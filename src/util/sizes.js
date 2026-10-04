@@ -7,14 +7,15 @@ import { getCharterData } from "./index.js";
 // own). The pages style themselves with these, and the export uses them for
 // the size of the capture.
 
-// A card on its own: no bleed, cutlines or border, and the die layouts have
-// their own sizes. The type ("private", "share", "train" or "number") picks
-// the size set for it in `cards.sizes`.
-export const getSingleCardData = (cards, paper, type) => {
+// A card on its own: no cutlines or border, and the die layouts have their own
+// sizes. The type ("private", "share", "train" or "number") picks the size set
+// for it in `cards.sizes`. It has no bleed unless one is asked for (in units),
+// which is not the bleed of the sheets (`cards.bleed`).
+export const getSingleCardData = (cards, paper, type, bleed = 0) => {
   const cardConfig = {
     ...typeCardConfig(cards, type),
     cutlines: 0,
-    bleed: 0,
+    bleed,
     border: 0,
   };
 

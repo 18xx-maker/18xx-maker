@@ -31,6 +31,7 @@ Every option is optional, leave out what you do not want to set.
 | `background`  | `--background`  | `white` or `transparent`: the background of the map, market, par, revenue and tile manifest png images, every other png (the background page, cards, charters, tokens and tiles) is always transparent (not Board18 or svg images) | `white`                                                                          |
 | `variation`   | `--variation`   | the number of a map variation, 0 is the first (`--variation all` for every one)                                                                                                                                                    | every variation                                                                  |
 | `png.dpi`     | `--dpi`         | a whole number from 1 to 300                                                                                                                                                                                                       | `300`, the size the images print at                                              |
+| `cards.bleed` | `--card-bleed`  | a number from 0 to 50, in 1/100 inch (12.5 is 1/8 inch): the bleed around each single card png, filled with the card background                                                                                                    | `0`, no bleed                                                                    |
 | `b18.version` | `--b18-version` | the version of the Board18 box                                                                                                                                                                                                     | `1.0`                                                                            |
 | `b18.author`  | `--b18-author`  | the author of the Board18 box                                                                                                                                                                                                      | `b18.author` of `maker config` or your name, the designer of the game in the app |
 
@@ -75,6 +76,7 @@ file:
 | `background`  | `--background transparent`                    | _Image background_                            |
 | `variation`   | `--variation 0` or `--variation all`          | _Map variation_ (a game with variations only) |
 | `png.dpi`     | `--dpi 96`                                    | _PNG resolution (dpi)_                        |
+| `cards.bleed` | `--card-bleed 12.5`                           | _Card bleed (units)_                          |
 | `b18.version` | `--b18-version 2.0` (`maker b18 <game> 2.0`)  | _Board18 version_                             |
 | `b18.author`  | `--b18-author Me` (`maker b18 <game> 2.0 Me`) | _Board18 author_                              |
 

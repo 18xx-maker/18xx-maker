@@ -6,6 +6,7 @@ import { chromium } from "playwright";
 
 import b18 from "#cli/b18";
 import exportCommand, {
+  parseCardBleed,
   parseDpi,
   resolveGame,
   selectDocs,
@@ -472,6 +473,19 @@ describe("export usage errors", () => {
       "--dpi must be a whole number from 1 to 300",
     );
     await usage("18Test", { dpi: "150.5" }, "--dpi must be a whole number");
+  });
+
+  it("--card-bleed is 0 to 50", async () => {
+    expect.hasAssertions();
+    for (const cardBleed of ["51", "-1", "abc", ""]) {
+      await usage(
+        "18Test",
+        { cardBleed },
+        "--card-bleed must be a number from 0 to 50",
+      );
+    }
+    expect(parseCardBleed("12.5")).toBe(12.5);
+    expect(parseCardBleed("0")).toBe(0);
   });
 
   it("knows the formats and the pages", async () => {

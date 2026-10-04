@@ -185,6 +185,7 @@ describe("validate", () => {
           layouts: "current",
           variation: 0,
           png: { dpi: 300 },
+          cards: { bleed: 12.5 },
           b18: { version: "2.0", author: "Me" },
         }),
       );
@@ -211,6 +212,17 @@ describe("validate", () => {
         /is 0, but should be 1 at minimum/,
       ],
       [{ png: { dpi: 1.5 } }, "#/exports/png/dpi", /integer/i],
+      [
+        { cards: { bleed: 51 } },
+        "#/exports/cards/bleed",
+        /should be 50 at maximum/,
+      ],
+      [
+        { cards: { bleed: -1 } },
+        "#/exports/cards/bleed",
+        /should be 0 at minimum/,
+      ],
+      [{ cards: { color: "red" } }, "#/exports/cards", /color/i],
       [{ formats: ["gif"] }, "#/exports/formats/0", /one of/i],
       [{ formats: [] }, "#/exports/formats", /at least 1/i],
       [{ docs: ["nothing"] }, "#/exports/docs/0", /one of/i],

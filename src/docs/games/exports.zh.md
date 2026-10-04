@@ -27,6 +27,7 @@
 | `background`  | `--background`  | `white` 或 `transparent`:地图、股市、发行价、收益和地块清单 png 图片的背景,其他所有 png(背景页、卡牌、公司执照、标记和地块)始终是透明的(Board18 和 svg 图片不适用) | `white`                                                            |
 | `variation`   | `--variation`   | 地图变体的编号,0 表示第一个(`--variation all` 表示导出每一个)                                                                                                      | 每一个变体                                                         |
 | `png.dpi`     | `--dpi`         | 1 到 300 的整数                                                                                                                                                    | `300`,即图片打印时的实际尺寸                                       |
+| `cards.bleed` | `--card-bleed`  | 0 到 50 的数字,单位为 1/100 英寸(12.5 即 1/8 英寸):每张单独卡牌 PNG 周围的出血,以卡牌背景填充                                                                      | `0`,无出血                                                         |
 | `b18.version` | `--b18-version` | Board18 游戏盒的版本                                                                                                                                               | `1.0`                                                              |
 | `b18.author`  | `--b18-author`  | Board18 游戏盒的作者                                                                                                                                               | `maker config` 的 `b18.author`,或您的姓名;在应用中则为游戏的设计师 |
 
@@ -56,6 +57,7 @@
 | `background`  | `--background transparent`                   | “图片背景”                   |
 | `variation`   | `--variation 0` 或 `--variation all`         | “地图变体”(仅限有变体的游戏) |
 | `png.dpi`     | `--dpi 96`                                   | “PNG 分辨率(dpi)”            |
+| `cards.bleed` | `--card-bleed 12.5`                          | “卡牌出血(单位)”             |
 | `b18.version` | `--b18-version 2.0`(`maker b18 <game> 2.0`)  | “Board18 版本”               |
 | `b18.author`  | `--b18-author Me`(`maker b18 <game> 2.0 Me`) | “Board18 作者”               |
 

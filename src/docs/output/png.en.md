@@ -43,6 +43,13 @@ inches is 796 by 518 pixels at 300 dpi), but it never has an edge that is
 partly transparent or blended with the background. The app and the command line
 make the same images.
 
+A card image has no bleed by default. For a card printing company that wants the
+art to run past the cut edge, set `cards.bleed` (`--card-bleed`, or _Card bleed_ in the
+_Export options_ panel): each card image is then the card plus that bleed on
+every side, with the card background filling the bleed. Logos and borders are
+not extended into it. The sheets keep their own bleed (`cards.bleed` of the
+config).
+
 ## Command Line
 
 > [!IMPORTANT]

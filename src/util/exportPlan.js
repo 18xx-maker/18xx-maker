@@ -57,12 +57,12 @@ const appDefaults = (game) => ({
 // The options of an export of the game, in the order of the `exports` field of
 // the game (see resolveExportOptions): the defaults of the app, the game's
 // `exports` and what the user chose. userOptions are
-//   { formats, docs, layouts, background, dpi, variation,
+//   { formats, docs, layouts, background, dpi, cardBleed, variation,
 //     b18: { version, author } }
 // with what is left out coming from the layers below. A variation of null is
 // every variation, also when the game's `exports` has one.
 const resolveOptions = (game, layers, userOptions = {}) => {
-  const { dpi, ...user } = userOptions;
+  const { dpi, cardBleed, ...user } = userOptions;
   return resolveExportOptions({
     defaults: appDefaults(game),
     game: game.exports,
@@ -74,6 +74,7 @@ const resolveOptions = (game, layers, userOptions = {}) => {
           mergeDeepRight(layers.userConfig || {}, layers.storedConfig || {}),
         ),
       png: { dpi },
+      cards: { bleed: cardBleed },
     },
   });
 };
@@ -95,6 +96,7 @@ export const exportDefaults = (game, layers) => {
         ? options.variation
         : null,
     dpi: options.png.dpi,
+    cardBleed: options.cards.bleed,
     b18: options.b18,
   };
 };
@@ -127,7 +129,10 @@ export const planExport = (game, layers, userOptions) => {
   const files = formats.filter((format) => format !== "b18");
   const jobs = exportJobs(
     game,
-    selectDocs(documents(game, config, data), { docs, variation }),
+    selectDocs(
+      documents(game, config, data, { cardBleed: options.cards.bleed }),
+      { docs, variation },
+    ),
     files,
   );
 

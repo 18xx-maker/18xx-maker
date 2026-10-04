@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 
 import { assoc, flatten, map } from "ramda";
 
@@ -7,6 +7,7 @@ import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
 
+import { MAX_CARD_BLEED } from "@/export/options.js";
 import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { cardCompanyTrains } from "@/util/companyTrains";
@@ -16,6 +17,11 @@ const Card = () => {
   const { config } = useConfig();
   const game = useGame();
   const { type, index } = useParams();
+
+  // The bleed of the image (in units) the export asks for, none by default
+  const { search } = useLocation();
+  const requested = parseFloat(new URLSearchParams(search).get("cardBleed"));
+  const bleed = requested > 0 ? Math.min(requested, MAX_CARD_BLEED) : 0;
 
   // Anything that is not a private, share or train is a number card
   const cardType = ["private", "share", "train"].includes(type)
@@ -78,7 +84,7 @@ const Card = () => {
       break;
   }
 
-  let data = getSingleCardData(config.cards, config.paper, cardType);
+  let data = getSingleCardData(config.cards, config.paper, cardType, bleed);
 
   let css = `
 .cutlines {

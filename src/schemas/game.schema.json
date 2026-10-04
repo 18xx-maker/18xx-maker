@@ -2187,6 +2187,19 @@
           },
           "additionalProperties": false
         },
+        "cards": {
+          "type": "object",
+          "description": "Options of the single card png images.",
+          "properties": {
+            "bleed": {
+              "type": "number",
+              "description": "The bleed around each single card image, in units of 1/100 inch (12.5 is 1/8 inch), like --card-bleed. The image is the card plus the bleed on every side, with the card background filling the bleed, ready for a card printing company. Logos and borders are not extended. The sheets keep the cards.bleed of the config. Defaults to 0, no bleed.",
+              "minimum": 0,
+              "maximum": 50
+            }
+          },
+          "additionalProperties": false
+        },
         "b18": {
           "type": "object",
           "description": "Options of the Board18 box.",

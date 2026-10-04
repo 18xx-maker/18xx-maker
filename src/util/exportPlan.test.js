@@ -156,6 +156,28 @@ describe("planExport with the exports of a game", () => {
     expect(paths(request).some((path) => path.includes("card"))).toBe(false);
   });
 
+  it("plans the card images with the bleed of the game, or the user's", () => {
+    const sizes = (request) =>
+      request.jobs
+        .filter(({ doc }) => doc.kind === "card")
+        .map(({ doc }) => doc.query);
+    const withGame = planExport(
+      exporting({ formats: ["png"], docs: ["cards"], cards: { bleed: 12.5 } }),
+      layers(),
+      {},
+    );
+    expect(sizes(withGame).length).toBeGreaterThan(0);
+    expect(sizes(withGame)).toEqual(
+      sizes(withGame).map(() => ({ cardBleed: 12.5 })),
+    );
+    const user = planExport(
+      exporting({ formats: ["png"], docs: ["cards"], cards: { bleed: 12.5 } }),
+      layers(),
+      { cardBleed: 0 },
+    );
+    expect(sizes(user)).toEqual(sizes(user).map(() => ({})));
+  });
+
   it("takes what the user chose over the game", () => {
     const request = planExport(
       exporting({ formats: ["png"], docs: ["map"], png: { dpi: 100 } }),
@@ -250,6 +272,7 @@ describe("planExport with the exports of a game", () => {
       background: "white",
       variation: null,
       dpi: 120,
+      cardBleed: 0,
       b18: { version: "4", author: "Game" },
     });
   });

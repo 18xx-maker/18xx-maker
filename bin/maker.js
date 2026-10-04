@@ -84,6 +84,10 @@ program
     "--dpi <dpi>",
     "the resolution of the PNG files, 1 to 300 (default: 300), SVG files have none",
   )
+  .option(
+    "--card-bleed <units>",
+    "the bleed around each single card PNG, in units of 1/100 inch, up to 50 (default: 0, 0 turns it off)",
+  )
   .option("-o, --out <folder>", "the folder for the game folders", "render")
   .option("-j, --jobs <n>", "how many files to capture at the same time", "1")
   .option("-a, --all", "export all bundled games")

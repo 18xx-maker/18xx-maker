@@ -4,6 +4,7 @@ import {
   DEFAULTS,
   FORMATS,
   LAYOUTS,
+  MAX_CARD_BLEED,
   cleanOptions,
   layoutsOfConfig,
   resolveExportOptions,
@@ -17,6 +18,7 @@ describe("resolveExportOptions", () => {
       background: "white",
       png: { dpi: 300 },
       b18: { version: "1.0" },
+      cards: { bleed: 0 },
     });
     expect(DEFAULTS.png.dpi).toBe(MAX_DPI);
   });
@@ -31,6 +33,7 @@ describe("resolveExportOptions", () => {
       background: "transparent",
       png: { dpi: 300 },
       b18: { version: "1.0", author: "Me" },
+      cards: { bleed: 0 },
     });
   });
 
@@ -43,6 +46,7 @@ describe("resolveExportOptions", () => {
       variation: 1,
       png: { dpi: 150 },
       b18: { version: "2.0", author: "Game" },
+      cards: { bleed: 12.5 },
     };
 
     expect(resolveExportOptions({ game })).toEqual(game);
@@ -56,6 +60,7 @@ describe("resolveExportOptions", () => {
           background: "transparent",
           png: { dpi: 72 },
           b18: { author: "User" },
+          cards: { bleed: 0 },
         },
       }),
     ).toEqual({
@@ -66,6 +71,7 @@ describe("resolveExportOptions", () => {
       variation: 1,
       png: { dpi: 72 },
       b18: { version: "2.0", author: "User" },
+      cards: { bleed: 0 },
     });
   });
 
@@ -124,7 +130,43 @@ describe("resolveExportOptions", () => {
       background: "white",
       png: { dpi: 300 },
       b18: { version: "1.0" },
+      cards: { bleed: 0 },
     });
+  });
+});
+
+describe("card bleed", () => {
+  it("is none by default and set by a game or the user, the user winning", () => {
+    expect(resolveExportOptions().cards).toEqual({ bleed: 0 });
+    expect(
+      resolveExportOptions({ game: { cards: { bleed: 12.5 } } }).cards,
+    ).toEqual({ bleed: 12.5 });
+    expect(
+      resolveExportOptions({
+        game: { cards: { bleed: 12.5 } },
+        user: { cards: { bleed: 0 } },
+      }).cards,
+    ).toEqual({ bleed: 0 });
+    expect(
+      resolveExportOptions({
+        game: { cards: { bleed: 12.5 } },
+        user: { cards: { bleed: undefined } },
+      }).cards,
+    ).toEqual({ bleed: 12.5 });
+  });
+
+  it("skips a bleed that is not valid", () => {
+    for (const bleed of [-1, MAX_CARD_BLEED + 1, "12", NaN, null]) {
+      expect(
+        resolveExportOptions({ game: { cards: { bleed } } }).cards,
+      ).toEqual({
+        bleed: 0,
+      });
+    }
+    expect(
+      resolveExportOptions({ game: { cards: { bleed: MAX_CARD_BLEED } } })
+        .cards,
+    ).toEqual({ bleed: MAX_CARD_BLEED });
   });
 });
 

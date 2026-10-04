@@ -24,7 +24,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 
 import { MAX_DPI } from "@/export/capture.js";
-import { BACKGROUNDS } from "@/export/options.js";
+import { BACKGROUNDS, MAX_CARD_BLEED } from "@/export/options.js";
 import { createAlert } from "@/state";
 import { exportDefaults, exportPages, planExport } from "@/util/exportPlan";
 
@@ -70,6 +70,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
     initial.variation === null ? ALL : String(initial.variation),
   );
   const [dpi, setDpi] = useState(String(initial.dpi));
+  const [cardBleed, setCardBleed] = useState(String(initial.cardBleed));
   const [background, setBackground] = useState(initial.background);
   const [version, setVersion] = useState(initial.b18.version);
   const [author, setAuthor] = useState(initial.b18.author);
@@ -85,6 +86,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
     setLayoutsAll(initial.layouts === "all");
     setVariation(initial.variation === null ? ALL : String(initial.variation));
     setDpi(String(initial.dpi));
+    setCardBleed(String(initial.cardBleed));
     setBackground(initial.background);
     setVersion(initial.b18.version);
     setAuthor(initial.b18.author);
@@ -93,12 +95,18 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const files = formats.some((format) => format !== "b18");
   const dpiValid = /^\d+$/.test(dpi) && dpi >= 1 && dpi <= MAX_DPI;
   const dpiError = formats.includes("png") && !dpiValid;
+  const bleedValid =
+    cardBleed.trim() !== "" &&
+    Number(cardBleed) >= 0 &&
+    Number(cardBleed) <= MAX_CARD_BLEED;
+  const bleedError = formats.includes("png") && !bleedValid;
   const options = () => ({
     formats,
     docs,
     layouts: layoutsAll ? "all" : "current",
     variation: variation === ALL ? null : Number(variation),
     dpi: Number(dpiValid ? dpi : MAX_DPI),
+    cardBleed: bleedValid ? Number(cardBleed) : initial.cardBleed,
     background,
     b18: { version, author },
   });
@@ -267,6 +275,35 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
           </Field>
 
           <Field
+            id="export-card-bleed"
+            label={t("export.cardBleed")}
+            description={t("export.cardBleedDescription", {
+              max: MAX_CARD_BLEED,
+            })}
+            error={
+              bleedError && t("export.cardBleedError", { max: MAX_CARD_BLEED })
+            }
+          >
+            <Input
+              id="export-card-bleed"
+              type="number"
+              inputMode="decimal"
+              min={0}
+              max={MAX_CARD_BLEED}
+              step="any"
+              value={cardBleed}
+              disabled={running || !formats.includes("png")}
+              aria-invalid={bleedError}
+              aria-describedby={
+                bleedError
+                  ? "export-card-bleed-description export-card-bleed-error"
+                  : "export-card-bleed-description"
+              }
+              onChange={(event) => setCardBleed(event.target.value)}
+            />
+          </Field>
+
+          <Field
             id="export-background"
             label={t("export.background")}
             description={t("export.backgroundDescription")}
@@ -351,6 +388,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
               running ||
               !!problem ||
               dpiError ||
+              bleedError ||
               (formats.includes("b18") && (!version || !author))
             }
             onClick={run}

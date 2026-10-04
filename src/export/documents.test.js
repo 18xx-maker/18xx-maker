@@ -171,6 +171,28 @@ describe("documents", () => {
     });
   });
 
+  it("has the card images with a bleed when asked for", () => {
+    const game = loadGame("18Test");
+    const config = loadGameConfig(game);
+    const plain = documents(game, config, data);
+    const bled = documents(game, config, data, { cardBleed: 12.5 });
+    const cards = (docs) => docs.filter((doc) => doc.kind === "card");
+
+    expect(cards(plain).length).toBeGreaterThan(0);
+    for (const doc of cards(plain)) expect(doc.query).toEqual({});
+    expect(ids(bled)).toEqual(ids(plain));
+    cards(bled).forEach((doc, i) => {
+      const before = cards(plain)[i];
+      expect(doc.query).toEqual({ cardBleed: 12.5 });
+      expect(doc.size.widthIn).toBeCloseTo(before.size.widthIn + 0.25);
+      expect(doc.size.heightIn).toBeCloseTo(before.size.heightIn + 0.25);
+    });
+    // Nothing but the card images changes
+    const others = (docs) => docs.filter((doc) => doc.kind !== "card");
+    expect(others(bled)).toEqual(others(plain));
+    expect(documents(game, config, data, { cardBleed: 0 })).toEqual(plain);
+  });
+
   it("has an svg of the map, market, par, revenue, tiles and tokens only", () => {
     const svgs = docs.filter((doc) => doc.formats.includes("svg"));
 
