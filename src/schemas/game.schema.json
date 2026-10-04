@@ -329,6 +329,10 @@
           "tokens": {
             "oneOf": [{ "$ref": "#/definitions/tokens" }, { "type": "string" }]
           },
+          "tokensBelow": {
+            "type": "boolean",
+            "description": "Print the token slots of the charter in their own row under the company name, smaller so they fit the width, instead of to the right of the name. Use it for companies with many tokens, so they do not squeeze the name. Half width charters ignore it. Defaults to false."
+          },
           "loans": {
             "type": "array",
             "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns that fit the height of the charter (more loans than fit are cut off). Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",

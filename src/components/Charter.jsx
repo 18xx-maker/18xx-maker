@@ -78,12 +78,16 @@ const Charter = ({
   const showTrains = company.trains !== false;
   const showTreasury = company.treasury !== false;
 
+  // Many tokens print in their own row under the name instead of squeezing it.
+  // Half width charters already stack their tokens, so they ignore it.
+  const tokensBelow = !!company.tokensBelow && !halfWidth;
+
   // A slot on the charter: a shape with its label under it (turned sideways on
   // half width charters). A loan prints no label when it has none, and its
   // label is always black because it sits on the body, not on the colored
   // header.
   const spot = (key, shape, label, loan) => (
-    <svg key={key}>
+    <svg key={key} viewBox={tokensBelow && !loan ? "0 0 50 68" : undefined}>
       <g transform={`translate(25 25)${loan ? " scale(0.9)" : ""}`}>
         {shape}
         {!(loan && (label === null || label === undefined || label === "")) && (
@@ -220,11 +224,12 @@ const Charter = ({
                 <div
                   style={{
                     color: t(c(charterStyle === "color" ? color : "white")),
-                    paddingRight: halfWidth
-                      ? null
-                      : unitsToCss(12.5 + 65 * tokens.length),
+                    paddingRight:
+                      halfWidth || tokensBelow
+                        ? null
+                        : unitsToCss(12.5 + 65 * tokens.length),
                   }}
-                  className="charter__name"
+                  className={`charter__name${tokensBelow ? " charter__name--tokens-below" : ""}`}
                 >
                   <div
                     style={{
@@ -265,7 +270,9 @@ const Charter = ({
                   </div>
                 )}
                 {tokenSpots.length > 0 && (
-                  <div className="charter__tokens">
+                  <div
+                    className={`charter__tokens${tokensBelow ? " charter__tokens--below" : ""}`}
+                  >
                     {halfWidth && "Tokens"}
                     {tokenSpots}
                   </div>

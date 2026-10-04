@@ -2575,7 +2575,7 @@ export default {
               { dups: 1, flip: true },
               { dups: 1, flip: true },
               { dups: 1, flip: true },
-              { dups: 1, flip: true },
+              { dups: 11, flip: true },
               { dups: 1, flip: true },
               { dups: 1, flip: true },
               { dups: 1, flip: true },
