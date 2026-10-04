@@ -213,7 +213,7 @@ describe("config drawer", () => {
     const input = screen.getByRole("textbox", { name: "Private Card Width" });
     // Nothing set: blank, showing the card width it falls back to
     expect(input).toHaveValue("");
-    expect(input).toHaveAttribute("placeholder", "2.65748");
+    expect(input).toHaveAttribute("placeholder", "2.657");
 
     await user.type(input, "2{Enter}");
     await waitFor(() =>
