@@ -54,7 +54,6 @@ describe("getTileSheetContext", () => {
     expect(clip("die")).toBe("hexBleedClipPath");
     expect(clip("smallDie")).toBe("hexBleedClipPath");
     expect(clip("individual")).toBe("hexClipPath");
-    expect(clip("offset")).toBe("hexBleedClipPathOffset");
   });
 
   it("should fill die columns top to bottom", () => {
@@ -185,18 +184,21 @@ describe("offset bleed", () => {
     const n = offsetNeighbors(c, full, i);
 
     expect(n).toEqual([true, true, true, true, true, true]);
-    centers.forEach((p, j) => {
-      const d = Math.hypot(p[0] - centers[i][0], p[1] - centers[i][1]);
-      expect(n.filter(Boolean).length === 6 && j !== i && d < 174).toBe(
-        [i - 1, i + 1].includes(j) ||
-          [
-            i - c.perRow,
-            i - c.perRow + 1,
-            i + c.perRow,
-            i + c.perRow + 1,
-          ].includes(j),
-      );
-    });
+    const near = centers.flatMap((p, j) =>
+      j !== i && Math.hypot(p[0] - centers[i][0], p[1] - centers[i][1]) < 174
+        ? [j]
+        : [],
+    );
+    expect(near.sort((x, y) => x - y)).toEqual(
+      [
+        i - c.perRow,
+        i - c.perRow + 1,
+        i - 1,
+        i + 1,
+        i + c.perRow,
+        i + c.perRow + 1,
+      ].sort((x, y) => x - y),
+    );
   });
 
   it("should not find neighbors outside the page or in empty spots", () => {

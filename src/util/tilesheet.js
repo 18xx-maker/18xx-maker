@@ -140,7 +140,6 @@ export const getTileSheetContext = (layout, paper, hexWidth) => {
       c.perRow = Math.floor((c.pageWidth - 20 - c.width / 2) / c.width);
       c.rowsPerPage = Math.floor((c.pageHeight - 20) / c.height);
       c.perPage = c.perRow * c.rowsPerPage;
-      c.clipPath = "hexBleedClipPathOffset";
 
       // Offset tiles are always offset by their plain width and height, regardless of bleed
       c.tileOffsetX = c.width;
