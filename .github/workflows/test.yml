@@ -12,7 +12,8 @@ name: Test
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-# The Linux jobs (cheap and fast) all start at once. Only the Mac and Windows
+# Release notes safe runs first (a few seconds, often fails) and every other
+# job waits for it. The Linux jobs (cheap and fast) then start at once. Only the Mac and Windows
 # jobs (10x and 2x minute multipliers) wait for Lint and Build, so a quick
 # failure stops the expensive runners from starting at all. The checks to
 # require are the aggregate jobs "Linux", "Mac", "Windows" and the three
@@ -40,6 +41,7 @@ jobs:
         run: node scripts/check-pr-body.mjs
   lint:
     name: Lint
+    needs: pr-body
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -67,6 +69,7 @@ jobs:
           FORCE_COLOR: 3
   build:
     name: Build
+    needs: pr-body
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -90,6 +93,7 @@ jobs:
         run: pnpm build:sb
   linux-shards:
     name: Linux Shard ${{ matrix.shard }}
+    needs: pr-body
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -307,6 +311,7 @@ jobs:
   # it has to stay in one run, cli.spec.js is the other half of the time.
   export-linux:
     name: Export Linux Shard ${{ matrix.export.name }}
+    needs: pr-body
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
