@@ -52,6 +52,21 @@ describe("tiles of games on this device", () => {
     );
   });
 
+  it("opens the popover with a tap and closes it with a second tap", async () => {
+    opfs.peekGame.mockResolvedValue(saved);
+    const { user } = renderApp("/elements/tiles?id=ZZ9", withSaved);
+    await waitFor(() => expect(shownTiles()).toBe(1));
+    const tile = screen.getByTestId("tile-ZZ9");
+
+    await user.pointer({ keys: "[TouchA]", target: tile });
+    expect(await screen.findByRole("tooltip")).toHaveTextContent("Saved Game");
+
+    await user.pointer({ keys: "[TouchA]", target: tile });
+    await waitFor(() =>
+      expect(screen.queryByRole("tooltip")).not.toBeInTheDocument(),
+    );
+  });
+
   it("does not crash on a malformed stored game", async () => {
     opfs.peekGame.mockResolvedValue({
       info: { title: "Saved Game" },

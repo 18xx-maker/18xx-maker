@@ -1,4 +1,4 @@
-import { Component, useCallback, useMemo } from "react";
+import { Component, useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
@@ -108,6 +108,9 @@ const UsedBy = ({ games }) => {
 
 const Tiles = () => {
   const { t } = useTranslation();
+  // Touch screens have no hover: a tap on a tile toggles its popover
+  const [openKey, setOpenKey] = useState(null);
+  const tap = useRef({ touch: false, wasOpen: false });
   const navigate = useNavigate();
   const location = useLocation();
   const { games } = useKnownGames();
@@ -267,10 +270,27 @@ const Tiles = () => {
           </div>
           {map(
             (entry) => (
-              <Tooltip key={entry.key}>
+              <Tooltip
+                key={entry.key}
+                open={openKey === entry.key}
+                onOpenChange={(open) => setOpenKey(open ? entry.key : null)}
+              >
                 <TooltipTrigger asChild>
                   <div
                     tabIndex={0}
+                    onPointerDown={(e) => {
+                      tap.current = {
+                        touch: e.pointerType === "touch",
+                        wasOpen: openKey === entry.key,
+                      };
+                    }}
+                    onClick={(e) => {
+                      if (!tap.current.touch) {
+                        return;
+                      }
+                      e.preventDefault();
+                      setOpenKey(tap.current.wasOpen ? null : entry.key);
+                    }}
                     data-testid={`tile-${entry.id}`}
                     // Labels without a font of their own inherit the print font, like in the editor
                     className="checkered border rounded-xl flex flex-col items-center font-display font-bold"
