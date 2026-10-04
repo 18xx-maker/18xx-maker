@@ -231,8 +231,10 @@
       "title": "Company Logos",
       "description": "Included train company logos",
       "page": {
-        "description": "Here are all of the SVG logos bundled with 18xx Maker."
+        "description": "Here are all of the SVG logos bundled with 18xx Maker. Logos with recolorable colors also show how they look on the back of a token (reserved)."
       },
+      "front": "Normal",
+      "back": "Reserved",
       "set": "Logo Set:"
     },
     "cheat": {

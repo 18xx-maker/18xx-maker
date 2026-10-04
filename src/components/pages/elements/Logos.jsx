@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
@@ -32,6 +32,51 @@ const groupItems = map(
   groupNames,
 );
 
+// Classes that look the same on the back of a token
+const SAME_ON_BACK = ["color-white", "color-stroke-white"];
+
+const hasBack = (el) =>
+  [...el.querySelectorAll('[class*="color-"]')].some((node) =>
+    [...node.classList].some(
+      (c) => c.startsWith("color-") && !SAME_ON_BACK.includes(c),
+    ),
+  );
+
+const LogoCard = ({ logo, Component }) => {
+  const { t } = useTranslation();
+  const ref = useRef(null);
+  const [back, setBack] = useState(false);
+
+  useEffect(() => {
+    setBack(hasBack(ref.current));
+  }, [logo]);
+
+  const preview = (className, label) => (
+    <div className="m-4">
+      <Component
+        className={className}
+        width="100%"
+        height="100%"
+        style={{ overflow: "hidden" }}
+      />
+      {back && (
+        <div className="text-center text-xs text-muted-foreground">{label}</div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="border rounded-lg checkered overflow-hidden">
+      <div ref={ref}>{preview(undefined, t("elements.logos.front"))}</div>
+      {back &&
+        preview("color-main-gray color-reserved", t("elements.logos.back"))}
+      <div className="border-t center p-4 bg-background text-center">
+        {logo}
+      </div>
+    </div>
+  );
+};
+
 const Logos = () => {
   const { t } = useTranslation();
   const [group, setGroup] = useStringParam("group", groupNames[0]);
@@ -40,23 +85,12 @@ const Logos = () => {
     () =>
       map((logo) => {
         let name = nameFor(logo);
-        let Component = logos[logo];
         return (
-          <div
+          <LogoCard
             key={`logo-${group}-${name}`}
-            className="border rounded-lg checkered overflow-hidden"
-          >
-            <div className="m-4">
-              <Component
-                width="100%"
-                height="100%"
-                style={{ overflow: "hidden" }}
-              />
-            </div>
-            <div className="border-t center p-4 bg-background text-center">
-              {logo}
-            </div>
-          </div>
+            logo={logo}
+            Component={logos[logo]}
+          />
         );
       }, groups[group]),
     [group],

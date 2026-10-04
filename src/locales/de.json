@@ -231,8 +231,10 @@
       "title": "Gesellschaftslogos",
       "description": "Enthaltene Logos der Eisenbahngesellschaften",
       "page": {
-        "description": "Hier sind alle SVG-Logos, die mit 18xx Maker mitgeliefert werden."
+        "description": "Hier sind alle SVG-Logos, die mit 18xx Maker mitgeliefert werden. Logos mit anpassbaren Farben zeigen auch, wie sie auf der Rückseite eines Tokens (reserviert) aussehen."
       },
+      "front": "Normal",
+      "back": "Reserviert",
       "set": "Logo-Set:"
     },
     "cheat": {
