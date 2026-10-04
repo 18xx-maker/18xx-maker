@@ -311,10 +311,10 @@
         "shield3TopRight": { "type": "string" },
         "square": { "type": "string" },
         "spiral": { "type": "string" },
-        "target": { "type": "array", "items": { "type": "string" } },
-        "stripe": { "type": "array", "items": { "type": "string" } },
-        "stripes": { "type": "array", "items": { "type": "string" } },
-        "curvedStripes": { "type": "array", "items": { "type": "string" } },
+        "target": { "type": "string" },
+        "stripe": { "type": "string" },
+        "stripes": { "type": "string" },
+        "curvedStripes": { "type": "string" },
         "halves": { "type": "array", "items": { "type": "string" } },
         "quarters": { "type": "array", "items": { "type": "string" } },
         "destination": { "type": "boolean", "enum": [true] },
@@ -417,7 +417,18 @@
             "type": "object",
             "properties": {
               "color": { "type": "string" },
-              "value": { "oneOf": [{ "type": "string" }, { "type": "number" }] }
+              "value": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "revenue": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "cost": { "oneOf": [{ "type": "string" }, { "type": "number" }] },
+              "phase": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "phaseColor": { "type": "string" },
+              "textColor": { "type": "string" }
             }
           }
         },
@@ -506,8 +517,7 @@
                   "type": "object",
                   "properties": {
                     "label": { "type": "string" },
-                    "color": { "type": "string" },
-                    "additionalProperties": false
+                    "color": { "type": "string" }
                   }
                 },
                 { "type": "string" },
@@ -1116,6 +1126,762 @@
         }
       },
       "additionalProperties": false
+    },
+    "token": {
+      "type": "object",
+      "description": "A token. The properties are the ones the Token component reads.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name of an svg logo to draw on the token."
+        },
+        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "icon": {
+          "type": "string",
+          "description": "Name of an icon to draw on the token."
+        },
+        "iconWidth": { "type": "number", "description": "Width of the icon." },
+        "iconColor": {
+          "type": "string",
+          "description": "Color of the icon or logo."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertical position of the icon."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text to write on the token."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Color of the label text."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Override the vertical position of the label."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Color of the stroke around the label."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stroke around the label."
+        },
+        "color": {
+          "type": "string",
+          "description": "Background color of the token."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Font size of the label."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Font family of the label."
+        },
+        "width": {
+          "type": "number",
+          "description": "Width (radius) of the token, 25 by default."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square draws a square token, anything else a circle."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Angle of the shapes, independent of the rotation."
+        },
+        "rotation": {
+          "type": "number",
+          "description": "Rotation of the token."
+        },
+        "fixed": {
+          "type": "boolean",
+          "description": "Cancels all rotation of the token."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "A destination token, smaller by default."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "A reserved token, drawn in gray."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Draw the inverse of the token: no logo, only text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Label color of an inverse token."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Draw bleed around the token for printing."
+        },
+        "bar": {
+          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Height of the bar." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Color of the border of the bar."
+        },
+        "outline": { "type": "string", "description": "Color of the outline." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Width of the outline."
+        },
+        "target": {
+          "type": "string",
+          "description": "Color of a target shape."
+        },
+        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stripe."
+        },
+        "stripes": { "type": "string", "description": "Color of the stripes." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Width of the stripes."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Distance of the stripes from the middle."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Color of curved stripes."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Width of the curved stripes."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Distance of the curved stripes from the middle."
+        },
+        "spiral": { "type": "string", "description": "Color of a spiral." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Width of the spiral."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Distance between the turns of the spiral."
+        },
+        "circle": {
+          "type": "string",
+          "description": "Color of a circle in the middle."
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius of the circle, 25 is the full token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Border color of the circle."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a shield, true for white."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Color of the top of the shield."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a three part shield, true for white."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Color of the top left of the three part shield."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Color of the top center of the three part shield."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Color of the top right of the three part shield."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a kite shield, true for white."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a five pointed star, true for white."
+        },
+        "square": {
+          "type": "string",
+          "description": "Color of a square on the token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the halves."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Four colors of the quarters."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors alternating over six parts."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Three colors of the sunrise."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the triangles of the hexagram."
+        }
+      },
+      "additionalProperties": false
+    },
+    "gameToken": {
+      "type": "object",
+      "description": "A token of the game: how many to print, and the token.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name of an svg logo to draw on the token."
+        },
+        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "icon": {
+          "type": "string",
+          "description": "Name of an icon to draw on the token."
+        },
+        "iconWidth": { "type": "number", "description": "Width of the icon." },
+        "iconColor": {
+          "type": "string",
+          "description": "Color of the icon or logo."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertical position of the icon."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text to write on the token."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Color of the label text."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Override the vertical position of the label."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Color of the stroke around the label."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stroke around the label."
+        },
+        "color": {
+          "type": "string",
+          "description": "Background color of the token."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Font size of the label."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Font family of the label."
+        },
+        "width": {
+          "type": "number",
+          "description": "Width (radius) of the token, 25 by default."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square draws a square token, anything else a circle."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Angle of the shapes, independent of the rotation."
+        },
+        "rotation": {
+          "type": "number",
+          "description": "Rotation of the token."
+        },
+        "fixed": {
+          "type": "boolean",
+          "description": "Cancels all rotation of the token."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "A destination token, smaller by default."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "A reserved token, drawn in gray."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Draw the inverse of the token: no logo, only text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Label color of an inverse token."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Draw bleed around the token for printing."
+        },
+        "bar": {
+          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Height of the bar." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Color of the border of the bar."
+        },
+        "outline": { "type": "string", "description": "Color of the outline." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Width of the outline."
+        },
+        "target": {
+          "type": "string",
+          "description": "Color of a target shape."
+        },
+        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stripe."
+        },
+        "stripes": { "type": "string", "description": "Color of the stripes." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Width of the stripes."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Distance of the stripes from the middle."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Color of curved stripes."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Width of the curved stripes."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Distance of the curved stripes from the middle."
+        },
+        "spiral": { "type": "string", "description": "Color of a spiral." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Width of the spiral."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Distance between the turns of the spiral."
+        },
+        "circle": {
+          "type": "string",
+          "description": "Color of a circle in the middle."
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius of the circle, 25 is the full token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Border color of the circle."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a shield, true for white."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Color of the top of the shield."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a three part shield, true for white."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Color of the top left of the three part shield."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Color of the top center of the three part shield."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Color of the top right of the three part shield."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a kite shield, true for white."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a five pointed star, true for white."
+        },
+        "square": {
+          "type": "string",
+          "description": "Color of a square on the token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the halves."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Four colors of the quarters."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors alternating over six parts."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Three colors of the sunrise."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the triangles of the hexagram."
+        },
+        "quantity": {
+          "description": "How many of this token to print. ∞ needs print, to say how many.",
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "print": {
+          "description": "How many of this token to print, overrides quantity.",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "roundToken": {
+      "type": "object",
+      "description": "A token on the round tracker: the round and its token.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name of an svg logo to draw on the token."
+        },
+        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "icon": {
+          "type": "string",
+          "description": "Name of an icon to draw on the token."
+        },
+        "iconWidth": { "type": "number", "description": "Width of the icon." },
+        "iconColor": {
+          "type": "string",
+          "description": "Color of the icon or logo."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertical position of the icon."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text to write on the token."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Color of the label text."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Override the vertical position of the label."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Color of the stroke around the label."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stroke around the label."
+        },
+        "color": {
+          "type": "string",
+          "description": "Background color of the token."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Font size of the label."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Font family of the label."
+        },
+        "width": {
+          "type": "number",
+          "description": "Width (radius) of the token, 25 by default."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square draws a square token, anything else a circle."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Angle of the shapes, independent of the rotation."
+        },
+        "rotation": {
+          "type": "number",
+          "description": "Rotation of the token."
+        },
+        "fixed": {
+          "type": "boolean",
+          "description": "Cancels all rotation of the token."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "A destination token, smaller by default."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "A reserved token, drawn in gray."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Draw the inverse of the token: no logo, only text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Label color of an inverse token."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Draw bleed around the token for printing."
+        },
+        "bar": {
+          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Height of the bar." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Color of the border of the bar."
+        },
+        "outline": { "type": "string", "description": "Color of the outline." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Width of the outline."
+        },
+        "target": {
+          "type": "string",
+          "description": "Color of a target shape."
+        },
+        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stripe."
+        },
+        "stripes": { "type": "string", "description": "Color of the stripes." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Width of the stripes."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Distance of the stripes from the middle."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Color of curved stripes."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Width of the curved stripes."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Distance of the curved stripes from the middle."
+        },
+        "spiral": { "type": "string", "description": "Color of a spiral." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Width of the spiral."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Distance between the turns of the spiral."
+        },
+        "circle": {
+          "type": "string",
+          "description": "Color of a circle in the middle."
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius of the circle, 25 is the full token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Border color of the circle."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a shield, true for white."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Color of the top of the shield."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a three part shield, true for white."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Color of the top left of the three part shield."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Color of the top center of the three part shield."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Color of the top right of the three part shield."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a kite shield, true for white."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a five pointed star, true for white."
+        },
+        "square": {
+          "type": "string",
+          "description": "Color of a square on the token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the halves."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Four colors of the quarters."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors alternating over six parts."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Three colors of the sunrise."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the triangles of the hexagram."
+        },
+        "name": {
+          "description": "The name of the round, its label.",
+          "type": "string"
+        },
+        "small": {
+          "description": "Draw the round token smaller.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name"]
     }
   },
   "type": "object",

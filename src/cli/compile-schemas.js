@@ -48,6 +48,52 @@ const command = () => {
     }, elements[path]);
   }, keys(elements));
 
+  // Tokens of a game share the properties of the token component. Draft-07
+  // cannot add properties to a closed object, so the variants are written out.
+  const withProperties = (description, properties, required = []) => ({
+    ...tiles.definitions.token,
+    description,
+    ...(required.length > 0 ? { required } : {}),
+    properties: { ...tiles.definitions.token.properties, ...properties },
+  });
+  tiles = assocPath(
+    ["definitions", "gameToken"],
+    withProperties("A token of the game: how many to print, and the token.", {
+      quantity: {
+        description:
+          "How many of this token to print. ∞ needs print, to say how many.",
+        oneOf: [
+          { type: "integer", minimum: 0 },
+          { type: "string", enum: ["∞"] },
+        ],
+      },
+      print: {
+        description: "How many of this token to print, overrides quantity.",
+        type: "integer",
+        minimum: 0,
+      },
+    }),
+    tiles,
+  );
+  tiles = assocPath(
+    ["definitions", "roundToken"],
+    withProperties(
+      "A token on the round tracker: the round and its token.",
+      {
+        name: {
+          description: "The name of the round, its label.",
+          type: "string",
+        },
+        small: {
+          description: "Draw the round token smaller.",
+          type: "boolean",
+        },
+      },
+      ["name"],
+    ),
+    tiles,
+  );
+
   const json = JSON.stringify(tiles);
   format(json, { filepath: "tiles.defs.json" }).then((prettyJson) => {
     fs.writeFileSync(

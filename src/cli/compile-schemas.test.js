@@ -62,7 +62,23 @@ describe("compile-schemas", () => {
     const src = readSchema("tiles.src.json");
     const defs = JSON.parse(written);
     expect(defs.$id).toBe(src.$id);
-    expect(Object.keys(defs.definitions)).toEqual(Object.keys(src.definitions));
+    expect(Object.keys(defs.definitions)).toEqual([
+      ...Object.keys(src.definitions),
+      "gameToken",
+      "roundToken",
+    ]);
+  });
+
+  it("derives the game and round tokens from the token", () => {
+    const { token, gameToken, roundToken } = JSON.parse(written).definitions;
+    const extra = (derived) =>
+      Object.keys(derived.properties).filter((key) => !token.properties[key]);
+
+    expect(extra(gameToken)).toEqual(["quantity", "print"]);
+    expect(extra(roundToken)).toEqual(["name", "small"]);
+    expect(roundToken.required).toEqual(["name"]);
+    expect(gameToken.additionalProperties).toBe(false);
+    expect(roundToken.additionalProperties).toBe(false);
   });
 
   it("matches the committed tiles.defs.json", () => {
