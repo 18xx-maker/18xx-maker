@@ -400,11 +400,10 @@ describe("tiles of all games", () => {
     await screen.findByTestId("tiles");
 
     await waitFor(() => expect(card().length).toBe(1));
-    expect(
-      screen.getByRole("button", { name: "Used in 1 game(s)" }),
-    ).toHaveAttribute("aria-expanded", "false");
-    await user.click(screen.getByRole("button", { name: /Used in/ }));
-    expect(screen.getByText("18Test")).toBeInTheDocument();
+    await user.hover(card()[0]);
+    const tip = await screen.findByRole("tooltip");
+    expect(tip).toHaveTextContent("Used in 1 game(s)");
+    expect(tip).toHaveTextContent("18Test");
   });
 
   it("has the color of a game tile as an option", async () => {

@@ -41,13 +41,15 @@ beforeEach(() => {
 describe("tiles of games on this device", () => {
   it("lists a stored game and its tiles", async () => {
     opfs.peekGame.mockResolvedValue(saved);
-    renderApp("/elements/tiles?id=ZZ9", withSaved);
+    const { user } = renderApp("/elements/tiles?id=ZZ9", withSaved);
 
     await waitFor(() => expect(shownTiles()).toBe(1));
     expect(opfs.peekGame).toHaveBeenCalledWith("abc");
-    expect(
-      screen.getByRole("button", { name: "Used in 1 game(s)" }),
-    ).toBeInTheDocument();
+
+    await user.hover(screen.getByTestId("tile-ZZ9"));
+    expect(await screen.findByRole("tooltip")).toHaveTextContent(
+      "Used in 1 game(s)Saved Game",
+    );
   });
 
   it("does not crash on a malformed stored game", async () => {

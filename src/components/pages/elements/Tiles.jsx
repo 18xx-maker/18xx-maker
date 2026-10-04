@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
@@ -22,6 +22,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
@@ -70,36 +76,24 @@ const gamesOfEntry = (entry, games, usage) =>
 
 const UsedBy = ({ games }) => {
   const { t } = useTranslation();
-  const [open, setOpen] = useState(false);
 
   if (games.length === 0) {
-    return (
-      <div className="text-xs text-muted-foreground p-2">
-        {t("elements.tiles.notUsed")}
-      </div>
-    );
+    return <div>{t("elements.tiles.notUsed")}</div>;
   }
 
   return (
-    <div className="text-xs p-2 text-center">
-      <button
-        type="button"
-        className="underline"
-        aria-expanded={open}
-        onClick={() => setOpen(!open)}
-      >
+    <div>
+      <div className="font-bold">
         {t("elements.tiles.usedBy", { count: games.length })}
-      </button>
-      {open && (
-        <ul>
-          {map(
-            (game) => (
-              <li key={game.slug}>{game.title}</li>
-            ),
-            games,
-          )}
-        </ul>
-      )}
+      </div>
+      <ul>
+        {map(
+          (game) => (
+            <li key={game.slug}>{game.title}</li>
+          ),
+          games,
+        )}
+      </ul>
     </div>
   );
 };
@@ -227,72 +221,81 @@ const Tiles = () => {
   const nextPage = min(pageCount, effectivePage + 1);
 
   return (
-    <div className="p-4" data-testid="tiles">
-      <h1 className="text-4xl font-extrabold">{t("elements.tiles.title")}</h1>
-      <p className="leading-7 my-4 text-wrap">
-        {t("elements.tiles.page.description")}
-      </p>
-      <div className="grid place-content-center grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 max-w-7xl">
-        <TileFilters
-          {...{
-            color,
-            setColor,
-            id,
-            setId,
-            includes,
-            setIncludes,
-            revenue,
-            setRevenue,
-            revenues,
-            colors,
-            game,
-            setGame,
-            games: gameOptions,
-          }}
-        />
-        <div className="col-span-2 lg:col-span-3 xl:col-span-4 2xl:col-span-5 bg-muted flex flex-rows place-items-center rounded-xl border px-4 py-2">
-          <Pagination>
-            <PaginationContent className="w-full">
-              <PaginationItem>
-                <PaginationPrevious onClick={() => setPage(prevPage)} />
-              </PaginationItem>
-              <PaginationItem className="grow text-center">
-                Page {effectivePage} of {pageCount}
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext onClick={() => setPage(nextPage)} />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+    <TooltipProvider>
+      <div className="p-4" data-testid="tiles">
+        <h1 className="text-4xl font-extrabold">{t("elements.tiles.title")}</h1>
+        <p className="leading-7 my-4 text-wrap">
+          {t("elements.tiles.page.description")}
+        </p>
+        <div className="grid place-content-center grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 max-w-7xl">
+          <TileFilters
+            {...{
+              color,
+              setColor,
+              id,
+              setId,
+              includes,
+              setIncludes,
+              revenue,
+              setRevenue,
+              revenues,
+              colors,
+              game,
+              setGame,
+              games: gameOptions,
+            }}
+          />
+          <div className="col-span-2 lg:col-span-3 xl:col-span-4 2xl:col-span-5 bg-muted flex flex-rows place-items-center rounded-xl border px-4 py-2">
+            <Pagination>
+              <PaginationContent className="w-full">
+                <PaginationItem>
+                  <PaginationPrevious onClick={() => setPage(prevPage)} />
+                </PaginationItem>
+                <PaginationItem className="grow text-center">
+                  Page {effectivePage} of {pageCount}
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext onClick={() => setPage(nextPage)} />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+          {map(
+            (entry) => (
+              <Tooltip key={entry.key}>
+                <TooltipTrigger asChild>
+                  <div
+                    tabIndex={0}
+                    data-testid={`tile-${entry.id}`}
+                    // Labels without a font of their own inherit the print font, like in the editor
+                    className="checkered border rounded-xl flex flex-col items-center font-display font-bold"
+                  >
+                    <Svg
+                      width="200"
+                      height="200"
+                      viewBox="-100 -100 200 200"
+                      transform="rotate(-90)"
+                    >
+                      <Tile
+                        id={entry.id}
+                        gameTiles={entry.gameTiles}
+                        width={150}
+                        x={0}
+                        y={0}
+                      />
+                    </Svg>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <UsedBy games={gamesOfEntry(entry, games, usage)} />
+                </TooltipContent>
+              </Tooltip>
+            ),
+            pagedTiles,
+          )}
         </div>
-        {map(
-          (entry) => (
-            <div
-              key={entry.key}
-              // Labels without a font of their own inherit the print font, like in the editor
-              className="checkered border rounded-xl flex flex-col items-center font-display font-bold"
-            >
-              <Svg
-                width="200"
-                height="200"
-                viewBox="-100 -100 200 200"
-                transform="rotate(-90)"
-              >
-                <Tile
-                  id={entry.id}
-                  gameTiles={entry.gameTiles}
-                  width={150}
-                  x={0}
-                  y={0}
-                />
-              </Svg>
-              <UsedBy games={gamesOfEntry(entry, games, usage)} />
-            </div>
-          ),
-          pagedTiles,
-        )}
       </div>
-    </div>
+    </TooltipProvider>
   );
 };
 
