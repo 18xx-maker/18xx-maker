@@ -209,6 +209,13 @@ describe("load games filters", () => {
     await screen.findByText("Saved Game");
     await user.click(screen.getByRole("combobox", { name: "Designer" }));
     expect(screen.getByRole("option", { name: "Bob Ray" })).toBeInTheDocument();
+    // Sorted by last name: Doe, Lee, Ray
+    expect(
+      screen
+        .getAllByRole("option")
+        .map((o) => o.textContent)
+        .filter((t) => ["Cy Doe", "Ann Lee", "Bob Ray"].includes(t)),
+    ).toEqual(["Cy Doe", "Ann Lee", "Bob Ray"]);
     expect(
       screen.queryByRole("option", { name: "undefined" }),
     ).not.toBeInTheDocument();

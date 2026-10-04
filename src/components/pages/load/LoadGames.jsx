@@ -42,6 +42,9 @@ export const splitDesigners = (designer) =>
         .filter(Boolean)
     : [];
 
+// "Ann Lee" sorts under "lee", ties fall back to the full name
+const lastName = (name) => name.toLowerCase().split(/\s+/).pop();
+
 const isLoaded = (game) => game.type !== "bundled";
 
 const LoadGames = () => {
@@ -80,8 +83,8 @@ const LoadGames = () => {
   );
   const designerOptions = useMemo(
     () =>
-      sortBy(
-        (d) => d.toLowerCase(),
+      sortWith(
+        [ascend((d) => lastName(d)), ascend((d) => d.toLowerCase())],
         uniq(chain((game) => splitDesigners(game.designer), sorted)),
       ),
     [sorted],
