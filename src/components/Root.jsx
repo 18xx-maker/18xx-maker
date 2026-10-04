@@ -10,6 +10,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import Alert from "@/components/Alert";
 import Analytics from "@/components/Analytics";
+import ExportHost from "@/components/ExportHost";
 import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
 import SetSvgColors from "@/components/SetSvgColors";
@@ -243,6 +244,7 @@ body {
           ) : (
             <>
               <Alert />
+              <ExportHost />
               <ShortcutsDialog open={shortcuts} onOpenChange={setShortcuts} />
             </>
           )}

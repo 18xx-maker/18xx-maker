@@ -897,7 +897,7 @@
       },
       "export": {
         "use": "Das Exportmenü öffnen",
-        "notes": "Nur in der App. Wechselt zum geladenen Spiel."
+        "notes": "Nur in der App. Öffnet auf jeder Seite das Menü des geladenen Spiels."
       },
       "app": {
         "use": "Zur Seite „App-Informationen“ wechseln",

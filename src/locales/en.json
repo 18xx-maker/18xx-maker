@@ -897,7 +897,7 @@
       },
       "export": {
         "use": "Open the export menu",
-        "notes": "App only. Goes to the loaded game."
+        "notes": "App only. Opens the menu of the loaded game on any page."
       },
       "app": {
         "use": "Navigate to the App Info page",
