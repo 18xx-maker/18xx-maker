@@ -74,8 +74,9 @@ Zeichenkette auf sie, zum Beispiel
 
 Eine Gesellschaft kann auch `loans` haben, zusätzliche Felder auf ihrer
 Gesellschaftskarte, zum Beispiel für die Kredite eines Spiels. Jeder Eintrag ist
-die Beschriftung unter dem Feld, und jedes Feld wird nach den Token als leeres
-Quadrat gedruckt, damit es nie mit einem Token verwechselt wird. Eine leere
+die Beschriftung unter dem Feld, und jedes Feld wird als leeres Quadrat im
+Hauptteil der Gesellschaftskarte gedruckt, rechts unter der Kopfzeile, in
+Spalten mit bis zu 5 Feldern, damit es nie mit einem Token verwechselt wird. Eine leere
 Zeichenkette oder `null` lässt das Feld ohne Beschriftung:
 
 ```json

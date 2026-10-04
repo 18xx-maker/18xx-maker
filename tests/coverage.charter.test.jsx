@@ -234,18 +234,20 @@ describe("Charter", () => {
     ).toHaveLength(2);
   });
 
-  it("draws loan slots as empty squares after the tokens", async () => {
+  it("draws loan slots as empty squares in the body", async () => {
     const withLoans = { ...company, loans: [50, "", null] };
     const { root } = await mountElement(
       <Charter {...props} company={withLoans} />,
     );
-    // Two tokens and three loans
-    const spots = all(root, ".charter__tokens > svg");
-    expect(spots).toHaveLength(5);
-    expect(all(root, ".charter__tokens rect")).toHaveLength(3);
-    expect(spots.slice(2).map((s) => s.textContent)).toEqual(["$50", "", ""]);
+    // Two tokens in the header and three loans in the body
+    expect(all(root, ".charter__tokens > svg")).toHaveLength(2);
+    expect(all(root, ".charter__tokens rect")).toHaveLength(0);
+    const spots = all(root, ".charter__loans > svg");
+    expect(spots).toHaveLength(3);
+    expect(all(root, ".charter__loans rect")).toHaveLength(3);
+    expect(spots.map((s) => s.textContent)).toEqual(["$50", "", ""]);
     expect(one(root, ".charter__name")).toHaveStyle({
-      paddingRight: "324px",
+      paddingRight: "136.8px",
     });
   });
 
@@ -257,8 +259,9 @@ describe("Charter", () => {
         company={{ ...company, loans: [100] }}
       />,
     );
-    expect(all(root, ".charter__tokens > svg")).toHaveLength(1);
-    expect(all(root, ".charter__tokens rect")).toHaveLength(1);
+    expect(all(root, ".charter__tokens")).toHaveLength(0);
+    expect(all(root, ".charter__loans > svg")).toHaveLength(1);
+    expect(all(root, ".charter__loans rect")).toHaveLength(1);
   });
 
   it("turns loan labels sideways on half width charters", async () => {
@@ -268,9 +271,9 @@ describe("Charter", () => {
     expect(
       all(
         root,
-        ".charter__tokens g[transform='rotate(-90) translate(0 39)'] > text",
+        ".charter__loans g[transform='rotate(-90) translate(0 39)'] > text",
       ),
-    ).toHaveLength(3);
+    ).toHaveLength(1);
   });
 
   it("draws the trains of a company as cards", async () => {

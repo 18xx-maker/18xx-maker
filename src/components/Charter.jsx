@@ -135,7 +135,8 @@ const Charter = ({
     tokens = [];
   }
 
-  // Loans are empty squares, so they never look like a token
+  // Loans are empty squares, so they never look like a token. They print in the
+  // body of the charter, in columns of up to 5.
   const loans = company.loans || [];
   const loanSpots = addIndex(map)(
     (label, index) =>
@@ -222,7 +223,7 @@ const Charter = ({
                     color: t(c(charterStyle === "color" ? color : "white")),
                     paddingRight: halfWidth
                       ? null
-                      : unitsToCss(12.5 + 65 * (tokens.length + loans.length)),
+                      : unitsToCss(12.5 + 65 * tokens.length),
                   }}
                   className="charter__name"
                 >
@@ -264,12 +265,14 @@ const Charter = ({
                     </svg>
                   </div>
                 )}
-                {tokenSpots.length + loanSpots.length > 0 && (
+                {tokenSpots.length > 0 && (
                   <div className="charter__tokens">
                     {halfWidth && "Tokens"}
                     {tokenSpots}
-                    {loanSpots}
                   </div>
+                )}
+                {loanSpots.length > 0 && (
+                  <div className="charter__loans">{loanSpots}</div>
                 )}
                 {halfWidth && (
                   <div className="charter__assets">

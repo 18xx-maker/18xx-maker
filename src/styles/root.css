@@ -511,6 +511,42 @@ body {
   padding: 0.05in 0 0;
 }
 
+.charter__loans {
+  position: absolute;
+  top: 1.0625in;
+  right: 0;
+  padding: 0.125in;
+  box-sizing: border-box;
+  line-height: normal;
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+}
+
+.charter--carth .charter__loans {
+  top: 1.1875in;
+}
+
+.charter--minor .charter__loans {
+  top: 0.875in;
+}
+
+.charter--minor.charter--carth .charter__loans {
+  top: 0.9375in;
+}
+
+.charter__loans svg {
+  width: 0.5in;
+  height: 0.7in;
+  padding: 0 0 0 0.15in;
+  box-sizing: content-box;
+}
+
+.charter--half .charter__loans svg {
+  height: 0.5in;
+  padding: 0.05in 0 0;
+}
+
 .prices {
   position: relative;
   overflow: hidden;
