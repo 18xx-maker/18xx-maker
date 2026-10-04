@@ -893,6 +893,14 @@
         { "side": 6, "color": "blue", "width": 15 }
       ]
     },
+    "B3": {
+      "quantity": 1,
+      "color": "yellow",
+      "track": [{ "type": "straight", "side": 1 }],
+      "cities": [{}],
+      "values": [{ "value": 30, "x": 0, "y": 0 }],
+      "labels": [{ "label": "O" }]
+    },
     "DB801": 1
   },
   "map": {
