@@ -65,7 +65,10 @@ const inches = (size) =>
 //             transparent
 //   basename  the name of the file, without the game or the extension
 //   variation the map variation, for the map documents
-export const documents = (game, config, data) => {
+//
+// options are { cardBleed }: the bleed in units around the single card images
+// (0 for none), see the `exports.cards.bleed` of a game
+export const documents = (game, config, data, { cardBleed = 0 } = {}) => {
   const { slug } = data;
   const paper = {
     width: config.paper.width,
@@ -242,13 +245,21 @@ export const documents = (game, config, data) => {
     });
 
   // Cards
-  const cardSize = (type) =>
-    inches(getSingleCardData(config.cards, config.paper, type));
+  const cardSize = (type) => {
+    const { bleedWidth, bleedHeight } = getSingleCardData(
+      config.cards,
+      config.paper,
+      type,
+      cardBleed,
+    );
+    return inches({ width: bleedWidth, height: bleedHeight });
+  };
   const card = (type, index, basename) =>
     item({
       id: `cards/${type}/${index}`,
       kind: "card",
       route: `cards/${type}/${index}`,
+      query: cardBleed > 0 ? { cardBleed } : {},
       size: cardSize(type),
       basename,
     });

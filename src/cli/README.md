@@ -66,6 +66,7 @@ pnpm maker export <game|path.json> --format pdf,png,svg,b18
 | `--variation <n>`         | only this map variation, `all` for every one                                                                                                                           |
 | `--config <file>`         | a config file on top of `src/config.json` (the settings to change)                                                                                                     |
 | `--dpi <dpi>`             | resolution of PNGs, 1 to 300 (the default and the highest), SVGs have none                                                                                             |
+| `--card-bleed <units>`    | bleed around each single card PNG in 1/100 inch (12.5 is 1/8 inch), 0 to 50, default 0 (none)                                                                          |
 | `-o, --out <folder>`      | the folder that holds the game folders, default `render`                                                                                                               |
 | `-j, --jobs <n>`          | files captured at the same time, default 1                                                                                                                             |
 | `-a, --all`               | every bundled game                                                                                                                                                     |
@@ -101,6 +102,7 @@ field. The game schema checks it (`pnpm validate`, `maker validate`, and
 | `background`  | `--background`  | `white` or `transparent`                       |
 | `variation`   | `--variation`   | a map variation, 0 or more                     |
 | `png.dpi`     | `--dpi`         | a whole number from 1 to 300                   |
+| `cards.bleed` | `--card-bleed`  | a number from 0 to 50 (1/100 inch)             |
 | `b18.version` | `--b18-version` | the Board 18 version                           |
 | `b18.author`  | `--b18-author`  | the Board 18 author                            |
 

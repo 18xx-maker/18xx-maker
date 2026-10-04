@@ -26,6 +26,7 @@ import { documents } from "#export/documents";
 import { exportJobs } from "#export/names";
 import {
   BACKGROUNDS,
+  MAX_CARD_BLEED,
   layoutsOfConfig,
   resolveExportOptions,
 } from "#export/options";
@@ -49,6 +50,22 @@ const list = (value, valid, what) => {
     );
   }
   return items;
+};
+
+// The bleed of --card-bleed: 0 to MAX_CARD_BLEED units
+export const parseCardBleed = (value) => {
+  const bleed = Number(value);
+  if (
+    String(value).trim() === "" ||
+    !Number.isFinite(bleed) ||
+    bleed < 0 ||
+    bleed > MAX_CARD_BLEED
+  ) {
+    throw new UsageError(
+      `--card-bleed must be a number from 0 to ${MAX_CARD_BLEED}`,
+    );
+  }
+  return bleed;
 };
 
 // The resolution of --dpi: 1 to 300
@@ -145,6 +162,9 @@ const flagOptions = (opts) => {
     user.variation = variation;
   }
   if (opts.dpi !== undefined) user.png = { dpi: parseDpi(opts.dpi) };
+  if (opts.cardBleed !== undefined) {
+    user.cards = { bleed: parseCardBleed(opts.cardBleed) };
+  }
   if (opts.b18Version || opts.b18Author) {
     user.b18 = { version: opts.b18Version, author: opts.b18Author };
   }
@@ -159,6 +179,7 @@ const flagOptions = (opts) => {
 //   variation   only this map variation, or all
 //   config      a config file
 //   dpi         of the pngs, 1 to 300 (an svg has none)
+//   cardBleed   the bleed of the single card pngs, in units
 //   out         the folder the folder of the game goes in
 //   jobs        how many files are captured at the same time
 //   all         every bundled game
@@ -261,10 +282,12 @@ const command = async (game, opts = {}) => {
       if (files.length > 0) {
         const list = exportJobs(
           gameDef,
-          selectDocs(documents(gameDef, config, exportData), {
-            docs,
-            variation,
-          }),
+          selectDocs(
+            documents(gameDef, config, exportData, {
+              cardBleed: options.cards.bleed,
+            }),
+            { docs, variation },
+          ),
           files,
         );
         if (list.length === 0) {

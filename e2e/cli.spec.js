@@ -149,6 +149,33 @@ test.describe("maker export 18Test", () => {
     });
   });
 
+  test("writes a card with a bleed on every side", () => {
+    fs.writeFileSync(
+      path.join(out, "poker.json"),
+      JSON.stringify({ cards: { layout: "free", width: 250, height: 350 } }),
+    );
+    const result = maker(
+      out,
+      "18Test",
+      "--format",
+      "png",
+      "--docs",
+      "cards",
+      "--config",
+      "poker.json",
+      "--card-bleed",
+      "12.5",
+    );
+    expect(result.status, result.stderr).toBe(0);
+
+    // 2.75 by 3.75 inches at 300 dpi: the card and 1/8 inch on each side
+    expect(png(path.join(out, "18Test/18test-card-train-1-2.png"))).toEqual({
+      width: 825,
+      height: 1125,
+      pixelsPerMeter: 11811,
+    });
+  });
+
   // A card is 255.11 by 166.3 CSS pixels, painted 255 by 166: an image of a
   // pixel more has an edge the card only partly covers, partly transparent
   for (const [dpi, width, height] of [

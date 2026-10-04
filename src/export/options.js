@@ -13,6 +13,9 @@ export const FORMATS = ["pdf", "png", "svg", "b18"];
 export const LAYOUTS = ["all", "current"];
 export const BACKGROUNDS = ["transparent", "white"];
 
+// The most bleed a card image can have, in units of 1/100 inch (half an inch)
+export const MAX_CARD_BLEED = 50;
+
 // What an export does when nothing says otherwise. Not set: docs (every
 // page), layouts (the export.allLayouts setting of the config), variation
 // (every one) and the author of a Board18 box (it depends on who exports).
@@ -21,6 +24,7 @@ export const DEFAULTS = {
   background: "white",
   png: { dpi: MAX_DPI },
   b18: { version: "1.0" },
+  cards: { bleed: 0 },
 };
 
 const isList = (value, valid) =>
@@ -31,7 +35,7 @@ const isText = (value) => typeof value === "string" && value.length > 0;
 
 // The valid options of a layer, in the shape of the `exports` field:
 //   { formats, docs, layouts, background, variation,
-//     png: { dpi }, b18: { version, author } }
+//     png: { dpi }, b18: { version, author }, cards: { bleed } }
 // What is left out, undefined or not valid is not in the result. The schema
 // of the game rejects invalid options of a game file; a game that the app
 // loaded was not checked, so its mistakes are skipped here instead of failing
@@ -55,6 +59,11 @@ export const cleanOptions = (layer) => {
   const dpi = given.png?.dpi;
   if (Number.isInteger(dpi) && dpi >= 1 && dpi <= MAX_DPI) out.png = { dpi };
 
+  const bleed = given.cards?.bleed;
+  if (Number.isFinite(bleed) && bleed >= 0 && bleed <= MAX_CARD_BLEED) {
+    out.cards = { bleed };
+  }
+
   const b18 = {};
   if (isText(given.b18?.version)) b18.version = given.b18.version;
   if (isText(given.b18?.author)) b18.author = given.b18.author;
@@ -67,6 +76,7 @@ const merge = (low, high) => ({
   ...high,
   png: { ...low.png, ...high.png },
   b18: { ...low.b18, ...high.b18 },
+  cards: { ...low.cards, ...high.cards },
 });
 
 // The options of an export:
@@ -76,11 +86,11 @@ const merge = (low, high) => ({
 //   defaults  the defaults of the caller, on top of DEFAULTS
 // Returns every option: { formats, docs, layouts, background,
 // variation,
-// png: { dpi }, b18: { version, author } }
+// png: { dpi }, b18: { version, author }, cards: { bleed } }
 export const resolveExportOptions = ({ game, user, defaults } = {}) => {
   const options = [defaults, game, user]
     .map(cleanOptions)
-    .reduce(merge, merge(DEFAULTS, { png: {}, b18: {} }));
+    .reduce(merge, merge(DEFAULTS, { png: {}, b18: {}, cards: {} }));
   if (options.variation === null) delete options.variation;
   return options;
 };

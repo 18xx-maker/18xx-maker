@@ -118,7 +118,7 @@ pnpm maker export 18Test --format pdf,png,svg,b18
 node scripts/export-golden.mjs 18Test
 
 # Every export option (formats, docs, layouts, background, variation, png.dpi,
-# b18.version, b18.author) can also be set in a game file's `exports` field
+# cards.bleed, b18.version, b18.author) can also be set in a game file's `exports` field
 # (src/schemas/game.schema.json, src/docs/games/exports.en.md). A flag wins over
 # the game file and the game file over the defaults: resolveExportOptions in
 # src/export/options.js is the one place that decides, for the CLI and the app.

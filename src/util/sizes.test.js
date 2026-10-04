@@ -25,6 +25,25 @@ describe("getSingleCardData", () => {
     });
   });
 
+  it("adds the bleed asked for around the card, not the one of the config", () => {
+    const data = getSingleCardData(
+      { ...cards, cutlines: 3, bleed: 4, border: 2 },
+      paper,
+      undefined,
+      12.5,
+    );
+    expect(data).toMatchObject({
+      width: cards.width,
+      height: cards.height,
+      bleed: 12.5,
+      bleedWidth: cards.width + 25,
+      bleedHeight: cards.height + 25,
+      cutlines: 0,
+      border: 0,
+    });
+    expect(data.totalWidth).toBe(data.bleedWidth);
+  });
+
   it("does not change the config", () => {
     const config = { ...cards, bleed: 4 };
     getSingleCardData(config, paper);

@@ -47,6 +47,14 @@ Karte von 2,657 mal 1,732 Zoll ist bei 300 dpi 796 mal 518 Pixel groß), aber es
 hat nie einen Rand, der teilweise transparent oder mit dem Hintergrund
 vermischt ist. Die App und die Kommandozeile erzeugen dieselben Bilder.
 
+Ein Karten-Bild hat standardmäßig keinen Anschnitt. Für eine Kartendruckerei, die
+möchte, dass die Gestaltung über die Schnittkante hinausläuft, setze `cards.bleed`
+(`--card-bleed`, oder _Kartenanschnitt_ im Fenster _Exportoptionen_): Jedes Karten-Bild
+ist dann die Karte plus dieser Anschnitt auf allen Seiten, wobei der
+Kartenhintergrund den Anschnitt füllt. Logos und Rahmen werden nicht in den
+Anschnitt verlängert. Die Bögen behalten ihren eigenen Anschnitt (`cards.bleed`
+der Konfiguration).
+
 ## Kommandozeile
 
 > [!IMPORTANT]

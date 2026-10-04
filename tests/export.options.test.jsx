@@ -259,6 +259,30 @@ describe("export options", () => {
     expect(exportButton(panel)).toBeEnabled();
   });
 
+  it("exports the card images with the chosen bleed, and stops at a bad one", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(checkbox(panel, "PNG images"));
+    const bleed = within(panel).getByLabelText("Card bleed (units)");
+    expect(bleed).toHaveValue(0);
+    await user.clear(bleed);
+    await user.type(bleed, "51");
+    expect(bleed).toBeInvalid();
+    expect(
+      within(panel).getByText("Use a number from 0 to 50"),
+    ).toBeInTheDocument();
+    expect(exportButton(panel)).toBeDisabled();
+
+    await user.clear(bleed);
+    await user.type(bleed, "12.5");
+    expect(bleed).toBeValid();
+    await user.click(exportButton(panel));
+
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    const cards = requested().jobs.filter(({ doc }) => doc.kind === "card");
+    expect(cards.length).toBeGreaterThan(0);
+    for (const { doc } of cards) expect(doc.query).toEqual({ cardBleed: 12.5 });
+  });
+
   it("asks for a format and a document", async () => {
     const { user, panel } = await openOptions();
     await user.click(checkbox(panel, "PDF documents"));
