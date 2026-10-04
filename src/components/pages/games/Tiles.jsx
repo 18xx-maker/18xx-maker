@@ -118,7 +118,7 @@ const TileSheet = () => {
   const { config } = useConfig();
   const game = useGame();
   const paper = config.paper;
-  const { layout, width: hexWidth, gaps } = config.tiles;
+  const { layout, width: hexWidth, gaps, cutBorder } = config.tiles;
 
   if (!game.tiles) {
     return <Navigate to={`/games/${game.meta.slug}/`} replace />;
@@ -317,6 +317,28 @@ const TileSheet = () => {
       );
     }, page);
 
+    // Drawn after every tile so neighboring bleed never covers a border
+    const borderNodes = cutBorder
+      ? addIndex(map)(
+          (hex, i) =>
+            hex && (
+              <g
+                transform={`translate(${c.getX(i)} ${c.getY(i)}) scale(${c.hexWidth / 150})`}
+                key={`border-${i}`}
+              >
+                <polygon
+                  className="TileSheet--CutBorder"
+                  points="-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5"
+                  fill="none"
+                  stroke="black"
+                  strokeWidth={150 / c.hexWidth}
+                />
+              </g>
+            ),
+          page,
+        )
+      : null;
+
     let widthIn, viewBoxStr;
     if (layout === "smallDie") {
       widthIn = (c.pageWidth + 20) * 0.01;
@@ -349,6 +371,7 @@ const TileSheet = () => {
           <Cutlines />
           {pins}
           {tileNodes}
+          {borderNodes}
         </Svg>
       </div>
     );

@@ -499,6 +499,10 @@
       "gaps": {
         "label": "Tile Gaps",
         "description": "This says whether to separate different colors with spaces needed to prevent bleed crossover. Leave on unless you really know you want it."
+      },
+      "cutBorder": {
+        "label": "Tile Cut Borders",
+        "description": "This draws a thin black outline at the exact cut size around every tile on the tile sheet, to help when cutting tiles out by hand."
       }
     },
     "stock": {

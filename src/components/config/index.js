@@ -201,6 +201,9 @@ export const sections = [
         name: "gaps",
       },
       {
+        name: "cutBorder",
+      },
+      {
         pins: true,
       },
     ],

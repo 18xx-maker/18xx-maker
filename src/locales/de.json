@@ -499,6 +499,10 @@
       "gaps": {
         "label": "Plättchenabstände",
         "description": "Legt fest, ob verschiedene Farben durch Abstände getrennt werden, um ein Überlaufen der Farben beim Beschnitt zu verhindern. Eingeschaltet lassen, außer du weißt genau, dass du es nicht willst."
+      },
+      "cutBorder": {
+        "label": "Schnittränder der Plättchen",
+        "description": "Zeichnet um jedes Plättchen auf dem Plättchenbogen eine dünne schwarze Linie in der genauen Schnittgröße, damit du Plättchen von Hand ausschneiden kannst."
       }
     },
     "stock": {

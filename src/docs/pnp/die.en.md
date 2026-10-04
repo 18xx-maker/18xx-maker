@@ -39,6 +39,10 @@ There is also a `smallDie` option that is setup to print on a die created to
 make small 1" (flat to flat) tiles. I do not own this die so I haven't been able
 to fully test it.
 
+If you cut tiles out by hand instead, set `tiles.cutBorder` to `true` to draw a
+thin black outline at the exact cut size around every tile. It works with every
+tile layout.
+
 ### Cards
 
 You can set the `cards.layout` property to `dtgDie` or `miniEuroDie` depending

@@ -277,6 +277,10 @@
           "exclusiveMinimum": 0
         },
         "gaps": { "type": "boolean" },
+        "cutBorder": {
+          "type": "boolean",
+          "description": "Draw a thin black outline at the exact cut size around every tile on the tile sheet, so tiles can be cut out by hand."
+        },
         "pins": { "$ref": "#/definitions/pins" }
       },
       "required": ["layout", "width", "mapWidth", "gaps"],
