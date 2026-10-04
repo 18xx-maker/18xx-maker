@@ -71,6 +71,24 @@ describe("charter train cards", () => {
     },
   );
 
+  // A tall phase chart overflows upward over the label, never out of the box
+  it.for(["3x1", "3x1minors"])(
+    "keeps the phase chart inside the trains box of 1867 in the %s layout",
+    async (layout) => {
+      renderApp(`/games/1867/charters?config.charters.layout=${layout}`);
+      const root = await screen.findByTestId("game-1867-charters");
+      const boxes = all(root, ".charter__trains").filter((b) =>
+        one(b, ".charter__phase"),
+      );
+      expect(boxes.length).toBeGreaterThan(0);
+      for (const box of boxes) {
+        expect(
+          one(box, ".charter__phase").getBoundingClientRect().bottom,
+        ).toBeLessThanOrEqual(box.getBoundingClientRect().bottom + 0.5);
+      }
+    },
+  );
+
   it("stay above the phase chart on a minor charter", async () => {
     const company = {
       ...games["18Test"].companies.find((c) => c.minor),

@@ -335,7 +335,7 @@ export const phase = (Story, { globals, parameters }) => {
     >
       <Page width={width} height={height} css="">
         <div className="charter">
-          <div className="charter__phase" style={{ position: "static" }}>
+          <div className="charter__phase">
             <Story />
           </div>
         </div>

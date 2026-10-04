@@ -273,6 +273,8 @@ body {
   width: 50%;
   display: flex;
   flex-direction: column;
+  /* A phase chart too tall for the box overflows upward, as it always did */
+  justify-content: flex-end;
   padding: 0.125in;
   border-width: 0 1px 0 0;
   border-color: #666;
