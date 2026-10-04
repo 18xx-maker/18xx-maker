@@ -218,4 +218,92 @@ describe("Company tokens", () => {
     expect(one(svg, "g[clip-path] svg")).toBeNull();
     expect(one(svg, "text")).toHaveTextContent("L");
   });
+
+  describe("second line", () => {
+    const ys = (svg) =>
+      all(svg, "text").map((t) => Number(t.getAttribute("y")));
+
+    it("draws a second line below the label", async () => {
+      const svg = await drawSvg(<Token label="AA" label2="Berlin" />);
+      const [main, second] = all(svg, "text");
+      expect(second).toHaveTextContent("Berlin");
+      const [y1, y2] = ys(svg);
+      expect(y2).toBeGreaterThan(y1);
+      expect(Number(second.getAttribute("font-size"))).toBeLessThan(
+        Number(main.getAttribute("font-size")),
+      );
+    });
+
+    it("draws a second line above the label", async () => {
+      const svg = await drawSvg(
+        <Token label="AA" label2="Hi" label2Position="above" />,
+      );
+      const [y1, y2] = ys(svg);
+      expect(y2).toBeLessThan(y1);
+    });
+
+    it("moves the main label away from the second line", async () => {
+      const plain = ys(await drawSvg(<Token label="AA" />))[0];
+      const below = ys(await drawSvg(<Token label="AA" label2="x" />))[0];
+      const above = ys(
+        await drawSvg(<Token label="AA" label2="x" label2Position="above" />),
+      )[0];
+      expect(below).toBeLessThan(plain);
+      expect(above).toBeGreaterThan(plain);
+    });
+
+    it("leaves tokens without a second line alone", async () => {
+      const svg = await drawSvg(<Token label="AA" />);
+      expect(all(svg, "text")).toHaveLength(1);
+    });
+
+    it("uses the label color unless label2Color is set", async () => {
+      let svg = await drawSvg(<Token label="AA" color="blue" label2="x" />);
+      const [main, second] = all(svg, "text");
+      expect(second).toHaveAttribute("fill", main.getAttribute("fill"));
+      svg = await drawSvg(
+        <Token label="AA" color="blue" label2="x" label2Color="red" />,
+      );
+      expect(all(svg, "text")[1]).toHaveAttribute("fill", gmt.red);
+    });
+
+    it("keeps the label stroke on the second line", async () => {
+      const svg = await drawSvg(
+        <Token
+          label="AA"
+          label2="x"
+          label2Color="white"
+          labelStrokeColor="black"
+        />,
+      );
+      const [main, second] = all(svg, "text");
+      expect(second).toHaveAttribute("stroke", main.getAttribute("stroke"));
+    });
+
+    it("keeps an explicit labelY and places the second line from it", async () => {
+      const svg = await drawSvg(<Token label="AA" label2="x" labelY={5} />);
+      const [y1, y2] = ys(svg);
+      expect(y1).toBe(5);
+      expect(y2).toBeGreaterThan(5);
+    });
+
+    it("works with an icon and label", async () => {
+      const svg = await drawSvg(<Token icon="token" label="AA" label2="x" />);
+      expect(all(svg, "text")).toHaveLength(2);
+    });
+
+    it("works on shield and destination tokens", async () => {
+      let svg = await drawSvg(<Token shield label="AA" label2="x" />);
+      expect(all(svg, "text")).toHaveLength(2);
+      svg = await drawSvg(<Token destination label="AA" label2="x" />);
+      expect(all(svg, "text")).toHaveLength(2);
+    });
+
+    it("draws no second line on logo tokens", async () => {
+      const svg = await drawSvg(
+        <Token logo="countries/ad" label="AD" label2="x" />,
+      );
+      expect(all(svg, "text")).toHaveLength(1);
+    });
+  });
 });

@@ -40,6 +40,12 @@ export default {
     labelStrokeColor: colorSelect(),
     labelStrokeWidth: number(0, 3, 0.5),
     labelY: number(-20, 20),
+    label2: { control: { type: "text" } },
+    label2Position: {
+      control: { type: "select" },
+      options: ["below", "above"],
+    },
+    label2Color: colorSelect(),
     fontSize: number(4, 30),
     width: number(10, 35),
     rotation: number(0, 330, 30),
@@ -221,3 +227,9 @@ export const Inverse = {
 export const SquareToken = { args: { label: "SQ", tokenShape: "square" } };
 
 export const Bleed = { args: { label: "PR", bleed: true } };
+
+export const SecondLine = { args: { label: "5", label2: "Berlin" } };
+
+export const SecondLineAbove = {
+  args: { label: "5", label2: "Berlin", label2Position: "above" },
+};

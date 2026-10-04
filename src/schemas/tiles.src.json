@@ -1027,6 +1027,26 @@
           ],
           "description": "Width of the stroke around the label."
         },
+        "label2": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "description": "A second, smaller line of text shown with the label."
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "Whether the second line is above or below the label. Defaults to below."
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "Color of the second line. Defaults to the label color."
+        },
         "color": {
           "type": "string",
           "description": "Background color of the token."

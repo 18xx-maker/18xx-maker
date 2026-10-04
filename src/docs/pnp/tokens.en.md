@@ -38,6 +38,23 @@ that company.
 in addition to any defined on the company itself. You can also define this field
 on a company to override its value only for that company.
 
+## Second Line
+
+A token can show a second, smaller line of text above or below its label,
+for example a company name or operating order. Set `label2` in the company's
+`token` field. `label2Position` is `"below"` (default) or `"above"`, and
+`label2Color` sets its color (default: the label color). Logo tokens show no
+text, and companies drawn as plain map tokens ignore the `token` field.
+
+```json
+{
+  "name": "Berlin Railroad",
+  "abbrev": "BR",
+  "color": "orange",
+  "token": { "label2": "Berlin", "label2Position": "below" }
+}
+```
+
 ## Tool Config Options
 
 You can set the size of each type of token in the tool. Sizes are in hundredths of

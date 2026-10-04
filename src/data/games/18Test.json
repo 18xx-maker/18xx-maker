@@ -189,7 +189,8 @@
     {
       "name": "Natural Railroad",
       "abbrev": "NRR",
-      "color": "natural"
+      "color": "natural",
+      "token": { "label2": "Second", "label2Position": "above" }
     },
     {
       "name": "Orange Railroad",
@@ -206,7 +207,8 @@
     {
       "name": "Pink Railroad",
       "abbrev": "PRR",
-      "color": "pink"
+      "color": "pink",
+      "token": { "label2": "Second" }
     },
     {
       "name": "Violet Railroad",
