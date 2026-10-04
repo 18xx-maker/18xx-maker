@@ -32,6 +32,29 @@ describe("game charters", () => {
       expect(one(root, ".charter__traincards") !== null).toBe(!half);
     },
   );
+
+  it("draws only minors at half width with halfWidthMinors", async () => {
+    renderApp(
+      "/games/18Test/charters?config.charters.layout=free&config.charters.halfWidthMinors=true",
+    );
+    const root = await screen.findByTestId("game-18Test-charters");
+    const minors = all(root, ".charter--minor");
+    const majors = all(root, ".charter").filter(
+      (c) => !c.classList.contains("charter--minor"),
+    );
+    expect(minors.length).toBeGreaterThan(0);
+    expect(majors.length).toBeGreaterThan(0);
+    for (const c of minors) expect(c).toHaveClass("charter--half");
+    for (const c of majors) expect(c).not.toHaveClass("charter--half");
+  });
+
+  it("ignores halfWidthMinors in the 3x1 layout", async () => {
+    renderApp(
+      "/games/18Test/charters?config.charters.layout=3x1&config.charters.halfWidthMinors=true",
+    );
+    const root = await screen.findByTestId("game-18Test-charters");
+    expect(all(root, ".charter--half")).toHaveLength(0);
+  });
 });
 
 describe("charter train cards", () => {

@@ -192,6 +192,7 @@
         "bleed": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0 },
         "halfWidth": { "type": "boolean" },
+        "halfWidthMinors": { "type": "boolean" },
         "smallerMinors": { "type": "boolean" },
         "blackBand": { "type": "boolean" },
         "showPhaseChart": { "type": "boolean" },

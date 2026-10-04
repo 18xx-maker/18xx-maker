@@ -547,6 +547,10 @@
         "label": "Half Width Charters",
         "description": "This draws all charters (major and minor) as half width. They will take up half of the width of your page (minus cutlines)."
       },
+      "halfWidthMinors": {
+        "label": "Half Width Minor Charters",
+        "description": "This draws only minor charters as half width while major charters stay full width. It only applies to the free layout."
+      },
       "smallerMinors": {
         "label": "Smaller Minors",
         "description": "This draws minor charters smaller (height wise)."
