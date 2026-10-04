@@ -63,6 +63,10 @@ Conventions:
   game, add its slug to `tests/snapshots.test.jsx`.
 - `src/data/games/18Test.json` is the fixture game. Page roots expose
   `data-testid` hooks like `game-18Test-map`; add one when adding a page.
+- **Always add an example of every new feature to `18Test.json`** (a new
+  option, tile element, charter/market/token field, ...), so it renders in the
+  print pages and the snapshots cover it. Extend an existing entry where one
+  fits; add a new one only when the feature needs it.
 - Every route in `rootRoutes` needs a smoke test entry (`tests/routes.js`,
   `tests/smoke.js`).
 - CI enforces a 95% statement floor on `src/state/**`. The state layer is
