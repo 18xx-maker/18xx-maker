@@ -283,6 +283,32 @@ describe("validate", () => {
     });
   });
 
+  describe("the second token line of a company", () => {
+    const withToken = (token) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          companies: [{ name: "A", abbrev: "A", token }],
+        }),
+      );
+
+    it("accepts label2 settings", () => {
+      const token = {
+        label2: "Two",
+        label2Position: "above",
+        label2Color: "red",
+      };
+      expect(run(withToken(token)).code).toBe(0);
+    });
+
+    it("rejects a bad label2Position", () => {
+      const { code, lines } = run(withToken({ label2Position: "left" }));
+      expect(code).toBe(1);
+      expect(lines.join("\n")).toContain("label2Position");
+    });
+  });
+
   describe("the trains of a game and its companies", () => {
     const withTrains = (trains, companyTrains) =>
       writeTmp(
