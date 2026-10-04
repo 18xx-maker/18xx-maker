@@ -16,7 +16,7 @@ import {
   unzip,
 } from "./export-files.js";
 
-// The six real export paths, {CLI, app} x {pdf, png, b18}, each exporting the
+// The eight real export paths, {CLI, app} x {pdf, png, svg, b18}, each exporting the
 // same small fixed set of 18Test (see export-files.js) and checking the real
 // files on disk. No mocks: the CLI is bin/maker.js on dist/site, the app is
 // dist/main (pnpm build && pnpm build:app first). They run on Linux, macOS and
@@ -114,6 +114,38 @@ const check = {
       }
     }
   },
+  svg: (dir) => {
+    const names = fs.readdirSync(dir);
+    expect(names.every((name) => name.endsWith(".svg"))).toBe(true);
+
+    for (const [name, [width, height]] of Object.entries(expected.svg.sizes)) {
+      const text = fs.readFileSync(path.join(dir, name), "utf-8");
+      // A standalone file: the styles of the page are written on the shapes
+      expect(text.startsWith("<?xml"), name).toBe(true);
+      expect(text, name).toContain('xmlns="http://www.w3.org/2000/svg"');
+      expect(text, name).toContain(
+        'xmlns:xlink="http://www.w3.org/1999/xlink"',
+      );
+      expect(text, name).not.toMatch(/\sclass=|\sstyle=|<style|foreignObject/);
+      expect(text, name).toMatch(/fill="rgb\(/);
+      expect(text, name).not.toMatch(/font-family="[^"]*\bdisplay\b/);
+      // The text is text, in a real font
+      if (name.includes("token") || name.includes("map")) {
+        expect(text, name).toMatch(/<text[^>]*font-family="[^"]*Bitter/);
+      }
+      const size = (attribute) =>
+        Number(text.match(new RegExp(`<svg[^>]* ${attribute}="([\\d.]+)"`))[1]);
+      expect(size("width"), name).toBeCloseTo(width, 0);
+      expect(size("height"), name).toBeCloseTo(height, 0);
+    }
+    expect(names).toEqual(
+      expect.arrayContaining(Object.keys(expected.svg.sizes)),
+    );
+    // Only the documents that have one, not the paginated or sheet pages
+    expect(names.some((name) => /paginated|cards|charters/.test(name))).toBe(
+      false,
+    );
+  },
   b18: (dir) => {
     const { zip, folder, images } = expected.b18;
     const files = unzip(path.join(dir, zip));
@@ -152,10 +184,11 @@ const check = {
 const docs = {
   pdf: ["map"],
   png: ["background", "map", "market", "cards"],
+  svg: ["map", "market", "tiles", "tokens"],
   b18: ["map"],
 };
 
-for (const format of ["pdf", "png", "b18"]) {
+for (const format of ["pdf", "png", "svg", "b18"]) {
   test(`export › cli › ${format}`, () => {
     const result = spawnSync(
       process.execPath,
@@ -197,9 +230,14 @@ const launch = () =>
     ],
   });
 
-const label = { pdf: "PDF documents", png: "PNG images", b18: "Board18 box" };
+const label = {
+  pdf: "PDF documents",
+  png: "PNG images",
+  svg: "SVG images",
+  b18: "Board18 box",
+};
 
-for (const format of ["pdf", "png", "b18"]) {
+for (const format of ["pdf", "png", "svg", "b18"]) {
   test(`export › app › ${format}`, async () => {
     const dir = path.join(out, "files");
     fs.mkdirSync(dir);

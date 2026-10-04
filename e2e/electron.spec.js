@@ -67,7 +67,7 @@ test.describe("the app exports 18Test", () => {
 
   test.setTimeout(180_000);
 
-  test("writes pdf, png and a Board 18 box from the options panel", async () => {
+  test("writes pdf, png, svg and a Board 18 box from the options panel", async () => {
     app = await launch();
     // The folder is chosen without a dialog, and nothing is shown in the
     // file manager
@@ -85,6 +85,7 @@ test.describe("the app exports 18Test", () => {
 
     const panel = window.getByRole("dialog");
     await panel.getByRole("checkbox", { name: "PNG images" }).check();
+    await panel.getByRole("checkbox", { name: "SVG images" }).check();
     await panel.getByRole("checkbox", { name: "Board18 box" }).check();
 
     // Only the background and the map
@@ -110,6 +111,10 @@ test.describe("the app exports 18Test", () => {
       pixelsPerMeter: 11811,
     });
     expect(png(path.join(out, "18test-map.png")).width).toBe(4500);
+    const svg = fs.readFileSync(path.join(out, "18test-map.svg"), "utf-8");
+    expect(svg.startsWith("<?xml")).toBe(true);
+    expect(svg).toMatch(/<svg [^>]*width="1392"/);
+    expect(fs.existsSync(path.join(out, "18test-background.svg"))).toBe(false);
 
     const box = path.join(out, "board18-18Test-1.0");
     expect(png(path.join(box, "18Test-1.0/Tokens.png"))).toEqual({

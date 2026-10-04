@@ -56,12 +56,12 @@ test.afterEach(() => {
 test.describe("maker export 18Test", () => {
   test.setTimeout(120_000);
 
-  test("writes pdf, png and a Board 18 box", () => {
+  test("writes pdf, png, svg and a Board 18 box", () => {
     const result = maker(
       out,
       "18Test",
       "--format",
-      "pdf,png,b18",
+      "pdf,png,svg,b18",
       "--docs",
       "background,map",
     );
@@ -78,6 +78,15 @@ test.describe("maker export 18Test", () => {
       pixelsPerMeter: 11811,
     });
     expect(png(path.join(dir, "18test-map.png")).width).toBe(4500);
+
+    // The svg of the map is a standalone file, without a background page
+    // (the map png is 4500 wide with its quarter inch border, 24 CSS pixels
+    // on each side)
+    const svg = fs.readFileSync(path.join(dir, "18test-map.svg"), "utf-8");
+    expect(svg.startsWith("<?xml")).toBe(true);
+    expect(svg).toMatch(/<svg [^>]*width="1392"/);
+    expect(svg).not.toMatch(/\sclass=|<style|foreignObject/);
+    expect(fs.existsSync(path.join(dir, "18test-background.svg"))).toBe(false);
 
     // Board 18 images are one pixel for each unit, without a resolution
     const box = path.join(dir, "board18-18Test-1.0");
