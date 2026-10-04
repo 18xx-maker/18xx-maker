@@ -257,6 +257,8 @@
       "name": "3+1",
       "quantity": 3,
       "price": 300,
+      "upgrade": 200,
+      "tradeIn": 100,
       "color": "green",
       "obsolete": "8E"
     },
