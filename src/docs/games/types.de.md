@@ -90,7 +90,7 @@ Der erste Kredit steht in der rechten Spalte, und die Kredite füllen sie von ob
 Eine Gesellschaft mit vielen Tokens kann `tokensBelow` setzen, um ihre Tokenfelder
 in einer Reihe unter dem Namen statt rechts davon zu drucken, damit sie den Namen
 nicht zusammendrücken. Die Tokens werden kleiner, damit sie in die Breite der
-Gesellschaftskarte passen. Gesellschaftskarten halber Breite stapeln ihre Tokens
+Gesellschaftskarte passen, und der Name hat Platz für eine Zeile, also halte ihn kurz und lass den Untertext weg. Gesellschaftskarten halber Breite stapeln ihre Tokens
 bereits und ignorieren die Einstellung:
 
 ```json

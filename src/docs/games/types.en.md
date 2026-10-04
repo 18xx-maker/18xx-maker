@@ -85,7 +85,7 @@ The first loan is in the right column and the loans fill it from top to bottom, 
 
 A company with many tokens can set `tokensBelow` to print its token slots in a
 row under the company name instead of to the right of it, so they do not squeeze
-the name. The tokens get smaller to fit the width of the charter. Half width
+the name. The tokens get smaller to fit the width of the charter, and the name has room for one line, so keep it short and leave out the subtext. Half width
 charters already stack their tokens and ignore it:
 
 ```json

@@ -87,7 +87,7 @@ const Charter = ({
   // label is always black because it sits on the body, not on the colored
   // header.
   const spot = (key, shape, label, loan) => (
-    <svg key={key} viewBox={tokensBelow && !loan ? "0 0 50 68" : undefined}>
+    <svg key={key} viewBox={tokensBelow && !loan ? "-4 0 58 68" : undefined}>
       <g transform={`translate(25 25)${loan ? " scale(0.9)" : ""}`}>
         {shape}
         {!(loan && (label === null || label === undefined || label === "")) && (
