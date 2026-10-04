@@ -28,6 +28,22 @@
 
 `extraStationTokens` 定义除公司自身定义的车站标记之外,还要为每家公司额外打印多少个车站标记。您也可以在某家公司上设置此字段,仅为该公司覆盖它的值。
 
+## 第二行文字
+
+代币可以在标签上方或下方显示第二行较小的文字，例如公司名称或运营顺序。在公司的
+`token` 字段中设置 `label2`。`label2Position` 为 `"below"`（默认）或
+`"above"`，`label2Color` 设置其颜色（默认与标签颜色相同）。标志代币不显示文字，
+以普通地图代币绘制的公司会忽略 `token` 字段。
+
+```json
+{
+  "name": "Berlin Railroad",
+  "abbrev": "BR",
+  "color": "orange",
+  "token": { "label2": "Berlin", "label2Position": "below" }
+}
+```
+
 ## 工具设置选项
 
 您可以在工具中设置每种标记的大小。大小以百分之一英寸为单位。我们默认股市标记为 50(0.5 英寸),车站标记为 37.5(0.375 英寸)。这些尺寸的打孔器相对容易买到,打出来的贴纸正好适合 [Rails on Boards](https://www.railsonboards.com/) 的 15 毫米和 12 毫米标记。

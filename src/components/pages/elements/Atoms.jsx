@@ -317,6 +317,18 @@ const atoms = [
         ],
       },
       { tokens: [{ label: "XYZ", shield: true }] },
+      { tokens: [{ label: "5", label2: "Berlin", color: "orange" }] },
+      {
+        tokens: [
+          {
+            label: "5",
+            label2: "Berlin",
+            label2Position: "above",
+            label2Color: "white",
+            color: "blue",
+          },
+        ],
+      },
       { tokens: [{ label: "xyzzy", shield: "yellow", shieldTop: "orange" }] },
       { tokens: [{ label: "USA", shield3: true }] },
       {

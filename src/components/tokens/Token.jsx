@@ -21,6 +21,9 @@ const Token = ({
   color, // What color is this token using as a background
   labelStrokeColor, // What color to use for the stroke of the label
   labelStrokeWidth, // What width to use for the stroke of the label
+  label2, // A second, smaller line of text shown with the label
+  label2Position, // "above" or "below" (default) the main label
+  label2Color, // What color to use for the second line (default: the label's)
   shapeAngle, // Angle for the shapes, independent of the positioning angle
 
   bar, // Do we add a white bar around the text?
@@ -143,6 +146,52 @@ const Token = ({
         } else {
           tokenFill = c(color) || p("white");
         }
+
+        // Second line of text. Logo tokens draw no text, so it is skipped.
+        const text2 =
+          label2 != null && label2 !== "" && !(logo && logos[logo])
+            ? String(label2)
+            : null;
+        const above = label2Position === "above";
+        // Shift the main label away from the second line and build the
+        // second line relative to the main label's final position. fSize is
+        // the main label's (already scaled) font size, y its baseline.
+        const withLabel2 = (fSize, y, textFill, textStroke) => {
+          if (!text2) {
+            return { y, extra: null };
+          }
+          let f2 = fSize * 0.6;
+          if (text2.length > 5) {
+            f2 *= 0.6;
+          } else if (text2.length > 4) {
+            f2 *= 0.7;
+          } else if (text2.length > 3) {
+            f2 *= 0.8;
+          }
+          if (!labelY) {
+            y += (above ? 1 : -1) * fSize * 0.3;
+          }
+          const y2 = y + (above ? -1 : 1) * (fSize * 0.45 + f2 * 0.6);
+          const fill = label2Color ? c(label2Color) : textFill;
+          return {
+            y,
+            extra: (
+              <text
+                key="text2"
+                fontFamily={fontFamily || "display"}
+                fontSize={f2}
+                textAnchor="middle"
+                strokeWidth={labelStrokeWidth}
+                stroke={label2Color ? "none" : textStroke}
+                fill={fill}
+                x="0"
+                y={y2}
+              >
+                {text2}
+              </text>
+            ),
+          };
+        };
 
         let tokInner, tokOuter;
         if (tokenShape === "square") {
@@ -867,6 +916,7 @@ const Token = ({
                 y += scaling * 5;
               }
             }
+            const second = withLabel2(fSize, y, textFill, textStroke);
             content.push(
               <text
                 key="text"
@@ -877,11 +927,14 @@ const Token = ({
                 stroke={textStroke}
                 fill={textFill}
                 x="0"
-                y={y}
+                y={second.y}
               >
                 {label}
               </text>,
             );
+            if (second.extra) {
+              content.push(second.extra);
+            }
           } else {
             let size = defaultTo(width * 2, logoWidth * scaling) * 0.75;
             let start = -0.5 * size;
@@ -930,6 +983,7 @@ const Token = ({
           } else {
             y += labelShift;
           }
+          const second = withLabel2(fSize, y, textFill, textStroke);
           content.push(
             <text
               key="text"
@@ -940,11 +994,14 @@ const Token = ({
               stroke={textStroke}
               fill={textFill}
               x="0"
-              y={y}
+              y={second.y}
             >
               {label}
             </text>,
           );
+          if (second.extra) {
+            content.push(second.extra);
+          }
         }
         return (
           <RotateContext.Consumer>

@@ -42,6 +42,24 @@ zusätzlich zu denen gedruckt werden, die in der Gesellschaft selbst definiert
 sind. Du kannst dieses Feld auch bei einer Gesellschaft angeben, um den Wert nur
 für diese Gesellschaft zu überschreiben.
 
+## Zweite Zeile
+
+Ein Token kann über oder unter dem Label eine zweite, kleinere Textzeile
+anzeigen, zum Beispiel einen Firmennamen oder die Spielreihenfolge. Setze
+`label2` im Feld `token` der Firma. `label2Position` ist `"below"` (Standard)
+oder `"above"`, und `label2Color` legt die Farbe fest (Standard: die Farbe des
+Labels). Logo-Tokens zeigen keinen Text, und Firmen, die als einfache
+Kartentokens gezeichnet werden, ignorieren das Feld `token`.
+
+```json
+{
+  "name": "Berlin Railroad",
+  "abbrev": "BR",
+  "color": "orange",
+  "token": { "label2": "Berlin", "label2Position": "below" }
+}
+```
+
 ## Optionen in der Werkzeugkonfiguration
 
 Du kannst im Werkzeug die Größe jeder Tokenart festlegen. Die Größen sind in
