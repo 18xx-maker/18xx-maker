@@ -16,7 +16,7 @@
 
 - [companies](https://18xx-maker.com/schemas/companies.schema.json) 定义用于替换公司的公司文件
 - [publishers](https://18xx-maker.com/schemas/publishers.schema.json) 定义出版商文件
-- [game](https://18xx-maker.com/schemas/game.schema.json) 定义游戏文件 - _目前仍在制作中,尚不完整_
+- [game](https://18xx-maker.com/schemas/game.schema.json) 定义游戏文件
 - [tiles](https://18xx-maker.com/schemas/tiles.schema.json) 定义地块文件,以及游戏文件中六边格定义的格式
 - [config](https://18xx-maker.com/schemas/config.schema.json) - 定义 `defaults.json` 的格式,用于管理 18xx Maker 及其他工具的[配置文件](https://github.com/18xx-maker/18xx-maker/blob/main/src/defaults.json)。
 - [theme](https://18xx-maker.com/schemas/theme.schema.json) - 定义配色主题文件的模式(地图或公司)
