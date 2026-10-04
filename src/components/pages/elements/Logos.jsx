@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
@@ -32,29 +32,8 @@ const groupItems = map(
   groupNames,
 );
 
-// Classes that look the same on the back of a token
-const SAME_ON_BACK = [
-  "color-white",
-  "color-stroke-white",
-  "color-gray",
-  "color-stroke-gray",
-];
-
-const hasBack = (el) =>
-  [...el.querySelectorAll('[class*="color-"]')].some((node) =>
-    [...node.classList].some(
-      (c) => c.startsWith("color-") && !SAME_ON_BACK.includes(c),
-    ),
-  );
-
 const LogoCard = ({ logo, Component }) => {
   const { t } = useTranslation();
-  const ref = useRef(null);
-  const [back, setBack] = useState(false);
-
-  useLayoutEffect(() => {
-    setBack(hasBack(ref.current));
-  }, [logo]);
 
   const preview = (className, label) => (
     <div className="m-4">
@@ -64,17 +43,14 @@ const LogoCard = ({ logo, Component }) => {
         height="100%"
         style={{ overflow: "hidden" }}
       />
-      {back && (
-        <div className="text-center text-xs text-muted-foreground">{label}</div>
-      )}
+      <div className="text-center text-xs text-muted-foreground">{label}</div>
     </div>
   );
 
   return (
     <div className="border rounded-lg checkered overflow-hidden">
-      <div ref={ref}>{preview(undefined, t("elements.logos.front"))}</div>
-      {back &&
-        preview("color-main-gray color-reserved", t("elements.logos.back"))}
+      {preview(undefined, t("elements.logos.front"))}
+      {preview("color-main-gray color-reserved", t("elements.logos.back"))}
       <div className="border-t center p-4 bg-background text-center">
         {logo}
       </div>

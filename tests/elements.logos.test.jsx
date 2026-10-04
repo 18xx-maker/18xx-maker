@@ -9,38 +9,23 @@ const cardFor = (page, name) =>
   );
 
 describe("elements logos page", () => {
-  it("shows the reserved back of a recolorable logo", async () => {
-    renderApp("/elements/logos?group=1846");
-    const page = await screen.findByTestId("logos");
+  it.each(["1846/ERIE", "1846/GT"])(
+    "shows the normal and reserved sides of %s",
+    async (name) => {
+      renderApp("/elements/logos?group=1846");
+      const page = await screen.findByTestId("logos");
 
-    await waitFor(() => {
+      await waitFor(() => {
+        expect(cardFor(page, name)).toBeDefined();
+      });
+
+      const card = cardFor(page, name);
       // eslint-disable-next-line testing-library/no-node-access
-      expect(cardFor(page, "1846/ERIE").querySelectorAll("svg")).toHaveLength(
-        2,
-      );
-    });
-
-    const card = cardFor(page, "1846/ERIE");
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(card.querySelector("svg.color-reserved")).not.toBeNull();
-  });
-
-  it("shows a single side for a logo without color classes", async () => {
-    renderApp("/elements/logos?group=1846");
-    const page = await screen.findByTestId("logos");
-
-    await waitFor(() => {
+      expect(card.querySelectorAll("svg")).toHaveLength(2);
       // eslint-disable-next-line testing-library/no-node-access
-      expect(cardFor(page, "1846/ERIE").querySelectorAll("svg")).toHaveLength(
-        2,
-      );
-    });
-
-    const card = cardFor(page, "1846/GT");
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(card.querySelectorAll("svg")).toHaveLength(1);
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(card.querySelector("svg.color-reserved")).toBeNull();
-    expect(card).not.toHaveTextContent("Reserved");
-  });
+      expect(card.querySelector("svg.color-reserved")).not.toBeNull();
+      expect(card).toHaveTextContent("Normal");
+      expect(card).toHaveTextContent("Reserved");
+    },
+  );
 });
