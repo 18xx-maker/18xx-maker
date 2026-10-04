@@ -1,6 +1,7 @@
 import { Navigate, useParams } from "react-router";
 
 import Charter from "@/components/Charter";
+import HtmlEditor from "@/components/HtmlEditor";
 import PageSetup from "@/components/PageSetup";
 
 import { useConfig, useGame } from "@/hooks";
@@ -130,35 +131,37 @@ const Charters = () => {
 `;
 
   return (
-    <div
-      className="charters printElement"
-      data-testid={`game-${game.meta.slug}-charter`}
-      style={{ display: "inline-block" }}
-    >
-      <style>{css}</style>
-      <Charter
-        game={game.info.title}
-        name={company.name}
-        subName={company.subName}
-        abbrev={company.abbrev}
-        logo={company.logo}
-        color={company.color}
-        token={company.token}
-        tokens={company.tokens}
-        phases={game.phases}
-        turns={game.turns}
-        trains={game.trains}
-        minor={!!company.minor}
-        halfWidth={charterHalfWidth(charters, !!company.minor)}
-        company={company}
-        variant={company.variant}
-        fontFamily={company.fontFamily || game.info.companyFontFamily}
-        fontSize={company.fontSize || game.info.companyFontSize}
-        fontWeight={company.fontWeight || game.info.companyFontWeight}
-        fontStyle={company.fontStyle || game.info.companyFontStyle}
-      />
-      <PageSetup landscape={false} />
-    </div>
+    <HtmlEditor>
+      <div
+        className="charters printElement"
+        data-testid={`game-${game.meta.slug}-charter`}
+        style={{ display: "inline-block" }}
+      >
+        <style>{css}</style>
+        <Charter
+          game={game.info.title}
+          name={company.name}
+          subName={company.subName}
+          abbrev={company.abbrev}
+          logo={company.logo}
+          color={company.color}
+          token={company.token}
+          tokens={company.tokens}
+          phases={game.phases}
+          turns={game.turns}
+          trains={game.trains}
+          minor={!!company.minor}
+          halfWidth={charterHalfWidth(charters, !!company.minor)}
+          company={company}
+          variant={company.variant}
+          fontFamily={company.fontFamily || game.info.companyFontFamily}
+          fontSize={company.fontSize || game.info.companyFontSize}
+          fontWeight={company.fontWeight || game.info.companyFontWeight}
+          fontStyle={company.fontStyle || game.info.companyFontStyle}
+        />
+        <PageSetup landscape={false} />
+      </div>
+    </HtmlEditor>
   );
 };
 

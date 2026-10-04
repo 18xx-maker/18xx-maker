@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 
 import { addIndex, compose, concat, is, map, propEq, reject } from "ramda";
 
+import HtmlEditor from "@/components/HtmlEditor";
 import Svg from "@/components/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
@@ -185,14 +186,16 @@ const TokenSingle = () => {
   let tokenNode = concat(companyTokenNodes, extraTokenNodes)[index];
 
   return (
-    <div
-      className="token printElement"
-      data-testid={`game-${game.meta.slug}-token`}
-    >
-      <ColorContext.Provider value="companies">
-        {tokenNode}
-      </ColorContext.Provider>
-    </div>
+    <HtmlEditor>
+      <div
+        className="token printElement"
+        data-testid={`game-${game.meta.slug}-token`}
+      >
+        <ColorContext.Provider value="companies">
+          {tokenNode}
+        </ColorContext.Provider>
+      </div>
+    </HtmlEditor>
   );
 };
 

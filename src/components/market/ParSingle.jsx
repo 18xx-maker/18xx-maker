@@ -1,5 +1,6 @@
 import { Navigate } from "react-router";
 
+import Editor, { useEditing } from "@/components/Editor";
 import Svg from "@/components/Svg";
 import Par from "@/components/market/Par";
 
@@ -7,6 +8,8 @@ import { unitsToCss } from "@/util";
 import { getParData } from "@/util/market";
 
 const ParSingle = ({ config, game }) => {
+  const editing = useEditing();
+
   if (!game.stock || !game.stock.par || !game.stock.par.values) {
     return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
@@ -25,13 +28,19 @@ const ParSingle = ({ config, game }) => {
         data-testid={`game-${game.meta.slug}-par`}
         style={{ display: "inline-block" }}
       >
-        <Svg
-          width={data.css.totalWidth}
-          height={data.css.totalHeight}
-          viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}
-        >
-          <Par data={data} title={`${game.info.title} Par`} />
-        </Svg>
+        {editing ? (
+          <Editor width={data.totalWidth} height={data.totalHeight}>
+            <Par data={data} title={`${game.info.title} Par`} />
+          </Editor>
+        ) : (
+          <Svg
+            width={data.css.totalWidth}
+            height={data.css.totalHeight}
+            viewBox={`0 0 ${data.totalWidth} ${data.totalHeight}`}
+          >
+            <Par data={data} title={`${game.info.title} Par`} />
+          </Svg>
+        )}
         <style>{`@media print {@page {size: ${cssPaperWidth} ${cssPaperHeight}; margin: ${unitsToCss(config.paper.margins)}}}`}</style>
       </div>
     </div>

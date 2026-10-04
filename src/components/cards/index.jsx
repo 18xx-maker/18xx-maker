@@ -9,6 +9,7 @@ import {
   unnest,
 } from "ramda";
 
+import HtmlEditor from "@/components/HtmlEditor";
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
 import Svg from "@/components/Svg";
@@ -368,11 +369,13 @@ ${grouped ? sizeCss : cutlinesCss(data, "")}${paddingCss}${grouped ? "" : cardCs
   }
 
   return (
-    <div data-testid={`game-${game.meta.slug}-cards`}>
-      <style>{css}</style>
-      {pageNodes}
-      <PageSetup landscape={data.layout.landscape} />
-    </div>
+    <HtmlEditor>
+      <div data-testid={`game-${game.meta.slug}-cards`}>
+        <style>{css}</style>
+        {pageNodes}
+        <PageSetup landscape={data.layout.landscape} />
+      </div>
+    </HtmlEditor>
   );
 };
 
