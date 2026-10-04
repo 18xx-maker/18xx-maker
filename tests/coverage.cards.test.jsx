@@ -400,6 +400,97 @@ describe("Cards page", () => {
     expect(page.querySelector(".pins")).toBeNull();
   });
 
+  describe("sizes per type", () => {
+    const free =
+      "/games/18Test/cards?config.cards.layout=free&config.cards.cutlines=0&config.cards.bleed=0";
+
+    const draw = async (search = "") => {
+      renderApp(`${free}${search}`);
+      const page = await screen.findByTestId("game-18Test-cards");
+      return {
+        page,
+        // eslint-disable-next-line testing-library/no-node-access
+        css: page.querySelector("style").textContent,
+        // eslint-disable-next-line testing-library/no-node-access
+        pages: [...page.querySelectorAll(".cards")],
+      };
+    };
+
+    it("keeps one set of pages without sizes", async () => {
+      const { css, pages } = await draw();
+      expect(css).not.toContain(".cards-group-");
+      for (const cards of pages) {
+        expect(cards.className).not.toContain("cards-group-");
+      }
+    });
+
+    it("keeps one set of pages when every size is the same", async () => {
+      const base = await draw();
+      const equal = await draw("&config.cards.sizes.private.width=265.748");
+      expect(equal.css).toBe(base.css);
+      expect(equal.pages).toHaveLength(base.pages.length);
+    });
+
+    it("lays out each size on its own pages", async () => {
+      const { css, pages } = await draw(
+        "&config.cards.sizes.private.width=500&config.cards.sizes.private.height=300",
+      );
+      expect(pages[0]).toHaveClass("cards-group-0");
+      expect(pages.at(-1)).toHaveClass("cards-group-1");
+      expect(css).toContain(".cards-group-0 .card__body {");
+      expect(css).toContain(".cards-group-1 .card__body {");
+      // 500 by 300 for the privates, the card size for everything else
+      expect(css).toMatch(/\.cards-group-0 \.card__body \{[^}]*width: 5in/);
+      expect(css).toMatch(
+        /\.cards-group-1 \.card__body \{[^}]*width: 2.65748in/,
+      );
+      // Only the privates are in the first group
+      const first = pages.filter((p) => p.classList.contains("cards-group-0"));
+      for (const cards of first) {
+        // eslint-disable-next-line testing-library/no-node-access
+        expect(cards.querySelector(".share, .train, .number")).toBeNull();
+      }
+    });
+
+    it("puts types of the same size together even when apart", async () => {
+      const { pages } = await draw(
+        "&config.cards.sizes.share.width=500&config.cards.sizes.share.height=300",
+      );
+      expect(pages.at(-1)).toHaveClass("cards-group-1");
+      expect(pages.some((p) => p.classList.contains("cards-group-2"))).toBe(
+        false,
+      );
+    });
+
+    it("keeps the first group's page orientation", async () => {
+      const { pages } = await draw(
+        "&config.cards.sizes.number.width=500&config.cards.sizes.number.height=300",
+      );
+      const widths = new Set(pages.map((p) => p.style.width));
+      expect(widths.size).toBe(1);
+      expect(pages.length).toBeGreaterThan(1);
+    });
+
+    it("ignores the sizes in the die layouts", async () => {
+      const { css, pages } = await draw(
+        "&config.cards.layout=dtgDie&config.cards.sizes.private.width=500",
+      );
+      expect(css).not.toContain(".cards-group-");
+      expect(pages.length).toBeGreaterThan(0);
+    });
+
+    it("sizes the single card page by its type", async () => {
+      renderApp(
+        "/games/18Test/cards/private/0?config.cards.layout=free&config.cards.sizes.private.width=500&config.cards.sizes.private.height=300",
+      );
+      const card = await screen.findByTestId("game-18Test-card");
+      // eslint-disable-next-line testing-library/no-node-access
+      const css = card.parentElement.querySelector("style").textContent;
+      expect(css).toContain("width: 5in");
+      expect(css).toContain("height: 3in");
+    });
+  });
+
   it.for(["dtgDie", "free"])(
     "renders a single card in the %s layout",
     async (layout) => {

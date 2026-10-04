@@ -240,13 +240,14 @@ export const documents = (game, config, data) => {
     });
 
   // Cards
-  const cardSize = inches(getSingleCardData(config.cards, config.paper));
+  const cardSize = (type) =>
+    inches(getSingleCardData(config.cards, config.paper, type));
   const card = (type, index, basename) =>
     item({
       id: `cards/${type}/${index}`,
       kind: "card",
       route: `cards/${type}/${index}`,
-      size: cardSize,
+      size: cardSize(type),
       basename,
     });
 

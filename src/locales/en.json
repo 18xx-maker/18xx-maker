@@ -653,7 +653,42 @@
         "label": "Card Black Band",
         "description": "Whether or not to put a black border against the color section of the share. Only relevent to \"gmt\" and \"left\" shares as well as trains. Always put on white color cards."
       },
-      "sizes": "**Width, height, cutlines, bleed, padding and DTG padding** are in the units you choose. Cutlines are the cut marks drawn around each card, bleed is how far the card color extends past the cut edge, padding keeps text and icons away from the card edge, and DTG padding only applies to the DTG die layout. Edits apply when you leave a field or press Enter."
+      "sizes": "**Width, height, cutlines, bleed, padding and DTG padding** are in the units you choose. Cutlines are the cut marks drawn around each card, bleed is how far the card color extends past the cut edge, padding keeps text and icons away from the card edge, and DTG padding only applies to the DTG die layout. Edits apply when you leave a field or press Enter.",
+      "typeSizes": {
+        "private": {
+          "width": {
+            "label": "Private Card Width"
+          },
+          "height": {
+            "label": "Private Card Height"
+          }
+        },
+        "share": {
+          "width": {
+            "label": "Share Card Width"
+          },
+          "height": {
+            "label": "Share Card Height"
+          }
+        },
+        "train": {
+          "width": {
+            "label": "Train Card Width"
+          },
+          "height": {
+            "label": "Train Card Height"
+          }
+        },
+        "number": {
+          "width": {
+            "label": "Number Card Width"
+          },
+          "height": {
+            "label": "Number Card Height"
+          }
+        }
+      },
+      "typeSizesNote": "**Card sizes per type.** Leave a width or height blank to use the card width and height above. Types with the same size are printed on the same pages, each different size gets its own pages, and the page orientation follows the first size. The die layouts ignore these sizes."
     },
     "privates": {
       "title": "Privates",

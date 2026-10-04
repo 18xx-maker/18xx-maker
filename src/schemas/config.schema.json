@@ -3,6 +3,23 @@
   "$id": "https://18xx-maker.com/schemas/config.schema.json",
 
   "definitions": {
+    "cardSize": {
+      "type": "object",
+      "description": "The size of one type of card in units. A missing width or height uses cards.width or cards.height.",
+      "properties": {
+        "width": {
+          "type": "number",
+          "minimum": 1,
+          "description": "The card width in units."
+        },
+        "height": {
+          "type": "number",
+          "minimum": 1,
+          "description": "The card height in units."
+        }
+      },
+      "additionalProperties": false
+    },
     "font": {
       "type": "object",
       "properties": {
@@ -145,6 +162,17 @@
         "padding": { "type": "number", "minimum": 0 },
         "border": { "type": "number", "minimum": 0 },
         "blackBand": { "type": "boolean" },
+        "sizes": {
+          "type": "object",
+          "description": "Optional size per type of card, used instead of width and height. A missing width or height uses the one above. Ignored by the die layouts.",
+          "properties": {
+            "private": { "$ref": "#/definitions/cardSize" },
+            "share": { "$ref": "#/definitions/cardSize" },
+            "train": { "$ref": "#/definitions/cardSize" },
+            "number": { "$ref": "#/definitions/cardSize" }
+          },
+          "additionalProperties": false
+        },
         "pins": { "$ref": "#/definitions/pins" }
       },
       "required": [

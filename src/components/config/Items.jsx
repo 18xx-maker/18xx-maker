@@ -53,6 +53,8 @@ const Items = ({ section, items }) => {
         name={path}
         options={item.options}
         dimension={item.dimension}
+        clearable={item.clearable}
+        inherit={item.inherit}
         label={t(`config.${section}.${item.name}.label`)}
         description={
           item.description !== false &&

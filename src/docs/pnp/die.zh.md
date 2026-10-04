@@ -29,7 +29,7 @@
 
 ### 卡牌
 
-您可以根据自己拥有的刀模布局,把 `cards.layout` 属性设为 `dtgDie` 或 `miniEuroDie`。与地块一样,设置其中一个选项会覆盖许多其他选项。
+您可以根据自己拥有的刀模布局,把 `cards.layout` 属性设为 `dtgDie` 或 `miniEuroDie`。与地块一样,设置其中一个选项会覆盖许多其他选项,包括 `cards.sizes`(每种卡牌类型 `private`、`share`、`train` 和 `number` 可选的宽度和高度):刀模布局会忽略它,所有卡牌使用同一种尺寸。
 
 ## 订购
 

@@ -19,15 +19,27 @@ const allUnits = {
 };
 
 // Component to help input units
-const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
+// `clearable` lets an empty field unset the value (onChange(undefined)), the
+// `placeholder` (in units) is what an unset value falls back to
+const UnitInput = ({
+  name,
+  value,
+  label,
+  onChange,
+  errorValidation,
+  clearable = false,
+  placeholder,
+}) => {
   let [error, setError] = useState(false);
   let [units, setUnits] = useState("inches");
-  let [internalValue, setInternalValue] = useState(value / allUnits[units]);
+  const display = (value, units) =>
+    value === undefined ? "" : value / allUnits[units];
+  let [internalValue, setInternalValue] = useState(display(value, units));
 
   const isError = error || errorValidation;
 
   useEffect(() => {
-    setInternalValue(value / allUnits[units]);
+    setInternalValue(display(value, units));
   }, [value, units]);
 
   // Typing only edits the text. The value is applied on blur or Enter, so a
@@ -44,9 +56,17 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
 
   let commit = () => {
     const text = `${internalValue}`;
+    if (clearable && text.trim() === "") {
+      if (value !== undefined) {
+        onChange(undefined);
+      }
+      setError(false);
+      return;
+    }
+
     if (text.trim() === "" || Number.isNaN(Number(text))) {
       // Nothing usable was typed, go back to the current value
-      setInternalValue(value / allUnits[units]);
+      setInternalValue(display(value, units));
       setError(false);
       return;
     }
@@ -65,7 +85,7 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
 
   let unitsHandler = (newValue) => {
     setUnits(newValue);
-    setInternalValue(value / allUnits[newValue]);
+    setInternalValue(display(value, newValue));
   };
 
   const className = clsx({ "border-error": isError });
@@ -82,6 +102,11 @@ const UnitInput = ({ name, value, label, onChange, errorValidation }) => {
           id={name}
           name={name}
           value={internalValue}
+          placeholder={
+            placeholder === undefined
+              ? undefined
+              : `${Number((placeholder / allUnits[units]).toFixed(3))}`
+          }
           onChange={handler}
           onBlur={commit}
           onKeyDown={keyHandler}

@@ -17,6 +17,11 @@ const Card = () => {
   const game = useGame();
   const { type, index } = useParams();
 
+  // Anything that is not a private, share or train is a number card
+  const cardType = ["private", "share", "train"].includes(type)
+    ? type
+    : "number";
+
   let node;
   switch (type) {
     case "private":
@@ -73,7 +78,7 @@ const Card = () => {
       break;
   }
 
-  let data = getSingleCardData(config.cards, config.paper);
+  let data = getSingleCardData(config.cards, config.paper, cardType);
 
   let css = `
 .cutlines {

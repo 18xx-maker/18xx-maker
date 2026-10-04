@@ -1,6 +1,6 @@
 import { max } from "ramda";
 
-import { getCardData } from "./cards.js";
+import { getCardData, typeCardConfig } from "./cards.js";
 import { getCharterData } from "./index.js";
 
 // The sizes of the single element pages (a card, charter, token or tile on its
@@ -8,9 +8,15 @@ import { getCharterData } from "./index.js";
 // the size of the capture.
 
 // A card on its own: no bleed, cutlines or border, and the die layouts have
-// their own sizes
-export const getSingleCardData = (cards, paper) => {
-  const cardConfig = { ...cards, cutlines: 0, bleed: 0, border: 0 };
+// their own sizes. The type ("private", "share", "train" or "number") picks
+// the size set for it in `cards.sizes`.
+export const getSingleCardData = (cards, paper, type) => {
+  const cardConfig = {
+    ...typeCardConfig(cards, type),
+    cutlines: 0,
+    bleed: 0,
+    border: 0,
+  };
 
   switch (cards.layout) {
     case "miniEuroDie":

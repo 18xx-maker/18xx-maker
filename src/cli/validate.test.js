@@ -224,6 +224,36 @@ describe("validate", () => {
     });
   });
 
+  describe("the card sizes of a config", () => {
+    const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
+    const withSizes = (sizes) =>
+      writeTmp(
+        "config.json",
+        JSON.stringify({ ...defaults, cards: { ...defaults.cards, sizes } }),
+      );
+
+    it.each([
+      ["none", {}],
+      ["a width", { private: { width: 200 } }],
+      ["a height", { train: { height: 150 } }],
+      ["every type", { private: {}, share: {}, train: {}, number: {} }],
+      ["both", { number: { width: 100, height: 120.5 } }],
+    ])("accepts %s", (_, sizes) => {
+      expect(run(withSizes(sizes)).code).toBe(0);
+    });
+
+    it.each([
+      [{ private: { width: 0 } }, "#/cards/sizes/private/width"],
+      [{ share: { height: "big" } }, "#/cards/sizes/share/height"],
+      [{ train: { depth: 3 } }, "#/cards/sizes/train"],
+      [{ token: { width: 3 } }, "#/cards/sizes"],
+    ])("rejects %j", (sizes, pointer) => {
+      const { code, lines } = run(withSizes(sizes));
+      expect(code).toBe(1);
+      expect(lines.some((l) => l.startsWith(pointer))).toBe(true);
+    });
+  });
+
   describe("the starting tokens of a company", () => {
     const withTokens = (tokens) =>
       writeTmp(
