@@ -329,6 +329,17 @@
           "tokens": {
             "oneOf": [{ "$ref": "#/definitions/tokens" }, { "type": "string" }]
           },
+          "loans": {
+            "type": "array",
+            "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns that fit the height of the charter (more loans than fit are cut off). Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",
+            "items": {
+              "oneOf": [
+                { "type": "string" },
+                { "type": "number" },
+                { "type": "null" }
+              ]
+            }
+          },
           "trains": {
             "description": "false hides the trains label on the charter. Otherwise the trains the company owns: the name of a game train, { name, quantity } for several copies of a game train, or a full train (quantity defaults to 1). They print on the charter, or as train cards when the charters trainCards config is cards.",
             "oneOf": [

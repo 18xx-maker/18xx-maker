@@ -234,6 +234,53 @@ describe("Charter", () => {
     ).toHaveLength(2);
   });
 
+  it("draws loan slots as empty squares in the body", async () => {
+    const withLoans = { ...company, loans: [50, "", null] };
+    const { root } = await mountElement(
+      <Charter {...props} company={withLoans} />,
+    );
+    // Two tokens in the header and three loans in the body
+    expect(all(root, ".charter__tokens > svg")).toHaveLength(2);
+    expect(all(root, ".charter__tokens rect")).toHaveLength(0);
+    const spots = all(root, ".charter__loans > svg");
+    expect(spots).toHaveLength(3);
+    expect(all(root, ".charter__loans rect")).toHaveLength(3);
+    expect(spots.map((s) => s.textContent)).toEqual(["$50", "", ""]);
+    // Loans sit on the body, so their label is black, not the header contrast
+    expect(one(root, ".charter__loans text")).toHaveAttribute(
+      "fill",
+      "#030000",
+    );
+    expect(one(root, ".charter__name")).toHaveStyle({
+      paddingRight: "136.8px",
+    });
+  });
+
+  it("draws loan slots on a company without tokens", async () => {
+    const { root } = await mountElement(
+      <Charter
+        {...props}
+        tokens={undefined}
+        company={{ ...company, loans: [100] }}
+      />,
+    );
+    expect(all(root, ".charter__tokens")).toHaveLength(0);
+    expect(all(root, ".charter__loans > svg")).toHaveLength(1);
+    expect(all(root, ".charter__loans rect")).toHaveLength(1);
+  });
+
+  it("turns loan labels sideways on half width charters", async () => {
+    const { root } = await mountElement(
+      <Charter {...props} company={{ ...company, loans: [50] }} halfWidth />,
+    );
+    expect(
+      all(
+        root,
+        ".charter__loans g[transform='rotate(-90) translate(0 39)'] > text",
+      ),
+    ).toHaveLength(1);
+  });
+
   it("draws the trains of a company as cards", async () => {
     const own = { name: "S", color: "red", price: 50 };
     const withTrains = {

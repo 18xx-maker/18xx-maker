@@ -78,6 +78,38 @@ const Charter = ({
   const showTrains = company.trains !== false;
   const showTreasury = company.treasury !== false;
 
+  // A slot on the charter: a shape with its label under it (turned sideways on
+  // half width charters). A loan prints no label when it has none, and its
+  // label is always black because it sits on the body, not on the colored
+  // header.
+  const spot = (key, shape, label, loan) => (
+    <svg key={key}>
+      <g transform={`translate(25 25)${loan ? " scale(0.9)" : ""}`}>
+        {shape}
+        {!(loan && (label === null || label === undefined || label === "")) && (
+          <g transform={`${halfWidth ? "rotate(-90) " : ""}translate(0 39)`}>
+            <Color context="companies">
+              {(c, t) => (
+                <text
+                  fill={
+                    !loan && charterStyle === "color" && !halfWidth
+                      ? t(c(color))
+                      : c("black")
+                  }
+                  fontSize="11"
+                  fontWeight="normal"
+                  textAnchor="middle"
+                >
+                  <Currency value={label} type="token" />
+                </text>
+              )}
+            </Color>
+          </g>
+        )}
+      </g>
+    </svg>
+  );
+
   let tokenSpots = [];
   if (tokens) {
     tokenSpots = addIndex(map)((label, index) => {
@@ -90,37 +122,39 @@ const Charter = ({
           <CompanyToken company={company} />
         );
 
-      return (
-        <svg key={`token-${index}`}>
-          <g transform={`translate(25 25)`}>
-            <ColorContext.Provider value="companies">
-              {companyToken}
-            </ColorContext.Provider>
-            <g transform={`${halfWidth ? "rotate(-90) " : ""}translate(0 39)`}>
-              <Color context="companies">
-                {(c, t) => (
-                  <text
-                    fill={
-                      charterStyle === "color" && !halfWidth
-                        ? t(c(color))
-                        : c("black")
-                    }
-                    fontSize="11"
-                    fontWeight="normal"
-                    textAnchor="middle"
-                  >
-                    <Currency value={label} type="token" />
-                  </text>
-                )}
-              </Color>
-            </g>
-          </g>
-        </svg>
+      return spot(
+        `token-${index}`,
+        <ColorContext.Provider value="companies">
+          {companyToken}
+        </ColorContext.Provider>,
+        label,
       );
     }, tokens);
   } else {
     tokens = [];
   }
+
+  // Loans are empty squares, so they never look like a token. They print in the
+  // body of the charter, in columns that fit its height.
+  const loans = company.loans || [];
+  const loanSpots = addIndex(map)(
+    (label, index) =>
+      spot(
+        `loan-${index}`,
+        <rect
+          x="-25"
+          y="-25"
+          width="50"
+          height="50"
+          fill="none"
+          stroke="black"
+          strokeWidth="1"
+        />,
+        label,
+        true,
+      ),
+    loans,
+  );
 
   let turnNodes = chain((turn) => {
     let steps = addIndex(map)((step, i) => {
@@ -158,7 +192,7 @@ const Charter = ({
           className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}
         >
           <div
-            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}`}
+            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${loans.length > 0 ? " charter--loans" : ""}`}
           >
             <div
               className="charter__bleed"
@@ -235,6 +269,9 @@ const Charter = ({
                     {halfWidth && "Tokens"}
                     {tokenSpots}
                   </div>
+                )}
+                {loanSpots.length > 0 && (
+                  <div className="charter__loans">{loanSpots}</div>
                 )}
                 {halfWidth && (
                   <div className="charter__assets">
