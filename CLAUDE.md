@@ -138,6 +138,13 @@ sizing or packaging logic in either surface.
   then scales by the emulated device scale, so a card of 255.11 CSS pixels is
   painted to 796.875 device pixels at 300 dpi. A clip is whole CSS pixels, so
   the screenshot is cut to size with `cropPng`.
+- An SVG is not a screenshot: `serializeSvg` (`src/export/svg.js`) runs in the
+  page (one `adapter.evaluate`, print media), copies the svg inside
+  `capture.selector` and writes the computed presentation properties on it as
+  attributes (the page's classes and style elements do not exist in the file),
+  maps font aliases (`display`) to real families and fails on `foreignObject`.
+  It is opt-in, has no dpi or background, and is only on the map, market, par,
+  revenue, tiles and tokens.
 - File names are the slugged title (`titleToFilename`); CLI output folders and
   the b18 box keep the game id.
 
@@ -147,7 +154,7 @@ sizing or packaging logic in either surface.
 - `node scripts/export-golden.mjs 18Test` compares raw CDP capture against
   `setViewportSize`/`page.pdf` (b18 pixel-identical, PDF page counts and sizes).
   Per-page PDF images need `pdftoppm` (Linux).
-- The six real export paths, {CLI, app} x {pdf, png, b18}, are
+- The eight real export paths, {CLI, app} x {pdf, png, svg, b18}, are
   `e2e/export.spec.js` (`export › cli › pdf` ... `export › app › b18`), run
   with `e2e/cli.spec.js` and `e2e/electron.spec.js` by `pnpm test:export`. CI
   runs them on Linux, macOS and Windows (the "Export" job, no mocks). Locally:

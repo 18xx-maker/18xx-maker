@@ -27,10 +27,11 @@ Datei gültig sein und trotzdem nicht richtig aussehen. Siehe
 ## Wie exportiere oder drucke ich?
 
 In der App nutzt du die Export-Schaltfläche oben links auf einer Spielseite:
-PDF, PNG oder Board18 für das ganze Spiel, oder _Exportoptionen_ zur Auswahl. Auf
+PDF, PNG, SVG oder Board18 für das ganze Spiel, oder _Exportoptionen_ zur Auswahl. Auf
 der Website öffnet die Schaltfläche den Druckdialog deines Browsers. Siehe
-[PDF-Ausgabe](/docs/output/pdf), [PNG-Ausgabe](/docs/output/png) und
-[Board18-Ausgabe](/docs/output/b18). Auch die Kommandozeile kann mit
+[PDF-Ausgabe](/docs/output/pdf), [PNG-Ausgabe](/docs/output/png),
+[SVG-Ausgabe](/docs/output/svg) (um Karte, Plättchen oder Token in Inkscape oder
+Illustrator zu bearbeiten) und [Board18-Ausgabe](/docs/output/b18). Auch die Kommandozeile kann mit
 `maker export` exportieren; ihre Optionen stehen in der CLI-Readme und können in
 der Spieldatei gespeichert werden, siehe [Exportoptionen](/docs/games/exports).
 

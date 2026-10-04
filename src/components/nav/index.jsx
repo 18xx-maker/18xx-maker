@@ -19,6 +19,7 @@ import {
   Scissors,
   ScrollText,
   Settings2,
+  Shapes,
   Shield,
   SquareDashed,
   SwatchBook,
@@ -109,6 +110,11 @@ export const mainMenu = [
         icon: Image,
         label: "docs.output.png.title",
         to: "/docs/output/png",
+      },
+      {
+        icon: Shapes,
+        label: "docs.output.svg.title",
+        to: "/docs/output/svg",
       },
       {
         icon: Package,

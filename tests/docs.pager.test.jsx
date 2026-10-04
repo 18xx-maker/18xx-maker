@@ -28,6 +28,23 @@ describe("docs previous and next", () => {
     );
   });
 
+  it("puts the svg output between png and Board18", async () => {
+    renderApp("/docs/output/svg");
+    const nav = await pager();
+
+    expect(within(nav).getByRole("link", { name: /Previous/ })).toHaveAttribute(
+      "href",
+      "/docs/output/png",
+    );
+    expect(within(nav).getByRole("link", { name: /Next/ })).toHaveAttribute(
+      "href",
+      "/docs/output/b18",
+    );
+    expect(await screen.findByTestId("docs-output/svg")).toHaveTextContent(
+      "SVG Output",
+    );
+  });
+
   it("has no previous link on the first page", async () => {
     renderApp("/docs");
     const nav = await pager();

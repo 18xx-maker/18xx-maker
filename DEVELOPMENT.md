@@ -114,7 +114,7 @@ pnpm test:e2e
 
 # Export a game from the built site (see src/cli/README.md), and compare
 # Playwright's own capture with the shared capture on Linux (see below)
-pnpm maker export 18Test --format pdf,png,b18
+pnpm maker export 18Test --format pdf,png,svg,b18
 node scripts/export-golden.mjs 18Test
 
 # Every export option (formats, docs, layouts, background, variation, png.dpi,
@@ -274,7 +274,7 @@ Chromium build make pixels comparable.
 
 ### Export tests on every OS
 
-Plan: the six real export paths, {CLI, app} x {pdf, png, b18}, run with no
+Plan: the eight real export paths, {CLI, app} x {pdf, png, svg, b18}, run with no
 mocks on Linux, macOS and Windows in the "Export" job of CI (checks "Export
 Linux", "Export Mac", "Export Windows", the ones to require). Each job builds
 the site and the app (`pnpm build`, `pnpm build:app`), then runs
@@ -286,8 +286,8 @@ Linux runs it under `xvfb-run`, and the app gets `--no-sandbox` only when `CI`
 is set (the runner has no setuid `chrome-sandbox`). The job is separate from
 the vitest jobs, so it is not part of the coverage merge.
 
-`e2e/export.spec.js` has the six paths as `export › cli › pdf`, `export › cli
-› png`, `export › cli › b18`, and the same three for `app`. Each exports 18Test
+`e2e/export.spec.js` has the eight paths as `export › cli › pdf`, `export › cli
+› png`, `export › cli › svg`, `export › cli › b18`, and the same four for `app`. Each exports 18Test
 and reads the real files: the `18test-map.pdf` has 1 page, the
 `18test-background.png` is 2400 x 3150 pixels with a pHYs of 11811
 pixels/meter, and the Board18 zip has its folder at the top, forward slash
