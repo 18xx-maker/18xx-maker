@@ -525,6 +525,8 @@ body {
   grid-template-rows: repeat(auto-fill, 0.63in);
   overflow: hidden;
   grid-auto-flow: column;
+  /* The first column is on the right, so loans flow down, then right to left */
+  direction: rtl;
 }
 
 .charter--carth .charter__loans {
@@ -545,6 +547,7 @@ body {
   height: 0.63in;
   padding: 0 0 0 0.15in;
   box-sizing: content-box;
+  direction: ltr;
 }
 
 .charter--half .charter__loans {

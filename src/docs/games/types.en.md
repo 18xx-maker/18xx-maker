@@ -79,4 +79,4 @@ header, in columns that fit the height of the charter, so it is never mistaken f
 { "abbrev": "RED", "tokens": [0, 40], "loans": [50, 50, ""] }
 ```
 
-Loans that do not fit are cut off, so keep the number small on minors and half width charters.
+The first loan is in the right column and the loans fill it from top to bottom, then continue in the column to its left. Loans that do not fit are cut off, so keep the number small on minors and half width charters.
