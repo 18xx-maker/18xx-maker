@@ -1,6 +1,6 @@
 import { Fragment, useLayoutEffect, useRef } from "react";
 
-import { addIndex, chain, map } from "ramda";
+import { addIndex, chain, is, map } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
@@ -116,15 +116,18 @@ const Charter = ({
 
   let tokenSpots = [];
   if (tokens) {
-    tokenSpots = addIndex(map)((label, index) => {
-      // Color charters just use empty token circles, carth style uses full
-      // company tokens.
-      let companyToken =
-        charterStyle === "color" ? (
-          <Token outline="black" />
-        ) : (
-          <CompanyToken company={company} />
-        );
+    tokenSpots = addIndex(map)((raw, index) => {
+      // An entry is a cost or an object with the cost and whether the company
+      // starts with a token there. A starting token is already on the map, so
+      // color charters show it as a logo in the space, while carth charters,
+      // which show a logo in every space, take it out of the space.
+      const { cost: label, start } = is(Object, raw) ? raw : { cost: raw };
+      const filled = charterStyle === "carth" ? !start : !!start;
+      const companyToken = filled ? (
+        <CompanyToken company={company} />
+      ) : (
+        <Token outline="black" />
+      );
 
       return spot(
         `token-${index}`,

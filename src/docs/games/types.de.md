@@ -70,7 +70,19 @@ Zeichenkette auf sie, zum Beispiel
 `{ "abbrev": "KU", "tokens": "one" }`. Die Dateien für 1889 und 1867 in
 `src/data/games` verwenden diese.
 
-## Kreditfelder
+## Startende Token
+
+Ein Eintrag in `tokens` kann auch ein Objekt mit `cost` (die Beschriftung unter
+dem Feld) und `start` sein, für eine Gesellschaft, die das Spiel mit einem Token
+auf diesem Feld beginnt. Ein startender Token liegt bereits auf der Karte, deshalb
+zeigt die Charter ihn anders als die übrigen Felder: Der Farbstil zeigt das
+Gesellschaftslogo statt eines leeren Kreises, der Carth-Stil, der in jedem Feld
+das Logo zeigt, lässt das Feld leer. `start: false` ist dasselbe wie es
+wegzulassen, und `cost` ist optional:
+
+```json
+{ "abbrev": "RED", "tokens": [{ "cost": "Home", "start": true }, 40, 100] }
+```
 
 Eine Gesellschaft kann auch `loans` haben, zusätzliche Felder auf ihrer
 Gesellschaftskarte, zum Beispiel für die Kredite eines Spiels. Jeder Eintrag ist

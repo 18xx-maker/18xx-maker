@@ -159,12 +159,14 @@
     {
       "name": "Green Railroad",
       "abbrev": "GERR",
-      "color": "green"
+      "color": "green",
+      "tokens": [{ "cost": "Home", "start": true }]
     },
     {
       "name": "Lavender Railroad",
       "abbrev": "LVRR",
-      "color": "lavender"
+      "color": "lavender",
+      "tokens": [{ "cost": 40, "start": false }]
     },
     {
       "name": "Lime Railroad",
@@ -176,7 +178,8 @@
     {
       "name": "Bright Green Railroad",
       "abbrev": "BGRR",
-      "color": "brightGreen"
+      "color": "brightGreen",
+      "tokens": [{ "start": true }]
     },
     {
       "name": "Gold Railroad",

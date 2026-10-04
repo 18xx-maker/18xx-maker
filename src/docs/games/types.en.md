@@ -68,6 +68,20 @@ Types can have any name, and companies refer to them with a string, for example
 `{ "abbrev": "KU", "tokens": "one" }`. The 1889 and 1867 files in
 `src/data/games` use these.
 
+## Starting tokens
+
+An entry in `tokens` can also be an object with a `cost` (the label under the
+space) and `start`, for a company that begins the game with a token in that
+space. A starting token is already on the map, so the charter shows it
+differently from the other spaces: the color style shows the company logo in the
+space instead of an empty circle, and the carth style, which shows the logo in
+every space, leaves the space empty. `start: false` is the same as leaving it
+out, and `cost` is optional:
+
+```json
+{ "abbrev": "RED", "tokens": [{ "cost": "Home", "start": true }, 40, 100] }
+```
+
 ## Loan slots
 
 A company can also have `loans`, extra slots on its charter, for example for
