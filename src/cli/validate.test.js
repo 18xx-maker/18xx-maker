@@ -224,6 +224,35 @@ describe("validate", () => {
     });
   });
 
+  describe("the starting tokens of a company", () => {
+    const withTokens = (tokens) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          companies: [{ name: "A", abbrev: "A", tokens }],
+        }),
+      );
+
+    it.each([
+      ["a cost and start", [{ cost: 40, start: true }, 40, "Home"]],
+      ["start without a cost", [{ start: true }]],
+      ["a string cost", [{ cost: "Free", start: false }]],
+    ])("accepts %s", (_, tokens) => {
+      expect(run(withTokens(tokens)).code).toBe(0);
+    });
+
+    it.each([
+      [[{ cost: 40, start: "yes" }], "start"],
+      [[{ cost: 40, begin: true }], "begin"],
+      [[{ cost: [40] }], "cost"],
+    ])("rejects %j", (tokens, message) => {
+      const { code, lines } = run(withTokens(tokens));
+      expect(code).toBe(1);
+      expect(lines.join("\n")).toContain(message);
+    });
+  });
+
   describe("the trains of a game and its companies", () => {
     const withTrains = (trains, companyTrains) =>
       writeTmp(

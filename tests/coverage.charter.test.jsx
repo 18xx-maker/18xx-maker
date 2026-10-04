@@ -217,6 +217,62 @@ describe("Charter", () => {
     costs.forEach((c) => expect(c).toHaveAttribute("fill", rob.black));
   });
 
+  describe("starting tokens", () => {
+    const starts = [{ cost: 40, start: true }, 40, { start: true }, "Free"];
+    const logos = (root) =>
+      all(root, ".charter__tokens > svg").map(
+        (s) => one(s, "text:not([font-size='11'])") !== null,
+      );
+    const costs = (root) =>
+      all(root, ".charter__tokens > svg").map((s) =>
+        all(s, "text[font-size='11']")
+          .map((t) => t.textContent)
+          .join(""),
+      );
+
+    it("fills the space of a starting token on color charters", async () => {
+      const { root } = await mountElement(
+        <Charter {...props} tokens={starts} />,
+      );
+      expect(logos(root)).toEqual([true, false, true, false]);
+      expect(costs(root)).toEqual(["$40", "$40", "", "Free"]);
+      expect(one(root, ".charter__name")).toHaveStyle({
+        paddingRight: "261.6px",
+      });
+    });
+
+    it("empties the space of a starting token on carth charters", async () => {
+      const { root } = await mountElement(
+        <Charter
+          {...props}
+          tokens={[{ cost: 40, start: true }, 40, { cost: 0, start: false }]}
+        />,
+        { search: "?config.charters.style=carth" },
+      );
+      expect(logos(root)).toEqual([false, true, true]);
+      expect(costs(root)).toEqual(["$40", "$40", "$0"]);
+    });
+
+    it("keeps plain tokens as they were", async () => {
+      const { root } = await mountElement(<Charter {...props} />);
+      expect(logos(root)).toEqual([false, false]);
+      expect(costs(root)).toEqual(["$0", "$40"]);
+    });
+
+    it("turns the cost of a starting token on half width charters", async () => {
+      const { root } = await mountElement(
+        <Charter {...props} tokens={starts} halfWidth />,
+      );
+      expect(logos(root)).toEqual([true, false, true, false]);
+      expect(
+        all(
+          root,
+          ".charter__tokens g[transform='rotate(-90) translate(0 39)']",
+        ),
+      ).toHaveLength(4);
+    });
+  });
+
   it("draws half width charters with assets instead of trains", async () => {
     const { root } = await mountElement(<Charter {...props} halfWidth />);
     expect(one(root, ".cutlines")).toHaveClass("cutlines--half");

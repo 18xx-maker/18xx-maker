@@ -224,9 +224,24 @@
         "oneOf": [
           { "type": "string" },
           { "type": "number" },
-          { "$ref": "#/definitions/token" }
+          { "$ref": "#/definitions/charterToken" }
         ]
       }
+    },
+    "charterToken": {
+      "type": "object",
+      "description": "A token space on a charter, with more than a cost.",
+      "properties": {
+        "cost": {
+          "description": "The label under the token space, like the plain string or number entry.",
+          "oneOf": [{ "type": "string" }, { "type": "number" }]
+        },
+        "start": {
+          "type": "boolean",
+          "description": "The company starts with a token in this space. Color charters show the logo in it instead of an empty circle, carth charters show an empty circle instead of the logo. false is the same as leaving it out."
+        }
+      },
+      "additionalProperties": false
     },
     "token": {
       "type": "object"
