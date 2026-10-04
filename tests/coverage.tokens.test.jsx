@@ -267,6 +267,19 @@ describe("Company tokens", () => {
       expect(all(svg, "text")[1]).toHaveAttribute("fill", gmt.red);
     });
 
+    it("keeps the label stroke on the second line", async () => {
+      const svg = await drawSvg(
+        <Token
+          label="AA"
+          label2="x"
+          label2Color="white"
+          labelStrokeColor="black"
+        />,
+      );
+      const [main, second] = all(svg, "text");
+      expect(second).toHaveAttribute("stroke", main.getAttribute("stroke"));
+    });
+
     it("keeps an explicit labelY and places the second line from it", async () => {
       const svg = await drawSvg(<Token label="AA" label2="x" labelY={5} />);
       const [y1, y2] = ys(svg);
