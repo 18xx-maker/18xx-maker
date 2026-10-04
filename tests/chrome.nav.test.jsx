@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access -- the underline is a bare <u> with no role */
 import { act, screen, waitFor, within } from "@testing-library/react";
 import { page } from "vitest/browser";
 
@@ -195,5 +196,26 @@ describe("alerts", () => {
     await waitFor(() =>
       expect(screen.queryByText("It worked")).not.toBeInTheDocument(),
     );
+  });
+});
+
+describe("shortcut keys in the sidebar", () => {
+  it("underlines the key and keeps the accessible name", async () => {
+    const { user } = renderApp("/");
+    await user.click(trigger());
+    const panel = await sidebar();
+
+    for (const [name, key] of [
+      ["Home", "H"],
+      ["Atoms", "A"],
+      ["Tiles", "T"],
+    ]) {
+      const link = within(panel).getByRole("link", { name });
+      expect(link.querySelector("u")).toHaveTextContent(key);
+    }
+    const logos = within(panel).getByRole("link", { name: "Company Logos" });
+    expect(logos.querySelector("u")).toHaveTextContent("C");
+    const docs = within(panel).getByRole("link", { name: "Using 18xx Maker" });
+    expect(docs.querySelector("[aria-hidden] u")).toHaveTextContent("d");
   });
 });

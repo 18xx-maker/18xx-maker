@@ -113,7 +113,11 @@ const Toolbar = () => {
                 disabled={item.disabled?.(game)}
                 className="w-48 flex flex-row"
               >
-                {item.key && <span className="mr-2 italic">{item.key}:</span>}
+                {item.key && (
+                  <span className="mr-2">
+                    <u>{item.key}</u>:
+                  </span>
+                )}
                 {t(`game.nav.${item.section}`)}
               </SelectItem>
             );
