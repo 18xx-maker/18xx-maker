@@ -76,6 +76,11 @@ const sortOrdered = (list) =>
     list,
   ).map((o) => o.node);
 
+// Borders stay in their own layer under the tracks, ordered or not
+const borderSlot = (data, render) => (
+  <Position data={toList(data)}>{render}</Position>
+);
+
 const rest = (data, render, type) => (
   <Position data={toList(data)} type={type} pick={isUnordered}>
     {render}
@@ -155,7 +160,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   // when negative, before) the unordered elements of their tier. Position is
   // computed over the whole list, so `order` never changes where they sit.
   const ordered = { inner: [], outside: [] };
-  const slot = (tier, key, data, render, { type, border } = {}) => {
+  const slot = (tier, key, data, render, { type } = {}) => {
     const list = toList(data);
     list.forEach((e, i) => {
       if (!isOrdered(e) || e.hidden) {
@@ -168,11 +173,6 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
         i,
         node: (
           <Fragment key={`ord-${key}-${i}`}>
-            {border && (
-              <Position data={list} type={type} pick={only}>
-                {border}
-              </Position>
-            )}
             <Position data={list} type={type} pick={only}>
               {render}
             </Position>
@@ -192,33 +192,25 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   const outsideList = R.filter((c) => c.outside === true, hex.cities || []);
   const innerList = R.filter((c) => c.outside !== true, hex.cities || []);
 
-  let outsideCities = slot("outside", "outsideCities", outsideList, city, {
-    border: cityBorder,
-  });
-  let cities = slot("inner", "cities", innerList, city, {
-    border: cityBorder,
-  });
-  let outsideCityBorders = rest(outsideList, cityBorder);
-  let cityBorders = rest(innerList, cityBorder);
+  let outsideCities = slot("outside", "outsideCities", outsideList, city);
+  let cities = slot("inner", "cities", innerList, city);
+  let outsideCityBorders = borderSlot(outsideList, cityBorder);
+  let cityBorders = borderSlot(innerList, cityBorder);
 
   const town = (t) => <Town bgColor={hex.color} {...t} />;
   const townBorder = (t) => <Town {...t} border={true} />;
-  let towns = slot("inner", "towns", hex.towns, town, { border: townBorder });
-  let townBorders = rest(hex.towns, townBorder);
+  let towns = slot("inner", "towns", hex.towns, town);
+  let townBorders = borderSlot(hex.towns, townBorder);
 
   const centerTown = (t) => <CenterTown bgColor={hex.color} {...t} />;
   const centerTownBorder = (t) => <CenterTown border={true} {...t} />;
-  let centerTowns = slot("inner", "centerTowns", hex.centerTowns, centerTown, {
-    border: centerTownBorder,
-  });
-  let centerTownBorders = rest(hex.centerTowns, centerTownBorder);
+  let centerTowns = slot("inner", "centerTowns", hex.centerTowns, centerTown);
+  let centerTownBorders = borderSlot(hex.centerTowns, centerTownBorder);
 
   const boomtown = (t) => <Boomtown bgColor={hex.color} {...t} />;
   const boomtownBorder = (t) => <Boomtown border={true} {...t} />;
-  let boomtowns = slot("inner", "boomtowns", hex.boomtowns, boomtown, {
-    border: boomtownBorder,
-  });
-  let boomtownBorders = rest(hex.boomtowns, boomtownBorder);
+  let boomtowns = slot("inner", "boomtowns", hex.boomtowns, boomtown);
+  let boomtownBorders = borderSlot(hex.boomtowns, boomtownBorder);
 
   const mediumCity = (m) => <MediumCity {...m} />;
   const mediumCityBorder = (m) => <MediumCity border={true} {...m} />;
@@ -227,9 +219,8 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
     "mediumCities",
     hex.mediumCities,
     mediumCity,
-    { border: mediumCityBorder },
   );
-  let mediumCityBorders = rest(hex.mediumCities, mediumCityBorder);
+  let mediumCityBorders = borderSlot(hex.mediumCities, mediumCityBorder);
 
   let labels = slot(
     "inner",
@@ -293,13 +284,15 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   ));
   const tunnelEntrance = (t) => <TunnelEntrance {...t} />;
   const tunnelEntranceBorder = (t) => <TunnelEntrance {...t} border={true} />;
-  let tunnelEntranceBorders = rest(hex.tunnelEntrances, tunnelEntranceBorder);
+  let tunnelEntranceBorders = borderSlot(
+    hex.tunnelEntrances,
+    tunnelEntranceBorder,
+  );
   let tunnelEntrances = slot(
     "inner",
     "tunnelEntrances",
     hex.tunnelEntrances,
     tunnelEntrance,
-    { border: tunnelEntranceBorder },
   );
   let divides = <Position data={hex.divides}>{() => <Divide />}</Position>;
 

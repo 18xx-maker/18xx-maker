@@ -119,7 +119,5 @@ einem Element eine `order`. Es wird nach allen Elementen seines Feldes ohne
 - Ein Element bleibt auf seiner Seite von Feldrand und ID: innere Elemente
   eines Feldes können nicht über den Rand, und außen gezeichnete Elemente (wie
   Städte außerhalb oder Namen) nicht darunter.
-- Eine Stadt, ein Ort oder ein Tunneleingang mit `order` behält seine Kontur.
 - Sie kann Gleise verdecken.
 - Gleise, Off-Board-Gleise, Trennlinien und Ränder haben keine `order`.
-- Board18-Exporte ignorieren sie.

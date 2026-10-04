@@ -110,7 +110,5 @@ position does not change. For example, to draw a city over a value:
 - An element stays on its side of the tile border and ID: a hex's inner
   elements cannot go over the border, and elements drawn outside (like outside
   cities or names) cannot go under it.
-- An ordered city, town or tunnel entrance keeps its outline.
 - It can cover track.
 - Track, off board track, divides and borders do not have an `order`.
-- Board18 exports ignore it.

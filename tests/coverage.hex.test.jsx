@@ -295,9 +295,7 @@ describe("Hex draw order", () => {
       cities: [{ order: 1 }],
       values: [{ value: 20 }],
     });
-    expect(textPosition(ordered, "20")).toBeLessThan(
-      position(ordered, "circle"),
-    );
+    expect(textPosition(ordered, "20")).toBeLessThan(lastOf(ordered));
   });
 
   it("keeps the position of an ordered element", async () => {
@@ -363,45 +361,30 @@ describe("Hex draw order", () => {
     expect(textPosition(svg, "20")).toBeLessThan(position(svg, "circle"));
   });
 
-  it("keeps the border with an ordered element", async () => {
-    for (const key of [
-      "cities",
-      "mediumCities",
-      "towns",
-      "boomtowns",
-      "centerTowns",
-    ]) {
-      const plain = await draw({ [key]: [{}] });
-      const ordered = await draw({ [key]: [{ order: 1 }] });
+  it("keeps the border under the track when ordered", async () => {
+    const track = [{ type: "straight", side: 1 }];
+    for (const key of ["cities", "mediumCities", "towns", "boomtowns"]) {
+      const plain = await draw({ track, [key]: [{}] });
+      const ordered = await draw({ track, [key]: [{ order: 1 }] });
       expect(ordered.querySelectorAll("*").length).toBe(
         plain.querySelectorAll("*").length,
       );
+      // the border stays in the same place relative to the track
+      const before = (svg) => position(svg, "circle") < position(svg, "path");
+      expect(before(ordered)).toBe(before(plain));
     }
-    const ordered = await draw({
-      cities: [{ order: 1 }],
-      values: [{ value: 20 }],
-    });
-    expect(attr(ordered, "circle", "r")).toEqual(
-      attr(
-        await draw({ cities: [{}], values: [{ value: 20 }] }),
-        "circle",
-        "r",
-      ),
-    );
   });
 
-  it("draws an ordered outside city over the id", async () => {
-    const plain = await draw({ cities: [{ outside: true, side: 1 }] });
-    const ordered = await draw({
+  it("keeps the border of an ordered outside city under the id", async () => {
+    const svg = await draw({
       cities: [{ outside: true, side: 1, order: 1 }],
     });
-    const idPosition = (svg) => textPosition(svg, "1");
-    const circle = (svg, at) =>
-      [...svg.querySelectorAll("*")].indexOf(all(svg, "circle").at(at));
-    // The border of an unordered outside city is under the id
-    expect(circle(plain, 0)).toBeLessThan(idPosition(plain));
-    // An ordered one takes its border along, so all of it is over the id
-    expect(circle(ordered, 0)).toBeGreaterThan(idPosition(ordered));
+    const first = [...svg.querySelectorAll("*")].indexOf(all(svg, "circle")[0]);
+    expect(first).toBeLessThan(textPosition(svg, "1"));
+    const last = [...svg.querySelectorAll("*")].indexOf(
+      all(svg, "circle").at(-1),
+    );
+    expect(last).toBeGreaterThan(textPosition(svg, "1"));
   });
 
   it("draws nothing for a hidden ordered element", async () => {
