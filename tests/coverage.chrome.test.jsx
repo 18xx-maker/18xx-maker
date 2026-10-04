@@ -13,7 +13,8 @@ import { filter, values } from "ramda";
 
 import Markdown from "@/components/Markdown";
 
-import { tiles } from "@/data";
+import { games, tiles } from "@/data";
+import { mergeKnownTiles } from "@/util/tiles";
 
 import { renderApp } from "@tests/helpers.jsx";
 
@@ -279,6 +280,12 @@ describe("unit inputs", () => {
   });
 });
 
+const knownGames = () =>
+  Object.values(games).map((game) => ({
+    slug: game.meta.slug,
+    tiles: game.tiles || {},
+  }));
+
 describe("tile filters", () => {
   // Each rendered tile is in its own checkered box
   const shownTiles = () =>
@@ -302,11 +309,14 @@ describe("tile filters", () => {
     const { user, router } = renderApp("/elements/tiles");
     await screen.findByTestId("tiles");
 
-    await user.click(screen.getAllByRole("combobox")[0]);
+    await user.click(screen.getByRole("combobox", { name: "Color" }));
     await user.click(await screen.findByRole("option", { name: "gray" }));
 
     expect(router.state.location.search).toContain("color=gray");
-    const gray = filter((t) => t.color === "gray", values(tiles)).length;
+    const gray = filter(
+      (t) => t.tile.color === "gray",
+      mergeKnownTiles(tiles, knownGames()),
+    ).length;
     expect(
       await screen.findByText(`Page 1 of ${Math.ceil(gray / 50)}`),
     ).toBeInTheDocument();
@@ -377,6 +387,78 @@ describe("tile filters", () => {
 
     await user.click(screen.getByLabelText("Go to previous page"));
     expect(screen.getByText(`Page 1 of ${total}`)).toBeInTheDocument();
+  });
+});
+
+describe("tiles of all games", () => {
+  const card = () =>
+    // eslint-disable-next-line testing-library/no-node-access
+    screen.getByTestId("tiles").querySelectorAll(".checkered");
+
+  it("shows tiles only a game defines and credits the game", async () => {
+    const { user } = renderApp("/elements/tiles?id=T1");
+    await screen.findByTestId("tiles");
+
+    await waitFor(() => expect(card().length).toBe(1));
+    expect(
+      screen.getByRole("button", { name: "Used in 1 game(s)" }),
+    ).toHaveAttribute("aria-expanded", "false");
+    await user.click(screen.getByRole("button", { name: /Used in/ }));
+    expect(screen.getByText("18Test")).toBeInTheDocument();
+  });
+
+  it("has the color of a game tile as an option", async () => {
+    const { user } = renderApp("/elements/tiles");
+    await screen.findByTestId("tiles");
+
+    await user.click(screen.getByRole("combobox", { name: "Color" }));
+    expect(
+      await screen.findByRole("option", { name: "offboard" }),
+    ).toBeInTheDocument();
+  });
+
+  it("narrows to the tiles of one game and falls back for an unknown one", async () => {
+    const { user, router } = renderApp("/elements/tiles?game=18Test");
+    await screen.findByTestId("tiles");
+    await waitFor(() => expect(card().length).toBeLessThan(50));
+    expect(card().length).toBeGreaterThan(1);
+    expect(screen.getByRole("combobox", { name: "Game" })).toHaveTextContent(
+      "18Test",
+    );
+
+    await user.click(screen.getByRole("combobox", { name: "Game" }));
+    await user.click(await screen.findByRole("option", { name: "All games" }));
+    expect(router.state.location.search).not.toContain("game");
+    await waitFor(() => expect(card().length).toBe(50));
+  });
+
+  it("keeps an unknown game in the url and shows all tiles", async () => {
+    const { router } = renderApp("/elements/tiles?game=nothing");
+    await screen.findByTestId("tiles");
+
+    await waitFor(() => expect(card().length).toBe(50));
+    expect(router.state.location.search).toBe("?game=nothing");
+  });
+
+  it("resets the revenue and color when the game changes", async () => {
+    const { user, router } = renderApp(
+      "/elements/tiles?revenue=10_30&color=gray&page=2",
+    );
+    await screen.findByTestId("tiles");
+
+    await user.click(screen.getByRole("combobox", { name: "Game" }));
+    await user.click(await screen.findByRole("option", { name: "18Test" }));
+
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?game=18Test"),
+    );
+  });
+
+  it("keeps an explicit revenue", async () => {
+    const { router } = renderApp("/elements/tiles?revenue=10_30");
+    await screen.findByTestId("tiles");
+    await waitFor(() => expect(card().length).toBeGreaterThan(0));
+    expect(router.state.location.search).toBe("?revenue=10_30");
   });
 });
 
