@@ -1,9 +1,10 @@
+/* eslint-disable testing-library/no-node-access */
 import { screen, waitFor } from "@testing-library/react";
 
 import { renderApp } from "@tests/helpers.jsx";
 
 const cardFor = (page, name) =>
-  // eslint-disable-next-line testing-library/no-node-access
+   
   [...page.querySelectorAll(".checkered")].find((card) =>
     card.textContent.includes(name),
   );
@@ -20,12 +21,23 @@ describe("elements logos page", () => {
       });
 
       const card = cardFor(page, name);
-      // eslint-disable-next-line testing-library/no-node-access
+       
       expect(card.querySelectorAll("svg")).toHaveLength(2);
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(card.querySelector("svg.color-reserved")).not.toBeNull();
+
       expect(card).toHaveTextContent("Normal");
       expect(card).toHaveTextContent("Reserved");
+      const reserved = card.querySelector("svg.color-reserved");
+      expect(reserved).not.toBeNull();
+      // the reserved side recolors yellow to gray, the front keeps yellow
+
+      if (name !== "1846/ERIE") {
+        return;
+      }
+      const front = card.querySelector("svg:not(.color-reserved)");
+      const fill = (svg) =>
+         
+        getComputedStyle(svg.querySelector(".color-yellow")).fill;
+      expect(fill(reserved)).not.toBe(fill(front));
     },
   );
 });
