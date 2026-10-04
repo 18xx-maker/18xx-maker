@@ -1,0 +1,6 @@
+<svg width="48" height="48" viewBox="-12.5 -12.5 25 25">
+  <g class="color-main" transform="matrix(.25 0 0 .25 -12.5 -12.5)">
+    <rect width="22" height="18" x="39" y="15" rx="2"/>
+    <path d="M46 33h4L29 88h-8zm2 0h4l2 55h-8zm2 0h4l25 55h-8z"/>
+  </g>
+</svg>
