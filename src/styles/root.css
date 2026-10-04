@@ -522,7 +522,7 @@ body {
   display: grid;
   /* Two columns wide, more loans are cut off */
   width: 1.55in;
-  grid-template-rows: repeat(auto-fill, 0.7in);
+  grid-template-rows: repeat(auto-fill, 0.63in);
   overflow: hidden;
   grid-auto-flow: column;
 }
@@ -542,7 +542,7 @@ body {
 
 .charter__loans svg {
   width: 0.5in;
-  height: 0.7in;
+  height: 0.63in;
   padding: 0 0 0 0.15in;
   box-sizing: content-box;
 }

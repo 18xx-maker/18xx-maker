@@ -48,4 +48,23 @@ describe("Charter loans layout", () => {
       }
     },
   );
+  it("fits the ten loans of the gray 18Test charter on a full charter", async () => {
+    const gray = games["18Test"].companies.find((c) => c.abbrev === "GRRR");
+    const { root } = await mountElement(
+      <>
+        <style>
+          {".charter, .charter__body { height: 4.75in; width: 7.5in; }"}
+        </style>
+        <Charter {...props} company={gray} />
+      </>,
+    );
+    const box = one(root, ".charter__loans").getBoundingClientRect();
+    const spots = all(root, ".charter__loans svg");
+    expect(spots).toHaveLength(10);
+    for (const s of spots) {
+      const r = s.getBoundingClientRect();
+      expect(r.bottom).toBeLessThanOrEqual(box.bottom + 0.5);
+      expect(r.right).toBeLessThanOrEqual(box.right + 0.5);
+    }
+  });
 });

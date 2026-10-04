@@ -84,7 +84,7 @@ const Charter = ({
   // header.
   const spot = (key, shape, label, loan) => (
     <svg key={key}>
-      <g transform={`translate(25 25)`}>
+      <g transform={`translate(25 25)${loan ? " scale(0.9)" : ""}`}>
         {shape}
         {!(loan && (label === null || label === undefined || label === "")) && (
           <g transform={`${halfWidth ? "rotate(-90) " : ""}translate(0 39)`}>
