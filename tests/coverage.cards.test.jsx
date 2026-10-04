@@ -376,6 +376,24 @@ describe("Cards page", () => {
     expect(cards).toHaveStyle({ display: "flex", alignItems: "center" });
   });
 
+  it("draws pins on a free layout when showPins is set", async () => {
+    renderApp(
+      "/games/18Test/cards?config.cards.layout=free&config.cards.showPins=true",
+    );
+    const page = await screen.findByTestId("game-18Test-cards");
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(page.querySelector(".pins")).not.toBeNull();
+  });
+
+  it("always draws pins on a fixed layout", async () => {
+    renderApp(
+      "/games/18Test/cards?config.cards.layout=miniEuroDie&config.cards.showPins=false",
+    );
+    const page = await screen.findByTestId("game-18Test-cards");
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(page.querySelector(".pins")).not.toBeNull();
+  });
+
   it("does not crash when a card is too big for the page", async () => {
     renderApp(
       "/games/18Test/cards?config.cards.layout=free&config.cards.width=5000&config.cards.height=5000",

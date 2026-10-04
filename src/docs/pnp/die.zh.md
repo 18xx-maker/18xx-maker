@@ -33,6 +33,10 @@
 
 您可以根据自己拥有的刀模布局,把 `cards.layout` 属性设为 `dtgDie` 或 `miniEuroDie`。与地块一样,设置其中一个选项会覆盖许多其他选项,包括 `cards.sizes`(每种卡牌类型 `private`、`share`、`train` 和 `number` 可选的宽度和高度):刀模布局会忽略它,所有卡牌使用同一种尺寸。
 
+### 自由布局中的定位销
+
+刀模布局始终会绘制用于对齐刀模的定位销标记。若要在自由布局中也绘制它们,请把 `cards.showPins` 或 `tiles.showPins` 设为 `true`。自由布局不会为定位销预留空间,因此使用默认位置时,它们可能与页面边缘附近的内容重叠。请通过 `cards.pins` 和 `tiles.pins` 移动它们,或调整边距。
+
 ## 订购
 
 要订购定制刀模,我会通过 Ellison 的[网页](https://www.ellisoneducation.com/contact)联系他们。

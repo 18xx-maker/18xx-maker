@@ -506,6 +506,10 @@
       "cutBorder": {
         "label": "Schnittränder der Plättchen",
         "description": "Zeichnet um jedes Plättchen auf dem Plättchenbogen eine dünne schwarze Linie in der genauen Schnittgröße, damit du Plättchen von Hand ausschneiden kannst."
+      },
+      "showPins": {
+        "label": "Pins im freien Layout anzeigen",
+        "description": "Zeichnet die Pin-Markierungen auch in freien Layouts. Feste Die-Layouts zeichnen sie immer. Freie Layouts reservieren keinen Platz für Pins, verschiebe daher die Pins oder passe die Ränder an, damit sie nicht über Inhalten liegen."
       }
     },
     "stock": {
@@ -666,6 +670,10 @@
       "blackBand": {
         "label": "Schwarzer Streifen der Karten",
         "description": "Ob ein schwarzer Rand an den farbigen Bereich der Aktie gesetzt wird. Nur für „gmt“- und „left“-Aktien sowie für Züge relevant. Bei weißen Karten immer aktiv."
+      },
+      "showPins": {
+        "label": "Pins im freien Layout anzeigen",
+        "description": "Zeichnet die Pin-Markierungen auch in freien Layouts. Feste Die-Layouts zeichnen sie immer. Freie Layouts reservieren keinen Platz für Pins, verschiebe daher die Pins oder passe die Ränder an, damit sie nicht über Inhalten liegen."
       },
       "sizes": "**Breite, Höhe, Schnittlinien, Beschnitt, Innenabstand und DTG-Innenabstand** sind in der von dir gewählten Einheit angegeben. Schnittlinien sind die Schnittmarken um jede Karte, der Beschnitt gibt an, wie weit die Kartenfarbe über die Schnittkante hinausreicht, der Innenabstand hält Text und Symbole vom Kartenrand fern, und der DTG-Innenabstand gilt nur für das DTG-Stanzlayout. Änderungen werden übernommen, wenn du das Feld verlässt oder die Eingabetaste drückst.",
       "typeSizes": {

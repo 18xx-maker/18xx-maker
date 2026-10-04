@@ -175,7 +175,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 
   let pins = null;
 
-  if (config.cards.layout !== "free") {
+  if (config.cards.layout !== "free" || config.cards.showPins) {
     pins = (
       <Svg className="pins" viewBox="0 0 50 800">
         <Pins landscape={true} config={cardConfig.pins} />

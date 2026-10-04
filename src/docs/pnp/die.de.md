@@ -56,6 +56,15 @@ setzen, je nachdem, welches Stanzlayout du hast. Genau wie bei Plättchen
 `share`, `train` und `number`): Die Stanzlayouts ignorieren sie und verwenden
 eine Größe für alle Karten.
 
+### Pins in freien Layouts
+
+Die Die-Layouts zeichnen immer die Pin-Markierungen, mit denen die Stanzform
+ausgerichtet wird. Um sie auch in freien Layouts zu zeichnen, setze
+`cards.showPins` oder `tiles.showPins` auf `true`. Freie Layouts reservieren
+keinen Platz für die Pins, daher können sie sich mit den Standardpositionen mit
+Inhalten am Seitenrand überlappen. Verschiebe sie mit `cards.pins` und
+`tiles.pins` oder passe deine Ränder an.
+
 ## Bestellen
 
 Um individuelle Stanzformen zu bestellen, würde ich Ellison über deren
