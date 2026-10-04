@@ -248,7 +248,18 @@
   },
   "games": {
     "title": "Spiele",
-    "description": "Dies sind die Spiele, die du in 18xx Maker geladen hast"
+    "description": "Dies sind die Spiele, die du in 18xx Maker geladen hast",
+    "filter": {
+      "publisher": "Verlag",
+      "designer": "Autor",
+      "type": "Typ",
+      "all": "Alle",
+      "bundled": "Mitgeliefert",
+      "loaded": "Geladen"
+    },
+    "loaded": "Deine Spiele",
+    "bundled": "Mitgelieferte Spiele",
+    "empty": "Keine Spiele entsprechen diesen Filtern"
   },
   "game": {
     "info": "Spielinformationen",

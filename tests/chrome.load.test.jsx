@@ -140,6 +140,115 @@ describe("load games page", () => {
   });
 });
 
+describe("load games filters", () => {
+  const second = {
+    ...summary,
+    title: "Other Game",
+    designer: "Ann Lee, Bob Ray and Cy Doe",
+    publisher: "gmt",
+    id: "def",
+    type: "system",
+    slug: "system:def",
+  };
+  const bare = {
+    title: "Bare Game",
+    id: "ghi",
+    type: "internal",
+    slug: "internal:ghi",
+  };
+
+  const pick = async (user, label, option) => {
+    await user.click(screen.getByRole("combobox", { name: label }));
+    await user.click(await screen.findByRole("option", { name: option }));
+  };
+
+  beforeEach(() => {
+    opfs.loadSummaries.mockResolvedValue({
+      "internal:abc": summary,
+      "internal:ghi": bare,
+    });
+    idb.loadSummaries.mockResolvedValue({ "system:def": second });
+    caps.system = true;
+  });
+
+  it("lists loaded games in their own section above bundled games", async () => {
+    renderApp("/games/");
+    await screen.findByText("Saved Game");
+    const headings = screen.getAllByRole("heading", { level: 2 });
+    expect(headings.map((h) => h.textContent)).toEqual([
+      "Your games",
+      "Bundled games",
+    ]);
+    const titles = screen
+      .getAllByRole("link")
+      .map((l) => l.textContent)
+      .filter((x) =>
+        ["Bare Game", "Other Game", "Saved Game", "Shikoku 1889"].includes(x),
+      );
+    expect(titles).toEqual([
+      "Bare Game",
+      "Other Game",
+      "Saved Game",
+      "Shikoku 1889",
+    ]);
+  });
+
+  it("filters by type", async () => {
+    const { user } = renderApp("/games/");
+    await screen.findByText("Saved Game");
+    await pick(user, "Type", "Bundled");
+    expect(screen.queryByText("Saved Game")).not.toBeInTheDocument();
+    expect(screen.getByText("Shikoku 1889")).toBeInTheDocument();
+    await pick(user, "Type", "Loaded");
+    expect(screen.getByText("Saved Game")).toBeInTheDocument();
+    expect(screen.queryByText("Shikoku 1889")).not.toBeInTheDocument();
+  });
+
+  it("splits designers and never offers a missing one", async () => {
+    const { user } = renderApp("/games/");
+    await screen.findByText("Saved Game");
+    await user.click(screen.getByRole("combobox", { name: "Designer" }));
+    expect(screen.getByRole("option", { name: "Bob Ray" })).toBeInTheDocument();
+    // Sorted by last name: Doe, Lee, Ray
+    expect(
+      screen
+        .getAllByRole("option")
+        .map((o) => o.textContent)
+        .filter((t) => ["Cy Doe", "Ann Lee", "Bob Ray"].includes(t)),
+    ).toEqual(["Cy Doe", "Ann Lee", "Bob Ray"]);
+    expect(
+      screen.queryByRole("option", { name: "undefined" }),
+    ).not.toBeInTheDocument();
+    await user.click(screen.getByRole("option", { name: "Bob Ray" }));
+    expect(screen.getByText("Other Game")).toBeInTheDocument();
+    expect(screen.queryByText("Saved Game")).not.toBeInTheDocument();
+    expect(screen.queryByText("Bare Game")).not.toBeInTheDocument();
+  });
+
+  it("combines filters and shows a message when nothing matches", async () => {
+    const { user } = renderApp("/games/");
+    await screen.findByText("Saved Game");
+    await pick(user, "Publisher", "GMT Games");
+    expect(screen.getByText("Other Game")).toBeInTheDocument();
+    expect(screen.queryByText("Saved Game")).not.toBeInTheDocument();
+    await pick(user, "Type", "Bundled");
+    expect(
+      screen.getByText("No games match these filters"),
+    ).toBeInTheDocument();
+  });
+
+  it("hides the type filter and loaded section without loaded games", async () => {
+    opfs.loadSummaries.mockResolvedValue({});
+    idb.loadSummaries.mockResolvedValue({});
+    renderApp("/games/");
+    await screen.findByText("Shikoku 1889");
+    expect(
+      screen.queryByRole("combobox", { name: "Type" }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { level: 2 })).not.toBeInTheDocument();
+  });
+});
+
 describe("game info page", () => {
   it("forgets a saved game and returns to the reloaded list", async () => {
     opfs.loadGame.mockResolvedValue(internalGame);

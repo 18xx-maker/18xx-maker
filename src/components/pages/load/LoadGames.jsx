@@ -1,22 +1,51 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { chain, compose, map, prop, sortBy, values } from "ramda";
+import {
+  any,
+  ascend,
+  chain,
+  compose,
+  filter,
+  map,
+  partition,
+  prop,
+  sortBy,
+  sortWith,
+  uniq,
+  values,
+} from "ramda";
 
 import { FolderOpen } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
+import GameFilters from "@/components/pages/load/GameFilters";
 import GameRow from "@/components/pages/load/GameRow";
 
+import { publishers } from "@/data";
 import { createAlert, loadSummaries } from "@/state";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import * as opfs from "@/util/opfs";
 
 const sortSummaries = compose(sortBy(prop("title")), chain(values), values);
+
+// Designer is free text: "A, B and C" is three designers
+export const splitDesigners = (designer) =>
+  designer
+    ? designer
+        .split(/\s*,\s*|\s+and\s+/)
+        .map((d) => d.trim())
+        .filter(Boolean)
+    : [];
+
+// "Ann Lee" sorts under "lee", ties fall back to the full name
+const lastName = (name) => name.toLowerCase().split(/\s+/).pop();
+
+const isLoaded = (game) => game.type !== "bundled";
 
 const LoadGames = () => {
   const { t } = useTranslation();
@@ -29,10 +58,64 @@ const LoadGames = () => {
     dispatch(loadSummaries());
   }, [dispatch]);
 
-  const gameRows = map(
-    (game) => <GameRow game={game} key={game.slug} />,
-    sortSummaries(summaries),
+  const [publisher, setPublisher] = useState("all");
+  const [designer, setDesigner] = useState("all");
+  const [type, setType] = useState("all");
+
+  const sorted = useMemo(() => sortSummaries(summaries), [summaries]);
+  const hasLoaded = any(isLoaded, sorted);
+
+  const publisherOptions = useMemo(
+    () =>
+      sortWith(
+        [ascend((o) => o[1].toLowerCase())],
+        map(
+          (id) => [id, publishers[id]?.name ?? id],
+          uniq(
+            filter(
+              (id) => id && id !== "self",
+              map((game) => game.publisher, sorted),
+            ),
+          ),
+        ),
+      ),
+    [sorted],
   );
+  const designerOptions = useMemo(
+    () =>
+      sortWith(
+        [ascend((d) => lastName(d)), ascend((d) => d.toLowerCase())],
+        uniq(chain((game) => splitDesigners(game.designer), sorted)),
+      ),
+    [sorted],
+  );
+
+  const [loaded, bundled] = partition(
+    isLoaded,
+    filter(
+      (game) =>
+        (publisher === "all" || game.publisher === publisher) &&
+        (designer === "all" ||
+          splitDesigners(game.designer).includes(designer)) &&
+        (type === "all" || (type === "loaded") === isLoaded(game)),
+      sorted,
+    ),
+  );
+
+  const section = (heading, games) =>
+    games.length > 0 && (
+      <section className="mt-6">
+        {heading && <h2 className="text-2xl font-bold mb-4">{heading}</h2>}
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+          {map(
+            (game) => (
+              <GameRow game={game} key={game.slug} />
+            ),
+            games,
+          )}
+        </div>
+      </section>
+    );
 
   const openGame = (event) => {
     event.preventDefault();
@@ -94,9 +177,22 @@ const LoadGames = () => {
           </label>
         </Button>
       )}
-      <div className="flex flex-col gap-6 mt-6 flex-wrap max-w-2xl">
-        {gameRows}
-      </div>
+      <GameFilters
+        publisher={publisher}
+        setPublisher={setPublisher}
+        publishers={publisherOptions}
+        designer={designer}
+        setDesigner={setDesigner}
+        designers={designerOptions}
+        type={type}
+        setType={setType}
+        showType={hasLoaded}
+      />
+      {section(t("games.loaded"), loaded)}
+      {section(hasLoaded ? t("games.bundled") : null, bundled)}
+      {loaded.length === 0 && bundled.length === 0 && (
+        <p className="mt-6">{t("games.empty")}</p>
+      )}
     </div>
   );
 };

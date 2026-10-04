@@ -248,7 +248,18 @@
   },
   "games": {
     "title": "游戏",
-    "description": "这些是您已加载到 18xx Maker 中的游戏"
+    "description": "这些是您已加载到 18xx Maker 中的游戏",
+    "filter": {
+      "publisher": "出版商",
+      "designer": "设计师",
+      "type": "类型",
+      "all": "全部",
+      "bundled": "内置",
+      "loaded": "已加载"
+    },
+    "loaded": "您的游戏",
+    "bundled": "内置游戏",
+    "empty": "没有符合这些筛选条件的游戏"
   },
   "game": {
     "info": "游戏信息",
