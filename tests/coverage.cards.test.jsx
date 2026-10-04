@@ -491,6 +491,16 @@ describe("Cards page", () => {
     });
   });
 
+  it("bleeds the revenue box of a private into the bleed of a single card", async () => {
+    renderApp("/games/18Test/cards/private/0?cardBleed=12.5");
+    const card = await screen.findByTestId("game-18Test-card");
+    // eslint-disable-next-line testing-library/no-node-access
+    const css = card.parentElement.querySelector("style").textContent;
+    expect(css).toMatch(
+      /\.private__revenue--background::before \{\s*right: -0\.125in;\s*bottom: -0\.125in;/,
+    );
+  });
+
   it.for(["dtgDie", "free"])(
     "renders a single card in the %s layout",
     async (layout) => {

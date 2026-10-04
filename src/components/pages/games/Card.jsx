@@ -128,6 +128,11 @@ const Card = () => {
     height: ${data.css.height};
 }
 
+.private__revenue--background::before {
+    right: -${data.css.bleed};
+    bottom: -${data.css.bleed};
+}
+
 .share__hr {
     bottom: calc(0.375in + ${data.css.bleed});
 }
