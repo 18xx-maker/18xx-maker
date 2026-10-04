@@ -127,20 +127,32 @@ const ExportButton = () => {
         <DropdownMenuContent align="end" onKeyDown={handleMenuKeyDown}>
           <DropdownMenuItem onSelect={() => handleAll("pdf")}>
             <FileText />
-            <KeyLabel text={t("export.allPdf")} shortcut="p" word="pdf" />
+            <span>
+              <KeyLabel text={t("export.allPdf")} shortcut="p" word="pdf" />
+            </span>
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => handleAll("png")}>
             <FileImage />
-            <KeyLabel text={t("export.allPng")} shortcut="n" word="png" />
+            <span>
+              <KeyLabel text={t("export.allPng")} shortcut="n" word="png" />
+            </span>
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => handleAll("b18")}>
             <Box />
-            <KeyLabel text={t("export.b18")} shortcut="b" word="Board18" />
+            <span>
+              <KeyLabel text={t("export.b18")} shortcut="b" word="Board18" />
+            </span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => setOptions(true)}>
             <Settings2 />
-            <KeyLabel text={t("export.options")} shortcut="o" word="options" />
+            <span>
+              <KeyLabel
+                text={t("export.options")}
+                shortcut="o"
+                word="options"
+              />
+            </span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
