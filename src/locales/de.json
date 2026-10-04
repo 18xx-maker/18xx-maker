@@ -547,6 +547,10 @@
         "label": "Gesellschaftskarten halber Breite",
         "description": "Zeichnet alle Gesellschaftskarten (große und kleine) in halber Breite. Sie nehmen die Hälfte der Seitenbreite ein (abzüglich Schnittlinien)."
       },
+      "halfWidthMinors": {
+        "label": "Kleine Gesellschaftskarten halber Breite",
+        "description": "Zeichnet nur die kleinen Gesellschaftskarten in halber Breite, während die großen Gesellschaftskarten volle Breite behalten. Gilt nur für das freie Layout."
+      },
       "smallerMinors": {
         "label": "Kleinere Minors",
         "description": "Zeichnet kleine Gesellschaftskarten (Minors) in geringerer Höhe."

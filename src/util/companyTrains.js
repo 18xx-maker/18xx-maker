@@ -43,7 +43,7 @@ export const charterHalfWidth = (charters, minor) => {
     case "3x1minors":
       return !!minor;
     default:
-      return !!charters.halfWidth;
+      return !!(charters.halfWidth || (minor && charters.halfWidthMinors));
   }
 };
 

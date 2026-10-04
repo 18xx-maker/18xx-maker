@@ -70,6 +70,23 @@ describe("charterHalfWidth", () => {
     expect(charterHalfWidth({ layout: "3x1minors" }, false)).toBe(false);
     expect(charterHalfWidth({ layout: "3x1minors" }, true)).toBe(true);
   });
+
+  it("makes only minors half width with halfWidthMinors in the free layout", () => {
+    const charters = {
+      layout: "free",
+      halfWidth: false,
+      halfWidthMinors: true,
+    };
+    expect(charterHalfWidth(charters, true)).toBe(true);
+    expect(charterHalfWidth(charters, false)).toBe(false);
+    expect(charterHalfWidth({ ...charters, halfWidth: true }, false)).toBe(
+      true,
+    );
+    expect(charterHalfWidth({ ...charters, layout: "3x1" }, true)).toBe(false);
+    expect(charterHalfWidth({ ...charters, layout: "3x1minors" }, false)).toBe(
+      false,
+    );
+  });
 });
 
 describe("cardCompanyTrains", () => {

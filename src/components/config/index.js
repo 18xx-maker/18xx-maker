@@ -292,6 +292,9 @@ export const sections = [
         name: "halfWidth",
       },
       {
+        name: "halfWidthMinors",
+      },
+      {
         name: "smallerMinors",
       },
       {
