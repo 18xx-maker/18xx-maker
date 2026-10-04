@@ -105,6 +105,21 @@ describe("documents", () => {
     expect(byId(docs, "charters/14").size.heightIn).toBe(3.5);
   });
 
+  it("sizes the minor charters of 3x1minors at half width", () => {
+    const docs = list(
+      {},
+      {
+        charters: {
+          ...loadGameConfig(loadGame("18Test")).charters,
+          layout: "3x1minors",
+        },
+      },
+    );
+    const major = byId(docs, "charters/0").size;
+    const minor = byId(docs, "charters/14").size;
+    expect(minor.widthIn).toBeCloseTo(major.widthIn / 2, 5);
+  });
+
   it("only gives the background to the map, market, par, revenue and tile manifest", () => {
     const pngs = docs.filter((doc) => doc.formats.includes("png"));
     expect(
@@ -145,6 +160,34 @@ describe("documents", () => {
     expect(byId(docs, "tokens/0").basename).toBe("token-1-BLRR");
     expect(byId(docs, "tokens/20").basename).toBe("token-21");
     expect(byId(docs, "tiles/26|T2").basename).toBe("tile-26_T2");
+  });
+
+  it("has the trains of companies last among the train cards", () => {
+    const trains = (config) =>
+      ids(list({}, config)).filter((id) => id.startsWith("cards/train/"));
+    // The fixture's black railroad has two trains to print on the charter
+    expect(trains()).toHaveLength(4);
+    expect(
+      trains({
+        charters: {
+          ...loadGameConfig(loadGame("18Test")).charters,
+          trainCards: "cards",
+        },
+      }),
+    ).toHaveLength(7);
+  });
+
+  it("leaves the trains of half width charters to the cards", () => {
+    const config = {
+      charters: { ...loadGameConfig(loadGame("18Test")).charters },
+    };
+    const trains = (layout) =>
+      ids(
+        list({}, { ...config, charters: { ...config.charters, layout } }),
+      ).filter((id) => id.startsWith("cards/train/"));
+    // 3x1 charters print their own trains, 3x2 charters have no room for them
+    expect(trains("3x1")).toHaveLength(4);
+    expect(trains("3x2")).toHaveLength(7);
   });
 
   it("captures a token inside of the wrapper the page has for it", () => {

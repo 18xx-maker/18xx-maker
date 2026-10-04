@@ -316,6 +316,15 @@ export const sections = [
         name: "showTurnOrder",
       },
       {
+        name: "trainCards",
+      },
+      {
+        name: "trainCardBorder",
+      },
+      {
+        name: "trainCardRound",
+      },
+      {
         name: "blackBand",
       },
       {

@@ -1,16 +1,21 @@
-import { Fragment } from "react";
+import { Fragment, useLayoutEffect, useRef } from "react";
 
 import { addIndex, chain, map } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import Phase from "@/components/Phase";
+import Train from "@/components/cards/Train";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
 import { multiDefaultTo, unitsToCss } from "@/util";
+import { companyTrains } from "@/util/companyTrains";
+import { getSingleCardData } from "@/util/sizes";
+
+const MIN_CARD_SCALE = 0.2;
 
 const Charter = ({
   name,
@@ -40,6 +45,34 @@ const Charter = ({
   fontWeight = multiDefaultTo("bold", fontWeight);
   fontStyle = multiDefaultTo("normal", fontStyle);
   let lineHeight = fontSize * 1.1;
+
+  // Trains the company owns print as small cards under the trains label
+  const ownTrains =
+    !halfWidth && config.charters.trainCards === "charter"
+      ? companyTrains(company, trains || [])
+      : [];
+  const cardData = ownTrains.length
+    ? getSingleCardData(config.cards, config.paper)
+    : null;
+
+  // The cards share the trains box with the phase chart. Shrink them until
+  // they fit above it, so they never print over the chart.
+  const cardsRef = useRef(null);
+  useLayoutEffect(() => {
+    const cards = cardsRef.current;
+    if (!cards) return;
+    cards.style.removeProperty("--train-card-scale");
+    let scale = parseFloat(
+      getComputedStyle(cards).getPropertyValue("--train-card-scale"),
+    );
+    while (
+      cards.scrollHeight > cards.clientHeight + 0.5 &&
+      scale > MIN_CARD_SCALE
+    ) {
+      scale = Math.max(MIN_CARD_SCALE, scale - 0.025);
+      cards.style.setProperty("--train-card-scale", scale);
+    }
+  });
 
   // Hide section labels for things we don't want on a company
   const showTrains = company.trains !== false;
@@ -212,6 +245,67 @@ const Charter = ({
                 {halfWidth || (
                   <div className="charter__trains">
                     {showTrains && "Trains"}
+                    {cardData && (
+                      <div
+                        ref={cardsRef}
+                        className={[
+                          "charter__traincards",
+                          config.charters.trainCardBorder &&
+                            "charter__traincards--border",
+                          config.charters.trainCardRound &&
+                            "charter__traincards--round",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
+                        data-testid="charter-train-cards"
+                      >
+                        <style>{`
+.charter__traincard {
+    width: calc(${cardData.css.width} * var(--train-card-scale));
+    height: calc(${cardData.css.height} * var(--train-card-scale));
+}
+
+.charter__traincard > div {
+    width: ${cardData.css.width};
+    height: ${cardData.css.height};
+}
+
+.charter__traincard .card,
+.charter__traincard .card__bleed {
+    width: ${cardData.css.width};
+    height: ${cardData.css.height};
+}
+
+.charter__traincard .card__body {
+    margin: 0;
+    border: 0;
+    width: ${cardData.css.width};
+    height: ${cardData.css.height};
+}
+
+.charter__traincard .train__hr {
+    height: 0.6875in;
+}
+`}</style>
+                        {addIndex(map)(
+                          (train, i) => (
+                            <div
+                              className="charter__traincard"
+                              key={`train-${company.abbrev}-${i}`}
+                            >
+                              <div>
+                                <Train
+                                  bare
+                                  train={train}
+                                  trains={[...(trains || []), ...ownTrains]}
+                                />
+                              </div>
+                            </div>
+                          ),
+                          ownTrains,
+                        )}
+                      </div>
+                    )}
                     {showPhaseChart && (
                       <div className="charter__phase">
                         <Phase

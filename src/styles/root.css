@@ -271,6 +271,10 @@ body {
   bottom: 0;
   left: 0;
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  /* A phase chart too tall for the box overflows upward, as it always did */
+  justify-content: flex-end;
   padding: 0.125in;
   border-width: 0 1px 0 0;
   border-color: #666;
@@ -356,13 +360,13 @@ body {
   font-size: 0.25in;
 }
 
+/* The phase chart sits at the bottom edge of the trains box, below any train
+   cards, which it must never print over */
 .charter__phase {
-  position: absolute;
-  bottom: 0;
+  flex: none;
+  margin: auto -0.125in -0.125in;
   padding: 0.125in;
   box-sizing: border-box;
-  width: 100%;
-  left: 0;
 }
 
 .charter__phase table {
@@ -818,4 +822,41 @@ footer a:hover {
   body {
     background: transparent;
   }
+}
+
+.charter__traincards {
+  --train-card-scale: 0.5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.0625in;
+  margin-top: 0.0625in;
+  /* Takes the room the phase chart leaves, Charter.jsx shrinks the cards to fit */
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  align-content: flex-start;
+}
+
+.charter__traincard {
+  position: relative;
+  overflow: hidden;
+}
+
+.charter__traincards--border .charter__traincard::after {
+  /* An outline would be painted under the scaled card, so draw it on top */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid #000;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.charter__traincards--round .charter__traincard {
+  border-radius: 0.0625in;
+}
+
+.charter__traincard > div {
+  transform: scale(var(--train-card-scale));
+  transform-origin: top left;
 }

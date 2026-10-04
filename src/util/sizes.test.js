@@ -64,6 +64,16 @@ describe("charters", () => {
     expect(getCharterSize(data, true).height).toBe(data.totalMinorHeight);
     expect(data.totalMinorHeight).toBeLessThan(data.totalHeight);
   });
+
+  it("sizes half width charters by the half width", () => {
+    const data = getSingleCharterData(
+      { ...charters, layout: "3x1minors" },
+      paper,
+    );
+    expect(getCharterSize(data, true, true).width).toBe(data.totalHalfWidth);
+    expect(data.totalHalfWidth).toBeLessThan(data.totalWidth);
+    expect(getCharterSize(data, false, false).width).toBe(data.totalWidth);
+  });
 });
 
 describe("tokens", () => {

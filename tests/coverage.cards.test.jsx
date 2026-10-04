@@ -397,3 +397,26 @@ describe("Cards page", () => {
     },
   );
 });
+
+describe("company trains on cards", () => {
+  const trainCards = (route) => `${route}?config.charters.trainCards=cards`;
+  const names = (root) =>
+    all(root, ".card.train .train__name").map((n) => n.textContent);
+
+  it("adds them to the cards sheet after the game trains", async () => {
+    const view = renderApp("/games/18Test/cards");
+    const count = names(await screen.findByTestId("game-18Test-cards")).length;
+    view.unmount();
+
+    renderApp(trainCards("/games/18Test/cards"));
+    const all18 = names(await screen.findByTestId("game-18Test-cards"));
+    expect(all18).toHaveLength(count + 3);
+    // The fixture's black railroad owns two 2 trains and an S train
+    expect(all18.slice(-3)).toEqual(["2", "2", "S"]);
+  });
+
+  it("has a card route for each of them", async () => {
+    renderApp(trainCards("/games/18Test/cards/train/6"));
+    expect(await screen.findByText("S")).toBeInTheDocument();
+  });
+});

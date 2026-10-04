@@ -9,6 +9,7 @@ import Train from "@/components/cards/Train";
 
 import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
+import { cardCompanyTrains } from "@/util/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
 
 const Card = () => {
@@ -21,9 +22,22 @@ const Card = () => {
     case "private":
       node = <Private players={game.players} {...game.privates[index]} />;
       break;
-    case "train":
-      node = <Train train={game.trains[index]} trains={game.trains} />;
+    case "train": {
+      const trains = [
+        ...(game.trains || []),
+        ...cardCompanyTrains(
+          overrideCompanies(
+            compileCompanies(game),
+            config.overrideCompanies,
+            config.overrideSelection,
+          ),
+          config.charters,
+          game.trains,
+        ),
+      ];
+      node = <Train train={trains[index]} trains={trains} />;
       break;
+    }
     case "share": {
       const override = config.overrideCompanies;
       const selection = config.overrideSelection;
