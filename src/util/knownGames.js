@@ -45,7 +45,10 @@ export const loadKnownGames = async (entries, loaders) => {
       ? [
           {
             slug: entries[index].slug,
-            title: result.value.info?.title || entries[index].id,
+            title:
+              (typeof result.value.info?.title === "string" &&
+                result.value.info.title) ||
+              entries[index].id,
             tiles: result.value.tiles || {},
           },
         ]

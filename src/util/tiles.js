@@ -62,10 +62,14 @@ const validValues = (values) =>
     ));
 
 const isDefinition = (tile) =>
-  is(Object, tile) && !Array.isArray(tile) && tile.color && !tile.tile;
+  is(Object, tile) &&
+  !Array.isArray(tile) &&
+  typeof tile.color === "string" &&
+  tile.color &&
+  !tile.tile;
 
 export const customTiles = (gameTiles) => {
-  const custom = {};
+  const custom = Object.create(null);
 
   forEachObjIndexed((tile, id) => {
     if (isDefinition(tile) && validValues(tile.values)) {
@@ -80,7 +84,7 @@ export const customTiles = (gameTiles) => {
 // the tiles map of a game (count, alias or extra data), the base id of "a|b"
 // ids, and the target of an alias. Full definitions are not credited here.
 export const tileUsage = (games) => {
-  const usage = {};
+  const usage = Object.create(null);
 
   const credit = (id, game) => {
     usage[id] = usage[id] || [];
@@ -124,7 +128,7 @@ export const mergeKnownTiles = (generic, games) => {
     slugs: undefined,
     definedBy: [],
   }));
-  const byId = {};
+  const byId = Object.create(null);
   forEach((entry) => {
     byId[entry.id] = [entry];
   }, entries);

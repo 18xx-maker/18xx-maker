@@ -81,6 +81,18 @@ describe("tiles of games on this device", () => {
     await waitFor(() => expect(shownTiles()).toBe(1));
   });
 
+  it("does not crash on inherited ids, odd colors or titles", async () => {
+    opfs.peekGame.mockResolvedValue({
+      info: { title: 5 },
+      tiles: JSON.parse(
+        '{"constructor":{"color":"red"},"toString":1,"__proto__":2,"ZZ6":{"color":{"a":1}},"ZZ7":{"color":"red"}}',
+      ),
+    });
+    renderApp("/elements/tiles?id=ZZ", withSaved);
+
+    await waitFor(() => expect(shownTiles()).toBe(1));
+  });
+
   it("shows a tile that cannot be drawn as its id", async () => {
     opfs.peekGame.mockResolvedValue({
       info: { title: "Saved Game" },
