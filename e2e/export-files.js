@@ -100,14 +100,14 @@ export const expected = {
     // device pixels the card is painted on whole, 255 by 166 CSS pixels
     cards: { count: 48, width: 796, height: 518 },
   },
-  // The svgs of the map, market, tiles and tokens: the size in CSS pixels
-  // (1/96 inch) of the map and the market is the size of their png less the
-  // quarter inch border they have there (24 CSS pixels on each side, 150
-  // pixels at 300 dpi), and some files that must be there
+  // The svgs of the map, market, tiles and tokens: their size in CSS pixels
+  // (1/96 inch), which is the size of the drawing in units (the viewBox of
+  // the map is 1450 by 403.10875, the market 1340 by 985) at 0.96 pixels a
+  // unit, with no border: it comes from the game, not from the fonts
   svg: {
     sizes: {
-      "18test-map.svg": [(4500 - 150) * 0.32, (1356 - 150) * 0.32],
-      "18test-market.svg": [(4168 - 150) * 0.32, (3115 - 150) * 0.32],
+      "18test-map.svg": [1392, 386.984],
+      "18test-market.svg": [1286.4, 945.6],
       // A tile is 2 inches, a token with its four sides 2.4 by 0.6
       "18test-tile-1.svg": [192, 192],
       "18test-token-1-BLRR.svg": [230.4, 57.6],
