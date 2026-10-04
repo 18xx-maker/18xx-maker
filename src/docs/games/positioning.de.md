@@ -96,3 +96,28 @@ verschoben, nach:
   "percent": 0.7
 }
 ```
+
+## Zeichenreihenfolge
+
+Die Position legt nur fest, wo ein Element sitzt. Welches Element über welchem
+gezeichnet wird, folgt einer festen Reihenfolge nach Typ (Städte, dann Werte,
+Beschriftungen, Token, Gelände, Symbole und so weiter). Um das zu ändern, gib
+einem Element eine `order`. Es wird nach allen Elementen seines Feldes ohne
+`order` gezeichnet, das mit der kleinsten `order` zuerst, und seine Position
+ändert sich nicht. Zum Beispiel, um eine Stadt über einen Wert zu zeichnen:
+
+```json
+{
+  "cities": [{ "order": 1 }],
+  "values": [{ "value": 30, "x": 0, "y": 0 }]
+}
+```
+
+- Eine negative Zahl zeichnet das Element vor allen anderen, `true` zeichnet es
+  zuletzt und `0` zeichnet es nach den Elementen ohne `order`.
+- Elemente mit gleicher `order` behalten die übliche Reihenfolge nach Typ.
+- Ein Element bleibt auf seiner Seite von Feldrand und ID: innere Elemente
+  eines Feldes können nicht über den Rand, und außen gezeichnete Elemente (wie
+  Städte außerhalb oder Namen) nicht darunter.
+- Sie kann Gleise verdecken.
+- Gleise, Off-Board-Gleise, Trennlinien und Ränder haben keine `order`.

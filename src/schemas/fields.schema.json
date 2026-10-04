@@ -3,6 +3,15 @@
   "$id": "https://18xx-maker.com/schemas/fields.schema.json",
 
   "definitions": {
+    "order": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      }
+    },
     "text": {
       "type": "object",
       "properties": {

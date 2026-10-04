@@ -24,8 +24,8 @@ describe("game tiles", () => {
     );
 
     expect(used.size).toBeGreaterThan(1);
-    // A tile with neighbors to the east and south west
-    expect(used).toContain("hexBleedClipPathOffset-101000");
+    // A tile with a neighbor to the east
+    expect(used).toContain("hexBleedClipPathOffset-100000");
     used.forEach((id) => {
       expect(id).toMatch(/^hexBleedClipPathOffset-[01]{6}$/);
       expect(
