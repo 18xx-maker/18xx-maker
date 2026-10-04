@@ -170,7 +170,9 @@ const Token = ({
           }
           const spacing = fSize * 0.45 + f2 * 0.6;
           if (!labelY) {
-            y += (above ? 1 : -1) * spacing * 0.5;
+            // Nudge the whole block up a little: less top padding with the
+            // second line below, more bottom padding with it above.
+            y += (above ? 1 : -1) * spacing * 0.5 - fSize * 0.08;
           }
           const y2 = y + (above ? -1 : 1) * spacing;
           const fill = label2Color ? c(label2Color) : textFill;
