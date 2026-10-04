@@ -1162,8 +1162,16 @@
           "description": "Distance between the turns of the spiral."
         },
         "circle": {
-          "type": "string",
-          "description": "Color of a circle in the middle."
+          "description": "Color of a circle in the middle, true for white.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean",
+              "enum": [true]
+            }
+          ]
         },
         "circleRadius": {
           "type": "number",

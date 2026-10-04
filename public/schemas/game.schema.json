@@ -251,16 +251,6 @@
               "dashed": {
                 "type": "boolean"
               },
-              "dashArray": {
-                "oneOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "number"
-                  }
-                ]
-              },
               "offset": {
                 "type": "number"
               }
@@ -794,12 +784,12 @@
       "description": "The stock market, and the par and revenue charts.",
       "properties": {
         "type": {
-          "description": "The layout of the market: 2D is a grid, 1D a single row, 1Diag a zigzag row. Defaults to 2D.",
+          "description": "The layout of the market: 2D is a grid, 1D a single row, 1Diag a zigzag row. Always set it, a market without a type is empty.",
           "type": "string",
           "enum": ["1D", "2D", "1Diag"]
         },
         "title": {
-          "description": "false hides the title above the market.",
+          "description": "false starts the market at the top, without space for the title.",
           "type": "boolean",
           "const": false
         },
@@ -1588,7 +1578,7 @@
             "type": "boolean"
           },
           "events": {
-            "description": "Events of the phase, shown on the phase card.",
+            "description": "Events of the phase, an object of boolean fields. close_companies and remove_tokens show on the phase card, other events are ignored.",
             "type": "object",
             "properties": {
               "close_companies": {
@@ -1600,7 +1590,9 @@
                 "type": "boolean"
               }
             },
-            "additionalProperties": false
+            "additionalProperties": {
+              "type": "boolean"
+            }
           }
         },
         "anyOf": [

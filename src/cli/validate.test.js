@@ -598,10 +598,10 @@ describe("validate", () => {
         "discount",
       ],
       [
-        "an unknown phase event",
+        "a phase event that is not a boolean",
         {
           phases: [
-            { name: "5", limit: 3, tiles: "brown", events: { explode: true } },
+            { name: "5", limit: 3, tiles: "brown", events: { explode: "yes" } },
           ],
         },
         "explode",
