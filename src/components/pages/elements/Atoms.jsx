@@ -174,6 +174,8 @@ const atoms = [
       { icons: [{ type: "water" }] },
       { icons: [{ type: "noenter" }] },
       { icons: [{ type: "noenter", color: "gray" }] },
+      { icons: [{ type: "flag" }] },
+      { icons: [{ type: "flag", color: "blue" }] },
     ],
   },
   {
@@ -356,6 +358,7 @@ const atoms = [
       { tokens: [{ icon: "tracks", label: "$100" }] },
       { tokens: [{ icon: "boat", iconColor: "red", label: "Free" }] },
       { tokens: [{ icon: "noenter" }] },
+      { tokens: [{ icon: "flag" }] },
     ],
   },
   {
@@ -404,7 +407,7 @@ const atoms = [
       },
       { cities: [{ size: 1, pass: true }] },
       { cities: [{ size: 2, pass: true }] },
-      { cities: [{ size: 3, icons: ["meat", "noenter", "share"] }] },
+      { cities: [{ size: 3, icons: ["meat", "noenter", "flag", "share"] }] },
     ],
   },
   {
@@ -848,6 +851,7 @@ const atoms = [
       { terrain: [{ size: "tiny", type: "river", cost: 10 }] },
       { terrain: [{ size: "large", type: "swamp", cost: 120 }] },
       { terrain: [{ size: "medium", type: "noenter", cost: 120 }] },
+      { terrain: [{ type: "flag", cost: 20 }] },
     ],
   },
   {

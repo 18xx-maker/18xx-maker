@@ -18,7 +18,7 @@ export default {
   argTypes: {
     type: {
       control: { type: "select" },
-      options: ["mountain", "swamp", "cow-skull", "wheat", "noenter"],
+      options: ["mountain", "swamp", "cow-skull", "wheat", "noenter", "flag"],
     },
     cost: { control: "number" },
     size: {
