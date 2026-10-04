@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ascend, compose, groupBy, keys, map, nth, sort, split } from "ramda";
@@ -33,7 +33,12 @@ const groupItems = map(
 );
 
 // Classes that look the same on the back of a token
-const SAME_ON_BACK = ["color-white", "color-stroke-white"];
+const SAME_ON_BACK = [
+  "color-white",
+  "color-stroke-white",
+  "color-gray",
+  "color-stroke-gray",
+];
 
 const hasBack = (el) =>
   [...el.querySelectorAll('[class*="color-"]')].some((node) =>
@@ -47,7 +52,7 @@ const LogoCard = ({ logo, Component }) => {
   const ref = useRef(null);
   const [back, setBack] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setBack(hasBack(ref.current));
   }, [logo]);
 

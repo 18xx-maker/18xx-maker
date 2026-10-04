@@ -231,7 +231,7 @@
       "title": "公司标志",
       "description": "内置的铁路公司标志",
       "page": {
-        "description": "这里是 18xx Maker 内置的所有 SVG 标志。 带有可重新着色颜色的标志还会显示其在标记背面(保留)的样子。"
+        "description": "这里是 18xx Maker 内置的所有 SVG 标志。带有可重新着色颜色的标志还会显示其在标记背面(保留)的样子。"
       },
       "front": "正面",
       "back": "保留",
