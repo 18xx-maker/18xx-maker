@@ -160,18 +160,19 @@ const Token = ({
           if (!text2) {
             return { y, extra: null };
           }
-          let f2 = fSize * 0.6;
+          let f2 = fSize * 0.85;
           if (text2.length > 5) {
-            f2 *= 0.6;
-          } else if (text2.length > 4) {
-            f2 *= 0.7;
-          } else if (text2.length > 3) {
             f2 *= 0.8;
+          } else if (text2.length > 4) {
+            f2 *= 0.88;
+          } else if (text2.length > 3) {
+            f2 *= 0.94;
           }
+          const spacing = fSize * 0.45 + f2 * 0.6;
           if (!labelY) {
-            y += (above ? 1 : -1) * fSize * 0.3;
+            y += (above ? 1 : -1) * spacing * 0.5;
           }
-          const y2 = y + (above ? -1 : 1) * (fSize * 0.45 + f2 * 0.6);
+          const y2 = y + (above ? -1 : 1) * spacing;
           const fill = label2Color ? c(label2Color) : textFill;
           return {
             y,
