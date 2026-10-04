@@ -211,3 +211,89 @@ export const reorderForBleed = (page, groupOf, above) => {
 
   return result;
 };
+
+// Offset tiles sit on a triangular lattice (every neighbor is one tile width
+// away), and each tile's bleed reaches into the gaps it shares with them.
+// Where two bleeds overlap the later tile would paint over the earlier one, so
+// every tile's bleed stops halfway to each neighbor it actually has.
+// Directions, in order: east, south east, south west, west, north west,
+// north east (SVG y points down).
+const OFFSET_BLEED = [
+  [-86.6025, 0],
+  [-92.376, -9.999995337],
+  [-54.84825, -75],
+  [-43.30125, -75],
+  [-37.52775, -85],
+  [37.52775, -85],
+  [43.30125, -75],
+  [54.84825, -75],
+  [92.376, -9.999995337],
+  [86.6025, 0],
+  [92.376, 9.999995337],
+  [54.84825, 75],
+  [43.30125, 75],
+  [37.52775, 85],
+  [-37.52775, 85],
+  [-43.30125, 75],
+  [-54.84825, 75],
+  [-92.376, 9.999995337],
+];
+const HALF_SPACING = 86.6025;
+const SQRT3_2 = Math.sqrt(3) / 2;
+const OFFSET_DIRECTIONS = [
+  [1, 0],
+  [0.5, SQRT3_2],
+  [-0.5, SQRT3_2],
+  [-1, 0],
+  [-0.5, -SQRT3_2],
+  [0.5, -SQRT3_2],
+];
+
+// Which of the six neighbors of position i on an offset page hold a tile
+export const offsetNeighbors = (c, page, i) => {
+  const row = c.getYindex(i);
+  const col = c.getXindex(i);
+  const odd = c.isOdd(i);
+  const cells = [
+    [row, col + 1],
+    [row + 1, odd ? col + 1 : col],
+    [row + 1, odd ? col : col - 1],
+    [row, col - 1],
+    [row - 1, odd ? col : col - 1],
+    [row - 1, odd ? col + 1 : col],
+  ];
+
+  return cells.map(
+    ([r, k]) => r >= 0 && k >= 0 && k < c.perRow && !!page[r * c.perRow + k],
+  );
+};
+
+// The offset bleed outline, cut flat halfway to each neighbor in `neighbors`
+export const offsetBleedPoints = (neighbors) => {
+  let poly = OFFSET_BLEED;
+
+  neighbors.forEach((has, d) => {
+    if (!has) return;
+    const [ux, uy] = OFFSET_DIRECTIONS[d];
+    const dist = ([x, y]) => x * ux + y * uy - HALF_SPACING;
+    const out = [];
+
+    poly.forEach((p, k) => {
+      const q = poly[(k + 1) % poly.length];
+      const dp = dist(p);
+      const dq = dist(q);
+      if (dp <= 0) out.push(p);
+      if (dp < 0 !== dq < 0 && dp !== 0 && dq !== 0) {
+        const t = dp / (dp - dq);
+        out.push([p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])]);
+      }
+    });
+
+    poly = out;
+  });
+
+  return poly;
+};
+
+export const offsetBleedId = (neighbors) =>
+  `hexBleedClipPathOffset-${neighbors.map((n) => (n ? 1 : 0)).join("")}`;
