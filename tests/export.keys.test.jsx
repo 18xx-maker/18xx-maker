@@ -45,6 +45,13 @@ const formatsOf = () => {
   return [...new Set(request.jobs.map(({ path }) => path.split(".").pop()))];
 };
 
+// A game of the last session that is gone, it cannot be loaded
+const missing = {
+  ...{ title: "Gone", id: "Gone" },
+  type: "bundled",
+  slug: "bundled:Gone",
+};
+
 const loaded = {
   title: "18Test",
   id: "18Test",
@@ -62,6 +69,24 @@ const renderOnSettings = async (options) => {
 };
 
 describe("export keys", () => {
+  it("x exports the game of the last session without opening a game page", async () => {
+    const { user, store, router } = renderApp("/settings", {
+      loadedGame: { ...loaded, type: "bundled", slug: "bundled:18Test" },
+    });
+    await screen.findByRole("heading", { name: "Settings" });
+    await waitFor(() => expect(store.getState().game).toBeTruthy());
+
+    await user.keyboard("x");
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/settings");
+    expect(
+      store.getState().alerts?.some?.((a) => a.title === "Game Loaded") ??
+        false,
+    ).toBe(false);
+  });
+
   it("x opens the export menu of the game showing", async () => {
     const { user } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
@@ -177,8 +202,8 @@ describe("export keys", () => {
     });
   });
 
-  it("x does nothing while the loaded game has not loaded yet", async () => {
-    const { user, router, store } = renderApp("/", { loadedGame: loaded });
+  it("x does nothing when the game of the last session cannot be loaded", async () => {
+    const { user, router, store } = renderApp("/", { loadedGame: missing });
     await screen.findByTestId("home");
 
     await user.keyboard("x");
@@ -219,7 +244,7 @@ describe("export keys", () => {
   });
 
   it("the sidebar has no export entry without a game that loaded", async () => {
-    renderApp("/", { loadedGame: loaded });
+    renderApp("/", { loadedGame: missing });
     await screen.findByTestId("home");
 
     expect(

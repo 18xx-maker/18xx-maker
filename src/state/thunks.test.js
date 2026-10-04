@@ -69,6 +69,25 @@ describe("loadGame", () => {
     ]);
   });
 
+  it("a quiet load sets the game without alerts", async () => {
+    state = {};
+    await loadGame("bundled:1889", true)(dispatch, getState);
+    expect(types()).toEqual([createSetGame(games["1889"])]);
+  });
+
+  it("a quiet load keeps a game that was opened meanwhile", async () => {
+    state = { game: games["1889"] };
+    await loadGame("bundled:1889", true)(dispatch, getState);
+    expect(types()).toEqual([]);
+  });
+
+  it("a quiet load fails without an alert", async () => {
+    await expect(
+      loadGame("bundled:nope", true)(dispatch, getState),
+    ).rejects.toThrow("not found");
+    expect(types()).toEqual([]);
+  });
+
   it.each([
     ["system", idb, "System"],
     ["internal", opfs, "Internal"],
