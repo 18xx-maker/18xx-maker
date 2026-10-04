@@ -57,13 +57,13 @@ const Docs = () => {
 
   return (
     <div data-testid={`docs-${file}`} className="flex">
-      <div ref={article} className="min-w-0 flex-1">
+      <div ref={article} className="min-w-0 max-w-200 flex-1">
         {/* Wider than the default so tables and code have room, text stays at
             65 characters */}
-        <Markdown className="mx-auto max-w-200 [&_p]:max-w-[65ch] [&_ul]:max-w-[65ch]">
+        <Markdown className="max-w-200 [&_p]:max-w-[65ch] [&_ul]:max-w-[65ch]">
           {source}
         </Markdown>
-        <div className="mx-auto max-w-200 px-4 pb-4">
+        <div className="max-w-200 px-4 pb-4">
           <DocsPager />
         </div>
       </div>

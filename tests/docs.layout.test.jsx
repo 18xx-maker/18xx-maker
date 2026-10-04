@@ -5,13 +5,15 @@ import { renderApp } from "@tests/helpers.jsx";
 // The component tests load no stylesheet, so the layout is pinned by its
 // classes here and looked at in the browser for real widths.
 describe("docs layout", () => {
-  it("is a centered article 800px wide that keeps text at 65 characters", async () => {
+  it("is a left aligned article 800px wide that keeps text at 65 characters", async () => {
     renderApp("/docs/games/exports");
     const docs = await screen.findByTestId("docs-games/exports");
     // eslint-disable-next-line testing-library/no-node-access
     const article = docs.querySelector(".max-w-200");
 
-    expect(article).toHaveClass("mx-auto");
+    expect(article).not.toHaveClass("mx-auto");
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(docs.querySelectorAll(".mx-auto")).toHaveLength(0);
     expect(article).not.toHaveClass("max-w-prose");
   });
 
