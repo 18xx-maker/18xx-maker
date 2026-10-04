@@ -286,6 +286,7 @@
       }
     },
     "plainMapCompanies": { "type": "boolean" },
+    "tileCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
     "font": { "$ref": "#/definitions/font" }
   },
@@ -304,6 +305,7 @@
     "plainMapCompanies",
     "stock",
     "theme",
+    "tileCompanies",
     "tokens"
   ],
   "additionalProperties": false

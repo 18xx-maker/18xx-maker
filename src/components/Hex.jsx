@@ -35,6 +35,7 @@ import ColorContext from "@/context/ColorContext";
 import HexContext from "@/context/HexContext";
 import { useOrientation } from "@/context/OrientationContext";
 import PhaseContext from "@/context/PhaseContext";
+import { useConfig } from "@/hooks";
 
 const concat = R.unapply(R.reduce(R.concat, []));
 
@@ -51,6 +52,8 @@ const makeBorder = (track) => (
 
 const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   const rotation = useOrientation();
+  const { config } = useConfig();
+  const tileCompanies = config.tileCompanies;
 
   if (hex === undefined || hex === null) {
     return null;
@@ -255,7 +258,9 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   );
   let goods = <Position data={hex.goods}>{(g) => <Good {...g} />}</Position>;
   let companies = (
-    <Position data={hex.companies}>{(c) => <Company {...c} />}</Position>
+    <Position data={tileCompanies ? hex.companies : undefined}>
+      {(c) => <Company {...c} />}
+    </Position>
   );
   let bonus = (
     <Position data={hex.routeBonuses || hex.routeBonus}>
@@ -264,7 +269,13 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   );
   let tokens = (
     <ColorContext.Provider value="companies">
-      <Position data={hex.tokens}>
+      <Position
+        data={
+          tileCompanies
+            ? hex.tokens
+            : R.reject((t) => t.company, [].concat(hex.tokens || []))
+        }
+      >
         {(t) => {
           if (t.company) {
             return <GameMapCompanyToken {...t} abbrev={t.company} />;

@@ -418,6 +418,10 @@
         "label": "Plain Map Company Spaces",
         "description": "This sets all home/destination/token spots on maps to be empty white cities with black company text instead of colored or using logos."
       },
+      "tileCompanies": {
+        "label": "Companies on Tiles",
+        "description": "Show company logos and names on tiles and maps: hex company labels, company tokens in city spaces and company tokens placed on hexes. City colors reserved for a company are kept."
+      },
       "plainMapDestinations": {
         "label": "Plain Map Destination Spaces",
         "description": "This sets all destination spots on maps to be empty white cities with black company text."
