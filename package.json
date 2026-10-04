@@ -47,6 +47,7 @@
     "test:export": "playwright test -c playwright.export.config.js",
     "test:run": "vitest run",
     "docs:images": "node ./scripts/docs-images.mjs",
+    "shot": "node ./scripts/shot.mjs",
     "validate": "node ./bin/maker.js validate \"src/schemas/*.schema.json\" \"src/*.json\" \"src/data/**/*.json\"",
     "validate:schemas": "node ./bin/maker.js validate \"src/schemas/*.schema.json\""
   },

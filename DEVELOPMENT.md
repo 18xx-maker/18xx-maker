@@ -154,6 +154,22 @@ pnpm build:app
 pnpm build:sb
 ```
 
+### Visual check
+
+Snapshots cannot see how print output looks. `pnpm shot` renders one print page,
+element or region of a built site (`pnpm build` first) to a PNG in `shots/`
+(ignored by git), zoomed 4x by default:
+
+```shell
+pnpm shot 18Test tokens --clip 316,6,200,108
+pnpm shot 18Test tokens --sel "g:has(> circle)" --scale 6
+pnpm shot 18Test tokens --vs ../main/dist/site   # before/after side by side
+```
+
+`--vs` renders a second build (of `main`, for example) and writes `*-before.png`
+and `*-compare.png` next to the new image. See the top of `scripts/shot.mjs` for
+all options.
+
 ### Print output snapshots
 
 18xx Maker's output is SVG that people print at physical sizes, so

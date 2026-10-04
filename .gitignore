@@ -11,6 +11,9 @@
 /coverage
 /.vitest
 
+# visual check output (pnpm shot)
+/shots
+
 # renders
 /render
 !/src/render
