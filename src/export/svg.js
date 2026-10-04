@@ -74,7 +74,36 @@ export function serializeSvg(selector, aliases) {
     "radialGradient",
     "filter",
   ];
-  const DROPPED = ["style", "script"];
+  // Elements that are not copied: styles are written on the elements, and
+  // scripts and animations do not belong in a file that is a drawing
+  const DROPPED = [
+    "style",
+    "script",
+    "animate",
+    "set",
+    "animateTransform",
+    "animateMotion",
+  ];
+  // What a file can link to: its own elements and embedded images
+  const linkOk = (value) =>
+    value.startsWith("#") || /^data:image\//.test(value);
+  // Characters that are not allowed in xml 1.0
+  // eslint-disable-next-line no-control-regex -- that is what is removed
+  const INVALID = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\uFFFE\uFFFF]/g;
+  const clean = (text) => text.replace(INVALID, "");
+  const isHref = (name) => name === "href" || name === "xlink:href";
+  const notEmbedded = (node) =>
+    [
+      ...(node.localName === "image" ? [node] : []),
+      ...node.querySelectorAll("image"),
+    ].some(
+      (image) =>
+        !(
+          image.getAttribute("href") ||
+          image.getAttribute("xlink:href") ||
+          ""
+        ).startsWith("data:image/"),
+    );
 
   const element = document.querySelector(selector);
   if (!element) return { error: `The page has no ${selector}` };
@@ -92,16 +121,23 @@ export function serializeSvg(selector, aliases) {
         error: `${selector} has a foreignObject, which vector graphics software does not read`,
       };
     }
-    for (const image of source.querySelectorAll("image")) {
-      const href =
-        image.getAttribute("href") || image.getAttribute("xlink:href");
-      if (!(href || "").startsWith("data:")) {
-        return { error: `${selector} has an image that is not embedded` };
-      }
+    if (notEmbedded(source)) {
+      return { error: `${selector} has an image that is not embedded` };
     }
   }
 
-  const unquote = (name) => name.trim().replace(/^(["'])(.*)\1$/, "$2");
+  // The name of a font family without its quotes and the escapes of css
+  const unquote = (name) =>
+    clean(
+      name
+        .trim()
+        .replace(/^(["'])(.*)\1$/, "$2")
+        .replace(/\\([0-9a-f]{1,6}\s?|.)/gi, (_, escaped) =>
+          /^[0-9a-f]/i.test(escaped)
+            ? String.fromCodePoint(parseInt(escaped, 16))
+            : escaped,
+        ),
+    ).replace(/"/g, "");
 
   // A font-family of the page with the real families in place of its aliases:
   // the alias display is the family Bitter, and a family named serif or
@@ -133,6 +169,49 @@ export function serializeSvg(selector, aliases) {
   const reference = /url\(\s*["']?#([^"')\s]+)["']?\s*\)/g;
   const px = (value) => Math.round(parseFloat(value) * 1000) / 1000;
 
+  // The transform of an element, which is also what the stylesheet says (a
+  // transform, and the point it turns around), as the attribute. A pivot that
+  // is not the origin of the user space (transform-box fill-box with the
+  // origin center, as Terrain has) becomes translate(pivot) transform
+  // translate(-pivot)
+  const pivot = (source, clone, style) => {
+    const computed = style.transform;
+    const has =
+      computed && computed !== "none" && !computed.startsWith("matrix3d");
+    const base = clone.getAttribute("transform") || (has ? computed : null);
+    if (!base) return;
+    const [x, y] = style.transformOrigin.split(" ").map(parseFloat);
+    const box = style.transformBox;
+    if (Number.isNaN(x) || Number.isNaN(y)) {
+      clone.setAttribute("transform", base);
+      return;
+    }
+    let left = 0;
+    let top = 0;
+    if (box === "fill-box" || box === "stroke-box") {
+      try {
+        const bbox = source.getBBox();
+        left = bbox.x;
+        top = bbox.y;
+      } catch {
+        // not rendered: the origin stays at the user space's
+      }
+    } else if (source.ownerSVGElement?.viewBox?.baseVal) {
+      left = source.ownerSVGElement.viewBox.baseVal.x;
+      top = source.ownerSVGElement.viewBox.baseVal.y;
+    }
+    const ox = px(left + x);
+    const oy = px(top + y);
+    if (!ox && !oy) {
+      clone.setAttribute("transform", base);
+      return;
+    }
+    clone.setAttribute(
+      "transform",
+      `translate(${ox} ${oy}) ${base} translate(${-ox} ${-oy})`,
+    );
+  };
+
   // The copy of an element and what is in it, the properties written as
   // attributes. root is the svg that is a file, its parent is the page
   const copy = (source, parent, root) => {
@@ -143,7 +222,9 @@ export function serializeSvg(selector, aliases) {
         name === "style" ||
         name === "xmlns" ||
         name.startsWith("xmlns:") ||
-        name.startsWith("data-")
+        name.startsWith("data-") ||
+        name.toLowerCase().startsWith("on") ||
+        (isHref(name) && !linkOk(clone.getAttribute(name)))
       ) {
         clone.removeAttribute(name);
       }
@@ -176,6 +257,7 @@ export function serializeSvg(selector, aliases) {
         clone.setAttribute(property, value);
       }
     }
+    if (tag !== "svg") pivot(source, clone, style);
     if (style.display === "none" && !DEFINITIONS.includes(tag)) {
       clone.setAttribute("display", "none");
     }
@@ -185,7 +267,7 @@ export function serializeSvg(selector, aliases) {
 
     for (const child of source.childNodes) {
       if (child.nodeType === Node.TEXT_NODE) {
-        clone.append(document.createTextNode(child.textContent));
+        clone.append(document.createTextNode(clean(child.textContent)));
       } else if (
         child.nodeType === Node.ELEMENT_NODE &&
         !DROPPED.includes(child.localName)
@@ -195,8 +277,8 @@ export function serializeSvg(selector, aliases) {
     }
 
     // href also as xlink:href, for software that reads only the old one
-    const href = source.getAttribute("href");
-    if (href !== null && !source.hasAttribute("xlink:href")) {
+    const href = clone.getAttribute("href");
+    if (href !== null && !clone.hasAttribute("xlink:href")) {
       clone.setAttributeNS(XLINK, "xlink:href", href);
     }
     return clone;
@@ -262,6 +344,9 @@ export function serializeSvg(selector, aliases) {
     for (const id of used()) {
       const outside = !have.has(id) && document.getElementById(id);
       if (!outside) continue;
+      if (notEmbedded(outside)) {
+        return { error: `${selector} uses an image that is not embedded` };
+      }
       if (!defs) {
         defs = document.createElementNS(SVG, "defs");
         root.insertBefore(defs, root.firstChild);
