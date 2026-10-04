@@ -122,6 +122,8 @@ describe("b18", () => {
       expect(yellow.tile).toEqual([
         { rots: 6, dups: 1 },
         { rots: 3, dups: 2 },
+        { rots: 6, dups: 1 },
+        { rots: 6, dups: 1 },
       ]);
     });
 
