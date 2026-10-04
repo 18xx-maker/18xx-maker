@@ -88,3 +88,29 @@ If there is also an icon then the terrain is shifted right to:
   "percent": 0.7
 }
 ```
+
+## Draw Order
+
+Position only says where an element sits. Which element is drawn on top of which
+follows a fixed order by type (cities, then values, labels, tokens, terrain and
+icons, and so on). To change it, give an element an `order`. It is drawn after
+all the elements of its tile that have none, lowest `order` first, and its
+position does not change. For example, to draw a city over a value:
+
+```json
+{
+  "cities": [{ "order": 1 }],
+  "values": [{ "value": 30, "x": 0, "y": 0 }]
+}
+```
+
+- A negative number draws the element before all the others, `true` draws it
+  last, and `0` draws it after the elements without an `order`.
+- Elements with the same `order` keep the usual order by type.
+- An element stays on its side of the tile border and ID: a hex's inner
+  elements cannot go over the border, and elements drawn outside (like outside
+  cities or names) cannot go under it.
+- An ordered city, town or tunnel entrance keeps its outline.
+- It can cover track.
+- Track, off board track, divides and borders do not have an `order`.
+- Board18 exports ignore it.

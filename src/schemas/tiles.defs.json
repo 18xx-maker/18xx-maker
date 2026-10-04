@@ -74,7 +74,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false,
         "required": ["label"]
@@ -128,7 +135,11 @@
         "side": { "type": "number", "minimum": 1, "maximum": 6 },
         "x": { "type": "number" },
         "y": { "type": "number" },
-        "percent": { "type": "number", "minimum": 0 }
+        "percent": { "type": "number", "minimum": 0 },
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
       },
       "additionalProperties": false,
       "required": ["name"]
@@ -184,7 +195,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -220,7 +238,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -280,7 +305,11 @@
         "side": { "type": "number", "minimum": 1, "maximum": 6 },
         "x": { "type": "number" },
         "y": { "type": "number" },
-        "percent": { "type": "number", "minimum": 0 }
+        "percent": { "type": "number", "minimum": 0 },
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
       },
       "required": ["company"],
       "additionalProperties": false
@@ -346,6 +375,10 @@
         "side": { "type": "number", "minimum": 1, "maximum": 6 },
         "x": { "type": "number" },
         "y": { "type": "number" },
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        },
         "fontStyle": {
           "type": "string",
           "enum": ["normal", "italic", "oblique"]
@@ -399,7 +432,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -451,7 +491,11 @@
         "side": { "type": "number", "minimum": 1, "maximum": 6 },
         "x": { "type": "number" },
         "y": { "type": "number" },
-        "percent": { "type": "number", "minimum": 0 }
+        "percent": { "type": "number", "minimum": 0 },
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
       },
       "additionalProperties": false
     },
@@ -486,6 +530,13 @@
           "x": { "type": "number" },
           "y": { "type": "number" },
           "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          },
           "groups": { "type": "array", "items": { "type": "string" } }
         },
         "additionalProperties": false
@@ -544,7 +595,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -576,6 +634,13 @@
           "x": { "type": "number" },
           "y": { "type": "number" },
           "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          },
           "groups": { "type": "array", "items": { "type": "string" } }
         },
         "additionalProperties": false
@@ -609,7 +674,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -641,7 +713,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -694,7 +773,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -747,7 +833,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -777,7 +870,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -844,7 +944,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -879,7 +986,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -913,7 +1027,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -1020,7 +1141,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false
       }
@@ -1051,7 +1179,14 @@
           "side": { "type": "number", "minimum": 1, "maximum": 6 },
           "x": { "type": "number" },
           "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "percent": { "type": "number", "minimum": 0 },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of its kind that have none, lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
         },
         "additionalProperties": false,
         "required": ["value"]

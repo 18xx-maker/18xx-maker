@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { Fragment, memo } from "react";
 
 import * as R from "ramda";
 
@@ -38,6 +38,49 @@ import PhaseContext from "@/context/PhaseContext";
 import { useConfig } from "@/hooks";
 
 const concat = R.unapply(R.reduce(R.concat, []));
+
+const isOrdered = (e) => e?.order === true || typeof e?.order === "number";
+const isUnordered = (e) => !isOrdered(e);
+const orderValue = (e) => (e.order === true ? Infinity : e.order);
+const toList = (d) => (!d ? [] : Array.isArray(d) ? d : [d]);
+
+// Normal render order of the slots, so equal orders tie in the usual type order
+const SLOTS = [
+  "bgShapes",
+  "goods",
+  "tunnelEntrances",
+  "cities",
+  "mediumCities",
+  "towns",
+  "boomtowns",
+  "centerTowns",
+  "values",
+  "labels",
+  "tokens",
+  "terrain",
+  "icons",
+  "outsideCities",
+  "bonus",
+  "industries",
+  "companies",
+  "names",
+  "shapes",
+  "tunnels",
+  "bridges",
+  "offBoardRevenue",
+];
+
+const sortOrdered = (list) =>
+  R.sortWith(
+    [R.ascend((o) => o.order), R.ascend((o) => o.rank), R.ascend((o) => o.i)],
+    list,
+  ).map((o) => o.node);
+
+const rest = (data, render, type) => (
+  <Position data={toList(data)} type={type} pick={isUnordered}>
+    {render}
+  </Position>
+);
 
 const makeTrack = (track) => (
   <Position key={`track-${track.id}`} data={track}>
@@ -108,83 +151,99 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   ];
   let tracks = getTracks(allTracks);
 
-  let outsideCities = (
-    <Position data={R.filter((c) => c.outside === true, hex.cities || [])}>
-      {(c) => <City bgColor={hex.color} {...c} />}
-    </Position>
-  );
-  let cities = (
-    <Position data={R.filter((c) => c.outside !== true, hex.cities || [])}>
-      {(c) => <City bgColor={hex.color} {...c} />}
-    </Position>
-  );
+  // Elements with an `order` leave their normal slot and are drawn after (or,
+  // when negative, before) the unordered elements of their tier. Position is
+  // computed over the whole list, so `order` never changes where they sit.
+  const ordered = { inner: [], outside: [] };
+  const slot = (tier, key, data, render, { type, border } = {}) => {
+    const list = toList(data);
+    list.forEach((e, i) => {
+      if (!isOrdered(e) || e.hidden) {
+        return;
+      }
+      const only = (x) => x === e;
+      ordered[tier].push({
+        order: orderValue(e),
+        rank: SLOTS.indexOf(key),
+        i,
+        node: (
+          <Fragment key={`ord-${key}-${i}`}>
+            {border && (
+              <Position data={list} type={type} pick={only}>
+                {border}
+              </Position>
+            )}
+            <Position data={list} type={type} pick={only}>
+              {render}
+            </Position>
+          </Fragment>
+        ),
+      });
+    });
+    return rest(list, render, type);
+  };
+  const before = (tier) =>
+    sortOrdered(ordered[tier].filter((o) => o.order < 0));
+  const after = (tier) =>
+    sortOrdered(ordered[tier].filter((o) => o.order >= 0));
 
-  let outsideCityBorders = (
-    <Position data={R.filter((c) => c.outside === true, hex.cities || [])}>
-      {(c) => <City {...c} border={true} />}
-    </Position>
-  );
-  let cityBorders = (
-    <Position data={R.filter((c) => c.outside !== true, hex.cities || [])}>
-      {(c) => <City {...c} border={true} />}
-    </Position>
-  );
+  const city = (c) => <City bgColor={hex.color} {...c} />;
+  const cityBorder = (c) => <City {...c} border={true} />;
+  const outsideList = R.filter((c) => c.outside === true, hex.cities || []);
+  const innerList = R.filter((c) => c.outside !== true, hex.cities || []);
 
-  let towns = (
-    <Position data={hex.towns}>
-      {(t) => <Town bgColor={hex.color} {...t} />}
-    </Position>
-  );
-  let townBorders = (
-    <Position data={hex.towns}>{(t) => <Town {...t} border={true} />}</Position>
-  );
+  let outsideCities = slot("outside", "outsideCities", outsideList, city, {
+    border: cityBorder,
+  });
+  let cities = slot("inner", "cities", innerList, city, {
+    border: cityBorder,
+  });
+  let outsideCityBorders = rest(outsideList, cityBorder);
+  let cityBorders = rest(innerList, cityBorder);
 
-  let centerTowns = (
-    <Position data={hex.centerTowns}>
-      {(t) => <CenterTown bgColor={hex.color} {...t} />}
-    </Position>
-  );
-  let centerTownBorders = (
-    <Position data={hex.centerTowns}>
-      {(t) => <CenterTown border={true} {...t} />}
-    </Position>
-  );
+  const town = (t) => <Town bgColor={hex.color} {...t} />;
+  const townBorder = (t) => <Town {...t} border={true} />;
+  let towns = slot("inner", "towns", hex.towns, town, { border: townBorder });
+  let townBorders = rest(hex.towns, townBorder);
 
-  let boomtowns = (
-    <Position data={hex.boomtowns}>
-      {(t) => <Boomtown bgColor={hex.color} {...t} />}
-    </Position>
-  );
-  let boomtownBorders = (
-    <Position data={hex.boomtowns}>
-      {(t) => <Boomtown border={true} {...t} />}
-    </Position>
-  );
+  const centerTown = (t) => <CenterTown bgColor={hex.color} {...t} />;
+  const centerTownBorder = (t) => <CenterTown border={true} {...t} />;
+  let centerTowns = slot("inner", "centerTowns", hex.centerTowns, centerTown, {
+    border: centerTownBorder,
+  });
+  let centerTownBorders = rest(hex.centerTowns, centerTownBorder);
 
-  let mediumCities = (
-    <Position data={hex.mediumCities}>{(m) => <MediumCity {...m} />}</Position>
-  );
-  let mediumCityBorders = (
-    <Position data={hex.mediumCities}>
-      {(m) => <MediumCity border={true} {...m} />}
-    </Position>
-  );
+  const boomtown = (t) => <Boomtown bgColor={hex.color} {...t} />;
+  const boomtownBorder = (t) => <Boomtown border={true} {...t} />;
+  let boomtowns = slot("inner", "boomtowns", hex.boomtowns, boomtown, {
+    border: boomtownBorder,
+  });
+  let boomtownBorders = rest(hex.boomtowns, boomtownBorder);
 
-  let labels = (
-    <Position data={hex.labels} type="label">
-      {(l) => <Label bgColor={hex.color} {...l} />}
-    </Position>
+  const mediumCity = (m) => <MediumCity {...m} />;
+  const mediumCityBorder = (m) => <MediumCity border={true} {...m} />;
+  let mediumCities = slot(
+    "inner",
+    "mediumCities",
+    hex.mediumCities,
+    mediumCity,
+    { border: mediumCityBorder },
   );
-  let icons = (
-    <Position data={hex.icons} type="icon">
-      {(i) => <Icon {...i} />}
-    </Position>
+  let mediumCityBorders = rest(hex.mediumCities, mediumCityBorder);
+
+  let labels = slot(
+    "inner",
+    "labels",
+    hex.labels,
+    (l) => <Label bgColor={hex.color} {...l} />,
+    { type: "label" },
   );
-  let names = (
-    <Position data={hex.names}>
-      {(n) => <Name bgColor={hex.color} {...n} />}
-    </Position>
-  );
+  let icons = slot("inner", "icons", hex.icons, (i) => <Icon {...i} />, {
+    type: "icon",
+  });
+  let names = slot("outside", "names", hex.names, (n) => (
+    <Name bgColor={hex.color} {...n} />
+  ));
 
   // Deprecating stuff... let's convert old mountain and water to new format
   let terrainHexes = [...(hex.terrain || [])];
@@ -206,85 +265,88 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
       terrainHexes.push({ ...hex.water, type: "water" });
     }
   }
-  let bgShapes = (
-    <Position data={R.filter((s) => s.background, hex.shapes || [])}>
-      {(s) => <Shape {...s} />}
-    </Position>
+  const shapeList = hex.shapes || [];
+  let bgShapes = slot(
+    "inner",
+    "bgShapes",
+    R.filter((s) => s.background, shapeList),
+    (s) => <Shape {...s} />,
   );
-  let shapes = (
-    <Position data={R.reject((s) => s.background, hex.shapes || [])}>
-      {(s) => <Shape {...s} />}
-    </Position>
+  let shapes = slot(
+    "outside",
+    "shapes",
+    R.reject((s) => s.background, shapeList),
+    (s) => <Shape {...s} />,
   );
-  let terrain = (
-    <Position data={terrainHexes} type="terrain">
-      {(t) => <Terrain {...t} />}
-    </Position>
+  let terrain = slot(
+    "inner",
+    "terrain",
+    terrainHexes,
+    (t) => <Terrain {...t} />,
+    { type: "terrain" },
   );
-  let bridges = (
-    <Position data={hex.bridges}>{(b) => <Bridge {...b} />}</Position>
-  );
-  let tunnels = (
-    <Position data={hex.tunnels}>{(t) => <Tunnel {...t} />}</Position>
-  );
-  let tunnelEntranceBorders = (
-    <Position data={hex.tunnelEntrances}>
-      {(t) => <TunnelEntrance {...t} border={true} />}
-    </Position>
-  );
-  let tunnelEntrances = (
-    <Position data={hex.tunnelEntrances}>
-      {(t) => <TunnelEntrance {...t} />}
-    </Position>
+  let bridges = slot("outside", "bridges", hex.bridges, (b) => (
+    <Bridge {...b} />
+  ));
+  let tunnels = slot("outside", "tunnels", hex.tunnels, (t) => (
+    <Tunnel {...t} />
+  ));
+  const tunnelEntrance = (t) => <TunnelEntrance {...t} />;
+  const tunnelEntranceBorder = (t) => <TunnelEntrance {...t} border={true} />;
+  let tunnelEntranceBorders = rest(hex.tunnelEntrances, tunnelEntranceBorder);
+  let tunnelEntrances = slot(
+    "inner",
+    "tunnelEntrances",
+    hex.tunnelEntrances,
+    tunnelEntrance,
+    { border: tunnelEntranceBorder },
   );
   let divides = <Position data={hex.divides}>{() => <Divide />}</Position>;
 
-  let offBoardRevenue = (
-    <Position data={hex.offBoardRevenue}>
-      {(r) => <OffBoardRevenue {...r} />}
-    </Position>
+  let offBoardRevenue = slot(
+    "outside",
+    "offBoardRevenue",
+    hex.offBoardRevenue,
+    (r) => <OffBoardRevenue {...r} />,
   );
 
   let borders = (
     <Position data={hex.borders}>{(b) => <Border {...b} />}</Position>
   );
-  let values = (
-    <Position data={hex.values} type="value">
-      {(v) => <Value {...v} />}
-    </Position>
+  let values = slot("inner", "values", hex.values, (v) => <Value {...v} />, {
+    type: "value",
+  });
+  let industries = slot("outside", "industries", hex.industries, (i) => (
+    <Industry {...i} />
+  ));
+  let goods = slot("inner", "goods", hex.goods, (g) => <Good {...g} />);
+  let companies = slot(
+    "outside",
+    "companies",
+    tileCompanies ? hex.companies : undefined,
+    (c) => <Company {...c} />,
   );
-  let industries = (
-    <Position data={hex.industries}>{(i) => <Industry {...i} />}</Position>
+  let bonus = slot(
+    "outside",
+    "bonus",
+    hex.routeBonuses || hex.routeBonus,
+    (b) => <RouteBonus {...b} />,
   );
-  let goods = <Position data={hex.goods}>{(g) => <Good {...g} />}</Position>;
-  let companies = (
-    <Position data={tileCompanies ? hex.companies : undefined}>
-      {(c) => <Company {...c} />}
-    </Position>
-  );
-  let bonus = (
-    <Position data={hex.routeBonuses || hex.routeBonus}>
-      {(b) => <RouteBonus {...b} />}
-    </Position>
-  );
-  let tokens = (
-    <ColorContext.Provider value="companies">
-      <Position
-        data={
-          tileCompanies
-            ? hex.tokens
-            : R.reject((t) => t.company, [].concat(hex.tokens || []))
-        }
-      >
-        {(t) => {
-          if (t.company) {
-            return <GameMapCompanyToken {...t} abbrev={t.company} />;
-          } else {
-            return <Token {...t} />;
-          }
-        }}
-      </Position>
-    </ColorContext.Provider>
+  let tokens = slot(
+    "inner",
+    "tokens",
+    tileCompanies
+      ? hex.tokens
+      : R.reject((t) => t.company, [].concat(hex.tokens || [])),
+    (t) => (
+      <ColorContext.Provider value="companies">
+        {t.company ? (
+          <GameMapCompanyToken {...t} abbrev={t.company} />
+        ) : (
+          <Token {...t} />
+        )}
+      </ColorContext.Provider>
+    ),
   );
 
   return (
@@ -304,6 +366,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
             />
 
             <g transform={`rotate(-${rotation})`}>
+              {before("inner")}
               {bgShapes}
               {goods}
               {tunnelEntranceBorders}
@@ -326,6 +389,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
               {icons}
               {divides}
               {borders}
+              {after("inner")}
             </g>
           </g>
 
@@ -346,6 +410,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
             />
           )}
 
+          {before("outside")}
           {outsideCities}
           {bonus}
           {industries}
@@ -355,6 +420,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
           {tunnels}
           {bridges}
           {offBoardRevenue}
+          {after("outside")}
         </HexContext.Provider>
       </PhaseContext.Provider>
     </g>

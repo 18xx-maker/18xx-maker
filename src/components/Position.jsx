@@ -1,6 +1,15 @@
 import { useContext } from "react";
 
-import { addIndex, any, chain, has, identity, includes, map } from "ramda";
+import {
+  addIndex,
+  any,
+  chain,
+  has,
+  identity,
+  includes,
+  map,
+  omit,
+} from "ramda";
 
 import HexContext from "@/context/HexContext";
 
@@ -122,7 +131,7 @@ const autoPosition = (d, i, hex, type) => {
   }
 };
 
-const Position = ({ data, type, children }) => {
+const Position = ({ data, type, pick, children }) => {
   const hex = useContext(HexContext);
 
   if (!data) {
@@ -132,6 +141,11 @@ const Position = ({ data, type, children }) => {
   }
 
   return addIndex(chain)((d, i) => {
+    // Only render the picked elements (index and position stay as if all were)
+    if (pick && !pick(d)) {
+      return [];
+    }
+
     // If this element is hidden, then don't need to render anything
     if (d.hidden) {
       return [];
@@ -156,7 +170,7 @@ const Position = ({ data, type, children }) => {
     let translate = 75 * (d.percent || 0);
     let rotate = -(d.angle || 0) + (rotation || 0);
 
-    let passing = { ...d };
+    let passing = omit(["order"], d);
 
     return [
       <g

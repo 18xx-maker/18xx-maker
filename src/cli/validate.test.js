@@ -228,6 +228,37 @@ describe("validate", () => {
     });
   });
 
+  describe("the draw order of a tile element", () => {
+    const withHex = (hex) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          tiles: { X1: { color: "yellow", ...hex } },
+        }),
+      );
+
+    it.each([
+      ["a number", { values: [{ value: 20, order: 1 }] }],
+      ["a negative number", { cities: [{ order: -1 }] }],
+      ["zero", { labels: [{ label: "A", order: 0 }] }],
+      ["true", { towns: [{ order: true }] }],
+      ["a token", { tokens: [{ order: 2 }] }],
+    ])("accepts %s", (_, hex) => {
+      expect(run(withHex(hex)).code).toBe(0);
+    });
+
+    it.each([
+      [{ values: [{ value: 20, order: false }] }],
+      [{ values: [{ value: 20, order: "1" }] }],
+      [{ track: [{ type: "straight", side: 1, order: 1 }] }],
+      [{ divides: [{ side: 1, order: 1 }] }],
+      [{ borders: [{ side: 1, order: 1 }] }],
+    ])("rejects %j", (hex) => {
+      expect(run(withHex(hex)).code).toBe(1);
+    });
+  });
+
   describe("the card sizes of a config", () => {
     const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
     const withSizes = (sizes) =>
