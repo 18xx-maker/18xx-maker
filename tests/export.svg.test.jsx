@@ -313,6 +313,18 @@ describe("svg export of 18Test", () => {
         );
       });
 
+      it("does not add the origin of the viewBox to a transform attribute", () => {
+        const { doc } = svgOf(
+          `<svg id="x" width="100" height="100" viewBox="-50 -50 100 100"><g transform="rotate(30 5 5)">
+            <rect width="10" height="10"/></g></svg>`,
+        );
+
+        expect(doc.querySelector("g")).toHaveAttribute(
+          "transform",
+          "rotate(30 5 5)",
+        );
+      });
+
       it("leaves a transform attribute as it is without a pivot", () => {
         const { doc } = svgOf(
           `<svg id="x" width="100" height="100"><g transform="rotate(30)">

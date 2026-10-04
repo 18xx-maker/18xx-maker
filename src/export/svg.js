@@ -173,7 +173,8 @@ export function serializeSvg(selector, aliases) {
   // transform, and the point it turns around), as the attribute. A pivot that
   // is not the origin of the user space (transform-box fill-box with the
   // origin center, as Terrain has) becomes translate(pivot) transform
-  // translate(-pivot)
+  // translate(-pivot). Against the view-box the origin is a point of the user
+  // space, as in the attribute: the viewBox's own origin is not added
   const pivot = (source, clone, style) => {
     const computed = style.transform;
     const has =
@@ -196,9 +197,6 @@ export function serializeSvg(selector, aliases) {
       } catch {
         // not rendered: the origin stays at the user space's
       }
-    } else if (source.ownerSVGElement?.viewBox?.baseVal) {
-      left = source.ownerSVGElement.viewBox.baseVal.x;
-      top = source.ownerSVGElement.viewBox.baseVal.y;
     }
     const ox = px(left + x);
     const oy = px(top + y);
