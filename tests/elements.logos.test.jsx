@@ -4,7 +4,6 @@ import { screen, waitFor } from "@testing-library/react";
 import { renderApp } from "@tests/helpers.jsx";
 
 const cardFor = (page, name) =>
-   
   [...page.querySelectorAll(".checkered")].find((card) =>
     card.textContent.includes(name),
   );
@@ -21,7 +20,7 @@ describe("elements logos page", () => {
       });
 
       const card = cardFor(page, name);
-       
+
       expect(card.querySelectorAll("svg")).toHaveLength(2);
 
       expect(card).toHaveTextContent("Normal");
@@ -35,7 +34,6 @@ describe("elements logos page", () => {
       }
       const front = card.querySelector("svg:not(.color-reserved)");
       const fill = (svg) =>
-         
         getComputedStyle(svg.querySelector(".color-yellow")).fill;
       expect(fill(reserved)).not.toBe(fill(front));
     },
