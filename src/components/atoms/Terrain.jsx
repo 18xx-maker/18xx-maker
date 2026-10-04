@@ -37,6 +37,7 @@ const Terrain = ({
       translate = -18;
       break;
     case "noenter":
+    case "flag":
       translate = -18;
       break;
     default:

@@ -584,6 +584,7 @@ describe("Terrain", () => {
     ["cow-skull", "tiny", "translate(0 -18) scale(0.75)"],
     ["wheat", undefined, "translate(0 -18) scale(1)"],
     ["noenter", undefined, "translate(0 -18) scale(1)"],
+    ["flag", undefined, "translate(0 -18) scale(1)"],
     ["water", undefined, "translate(0 -12) scale(1)"],
   ])("positions the %s icon", async ([type, size, transform]) => {
     const svg = await drawSvg(<Terrain type={type} size={size} cost={40} />);
