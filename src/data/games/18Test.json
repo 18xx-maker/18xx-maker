@@ -858,6 +858,26 @@
         }
       ]
     },
+    "B1": {
+      "quantity": 1,
+      "color": "yellow",
+      "track": [{ "type": "straight", "side": 1 }],
+      "borders": [
+        { "side": 1, "color": "violet", "width": 15 },
+        { "side": 2, "color": "violet", "width": 15 },
+        { "side": 3, "color": "violet", "width": 15 }
+      ]
+    },
+    "B2": {
+      "quantity": 1,
+      "color": "yellow",
+      "track": [{ "type": "straight", "side": 1 }],
+      "borders": [
+        { "side": 4, "color": "blue", "width": 15 },
+        { "side": 5, "color": "blue", "width": 15 },
+        { "side": 6, "color": "blue", "width": 15 }
+      ]
+    },
     "DB801": 1
   },
   "map": {

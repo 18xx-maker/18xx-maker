@@ -1,6 +1,10 @@
 import defaults from "@/defaults.json";
 import { HEX_RATIO } from "@/util/map";
-import { getTileSheetContext } from "@/util/tilesheet";
+import {
+  getTileSheetContext,
+  offsetBleedPoints,
+  offsetNeighbors,
+} from "@/util/tilesheet";
 
 const { paper } = defaults;
 const layouts = ["die", "smallDie", "individual", "offset"];
@@ -50,7 +54,6 @@ describe("getTileSheetContext", () => {
     expect(clip("die")).toBe("hexBleedClipPath");
     expect(clip("smallDie")).toBe("hexBleedClipPath");
     expect(clip("individual")).toBe("hexClipPath");
-    expect(clip("offset")).toBe("hexBleedClipPathOffset");
   });
 
   it("should fill die columns top to bottom", () => {
@@ -157,4 +160,103 @@ describe("getTileSheetContext", () => {
       }
     },
   );
+});
+
+describe("offset bleed", () => {
+  const c = getTileSheetContext("offset", paper, 150);
+  const full = Array(c.perRow * c.rowsPerPage).fill({});
+  const centers = full.map((_, i) => [c.getX(i), c.getY(i)]);
+
+  const inside = (poly, [x, y]) => {
+    let hit = false;
+    for (let a = 0, b = poly.length - 1; a < poly.length; b = a++) {
+      const [ax, ay] = poly[a];
+      const [bx, by] = poly[b];
+      if (ay > y !== by > y && x < ((bx - ax) * (y - ay)) / (by - ay) + ax) {
+        hit = !hit;
+      }
+    }
+    return hit;
+  };
+
+  it("should find the six neighbors of an offset tile", () => {
+    const i = c.perRow + 1; // odd row, second column
+    const n = offsetNeighbors(c, full, i);
+
+    expect(n).toEqual([true, true, true, true, true, true]);
+    const near = centers.flatMap((p, j) =>
+      j !== i && Math.hypot(p[0] - centers[i][0], p[1] - centers[i][1]) < 174
+        ? [j]
+        : [],
+    );
+    expect(near.sort((x, y) => x - y)).toEqual(
+      [
+        i - c.perRow,
+        i - c.perRow + 1,
+        i - 1,
+        i + 1,
+        i + c.perRow,
+        i + c.perRow + 1,
+      ].sort((x, y) => x - y),
+    );
+  });
+
+  it("should not find neighbors outside the page or in empty spots", () => {
+    expect(offsetNeighbors(c, full, 0)).toEqual([
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+    ]);
+    const gap = [...full];
+    gap[1] = null;
+    expect(offsetNeighbors(c, gap, 0)[0]).toBe(false);
+  });
+
+  const countOverlaps = (clipFor) => {
+    const clips = full.map((_, i) =>
+      clipFor(i).map(([x, y]) => [x + centers[i][0], y + centers[i][1]]),
+    );
+    let overlaps = 0;
+
+    for (let i = 0; i < clips.length; i++) {
+      for (let j = i + 1; j < clips.length; j++) {
+        const dx = centers[i][0] - centers[j][0];
+        const dy = centers[i][1] - centers[j][1];
+        if (Math.hypot(dx, dy) > 175) continue;
+        for (let x = centers[i][0] - 100; x <= centers[i][0] + 100; x++) {
+          for (let y = centers[i][1] - 100; y <= centers[i][1] + 100; y++) {
+            if (inside(clips[i], [x, y]) && inside(clips[j], [x, y])) {
+              overlaps++;
+            }
+          }
+        }
+      }
+    }
+
+    return overlaps;
+  };
+
+  it("should overlap when every tile keeps its full bleed", () => {
+    expect(
+      countOverlaps(() => offsetBleedPoints(Array(6).fill(false))),
+    ).toBeGreaterThan(0);
+  });
+
+  it("should never let the bleeds of two neighbors overlap", () => {
+    expect(
+      countOverlaps((i) => offsetBleedPoints(offsetNeighbors(c, full, i))),
+    ).toBe(0);
+  });
+
+  it("should keep full bleed on edges without a neighbor", () => {
+    const none = offsetBleedPoints([false, false, false, false, false, false]);
+    const east = offsetBleedPoints([true, false, false, false, false, false]);
+
+    expect(none).toHaveLength(18);
+    expect(Math.max(...east.map((p) => p[0]))).toBeCloseTo(86.6025);
+    expect(Math.min(...east.map((p) => p[0]))).toBeCloseTo(-92.376);
+  });
 });

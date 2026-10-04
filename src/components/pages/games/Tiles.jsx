@@ -36,7 +36,13 @@ import Svg from "@/components/Svg";
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
 import { getTile, sortTiles } from "@/util";
-import { getTileSheetContext, reorderForBleed } from "@/util/tilesheet";
+import {
+  getTileSheetContext,
+  offsetBleedId,
+  offsetBleedPoints,
+  offsetNeighbors,
+  reorderForBleed,
+} from "@/util/tilesheet";
 import { alignSides, sidesFromTile } from "@/util/track";
 
 const gatherIds = (tiles) => {
@@ -219,6 +225,9 @@ const TileSheet = () => {
     );
   }
 
+  // Offset tiles get a bleed clip cut flat toward the neighbors they have
+  const offsetClips = {};
+
   let pageNodes = addIndex(map)((page, pageIndex) => {
     let sides = [];
     let tileNodes = addIndex(map)((hex, i) => {
@@ -278,6 +287,12 @@ const TileSheet = () => {
         }
 
         sides.push(clone(currentSides));
+      }
+
+      if (layout === "offset") {
+        const neighbors = offsetNeighbors(c, page, i);
+        clipPath = offsetBleedId(neighbors);
+        offsetClips[clipPath] = neighbors;
       }
 
       // Overrides from tile definitions
@@ -345,6 +360,28 @@ const TileSheet = () => {
         data-testid={`game-${game.meta.slug}-tiles`}
         className={`tileSheet tileSheet--${layout}`}
       >
+        {keys(offsetClips).length > 0 && (
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ height: 0, width: 0, position: "absolute" }}
+          >
+            <defs>
+              {map(
+                (id) => (
+                  <clipPath id={id} key={id}>
+                    <polygon
+                      points={offsetBleedPoints(offsetClips[id])
+                        .map((p) => p.join(","))
+                        .join(" ")}
+                    />
+                  </clipPath>
+                ),
+                keys(offsetClips),
+              )}
+            </defs>
+          </svg>
+        )}
         {pageNodes}
         <PageSetup paper={c.paper} landscape={false} />
       </div>
