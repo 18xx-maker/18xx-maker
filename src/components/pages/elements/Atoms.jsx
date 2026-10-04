@@ -174,6 +174,8 @@ const atoms = [
       { icons: [{ type: "water" }] },
       { icons: [{ type: "noenter" }] },
       { icons: [{ type: "noenter", color: "gray" }] },
+      { icons: [{ type: "survey" }] },
+      { icons: [{ type: "survey", color: "gray" }] },
       { icons: [{ type: "flag" }] },
       { icons: [{ type: "flag", color: "blue" }] },
     ],
