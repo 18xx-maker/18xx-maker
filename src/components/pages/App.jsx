@@ -114,7 +114,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="mx-auto max-w-200 p-4" data-testid="app">
+    <div className="max-w-200 p-4" data-testid="app">
       <h1 className="text-4xl font-extrabold">{t("app.title")}</h1>
       {data && (
         <div className="p-4 border rounded-xl my-4">
