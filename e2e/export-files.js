@@ -107,7 +107,7 @@ export const expected = {
       "Map.png": [1000, 304],
       "Market.png": [1336, 995],
       "Tokens.png": [60, 1080],
-      "Yellow.png": [300, 900],
+      "Yellow.png": [600, 900],
     },
   },
 };
