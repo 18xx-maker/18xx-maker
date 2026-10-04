@@ -289,6 +289,28 @@ describe("validate", () => {
     });
   });
 
+  describe("the tile cut border of a config", () => {
+    const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
+    const withCutBorder = (cutBorder) =>
+      writeTmp(
+        "config.json",
+        JSON.stringify({
+          ...defaults,
+          tiles: { ...defaults.tiles, cutBorder },
+        }),
+      );
+
+    it.each([true, false])("accepts %s", (value) => {
+      expect(run(withCutBorder(value)).code).toBe(0);
+    });
+
+    it("rejects a value that is not a boolean", () => {
+      const { code, lines } = run(withCutBorder("yes"));
+      expect(code).toBe(1);
+      expect(lines.some((l) => l.startsWith("#/tiles/cutBorder"))).toBe(true);
+    });
+  });
+
   describe("the starting tokens of a company", () => {
     const withTokens = (tokens) =>
       writeTmp(

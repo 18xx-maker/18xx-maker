@@ -43,6 +43,10 @@ gedacht ist, mit der kleine Plättchen von 1" (von Kante zu gegenüberliegender
 Kante) gestanzt werden. Ich besitze diese Stanzform nicht und konnte sie deshalb
 nicht vollständig testen.
 
+Wenn du Plättchen stattdessen von Hand ausschneidest, setze `tiles.cutBorder`
+auf `true`, um um jedes Plättchen eine dünne schwarze Linie in der genauen
+Schnittgröße zu zeichnen. Das funktioniert mit jedem Plättchen-Layout.
+
 ### Karten
 
 Du kannst die Eigenschaft `cards.layout` auf `dtgDie` oder `miniEuroDie`

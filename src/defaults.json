@@ -110,6 +110,7 @@
     "width": 150,
     "mapWidth": 150,
     "gaps": true,
+    "cutBorder": false,
     "pins": {
       "innerRadius": 6.25,
       "outerRadius": 12.5,
