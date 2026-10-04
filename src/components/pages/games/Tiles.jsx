@@ -150,7 +150,8 @@ const TileSheet = () => {
   }, tiles);
 
   let separatedTiles = compose(
-    reduce((tiles, color) => {
+    addIndex(reduce)((tiles, key, i, orderedKeys) => {
+      const color = groupedByColor[key];
       if (tiles.length === 0) return color;
 
       // If people don't want gaps... let them do it!
@@ -160,6 +161,10 @@ const TileSheet = () => {
 
       switch (layout) {
         case "offset":
+          // Individual tiles pack together, a gap per tile wastes whole rows
+          if (key.startsWith("z-") && orderedKeys[i - 1].startsWith("z-")) {
+            return concat(tiles, color);
+          }
           if (
             Math.ceil(((tiles.length + 1) % c.perPage) / c.perRow) % 2 !==
             0
@@ -195,8 +200,7 @@ const TileSheet = () => {
           return concat(tiles, color);
       }
     }, []),
-    filter((x) => x && x.length > 0),
-    map((color) => groupedByColor[color]),
+    filter((key) => groupedByColor[key]?.length > 0),
   )(keys(groupedByColor));
 
   let pagedTiles = pageTiles(c.perPage, [], separatedTiles);
