@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { Component, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
@@ -36,9 +36,26 @@ import TileFilters from "@/components/TileFilters";
 import { tiles } from "@/data";
 import useKnownGames from "@/hooks/useKnownGames";
 import { useIntParam, useRangeParam, useStringParam } from "@/util/query";
-import { mergeKnownTiles, tileUsage } from "@/util/tiles";
+import { gamesOfEntry, mergeKnownTiles, tileUsage } from "@/util/tiles";
 
 const PER_PAGE = 50;
+
+// A malformed tile of a stored game falls back to its id instead of taking the
+// page down
+class TileBoundary extends Component {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    if (this.state.failed) {
+      return <div className="p-4 text-center">{this.props.id}</div>;
+    }
+    return this.props.children;
+  }
+}
 
 const getRevenues = (entries) =>
   reduce(
@@ -50,9 +67,6 @@ const getRevenues = (entries) =>
 
       let [minTile, maxTile] = reduce(
         ([minRevenue, maxRevenue], value) => {
-          if (value?.value === null || value?.value === undefined) {
-            return [minRevenue, maxRevenue];
-          }
           return [
             min(minRevenue, parseInt(value.value)),
             max(maxRevenue, parseInt(value.value)),
@@ -67,12 +81,6 @@ const getRevenues = (entries) =>
     [Number.MAX_SAFE_INTEGER, 0],
     entries,
   );
-
-// The games that use an entry: its own slugs, or the games using its tile id
-const gamesOfEntry = (entry, games, usage) =>
-  entry.slugs
-    ? filter(({ slug }) => entry.slugs.includes(slug), games)
-    : usage[entry.id] || [];
 
 const UsedBy = ({ games }) => {
   const { t } = useTranslation();
@@ -188,9 +196,6 @@ const Tiles = () => {
 
           for (let i = 0; i < (t.values || []).length; i++) {
             let rawValue = t.values[i].value;
-            if (rawValue === null || rawValue === undefined) {
-              continue;
-            }
             let splitValues = split(
               /\D+/,
               is(String, rawValue) ? rawValue : rawValue.toString(),
@@ -270,20 +275,22 @@ const Tiles = () => {
                     // Labels without a font of their own inherit the print font, like in the editor
                     className="checkered border rounded-xl flex flex-col items-center font-display font-bold"
                   >
-                    <Svg
-                      width="200"
-                      height="200"
-                      viewBox="-100 -100 200 200"
-                      transform="rotate(-90)"
-                    >
-                      <Tile
-                        id={entry.id}
-                        gameTiles={entry.gameTiles}
-                        width={150}
-                        x={0}
-                        y={0}
-                      />
-                    </Svg>
+                    <TileBoundary id={entry.id}>
+                      <Svg
+                        width="200"
+                        height="200"
+                        viewBox="-100 -100 200 200"
+                        transform="rotate(-90)"
+                      >
+                        <Tile
+                          id={entry.id}
+                          gameTiles={entry.gameTiles}
+                          width={150}
+                          x={0}
+                          y={0}
+                        />
+                      </Svg>
+                    </TileBoundary>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">

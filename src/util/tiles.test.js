@@ -1,6 +1,7 @@
 import {
   compileTiles,
   customTiles,
+  gamesOfEntry,
   gatherTileColors,
   mergeKnownTiles,
   tileUsage,
@@ -82,7 +83,6 @@ describe("tileUsage", () => {
   it("lists the games using each tile, aliases and extra data too", () => {
     expect(tileUsage([a, b])).toEqual({
       1: [a, b],
-      2: [a],
       57: [a],
     });
   });
@@ -121,6 +121,16 @@ describe("mergeKnownTiles", () => {
     ]);
     expect(entries.map((e) => e.id)).toEqual(["1"]);
     expect(entries[0].slugs).toBeUndefined();
+  });
+
+  it("still credits a game defining a generic tile", () => {
+    const a = game("a", { 1: { color: "yellow", cities: [1] } });
+    const b = game("b", { 1: 1 });
+    const entries = mergeKnownTiles(generic, [a, b]);
+    const usage = tileUsage([a, b]);
+
+    expect(entries).toHaveLength(1);
+    expect(gamesOfEntry(entries[0], [a, b], usage)).toEqual([a, b]);
   });
 
   it("ignores a quantity difference", () => {

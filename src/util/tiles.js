@@ -95,12 +95,14 @@ export const tileUsage = (games) => {
       if (isDefinition(tile)) {
         return;
       }
-      credit(id, game);
-      credit(id.split("|")[0], game);
       if (is(Object, tile) && tile.tile) {
+        // An alias uses its target, not the id it is listed under
         credit(String(tile.tile), game);
         credit(String(tile.tile).split("|")[0], game);
+        return;
       }
+      credit(id, game);
+      credit(id.split("|")[0], game);
     }, game.tiles || {});
   }, games);
 
@@ -110,7 +112,9 @@ export const tileUsage = (games) => {
 // The generic tiles followed by the custom tiles of every game. A custom tile
 // the same as one already listed is not listed again, its game is added to
 // that entry's slugs. A different definition for the same id is its own entry.
-// An entry is { key, id, tile, gameTiles, slugs }; key is only for React.
+// An entry is { key, id, tile, gameTiles, slugs, definedBy }; key is only for
+// React. A generic entry has no slugs, definedBy lists the games whose own
+// definition is the same.
 export const mergeKnownTiles = (generic, games) => {
   const entries = values(generic).map((tile) => ({
     key: tile.id,
@@ -118,6 +122,7 @@ export const mergeKnownTiles = (generic, games) => {
     tile,
     gameTiles: undefined,
     slugs: undefined,
+    definedBy: [],
   }));
   const byId = {};
   forEach((entry) => {
@@ -134,8 +139,9 @@ export const mergeKnownTiles = (generic, games) => {
       );
 
       if (same) {
-        if (same.slugs && !same.slugs.includes(game.slug)) {
-          same.slugs.push(game.slug);
+        const list = same.slugs || same.definedBy;
+        if (!list.includes(game.slug)) {
+          list.push(game.slug);
         }
         return;
       }
@@ -154,3 +160,14 @@ export const mergeKnownTiles = (generic, games) => {
 
   return entries;
 };
+
+// The games that use an entry: its own slugs, or the games using its tile id or
+// defining it the same
+export const gamesOfEntry = (entry, games, usage) =>
+  entry.slugs
+    ? games.filter(({ slug }) => entry.slugs.includes(slug))
+    : games.filter(
+        (game) =>
+          (usage[entry.id] || []).includes(game) ||
+          (entry.definedBy || []).includes(game.slug),
+      );

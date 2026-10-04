@@ -66,6 +66,36 @@ describe("tiles of games on this device", () => {
     await waitFor(() => expect(shownTiles()).toBe(1));
   });
 
+  it("shows a tile that cannot be drawn as its id", async () => {
+    opfs.peekGame.mockResolvedValue({
+      info: { title: "Saved Game" },
+      tiles: { ZZ9: { color: "brown", cities: [null], quantity: 1 } },
+    });
+    // React logs the error it hands to the boundary
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    renderApp("/elements/tiles?id=ZZ9", withSaved);
+
+    await waitFor(() =>
+      expect(screen.getByTestId("tile-ZZ9")).toHaveTextContent("ZZ9"),
+    );
+    expect(shownTiles()).toBe(1);
+    expect(error).toHaveBeenCalled();
+    error.mockRestore();
+  });
+
+  it("selects a stored game in the Game dropdown", async () => {
+    opfs.peekGame.mockResolvedValue(saved);
+    const { user, router } = renderApp("/elements/tiles", withSaved);
+
+    await waitFor(() => expect(opfs.peekGame).toHaveBeenCalled());
+    await user.click(screen.getByRole("combobox", { name: "Game" }));
+    await user.click(await screen.findByRole("option", { name: "Saved Game" }));
+
+    expect(router.state.location.search).toBe("?game=internal%253Aabc");
+    await waitFor(() => expect(shownTiles()).toBe(1));
+    expect(screen.getByTestId("tile-ZZ9")).toBeInTheDocument();
+  });
+
   it("skips a game that fails to load", async () => {
     opfs.peekGame.mockRejectedValue(new Error("gone"));
     renderApp("/elements/tiles?id=ZZ9", withSaved);
