@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useEffect } from "react";
 import { getI18n, useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet, useMatch, useNavigate } from "react-router";
 
 import { compose } from "ramda";
 
@@ -10,6 +10,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import Alert from "@/components/Alert";
 import Analytics from "@/components/Analytics";
+import ExportHost from "@/components/ExportHost";
 import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
 import SetSvgColors from "@/components/SetSvgColors";
@@ -26,6 +27,7 @@ import {
   createProgressAlert,
   createSetGame,
   createUpdate,
+  loadGame,
 } from "@/state";
 import { selectLanguage } from "@/state/selectors";
 import capability from "@/util/capability";
@@ -175,6 +177,20 @@ body {
     }
   }, [dispatch, navigate, render]);
 
+  // The game of the last session is loaded on start, so what needs the game
+  // (the export menu) works before a game page is opened. A game page loads
+  // its own game.
+  const loadedSlug = useSelector((state) => state.loadedGame?.slug);
+  const onGamePage = !!useMatch("/games/:slug/*");
+  const hasGame = useSelector((state) => !!state.game);
+  useEffect(() => {
+    if (!render && loadedSlug && !hasGame && !onGamePage) {
+      dispatch(loadGame(loadedSlug, true)).catch(() => undefined);
+    }
+    // Once, on start
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const [shortcuts, setShortcuts] = useBindings();
   const inEditor = useEditor();
 
@@ -243,6 +259,7 @@ body {
           ) : (
             <>
               <Alert />
+              <ExportHost />
               <ShortcutsDialog open={shortcuts} onOpenChange={setShortcuts} />
             </>
           )}

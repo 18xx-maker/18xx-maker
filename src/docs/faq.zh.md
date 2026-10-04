@@ -14,7 +14,7 @@
 
 ## 如何导出或打印?
 
-在应用中,使用游戏页面左上角的导出按钮:可将整个游戏导出为 PDF、PNG、SVG 或 Board18,也可以用_导出选项_自行选择。在网站上,该按钮会打开浏览器的打印对话框。参见 [PDF 输出](/docs/output/pdf)、[PNG 输出](/docs/output/png)、[SVG 输出](/docs/output/svg)(用于在 Inkscape 或 Illustrator 中编辑地图、地块或标记)和 [Board18 输出](/docs/output/b18)。命令行也可以通过 `maker export` 导出;其选项见 CLI 说明文档,也可以存放在游戏文件中,参见[导出选项](/docs/games/exports)。
+在应用中,使用游戏页面左上角的导出按钮,或在任何页面使用侧边栏的导出项(或按 `x` 键):可将整个游戏导出为 PDF、PNG、SVG 或 Board18,也可以用_导出选项_自行选择。在网站上,该按钮会打开浏览器的打印对话框。参见 [PDF 输出](/docs/output/pdf)、[PNG 输出](/docs/output/png)、[SVG 输出](/docs/output/svg)(用于在 Inkscape 或 Illustrator 中编辑地图、地块或标记)和 [Board18 输出](/docs/output/b18)。命令行也可以通过 `maker export` 导出;其选项见 CLI 说明文档,也可以存放在游戏文件中,参见[导出选项](/docs/games/exports)。
 
 ## 使用的是什么页面尺寸?
 

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { matchPath, useLocation, useMatch, useNavigate } from "react-router";
+import { useLocation, useMatch, useNavigate } from "react-router";
 
 import { find, propEq } from "ramda";
 
@@ -9,21 +9,13 @@ import { firstSection, gameNav } from "@/components/gameNav";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
-import {
-  createAlert,
-  createSetExportMenuOpen,
-  createSetExportSheetOpen,
-  refreshGame,
-} from "@/state";
-import { selectGameForSlug } from "@/state/selectors";
+import { createAlert, createSetExportMenuOpen, refreshGame } from "@/state";
+import { selectExportSheetOpen, selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
 import * as idb from "@/util/idb";
 import { isControlTarget } from "@/util/keys";
 import { useBooleanParam } from "@/util/query";
-
-// Whether the toolbar, and so the export button, can show for a section
-const hasExportButton = (section) =>
-  section !== "b18" && !!find(propEq(section, "section"), gameNav);
+import { getRenderInput } from "@/util/renderInput";
 
 // The item before ("[") or after ("]") the current one, wrapping around. With
 // no current item it starts at the first or last.
@@ -45,6 +37,7 @@ export const useBindings = () => {
   const game = useSelector((state) =>
     selectGameForSlug(state, loadedGame?.slug),
   );
+  const exportSheetOpen = useSelector(selectExportSheetOpen);
   const viewingGame = useMatch("/games/:slug/:section/*");
   const location = useLocation();
   const [shortcuts, setShortcuts] = useState(false);
@@ -213,15 +206,14 @@ export const useBindings = () => {
           }
           break;
         case "x":
-          if (!capability.electron) break;
-
-          if (viewingGame) {
-            // The b18 pages, unknown sections and the print page have no export button
-            if (!print && hasExportButton(viewingGame.params.section)) {
-              dispatch(createSetExportMenuOpen(true));
-            }
-          } else if (loadedGame) {
-            navigate(`/games/${loadedGame.slug}/map`);
+          // The menu is ExportHost's, for the loaded game on every page
+          if (
+            capability.electron &&
+            !getRenderInput() &&
+            !print &&
+            game &&
+            !exportSheetOpen
+          ) {
             dispatch(createSetExportMenuOpen(true));
           }
           break;
@@ -238,24 +230,12 @@ export const useBindings = () => {
       location,
       pathname,
       print,
+      exportSheetOpen,
       toggleConfig,
       dispatch,
       navigate,
     ],
   );
-
-  // The flags only live while an export button can show them. A load that
-  // failed or an unknown section lands on a page without one, and the flags
-  // would wait there to open the menu on the next game page. This runs when
-  // the page changes, so the open flag set by "x" just before it navigates to
-  // a game page is kept.
-  useEffect(() => {
-    const match = matchPath("/games/:slug/:section/*", pathname);
-    if (!match || print || !hasExportButton(match.params.section)) {
-      dispatch(createSetExportMenuOpen(false));
-      dispatch(createSetExportSheetOpen(false));
-    }
-  }, [pathname, print, dispatch]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);

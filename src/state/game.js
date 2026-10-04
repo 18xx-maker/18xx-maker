@@ -48,79 +48,88 @@ export const refreshGame = () => (dispatch, getState) => {
   }
 };
 
-export const loadGame = (slug) => (dispatch) => {
-  const { type, id } = parseSlug(slug);
+// A quiet load restores the game of the last session in the background: no
+// alerts, and it never replaces a game that was opened in the meantime.
+export const loadGame =
+  (slug, quiet = false) =>
+  (dispatch, getState) => {
+    const { type, id } = parseSlug(slug);
 
-  const render = getRenderInput();
+    const render = getRenderInput();
 
-  return new Promise((resolve, reject) => {
-    // The game of render mode is the one that was given, never loaded
-    if (render && slug === render.game.meta.slug) {
-      return resolve(render.game);
-    }
-
-    if (type === BUNDLED) {
-      if (!games[id]) {
-        return reject(new Error(`Bundled game ${id} not found`));
+    return new Promise((resolve, reject) => {
+      // The game of render mode is the one that was given, never loaded
+      if (render && slug === render.game.meta.slug) {
+        return resolve(render.game);
       }
 
-      return resolve(games[id]);
-    }
+      if (type === BUNDLED) {
+        if (!games[id]) {
+          return reject(new Error(`Bundled game ${id} not found`));
+        }
 
-    if (type === idb.TYPE) {
-      if (!capability.system) {
-        return reject(
-          new Error(
-            "Your browser doesn't support loading games from your file system",
-          ),
-        );
+        return resolve(games[id]);
       }
 
-      return resolve(idb.loadGame(id));
-    }
+      if (type === idb.TYPE) {
+        if (!capability.system) {
+          return reject(
+            new Error(
+              "Your browser doesn't support loading games from your file system",
+            ),
+          );
+        }
 
-    if (type === opfs.TYPE) {
-      if (!capability.internal) {
-        return reject(
-          new Error(
-            "Your browser doesn't support loading games from the private internal file system",
-          ),
-        );
+        return resolve(idb.loadGame(id));
       }
 
-      return resolve(opfs.loadGame(id));
-    }
+      if (type === opfs.TYPE) {
+        if (!capability.internal) {
+          return reject(
+            new Error(
+              "Your browser doesn't support loading games from the private internal file system",
+            ),
+          );
+        }
 
-    if (type === ELECTRON) {
-      if (!capability.electron) {
-        return reject(
-          new Error(
-            "Your browser doesn't support loading games from the file system",
-          ),
-        );
+        return resolve(opfs.loadGame(id));
       }
 
-      return resolve(window.api.loadGame(id));
-    }
-    return reject(new Error(`Unknown game type ${type}`));
-  })
-    .then((game) => {
-      const typeLabel = type[0].toUpperCase() + type.slice(1);
-      dispatch(createSetGame(game));
-      dispatch(
-        createAlert(
-          "Game Loaded",
-          `${typeLabel} game ${game.info.title} loaded`,
-          "success",
-        ),
-      );
-      return game;
+      if (type === ELECTRON) {
+        if (!capability.electron) {
+          return reject(
+            new Error(
+              "Your browser doesn't support loading games from the file system",
+            ),
+          );
+        }
+
+        return resolve(window.api.loadGame(id));
+      }
+      return reject(new Error(`Unknown game type ${type}`));
     })
-    .catch((e) => {
-      dispatch(createAlert(e.name, e.message, "error"));
-      throw e;
-    });
-};
+      .then((game) => {
+        if (quiet) {
+          if (!getState().game) dispatch(createSetGame(game));
+          return game;
+        }
+
+        const typeLabel = type[0].toUpperCase() + type.slice(1);
+        dispatch(createSetGame(game));
+        dispatch(
+          createAlert(
+            "Game Loaded",
+            `${typeLabel} game ${game.info.title} loaded`,
+            "success",
+          ),
+        );
+        return game;
+      })
+      .catch((e) => {
+        if (!quiet) dispatch(createAlert(e.name, e.message, "error"));
+        throw e;
+      });
+  };
 
 export const deleteGame = (slug, title) => (dispatch) => {
   const { type, id } = parseSlug(slug);

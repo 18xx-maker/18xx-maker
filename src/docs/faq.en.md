@@ -24,7 +24,8 @@ right. See [JSON Schemas](/docs/games/schemas).
 
 ## How do I export or print?
 
-In the app, use the Export button at the top left of a game page: pdf, png, svg or
+In the app, use the Export button at the top left of a game page, or the Export
+entry of the sidebar (or the `x` key) on any page: pdf, png, svg or
 Board18 for the whole game, or _Export options_ to choose. On the website the
 button opens your browser's print dialog. See [PDF Output](/docs/output/pdf),
 [PNG Output](/docs/output/png), [SVG Output](/docs/output/svg) (to edit the

@@ -128,6 +128,27 @@ test.describe("the app exports 18Test", () => {
     expect(fs.existsSync(`${box}.zip`)).toBe(true);
   });
 
+  test("opens the export menu from another page", async () => {
+    app = await launch();
+
+    const window = await show(app, "#/games/18Test/map");
+    await expect(window.getByRole("button", { name: "Export" })).toBeVisible();
+    await window.evaluate(() => {
+      window.location.hash = "#/settings";
+    });
+    await expect(window).toHaveURL((url) => url.hash === "#/settings");
+
+    await window.keyboard.press("x");
+    await expect(
+      window.getByRole("menuitem", { name: "Export options" }),
+    ).toBeVisible();
+    await window.keyboard.press("Escape");
+    await window.getByRole("button", { name: /^Export/ }).click();
+    await expect(
+      window.getByRole("menuitem", { name: "Export options" }),
+    ).toBeVisible();
+  });
+
   test("quits in the middle of an export without leaving windows behind", async () => {
     app = await launch();
     await app.evaluate(({ dialog, shell }, folder) => {

@@ -17,22 +17,28 @@ import {
 } from "@/components/ui/sidebar";
 
 import { mainMenu } from "@/components/nav";
+import ExportItem from "@/components/nav/sidebar/ExportItem";
 import Group from "@/components/nav/sidebar/Group";
 import Item from "@/components/nav/sidebar/Item";
 
 import { useLoadedGame } from "@/hooks";
+import { selectGameForSlug } from "@/state/selectors";
+import capability from "@/util/capability";
 import version from "@/util/version";
 
 const AppSidebar = (props) => {
   const { t } = useTranslation();
   const game = useLoadedGame();
   const update = useSelector(prop("update"));
+  // The export menu needs the game itself, not only its entry in the store
+  const resolved = useSelector((state) => selectGameForSlug(state, game?.slug));
 
   const renderItems = (items) => {
     return addIndex(chain)((item, index) => {
       if (item.game) {
         return (
-          game && [
+          game &&
+          [
             <Item
               key={game.slug}
               to={`/games/${game.slug}`}
@@ -48,7 +54,8 @@ const AppSidebar = (props) => {
               label={t("nav.edit")}
               shortcut="e"
             />,
-          ]
+            capability.electron && resolved && <ExportItem key="game-export" />,
+          ].filter(Boolean)
         );
       }
 

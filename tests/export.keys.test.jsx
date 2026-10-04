@@ -1,7 +1,7 @@
 import { act, screen, waitFor } from "@testing-library/react";
 import { page } from "vitest/browser";
 
-import { createSetExportSheetOpen } from "@/state";
+import { createSetExportSheetOpen, createSetGame } from "@/state";
 
 import { renderApp } from "@tests/helpers.jsx";
 
@@ -45,7 +45,48 @@ const formatsOf = () => {
   return [...new Set(request.jobs.map(({ path }) => path.split(".").pop()))];
 };
 
+// A game of the last session that is gone, it cannot be loaded
+const missing = {
+  ...{ title: "Gone", id: "Gone" },
+  type: "bundled",
+  slug: "bundled:Gone",
+};
+
+const loaded = {
+  title: "18Test",
+  id: "18Test",
+  type: "app",
+  slug: "18Test",
+};
+
+// A page that is not a game page, with the game loaded as when it was visited
+const renderOnSettings = async (options) => {
+  const view = renderApp("/games/18Test/map", {}, options);
+  await screen.findByTestId("game-18Test-map");
+  await act(() => view.router.navigate("/settings"));
+  await screen.findByRole("heading", { name: "Settings" });
+  return view;
+};
+
 describe("export keys", () => {
+  it("x exports the game of the last session without opening a game page", async () => {
+    const { user, store, router } = renderApp("/settings", {
+      loadedGame: { ...loaded, type: "bundled", slug: "bundled:18Test" },
+    });
+    await screen.findByRole("heading", { name: "Settings" });
+    await waitFor(() => expect(store.getState().game).toBeTruthy());
+
+    await user.keyboard("x");
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/settings");
+    expect(
+      store.getState().alerts?.some?.((a) => a.title === "Game Loaded") ??
+        false,
+    ).toBe(false);
+  });
+
   it("x opens the export menu of the game showing", async () => {
     const { user } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
@@ -56,83 +97,95 @@ describe("export keys", () => {
     ).toBeInTheDocument();
   });
 
-  it("x goes to the loaded game and opens the menu", async () => {
-    const { user, router } = renderApp("/", {
-      loadedGame: {
-        title: "18Test",
-        id: "18Test",
-        type: "app",
-        slug: "18Test",
-      },
-    });
-    await screen.findByTestId("home");
+  it("x opens the menu on another page without leaving it", async () => {
+    const { user, router } = await renderOnSettings();
 
     await user.keyboard("x");
-    await screen.findByRole("menuitem", { name: "Export options" });
-    expect(router.state.location.pathname).toBe("/games/18Test/map");
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/settings");
   });
 
-  it("x does nothing on the b18 pages, which have no export button", async () => {
-    const { user, store } = renderApp("/games/18Test/b18");
+  it("x opens the menu in strict mode", async () => {
+    const { user } = await renderOnSettings({ strict: true });
+
+    await user.keyboard("x");
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+  });
+
+  it("x opens the menu on the b18 pages", async () => {
+    const { user } = renderApp("/games/18Test/b18");
     await screen.findByRole("heading", { level: 1 }).catch(() => null);
 
+    await user.keyboard("x");
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+  });
+
+  it("the menu exports the loaded game from another page", async () => {
+    const { user } = await renderOnSettings();
+
+    await user.keyboard("x");
+    await screen.findByRole("menu");
+    await user.keyboard("p");
+
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    expect(formatsOf()).toEqual(["pdf"]);
+    expect(api.export.mock.calls[0][0].jobs[0].path).toMatch(/18test/i);
+  });
+
+  it("the options open from another page", async () => {
+    const { user } = await renderOnSettings();
+
+    await user.keyboard("x");
+    await screen.findByRole("menu");
+    await user.keyboard("o");
+    expect(
+      await screen.findByRole("dialog", { name: "Export 18Test" }),
+    ).toBeInTheDocument();
+  });
+
+  it("x does nothing while the options are open", async () => {
+    const { user, store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    act(() => store.dispatch(createSetExportSheetOpen(true)));
+    expect(
+      await screen.findByRole("dialog", { name: "Export 18Test" }),
+    ).toBeInTheDocument();
     await user.keyboard("x");
     expect(store.getState().ui.exportMenuOpen).toBe(false);
   });
 
-  it("the menu is closed after leaving the game page", async () => {
+  it("the menu is closed when the game is forgotten", async () => {
     const { user, store } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
 
     await user.keyboard("x");
     await screen.findByRole("menu");
-    await user.keyboard("h");
-    await screen.findByTestId("home");
+    act(() => store.dispatch(createSetGame(undefined)));
     await waitFor(() =>
       expect(store.getState().ui).toEqual({
         exportMenuOpen: false,
         exportSheetOpen: false,
       }),
     );
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 
-  it("x from another page keeps the menu open in strict mode", async () => {
-    const { user, router } = renderApp(
-      "/",
-      {
-        loadedGame: {
-          title: "18Test",
-          id: "18Test",
-          type: "app",
-          slug: "18Test",
-        },
-      },
-      { strict: true },
-    );
-    await screen.findByTestId("home");
-
-    await user.keyboard("x");
-    await screen.findByRole("menuitem", { name: "Export options" });
-    expect(router.state.location.pathname).toBe("/games/18Test/map");
-  });
-
-  it("the options sheet is closed after leaving the game page", async () => {
-    const { user, store } = renderApp("/games/18Test/map");
+  it("the options are closed when the game is forgotten", async () => {
+    const { store } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
 
-    await user.keyboard("x");
-    await screen.findByRole("menu");
-    await user.keyboard("o");
-    await screen.findByRole("dialog", { name: "Export 18Test" });
-    expect(store.getState().ui.exportSheetOpen).toBe(true);
-
-    await user.keyboard("{Escape}");
-    await waitFor(() =>
-      expect(store.getState().ui.exportSheetOpen).toBe(false),
-    );
     act(() => store.dispatch(createSetExportSheetOpen(true)));
-    await user.keyboard("h");
-    await screen.findByTestId("home");
+    expect(
+      await screen.findByRole("dialog", { name: "Export 18Test" }),
+    ).toBeInTheDocument();
+    act(() => store.dispatch(createSetGame(undefined)));
     await waitFor(() =>
       expect(store.getState().ui.exportSheetOpen).toBe(false),
     );
@@ -149,36 +202,13 @@ describe("export keys", () => {
     });
   });
 
-  it("x does nothing on a section that does not exist", async () => {
-    const { user, store } = renderApp("/games/18Test/nonsense");
-    await screen.findByTestId("game-18Test-nonsense").catch(() => null);
-
-    await user.keyboard("x");
-    expect(store.getState().ui.exportMenuOpen).toBe(false);
-  });
-
-  it("the flags do not outlive a game that fails to load", async () => {
-    const { user, router, store } = renderApp("/", {
-      loadedGame: {
-        title: "Gone",
-        id: "gone",
-        type: "bogus",
-        slug: "bogus:gone",
-      },
-    });
+  it("x does nothing when the game of the last session cannot be loaded", async () => {
+    const { user, router, store } = renderApp("/", { loadedGame: missing });
     await screen.findByTestId("home");
 
     await user.keyboard("x");
-    await waitFor(() => expect(router.state.location.pathname).toBe("/games/"));
-    await waitFor(() =>
-      expect(store.getState().ui).toEqual({
-        exportMenuOpen: false,
-        exportSheetOpen: false,
-      }),
-    );
-
-    await act(() => router.navigate("/games/18Test/map"));
-    await screen.findByTestId("game-18Test-map");
+    expect(router.state.location.pathname).toBe("/");
+    expect(store.getState().ui.exportMenuOpen).toBe(false);
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 
@@ -189,6 +219,37 @@ describe("export keys", () => {
     await user.keyboard("x");
     expect(router.state.location.pathname).toBe("/");
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+  });
+
+  it("the toolbar button opens the menu", async () => {
+    const { user, store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.click(screen.getByRole("button", { name: "Export" }));
+    await screen.findByRole("menu");
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument(),
+    );
+    expect(store.getState().ui.exportMenuOpen).toBe(false);
+  });
+
+  it("the sidebar entry opens the menu on any page", async () => {
+    const { user } = await renderOnSettings();
+
+    await user.click(screen.getByRole("button", { name: /^Export/ }));
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+  });
+
+  it("the sidebar has no export entry without a game that loaded", async () => {
+    renderApp("/", { loadedGame: missing });
+    await screen.findByTestId("home");
+
+    expect(
+      screen.queryByRole("button", { name: /^Export/ }),
+    ).not.toBeInTheDocument();
   });
 
   it.for([
@@ -219,7 +280,9 @@ describe("export keys", () => {
     await screen.findByRole("menu");
     await user.keyboard("o");
 
-    await screen.findByRole("dialog", { name: "Export 18Test" });
+    expect(
+      await screen.findByRole("dialog", { name: "Export 18Test" }),
+    ).toBeInTheDocument();
     expect(api.export).not.toHaveBeenCalled();
     expect(api.chooseExportFolder).not.toHaveBeenCalled();
     expect(router.state.location.pathname).toBe("/games/18Test/map");
