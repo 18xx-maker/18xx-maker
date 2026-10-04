@@ -24,8 +24,7 @@ des Quellcode-Repositorys.
 - [companies](https://18xx-maker.com/schemas/companies.schema.json) definiert die Gesellschaftsdateien
   zum Ersetzen von Gesellschaften
 - [publishers](https://18xx-maker.com/schemas/publishers.schema.json) definiert die Verlagsdatei
-- [game](https://18xx-maker.com/schemas/game.schema.json) definiert eine Spieldatei - _dies ist
-  derzeit in Arbeit und noch nicht vollständig_
+- [game](https://18xx-maker.com/schemas/game.schema.json) definiert eine Spieldatei
 - [tiles](https://18xx-maker.com/schemas/tiles.schema.json) definiert eine Plättchendatei und wie die Kartenfeld-Definitionen in Spieldateien aussehen
 - [config](https://18xx-maker.com/schemas/config.schema.json) - definiert das Format von `defaults.json`, um die
   [Konfigurationsdatei](https://github.com/18xx-maker/18xx-maker/blob/main/src/defaults.json)

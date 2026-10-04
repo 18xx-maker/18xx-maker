@@ -339,4 +339,354 @@ describe("validate", () => {
       expect(run(withTrains(trains, companyTrains)).code).toBe(1);
     });
   });
+
+  describe("the sections of a game", () => {
+    const withGame = (game) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({ info: { title: "Game" }, ...game }),
+      );
+
+    it("accepts a token on a company of a company file", () => {
+      const file = writeTmp(
+        "companies.json",
+        JSON.stringify({
+          name: "Set",
+          abbrev: "S",
+          companies: [
+            {
+              name: "A",
+              abbrev: "A",
+              color: "red",
+              token: { stripe: "white" },
+            },
+          ],
+        }),
+      );
+      expect(run(file).code).toBe(0);
+    });
+
+    it("rejects an unknown token property on a company of a company file", () => {
+      const file = writeTmp(
+        "companies.json",
+        JSON.stringify({
+          name: "Set",
+          abbrev: "S",
+          companies: [
+            { name: "A", abbrev: "A", color: "red", token: { bogus: 1 } },
+          ],
+        }),
+      );
+      expect(run(file).code).toBe(1);
+    });
+
+    it("validates every shipped game, company file and tile file", () => {
+      const globs = ["games", "companies", "tiles", "publishers"].map((dir) =>
+        src(`data/${dir}/*.json`).split(path.sep).join("/"),
+      );
+      expect(run(...globs).code).toBe(0);
+    });
+
+    it.each([
+      [
+        "pools",
+        { pools: [{ name: "Bank", notes: [{ note: "Pays", icon: "x" }] }] },
+      ],
+      [
+        "rounds",
+        {
+          rounds: [
+            { name: "SR", color: "white" },
+            { name: "OR", color: "gray", small: true },
+          ],
+        },
+      ],
+      [
+        "a round with a token shape",
+        { rounds: [{ name: "OR", color: "gray", halves: ["red", "blue"] }] },
+      ],
+      [
+        "turns",
+        {
+          turns: [
+            { name: "Turn", steps: ["Lay"], ordered: true, optional: ["Sell"] },
+          ],
+        },
+      ],
+      [
+        "a 2D market",
+        {
+          stock: {
+            type: "2D",
+            market: [
+              [10, "20", { value: 30, arrow: ["up", "down"], legend: 0 }, null],
+              [{ label: "A", par: true }],
+            ],
+            legend: [{ description: "Info", color: "red" }],
+          },
+        },
+      ],
+      [
+        "a 1D market with ledges",
+        {
+          stock: {
+            type: "1D",
+            market: [{ value: 10, height: 2 }],
+            ledges: [
+              {
+                coords: ["4 0", "4 1"],
+                color: "red",
+                dashed: true,
+                offset: -7,
+              },
+            ],
+          },
+        },
+      ],
+      [
+        "par and display",
+        {
+          stock: {
+            par: { values: [[40], 50], color: "orange" },
+            display: {
+              par: { x: 1, y: 2 },
+              legend: { x: 1, y: 2, align: "right" },
+              roundTracker: { x: 1, y: 1, type: "round" },
+            },
+            title: false,
+          },
+        },
+      ],
+      [
+        "stock movement",
+        {
+          stock: {
+            movement: { up: ["Sold out"], "2x right": ["Paid"] },
+            limits: [{ min: 1, max: 2, color: "red", description: "Par" }],
+          },
+        },
+      ],
+      ["a revenue range", { revenue: { min: 10, max: 200, perRow: 10 } }],
+      [
+        "tokens",
+        {
+          tokens: [
+            "Round",
+            5,
+            { label: "+30", color: "white", quantity: 2 },
+            { logo: "SJ", quantity: "∞", print: 13 },
+          ],
+        },
+      ],
+      [
+        "named and phased colors",
+        {
+          colors: {
+            red: "#f00",
+            _blue: "blue",
+            ground: { default: "tan", "phase2+": "yellow" },
+          },
+        },
+      ],
+      [
+        "company tokens",
+        {
+          companies: [
+            {
+              name: "A",
+              abbrev: "A",
+              token: {
+                color: "red",
+                stripe: "white",
+                halves: ["red", "blue"],
+                bar: true,
+                shield: true,
+              },
+            },
+          ],
+        },
+      ],
+      [
+        "a private with a token and abilities",
+        {
+          privates: [
+            {
+              name: "P",
+              token: { logo: "SJ", iconColor: "red" },
+              abilities: [{ type: "tile_lay", hexes: ["A1"] }],
+            },
+          ],
+        },
+      ],
+    ])("accepts %s", (_, game) => {
+      const { code, lines } = run(withGame(game));
+      expect(lines.filter((line) => line.startsWith("#"))).toEqual([]);
+      expect(code).toBe(0);
+    });
+
+    it.each([
+      ["a round without a name", { rounds: [{ color: "white" }] }, "name"],
+      [
+        "an unknown round property",
+        { rounds: [{ name: "SR", colour: "white" }] },
+        "colour",
+      ],
+      ["a turn without a name", { turns: [{ steps: [] }] }, "name"],
+      [
+        "an unknown turn property",
+        { turns: [{ name: "T", step: [] }] },
+        "step",
+      ],
+      ["a bad market type", { stock: { type: "3D" } }, "type"],
+      ["an unknown stock property", { stock: { markets: [] } }, "markets"],
+      ["a bad arrow", { stock: { market: [{ arrow: "sideways" }] } }, "arrow"],
+      [
+        "a bad ledge corner",
+        { stock: { ledges: [{ coords: ["a", "b"] }] } },
+        "coords",
+      ],
+      [
+        "a ledge without coords",
+        { stock: { ledges: [{ color: "red" }] } },
+        "coords",
+      ],
+      [
+        "a legend without a description",
+        { stock: { legend: [{ color: "red" }] } },
+        "description",
+      ],
+      ["a revenue range of zero", { revenue: { perRow: 0 } }, "perRow"],
+      [
+        "an unknown token property",
+        { tokens: [{ label: "A", colour: "red" }] },
+        "colour",
+      ],
+      [
+        "a token with an array color",
+        { tokens: [{ label: "A", color: ["red"] }] },
+        "color",
+      ],
+      [
+        "halves of three colors",
+        { tokens: [{ halves: ["a", "b", "c"] }] },
+        "halves",
+      ],
+      [
+        "a company token with an unknown property",
+        { companies: [{ name: "A", abbrev: "A", token: { bogus: 1 } }] },
+        "bogus",
+      ],
+      [
+        "a private token with an unknown property",
+        { privates: [{ name: "P", token: { bogus: 1 } }] },
+        "bogus",
+      ],
+      [
+        "an ability without a type",
+        { privates: [{ name: "P", abilities: [{ when: "x" }] }] },
+        "type",
+      ],
+      [
+        "a train event without an index",
+        {
+          trains: [
+            { name: "5", color: "gray", quantity: 1, rust: { on: "6" } },
+          ],
+        },
+        "index",
+      ],
+      [
+        "an unknown train event property",
+        {
+          trains: [
+            {
+              name: "5",
+              color: "gray",
+              quantity: 1,
+              rust: { on: "6", index: 2, at: 1 },
+            },
+          ],
+        },
+        "at",
+      ],
+      [
+        "a train discount that is not a number",
+        {
+          trains: [
+            { name: "5", color: "gray", quantity: 1, discount: { 4: "a lot" } },
+          ],
+        },
+        "discount",
+      ],
+      [
+        "a negative train discount",
+        {
+          trains: [
+            { name: "5", color: "gray", quantity: 1, discount: { 4: -1 } },
+          ],
+        },
+        "discount",
+      ],
+      [
+        "a phase event that is not a boolean",
+        {
+          phases: [
+            { name: "5", limit: 3, tiles: "brown", events: { explode: "yes" } },
+          ],
+        },
+        "explode",
+      ],
+      [
+        "an unknown player property",
+        { players: [{ number: 3, cnkapital: 400 }] },
+        "cnkapital",
+      ],
+      [
+        "a bad map coordinate",
+        { map: { hexes: [], lines: [{ coords: ["A1", "B2p1"] }] } },
+        "coords",
+      ],
+      [
+        "a map line without coords",
+        { map: { hexes: [], lines: [{ color: "red" }] } },
+        "coords",
+      ],
+      [
+        "an unknown map border property",
+        {
+          map: {
+            hexes: [],
+            borders: [{ coords: ["A1p1", "A2p1"], colour: "red" }],
+          },
+        },
+        "colour",
+      ],
+      [
+        "a border text without a coordinate",
+        { map: { hexes: [], borderTexts: [{ cost: 10 }] } },
+        "coord",
+      ],
+      [
+        "a bad map coordinates setting",
+        { info: { title: "G", mapCoordinates: "diagonal" } },
+        "mapCoordinates",
+      ],
+      [
+        "a bad tracks gauge",
+        { info: { title: "G", trackWidth: "wide" } },
+        "trackWidth",
+      ],
+      ["a color that is a number", { colors: { red: 5 } }, "red"],
+      ["a color that is an array", { colors: { red: ["red"] } }, "red"],
+      [
+        "a pool note without a note",
+        { pools: [{ name: "B", notes: [{ color: "red" }] }] },
+        "note",
+      ],
+    ])("rejects %s", (_, game, message) => {
+      const { code, lines } = run(withGame(game));
+      expect(code).toBe(1);
+      expect(lines.join("\n")).toContain(message);
+    });
+  });
 });

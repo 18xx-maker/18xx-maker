@@ -793,7 +793,7 @@
       "color": "cherry",
       "token": {
         "color": "white",
-        "square": ["cherry"],
+        "square": "cherry",
         "shapeAngle": 45,
         "fontSize": 20,
         "labelColor": "white",
@@ -809,7 +809,7 @@
         "bar": true,
         "barHeight": 18,
         "fontSize": 20,
-        "stripes": ["black"],
+        "stripes": "black",
         "halves": ["white", "gray"],
         "stripesWidth": 6
       }
@@ -823,7 +823,7 @@
         "bar": true,
         "barHeight": 18,
         "fontSize": 20,
-        "stripe": ["yellow"],
+        "stripe": "yellow",
         "shapeAngle": 45
       }
     },
@@ -871,7 +871,7 @@
         "bar": true,
         "barHeight": 18,
         "fontSize": 20,
-        "color": ["blue"],
+        "color": "blue",
         "stripe": "white",
         "labelColor": "black"
       }
@@ -885,8 +885,8 @@
         "bar": true,
         "barHeight": 20,
         "fontSize": 20,
-        "color": ["orange"],
-        "curvedStripes": ["black"],
+        "color": "orange",
+        "curvedStripes": "black",
         "curvedStripesDistance": 19,
         "stripe": "black",
         "stripeWidth": "6.25",
@@ -902,8 +902,8 @@
         "bar": true,
         "barHeight": 18,
         "fontSize": 20,
-        "color": ["lime"],
-        "stripe": ["yellow"]
+        "color": "lime",
+        "stripe": "yellow"
       }
     },
     {
@@ -915,8 +915,8 @@
         "bar": true,
         "barHeight": 18,
         "fontSize": 20,
-        "color": ["green"],
-        "spiral": ["natural"]
+        "color": "green",
+        "spiral": "natural"
       }
     },
     {
@@ -932,7 +932,7 @@
         "barHeight": 20,
         "fontSize": 20,
         "target": "white",
-        "color": ["pink"]
+        "color": "pink"
       },
       "shares": [
         {

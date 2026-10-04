@@ -1,11 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://18xx-maker.com/schemas/game.schema.json",
-
   "definitions": {
     "numberOrSlash": {
       "oneOf": [
-        { "type": "number", "minimum": 1 },
+        {
+          "type": "number",
+          "minimum": 1
+        },
         {
           "type": "string",
           "pattern": "^[0-9]+ ?/ ?[0-9]+( ?/ ?[0-9]+)*$"
@@ -18,7 +20,10 @@
     },
     "bank": {
       "oneOf": [
-        { "type": "number", "minimum": 1 },
+        {
+          "type": "number",
+          "minimum": 1
+        },
         {
           "type": "string",
           "pattern": "^∞$"
@@ -26,9 +31,19 @@
       ]
     },
     "capital": {
-      "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
+      "oneOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "string"
+        }
+      ]
     },
-    "certLimit": { "$ref": "#/definitions/numberOrSlash" },
+    "certLimit": {
+      "$ref": "#/definitions/numberOrSlash"
+    },
     "link": {
       "type": "string",
       "pattern": "(mailto|https?):.*"
@@ -36,9 +51,17 @@
     "map": {
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "copy": { "type": "integer", "minimum": 0 },
-        "title": { "type": "boolean", "const": false },
+        "name": {
+          "type": "string"
+        },
+        "copy": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "title": {
+          "type": "boolean",
+          "const": false
+        },
         "remove": {
           "type": "array",
           "items": {
@@ -48,39 +71,48 @@
         },
         "hexes": {
           "type": "array",
-          "items": { "$ref": "tiles.defs.json#/definitions/hex" }
+          "items": {
+            "$ref": "tiles.defs.json#/definitions/hex"
+          }
         },
         "roundTracker": {
-          "type": "object",
-          "properties": {
-            "x": { "type": "number" },
-            "y": { "type": "number" },
-            "rotation": {
-              "type": "number",
-              "exclusiveMinimum": -360,
-              "exclusiveMaximum": 360
-            },
-            "type": {
-              "type": "string",
-              "enum": ["row", "row-reverse", "col", "col-reverse", "round"]
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/roundTracker"
         },
         "market": {
           "type": "object",
           "properties": {
-            "x": { "type": "number" },
-            "y": { "type": "number" }
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            }
           },
           "additionalProperties": false
         },
         "players": {
           "type": "object",
           "properties": {
-            "x": { "type": "number" },
-            "y": { "type": "number" },
-            "cellWidth": { "type": "number", "exclusiveMinimum": 0 }
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "cellWidth": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "rowHeight": {
+              "description": "Height of a row of the players table.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "fontSize": {
+              "description": "Font size of the players table.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
           },
           "additionalProperties": false
         },
@@ -89,15 +121,60 @@
           "items": {
             "type": "object",
             "properties": {
-              "cost": { "type": "number" },
-              "circle": { "type": "number" },
-              "color": { "type": "string" },
-              "bgColor": { "type": "string" },
               "coord": {
-                "type": "string",
-                "pattern": "^[A-Z]+[0-9]+(s[1-6])|(p[1-6])|(a[0-9]+p[0-9]+)|(x[0-9]+y[0-9]+)"
+                "$ref": "#/definitions/mapCoord"
+              },
+              "cost": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "circle": {
+                "description": "Radius of a circle behind the text.",
+                "type": "number"
+              },
+              "color": {
+                "type": "string"
+              },
+              "bgColor": {
+                "type": "string"
+              },
+              "borderColor": {
+                "type": "string"
+              },
+              "borderWidth": {
+                "type": "number"
+              },
+              "rotation": {
+                "type": "number"
+              },
+              "fontSize": {
+                "type": "number"
+              },
+              "fontWeight": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "fontFamily": {
+                "type": "string"
               }
-            }
+            },
+            "required": ["coord"],
+            "additionalProperties": false
           }
         },
         "borders": {
@@ -105,15 +182,45 @@
           "items": {
             "type": "object",
             "properties": {
-              "color": { "type": "string" },
+              "color": {
+                "type": "string"
+              },
               "coords": {
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "pattern": "^[A-Z]+[0-9]+(s[1-6])|(p[1-6])|(a[0-9]+p[0-9]+)|(x[0-9]+y[0-9]+)"
-                }
+                  "$ref": "#/definitions/mapCoord"
+                },
+                "minItems": 2
+              },
+              "width": {
+                "type": "number"
+              },
+              "border": {
+                "description": "false draws no border.",
+                "type": "boolean"
+              },
+              "borderWidth": {
+                "type": "number"
+              },
+              "dashed": {
+                "type": "boolean"
+              },
+              "dashArray": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "offset": {
+                "type": "number"
               }
-            }
+            },
+            "required": ["coords"],
+            "additionalProperties": false
           }
         },
         "lines": {
@@ -121,15 +228,35 @@
           "items": {
             "type": "object",
             "properties": {
-              "color": { "type": "string" },
+              "color": {
+                "type": "string"
+              },
               "coords": {
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "pattern": "^[A-Z]+[0-9]+(s[1-6])|(p[1-6])|(a[0-9]+p[0-9]+)|(x[0-9]+y[0-9]+)"
-                }
+                  "$ref": "#/definitions/mapCoord"
+                },
+                "minItems": 2
+              },
+              "width": {
+                "type": "number"
+              },
+              "border": {
+                "description": "false draws no border.",
+                "type": "boolean"
+              },
+              "borderWidth": {
+                "type": "number"
+              },
+              "dashed": {
+                "type": "boolean"
+              },
+              "offset": {
+                "type": "number"
               }
-            }
+            },
+            "required": ["coords"],
+            "additionalProperties": false
           }
         }
       },
@@ -138,76 +265,224 @@
     },
     "trainItem": {
       "oneOf": [
-        { "type": "string" },
+        {
+          "type": "string"
+        },
         {
           "type": "object",
+          "description": "A train by its name and which one of them, like the 3rd 5.",
           "properties": {
-            "on": { "type": "string" },
-            "index": { "type": "integer", "minimum": 2 }
-          }
+            "on": {
+              "description": "The name of the train.",
+              "type": "string"
+            },
+            "index": {
+              "description": "Which train of that name, 2 is the second.",
+              "type": "integer",
+              "minimum": 2
+            }
+          },
+          "required": ["on", "index"],
+          "additionalProperties": false
         }
       ]
     },
     "train": {
       "type": "object",
       "properties": {
-        "name": { "type": "string" },
-        "price": {
-          "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
+        "name": {
+          "type": "string"
         },
-        "color": { "type": "string" },
+        "price": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "color": {
+          "type": "string"
+        },
         "image": {
           "type": "string"
         },
-        "phase": { "type": "boolean" },
+        "phase": {
+          "type": "boolean"
+        },
         "quantity": {
           "oneOf": [
-            { "type": "integer", "minimum": 1 },
-            { "type": "string", "enum": ["∞"] }
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "string",
+              "enum": ["∞"]
+            }
           ]
         },
-        "quantity_label": { "type": "string" },
-        "print": { "type": "integer", "minimum": 0 },
-        "discount": { "type": "object" },
+        "quantity_label": {
+          "type": "string"
+        },
+        "print": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "discount": {
+          "description": "The price of this train when traded in for each of the listed trains, by the name of the train traded in.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
         "upgrade": {
           "description": "Cost of this train when bought as an upgrade, shown under the price",
-          "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "string"
+            }
+          ]
         },
         "tradeIn": {
           "description": "Value of this train when traded in, shown in parentheses under the price",
-          "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "string"
+            }
+          ]
         },
-        "description": { "type": "string" },
-        "available": { "type": "string" },
-        "variant": { "type": "string" },
-        "rust": { "$ref": "#/definitions/trainEvent" },
-        "phased": { "$ref": "#/definitions/trainEvent" },
-        "obsolete": { "$ref": "#/definitions/trainEvent" },
-        "permanent": { "type": "boolean" },
-        "players": { "type": "integer" }
+        "description": {
+          "type": "string"
+        },
+        "available": {
+          "type": "string"
+        },
+        "variant": {
+          "type": "string"
+        },
+        "rust": {
+          "$ref": "#/definitions/trainEvent"
+        },
+        "phased": {
+          "$ref": "#/definitions/trainEvent"
+        },
+        "obsolete": {
+          "$ref": "#/definitions/trainEvent"
+        },
+        "permanent": {
+          "type": "boolean"
+        },
+        "players": {
+          "type": "integer"
+        },
+        "nameFontSize": {
+          "description": "Font size of the name.",
+          "type": "number"
+        },
+        "nameFontFamily": {
+          "description": "Font family of the name.",
+          "type": "string"
+        },
+        "priceFontSize": {
+          "description": "Font size of the price.",
+          "type": "number"
+        },
+        "priceFontFamily": {
+          "description": "Font family of the price.",
+          "type": "string"
+        },
+        "longevityFontSize": {
+          "description": "Font size of the rust, phase and obsolete texts.",
+          "type": "number"
+        },
+        "longevityFontFamily": {
+          "description": "Font family of the rust, phase and obsolete texts.",
+          "type": "string"
+        },
+        "backgroundColor": {
+          "description": "Background color of the train card.",
+          "type": "string"
+        },
+        "imagePaddingTop": {
+          "description": "Space above the image.",
+          "type": "number"
+        },
+        "imageWidth": {
+          "description": "Width of the image.",
+          "type": "number"
+        },
+        "phasedText": {
+          "description": "Replaces the text before the phased by event.",
+          "type": "string"
+        },
+        "obsoletedText": {
+          "description": "Replaces the text before the obsolete event.",
+          "type": "string"
+        },
+        "rustedText": {
+          "description": "Replaces the text before the rust event.",
+          "type": "string"
+        },
+        "permanentText": {
+          "description": "Replaces the text of a permanent train.",
+          "type": "string"
+        },
+        "permanentColor": {
+          "description": "Color of the text of a permanent train.",
+          "type": "string"
+        }
       },
       "required": ["name", "color"],
       "additionalProperties": false
     },
     "companyTrain": {
       "anyOf": [
-        { "type": "string" },
+        {
+          "type": "string"
+        },
         {
           "type": "object",
           "properties": {
-            "name": { "type": "string" },
-            "quantity": { "type": "integer", "minimum": 1 }
+            "name": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer",
+              "minimum": 1
+            }
           },
           "required": ["name"],
           "additionalProperties": false
         },
-        { "$ref": "#/definitions/train" }
+        {
+          "$ref": "#/definitions/train"
+        }
       ]
     },
     "trainEvent": {
       "oneOf": [
-        { "$ref": "#/definitions/trainItem" },
-        { "type": "array", "items": { "$ref": "#/definitions/trainItem" } }
+        {
+          "$ref": "#/definitions/trainItem"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/trainItem"
+          }
+        }
       ]
     },
     "shares": {
@@ -215,13 +490,50 @@
       "items": {
         "type": "object",
         "properties": {
-          "quantity": { "type": "number", "minimum": 0 },
-          "label": { "type": "string" },
-          "cost": { "type": "number", "minimum": 0 },
-          "percent": { "$ref": "#/definitions/numberOrSlash" },
-          "revenue": { "$ref": "#/definitions/numberOrSlash" },
-          "shares": { "$ref": "#/definitions/numberOrSlash" },
-          "variant": { "type": "string" }
+          "quantity": {
+            "type": "number",
+            "minimum": 0
+          },
+          "label": {
+            "type": "string"
+          },
+          "cost": {
+            "type": "number",
+            "minimum": 0
+          },
+          "percent": {
+            "$ref": "#/definitions/numberOrSlash"
+          },
+          "revenue": {
+            "$ref": "#/definitions/numberOrSlash"
+          },
+          "shares": {
+            "$ref": "#/definitions/numberOrSlash"
+          },
+          "variant": {
+            "type": "string"
+          },
+          "subtext": {
+            "description": "Text under the name of the company.",
+            "type": "string"
+          },
+          "color": {
+            "description": "Color of the share band.",
+            "type": "string"
+          },
+          "backgroundColor": {
+            "description": "Background color of the share.",
+            "type": "string"
+          },
+          "labelColor": {
+            "description": "Color of the label.",
+            "type": "string"
+          },
+          "tokenCount": {
+            "description": "How many tokens to draw on the share.",
+            "type": "number",
+            "minimum": 0
+          }
         },
         "required": ["quantity"]
       }
@@ -230,9 +542,15 @@
       "type": "array",
       "items": {
         "oneOf": [
-          { "type": "string" },
-          { "type": "number" },
-          { "$ref": "#/definitions/charterToken" }
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "$ref": "#/definitions/charterToken"
+          }
         ]
       }
     },
@@ -242,7 +560,14 @@
       "properties": {
         "cost": {
           "description": "The label under the token space, like the plain string or number entry.",
-          "oneOf": [{ "type": "string" }, { "type": "number" }]
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
         },
         "start": {
           "type": "boolean",
@@ -252,57 +577,715 @@
       "additionalProperties": false
     },
     "token": {
-      "type": "object"
+      "$ref": "tiles.defs.json#/definitions/token"
+    },
+    "gameTokens": {
+      "type": "array",
+      "description": "The tokens of the game that print on the token sheet. A string or a number is a white token with that label.",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "$ref": "tiles.defs.json#/definitions/gameToken"
+          }
+        ]
+      }
+    },
+    "cellObject": {
+      "type": "object",
+      "description": "A cell of the stock market, par chart or revenue chart.",
+      "properties": {
+        "value": {
+          "description": "The price shown in the cell, formatted with the market currency.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "label": {
+          "description": "Text shown instead of a value.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "subLabel": {
+          "description": "A second text, at the opposite corner of the cell.",
+          "type": "string"
+        },
+        "color": {
+          "description": "Background color of the cell.",
+          "type": "string"
+        },
+        "labelColor": {
+          "description": "Color of the texts, defaults to a readable color.",
+          "type": "string"
+        },
+        "arrow": {
+          "description": "The arrow or arrows drawn in the corners of the cell.",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["up", "down", "left", "right"]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["up", "down", "left", "right"]
+              }
+            }
+          ]
+        },
+        "arrowColor": {
+          "description": "Color of the arrows.",
+          "type": "string"
+        },
+        "legend": {
+          "description": "Index in the stock legend, the cell takes the color of that legend entry.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "par": {
+          "description": "The cell is a par value, it takes the color of the par chart.",
+          "type": "boolean"
+        },
+        "bottom": {
+          "description": "Draw the cell below the other cells.",
+          "type": "boolean"
+        },
+        "underline": {
+          "description": "Underline the text of the cell.",
+          "type": "boolean"
+        },
+        "rotated": {
+          "description": "Rotate the label.",
+          "type": "boolean"
+        },
+        "subRotated": {
+          "description": "Rotate the sub label.",
+          "type": "boolean"
+        },
+        "width": {
+          "description": "Width of the cell, in cells.",
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "height": {
+          "description": "Height of the cell, in cells.",
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "companies": {
+          "description": "Companies shown as bars in the cell: an abbreviation, or an abbreviation with the row of the bar.",
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "abbrev": {
+                    "type": "string"
+                  },
+                  "row": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "required": ["abbrev"],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "tokens": {
+          "description": "Tokens drawn in the cell. A company is a company token, otherwise a token with x and y positions.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "cell": {
+      "description": "A cell of a market: nothing, a price, a label or an object.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/cellObject"
+        }
+      ]
+    },
+    "cellRows": {
+      "type": "array",
+      "description": "Rows of cells, or a single cell for a row of one.",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/cell"
+          },
+          {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/cell"
+            }
+          }
+        ]
+      }
+    },
+    "roundTracker": {
+      "type": "object",
+      "description": "Where to draw the round tracker, in cells of the market.",
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "rotation": {
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "type": {
+          "type": "string",
+          "enum": ["row", "row-reverse", "col", "col-reverse", "round"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "stock": {
+      "type": "object",
+      "description": "The stock market, and the par and revenue charts.",
+      "properties": {
+        "type": {
+          "description": "The layout of the market: 2D is a grid, 1D a single row, 1Diag a zigzag row. Always set it, a market without a type is empty.",
+          "type": "string",
+          "enum": ["1D", "2D", "1Diag"]
+        },
+        "title": {
+          "description": "false starts the market at the top, without space for the title.",
+          "type": "boolean",
+          "const": false
+        },
+        "market": {
+          "description": "The cells: rows of cells for a 2D market, a row of cells for the others.",
+          "$ref": "#/definitions/cellRows"
+        },
+        "par": {
+          "description": "The par chart.",
+          "type": "object",
+          "properties": {
+            "values": {
+              "description": "The par values, rows of cells.",
+              "$ref": "#/definitions/cellRows"
+            },
+            "color": {
+              "description": "Background color of the par cells.",
+              "type": "string"
+            },
+            "width": {
+              "description": "Width of a par cell, in cells.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "height": {
+              "description": "Height of a par cell, in cells.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "title": {
+              "description": "false hides the title above the par chart.",
+              "type": "boolean",
+              "const": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "cell": {
+          "description": "The size and color every market cell starts with.",
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "height": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "color": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "display": {
+          "description": "Where the parts of the market are drawn.",
+          "type": "object",
+          "properties": {
+            "par": {
+              "description": "Draw the par chart on the market, at x and y cells from the corner.",
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                }
+              },
+              "required": ["x", "y"],
+              "additionalProperties": false
+            },
+            "legend": {
+              "description": "Where the legend goes on a 2D market, or a 1Diag market.",
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number"
+                },
+                "y": {
+                  "type": "number"
+                },
+                "reverse": {
+                  "type": "boolean"
+                },
+                "align": {
+                  "type": "string",
+                  "enum": ["left", "right"]
+                },
+                "verticalAlign": {
+                  "type": "string",
+                  "enum": ["top", "bottom"]
+                }
+              },
+              "additionalProperties": false
+            },
+            "roundTracker": {
+              "$ref": "#/definitions/roundTracker"
+            },
+            "extraTotalHeight": {
+              "description": "Extra height of the page, in units.",
+              "type": "number"
+            },
+            "extraTotalWidth": {
+              "description": "Extra width of the page, in units.",
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ledges": {
+          "description": "Lines drawn over the market, from corner to corner of cells.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "coords": {
+                "description": "The corners of the line, each as the x and y of a cell corner, like 6 0.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^-?[0-9]+ -?[0-9]+$"
+                },
+                "minItems": 2
+              },
+              "color": {
+                "type": "string"
+              },
+              "width": {
+                "type": "number"
+              },
+              "border": {
+                "description": "Draw a border around the line.",
+                "type": "boolean"
+              },
+              "borderWidth": {
+                "type": "number"
+              },
+              "dashed": {
+                "description": "Draw a dashed line.",
+                "type": "boolean"
+              },
+              "dashArray": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "offset": {
+                "description": "Offset of the dashes.",
+                "type": "number"
+              }
+            },
+            "required": ["coords"],
+            "additionalProperties": false
+          }
+        },
+        "legend": {
+          "description": "The legend of the colors of the market.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string"
+              },
+              "borderColor": {
+                "type": "string"
+              },
+              "borderWidth": {
+                "type": "number"
+              },
+              "fontFamily": {
+                "type": "string"
+              },
+              "fontSize": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "fontWeight": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "icon": {
+                "description": "Not drawn at the moment.",
+                "type": "string"
+              }
+            },
+            "required": ["description"],
+            "additionalProperties": false
+          }
+        },
+        "movement": {
+          "description": "How the share price moves, by direction. Kept for reference, it is not printed.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "limits": {
+          "description": "Ranges of share prices, like the allowed par values. Kept for reference, it is not printed.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string"
+              },
+              "min": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "colorValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/colorValue"
+          }
+        }
+      ]
+    },
+    "mapCoord": {
+      "type": "string",
+      "description": "A place on the map: a hex and a point (A1p1), a side (A1s1), an angle and percent (A1a30p0.5), or an offset from the middle (A1x10y-5).",
+      "pattern": "^[A-Z]+[0-9]+(p[0-9.-]+|s[0-9.-]+|a[0-9.-]+(p[0-9.-]+)?|x[0-9.-]+y[0-9.-]+)$"
     }
   },
-
   "type": "object",
   "properties": {
     "info": {
       "type": "object",
       "properties": {
-        "title": { "type": "string" },
-        "subtitle": { "type": "string" },
-        "designer": { "type": "string" },
-        "background": { "type": "string" },
-        "notes": { "type": "string" },
-        "publisher": { "type": "string" },
-        "extraTotalHeight": { "type": "number", "minimum": 1 },
-        "extraTotalWidth": { "type": "number", "minimum": 1 },
-        "titleX": { "type": "number" },
-        "titleY": { "type": "number" },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "designer": {
+          "type": "string"
+        },
+        "background": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "extraTotalHeight": {
+          "type": "number",
+          "minimum": 1
+        },
+        "extraTotalWidth": {
+          "type": "number",
+          "minimum": 1
+        },
+        "titleX": {
+          "type": "number"
+        },
+        "titleY": {
+          "type": "number"
+        },
         "titleRotate": {
           "type": "number",
           "minimum": -360,
           "maximum": 360
         },
-        "titleSize": { "type": "number" },
-        "subtitleSize": { "type": "number" },
-        "designerSize": { "type": "number" },
-        "titleFontFamily": { "type": "string" },
-        "subtitleFontFamily": { "type": "string" },
-        "designerFontFamily": { "type": "string" },
+        "titleSize": {
+          "type": "number"
+        },
+        "subtitleSize": {
+          "type": "number"
+        },
+        "designerSize": {
+          "type": "number"
+        },
+        "titleFontFamily": {
+          "type": "string"
+        },
+        "subtitleFontFamily": {
+          "type": "string"
+        },
+        "designerFontFamily": {
+          "type": "string"
+        },
         "orientation": {
           "type": "string",
           "enum": ["horizontal", "vertical"]
         },
         "capitalization": {
-          "type": "string",
           "description": "Full cap is the default and doesn't need to be specified.",
-          "enum": ["incremental"]
-        },
-        "mustSellInBlocks": { "type": "boolean", "enum": [true] },
-        "marketTokens": { "type": "integer", "minimum": 0 },
-        "extraStationTokens": { "type": "integer", "minimum": 1 },
-        "mustSellInBlocks": { "type": "boolean" },
-        "capitalization": {
           "type": "string",
           "enum": ["full", "incremental"]
+        },
+        "mustSellInBlocks": {
+          "description": "Shares must be sold in blocks, shown on the charter.",
+          "type": "boolean"
+        },
+        "marketTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "extraStationTokens": {
+          "type": "integer",
+          "minimum": 1
         },
         "currency": {
           "description": "The currency format string must contain a # character",
           "type": "string",
           "pattern": "^(.*)#(.*)$"
+        },
+        "valueFontFamily": {
+          "description": "Font family of the values on the map.",
+          "type": "string"
+        },
+        "valueFontWeight": {
+          "description": "Font weight of the values on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "nameFontFamily": {
+          "description": "Font family of the names on the map.",
+          "type": "string"
+        },
+        "nameFontWeight": {
+          "description": "Font weight of the names on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "companyFontFamily": {
+          "description": "Font family of the companies.",
+          "type": "string"
+        },
+        "companyFontWeight": {
+          "description": "Font weight of the companies.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "valueFontSize": {
+          "description": "Font size of the values on the map.",
+          "type": "number"
+        },
+        "nameFontSize": {
+          "description": "Font size of the names on the map.",
+          "type": "number"
+        },
+        "companyFontSize": {
+          "description": "Font size of the companies.",
+          "type": "number"
+        },
+        "companyFontStyle": {
+          "description": "Font style of the companies.",
+          "type": "string"
+        },
+        "titleFontWeight": {
+          "description": "Font weight of the title on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "subtitleFontWeight": {
+          "description": "Font weight of the subtitle on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "designerFontWeight": {
+          "description": "Font weight of the designer on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "borderWidth": {
+          "description": "Width of the border of track, cities and towns.",
+          "type": "number"
+        },
+        "trackWidth": {
+          "description": "Width of the track.",
+          "type": "number"
+        },
+        "trackColor": {
+          "description": "Color of the track, match uses the color of the hex.",
+          "type": "string"
+        },
+        "trackBorderColor": {
+          "description": "Color of the border of the track, match uses the color of the hex.",
+          "type": "string"
+        },
+        "trackGauge": {
+          "description": "Gauge of all the track: narrow, dashed, line or dual.",
+          "type": "string"
+        },
+        "trackGaugeColor": {
+          "description": "Color of the gauge lines, match uses the color of the hex.",
+          "type": "string"
+        },
+        "cityWidth": {
+          "description": "Width of the cities.",
+          "type": "number"
+        },
+        "townWidth": {
+          "description": "Width of the towns.",
+          "type": "number"
+        },
+        "townBorderWidth": {
+          "description": "Width of the border of towns.",
+          "type": "number"
+        },
+        "transparent": {
+          "description": "Draw the hexes of the map without a background.",
+          "type": "boolean"
+        },
+        "mapCoordinates": {
+          "description": "Where the numbers and letters of the coordinates go.",
+          "type": "string",
+          "enum": [
+            "numbersVertical",
+            "reversed",
+            "lettersHorizontal",
+            "numbersHorizontal",
+            "lettersVertical"
+          ]
         }
       },
       "required": ["title"],
@@ -310,33 +1293,60 @@
     },
     "colors": {
       "type": "object",
-      "additionalProperties": true
+      "description": "Colors of the game by name. A color is a CSS color or another color name, or an object of those by phase.",
+      "additionalProperties": {
+        "$ref": "#/definitions/colorValue"
+      }
     },
     "links": {
       "type": "object",
       "properties": {
-        "bgg": { "$ref": "#/definitions/link" },
-        "license": { "$ref": "#/definitions/link" },
-        "purchase": { "$ref": "#/definitions/link" },
-        "rules": { "$ref": "#/definitions/link" }
+        "bgg": {
+          "$ref": "#/definitions/link"
+        },
+        "license": {
+          "$ref": "#/definitions/link"
+        },
+        "purchase": {
+          "$ref": "#/definitions/link"
+        },
+        "rules": {
+          "$ref": "#/definitions/link"
+        }
       },
       "additionalProperties": false
     },
-    "bank": { "$ref": "#/definitions/bank" },
-    "capital": { "$ref": "#/definitions/capital" },
-    "certLimit": { "$ref": "#/definitions/certLimit" },
-    "floatPercent": { "type": "number", "minimum": 0, "maximum": 100 },
+    "bank": {
+      "$ref": "#/definitions/bank"
+    },
+    "capital": {
+      "$ref": "#/definitions/capital"
+    },
+    "certLimit": {
+      "$ref": "#/definitions/certLimit"
+    },
+    "floatPercent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
     "tokenTypes": {
       "type": "object",
-      "additionalProperties": { "$ref": "#/definitions/tokens" }
+      "additionalProperties": {
+        "$ref": "#/definitions/tokens"
+      }
     },
     "number_cards": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "shareTypes": {
       "type": "object",
-      "additionalProperties": { "$ref": "#/definitions/shares" }
+      "additionalProperties": {
+        "$ref": "#/definitions/shares"
+      }
     },
     "companies": {
       "type": "array",
@@ -344,13 +1354,31 @@
         "type": "object",
         "required": ["name", "abbrev"],
         "properties": {
-          "name": { "type": "string" },
-          "variant": { "type": "string" },
+          "name": {
+            "type": "string"
+          },
+          "variant": {
+            "type": "string"
+          },
           "shares": {
-            "oneOf": [{ "$ref": "#/definitions/shares" }, { "type": "string" }]
+            "oneOf": [
+              {
+                "$ref": "#/definitions/shares"
+              },
+              {
+                "type": "string"
+              }
+            ]
           },
           "tokens": {
-            "oneOf": [{ "$ref": "#/definitions/tokens" }, { "type": "string" }]
+            "oneOf": [
+              {
+                "$ref": "#/definitions/tokens"
+              },
+              {
+                "type": "string"
+              }
+            ]
           },
           "tokensBelow": {
             "type": "boolean",
@@ -361,29 +1389,123 @@
             "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns that fit the height of the charter (more loans than fit are cut off). Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",
             "items": {
               "oneOf": [
-                { "type": "string" },
-                { "type": "number" },
-                { "type": "null" }
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
               ]
             }
           },
           "trains": {
             "description": "false hides the trains label on the charter. Otherwise the trains the company owns: the name of a game train, { name, quantity } for several copies of a game train, or a full train (quantity defaults to 1). They print on the charter, or as train cards when the charters trainCards config is cards.",
             "oneOf": [
-              { "const": false },
+              {
+                "const": false
+              },
               {
                 "type": "array",
-                "items": { "$ref": "#/definitions/companyTrain" }
+                "items": {
+                  "$ref": "#/definitions/companyTrain"
+                }
               }
             ]
+          },
+          "token": {
+            "$ref": "#/definitions/token"
+          },
+          "color": {
+            "description": "The color of the company.",
+            "type": "string"
+          },
+          "logo": {
+            "description": "The logo of the company.",
+            "type": "string"
+          },
+          "minor": {
+            "description": "The company is a minor company.",
+            "type": "boolean"
+          },
+          "subtext": {
+            "description": "Text under the name of the company.",
+            "type": "string"
+          },
+          "subName": {
+            "description": "A second line under the name of the charter.",
+            "type": "string"
+          },
+          "shareType": {
+            "description": "The name of a share type of the game.",
+            "type": "string"
+          },
+          "tokenType": {
+            "description": "The name of a token type of the game.",
+            "type": "string"
+          },
+          "marketTokens": {
+            "description": "How many market tokens to print.",
+            "type": "integer",
+            "minimum": 0
+          },
+          "extraStationTokens": {
+            "description": "How many extra station tokens to print.",
+            "type": "integer",
+            "minimum": 0
+          },
+          "treasury": {
+            "description": "false hides the treasury on the charter.",
+            "type": "boolean",
+            "const": false
+          },
+          "capital": {
+            "description": "The starting capital shown on the charter.",
+            "$ref": "#/definitions/capital"
+          },
+          "fontFamily": {
+            "description": "Font family of the name.",
+            "type": "string"
+          },
+          "fontSize": {
+            "description": "Font size of the name.",
+            "type": "number"
+          },
+          "fontWeight": {
+            "description": "Font weight of the name.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "fontStyle": {
+            "description": "Font style of the name.",
+            "type": "string"
+          },
+          "outlineWidth": {
+            "description": "Width of the outline of the company on its private card.",
+            "type": "number"
           }
         }
       }
     },
     "map": {
       "oneOf": [
-        { "$ref": "#/definitions/map" },
-        { "type": "array", "items": { "$ref": "#/definitions/map" } }
+        {
+          "$ref": "#/definitions/map"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/map"
+          }
+        }
       ]
     },
     "phases": {
@@ -391,18 +1513,34 @@
       "items": {
         "type": "object",
         "properties": {
-          "name": { "type": "string" },
-          "minor": { "type": "boolean" },
-          "company": { "type": "string" },
+          "name": {
+            "type": "string"
+          },
+          "minor": {
+            "type": "boolean"
+          },
+          "company": {
+            "type": "string"
+          },
           "train": {
             "oneOf": [
-              { "type": "array", "items": { "type": "string" } },
-              { "type": "string" }
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "string"
+              }
             ]
           },
           "limit": {
             "oneOf": [
-              { "type": "integer", "minimum": 1 },
+              {
+                "type": "integer",
+                "minimum": 1
+              },
               {
                 "type": "string",
                 "pattern": "^∞$"
@@ -413,29 +1551,57 @@
               }
             ]
           },
-          "rounds": { "type": "integer", "minimum": 1 },
-          "tiles": { "type": "string" },
-          "on": { "$ref": "#/definitions/trainEvent" },
+          "rounds": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tiles": {
+            "type": "string"
+          },
+          "on": {
+            "$ref": "#/definitions/trainEvent"
+          },
           "notes": {
             "oneOf": [
-              { "type": "string" },
+              {
+                "type": "string"
+              },
               {
                 "type": "array",
-                "items": { "type": "string" }
+                "items": {
+                  "type": "string"
+                }
               }
             ]
           },
-          "buy_companies": { "type": "boolean" },
+          "buy_companies": {
+            "type": "boolean"
+          },
           "events": {
+            "description": "Events of the phase, an object of boolean fields. close_companies and remove_tokens show on the phase card, other events are ignored.",
             "type": "object",
+            "properties": {
+              "close_companies": {
+                "description": "The privates close.",
+                "type": "boolean"
+              },
+              "remove_tokens": {
+                "description": "The tokens of private companies are removed from the map.",
+                "type": "boolean"
+              }
+            },
             "additionalProperties": {
               "type": "boolean"
             }
           }
         },
         "anyOf": [
-          { "required": ["name", "limit", "tiles"] },
-          { "required": ["train", "limit", "tiles"] }
+          {
+            "required": ["name", "limit", "tiles"]
+          },
+          {
+            "required": ["train", "limit", "tiles"]
+          }
         ],
         "additionalProperties": false
       }
@@ -445,72 +1611,440 @@
       "items": {
         "type": "object",
         "properties": {
-          "bank": { "$ref": "#/definitions/bank" },
-          "capital": { "$ref": "#/definitions/capital" },
-          "certLimit": { "$ref": "#/definitions/certLimit" },
-          "number": { "type": "number", "minimum": 1 }
+          "bank": {
+            "$ref": "#/definitions/bank"
+          },
+          "capital": {
+            "$ref": "#/definitions/capital"
+          },
+          "certLimit": {
+            "$ref": "#/definitions/certLimit"
+          },
+          "number": {
+            "type": "number",
+            "minimum": 1
+          }
         },
-        "required": ["number"]
+        "required": ["number"],
+        "additionalProperties": false
       }
     },
-    "pools": {},
-    "privates": {
+    "pools": {
       "type": "array",
+      "description": "Notes about the pools of the game. Kept for reference, they are not printed.",
       "items": {
         "type": "object",
         "properties": {
-          "name": { "type": "string" },
-          "note": { "type": "string" },
-          "minPlayers": { "type": "integer", "minimum": 1 },
-          "maxPlayers": { "type": "integer", "minimum": 1 },
-          "nameFontSize": { "type": "integer", "minimum": 1 },
-          "descFontSize": { "type": "integer", "minimum": 1 },
-          "description": { "type": "string" },
-          "hex": { "type": "string" },
-          "token": { "$ref": "#/definitions/token" },
-          "company": { "type": "string" },
-          "image": { "type": "string" },
-          "icon": { "type": "string" },
-          "iconColor": { "type": "string" },
-          "tile": { "type": "string" },
-          "id": { "type": "string" },
-          "idBackgroundColor": { "type": "string" },
-          "variant": { "type": "string" },
-          "sym": { "type": "string" },
-          "abilities": {
+          "name": {
+            "type": "string"
+          },
+          "notes": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "type": { "type": "string" }
-              }
-            }
-          },
-          "bid": { "type": "number", "minimum": 0 },
-          "price": {
-            "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string" }]
-          },
-          "debt": { "type": "number", "minimum": 0 },
-          "revenue": {
-            "oneOf": [
-              { "type": "number", "minimum": 0 },
-              {
-                "type": "array",
-                "items": { "type": "number", "minimum": 0 }
+                "note": {
+                  "type": "string"
+                },
+                "color": {
+                  "type": "string"
+                },
+                "icon": {
+                  "type": "string"
+                }
               },
-              {
-                "type": "string",
-                "pattern": "^.?.?[0-9].?%? ?/ ?.?.?[0-9].?%?$"
-              }
-            ]
+              "required": ["note"],
+              "additionalProperties": false
+            }
           }
         },
         "required": ["name"],
         "additionalProperties": false
       }
     },
-    "rounds": {},
-    "stock": {},
+    "privates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "minPlayers": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "maxPlayers": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "nameFontSize": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "descFontSize": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "description": {
+            "type": "string"
+          },
+          "hex": {
+            "type": "string"
+          },
+          "token": {
+            "$ref": "#/definitions/token"
+          },
+          "company": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "iconColor": {
+            "type": "string"
+          },
+          "tile": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "idBackgroundColor": {
+            "type": "string"
+          },
+          "variant": {
+            "type": "string"
+          },
+          "sym": {
+            "type": "string"
+          },
+          "abilities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "An ability of the private. Kept for reference, it is not printed.",
+              "properties": {
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": ["type"]
+            }
+          },
+          "bid": {
+            "type": "number",
+            "minimum": 0
+          },
+          "price": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "debt": {
+            "type": "number",
+            "minimum": 0
+          },
+          "revenue": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              {
+                "type": "string",
+                "pattern": "^.?.?[0-9].?%? ?/ ?.?.?[0-9].?%?$"
+              }
+            ]
+          },
+          "nameFontFamily": {
+            "description": "Font family of the name.",
+            "type": "string"
+          },
+          "nameFontWeight": {
+            "description": "Font weight of the name.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "nameFontStyle": {
+            "description": "Font style of the name.",
+            "type": "string"
+          },
+          "nameColor": {
+            "description": "Color of the name.",
+            "type": "string"
+          },
+          "idFontFamily": {
+            "description": "Font family of the id.",
+            "type": "string"
+          },
+          "idFontWeight": {
+            "description": "Font weight of the id.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "idFontStyle": {
+            "description": "Font style of the id.",
+            "type": "string"
+          },
+          "idColor": {
+            "description": "Color of the id.",
+            "type": "string"
+          },
+          "idFontSize": {
+            "description": "Font size of the id.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "noteFontFamily": {
+            "description": "Font family of the note.",
+            "type": "string"
+          },
+          "noteFontWeight": {
+            "description": "Font weight of the note.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "noteFontStyle": {
+            "description": "Font style of the note.",
+            "type": "string"
+          },
+          "noteColor": {
+            "description": "Color of the note.",
+            "type": "string"
+          },
+          "noteFontSize": {
+            "description": "Font size of the note.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "descFontFamily": {
+            "description": "Font family of the description.",
+            "type": "string"
+          },
+          "descFontWeight": {
+            "description": "Font weight of the description.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "descFontStyle": {
+            "description": "Font style of the description.",
+            "type": "string"
+          },
+          "descColor": {
+            "description": "Color of the description.",
+            "type": "string"
+          },
+          "priceFontFamily": {
+            "description": "Font family of the price.",
+            "type": "string"
+          },
+          "priceFontWeight": {
+            "description": "Font weight of the price.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "priceFontStyle": {
+            "description": "Font style of the price.",
+            "type": "string"
+          },
+          "priceColor": {
+            "description": "Color of the price.",
+            "type": "string"
+          },
+          "priceFontSize": {
+            "description": "Font size of the price.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "revenueFontFamily": {
+            "description": "Font family of the revenue.",
+            "type": "string"
+          },
+          "revenueFontWeight": {
+            "description": "Font weight of the revenue.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "revenueFontStyle": {
+            "description": "Font style of the revenue.",
+            "type": "string"
+          },
+          "revenueColor": {
+            "description": "Color of the revenue.",
+            "type": "string"
+          },
+          "revenueFontSize": {
+            "description": "Font size of the revenue.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "bidFontFamily": {
+            "description": "Font family of the bid.",
+            "type": "string"
+          },
+          "bidFontWeight": {
+            "description": "Font weight of the bid.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "bidFontStyle": {
+            "description": "Font style of the bid.",
+            "type": "string"
+          },
+          "bidColor": {
+            "description": "Color of the bid.",
+            "type": "string"
+          },
+          "bidFontSize": {
+            "description": "Font size of the bid.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "variantFontFamily": {
+            "description": "Font family of the variant.",
+            "type": "string"
+          },
+          "variantFontWeight": {
+            "description": "Font weight of the variant.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "variantFontStyle": {
+            "description": "Font style of the variant.",
+            "type": "string"
+          },
+          "variantColor": {
+            "description": "Color of the variant.",
+            "type": "string"
+          },
+          "variantFontSize": {
+            "description": "Font size of the variant.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "playersFontFamily": {
+            "description": "Font family of the players.",
+            "type": "string"
+          },
+          "playersFontWeight": {
+            "description": "Font weight of the players.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "playersFontStyle": {
+            "description": "Font style of the players.",
+            "type": "string"
+          },
+          "playersColor": {
+            "description": "Color of the players.",
+            "type": "string"
+          },
+          "playersFontSize": {
+            "description": "Font size of the players.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "fontColor": {
+            "description": "Color of the text of the card.",
+            "type": "string"
+          },
+          "backgroundColor": {
+            "description": "Background color of the card.",
+            "type": "string"
+          },
+          "revenueBackgroundColor": {
+            "description": "Background color of the revenue.",
+            "type": "string"
+          }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
+    "rounds": {
+      "type": "array",
+      "description": "The rounds of the game, in order, for the round tracker.",
+      "items": {
+        "$ref": "tiles.defs.json#/definitions/roundToken"
+      }
+    },
+    "stock": {
+      "$ref": "#/definitions/stock"
+    },
     "tiles": {
       "type": "object",
       "additionalProperties": {
@@ -525,14 +2059,49 @@
         ]
       }
     },
-    "tokens": {},
-    "turns": {},
+    "tokens": {
+      "$ref": "#/definitions/gameTokens"
+    },
+    "turns": {
+      "type": "array",
+      "description": "The turns of the game, printed on the charter.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ordered": {
+            "description": "Number the steps.",
+            "type": "boolean"
+          },
+          "optional": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
     "trains": {
       "type": "array",
       "items": {
         "allOf": [
-          { "$ref": "#/definitions/train" },
-          { "required": ["quantity"] }
+          {
+            "$ref": "#/definitions/train"
+          },
+          {
+            "required": ["quantity"]
+          }
         ]
       }
     },
@@ -547,8 +2116,12 @@
         "uniqueItems": true
       }
     },
-    "wip": { "type": "boolean" },
-    "prototype": { "type": "boolean" },
+    "wip": {
+      "type": "boolean"
+    },
+    "prototype": {
+      "type": "boolean"
+    },
     "exports": {
       "type": "object",
       "description": "The options of an export (maker export, and the export options of the app) for this game. They are the defaults of the game: the flags of maker export, the user's config and the choices made in the export options panel come on top of them.",
@@ -556,7 +2129,10 @@
         "formats": {
           "type": "array",
           "description": "The files to export, like --format. pdf, png and b18 (a Board18 box). Defaults to pdf.",
-          "items": { "type": "string", "enum": ["pdf", "png", "b18"] },
+          "items": {
+            "type": "string",
+            "enum": ["pdf", "png", "b18"]
+          },
           "minItems": 1,
           "uniqueItems": true
         },
@@ -630,6 +2206,28 @@
             }
           },
           "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "revenue": {
+      "type": "object",
+      "description": "The range of the revenue chart.",
+      "properties": {
+        "min": {
+          "description": "The first revenue, 1 by default.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "max": {
+          "description": "The last revenue, 100 by default.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "perRow": {
+          "description": "How many revenues in a row, 20 by default.",
+          "type": "integer",
+          "minimum": 1
         }
       },
       "additionalProperties": false
