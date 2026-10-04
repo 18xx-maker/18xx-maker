@@ -42,6 +42,7 @@
   "export": {
     "allPdf": "将游戏导出为 PDF 文档",
     "allPng": "将游戏导出为 PNG 图片",
+    "allSvg": "将游戏导出为 SVG 图片",
     "b18": "将游戏导出为 Board18 游戏盒",
     "options": "导出选项",
     "optionsTitle": "导出 {{title}}",
@@ -50,13 +51,14 @@
     "format": {
       "pdf": "PDF 文档",
       "png": "PNG 图片",
+      "svg": "SVG 图片",
       "b18": "Board18 游戏盒"
     },
     "documents": "文档",
-    "documentsDescription": "仅适用于 PDF 和 PNG 文件。",
+    "documentsDescription": "仅适用于 PDF、PNG 和 SVG 文件。",
     "allLayouts": "页面的每一种布局",
     "background": "图片背景",
-    "backgroundDescription": "适用于地图、股市、发行价、收益和地块清单的 PNG 图片,默认为白色。其他 PNG 图片(背景、卡牌、公司执照、标记和地块)始终是透明的。Board18 的地图和股市始终为白色,其标记和地块为透明。",
+    "backgroundDescription": "适用于地图、股市、发行价、收益和地块清单的 PNG 图片,默认为白色。其他 PNG 图片(背景、卡牌、公司执照、标记和地块)始终是透明的。Board18 的地图和股市始终为白色,其标记和地块为透明。SVG 图片始终是透明的。",
     "transparent": "透明",
     "white": "白色",
     "variation": "地图变体",
@@ -140,6 +142,10 @@
       "png": {
         "title": "PNG 输出",
         "description": "生成 PNG 图片"
+      },
+      "svg": {
+        "title": "SVG 输出",
+        "description": "生成可用于矢量图形软件的 SVG 图片"
       },
       "b18": {
         "title": "Board18 输出",
@@ -831,7 +837,7 @@
     "key": "按键",
     "use": "用途",
     "notes": "备注",
-    "exportMenu": "打开导出菜单后:p 导出 PDF,n 导出 PNG,b 导出 Board18 文件,o 打开导出选项。",
+    "exportMenu": "打开导出菜单后:p 导出 PDF,n 导出 PNG,s 导出 SVG,b 导出 Board18 文件,o 打开导出选项。",
     "keys": {
       "escape": {
         "use": "返回:先关闭配置面板,再从编辑页面返回游戏页面,最后回到首页",

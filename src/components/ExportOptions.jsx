@@ -28,7 +28,7 @@ import { BACKGROUNDS } from "@/export/options.js";
 import { createAlert } from "@/state";
 import { exportDefaults, exportPages, planExport } from "@/util/exportPlan";
 
-const FORMATS = ["pdf", "png", "b18"];
+const FORMATS = ["pdf", "png", "svg", "b18"];
 
 const Field = ({ id, label, description, error, children }) => (
   <div className="flex flex-col gap-1">

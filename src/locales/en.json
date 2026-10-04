@@ -42,6 +42,7 @@
   "export": {
     "allPdf": "Export game as pdf documents",
     "allPng": "Export game as png images",
+    "allSvg": "Export game as svg images",
     "b18": "Export game as a Board18 box",
     "options": "Export options",
     "optionsTitle": "Export {{title}}",
@@ -50,13 +51,14 @@
     "format": {
       "pdf": "PDF documents",
       "png": "PNG images",
+      "svg": "SVG images",
       "b18": "Board18 box"
     },
     "documents": "Documents",
-    "documentsDescription": "Only for pdf and png files.",
+    "documentsDescription": "Only for pdf, png and svg files.",
     "allLayouts": "Every layout of a sheet",
     "background": "Image background",
-    "backgroundDescription": "Of the map, market, par, revenue and tile manifest png images, white by default. The other png images (background, cards, charters, tokens and tiles) are always transparent. Board18 maps and markets are always white, their tokens and tiles transparent.",
+    "backgroundDescription": "Of the map, market, par, revenue and tile manifest png images, white by default. The other png images (background, cards, charters, tokens and tiles) are always transparent. Board18 maps and markets are always white, their tokens and tiles transparent. SVG images are always transparent.",
     "transparent": "Transparent",
     "white": "White",
     "variation": "Map variation",
@@ -140,6 +142,10 @@
       "png": {
         "title": "PNG Output",
         "description": "Generate PNG images"
+      },
+      "svg": {
+        "title": "SVG Output",
+        "description": "Generate SVG images for vector graphics software"
       },
       "b18": {
         "title": "Board18 Output",
@@ -831,7 +837,7 @@
     "key": "Key",
     "use": "Use",
     "notes": "Notes",
-    "exportMenu": "With the export menu open: p exports PDFs, n exports PNGs, b exports a Board18 file and o opens the export options.",
+    "exportMenu": "With the export menu open: p exports PDFs, n exports PNGs, s exports SVGs, b exports a Board18 file and o opens the export options.",
     "keys": {
       "escape": {
         "use": "Go back: close the config panel, then leave the edit page for the game page, then go home",

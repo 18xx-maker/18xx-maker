@@ -194,6 +194,7 @@ describe("export keys", () => {
   it.for([
     ["p", "pdf"],
     ["n", "png"],
+    ["s", "svg"],
     ["b", "b18"],
   ])("%s in the menu exports %s", async ([key, format]) => {
     const { user } = renderApp("/games/18Test/map");
