@@ -7,6 +7,7 @@ import {
   loadGame,
   loadSummaries,
   openFilePicker,
+  peekGame,
   saveGameHandle,
 } from "@/util/idb";
 
@@ -143,6 +144,35 @@ describe("system games in IndexedDB", () => {
     await expect(saveGameHandle(handle)).rejects.toThrow(
       "File was not a valid 18xx-maker game",
     );
+  });
+
+  it("peeks at a game with permission and changes nothing", async () => {
+    const handle = fileHandle(game);
+    const slug = await saveGameHandle(handle);
+    const id = slug.split(":")[1];
+    const before = { ...records("game_file_handles").get(id) };
+
+    expect(await peekGame(id)).toEqual({
+      ...game,
+      meta: { id, type: "system", slug },
+    });
+    expect(records("game_file_handles").get(id)).toEqual(before);
+  });
+
+  it("never asks for permission or deletes when peeking", async () => {
+    const handle = fileHandle(game);
+    const slug = await saveGameHandle(handle);
+    const id = slug.split(":")[1];
+    handle.queryPermission.mockResolvedValue("prompt");
+    handle.requestPermission.mockResolvedValue("granted");
+
+    await expect(peekGame(id)).rejects.toThrow("Permission needed");
+    expect(handle.requestPermission).not.toHaveBeenCalled();
+
+    handle.queryPermission.mockResolvedValue("granted");
+    handle.getFile.mockRejectedValue(new DOMException("gone", "NotFoundError"));
+    await expect(peekGame(id)).rejects.toThrow();
+    expect(records("game_file_handles").has(id)).toBe(true);
   });
 
   it("loads a game and refreshes its summary", async () => {

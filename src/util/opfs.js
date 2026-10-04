@@ -58,6 +58,15 @@ export const loadGame = async (id) => {
   }
 };
 
+// Reads a game without changing anything, unlike loadGame it never deletes it
+export const peekGame = async (id) => {
+  const dir = await getGamesDirectory();
+  const handle = await dir.getFileHandle(name(id));
+  const file = await handle.getFile();
+  const game = await loadFile(file);
+  return assoc("meta", meta(id), game);
+};
+
 // Safari has no FileSystemFileHandle.createWritable on the main thread, only
 // createSyncAccessHandle inside a worker.
 const writeInWorker = (filename, buffer) =>
