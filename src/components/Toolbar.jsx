@@ -66,7 +66,7 @@ const Toolbar = () => {
   };
 
   return (
-    <div className="z-40 print:hidden fixed top-4 left-4 rounded-sm border p-1 flex flex-row flex-wrap gap-0.5 bg-background justify-start items-center">
+    <div className="z-40 print:hidden fixed top-4 left-4 rounded-sm border p-1 flex flex-row gap-0.5 bg-background justify-start items-center">
       <Button asChild variant="outline" className="px-2 h-8 m-0">
         <Link to={`/games/${slug}`}>
           <ArrowBigLeft width="24" height="24" />
