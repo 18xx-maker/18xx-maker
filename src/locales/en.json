@@ -254,6 +254,39 @@
     "cheat": {
       "title": "Cheat Sheet",
       "description": "Data from included 18xx games"
+    },
+    "positioning": {
+      "title": "Auto Positioning",
+      "description": "Live examples of auto positioning",
+      "page": {
+        "description": "Every auto positioning rule and edge case, drawn live with the JSON that produces it. See the Auto Positioning doc for the rules."
+      },
+      "groups": {
+        "icons": "Icons",
+        "terrain": "Terrain",
+        "values": "Values",
+        "labels": "Labels",
+        "off": "Turning it off",
+        "all": "Everything together"
+      },
+      "examples": {
+        "iconCity": "An icon on a hex with a city goes to angle 0, percent 0.6.",
+        "iconCenterTown": "A centerTown works like a city.",
+        "iconTerrain": "With terrain as well, the icon moves to angle 30 and the terrain to angle 330.",
+        "iconAlone": "With no city or centerTown the icon is not moved.",
+        "terrainCity": "Terrain on a hex with a city goes to angle 0, percent 0.7.",
+        "terrainCenterTown": "A centerTown works like a city.",
+        "terrainIcon": "With an icon as well, the terrain moves to angle 330 and the icon to angle 30.",
+        "terrainAlone": "With no city or centerTown the terrain is not moved.",
+        "valueOne": "The first value goes to angle 210, percent 0.7.",
+        "valueTwo": "Only the first value is moved. The second stays in the middle.",
+        "labelOne": "The first label goes to angle 150, percent 0.7.",
+        "labelTwo": "The second label goes to angle 270, percent 0.7.",
+        "labelThree": "Only the first two labels are moved. The third stays in the middle.",
+        "offAngle": "Any positioning field, here angle 0, turns auto positioning off for that terrain.",
+        "offOne": "Turning it off is per element. The second terrain is still moved.",
+        "everything": "A city, terrain, an icon, a value and two labels in the standard layout."
+      }
     }
   },
   "games": {

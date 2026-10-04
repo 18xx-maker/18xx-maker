@@ -9,6 +9,7 @@ import Home from "@/components/pages/Home";
 import Settings from "@/components/pages/Settings";
 import Atoms from "@/components/pages/elements/Atoms";
 import Logos from "@/components/pages/elements/Logos";
+import Positioning from "@/components/pages/elements/Positioning";
 import AllTiles from "@/components/pages/elements/Tiles";
 import Background from "@/components/pages/games/Background";
 import Card from "@/components/pages/games/Card";
@@ -52,6 +53,7 @@ export const rootRoutes = [
           { index: true, element: <Atoms /> },
           { path: "tiles", element: <AllTiles /> },
           { path: "logos", element: <Logos /> },
+          { path: "positioning", element: <Positioning /> },
         ],
       },
       {

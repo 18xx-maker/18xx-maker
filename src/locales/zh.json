@@ -254,6 +254,39 @@
     "cheat": {
       "title": "速查表",
       "description": "来自内置 18xx 游戏的数据"
+    },
+    "positioning": {
+      "title": "自动定位",
+      "description": "自动定位的实时示例",
+      "page": {
+        "description": "每条自动定位规则和特殊情况都在此实时绘制,并附上生成它的 JSON。规则请参见自动定位文档。"
+      },
+      "groups": {
+        "icons": "图标",
+        "terrain": "地形",
+        "values": "数值",
+        "labels": "标签",
+        "off": "关闭自动定位",
+        "all": "全部组合"
+      },
+      "examples": {
+        "iconCity": "有城市的六边格上,图标会移到 angle 0、percent 0.6。",
+        "iconCenterTown": "centerTown 的作用与城市相同。",
+        "iconTerrain": "如果同时还有地形,图标会移到 angle 30,地形会移到 angle 330。",
+        "iconAlone": "没有城市或 centerTown 时,图标不会被移动。",
+        "terrainCity": "有城市的六边格上,地形会移到 angle 0、percent 0.7。",
+        "terrainCenterTown": "centerTown 的作用与城市相同。",
+        "terrainIcon": "如果同时还有图标,地形会移到 angle 330,图标会移到 angle 30。",
+        "terrainAlone": "没有城市或 centerTown 时,地形不会被移动。",
+        "valueOne": "第一个数值会移到 angle 210、percent 0.7。",
+        "valueTwo": "只有第一个数值会被移动,第二个保持在中央。",
+        "labelOne": "第一个标签会移到 angle 150、percent 0.7。",
+        "labelTwo": "第二个标签会移到 angle 270、percent 0.7。",
+        "labelThree": "只有前两个标签会被移动,第三个保持在中央。",
+        "offAngle": "任何定位字段(这里是 angle 0)都会关闭该地形的自动定位。",
+        "offOne": "关闭自动定位只针对单个元素,第二个地形仍会被移动。",
+        "everything": "城市、地形、图标、一个数值和两个标签,按标准布局排列。"
+      }
     }
   },
   "games": {

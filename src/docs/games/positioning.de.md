@@ -14,16 +14,21 @@ tu das ruhig. Das System soll nur sinnvolle Standardwerte liefern, wenn du es
 nicht tust.
 
 Wenn du die automatische Positionierung für ein Element ausschalten möchtest,
-füge diesem Element einfach ein einzelnes Positionsfeld hinzu. Wenn du zum
-Beispiel `"angle": 0` hinzufügst, wird die automatische Positionierung
-faktisch ausgeschaltet, und das Element bleibt in der Mitte des Kartenfelds.
+füge diesem Element einfach ein Positionsfeld (`angle`, `percent`, `rotate`,
+`rotation`, `side`, `x` oder `y`) hinzu. Wenn du zum Beispiel `"angle": 0`
+hinzufügst, wird die automatische Positionierung faktisch ausgeschaltet, und das
+Element bleibt in der Mitte des Kartenfelds. Das gilt nur für dieses Element, die
+anderen Elemente des Kartenfelds werden weiterhin positioniert.
+
+Jede der folgenden Regeln wird auf der Beispielseite [Automatische
+Positionierung](/elements/positioning) live mit ihrem JSON gezeichnet.
 
 ## Regeln
 
 ### Symbole
 
-Symbole (auf einem Plättchen mit einer einzelnen Stadt oder centerTown) werden
-verschoben nach:
+Symbole (auf einem Plättchen mit einer Stadt oder centerTown) werden verschoben
+nach ([Beispiele](/elements/positioning#icons)):
 
 ```json
 {
@@ -32,7 +37,7 @@ verschoben nach:
 }
 ```
 
-Wenn es zusätzlich Geländekosten gibt, werden diese nach links verschoben, nach:
+Wenn es zusätzlich Geländekosten gibt, wird das Symbol nach links verschoben, nach:
 
 ```json
 {
@@ -44,7 +49,8 @@ Wenn es zusätzlich Geländekosten gibt, werden diese nach links verschoben, nac
 ### Werte
 
 Der erste Wert jedes Plättchens wird automatisch in die obere rechte Ecke
-positioniert:
+positioniert ([Beispiele](/elements/positioning#values)). Weitere Werte werden
+nicht verschoben:
 
 ```json
 {
@@ -56,7 +62,7 @@ positioniert:
 ### Beschriftungen
 
 Die erste Beschriftung auf einem Plättchen wird automatisch in die obere linke
-Ecke positioniert:
+Ecke positioniert ([Beispiele](/elements/positioning#labels)):
 
 ```json
 {
@@ -66,7 +72,7 @@ Ecke positioniert:
 ```
 
 Die zweite Beschriftung auf einem Plättchen wird automatisch an die rechte
-Seite positioniert:
+Seite positioniert. Weitere Beschriftungen werden nicht verschoben:
 
 ```json
 {
@@ -77,8 +83,8 @@ Seite positioniert:
 
 ### Gelände
 
-Geländekosten (auf einem Plättchen mit einer einzelnen Stadt oder centerTown)
-werden verschoben nach:
+Geländekosten (auf einem Plättchen mit einer Stadt oder centerTown) werden
+verschoben nach ([Beispiele](/elements/positioning#terrain)):
 
 ```json
 {

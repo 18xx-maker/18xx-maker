@@ -136,6 +136,7 @@ export const routes = [
   ["/elements", "atoms"],
   ["/elements/tiles", "tiles"],
   ["/elements/logos", "logos"],
+  ["/elements/positioning", "positioning"],
   ["/games", "games"],
   ["/app", "home"],
   ["/settings", "settings"],
