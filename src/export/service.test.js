@@ -22,7 +22,8 @@ const fakeSlot = ({ state = "ready", hang } = {}) => ({
     }
     return {};
   },
-  evaluate: async () => state,
+  evaluate: async (expression) =>
+    expression.includes("serializeSvg") ? { text: "<svg/>" } : state,
 });
 
 const job = (name, format = "pdf", route = "/games/render:18Test/map") => ({
@@ -142,6 +143,39 @@ describe("run", () => {
 
     expect(order).toEqual(["dialog", "capture"]);
     expect(files()).toEqual(["chosen.pdf"]);
+  });
+
+  it("asks for an svg with its own title", async () => {
+    const { service, ui, dialogs } = setup();
+    dialogs.saveFile.mockResolvedValue({ out: tmp, name: "chosen.svg" });
+
+    await service.run(
+      1,
+      request({
+        single: true,
+        jobs: [
+          {
+            ...job("a.svg", "svg"),
+            doc: {
+              route: "/games/render:18Test/map",
+              query: {},
+              capture: { selector: ".printElement" },
+            },
+          },
+        ],
+      }),
+      ui,
+    );
+
+    expect(dialogs.saveFile).toHaveBeenCalledWith({
+      title: "Save SVG",
+      name: "a.svg",
+      format: "svg",
+    });
+    expect(files()).toEqual(["chosen.svg"]);
+    expect(fs.readFileSync(path.join(tmp, "chosen.svg"), "utf-8")).toBe(
+      "<svg/>",
+    );
   });
 
   it("captures nothing when the dialog is cancelled", async () => {
@@ -384,6 +418,12 @@ describe("validateRequest", () => {
     bad({ dpi: 301 }, "1 to 300 dpi");
     bad({ dpi: 0 }, "1 to 300 dpi");
     expect(() => validateRequest(request({ dpi: 1 }))).not.toThrow();
+  });
+
+  it("takes an svg", () => {
+    expect(() =>
+      validateRequest(request({ jobs: [job("a.svg", "svg")] })),
+    ).not.toThrow();
   });
 
   it("refuses a file that is not valid", () => {

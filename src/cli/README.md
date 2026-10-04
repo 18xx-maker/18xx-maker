@@ -50,22 +50,22 @@ pnpm maker help b18
 
 ## Export
 
-`export` builds PDF, PNG and Board 18 files from a game. It needs the built site
+`export` builds PDF, PNG, SVG and Board 18 files from a game. It needs the built site
 (`pnpm build`) and puts the files in `render/<game>`.
 
 ```shell
-pnpm maker export <game|path.json> --format pdf,png,b18
+pnpm maker export <game|path.json> --format pdf,png,svg,b18
 ```
 
 | Option                    | Use                                                                                                                                                                    |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-f, --format <formats>`  | `pdf`, `png` and `b18` separated by commas, default `pdf`                                                                                                              |
+| `-f, --format <formats>`  | `pdf`, `png`, `svg` and `b18` separated by commas, default `pdf`                                                                                                       |
 | `--docs <pages>`          | only these pages: `map,tiles,cards`, also for their PNGs                                                                                                               |
 | `--layouts <layouts>`     | `all`: a sheet for every layout of the cards, tiles and tokens, or `current`                                                                                           |
 | `--background <bg>`       | `white` (default) or `transparent`: the background of the map, market, par, revenue and tile manifest PNGs (not of Board 18 images); every other PNG stays transparent |
 | `--variation <n>`         | only this map variation, `all` for every one                                                                                                                           |
 | `--config <file>`         | a config file on top of `src/config.json` (the settings to change)                                                                                                     |
-| `--dpi <dpi>`             | resolution of PNGs, 1 to 300 (the default and the highest)                                                                                                             |
+| `--dpi <dpi>`             | resolution of PNGs, 1 to 300 (the default and the highest), SVGs have none                                                                                             |
 | `-o, --out <folder>`      | the folder that holds the game folders, default `render`                                                                                                               |
 | `-j, --jobs <n>`          | files captured at the same time, default 1                                                                                                                             |
 | `-a, --all`               | every bundled game                                                                                                                                                     |
@@ -83,7 +83,7 @@ field. The game schema checks it (`pnpm validate`, `maker validate`, and
 ```json
 {
   "exports": {
-    "formats": ["pdf", "png", "b18"],
+    "formats": ["pdf", "png", "svg", "b18"],
     "docs": ["map", "cards"],
     "layouts": "all",
     "variation": 1,
@@ -95,7 +95,7 @@ field. The game schema checks it (`pnpm validate`, `maker validate`, and
 
 | `exports`     | Flag            | Values                                         |
 | ------------- | --------------- | ---------------------------------------------- |
-| `formats`     | `--format`      | a list of `pdf`, `png`, `b18`                  |
+| `formats`     | `--format`      | a list of `pdf`, `png`, `svg`, `b18`           |
 | `docs`        | `--docs`        | a list of pages (`map`, `tiles`, `cards`, ...) |
 | `layouts`     | `--layouts`     | `all` or `current`                             |
 | `background`  | `--background`  | `white` or `transparent`                       |

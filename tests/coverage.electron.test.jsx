@@ -624,6 +624,35 @@ describe("export button", () => {
     expect(exported(requested())["tokens/0"]).toBe("1888-token-1.png");
   });
 
+  it("exports an svg for the components that are drawings", async () => {
+    const { user } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await openExport(user);
+    await user.click(
+      await screen.findByRole("menuitem", {
+        name: "Export game as svg images",
+      }),
+    );
+
+    expect(api.export).toHaveBeenCalledTimes(1);
+    const items = exported(requested());
+    expect(items).toMatchObject({
+      map: "18test-map.svg",
+      market: "18test-market.svg",
+      par: "18test-par.svg",
+      revenue: "18test-revenue.svg",
+      "tokens/0": "18test-token-1-BLRR.svg",
+    });
+    expect(Object.values(items).every((name) => name.endsWith(".svg"))).toBe(
+      true,
+    );
+    expect(Object.keys(items)).not.toContain("background");
+    expect(Object.keys(items).some((page) => page.includes("paginated"))).toBe(
+      false,
+    );
+  });
+
   it("exports every component of the game as pngs", async () => {
     const { user } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");

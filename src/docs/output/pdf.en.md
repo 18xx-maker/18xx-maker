@@ -15,9 +15,9 @@ click on the export button:
 ![Toolbar of a game page in a web browser with the print button circled](/images/print-button-light.png "In a web browser the same spot shows the print button.")
 
 This will expose a menu with export options: export the full game as PDF
-documents, as PNG images or as a Board18 box. Exporting this way
+documents, as PNG images, as SVG images or as a Board18 box. Exporting this way
 _will_ respect any config options you have set in the app. The _Export options_
-entry opens a panel where you choose the formats (PDF, PNG and Board18), the
+entry opens a panel where you choose the formats (PDF, PNG, SVG and Board18), the
 documents, if every layout of a sheet is exported and the folder, then exports them all at once. The panel starts with
 the options of the game's `exports` field if it has one (see [Export
 options](/docs/games/exports)), and what you change there wins. Press _Cancel export_ in

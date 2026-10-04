@@ -174,6 +174,27 @@ describe("export options", () => {
     expect(requested().out).toBeUndefined();
   });
 
+  it("exports svg files without a resolution or a background to choose", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(checkbox(panel, "PDF documents"));
+    await user.click(checkbox(panel, "SVG images"));
+
+    expect(within(panel).getByLabelText("PNG resolution (dpi)")).toBeDisabled();
+    expect(
+      within(panel).getByRole("combobox", { name: "Image background" }),
+    ).toBeDisabled();
+    // The documents are for svg files too
+    expect(checkbox(panel, "Map")).toBeEnabled();
+
+    await user.click(exportButton(panel));
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    const { jobs } = requested();
+    expect(jobs.every(({ format }) => format === "svg")).toBe(true);
+    expect(jobs.map(({ path }) => path)).toEqual(
+      expect.arrayContaining(["18test-map.svg", "18test-tile-1.svg"]),
+    );
+  });
+
   it("only takes a background for png images, not a Board18 box", async () => {
     const { user, panel } = await openOptions();
     const background = within(panel).getByRole("combobox", {
@@ -255,6 +276,30 @@ describe("export options", () => {
       within(panel).getByText("Choose at least one document"),
     ).toBeVisible();
     expect(exportButton(panel)).toBeDisabled();
+  });
+
+  it("disables the export of svg files of pages that have no svg", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(checkbox(panel, "PDF documents"));
+    await user.click(checkbox(panel, "SVG images"));
+    const documents = within(
+      within(panel).getByRole("group", { name: "Documents" }),
+    ).getAllByRole("checkbox");
+    // Only the pages that have no svg
+    for (const box of documents) {
+      const on = box.getAttribute("aria-checked") === "true";
+      if (on !== (box.id === "export-doc-cards")) await user.click(box);
+    }
+
+    expect(
+      within(panel).getByText(
+        "Nothing to export: the chosen documents have no files in the chosen formats",
+      ),
+    ).toBeVisible();
+    expect(exportButton(panel)).toBeDisabled();
+
+    await user.click(checkbox(panel, "Map"));
+    expect(exportButton(panel)).toBeEnabled();
   });
 
   it("exports every layout when asked", async () => {
@@ -395,9 +440,10 @@ describe("export options", () => {
         if (!panel.contains(activeElement)) break;
         order.push(activeElement.id || activeElement.textContent);
       }
-      expect(order.slice(0, 4)).toEqual([
+      expect(order.slice(0, 5)).toEqual([
         "export-format-pdf",
         "export-format-png",
+        "export-format-svg",
         "export-format-b18",
         "export-doc-background",
       ]);

@@ -9,7 +9,7 @@
 import { MAX_DPI } from "./capture.js";
 import { DOCS } from "./select.js";
 
-export const FORMATS = ["pdf", "png", "b18"];
+export const FORMATS = ["pdf", "png", "svg", "b18"];
 export const LAYOUTS = ["all", "current"];
 export const BACKGROUNDS = ["transparent", "white"];
 

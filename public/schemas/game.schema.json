@@ -2128,17 +2128,14 @@
       "properties": {
         "formats": {
           "type": "array",
-          "description": "The files to export, like --format. pdf, png and b18 (a Board18 box). Defaults to pdf.",
-          "items": {
-            "type": "string",
-            "enum": ["pdf", "png", "b18"]
-          },
+          "description": "The files to export, like --format. pdf, png, svg (the map, market, par, revenue, tiles and tokens, for vector graphics software) and b18 (a Board18 box). Defaults to pdf.",
+          "items": { "type": "string", "enum": ["pdf", "png", "svg", "b18"] },
           "minItems": 1,
           "uniqueItems": true
         },
         "docs": {
           "type": "array",
-          "description": "Only export these pages, like --docs. All pages when left out. Only for pdf and png files.",
+          "description": "Only export these pages, like --docs. All pages when left out. Only for pdf, png and svg files.",
           "items": {
             "type": "string",
             "enum": [
@@ -2168,7 +2165,7 @@
         },
         "background": {
           "type": "string",
-          "description": "The background of the map, market, par, revenue and tile manifest png images, like --background: white or transparent. Every other png image (the background page, cards, charters, tokens and tiles) is always transparent. Board18 boxes and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to white.",
+          "description": "The background of the map, market, par, revenue and tile manifest png images, like --background: white or transparent. Every other png image (the background page, cards, charters, tokens and tiles) is always transparent. Board18 boxes, svg and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to white.",
           "enum": ["white", "transparent"],
           "default": "white"
         },

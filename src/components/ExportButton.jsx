@@ -3,7 +3,14 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useMatch } from "react-router";
 
-import { Box, FileImage, FileText, Images, Settings2 } from "lucide-react";
+import {
+  Box,
+  FileImage,
+  FileText,
+  Images,
+  Settings2,
+  Shapes,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -92,6 +99,7 @@ const ExportButton = () => {
     const actions = {
       p: () => handleAll("pdf"),
       n: () => handleAll("png"),
+      s: () => handleAll("svg"),
       b: () => handleAll("b18"),
       o: () => setOptions(true),
     };
@@ -135,6 +143,12 @@ const ExportButton = () => {
             <FileImage />
             <span>
               <KeyLabel text={t("export.allPng")} shortcut="n" word="png" />
+            </span>
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => handleAll("svg")}>
+            <Shapes />
+            <span>
+              <KeyLabel text={t("export.allSvg")} shortcut="s" word="svg" />
             </span>
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => handleAll("b18")}>

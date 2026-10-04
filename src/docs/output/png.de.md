@@ -13,7 +13,7 @@ dann auf den Export-Button klicken:
 ![Werkzeugleiste einer Spielseite in einem Webbrowser mit eingekreistem Druck-Button](/images/print-button-light.png "In einem Webbrowser zeigt dieselbe Stelle den Druck-Button.")
 
 Dadurch öffnet sich ein Menü mit Exportoptionen: das ganze Spiel als
-PDF-Dokumente, als PNG-Bilder oder als Board18-Box exportieren. Ein Export auf
+PDF-Dokumente, als PNG-Bilder, als SVG-Bilder oder als Board18-Box exportieren. Ein Export auf
 diesem Weg berücksichtigt _alle_ Konfigurationsoptionen, die du in der App
 gesetzt hast.
 
@@ -96,4 +96,5 @@ das). Siehe [Exportoptionen](/docs/games/exports) für alle Optionen.
 
 Denk daran, dass dabei die Einstellungen aus dem Konfigurationsbereich im
 Browser nicht verwendet werden, siehe [PDF-Ausgabe](/docs/output/pdf), wie du
-deine Konfiguration verwendest.
+deine Konfiguration verwendest. Um eine Komponente stattdessen in
+Vektorgrafik-Software zu bearbeiten, siehe [SVG-Ausgabe](/docs/output/svg).

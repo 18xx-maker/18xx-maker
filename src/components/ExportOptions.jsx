@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -28,7 +28,7 @@ import { BACKGROUNDS } from "@/export/options.js";
 import { createAlert } from "@/state";
 import { exportDefaults, exportPages, planExport } from "@/util/exportPlan";
 
-const FORMATS = ["pdf", "png", "b18"];
+const FORMATS = ["pdf", "png", "svg", "b18"];
 
 const Field = ({ id, label, description, error, children }) => (
   <div className="flex flex-col gap-1">
@@ -93,9 +93,33 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const files = formats.some((format) => format !== "b18");
   const dpiValid = /^\d+$/.test(dpi) && dpi >= 1 && dpi <= MAX_DPI;
   const dpiError = formats.includes("png") && !dpiValid;
+  const options = () => ({
+    formats,
+    docs,
+    layouts: layoutsAll ? "all" : "current",
+    variation: variation === ALL ? null : Number(variation),
+    dpi: Number(dpiValid ? dpi : MAX_DPI),
+    background,
+    b18: { version, author },
+  });
+  // How many files the choice exports, to tell when it is none (an svg of
+  // pages that have no svg)
+  const count = useMemo(
+    () =>
+      open && formats.length > 0
+        ? planExport(game, layers, {
+            formats,
+            docs,
+            layouts: layoutsAll ? "all" : "current",
+            variation: variation === ALL ? null : Number(variation),
+          }).jobs.length
+        : null,
+    [game, layers, open, formats, docs, layoutsAll, variation],
+  );
   const problem =
     (formats.length === 0 && t("export.noFormat")) ||
-    (files && docs.length === 0 && t("export.noDocuments"));
+    (files && docs.length === 0 && t("export.noDocuments")) ||
+    (count === 0 && t("export.noFiles"));
 
   const chooseFolder = async () => {
     const folder = await window.api.chooseExportFolder();
@@ -106,15 +130,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
     setRunning(true);
     try {
       const result = await window.api.export({
-        ...planExport(game, layers, {
-          formats,
-          docs,
-          layouts: layoutsAll ? "all" : "current",
-          variation: variation === ALL ? null : Number(variation),
-          dpi: Number(dpiValid ? dpi : MAX_DPI),
-          background,
-          b18: { version, author },
-        }),
+        ...planExport(game, layers, options()),
         out,
       });
       // A dialog that was cancelled leaves the options open

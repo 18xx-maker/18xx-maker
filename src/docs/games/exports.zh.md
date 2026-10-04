@@ -19,18 +19,18 @@
 
 ## 选项
 
-| 选项          | 标志            | 取值                                                                                                                                                        | 默认值                                                             |
-| ------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `formats`     | `--format`      | `pdf`、`png` 和 `b18`(Board18 游戏盒)组成的列表                                                                                                             | `["pdf"]`                                                          |
-| `docs`        | `--docs`        | 页面列表:`background`、`cards`、`charters`、`map`、`market`、`par`、`revenue`、`tile-manifest`、`tiles` 和 `tokens`                                         | 游戏的每一个页面                                                   |
-| `layouts`     | `--layouts`     | `all`:为卡牌、地块和标记的每一种布局各生成一个文件,`current`:仅使用配置中的布局                                                                             | 配置中的 `export.allLayouts` 设置                                  |
-| `background`  | `--background`  | `white` 或 `transparent`:地图、股市、发行价、收益和地块清单 png 图片的背景,其他所有 png(背景页、卡牌、公司执照、标记和地块)始终是透明的(Board18 图片不适用) | `white`                                                            |
-| `variation`   | `--variation`   | 地图变体的编号,0 表示第一个(`--variation all` 表示导出每一个)                                                                                               | 每一个变体                                                         |
-| `png.dpi`     | `--dpi`         | 1 到 300 的整数                                                                                                                                             | `300`,即图片打印时的实际尺寸                                       |
-| `b18.version` | `--b18-version` | Board18 游戏盒的版本                                                                                                                                        | `1.0`                                                              |
-| `b18.author`  | `--b18-author`  | Board18 游戏盒的作者                                                                                                                                        | `maker config` 的 `b18.author`,或您的姓名;在应用中则为游戏的设计师 |
+| 选项          | 标志            | 取值                                                                                                                                                               | 默认值                                                             |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `formats`     | `--format`      | `pdf`、`png`、`svg` 和 `b18`(Board18 游戏盒)组成的列表                                                                                                             | `["pdf"]`                                                          |
+| `docs`        | `--docs`        | 页面列表:`background`、`cards`、`charters`、`map`、`market`、`par`、`revenue`、`tile-manifest`、`tiles` 和 `tokens`                                                | 游戏的每一个页面                                                   |
+| `layouts`     | `--layouts`     | `all`:为卡牌、地块和标记的每一种布局各生成一个文件,`current`:仅使用配置中的布局                                                                                    | 配置中的 `export.allLayouts` 设置                                  |
+| `background`  | `--background`  | `white` 或 `transparent`:地图、股市、发行价、收益和地块清单 png 图片的背景,其他所有 png(背景页、卡牌、公司执照、标记和地块)始终是透明的(Board18 和 svg 图片不适用) | `white`                                                            |
+| `variation`   | `--variation`   | 地图变体的编号,0 表示第一个(`--variation all` 表示导出每一个)                                                                                                      | 每一个变体                                                         |
+| `png.dpi`     | `--dpi`         | 1 到 300 的整数                                                                                                                                                    | `300`,即图片打印时的实际尺寸                                       |
+| `b18.version` | `--b18-version` | Board18 游戏盒的版本                                                                                                                                               | `1.0`                                                              |
+| `b18.author`  | `--b18-author`  | Board18 游戏盒的作者                                                                                                                                               | `maker config` 的 `b18.author`,或您的姓名;在应用中则为游戏的设计师 |
 
-`docs`、`layouts` 和 `variation` 适用于 pdf 和 png 文件(Board18 游戏盒有自己的图片,但会采用 `variation`)。`png.dpi` 只适用于 png 文件:Board18 游戏盒中的图片始终每个单位使用一个像素。pdf 文件除了共有的选项之外,没有自己专属的选项。
+`docs`、`layouts` 和 `variation` 适用于 pdf、png 和 svg 文件(Board18 游戏盒有自己的图片,但会采用 `variation`)。`png.dpi` 只适用于 png 文件:Board18 游戏盒中的图片始终每个单位使用一个像素。svg 文件(地图、股市、发行价、收益、地块和标记)是透明的,没有分辨率,`png.dpi` 和 `background` 不会改变它们。pdf 和 svg 文件除了共有的选项之外,没有自己专属的选项。
 
 与命令在哪里、如何运行有关的选项不属于游戏:`--out`、`--jobs`、`--all`、`--config` 和 `--debug` 只是命令行标志。
 

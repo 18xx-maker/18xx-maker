@@ -42,6 +42,7 @@
   "export": {
     "allPdf": "Spiel als PDF-Dokumente exportieren",
     "allPng": "Spiel als PNG-Bilder exportieren",
+    "allSvg": "Spiel als SVG-Bilder exportieren",
     "b18": "Spiel als Board18-Box exportieren",
     "options": "Exportoptionen",
     "optionsTitle": "{{title}} exportieren",
@@ -50,13 +51,14 @@
     "format": {
       "pdf": "PDF-Dokumente",
       "png": "PNG-Bilder",
+      "svg": "SVG-Bilder",
       "b18": "Board18-Box"
     },
     "documents": "Dokumente",
-    "documentsDescription": "Nur für PDF- und PNG-Dateien.",
+    "documentsDescription": "Nur für PDF-, PNG- und SVG-Dateien.",
     "allLayouts": "Jedes Layout eines Bogens",
     "background": "Bildhintergrund",
-    "backgroundDescription": "Für die PNG-Bilder von Karte, Aktienmarkt, Par-Tabelle, Einnahmentabelle und Plättchenübersicht, standardmäßig weiß. Die übrigen PNG-Bilder (Hintergrund, Karten, Gesellschaftskarten, Token und Plättchen) sind immer transparent. Board18-Karten und -Aktienmärkte sind immer weiß, ihre Token und Plättchen transparent.",
+    "backgroundDescription": "Für die PNG-Bilder von Karte, Aktienmarkt, Par-Tabelle, Einnahmentabelle und Plättchenübersicht, standardmäßig weiß. Die übrigen PNG-Bilder (Hintergrund, Karten, Gesellschaftskarten, Token und Plättchen) sind immer transparent. Board18-Karten und -Aktienmärkte sind immer weiß, ihre Token und Plättchen transparent. SVG-Bilder sind immer transparent.",
     "transparent": "Transparent",
     "white": "Weiß",
     "variation": "Kartenvariante",
@@ -73,6 +75,7 @@
     "chooseFolder": "Ordner auswählen",
     "noFormat": "Wähle mindestens ein Format aus",
     "noDocuments": "Wähle mindestens ein Dokument aus",
+    "noFiles": "Nichts zu exportieren: Die gewählten Dokumente haben keine Dateien in den gewählten Formaten",
     "run": "Exportieren",
     "running": "Exportiere",
     "cancel": "Export abbrechen",
@@ -140,6 +143,10 @@
       "png": {
         "title": "PNG-Ausgabe",
         "description": "PNG-Bilder erzeugen"
+      },
+      "svg": {
+        "title": "SVG-Ausgabe",
+        "description": "SVG-Bilder für Vektorgrafik-Software erzeugen"
       },
       "b18": {
         "title": "Board18-Ausgabe",
@@ -831,7 +838,7 @@
     "key": "Taste",
     "use": "Verwendung",
     "notes": "Hinweise",
-    "exportMenu": "Bei geöffnetem Exportmenü: p exportiert PDFs, n exportiert PNGs, b exportiert eine Board18-Datei und o öffnet die Exportoptionen.",
+    "exportMenu": "Bei geöffnetem Exportmenü: p exportiert PDFs, n exportiert PNGs, s exportiert SVGs, b exportiert eine Board18-Datei und o öffnet die Exportoptionen.",
     "keys": {
       "escape": {
         "use": "Zurück: schließt zuerst das Konfigurationspanel, verlässt dann die Bearbeitungsseite und wechselt zur Spielseite, dann zur Startseite",

@@ -24,10 +24,12 @@ right. See [JSON Schemas](/docs/games/schemas).
 
 ## How do I export or print?
 
-In the app, use the Export button at the top left of a game page: pdf, png or
+In the app, use the Export button at the top left of a game page: pdf, png, svg or
 Board18 for the whole game, or _Export options_ to choose. On the website the
 button opens your browser's print dialog. See [PDF Output](/docs/output/pdf),
-[PNG Output](/docs/output/png) and [Board18 Output](/docs/output/b18). The
+[PNG Output](/docs/output/png), [SVG Output](/docs/output/svg) (to edit the
+map, tiles or tokens in Inkscape or Illustrator) and [Board18
+Output](/docs/output/b18). The
 command line can export too, with `maker export`; its options are in the CLI
 readme and can be stored in the game file, see [Export
 Options](/docs/games/exports).

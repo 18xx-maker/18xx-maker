@@ -180,7 +180,7 @@ describe("validate", () => {
     it("accepts every option", () => {
       const { code } = run(
         withExports({
-          formats: ["pdf", "png", "b18"],
+          formats: ["pdf", "png", "svg", "b18"],
           docs: ["map", "tile-manifest"],
           layouts: "current",
           variation: 0,
@@ -189,6 +189,10 @@ describe("validate", () => {
         }),
       );
       expect(code).toBe(0);
+    });
+
+    it("accepts svg as the only format", () => {
+      expect(run(withExports({ formats: ["svg"] })).code).toBe(0);
     });
 
     it("accepts a game without them, and with none set", () => {

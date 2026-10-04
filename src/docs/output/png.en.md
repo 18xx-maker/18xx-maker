@@ -13,7 +13,7 @@ click on the export button:
 ![Toolbar of a game page in a web browser with the print button circled](/images/print-button-light.png "In a web browser the same spot shows the print button.")
 
 This will expose a menu with export options: export the full game as PDF
-documents, as PNG images or as a Board18 box. Exporting this way
+documents, as PNG images, as SVG images or as a Board18 box. Exporting this way
 _will_ respect any config options you have set in the app.
 
 The map, market, par, revenue and tile manifest images have a border of a
@@ -85,4 +85,5 @@ resolution over 300 is an error in the game file too (`pnpm validate` says so).
 See [Export options](/docs/games/exports) for all of them.
 
 Remember that this will not use the options setup in the browser config page,
-see [PDF output](/docs/output/pdf) for how to use your config.
+see [PDF output](/docs/output/pdf) for how to use your config. To edit a
+component in vector graphics software instead, see [SVG output](/docs/output/svg).
