@@ -313,7 +313,10 @@ const Tiles = () => {
                     </TileBoundary>
                   </div>
                 </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
+                <TooltipContent
+                  data-testid="tile-popover"
+                  className="max-w-xs border bg-popover text-sm text-popover-foreground shadow-md"
+                >
                   <UsedBy games={gamesOfEntry(entry, games, usage)} />
                 </TooltipContent>
               </Tooltip>

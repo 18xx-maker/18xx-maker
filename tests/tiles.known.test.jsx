@@ -52,6 +52,19 @@ describe("tiles of games on this device", () => {
     );
   });
 
+  it("styles the popover with the theme popover colors and a border", async () => {
+    opfs.peekGame.mockResolvedValue(saved);
+    const { user } = renderApp("/elements/tiles?id=ZZ9", withSaved);
+    await waitFor(() => expect(shownTiles()).toBe(1));
+
+    await user.hover(screen.getByTestId("tile-ZZ9"));
+    await screen.findByRole("tooltip");
+    const popover = screen.getByTestId("tile-popover");
+    expect(popover).toHaveClass("bg-popover", "text-popover-foreground");
+    expect(popover).toHaveClass("border");
+    expect(popover).not.toHaveClass("bg-primary");
+  });
+
   it("opens the popover with a tap and closes it with a second tap", async () => {
     opfs.peekGame.mockResolvedValue(saved);
     const { user } = renderApp("/elements/tiles?id=ZZ9", withSaved);
