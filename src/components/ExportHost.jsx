@@ -153,6 +153,7 @@ const ExportHost = () => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent
+          aria-label={t("export.label")}
           side={anchor.side}
           align={anchor.side === "right" ? "start" : "end"}
           onKeyDown={handleMenuKeyDown}
