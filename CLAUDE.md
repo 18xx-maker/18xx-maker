@@ -78,6 +78,54 @@ Conventions:
 - Lefthook's pre-commit test step excludes `tests/**`; run `pnpm test:run`
   yourself before pushing.
 
+## Visual changes
+
+Snapshots and tests cannot see spacing, centering, size or stroke width, so
+look at the output yourself before the first push. Two PRs took 8 and 2
+follow-up commits on spacing and a missing border that a render would have
+shown at once.
+
+1. Build, then render the thing you changed zoomed in, with `pnpm shot`
+   (`scripts/shot.mjs`, output in `shots/`, not committed):
+
+   ```shell
+   pnpm build
+   pnpm shot 18Test tokens --clip 316,6,200,108      # a region, 4x
+   pnpm shot 18Test tokens --sel "g:has(> circle)"   # one element
+   pnpm shot 18Test tokens --vs /path/to/main/dist/site   # side by side
+   ```
+
+   `--vs` takes a build of `main` (build it once in another worktree) and
+   writes `*-compare.png` with before and after. Open the PNG with the Read
+   tool and look at it. A render you did not look at does not count.
+
+2. Compare against the neighbours, not against your memory: put the new item
+   next to an existing one in the same render (`18Test.json` has the
+   examples) and check it matches.
+3. Work out spacing and size from numbers (font size, cap height, the
+   container size) once, instead of nudging by a pixel per commit. If a
+   second look still shows a problem, change the formula, not the constant.
+4. Put the before/after image in the PR description (drag it into the PR
+   body) so the review is one image. If the request came without a
+   reference (a screenshot, a sketch, an item to match), ask for one before
+   starting.
+
+Design checklist for tokens and icons:
+
+- Icons (`src/data/icons`): a 25 x 25 `viewBox="-12.5 -12.5 25 25"` centered on
+  0, black `stroke="#000"` at the default width of 1 with round caps and
+  joins, fills as `color-*` classes so themes can recolor them. A new icon
+  gets the stroke the other icons have, and it sits in the same box.
+- Token text: the label is centered on the token by its cap height, not its
+  line box. With two lines, center them as one block, with the same gap
+  whether the second line is above or below, and a second line smaller than
+  the label (long text shrinks). Both lines keep the label's stroke and
+  color rules.
+- Check the longest and the shortest value in `18Test.json`, on a light and a
+  dark background color, in every position the feature supports.
+- A new field also goes in the schema (see "JSON schemas"); `pnpm validate`
+  fails in CI otherwise.
+
 ## Upgrade notes
 
 - The UI is shadcn/Radix + Tailwind 4 (`src/components/ui`, theme tokens in
