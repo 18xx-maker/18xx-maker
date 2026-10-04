@@ -27,7 +27,7 @@ const ExportButton = () => {
       aria-haspopup="menu"
       {...{ [EXPORT_TRIGGER]: "" }}
       onClick={() => dispatch(createSetExportMenuOpen(true))}
-      className="border rounded-sm px-2 h-8 m-0 print:hidden"
+      className="border rounded-sm px-2 h-8 m-0 shrink-0 print:hidden"
     >
       <Images className="size-6" />
       <span className="max-md:sr-only">{t("export.label")}</span>

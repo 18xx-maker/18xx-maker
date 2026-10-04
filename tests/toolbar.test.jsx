@@ -67,6 +67,21 @@ describe("toolbar", () => {
     );
   });
 
+  it("never squishes toolbar controls, whatever the language", async () => {
+    renderApp("/games/18Test/cards");
+    await screen.findByTestId("game-18Test-cards");
+
+    [
+      screen.getByRole("link", { name: "Game Info" }),
+      screen.getByRole("button", { name: "Config" }),
+      screen.getByRole("button", { name: "Print" }),
+      screen.getByRole("button", { name: "Filter" }),
+      screen.getByRole("combobox", { name: "Game Section" }),
+    ].forEach((el) => {
+      expect(el).toHaveClass("shrink-0");
+    });
+  });
+
   it("only offers the cards toggles on the cards page", async () => {
     renderApp("/games/18Test/tiles");
     await screen.findByTestId("game-18Test-tiles");

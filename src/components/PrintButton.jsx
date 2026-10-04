@@ -25,7 +25,7 @@ const PrintButton = () => {
   return (
     <Button
       variant="outline"
-      className="border rounded-sm px-2 h-8 m-0 print:hidden"
+      className="border rounded-sm px-2 h-8 m-0 shrink-0 print:hidden"
       onClick={handler}
     >
       <Printer className="size-6" />
