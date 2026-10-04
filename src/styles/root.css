@@ -520,6 +520,8 @@ body {
   box-sizing: border-box;
   line-height: normal;
   display: grid;
+  /* Two columns wide, more loans are cut off */
+  width: 1.55in;
   grid-template-rows: repeat(auto-fill, 0.7in);
   overflow: hidden;
   grid-auto-flow: column;
@@ -546,12 +548,22 @@ body {
 }
 
 .charter--half .charter__loans {
+  width: 1.75in;
   grid-template-rows: repeat(auto-fill, 0.55in);
 }
 
 .charter--half .charter__loans svg {
   height: 0.5in;
-  padding: 0.05in 0 0;
+  padding: 0.05in 0.25in 0 0;
+}
+
+/* Keep the turn order text clear of the loan slots */
+.charter--loans dl {
+  padding-right: 1.675in;
+}
+
+.charter--loans.charter--half dl {
+  padding-right: 1.875in;
 }
 
 .prices {

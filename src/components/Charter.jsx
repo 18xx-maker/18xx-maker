@@ -79,8 +79,9 @@ const Charter = ({
   const showTreasury = company.treasury !== false;
 
   // A slot on the charter: a shape with its label under it (turned sideways on
-  // half width charters). A loan prints no label when it has none, and its label is always black
-  // because it sits on the body, not on the colored header.
+  // half width charters). A loan prints no label when it has none, and its
+  // label is always black because it sits on the body, not on the colored
+  // header.
   const spot = (key, shape, label, loan) => (
     <svg key={key}>
       <g transform={`translate(25 25)`}>
@@ -191,7 +192,7 @@ const Charter = ({
           className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}
         >
           <div
-            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}`}
+            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${loans.length > 0 ? " charter--loans" : ""}`}
           >
             <div
               className="charter__bleed"
