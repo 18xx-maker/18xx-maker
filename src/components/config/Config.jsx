@@ -1,5 +1,7 @@
 import { diff } from "deep-object-diff";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 
 import {
@@ -36,6 +38,7 @@ import Items from "@/components/config/Items";
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
+import { createAlert } from "@/state";
 import { useStringParam } from "@/util/query";
 
 export const getPath = split(".");
@@ -48,12 +51,33 @@ export const getSchema = (name) => path(getSchemaPath(name), schema);
 
 const Config = () => {
   const { t } = useTranslation();
-  const { config, resetConfig } = useConfig();
+  const dispatch = useDispatch();
+  const { config, resetConfig, importConfig } = useConfig();
+  const [importText, setImportText] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const [section, setSection] = useStringParam("section", "colors");
 
   const items = prop("items", find(propEq(section, "section"), sections)) || [];
+
+  const onImport = async () => {
+    let imported;
+    try {
+      imported = JSON.parse(importText);
+    } catch {
+      return dispatch(
+        createAlert(
+          t("alerts.configInvalidJson"),
+          t("alerts.configInvalidJsonMessage"),
+          "error",
+        ),
+      );
+    }
+
+    if (await importConfig(imported)) {
+      setImportText("");
+    }
+  };
 
   const onClose = () => {
     const params = new URLSearchParams(location.search);
@@ -127,6 +151,30 @@ const Config = () => {
               filename="config.json"
               className="my-5"
             />,
+            <h3 key="import-header" className="text-xl mb-2">
+              {t("config.data.importTitle")}
+            </h3>,
+            <p key="import-p" className="mb-4">
+              {t("config.data.importDescription")}
+            </p>,
+            <textarea
+              key="import-text"
+              aria-label={t("config.data.importTitle")}
+              placeholder={t("config.data.importPlaceholder")}
+              value={importText}
+              onChange={(e) => setImportText(e.target.value)}
+              rows={6}
+              className="w-full rounded-md border border-input bg-transparent px-3 py-2 font-mono text-sm shadow-xs focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+            />,
+            <Button
+              key="import-button"
+              variant="outline"
+              onClick={onImport}
+              disabled={!importText.trim()}
+              className="self-start"
+            >
+              {t("config.data.importButton")}
+            </Button>,
           ]}
         </div>
       </div>

@@ -247,4 +247,71 @@ describe("number fields", () => {
       expect(store.getState().config.charters?.border).toBe(1.5),
     );
   });
+
+  describe("importing a config", () => {
+    const paste = async (user, text) => {
+      await user.click(await screen.findByRole("textbox", { name: "Import" }));
+      await user.paste(text);
+      await user.click(screen.getByRole("button", { name: "Import Config" }));
+    };
+    const url = "/games/18Test/map?config=true&section=data";
+
+    it("replaces the stored config with the pasted settings", async () => {
+      const { user, store } = renderApp(url, {
+        config: { export: { allLayouts: true } },
+      });
+
+      await paste(user, '{"margin": 100, "font": {"size": "0.2in"}}');
+
+      await waitFor(() =>
+        expect(store.getState().config).toEqual({
+          margin: 100,
+          font: { size: "0.2in" },
+        }),
+      );
+      expect(store.getState().alert).toMatchObject({
+        title: "Config Imported",
+        type: "success",
+      });
+      expect(store.getState().errors).toEqual({});
+      expect(screen.getByRole("textbox", { name: "Import" })).toHaveValue("");
+    });
+
+    it("disables the button until there is text", async () => {
+      renderApp(url);
+      await screen.findByRole("textbox", { name: "Import" });
+      expect(
+        screen.getByRole("button", { name: "Import Config" }),
+      ).toBeDisabled();
+    });
+
+    it("alerts on invalid json and stores nothing", async () => {
+      const { user, store } = renderApp(url);
+
+      await paste(user, "{nope");
+
+      await waitFor(() =>
+        expect(store.getState().alert).toMatchObject({
+          title: "Invalid JSON",
+          type: "error",
+        }),
+      );
+      expect(store.getState().config).toEqual({});
+    });
+
+    it("alerts on settings the schema rejects and stores nothing", async () => {
+      const { user, store } = renderApp(url);
+
+      await paste(user, '{"margin": "wide"}');
+
+      await waitFor(() =>
+        expect(store.getState().alert).toMatchObject({
+          title: "Invalid Config",
+          type: "error",
+        }),
+      );
+      expect(store.getState().config).toEqual({});
+      expect(store.getState().errors).toEqual({});
+    });
+  });
 });

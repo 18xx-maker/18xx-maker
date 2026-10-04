@@ -1,12 +1,13 @@
 import { diff } from "deep-object-diff";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
 import { mergeDeepRight } from "ramda";
 
 import { useGame, useValidation } from "@/hooks";
-import { createResetConfig, createSetConfig } from "@/state";
+import { createAlert, createResetConfig, createSetConfig } from "@/state";
 import { createConfigSelector } from "@/state/selectors";
 import { getRenderInput } from "@/util/renderInput";
 
@@ -26,10 +27,11 @@ const initialConfig = renderInput
 const selectConfig = createConfigSelector(initialConfig);
 
 export const useConfig = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const game = useGame();
   const location = useLocation();
-  const { validateConfigSchema } = useValidation();
+  const { validateConfigSchema, checkConfigSchema } = useValidation();
 
   const storedConfig = useSelector((state) => state.config);
   const { config, searchConfig, gameConfig } = useSelector((state) =>
@@ -47,8 +49,42 @@ export const useConfig = () => {
     [dispatch, validateConfigSchema],
   );
 
+  // Replaces the stored config with the imported settings and alerts with the
+  // result. Resolves true when imported, nothing is stored on schema errors.
+  const importConfig = useCallback(
+    async (imported) => {
+      const full = mergeDeepRight(initialConfig, imported);
+      const errors = await checkConfigSchema(full);
+
+      if (errors.length) {
+        dispatch(
+          createAlert(
+            t("alerts.configInvalid"),
+            errors
+              .map((error) => `${error.data.pointer}: ${error.message}`)
+              .join("\n"),
+            "error",
+          ),
+        );
+        return false;
+      }
+
+      dispatch(createSetConfig(diff(initialConfig, full)));
+      dispatch(
+        createAlert(
+          t("alerts.configImported"),
+          t("alerts.configImportedMessage"),
+          "success",
+        ),
+      );
+      return true;
+    },
+    [dispatch, checkConfigSchema, t],
+  );
+
   return {
     setConfig,
+    importConfig,
     resetConfig: useCallback(() => dispatch(createResetConfig()), [dispatch]),
     config,
     defaultConfig,

@@ -177,8 +177,10 @@ describe("electron root", () => {
 
     drop(transfer);
 
-    expect(api.saveGamePath).toHaveBeenCalledWith(
-      expect.objectContaining({ name: "game.json" }),
+    await waitFor(() =>
+      expect(api.saveGamePath).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "game.json" }),
+      ),
     );
     await waitFor(() =>
       expect(router.state.location.pathname).toBe("/games/1889/map"),
@@ -195,7 +197,7 @@ describe("electron root", () => {
     // Without dataTransfer.items the file comes from dataTransfer.files
     drop({ files: [file] });
 
-    expect(api.saveGamePath).toHaveBeenCalledWith(file);
+    await waitFor(() => expect(api.saveGamePath).toHaveBeenCalledWith(file));
     await waitFor(() =>
       expect(store.getState().alert).toMatchObject({
         title: "Error",

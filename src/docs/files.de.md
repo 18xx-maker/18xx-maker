@@ -101,3 +101,13 @@ Browser dieses Spiel vergessen.
 
 Die einzige Möglichkeit, die Datei mit den Daten auf deinem Computer zu
 aktualisieren, besteht darin, sie mit einer der obigen Methoden erneut zu öffnen.
+
+## Eine config.json importieren
+
+Einstellungen, die du im [Konfigurationsfenster](?config=true) geändert hast,
+kannst du im Bereich Daten als `config.json` speichern. Um eine solche Datei
+anderswo anzuwenden, ziehe sie auf die App oder die Website oder füge ihren
+Inhalt in das Feld Importieren im Bereich Daten ein. Die importierten
+Einstellungen ersetzen deine aktuellen eigenen Einstellungen. Eine abgelegte
+JSON-Datei wird als Konfiguration behandelt, wenn sie nur Konfigurationswerte
+enthält, andernfalls wird sie als Spiel geladen.

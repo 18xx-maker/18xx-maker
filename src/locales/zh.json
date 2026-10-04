@@ -698,7 +698,11 @@
       "reset": "重置为默认值",
       "local": "这些值保存在此浏览器的本地存储中。",
       "json": "JSON",
-      "file": "如果想把这些设置应用到命令行或本地服务器,可以复制这个 JSON 值并粘贴到 src/config.json 文件中。"
+      "file": "如果想把这些设置应用到命令行或本地服务器,可以复制这个 JSON 值并粘贴到 src/config.json 文件中。",
+      "importTitle": "导入",
+      "importDescription": "在此粘贴 config.json 文件的内容,或把文件拖放到页面任意位置。导入的设置将替换你当前的自定义设置。",
+      "importPlaceholder": "在此粘贴 config.json",
+      "importButton": "导入配置"
     },
     "toggle": "配置",
     "close": "关闭配置",
@@ -731,7 +735,12 @@
     "gameLoaded": "游戏已加载",
     "gameLoadedMessage": "已加载 {{title}}",
     "dropNotFile": "这里只能拖放文件",
-    "dropUnsupported": "你的浏览器不支持拖放文件"
+    "dropUnsupported": "你的浏览器不支持拖放文件",
+    "configInvalid": "配置无效",
+    "configInvalidJson": "JSON 无效",
+    "configInvalidJsonMessage": "该文本不是有效的 JSON",
+    "configImported": "配置已导入",
+    "configImportedMessage": "你的设置已被导入的配置替换"
   },
   "ui": {
     "close": "关闭",

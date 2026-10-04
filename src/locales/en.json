@@ -698,7 +698,11 @@
       "reset": "Reset To Defaults",
       "local": "These values are saved on this browser in local storage.",
       "json": "JSON",
-      "file": "You can copy and paste this json value into the file in src/config.json if you want to apply these settings to command line or local servers."
+      "file": "You can copy and paste this json value into the file in src/config.json if you want to apply these settings to command line or local servers.",
+      "importTitle": "Import",
+      "importDescription": "Paste the contents of a config.json file here, or drop the file anywhere on the page. The imported settings replace your current custom settings.",
+      "importPlaceholder": "Paste config.json here",
+      "importButton": "Import Config"
     },
     "toggle": "config",
     "close": "Close Config",
@@ -731,7 +735,12 @@
     "gameLoaded": "Game Loaded",
     "gameLoadedMessage": "{{title}} loaded",
     "dropNotFile": "Only files can be dropped here",
-    "dropUnsupported": "Your browser does not support dropping files"
+    "dropUnsupported": "Your browser does not support dropping files",
+    "configInvalid": "Invalid Config",
+    "configInvalidJson": "Invalid JSON",
+    "configInvalidJsonMessage": "The text is not valid JSON",
+    "configImported": "Config Imported",
+    "configImportedMessage": "Your settings were replaced with the imported config"
   },
   "ui": {
     "close": "Close",
