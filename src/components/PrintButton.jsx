@@ -4,12 +4,6 @@ import { useMatch } from "react-router";
 import { Printer } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 import { useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
@@ -29,21 +23,14 @@ const PrintButton = () => {
   };
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="outline"
-            aria-label={t("game.print.label")}
-            className="border rounded-sm p-2 w-8 h-8 m-0 print:hidden"
-            onClick={handler}
-          >
-            <Printer className="size-6" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>{t("game.print.tooltip")}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button
+      variant="outline"
+      className="border rounded-sm px-2 h-8 m-0 print:hidden"
+      onClick={handler}
+    >
+      <Printer className="size-6" />
+      <span className="max-md:sr-only">{t("game.print.label")}</span>
+    </Button>
   );
 };
 

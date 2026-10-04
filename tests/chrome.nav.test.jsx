@@ -89,7 +89,7 @@ describe("game toolbar", () => {
       screen.queryByRole("link", { name: "Game Info" }),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: "config" }),
+      screen.queryByRole("button", { name: "Config" }),
     ).not.toBeInTheDocument();
   });
 });

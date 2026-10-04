@@ -3,7 +3,7 @@ import { screen, waitFor, within } from "@testing-library/react";
 import { renderApp } from "@tests/helpers.jsx";
 
 const openDrawer = async (user) => {
-  await user.click(screen.getByRole("button", { name: "config" }));
+  await user.click(screen.getByRole("button", { name: "Config" }));
   return screen.findByRole("button", { name: "Close Config" });
 };
 
@@ -22,7 +22,7 @@ describe("config drawer", () => {
 
     const close = await openDrawer(user);
     expect(router.state.location.search).toBe("?config=true");
-    expect(screen.getByRole("button", { name: "config" })).toHaveAttribute(
+    expect(screen.getByRole("button", { name: "Config" })).toHaveAttribute(
       "aria-pressed",
       "true",
     );
@@ -49,7 +49,7 @@ describe("config drawer", () => {
     renderApp("/games/18Test/map?print=true&config=true");
     expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: "config" }),
+      screen.queryByRole("button", { name: "Config" }),
     ).not.toBeInTheDocument();
     expect(
       screen.queryByRole("button", { name: "Close Config" }),

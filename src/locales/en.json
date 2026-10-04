@@ -6,7 +6,7 @@
   "piracy": "Do not use this app to print games that you don't have a license to print. Please support our 18xx designers, developers, and publishers.",
   "download": "Download",
   "save": "Save",
-  "show": "Show",
+  "filter": "Filter",
   "nav": {
     "menu": "Menu",
     "app": "App",
@@ -324,8 +324,7 @@
     "rules": "Rules",
     "unload": "Unload Game",
     "print": {
-      "label": "print",
-      "tooltip": "Print"
+      "label": "Print"
     }
   },
   "started": {
@@ -790,7 +789,7 @@
       "importPlaceholder": "Paste config.json here",
       "importButton": "Import Config"
     },
-    "toggle": "config",
+    "toggle": "Config",
     "close": "Close Config",
     "sectionLabel": "Config Section",
     "pins": {

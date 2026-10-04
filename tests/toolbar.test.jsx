@@ -1,4 +1,4 @@
-import { screen, within } from "@testing-library/react";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 import { renderApp } from "@tests/helpers.jsx";
 
@@ -17,7 +17,7 @@ describe("toolbar", () => {
     const { user, router } = renderApp("/games/18Test/cards");
     await screen.findByTestId("game-18Test-cards");
 
-    await user.click(screen.getByRole("button", { name: "Show" }));
+    await user.click(screen.getByRole("button", { name: "Filter" }));
     const privates = await screen.findByRole("menuitemcheckbox", {
       name: "Privates",
     });
@@ -27,12 +27,52 @@ describe("toolbar", () => {
     expect(router.state.location.search).toContain("hidePrivates=true");
   });
 
+  it("keeps the filter menu open while toggling, closes on outside click", async () => {
+    const { user, router } = renderApp("/games/18Test/cards");
+    await screen.findByTestId("game-18Test-cards");
+
+    const trigger = screen.getByRole("button", { name: "Filter" });
+    await user.click(trigger);
+    await user.click(
+      await screen.findByRole("menuitemcheckbox", { name: "Privates" }),
+    );
+    await user.click(screen.getByRole("menuitemcheckbox", { name: "Shares" }));
+    expect(router.state.location.search).toContain("hidePrivates=true");
+    expect(router.state.location.search).toContain("hideShares=true");
+    expect(screen.getByRole("menu")).toBeInTheDocument();
+
+    await user.keyboard("{Escape}");
+    await user.click(trigger);
+    await screen.findByRole("menu");
+    // The open menu is modal: body has pointer-events none, so click outside
+    // with a raw pointer event like a real browser does.
+    fireEvent.pointerDown(document.body);
+    await waitFor(() =>
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("labels the toolbar buttons with visible text", async () => {
+    renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    expect(screen.getByRole("link", { name: "Game Info" })).toHaveTextContent(
+      "Game Info",
+    );
+    expect(screen.getByRole("button", { name: "Config" })).toHaveTextContent(
+      "Config",
+    );
+    expect(screen.getByRole("button", { name: "Print" })).toHaveTextContent(
+      "Print",
+    );
+  });
+
   it("only offers the cards toggles on the cards page", async () => {
     renderApp("/games/18Test/tiles");
     await screen.findByTestId("game-18Test-tiles");
 
     expect(
-      screen.queryByRole("button", { name: "Show" }),
+      screen.queryByRole("button", { name: "Filter" }),
     ).not.toBeInTheDocument();
   });
 });

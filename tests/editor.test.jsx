@@ -36,7 +36,7 @@ describe("map editor", () => {
       screen.queryByRole("combobox", { name: "Game Section" }),
     ).not.toBeInTheDocument();
     expect(
-      within(document.body).queryByRole("button", { name: "config" }),
+      within(document.body).queryByRole("button", { name: "Config" }),
     ).not.toBeInTheDocument();
   });
 });

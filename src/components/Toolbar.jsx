@@ -66,32 +66,33 @@ const Toolbar = () => {
   };
 
   return (
-    <div className="z-40 print:hidden fixed top-4 left-4 rounded-sm border p-1 flex flex-row gap-0.5 bg-background justify-start items-center">
-      <Button asChild variant="outline" className="p-2-px w-8 h-8 m-0">
-        <Link to={`/games/${slug}`} aria-label={t("game.info")}>
+    <div className="z-40 print:hidden fixed top-4 left-4 rounded-sm border p-1 flex flex-row flex-wrap gap-0.5 bg-background justify-start items-center">
+      <Button asChild variant="outline" className="px-2 h-8 m-0">
+        <Link to={`/games/${slug}`}>
           <ArrowBigLeft width="24" height="24" />
+          <span className="max-md:sr-only">{t("game.info")}</span>
         </Link>
       </Button>
       <Separator orientation="vertical" />
       <Toggle
         onPressedChange={toggleConfig}
         pressed={config}
-        aria-label={t("config.toggle")}
         variant="outline"
-        className="rounded-sm p-2 w-8 h-8 m-0"
+        className="rounded-sm px-2 h-8 m-0"
       >
         <Bolt className="w-6 h-6" />
+        <span className="max-md:sr-only">{t("config.toggle")}</span>
       </Toggle>
       {!capability.electron && game.meta.type === "system" && (
         <>
           <Separator orientation="vertical" />
           <Button
             variant="outline"
-            className="border rounded-sm p-2 w-8 h-8 m-0"
+            className="border rounded-sm px-2 h-8 m-0"
             onClick={onRefresh}
-            aria-label={t("refresh.refresh")}
           >
             <RefreshCw className="size-6" />
+            <span className="max-md:sr-only">{t("refresh.refresh")}</span>
           </Button>
         </>
       )}
@@ -150,7 +151,7 @@ const Toolbar = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-2 h-8">
-              {t("show")}
+              {t("filter")}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -164,6 +165,7 @@ const Toolbar = () => {
                 key={name}
                 checked={!hidden}
                 onCheckedChange={toggle}
+                onSelect={(event) => event.preventDefault()}
               >
                 {t(`game.cards.${name}`)}
               </DropdownMenuCheckboxItem>
