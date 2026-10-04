@@ -3,7 +3,9 @@
 // no such letter, or `append` is set, the key is added in parentheses and
 // hidden from assistive technology, so accessible names stay the label.
 const KeyLabel = ({ text, shortcut, word, append = false }) => {
-  const start = append ? -1 : text.indexOf(word ?? text);
+  const start = append
+    ? -1
+    : text.toLowerCase().indexOf((word ?? text).toLowerCase());
   const at =
     start < 0
       ? -1

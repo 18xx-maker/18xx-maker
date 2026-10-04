@@ -34,11 +34,19 @@ describe("KeyLabel", () => {
     expect(container.querySelector("[aria-hidden]")).toHaveTextContent("(t)");
   });
 
+  it("finds the word regardless of case", () => {
+    const { container } = render(
+      <KeyLabel text="Spiel als PDF-Dokumente" shortcut="p" word="pdf" />,
+    );
+    expect(underlined(container)).toEqual(["P"]);
+    expect(container.querySelector("[aria-hidden]")).toBeNull();
+  });
+
   it("falls back to the suffix when the word is not in the label", () => {
     const { container } = render(
-      <KeyLabel text="PDF Dokumente" shortcut="p" word="pdf" />,
+      <KeyLabel text="Dokumente" shortcut="p" word="pdf" />,
     );
     expect(container.querySelector("[aria-hidden]")).toHaveTextContent("(p)");
-    screen.getByText(/PDF Dokumente/);
+    screen.getByText(/Dokumente/);
   });
 });
