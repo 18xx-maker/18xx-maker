@@ -105,7 +105,7 @@ const UnitInput = ({
           placeholder={
             placeholder === undefined
               ? undefined
-              : `${placeholder / allUnits[units]}`
+              : `${Number((placeholder / allUnits[units]).toFixed(3))}`
           }
           onChange={handler}
           onBlur={commit}

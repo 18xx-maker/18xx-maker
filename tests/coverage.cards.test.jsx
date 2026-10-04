@@ -452,12 +452,23 @@ describe("Cards page", () => {
       }
     });
 
+    it("puts types of the same size together even when apart", async () => {
+      const { pages } = await draw(
+        "&config.cards.sizes.share.width=500&config.cards.sizes.share.height=300",
+      );
+      expect(pages.at(-1)).toHaveClass("cards-group-1");
+      expect(pages.some((p) => p.classList.contains("cards-group-2"))).toBe(
+        false,
+      );
+    });
+
     it("keeps the first group's page orientation", async () => {
       const { pages } = await draw(
-        "&config.cards.sizes.number.width=300&config.cards.sizes.number.height=300",
+        "&config.cards.sizes.number.width=500&config.cards.sizes.number.height=300",
       );
       const widths = new Set(pages.map((p) => p.style.width));
       expect(widths.size).toBe(1);
+      expect(pages.length).toBeGreaterThan(1);
     });
 
     it("ignores the sizes in the die layouts", async () => {

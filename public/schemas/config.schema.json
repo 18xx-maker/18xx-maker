@@ -7,8 +7,16 @@
       "type": "object",
       "description": "The size of one type of card in units. A missing width or height uses cards.width or cards.height.",
       "properties": {
-        "width": { "type": "number", "minimum": 1 },
-        "height": { "type": "number", "minimum": 1 }
+        "width": {
+          "type": "number",
+          "minimum": 1,
+          "description": "The card width in units."
+        },
+        "height": {
+          "type": "number",
+          "minimum": 1,
+          "description": "The card height in units."
+        }
       },
       "additionalProperties": false
     },

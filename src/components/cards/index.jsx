@@ -1,4 +1,13 @@
-import { addIndex, chain, clone, map, prop, range, splitEvery } from "ramda";
+import {
+  addIndex,
+  chain,
+  clone,
+  map,
+  prop,
+  range,
+  splitEvery,
+  unnest,
+} from "ramda";
 
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
@@ -83,10 +92,12 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     trains,
   );
   let numberColors = game.number_cards || [game.info.background];
-  let numberNodes = map(
-    (color) =>
+  let numberNodes = addIndex(map)(
+    (color, ci) =>
       map(
-        (n) => <Number number={n} background={color} key={`number=${n}`} />,
+        (n) => (
+          <Number number={n} background={color} key={`number-${ci}-${n}`} />
+        ),
         numbers,
       ),
     numberColors,
@@ -139,18 +150,18 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     ["private", privateNodes],
     ["share", shareNodes],
     ["train", trainNodes],
-    ["number", hideNumbers || !numbers.length ? [] : numberNodes],
+    ["number", hideNumbers || !numbers.length ? [] : unnest(numberNodes)],
   ].filter(([, nodes]) => nodes.length);
 
+  // Types of the same size share pages, in the order each size first appears
   const groups = types.reduce((groups, [type, nodes]) => {
     const data = getCardData(typeCardConfig(cardConfig, type), paperConfig);
-    const last = groups[groups.length - 1];
-    if (
-      last &&
-      last.data.width === data.width &&
-      last.data.height === data.height
-    ) {
-      last.nodes = [...last.nodes, ...nodes];
+    const same = groups.find(
+      (group) =>
+        group.data.width === data.width && group.data.height === data.height,
+    );
+    if (same) {
+      same.nodes = [...same.nodes, ...nodes];
     } else {
       groups.push({ type, data, nodes });
     }
@@ -227,6 +238,8 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 
   // The rules that depend on the size of the card. Each size group scopes them
   // to its own pages, a single size applies to every card.
+  // With a single size the rules are not scoped, which keeps the css of cards
+  // without sizes exactly as it always was.
   const cutlinesCss = (data, scope) => {
     const sel = (selectors) =>
       selectors.map((selector) => `${scope}${selector}`).join(",\n");
