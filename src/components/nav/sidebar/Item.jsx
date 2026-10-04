@@ -6,7 +6,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const Item = ({ to, label, icon }) => {
+import KeyLabel from "@/components/KeyLabel";
+
+const Item = ({ to, label, icon, shortcut, append }) => {
   const { toggleSidebar, isMobile } = useSidebar();
   const match = useMatch(to);
   const active = !!match;
@@ -28,7 +30,13 @@ const Item = ({ to, label, icon }) => {
           aria-current={active ? "page" : undefined}
         >
           <Icon />
-          <span>{label}</span>
+          <span>
+            {shortcut ? (
+              <KeyLabel text={label} shortcut={shortcut} append={append} />
+            ) : (
+              label
+            )}
+          </span>
         </Link>
       </SidebarMenuButton>
     </SidebarMenuItem>

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/tooltip";
 
 import ExportOptions from "@/components/ExportOptions";
+import KeyLabel from "@/components/KeyLabel";
 
 import { useConfig, useGame } from "@/hooks";
 import {
@@ -126,20 +127,20 @@ const ExportButton = () => {
         <DropdownMenuContent align="end" onKeyDown={handleMenuKeyDown}>
           <DropdownMenuItem onSelect={() => handleAll("pdf")}>
             <FileText />
-            {t("export.allPdf")}
+            <KeyLabel text={t("export.allPdf")} shortcut="p" word="pdf" />
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => handleAll("png")}>
             <FileImage />
-            {t("export.allPng")}
+            <KeyLabel text={t("export.allPng")} shortcut="n" word="png" />
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => handleAll("b18")}>
             <Box />
-            {t("export.b18")}
+            <KeyLabel text={t("export.b18")} shortcut="b" word="Board18" />
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => setOptions(true)}>
             <Settings2 />
-            {t("export.options")}
+            <KeyLabel text={t("export.options")} shortcut="o" word="options" />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

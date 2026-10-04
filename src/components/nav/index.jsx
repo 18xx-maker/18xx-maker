@@ -32,16 +32,19 @@ export const mainMenu = [
       {
         icon: House,
         label: "nav.home",
+        shortcut: "h",
         to: "/",
       },
       {
         icon: FolderOpen,
         label: "nav.load",
+        shortcut: "l",
         to: "/games",
       },
       {
         icon: TrainTrack,
         game: true,
+        shortcut: "g",
       },
     ],
   },
@@ -51,16 +54,19 @@ export const mainMenu = [
       {
         icon: Atom,
         label: "elements.atoms.title",
+        shortcut: "a",
         to: "/elements",
       },
       {
         icon: Hexagon,
         label: "elements.tiles.title",
+        shortcut: "t",
         to: "/elements/tiles",
       },
       {
         icon: Shield,
         label: "elements.logos.title",
+        shortcut: "c",
         to: "/elements/logos",
       },
     ],
@@ -71,6 +77,7 @@ export const mainMenu = [
       {
         icon: Info,
         label: "docs.help.title",
+        shortcut: "d",
         to: "/docs",
       },
       {

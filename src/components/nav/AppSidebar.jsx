@@ -38,12 +38,15 @@ const AppSidebar = (props) => {
               to={`/games/${game.slug}`}
               icon={item.icon || null}
               label={game.title}
+              shortcut={item.shortcut}
+              append
             />,
             <Item
               key="game-editor"
               to={`/games/${game.slug}/map`}
               icon={ArrowBigRight}
               label={t("nav.edit")}
+              shortcut="e"
             />,
           ]
         );
@@ -67,6 +70,7 @@ const AppSidebar = (props) => {
           to={item.to}
           icon={item.icon || null}
           label={t(item.label)}
+          shortcut={item.shortcut}
         />,
       ];
     }, items);
