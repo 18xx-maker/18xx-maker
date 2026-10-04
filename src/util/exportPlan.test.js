@@ -73,15 +73,46 @@ describe("exportPages", () => {
   });
 });
 
+describe("planned svg requests", () => {
+  it("name an svg for each map, market, par, revenue, tile and token", () => {
+    const request = planExport(game, layers(), { formats: ["svg"] });
+    const names = paths(request);
+
+    expect(names).toEqual(
+      expect.arrayContaining([
+        "18test-map.svg",
+        "18test-market.svg",
+        "18test-par.svg",
+        "18test-revenue.svg",
+        "18test-tile-1.svg",
+        "18test-token-1-BLRR.svg",
+      ]),
+    );
+    expect(names.every((name) => name.endsWith(".svg"))).toBe(true);
+    expect(names.some((name) => /paginated|cards|charters/.test(name))).toBe(
+      false,
+    );
+  });
+
+  it("only have the documents asked for", () => {
+    const request = planExport(game, layers(), {
+      formats: ["svg"],
+      docs: ["map"],
+    });
+
+    expect(paths(request)).toEqual(["18test-map.svg"]);
+  });
+});
+
 describe("planned requests", () => {
   it("are valid for every format", () => {
     const request = planExport(game, layers(), {
-      formats: ["pdf", "png", "b18"],
+      formats: ["pdf", "png", "svg", "b18"],
       b18: { version: "1.0", author: "Pat" },
     });
 
     expect(new Set(request.jobs.map(({ format }) => format))).toEqual(
-      new Set(["pdf", "png", "b18"]),
+      new Set(["pdf", "png", "svg", "b18"]),
     );
     expect(() => validateRequest(request)).not.toThrow();
     expect(structuredClone(request)).toEqual(request);

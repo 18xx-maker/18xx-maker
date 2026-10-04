@@ -35,7 +35,7 @@ import { writeZip } from "#export/zip";
 
 export { DOCS, selectDocs };
 
-export const FORMATS = ["pdf", "png", "b18"];
+export const FORMATS = ["pdf", "png", "svg", "b18"];
 
 const list = (value, valid, what) => {
   const items = String(value)
@@ -151,14 +151,14 @@ const flagOptions = (opts) => {
   return user;
 };
 
-// maker export: pdf, png and Board 18 files of a game. Every option can also
+// maker export: pdf, png, svg and Board 18 files of a game. Every option can also
 // be set in the game file (its `exports` field), what is given here wins.
-//   format      "pdf,png,b18", pdf
+//   format      "pdf,png,svg,b18", pdf
 //   docs        "map,cards": only these pages
 //   layouts     "all": a sheet for every layout
 //   variation   only this map variation, or all
 //   config      a config file
-//   dpi         of the pngs, 1 to 300
+//   dpi         of the pngs, 1 to 300 (an svg has none)
 //   out         the folder the folder of the game goes in
 //   jobs        how many files are captured at the same time
 //   all         every bundled game

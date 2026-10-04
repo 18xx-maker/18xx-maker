@@ -1,4 +1,5 @@
 import { cropPng, withResolution } from "./png.js";
+import { svgExpression } from "./svg.js";
 
 // Captures a document from a page of the site with Chrome DevTools Protocol
 // commands, the same ones in every browser adapter (Playwright in the CLI).
@@ -261,11 +262,22 @@ const captureElement = async (
   return withResolution(await cropPng(png, pixels.width, pixels.height), dpi);
 };
 
+// The svg of a document: the svg inside its element, as a standalone file (see
+// serializeSvg), as UTF-8 bytes
+const captureSvg = async (adapter, { selector }) => {
+  const { text, error } = await adapter.evaluate(svgExpression(selector));
+  if (error) throw new Error(error);
+  return new TextEncoder().encode(text);
+};
+
 // Captures a file of an export list ({ doc, format }, see exportJobs) from the
 // page the adapter has open, and returns its bytes:
 //   pdf  the page printed on the paper of its css
 //   png  the element of the document, at dpi (at most MAX_DPI)
 //   b18  a screenshot of a viewport the size of the image
+//   svg  the svg inside the element of the document, in print media (its
+//        computed styles are the printed ones). It has no resolution, no
+//        background and no border: it is transparent, at the size it prints.
 // The background of a png of a document with capture.background (the map,
 // market, par, revenue and tile manifest) is opaque white, or transparent when
 // background is "transparent". Every other png (the background page, cards,
@@ -281,12 +293,13 @@ export const capture = async (
   { doc, format },
   { dpi = MAX_DPI, maxPixels = MAX_PIXELS, background = "white" } = {},
 ) => {
-  if (!(dpi >= 1 && dpi <= MAX_DPI)) {
+  if (format !== "svg" && !(dpi >= 1 && dpi <= MAX_DPI)) {
     throw new Error(`The resolution must be 1 to ${MAX_DPI} dpi`);
   }
 
   await adapter.send("Emulation.setEmulatedMedia", { media: "print" });
   if (format === "pdf") return printToPdf(adapter);
+  if (format === "svg") return captureSvg(adapter, doc.capture);
 
   const margin = format === "png" && doc.capture.background ? MARGIN : 0;
   try {

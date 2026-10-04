@@ -107,6 +107,25 @@ describe("export formats", () => {
     expect(files().some((name) => name.endsWith(".pdf"))).toBe(false);
   });
 
+  it("exports an svg for each element with --format svg", async () => {
+    await exportCommand("18Test", { format: "svg" });
+
+    expect(files()).toEqual(
+      expect.arrayContaining([
+        "18test-map.svg",
+        "18test-market.svg",
+        "18test-tile-1.svg",
+        "18test-token-1-BLRR.svg",
+      ]),
+    );
+    expect(files().every((name) => name.endsWith(".svg"))).toBe(true);
+    expect(fs.readFileSync(out("18test-map.svg"), "utf-8")).toBe("<svg/>\n");
+    // No screenshot, no device size
+    const methods = mocks.fake.session.send.mock.calls.map(([m]) => m);
+    expect(methods).not.toContain("Page.captureScreenshot");
+    expect(methods).not.toContain("Emulation.setDeviceMetricsOverride");
+  });
+
   it("writes png at 300 dpi, with its resolution", async () => {
     await exportCommand("18Test", { format: "png", docs: "background" });
 
@@ -450,7 +469,7 @@ describe("export usage errors", () => {
     await usage(
       "18Test",
       { format: "pdf,gif" },
-      "Unknown format gif, use pdf, png, b18",
+      "Unknown format gif, use pdf, png, svg, b18",
     );
     await usage(
       "18Test",

@@ -55,11 +55,13 @@ export const createFakeBrowser = () => {
     addInitScript: vi.fn(),
     goto: vi.fn(),
     waitForFunction: vi.fn(),
-    // The element a png captures when given an expression, the render state
-    // when given a function
+    // The element a png captures when given an expression (the svg of an svg),
+    // the render state when given a function
     evaluate: vi.fn(async (what) =>
       typeof what === "string"
-        ? { x: 0, y: 0, width: 240, height: 150 }
+        ? what.includes("serializeSvg")
+          ? { text: "<svg/>\n" }
+          : { x: 0, y: 0, width: 240, height: 150 }
         : "ready",
     ),
     close: vi.fn(async () => {}),

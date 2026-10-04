@@ -56,10 +56,10 @@ const inches = (size) =>
 //   route     where the page is on the site
 //   query     the url parameters of the page
 //   mode      "single" (one page or sheet), "paginated" or "item" (one element)
-//   formats   "pdf", "png", "b18"
+//   formats   "pdf", "png", "svg", "b18"
 //   size      { widthIn, heightIn } of the element a png captures, or null
 //   paper     the paper of the config
-//   capture   how a png or b18 image is captured: the element to capture, the
+//   capture   how a png, svg or b18 image is captured: the element to capture, the
 //             viewport (b18) and background, true when the image takes the
 //             background option (BACKGROUND_PAGES), false when it is always
 //             transparent
@@ -94,7 +94,8 @@ export const documents = (game, config, data) => {
     background,
   });
 
-  // A document with pdf and png output, and its paginated version (pdf only),
+  // A document with pdf, png and svg output (the background is no svg), and
+  // its paginated version (pdf only),
   // which is only there when the document does not fit on one page
   const paged = (kind, size, variation) => {
     const suffix = variation === undefined ? "" : `-${variation}`;
@@ -104,7 +105,7 @@ export const documents = (game, config, data) => {
       kind,
       route: kind,
       query,
-      formats: ["pdf", "png"],
+      formats: ["pdf", "png", "svg"],
       size: inches(size),
       capture: element(BACKGROUND_PAGES.includes(kind)),
       basename: `${kind}${suffix}`,
@@ -230,11 +231,12 @@ export const documents = (game, config, data) => {
     sheet("tokens", config.tokens);
   }
 
-  // The elements of the sheets, a png each
-  const item = ({ selector, ...doc }) =>
+  // The elements of the sheets, a png each (and an svg for the tokens and
+  // tiles, which are svgs)
+  const item = ({ selector, formats = ["png"], ...doc }) =>
     add({
       mode: "item",
-      formats: ["png"],
+      formats,
       capture: element(false, selector),
       ...doc,
     });
@@ -310,6 +312,7 @@ export const documents = (game, config, data) => {
       size: inches(getTokenSize(config.tokens, true)),
       basename: `token-${i + 1}-${safeName(company.abbrev)}`,
       selector: TOKEN_SELECTOR,
+      formats: ["png", "svg"],
     }),
   );
   // "quantity" of 0 removes a token, like the token page does
@@ -323,6 +326,7 @@ export const documents = (game, config, data) => {
         size: inches(getTokenSize(config.tokens, false)),
         basename: `token-${i + 1 + companies.length}`,
         selector: TOKEN_SELECTOR,
+        formats: ["png", "svg"],
       }),
     );
 
@@ -335,6 +339,7 @@ export const documents = (game, config, data) => {
         route: `tiles/${encodeURIComponent(id)}`,
         size: inches(getTileSize(config.tiles.width)),
         basename: `tile-${id.replace(/[^\w.-]+/g, "_")}`,
+        formats: ["png", "svg"],
       });
     }
   }

@@ -84,7 +84,7 @@ describe("documents", () => {
     expect(byId(docs, "market").size.widthIn).toBeCloseTo(13.4);
     expect(byId(docs, "tiles/1")).toMatchObject({
       mode: "item",
-      formats: ["png"],
+      formats: ["png", "svg"],
       size: { widthIn: 2, heightIn: 2 },
       capture: {
         selector: ".printElement",
@@ -168,6 +168,32 @@ describe("documents", () => {
     expect(byId(sized, "cards/private/0").size).toEqual({
       widthIn: 2,
       heightIn: 1,
+    });
+  });
+
+  it("has an svg of the map, market, par, revenue, tiles and tokens only", () => {
+    const svgs = docs.filter((doc) => doc.formats.includes("svg"));
+
+    expect(
+      svgs
+        .map((doc) => doc.kind)
+        .filter((kind, i, all) => all.indexOf(kind) === i),
+    ).toEqual(["map", "market", "par", "revenue", "token", "tile"]);
+    // Not the paginated pages, the sheets, the cards, charters, the
+    // background and the tile manifest
+    expect(svgs.every((doc) => doc.mode !== "paginated")).toBe(true);
+    for (const id of [
+      "background",
+      "tile-manifest",
+      "charters/0",
+      "cards/number/1",
+    ]) {
+      expect(byId(docs, id).formats).not.toContain("svg");
+    }
+    expect(byId(docs, "map").formats).toEqual(["pdf", "png", "svg"]);
+    expect(byId(docs, "tokens/0")).toMatchObject({
+      formats: ["png", "svg"],
+      capture: { selector: ".token .printElement" },
     });
   });
 

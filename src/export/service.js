@@ -27,7 +27,9 @@ import { runExport } from "./run.js";
 // ui is { progress(title, message, percent), alert(title, message, type) }.
 // An owner (a window) has one export at a time.
 
-const FORMATS = ["pdf", "png", "b18"];
+const FORMATS = ["pdf", "png", "svg", "b18"];
+
+const SAVE_TITLES = { pdf: "Save PDF", svg: "Save SVG" };
 
 // A name in the output folder: relative, and not going up from it
 const plainName = (name) =>
@@ -100,7 +102,7 @@ export const createExportService = ({
       const [job] = jobs;
       if (out) return { out, jobs };
       const file = await dialogs.saveFile({
-        title: job.format === "pdf" ? "Save PDF" : "Save Screenshot",
+        title: SAVE_TITLES[job.format] || "Save Screenshot",
         name: job.path,
         format: job.format,
       });

@@ -128,6 +128,16 @@ describe("resolveExportOptions", () => {
   });
 });
 
+describe("svg", () => {
+  it("is a format, and not a default one", () => {
+    expect(FORMATS).toEqual(["pdf", "png", "svg", "b18"]);
+    expect(
+      resolveExportOptions({ game: { formats: ["svg"] } }).formats,
+    ).toEqual(["svg"]);
+    expect(DEFAULTS.formats).toEqual(["pdf"]);
+  });
+});
+
 describe("cleanOptions", () => {
   it("keeps the valid options and nothing else", () => {
     expect(

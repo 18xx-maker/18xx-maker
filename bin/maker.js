@@ -60,11 +60,11 @@ const withAuthor = (opts) => ({
 
 program
   .command("export")
-  .description("export PDF, PNG and Board 18 files of a game")
+  .description("export PDF, PNG, SVG and Board 18 files of a game")
   .argument("[game]", "the id of a bundled game or the path of a game file")
   .option(
     "-f, --format <formats>",
-    "pdf, png and b18, separated by commas (default: pdf)",
+    "pdf, png, svg and b18, separated by commas (default: pdf)",
   )
   .option("--docs <pages>", "only these pages: map,tiles,cards,...")
   .option(
@@ -73,7 +73,7 @@ program
   )
   .option(
     "--background <background>",
-    "white or transparent: the background of the map, market, par, revenue and tile manifest PNGs, the other PNGs are always transparent, not of a Board 18 box (default: white)",
+    "white or transparent: the background of the map, market, par, revenue and tile manifest PNGs, the other PNGs are always transparent, not of a Board 18 box or an SVG (default: white)",
   )
   .option(
     "--variation <n>",
@@ -82,7 +82,7 @@ program
   .option("--config <file>", "a config file to export with")
   .option(
     "--dpi <dpi>",
-    "the resolution of the PNG files, 1 to 300 (default: 300)",
+    "the resolution of the PNG files, 1 to 300 (default: 300), SVG files have none",
   )
   .option("-o, --out <folder>", "the folder for the game folders", "render")
   .option("-j, --jobs <n>", "how many files to capture at the same time", "1")

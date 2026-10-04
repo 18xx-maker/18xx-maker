@@ -39,6 +39,12 @@ const openPool = (input) => {
   };
 };
 
+const SAVE_FILTERS = {
+  pdf: { name: "PDF Document", extensions: ["pdf"] },
+  png: { name: "PNG Image", extensions: ["png"] },
+  svg: { name: "SVG Image", extensions: ["svg"] },
+};
+
 const dialogs = {
   saveFile: async ({ title, name, format }) => {
     const { filePath, canceled } = await dialog.showSaveDialog(
@@ -46,11 +52,7 @@ const dialogs = {
       {
         title,
         defaultPath: name,
-        filters: [
-          format === "pdf"
-            ? { name: "PDF Document", extensions: ["pdf"] }
-            : { name: "PNG Image", extensions: ["png"] },
-        ],
+        filters: [SAVE_FILTERS[format] || SAVE_FILTERS.png],
       },
     );
     return canceled || !filePath

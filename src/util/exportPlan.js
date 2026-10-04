@@ -102,14 +102,14 @@ export const exportDefaults = (game, layers) => {
 // What the main process exports for a game:
 //   { id, game, config, jobs, dpi, background, title, b18 }
 // see createExportService. The options are
-//   formats    "pdf", "png", "b18"
+//   formats    "pdf", "png", "svg", "b18"
 //   docs       the pages to export (exportPages), all when left out
 //   layouts    "all" for a sheet of every layout, "current" for the one config
 //              has, as config says when left out
 //   background "white" or "transparent", of the png images of the map,
 //              market, par, revenue and tile manifest (the others are always
-//              transparent, b18 images do not take it)
-//   dpi        of the pngs, at most MAX_DPI
+//              transparent, b18 images and svgs do not take it)
+//   dpi        of the pngs, at most MAX_DPI (an svg has none)
 //   variation  only this map variation
 //   b18        { version, author } of the Board 18 box
 // What is left out is the `exports` of the game, or the default of the app

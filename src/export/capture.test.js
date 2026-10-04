@@ -487,6 +487,57 @@ describe("png", () => {
   });
 });
 
+describe("svg", () => {
+  const job = () => ({
+    format: "svg",
+    doc: doc({ selector: ".printElement" }),
+  });
+  const svgAdapter = (answer = { text: "<svg>é</svg>" }) => {
+    const a = adapter();
+    a.evaluate = async (expression) => {
+      a.evaluated.push(expression);
+      return answer;
+    };
+    return a;
+  };
+
+  it("is the svg of the element as UTF-8, in print media, with one evaluate", async () => {
+    const a = svgAdapter();
+
+    const bytes = await capture(a, job());
+
+    expect(text(bytes)).toBe("<svg>é</svg>");
+    expect(bytes).toEqual(new TextEncoder().encode("<svg>é</svg>"));
+    expect(a.calls).toEqual([
+      ["Emulation.setEmulatedMedia", { media: "print" }],
+    ]);
+    expect(a.evaluated).toHaveLength(1);
+    expect(a.evaluated[0]).toContain('".printElement"');
+  });
+
+  it("takes no screenshot, device size or background", async () => {
+    const a = svgAdapter();
+
+    await capture(a, job(), { background: "transparent" });
+
+    expect(a.names()).toEqual(["Emulation.setEmulatedMedia"]);
+  });
+
+  it("ignores the resolution", async () => {
+    const a = svgAdapter();
+
+    for (const dpi of [0, 301, NaN, 96]) {
+      await expect(capture(a, job(), { dpi })).resolves.toBeDefined();
+    }
+  });
+
+  it("fails with the reason when the element has no svg", async () => {
+    const a = svgAdapter({ error: ".printElement has no svg" });
+
+    await expect(capture(a, job())).rejects.toThrow(".printElement has no svg");
+  });
+});
+
 describe("imageSize", () => {
   it("is the device pixels the element covers whole at dpi over 96", () => {
     expect(imageSize({ width: 240, height: 150 }, 300)).toEqual({
