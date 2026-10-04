@@ -204,6 +204,31 @@ describe("config drawer", () => {
     expect(store.getState().errors).toEqual({});
   });
 
+  it("sets and clears the size of a type of card", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/cards?config=true&section=cards",
+    );
+    await screen.findByRole("button", { name: "Close Config" });
+
+    const input = screen.getByRole("textbox", { name: "Private Card Width" });
+    // Nothing set: blank, showing the card width it falls back to
+    expect(input).toHaveValue("");
+    expect(input).toHaveAttribute("placeholder", "2.65748");
+
+    await user.type(input, "2{Enter}");
+    await waitFor(() =>
+      expect(store.getState().config.cards.sizes).toEqual({
+        private: { width: 200 },
+      }),
+    );
+
+    await user.clear(input);
+    await user.keyboard("{Enter}");
+    // The key and the objects it leaves empty are removed
+    await waitFor(() => expect(store.getState().config.cards).toBeUndefined());
+    expect(store.getState().errors).toEqual({});
+  });
+
   it("resets the stored config to the defaults", async () => {
     const { user, store } = renderApp(
       "/games/18Test/map?config=true&section=data",

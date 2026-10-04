@@ -10,7 +10,7 @@ import Train from "@/components/cards/Train";
 
 import { useConfig, useGame } from "@/hooks";
 import { fillArray, maxPlayers, unitsToCss } from "@/util";
-import { getCardData } from "@/util/cards";
+import { getCardData, typeCardConfig } from "@/util/cards";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { cardCompanyTrains } from "@/util/companyTrains";
 
@@ -133,7 +133,34 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
       break;
   }
 
-  let data = getCardData(cardConfig, paperConfig);
+  // Each type of card can have its own size. Types with the same size stay
+  // together on the same pages, otherwise each size is laid out on its own.
+  const types = [
+    ["private", privateNodes],
+    ["share", shareNodes],
+    ["train", trainNodes],
+    ["number", hideNumbers || !numbers.length ? [] : numberNodes],
+  ].filter(([, nodes]) => nodes.length);
+
+  const groups = types.reduce((groups, [type, nodes]) => {
+    const data = getCardData(typeCardConfig(cardConfig, type), paperConfig);
+    const last = groups[groups.length - 1];
+    if (
+      last &&
+      last.data.width === data.width &&
+      last.data.height === data.height
+    ) {
+      last.nodes = [...last.nodes, ...nodes];
+    } else {
+      groups.push({ type, data, nodes });
+    }
+    return groups;
+  }, []);
+
+  const grouped = groups.length > 1;
+  let data = groups.length
+    ? groups[0].data
+    : getCardData(cardConfig, paperConfig);
 
   let pins = null;
 
@@ -145,92 +172,139 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     );
   }
 
-  let splitCardNodes = splitEvery(data.layout.perPage, cardNodes);
+  const pagesFor = (data, nodes, keyPrefix, className) =>
+    addIndex(map)(
+      (cardNodes, i) => (
+        <div
+          className={`cards cards--${config.cards.layout}${className}`}
+          key={`${keyPrefix}${i}`}
+          style={{
+            width: data.css.printableWidth,
+            height: data.css.printableHeight,
+            ...(data.layout.perPage === 1
+              ? {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "safe center",
+                }
+              : {}),
+          }}
+        >
+          {cardNodes}
+          {pins}
+        </div>
+      ),
+      splitEvery(data.layout.perPage, nodes),
+    );
 
-  let pageNodes = addIndex(map)(
-    (cardNodes, i) => (
-      <div
-        className={`cards cards--${config.cards.layout}`}
-        key={`cards-page-${i}`}
-        style={{
-          width: data.css.printableWidth,
-          height: data.css.printableHeight,
-          ...(data.layout.perPage === 1
-            ? {
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "safe center",
-              }
-            : {}),
-        }}
-      >
-        {cardNodes}
-        {pins}
-      </div>
-    ),
-    splitCardNodes,
-  );
+  let pageNodes;
+  if (grouped) {
+    // The page setup is for the whole document, so every size follows the
+    // orientation of the first one
+    const orientation = data.layout.landscape ? "landscape" : "portrait";
+    groups.forEach((group, i) => {
+      if (i > 0) {
+        group.data = getCardData(
+          typeCardConfig(cardConfig, group.type),
+          paperConfig,
+          orientation,
+        );
+      }
+    });
+    pageNodes = addIndex(chain)(
+      (group, i) =>
+        pagesFor(
+          group.data,
+          group.nodes,
+          `cards-group-${i}-page-`,
+          ` cards-group-${i}`,
+        ),
+      groups,
+    );
+  } else {
+    pageNodes = pagesFor(data, cardNodes, "cards-page-", "");
+  }
 
-  let css = `
-.cutlines {
+  // The rules that depend on the size of the card. Each size group scopes them
+  // to its own pages, a single size applies to every card.
+  const cutlinesCss = (data, scope) => {
+    const sel = (selectors) =>
+      selectors.map((selector) => `${scope}${selector}`).join(",\n");
+    return `${sel([".cutlines"])} {
     padding: ${data.css.cutlines};
     width: ${data.css.totalWidth};
     height: ${data.css.totalHeight};
 }
 
-.cutlines:after,
-.cutlines:before {
+${sel([".cutlines:after", ".cutlines:before"])} {
     width: ${data.css.cutlines};
     height: ${data.css.height};
     top: ${data.css.cutlinesAndBleed};
 }
 
-.cutlines > div:after,
-.cutlines > div:before {
+${sel([".cutlines > div:after", ".cutlines > div:before"])} {
     width: ${data.css.width};
     height: ${data.css.cutlines};
     left: ${data.css.bleed};
 }
 
-.cutlines > div:after {
+${sel([".cutlines > div:after"])} {
     bottom: -${data.css.cutlines};
 }
 
-.cutlines > div:before {
+${sel([".cutlines > div:before"])} {
     top: -${data.css.cutlines};
 }
 
-${
-  cardConfig.padding === 12.5
-    ? ""
-    : `.card {
-    --card-padding: ${unitsToCss(cardConfig.padding)};
-}
+`;
+  };
 
-`
-}.card,
-.card__bleed {
+  const cardCss = (data, scope) => {
+    const sel = (selectors) =>
+      selectors.map((selector) => `${scope}${selector}`).join(",\n");
+    return `${sel([".card", ".card__bleed"])} {
     height: ${data.css.bleedHeight};
     width: ${data.css.bleedWidth};
 }
 
-.card__body {
+${sel([".card__body"])} {
     border: ${data.border}px solid black;
     margin: ${data.css.bleed};
     width: ${data.css.width};
     height: ${data.css.height};
 }
 
-${
-  privates.some((p) => p.revenueBackgroundColor)
-    ? `.private__revenue--background::before {
+`;
+  };
+
+  const paddingCss =
+    cardConfig.padding === 12.5
+      ? ""
+      : `.card {
+    --card-padding: ${unitsToCss(cardConfig.padding)};
+}
+
+`;
+
+  const sizeCss = groups
+    .map(
+      (group, i) =>
+        cutlinesCss(group.data, `.cards-group-${i} `) +
+        cardCss(group.data, `.cards-group-${i} `),
+    )
+    .join("");
+
+  let css = `
+${grouped ? sizeCss : cutlinesCss(data, "")}${paddingCss}${grouped ? "" : cardCss(data, "")}${
+    privates.some((p) => p.revenueBackgroundColor)
+      ? `.private__revenue--background::before {
     right: -${data.css.bleed};
     bottom: -${data.css.bleed};
 }
 
 `
-    : ""
-}.share__hr {
+      : ""
+  }.share__hr {
     bottom: calc(0.375in + ${data.css.bleed});
 }
 

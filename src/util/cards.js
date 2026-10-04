@@ -4,7 +4,27 @@ import { unitsToCss } from "./index.js";
 // short (0.3 / 0.1 is 2.9999999999999996)
 const fit = (space, size) => Math.floor(space / size + 1e-9);
 
-export const getCardData = (cards, paper) => {
+const dieLayouts = ["miniEuroDie", "dtgDie"];
+
+// The card config for one type of card ("private", "share", "train" or
+// "number"): its own width and height from `cards.sizes` where set, the shared
+// ones otherwise. The die layouts force their own size and ignore overrides.
+export const typeCardConfig = (cards, type) => {
+  const size = cards.sizes?.[type];
+  if (!size || dieLayouts.includes(cards.layout)) {
+    return cards;
+  }
+
+  return {
+    ...cards,
+    ...(size.width !== undefined && { width: size.width }),
+    ...(size.height !== undefined && { height: size.height }),
+  };
+};
+
+// `orientation` ("portrait" or "landscape") forces the page orientation, by
+// default whichever fits more cards is used
+export const getCardData = (cards, paper, orientation) => {
   let { layout, width, height, cutlines, bleed, border } = cards;
   let { margins, width: pageWidth, height: pageHeight } = paper;
 
@@ -38,7 +58,9 @@ export const getCardData = (cards, paper) => {
   landscape.perPage = landscape.perRow * landscape.perColumn;
 
   // Use portrait if it's more or equal to landscape
-  let usePortrait = portrait.perPage >= landscape.perPage;
+  let usePortrait = orientation
+    ? orientation === "portrait"
+    : portrait.perPage >= landscape.perPage;
 
   let cardLayout = {
     perPage: usePortrait ? portrait.perPage : landscape.perPage,
@@ -49,7 +71,12 @@ export const getCardData = (cards, paper) => {
 
   // A card that is too big for the page still gets a page of its own
   if (cardLayout.perPage < 1) {
-    cardLayout = { perPage: 1, perRow: 1, perColumn: 1, landscape: false };
+    cardLayout = {
+      perPage: 1,
+      perRow: 1,
+      perColumn: 1,
+      landscape: orientation === "landscape",
+    };
   }
 
   // Return all data and some

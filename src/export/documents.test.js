@@ -151,6 +151,26 @@ describe("documents", () => {
     expect(byId(docs, "tile-manifest").size).toBeNull();
   });
 
+  it("sizes each type of card by its own size", () => {
+    const sized = list(
+      {},
+      {
+        cards: {
+          ...loadGameConfig(loadGame("18Test")).cards,
+          layout: "free",
+          sizes: { private: { width: 200, height: 100 } },
+        },
+      },
+    );
+    const plain = byId(sized, "cards/number/1").size;
+    expect(plain).not.toEqual(byId(sized, "cards/private/0").size);
+    expect(byId(sized, "cards/share/0").size).toEqual(plain);
+    expect(byId(sized, "cards/private/0").size).toEqual({
+      widthIn: 2,
+      heightIn: 1,
+    });
+  });
+
   it("names the elements like the app does", () => {
     expect(byId(docs, "cards/number/1").basename).toBe("card-number-1");
     expect(byId(docs, "cards/private/0").basename).toBe("card-private-1");

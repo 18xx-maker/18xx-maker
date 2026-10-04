@@ -47,7 +47,10 @@ nicht vollständig testen.
 
 Du kannst die Eigenschaft `cards.layout` auf `dtgDie` oder `miniEuroDie`
 setzen, je nachdem, welches Stanzlayout du hast. Genau wie bei Plättchen
-überschreibt eine dieser Optionen viele andere Optionen.
+überschreibt eine dieser Optionen viele andere Optionen. Dazu gehört auch
+`cards.sizes`, die optionale Breite und Höhe jedes Kartentyps (`private`,
+`share`, `train` und `number`): Die Stanzlayouts ignorieren sie und verwenden
+eine Größe für alle Karten.
 
 ## Bestellen
 

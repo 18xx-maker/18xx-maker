@@ -374,6 +374,89 @@ export const sections = [
         note: "sizes",
       },
       {
+        group: [
+          {
+            name: "typeSizes.private.width",
+            path: "cards.sizes.private.width",
+            dimension: true,
+            clearable: true,
+            inherit: "cards.width",
+            description: false,
+          },
+          {
+            name: "typeSizes.private.height",
+            path: "cards.sizes.private.height",
+            dimension: true,
+            clearable: true,
+            inherit: "cards.height",
+            description: false,
+          },
+        ],
+      },
+      {
+        group: [
+          {
+            name: "typeSizes.share.width",
+            path: "cards.sizes.share.width",
+            dimension: true,
+            clearable: true,
+            inherit: "cards.width",
+            description: false,
+          },
+          {
+            name: "typeSizes.share.height",
+            path: "cards.sizes.share.height",
+            dimension: true,
+            clearable: true,
+            inherit: "cards.height",
+            description: false,
+          },
+        ],
+      },
+      {
+        group: [
+          {
+            name: "typeSizes.train.width",
+            path: "cards.sizes.train.width",
+            dimension: true,
+            clearable: true,
+            inherit: "cards.width",
+            description: false,
+          },
+          {
+            name: "typeSizes.train.height",
+            path: "cards.sizes.train.height",
+            dimension: true,
+            clearable: true,
+            inherit: "cards.height",
+            description: false,
+          },
+        ],
+      },
+      {
+        group: [
+          {
+            name: "typeSizes.number.width",
+            path: "cards.sizes.number.width",
+            dimension: true,
+            clearable: true,
+            inherit: "cards.width",
+            description: false,
+          },
+          {
+            name: "typeSizes.number.height",
+            path: "cards.sizes.number.height",
+            dimension: true,
+            clearable: true,
+            inherit: "cards.height",
+            description: false,
+          },
+        ],
+      },
+      {
+        note: "typeSizesNote",
+      },
+      {
         name: "border",
       },
       {

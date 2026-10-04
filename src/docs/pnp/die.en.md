@@ -43,7 +43,9 @@ to fully test it.
 
 You can set the `cards.layout` property to `dtgDie` or `miniEuroDie` depending
 on which die layout you have. Just like on tiles setting one of these options
-overrides a lot of other options.
+overrides a lot of other options. This includes `cards.sizes`, the optional
+width and height of each type of card (`private`, `share`, `train` and
+`number`): the die layouts ignore it and use one size for every card.
 
 ## Ordering
 

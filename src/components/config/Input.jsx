@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
-import { assocPath, map, path, split } from "ramda";
+import { assocPath, dissocPath, init, isEmpty, map, path, split } from "ramda";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input as FormInput } from "@/components/ui/input";
@@ -59,6 +59,8 @@ const Input = ({
   options = [],
   description,
   dimension,
+  clearable = false,
+  inherit,
   large = false,
 }) => {
   const { config, setConfig } = useConfig();
@@ -70,7 +72,21 @@ const Input = ({
 
   let valuePath = getPath(name);
   let update = (value) => {
-    setConfig(assocPath(valuePath, value, config));
+    if (value !== undefined) {
+      setConfig(assocPath(valuePath, value, config));
+      return;
+    }
+
+    // Unset the value, and the objects that are left empty by it
+    let next = dissocPath(valuePath, config);
+    for (
+      let parent = init(valuePath);
+      parent.length > 1 && isEmpty(path(parent, next));
+      parent = init(parent)
+    ) {
+      next = dissocPath(parent, next);
+    }
+    setConfig(next);
   };
 
   let inputSchema = getSchema(name);
@@ -139,6 +155,8 @@ const Input = ({
         label={label}
         onChange={update}
         errorValidation={error}
+        clearable={clearable}
+        placeholder={inherit ? path(split(".", inherit), config) : undefined}
       />
     ) : (
       <div className="flex flex-col gap-2">

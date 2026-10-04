@@ -31,12 +31,37 @@ describe("getSingleCardData", () => {
     expect(config.bleed).toBe(4);
   });
 
+  it("uses the size set for the type of card", () => {
+    const config = {
+      ...cards,
+      layout: "free",
+      sizes: { private: { width: 200 } },
+    };
+    expect(getSingleCardData(config, paper, "private")).toMatchObject({
+      width: 200,
+      height: cards.height,
+    });
+    expect(getSingleCardData(config, paper, "share")).toMatchObject({
+      width: cards.width,
+    });
+    expect(getSingleCardData(config, paper)).toMatchObject({
+      width: cards.width,
+    });
+  });
+
   it("uses the size of the die layouts", () => {
     expect(
       getSingleCardData({ ...cards, layout: "miniEuroDie" }, paper),
     ).toMatchObject({ width: 265.748, height: 173.228 });
     expect(
       getSingleCardData({ ...cards, layout: "dtgDie" }, paper),
+    ).toMatchObject({ width: 250, height: 150 });
+    expect(
+      getSingleCardData(
+        { ...cards, layout: "dtgDie", sizes: { private: { width: 10 } } },
+        paper,
+        "private",
+      ),
     ).toMatchObject({ width: 250, height: 150 });
   });
 });

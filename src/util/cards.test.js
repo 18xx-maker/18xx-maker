@@ -1,5 +1,5 @@
 import defaults from "@/defaults.json";
-import { getCardData } from "@/util/cards";
+import { getCardData, typeCardConfig } from "@/util/cards";
 
 const { cards, paper } = defaults;
 
@@ -110,5 +110,69 @@ describe("getCardData", () => {
     expect(data.layout.perPage).toBe(1);
     expect(data.layout.perRow).toBe(1);
     expect(data.layout.perColumn).toBe(1);
+  });
+});
+
+describe("typeCardConfig", () => {
+  const free = { ...cards, layout: "free" };
+  const sizes = {
+    private: { width: 200, height: 100 },
+    share: { width: 300 },
+    train: { height: 90 },
+  };
+
+  it("uses the size of the type", () => {
+    expect(typeCardConfig({ ...free, sizes }, "private")).toMatchObject({
+      width: 200,
+      height: 100,
+    });
+  });
+
+  it("falls back to the card size for what is not set", () => {
+    expect(typeCardConfig({ ...free, sizes }, "share")).toMatchObject({
+      width: 300,
+      height: cards.height,
+    });
+    expect(typeCardConfig({ ...free, sizes }, "train")).toMatchObject({
+      width: cards.width,
+      height: 90,
+    });
+  });
+
+  it("returns the config as it is without a size for the type", () => {
+    const config = { ...free, sizes };
+    expect(typeCardConfig(config, "number")).toBe(config);
+    expect(typeCardConfig(free, "private")).toBe(free);
+  });
+
+  it("ignores the sizes of the die layouts", () => {
+    for (const layout of ["miniEuroDie", "dtgDie"]) {
+      const config = { ...cards, layout, sizes };
+      expect(typeCardConfig(config, "private")).toBe(config);
+    }
+  });
+});
+
+describe("getCardData orientation", () => {
+  it("can be forced", () => {
+    expect(getCardData(cards, paper, "landscape").layout.landscape).toBe(true);
+
+    const portrait = getCardData(cards, paper, "portrait");
+    expect(portrait.layout).toEqual({
+      landscape: false,
+      perColumn: 4,
+      perPage: 8,
+      perRow: 2,
+    });
+    expect(portrait.pageWidth).toBe(paper.width);
+  });
+
+  it("keeps the forced orientation for a card too big for the page", () => {
+    const big = { ...cards, width: 5000, height: 5000 };
+    expect(getCardData(big, paper, "landscape").layout).toMatchObject({
+      landscape: true,
+      perPage: 1,
+    });
+    expect(getCardData(big, paper).layout.landscape).toBe(false);
   });
 });

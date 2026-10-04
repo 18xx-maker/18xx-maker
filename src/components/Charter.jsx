@@ -52,7 +52,7 @@ const Charter = ({
       ? companyTrains(company, trains || [])
       : [];
   const cardData = ownTrains.length
-    ? getSingleCardData(config.cards, config.paper)
+    ? getSingleCardData(config.cards, config.paper, "train")
     : null;
 
   // The cards share the trains box with the phase chart. Shrink them until
