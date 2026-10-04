@@ -259,18 +259,21 @@ const command = async (game, opts = {}) => {
 
       const files = formats.filter((format) => format !== "b18");
       if (files.length > 0) {
-        failed.push(
-          ...(await run(
-            exportJobs(
-              gameDef,
-              selectDocs(documents(gameDef, config, exportData), {
-                docs,
-                variation,
-              }),
-              files,
-            ),
-          )),
+        const list = exportJobs(
+          gameDef,
+          selectDocs(documents(gameDef, config, exportData), {
+            docs,
+            variation,
+          }),
+          files,
         );
+        if (list.length === 0) {
+          console.error(
+            `Nothing to export for ${id}: the chosen documents have no ${files.join(", ")} files`,
+          );
+          process.exitCode = 1;
+        }
+        failed.push(...(await run(list)));
       }
 
       if (formats.includes("b18")) {

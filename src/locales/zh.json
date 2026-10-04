@@ -75,6 +75,7 @@
     "chooseFolder": "选择文件夹",
     "noFormat": "请至少选择一种格式",
     "noDocuments": "请至少选择一个文档",
+    "noFiles": "没有可导出的内容：所选文档在所选格式下没有文件",
     "run": "导出",
     "running": "正在导出",
     "cancel": "取消导出",

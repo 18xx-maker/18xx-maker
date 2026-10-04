@@ -75,6 +75,7 @@
     "chooseFolder": "Ordner auswählen",
     "noFormat": "Wähle mindestens ein Format aus",
     "noDocuments": "Wähle mindestens ein Dokument aus",
+    "noFiles": "Nichts zu exportieren: Die gewählten Dokumente haben keine Dateien in den gewählten Formaten",
     "run": "Exportieren",
     "running": "Exportiere",
     "cancel": "Export abbrechen",

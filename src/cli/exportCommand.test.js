@@ -107,6 +107,16 @@ describe("export formats", () => {
     expect(files().some((name) => name.endsWith(".pdf"))).toBe(false);
   });
 
+  it("fails clearly when the formats have no file for the documents", async () => {
+    await exportCommand("18Test", { format: "svg", docs: "cards" });
+
+    expect(console.error).toHaveBeenCalledWith(
+      "Nothing to export for 18Test: the chosen documents have no svg files",
+    );
+    expect(process.exitCode).toBe(1);
+    expect(files()).toEqual([]);
+  });
+
   it("exports an svg for each element with --format svg", async () => {
     await exportCommand("18Test", { format: "svg" });
 

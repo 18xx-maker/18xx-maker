@@ -278,6 +278,30 @@ describe("export options", () => {
     expect(exportButton(panel)).toBeDisabled();
   });
 
+  it("disables the export of svg files of pages that have no svg", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(checkbox(panel, "PDF documents"));
+    await user.click(checkbox(panel, "SVG images"));
+    const documents = within(
+      within(panel).getByRole("group", { name: "Documents" }),
+    ).getAllByRole("checkbox");
+    // Only the pages that have no svg
+    for (const box of documents) {
+      const on = box.getAttribute("aria-checked") === "true";
+      if (on !== (box.id === "export-doc-cards")) await user.click(box);
+    }
+
+    expect(
+      within(panel).getByText(
+        "Nothing to export: the chosen documents have no files in the chosen formats",
+      ),
+    ).toBeVisible();
+    expect(exportButton(panel)).toBeDisabled();
+
+    await user.click(checkbox(panel, "Map"));
+    expect(exportButton(panel)).toBeEnabled();
+  });
+
   it("exports every layout when asked", async () => {
     const { user, panel } = await openOptions();
     const layouts = within(panel).getByRole("switch", {
