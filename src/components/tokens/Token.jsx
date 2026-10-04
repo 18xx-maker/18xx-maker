@@ -168,7 +168,9 @@ const Token = ({
           } else if (text2.length > 3) {
             f2 *= 0.94;
           }
-          const spacing = fSize * 0.55 + f2 * 0.6;
+          // Baseline distance between the lines: a gap from the main label's
+          // cap top (above) or from the second line's cap top (below).
+          const spacing = above ? fSize * 1.3 : f2 * 0.7 + fSize * 0.22;
           if (!labelY) {
             // Center the two lines as a block (by cap height, about 0.7 of
             // the font size) where the single label was centered.
