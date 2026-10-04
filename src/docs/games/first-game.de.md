@@ -86,8 +86,10 @@ Ein paar Dinge, die dir auffallen sollten:
   Definition viele Kartenfelder färben kann. Mit `companies` in einer Stadt
   wird der Heimat-Token einer Gesellschaft dort platziert.
 - `tiles` ordnet einer Plättchennummer zu, wie viele davon existieren.
-  Plättchennummern stammen aus den Plättchen, die 18xx Maker kennt, siehe
-  [Elemente > Plättchen](/elements/tiles).
+  Plättchennummern stammen aus den generischen Plättchen, die 18xx Maker
+  kennt. [Elemente > Plättchen](/elements/tiles) zeigt sie und auch die
+  eigenen Plättchen jedes Spiels, die ein anderes Spiel selbst definieren
+  muss.
 - `trains` und `phases` sind unter [Phasen und Züge](/docs/games/trains)
   beschrieben.
 

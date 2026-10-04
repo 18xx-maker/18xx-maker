@@ -204,10 +204,14 @@
       "title": "Tiles",
       "description": "18xx tiles from all games",
       "page": {
-        "description": "This page shows all of the generic tiles that 18xx Maker knows about."
+        "description": "This page shows all of the tiles that 18xx Maker knows about: the generic tiles and the tiles of every game on this device."
       },
+      "usedBy": "Used in {{count}} game(s)",
+      "notUsed": "Not used by any game",
       "filter": {
         "title": "Tile Filter",
+        "game": "Game",
+        "allGames": "All games",
         "all": "All",
         "none": "None",
         "color": "Color",

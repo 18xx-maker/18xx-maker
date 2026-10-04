@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { map, uniq, values } from "ramda";
+import { map } from "ramda";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,10 +14,6 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 
-import { tiles } from "@/data";
-
-const colors = uniq(values(map((t) => t.color, tiles)));
-
 const TileFilters = ({
   color,
   setColor,
@@ -28,29 +24,54 @@ const TileFilters = ({
   revenue,
   setRevenue,
   revenues,
+  colors,
+  game,
+  setGame,
+  games,
 }) => {
   const { t } = useTranslation();
-  const [revenueSlider, setRevenueSlider] = useState(revenue);
+  // The range being dragged, otherwise the one in the URL
+  const [dragging, setDragging] = useState(null);
+  const revenueSlider = dragging || revenue;
 
   const handleRevenueCommit = (values) => {
-    setRevenueSlider(values);
     setRevenue(values);
+    setDragging(null);
   };
-  const handleRevenue = (values) => setRevenueSlider(values);
+  const handleRevenue = (values) => setDragging(values);
 
   return (
     <div className="col-span-2 lg:col-span-3 xl:col-span-4 2xl:col-span-5 bg-muted flex flex-wrap flex-row gap-4 rounded-xl border px-4 py-2">
       <div className="w-40">
+        <Label htmlFor="tile-filter-game" className="mr-2">
+          {t("elements.tiles.filter.game")}
+        </Label>
+        <Select value={game} onValueChange={setGame}>
+          <SelectTrigger id="tile-filter-game">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem key="all" value="all">
+              {t("elements.tiles.filter.allGames")}
+            </SelectItem>
+            {map(
+              (g) => (
+                <SelectItem key={g.slug} value={g.slug}>
+                  {g.title}
+                </SelectItem>
+              ),
+              games,
+            )}
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="w-40">
         <Label htmlFor="tile-filter-color" className="mr-2">
           {t("elements.tiles.filter.color")}
         </Label>
-        <Select
-          id="tile-filter-color"
-          defaultValue={color}
-          onValueChange={setColor}
-        >
-          <SelectTrigger>
-            <SelectValue value={color} />
+        <Select value={color} onValueChange={setColor}>
+          <SelectTrigger id="tile-filter-color">
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectItem key="all" value="all">
@@ -81,13 +102,9 @@ const TileFilters = ({
         <Label htmlFor="tile-filter-includes" className="text-nowrap mr-2">
           {t("elements.tiles.filter.includes")}
         </Label>
-        <Select
-          id="tile-filters-includes"
-          defaultValue={includes}
-          onValueChange={setIncludes}
-        >
-          <SelectTrigger>
-            <SelectValue value={includes} />
+        <Select value={includes} onValueChange={setIncludes}>
+          <SelectTrigger id="tile-filter-includes">
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">
@@ -113,7 +130,7 @@ const TileFilters = ({
           <span>{revenueSlider[0]}</span>
           <Slider
             id="tile-filter-revenues"
-            defaultValue={revenueSlider}
+            value={revenueSlider}
             onValueChange={handleRevenue}
             onValueCommit={handleRevenueCommit}
             step={10}

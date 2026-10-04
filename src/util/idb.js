@@ -110,6 +110,23 @@ const loadFileFromHandle = (handle) =>
     });
   });
 
+// Reads a game without changing anything: it never deletes the game, updates
+// the summary or asks for permission, a file that needs it is an error.
+export const peekGame = (id) =>
+  loadGameSummary(id)
+    .then(prop("handle"))
+    .then((handle) =>
+      handle.queryPermission().then((permission) => {
+        if (permission !== "granted") {
+          throw new Error("Permission needed");
+        }
+
+        return handle.getFile();
+      }),
+    )
+    .then(loadFile)
+    .then(assoc("meta", meta(id)));
+
 export const loadSummaries = () =>
   op(GAME_FILE_STORE, (store) => store.getAll())
     .then(map(omit(["handle"])))

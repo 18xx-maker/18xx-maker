@@ -204,10 +204,14 @@
       "title": "地块",
       "description": "所有游戏中的 18xx 地块",
       "page": {
-        "description": "此页面展示了 18xx Maker 所知的所有通用地块。"
+        "description": "此页面展示了 18xx Maker 所知的所有地块:通用地块以及此设备上所有游戏的地块。"
       },
+      "usedBy": "用于 {{count}} 个游戏",
+      "notUsed": "没有游戏使用",
       "filter": {
         "title": "地块筛选",
+        "game": "游戏",
+        "allGames": "所有游戏",
         "all": "全部",
         "none": "无",
         "color": "颜色",

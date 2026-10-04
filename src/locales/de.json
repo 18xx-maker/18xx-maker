@@ -204,10 +204,14 @@
       "title": "Plättchen",
       "description": "18xx-Plättchen aus allen Spielen",
       "page": {
-        "description": "Diese Seite zeigt alle allgemeinen Plättchen, die 18xx Maker kennt."
+        "description": "Diese Seite zeigt alle Plättchen, die 18xx Maker kennt: die allgemeinen Plättchen und die Plättchen aller Spiele auf diesem Gerät."
       },
+      "usedBy": "Verwendet in {{count}} Spiel(en)",
+      "notUsed": "Von keinem Spiel verwendet",
       "filter": {
         "title": "Plättchenfilter",
+        "game": "Spiel",
+        "allGames": "Alle Spiele",
         "all": "Alle",
         "none": "Keine",
         "color": "Farbe",

@@ -2,7 +2,13 @@
 
 import { validate } from "uuid";
 
-import { deleteGame, loadGame, loadSummaries, saveGameFile } from "@/util/opfs";
+import {
+  deleteGame,
+  loadGame,
+  loadSummaries,
+  peekGame,
+  saveGameFile,
+} from "@/util/opfs";
 
 // An in-memory origin private file system with a single directory level
 const createStorage = () => {
@@ -172,6 +178,23 @@ describe("internal games in OPFS", () => {
     await expect(loadGame("missing")).rejects.toThrow(
       "File was not a valid 18xx-maker game",
     );
+  });
+
+  it("peeks at a game without deleting it when it is not valid", async () => {
+    storage.directories.games = new Map([["bad.json", "not json"]]);
+
+    await expect(peekGame("bad")).rejects.toThrow();
+    expect(games().has("bad.json")).toBe(true);
+  });
+
+  it("peeks at a saved game with its meta data", async () => {
+    const slug = await saveGameFile(JSON.stringify(game));
+    const id = slug.split(":")[1];
+
+    expect(await peekGame(id)).toEqual({
+      ...game,
+      meta: { id, type: "internal", slug },
+    });
   });
 
   it("deletes games", async () => {
