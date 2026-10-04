@@ -248,7 +248,18 @@
   },
   "games": {
     "title": "Games",
-    "description": "These are the games that you have loaded into 18xx Maker"
+    "description": "These are the games that you have loaded into 18xx Maker",
+    "filter": {
+      "publisher": "Publisher",
+      "designer": "Designer",
+      "type": "Type",
+      "all": "All",
+      "bundled": "Bundled",
+      "loaded": "Loaded"
+    },
+    "loaded": "Your games",
+    "bundled": "Bundled games",
+    "empty": "No games match these filters"
   },
   "game": {
     "info": "Game Info",
