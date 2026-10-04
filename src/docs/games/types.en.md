@@ -67,3 +67,16 @@ Types can have any name, and companies refer to them with a string, for example
 `"tokenTypes": { "default": ["Free", 40], "one": ["Free"] }` with
 `{ "abbrev": "KU", "tokens": "one" }`. The 1889 and 1867 files in
 `src/data/games` use these.
+
+## Loan slots
+
+A company can also have `loans`, extra slots on its charter, for example for
+the loans of a game. Each entry is the label under the slot, and every slot is
+printed as an empty square after the tokens, so it is never mistaken for a
+token. An empty string or `null` leaves the slot without a label:
+
+```json
+{ "abbrev": "RED", "tokens": [0, 40], "loans": [50, 50, ""] }
+```
+
+Many loans can overflow a half width charter.

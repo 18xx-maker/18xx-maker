@@ -141,12 +141,14 @@
     {
       "name": "Navy Railroad",
       "abbrev": "NVRR",
-      "color": "navy"
+      "color": "navy",
+      "loans": [50, 50, "", null]
     },
     {
       "name": "Brown Railroad",
       "abbrev": "BWRR",
-      "color": "brown"
+      "color": "brown",
+      "loans": [100]
     },
     {
       "name": "Gray Railroad",

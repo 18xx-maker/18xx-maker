@@ -78,6 +78,39 @@ const Charter = ({
   const showTrains = company.trains !== false;
   const showTreasury = company.treasury !== false;
 
+  // A slot on the charter: a shape with its label under it (turned sideways on
+  // half width charters). A loan prints no label when it has none.
+  const spot = (key, shape, label, skipEmpty) => (
+    <svg key={key}>
+      <g transform={`translate(25 25)`}>
+        {shape}
+        {!(
+          skipEmpty &&
+          (label === null || label === undefined || label === "")
+        ) && (
+          <g transform={`${halfWidth ? "rotate(-90) " : ""}translate(0 39)`}>
+            <Color context="companies">
+              {(c, t) => (
+                <text
+                  fill={
+                    charterStyle === "color" && !halfWidth
+                      ? t(c(color))
+                      : c("black")
+                  }
+                  fontSize="11"
+                  fontWeight="normal"
+                  textAnchor="middle"
+                >
+                  <Currency value={label} type="token" />
+                </text>
+              )}
+            </Color>
+          </g>
+        )}
+      </g>
+    </svg>
+  );
+
   let tokenSpots = [];
   if (tokens) {
     tokenSpots = addIndex(map)((label, index) => {
@@ -90,37 +123,38 @@ const Charter = ({
           <CompanyToken company={company} />
         );
 
-      return (
-        <svg key={`token-${index}`}>
-          <g transform={`translate(25 25)`}>
-            <ColorContext.Provider value="companies">
-              {companyToken}
-            </ColorContext.Provider>
-            <g transform={`${halfWidth ? "rotate(-90) " : ""}translate(0 39)`}>
-              <Color context="companies">
-                {(c, t) => (
-                  <text
-                    fill={
-                      charterStyle === "color" && !halfWidth
-                        ? t(c(color))
-                        : c("black")
-                    }
-                    fontSize="11"
-                    fontWeight="normal"
-                    textAnchor="middle"
-                  >
-                    <Currency value={label} type="token" />
-                  </text>
-                )}
-              </Color>
-            </g>
-          </g>
-        </svg>
+      return spot(
+        `token-${index}`,
+        <ColorContext.Provider value="companies">
+          {companyToken}
+        </ColorContext.Provider>,
+        label,
       );
     }, tokens);
   } else {
     tokens = [];
   }
+
+  // Loans are empty squares, so they never look like a token
+  const loans = company.loans || [];
+  const loanSpots = addIndex(map)(
+    (label, index) =>
+      spot(
+        `loan-${index}`,
+        <rect
+          x="-25"
+          y="-25"
+          width="50"
+          height="50"
+          fill="none"
+          stroke="black"
+          strokeWidth="1"
+        />,
+        label,
+        true,
+      ),
+    loans,
+  );
 
   let turnNodes = chain((turn) => {
     let steps = addIndex(map)((step, i) => {
@@ -188,7 +222,7 @@ const Charter = ({
                     color: t(c(charterStyle === "color" ? color : "white")),
                     paddingRight: halfWidth
                       ? null
-                      : unitsToCss(12.5 + 65 * tokens.length),
+                      : unitsToCss(12.5 + 65 * (tokens.length + loans.length)),
                   }}
                   className="charter__name"
                 >
@@ -230,10 +264,11 @@ const Charter = ({
                     </svg>
                   </div>
                 )}
-                {tokenSpots.length > 0 && (
+                {tokenSpots.length + loanSpots.length > 0 && (
                   <div className="charter__tokens">
                     {halfWidth && "Tokens"}
                     {tokenSpots}
+                    {loanSpots}
                   </div>
                 )}
                 {halfWidth && (

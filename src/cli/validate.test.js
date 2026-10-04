@@ -127,6 +127,22 @@ describe("validate", () => {
     );
   });
 
+  it("accepts loan slots with labels or empty slots", () => {
+    const valid = writeTmp(
+      "game.json",
+      '{"info":{"title":"x"},"companies":[{"name":"A","abbrev":"A","loans":[50,"x","",null]}]}',
+    );
+    expect(run(valid).code).toBe(0);
+  });
+
+  it.each(["{}", "[{}]"])("rejects loans of %s", (loans) => {
+    const invalid = writeTmp(
+      "game.json",
+      `{"info":{"title":"x"},"companies":[{"name":"A","abbrev":"A","loans":${loans}}]}`,
+    );
+    expect(run(invalid).code).toBe(1);
+  });
+
   it("reports files that are not json as errors", () => {
     const broken = writeTmp("broken.json", "{");
 
