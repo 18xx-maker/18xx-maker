@@ -84,3 +84,19 @@ Zeichenkette oder `null` lässt das Feld ohne Beschriftung:
 ```
 
 Der erste Kredit steht in der rechten Spalte, und die Kredite füllen sie von oben nach unten und gehen dann in der Spalte links davon weiter. Kredite, die nicht passen, werden abgeschnitten; halte die Anzahl bei Minors und Gesellschaftskarten halber Breite daher klein.
+
+## Token unter dem Namen
+
+Eine Gesellschaft mit vielen Tokens kann `tokensBelow` setzen, um ihre Tokenfelder
+in einer Reihe unter dem Namen statt rechts davon zu drucken, damit sie den Namen
+nicht zusammendrücken. Die Tokens werden kleiner, damit sie in die Breite der
+Gesellschaftskarte passen, und der Name hat Platz für eine Zeile, also halte ihn kurz und lass den Untertext weg. Gesellschaftskarten halber Breite stapeln ihre Tokens
+bereits und ignorieren die Einstellung:
+
+```json
+{
+  "abbrev": "RED",
+  "tokens": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+  "tokensBelow": true
+}
+```

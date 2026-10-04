@@ -80,3 +80,18 @@ header, in columns that fit the height of the charter, so it is never mistaken f
 ```
 
 The first loan is in the right column and the loans fill it from top to bottom, then continue in the column to its left. Loans that do not fit are cut off, so keep the number small on minors and half width charters.
+
+## Tokens below the name
+
+A company with many tokens can set `tokensBelow` to print its token slots in a
+row under the company name instead of to the right of it, so they do not squeeze
+the name. The tokens get smaller to fit the width of the charter, and the name has room for one line, so keep it short and leave out the subtext. Half width
+charters already stack their tokens and ignore it:
+
+```json
+{
+  "abbrev": "RED",
+  "tokens": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+  "tokensBelow": true
+}
+```

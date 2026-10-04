@@ -91,3 +91,85 @@ describe("Charter loans layout", () => {
     }
   });
 });
+
+describe("Charter tokens below the name", () => {
+  const company = games["18Test"].companies.find((c) => c.abbrev === "LRR");
+  const props = {
+    name: "Lime Railroad",
+    color: "lime",
+    tokens: company.tokens,
+    company,
+    trains: [],
+    phases: [{ name: "2" }],
+    turns: [],
+  };
+
+  it("puts the tokens under the name, inside the charter", async () => {
+    const { root } = await mountElement(
+      <>
+        <style>
+          {".charter, .charter__body { height: 4.75in; width: 3.75in; }"}
+        </style>
+        <Charter {...props} />
+      </>,
+    );
+    const name = one(root, ".charter__name").getBoundingClientRect();
+    const tokens = one(root, ".charter__tokens").getBoundingClientRect();
+    const charter = one(root, ".charter").getBoundingClientRect();
+    const spots = all(root, ".charter__tokens svg").map((s) =>
+      s.getBoundingClientRect(),
+    );
+    expect(spots).toHaveLength(11);
+    expect(name.width).toBeCloseTo(charter.width, 0);
+    for (const s of spots) {
+      expect(s.right).toBeLessThanOrEqual(charter.right + 0.5);
+      expect(s.bottom).toBeLessThanOrEqual(name.bottom + 0.5);
+      expect(s.top).toBeGreaterThanOrEqual(tokens.top - 0.5);
+    }
+    expect(one(root, ".charter__tokens").className).toContain(
+      "charter__tokens--below",
+    );
+  });
+
+  it("ignores the setting on half width charters", async () => {
+    const { root } = await mountElement(<Charter {...props} halfWidth />);
+    expect(one(root, ".charter__tokens").className).not.toContain("--below");
+  });
+
+  it("leaves other companies alone", async () => {
+    const { root } = await mountElement(
+      <Charter {...props} company={{ ...company, tokensBelow: false }} />,
+    );
+    expect(one(root, ".charter__tokens").className).not.toContain("--below");
+    expect(one(root, ".charter__name").className).not.toContain("tokens-below");
+  });
+});
+
+describe("Charter tokens below the name layout", () => {
+  const company = games["18Test"].companies.find((c) => c.abbrev === "LRR");
+  it.each([false, true])(
+    "keeps the name above the token row (minor %s)",
+    async (minor) => {
+      const { root } = await mountElement(
+        <>
+          <style>
+            {".charter, .charter__body { height: 4.75in; width: 3.75in; }"}
+          </style>
+          <Charter
+            name="Lime Railroad"
+            color="lime"
+            tokens={company.tokens}
+            company={{ ...company, minor }}
+            minor={minor}
+            trains={[]}
+            phases={[{ name: "2" }]}
+            turns={[]}
+          />
+        </>,
+      );
+      const text = one(root, ".charter__name > div").getBoundingClientRect();
+      const row = one(root, ".charter__tokens").getBoundingClientRect();
+      expect(text.bottom).toBeLessThanOrEqual(row.top + 0.5);
+    },
+  );
+});
