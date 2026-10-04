@@ -52,6 +52,7 @@ const City = ({
   const game = useGame();
   const { config } = useConfig();
   const straightCityNames = config.straightCityNames;
+  const tileCompanies = config.tileCompanies;
 
   if (size === undefined) {
     size = 1;
@@ -83,7 +84,7 @@ const City = ({
 
   let companyLabel = (num) => {
     // Do we have companies defined for this city space?
-    if (companies && companies[num]) {
+    if (tileCompanies && companies && companies[num]) {
       let companyToken = is(Object, companies[num]) ? (
         <GameMapCompanyToken
           {...companies[num]}

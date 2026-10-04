@@ -248,3 +248,29 @@ describe("PageSetup", () => {
     );
   });
 });
+
+describe("Hex companies", () => {
+  const hex = {
+    color: "plain",
+    cities: [{ companies: ["BLRR"] }],
+    companies: [{ label: "HEXCO" }],
+    tokens: [{ company: "BLRR" }, { label: "PLAIN" }],
+  };
+  const text = (svg) => all(svg, "text").map((t) => t.textContent);
+
+  it("draws hex companies by default", async () => {
+    const svg = await drawSvg(<HexTile hex={hex} />);
+    expect(text(svg)).toContain("BLRR");
+    expect(text(svg)).toContain("PLAIN");
+    expect(svg).toHaveTextContent("HEXCO");
+  });
+
+  it("hides company labels and tokens when tileCompanies is off", async () => {
+    const svg = await drawSvg(<HexTile hex={hex} />, {
+      config: { tileCompanies: false },
+    });
+    expect(text(svg)).not.toContain("BLRR");
+    expect(svg).not.toHaveTextContent("HEXCO");
+    expect(text(svg)).toContain("PLAIN");
+  });
+});

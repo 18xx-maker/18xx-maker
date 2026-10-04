@@ -39,6 +39,7 @@
     "market": true
   },
   "plainMapCompanies": false,
+  "tileCompanies": true,
   "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "rob",

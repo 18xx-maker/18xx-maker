@@ -418,6 +418,10 @@
         "label": "Schlichte Gesellschaftsfelder auf der Karte",
         "description": "Setzt alle Heimat-, Ziel- und Tokenfelder auf Karten als leere weiße Städte mit schwarzem Gesellschaftstext, statt farbig oder mit Logos."
       },
+      "tileCompanies": {
+        "label": "Gesellschaften auf Kacheln",
+        "description": "Zeigt Gesellschaftslogos und -namen auf Kacheln und Karten: Gesellschaftsbeschriftungen auf Feldern, Gesellschaftstoken in Städten und auf Feldern platzierte Gesellschaftstoken. Für eine Gesellschaft reservierte Stadtfarben bleiben erhalten."
+      },
       "plainMapDestinations": {
         "label": "Schlichte Zielfelder auf der Karte",
         "description": "Setzt alle Zielfelder auf Karten als leere weiße Städte mit schwarzem Gesellschaftstext."

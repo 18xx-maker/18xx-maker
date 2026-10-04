@@ -135,6 +135,10 @@ export const sections = [
         root: true,
       },
       {
+        name: "tileCompanies",
+        root: true,
+      },
+      {
         group: [
           { name: "cutlines", root: true, dimension: true, description: false },
           {
