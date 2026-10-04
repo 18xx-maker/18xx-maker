@@ -337,6 +337,11 @@ imperative description):
 - `chore(release): v<version>` is reserved for release-please PRs.
 - Subject only needs the `(#123)` PR suffix that GitHub adds on merge; do not
   add it yourself.
+- **Check the body before pushing or opening a PR.** Write the PR description
+  to a file and run `node scripts/check-pr-body.mjs body.md` (the CI check
+  "Release notes safe" runs the same script and is the first job to fail). The
+  commit-msg hook runs it on every commit body too. Do this before
+  `gh pr create`, not after CI fails.
 
 ## Working in this repo
 

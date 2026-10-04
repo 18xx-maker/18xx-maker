@@ -2,6 +2,8 @@ commit-msg:
   commands:
     commitlint:
       run: pnpm commitlint --edit {1}
+    body:
+      run: node scripts/check-pr-body.mjs --commit {1}
 
 pre-commit:
   commands:
