@@ -3,17 +3,32 @@
   "$id": "https://18xx-maker.com/schemas/companies.schema.json",
   "type": "object",
   "properties": {
-    "name": { "type": "string" },
-    "abbrev": { "type": "string" },
+    "name": {
+      "type": "string"
+    },
+    "abbrev": {
+      "type": "string"
+    },
     "companies": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "name": { "type": "string" },
-          "abbrev": { "type": "string" },
-          "logo": { "type": "string" },
-          "color": { "type": "string" }
+          "name": {
+            "type": "string"
+          },
+          "abbrev": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "token": {
+            "$ref": "tiles.defs.json#/definitions/token"
+          }
         },
         "required": ["name", "abbrev", "color"],
         "additionalProperties": false

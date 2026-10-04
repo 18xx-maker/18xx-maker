@@ -317,6 +317,39 @@ describe("validate", () => {
         JSON.stringify({ info: { title: "Game" }, ...game }),
       );
 
+    it("accepts a token on a company of a company file", () => {
+      const file = writeTmp(
+        "companies.json",
+        JSON.stringify({
+          name: "Set",
+          abbrev: "S",
+          companies: [
+            {
+              name: "A",
+              abbrev: "A",
+              color: "red",
+              token: { stripe: "white" },
+            },
+          ],
+        }),
+      );
+      expect(run(file).code).toBe(0);
+    });
+
+    it("rejects an unknown token property on a company of a company file", () => {
+      const file = writeTmp(
+        "companies.json",
+        JSON.stringify({
+          name: "Set",
+          abbrev: "S",
+          companies: [
+            { name: "A", abbrev: "A", color: "red", token: { bogus: 1 } },
+          ],
+        }),
+      );
+      expect(run(file).code).toBe(1);
+    });
+
     it("validates every shipped game, company file and tile file", () => {
       const globs = ["games", "companies", "tiles", "publishers"].map((dir) =>
         src(`data/${dir}/*.json`).split(path.sep).join("/"),
@@ -522,6 +555,96 @@ describe("validate", () => {
         "an ability without a type",
         { privates: [{ name: "P", abilities: [{ when: "x" }] }] },
         "type",
+      ],
+      [
+        "a train event without an index",
+        {
+          trains: [
+            { name: "5", color: "gray", quantity: 1, rust: { on: "6" } },
+          ],
+        },
+        "index",
+      ],
+      [
+        "an unknown train event property",
+        {
+          trains: [
+            {
+              name: "5",
+              color: "gray",
+              quantity: 1,
+              rust: { on: "6", index: 2, at: 1 },
+            },
+          ],
+        },
+        "at",
+      ],
+      [
+        "a train discount that is not a number",
+        {
+          trains: [
+            { name: "5", color: "gray", quantity: 1, discount: { 4: "a lot" } },
+          ],
+        },
+        "discount",
+      ],
+      [
+        "a negative train discount",
+        {
+          trains: [
+            { name: "5", color: "gray", quantity: 1, discount: { 4: -1 } },
+          ],
+        },
+        "discount",
+      ],
+      [
+        "an unknown phase event",
+        {
+          phases: [
+            { name: "5", limit: 3, tiles: "brown", events: { explode: true } },
+          ],
+        },
+        "explode",
+      ],
+      [
+        "an unknown player property",
+        { players: [{ number: 3, cnkapital: 400 }] },
+        "cnkapital",
+      ],
+      [
+        "a bad map coordinate",
+        { map: { hexes: [], lines: [{ coords: ["A1", "B2p1"] }] } },
+        "coords",
+      ],
+      [
+        "a map line without coords",
+        { map: { hexes: [], lines: [{ color: "red" }] } },
+        "coords",
+      ],
+      [
+        "an unknown map border property",
+        {
+          map: {
+            hexes: [],
+            borders: [{ coords: ["A1p1", "A2p1"], colour: "red" }],
+          },
+        },
+        "colour",
+      ],
+      [
+        "a border text without a coordinate",
+        { map: { hexes: [], borderTexts: [{ cost: 10 }] } },
+        "coord",
+      ],
+      [
+        "a bad map coordinates setting",
+        { info: { title: "G", mapCoordinates: "diagonal" } },
+        "mapCoordinates",
+      ],
+      [
+        "a bad tracks gauge",
+        { info: { title: "G", trackWidth: "wide" } },
+        "trackWidth",
       ],
       ["a color that is a number", { colors: { red: 5 } }, "red"],
       ["a color that is an array", { colors: { red: ["red"] } }, "red"],

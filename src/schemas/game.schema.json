@@ -76,25 +76,7 @@
           }
         },
         "roundTracker": {
-          "type": "object",
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "rotation": {
-              "type": "number",
-              "exclusiveMinimum": -360,
-              "exclusiveMaximum": 360
-            },
-            "type": {
-              "type": "string",
-              "enum": ["row", "row-reverse", "col", "col-reverse", "round"]
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/roundTracker"
         },
         "market": {
           "type": "object",
@@ -120,6 +102,16 @@
             "cellWidth": {
               "type": "number",
               "exclusiveMinimum": 0
+            },
+            "rowHeight": {
+              "description": "Height of a row of the players table.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "fontSize": {
+              "description": "Font size of the players table.",
+              "type": "number",
+              "exclusiveMinimum": 0
             }
           },
           "additionalProperties": false
@@ -129,10 +121,24 @@
           "items": {
             "type": "object",
             "properties": {
+              "coord": {
+                "$ref": "#/definitions/mapCoord"
+              },
               "cost": {
-                "type": "number"
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "label": {
+                "type": "string"
               },
               "circle": {
+                "description": "Radius of a circle behind the text.",
                 "type": "number"
               },
               "color": {
@@ -141,11 +147,34 @@
               "bgColor": {
                 "type": "string"
               },
-              "coord": {
-                "type": "string",
-                "pattern": "^[A-Z]+[0-9]+(s[1-6])|(p[1-6])|(a[0-9]+p[0-9]+)|(x[0-9]+y[0-9]+)"
+              "borderColor": {
+                "type": "string"
+              },
+              "borderWidth": {
+                "type": "number"
+              },
+              "rotation": {
+                "type": "number"
+              },
+              "fontSize": {
+                "type": "number"
+              },
+              "fontWeight": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "fontFamily": {
+                "type": "string"
               }
-            }
+            },
+            "required": ["coord"],
+            "additionalProperties": false
           }
         },
         "borders": {
@@ -159,11 +188,39 @@
               "coords": {
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "pattern": "^[A-Z]+[0-9]+(s[1-6])|(p[1-6])|(a[0-9]+p[0-9]+)|(x[0-9]+y[0-9]+)"
-                }
+                  "$ref": "#/definitions/mapCoord"
+                },
+                "minItems": 2
+              },
+              "width": {
+                "type": "number"
+              },
+              "border": {
+                "description": "false draws no border.",
+                "type": "boolean"
+              },
+              "borderWidth": {
+                "type": "number"
+              },
+              "dashed": {
+                "type": "boolean"
+              },
+              "dashArray": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "offset": {
+                "type": "number"
               }
-            }
+            },
+            "required": ["coords"],
+            "additionalProperties": false
           }
         },
         "lines": {
@@ -177,11 +234,39 @@
               "coords": {
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "pattern": "^[A-Z]+[0-9]+(s[1-6])|(p[1-6])|(a[0-9]+p[0-9]+)|(x[0-9]+y[0-9]+)"
-                }
+                  "$ref": "#/definitions/mapCoord"
+                },
+                "minItems": 2
+              },
+              "width": {
+                "type": "number"
+              },
+              "border": {
+                "description": "false draws no border.",
+                "type": "boolean"
+              },
+              "borderWidth": {
+                "type": "number"
+              },
+              "dashed": {
+                "type": "boolean"
+              },
+              "dashArray": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "offset": {
+                "type": "number"
               }
-            }
+            },
+            "required": ["coords"],
+            "additionalProperties": false
           }
         }
       },
@@ -195,15 +280,20 @@
         },
         {
           "type": "object",
+          "description": "A train by its name and which one of them, like the 3rd 5.",
           "properties": {
             "on": {
+              "description": "The name of the train.",
               "type": "string"
             },
             "index": {
+              "description": "Which train of that name, 2 is the second.",
               "type": "integer",
               "minimum": 2
             }
-          }
+          },
+          "required": ["on", "index"],
+          "additionalProperties": false
         }
       ]
     },
@@ -253,7 +343,12 @@
           "minimum": 0
         },
         "discount": {
-          "type": "object"
+          "description": "The price of this train when traded in for each of the listed trains, by the name of the train traded in.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
         },
         "upgrade": {
           "description": "Cost of this train when bought as an upgrade, shown under the price",
@@ -302,6 +397,62 @@
         },
         "players": {
           "type": "integer"
+        },
+        "nameFontSize": {
+          "description": "Font size of the name.",
+          "type": "number"
+        },
+        "nameFontFamily": {
+          "description": "Font family of the name.",
+          "type": "string"
+        },
+        "priceFontSize": {
+          "description": "Font size of the price.",
+          "type": "number"
+        },
+        "priceFontFamily": {
+          "description": "Font family of the price.",
+          "type": "string"
+        },
+        "longevityFontSize": {
+          "description": "Font size of the rust, phase and obsolete texts.",
+          "type": "number"
+        },
+        "longevityFontFamily": {
+          "description": "Font family of the rust, phase and obsolete texts.",
+          "type": "string"
+        },
+        "backgroundColor": {
+          "description": "Background color of the train card.",
+          "type": "string"
+        },
+        "imagePaddingTop": {
+          "description": "Space above the image.",
+          "type": "number"
+        },
+        "imageWidth": {
+          "description": "Width of the image.",
+          "type": "number"
+        },
+        "phasedText": {
+          "description": "Replaces the text before the phased by event.",
+          "type": "string"
+        },
+        "obsoletedText": {
+          "description": "Replaces the text before the obsolete event.",
+          "type": "string"
+        },
+        "rustedText": {
+          "description": "Replaces the text before the rust event.",
+          "type": "string"
+        },
+        "permanentText": {
+          "description": "Replaces the text of a permanent train.",
+          "type": "string"
+        },
+        "permanentColor": {
+          "description": "Color of the text of a permanent train.",
+          "type": "string"
         }
       },
       "required": ["name", "color"],
@@ -371,6 +522,27 @@
           },
           "variant": {
             "type": "string"
+          },
+          "subtext": {
+            "description": "Text under the name of the company.",
+            "type": "string"
+          },
+          "color": {
+            "description": "Color of the share band.",
+            "type": "string"
+          },
+          "backgroundColor": {
+            "description": "Background color of the share.",
+            "type": "string"
+          },
+          "labelColor": {
+            "description": "Color of the label.",
+            "type": "string"
+          },
+          "tokenCount": {
+            "description": "How many tokens to draw on the share.",
+            "type": "number",
+            "minimum": 0
           }
         },
         "required": ["quantity"]
@@ -772,7 +944,14 @@
                 "type": "boolean"
               },
               "dashArray": {
-                "type": "number"
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
               },
               "offset": {
                 "description": "Offset of the dashes.",
@@ -880,6 +1059,11 @@
           }
         }
       ]
+    },
+    "mapCoord": {
+      "type": "string",
+      "description": "A place on the map: a hex and a point (A1p1), a side (A1s1), an angle and percent (A1a30p0.5), or an offset from the middle (A1x10y-5).",
+      "pattern": "^[A-Z]+[0-9]+(p[0-9.-]+|s[0-9.-]+|a[0-9.-]+(p[0-9.-]+)?|x[0-9.-]+y[0-9.-]+)$"
     }
   },
   "type": "object",
@@ -947,10 +1131,12 @@
           "enum": ["horizontal", "vertical"]
         },
         "capitalization": {
+          "description": "Full cap is the default and doesn't need to be specified.",
           "type": "string",
           "enum": ["full", "incremental"]
         },
         "mustSellInBlocks": {
+          "description": "Shares must be sold in blocks, shown on the charter.",
           "type": "boolean"
         },
         "marketTokens": {
@@ -965,6 +1151,151 @@
           "description": "The currency format string must contain a # character",
           "type": "string",
           "pattern": "^(.*)#(.*)$"
+        },
+        "valueFontFamily": {
+          "description": "Font family of the values on the map.",
+          "type": "string"
+        },
+        "valueFontWeight": {
+          "description": "Font weight of the values on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "nameFontFamily": {
+          "description": "Font family of the names on the map.",
+          "type": "string"
+        },
+        "nameFontWeight": {
+          "description": "Font weight of the names on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "companyFontFamily": {
+          "description": "Font family of the companies.",
+          "type": "string"
+        },
+        "companyFontWeight": {
+          "description": "Font weight of the companies.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "valueFontSize": {
+          "description": "Font size of the values on the map.",
+          "type": "number"
+        },
+        "nameFontSize": {
+          "description": "Font size of the names on the map.",
+          "type": "number"
+        },
+        "companyFontSize": {
+          "description": "Font size of the companies.",
+          "type": "number"
+        },
+        "companyFontStyle": {
+          "description": "Font style of the companies.",
+          "type": "string"
+        },
+        "titleFontWeight": {
+          "description": "Font weight of the title on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "subtitleFontWeight": {
+          "description": "Font weight of the subtitle on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "designerFontWeight": {
+          "description": "Font weight of the designer on the map.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "borderWidth": {
+          "description": "Width of the border of track, cities and towns.",
+          "type": "number"
+        },
+        "trackWidth": {
+          "description": "Width of the track.",
+          "type": "number"
+        },
+        "trackColor": {
+          "description": "Color of the track, match uses the color of the hex.",
+          "type": "string"
+        },
+        "trackBorderColor": {
+          "description": "Color of the border of the track, match uses the color of the hex.",
+          "type": "string"
+        },
+        "trackGauge": {
+          "description": "Gauge of all the track: narrow, dashed, line or dual.",
+          "type": "string"
+        },
+        "trackGaugeColor": {
+          "description": "Color of the gauge lines, match uses the color of the hex.",
+          "type": "string"
+        },
+        "cityWidth": {
+          "description": "Width of the cities.",
+          "type": "number"
+        },
+        "townWidth": {
+          "description": "Width of the towns.",
+          "type": "number"
+        },
+        "townBorderWidth": {
+          "description": "Width of the border of towns.",
+          "type": "number"
+        },
+        "transparent": {
+          "description": "Draw the hexes of the map without a background.",
+          "type": "boolean"
+        },
+        "mapCoordinates": {
+          "description": "Where the numbers and letters of the coordinates go.",
+          "type": "string",
+          "enum": [
+            "numbersVertical",
+            "reversed",
+            "lettersHorizontal",
+            "numbersHorizontal",
+            "lettersVertical"
+          ]
         }
       },
       "required": ["title"],
@@ -1096,6 +1427,80 @@
           },
           "token": {
             "$ref": "#/definitions/token"
+          },
+          "color": {
+            "description": "The color of the company.",
+            "type": "string"
+          },
+          "logo": {
+            "description": "The logo of the company.",
+            "type": "string"
+          },
+          "minor": {
+            "description": "The company is a minor company.",
+            "type": "boolean"
+          },
+          "subtext": {
+            "description": "Text under the name of the company.",
+            "type": "string"
+          },
+          "subName": {
+            "description": "A second line under the name of the charter.",
+            "type": "string"
+          },
+          "shareType": {
+            "description": "The name of a share type of the game.",
+            "type": "string"
+          },
+          "tokenType": {
+            "description": "The name of a token type of the game.",
+            "type": "string"
+          },
+          "marketTokens": {
+            "description": "How many market tokens to print.",
+            "type": "integer",
+            "minimum": 0
+          },
+          "extraStationTokens": {
+            "description": "How many extra station tokens to print.",
+            "type": "integer",
+            "minimum": 0
+          },
+          "treasury": {
+            "description": "false hides the treasury on the charter.",
+            "type": "boolean",
+            "const": false
+          },
+          "capital": {
+            "description": "The starting capital shown on the charter.",
+            "$ref": "#/definitions/capital"
+          },
+          "fontFamily": {
+            "description": "Font family of the name.",
+            "type": "string"
+          },
+          "fontSize": {
+            "description": "Font size of the name.",
+            "type": "number"
+          },
+          "fontWeight": {
+            "description": "Font weight of the name.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "fontStyle": {
+            "description": "Font style of the name.",
+            "type": "string"
+          },
+          "outlineWidth": {
+            "description": "Width of the outline of the company on its private card.",
+            "type": "number"
           }
         }
       }
@@ -1183,10 +1588,19 @@
             "type": "boolean"
           },
           "events": {
+            "description": "Events of the phase, shown on the phase card.",
             "type": "object",
-            "additionalProperties": {
-              "type": "boolean"
-            }
+            "properties": {
+              "close_companies": {
+                "description": "The privates close.",
+                "type": "boolean"
+              },
+              "remove_tokens": {
+                "description": "The tokens of private companies are removed from the map.",
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
           }
         },
         "anyOf": [
@@ -1219,7 +1633,8 @@
             "minimum": 1
           }
         },
-        "required": ["number"]
+        "required": ["number"],
+        "additionalProperties": false
       }
     },
     "pools": {
@@ -1368,6 +1783,260 @@
                 "pattern": "^.?.?[0-9].?%? ?/ ?.?.?[0-9].?%?$"
               }
             ]
+          },
+          "nameFontFamily": {
+            "description": "Font family of the name.",
+            "type": "string"
+          },
+          "nameFontWeight": {
+            "description": "Font weight of the name.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "nameFontStyle": {
+            "description": "Font style of the name.",
+            "type": "string"
+          },
+          "nameColor": {
+            "description": "Color of the name.",
+            "type": "string"
+          },
+          "idFontFamily": {
+            "description": "Font family of the id.",
+            "type": "string"
+          },
+          "idFontWeight": {
+            "description": "Font weight of the id.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "idFontStyle": {
+            "description": "Font style of the id.",
+            "type": "string"
+          },
+          "idColor": {
+            "description": "Color of the id.",
+            "type": "string"
+          },
+          "idFontSize": {
+            "description": "Font size of the id.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "noteFontFamily": {
+            "description": "Font family of the note.",
+            "type": "string"
+          },
+          "noteFontWeight": {
+            "description": "Font weight of the note.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "noteFontStyle": {
+            "description": "Font style of the note.",
+            "type": "string"
+          },
+          "noteColor": {
+            "description": "Color of the note.",
+            "type": "string"
+          },
+          "noteFontSize": {
+            "description": "Font size of the note.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "descFontFamily": {
+            "description": "Font family of the description.",
+            "type": "string"
+          },
+          "descFontWeight": {
+            "description": "Font weight of the description.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "descFontStyle": {
+            "description": "Font style of the description.",
+            "type": "string"
+          },
+          "descColor": {
+            "description": "Color of the description.",
+            "type": "string"
+          },
+          "priceFontFamily": {
+            "description": "Font family of the price.",
+            "type": "string"
+          },
+          "priceFontWeight": {
+            "description": "Font weight of the price.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "priceFontStyle": {
+            "description": "Font style of the price.",
+            "type": "string"
+          },
+          "priceColor": {
+            "description": "Color of the price.",
+            "type": "string"
+          },
+          "priceFontSize": {
+            "description": "Font size of the price.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "revenueFontFamily": {
+            "description": "Font family of the revenue.",
+            "type": "string"
+          },
+          "revenueFontWeight": {
+            "description": "Font weight of the revenue.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "revenueFontStyle": {
+            "description": "Font style of the revenue.",
+            "type": "string"
+          },
+          "revenueColor": {
+            "description": "Color of the revenue.",
+            "type": "string"
+          },
+          "revenueFontSize": {
+            "description": "Font size of the revenue.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "bidFontFamily": {
+            "description": "Font family of the bid.",
+            "type": "string"
+          },
+          "bidFontWeight": {
+            "description": "Font weight of the bid.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "bidFontStyle": {
+            "description": "Font style of the bid.",
+            "type": "string"
+          },
+          "bidColor": {
+            "description": "Color of the bid.",
+            "type": "string"
+          },
+          "bidFontSize": {
+            "description": "Font size of the bid.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "variantFontFamily": {
+            "description": "Font family of the variant.",
+            "type": "string"
+          },
+          "variantFontWeight": {
+            "description": "Font weight of the variant.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "variantFontStyle": {
+            "description": "Font style of the variant.",
+            "type": "string"
+          },
+          "variantColor": {
+            "description": "Color of the variant.",
+            "type": "string"
+          },
+          "variantFontSize": {
+            "description": "Font size of the variant.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "playersFontFamily": {
+            "description": "Font family of the players.",
+            "type": "string"
+          },
+          "playersFontWeight": {
+            "description": "Font weight of the players.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "playersFontStyle": {
+            "description": "Font style of the players.",
+            "type": "string"
+          },
+          "playersColor": {
+            "description": "Color of the players.",
+            "type": "string"
+          },
+          "playersFontSize": {
+            "description": "Font size of the players.",
+            "type": "integer",
+            "minimum": 1
+          },
+          "fontColor": {
+            "description": "Color of the text of the card.",
+            "type": "string"
+          },
+          "backgroundColor": {
+            "description": "Background color of the card.",
+            "type": "string"
+          },
+          "revenueBackgroundColor": {
+            "description": "Background color of the revenue.",
+            "type": "string"
           }
         },
         "required": ["name"],
