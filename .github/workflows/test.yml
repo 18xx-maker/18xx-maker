@@ -7,20 +7,18 @@ on:
   pull_request:
     branches:
       - main
-  merge_group:
-    types:
-      - checks_requested
 name: Test
 # A new push to a pull request supersedes its running checks
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-# Jobs are ordered by cost: each tier only starts when the cheaper one before
-# it passed, so a quick failure stops the expensive jobs from running at all.
-#   1. Lint and PR body (cheap Linux jobs, no browser)
-#   2. Build and Linux shards (Linux, builds and the full vitest suite)
-#   3. End to End and Export Linux (Linux, build and drive Playwright/Electron)
-#   4. Mac and Windows: test shards and Export (10x and 2x minute multipliers)
+# The Linux jobs (cheap and fast) all start at once. Only the Mac and Windows
+# jobs (10x and 2x minute multipliers) wait for Lint and Build, so a quick
+# failure stops the expensive runners from starting at all. The checks to
+# require are the aggregate jobs "Linux", "Mac", "Windows" and the three
+# "Export" ones, the sharded jobs behind them have no stable names.
+# A pull request only runs the unit tests on Mac and Windows, the full suite
+# runs on the push to main, which is the only run of the merged commit.
 jobs:
   # Edits of the PR body are checked by pr-body.yml, this runs it on every push
   pr-body:
@@ -69,7 +67,6 @@ jobs:
           FORCE_COLOR: 3
   build:
     name: Build
-    needs: [lint, pr-body]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -91,11 +88,8 @@ jobs:
         run: pnpm build:app
       - name: Build Storybook
         run: pnpm build:sb
-  # The required checks are the Linux, Mac and Windows jobs further down, which
-  # collect the results of these sharded jobs.
   linux-shards:
     name: Linux Shard ${{ matrix.shard }}
-    needs: [lint, pr-body]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -186,10 +180,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
   # Pull requests only run the unit tests on Mac and Windows, the full suite
-  # runs on main and in the merge queue
+  # runs on main
   desktop-shards:
     name: ${{ matrix.os.name }} Shard ${{ matrix.shard }}
-    needs: [e2e, export-linux]
+    needs: [lint, build]
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
@@ -258,7 +252,6 @@ jobs:
           test "${{ needs.desktop-shards.result }}" = "success"
   e2e:
     name: End to End
-    needs: [build, linux-shards]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -309,14 +302,20 @@ jobs:
           retention-days: 7
   # The six real export paths, {CLI, app} x {pdf, png, b18}, on the built site
   # and the built app with no mocks. To require them, require the three
-  # "Export Linux", "Export Mac" and "Export Windows" checks.
-  # The six real export paths, {CLI, app} x {pdf, png, b18}, on the built site
-  # and the built app with no mocks. To require them, require the three
-  # "Export Linux", "Export Mac" and "Export Windows" checks.
+  # "Export Linux", "Export Mac" and "Export Windows" checks. They are split in
+  # two shards by spec file: export.spec.js compares the app with the CLI, so
+  # it has to stay in one run, cli.spec.js is the other half of the time.
   export-linux:
-    name: Export Linux
-    needs: [build, linux-shards]
+    name: Export Linux Shard ${{ matrix.export.name }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        export:
+          - name: 1
+            files: cli.spec.js
+          - name: 2
+            files: electron.spec.js export.spec.js
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -358,21 +357,21 @@ jobs:
       - name: Electron Dependencies
         run: sudo apt-get install -y xvfb libgbm1 libnss3 libasound2t64 libgtk-3-0t64
       - name: Export Tests
-        run: xvfb-run --auto-servernum pnpm test:export
+        run: xvfb-run --auto-servernum pnpm test:export ${{ matrix.export.files }}
         env:
           E2E_ELECTRON: 1
       - name: Upload Report
         uses: actions/upload-artifact@v7
         if: failure()
         with:
-          name: export-report-linux
+          name: export-report-linux-${{ matrix.export.name }}
           path: |
             playwright-report/
             test-results/
           retention-days: 7
   export-desktop:
-    name: Export ${{ matrix.os.name }}
-    needs: [e2e, export-linux]
+    name: Export ${{ matrix.os.name }} Shard ${{ matrix.export.name }}
+    needs: [lint, build]
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
@@ -384,6 +383,11 @@ jobs:
           - name: Windows
             slug: windows
             image: windows-latest
+        export:
+          - name: 1
+            files: cli.spec.js
+          - name: 2
+            files: electron.spec.js export.spec.js
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -416,15 +420,40 @@ jobs:
       - name: Build App
         run: pnpm build:app
       - name: Export Tests
-        run: pnpm test:export
+        run: pnpm test:export ${{ matrix.export.files }}
         env:
           E2E_ELECTRON: 1
       - name: Upload Report
         uses: actions/upload-artifact@v7
         if: failure()
         with:
-          name: export-report-${{ matrix.os.slug }}
+          name: export-report-${{ matrix.os.slug }}-${{ matrix.export.name }}
           path: |
             playwright-report/
             test-results/
           retention-days: 7
+  export-linux-result:
+    name: Export Linux
+    needs: export-linux
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shards
+        run: test "${{ needs.export-linux.result }}" = "success"
+  # Mac and Windows shards share one result, the failed shard job names the system
+  export-mac:
+    name: Export Mac
+    needs: export-desktop
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shards
+        run: test "${{ needs.export-desktop.result }}" = "success"
+  export-windows:
+    name: Export Windows
+    needs: export-desktop
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shards
+        run: test "${{ needs.export-desktop.result }}" = "success"

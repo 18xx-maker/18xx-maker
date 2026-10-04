@@ -138,7 +138,7 @@ pnpm svgo
 
 In CI the Linux tests run in three shards whose reports are merged (the coverage
 floor is checked on the merged result). Mac and Windows run only the unit tests
-on pull requests, and the full suite on `main` and in the merge queue.
+on pull requests, and the full suite on `main`.
 
 There are the commands to preview and build the production versions of the site,
 app and storybook site:
@@ -280,6 +280,8 @@ Linux", "Export Mac", "Export Windows", the ones to require). Each job builds
 the site and the app (`pnpm build`, `pnpm build:app`), then runs
 `pnpm test:export` (`playwright.export.config.js`, no preview server, one
 worker): `e2e/export.spec.js`, `e2e/cli.spec.js` and `e2e/electron.spec.js`.
+In CI it runs in two shards by spec file (`cli.spec.js`, and
+`electron.spec.js` with `export.spec.js`, which compares the app with the CLI).
 Linux runs it under `xvfb-run`, and the app gets `--no-sandbox` only when `CI`
 is set (the runner has no setuid `chrome-sandbox`). The job is separate from
 the vitest jobs, so it is not part of the coverage merge.
