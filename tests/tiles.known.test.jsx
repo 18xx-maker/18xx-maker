@@ -50,6 +50,20 @@ describe("tiles of games on this device", () => {
     ).toBeInTheDocument();
   });
 
+  it("does not crash on a malformed stored game", async () => {
+    opfs.peekGame.mockResolvedValue({
+      info: { title: "Saved Game" },
+      tiles: {
+        ZZ7: { color: "red", quantity: 1 },
+        ZZ8: { color: "blue", values: [null, { value: null }] },
+        ZZ9: { color: "brown", values: "x" },
+      },
+    });
+    renderApp("/elements/tiles?id=ZZ", withSaved);
+
+    await waitFor(() => expect(shownTiles()).toBe(1));
+  });
+
   it("skips a game that fails to load", async () => {
     opfs.peekGame.mockRejectedValue(new Error("gone"));
     renderApp("/elements/tiles?id=ZZ9", withSaved);

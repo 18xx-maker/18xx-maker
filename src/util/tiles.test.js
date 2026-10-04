@@ -54,6 +54,18 @@ describe("customTiles", () => {
     ).toEqual({ T1: { color: "offboard", quantity: 1, id: "T1" } });
   });
 
+  it("skips malformed definitions", () => {
+    expect(
+      customTiles({
+        A: { color: "red", values: "x" },
+        B: { color: "red", values: [null] },
+        C: { color: "red", values: [{ value: null }] },
+        D: { color: "red", values: [{ value: 3 }, { value: "2+1" }] },
+        E: [],
+      }),
+    ).toEqual({ D: expect.objectContaining({ id: "D" }) });
+  });
+
   it("has none without tiles", () => {
     expect(customTiles(undefined)).toEqual({});
   });
@@ -72,8 +84,25 @@ describe("tileUsage", () => {
       1: [a, b],
       2: [a],
       57: [a],
-      T1: [b],
     });
+  });
+
+  it("does not credit a generic id for a full custom definition", () => {
+    const d = { slug: "d", title: "D", tiles: { 1: { color: "green" } } };
+    expect(tileUsage([d])[1]).toBeUndefined();
+  });
+
+  it("credits the base id of base|extra ids and alias targets", () => {
+    const e = {
+      slug: "e",
+      title: "E",
+      tiles: { "7|x": 1, 9: { tile: "57|y" } },
+    };
+    const usage = tileUsage([e]);
+    expect(usage["7"]).toEqual([e]);
+    expect(usage["7|x"]).toEqual([e]);
+    expect(usage["57"]).toEqual([e]);
+    expect(usage["57|y"]).toEqual([e]);
   });
 
   it("lists a game once per tile", () => {
@@ -92,6 +121,13 @@ describe("mergeKnownTiles", () => {
     ]);
     expect(entries.map((e) => e.id)).toEqual(["1"]);
     expect(entries[0].slugs).toBeUndefined();
+  });
+
+  it("ignores a quantity difference", () => {
+    const entries = mergeKnownTiles(generic, [
+      game("a", { 1: { color: "yellow", cities: [1], quantity: 4 } }),
+    ]);
+    expect(entries.map((e) => e.id)).toEqual(["1"]);
   });
 
   it("keeps a different definition and a game only tile as entries", () => {

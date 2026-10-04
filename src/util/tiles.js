@@ -7,6 +7,7 @@ import {
   forEachObjIndexed,
   is,
   mapObjIndexed,
+  omit,
   prop,
   reduce,
   values,
@@ -50,11 +51,24 @@ export const compileTiles = (...tileJSONs) => {
 
 // Full tile definitions of a game, the same ones Tile.jsx draws as they are:
 // a color and no alias target. Aliases and extra data are left out.
+const validValues = (values) =>
+  values === undefined ||
+  (Array.isArray(values) &&
+    values.every(
+      (v) =>
+        is(Object, v) &&
+        v !== null &&
+        (typeof v.value === "number" || typeof v.value === "string"),
+    ));
+
+const isDefinition = (tile) =>
+  is(Object, tile) && !Array.isArray(tile) && tile.color && !tile.tile;
+
 export const customTiles = (gameTiles) => {
   const custom = {};
 
   forEachObjIndexed((tile, id) => {
-    if (is(Object, tile) && tile.color && !tile.tile) {
+    if (isDefinition(tile) && validValues(tile.values)) {
       custom[id] = assoc("id", id, tile);
     }
   }, gameTiles || {});
@@ -63,8 +77,8 @@ export const customTiles = (gameTiles) => {
 };
 
 // Maps a tile id to the games ({ slug, title, tiles }) that use it: any tile in
-// the tiles map of a game (count, alias, extra data or definition), and the
-// target of an alias.
+// the tiles map of a game (count, alias or extra data), the base id of "a|b"
+// ids, and the target of an alias. Full definitions are not credited here.
 export const tileUsage = (games) => {
   const usage = {};
 
@@ -77,9 +91,15 @@ export const tileUsage = (games) => {
 
   forEach((game) => {
     forEachObjIndexed((tile, id) => {
+      // A full definition is credited through the slugs of its entry
+      if (isDefinition(tile)) {
+        return;
+      }
       credit(id, game);
+      credit(id.split("|")[0], game);
       if (is(Object, tile) && tile.tile) {
-        credit(tile.tile, game);
+        credit(String(tile.tile), game);
+        credit(String(tile.tile).split("|")[0], game);
       }
     }, game.tiles || {});
   }, games);
@@ -107,7 +127,10 @@ export const mergeKnownTiles = (generic, games) => {
   forEach((game) => {
     forEachObjIndexed((tile, id) => {
       const same = (byId[id] || []).find((entry) =>
-        equals(assoc("id", id, entry.tile), tile),
+        equals(
+          omit(["quantity"], assoc("id", id, entry.tile)),
+          omit(["quantity"], tile),
+        ),
       );
 
       if (same) {

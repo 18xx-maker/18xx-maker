@@ -44,6 +44,9 @@ const getRevenues = (entries) =>
 
       let [minTile, maxTile] = reduce(
         ([minRevenue, maxRevenue], value) => {
+          if (value?.value === null || value?.value === undefined) {
+            return [minRevenue, maxRevenue];
+          }
           return [
             min(minRevenue, parseInt(value.value)),
             max(maxRevenue, parseInt(value.value)),
@@ -58,6 +61,12 @@ const getRevenues = (entries) =>
     [Number.MAX_SAFE_INTEGER, 0],
     entries,
   );
+
+// The games that use an entry: its own slugs, or the games using its tile id
+const gamesOfEntry = (entry, games, usage) =>
+  entry.slugs
+    ? filter(({ slug }) => entry.slugs.includes(slug), games)
+    : usage[entry.id] || [];
 
 const UsedBy = ({ games }) => {
   const { t } = useTranslation();
@@ -144,12 +153,14 @@ const Tiles = () => {
     () =>
       splitEvery(
         PER_PAGE,
-        filter(({ id: tileId, tile: t, slugs }) => {
+        filter((entry) => {
+          const { id: tileId, tile: t } = entry;
           if (game !== "all") {
-            const uses = slugs
-              ? slugs.includes(game)
-              : (usage[tileId] || []).some(({ slug }) => slug === game);
-            if (!uses) {
+            if (
+              !gamesOfEntry(entry, games, usage).some(
+                ({ slug }) => slug === game,
+              )
+            ) {
               return false;
             }
           }
@@ -183,6 +194,9 @@ const Tiles = () => {
 
           for (let i = 0; i < (t.values || []).length; i++) {
             let rawValue = t.values[i].value;
+            if (rawValue === null || rawValue === undefined) {
+              continue;
+            }
             let splitValues = split(
               /\D+/,
               is(String, rawValue) ? rawValue : rawValue.toString(),
@@ -203,7 +217,7 @@ const Tiles = () => {
           return false;
         }, entries),
       ),
-    [revenue, color, id, includes, game, entries, usage],
+    [revenue, color, id, includes, game, entries, usage, games],
   );
 
   const pageCount = filteredTiles.length;
@@ -272,13 +286,7 @@ const Tiles = () => {
                   y={0}
                 />
               </Svg>
-              <UsedBy
-                games={
-                  entry.slugs
-                    ? filter(({ slug }) => entry.slugs.includes(slug), games)
-                    : usage[entry.id] || []
-                }
-              />
+              <UsedBy games={gamesOfEntry(entry, games, usage)} />
             </div>
           ),
           pagedTiles,

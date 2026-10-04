@@ -84,7 +84,9 @@ A few things to notice:
   coordinates it applies to, so one definition can paint many hexes. A city's
   `companies` puts a company's home token there.
 - `tiles` maps a tile number to how many exist. Tile numbers come from the
-  tiles 18xx Maker knows about, see [Elements > Tiles](/elements/tiles).
+  generic tiles 18xx Maker knows about. [Elements > Tiles](/elements/tiles)
+  lists them, and also each game's own tiles, which another game must define
+  itself.
 - `trains` and `phases` are described in [Phases and
   Trains](/docs/games/trains).
 
