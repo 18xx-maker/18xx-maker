@@ -73,10 +73,10 @@ Types can have any name, and companies refer to them with a string, for example
 A company can also have `loans`, extra slots on its charter, for example for
 the loans of a game. Each entry is the label under the slot, and every slot is
 printed as an empty square in the body of the charter, on the right below the
-header, in columns of up to 5, so it is never mistaken for a token. An empty string or `null` leaves the slot without a label:
+header, in columns that fit the height of the charter, so it is never mistaken for a token. An empty string or `null` leaves the slot without a label:
 
 ```json
 { "abbrev": "RED", "tokens": [0, 40], "loans": [50, 50, ""] }
 ```
 
-Many loans can overflow a half width charter.
+Loans that do not fit are cut off, so keep the number small on minors and half width charters.

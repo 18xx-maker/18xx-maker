@@ -515,11 +515,13 @@ body {
   position: absolute;
   top: 1.0625in;
   right: 0;
+  bottom: 0;
   padding: 0.125in;
   box-sizing: border-box;
   line-height: normal;
   display: grid;
-  grid-template-rows: repeat(5, auto);
+  grid-template-rows: repeat(auto-fill, 0.7in);
+  overflow: hidden;
   grid-auto-flow: column;
 }
 
@@ -531,7 +533,8 @@ body {
   top: 0.875in;
 }
 
-.charter--minor.charter--carth .charter__loans {
+.charter--minor.charter--carth .charter__loans,
+.charter--carth.charter--half .charter__loans {
   top: 0.9375in;
 }
 
@@ -540,6 +543,10 @@ body {
   height: 0.7in;
   padding: 0 0 0 0.15in;
   box-sizing: content-box;
+}
+
+.charter--half .charter__loans {
+  grid-template-rows: repeat(auto-fill, 0.55in);
 }
 
 .charter--half .charter__loans svg {

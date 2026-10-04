@@ -76,11 +76,11 @@ Eine Gesellschaft kann auch `loans` haben, zusätzliche Felder auf ihrer
 Gesellschaftskarte, zum Beispiel für die Kredite eines Spiels. Jeder Eintrag ist
 die Beschriftung unter dem Feld, und jedes Feld wird als leeres Quadrat im
 Hauptteil der Gesellschaftskarte gedruckt, rechts unter der Kopfzeile, in
-Spalten mit bis zu 5 Feldern, damit es nie mit einem Token verwechselt wird. Eine leere
+Spalten, die in die Höhe der Gesellschaftskarte passen, damit es nie mit einem Token verwechselt wird. Eine leere
 Zeichenkette oder `null` lässt das Feld ohne Beschriftung:
 
 ```json
 { "abbrev": "RED", "tokens": [0, 40], "loans": [50, 50, ""] }
 ```
 
-Viele Kredite können auf einer Gesellschaftskarte halber Breite überlaufen.
+Kredite, die nicht passen, werden abgeschnitten; halte die Anzahl bei Minors und Gesellschaftskarten halber Breite daher klein.

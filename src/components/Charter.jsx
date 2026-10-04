@@ -79,21 +79,19 @@ const Charter = ({
   const showTreasury = company.treasury !== false;
 
   // A slot on the charter: a shape with its label under it (turned sideways on
-  // half width charters). A loan prints no label when it has none.
-  const spot = (key, shape, label, skipEmpty) => (
+  // half width charters). A loan prints no label when it has none, and its label is always black
+  // because it sits on the body, not on the colored header.
+  const spot = (key, shape, label, loan) => (
     <svg key={key}>
       <g transform={`translate(25 25)`}>
         {shape}
-        {!(
-          skipEmpty &&
-          (label === null || label === undefined || label === "")
-        ) && (
+        {!(loan && (label === null || label === undefined || label === "")) && (
           <g transform={`${halfWidth ? "rotate(-90) " : ""}translate(0 39)`}>
             <Color context="companies">
               {(c, t) => (
                 <text
                   fill={
-                    charterStyle === "color" && !halfWidth
+                    !loan && charterStyle === "color" && !halfWidth
                       ? t(c(color))
                       : c("black")
                   }
@@ -136,7 +134,7 @@ const Charter = ({
   }
 
   // Loans are empty squares, so they never look like a token. They print in the
-  // body of the charter, in columns of up to 5.
+  // body of the charter, in columns that fit its height.
   const loans = company.loans || [];
   const loanSpots = addIndex(map)(
     (label, index) =>

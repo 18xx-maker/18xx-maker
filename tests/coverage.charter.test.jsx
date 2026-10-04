@@ -246,6 +246,11 @@ describe("Charter", () => {
     expect(spots).toHaveLength(3);
     expect(all(root, ".charter__loans rect")).toHaveLength(3);
     expect(spots.map((s) => s.textContent)).toEqual(["$50", "", ""]);
+    // Loans sit on the body, so their label is black, not the header contrast
+    expect(one(root, ".charter__loans text")).toHaveAttribute(
+      "fill",
+      "#030000",
+    );
     expect(one(root, ".charter__name")).toHaveStyle({
       paddingRight: "136.8px",
     });

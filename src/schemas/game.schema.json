@@ -331,7 +331,7 @@
           },
           "loans": {
             "type": "array",
-            "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns of up to 5. Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",
+            "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns that fit the height of the charter (more loans than fit are cut off). Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",
             "items": {
               "oneOf": [
                 { "type": "string" },
