@@ -89,7 +89,7 @@ JSON 并重新加载,直到效果满意为止。
 
 如果想在不打开文件的情况下检查它,可以运行校验器,它会输出每个问题的路径:
 
-```shell
+```bash
 pnpm maker validate my-game.json
 ```
 

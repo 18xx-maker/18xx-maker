@@ -209,9 +209,8 @@ const components = {
       return (
         <Code
           {...clean(rest)}
-          PreTag="div"
           language={match[1]}
-          className="rounded-lg"
+          className="rounded-lg border"
         >
           {String(children).replace(/\n$/, "")}
         </Code>

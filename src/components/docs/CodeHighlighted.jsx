@@ -1,28 +1,57 @@
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
-import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
-import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
-import markdown from "react-syntax-highlighter/dist/esm/languages/prism/markdown";
-import light from "react-syntax-highlighter/dist/esm/styles/prism/coldark-cold";
-import dark from "react-syntax-highlighter/dist/esm/styles/prism/coldark-dark";
+import { createHighlighterCoreSync } from "shiki/core";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
+import bash from "shiki/langs/bash.mjs";
+import json from "shiki/langs/json.mjs";
+import dark from "shiki/themes/github-dark-default.mjs";
+import light from "shiki/themes/github-light.mjs";
 
-import { useTheme } from "@/context/ThemeProvider";
+import { cn } from "@/util/cn";
 
-SyntaxHighlighter.registerLanguage("javascript", javascript);
-SyntaxHighlighter.registerLanguage("json", json);
-SyntaxHighlighter.registerLanguage("markdown", markdown);
-SyntaxHighlighter.registerLanguage("bash", bash);
+// The JavaScript regex engine needs no WASM, and only the grammars the docs
+// and config views use are bundled. Anything else renders as plain text.
+const highlighter = createHighlighterCoreSync({
+  engine: createJavaScriptRegexEngine(),
+  langs: [json, bash],
+  themes: [light, dark],
+});
 
-const CodeHighlighted = (props) => {
-  const theme = useTheme();
-  const style = theme === "light" ? light : dark;
+const languages = new Set(highlighter.getLoadedLanguages());
+
+// Both themes ride on each token as --shiki-light/--shiki-dark variables, the
+// `.shiki` styles in ui.css pick one by the current theme
+const tokenize = (code, language) =>
+  languages.has(language)
+    ? highlighter.codeToTokens(code, {
+        defaultColor: false,
+        lang: language,
+        themes: { dark: "github-dark-default", light: "github-light" },
+      }).tokens
+    : code.split("\n").map((line) => (line ? [{ content: line }] : []));
+
+const CodeHighlighted = ({ children, className, language, ...props }) => {
+  const lines = tokenize(String(children), language);
 
   return (
-    <SyntaxHighlighter
-      customStyle={{ margin: "auto" }}
-      style={style}
+    <div
       {...props}
-    />
+      className={cn(
+        "shiki overflow-auto p-4 font-mono whitespace-pre",
+        className,
+      )}
+    >
+      <code>
+        {lines.map((tokens, i) => (
+          <span key={i}>
+            {i > 0 && "\n"}
+            {tokens.map((token, j) => (
+              <span key={j} style={token.htmlStyle}>
+                {token.content}
+              </span>
+            ))}
+          </span>
+        ))}
+      </code>
+    </div>
   );
 };
 

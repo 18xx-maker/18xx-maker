@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-// The highlighter and its languages are a separate chunk, plain text shows
+// The highlighter and its grammars are a separate chunk, plain text shows
 // until it loads
 let Highlighted;
 export const preloadCode = () =>

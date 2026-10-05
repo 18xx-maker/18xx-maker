@@ -142,7 +142,7 @@ const Config = () => {
             <p key="file-p" className="mb-4">
               {t("config.data.file")}
             </p>,
-            <Code key="config-diff" language="json" className="w-full">
+            <Code key="config-diff" language="json" className="w-full border">
               {JSON.stringify(diff(defaultConfig, config), null, 2)}
             </Code>,
             <File

@@ -164,3 +164,23 @@
     overflow: visible;
   }
 }
+
+/* Code blocks: CodeHighlighted puts the github-light and github-dark-default colors on
+   each token as variables, pick one by theme */
+@layer components {
+  .shiki {
+    background-color: #fff;
+    color: #24292e;
+    font-weight: 400;
+  }
+  .shiki span {
+    color: var(--shiki-light, inherit);
+  }
+  .dark .shiki {
+    background-color: #0d1117;
+    color: #e6edf3;
+  }
+  .dark .shiki span {
+    color: var(--shiki-dark, inherit);
+  }
+}

@@ -509,7 +509,7 @@ describe("markdown", () => {
       await screen.findByText('"a"', {}, { timeout: 10_000 }),
     ).not.toHaveClass("bg-accent");
     // eslint-disable-next-line testing-library/no-node-access
-    const block = document.querySelector("code.language-json");
+    const block = document.querySelector(".shiki code");
     expect(block).toHaveTextContent('{ "a": 1 }');
   });
 

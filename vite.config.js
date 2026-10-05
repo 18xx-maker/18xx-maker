@@ -15,7 +15,7 @@ const manualChunks = (id) => {
   // Only loaded on demand (json-schema-library by the config validation and
   // the highlighter by code blocks), leave them in their own async chunks
   if (
-    /node_modules\/(\.pnpm\/[^/]+\/node_modules\/)?(json-schema-library|@hyperjump|@sagold|uri-js|valid-url|fast-copy|fast-deep-equal|react-syntax-highlighter|refractor|prismjs|lowlight|highlight\.js|highlightjs-vue)\//.test(
+    /node_modules\/(\.pnpm\/[^/]+\/node_modules\/)?(json-schema-library|@hyperjump|@sagold|uri-js|valid-url|fast-copy|fast-deep-equal|shiki|@shikijs|oniguruma-to-es|oniguruma-parser|regex|regex-utilities|regex-recursion|hast-util-to-html|character-entities-html4|html-void-elements)\//.test(
       id,
     )
   ) {
