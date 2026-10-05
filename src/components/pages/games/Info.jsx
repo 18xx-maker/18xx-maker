@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 
 import File from "@/components/File";
 import { firstSection } from "@/components/gameNav";
+import GameStats from "@/components/pages/games/GameStats";
 
 import { useGame } from "@/hooks";
 import { deleteGame, refreshGame } from "@/state";
@@ -151,6 +152,7 @@ const Info = () => {
           </Button>
         )}
       </div>
+      <GameStats />
       <div className="flex flex-row gap-4 mt-16 mb-4">
         <TypeIcon />
         <p>{typeDescription}</p>

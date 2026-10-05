@@ -308,6 +308,32 @@
   "game": {
     "info": "Game Info",
     "sections": "Game Section",
+    "stats": {
+      "map": "Map",
+      "extras": "More",
+      "title": "Statistics",
+      "tiles": "Tiles",
+      "tileCount": "{{total}} ({{types}} different)",
+      "yellow": "Yellow",
+      "green": "Green",
+      "brown": "Brown",
+      "gray": "Gray",
+      "other": "Other",
+      "gauges": "Track gauges",
+      "normal": "Normal",
+      "hexes": "Map hexes",
+      "variations": "Map variations",
+      "size": "Map size",
+      "sizeValue": "{{width}} × {{height}}",
+      "companies": "Companies",
+      "major": "Major",
+      "minor": "Minor",
+      "privates": "Privates",
+      "trains": "Trains",
+      "trainCount": "{{total}} ({{types}} types)",
+      "phases": "Phases",
+      "rounds": "Rounds"
+    },
     "type": {
       "bundled": {
         "label": "Bundled",
