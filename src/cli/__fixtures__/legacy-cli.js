@@ -110,16 +110,6 @@ export default {
       "18EB-tiles-die.pdf",
       "18EB-tokens.pdf",
     ],
-    "18GJ": [
-      "18GJ-background.pdf",
-      "18GJ-cards-miniEuroDie.pdf",
-      "18GJ-charters.pdf",
-      "18GJ-revenue.pdf",
-      "18GJ-revenue-paginated.pdf",
-      "18GJ-tile-manifest.pdf",
-      "18GJ-tiles-die.pdf",
-      "18GJ-tokens.pdf",
-    ],
     "18LA": [
       "18LA-background.pdf",
       "18LA-cards-miniEuroDie.pdf",
@@ -1625,9 +1615,6 @@ export default {
           omitBackground: true,
         },
       ],
-    },
-    "18GJ": {
-      error: "Cannot read properties of undefined (reading 'title')",
     },
     "18LA": {
       json: {
