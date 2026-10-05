@@ -33,6 +33,10 @@ const added = {
 // Games where the old b18 command crashed, they have no stock market
 const crashed = ["1888", "1883ExpressdOrient"];
 
+// Games added after the legacy CLI was retired, they have no legacy output
+const newer = ["18GJ"];
+const legacyGames = games.filter((id) => !newer.includes(id));
+
 const data = loadExportData();
 const setup = (id) => {
   const game = loadGame(id);
@@ -42,10 +46,10 @@ const setup = (id) => {
 
 describe("print file names", () => {
   it("covers every bundled game", () => {
-    expect(games.sort()).toEqual(Object.keys(legacy.print).sort());
+    expect([...legacyGames].sort()).toEqual(Object.keys(legacy.print).sort());
   });
 
-  it.each(games)("%s prints what it did, with the new names", (id) => {
+  it.each(legacyGames)("%s prints what it did, with the new names", (id) => {
     const { game, config, data } = setup(id);
     const names = exportJobs(game, documents(game, config, data), ["pdf"])
       .map((job) => job.path)
@@ -73,7 +77,7 @@ describe("print file names", () => {
     expect(names.some((name) => name.includes("-map-paginated."))).toBe(true);
   });
 
-  it("names the six bundled games whose title is not their id", () => {
+  it("names the seven bundled games whose title is not their id", () => {
     const renamed = [...games]
       .sort()
       .filter((id) => prefix(id) !== id.toLowerCase());
@@ -81,6 +85,7 @@ describe("print file names", () => {
       ["1871BC", "1871-british-columbia"],
       ["1883ExpressdOrient", "1883-express-d-orient"],
       ["1889", "shikoku-1889"],
+      ["18GJ", "18-grand-junction"],
       ["18LA", "18-los-angeles"],
       ["18TraXX2020", "18traxx"],
       ["TheOldPrince1871", "the-old-prince-1871"],
@@ -89,7 +94,7 @@ describe("print file names", () => {
 });
 
 describe("b18 box", () => {
-  it.each(games.filter((id) => !crashed.includes(id)))(
+  it.each(legacyGames.filter((id) => !crashed.includes(id)))(
     "%s has the json, sizes and file names it had",
     (id) => {
       const { game, config, data } = setup(id);
