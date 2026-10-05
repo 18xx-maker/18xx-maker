@@ -8,13 +8,14 @@ import { sections as configSections } from "@/components/config";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
+import { useEditPanel } from "@/hooks/useEditPanel";
 import { createAlert, createSetExportMenuOpen, refreshGame } from "@/state";
 import { selectExportSheetOpen, selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
 import { downloadGame } from "@/util/download";
 import { firstSection, gameNav } from "@/util/gameNav";
 import { isControlTarget } from "@/util/keys";
-import { useBooleanParam } from "@/util/query";
+import { useBooleanParam, useTogglePanel } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
 import * as idb from "@/util/storage/idb";
 
@@ -43,7 +44,12 @@ export const useBindings = () => {
   const location = useLocation();
   const [shortcuts, setShortcuts] = useState(false);
   const [print] = useBooleanParam("print");
-  const [, toggleConfig] = useBooleanParam("config");
+  const [, toggleConfig] = useTogglePanel("config");
+  const {
+    available: canEdit,
+    open: editOpen,
+    toggle: toggleEdit,
+  } = useEditPanel();
   const [, togglePagination] = useBooleanParam("paginated");
   const { pathname } = location;
 
@@ -58,14 +64,16 @@ export const useBindings = () => {
         return;
       }
 
-      // Escape steps back one level: config panel, edit page, game page,
-      // home. A Radix layer closing on escape has already claimed the event
+      // Escape steps back one level: edit panel, config panel, edit page, game
+      // page, home. A Radix layer closing on escape has already claimed the event
       // with preventDefault.
       if (event.key === "Escape") {
         if (event.defaultPrevented) return;
 
         const params = new URLSearchParams(location.search);
-        if (viewingGame && params.has("config")) {
+        if (editOpen) {
+          toggleEdit();
+        } else if (viewingGame && params.has("config")) {
           params.delete("section");
           params.delete("config");
           navigate({ search: params.toString() });
@@ -169,7 +177,9 @@ export const useBindings = () => {
         }
 
         if (event.key === "e") {
-          navigate(`/games/${viewingGame.params.slug}`);
+          // The sections with an edit toggle open the panel, the others go back
+          if (canEdit) toggleEdit();
+          else navigate(`/games/${viewingGame.params.slug}`);
           return;
         }
       } else if (loadedGame) {
@@ -261,6 +271,9 @@ export const useBindings = () => {
       print,
       exportSheetOpen,
       toggleConfig,
+      toggleEdit,
+      canEdit,
+      editOpen,
       togglePagination,
       dispatch,
       navigate,

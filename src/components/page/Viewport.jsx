@@ -1,15 +1,20 @@
 import clsx from "clsx";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 
 import Toolbar from "@/components/Toolbar";
 import Config from "@/components/config/Config";
 
+import { useEditPanel } from "@/hooks/useEditPanel";
 import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
+
+// The form loads when the panel is first opened
+const EditPanel = lazy(() => import("@/components/editPanel/EditPanel"));
 
 const Viewport = ({ children }) => {
   const [config] = useBooleanParam("config");
   const [print] = useBooleanParam("print");
+  const { open: edit } = useEditPanel();
 
   // The scroll past the edge (macOS rubber banding) shows the page canvas,
   // not #viewport, so the editor background and overscroll rule go on <html>
@@ -37,7 +42,12 @@ const Viewport = ({ children }) => {
       )}
     >
       {!print && <Toolbar />}
-      {config && !print && <Config />}
+      {config && !print && !edit && <Config />}
+      {edit && (
+        <Suspense fallback={null}>
+          <EditPanel />
+        </Suspense>
+      )}
       <div
         id="viewport-children"
         className={clsx(

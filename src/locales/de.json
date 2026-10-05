@@ -55,6 +55,19 @@
     "hide": "Diff ausblenden",
     "restore": "Wiederherstellen"
   },
+  "editPanel": {
+    "toggle": "Bearbeiten",
+    "title": "Spielinfo",
+    "close": "Bearbeitungspanel schließen",
+    "description": "Bearbeite die Spielinfo, Links und Markierungen. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst.",
+    "changes": "Änderungen prüfen und speichern",
+    "unset": "Nicht gesetzt",
+    "true": "Ja",
+    "false": "Nein",
+    "required": "Dieses Feld ist erforderlich.",
+    "invalidNumber": "Gib eine Zahl ein.",
+    "invalidJson": "Gib gültiges JSON ein."
+  },
   "problems": {
     "nav": "Probleme",
     "title": "Probleme mit diesem Spiel",
@@ -980,7 +993,7 @@
     "exportMenu": "Bei geöffnetem Exportmenü: p exportiert PDFs, n exportiert PNGs, s exportiert SVGs, b exportiert eine Board18-Datei und o öffnet die Exportoptionen.",
     "keys": {
       "escape": {
-        "use": "Zurück: schließt zuerst das Konfigurationspanel, verlässt dann die Bearbeitungsseite und wechselt zur Spielseite, dann zur Startseite",
+        "use": "Zurück: schließt zuerst das Bearbeitungs- oder Konfigurationspanel, verlässt dann die Bearbeitungsseite und wechselt zur Spielseite, dann zur Startseite",
         "notes": "Tut auf der Startseite nichts"
       },
       "docs": {
@@ -1024,7 +1037,7 @@
       },
       "edit": {
         "use": "Das geladene Spiel im ersten Abschnitt bearbeiten",
-        "notes": "Auf der Bearbeitungsseite zurück zur Spielseite"
+        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel (Formular der Spielinfo) geöffnet oder geschlossen. Sonst zurück zur Spielseite"
       },
       "section": {
         "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",

@@ -102,6 +102,22 @@ Data section. The imported settings replace your current custom settings. A
 dropped json file is treated as a config when it only contains config settings,
 otherwise it is loaded as a game.
 
+## Editing the game info
+
+On a game's edit pages the Edit button in the toolbar (or the `e` key) opens a
+panel beside the page with a form for the game info, the links and the
+prototype and work in progress flags. The page stays visible and follows what
+you type. The form is generated from the [game file schema](/docs/games/schemas),
+so a new field in these parts of the schema shows up in the panel without a
+change to the app. Field names and descriptions come from the schema and are
+only in English. A field is passed on when you leave it or press Enter, and
+emptying a field removes it from the game (the title cannot be removed).
+Problems with a value, like a currency without a `#`, are shown below its field.
+Escape closes the panel.
+
+The edits stay in the loaded game. Review and save them on the Changes page,
+described next.
+
 ## Changes, saving and history
 
 When the loaded game differs from its file, a Changes entry appears in the game

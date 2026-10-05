@@ -4,7 +4,7 @@ import { Link, useMatch, useNavigate } from "react-router";
 
 import { addIndex, find, is, map, propEq } from "ramda";
 
-import { ArrowBigLeft, Bolt, FileDiff, RefreshCw } from "lucide-react";
+import { ArrowBigLeft, Bolt, FileDiff, Pencil, RefreshCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -30,12 +30,13 @@ import ExportButton from "@/components/export/ExportButton";
 import PrintButton from "@/components/page/PrintButton";
 
 import { useGame } from "@/hooks";
+import { useEditPanel } from "@/hooks/useEditPanel";
 import { refreshGame } from "@/state";
 import { selectGameChanged } from "@/state/selectors";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 import { gameNav } from "@/util/gameNav";
-import { useBooleanParam, useIntParam } from "@/util/query";
+import { useBooleanParam, useIntParam, useTogglePanel } from "@/util/query";
 
 const Toolbar = () => {
   const { t } = useTranslation();
@@ -43,7 +44,8 @@ const Toolbar = () => {
   const navigate = useNavigate();
 
   const [paginated, togglePagination] = useBooleanParam("paginated");
-  const [config, toggleConfig] = useBooleanParam("config");
+  const [config, toggleConfig] = useTogglePanel("config");
+  const { open: edit, toggle: toggleEdit } = useEditPanel();
   const [variation, setVariation] = useIntParam("variation", 0);
   const [hidePrivates, togglePrivates] = useBooleanParam("hidePrivates");
   const [hideShares, toggleShares] = useBooleanParam("hideShares");
@@ -85,6 +87,17 @@ const Toolbar = () => {
       >
         <Bolt className="w-6 h-6" />
         <span className="max-md:sr-only">{t("config.toggle")}</span>
+      </Toggle>
+      <Toggle
+        onPressedChange={toggleEdit}
+        pressed={edit}
+        variant="outline"
+        className="rounded-sm px-2 h-8 m-0 shrink-0"
+      >
+        <Pencil className="w-6 h-6" />
+        <span className="max-md:sr-only">
+          <KeyLabel text={t("editPanel.toggle")} shortcut="e" />
+        </span>
       </Toggle>
       {!capability.electron && game.meta.type === "system" && (
         <>

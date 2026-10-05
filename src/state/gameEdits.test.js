@@ -108,6 +108,13 @@ describe("editing", () => {
     expect(state().game.n).toBe(2);
   });
 
+  it("editGame does not dispatch when the game is returned as it is", () => {
+    store.dispatch(createSetGame(game()));
+    const before = state();
+    store.dispatch(editGame((g) => g));
+    expect(state()).toBe(before);
+  });
+
   it("editGame does nothing without a game", () => {
     store.dispatch(editGame((g) => g));
     expect(state().game).toBeUndefined();

@@ -66,6 +66,29 @@ test.describe("bundled games", () => {
     await expect(page.getByTestId("game-18Test")).toBeVisible();
   });
 
+  test("edits the game info in the edit panel", async ({ page }) => {
+    await page.goto("/games/18Test/map");
+    await expect(page.getByTestId("game-18Test-map")).toBeVisible();
+
+    await page.keyboard.press("e");
+    const panel = page.getByTestId("edit-panel");
+    await expect(panel).toBeVisible();
+    await expect(page).toHaveURL(/\?edit=true$/);
+
+    const subtitle = panel.getByRole("textbox", {
+      name: "Subtitle",
+      exact: true,
+    });
+    await subtitle.fill("Edited in the panel");
+    await subtitle.press("Enter");
+    await expect(
+      page.getByRole("link", { name: "Changes" }).first(),
+    ).toBeVisible();
+
+    await subtitle.press("Escape");
+    await expect(panel).toBeHidden();
+  });
+
   test("opens a real game and its pages", async ({ page }) => {
     await page.goto("/games/");
     await page

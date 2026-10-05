@@ -112,6 +112,23 @@ Einstellungen ersetzen deine aktuellen eigenen Einstellungen. Eine abgelegte
 JSON-Datei wird als Konfiguration behandelt, wenn sie nur Konfigurationswerte
 enthält, andernfalls wird sie als Spiel geladen.
 
+## Die Spielinfo bearbeiten
+
+Auf den Bearbeitungsseiten eines Spiels öffnet die Schaltfläche Bearbeiten in
+der Werkzeugleiste (oder die Taste `e`) neben der Seite ein Panel mit einem
+Formular für die Spielinfo, die Links und die Markierungen Prototyp und in
+Arbeit. Die Seite bleibt sichtbar und folgt deinen Eingaben. Das Formular wird
+aus dem [Schema der Spieldatei](/docs/games/schemas) erzeugt, daher erscheint
+ein neues Feld in diesen Teilen des Schemas im Panel, ohne dass die App
+geändert werden muss. Feldnamen und Beschreibungen stammen aus dem Schema und
+sind nur auf Englisch. Ein Feld wird übernommen, wenn du es verlässt oder die
+Eingabetaste drückst, und ein geleertes Feld wird aus dem Spiel entfernt (der
+Titel kann nicht entfernt werden). Probleme mit einem Wert, etwa eine Währung
+ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel.
+
+Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
+Seite Änderungen, die im Folgenden beschrieben wird.
+
 ## Änderungen, Speichern und Verlauf
 
 Weicht das geladene Spiel von seiner Datei ab, erscheint im Spielmenü (und in
