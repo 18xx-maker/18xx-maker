@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { addIndex, chain, prop } from "ramda";
 
-import { ArrowBigRight, Download, Settings } from "lucide-react";
+import { ArrowBigRight, Settings } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
 import {
@@ -21,6 +21,7 @@ import DownloadItem from "@/components/nav/sidebar/DownloadItem";
 import ExportItem from "@/components/nav/sidebar/ExportItem";
 import Group from "@/components/nav/sidebar/Group";
 import Item from "@/components/nav/sidebar/Item";
+import UpdateItem from "@/components/nav/sidebar/UpdateItem";
 
 import { useLoadedGame } from "@/hooks";
 import { selectGameForSlug } from "@/state/selectors";
@@ -117,7 +118,7 @@ const AppSidebar = (props) => {
       <SidebarFooter>
         <SidebarMenu>
           {update && update.available && (
-            <Item to="/app" label={t("nav.update")} icon={Download} />
+            <UpdateItem version={update.info?.version} />
           )}
           <Item to="/settings" label={t("settings.title")} icon={Settings} />
         </SidebarMenu>

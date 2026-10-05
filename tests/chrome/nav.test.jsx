@@ -168,13 +168,27 @@ describe("app sidebar", () => {
   });
 
   it("offers the update when one is available in the state", async () => {
-    const { user } = renderApp("/", { update: { available: true } });
+    const { user } = renderApp("/", {
+      update: { available: true, info: { version: "1.4.0" } },
+    });
     expect(await screen.findByTestId("home")).toBeInTheDocument();
+    expect(screen.getByTestId("update-indicator")).toBeInTheDocument();
 
     await user.click(trigger());
     expect(
-      within(await sidebar()).getByRole("link", { name: "Update" }),
+      within(await sidebar()).getByRole("link", { name: "Update to 1.4.0" }),
     ).toHaveAttribute("href", "/app");
+  });
+
+  it("has no update link or indicator without an update", async () => {
+    const { user } = renderApp("/");
+    expect(await screen.findByTestId("home")).toBeInTheDocument();
+    expect(screen.queryByTestId("update-indicator")).not.toBeInTheDocument();
+
+    await user.click(trigger());
+    expect(
+      within(await sidebar()).queryByRole("link", { name: /^Update/ }),
+    ).not.toBeInTheDocument();
   });
 });
 

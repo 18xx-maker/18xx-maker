@@ -10,7 +10,7 @@
   "nav": {
     "menu": "Menu",
     "app": "App",
-    "update": "Update",
+    "update": "Update to {{version}}",
     "home": "Home",
     "load": "Load Games",
     "elements": "Elements",
