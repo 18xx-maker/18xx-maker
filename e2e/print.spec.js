@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { pages } from "./export-files.js";
+
 // The web build shows a print button (the electron app shows the export
 // button instead) that calls window.print()
 test("the print button calls window.print on a game page", async ({ page }) => {
@@ -58,4 +60,39 @@ test("print mode pages keep a transparent background in print", async ({
 
   expect((await backgrounds(page))[0]).toBe("rgba(0, 0, 0, 0)");
   expect((await backgrounds(page))[1]).toBe("rgba(0, 0, 0, 0)");
+});
+
+// Plain pages sit below the toolbar on screen; none of that may reach paper.
+// The editor is swapped for the plain page on beforeprint, and a leftover
+// top padding pushed the map onto a second page.
+const printLayout = async (page, path, testId) => {
+  await page.goto(path);
+  await expect(page.getByTestId(testId)).toBeVisible();
+  await page.emulateMedia({ media: "print" });
+  await expect(page.locator("#editor")).toHaveCount(0);
+  return page.evaluate(() => {
+    const style = getComputedStyle(
+      document.querySelector("#viewport-children"),
+    );
+    return { paddingTop: style.paddingTop, display: style.display };
+  });
+};
+
+test("the map prints on one page without the toolbar padding", async ({
+  page,
+}, testInfo) => {
+  expect(
+    await printLayout(page, "/games/18Test/map", "game-18Test-map"),
+  ).toEqual({ paddingTop: "0px", display: "block" });
+  const file = testInfo.outputPath("map.pdf");
+  await page.pdf({ path: file, preferCSSPageSize: true });
+  expect(pages(file)).toBe(1);
+});
+
+test("a paginated plain page prints without the toolbar padding", async ({
+  page,
+}) => {
+  expect(
+    await printLayout(page, "/games/18Test/tiles", "game-18Test-tiles"),
+  ).toEqual({ paddingTop: "0px", display: "block" });
 });
