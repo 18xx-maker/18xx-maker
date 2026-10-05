@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 
 import SvgEditor from "@/components/SvgEditor";
 
+import { TOOLBAR_INSET } from "@/hooks/use-pan-zoom";
 import { initialState, rootReducer } from "@/state";
 
 const fire = (el, type, init) =>
@@ -39,6 +40,17 @@ const setup = () => {
   const svg = container.querySelector("svg");
   return { svg, box: () => svg.getAttribute("viewBox") };
 };
+
+describe("SvgEditor start view", () => {
+  it("starts with the content below the toolbar", () => {
+    const { box } = setup();
+    const [, y, , h] = box().split(" ").map(Number);
+    // The top of the content (0) is TOOLBAR_INSET pixels or more below the
+    // top of the window
+    const scale = window.innerHeight / h;
+    expect(-y * scale).toBeGreaterThanOrEqual(TOOLBAR_INSET - 0.5);
+  });
+});
 
 describe("SvgEditor panning", () => {
   it("pans while the primary button is held", () => {

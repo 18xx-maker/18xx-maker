@@ -2,6 +2,10 @@ import { useEffect, useRef } from "react";
 
 import { isControlTarget } from "@/util/keys";
 
+// The space at the top of the window taken by the floating editor toolbar. The
+// editors start with their content below it.
+export const TOOLBAR_INSET = 72;
+
 // Pointer, wheel and keyboard handling shared by the pan and zoom editors.
 //
 // The handlers are called with

@@ -310,7 +310,7 @@ const Charters = () => {
   }
 
   return (
-    <HtmlEditor page=".charters .charters">
+    <HtmlEditor page=".cutlines" count={2}>
       <div
         className="charters"
         data-testid={`game-${game.meta.slug}-charters`}

@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 
 import HtmlEditor from "@/components/HtmlEditor";
 
+import { TOOLBAR_INSET } from "@/hooks/use-pan-zoom";
 import { initialState, rootReducer } from "@/state";
 
 const fire = (el, type, init) =>
@@ -49,6 +50,12 @@ describe("HtmlEditor", () => {
     const { transform } = setup();
     // Padded, so a little smaller than the window
     expect(transform()).toMatch(/translate\(.*\) scale\(0\.\d+\)/);
+  });
+
+  it("starts with the content below the toolbar", () => {
+    const { transform } = setup();
+    const y = Number(transform().match(/translate\([^,]*, ([^p]*)px\)/)[1]);
+    expect(y).toBeGreaterThanOrEqual(TOOLBAR_INSET - 0.5);
   });
 
   it("pans while the primary button is held", () => {
@@ -155,10 +162,45 @@ describe("HtmlEditor", () => {
     const box = editor.getBoundingClientRect();
     expect(first.width).toBeLessThan(box.width);
     expect(first.height).toBeLessThan(box.height);
-    // Padding on every side and centered on the window
+    // Padding on every side, centered below the toolbar
     expect(first.left - box.left).toBeGreaterThan(0);
     expect(box.right - first.right).toBeCloseTo(first.left - box.left, 0);
-    expect(box.bottom - first.bottom).toBeCloseTo(first.top - box.top, 0);
+    expect(first.top - box.top).toBeGreaterThanOrEqual(TOOLBAR_INSET - 0.5);
+    expect(box.bottom - first.bottom).toBeGreaterThan(0);
+  });
+
+  it("starts on the first `count` pages together", () => {
+    const store = configureStore({
+      reducer: rootReducer,
+      preloadedState: initialState,
+    });
+    const { container } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <HtmlEditor page=".sheet" count={2}>
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <div
+                key={n}
+                className="sheet"
+                style={{ float: "left", width: 4000, height: 3000 }}
+              />
+            ))}
+          </HtmlEditor>
+        </MemoryRouter>
+      </Provider>,
+    );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const box = container.querySelector("#editor").getBoundingClientRect();
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const sheets = [...container.querySelectorAll(".sheet")].map((el) =>
+      el.getBoundingClientRect(),
+    );
+    // The two pages together are centered below the toolbar
+    const top = sheets[0].top - box.top;
+    const bottom = box.bottom - sheets[1].bottom;
+    expect(top).toBeGreaterThanOrEqual(TOOLBAR_INSET - 0.5);
+    expect(sheets[1].bottom).toBeLessThan(box.bottom);
+    expect(top - TOOLBAR_INSET).toBeCloseTo(bottom, 0);
   });
 
   it("renders the children untouched when printing", () => {
