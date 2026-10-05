@@ -1,5 +1,81 @@
 # Changelog
 
+## [1.0.0-beta.127](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.126...v1.0.0-beta.127) (2026-10-05)
+
+
+### :tada: Features
+
+* **cards:** set the size of each type of card ([#819](https://github.com/18xx-maker/18xx-maker/issues/819)) ([6d38660](https://github.com/18xx-maker/18xx-maker/commit/6d386602ac06a5df16dd9cd0bf2b67a9872307a4))
+* **charters:** add a half width minors option to the free layout ([#792](https://github.com/18xx-maker/18xx-maker/issues/792)) ([1618179](https://github.com/18xx-maker/18xx-maker/commit/1618179ceb7dda57f554a27c8c70dbac6f8cebb1))
+* **charters:** add a tokensBelow option to print many tokens under the company name ([#809](https://github.com/18xx-maker/18xx-maker/issues/809)) ([f50bd82](https://github.com/18xx-maker/18xx-maker/commit/f50bd82a65b9edc06c9d8c9705a54cae5daf2cf5))
+* **charters:** add loan slots to a company charter ([#793](https://github.com/18xx-maker/18xx-maker/issues/793)) ([b3c33e2](https://github.com/18xx-maker/18xx-maker/commit/b3c33e2484d3b2e458a53c61957e306f22e6f109))
+* **charters:** add train cards to a company charter ([#782](https://github.com/18xx-maker/18xx-maker/issues/782)) ([d38534a](https://github.com/18xx-maker/18xx-maker/commit/d38534aa62b09c8fb6fd97c7c4e2c28bad9a2266))
+* **charters:** mark which token spaces a company starts with ([#813](https://github.com/18xx-maker/18xx-maker/issues/813)) ([473de1e](https://github.com/18xx-maker/18xx-maker/commit/473de1e3f57cfe68b988387991fc8d35b6dd9b5d))
+* **config:** add showPins option for free layouts ([#832](https://github.com/18xx-maker/18xx-maker/issues/832)) ([62746fc](https://github.com/18xx-maker/18xx-maker/commit/62746fc3e4ce84eb0510984126bb8841c31b506d))
+* **export:** add a bleed option to the single card images ([#826](https://github.com/18xx-maker/18xx-maker/issues/826)) ([04a331f](https://github.com/18xx-maker/18xx-maker/commit/04a331f3b94a0dde2987e57461dc365cfec793b7))
+* **export:** export svg files for vector graphic software ([#820](https://github.com/18xx-maker/18xx-maker/issues/820)) ([aa82fab](https://github.com/18xx-maker/18xx-maker/commit/aa82fab9c9bb5a13d95e99caa32de0a140659ef4)), closes [#358](https://github.com/18xx-maker/18xx-maker/issues/358)
+* **icons:** add land survey icon ([#825](https://github.com/18xx-maker/18xx-maker/issues/825)) ([a5b8780](https://github.com/18xx-maker/18xx-maker/commit/a5b8780dbee8b55b94f7fb5c3d1ef9c2a1867bf8))
+* **icons:** add triangle flag icon ([#821](https://github.com/18xx-maker/18xx-maker/issues/821)) ([7fe14ba](https://github.com/18xx-maker/18xx-maker/commit/7fe14baa04cbcdf1b730f1285b7d309752e07618))
+* **maps:** add option to turn off companies on tiles ([#804](https://github.com/18xx-maker/18xx-maker/issues/804)) ([63e5e00](https://github.com/18xx-maker/18xx-maker/commit/63e5e00ab6c2a695fe467360c71e84c2679c7d1c))
+* **schemas:** fill in the missing items of the game schema ([#818](https://github.com/18xx-maker/18xx-maker/issues/818)) ([d6ffda5](https://github.com/18xx-maker/18xx-maker/commit/d6ffda53e28bbfbda383d04daa6ffe19a81feebd))
+* **tiles:** add a cut border option to outline tiles for cutting by hand ([#829](https://github.com/18xx-maker/18xx-maker/issues/829)) ([c130d19](https://github.com/18xx-maker/18xx-maker/commit/c130d19681f1e115845bbc3c92731c7e0042ccb4))
+* **tiles:** add an order field to change the draw order of tile elements ([#823](https://github.com/18xx-maker/18xx-maker/issues/823)) ([abdd497](https://github.com/18xx-maker/18xx-maker/commit/abdd4978aa2dce448fee60c968887bbdf611f096))
+* **tokens:** add a second line of text to tokens ([#815](https://github.com/18xx-maker/18xx-maker/issues/815)) ([708dc71](https://github.com/18xx-maker/18xx-maker/commit/708dc71394551be1c74f3722b483de0610f02410))
+* **trains:** add upgrade and tradeIn values to trains ([#814](https://github.com/18xx-maker/18xx-maker/issues/814)) ([de1b5fc](https://github.com/18xx-maker/18xx-maker/commit/de1b5fc3963e4f2a283a386051669ec35bda2fec))
+* **ui:** add an export menu to the sidebar that works on every page ([#822](https://github.com/18xx-maker/18xx-maker/issues/822)) ([8021dad](https://github.com/18xx-maker/18xx-maker/commit/8021dad1bb78e61bc2e43b9ae3b63d527b207f5c))
+* **ui:** filter games by publisher, designer and type on the games page ([#803](https://github.com/18xx-maker/18xx-maker/issues/803)) ([ecbbcf6](https://github.com/18xx-maker/18xx-maker/commit/ecbbcf6191400546a234acc641942e5c2c4dfd1b))
+* **ui:** import config.json settings from the config drawer ([#789](https://github.com/18xx-maker/18xx-maker/issues/789)) ([d907ac5](https://github.com/18xx-maker/18xx-maker/commit/d907ac5b9a62b83d08dce172bb79a97e66a12926))
+* **ui:** label edit toolbar buttons and keep the filter menu open ([#830](https://github.com/18xx-maker/18xx-maker/issues/830)) ([fe7ccf3](https://github.com/18xx-maker/18xx-maker/commit/fe7ccf3ac104fbdc63885b8074ecc3c9a88c9361)), closes [#802](https://github.com/18xx-maker/18xx-maker/issues/802)
+* **ui:** pan and zoom editor for every game section ([#833](https://github.com/18xx-maker/18xx-maker/issues/833)) ([6724e30](https://github.com/18xx-maker/18xx-maker/commit/6724e30f35ecbb9bb3f29d12d8f3589dc0e2a8c3))
+* **ui:** reorder the editor sections ([#787](https://github.com/18xx-maker/18xx-maker/issues/787)) ([97a3830](https://github.com/18xx-maker/18xx-maker/commit/97a383069a84a10a0cef0e3756b8fc364290e38b))
+* **ui:** show all known tiles with a game filter ([#794](https://github.com/18xx-maker/18xx-maker/issues/794)) ([fc57ec9](https://github.com/18xx-maker/18xx-maker/commit/fc57ec94c4334606d584be4ec7713a966df99eeb))
+* **ui:** show game statistics on the game info page ([#836](https://github.com/18xx-maker/18xx-maker/issues/836)) ([5e04d93](https://github.com/18xx-maker/18xx-maker/commit/5e04d931cb41c880bb7d6280a4d2f3dc42635a4b))
+* **ui:** show the reserved back of recolorable logos on the logos page ([#791](https://github.com/18xx-maker/18xx-maker/issues/791)) ([743faf8](https://github.com/18xx-maker/18xx-maker/commit/743faf8685baacbb1deadfad74aa12a0a89175e8))
+* **ui:** underline shortcut keys in labels ([#801](https://github.com/18xx-maker/18xx-maker/issues/801)) ([778db0a](https://github.com/18xx-maker/18xx-maker/commit/778db0ab3388b056c1c11bf3da11a2a9109e0843))
+
+
+### :bug: Bug Fixes
+
+* **1858:** remove per-cell height from the stock market ([#837](https://github.com/18xx-maker/18xx-maker/issues/837)) ([6ebce07](https://github.com/18xx-maker/18xx-maker/commit/6ebce07defe57ffc7ad8b2a2fe953c21e12fb49d))
+* **tiles:** pack individual tiles together in the offset tile sheet ([#800](https://github.com/18xx-maker/18xx-maker/issues/800)) ([6a2a846](https://github.com/18xx-maker/18xx-maker/commit/6a2a846cd7dd978dfa80ddee37aae00a490fcd4a))
+* **tiles:** stop offset tile bleeds from overwriting each other ([#795](https://github.com/18xx-maker/18xx-maker/issues/795)) ([d47b7f1](https://github.com/18xx-maker/18xx-maker/commit/d47b7f15034a54a0ed5758f60c2a3fac47600a22))
+* **ui:** left align doc pages ([#807](https://github.com/18xx-maker/18xx-maker/issues/807)) ([c0db45e](https://github.com/18xx-maker/18xx-maker/commit/c0db45e853a0b4e31c12736b142ab137963ca826))
+* **ui:** left align the app information page ([#808](https://github.com/18xx-maker/18xx-maker/issues/808)) ([a8ade5c](https://github.com/18xx-maker/18xx-maker/commit/a8ade5c114523df7f07299447707b71e59877a67))
+
+
+### :broom: Chores
+
+* **dev:** add pnpm shot and visual change guidelines ([#824](https://github.com/18xx-maker/18xx-maker/issues/824)) ([3f720d5](https://github.com/18xx-maker/18xx-maker/commit/3f720d5a97bbd9648cbd179747419d003c225b4d))
+
+
+### :book: Documentation
+
+* document how to change and compile the json schemas ([#784](https://github.com/18xx-maker/18xx-maker/issues/784)) ([044e62a](https://github.com/18xx-maker/18xx-maker/commit/044e62a36872565ea3f5bb083e2974d511d85144))
+* **positioning:** add a live auto positioning examples page ([#831](https://github.com/18xx-maker/18xx-maker/issues/831)) ([8a4db27](https://github.com/18xx-maker/18xx-maker/commit/8a4db27d0ce6c870f386ce12c009a848bba32c86)), closes [#827](https://github.com/18xx-maker/18xx-maker/issues/827)
+* require 18Test examples for every new feature ([#816](https://github.com/18xx-maker/18xx-maker/issues/816)) ([14d9044](https://github.com/18xx-maker/18xx-maker/commit/14d904416bafb60e9d0dde4fb2d001d6a33b258f))
+
+
+### :hammer_and_wrench: Code Refactoring
+
+* organize components, util and tests ([#838](https://github.com/18xx-maker/18xx-maker/issues/838)) ([01e00cd](https://github.com/18xx-maker/18xx-maker/commit/01e00cdfc9ddaff0baf275e8de8de482c331f85e))
+
+
+### :traffic_light: Tests
+
+* **e2e:** speed up the export tests with parallel capture ([#788](https://github.com/18xx-maker/18xx-maker/issues/788)) ([22fa9da](https://github.com/18xx-maker/18xx-maker/commit/22fa9dab93f21020dfae36868a4fe200496699ed))
+
+
+### :package: Build System
+
+* **deps:** bump shell-quote from 1.8.1 to 1.12.0 in the npm_and_yarn group across 1 directory ([#811](https://github.com/18xx-maker/18xx-maker/issues/811)) ([0b5f316](https://github.com/18xx-maker/18xx-maker/commit/0b5f316e3388e9751439ee45a596df699e4e0dcd))
+
+
+### :octocat: Continuous Integration
+
+* make the e2e job depend on pr-body ([#839](https://github.com/18xx-maker/18xx-maker/issues/839)) ([5533b5b](https://github.com/18xx-maker/18xx-maker/commit/5533b5b822bfa70813927dca4b688f346eee250f))
+* run linux jobs in parallel and shard the export tests ([#810](https://github.com/18xx-maker/18xx-maker/issues/810)) ([c45474d](https://github.com/18xx-maker/18xx-maker/commit/c45474de15fd02de831d60cf92fe4ecaa0725639))
+* run the release notes check before all other jobs ([#834](https://github.com/18xx-maker/18xx-maker/issues/834)) ([7997185](https://github.com/18xx-maker/18xx-maker/commit/7997185adf5498756bbf740f4bce9ee086008d43))
+
 ## [1.0.0-beta.126](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.125...v1.0.0-beta.126) (2026-10-03)
 
 
