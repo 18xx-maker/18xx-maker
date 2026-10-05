@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.0.0-beta.131](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.130...v1.0.0-beta.131) (2026-10-05)
+
+
+### :tada: Features
+
+* **electron:** add open export folder setting ([#900](https://github.com/18xx-maker/18xx-maker/issues/900)) ([aadf3d3](https://github.com/18xx-maker/18xx-maker/commit/aadf3d37b8ce958ff73f250d6274c809a0c18b86))
+* **ui:** add an option to print the turn order on minor charters ([#893](https://github.com/18xx-maker/18xx-maker/issues/893)) ([e3e56dd](https://github.com/18xx-maker/18xx-maker/commit/e3e56ddfe878a4e2a048aa0786fd79ddd7e3aa83))
+* **ui:** show a diff of game changes and save them back to the file ([#894](https://github.com/18xx-maker/18xx-maker/issues/894)) ([e92979b](https://github.com/18xx-maker/18xx-maker/commit/e92979b6e619d86870725d5a881731b30ec47bdc))
+
+
+### :bug: Bug Fixes
+
+* **ci:** ignore release-please changelog bullets in the PR body check ([#904](https://github.com/18xx-maker/18xx-maker/issues/904)) ([584ca19](https://github.com/18xx-maker/18xx-maker/commit/584ca190b8902fb0a0efd840d38c9cb7afb838c0))
+* **ui:** keep print padding off the map so it stays on one page ([#899](https://github.com/18xx-maker/18xx-maker/issues/899)) ([bef1b97](https://github.com/18xx-maker/18xx-maker/commit/bef1b974e09f1a9cef16f678ac8d2265fafc4cdf))
+
+
+### :broom: Chores
+
+* **cli:** replace express with sirv for the static server ([#901](https://github.com/18xx-maker/18xx-maker/issues/901)) ([e534581](https://github.com/18xx-maker/18xx-maker/commit/e534581ae64c17c75449dc5b8426ffd5ffd03c69))
+* replace deep-object-diff with a small helper ([#898](https://github.com/18xx-maker/18xx-maker/issues/898)) ([62a3d14](https://github.com/18xx-maker/18xx-maker/commit/62a3d140badcc756e0dcea825ea97fab83f63719))
+* replace glob with fs.globSync ([#903](https://github.com/18xx-maker/18xx-maker/issues/903)) ([a1336a7](https://github.com/18xx-maker/18xx-maker/commit/a1336a77a9713f10101851d53376dec79115165a))
+* **test:** drop jsdom from node unit tests ([#902](https://github.com/18xx-maker/18xx-maker/issues/902)) ([74d871f](https://github.com/18xx-maker/18xx-maker/commit/74d871f48c85c00e2b963c1468ab1057bfae86c6))
+
 ## [1.0.0-beta.130](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.129...v1.0.0-beta.130) (2026-10-05)
 
 
