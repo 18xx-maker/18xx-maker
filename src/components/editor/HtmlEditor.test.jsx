@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { act, render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import HtmlEditor from "@/components/editor/HtmlEditor";
 
@@ -27,7 +27,7 @@ const setup = (url = "/") => {
     reducer: rootReducer,
     preloadedState: initialState,
   });
-  const { container } = render(
+  const { container, unmount } = render(
     <Provider store={store}>
       <MemoryRouter initialEntries={[url]}>
         <HtmlEditor>
@@ -40,12 +40,32 @@ const setup = (url = "/") => {
   const editor = container.querySelector("#editor");
   return {
     container,
+    unmount,
     editor,
     transform: () => editor.firstElementChild.style.transform,
   };
 };
 
 describe("HtmlEditor", () => {
+  it("locks the page scroll and puts a scrolled editor back", async () => {
+    const { editor } = setup();
+    expect(document.documentElement).toHaveStyle({ overflow: "hidden" });
+    await act(async () => {
+      Object.assign(editor.style, { height: "100px", overflow: "hidden" });
+      editor.firstElementChild.style.height = "5000px";
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    });
+    editor.scrollTop = 40;
+    expect(editor.scrollTop).toBe(40);
+    await vi.waitFor(() => expect(editor.scrollTop).toBe(0));
+  });
+
+  it("unlocks the page scroll when it goes away", () => {
+    const { unmount } = setup();
+    unmount();
+    expect(document.documentElement).not.toHaveStyle({ overflow: "hidden" });
+  });
+
   it("fits the content into the window to start", () => {
     const { transform } = setup();
     // Padded, so a little smaller than the window

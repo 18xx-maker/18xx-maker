@@ -94,9 +94,24 @@ export const usePanZoom = (ref, handlers) => {
       if (document.hidden) clear();
     };
 
+    // The editor never scrolls, the view moves by transform. Keep the page
+    // and the element at 0,0 (focus, a text selection or a touch that chains
+    // past the element would otherwise scroll them instead of the view).
+    const lock = document.documentElement;
+    const body = document.body;
+    const before = [lock.style.overflow, body.style.overflow];
+    lock.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    const onScroll = () => {
+      if (el.scrollTop || el.scrollLeft) el.scrollTo(0, 0);
+      if (window.scrollX || window.scrollY) window.scrollTo(0, 0);
+    };
+
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("blur", clear);
+    window.addEventListener("scroll", onScroll);
+    el.addEventListener("scroll", onScroll);
     el.addEventListener("pointerdown", onDown);
     el.addEventListener("pointermove", onMove);
     el.addEventListener("pointerup", onUp);
@@ -108,6 +123,9 @@ export const usePanZoom = (ref, handlers) => {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("blur", clear);
+      window.removeEventListener("scroll", onScroll);
+      el.removeEventListener("scroll", onScroll);
+      [lock.style.overflow, body.style.overflow] = before;
       el.removeEventListener("pointerdown", onDown);
       el.removeEventListener("pointermove", onMove);
       el.removeEventListener("pointerup", onUp);
