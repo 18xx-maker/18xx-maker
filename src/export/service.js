@@ -2,6 +2,7 @@ import { MAX_DPI } from "./capture.js";
 import { BACKGROUNDS } from "./options.js";
 import { createPageCapture } from "./page.js";
 import { runExport } from "./run.js";
+import { gameFolder } from "./sink.js";
 
 // The export of the app, as the main process runs it. Everything that touches
 // Electron is passed in, so this does not know about windows, dialogs or file
@@ -95,7 +96,8 @@ export const createExportService = ({
   const active = new Map();
 
   // Where the files go, and the jobs with their path there. A single file is
-  // saved under the name the user chose.
+  // saved under the name the user chose, the other files go in the folder of
+  // the game in the chosen folder, like the CLI.
   const destination = async (request) => {
     const { jobs, single, out } = request;
     if (single) {
@@ -110,7 +112,7 @@ export const createExportService = ({
     }
 
     const folder = out || (await dialogs.chooseFolder("Select directory"));
-    return folder && { out: folder, jobs };
+    return folder && { out: gameFolder(folder, request.id), jobs };
   };
 
   const run = async (owner, request, ui) => {

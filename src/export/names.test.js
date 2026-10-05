@@ -3,6 +3,7 @@ import {
   docPath,
   exportJobs,
   fileName,
+  formatFolder,
   safeName,
 } from "#export/names";
 
@@ -98,5 +99,21 @@ describe("exportJobs", () => {
   it("uses the path of a document that has one", () => {
     const [job] = exportJobs(game, docs, ["b18"]);
     expect(job).toEqual({ doc: docs[2], format: "b18", path: "box/Map.png" });
+  });
+});
+
+describe("formatFolder", () => {
+  it("puts a file in the folder of its format and leaves a Board 18 box alone", () => {
+    expect(
+      formatFolder([
+        { format: "pdf", path: "a.pdf" },
+        { format: "svg", path: "a.svg" },
+        { format: "b18", path: "board18-x-1.0/x-1.0/Map.png" },
+      ]),
+    ).toEqual([
+      { format: "pdf", path: "pdf/a.pdf" },
+      { format: "svg", path: "svg/a.svg" },
+      { format: "b18", path: "board18-x-1.0/x-1.0/Map.png" },
+    ]);
   });
 });

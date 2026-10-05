@@ -18,7 +18,8 @@ dann auf den Export-Button klicken:
 Wähle _Spiel als SVG-Bilder exportieren_ (drücke `s` bei geöffnetem Menü) oder
 hake _SVG-Bilder_ im Panel _Exportoptionen_ an. Ein Export auf diesem Weg
 berücksichtigt _alle_ Konfigurationsoptionen, die du in der App gesetzt hast. Du
-wirst aufgefordert, einen Ordner auszuwählen, und für jede Karte (eine pro
+wirst aufgefordert, einen Ordner auszuwählen (die App merkt ihn sich), und in
+`<Spiel-ID>/svg` darin wird für jede Karte (eine pro
 Variante), jeden Aktienmarkt, jede Par-Tabelle, jede Einnahmentabelle, jedes
 Plättchen und jeden Token wird eine Datei geschrieben. Die Dateien enthalten den
 Spielnamen, und die App öffnet den Ordner nach Abschluss des Exports.

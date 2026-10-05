@@ -23,11 +23,11 @@ the options of the game's `exports` field if it has one (see [Export
 options](/docs/games/exports)), and what you change there wins. Press _Cancel export_ in
 the panel to stop an export that is running; the files that are done stay.
 
-If you choose to export a full game you are asked to pick a folder to put all of
-the files. The files _do_ contain the game name in them, but it's suggested that
-you create a folder specifically for this game to help with your own
-organization. When the export is complete the app will open the resulting
-folder.
+If you choose to export a full game you are asked to pick a folder, and the app
+remembers it: the next export opens in the same folder (or in the default one if
+it no longer exists). The files go in a folder named after the game id, with a
+folder for each of `pdf`, `png` and `svg` in it, the same as the command line.
+When the export is complete the app will open the resulting folder.
 
 ## Command Line
 

@@ -1,15 +1,22 @@
 import { randomUUID } from "node:crypto";
+import fs from "node:fs";
 import os from "node:os";
 import { basename, dirname, join } from "node:path";
 
 import { app, dialog, ipcMain, shell } from "electron";
 
+import { savedFolder } from "#export/folder";
 import { createExportIpc, fromMainWindow } from "#export/ipc";
 import { createPool } from "#export/pool";
 import { createExportService } from "#export/service";
 import { createFileSink } from "#export/sink";
 import { writeZip } from "#export/zip";
 import { exportOf, openCaptureWindow } from "./capture.js";
+import {
+  clearExportFolder,
+  getExportFolder,
+  setExportFolder,
+} from "./config.js";
 import { getMainWindow, startBaseUrl } from "./window.js";
 
 // How many capture windows are open at once, and how many files a window
@@ -45,6 +52,14 @@ const SAVE_FILTERS = {
   svg: { name: "SVG Image", extensions: ["svg"] },
 };
 
+const isDirectory = (folder) => {
+  try {
+    return fs.statSync(folder).isDirectory();
+  } catch {
+    return false;
+  }
+};
+
 const dialogs = {
   saveFile: async ({ title, name, format }) => {
     const { filePath, canceled } = await dialog.showSaveDialog(
@@ -61,11 +76,18 @@ const dialogs = {
   },
 
   chooseFolder: async (title = "Select directory") => {
+    // The folder of the last export, unless it is gone
+    const saved = getExportFolder();
+    const defaultPath = savedFolder(saved, isDirectory);
+    if (saved && !defaultPath) clearExportFolder();
+
     const { canceled, filePaths } = await dialog.showOpenDialog(
       getMainWindow(),
-      { title, properties: ["openDirectory", "createDirectory"] },
+      { title, defaultPath, properties: ["openDirectory", "createDirectory"] },
     );
-    return canceled ? undefined : filePaths[0];
+    if (canceled || !filePaths[0]) return undefined;
+    setExportFolder(filePaths[0]);
+    return filePaths[0];
   },
 };
 

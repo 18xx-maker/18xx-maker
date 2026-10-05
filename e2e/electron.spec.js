@@ -103,20 +103,31 @@ test.describe("the app exports 18Test", () => {
       timeout: 150_000,
     });
 
-    expect(pages(path.join(out, "18test-map.pdf"))).toBe(1);
-    expect(pages(path.join(out, "18test-map-paginated.pdf"))).toBe(2);
-    expect(png(path.join(out, "18test-background.png"))).toEqual({
+    // Each format has its own folder in the folder of the game, like the CLI
+    const dir = path.join(out, "18Test");
+    expect(fs.readdirSync(dir).sort()).toEqual([
+      "board18-18Test-1.0",
+      "board18-18Test-1.0.zip",
+      "pdf",
+      "png",
+      "svg",
+    ]);
+    expect(pages(path.join(dir, "pdf/18test-map.pdf"))).toBe(1);
+    expect(pages(path.join(dir, "pdf/18test-map-paginated.pdf"))).toBe(2);
+    expect(png(path.join(dir, "png/18test-background.png"))).toEqual({
       width: 2400,
       height: 3150,
       pixelsPerMeter: 11811,
     });
-    expect(png(path.join(out, "18test-map.png")).width).toBe(4500);
-    const svg = fs.readFileSync(path.join(out, "18test-map.svg"), "utf-8");
+    expect(png(path.join(dir, "png/18test-map.png")).width).toBe(4500);
+    const svg = fs.readFileSync(path.join(dir, "svg/18test-map.svg"), "utf-8");
     expect(svg.startsWith("<?xml")).toBe(true);
     expect(svg).toMatch(/<svg [^>]*width="1392"/);
-    expect(fs.existsSync(path.join(out, "18test-background.svg"))).toBe(false);
+    expect(fs.existsSync(path.join(dir, "svg/18test-background.svg"))).toBe(
+      false,
+    );
 
-    const box = path.join(out, "board18-18Test-1.0");
+    const box = path.join(dir, "board18-18Test-1.0");
     expect(png(path.join(box, "18Test-1.0/Tokens.png"))).toEqual({
       width: 60,
       height: 1080,
@@ -165,7 +176,9 @@ test.describe("the app exports 18Test", () => {
       .getByRole("menuitem", { name: "Export game as png images" })
       .click();
     await expect
-      .poll(() => fs.readdirSync(out).length, { timeout: 60_000 })
+      .poll(() => fs.readdirSync(out, { recursive: true }).length, {
+        timeout: 60_000,
+      })
       .toBeGreaterThan(0);
 
     const closed = new Promise((resolve) =>
@@ -178,9 +191,9 @@ test.describe("the app exports 18Test", () => {
         setTimeout(() => reject(new Error("The app did not quit")), 20_000),
       ),
     ]);
-    const written = fs.readdirSync(out).length;
+    const written = fs.readdirSync(out, { recursive: true }).length;
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    expect(fs.readdirSync(out)).toHaveLength(written);
+    expect(fs.readdirSync(out, { recursive: true })).toHaveLength(written);
     app = undefined;
   });
 });

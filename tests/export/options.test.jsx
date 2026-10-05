@@ -147,11 +147,11 @@ describe("export options", () => {
     const formats = new Set(request.jobs.map(({ format }) => format));
     expect([...formats].sort()).toEqual(["b18", "pdf", "png"]);
     const names = request.jobs.map(({ path }) => path);
-    expect(names).toContain("18test-map.pdf");
-    expect(names).toContain("18test-map.png");
+    expect(names).toContain("pdf/18test-map.pdf");
+    expect(names).toContain("png/18test-map.png");
     // A paginated pdf of what does not fit on one page, and no cards
-    expect(names).toContain("18test-map-paginated.pdf");
-    expect(names).not.toContain("18test-par-paginated.pdf");
+    expect(names).toContain("pdf/18test-map-paginated.pdf");
+    expect(names).not.toContain("pdf/18test-par-paginated.pdf");
     expect(names.some((name) => name.includes("card"))).toBe(false);
     // The panel closes when the export is over
     await waitFor(() =>
@@ -191,7 +191,7 @@ describe("export options", () => {
     const { jobs } = requested();
     expect(jobs.every(({ format }) => format === "svg")).toBe(true);
     expect(jobs.map(({ path }) => path)).toEqual(
-      expect.arrayContaining(["18test-map.svg", "18test-tile-1.svg"]),
+      expect.arrayContaining(["svg/18test-map.svg", "svg/18test-tile-1.svg"]),
     );
   });
 
@@ -337,7 +337,7 @@ describe("export options", () => {
 
     await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
     expect(requested().jobs.map(({ path }) => path)).toContain(
-      "18test-cards-free.pdf",
+      "pdf/18test-cards-free.pdf",
     );
   });
 
@@ -362,8 +362,8 @@ describe("export options", () => {
 
     await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
     const names = requested().jobs.map(({ path }) => path);
-    expect(names).toContain("18test-cards.pdf");
-    expect(names).not.toContain("18test-cards-free.pdf");
+    expect(names).toContain("pdf/18test-cards.pdf");
+    expect(names).not.toContain("pdf/18test-cards-free.pdf");
   });
 
   it("needs a Board18 version and author for a box", async () => {

@@ -25,11 +25,12 @@ eines hat (siehe [Exportoptionen](/docs/games/exports)), und was du dort änders
 hat Vorrang. Drücke im Panel auf _Export abbrechen_, um einen laufenden Export
 zu stoppen; bereits fertige Dateien bleiben erhalten.
 
-Wenn du ein ganzes Spiel exportierst, wirst du aufgefordert, einen Ordner für
-alle Dateien auszuwählen. Die Dateien enthalten _zwar_ den Spielnamen, aber wir
-empfehlen, einen eigenen Ordner für dieses Spiel anzulegen, damit du den
-Überblick behältst. Nach Abschluss des Exports öffnet die App den entstandenen
-Ordner.
+Wenn du ein ganzes Spiel exportierst, wirst du aufgefordert, einen Ordner
+auszuwählen, und die App merkt sich ihn: Der nächste Export öffnet denselben
+Ordner (oder den Standardordner, falls er nicht mehr existiert). Die Dateien
+kommen in einen Ordner mit der Spiel-ID, darin je ein Ordner für `pdf`, `png`
+und `svg`, genau wie in der Kommandozeile. Nach Abschluss des Exports öffnet die
+App den entstandenen Ordner.
 
 ## Kommandozeile
 

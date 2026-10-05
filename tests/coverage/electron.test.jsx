@@ -500,19 +500,19 @@ describe("export button", () => {
     expect(api.export).toHaveBeenCalledTimes(1);
     expect(requested().single).toBeUndefined();
     expect(exported(requested())).toEqual({
-      background: "18test-background.pdf",
-      revenue: "18test-revenue.pdf",
-      "revenue?paginated=true": "18test-revenue-paginated.pdf",
-      cards: "18test-cards.pdf",
-      tokens: "18test-tokens.pdf",
-      charters: "18test-charters.pdf",
-      map: "18test-map.pdf",
-      "map?paginated=true": "18test-map-paginated.pdf",
-      market: "18test-market.pdf",
-      "market?paginated=true": "18test-market-paginated.pdf",
-      par: "18test-par.pdf",
-      "tile-manifest": "18test-tile-manifest.pdf",
-      tiles: "18test-tiles.pdf",
+      background: "pdf/18test-background.pdf",
+      revenue: "pdf/18test-revenue.pdf",
+      "revenue?paginated=true": "pdf/18test-revenue-paginated.pdf",
+      cards: "pdf/18test-cards.pdf",
+      tokens: "pdf/18test-tokens.pdf",
+      charters: "pdf/18test-charters.pdf",
+      map: "pdf/18test-map.pdf",
+      "map?paginated=true": "pdf/18test-map-paginated.pdf",
+      market: "pdf/18test-market.pdf",
+      "market?paginated=true": "pdf/18test-market-paginated.pdf",
+      par: "pdf/18test-par.pdf",
+      "tile-manifest": "pdf/18test-tile-manifest.pdf",
+      tiles: "pdf/18test-tiles.pdf",
     });
   });
 
@@ -534,15 +534,16 @@ describe("export button", () => {
     expect(items).not.toHaveProperty("tokens");
     expect(items).not.toHaveProperty("tiles");
     expect(items).toMatchObject({
-      "cards?config.cards.layout=free": "18test-cards-free.pdf",
-      "cards?config.cards.layout=miniEuroDie": "18test-cards-miniEuroDie.pdf",
-      "cards?config.cards.layout=dtgDie": "18test-cards-dtgDie.pdf",
-      "tokens?config.tokens.layout=free": "18test-tokens-free.pdf",
-      "tokens?config.tokens.layout=gsp": "18test-tokens-gsp.pdf",
-      "tiles?config.tiles.layout=offset": "18test-tiles-offset.pdf",
-      "tiles?config.tiles.layout=individual": "18test-tiles-individual.pdf",
-      "tiles?config.tiles.layout=die": "18test-tiles-die.pdf",
-      "tiles?config.tiles.layout=smallDie": "18test-tiles-smallDie.pdf",
+      "cards?config.cards.layout=free": "pdf/18test-cards-free.pdf",
+      "cards?config.cards.layout=miniEuroDie":
+        "pdf/18test-cards-miniEuroDie.pdf",
+      "cards?config.cards.layout=dtgDie": "pdf/18test-cards-dtgDie.pdf",
+      "tokens?config.tokens.layout=free": "pdf/18test-tokens-free.pdf",
+      "tokens?config.tokens.layout=gsp": "pdf/18test-tokens-gsp.pdf",
+      "tiles?config.tiles.layout=offset": "pdf/18test-tiles-offset.pdf",
+      "tiles?config.tiles.layout=individual": "pdf/18test-tiles-individual.pdf",
+      "tiles?config.tiles.layout=die": "pdf/18test-tiles-die.pdf",
+      "tiles?config.tiles.layout=smallDie": "pdf/18test-tiles-smallDie.pdf",
     });
   });
 
@@ -565,10 +566,10 @@ describe("export button", () => {
     );
     const pdfs = exported(requested());
     expect(pdfs).toMatchObject({
-      "map?variation=0": "18test-map-0.pdf",
-      "map?paginated=true&variation=0": "18test-map-0-paginated.pdf",
-      "map?variation=1": "18test-map-1.pdf",
-      "map?paginated=true&variation=1": "18test-map-1-paginated.pdf",
+      "map?variation=0": "pdf/18test-map-0.pdf",
+      "map?paginated=true&variation=0": "pdf/18test-map-0-paginated.pdf",
+      "map?variation=1": "pdf/18test-map-1.pdf",
+      "map?paginated=true&variation=1": "pdf/18test-map-1-paginated.pdf",
     });
     expect(pdfs).not.toHaveProperty("map");
     expect(pdfs).not.toHaveProperty("map?variation=2");
@@ -584,8 +585,8 @@ describe("export button", () => {
     );
     const pngs = exported(requested());
     expect(pngs).toMatchObject({
-      "map?variation=0": "18test-map-0.png",
-      "map?variation=1": "18test-map-1.png",
+      "map?variation=0": "png/18test-map-0.png",
+      "map?variation=1": "png/18test-map-1.png",
     });
     expect(pngs).not.toHaveProperty("map");
   });
@@ -626,7 +627,7 @@ describe("export button", () => {
         .sort(),
     ).toEqual(["background", "revenue", "tile-manifest"].sort());
     // Without companies the game tokens are numbered from one
-    expect(exported(requested())["tokens/0"]).toBe("bare-token-1.png");
+    expect(exported(requested())["tokens/0"]).toBe("png/bare-token-1.png");
   });
 
   it("exports an svg for the components that are drawings", async () => {
@@ -643,11 +644,11 @@ describe("export button", () => {
     expect(api.export).toHaveBeenCalledTimes(1);
     const items = exported(requested());
     expect(items).toMatchObject({
-      map: "18test-map.svg",
-      market: "18test-market.svg",
-      par: "18test-par.svg",
-      revenue: "18test-revenue.svg",
-      "tokens/0": "18test-token-1-BLRR.svg",
+      map: "svg/18test-map.svg",
+      market: "svg/18test-market.svg",
+      par: "svg/18test-par.svg",
+      revenue: "svg/18test-revenue.svg",
+      "tokens/0": "svg/18test-token-1-BLRR.svg",
     });
     expect(Object.values(items).every((name) => name.endsWith(".svg"))).toBe(
       true,
@@ -672,22 +673,22 @@ describe("export button", () => {
     expect(api.export).toHaveBeenCalledTimes(1);
     const items = exported(requested());
     expect(items).toMatchObject({
-      background: "18test-background.png",
-      revenue: "18test-revenue.png",
+      background: "png/18test-background.png",
+      revenue: "png/18test-revenue.png",
       // One number card per player count, 18Test seats 1 to 6
-      "cards/number/1": "18test-card-number-1.png",
-      "cards/number/6": "18test-card-number-6.png",
-      "cards/private/0": "18test-card-private-1.png",
-      "cards/private/5": "18test-card-private-6.png",
-      "cards/train/1": "18test-card-train-2-3+1.png",
-      "cards/train/3": "18test-card-train-4-8E.png",
-      map: "18test-map.png",
-      market: "18test-market.png",
-      par: "18test-par.png",
-      "tile-manifest": "18test-tile-manifest.png",
-      "tiles/1": "18test-tile-1.png",
+      "cards/number/1": "png/18test-card-number-1.png",
+      "cards/number/6": "png/18test-card-number-6.png",
+      "cards/private/0": "png/18test-card-private-1.png",
+      "cards/private/5": "png/18test-card-private-6.png",
+      "cards/train/1": "png/18test-card-train-2-3+1.png",
+      "cards/train/3": "png/18test-card-train-4-8E.png",
+      map: "png/18test-map.png",
+      market: "png/18test-market.png",
+      par: "png/18test-par.png",
+      "tile-manifest": "png/18test-tile-manifest.png",
+      "tiles/1": "png/18test-tile-1.png",
       // Tile ids are escaped in the url and made safe in the filename
-      "tiles/26%7CT2": "18test-tile-26_T2.png",
+      "tiles/26%7CT2": "png/18test-tile-26_T2.png",
     });
     expect(items).not.toHaveProperty("cards/number/7");
     expect(items).not.toHaveProperty("cards/private/6");
@@ -697,9 +698,11 @@ describe("export button", () => {
       k.startsWith("cards/share/"),
     );
     expect(shares.length).toBeGreaterThan(0);
-    expect(items["cards/share/0"]).toMatch(/^18test-card-share-1-\w+\.png$/);
-    expect(items["charters/0"]).toMatch(/^18test-charter-1-\w+\.png$/);
-    expect(items["tokens/0"]).toMatch(/^18test-token-1-\w+\.png$/);
+    expect(items["cards/share/0"]).toMatch(
+      /^png\/18test-card-share-1-\w+\.png$/,
+    );
+    expect(items["charters/0"]).toMatch(/^png\/18test-charter-1-\w+\.png$/);
+    expect(items["tokens/0"]).toMatch(/^png\/18test-token-1-\w+\.png$/);
   });
 
   it("exports the Board18 box of the game", async () => {

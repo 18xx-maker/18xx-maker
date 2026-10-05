@@ -79,7 +79,9 @@ const setup = ({ slot, ...overrides } = {}) => {
   return { service: createExportService(parts), ui, slots, opened, ...parts };
 };
 
-const files = () => fs.readdirSync(tmp).sort();
+// The files go in the folder of the game in the chosen folder
+const gameDir = () => path.join(tmp, "18Test");
+const files = () => fs.readdirSync(gameDir()).sort();
 
 describe("run", () => {
   it("asks for a folder, captures the files into it and shows the result", async () => {
@@ -89,13 +91,15 @@ describe("run", () => {
 
     expect(dialogs.chooseFolder).toHaveBeenCalledTimes(1);
     expect(files()).toEqual(["a.pdf", "b.pdf"]);
-    expect(fs.readFileSync(path.join(tmp, "a.pdf"), "utf-8")).toBe("%PDF");
+    expect(fs.readFileSync(path.join(gameDir(), "a.pdf"), "utf-8")).toBe(
+      "%PDF",
+    );
     expect(result).toEqual({
       done: 2,
       total: 2,
       failed: [],
       cancelled: false,
-      out: tmp,
+      out: gameDir(),
     });
     expect(opened).toEqual([
       { id: "18Test", game: expect.any(Object), config: {} },
@@ -107,10 +111,13 @@ describe("run", () => {
     );
     expect(ui.alert).toHaveBeenCalledWith(
       "Game Exported",
-      `Exported 2 files to ${tmp}`,
+      `Exported 2 files to ${gameDir()}`,
       "success",
     );
-    expect(show).toHaveBeenCalledWith(tmp, expect.stringMatching(/\.pdf$/));
+    expect(show).toHaveBeenCalledWith(
+      gameDir(),
+      expect.stringMatching(/\.pdf$/),
+    );
   });
 
   it("uses the folder it is given without asking", async () => {
@@ -120,6 +127,15 @@ describe("run", () => {
 
     expect(dialogs.chooseFolder).not.toHaveBeenCalled();
     expect(files()).toEqual(["a.pdf", "b.pdf"]);
+  });
+
+  it("keeps a game id that is not a name inside the chosen folder", async () => {
+    const { service, ui } = setup();
+
+    const result = await service.run(1, request({ id: "../evil" }), ui);
+
+    expect(result.out).toBe(path.join(tmp, "__evil"));
+    expect(fs.readdirSync(tmp)).toEqual(["__evil"]);
   });
 
   it("asks where to save a single file before capturing, and names it as chosen", async () => {
@@ -142,7 +158,7 @@ describe("run", () => {
     await service.run(1, request({ single: true, jobs: [job("a.pdf")] }), ui);
 
     expect(order).toEqual(["dialog", "capture"]);
-    expect(files()).toEqual(["chosen.pdf"]);
+    expect(fs.readdirSync(tmp)).toEqual(["chosen.pdf"]);
   });
 
   it("asks for an svg with its own title", async () => {
@@ -172,7 +188,7 @@ describe("run", () => {
       name: "a.svg",
       format: "svg",
     });
-    expect(files()).toEqual(["chosen.svg"]);
+    expect(fs.readdirSync(tmp)).toEqual(["chosen.svg"]);
     expect(fs.readFileSync(path.join(tmp, "chosen.svg"), "utf-8")).toBe(
       "<svg/>",
     );
@@ -212,11 +228,11 @@ describe("run", () => {
     );
 
     expect(
-      JSON.parse(fs.readFileSync(path.join(tmp, names.json), "utf-8")),
+      JSON.parse(fs.readFileSync(path.join(gameDir(), names.json), "utf-8")),
     ).toEqual({ bname: "x" });
-    expect(zip).toHaveBeenCalledWith(tmp, names);
+    expect(zip).toHaveBeenCalledWith(gameDir(), names);
     expect(order).toEqual(["board18-x-1.0"]);
-    expect(show).toHaveBeenCalledWith(tmp, "board18-x-1.0.zip");
+    expect(show).toHaveBeenCalledWith(gameDir(), "board18-x-1.0.zip");
   });
 
   it("reports the files that fail and keeps the others", async () => {
@@ -258,7 +274,7 @@ describe("run", () => {
       "b.pdf",
     ]);
     expect(result.failed[0].message).toContain("nothing to show");
-    expect(files()).toEqual([]);
+    expect(fs.readdirSync(tmp)).toEqual([]);
     expect(slots.every(({ close }) => close.mock.calls.length === 1)).toBe(
       true,
     );
