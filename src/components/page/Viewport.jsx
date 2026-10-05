@@ -38,7 +38,18 @@ const Viewport = ({ children }) => {
     >
       {!print && <Toolbar />}
       {config && !print && <Config />}
-      <div id="viewport-children">{children}</div>
+      <div
+        id="viewport-children"
+        className={clsx(
+          // Plain pages (no pan and zoom editor) start below the fixed toolbar
+          // and sit in the middle when narrower than the window, a page wider
+          // than the window starts at the left edge and scrolls ("safe")
+          !print &&
+            "not-has-[#editor]:pt-16 not-has-[#editor]:flex not-has-[#editor]:flex-col not-has-[#editor]:[align-items:safe_center] print:pt-0 print:block",
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 };

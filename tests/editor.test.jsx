@@ -40,3 +40,27 @@ describe("map editor", () => {
     ).not.toBeInTheDocument();
   });
 });
+
+// The test page has no Tailwind stylesheet, so the classes are what is checked
+// (the layout itself is verified in the built site)
+// eslint-disable-next-line testing-library/no-node-access
+const viewportChildren = () => document.getElementById("viewport-children");
+
+describe("plain game pages", () => {
+  it("start below the toolbar and center their content", async () => {
+    renderApp("/games/18Test/cards/private/0");
+    await screen.findByTestId("game-18Test-card");
+
+    expect(viewportChildren()).toHaveClass(
+      "not-has-[#editor]:pt-16",
+      "not-has-[#editor]:flex",
+    );
+  });
+
+  it("have no padding or centering with ?print=true", async () => {
+    renderApp("/games/18Test/cards/private/0?print=true");
+    await screen.findByTestId("game-18Test-card");
+
+    expect(viewportChildren()).not.toHaveClass("not-has-[#editor]:pt-16");
+  });
+});
