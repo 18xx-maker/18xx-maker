@@ -151,7 +151,7 @@ const InfoPage = () => {
         )}
       </div>
       <GameStats />
-      <div className="flex flex-row gap-4 mt-16 mb-4">
+      <div className="flex flex-row gap-4 mt-4 mb-4">
         <TypeIcon />
         <p>{typeDescription}</p>
       </div>
