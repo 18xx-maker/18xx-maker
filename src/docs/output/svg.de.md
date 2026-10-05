@@ -69,7 +69,7 @@ pnpm build && pnpm maker export <game> --format svg
 ```
 
 Dabei ist `<game>` die ID eines mitgelieferten Spiels oder der Pfad zu einer
-Spieldatei. Die Dateien werden nach `render/<game>` geschrieben und nach dem
+Spieldatei. Die Dateien werden nach `render/<game>/svg` geschrieben und nach dem
 Titel des Spiels benannt.
 
 ```bash

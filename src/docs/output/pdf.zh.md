@@ -51,22 +51,23 @@ pnpm maker export 1889 --format pdf --config my-config.json
 ```
 render
 └── 1889
-    ├── shikoku-1889-background.pdf
-    ├── shikoku-1889-cards-miniEuroDie.pdf
-    ├── shikoku-1889-charters.pdf
-    ├── shikoku-1889-map-paginated.pdf
-    ├── shikoku-1889-map.pdf
-    ├── shikoku-1889-market-paginated.pdf
-    ├── shikoku-1889-market.pdf
-    ├── shikoku-1889-par.pdf
-    ├── shikoku-1889-revenue-paginated.pdf
-    ├── shikoku-1889-revenue.pdf
-    ├── shikoku-1889-tile-manifest.pdf
-    ├── shikoku-1889-tiles-die.pdf
-    └── shikoku-1889-tokens.pdf
+    └── pdf
+        ├── shikoku-1889-background.pdf
+        ├── shikoku-1889-cards-miniEuroDie.pdf
+        ├── shikoku-1889-charters.pdf
+        ├── shikoku-1889-map-paginated.pdf
+        ├── shikoku-1889-map.pdf
+        ├── shikoku-1889-market-paginated.pdf
+        ├── shikoku-1889-market.pdf
+        ├── shikoku-1889-par.pdf
+        ├── shikoku-1889-revenue-paginated.pdf
+        ├── shikoku-1889-revenue.pdf
+        ├── shikoku-1889-tile-manifest.pdf
+        ├── shikoku-1889-tiles-die.pdf
+        └── shikoku-1889-tokens.pdf
 ```
 
-文件以游戏标题命名(与应用使用的名称相同),文件夹以您输入的游戏 id 命名。PDF 会连同背景一起打印,与应用一致。如果有些文档无法打印,命令会以退出码 1 结束(其余文档仍会写出);如果用法有误、游戏不存在或网站尚未构建,则以退出码 2 结束。
+每种格式在游戏文件夹中都有各自的文件夹:PDF 在 `pdf`,PNG 在 `png`,SVG 在 `svg`。文件以游戏标题命名(与应用使用的名称相同),文件夹以您输入的游戏 id 命名。PDF 会连同背景一起打印,与应用一致。如果有些文档无法打印,命令会以退出码 1 结束(其余文档仍会写出);如果用法有误、游戏不存在或网站尚未构建,则以退出码 2 结束。
 
 如果想一次构建所有游戏,可以运行:
 

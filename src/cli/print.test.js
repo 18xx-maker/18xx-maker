@@ -40,7 +40,7 @@ const printed = async (...args) => {
   return fs
     .readdirSync("render", { recursive: true })
     .filter((file) => file.endsWith(".pdf"))
-    .map((file) => file.replaceAll("\\", "/"))
+    .map((file) => file.replaceAll("\\", "/").replace("/pdf/", "/"))
     .sort();
 };
 
@@ -108,7 +108,7 @@ describe("print", () => {
       { media: "print" },
     );
     expect(
-      fs.readFileSync("render/18Full/18test-background.pdf", "utf-8"),
+      fs.readFileSync("render/18Full/pdf/18test-background.pdf", "utf-8"),
     ).toBe("pdf");
     expect(mocks.browser.close).toHaveBeenCalledOnce();
   });
@@ -253,9 +253,11 @@ describe("print", () => {
       ),
     ).toHaveLength(3);
     expect(files).toHaveLength(2);
-    expect(error).toHaveBeenCalledWith("Failed 18test-background.pdf: timeout");
     expect(error).toHaveBeenCalledWith(
-      expect.stringMatching(/1 documents failed:\n18test-background.pdf/),
+      "Failed pdf/18test-background.pdf: timeout",
+    );
+    expect(error).toHaveBeenCalledWith(
+      expect.stringMatching(/1 documents failed:\npdf\/18test-background.pdf/),
     );
     expect(process.exitCode).toBe(1);
     expect(mocks.browser.close).toHaveBeenCalledOnce();

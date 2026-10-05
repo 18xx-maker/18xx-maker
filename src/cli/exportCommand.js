@@ -180,7 +180,8 @@ const flagOptions = (opts) => {
 //   config      a config file
 //   dpi         of the pngs, 1 to 300 (an svg has none)
 //   cardBleed   the bleed of the single card pngs, in units
-//   out         the folder the folder of the game goes in
+//   out         the folder the folder of the game goes in, with a folder
+//               for each of pdf, png and svg in it
 //   jobs        how many files are captured at the same time
 //   all         every bundled game
 //   b18Version, b18Author  1.0, the author of the user's config or their name
@@ -280,6 +281,7 @@ const command = async (game, opts = {}) => {
 
       const files = formats.filter((format) => format !== "b18");
       if (files.length > 0) {
+        // Every format has its own folder in the folder of the game
         const list = exportJobs(
           gameDef,
           selectDocs(
@@ -289,7 +291,7 @@ const command = async (game, opts = {}) => {
             { docs, variation },
           ),
           files,
-        );
+        ).map((job) => ({ ...job, path: `${job.format}/${job.path}` }));
         if (list.length === 0) {
           console.error(
             `Nothing to export for ${id}: the chosen documents have no ${files.join(", ")} files`,

@@ -67,26 +67,36 @@ test.describe("maker export 18Test", () => {
     );
     expect(result.status, result.stderr).toBe(0);
 
+    // Each format has its own folder in the folder of the game
     const dir = path.join(out, "18Test");
-    expect(pages(path.join(dir, "18test-map.pdf"))).toBe(1);
-    expect(pages(path.join(dir, "18test-map-paginated.pdf"))).toBe(2);
+    expect(fs.readdirSync(dir).sort()).toEqual([
+      "board18-18Test-1.0",
+      "board18-18Test-1.0.zip",
+      "pdf",
+      "png",
+      "svg",
+    ]);
+    expect(pages(path.join(dir, "pdf/18test-map.pdf"))).toBe(1);
+    expect(pages(path.join(dir, "pdf/18test-map-paginated.pdf"))).toBe(2);
 
     // 8 by 10.5 inches at 300 dpi, with its resolution of 11811 pixels/meter
-    expect(png(path.join(dir, "18test-background.png"))).toEqual({
+    expect(png(path.join(dir, "png/18test-background.png"))).toEqual({
       width: 2400,
       height: 3150,
       pixelsPerMeter: 11811,
     });
-    expect(png(path.join(dir, "18test-map.png")).width).toBe(4500);
+    expect(png(path.join(dir, "png/18test-map.png")).width).toBe(4500);
 
     // The svg of the map is a standalone file, without a background page
     // (the map png is 4500 wide with its quarter inch border, 24 CSS pixels
     // on each side)
-    const svg = fs.readFileSync(path.join(dir, "18test-map.svg"), "utf-8");
+    const svg = fs.readFileSync(path.join(dir, "svg/18test-map.svg"), "utf-8");
     expect(svg.startsWith("<?xml")).toBe(true);
     expect(svg).toMatch(/<svg [^>]*width="1392"/);
     expect(svg).not.toMatch(/\sclass=|<style|foreignObject/);
-    expect(fs.existsSync(path.join(dir, "18test-background.svg"))).toBe(false);
+    expect(fs.existsSync(path.join(dir, "svg/18test-background.svg"))).toBe(
+      false,
+    );
 
     // Board 18 images are one pixel for each unit, without a resolution
     const box = path.join(dir, "board18-18Test-1.0");
@@ -117,7 +127,7 @@ test.describe("maker export 18Test", () => {
     );
     expect(result.status, result.stderr).toBe(0);
 
-    expect(png(path.join(out, "18Test/18test-background.png"))).toEqual({
+    expect(png(path.join(out, "18Test/png/18test-background.png"))).toEqual({
       width: 1200,
       height: 1575,
       pixelsPerMeter: 5906,
@@ -142,11 +152,13 @@ test.describe("maker export 18Test", () => {
     expect(result.status, result.stderr).toBe(0);
 
     // 2.5 by 3.5 inches at 300 dpi
-    expect(png(path.join(out, "18Test/18test-card-train-1-2.png"))).toEqual({
-      width: 750,
-      height: 1050,
-      pixelsPerMeter: 11811,
-    });
+    expect(png(path.join(out, "18Test/png/18test-card-train-1-2.png"))).toEqual(
+      {
+        width: 750,
+        height: 1050,
+        pixelsPerMeter: 11811,
+      },
+    );
   });
 
   test("writes a card with a bleed on every side", () => {
@@ -169,11 +181,13 @@ test.describe("maker export 18Test", () => {
     expect(result.status, result.stderr).toBe(0);
 
     // 2.75 by 3.75 inches at 300 dpi: the card and 1/8 inch on each side
-    expect(png(path.join(out, "18Test/18test-card-train-1-2.png"))).toEqual({
-      width: 825,
-      height: 1125,
-      pixelsPerMeter: 11811,
-    });
+    expect(png(path.join(out, "18Test/png/18test-card-train-1-2.png"))).toEqual(
+      {
+        width: 825,
+        height: 1125,
+        pixelsPerMeter: 11811,
+      },
+    );
   });
 
   // A card is 255.11 by 166.3 CSS pixels, painted 255 by 166: an image of a
@@ -198,7 +212,7 @@ test.describe("maker export 18Test", () => {
       );
       expect(result.status, result.stderr).toBe(0);
 
-      const dir = path.join(out, "18Test");
+      const dir = path.join(out, "18Test/png");
       const cards = fs
         .readdirSync(dir)
         .filter((name) => name.startsWith("18test-card-"));
@@ -231,7 +245,7 @@ test.describe("maker export 18Test", () => {
     );
     expect(result.status, result.stderr).toBe(0);
 
-    const dir = path.join(out, "18Test");
+    const dir = path.join(out, "18Test/png");
     const token = fs
       .readdirSync(dir)
       .find((name) => name.startsWith("18test-token-"));
@@ -308,7 +322,7 @@ test.describe("maker export 18Test", () => {
     const result = maker(out, fixture, "--format", "png", "--docs", "map");
     expect(result.status, result.stderr).toBe(0);
 
-    expect(fs.readdirSync(path.join(out, "e2e-game"))).toEqual([
+    expect(fs.readdirSync(path.join(out, "e2e-game/png"))).toEqual([
       "e2e-fixture-game-map.png",
     ]);
   });
@@ -326,7 +340,7 @@ test.describe("maker export 18Test", () => {
 
     let result = maker(out, file);
     expect(result.status, result.stderr).toBe(0);
-    expect(fs.readdirSync(path.join(out, "boxed"))).toEqual([
+    expect(fs.readdirSync(path.join(out, "boxed/pdf"))).toEqual([
       "e2e-fixture-game-map-paginated.pdf",
       "e2e-fixture-game-map.pdf",
     ]);
@@ -334,7 +348,7 @@ test.describe("maker export 18Test", () => {
     fs.rmSync(path.join(out, "boxed"), { recursive: true });
     result = maker(out, file, "--docs", "background");
     expect(result.status, result.stderr).toBe(0);
-    expect(fs.readdirSync(path.join(out, "boxed"))).toEqual([
+    expect(fs.readdirSync(path.join(out, "boxed/pdf"))).toEqual([
       "e2e-fixture-game-background.pdf",
     ]);
   });

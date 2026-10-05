@@ -37,7 +37,7 @@ SVG 文件是矢量图形:您可以在 Inkscape、Illustrator 或 Affinity Desig
 pnpm build && pnpm maker export <game> --format svg
 ```
 
-其中 `<game>` 是内置游戏的 id 或游戏文件的路径。文件会写入 `render/<game>`,并以游戏标题命名。
+其中 `<game>` 是内置游戏的 id 或游戏文件的路径。文件会写入 `render/<game>/svg`,并以游戏标题命名。
 
 ```bash
 # 只导出地图和地块
