@@ -18,6 +18,7 @@ import {
 } from "ramda";
 
 import { loadJSON, loadSchema } from "#cli/util";
+import { UNVALIDATED_GAMES } from "../util/testGames.js";
 
 // Load Defs
 const tileDefs = loadSchema("tiles.defs.json");
@@ -107,7 +108,16 @@ let validate = (json, file, schemaId) => {
   };
 };
 
+// Test games with schema errors on purpose are not checked
+const isSkipped = (file) =>
+  UNVALIDATED_GAMES.includes(path.basename(file, ".json")) &&
+  path.basename(path.dirname(file)) === "games";
+
 validate.file = (file, schemaId) => {
+  if (isSkipped(file)) {
+    return { valid: true, skipped: true, id: gameSchema.$id, file };
+  }
+
   if (!fs.existsSync(file)) {
     return {
       valid: false,
@@ -174,10 +184,25 @@ const displayErrors = (errors = [], level = 0) => {
     }
   }, errors);
 };
-const displayResult = ({ valid, error, validationErrors, file, id }) => {
-  const color = error ? chalk.red : valid ? chalk.green : chalk.yellow;
+const displayResult = ({
+  valid,
+  skipped,
+  error,
+  validationErrors,
+  file,
+  id,
+}) => {
+  const color = error
+    ? chalk.red
+    : skipped
+      ? chalk.gray
+      : valid
+        ? chalk.green
+        : chalk.yellow;
 
-  const result = (error ? "error" : valid ? "valid" : "invalid").padEnd(6, " ");
+  const result = (
+    error ? "error" : skipped ? "skip" : valid ? "valid" : "invalid"
+  ).padEnd(6, " ");
 
   const name = getShortSchemaName(id).padEnd(11, " ");
 

@@ -5,7 +5,7 @@ import { Outlet, useMatch, useNavigate } from "react-router";
 import Viewport from "@/components/page/Viewport";
 
 import { useEditor } from "@/hooks";
-import { loadGame } from "@/state";
+import { loadGame, validateLoadedGame } from "@/state";
 import { selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
 import { getRenderInput } from "@/util/renderInput";
@@ -34,6 +34,14 @@ const GamePage = () => {
         .catch(() => navigate("/games/"));
     }
   }, [dispatch, game, navigate, match]);
+
+  // Check the game against the schema once it settles, so typing in the editor
+  // does not check on every change
+  useEffect(() => {
+    if (!game) return;
+    const timeout = setTimeout(() => dispatch(validateLoadedGame(game)), 500);
+    return () => clearTimeout(timeout);
+  }, [dispatch, game]);
 
   // Wait for the game in the URL, a previously loaded game would otherwise
   // render under the new URL

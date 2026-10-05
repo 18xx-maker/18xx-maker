@@ -30,6 +30,7 @@ import { createAlert, loadSummaries } from "@/state";
 import capability from "@/util/capability";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
+import { isTestGame } from "@/util/testGames";
 
 const sortSummaries = compose(sortBy(prop("title")), chain(values), values);
 
@@ -90,7 +91,7 @@ const LoadGamesPage = () => {
     [sorted],
   );
 
-  const [loaded, bundled] = partition(
+  const [loaded, notLoaded] = partition(
     isLoaded,
     filter(
       (game) =>
@@ -100,6 +101,11 @@ const LoadGamesPage = () => {
         (type === "all" || (type === "loaded") === isLoaded(game)),
       sorted,
     ),
+  );
+  // Test games are not real games, so they go last
+  const [testGames, bundled] = partition(
+    (game) => isTestGame(game.id),
+    notLoaded,
   );
 
   const section = (heading, games) =>
@@ -190,9 +196,10 @@ const LoadGamesPage = () => {
       />
       {section(t("games.loaded"), loaded)}
       {section(hasLoaded ? t("games.bundled") : null, bundled)}
-      {loaded.length === 0 && bundled.length === 0 && (
-        <p className="mt-6">{t("games.empty")}</p>
-      )}
+      {section(t("games.test"), testGames)}
+      {loaded.length === 0 &&
+        bundled.length === 0 &&
+        testGames.length === 0 && <p className="mt-6">{t("games.empty")}</p>}
     </div>
   );
 };

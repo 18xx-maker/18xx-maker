@@ -40,6 +40,11 @@ describe("root state contract", () => {
         },
         "config": {},
         "errors": {},
+        "gameProblems": {
+          "issues": [],
+          "slug": null,
+          "status": "idle",
+        },
         "settings": {},
         "summaries": {},
         "ui": {
@@ -101,6 +106,11 @@ describe("root state contract", () => {
             "slug": "system:b",
             "type": "system",
           },
+        },
+        "gameProblems": {
+          "issues": [],
+          "slug": null,
+          "status": "idle",
         },
         "loadedGame": {
           "designer": "d",

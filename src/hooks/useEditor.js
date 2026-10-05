@@ -10,7 +10,8 @@ export const useEditor = () => {
     return false;
   }
 
-  return gameMatch.params["*"] !== "";
+  // The problems page is a plain page, like the info page
+  return !["", "problems"].includes(gameMatch.params["*"]);
 };
 
 export default useEditor;
