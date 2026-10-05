@@ -1259,5 +1259,8 @@
     "BCR_green": "#00a651",
     "JNS_blue": "#b9f2ff",
     "BWH_pink": "#ff6ec7"
+  },
+  "tokenTypes": {
+    "default": ["Free", 40, 60, 80]
   }
 }
