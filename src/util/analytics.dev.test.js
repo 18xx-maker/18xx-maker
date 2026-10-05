@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-// @vitest-environment-options { "url": "http://localhost:5173/" }
-
 import { init, track } from "@plausible-analytics/tracker";
+
+import { resetWindow } from "@tests/support/windowStub.js";
 
 vi.mock("@plausible-analytics/tracker", () => ({
   init: vi.fn(),
@@ -17,6 +16,7 @@ const importAnalytics = async (prod) => {
 const location = { pathname: "/games/18Test/map", search: "" };
 
 beforeEach(() => {
+  resetWindow({ location: { hostname: "localhost" } });
   vi.clearAllMocks();
 });
 

@@ -1,5 +1,3 @@
-// @vitest-environment jsdom
-
 import { act, renderHook } from "@testing-library/react";
 import { createElement } from "react";
 import { MemoryRouter, useLocation } from "react-router";
