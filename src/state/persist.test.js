@@ -132,6 +132,24 @@ describe("loading persisted state", () => {
     });
   });
 
+  it("reads settings stored before openExportFolder existed as off", async () => {
+    window.localStorage.setItem(
+      "settings",
+      JSON.stringify({ theme: "dark", language: "de" }),
+    );
+    const { store } = await importStore();
+    const { selectOpenExportFolder } = await import("@/state/selectors");
+    const { createSetOpenExportFolder } = await import("@/state/settings");
+
+    expect(selectOpenExportFolder(store.getState())).toBe(false);
+    store.dispatch(createSetOpenExportFolder(true));
+    expect(JSON.parse(window.localStorage.getItem("settings"))).toEqual({
+      theme: "dark",
+      language: "de",
+      openExportFolder: true,
+    });
+  });
+
   it("ignores keys that are not persisted", async () => {
     window.localStorage.setItem("alert", JSON.stringify({ open: true }));
     window.localStorage.setItem("errors", JSON.stringify({ a: "b" }));

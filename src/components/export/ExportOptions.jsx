@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -26,6 +26,7 @@ import { Switch } from "@/components/ui/switch";
 import { MAX_DPI } from "@/export/capture.js";
 import { BACKGROUNDS, MAX_CARD_BLEED } from "@/export/options.js";
 import { createAlert } from "@/state";
+import { selectOpenExportFolder } from "@/state/selectors";
 import { exportDefaults, exportPages, planExport } from "@/util/exportPlan";
 
 const FORMATS = ["pdf", "png", "svg", "b18"];
@@ -59,6 +60,7 @@ const toggle = (list, item, on) =>
 const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const reveal = useSelector(selectOpenExportFolder);
   const pages = exportPages(game, layers);
 
   // The options start as the game's `exports` and the defaults say
@@ -140,6 +142,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
       const result = await window.api.export({
         ...planExport(game, layers, options()),
         out,
+        reveal,
       });
       // A dialog that was cancelled leaves the options open
       if (!(result.cancelled && result.total === 0)) onOpenChange(false);

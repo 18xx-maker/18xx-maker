@@ -146,6 +146,10 @@
       "system": "System",
       "detected": "Detected language: {{language}}",
       "unavailable": "Detected language: {{language}} (not available, using {{fallback}})"
+    },
+    "openExportFolder": {
+      "title": "Open the folder after exporting",
+      "description": "Shows the exported files in your file manager when an export finishes. An open window of that folder is reused where your system allows it."
     }
   },
   "app": {

@@ -11,13 +11,18 @@ import { resolveConfig } from "@/util/resolveConfig";
 export const selectStoredConfig = (state) => state.config;
 
 // Settings are all optional: no theme means the system one, no sidebarOpen
-// means open and no language means the detected one
+// means open, no language means the detected one and no openExportFolder
+// means off
 export const selectTheme = (state) => state.settings?.theme;
 export const selectSidebarOpen = (state) => state.settings?.sidebarOpen;
 export const selectLanguage = (state) => {
   const language = state.settings?.language;
   return typeof language === "string" && language ? language : undefined;
 };
+
+// Off unless the setting is exactly true (the app shows exports in the folder)
+export const selectOpenExportFolder = (state) =>
+  state.settings?.openExportFolder === true;
 
 export const selectExportMenuOpen = (state) => !!state.ui?.exportMenuOpen;
 export const selectExportSheetOpen = (state) => !!state.ui?.exportSheetOpen;

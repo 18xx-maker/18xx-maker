@@ -70,6 +70,35 @@ const checkbox = (panel, name) => within(panel).getByRole("checkbox", { name });
 const exportButton = (panel) =>
   within(panel).getByRole("button", { name: /^Export(ing)?$/ });
 
+describe("open the export folder setting", () => {
+  afterEach(() => {
+    caps.electron = true;
+  });
+
+  it("is a switch in the app that turns the setting on and off", async () => {
+    const { user, store } = renderApp("/settings", { settings: {} });
+    const toggle = await screen.findByRole("switch", {
+      name: "Open the folder after exporting",
+    });
+    expect(toggle).not.toBeChecked();
+
+    await user.click(toggle);
+    expect(toggle).toBeChecked();
+    expect(store.getState().settings).toEqual({ openExportFolder: true });
+
+    await user.click(toggle);
+    expect(toggle).not.toBeChecked();
+    expect(store.getState().settings).toEqual({});
+  });
+
+  it("is not on the web", async () => {
+    caps.electron = false;
+    renderApp("/settings", { settings: {} });
+    await screen.findByTestId("settings");
+    expect(screen.queryByRole("switch")).not.toBeInTheDocument();
+  });
+});
+
 describe("export options", () => {
   it("opens from the export menu with the formats, documents and options", async () => {
     const { user } = renderApp("/games/18Test/map");
@@ -103,6 +132,22 @@ describe("export options", () => {
     expect(
       within(panel).queryByLabelText("Board18 author"),
     ).not.toBeInTheDocument();
+  });
+
+  it("does not ask to show the folder unless the setting is on", async () => {
+    const { user, panel } = await openOptions();
+    await user.click(exportButton(panel));
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    expect(requested().reveal).toBe(false);
+  });
+
+  it("asks to show the folder when the setting is on", async () => {
+    const { user, panel } = await openOptions("/games/18Test/map", {
+      settings: { openExportFolder: true },
+    });
+    await user.click(exportButton(panel));
+    await waitFor(() => expect(api.export).toHaveBeenCalledTimes(1));
+    expect(requested().reveal).toBe(true);
   });
 
   it("exports the chosen files with the chosen options", async () => {

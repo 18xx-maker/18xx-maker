@@ -96,6 +96,8 @@ const service = createExportService({
   openPool,
   createSink: createFileSink,
   zip: writeZip,
+  // Only when the user turned on the setting: the file manager reuses an open
+  // window of the folder where the system allows it
   show: (out, relPath) => shell.showItemInFolder(join(out, relPath)),
   concurrency: WINDOWS,
 });

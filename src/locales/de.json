@@ -146,6 +146,10 @@
       "system": "System",
       "detected": "Erkannte Sprache: {{language}}",
       "unavailable": "Erkannte Sprache: {{language}} (nicht verfügbar, verwende {{fallback}})"
+    },
+    "openExportFolder": {
+      "title": "Ordner nach dem Export öffnen",
+      "description": "Zeigt die exportierten Dateien in deinem Dateimanager an, wenn ein Export fertig ist. Ein bereits geöffnetes Fenster dieses Ordners wird wiederverwendet, wo dein System das erlaubt."
     }
   },
   "app": {

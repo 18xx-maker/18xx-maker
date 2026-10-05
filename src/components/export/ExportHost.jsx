@@ -26,6 +26,7 @@ import {
   selectExportMenuOpen,
   selectExportSheetOpen,
   selectGameForSlug,
+  selectOpenExportFolder,
 } from "@/state/selectors";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
@@ -78,6 +79,7 @@ const ExportHost = () => {
   const game = useSelector((state) => selectGameForSlug(state, slug));
   const { defaultConfig, userConfig, storedConfig } = useConfig();
   const layers = { defaultConfig, userConfig, storedConfig };
+  const reveal = useSelector(selectOpenExportFolder);
   const menu = useSelector(selectExportMenuOpen);
   const options = useSelector(selectExportSheetOpen);
   const setMenu = (open) => dispatch(createSetExportMenuOpen(open));
@@ -106,7 +108,7 @@ const ExportHost = () => {
 
   // The result, and progress, come as alerts from the main process
   const exportFiles = (request) =>
-    window.api.export(request).catch((error) => {
+    window.api.export({ ...request, reveal }).catch((error) => {
       dispatch(createAlert(t("export.failed"), error.message, "error"));
     });
 

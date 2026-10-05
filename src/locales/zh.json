@@ -146,6 +146,10 @@
       "system": "跟随系统",
       "detected": "检测到的语言:{{language}}",
       "unavailable": "检测到的语言:{{language}}(不可用,使用 {{fallback}})"
+    },
+    "openExportFolder": {
+      "title": "导出后打开文件夹",
+      "description": "导出完成后在文件管理器中显示导出的文件。如果系统允许，将重用该文件夹已打开的窗口。"
     }
   },
   "app": {

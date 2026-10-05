@@ -486,6 +486,28 @@ describe("export button", () => {
     expect(dpi).toBe(300);
   });
 
+  it.each([
+    [undefined, false],
+    [true, true],
+  ])(
+    "sends reveal for the quick export when the setting is %s",
+    async (openExportFolder, reveal) => {
+      const { user } = renderApp("/games/18Test/map", {
+        settings: openExportFolder ? { openExportFolder } : {},
+      });
+      await screen.findByTestId("game-18Test-map");
+
+      await openExport(user);
+      await user.click(
+        await screen.findByRole("menuitem", {
+          name: "Export game as pdf documents",
+        }),
+      );
+
+      expect(requested().reveal).toBe(reveal);
+    },
+  );
+
   it("exports every page of the game as pdfs", async () => {
     const { user } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
