@@ -111,7 +111,58 @@ describe("HtmlEditor", () => {
     expect(scale()).toBeLessThan(before * 2);
   });
 
-  it("wraps floated pages instead of laying them in one line", () => {
+  it("zooms a pinch around the point between the fingers", () => {
+    const { editor, transform } = setup();
+    const view = () => {
+      const [, x, y, scale] = transform().match(
+        /translate\(([^p]*)px, ([^p]*)px\) scale\(([^)]*)\)/,
+      );
+      return { x: Number(x), y: Number(y), scale: Number(scale) };
+    };
+    fire(editor, "wheel", { deltaY: 400 });
+    const rect = editor.getBoundingClientRect();
+    const pointer = (pointerId, type, x) =>
+      fire(editor, type, {
+        pointerId,
+        clientX: rect.left + x,
+        clientY: rect.top + 200,
+        buttons: 1,
+      });
+    const start = view();
+    pointer(1, "pointerdown", 100);
+    pointer(2, "pointerdown", 200);
+    pointer(2, "pointermove", 300);
+    const end = view();
+    expect(end.scale).toBeGreaterThan(start.scale);
+    // The content under the middle of the fingers (150) follows it to 200
+    expect((200 - end.x) / end.scale).toBeCloseTo(
+      (150 - start.x) / start.scale,
+      6,
+    );
+  });
+
+  it("forgets a finger when the window loses focus", () => {
+    const { editor, transform } = setup();
+    fire(editor, "pointerdown", {
+      pointerId: 1,
+      clientX: 10,
+      clientY: 10,
+      buttons: 1,
+    });
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    const before = transform();
+    fire(editor, "pointermove", {
+      pointerId: 1,
+      clientX: 50,
+      clientY: 10,
+      buttons: 1,
+    });
+    expect(transform()).toBe(before);
+  });
+
+  it("wraps floated pages instead of laying them in one line", async () => {
     const store = configureStore({
       reducer: rootReducer,
       preloadedState: initialState,
@@ -127,6 +178,9 @@ describe("HtmlEditor", () => {
         </MemoryRouter>
       </Provider>,
     );
+    // The editor has no height of its own without the stylesheet, so the
+    // refit after the first measure changes the view, let it settle
+    await act(() => new Promise((resolve) => setTimeout(resolve, 50)));
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const content = container.querySelector("#editor").firstElementChild;
     expect(content.offsetWidth).toBeLessThan(6 * 300);

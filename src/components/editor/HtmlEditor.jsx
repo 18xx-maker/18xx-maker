@@ -1,4 +1,10 @@
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { useEditing } from "@/components/editor/Editor";
 
@@ -80,43 +86,91 @@ const PanZoom = ({ page, count, children }) => {
   const content = useRef(null);
   const [view, setView] = useState({ x: 0, y: 0, scale: 1 });
   const [width, setWidth] = useState("max-content");
+  // Whether the view was moved since it was fitted, a late layout change
+  // (fonts, a resize) refits an untouched view only
+  const touched = useRef(false);
+
+  const current = useRef(view);
+  current.current = view;
 
   const reset = useCallback(
     () => setView(fit(container.current, content.current, page, count)),
     [page, count],
   );
 
-  // Start with the whole content in view, wrapped to fit the window
-  useLayoutEffect(() => {
+  const layout = useCallback(() => {
     const w = wrapWidth(container.current, content.current);
     setWidth(`${w}px`);
     content.current.style.width = `${w}px`;
     reset();
   }, [reset]);
 
+  // Start with the whole content in view, wrapped to fit the window
+  useLayoutEffect(layout, [layout]);
+
+  // The content changes size once fonts load, and the window when the phone
+  // turns or its toolbars move. Only a view that changes is set, the observer
+  // also reports the first measure.
+  useEffect(() => {
+    let live = true;
+    const refit = () => {
+      if (!live || touched.current) return;
+      const before = content.current.style.width;
+      const w = `${wrapWidth(container.current, content.current)}px`;
+      const wrapped = w !== before;
+      content.current.style.width = w;
+      const next = fit(container.current, content.current, page, count);
+      const last = current.current;
+      if (wrapped) setWidth(w);
+      if (
+        Math.abs(next.x - last.x) > 0.01 ||
+        Math.abs(next.y - last.y) > 0.01 ||
+        Math.abs(next.scale - last.scale) > 1e-6
+      ) {
+        setView(next);
+      }
+    };
+    document.fonts?.ready.then(refit);
+    const observer =
+      typeof ResizeObserver === "undefined" ? null : new ResizeObserver(refit);
+    observer?.observe(container.current);
+    return () => {
+      live = false;
+      observer?.disconnect();
+    };
+  }, [page, count]);
+
   usePanZoom(container, {
-    onPan: (dx, dy) => setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy })),
-    // Zoom around the center of the view
-    onZoom: (mult) =>
+    onPan: (dx, dy) => {
+      touched.current = true;
+      setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
+    },
+    // Zoom around the center of the view, or the point of a pinch
+    onZoom: (mult, focus) => {
+      touched.current = true;
       setView((v) => {
         const scale = Math.min(Math.max(v.scale / mult, MIN_SCALE), MAX_SCALE);
-        const cx = container.current.clientWidth / 2;
-        const cy = container.current.clientHeight / 2;
+        const cx = focus ? focus.x : container.current.clientWidth / 2;
+        const cy = focus ? focus.y : container.current.clientHeight / 2;
         const ratio = scale / v.scale;
         return {
           x: cx - (cx - v.x) * ratio,
           y: cy - (cy - v.y) * ratio,
           scale,
         };
-      }),
-    onReset: reset,
+      });
+    },
+    onReset: () => {
+      touched.current = false;
+      reset();
+    },
   });
 
   return (
     <div
       id="editor"
       ref={container}
-      className="overflow-hidden w-screen h-screen touch-none"
+      className="overflow-hidden w-screen h-dvh touch-none"
     >
       <div
         ref={content}

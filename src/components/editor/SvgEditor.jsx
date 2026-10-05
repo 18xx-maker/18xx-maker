@@ -38,40 +38,66 @@ const SvgEditor = ({ width, height, padding = 0, children }) => {
     );
   const [viewbox, setViewbox] = useState(initial);
   const [size, setSize] = useState(viewport.current);
+  // Whether the view was moved since it was fitted, a window resize keeps a
+  // moved view and refits an untouched one
+  const touched = useRef(false);
 
   usePanZoom(svg, {
-    onPan: (deltaX, deltaY) =>
+    onPan: (deltaX, deltaY) => {
+      touched.current = true;
       setViewbox((box) => ({
         ...box,
         x: box.x - (deltaX / viewport.current.width) * box.width,
         y: box.y - (deltaY / viewport.current.height) * box.height,
-      })),
-    // Zoom around the center of the view
-    onZoom: (mult) =>
+      }));
+    },
+    // Zoom around the center of the view, or the point of a pinch
+    onZoom: (mult, focus) => {
+      touched.current = true;
       setViewbox((box) => {
         const w = box.width * mult;
         const h = box.height * mult;
+        const fx = focus ? focus.x / viewport.current.width : 0.5;
+        const fy = focus ? focus.y / viewport.current.height : 0.5;
         return {
-          x: box.x + 0.5 * (box.width - w),
-          y: box.y + 0.5 * (box.height - h),
+          x: box.x + fx * (box.width - w),
+          y: box.y + fy * (box.height - h),
           width: w,
           height: h,
         };
-      }),
-    onReset: () => setViewbox(initial()),
+      });
+    },
+    onReset: () => {
+      touched.current = false;
+      setViewbox(initial());
+    },
   });
 
   useEffect(() => {
     const onResize = () => {
-      viewport.current = {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
-      setSize(viewport.current);
+      const old = viewport.current;
+      const next = { width: window.innerWidth, height: window.innerHeight };
+      viewport.current = next;
+      setSize(next);
+      if (!touched.current) {
+        setViewbox(fit(width, height, padding, next.width, next.height));
+        return;
+      }
+      // Keep the scale and the center of the view
+      setViewbox((box) => {
+        const width = (box.width * next.width) / old.width;
+        const height = (box.height * next.height) / old.height;
+        return {
+          x: box.x + (box.width - width) / 2,
+          y: box.y + (box.height - height) / 2,
+          width,
+          height,
+        };
+      });
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, []);
+  }, [width, height, padding]);
 
   const viewBox = `${viewbox.x} ${viewbox.y} ${viewbox.width} ${viewbox.height}`;
   return (
