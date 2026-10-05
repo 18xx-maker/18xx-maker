@@ -10,125 +10,81 @@ import Par from "@/components/market/Par";
 import { multiDefaultTo } from "@/util";
 import { getParData } from "@/util/market";
 
+// The legend entries in a row, each as wide as its description
+const poolNotes = (legend, left, y) => (
+  <g>
+    {addIndex(map)((legend, i) => {
+      let current = left;
+      left += 100 + legend.description.length * 6.5;
+      return (
+        <g key={`pool-note-${i}`} transform={`translate(${current} ${y})`}>
+          <Legend {...legend} />
+        </g>
+      );
+    }, legend)}
+  </g>
+);
+
 const Market = ({ data, game, config, title, displayTitle }) => {
-  let cells;
-  let market;
-  let bottomMarket;
-
   const pass = { game, config, data };
+  const titleY = data.stock.title === false ? 0 : 50;
+  const keepBottom = (cell) => (cell && cell.bottom ? cell : null);
+  const dropBottom = (cell) => (cell && cell.bottom ? null : cell);
+  const cellGroup = (key, transform, cell) => (
+    <g key={key} transform={transform}>
+      <Cell cell={cell} {...pass} />
+    </g>
+  );
 
+  // The cells that sit on the bottom are drawn first, so the others cover them
+  let renderLayer;
   switch (data.type) {
     case "1D":
-      bottomMarket = map(
-        (cell) => (cell && cell.bottom ? cell : null),
-        data.market || [],
-      );
-      market = map(
-        (cell) => (cell && cell.bottom ? null : cell),
-        data.market || [],
-      );
-      cells = addIndex(map)(
-        (cell, i) => (
-          <g
-            key={`cell-bottom-${i}`}
-            transform={`translate(${i * data.width} ${data.stock.title === false ? 0 : 50})`}
-          >
-            <Cell cell={cell} {...pass} />
-          </g>
-        ),
-        bottomMarket,
-      );
-      cells = concat(
-        cells,
+      renderLayer = (name, select) =>
         addIndex(map)(
-          (cell, i) => (
-            <g
-              key={`cell-top-${i}`}
-              transform={`translate(${i * data.width} ${data.stock.title === false ? 0 : 50})`}
-            >
-              <Cell cell={cell} {...pass} />
-            </g>
-          ),
-          market,
-        ),
-      );
+          (cell, i) =>
+            cellGroup(
+              `cell-${name}-${i}`,
+              `translate(${i * data.width} ${titleY})`,
+              cell,
+            ),
+          map(select, data.market || []),
+        );
       break;
     case "1Diag":
-      bottomMarket = map(
-        (cell) => (cell && cell.bottom ? cell : null),
-        data.market || [],
-      );
-      market = map(
-        (cell) => (cell && cell.bottom ? null : cell),
-        data.market || [],
-      );
-      cells = addIndex(map)(
-        (cell, i) => (
-          <g
-            key={`cell-bottom-${i}`}
-            transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? (data.stock.title === false ? 0 : 50) : (data.stock.title === false ? 0 : 50) + data.height})`}
-          >
-            <Cell cell={cell} {...pass} />
-          </g>
-        ),
-        bottomMarket,
-      );
-      cells = concat(
-        cells,
+      renderLayer = (name, select) =>
         addIndex(map)(
-          (cell, i) => (
-            <g
-              key={`cell-top-${i}`}
-              transform={`translate(${i * 0.5 * data.width} ${i % 2 === 0 ? (data.stock.title === false ? 0 : 50) : (data.stock.title === false ? 0 : 50) + data.height})`}
-            >
-              <Cell cell={cell} {...pass} />
-            </g>
-          ),
-          market,
-        ),
-      );
+          (cell, i) =>
+            cellGroup(
+              `cell-${name}-${i}`,
+              `translate(${i * 0.5 * data.width} ${i % 2 === 0 ? titleY : titleY + data.height})`,
+              cell,
+            ),
+          map(select, data.market || []),
+        );
       break;
     default:
-      bottomMarket = map(
-        (row) => map((cell) => (cell && cell.bottom ? cell : null), row),
-        data.market || [],
-      );
-      market = map(
-        (row) => map((cell) => (cell && cell.bottom ? null : cell), row),
-        data.market || [],
-      );
       // 2D
-      cells = addIndex(chain)((row, y) => {
-        return addIndex(map)(
-          (cell, x) => (
-            <g
-              key={`cell-bottom-${x}-${y}`}
-              transform={`translate(${x * data.width} ${y * data.height + (data.stock.title === false ? 0 : 50)})`}
-            >
-              <Cell cell={cell} {...pass} />
-            </g>
-          ),
-          row,
-        );
-      }, bottomMarket);
-      cells = concat(
-        cells,
-        addIndex(chain)((row, y) => {
-          return addIndex(map)(
-            (cell, x) => (
-              <g
-                key={`cell-top-${x}-${y}`}
-                transform={`translate(${x * data.width} ${y * data.height + (data.stock.title === false ? 0 : 50)})`}
-              >
-                <Cell cell={cell} {...pass} />
-              </g>
+      renderLayer = (name, select) =>
+        addIndex(chain)(
+          (row, y) =>
+            addIndex(map)(
+              (cell, x) =>
+                cellGroup(
+                  `cell-${name}-${x}-${y}`,
+                  `translate(${x * data.width} ${y * data.height + titleY})`,
+                  cell,
+                ),
+              row,
             ),
-            row,
-          );
-        }, market),
-      );
+          map((row) => map(select, row), data.market || []),
+        );
       break;
   }
+  const cells = concat(
+    renderLayer("bottom", keepBottom),
+    renderLayer("top", dropBottom),
+  );
 
   let roundTracker = null;
   if (data.display.roundTracker) {
@@ -200,23 +156,11 @@ const Market = ({ data, game, config, title, displayTitle }) => {
   } else if (data.type === "1D") {
     if (config.stock.display.legend) {
       let legend = (game.stock && game.stock.legend) || [];
-      let left = 0;
 
-      legendNode = (
-        <g>
-          {addIndex(map)((legend, i) => {
-            let current = left;
-            left += 100 + legend.description.length * 6.5;
-            return (
-              <g
-                key={`pool-note-${i}`}
-                transform={`translate(${current} ${1 * data.height + (data.stock.title === false ? 25 : 75)})`}
-              >
-                <Legend {...legend} />
-              </g>
-            );
-          }, legend)}
-        </g>
+      legendNode = poolNotes(
+        legend,
+        0,
+        1 * data.height + (data.stock.title === false ? 25 : 75),
       );
     }
   } else if (data.type === "1Diag") {
@@ -234,22 +178,7 @@ const Market = ({ data, game, config, title, displayTitle }) => {
         }
       }
 
-      legendNode = (
-        <g>
-          {addIndex(map)((legend, i) => {
-            let current = left;
-            left += 100 + legend.description.length * 6.5;
-            return (
-              <g
-                key={`pool-note-${i}`}
-                transform={`translate(${current} ${y})`}
-              >
-                <Legend {...legend} />
-              </g>
-            );
-          }, legend)}
-        </g>
-      );
+      legendNode = poolNotes(legend, left, y);
     }
   }
 
