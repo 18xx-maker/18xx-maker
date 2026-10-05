@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import { createElement } from "react";
+import { Children, createElement } from "react";
+import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router";
 import remarkFlexibleContainers from "remark-flexible-containers";
@@ -60,14 +61,45 @@ const DocImage = (props) => {
   );
 };
 
+// The title of an alert (> [!TIP]) is its icon and the type, shown translated
+// as "Tip" instead of the library's uppercase English text.
+const ALERT_TYPES = ["note", "tip", "important", "warning", "caution"];
+
+const AlertTitle = ({ type, props }) => {
+  const { t } = useTranslation();
+  const label = {
+    note: t("docs.alert.note"),
+    tip: t("docs.alert.tip"),
+    important: t("docs.alert.important"),
+    warning: t("docs.alert.warning"),
+    caution: t("docs.alert.caution"),
+  }[type];
+  return createElement(
+    "p",
+    clean(props),
+    Children.toArray(props.children)[0],
+    label,
+  );
+};
+
 // A figure is not allowed inside a paragraph
 const Paragraph = ({ node, ...props }) => {
+  const alert = []
+    .concat(node?.properties?.className ?? [])
+    .includes("markdown-alert-title");
+  const type = node?.children
+    ?.find((child) => child.type === "text")
+    ?.value?.toLowerCase();
+  if (alert && ALERT_TYPES.includes(type)) {
+    return <AlertTitle type={type} props={props} />;
+  }
   const figure = node?.children?.some(
     (child) => child.tagName === "img" && child.properties?.title,
   );
   return createElement(figure ? "div" : "p", {
     ...clean(props),
     className: clsx(
+      props.className,
       "leading-7 not-first:mt-6",
       figure && "flex flex-wrap items-start gap-4",
     ),

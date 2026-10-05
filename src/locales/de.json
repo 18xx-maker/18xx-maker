@@ -118,6 +118,13 @@
     }
   },
   "docs": {
+    "alert": {
+      "note": "Hinweis",
+      "tip": "Tipp",
+      "important": "Wichtig",
+      "warning": "Warnung",
+      "caution": "Achtung"
+    },
     "toc": "Auf dieser Seite",
     "pager": "Seiten",
     "previous": "Zurück",
