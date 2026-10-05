@@ -18,7 +18,7 @@ describe("bindings", () => {
 });
 
 describe("game keys", () => {
-  it("e, esc and g move between the game page and the edit page", async () => {
+  it("e, esc and g move between the game page and the edit page, e also opens the edit panel", async () => {
     const { user, router } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
 
@@ -29,7 +29,12 @@ describe("game keys", () => {
     await user.keyboard("e");
     await screen.findByTestId("game-18Test-map");
 
+    // In an edit section e opens the edit panel instead of going back
     await user.keyboard("e");
+    expect(await screen.findByTestId("edit-panel")).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+
+    await user.keyboard("g");
     await screen.findByTestId("game-18Test");
 
     await user.keyboard("1");

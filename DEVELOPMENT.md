@@ -270,6 +270,17 @@ Notes:
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.
 
+The edit panel (`src/components/editPanel`, toolbar button and `e` key) is a
+form generated at runtime from `src/schemas/game.schema.json`
+(`src/components/schemaForm`). `GAME_INFO_KEYS` in
+`src/components/schemaForm/resolve.js` lists the parts of the game it covers
+(`info`, `links`, `prototype`, `wip`); widening it means editing that list. A
+field kind without a form (arrays, other `oneOf`s) falls back to a JSON
+textarea, and `resolve.test.js` fails when a property in scope falls back. Edits
+go through `editGame`, so the Changes page, problems check and unsaved-edit
+handling work unchanged. Labels and help text are the schema keys and
+descriptions, in English only.
+
 The files of the CLI and the app have the same layout: `<folder>/<game id>/<format>/<file>`
 (`formatFolder` in `src/export/names.js`, `gameFolder` in `src/export/sink.js`; the
 Board 18 box is in `<game id>` itself). The app saves the folder of the folder

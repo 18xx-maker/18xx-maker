@@ -112,3 +112,32 @@ export const useStringParam = (key, initial) => {
 
   return [value, setValue];
 };
+
+// The config and edit panels are side panels that exclude each other: opening
+// one closes the other (and the config section), closing one leaves the rest
+export const togglePanelSearch = (search, panel) => {
+  const params = new URLSearchParams(search);
+
+  if (params.has(panel)) {
+    params.delete(panel);
+  } else {
+    params.delete(panel === "edit" ? "config" : "edit");
+    if (panel === "edit") params.delete("section");
+    params.set(panel, true);
+  }
+
+  return params.toString();
+};
+
+export const useTogglePanel = (panel) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const open = new URLSearchParams(location.search).has(panel);
+
+  const toggle = useCallback(
+    () => navigate({ search: togglePanelSearch(location.search, panel) }),
+    [navigate, location.search, panel],
+  );
+
+  return [open, toggle];
+};

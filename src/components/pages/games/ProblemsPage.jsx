@@ -4,6 +4,8 @@ import { Link } from "react-router";
 
 import { Badge } from "@/components/ui/badge";
 
+import { issueText } from "@/components/schemaForm/issueText";
+
 import { useGame } from "@/hooks";
 import { selectGameProblems } from "@/state";
 
@@ -19,13 +21,7 @@ const Problem = ({ issue }) => {
         ? "problems.warning"
         : "problems.error";
 
-  const text =
-    issue.code === "deprecated"
-      ? t([
-          `problems.deprecations.${issue.params.key}`,
-          "problems.deprecated-generic",
-        ])
-      : t(`problems.${issue.code}`, issue.params);
+  const text = issueText(t, issue);
 
   return (
     <li className="flex flex-row gap-3 py-3 border-t first:border-t-0">

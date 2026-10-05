@@ -55,6 +55,19 @@
     "hide": "Hide diff",
     "restore": "Restore"
   },
+  "editPanel": {
+    "toggle": "Edit",
+    "title": "Game info",
+    "close": "Close the edit panel",
+    "description": "Edit the game info, links and flags. The changes stay in memory until you save them on the Changes page.",
+    "changes": "Review and save changes",
+    "unset": "Not set",
+    "true": "Yes",
+    "false": "No",
+    "required": "This field is required.",
+    "invalidNumber": "Enter a number.",
+    "invalidJson": "Enter valid JSON."
+  },
   "problems": {
     "nav": "Problems",
     "title": "Problems with this game",
@@ -980,7 +993,7 @@
     "exportMenu": "With the export menu open: p exports PDFs, n exports PNGs, s exports SVGs, b exports a Board18 file and o opens the export options.",
     "keys": {
       "escape": {
-        "use": "Go back: close the config panel, then leave the edit page for the game page, then go home",
+        "use": "Go back: close the edit or config panel, then leave the edit page for the game page, then go home",
         "notes": "Does nothing on the home page"
       },
       "docs": {
@@ -1024,7 +1037,7 @@
       },
       "edit": {
         "use": "Edit the loaded game at its first section",
-        "notes": "On a game edit page, goes back to the game page"
+        "notes": "On a game edit page, opens or closes the edit panel (the game info form). Elsewhere: goes back to the game page"
       },
       "section": {
         "use": "Edit the loaded game at the map or a section",

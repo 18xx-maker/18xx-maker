@@ -42,6 +42,11 @@ const pages = [
     ready: (page) => page.getByRole("button", { name: "Close Config" }),
   },
   {
+    name: "edit panel",
+    url: "/games/18Test/map?edit=true",
+    ready: (page) => page.getByRole("button", { name: "Close the edit panel" }),
+  },
+  {
     name: "settings",
     url: "/settings",
     ready: (page) => page.getByTestId("settings"),
