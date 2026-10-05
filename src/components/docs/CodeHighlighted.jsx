@@ -8,8 +8,7 @@ import light from "shiki/themes/github-light.mjs";
 import { cn } from "@/util/cn";
 
 // The JavaScript regex engine needs no WASM, and only the grammars the docs
-// and config views use are bundled (the bash grammar also answers to shell and
-// sh). Anything else renders as plain text.
+// and config views use are bundled. Anything else renders as plain text.
 const highlighter = createHighlighterCoreSync({
   engine: createJavaScriptRegexEngine(),
   langs: [json, bash],

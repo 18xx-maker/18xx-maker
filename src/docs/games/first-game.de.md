@@ -103,7 +103,7 @@ JSON weiter und lade neu, bis es passt.
 Um eine Datei zu prüfen, ohne sie zu öffnen, führe den Validator aus. Er gibt
 den Pfad jedes Problems aus:
 
-```shell
+```bash
 pnpm maker validate my-game.json
 ```
 

@@ -100,7 +100,7 @@ until it looks right.
 To check a file without opening it, run the validator, which prints the path of
 every problem:
 
-```shell
+```bash
 pnpm maker validate my-game.json
 ```
 

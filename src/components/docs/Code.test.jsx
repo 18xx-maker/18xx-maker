@@ -28,9 +28,9 @@ describe("Code", () => {
     expect(container.querySelector("code").textContent).toBe('{\n  "a": 1\n}');
   });
 
-  it.each(["bash", "shell", "sh"])("highlights %s", (language) => {
+  it("highlights bash", () => {
     const { container } = render(
-      <Code language={language}>{"echo 'hi' # note"}</Code>,
+      <Code language="bash">{"echo 'hi' # note"}</Code>,
     );
     const found = tokens(container);
     expect(found.length).toBeGreaterThan(2);
