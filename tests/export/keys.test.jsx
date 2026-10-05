@@ -287,4 +287,14 @@ describe("export keys", () => {
     expect(api.chooseExportFolder).not.toHaveBeenCalled();
     expect(router.state.location.pathname).toBe("/games/18Test/map");
   });
+
+  it("p does not print, the app exports with x", async () => {
+    const print = vi.spyOn(window, "print").mockImplementation(() => {});
+    const { user } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("p");
+    expect(print).not.toHaveBeenCalled();
+    print.mockRestore();
+  });
 });

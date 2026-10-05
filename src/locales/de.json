@@ -981,6 +981,14 @@
         "use": "Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen",
         "notes": "Nur auf den Bearbeitungsseiten von Karte und Aktienmarkt"
       },
+      "print": {
+        "use": "Den aktuellen Abschnitt drucken",
+        "notes": "Nur auf der Bearbeitungsseite eines Abschnitts mit Drucken-Schaltfläche. Nicht in der App, dort x verwenden"
+      },
+      "paginate": {
+        "use": "Die Aufteilung auf Seiten ein- oder ausschalten",
+        "notes": "Nur auf den Bearbeitungsseiten von Karte, Markt, Par und Einnahmen"
+      },
       "download": {
         "use": "Die Datei des geladenen Spiels herunterladen",
         "notes": "Speichert das Spiel ohne Metadaten. Nur wenn ein Spiel geladen ist."

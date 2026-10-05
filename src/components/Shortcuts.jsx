@@ -26,6 +26,8 @@ const shortcuts = [
   { id: "section", keys: ["1–9", "0"] },
   { id: "cycle", keys: ["[", "]"] },
   { id: "view", keys: ["v"] },
+  { id: "print", keys: ["p"] },
+  { id: "paginate", keys: ["n"] },
   { id: "download", keys: ["d"] },
   { id: "export", keys: ["x"] },
   { id: "app", keys: ["u"] },
