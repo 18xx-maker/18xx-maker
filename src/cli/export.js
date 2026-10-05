@@ -8,7 +8,7 @@ import {
   loadCompanyOverrides,
   loadSchema,
   loadTiles,
-  startExpress,
+  startServer,
 } from "#cli/util";
 import { capture, withTimeout } from "#export/capture";
 import { docPath } from "#export/names";
@@ -51,7 +51,7 @@ export const TIMEOUT = 120_000;
 // always closes both. The site is on a free port. The browser has the color
 // profile of sRGB, so screenshots look the same on every computer.
 export const withBrowser = async (callback) => {
-  const server = startExpress(0);
+  const server = startServer(0);
   let browser;
   try {
     browser = await chromium.launch({

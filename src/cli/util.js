@@ -1,7 +1,8 @@
 import fs from "node:fs";
+import http from "node:http";
 import path from "node:path";
 
-import express from "express";
+import sirv from "sirv";
 
 import { map } from "ramda";
 
@@ -109,19 +110,16 @@ export const loadTiles = () =>
     ["yellow", "green", "brown", "gray", "other"],
   );
 
-export const startExpress = (port = 9000) => {
-  const site = path.join(import.meta.dirname, "../../dist/site");
+export const startServer = (
+  port = 9000,
+  site = path.join(import.meta.dirname, "../../dist/site"),
+) => {
   if (!fs.existsSync(path.join(site, "index.html"))) {
     throw new UsageError("The site is not built, run pnpm build first");
   }
 
-  const app = express();
-  app.use(express.static(site));
-  app.get("/{*path}", function (req, res) {
-    // With a root the folders above it are not checked for dots, a checkout
-    // inside a .folder (a git worktree under .claude) is not a 404
-    res.sendFile("index.html", { root: site });
-  });
+  // single: unknown routes get index.html so the app can route them
+  const serve = sirv(site, { single: true });
   // Only this machine can reach the site
-  return app.listen(port, "127.0.0.1");
+  return http.createServer(serve).listen(port, "127.0.0.1");
 };

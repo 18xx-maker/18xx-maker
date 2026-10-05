@@ -11,7 +11,7 @@ import exportCommand, {
   resolveGame,
   selectDocs,
 } from "#cli/exportCommand";
-import { UsageError, defaultConfig, loadGame, startExpress } from "#cli/util";
+import { UsageError, defaultConfig, loadGame, startServer } from "#cli/util";
 import { readPng } from "#export/png";
 import { createFakeBrowser } from "./__fixtures__/browser.js";
 
@@ -30,7 +30,7 @@ vi.mock("#cli/util", async (importOriginal) => {
   return {
     ...real,
     loadGame: vi.fn(real.loadGame),
-    startExpress: vi.fn(() => mocks.fake.server),
+    startServer: vi.fn(() => mocks.fake.server),
   };
 });
 
@@ -572,7 +572,7 @@ describe("export usage errors", () => {
   it("only serves the site in debug mode, whatever else is wrong", async () => {
     await exportCommand(undefined, { debug: true });
 
-    expect(startExpress).toHaveBeenCalledOnce();
+    expect(startServer).toHaveBeenCalledOnce();
     expect(chromium.launch).not.toHaveBeenCalled();
   });
 });
