@@ -5,13 +5,19 @@ import Cell from "@/components/market/Cell";
 import Ledges from "@/components/market/Ledges";
 import Market from "@/components/market/Market";
 import MarketRoundTracker from "@/components/market/MarketRoundTracker";
+import Movement from "@/components/market/Movement";
 import Par from "@/components/market/Par";
 import ParCell from "@/components/market/ParCell";
 import Revenue from "@/components/market/Revenue";
 
 import { useConfig, useGame } from "@/hooks";
 import { SizedSvg } from "@/stories/frames";
-import { getMarketData, getParData, getRevenueData } from "@/util/market";
+import {
+  getMarketData,
+  getMovementData,
+  getParData,
+  getRevenueData,
+} from "@/util/market";
 
 const empty = (v) => v === undefined || v === null || v === "";
 
@@ -174,6 +180,17 @@ export const MarketRoundTrackerStory = ({
         game={game}
         config={cfg}
       />
+    </SizedSvg>
+  );
+};
+
+// The movement legend of a stock
+export const MovementStory = ({ title, movement }) => {
+  const data = getMovementData(movement);
+
+  return (
+    <SizedSvg width={data.width} height={data.height}>
+      <Movement title={title} movement={movement} />
     </SizedSvg>
   );
 };
