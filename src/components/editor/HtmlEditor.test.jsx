@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { act, render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import HtmlEditor from "@/components/editor/HtmlEditor";
 
@@ -27,7 +27,7 @@ const setup = (url = "/") => {
     reducer: rootReducer,
     preloadedState: initialState,
   });
-  const { container } = render(
+  const { container, unmount } = render(
     <Provider store={store}>
       <MemoryRouter initialEntries={[url]}>
         <HtmlEditor>
@@ -40,12 +40,32 @@ const setup = (url = "/") => {
   const editor = container.querySelector("#editor");
   return {
     container,
+    unmount,
     editor,
     transform: () => editor.firstElementChild.style.transform,
   };
 };
 
 describe("HtmlEditor", () => {
+  it("locks the page scroll and puts a scrolled editor back", async () => {
+    const { editor } = setup();
+    expect(document.documentElement).toHaveStyle({ overflow: "hidden" });
+    await act(async () => {
+      Object.assign(editor.style, { height: "100px", overflow: "hidden" });
+      editor.firstElementChild.style.height = "5000px";
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    });
+    editor.scrollTop = 40;
+    expect(editor.scrollTop).toBe(40);
+    await vi.waitFor(() => expect(editor.scrollTop).toBe(0));
+  });
+
+  it("unlocks the page scroll when it goes away", () => {
+    const { unmount } = setup();
+    unmount();
+    expect(document.documentElement).not.toHaveStyle({ overflow: "hidden" });
+  });
+
   it("fits the content into the window to start", () => {
     const { transform } = setup();
     // Padded, so a little smaller than the window
@@ -111,7 +131,58 @@ describe("HtmlEditor", () => {
     expect(scale()).toBeLessThan(before * 2);
   });
 
-  it("wraps floated pages instead of laying them in one line", () => {
+  it("zooms a pinch around the point between the fingers", () => {
+    const { editor, transform } = setup();
+    const view = () => {
+      const [, x, y, scale] = transform().match(
+        /translate\(([^p]*)px, ([^p]*)px\) scale\(([^)]*)\)/,
+      );
+      return { x: Number(x), y: Number(y), scale: Number(scale) };
+    };
+    fire(editor, "wheel", { deltaY: 400 });
+    const rect = editor.getBoundingClientRect();
+    const pointer = (pointerId, type, x) =>
+      fire(editor, type, {
+        pointerId,
+        clientX: rect.left + x,
+        clientY: rect.top + 200,
+        buttons: 1,
+      });
+    const start = view();
+    pointer(1, "pointerdown", 100);
+    pointer(2, "pointerdown", 200);
+    pointer(2, "pointermove", 300);
+    const end = view();
+    expect(end.scale).toBeGreaterThan(start.scale);
+    // The content under the middle of the fingers (150) follows it to 200
+    expect((200 - end.x) / end.scale).toBeCloseTo(
+      (150 - start.x) / start.scale,
+      6,
+    );
+  });
+
+  it("forgets a finger when the window loses focus", () => {
+    const { editor, transform } = setup();
+    fire(editor, "pointerdown", {
+      pointerId: 1,
+      clientX: 10,
+      clientY: 10,
+      buttons: 1,
+    });
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    const before = transform();
+    fire(editor, "pointermove", {
+      pointerId: 1,
+      clientX: 50,
+      clientY: 10,
+      buttons: 1,
+    });
+    expect(transform()).toBe(before);
+  });
+
+  it("wraps floated pages instead of laying them in one line", async () => {
     const store = configureStore({
       reducer: rootReducer,
       preloadedState: initialState,
@@ -127,6 +198,9 @@ describe("HtmlEditor", () => {
         </MemoryRouter>
       </Provider>,
     );
+    // The editor has no height of its own without the stylesheet, so the
+    // refit after the first measure changes the view, let it settle
+    await act(() => new Promise((resolve) => setTimeout(resolve, 50)));
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const content = container.querySelector("#editor").firstElementChild;
     expect(content.offsetWidth).toBeLessThan(6 * 300);

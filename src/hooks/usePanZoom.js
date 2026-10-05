@@ -10,8 +10,9 @@ export const TOOLBAR_INSET = 72;
 //
 // The handlers are called with
 //   onPan(dx, dy)  the pointer moved by this many pixels while dragging
-//   onZoom(mult)   the wheel or a pinch asked for this zoom factor (above 1
-//                  zooms out)
+//   onZoom(mult, focus)  the wheel or a pinch asked for this zoom factor (above
+//                  1 zooms out). A pinch also passes the {x, y} point between
+//                  the fingers, relative to the element, to zoom around
 //   onReset()      the "v" key was pressed
 // They are read from a ref, so they may change on every render.
 export const usePanZoom = (ref, handlers) => {
@@ -64,7 +65,14 @@ export const usePanZoom = (ref, handlers) => {
       // Each finger moves half of the movement of their midpoint
       latest.current.onPan((e.x - last.x) / count, (e.y - last.y) / count);
       const after = spread();
-      if (before > 0 && after > 0) latest.current.onZoom(before / after);
+      if (before > 0 && after > 0) {
+        const [a, b] = [...pointers.current.values()];
+        const rect = el.getBoundingClientRect();
+        latest.current.onZoom(before / after, {
+          x: (a.x + b.x) / 2 - rect.left,
+          y: (a.y + b.y) / 2 - rect.top,
+        });
+      }
     };
     const onWheel = (e) => {
       e.preventDefault();
@@ -79,7 +87,31 @@ export const usePanZoom = (ref, handlers) => {
       }
     };
 
+    // A finger we never saw lift (the window lost focus mid-gesture) would
+    // leave a phantom pointer that turns the next drag into a pinch
+    const clear = () => pointers.current.clear();
+    const onVisibility = () => {
+      if (document.hidden) clear();
+    };
+
+    // The editor never scrolls, the view moves by transform. Keep the page
+    // and the element at 0,0 (focus, a text selection or a touch that chains
+    // past the element would otherwise scroll them instead of the view).
+    const lock = document.documentElement;
+    const body = document.body;
+    const before = [lock.style.overflow, body.style.overflow];
+    lock.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    const onScroll = () => {
+      if (el.scrollTop || el.scrollLeft) el.scrollTo(0, 0);
+      if (window.scrollX || window.scrollY) window.scrollTo(0, 0);
+    };
+
     document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("blur", clear);
+    window.addEventListener("scroll", onScroll);
+    el.addEventListener("scroll", onScroll);
     el.addEventListener("pointerdown", onDown);
     el.addEventListener("pointermove", onMove);
     el.addEventListener("pointerup", onUp);
@@ -87,7 +119,13 @@ export const usePanZoom = (ref, handlers) => {
     el.addEventListener("wheel", onWheel, { passive: false });
 
     return () => {
+      clear();
       document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("blur", clear);
+      window.removeEventListener("scroll", onScroll);
+      el.removeEventListener("scroll", onScroll);
+      [lock.style.overflow, body.style.overflow] = before;
       el.removeEventListener("pointerdown", onDown);
       el.removeEventListener("pointermove", onMove);
       el.removeEventListener("pointerup", onUp);

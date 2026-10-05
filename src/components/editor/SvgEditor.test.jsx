@@ -104,3 +104,38 @@ describe("SvgEditor panning", () => {
     expect(box()).toBe(before);
   });
 });
+
+describe("SvgEditor pinch", () => {
+  it("zooms around the point between the fingers", () => {
+    const { svg, box } = setup();
+    const rect = svg.getBoundingClientRect();
+    const pointer = (pointerId, type, x) =>
+      fire(svg, type, {
+        pointerId,
+        clientX: rect.left + x,
+        clientY: rect.top + 300,
+        buttons: 1,
+      });
+    const parse = () => box().split(" ").map(Number);
+    const [x0, , w0] = parse();
+    pointer(1, "pointerdown", 100);
+    pointer(2, "pointerdown", 200);
+    pointer(2, "pointermove", 300);
+    const [x1, , w1] = parse();
+    expect(w1).toBeLessThan(w0);
+    // The content under the middle of the fingers (150) follows it to 200
+    const width = window.innerWidth;
+    expect(x1 + (200 / width) * w1).toBeCloseTo(x0 + (150 / width) * w0, 6);
+  });
+
+  it("forgets a finger when the window loses focus", () => {
+    const { svg, box } = setup();
+    fire(svg, "pointerdown", { clientX: 10, clientY: 10, buttons: 1 });
+    act(() => {
+      window.dispatchEvent(new Event("blur"));
+    });
+    const before = box();
+    fire(svg, "pointermove", { clientX: 50, clientY: 10, buttons: 1 });
+    expect(box()).toBe(before);
+  });
+});
