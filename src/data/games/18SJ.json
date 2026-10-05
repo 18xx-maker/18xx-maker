@@ -10,7 +10,9 @@
     "currency": "#kr"
   },
   "links": {
-    "rules": "https://drive.google.com/open?id=1y9b9o7WL1Pt7ArqC7Nf5656hzTZWD4-9"
+    "bgg": "https://boardgamegeek.com/boardgame/328237/18sj",
+    "rules": "https://boardgamegeek.com/filepage/269594/18sj-rules",
+    "purchase": "https://all-aboardgames.com/products/18sj"
   },
   "tokens": [
     {

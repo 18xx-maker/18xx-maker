@@ -1353,7 +1353,7 @@ export default {
           {
             link_name: "1871BC on BGG",
             link_url:
-              "https://https://boardgamegeek.com/boardgame/306265/1871-british-columbia",
+              "https://boardgamegeek.com/boardgame/306265/1871-british-columbia",
           },
           {
             link_name: "Rules",
@@ -1788,7 +1788,7 @@ export default {
           {
             link_name: "Rules",
             link_url:
-              "https://drive.google.com/file/d/1G_fLbak96VWQ0Vfvg7-Qh2gXgv7r0BQi/view?usp=sharing",
+              "https://drive.google.com/file/d/1I1G0ly8EpQyJ9hPCqItb2pZPERunKhwh/view?usp=sharing",
           },
         ],
       },
@@ -2211,9 +2211,12 @@ export default {
         ],
         links: [
           {
+            link_name: "18SJ on BGG",
+            link_url: "https://boardgamegeek.com/boardgame/328237/18sj",
+          },
+          {
             link_name: "Rules",
-            link_url:
-              "https://drive.google.com/open?id=1y9b9o7WL1Pt7ArqC7Nf5656hzTZWD4-9",
+            link_url: "https://boardgamegeek.com/filepage/269594/18sj-rules",
           },
         ],
       },
@@ -3192,8 +3195,7 @@ export default {
           },
           {
             link_name: "Rules",
-            link_url:
-              "https://boardgamegeek.com/filepage/200309/rules-version-2020-04-28",
+            link_url: "https://boardgamegeek.com/filepage/263361/21moon-rules",
           },
         ],
       },
@@ -3438,6 +3440,11 @@ export default {
           },
         ],
         links: [
+          {
+            link_name: "TheOldPrince1871 on BGG",
+            link_url:
+              "https://boardgamegeek.com/boardgame/359211/the-old-prince-1871",
+          },
           {
             link_name: "Rules",
             link_url:
