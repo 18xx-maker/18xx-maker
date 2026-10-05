@@ -23,7 +23,7 @@ import {
 import { b18Spec } from "#export/b18";
 import { MAX_DPI } from "#export/capture";
 import { documents } from "#export/documents";
-import { exportJobs } from "#export/names";
+import { exportJobs, formatFolder } from "#export/names";
 import {
   BACKGROUNDS,
   MAX_CARD_BLEED,
@@ -32,6 +32,7 @@ import {
 } from "#export/options";
 import { renderGame, renderSlug } from "#export/render";
 import { DOCS, selectDocs } from "#export/select";
+import { gameFolder } from "#export/sink";
 import { writeZip } from "#export/zip";
 
 export { DOCS, selectDocs };
@@ -258,7 +259,7 @@ const command = async (game, opts = {}) => {
         });
       }
       const exportData = { ...data, slug: renderSlug(id) };
-      const out = path.join(root, id);
+      const out = gameFolder(root, id);
       const run = (list) =>
         exportGame({
           capture: createCapture({
@@ -282,16 +283,18 @@ const command = async (game, opts = {}) => {
       const files = formats.filter((format) => format !== "b18");
       if (files.length > 0) {
         // Every format has its own folder in the folder of the game
-        const list = exportJobs(
-          gameDef,
-          selectDocs(
-            documents(gameDef, config, exportData, {
-              cardBleed: options.cards.bleed,
-            }),
-            { docs, variation },
+        const list = formatFolder(
+          exportJobs(
+            gameDef,
+            selectDocs(
+              documents(gameDef, config, exportData, {
+                cardBleed: options.cards.bleed,
+              }),
+              { docs, variation },
+            ),
+            files,
           ),
-          files,
-        ).map((job) => ({ ...job, path: `${job.format}/${job.path}` }));
+        );
         if (list.length === 0) {
           console.error(
             `Nothing to export for ${id}: the chosen documents have no ${files.join(", ")} files`,

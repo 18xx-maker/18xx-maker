@@ -20,10 +20,9 @@ The map, market, par, revenue and tile manifest images have a border of a
 quarter inch around them (in the image background); every other image is cut to
 exactly the size of the component.
 
-If you choose to export a full game you are asked to pick a folder to put all of
-the files. The files _do_ contain the game name in them, but it's suggested that
-you create a folder specifically for this game to help with your own
-organization. Outputing a game to PNG images results in a _LOT_ of images. When
+If you choose to export a full game you are asked to pick a folder, which the
+app remembers for the next export. The images go in `<game id>/png` in it, the
+same as the command line. Outputing a game to PNG images results in a _LOT_ of images. When
 the export is complete the app will open the resulting folder.
 
 Exporting a full game will result in an individual image for every tile, card,

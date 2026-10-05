@@ -41,6 +41,13 @@ export const exportJobs = (game, docs, formats) =>
       })),
   );
 
+// Every format has its own folder in the folder of the game: pdf/<file>. A
+// Board 18 job has its own path in the box.
+export const formatFolder = (jobs) =>
+  jobs.map((job) =>
+    job.format === "b18" ? job : { ...job, path: `${job.format}/${job.path}` },
+  );
+
 // The path and query of a document on the site, "/games/1889/map?paginated=true"
 export const docPath = (doc) => {
   const query = new URLSearchParams(doc.query).toString();

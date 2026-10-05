@@ -3,7 +3,12 @@ import { mergeDeepRight, uniq } from "ramda";
 import { companies as companyOverrides, tiles } from "@/data";
 import { b18Spec } from "@/export/b18.js";
 import { BACKGROUND_PAGES, documents } from "@/export/documents.js";
-import { exportJobs, fileName, safeName } from "@/export/names.js";
+import {
+  exportJobs,
+  fileName,
+  formatFolder,
+  safeName,
+} from "@/export/names.js";
 import { layoutsOfConfig, resolveExportOptions } from "@/export/options.js";
 import { renderSlug } from "@/export/render.js";
 import { DOCS, docPage, selectDocs } from "@/export/select.js";
@@ -127,13 +132,15 @@ export const planExport = (game, layers, userOptions) => {
   }
   const data = exportData(game);
   const files = formats.filter((format) => format !== "b18");
-  const jobs = exportJobs(
-    game,
-    selectDocs(
-      documents(game, config, data, { cardBleed: options.cards.bleed }),
-      { docs, variation },
+  const jobs = formatFolder(
+    exportJobs(
+      game,
+      selectDocs(
+        documents(game, config, data, { cardBleed: options.cards.bleed }),
+        { docs, variation },
+      ),
+      files,
     ),
-    files,
   );
 
   let box;

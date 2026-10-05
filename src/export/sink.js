@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { safeName } from "./names.js";
+
 // The absolute path of relPath in root. A path that leaves the folder is an
 // error. Node only.
 export const insideFolder = (root, relPath) => {
@@ -11,6 +13,9 @@ export const insideFolder = (root, relPath) => {
   }
   return file;
 };
+
+// The folder of a game in the output folder, named by the game id. Node only.
+export const gameFolder = (root, id) => path.join(root, safeName(id));
 
 // A sink that writes files in a folder. A path that leaves the folder is an
 // error. Node only.

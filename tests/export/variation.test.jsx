@@ -99,9 +99,9 @@ describe("the map variation of the export options", () => {
     const { user, panel } = await openOptions();
     await user.click(within(panel).getByRole("button", { name: /^Export$/ }));
     const names = paths(await requested());
-    expect(names).toContain("18test-map-1.pdf");
-    expect(names).not.toContain("18test-map-0.pdf");
-    expect(names).toContain("18test-map-1-paginated.pdf");
+    expect(names).toContain("pdf/18test-map-1.pdf");
+    expect(names).not.toContain("pdf/18test-map-0.pdf");
+    expect(names).toContain("pdf/18test-map-1-paginated.pdf");
   });
 
   it("is chosen with the keyboard, over the variation of the game", async () => {
@@ -116,8 +116,8 @@ describe("the map variation of the export options", () => {
     await user.click(within(panel).getByRole("button", { name: /^Export$/ }));
 
     const names = paths(await requested());
-    expect(names).toContain("18test-map-0.pdf");
-    expect(names).not.toContain("18test-map-1.pdf");
+    expect(names).toContain("pdf/18test-map-0.pdf");
+    expect(names).not.toContain("pdf/18test-map-1.pdf");
   });
 
   it("can be every variation, when the game file has one", async () => {
@@ -131,8 +131,8 @@ describe("the map variation of the export options", () => {
     await user.click(within(panel).getByRole("button", { name: /^Export$/ }));
 
     const names = paths(await requested());
-    expect(names).toContain("18test-map-0.pdf");
-    expect(names).toContain("18test-map-1.pdf");
+    expect(names).toContain("pdf/18test-map-0.pdf");
+    expect(names).toContain("pdf/18test-map-1.pdf");
   });
 
   it("is every variation when the game file has none", async () => {

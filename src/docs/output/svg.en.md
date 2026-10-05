@@ -17,8 +17,9 @@ click on the export button:
 
 Choose _Export game as svg images_ (press `s` with the menu open) or tick _SVG
 images_ in the _Export options_ panel. Exporting this way _will_ respect any
-config options you have set in the app. You are asked to pick a folder and one
-file is written for every map (one for each variation), market, par table,
+config options you have set in the app. You are asked to pick a folder (the app
+remembers it) and one file is written in `<game id>/svg` in it for every map
+(one for each variation), market, par table,
 revenue table, tile and token. The files contain the game name, and the app
 opens the folder when the export is complete.
 

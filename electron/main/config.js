@@ -34,7 +34,8 @@ import { isDev } from "./dev.js";
 export const SUMMARIES = "summaries";
 export const RECENTS = "recents";
 export const LAST_ROUTE = "lastRoute";
-export const CONFIG_KEYS = [SUMMARIES, RECENTS, LAST_ROUTE];
+export const EXPORT_FOLDER = "exportFolder";
+export const CONFIG_KEYS = [SUMMARIES, RECENTS, LAST_ROUTE, EXPORT_FOLDER];
 export const DEFAULT_CONFIG = { [SUMMARIES]: {}, [RECENTS]: [] };
 
 export const CONFIG_FILE = isDev
@@ -170,6 +171,11 @@ export const updateConfig = (op) => {
 
 export const getLastRoute = () => prop(LAST_ROUTE, getConfig());
 export const setLastRoute = (url) => updateConfig(assoc(LAST_ROUTE, url));
+
+export const getExportFolder = () => prop(EXPORT_FOLDER, getConfig());
+export const setExportFolder = (folder) =>
+  updateConfig(assoc(EXPORT_FOLDER, folder));
+export const clearExportFolder = () => updateConfig(dissoc(EXPORT_FOLDER));
 
 export const deleteGame = (id) =>
   updateConfig((config) => {
