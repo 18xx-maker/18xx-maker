@@ -4,7 +4,7 @@ import { renderApp } from "@tests/support/helpers.jsx";
 
 describe("bindings", () => {
   it.for([
-    ["d", "docs-index"],
+    ["m", "docs-index"],
     ["l", "games"],
     ["a", "atoms"],
     ["c", "logos"],

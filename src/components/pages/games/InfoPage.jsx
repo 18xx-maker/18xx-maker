@@ -2,8 +2,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router";
 
-import { omit } from "ramda";
-
 import {
   ArrowBigRight,
   Copyright,
@@ -21,13 +19,14 @@ import {
 import { Button } from "@/components/ui/button";
 
 import File from "@/components/File";
+import KeyLabel from "@/components/KeyLabel";
 import GameStats from "@/components/pages/games/GameStats";
 
 import { useGame } from "@/hooks";
 import { deleteGame, refreshGame } from "@/state";
-import { titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
+import { gameFile } from "@/util/download";
 import { firstSection } from "@/util/gameNav";
 
 const InfoPage = () => {
@@ -138,13 +137,12 @@ const InfoPage = () => {
         <Button variant="outline" asChild>
           <Link to={`/games/${game.meta.slug}/${firstSection(game)}`}>
             <ArrowBigRight />
-            {t("nav.edit")}
+            <span>
+              <KeyLabel text={t("nav.edit")} shortcut="e" />
+            </span>
           </Link>
         </Button>
-        <File
-          data={omit(["meta"], game)}
-          filename={`${titleToFilename(game.info.title)}.json`}
-        />
+        <File {...gameFile(game)} shortcut="d" />
         {!capability.electron && game.meta.type === "system" && (
           <Button variant="outline" onClick={onRefresh}>
             <RefreshCw />

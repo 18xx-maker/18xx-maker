@@ -11,7 +11,7 @@ import {
 // are handled in src/hooks/bindings.js. Text is under "shortcuts.keys.<id>".
 const shortcuts = [
   { id: "escape", keys: ["Esc"] },
-  { id: "docs", keys: ["d"] },
+  { id: "docs", keys: ["m"] },
   { id: "help", keys: ["?"] },
   { id: "home", keys: ["h"] },
   { id: "load", keys: ["l"] },
@@ -23,9 +23,10 @@ const shortcuts = [
   { id: "positioning", keys: ["p"] },
   { id: "game", keys: ["g"] },
   { id: "edit", keys: ["e"] },
-  { id: "section", keys: ["m", "1–9", "0"] },
+  { id: "section", keys: ["1–9", "0"] },
   { id: "cycle", keys: ["[", "]"] },
   { id: "view", keys: ["v"] },
+  { id: "download", keys: ["d"] },
   { id: "export", keys: ["x"] },
   { id: "app", keys: ["u"] },
 ];

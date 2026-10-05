@@ -11,6 +11,7 @@ import { useLoadedGame } from "@/hooks/game";
 import { createAlert, createSetExportMenuOpen, refreshGame } from "@/state";
 import { selectExportSheetOpen, selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
+import { downloadGame } from "@/util/download";
 import { firstSection, gameNav } from "@/util/gameNav";
 import { isControlTarget } from "@/util/keys";
 import { useBooleanParam } from "@/util/query";
@@ -152,9 +153,7 @@ export const useBindings = () => {
         const section =
           event.key === "e"
             ? first
-            : event.key === "m"
-              ? "map"
-              : find(propEq(event.key, "key"), gameNav)?.section;
+            : find(propEq(event.key, "key"), gameNav)?.section;
 
         if (section) {
           navigate(`/games/${loadedGame.slug}/${section}`);
@@ -170,7 +169,7 @@ export const useBindings = () => {
           if (!viewingGame) navigate("/elements/logos");
           break;
         case "d":
-          navigate("/docs");
+          if (game) downloadGame(game);
           break;
         case "g":
           if (loadedGame) navigate(`/games/${loadedGame.slug}`);
@@ -180,6 +179,9 @@ export const useBindings = () => {
           break;
         case "l":
           navigate("/games/");
+          break;
+        case "m":
+          navigate("/docs");
           break;
         case "o":
           if (capability.electron) {
