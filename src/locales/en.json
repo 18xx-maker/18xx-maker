@@ -31,6 +31,30 @@
     "refresh": "Refresh",
     "description": "Reload the latest version of this file"
   },
+  "changes": {
+    "nav": "Changes",
+    "title": "Changes",
+    "none": "No changes. The game is the same as its file.",
+    "summary": "{{added}} lines added, {{removed}} lines removed",
+    "save": "Save",
+    "revert": "Revert to saved",
+    "reformat": "Saving writes the game the way Download does, so the first save may reformat the file.",
+    "conflict": "The file changed outside the app since it was loaded. Reload it and lose your changes, or overwrite it with yours.",
+    "reload": "Reload the file",
+    "overwrite": "Overwrite the file",
+    "saved": "Game Saved",
+    "savedMessage": "{{title}} saved to its file",
+    "saveFailed": "Could not save the game"
+  },
+  "history": {
+    "nav": "History",
+    "title": "History",
+    "none": "Nothing was saved in this session.",
+    "description": "Every save in this session, newest first. Each entry is the file as it was before that save. Restoring one puts it back as your changes.",
+    "view": "View diff",
+    "hide": "Hide diff",
+    "restore": "Restore"
+  },
   "problems": {
     "nav": "Problems",
     "title": "Problems with this game",

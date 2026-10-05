@@ -5,7 +5,7 @@ import updater from "electron-updater";
 
 import { objOf } from "ramda";
 
-import { createAddRecent } from "#export/ipc";
+import { createAddRecent, fromMainWindow } from "#export/ipc";
 import { exportOf } from "./capture.js";
 import {
   CONFIG_FILE,
@@ -17,9 +17,10 @@ import {
 import { registerExport } from "./export.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
 import { setMenu } from "./menu.js";
+import { createSaveGame } from "./saveFile.js";
 import { send } from "./util.js";
 import { stopWatching, watch } from "./watch.js";
-import { createWindow } from "./window.js";
+import { createWindow, getMainWindow, startBaseUrl } from "./window.js";
 
 const { autoUpdater } = updater;
 autoUpdater.autoDownload = false;
@@ -122,6 +123,15 @@ ipcMain.handle("loadGame", (event, id) => {
 });
 
 ipcMain.handle("openGame", openGame);
+
+ipcMain.handle(
+  "saveGame",
+  createSaveGame({
+    isMain: (event) => fromMainWindow(event, getMainWindow(), startBaseUrl),
+    summaryOf: (id) => getConfig().summaries[id],
+    afterSave: (id) => watch(id),
+  }),
+);
 
 ipcMain.on(
   "addRecent",

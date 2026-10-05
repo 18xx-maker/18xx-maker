@@ -35,6 +35,10 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
           `Electron game ${id} not found or was not a valid 18xx-maker game`,
         );
       }),
+    // Writes the game text over the game's file. `expected` is the game as it
+    // was loaded: a file that changed since is not overwritten (conflict).
+    saveGame: (id, text, expected) =>
+      ipcRenderer.invoke("saveGame", id, text, expected),
     loadSummaries: () => ipcRenderer.invoke("loadSummaries"),
     openGame: () =>
       ipcRenderer

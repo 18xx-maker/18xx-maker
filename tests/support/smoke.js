@@ -68,6 +68,8 @@ export const single = [
   page("tokens/0", "-token", always),
   // Not a print page, so not in the snapshots
   page("problems", "-problems", always, { redirects: false }),
+  page("changes", "-changes", always, { redirects: false }),
+  page("history", "-history", always, { redirects: false }),
 ];
 
 export const groups = { b18, parts, single };

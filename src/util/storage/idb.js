@@ -190,6 +190,32 @@ export const saveGameHandle = (handle) => {
 export const deleteGame = (id) =>
   op(GAME_FILE_STORE, (store) => store.delete(id), true);
 
+const gameHandle = (id) => loadGameSummary(id).then(prop("handle"));
+
+// Asks for permission to write the file of a game. It needs a user gesture, so
+// call it straight from the click that saves.
+export const requestWrite = (id) =>
+  gameHandle(id).then(async (handle) => {
+    const mode = { mode: "readwrite" };
+    if ((await handle.queryPermission(mode)) === "granted") return;
+    if ((await handle.requestPermission(mode)) !== "granted") {
+      throw new Error("Permission denied");
+    }
+  });
+
+// Writes the text over the file of a game, once requestWrite was granted
+export const writeGame = (id, text) =>
+  gameHandle(id).then(async (handle) => {
+    const writable = await handle.createWritable();
+    try {
+      await writable.write(text);
+      await writable.close();
+    } catch (e) {
+      await writable.abort().catch(() => {});
+      throw e;
+    }
+  });
+
 export const openFilePicker = () =>
   window
     .showOpenFilePicker({

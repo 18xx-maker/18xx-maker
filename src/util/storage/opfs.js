@@ -104,9 +104,7 @@ const writeInWorker = (filename, buffer) =>
     worker.postMessage({ filename, buffer }, [buffer]);
   });
 
-export const saveGameFile = async (file) => {
-  const id = uuidv4();
-  const filename = `${id}.json`;
+const writeGameFile = async (filename, file) => {
   const dir = await getGamesDirectory();
   const handle = await dir.getFileHandle(filename, { create: true });
   if (typeof handle.createWritable === "function") {
@@ -116,6 +114,18 @@ export const saveGameFile = async (file) => {
   } else {
     await writeInWorker(filename, await new Blob([file]).arrayBuffer());
   }
+};
 
+export const saveGameFile = async (file) => {
+  const id = uuidv4();
+  await writeGameFile(`${id}.json`, file);
   return slug(id);
+};
+
+// Writes the text over the file of an existing game. It never creates one: a
+// game that was forgotten in the meantime is an error.
+export const overwriteGame = async (id, text) => {
+  const dir = await getGamesDirectory();
+  await dir.getFileHandle(name(id));
+  await writeGameFile(name(id), text);
 };

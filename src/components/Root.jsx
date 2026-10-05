@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useEffect } from "react";
-import { getI18n, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useMatch, useNavigate } from "react-router";
 
@@ -25,11 +25,11 @@ import {
   createAlert,
   createDownloadPercent,
   createProgressAlert,
-  createSetGame,
   createUpdate,
   loadGame,
+  receiveGame,
 } from "@/state";
-import { selectLanguage } from "@/state/selectors";
+import { selectGameChanged, selectLanguage } from "@/state/selectors";
 import capability from "@/util/capability";
 import { sniffConfigFile } from "@/util/config";
 import { useBooleanParam } from "@/util/query";
@@ -151,18 +151,7 @@ body {
   useEffect(() => {
     // A capture window of an export only has the game it shows
     if (capability.electron && !render) {
-      const onGame = (game) => {
-        dispatch(createSetGame(game));
-        dispatch(
-          createAlert(
-            getI18n().t("alerts.gameLoaded"),
-            getI18n().t("alerts.gameLoadedMessage", {
-              title: game.info.title,
-            }),
-            "success",
-          ),
-        );
-      };
+      const onGame = (game) => dispatch(receiveGame(game));
 
       window.api.onAlert(compose(dispatch, createAlert));
       window.api.onGame(onGame);
@@ -176,6 +165,18 @@ body {
       };
     }
   }, [dispatch, navigate, render]);
+
+  // Unsaved edits are lost on a reload, so the browser asks first
+  const changed = useSelector(selectGameChanged);
+  useEffect(() => {
+    if (!changed) return;
+    const warn = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [changed]);
 
   // The game of the last session is loaded on start, so what needs the game
   // (the export menu) works before a game page is opened. A game page loads

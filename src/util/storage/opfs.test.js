@@ -6,6 +6,7 @@ import {
   deleteGame,
   loadGame,
   loadSummaries,
+  overwriteGame,
   peekGame,
   saveGameFile,
 } from "@/util/storage/opfs";
@@ -195,6 +196,22 @@ describe("internal games in OPFS", () => {
       ...game,
       meta: { id, type: "internal", slug },
     });
+  });
+
+  it("overwrites the file of an existing game", async () => {
+    const slug = await saveGameFile(JSON.stringify(game));
+    const id = slug.split(":")[1];
+
+    await overwriteGame(id, '{"info":{"title":"New"}}');
+
+    expect(games().get(`${id}.json`)).toBe('{"info":{"title":"New"}}');
+  });
+
+  it("does not create a game when overwriting", async () => {
+    await saveGameFile(JSON.stringify(game));
+
+    await expect(overwriteGame("gone", "{}")).rejects.toThrow();
+    expect(games().has("gone.json")).toBe(false);
   });
 
   it("deletes games", async () => {

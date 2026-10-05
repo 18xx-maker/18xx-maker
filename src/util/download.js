@@ -8,11 +8,14 @@ export const gameFile = (game) => ({
   filename: `${titleToFilename(game.info.title)}.json`,
 });
 
+// The text of the game file: what the download and a save write
+export const gameText = (game) => JSON.stringify(gameFile(game).data, null, 2);
+
 // Saves the game file through a temporary link with a download attribute
 export const downloadGame = (game) => {
-  const { data, filename } = gameFile(game);
+  const { filename } = gameFile(game);
   const url = URL.createObjectURL(
-    new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }),
+    new Blob([gameText(game)], { type: "application/json" }),
   );
   const link = document.createElement("a");
   link.href = url;

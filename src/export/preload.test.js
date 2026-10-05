@@ -18,6 +18,7 @@ describe("the preload api", () => {
     expect(api.export).toBeTypeOf("function");
     expect(api.chooseExportFolder).toBeTypeOf("function");
     expect(api.deleteGame).toBeTypeOf("function");
+    expect(api.saveGame).toBeTypeOf("function");
     expect(api.renderInput).toBeUndefined();
   });
 
@@ -30,6 +31,7 @@ describe("the preload api", () => {
     });
 
     expect(api).toEqual({ renderInput: { id: "18Test" } });
+    expect(api.saveGame).toBeUndefined();
     expect(ipc.sendSync).toHaveBeenCalledWith("getRenderInput", "abc");
   });
 });

@@ -10,8 +10,10 @@ export const useEditor = () => {
     return false;
   }
 
-  // The problems page is a plain page, like the info page
-  return !["", "problems"].includes(gameMatch.params["*"]);
+  // The problems, changes and history pages are plain pages, like the info page
+  return !["", "problems", "changes", "history"].includes(
+    gameMatch.params["*"],
+  );
 };
 
 export default useEditor;

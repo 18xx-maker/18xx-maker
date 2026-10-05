@@ -57,7 +57,7 @@ afterEach(() => {
 
 describe("loadGame", () => {
   it("loads a bundled game", async () => {
-    const result = await loadGame("bundled:1889")(dispatch);
+    const result = await loadGame("bundled:1889")(dispatch, getState);
     expect(result).toBe(games["1889"]);
     expect(types()).toEqual([
       createSetGame(games["1889"]),
@@ -95,7 +95,7 @@ describe("loadGame", () => {
     const g = game(type, "abc");
     mod.loadGame.mockResolvedValue(g);
 
-    await expect(loadGame(`${type}:abc`)(dispatch)).resolves.toBe(g);
+    await expect(loadGame(`${type}:abc`)(dispatch, getState)).resolves.toBe(g);
     expect(mod.loadGame).toHaveBeenCalledWith("abc");
     expect(types()).toEqual([
       createSetGame(g),
@@ -108,7 +108,7 @@ describe("loadGame", () => {
     const g = game("electron", "abc");
     window.api = { loadGame: vi.fn().mockResolvedValue(g) };
 
-    await loadGame("electron:abc")(dispatch);
+    await loadGame("electron:abc")(dispatch, getState);
     expect(window.api.loadGame).toHaveBeenCalledWith("abc");
     expect(types()).toEqual([
       createSetGame(g),
@@ -138,7 +138,7 @@ describe("loadGame", () => {
     "%s rejects and dispatches an error alert",
     async (slug, message, setup) => {
       setup();
-      await expect(loadGame(slug)(dispatch)).rejects.toThrow(message);
+      await expect(loadGame(slug)(dispatch, getState)).rejects.toThrow(message);
       expect(types()).toEqual([createAlert("Error", message, "error")]);
     },
   );
@@ -148,7 +148,9 @@ describe("loadGame", () => {
     error.name = "SyntaxError";
     idb.loadGame.mockRejectedValue(error);
 
-    await expect(loadGame("system:abc")(dispatch)).rejects.toBe(error);
+    await expect(loadGame("system:abc")(dispatch, getState)).rejects.toBe(
+      error,
+    );
     expect(types()).toEqual([
       createAlert("SyntaxError", "File was not valid", "error"),
     ]);
