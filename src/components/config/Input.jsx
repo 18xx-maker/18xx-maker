@@ -1,11 +1,9 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 import { assocPath, dissocPath, init, isEmpty, map, path, split } from "ramda";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input as FormInput } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -16,42 +14,10 @@ import {
 } from "@/components/ui/select";
 
 import UnitInput from "@/components/config/UnitInput";
+import NumberField from "@/components/form/NumberField";
 
 import { useConfig, useValidation } from "@/hooks";
 import { getPath, getSchema } from "@/util/input";
-
-// Keeps what is typed as text (so "1." and "-" can be typed) and only passes
-// on a number when the field is left or Enter is pressed
-const NumberInput = ({ value, onChange, ...pass }) => {
-  const [text, setText] = useState(`${value}`);
-
-  useEffect(() => {
-    setText((text) => (Number(text) === value ? text : `${value}`));
-  }, [value]);
-
-  const commit = () => {
-    const number = Number(text);
-    if (text.trim() !== "" && Number.isFinite(number)) {
-      if (number !== value) {
-        onChange(number);
-      }
-    } else {
-      setText(`${value}`);
-    }
-  };
-
-  return (
-    <FormInput
-      type="number"
-      step="any"
-      value={text}
-      onChange={(event) => setText(event.target.value)}
-      onBlur={commit}
-      onKeyDown={(event) => event.key === "Enter" && commit()}
-      {...pass}
-    />
-  );
-};
 
 const Input = ({
   name,
@@ -163,7 +129,7 @@ const Input = ({
         <Label htmlFor={name} className="text-lg">
           {label}
         </Label>
-        <NumberInput
+        <NumberField
           id={name}
           name={name}
           value={value}
