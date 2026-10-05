@@ -36,25 +36,46 @@ const wrapWidth = (container, content) => {
   return best;
 };
 
-// The view that fits the content in the window, centered
-const fit = (container, content) => {
-  const w = content.offsetWidth || 1;
-  const h = content.offsetHeight || 1;
+// The space kept free around what the view starts on, as a fraction of it
+const PADDING = 0.06;
+
+// The view that fits the first page (the whole content when there is no page)
+// in the window with some padding, centered
+const fit = (container, content, page) => {
+  const first = (page && content.querySelector(page)) || content;
+  // Where the page is inside the content, in unscaled pixels
+  const shown =
+    content.getBoundingClientRect().width / (content.offsetWidth || 1);
+  const box = first.getBoundingClientRect();
+  const origin = content.getBoundingClientRect();
+  const left = shown ? (box.left - origin.left) / shown : 0;
+  const top = shown ? (box.top - origin.top) / shown : 0;
+  const w = (first === content ? content.offsetWidth : box.width / shown) || 1;
+  const h =
+    (first === content ? content.offsetHeight : box.height / shown) || 1;
   const vw = container.clientWidth || window.innerWidth;
   const vh = container.clientHeight || window.innerHeight;
-  const scale = Math.min(vw / w, vh / h, 1);
-  return { x: (vw - w * scale) / 2, y: (vh - h * scale) / 2, scale };
+  const scale = Math.min(
+    vw / (w * (1 + 2 * PADDING)),
+    vh / (h * (1 + 2 * PADDING)),
+    1,
+  );
+  return {
+    x: (vw - w * scale) / 2 - left * scale,
+    y: (vh - h * scale) / 2 - top * scale,
+    scale,
+  };
 };
 
-const PanZoom = ({ children }) => {
+const PanZoom = ({ page, children }) => {
   const container = useRef(null);
   const content = useRef(null);
   const [view, setView] = useState({ x: 0, y: 0, scale: 1 });
   const [width, setWidth] = useState("max-content");
 
   const reset = useCallback(
-    () => setView(fit(container.current, content.current)),
-    [],
+    () => setView(fit(container.current, content.current, page)),
+    [page],
   );
 
   // Start with the whole content in view, wrapped to fit the window
@@ -105,10 +126,11 @@ const PanZoom = ({ children }) => {
 };
 
 // Pan and zoom for html content, the counterpart of SvgEditor. Printing,
-// ?print=true and render mode (the exports) get the children untouched.
-const HtmlEditor = ({ children }) => {
+// ?print=true and render mode (the exports) get the children untouched. The
+// view starts on the first element matching the `page` selector.
+const HtmlEditor = ({ page, children }) => {
   if (!useEditing()) return children;
-  return <PanZoom>{children}</PanZoom>;
+  return <PanZoom page={page}>{children}</PanZoom>;
 };
 
 export default HtmlEditor;

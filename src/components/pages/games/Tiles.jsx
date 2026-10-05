@@ -380,7 +380,7 @@ const TileSheet = () => {
   }, pagedTiles);
 
   return (
-    <HtmlEditor>
+    <HtmlEditor page=".TileSheet--Page">
       <ColorContext.Provider value="tile">
         <div
           data-testid={`game-${game.meta.slug}-tiles`}

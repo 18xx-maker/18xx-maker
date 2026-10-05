@@ -4,10 +4,17 @@ import Svg from "@/components/Svg";
 
 import { usePanZoom } from "@/hooks/use-pan-zoom";
 
-const SvgEditor = ({ width, height, children }) => {
+// padding is the space kept free around the content to start, as a fraction
+// of the content
+const SvgEditor = ({ width, height, padding = 0, children }) => {
   const initial = useMemo(
-    () => ({ x: 0, y: 0, width, height }),
-    [width, height],
+    () => ({
+      x: -width * padding,
+      y: -height * padding,
+      width: width * (1 + 2 * padding),
+      height: height * (1 + 2 * padding),
+    }),
+    [width, height, padding],
   );
 
   const svg = useRef(null);

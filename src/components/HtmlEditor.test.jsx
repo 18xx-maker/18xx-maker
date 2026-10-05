@@ -47,7 +47,8 @@ const setup = (url = "/") => {
 describe("HtmlEditor", () => {
   it("fits the content into the window to start", () => {
     const { transform } = setup();
-    expect(transform()).toMatch(/translate\(.*\) scale\(1\)/);
+    // Padded, so a little smaller than the window
+    expect(transform()).toMatch(/translate\(.*\) scale\(0\.\d+\)/);
   });
 
   it("pans while the primary button is held", () => {
@@ -123,6 +124,41 @@ describe("HtmlEditor", () => {
     const content = container.querySelector("#editor").firstElementChild;
     expect(content.offsetWidth).toBeLessThan(6 * 300);
     expect(content.offsetHeight).toBeGreaterThan(400);
+  });
+
+  it("starts on the first page with padding around it", () => {
+    const store = configureStore({
+      reducer: rootReducer,
+      preloadedState: initialState,
+    });
+    const { container } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <HtmlEditor page=".sheet">
+            {[1, 2, 3].map((n) => (
+              <div
+                key={n}
+                className="sheet"
+                style={{ float: "left", width: 4000, height: 3000 }}
+              />
+            ))}
+          </HtmlEditor>
+        </MemoryRouter>
+      </Provider>,
+    );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const editor = container.querySelector("#editor");
+    // eslint-disable-next-line testing-library/no-node-access
+    const content = editor.firstElementChild;
+    // eslint-disable-next-line testing-library/no-node-access
+    const first = content.querySelector(".sheet").getBoundingClientRect();
+    const box = editor.getBoundingClientRect();
+    expect(first.width).toBeLessThan(box.width);
+    expect(first.height).toBeLessThan(box.height);
+    // Padding on every side and centered on the window
+    expect(first.left - box.left).toBeGreaterThan(0);
+    expect(box.right - first.right).toBeCloseTo(first.left - box.left, 0);
+    expect(box.bottom - first.bottom).toBeCloseTo(first.top - box.top, 0);
   });
 
   it("renders the children untouched when printing", () => {

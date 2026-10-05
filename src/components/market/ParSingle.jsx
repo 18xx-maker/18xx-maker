@@ -33,7 +33,11 @@ const ParSingle = ({ config, game }) => {
         style={stockFrame}
       >
         {editing ? (
-          <Editor width={data.totalWidth} height={data.totalHeight}>
+          <Editor
+            width={data.totalWidth}
+            height={data.totalHeight}
+            padding={0.08}
+          >
             <Par data={data} title={`${game.info.title} Par`} />
           </Editor>
         ) : (

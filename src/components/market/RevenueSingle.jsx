@@ -27,7 +27,11 @@ const RevenueSingle = () => {
         style={stockFrame}
       >
         {editing ? (
-          <Editor width={data.totalWidth} height={data.totalHeight}>
+          <Editor
+            width={data.totalWidth}
+            height={data.totalHeight}
+            padding={0.08}
+          >
             <Revenue data={data} config={config} game={game} />
           </Editor>
         ) : (

@@ -105,7 +105,7 @@ const Paginate = ({ component, data, config, game, children }) => {
   }, paginationData.yPages);
 
   return (
-    <HtmlEditor>
+    <HtmlEditor page=".cutlines">
       <style>{css}</style>
       <Svg className="paginated-svg" defs={defs} />
       {pages}

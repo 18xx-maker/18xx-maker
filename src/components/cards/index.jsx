@@ -369,7 +369,7 @@ ${grouped ? sizeCss : cutlinesCss(data, "")}${paddingCss}${grouped ? "" : cardCs
   }
 
   return (
-    <HtmlEditor>
+    <HtmlEditor page=".cards">
       <div data-testid={`game-${game.meta.slug}-cards`}>
         <style>{css}</style>
         {pageNodes}
