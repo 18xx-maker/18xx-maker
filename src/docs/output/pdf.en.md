@@ -27,7 +27,8 @@ If you choose to export a full game you are asked to pick a folder, and the app
 remembers it: the next export opens in the same folder (or in the default one if
 it no longer exists). The files go in a folder named after the game id, with a
 folder for each of `pdf`, `png` and `svg` in it, the same as the command line.
-When the export is complete the app will open the resulting folder.
+When the export is complete the app will open the resulting folder if the
+_Open the folder after exporting_ setting is on.
 
 ## Command Line
 

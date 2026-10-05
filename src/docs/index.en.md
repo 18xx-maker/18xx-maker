@@ -54,7 +54,7 @@ Its menu has these entries:
 - Export options
 
 The full game entries ask you to pick a folder on your file system and will
-write all files into it. The app opens the folder when it's done. The Board18
+write all files into it. With the _Open the folder after exporting_ setting on, the app opens the folder when it's done. The Board18
 entry puts a zip file and the files in it in the folder. To export one page,
 use _Export options_ and choose the documents you want.
 

@@ -30,7 +30,8 @@ auszuwählen, und die App merkt sich ihn: Der nächste Export öffnet denselben
 Ordner (oder den Standardordner, falls er nicht mehr existiert). Die Dateien
 kommen in einen Ordner mit der Spiel-ID, darin je ein Ordner für `pdf`, `png`
 und `svg`, genau wie in der Kommandozeile. Nach Abschluss des Exports öffnet die
-App den entstandenen Ordner.
+App den entstandenen Ordner, wenn die Einstellung _Ordner nach dem Export
+öffnen_ aktiv ist.
 
 ## Kommandozeile
 
