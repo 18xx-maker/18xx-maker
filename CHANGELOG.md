@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.0.0-beta.128](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.127...v1.0.0-beta.128) (2026-10-05)
+
+
+### :tada: Features
+
+* **cli:** export each format to its own folder ([#858](https://github.com/18xx-maker/18xx-maker/issues/858)) ([935d378](https://github.com/18xx-maker/18xx-maker/commit/935d3787ef18149fb7fb92bd4c250c9947cb3bc7))
+* **data:** add TraXX publisher and remove 18 Grand Junction ([#847](https://github.com/18xx-maker/18xx-maker/issues/847)) ([072725c](https://github.com/18xx-maker/18xx-maker/commit/072725c6cfec39370a4ab1f9a112fb7ce58c98a9))
+* **ui:** add a download shortcut and move the docs key to m ([#849](https://github.com/18xx-maker/18xx-maker/issues/849)) ([a965ec3](https://github.com/18xx-maker/18xx-maker/commit/a965ec3f3a83217cf097c86c425b24e279ed1094))
+* **ui:** make the app update link more noticeable ([#853](https://github.com/18xx-maker/18xx-maker/issues/853)) ([1f3b2dd](https://github.com/18xx-maker/18xx-maker/commit/1f3b2ddd58ebd5c32c631158273f2789f1464766))
+* **ui:** show markdown alerts with an icon and translated title ([#850](https://github.com/18xx-maker/18xx-maker/issues/850)) ([cf702d2](https://github.com/18xx-maker/18xx-maker/commit/cf702d23919e2cce707be0517ed914c960652d58))
+
+
+### :bug: Bug Fixes
+
+* **data:** correct and fill in game info links ([#851](https://github.com/18xx-maker/18xx-maker/issues/851)) ([85875ef](https://github.com/18xx-maker/18xx-maker/commit/85875ef83866fddf479bf0f11676834021540f0d))
+* **map:** close the gap between hexes with removed borders ([#863](https://github.com/18xx-maker/18xx-maker/issues/863)) ([ea4f729](https://github.com/18xx-maker/18xx-maker/commit/ea4f729c952a5d948195ccf3a3af28c6e3a0991e))
+* **ui:** reduce top margin of the info page marker ([#862](https://github.com/18xx-maker/18xx-maker/issues/862)) ([133c0e8](https://github.com/18xx-maker/18xx-maker/commit/133c0e8156243adcf26044a757b033b3aaedb903))
+* **ui:** thin hover-reveal scrollbar in the sidebar ([#857](https://github.com/18xx-maker/18xx-maker/issues/857)) ([fbc188f](https://github.com/18xx-maker/18xx-maker/commit/fbc188f48f27e9cd292153c27d6c789cf2df994d)), closes [#854](https://github.com/18xx-maker/18xx-maker/issues/854)
+* **ui:** use crosshair and shield icons for docs nav items ([#843](https://github.com/18xx-maker/18xx-maker/issues/843)) ([31964e2](https://github.com/18xx-maker/18xx-maker/commit/31964e2cf36394cb080795e3f457b1880c46935e)), closes [#841](https://github.com/18xx-maker/18xx-maker/issues/841)
+
 ## [1.0.0-beta.127](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.126...v1.0.0-beta.127) (2026-10-05)
 
 
