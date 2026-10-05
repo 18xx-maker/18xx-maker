@@ -273,6 +273,16 @@ describe("startServer", () => {
     expect(await response.text()).toBe("<p>index</p>");
   });
 
+  it("serves index.html for unknown routes whose last segment has a dot", async () => {
+    const port = await start();
+
+    for (const route of ["/games/18Test/tiles/57.1", "/assets/missing.js"]) {
+      const response = await fetch(`http://localhost:${port}${route}`);
+      expect(response.status).toBe(200);
+      expect(await response.text()).toBe("<p>index</p>");
+    }
+  });
+
   it("serves real files with their content type", async () => {
     const port = await start();
 

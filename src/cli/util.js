@@ -118,8 +118,9 @@ export const startServer = (
     throw new UsageError("The site is not built, run pnpm build first");
   }
 
-  // single: unknown routes get index.html so the app can route them
-  const serve = sirv(site, { single: true });
+  // single: unknown routes get index.html so the app can route them;
+  // ignores: false so routes ending in a dotted segment (tiles/57.1) do too
+  const serve = sirv(site, { single: true, ignores: false });
   // Only this machine can reach the site
   return http.createServer(serve).listen(port, "127.0.0.1");
 };
