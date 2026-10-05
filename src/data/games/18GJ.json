@@ -793,12 +793,13 @@
         ]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Craig",
-            "percent": 0.6
+            "name": {
+              "name": "Craig",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "terrain": [
@@ -863,12 +864,13 @@
         "hexes": ["B17"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Steamboat Springs",
-            "percent": 0.6
+            "name": {
+              "name": "Steamboat Springs",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "terrain": [
@@ -886,11 +888,11 @@
       {
         "names": [
           {
-            "angle": 180,
+            "angle": 0,
             "color": "brown",
             "fontStyle": "italic",
             "name": "Rabbit Ears Pass",
-            "percent": 0.3
+            "percent": 0.5
           }
         ],
         "shapes": [
@@ -936,22 +938,16 @@
         "cities": [
           {
             "companies": ["CNW", "GSLP"],
-            "size": 2
+            "size": 2,
+            "name": {
+              "name": "Fort Collins",
+              "straight": true,
+              "y": -20,
+              "fontSize": 9
+            }
           }
         ],
         "color": "gray",
-        "names": [
-          {
-            "angle": -64,
-            "name": "Fort",
-            "percent": 0.78
-          },
-          {
-            "angle": -51,
-            "name": "Collins",
-            "percent": 0.91
-          }
-        ],
         "offBoardRevenue": {
           "angle": 0,
           "percent": 0.55,
@@ -993,12 +989,13 @@
         "hexes": ["C14"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Greeley",
-            "percent": 0.6
+            "name": {
+              "name": "Greeley",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "color": "plain",
@@ -1057,24 +1054,20 @@
         "cities": [
           {
             "angle": 150,
-            "percent": 0.75,
-            "width": 19
+            "percent": 0.72
           },
           {
             "angle": 210,
-            "percent": 0.75,
-            "width": 19
+            "percent": 0.72
           },
           {
             "angle": 270,
-            "percent": 0.75,
-            "width": 19
+            "percent": 0.72
           },
           {
             "angle": 330,
             "companies": ["DSPP"],
-            "percent": 0.7,
-            "width": 19
+            "percent": 0.72
           }
         ],
         "color": "yellow",
@@ -1089,12 +1082,16 @@
           {
             "angle": 0,
             "name": "Grand",
-            "percent": 0.2
+            "percent": 0.3,
+            "fontSize": 9,
+            "x": -9
           },
           {
             "angle": 0,
             "name": "Junction",
-            "percent": 0.36
+            "percent": 0.42,
+            "fontSize": 9,
+            "x": -9
           }
         ],
         "terrain": [
@@ -1134,12 +1131,13 @@
         "hexes": ["D3"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Glenwood Springs",
-            "percent": 0.6
+            "name": {
+              "name": "Glenwood Springs",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "terrain": [
@@ -1155,12 +1153,13 @@
         "hexes": ["D7"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Vail",
-            "percent": 0.6
+            "name": {
+              "name": "Vail",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "terrain": [
@@ -1208,12 +1207,13 @@
         "hexes": ["D11"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Boulder",
-            "percent": 0.6
+            "name": {
+              "name": "Boulder",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "terrain": [
@@ -1232,7 +1232,13 @@
         "cities": [
           {
             "companies": ["DRG"],
-            "size": 2
+            "size": 2,
+            "name": {
+              "name": "Denver",
+              "reverse": true,
+              "straight": true,
+              "y": 16
+            }
           }
         ],
         "color": "yellow",
@@ -1241,13 +1247,6 @@
             "angle": 180,
             "label": "Z",
             "percent": 0.72
-          }
-        ],
-        "names": [
-          {
-            "angle": -35,
-            "name": "Denver",
-            "percent": 0.7
           }
         ],
         "track": [
@@ -1316,12 +1315,13 @@
         "hexes": ["D17"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Gunnison",
-            "percent": 0.6
+            "name": {
+              "name": "Gunnison",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "terrain": [
@@ -1369,12 +1369,13 @@
         "hexes": ["E8"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Leadville",
-            "percent": 0.6
+            "name": {
+              "name": "Leadville",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "terrain": [
@@ -1400,22 +1401,17 @@
         "cities": [
           {
             "companies": ["CCR"],
-            "size": 2
+            "size": 2,
+            "name": {
+              "name": "Colorado Springs",
+              "straight": true,
+              "y": -8,
+              "fontSize": 9,
+              "x": -30
+            }
           }
         ],
         "color": "gray",
-        "names": [
-          {
-            "angle": 160,
-            "name": "Colorado",
-            "percent": 0.68
-          },
-          {
-            "angle": 150,
-            "name": "Springs",
-            "percent": 0.48
-          }
-        ],
         "offBoardRevenue": {
           "angle": 0,
           "percent": 0.55,
@@ -1454,19 +1450,20 @@
         "hexes": ["E14"]
       },
       {
-        "cities": [{}],
+        "cities": [
+          {
+            "name": {
+              "name": "Silverton",
+              "reverse": true,
+              "straight": true
+            }
+          }
+        ],
         "labels": [
           {
             "angle": -51,
             "label": "Z",
             "percent": 0.72
-          }
-        ],
-        "names": [
-          {
-            "angle": 0,
-            "name": "Silverton",
-            "percent": 0.6
           }
         ],
         "terrain": [
@@ -1482,24 +1479,26 @@
         "hexes": ["F5"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Alamosa",
-            "percent": 0.6
+            "name": {
+              "name": "Alamosa",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "color": "plain",
         "hexes": ["F11"]
       },
       {
-        "cities": [{}],
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Cañon City",
-            "percent": 0.6
+            "name": {
+              "name": "Cañon City",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
         "terrain": [
@@ -1518,17 +1517,17 @@
         "cities": [
           {
             "companies": ["CCP"],
-            "size": 2
+            "size": 2,
+            "name": {
+              "name": "Pueblo",
+              "reverse": true,
+              "straight": true,
+              "y": 16,
+              "x": 40
+            }
           }
         ],
         "color": "yellow",
-        "names": [
-          {
-            "angle": -20,
-            "name": "Pueblo",
-            "percent": 0.6
-          }
-        ],
         "track": [
           {
             "side": 1
@@ -1606,7 +1605,9 @@
         "offBoardRevenue": {
           "angle": 115,
           "name": {
-            "name": "Southern California"
+            "name": "Southern California",
+            "x": 8,
+            "fontSize": 8
           },
           "percent": 0.5,
           "revenues": [
@@ -1640,18 +1641,19 @@
         "hexes": ["G2"]
       },
       {
-        "cities": [{}],
+        "cities": [
+          {
+            "name": {
+              "name": "Durango",
+              "reverse": true,
+              "straight": true
+            }
+          }
+        ],
         "labels": [
           {
             "angle": -105,
             "label": "Z",
-            "percent": 0.6
-          }
-        ],
-        "names": [
-          {
-            "angle": 0,
-            "name": "Durango",
             "percent": 0.6
           }
         ],
@@ -1670,11 +1672,11 @@
       {
         "names": [
           {
-            "angle": 180,
+            "angle": 0,
             "color": "brown",
             "fontStyle": "italic",
             "name": "Wolf Creek Pass",
-            "percent": 0.3
+            "percent": 0.5
           }
         ],
         "shapes": [
@@ -1697,15 +1699,16 @@
         "hexes": ["G8"]
       },
       {
-        "cities": [{}],
-        "color": "gray",
-        "names": [
+        "cities": [
           {
-            "angle": 0,
-            "name": "Trinidad",
-            "percent": 0.6
+            "name": {
+              "name": "Trinidad",
+              "reverse": true,
+              "straight": true
+            }
           }
         ],
+        "color": "gray",
         "track": [
           {
             "side": 1
