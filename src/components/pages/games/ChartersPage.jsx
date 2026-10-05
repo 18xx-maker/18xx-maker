@@ -16,7 +16,6 @@ import {
 import GameCharter, { CharterSpacer } from "@/components/GameCharter";
 import Pins from "@/components/Pins";
 import charterCss from "@/components/charterCss";
-import HtmlEditor from "@/components/editor/HtmlEditor";
 import PageSetup from "@/components/page/PageSetup";
 import Svg from "@/components/svg/Svg";
 
@@ -160,18 +159,16 @@ const ChartersPage = () => {
   }
 
   return (
-    <HtmlEditor page=".cutlines" count={2}>
-      <div
-        className="charters"
-        data-testid={`game-${game.meta.slug}-charters`}
-        data-layout={charters.layout}
-        data-per-page={data.perPage}
-      >
-        <style>{charterCss(data)}</style>
-        {pages}
-        <PageSetup landscape={false} />
-      </div>
-    </HtmlEditor>
+    <div
+      className="charters"
+      data-testid={`game-${game.meta.slug}-charters`}
+      data-layout={charters.layout}
+      data-per-page={data.perPage}
+    >
+      <style>{charterCss(data)}</style>
+      {pages}
+      <PageSetup landscape={false} />
+    </div>
   );
 };
 

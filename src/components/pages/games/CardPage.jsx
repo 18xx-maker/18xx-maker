@@ -6,7 +6,6 @@ import Number from "@/components/cards/Number";
 import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
-import HtmlEditor from "@/components/editor/HtmlEditor";
 
 import { MAX_CARD_BLEED } from "@/export/options.js";
 import { useConfig, useGame } from "@/hooks";
@@ -155,18 +154,16 @@ const CardPage = () => {
 `;
 
   return (
-    <HtmlEditor>
-      <div>
-        <style>{css}</style>
-        <div
-          className="printElement"
-          data-testid={`game-${game.meta.slug}-card`}
-          style={{ overflow: "auto", display: "inline-block" }}
-        >
-          {node}
-        </div>
+    <div>
+      <style>{css}</style>
+      <div
+        className="printElement"
+        data-testid={`game-${game.meta.slug}-card`}
+        style={{ overflow: "auto", display: "inline-block" }}
+      >
+        {node}
       </div>
-    </HtmlEditor>
+    </div>
   );
 };
 

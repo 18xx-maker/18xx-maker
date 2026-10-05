@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { flatten, times } from "ramda";
 
 import Color from "@/components/Color";
-import HtmlEditor from "@/components/editor/HtmlEditor";
 import PageSetup from "@/components/page/PageSetup";
 
 import config from "@/defaults.json";
@@ -69,43 +68,41 @@ const BackgroundPage = () => {
   );
 
   return (
-    <HtmlEditor>
-      <Color context="companies">
-        {(c) => (
-          <div className="overflow-auto">
-            <div
-              className="background printElement"
-              data-testid={`game-${game.meta.slug}-background`}
+    <Color context="companies">
+      {(c) => (
+        <div className="overflow-auto">
+          <div
+            className="background printElement"
+            data-testid={`game-${game.meta.slug}-background`}
+            style={{
+              width: unitsToCss(pageWidth),
+              height: unitsToCss(pageHeight),
+              backgroundColor: c(color),
+            }}
+          >
+            <svg
+              viewBox={`0 0 ${pageWidth} ${pageHeight}`}
+              fontSize="20"
               style={{
                 width: unitsToCss(pageWidth),
                 height: unitsToCss(pageHeight),
-                backgroundColor: c(color),
               }}
             >
-              <svg
-                viewBox={`0 0 ${pageWidth} ${pageHeight}`}
-                fontSize="20"
-                style={{
-                  width: unitsToCss(pageWidth),
-                  height: unitsToCss(pageHeight),
-                }}
+              <text style={{ visibility: "hidden" }} ref={(r) => (text = r)}>
+                {title}
+              </text>
+              <g
+                transform={`translate(${(containerWidth - pageWidth) / -2.0} ${(containerHeight - pageHeight) / -2.0}) rotate(-30 ${containerWidth / 2} ${containerHeight / 2})`}
               >
-                <text style={{ visibility: "hidden" }} ref={(r) => (text = r)}>
-                  {title}
-                </text>
-                <g
-                  transform={`translate(${(containerWidth - pageWidth) / -2.0} ${(containerHeight - pageHeight) / -2.0}) rotate(-30 ${containerWidth / 2} ${containerHeight / 2})`}
-                >
-                  {textNodes}
-                </g>
-              </svg>
-              {/* <div className="text">{text}</div> */}
-              <PageSetup landscape={false} />
-            </div>
+                {textNodes}
+              </g>
+            </svg>
+            {/* <div className="text">{text}</div> */}
+            <PageSetup landscape={false} />
           </div>
-        )}
-      </Color>
-    </HtmlEditor>
+        </div>
+      )}
+    </Color>
   );
 };
 

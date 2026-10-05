@@ -14,7 +14,6 @@ import Number from "@/components/cards/Number";
 import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
-import HtmlEditor from "@/components/editor/HtmlEditor";
 import PageSetup from "@/components/page/PageSetup";
 import Svg from "@/components/svg/Svg";
 
@@ -372,13 +371,11 @@ ${grouped ? sizeCss : cutlinesCss(data, "")}${paddingCss}${grouped ? "" : cardCs
   }
 
   return (
-    <HtmlEditor page=".cards">
-      <div data-testid={`game-${game.meta.slug}-cards`}>
-        <style>{css}</style>
-        {pageNodes}
-        <PageSetup landscape={data.layout.landscape} />
-      </div>
-    </HtmlEditor>
+    <div data-testid={`game-${game.meta.slug}-cards`}>
+      <style>{css}</style>
+      {pageNodes}
+      <PageSetup landscape={data.layout.landscape} />
+    </div>
   );
 };
 

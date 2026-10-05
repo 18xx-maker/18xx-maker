@@ -2,7 +2,6 @@ import { Navigate, useParams } from "react-router";
 
 import GameCharter from "@/components/GameCharter";
 import charterCss from "@/components/charterCss";
-import HtmlEditor from "@/components/editor/HtmlEditor";
 import PageSetup from "@/components/page/PageSetup";
 
 import { useConfig, useGame } from "@/hooks";
@@ -34,22 +33,20 @@ const CharterPage = () => {
   let company = gameCompanies[index];
 
   return (
-    <HtmlEditor>
-      <div
-        className="charters printElement"
-        data-testid={`game-${game.meta.slug}-charter`}
-        style={{ display: "inline-block" }}
-      >
-        <style>{charterCss(data)}</style>
-        <GameCharter
-          company={company}
-          game={game}
-          charters={charters}
-          subName={company.subName}
-        />
-        <PageSetup landscape={false} />
-      </div>
-    </HtmlEditor>
+    <div
+      className="charters printElement"
+      data-testid={`game-${game.meta.slug}-charter`}
+      style={{ display: "inline-block" }}
+    >
+      <style>{charterCss(data)}</style>
+      <GameCharter
+        company={company}
+        game={game}
+        charters={charters}
+        subName={company.subName}
+      />
+      <PageSetup landscape={false} />
+    </div>
   );
 };
 
