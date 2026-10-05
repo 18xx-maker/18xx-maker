@@ -18,7 +18,7 @@ import { inflateSync } from "node:zlib";
 import { chromium } from "playwright";
 
 import { loadExportData, loadGameConfig } from "#cli/export";
-import { loadGame, startExpress } from "#cli/util";
+import { loadGame, startServer } from "#cli/util";
 import { capture } from "#export/capture";
 import { documents } from "#export/documents";
 import { docPath, exportJobs } from "#export/names";
@@ -125,7 +125,8 @@ const hasPdftoppm = (() => {
 const game = loadGame(id);
 const config = loadGameConfig(game);
 const data = loadExportData();
-const server = startExpress(0);
+const server = startServer(0);
+await new Promise((resolve) => server.once("listening", resolve));
 const base = `http://localhost:${server.address().port}`;
 const browser = await chromium.launch({ args: ["--force-color-profile=srgb"] });
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "18xx-golden-"));

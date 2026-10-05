@@ -99,7 +99,7 @@ program
     "--b18-author <author>",
     "the author of the Board 18 game box (default: b18.author of maker config, or your name)",
   )
-  .option("-d, --debug", "start the express server and then quit")
+  .option("-d, --debug", "start the static server and then quit")
   .addHelpText(
     "after",
     '\nEvery option but --config, --out, --jobs, --all and --debug can also be set in the\n`exports` field of the game file, which is what they are when you do not give\nthem. What you give here wins over the game file: --layouts current turns off\n"layouts": "all".',
@@ -118,7 +118,7 @@ program
     "[author]",
     "the author of this game box (default: b18.author of maker config, or your name)",
   )
-  .option("-d, --debug", "start the express server and then quit")
+  .option("-d, --debug", "start the static server and then quit")
   .action((game, version, author, opts) =>
     b18(game, version, author || config.get("b18.author"), opts),
   );
@@ -130,7 +130,7 @@ program
   )
   .argument("[game]", "the id of the game to print", "1889")
   .option("-a, --all", "print all games")
-  .option("-d, --debug", "start the express server and then quit")
+  .option("-d, --debug", "start the static server and then quit")
   .action(print);
 
 // Parse the arguments and away we go! Exit codes: 0 ok, 1 some documents

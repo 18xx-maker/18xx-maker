@@ -2,8 +2,6 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-import express from "express";
-
 import {
   UsageError,
   compileCompanies,
@@ -19,7 +17,7 @@ import {
   setup,
   setupB18,
   setupGame,
-  startExpress,
+  startServer,
 } from "#cli/util";
 
 const cwd = process.cwd();
@@ -238,8 +236,24 @@ describe("custom config", () => {
   });
 });
 
-describe("startExpress", () => {
+describe("startServer", () => {
   let server;
+
+  // Serve a built site in a folder under a dot folder, like a git worktree
+  // under .claude, which must not 404
+  const site = () => {
+    const dir = path.join(tmp, ".dot", "site");
+    fs.mkdirSync(path.join(dir, "assets"), { recursive: true });
+    fs.writeFileSync(path.join(dir, "index.html"), "<p>index</p>");
+    fs.writeFileSync(path.join(dir, "assets", "app.js"), "export {};");
+    return dir;
+  };
+
+  const start = async (dir = site()) => {
+    server = startServer(0, dir);
+    await new Promise((resolve) => server.once("listening", resolve));
+    return server.address().port;
+  };
 
   afterEach(async () => {
     vi.restoreAllMocks();
@@ -250,40 +264,45 @@ describe("startExpress", () => {
   });
 
   it("serves index.html for any unknown route so the app can route it", async () => {
-    // Echo the path that would be sent, dist/site may not be built
-    vi.spyOn(fs, "existsSync").mockReturnValue(true);
-    vi.spyOn(express.response, "sendFile").mockImplementation(
-      function (file, options) {
-        this.send(path.join(options.root, file));
-      },
-    );
-
-    server = startExpress(0);
-    await new Promise((resolve) => server.once("listening", resolve));
-    const { port } = server.address();
+    const port = await start();
 
     const response = await fetch(
       `http://localhost:${port}/games/18Test/map?print=true`,
     );
     expect(response.status).toBe(200);
-    expect(await response.text()).toBe(
-      path.join(import.meta.dirname, "../../dist/site/index.html"),
-    );
+    expect(await response.text()).toBe("<p>index</p>");
+  });
+
+  it("serves index.html for unknown routes whose last segment has a dot", async () => {
+    const port = await start();
+
+    for (const route of ["/games/18Test/tiles/57.1", "/assets/missing.js"]) {
+      const response = await fetch(`http://localhost:${port}${route}`);
+      expect(response.status).toBe(200);
+      expect(await response.text()).toBe("<p>index</p>");
+    }
+  });
+
+  it("serves real files with their content type", async () => {
+    const port = await start();
+
+    const response = await fetch(`http://localhost:${port}/assets/app.js`);
+    expect(response.status).toBe(200);
+    expect(response.headers.get("content-type")).toContain("javascript");
+    expect(await response.text()).toBe("export {};");
   });
 
   it("only listens on this machine", async () => {
-    vi.spyOn(fs, "existsSync").mockReturnValue(true);
-
-    server = startExpress(0);
-    await new Promise((resolve) => server.once("listening", resolve));
+    await start();
 
     expect(server.address().address).toBe("127.0.0.1");
   });
 
   it("is a usage error when the site is not built", () => {
-    vi.spyOn(fs, "existsSync").mockReturnValue(false);
+    const empty = path.join(tmp, "empty");
+    fs.mkdirSync(empty);
 
-    expect(() => startExpress(0)).toThrow(UsageError);
-    expect(() => startExpress(0)).toThrow("run pnpm build first");
+    expect(() => startServer(0, empty)).toThrow(UsageError);
+    expect(() => startServer(0, empty)).toThrow("run pnpm build first");
   });
 });

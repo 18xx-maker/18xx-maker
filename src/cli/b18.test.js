@@ -5,7 +5,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 
 import b18 from "#cli/b18";
-import { defaultConfig, loadGame, startExpress } from "#cli/util";
+import { defaultConfig, loadGame, startServer } from "#cli/util";
 import { writeZip } from "#export/zip";
 import { PNG } from "./__fixtures__/browser.js";
 
@@ -26,7 +26,7 @@ vi.mock("#cli/util", async (importOriginal) => {
   return {
     ...real,
     loadGame: vi.fn(real.loadGame),
-    startExpress: vi.fn(() => mocks.server),
+    startServer: vi.fn(() => mocks.server),
   };
 });
 
@@ -290,13 +290,13 @@ describe("b18", () => {
     await expect(b18("18Missing", "1.0", "Pat", {})).rejects.toThrow(
       "Game 18Missing not found",
     );
-    expect(startExpress).not.toHaveBeenCalled();
+    expect(startServer).not.toHaveBeenCalled();
   });
 
   it("only starts the server in debug mode", async () => {
     await b18("18Test", "1.0", "Pat", { debug: true });
 
-    expect(startExpress).toHaveBeenCalledOnce();
+    expect(startServer).toHaveBeenCalledOnce();
     expect(fs.statSync("render").isDirectory()).toBe(true);
     expect(chromium.launch).not.toHaveBeenCalled();
     expect(fs.existsSync(folder)).toBe(false);

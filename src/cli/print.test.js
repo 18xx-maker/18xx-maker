@@ -5,7 +5,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 
 import print from "#cli/print";
-import { UsageError, defaultConfig, loadGame, startExpress } from "#cli/util";
+import { UsageError, defaultConfig, loadGame, startServer } from "#cli/util";
 
 const mocks = await vi.hoisted(async () => {
   const { createFakeBrowser } = await import("./__fixtures__/browser.js");
@@ -22,7 +22,7 @@ vi.mock("#cli/util", async (importOriginal) => {
     ...real,
     customConfig: mocks.customConfig,
     loadGame: vi.fn(),
-    startExpress: vi.fn(() => mocks.server),
+    startServer: vi.fn(() => mocks.server),
   };
 });
 
@@ -201,7 +201,7 @@ describe("print", () => {
       new UsageError("Game 18Missing not found"),
     );
     expect(chromium.launch).not.toHaveBeenCalled();
-    expect(startExpress).not.toHaveBeenCalled();
+    expect(startServer).not.toHaveBeenCalled();
   });
 
   it("waits for the browser and closes it and the server", async () => {
@@ -266,7 +266,7 @@ describe("print", () => {
   it("only starts the server in debug mode", async () => {
     await print("18Full", { debug: true });
 
-    expect(startExpress).toHaveBeenCalledOnce();
+    expect(startServer).toHaveBeenCalledOnce();
     expect(fs.statSync("render").isDirectory()).toBe(true);
     expect(chromium.launch).not.toHaveBeenCalled();
     expect(mocks.server.close).not.toHaveBeenCalled();

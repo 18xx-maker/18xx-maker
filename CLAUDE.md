@@ -209,9 +209,9 @@ sizing or packaging logic in either surface.
   `pnpm build && pnpm build:app && E2E_ELECTRON=1 pnpm test:export`. Run after
   any change to `electron/`, the preload, render mode or export code; compiling
   is not enough (it caught bugs that unit tests with fake CDP targets missed).
-- Run the CLI from a checkout path with no dot folder for a baseline: express
-  `sendFile` 404s on absolute paths containing one (worktrees live in
-  `.claude/worktrees`), so use `root` as `startExpress` does.
+- The CLI serves `dist/site` with `sirv` (`startServer` in `src/cli/util.js`,
+  `single: true` so unknown routes get `index.html`). It works from a checkout
+  under a dot folder (worktrees live in `.claude/worktrees`).
 
 ## JSON schemas
 

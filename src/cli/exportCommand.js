@@ -18,7 +18,7 @@ import {
   customConfig,
   loadGame,
   setup,
-  startExpress,
+  startServer,
 } from "#cli/util";
 import { b18Spec } from "#export/b18";
 import { MAX_DPI } from "#export/capture";
@@ -193,9 +193,9 @@ const command = async (game, opts = {}) => {
 
   if (opts.debug) {
     setup();
-    startExpress();
+    startServer();
     console.log("Debug Mode");
-    console.log("Starting the express server on http://localhost:9000");
+    console.log("Starting the server on http://localhost:9000");
     console.log("\nCtrl-C when done");
     return;
   }

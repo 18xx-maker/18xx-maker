@@ -88,7 +88,7 @@ describe("createFileSink", () => {
 describe("withBrowser", () => {
   it("serves the site on a free port and always closes", async () => {
     vi.spyOn(chromium, "launch").mockResolvedValue(fake.browser);
-    vi.spyOn(util, "startExpress").mockReturnValue(fake.server);
+    vi.spyOn(util, "startServer").mockReturnValue(fake.server);
 
     const result = await withBrowser(async ({ browser, baseUrl }) => {
       expect(browser).toBe(fake.browser);
@@ -96,7 +96,7 @@ describe("withBrowser", () => {
     });
 
     expect(result).toBe("http://localhost:1234");
-    expect(util.startExpress).toHaveBeenCalledWith(0);
+    expect(util.startServer).toHaveBeenCalledWith(0);
     expect(chromium.launch).toHaveBeenCalledWith({
       args: ["--force-color-profile=srgb"],
     });
@@ -106,7 +106,7 @@ describe("withBrowser", () => {
 
   it("closes when the callback throws", async () => {
     vi.spyOn(chromium, "launch").mockResolvedValue(fake.browser);
-    vi.spyOn(util, "startExpress").mockReturnValue(fake.server);
+    vi.spyOn(util, "startServer").mockReturnValue(fake.server);
 
     await expect(
       withBrowser(async () => {
