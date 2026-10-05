@@ -23,8 +23,12 @@ const prefix = (id) =>
     .replace(/[^a-z0-9]+/g, "-");
 
 // Documents that did not print before, because the old checks looked for
-// different data: tokens used to need companies, 1888 only has extra tokens
-const added = { 1888: ["tokens"] };
+// different data: tokens used to need companies, 1888 only had extra tokens,
+// and 1888 and 1883 got their maps and companies after the files were written
+const added = {
+  1888: ["tokens", "cards-miniEuroDie", "charters", "map", "map-paginated"],
+  "1883ExpressdOrient": ["map", "map-paginated"],
+};
 
 // Games where the old b18 command crashed, they have no stock market
 const crashed = ["1888", "1883ExpressdOrient"];

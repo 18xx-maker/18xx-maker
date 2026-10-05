@@ -13,6 +13,11 @@ import { createUpdate } from "@/state";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
+vi.mock("@/data/games", async (importOriginal) => {
+  const { withBareGame } = await import("@tests/support/bare.js");
+  return { default: withBareGame((await importOriginal()).default) };
+});
+
 // The electron preload api, faked. analytics reads it at import time, so it
 // has to exist before the app modules are imported.
 const api = vi.hoisted(() => {
@@ -586,9 +591,9 @@ describe("export button", () => {
   });
 
   it("skips the components a game does not have", async () => {
-    // 1888 has tiles and tokens but no map, companies, stock or trains
-    const { user } = renderApp("/games/1888/tiles");
-    await screen.findByTestId("game-1888-tiles");
+    // Bare has tiles and tokens but no map, companies, stock or trains
+    const { user } = renderApp("/games/Bare/tiles");
+    await screen.findByTestId("game-Bare-tiles");
 
     await openExport(user);
     await user.click(
@@ -621,7 +626,7 @@ describe("export button", () => {
         .sort(),
     ).toEqual(["background", "revenue", "tile-manifest"].sort());
     // Without companies the game tokens are numbered from one
-    expect(exported(requested())["tokens/0"]).toBe("1888-token-1.png");
+    expect(exported(requested())["tokens/0"]).toBe("bare-token-1.png");
   });
 
   it("exports an svg for the components that are drawings", async () => {

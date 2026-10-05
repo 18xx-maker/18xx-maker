@@ -4,7 +4,10 @@
     "designer": "Anthony Fryer",
     "publisher": "traxx",
     "background": "gray",
-    "currency": "K #"
+    "currency": "K #",
+    "titleX": 20,
+    "titleY": 815,
+    "titleSize": 70
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/306260/1883-express-dorient",
@@ -16,13 +19,99 @@
   "colors": {
     "CFR_red": "#ce1227",
     "CFR_yellow": "#fbd117",
-    "CFR_blue": "#012d81"
+    "CFR_blue": "#012d81",
+    "KK_red": "#ce1227",
+    "Russia": "#a58ab8",
+    "SAF_pink": "#ff6ec7"
   },
   "tokens": ["Round"],
   "tokenTypes": {
     "default": ["Free", 40, 60, 80]
   },
   "companies": [
+    {
+      "name": "k. k. Österreichische",
+      "abbrev": "KK",
+      "token": {
+        "label": "KK",
+        "shield": true,
+        "shieldTop": "KK_red",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "KK_red"
+    },
+    {
+      "name": "DE",
+      "abbrev": "DE",
+      "token": {
+        "label": "DE",
+        "shield": true,
+        "shieldTop": "orange",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "orange"
+    },
+    {
+      "name": "Erste Ungarisch Eisenbahn",
+      "abbrev": "EUE",
+      "token": {
+        "label": "EUE",
+        "shield": true,
+        "shieldTop": "gray",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "gray"
+    },
+    {
+      "name": "SAF",
+      "abbrev": "SAF",
+      "token": {
+        "label": "SAF",
+        "shield": true,
+        "shieldTop": "SAF_pink",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "SAF_pink"
+    },
+    {
+      "name": "Beograd i Zagreb Železnice",
+      "abbrev": "BZZ",
+      "token": {
+        "shield": true,
+        "shieldTop": "yellow",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "yellow"
+    },
+    {
+      "name": "BGF",
+      "abbrev": "BGF",
+      "token": {
+        "label": "BGF",
+        "shield": true,
+        "shieldTop": "blue",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "blue"
+    },
+    {
+      "name": "BBF",
+      "abbrev": "BBF",
+      "token": {
+        "label": "BBF",
+        "shield": true,
+        "shieldTop": "green",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "green"
+    },
     {
       "name": "Caile Ferate Române",
       "abbrev": "CFR",
@@ -37,20 +126,9 @@
         "fontSize": 16
       },
       "color": "CFR_blue"
-    },
-    {
-      "name": "Beograd i Zagreb Železnice",
-      "abbrev": "BZZ",
-      "token": {
-        "shield": true,
-        "shieldTop": "yellow",
-        "color": "white",
-        "fontSize": 16
-      },
-      "color": "yellow"
     }
   ],
-  "bank": 12000,
+  "bank": 9000,
   "tiles": {
     "1": 1,
     "2": 1,
@@ -116,15 +194,40 @@
           "value": 30
         }
       ],
-      "cities": [{ "size": 2 }],
-      "track": [{ "side": 1 }, { "side": 2 }, { "side": 4 }, { "side": 6 }]
+      "cities": [
+        {
+          "size": 2
+        }
+      ],
+      "track": [
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 6
+        }
+      ]
     },
     "BUDG1": {
       "color": "green",
       "quantity": 1,
       "track": [
-        { "side": 1, "type": "straight", "cross": "under" },
-        { "side": 2, "type": "straight", "cross": "over" }
+        {
+          "side": 1,
+          "type": "straight",
+          "cross": "under"
+        },
+        {
+          "side": 2,
+          "type": "straight",
+          "cross": "over"
+        }
       ],
       "cities": [
         {
@@ -170,8 +273,14 @@
       "color": "green",
       "quantity": 1,
       "track": [
-        { "side": 5, "type": "gentle" },
-        { "side": 2, "type": "sharp" }
+        {
+          "side": 5,
+          "type": "gentle"
+        },
+        {
+          "side": 2,
+          "type": "sharp"
+        }
       ],
       "cities": [
         {
@@ -217,8 +326,16 @@
       "color": "green",
       "quantity": 1,
       "track": [
-        { "side": 4, "type": "gentle", "cross": "over" },
-        { "side": 2, "type": "straight", "cross": "under" }
+        {
+          "side": 4,
+          "type": "gentle",
+          "cross": "over"
+        },
+        {
+          "side": 2,
+          "type": "straight",
+          "cross": "under"
+        }
       ],
       "cities": [
         {
@@ -264,8 +381,14 @@
       "color": "green",
       "quantity": 1,
       "track": [
-        { "side": 3, "type": "sharp" },
-        { "side": 5, "type": "gentle" }
+        {
+          "side": 3,
+          "type": "sharp"
+        },
+        {
+          "side": 5,
+          "type": "gentle"
+        }
       ],
       "cities": [
         {
@@ -311,8 +434,14 @@
       "color": "green",
       "quantity": 1,
       "track": [
-        { "side": 2, "type": "straight" },
-        { "side": 6, "type": "sharp" }
+        {
+          "side": 2,
+          "type": "straight"
+        },
+        {
+          "side": 6,
+          "type": "sharp"
+        }
       ],
       "cities": [
         {
@@ -358,14 +487,33 @@
       "color": "brown",
       "quantity": 1,
       "track": [
-        { "side": 1 },
-        { "side": 2 },
-        { "side": 3 },
-        { "side": 4 },
-        { "side": 5 },
-        { "side": 6 }
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
       ],
-      "cities": [{ "size": 3, "angle": 0, "percent": 0.1, "rotation": 30 }],
+      "cities": [
+        {
+          "size": 3,
+          "angle": 0,
+          "percent": 0.1,
+          "rotation": 30
+        }
+      ],
       "labels": [
         {
           "label": "BUD",
@@ -386,13 +534,30 @@
       "color": "green",
       "quantity": 1,
       "track": [
-        { "side": 1 },
-        { "side": 3 },
-        { "side": 4 },
-        { "side": 5 },
-        { "side": 6 }
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
       ],
-      "cities": [{ "size": 3, "angle": 0, "percent": 0.1, "rotation": 60 }],
+      "cities": [
+        {
+          "size": 3,
+          "angle": 0,
+          "percent": 0.1,
+          "rotation": 60
+        }
+      ],
       "labels": [
         {
           "label": "BUCH",
@@ -413,13 +578,27 @@
       "color": "brown",
       "quantity": 1,
       "track": [
-        { "side": 1 },
-        { "side": 3 },
-        { "side": 4 },
-        { "side": 5 },
-        { "side": 6 }
+        {
+          "side": 1
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
       ],
-      "cities": [{ "size": 4 }],
+      "cities": [
+        {
+          "size": 4
+        }
+      ],
       "labels": [
         {
           "label": "BUCH",
@@ -451,12 +630,24 @@
       "color": "green",
       "quantity": 1,
       "track": [
-        { "side": 1 },
-        { "side": 2 },
-        { "side": 3 },
-        { "side": 4 },
-        { "side": 5 },
-        { "side": 6 }
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
       ],
       "cities": [
         {
@@ -492,12 +683,24 @@
       "color": "brown",
       "quantity": 1,
       "track": [
-        { "side": 1 },
-        { "side": 2 },
-        { "side": 3 },
-        { "side": 4 },
-        { "side": 5 },
-        { "side": 6 }
+        {
+          "side": 1
+        },
+        {
+          "side": 2
+        },
+        {
+          "side": 3
+        },
+        {
+          "side": 4
+        },
+        {
+          "side": 5
+        },
+        {
+          "side": 6
+        }
       ],
       "cities": [
         {
@@ -532,5 +735,1344 @@
         }
       ]
     }
-  }
+  },
+  "map": {
+    "roundTracker": {
+      "type": "col-reverse",
+      "x": 15,
+      "y": 15
+    },
+    "borders": [
+      {
+        "color": "water",
+        "width": 10,
+        "coords": [
+          "E3p2",
+          "E3p1",
+          "E3p6",
+          "E5p1",
+          "E5p6",
+          "E7p1",
+          "F6p6",
+          "F8p1",
+          "F8p6",
+          "F10p1",
+          "G9p6",
+          "G11p1",
+          "G11p6",
+          "G13p1",
+          "G13p6",
+          "G15p1",
+          "G15p6",
+          "G17p1",
+          "G17p6"
+        ]
+      }
+    ],
+    "borderTexts": [
+      {
+        "coord": "C7x-80y53",
+        "label": "H U N G A R Y",
+        "rotation": 0,
+        "fontSize": 30,
+        "color": "#999",
+        "fontWeight": "bold"
+      },
+      {
+        "coord": "D16x83y-5",
+        "label": "R O M A N I A",
+        "rotation": 0,
+        "fontSize": 30,
+        "color": "#999",
+        "fontWeight": "bold"
+      },
+      {
+        "coord": "G7x42y0",
+        "label": "S E R B I A",
+        "rotation": 0,
+        "fontSize": 30,
+        "color": "#999",
+        "fontWeight": "bold"
+      },
+      {
+        "coord": "G11x-33y49",
+        "label": "Danube",
+        "rotation": 30,
+        "fontSize": 11,
+        "color": "#2a7fb8"
+      },
+      {
+        "coord": "E3s5",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "E5s6",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "E5s5",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "E7s6",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "F6s4",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "F8s6",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "F8s5",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "F10s6",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "G9s4",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "G17s5",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      }
+    ],
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": [
+          "A5",
+          "A7",
+          "A15",
+          "B4",
+          "B8",
+          "B16",
+          "B20",
+          "C3",
+          "C9",
+          "C11",
+          "C17",
+          "D4",
+          "D6",
+          "D10",
+          "D16",
+          "D18",
+          "D20",
+          "E3",
+          "E5",
+          "E15",
+          "E17",
+          "F4",
+          "F14",
+          "F18",
+          "G3",
+          "G7",
+          "G9",
+          "G11",
+          "G15"
+        ]
+      },
+      {
+        "color": "plain",
+        "icons": [
+          {
+            "type": "tree",
+            "angle": 90,
+            "percent": 0.4,
+            "noCircle": true
+          }
+        ],
+        "shapes": [
+          {
+            "type": "diamond",
+            "text": "40",
+            "color": "green",
+            "textColor": "white",
+            "fontSize": 16,
+            "angle": 270,
+            "percent": 0.4
+          }
+        ],
+        "hexes": ["A9"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "2",
+            "x": -28,
+            "y": -17,
+            "size": 22
+          }
+        ],
+        "icons": [
+          {
+            "type": "mining",
+            "x": -28,
+            "y": 5,
+            "noCircle": true
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80,
+            "x": 18,
+            "y": 8
+          }
+        ],
+        "hexes": ["A13"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "3",
+            "x": -28,
+            "y": -17,
+            "size": 22
+          }
+        ],
+        "icons": [
+          {
+            "type": "mining",
+            "x": -28,
+            "y": 5,
+            "noCircle": true
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80,
+            "x": 18,
+            "y": 8
+          }
+        ],
+        "hexes": ["B12"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "4",
+            "x": -28,
+            "y": -17,
+            "size": 22
+          }
+        ],
+        "icons": [
+          {
+            "type": "mining",
+            "x": -28,
+            "y": 5,
+            "noCircle": true
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80,
+            "x": 18,
+            "y": 8
+          }
+        ],
+        "hexes": ["E11"]
+      },
+      {
+        "color": "plain",
+        "labels": [
+          {
+            "label": "5",
+            "x": -42,
+            "y": -17,
+            "size": 22
+          }
+        ],
+        "icons": [
+          {
+            "type": "mining",
+            "x": -42,
+            "y": 5,
+            "noCircle": true
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80,
+            "x": 42,
+            "y": 15
+          }
+        ],
+        "cities": [
+          {
+            "companies": ["SAF"]
+          }
+        ],
+        "names": [
+          {
+            "name": "Sibiu",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["E13"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": ["DE"]
+          }
+        ],
+        "names": [
+          {
+            "name": "Debrecen",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["A11"]
+      },
+      {
+        "color": "plain",
+        "shapes": [
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22
+          }
+        ],
+        "hexes": ["A17", "C19", "D8", "F12"]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80
+          }
+        ],
+        "hexes": ["B14", "C13", "C15", "F10"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "name": "Oradea",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["B10"]
+      },
+      {
+        "color": "plain",
+        "shapes": [
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 70,
+            "percent": 0.3
+          },
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 285,
+            "percent": 0.3
+          }
+        ],
+        "hexes": ["B18"]
+      },
+      {
+        "color": "plain",
+        "shapes": [
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 112,
+            "percent": 0.3
+          },
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 290,
+            "percent": 0.28
+          }
+        ],
+        "hexes": ["C5"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "name": "Szeged",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["C7"]
+      },
+      {
+        "color": "plain",
+        "shapes": [
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 100,
+            "percent": 0.28
+          },
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 285,
+            "percent": 0.3
+          }
+        ],
+        "hexes": ["E7"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "name": "Novi Sad",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["F6"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "names": [
+          {
+            "name": "Craiova",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["G13"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "names": [
+          {
+            "name": "Sarajevo",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["G5"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.4
+          },
+          {
+            "angle": 328,
+            "percent": 0.5
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 26,
+            "percent": 0.7
+          }
+        ],
+        "labels": [
+          {
+            "label": "BUD",
+            "angle": 125,
+            "percent": 0.7
+          }
+        ],
+        "companies": [
+          {
+            "label": "EUE",
+            "angle": 253,
+            "percent": 0.55,
+            "color": "gray"
+          }
+        ],
+        "names": [
+          {
+            "name": "Budapest",
+            "angle": 180,
+            "percent": 0.8
+          }
+        ],
+        "hexes": ["B6"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "angle": 98,
+            "percent": 0.48
+          },
+          {
+            "angle": 332,
+            "percent": 0.43
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 225,
+            "percent": 0.27
+          }
+        ],
+        "names": [
+          {
+            "name": "Timisoara",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["E9"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "angle": 107,
+            "percent": 0.43
+          },
+          {
+            "angle": 325,
+            "percent": 0.4
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 233,
+            "percent": 0.5
+          }
+        ],
+        "names": [
+          {
+            "name": "Ploesti",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["F16"]
+      },
+      {
+        "color": "yellow",
+        "cities": [{}],
+        "track": [
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 54,
+            "percent": 0.68
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 107,
+            "percent": 0.7
+          }
+        ],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80,
+            "angle": 0,
+            "percent": 0.62
+          }
+        ],
+        "names": [
+          {
+            "name": "Cluj-Napoca",
+            "angle": 180,
+            "percent": 0.75
+          }
+        ],
+        "hexes": ["D12"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80,
+            "angle": 0,
+            "percent": 0.62
+          }
+        ],
+        "names": [
+          {
+            "name": "Targu Mures",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["D14"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "companies": ["BGF"]
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 25,
+            "percent": 0.55
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 235,
+            "percent": 0.7
+          }
+        ],
+        "hexes": ["E19"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": ["BZZ"]
+          }
+        ],
+        "labels": [
+          {
+            "label": "BEL",
+            "angle": 245,
+            "percent": 0.6
+          }
+        ],
+        "names": [
+          {
+            "name": "Belgrade",
+            "angle": 180,
+            "percent": 0.72
+          }
+        ],
+        "hexes": ["F8"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "angle": 110,
+            "percent": 0.42,
+            "companies": ["BBF"]
+          },
+          {
+            "angle": 286,
+            "percent": 0.54,
+            "companies": ["CFR"]
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "value": 40,
+            "angle": 186,
+            "percent": 0.49
+          }
+        ],
+        "labels": [
+          {
+            "label": "BUCH",
+            "angle": 340,
+            "percent": 0.5
+          }
+        ],
+        "names": [
+          {
+            "name": "Bucharest",
+            "angle": 180,
+            "percent": 0.8
+          }
+        ],
+        "hexes": ["G17"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "type": "sharp",
+            "side": 1
+          }
+        ],
+        "hexes": ["G19"]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.55
+          },
+          {
+            "angle": 270,
+            "percent": 0.2,
+            "companies": ["KK"]
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "labels": [
+          {
+            "label": "W",
+            "angle": 210,
+            "percent": 0.75,
+            "size": 24
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+20",
+            "angle": 0,
+            "percent": 0.5
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ],
+          "name": {
+            "name": "Vienna"
+          },
+          "rows": 2,
+          "x": -30,
+          "y": -55
+        },
+        "hexes": ["A3"]
+      },
+      {
+        "color": "Russia",
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.25
+          },
+          {
+            "angle": 270,
+            "percent": 0.45
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "labels": [
+          {
+            "label": "N",
+            "angle": 180,
+            "percent": 0.75,
+            "size": 24
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "50"
+            },
+            {
+              "color": "green",
+              "cost": "70"
+            },
+            {
+              "color": "brown",
+              "cost": "90"
+            },
+            {
+              "color": "gray",
+              "cost": "110"
+            }
+          ],
+          "name": {
+            "name": "Russia"
+          },
+          "rows": 2,
+          "x": 60,
+          "y": -47
+        },
+        "hexes": ["A19"]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "angle": 270,
+            "percent": 0.16
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "labels": [
+          {
+            "label": "W",
+            "angle": 180,
+            "percent": 0.7,
+            "size": 24
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+20",
+            "angle": 0,
+            "percent": 0.5
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ],
+          "name": {
+            "name": "Zagreb"
+          },
+          "rows": 4,
+          "x": -45,
+          "y": 30
+        },
+        "hexes": ["D2"]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "angle": 270,
+            "percent": 0.1
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "labels": [
+          {
+            "label": "W",
+            "angle": 180,
+            "percent": 0.7,
+            "size": 24
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+20",
+            "angle": 0,
+            "percent": 0.5
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ],
+          "name": {
+            "name": "Venice"
+          },
+          "rows": 4,
+          "x": -35,
+          "y": 40
+        },
+        "hexes": ["F2"]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.1
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          }
+        ],
+        "labels": [
+          {
+            "label": "E",
+            "angle": 180,
+            "percent": 0.75,
+            "size": 24
+          }
+        ],
+        "routeBonuses": [
+          {
+            "value": "+20",
+            "angle": 0,
+            "percent": 0.5
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ],
+          "name": {
+            "name": "Constanta"
+          },
+          "rows": 4,
+          "x": 57,
+          "y": 15
+        },
+        "hexes": ["F20"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "labels": [
+          {
+            "label": "S",
+            "angle": 180,
+            "percent": 0.75,
+            "size": 24
+          }
+        ],
+        "offBoardRevenue": {
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ],
+          "name": {
+            "name": "Varna"
+          },
+          "y": -45
+        },
+        "hexes": ["H18"]
+      }
+    ]
+  },
+  "floatPercent": 60,
+  "players": [
+    {
+      "number": 2,
+      "capital": 1200,
+      "certLimit": 25
+    },
+    {
+      "number": 3,
+      "capital": 800,
+      "certLimit": 20
+    },
+    {
+      "number": 4,
+      "capital": 600,
+      "certLimit": 16
+    },
+    {
+      "number": 5,
+      "capital": 480,
+      "certLimit": 13
+    },
+    {
+      "number": 6,
+      "capital": 400,
+      "certLimit": 11
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": ["Buy one certificate", "Sell any number of certificates"],
+      "ordered": false
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 6,
+      "rust": "4",
+      "color": "yellow",
+      "description": "Discounted price in the Open Market: K 60"
+    },
+    {
+      "name": "3",
+      "quantity": 5,
+      "rust": "6",
+      "color": "green",
+      "description": "Discounted price in the Open Market: K 135"
+    },
+    {
+      "name": "4",
+      "quantity": 4,
+      "rust": "D",
+      "color": "green",
+      "description": "Discounted price in the Open Market: K 225"
+    },
+    {
+      "name": "5",
+      "quantity": 3,
+      "color": "brown",
+      "description": "Discounted price in the Open Market: K 400"
+    },
+    {
+      "name": "6",
+      "quantity": 2,
+      "color": "brown"
+    },
+    {
+      "name": "D",
+      "quantity": 6,
+      "color": "gray"
+    }
+  ],
+  "phases": [
+    {
+      "name": "2",
+      "train": "2",
+      "limit": 4,
+      "rounds": 1,
+      "tiles": "yellow"
+    },
+    {
+      "name": "3",
+      "train": "3",
+      "limit": 4,
+      "rounds": 2,
+      "tiles": "green",
+      "buy_companies": true
+    },
+    {
+      "name": "4",
+      "train": "4",
+      "limit": 3,
+      "rounds": 2,
+      "tiles": "green",
+      "buy_companies": true
+    },
+    {
+      "name": "5",
+      "train": "5",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "brown",
+      "events": {
+        "close_companies": true
+      }
+    },
+    {
+      "name": "6",
+      "train": "6",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "brown"
+    },
+    {
+      "name": "D",
+      "train": "D",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "gray"
+    }
+  ],
+  "privates": [
+    {
+      "name": "Forestry Company",
+      "sym": "1",
+      "hex": "A9",
+      "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
+    },
+    {
+      "name": "Mining Company",
+      "sym": "2",
+      "hex": "A13",
+      "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
+    },
+    {
+      "name": "Mining Company",
+      "sym": "3",
+      "hex": "B12",
+      "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
+    },
+    {
+      "name": "Mining Company",
+      "sym": "4",
+      "hex": "E11",
+      "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
+    },
+    {
+      "name": "Mining Company",
+      "sym": "5",
+      "hex": "E13",
+      "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
+    },
+    {
+      "name": "Franz Joseph I",
+      "sym": "6",
+      "description": "Upon purchase in the Initial Stock Round, the owning player receives the President's Certificate of the k. k. Österreichische from the IPO and sets its par value. Closes when the k. k. Österreichische purchases its first train. Cannot be sold to a public company."
+    }
+  ]
 }

@@ -2,6 +2,11 @@ import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
+vi.mock("@/data/games", async (importOriginal) => {
+  const { withBareGame } = await import("@tests/support/bare.js");
+  return { default: withBareGame((await importOriginal()).default) };
+});
+
 describe("toolbar", () => {
   it("shows nothing for a section that does not exist", async () => {
     renderApp("/games/18Test/nonsense");
@@ -101,9 +106,9 @@ describe("edit link", () => {
   });
 
   it("starts at the first section the game has data for", async () => {
-    renderApp("/games/1888");
-    const page = await screen.findByTestId("game-1888");
+    renderApp("/games/Bare");
+    const page = await screen.findByTestId("game-Bare");
     const link = within(page).getByRole("link", { name: "Edit Game" });
-    expect(link).not.toHaveAttribute("href", "/games/1888/map");
+    expect(link).not.toHaveAttribute("href", "/games/Bare/map");
   });
 });
