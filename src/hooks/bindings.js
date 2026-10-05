@@ -44,6 +44,7 @@ export const useBindings = () => {
   const [shortcuts, setShortcuts] = useState(false);
   const [print] = useBooleanParam("print");
   const [, toggleConfig] = useBooleanParam("config");
+  const [, togglePagination] = useBooleanParam("paginated");
   const { pathname } = location;
 
   const handleKeyDown = useCallback(
@@ -138,7 +139,31 @@ export const useBindings = () => {
           }
 
           if (item) {
+            // A section without data for the game has nothing to show
+            if (game && item.disabled?.(game)) return;
             navigate(`/games/${viewingGame.params.slug}/${item.section}`);
+            return;
+          }
+
+          // The toolbar's paginate switch and print button, for the sections
+          // that have them (the print button is the export menu's x in the app)
+          const current = find(
+            propEq(viewingGame.params.section, "section"),
+            gameNav,
+          );
+
+          if (event.key === "n" && current?.pagination) {
+            togglePagination();
+            return;
+          }
+
+          if (
+            event.key === "p" &&
+            current &&
+            viewingGame.params.section !== "b18" &&
+            !capability.electron
+          ) {
+            window.print();
             return;
           }
         }
@@ -150,10 +175,9 @@ export const useBindings = () => {
       } else if (loadedGame) {
         // The game state is only the loaded game when the slugs agree
         const first = game ? firstSection(game) : "map";
-        const section =
-          event.key === "e"
-            ? first
-            : find(propEq(event.key, "key"), gameNav)?.section;
+        const item = find(propEq(event.key, "key"), gameNav);
+        if (item && game && item.disabled?.(game)) return;
+        const section = event.key === "e" ? first : item?.section;
 
         if (section) {
           navigate(`/games/${loadedGame.slug}/${section}`);
@@ -237,6 +261,7 @@ export const useBindings = () => {
       print,
       exportSheetOpen,
       toggleConfig,
+      togglePagination,
       dispatch,
       navigate,
     ],

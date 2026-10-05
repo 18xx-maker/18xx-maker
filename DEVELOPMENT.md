@@ -270,6 +270,12 @@ Notes:
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.
 
+The files of the CLI and the app have the same layout: `<folder>/<game id>/<format>/<file>`
+(`formatFolder` in `src/export/names.js`, `gameFolder` in `src/export/sink.js`; the
+Board 18 box is in `<game id>` itself). The app saves the folder of the folder
+dialog as `exportFolder` in its `config.json` and opens the dialog there again
+(`savedFolder` in `src/export/folder.js`, `electron/main/export.js`).
+
 The export options are resolved in `src/export/options.js` (plain JS, used by
 `maker export` and by `planExport` in `src/util/exportPlan.js`, which also gives
 the export options panel its starting values). A new option goes in the `exports`

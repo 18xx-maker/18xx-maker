@@ -31,6 +31,30 @@
     "refresh": "Neu laden",
     "description": "Die neueste Version dieser Datei laden"
   },
+  "problems": {
+    "nav": "Probleme",
+    "title": "Probleme mit diesem Spiel",
+    "count": "{{count}} gefunden in {{title}}",
+    "checking": "Die Spieldatei wird geprüft",
+    "none": "Keine Probleme gefunden",
+    "error": "Fehler",
+    "warning": "Warnung",
+    "deprecated": "Veraltet",
+    "more": "und {{count}} weitere",
+    "root": "die Spieldatei",
+    "docs": "Über das Format der Spieldatei",
+    "unknown-field": "Unbekanntes Feld \"{{field}}\". Es wurde möglicherweise umbenannt oder entfernt. Entferne es oder sieh in der Dokumentation nach.",
+    "unknown-field-suggest": "Unbekanntes Feld \"{{field}}\". Es wurde möglicherweise umbenannt oder entfernt. Meintest du \"{{suggestion}}\"?",
+    "type": "Erwartet wurde {{expected}}, gefunden wurde {{found}} {{value}}.",
+    "enum": "{{value}} ist hier nicht erlaubt. Verwende eines von: {{values}}.",
+    "required": "Das Pflichtfeld \"{{field}}\" fehlt.",
+    "generic": "{{message}}",
+    "failed": "Die Spieldatei konnte nicht geprüft werden.",
+    "deprecated-generic": "Dieses Feld ist veraltet.",
+    "deprecations": {
+      "exports_paginated": "Dieses Feld ist veraltet und wird ignoriert. Entferne es, die paginierten PDFs werden automatisch exportiert."
+    }
+  },
   "prototype": {
     "prototype": "Prototyp",
     "description": "Dieses Spiel befindet sich noch in der Entwicklung"
@@ -310,6 +334,7 @@
     },
     "loaded": "Deine Spiele",
     "bundled": "Mitgelieferte Spiele",
+    "test": "Testspiele",
     "empty": "Keine Spiele entsprechen diesen Filtern"
   },
   "game": {
@@ -384,6 +409,7 @@
     "open": "Datei öffnen",
     "paginated": "Auf Seiten aufteilen",
     "players": "Spieler",
+    "publisher": "Veröffentlicht von",
     "purchase": {
       "primary": "Kaufen",
       "secondary": "Wo man dieses Spiel kaufen kann"
@@ -979,6 +1005,14 @@
       "view": {
         "use": "Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen",
         "notes": "Nur auf den Bearbeitungsseiten von Karte und Aktienmarkt"
+      },
+      "print": {
+        "use": "Den aktuellen Abschnitt drucken",
+        "notes": "Nur auf der Bearbeitungsseite eines Abschnitts mit Drucken-Schaltfläche. Nicht in der App, dort x verwenden"
+      },
+      "paginate": {
+        "use": "Die Aufteilung auf Seiten ein- oder ausschalten",
+        "notes": "Nur auf den Bearbeitungsseiten von Karte, Markt, Par und Einnahmen"
       },
       "download": {
         "use": "Die Datei des geladenen Spiels herunterladen",

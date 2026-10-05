@@ -1,4 +1,4 @@
-import { length, max, reduce } from "ramda";
+import { is, length, max, reduce } from "ramda";
 
 // TODO: Relative import since this is used in the CLI
 import { unitsToCss } from "./index.js";
@@ -6,6 +6,20 @@ import { unitsToCss } from "./index.js";
 export const getMaxLength = reduce((acc, row) => {
   return max(acc, length(row));
 }, 0);
+
+// A market or par cell can be a label, a value or an object: always give back
+// an object, or null for anything else
+export const normalizeCell = (cell) => {
+  if (is(String, cell)) {
+    return { label: cell };
+  } else if (is(Number, cell)) {
+    return { value: cell };
+  } else if (is(Object, cell)) {
+    // Nothing to do, just assume we have a valid object
+    return cell;
+  }
+  return null;
+};
 
 // Given the stock section of a game and the stock config.json section, compute
 // data that we need.

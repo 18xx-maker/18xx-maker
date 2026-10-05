@@ -48,6 +48,17 @@ describe("validate", () => {
     expect(lines[0]).toMatch(/^valid {2}game {8}18Test\.json .*games$/);
   });
 
+  it("skips the 18Broken test game, which has errors on purpose", () => {
+    const { code, lines } = run(src("data/games/18Broken.json"));
+    expect(code).toBe(0);
+    expect(lines[0]).toMatch(/^skip {3}game {8}18Broken\.json/);
+  });
+
+  it("validates a game named 18Broken outside the games folder", () => {
+    const file = writeTmp("18Broken.json", JSON.stringify({ info: {} }));
+    expect(run(file).code).toBe(1);
+  });
+
   it.each([
     ["schema", "schemas/game.schema.json"],
     ["game", "data/games/18Test.json"],
@@ -198,6 +209,10 @@ describe("validate", () => {
 
     it("accepts a game without them, and with none set", () => {
       expect(run(withExports({})).code).toBe(0);
+    });
+
+    it("still accepts the deprecated paginated option", () => {
+      expect(run(withExports({ paginated: true })).code).toBe(0);
     });
 
     it.each([

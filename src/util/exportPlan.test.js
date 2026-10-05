@@ -31,7 +31,7 @@ describe("planExport", () => {
       layouts: "current",
     });
 
-    expect(paths(request)).toEqual(["18test-cards.pdf"]);
+    expect(paths(request)).toEqual(["pdf/18test-cards.pdf"]);
   });
 
   it("exports every layout with all, also when the config does not", () => {
@@ -47,12 +47,12 @@ describe("planExport", () => {
 
     expect(paths(request)).toEqual(
       expect.arrayContaining([
-        "18test-cards-free.pdf",
-        "18test-cards-miniEuroDie.pdf",
-        "18test-cards-dtgDie.pdf",
+        "pdf/18test-cards-free.pdf",
+        "pdf/18test-cards-miniEuroDie.pdf",
+        "pdf/18test-cards-dtgDie.pdf",
       ]),
     );
-    expect(paths(request)).not.toContain("18test-cards.pdf");
+    expect(paths(request)).not.toContain("pdf/18test-cards.pdf");
   });
 
   it("follows the config without a layouts choice", () => {
@@ -61,7 +61,7 @@ describe("planExport", () => {
       docs: ["cards"],
     });
 
-    expect(paths(request)).toContain("18test-cards-free.pdf");
+    expect(paths(request)).toContain("pdf/18test-cards-free.pdf");
   });
 });
 
@@ -80,12 +80,12 @@ describe("planned svg requests", () => {
 
     expect(names).toEqual(
       expect.arrayContaining([
-        "18test-map.svg",
-        "18test-market.svg",
-        "18test-par.svg",
-        "18test-revenue.svg",
-        "18test-tile-1.svg",
-        "18test-token-1-BLRR.svg",
+        "svg/18test-map.svg",
+        "svg/18test-market.svg",
+        "svg/18test-par.svg",
+        "svg/18test-revenue.svg",
+        "svg/18test-tile-1.svg",
+        "svg/18test-token-1-BLRR.svg",
       ]),
     );
     expect(names.every((name) => name.endsWith(".svg"))).toBe(true);
@@ -100,7 +100,7 @@ describe("planned svg requests", () => {
       docs: ["map"],
     });
 
-    expect(paths(request)).toEqual(["18test-map.svg"]);
+    expect(paths(request)).toEqual(["svg/18test-map.svg"]);
   });
 });
 
@@ -152,7 +152,7 @@ describe("planExport with the exports of a game", () => {
     expect(formatsOf(request).sort()).toEqual(["b18", "png"]);
     expect(request.dpi).toBe(100);
     expect(request.b18.json).toMatchObject({ version: "7", author: "Game" });
-    expect(paths(request)).toContain("18test-map.png");
+    expect(paths(request)).toContain("png/18test-map.png");
     expect(paths(request).some((path) => path.includes("card"))).toBe(false);
   });
 
@@ -187,15 +187,15 @@ describe("planExport with the exports of a game", () => {
 
     expect(formatsOf(request)).toEqual(["pdf"]);
     expect(request.dpi).toBe(50);
-    expect(paths(request)).toEqual(["18test-tokens.pdf"]);
+    expect(paths(request)).toEqual(["pdf/18test-tokens.pdf"]);
   });
 
   it("has the paginated pdf of a page that does not fit on the paper", () => {
     const options = { formats: ["pdf"], docs: ["map"] };
 
     expect(paths(planExport(game, layers(), options))).toEqual([
-      "18test-map.pdf",
-      "18test-map-paginated.pdf",
+      "pdf/18test-map.pdf",
+      "pdf/18test-map-paginated.pdf",
     ]);
     expect(
       paths(
@@ -205,12 +205,13 @@ describe("planExport with the exports of a game", () => {
           options,
         ),
       ),
-    ).toEqual(["18test-map.pdf"]);
+    ).toEqual(["pdf/18test-map.pdf"]);
   });
 
   it("layers: the config of the user over the game, a choice over both", () => {
     const options = { formats: ["pdf"], docs: ["cards"] };
-    const every = (request) => paths(request).includes("18test-cards-free.pdf");
+    const every = (request) =>
+      paths(request).includes("pdf/18test-cards-free.pdf");
 
     expect(
       every(planExport(exporting({ layouts: "all" }), layers(), options)),
@@ -398,13 +399,13 @@ describe("the variation of an export", () => {
     const options = { formats: ["pdf"], docs: ["map"] };
 
     expect(maps(planExport(withFile, layers(), options))).toEqual([
-      "18test-map-1.pdf",
+      "pdf/18test-map-1.pdf",
     ]);
     expect(
       maps(planExport(withFile, layers(), { ...options, variation: 0 })),
-    ).toEqual(["18test-map-0.pdf"]);
+    ).toEqual(["pdf/18test-map-0.pdf"]);
     expect(
       maps(planExport(withFile, layers(), { ...options, variation: null })),
-    ).toEqual(["18test-map-0.pdf", "18test-map-1.pdf"]);
+    ).toEqual(["pdf/18test-map-0.pdf", "pdf/18test-map-1.pdf"]);
   });
 });

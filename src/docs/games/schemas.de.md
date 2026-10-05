@@ -45,6 +45,18 @@ Es ist im Spielschema und unter [Exportoptionen](/docs/games/exports)
 beschrieben, und ein ungültiger Wert, etwa eine Auflösung über 300 dpi, führt
 zu einem Validierungsfehler.
 
+## Problemseite
+
+Beim Öffnen eines Spiels wird die Datei im Hintergrund gegen das Spielschema
+geprüft. Stimmt etwas nicht, erscheint im Spielmenü der Eintrag
+Probleme mit der Anzahl der Probleme. Er öffnet eine Liste, die zeigt, wo jedes
+Problem liegt, was falsch ist und wie es sich beheben lässt: unbekannte Felder
+(ein Tippfehler oder ein Feld, das umbenannt oder entfernt wurde), Werte des
+falschen Typs, nicht erlaubte Werte und fehlende Pflichtfelder. Veraltete Felder
+werden ebenfalls aufgeführt, sie funktionieren noch, werden aber in einer
+zukünftigen Version entfernt. Die Seite meldet nur, deine Datei wird nie
+verändert.
+
 ## Validierung
 
 Um alle Dateien zu validieren, kannst du Folgendes ausführen:

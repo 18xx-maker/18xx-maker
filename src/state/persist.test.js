@@ -5,6 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   createAlert,
   createDeleteGame,
+  createGameProblemsDone,
   createSetConfig,
   createSetGame,
 } from "@/state";
@@ -198,8 +199,10 @@ describe("storage.listen", () => {
     const { createSetExportMenuOpen } = await import("@/state/ui");
     const store = await setup();
     store.dispatch(createSetExportMenuOpen(true));
+    store.dispatch(createGameProblemsDone("a", []));
 
     expect(window.localStorage.getItem("ui")).toBeNull();
+    expect(window.localStorage.getItem("gameProblems")).toBeNull();
     expect(Object.keys(window.localStorage)).toEqual(["config"]);
   });
 

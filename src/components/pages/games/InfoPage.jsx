@@ -22,6 +22,7 @@ import File from "@/components/File";
 import KeyLabel from "@/components/KeyLabel";
 import GameStats from "@/components/pages/games/GameStats";
 
+import { publishers } from "@/data";
 import { useGame } from "@/hooks";
 import { deleteGame, refreshGame } from "@/state";
 import { trackEvent } from "@/util/analytics";
@@ -56,6 +57,26 @@ const InfoPage = () => {
       : t("game.type.system.description");
   const TypeIcon = game.meta.type === "bundled" ? Package : HardDrive;
 
+  const publisherId = game.info.publisher;
+  const publisher = publishers[publisherId];
+  const publisherInner = publisher && (
+    <>
+      {publisherId !== "self" && (
+        <div className="flex flex-row place-content-center p-1 border rounded-lg w-16 h-16 shrink-0 overflow-hidden bg-white">
+          <img
+            className="block h-full"
+            alt={`${publisher.name} Logo`}
+            src={publisher.imageUrl}
+          />
+        </div>
+      )}
+      <div>
+        <p className="text-sm text-muted-foreground">{t("game.publisher")}</p>
+        <p className="font-bold">{publisher.name}</p>
+      </div>
+    </>
+  );
+
   return (
     <div className="p-4" data-testid={`game-${game.meta.slug}`}>
       <h1 className="text-4xl font-extrabold">{game.info.title}</h1>
@@ -66,6 +87,25 @@ const InfoPage = () => {
         {t("game.by")} {game.info.designer}
       </h3>
       <div className="px-4 border rounded-xl my-4 max-w-lg">
+        {publisher &&
+          (publisher.link ? (
+            <a
+              href={publisher.link}
+              target="_blank"
+              rel="noreferrer"
+              data-testid="game-publisher"
+              className="flex flex-row gap-4 my-4 hover:underline justify-start items-center"
+            >
+              {publisherInner}
+            </a>
+          ) : (
+            <div
+              data-testid="game-publisher"
+              className="flex flex-row gap-4 my-4 justify-start items-center"
+            >
+              {publisherInner}
+            </div>
+          ))}
         {game.players && (
           <div className="flex flex-row gap-4 my-4">
             <Users className="text-info" />

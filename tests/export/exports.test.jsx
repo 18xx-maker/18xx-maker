@@ -121,7 +121,7 @@ describe("export options of a game with exports", () => {
       author: "The Designer",
     });
     const names = request.jobs.map(({ path }) => path);
-    expect(names).toContain("18test-map.png");
+    expect(names).toContain("png/18test-map.png");
     expect(names.some((name) => name.includes("card"))).toBe(true);
     // The game has every layout, and the panel turned it off
     expect(names.some((name) => name.includes("Die"))).toBe(false);
@@ -150,8 +150,8 @@ describe("export options of a game with exports", () => {
     const names = request.jobs.map(({ path }) => path);
     expect(names.every((name) => name.endsWith(".pdf"))).toBe(true);
     expect(names.some((name) => name.includes("tokens"))).toBe(true);
-    expect(names).toContain("18test-map.pdf");
-    expect(names).toContain("18test-map-paginated.pdf");
+    expect(names).toContain("pdf/18test-map.pdf");
+    expect(names).toContain("pdf/18test-map-paginated.pdf");
     expect(names.some((name) => name.includes("cards"))).toBe(false);
   });
 

@@ -22,10 +22,9 @@ Plättchenübersicht haben einen Rand von einem Viertelzoll (im
 Bildhintergrund); jedes andere Bild wird genau auf die Größe der Komponente
 zugeschnitten.
 
-Wenn du ein ganzes Spiel exportierst, wirst du aufgefordert, einen Ordner für
-alle Dateien auszuwählen. Die Dateien enthalten _zwar_ den Spielnamen, aber wir
-empfehlen, einen eigenen Ordner für dieses Spiel anzulegen, damit du den
-Überblick behältst. Die Ausgabe eines Spiels als PNG-Bilder ergibt _VIELE_
+Wenn du ein ganzes Spiel exportierst, wirst du aufgefordert, einen Ordner
+auszuwählen, den sich die App für den nächsten Export merkt. Die Bilder kommen
+nach `<Spiel-ID>/png` darin, genau wie in der Kommandozeile. Die Ausgabe eines Spiels als PNG-Bilder ergibt _VIELE_
 Bilder. Nach Abschluss des Exports öffnet die App den entstandenen Ordner.
 
 Beim Export eines ganzen Spiels entsteht ein einzelnes Bild für jedes Plättchen,

@@ -1,6 +1,7 @@
 import { Link, useMatch } from "react-router";
 
 import {
+  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
@@ -8,7 +9,7 @@ import {
 
 import KeyLabel from "@/components/KeyLabel";
 
-const Item = ({ to, label, icon, shortcut, append }) => {
+const Item = ({ to, label, icon, shortcut, append, badge }) => {
   const { toggleSidebar, isMobile } = useSidebar();
   const match = useMatch(to);
   const active = !!match;
@@ -39,6 +40,7 @@ const Item = ({ to, label, icon, shortcut, append }) => {
           </span>
         </Link>
       </SidebarMenuButton>
+      {badge !== undefined && <SidebarMenuBadge>{badge}</SidebarMenuBadge>}
     </SidebarMenuItem>
   );
 };

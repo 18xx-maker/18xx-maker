@@ -31,6 +31,30 @@
     "refresh": "Refresh",
     "description": "Reload the latest version of this file"
   },
+  "problems": {
+    "nav": "Problems",
+    "title": "Problems with this game",
+    "count": "{{count}} found in {{title}}",
+    "checking": "Checking the game file",
+    "none": "No problems found",
+    "error": "Error",
+    "warning": "Warning",
+    "deprecated": "Deprecated",
+    "more": "and {{count}} more",
+    "root": "the game file",
+    "docs": "About the game file format",
+    "unknown-field": "Unknown field \"{{field}}\". It may have been renamed or removed. Remove it, or see the docs.",
+    "unknown-field-suggest": "Unknown field \"{{field}}\". It may have been renamed or removed. Did you mean \"{{suggestion}}\"?",
+    "type": "Expected {{expected}} but found {{found}} {{value}}.",
+    "enum": "{{value}} is not allowed here. Use one of: {{values}}.",
+    "required": "Missing the required field \"{{field}}\".",
+    "generic": "{{message}}",
+    "failed": "The game file could not be checked.",
+    "deprecated-generic": "This field is deprecated.",
+    "deprecations": {
+      "exports_paginated": "This field is deprecated and ignored. Remove it, the paginated pdfs are exported automatically."
+    }
+  },
   "prototype": {
     "prototype": "Prototype",
     "description": "This game is still being developed"
@@ -310,6 +334,7 @@
     },
     "loaded": "Your games",
     "bundled": "Bundled games",
+    "test": "Test games",
     "empty": "No games match these filters"
   },
   "game": {
@@ -384,6 +409,7 @@
     "open": "Open File",
     "paginated": "Paginate",
     "players": "Players",
+    "publisher": "Published by",
     "purchase": {
       "primary": "Purchase",
       "secondary": "Where to buy this game"
@@ -979,6 +1005,14 @@
       "view": {
         "use": "Reset the view of the map or market editor",
         "notes": "Only on the map and market edit pages"
+      },
+      "print": {
+        "use": "Print the current section",
+        "notes": "Only on the edit page of a section with a Print button. Not in the app, use x"
+      },
+      "paginate": {
+        "use": "Turn pagination on or off",
+        "notes": "Only on the map, market, par and revenue edit pages"
       },
       "download": {
         "use": "Download the loaded game file",

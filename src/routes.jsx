@@ -21,6 +21,7 @@ import InfoPage from "@/components/pages/games/InfoPage";
 import MapPage from "@/components/pages/games/MapPage";
 import MarketPage from "@/components/pages/games/MarketPage";
 import ParPage from "@/components/pages/games/ParPage";
+import ProblemsPage from "@/components/pages/games/ProblemsPage";
 import RevenuePage from "@/components/pages/games/RevenuePage";
 import TileManifestPage from "@/components/pages/games/TileManifestPage";
 import TilePage from "@/components/pages/games/TilePage";
@@ -76,6 +77,7 @@ export const rootRoutes = [
               { path: "map", element: <MapPage /> },
               { path: "market", element: <MarketPage /> },
               { path: "par", element: <ParPage /> },
+              { path: "problems", element: <ProblemsPage /> },
               { path: "revenue", element: <RevenuePage /> },
               { path: "tile-manifest", element: <TileManifestPage /> },
               { path: "tiles", element: <TilesPage /> },

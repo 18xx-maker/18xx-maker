@@ -31,6 +31,30 @@
     "refresh": "刷新",
     "description": "重新加载此文件的最新版本"
   },
+  "problems": {
+    "nav": "问题",
+    "title": "此游戏的问题",
+    "count": "在 {{title}} 中发现 {{count}} 个",
+    "checking": "正在检查游戏文件",
+    "none": "未发现问题",
+    "error": "错误",
+    "warning": "警告",
+    "deprecated": "已弃用",
+    "more": "另有 {{count}} 个",
+    "root": "游戏文件",
+    "docs": "关于游戏文件格式",
+    "unknown-field": "未知字段“{{field}}”。它可能已被重命名或移除。请删除它,或查看文档。",
+    "unknown-field-suggest": "未知字段“{{field}}”。它可能已被重命名或移除。您是指“{{suggestion}}”吗?",
+    "type": "应为 {{expected}},但找到 {{found}} {{value}}。",
+    "enum": "此处不允许 {{value}}。请使用以下之一:{{values}}。",
+    "required": "缺少必填字段“{{field}}”。",
+    "generic": "{{message}}",
+    "failed": "无法检查游戏文件。",
+    "deprecated-generic": "此字段已弃用。",
+    "deprecations": {
+      "exports_paginated": "此字段已弃用并被忽略。请删除它,分页 PDF 会自动导出。"
+    }
+  },
   "prototype": {
     "prototype": "原型",
     "description": "这款游戏仍在开发中"
@@ -310,6 +334,7 @@
     },
     "loaded": "您的游戏",
     "bundled": "内置游戏",
+    "test": "测试游戏",
     "empty": "没有符合这些筛选条件的游戏"
   },
   "game": {
@@ -384,6 +409,7 @@
     "open": "打开文件",
     "paginated": "分页",
     "players": "玩家",
+    "publisher": "出版商",
     "purchase": {
       "primary": "购买",
       "secondary": "在哪里购买这款游戏"
@@ -979,6 +1005,14 @@
       "view": {
         "use": "重置地图或股市编辑器的视图",
         "notes": "仅在地图和股市编辑页面可用"
+      },
+      "print": {
+        "use": "打印当前部分",
+        "notes": "仅在带有打印按钮的部分的编辑页面上有效。应用中不可用，请使用 x"
+      },
+      "paginate": {
+        "use": "开启或关闭分页",
+        "notes": "仅在地图、市场、起拍价和收益的编辑页面上有效"
       },
       "download": {
         "use": "下载已加载游戏的文件",

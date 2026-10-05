@@ -1077,7 +1077,8 @@
           "type": "string"
         },
         "publisher": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of the publisher (see src/data/publishers), shown on the game info page and in the game list"
         },
         "extraTotalHeight": {
           "type": "number",
@@ -2161,6 +2162,7 @@
         },
         "paginated": {
           "type": "boolean",
+          "deprecated": true,
           "description": "Deprecated and ignored. The paginated pdfs of the map, market, par and revenue are always exported when the page does not fit on one page of the paper."
         },
         "background": {

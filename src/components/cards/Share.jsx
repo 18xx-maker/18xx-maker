@@ -8,6 +8,26 @@ import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
 import { multiDefaultTo } from "@/util";
 
+const ShareLabel = ({ label, labelColor }) =>
+  label &&
+  label.length > 0 && (
+    <div className="share__label">
+      <Color context="map">
+        {(c, t) => (
+          <div
+            className="share__label__text"
+            style={{
+              color: t(c(labelColor || "yellow")),
+              backgroundColor: c(labelColor || "yellow"),
+            }}
+          >
+            {label}
+          </div>
+        )}
+      </Color>
+    </div>
+  );
+
 const LeftShare = ({
   cost,
   revenue,
@@ -138,23 +158,7 @@ const LeftShare = ({
                     {tokens}
                   </ColorContext.Provider>
                 </div>
-                {label && label.length > 0 && (
-                  <div className="share__label">
-                    <Color context="map">
-                      {(c, t) => (
-                        <div
-                          className="share__label__text"
-                          style={{
-                            color: t(c(labelColor || "yellow")),
-                            backgroundColor: c(labelColor || "yellow"),
-                          }}
-                        >
-                          {label}
-                        </div>
-                      )}
-                    </Color>
-                  </div>
-                )}
+                <ShareLabel label={label} labelColor={labelColor} />
                 {variant && <div className="share__variant">{variant}</div>}
               </div>
             </div>
@@ -238,23 +242,7 @@ const CenterShare = ({
                     {tokens}
                   </ColorContext.Provider>
                 </div>
-                {label && label.length > 0 && (
-                  <div className="share__label">
-                    <Color context="map">
-                      {(c, t) => (
-                        <div
-                          className="share__label__text"
-                          style={{
-                            color: t(c(labelColor || "yellow")),
-                            backgroundColor: c(labelColor || "yellow"),
-                          }}
-                        >
-                          {label}
-                        </div>
-                      )}
-                    </Color>
-                  </div>
-                )}
+                <ShareLabel label={label} labelColor={labelColor} />
                 {variant && <div className="share__variant">{variant}</div>}
               </div>
             </div>

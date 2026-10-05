@@ -1,21 +1,12 @@
-import { is } from "ramda";
-
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 
-const ParCell = ({ cell, data }) => {
-  if (is(String, cell)) {
-    cell = {
-      label: cell,
-    };
-  } else if (is(Number, cell)) {
-    cell = {
-      value: cell,
-    };
-  } else if (is(Object, cell)) {
-    // Nothing to do, just assume we have a valid object
-  } else {
-    // Don't know how to handle cells that aren't objects, numbers or strings
+import { normalizeCell } from "@/util/market";
+
+const ParCell = ({ cell: rawCell, data }) => {
+  const cell = normalizeCell(rawCell);
+
+  if (!cell) {
     return null;
   }
 

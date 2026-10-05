@@ -11,6 +11,7 @@ import {
   compileCompanies,
   overrideCompanies,
 } from "@/util/companies/companies";
+import { normalizeCell } from "@/util/market";
 
 const arrows = {
   up: "↑",
@@ -19,19 +20,10 @@ const arrows = {
   right: "→",
 };
 
-const Cell = ({ cell, game, config, data }) => {
-  if (is(String, cell)) {
-    cell = {
-      label: cell,
-    };
-  } else if (is(Number, cell)) {
-    cell = {
-      value: cell,
-    };
-  } else if (is(Object, cell)) {
-    // Nothing to do, just assume we have a valid object
-  } else {
-    // Don't know how to handle cells that aren't objects, numbers or strings
+const Cell = ({ cell: rawCell, game, config, data }) => {
+  const cell = normalizeCell(rawCell);
+
+  if (!cell) {
     return null;
   }
 

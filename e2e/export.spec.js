@@ -284,6 +284,13 @@ for (const format of ["pdf", "png", "svg", "b18"]) {
       timeout: 150_000,
     });
 
-    check[format](dir, "app");
+    // The same tree as the CLI: <folder>/<id>/<format>/
+    const game = path.join(dir, "18Test");
+    expect(fs.readdirSync(game).sort()).toEqual(
+      format === "b18"
+        ? ["board18-18Test-1.0", "board18-18Test-1.0.zip"]
+        : [format],
+    );
+    check[format](format === "b18" ? game : path.join(game, format), "app");
   });
 }

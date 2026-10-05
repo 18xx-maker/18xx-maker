@@ -2,6 +2,27 @@ import { keys, map, path } from "ramda";
 
 import { companyThemes, mapThemes } from "@/data";
 
+// The cutlines, margin and bleed of a page of printed items
+const printMargins = [
+  {
+    group: [
+      { name: "cutlines", root: true, dimension: true, description: false },
+      {
+        name: "cutlinesOffset",
+        root: true,
+        dimension: true,
+        description: false,
+      },
+    ],
+  },
+  {
+    group: [
+      { name: "margin", root: true, dimension: true, description: false },
+      { name: "bleed", root: true, dimension: true, description: false },
+    ],
+  },
+];
+
 const getThemeOptions = (theme) =>
   map(
     (value) => ({
@@ -138,23 +159,7 @@ export const sections = [
         name: "tileCompanies",
         root: true,
       },
-      {
-        group: [
-          { name: "cutlines", root: true, dimension: true, description: false },
-          {
-            name: "cutlinesOffset",
-            root: true,
-            dimension: true,
-            description: false,
-          },
-        ],
-      },
-      {
-        group: [
-          { name: "margin", root: true, dimension: true, description: false },
-          { name: "bleed", root: true, dimension: true, description: false },
-        ],
-      },
+      ...printMargins,
       {
         note: "pagination",
       },
@@ -251,23 +256,7 @@ export const sections = [
       {
         name: "par",
       },
-      {
-        group: [
-          { name: "cutlines", root: true, dimension: true, description: false },
-          {
-            name: "cutlinesOffset",
-            root: true,
-            dimension: true,
-            description: false,
-          },
-        ],
-      },
-      {
-        group: [
-          { name: "margin", root: true, dimension: true, description: false },
-          { name: "bleed", root: true, dimension: true, description: false },
-        ],
-      },
+      ...printMargins,
       {
         note: "pagination",
       },
