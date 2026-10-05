@@ -10,7 +10,7 @@
   "nav": {
     "menu": "菜单",
     "app": "应用",
-    "update": "更新",
+    "update": "更新到 {{version}}",
     "home": "首页",
     "load": "加载游戏",
     "elements": "元素",
