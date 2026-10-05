@@ -1,9 +1,8 @@
-import fs from "node:fs";
+import fs, { globSync } from "node:fs";
 import path from "node:path";
 import util from "node:util";
 
 import chalk from "chalk";
-import { globSync } from "glob";
 import { compileSchema, draft07 } from "json-schema-library";
 
 import {
@@ -233,7 +232,7 @@ const processFiles = compose(
   all(identity),
   map(displayResult),
   map(validate.file),
-  chain((file) => globSync(file, { posix: true, absolute: true })),
+  chain((file) => globSync(file).map((match) => path.resolve(match))),
 );
 
 const command = (files) => process.exit(processFiles(files) ? 0 : 1);
