@@ -6,6 +6,11 @@ import { clearAlert, createAlert } from "@/state";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
+vi.mock("@/data/games", async (importOriginal) => {
+  const { withBareGame } = await import("@tests/support/bare.js");
+  return { default: withBareGame((await importOriginal()).default) };
+});
+
 // The viewport is set to phone size below, so the app sidebar is a sheet
 // opened by the header's trigger. Game section pages have no sidebar: the
 // toolbar is their navigation.
@@ -39,8 +44,8 @@ describe("game toolbar", () => {
   });
 
   it("marks the current section and disables missing ones", async () => {
-    const { user } = renderApp("/games/1888/cards");
-    expect(await screen.findByTestId("game-1888-cards")).toBeInTheDocument();
+    const { user } = renderApp("/games/Bare/cards");
+    expect(await screen.findByTestId("game-Bare-cards")).toBeInTheDocument();
     expect(sections()).toHaveTextContent("Cards");
 
     await user.click(sections());
@@ -52,7 +57,7 @@ describe("game toolbar", () => {
       "true",
     );
 
-    // 1888 has no map
+    // Bare has no map
     expect(screen.getByRole("option", { name: /Map/ })).toHaveAttribute(
       "aria-disabled",
       "true",

@@ -2,6 +2,11 @@ import { screen, within } from "@testing-library/react";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
+vi.mock("@/data/games", async (importOriginal) => {
+  const { withBareGame } = await import("@tests/support/bare.js");
+  return { default: withBareGame((await importOriginal()).default) };
+});
+
 describe("game info stats", () => {
   it("shows tile, map, company and train counts", async () => {
     renderApp("/games/18Test/");
@@ -14,7 +19,7 @@ describe("game info stats", () => {
   });
 
   it("omits the map rows for a game without a map", async () => {
-    renderApp("/games/1888/");
+    renderApp("/games/Bare/");
     const stats = within(await screen.findByTestId("game-stats"));
     expect(stats.queryByText("Map variations")).not.toBeInTheDocument();
   });
