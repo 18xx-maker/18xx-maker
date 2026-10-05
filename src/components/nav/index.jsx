@@ -83,7 +83,7 @@ export const mainMenu = [
       {
         icon: Info,
         label: "docs.help.title",
-        shortcut: "d",
+        shortcut: "m",
         to: "/docs",
       },
       {

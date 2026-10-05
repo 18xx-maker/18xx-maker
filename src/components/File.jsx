@@ -6,10 +6,12 @@ import { Download } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
+import KeyLabel from "@/components/KeyLabel";
+
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 
-const File = ({ data, mime, filename, ...pass }) => {
+const File = ({ data, mime, filename, shortcut, ...pass }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const [dataURL, setDataURL] = useState(null);
@@ -44,7 +46,13 @@ const File = ({ data, mime, filename, ...pass }) => {
     >
       <a download={filename} href={dataURL}>
         <Download />
-        {t(verb)} {filename}
+        {shortcut ? (
+          <span>
+            <KeyLabel text={t(verb)} shortcut={shortcut} /> {filename}
+          </span>
+        ) : (
+          `${t(verb)} ${filename}`
+        )}
       </a>
     </Button>
   );

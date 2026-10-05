@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { mainMenu } from "@/components/nav";
+import DownloadItem from "@/components/nav/sidebar/DownloadItem";
 import ExportItem from "@/components/nav/sidebar/ExportItem";
 import Group from "@/components/nav/sidebar/Group";
 import Item from "@/components/nav/sidebar/Item";
@@ -54,6 +55,7 @@ const AppSidebar = (props) => {
               label={t("nav.edit")}
               shortcut="e"
             />,
+            resolved && <DownloadItem key="game-download" game={resolved} />,
             capability.electron && resolved && <ExportItem key="game-export" />,
           ].filter(Boolean)
         );

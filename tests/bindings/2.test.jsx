@@ -32,7 +32,7 @@ describe("game keys", () => {
     await user.keyboard("e");
     await screen.findByTestId("game-18Test");
 
-    await user.keyboard("m");
+    await user.keyboard("1");
     await screen.findByTestId("game-18Test-map");
   });
 
@@ -133,12 +133,12 @@ describe("shortcuts dialog", () => {
   });
 });
 
-describe("esc and d", () => {
-  it("d goes to the first docs page", async () => {
+describe("esc and m", () => {
+  it("m goes to the first docs page", async () => {
     const { user, router } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
 
-    await user.keyboard("d");
+    await user.keyboard("m");
     expect(router.state.location.pathname).toBe("/docs");
   });
 

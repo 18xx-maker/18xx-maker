@@ -973,6 +973,10 @@
         "use": "Reset the view of the map or market editor",
         "notes": "Only on the map and market edit pages"
       },
+      "download": {
+        "use": "Download the loaded game file",
+        "notes": "Saves the game without its meta data. Only if you have a game loaded."
+      },
       "export": {
         "use": "Open the export menu",
         "notes": "App only. Opens the menu of the loaded game on any page."

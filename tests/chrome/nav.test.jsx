@@ -220,6 +220,6 @@ describe("shortcut keys in the sidebar", () => {
       .find((link) => link.getAttribute("href") === "/elements/positioning");
     expect(positioning.querySelector("u")).toHaveTextContent("P");
     const docs = within(panel).getByRole("link", { name: "Using 18xx Maker" });
-    expect(docs.querySelector("[aria-hidden] u")).toHaveTextContent("d");
+    expect(docs.querySelector("u")).toHaveTextContent("M");
   });
 });

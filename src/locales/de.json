@@ -973,6 +973,10 @@
         "use": "Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen",
         "notes": "Nur auf den Bearbeitungsseiten von Karte und Aktienmarkt"
       },
+      "download": {
+        "use": "Die Datei des geladenen Spiels herunterladen",
+        "notes": "Speichert das Spiel ohne Metadaten. Nur wenn ein Spiel geladen ist."
+      },
       "export": {
         "use": "Das Exportmenü öffnen",
         "notes": "Nur in der App. Öffnet auf jeder Seite das Menü des geladenen Spiels."
