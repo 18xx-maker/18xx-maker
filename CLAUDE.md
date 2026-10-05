@@ -307,6 +307,46 @@ Images in `src/docs` live in `public/images`.
   the image from `scripts/docs-images.mjs`, labels included, so it can be
   reproduced.
 
+## Implementing a game from a rulebook
+
+Lessons from 18 Grand Junction (`src/data/games/18GJ.json`):
+
+- Get the rules PDF and map image from the publisher page. Drive files
+  download with `drive.usercontent.google.com/download?id=<id>&export=download&authuser=0`
+  (not `drive.google.com/uc`). macOS has no `pdftotext`: PDFKit reads it
+  (`PDFDocument(url:).string` in a Swift script). Crop the map image with
+  `sips --cropToHeightWidth h w --cropOffset y x`.
+- Read the layout from the image first: pointy-top hexes (flat sides left and
+  right) are the default; letters are rows, numbers are columns, and a row
+  only has the columns of one parity, so a row that starts at 3 or at 2 is
+  normal. Sides number clockwise from the west: 1 W, 2 NW, 3 NE, 4 E, 5 SE,
+  6 SW. Angles are 90 W, 150 NW, 210 NE, 270 E, 330 SE, 30 SW (0 is down,
+  180 is up). `angle` and `percent` place things, `angle` of an element
+  that sits at screen offset (dx, dy) from the center is `-atan2(dx, dy)`,
+  `percent` is the distance divided by 75 (the half width).
+- A map is a list of `hexes` entries sharing one definition over several
+  coordinates. A generator script that groups equal hexes keeps a 48 hex map
+  manageable; commit only the JSON.
+- Mapping printed symbols: half circle with a cost is `terrain` mountain, a
+  triangle on a border is a `tunnels` entry (draw it on the hex that is drawn
+  later, an earlier hex is painted over), a plain black dot is a
+  `shapes` circle, a cost shown next to a city name on an off-board or gray
+  hex is `offBoardRevenue` with several `revenues`, a double arrow is a
+  `routeBonuses` entry, a pill with two circles is a city of `size` 2, black
+  wedges on an off-board hex are `offboard` track on those sides. Pre-printed
+  stubs to off-center cities are `stub` track on the side of the city. City
+  `width` is a radius (default 25).
+- Names are better as hex `names` than as the city `name` (that one curves
+  around the circle). Split two line names into two entries.
+- Company presidents with special powers that are not private companies fit
+  the `privates` list (name, description, a note such as "3 uses"). No schema
+  support exists for a subsidy pool, per-phase income removal or tiered
+  companies: they are phase `notes` and `info.notes`.
+- A game added after the legacy CLI was retired goes in `newer` in
+  `src/cli/legacy.test.js` and in its list of renamed games.
+- Keep `wip` set until the game has been checked against the rules by a person
+  who owns it.
+
 ## Commit messages
 
 release-please builds releases and the changelog from commit subjects, so every

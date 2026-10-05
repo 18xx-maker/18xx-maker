@@ -1,0 +1,1728 @@
+{
+  "info": {
+    "title": "18 Grand Junction",
+    "subtitle": "Colorado's Mountain Railways",
+    "designer": "Anthony Fryer",
+    "publisher": "traxx",
+    "titleX": 10,
+    "titleY": 735,
+    "titleSize": 40,
+    "subtitleSize": 12,
+    "extraTotalHeight": 150,
+    "background": "orange",
+    "capitalization": "incremental",
+    "mustSellInBlocks": true,
+    "currency": "$#",
+    "notes": "Based on 1846. Fewer than 5 players: SLVS is relegated to tier 2, with 2-3 players also one of CCR and CCP. No train may serve two E or two W locations. Black dots are minor income centers ($10 per dot per OR for a company with a train). Tunnel markers add to the cost of crossing that border."
+  },
+  "links": {
+    "rules": "https://drive.google.com/file/d/1r6JTORo5xxnyHOfMCKmTkMgeOl5lNjgq/view",
+    "license": "https://traxx-denver.com/games/",
+    "purchase": "https://traxx-denver.com/games/"
+  },
+  "wip": true,
+  "colors": {
+    "DRG": "#FF6A00",
+    "DSPP": "#0026FF",
+    "CNW": "#FF7FED",
+    "GSLP": "#7FFFFF",
+    "CCR": "#00830E",
+    "CCP": "#FF0000",
+    "SLVS": "#7B3FA0"
+  },
+  "players": [
+    {
+      "number": 2,
+      "capital": 600,
+      "certLimit": 20,
+      "bank": 7000
+    },
+    {
+      "number": 3,
+      "capital": 400,
+      "certLimit": 14,
+      "bank": 6500
+    },
+    {
+      "number": 4,
+      "capital": 400,
+      "certLimit": 12,
+      "bank": 7500
+    },
+    {
+      "number": 5,
+      "capital": 400,
+      "certLimit": 11,
+      "bank": 9000
+    }
+  ],
+  "companies": [
+    {
+      "name": "Denver & Rio Grande Railroad",
+      "abbrev": "DRG",
+      "tokens": ["Free", 80, 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "DRG",
+        "color": "white",
+        "fontSize": 14
+      },
+      "color": "DRG",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Denver, South Park & Pacific Railroad",
+      "abbrev": "DSPP",
+      "tokens": ["Free", 80, 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "DSPP",
+        "color": "white",
+        "fontSize": 12
+      },
+      "color": "DSPP",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Colorado and North Western Railroad",
+      "abbrev": "CNW",
+      "tokens": ["Free", 80, 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "CNW",
+        "color": "white",
+        "fontSize": 14
+      },
+      "color": "CNW",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Greeley, Salt Lake & Pacific Railroad",
+      "abbrev": "GSLP",
+      "tokens": ["Free", 80, 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "GSLP",
+        "color": "white",
+        "fontSize": 12
+      },
+      "color": "GSLP",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Colorado Central Railroad",
+      "abbrev": "CCR",
+      "tokens": ["Free", 80, 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "CCR",
+        "color": "white",
+        "fontSize": 14
+      },
+      "color": "CCR",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "Colorado Central & Pacific Railroad",
+      "abbrev": "CCP",
+      "tokens": ["Free", 80, 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "CCP",
+        "color": "white",
+        "fontSize": 14
+      },
+      "color": "CCP",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    },
+    {
+      "name": "San Luis Valley Southern Railway",
+      "abbrev": "SLVS",
+      "tokens": ["Free", 80, 80, 80, 80],
+      "token": {
+        "shield": true,
+        "shieldTop": "SLVS",
+        "color": "white",
+        "fontSize": 12
+      },
+      "color": "SLVS",
+      "shares": [
+        {
+          "quantity": 1,
+          "label": "President's Certificate",
+          "percent": 20,
+          "shares": 2
+        },
+        {
+          "quantity": 8,
+          "percent": 10,
+          "shares": 1
+        }
+      ]
+    }
+  ],
+  "privates": [
+    {
+      "name": "Abraham Donaldson",
+      "description": "Up to three times during the game, the president may augment train revenue, even if there is none, from the company treasury in $10 increments. Counts for stock movement. May add enough to double- or triple-jump; a triple-jump is allowed even below $165/share.",
+      "note": "3 uses"
+    },
+    {
+      "name": "Max Delaney",
+      "description": "This company is not required to own a train."
+    },
+    {
+      "name": "Lemuel Morrissey",
+      "description": "The president may place a +$20 token on any city. Each train of this company that runs to it earns $20 more. It cannot be moved and is removed with the president."
+    },
+    {
+      "name": "Logan Maynard",
+      "description": "Up to three times during the game, the company may place or upgrade one additional tile as an extra action (can upgrade a just placed or upgraded tile). Terrain costs apply.",
+      "note": "3 uses"
+    },
+    {
+      "name": "Corbett Thompson",
+      "description": "Up to two times during the game, the president may decide when the company operates, at the beginning of an Operating Round.",
+      "note": "2 uses"
+    },
+    {
+      "name": "Orrin Langhorne",
+      "description": "A player may own up to 100% of this company, and is never obliged to sell down below the limit."
+    },
+    {
+      "name": "Orville Gillis",
+      "description": "Up to three times during the game, the company may ignore terrain costs when building track.",
+      "note": "3 uses"
+    },
+    {
+      "name": "Adolphus Meyer",
+      "description": "Up to three times during the game, the company may claim a 10% discount on a single train from the bank. Up to three discounts may be combined (10%, 20% or 30%).",
+      "note": "3 uses"
+    },
+    {
+      "name": "Rufus Snape",
+      "description": "Up to two times during the game, the company may place a station token for no cost.",
+      "note": "2 uses"
+    },
+    {
+      "name": "Arvid Bollen",
+      "description": "Up to three times during the game, the president may prevent the company from losing stock value during an Operating Round.",
+      "note": "3 uses"
+    },
+    {
+      "name": "Brice Melville",
+      "description": "The company may place a station token in a location even if it is full (not Grand Junction). It is placed near the other tokens; a reserved home token is placed in its reserved spot and the reserving company's token goes near the others."
+    },
+    {
+      "name": "Neville Tinning",
+      "description": "The company may either issue or redeem shares at the current market value."
+    },
+    {
+      "name": "Hugo Weddell",
+      "description": "Up to three times during the game, the trains of this company may score one additional station on a legal route (a 2 operates as a 3, a 4/6 as a 5/6).",
+      "note": "3 uses"
+    },
+    {
+      "name": "Abel Jephcots",
+      "description": "One of the company's trains earns $10 per city visited (a 4/6 train serving 6 locations earns $60)."
+    },
+    {
+      "name": "Walton Purcell",
+      "description": "The company is paid $20 into its treasury by the bank in each operating round."
+    },
+    {
+      "name": "Elias Bluit",
+      "description": "Up to three times during the game, the company may upgrade any one tile to the next color, even if that color is not yet available. Part of the normal tile laying step.",
+      "note": "3 uses"
+    },
+    {
+      "name": "Cleveland Graham",
+      "description": "The company may redeem shares of other companies from the open market. Dividends go to its treasury. It may issue them (even in Emergency Financing, with no price effect) and players may buy them from its treasury. Never president of another company; these shares do not count as held by players for issue limits."
+    },
+    {
+      "name": "Homer Cropper",
+      "description": "When the president's certificate is purchased, the company receives from the bank the sum of two 10% shares at the initial share value ($80 to $300)."
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "quantity": 9,
+      "price": 80,
+      "color": "yellow",
+      "phased": ["4/6", "5"],
+      "rust": ["6", "7/8"]
+    },
+    {
+      "name": "3/5",
+      "quantity": 6,
+      "price": 160,
+      "color": "green",
+      "phased": ["6", "7/8"]
+    },
+    {
+      "name": "4",
+      "quantity": 6,
+      "price": 180,
+      "color": "green",
+      "phased": ["6", "7/8"]
+    },
+    {
+      "name": "4/6",
+      "quantity": 5,
+      "price": 450,
+      "color": "brown"
+    },
+    {
+      "name": "5",
+      "quantity": 5,
+      "price": 500,
+      "color": "brown"
+    },
+    {
+      "name": "6",
+      "quantity": 9,
+      "price": 800,
+      "color": "gray"
+    },
+    {
+      "name": "7/8",
+      "quantity": 9,
+      "price": 900,
+      "color": "gray"
+    }
+  ],
+  "phases": [
+    {
+      "name": "1",
+      "train": "2",
+      "limit": 4,
+      "tiles": "yellow",
+      "notes": [
+        "Government subsidy pool: $180 (2-3 players) or $200 (4-5 players)"
+      ]
+    },
+    {
+      "name": "2",
+      "train": ["3/5", "4"],
+      "limit": 4,
+      "tiles": "green",
+      "notes": [
+        "Government subsidy pool: $200 (2-3 players) or $240 (4-5 players)"
+      ]
+    },
+    {
+      "name": "3",
+      "train": ["4/6", "5"],
+      "limit": 3,
+      "tiles": "brown",
+      "notes": [
+        "Government subsidy pool: $200 (2-3 players) or $300 (4-5 players)",
+        "Presidents leave play, tier 2 companies open, new presidents are picked at the end of an OR",
+        "Certificate limit by companies available (2/3/4/5 players): 7: 22/17/14/11, 6: 21/16/12/10, 5: 19/14/10/8, 4 or fewer: 16/11/8/6"
+      ]
+    },
+    {
+      "name": "4",
+      "train": ["6", "7/8"],
+      "limit": 2,
+      "tiles": "gray",
+      "notes": [
+        "Government subsidy pool: $160 (2-3 players) or $200 (4-5 players)",
+        "Minor income centers are removed from the map and the charters"
+      ]
+    }
+  ],
+  "pools": [
+    {
+      "name": "Stock Market",
+      "notes": [
+        {
+          "color": "orange",
+          "note": "Corporations issue/redeem stock at one value lower/higher"
+        },
+        {
+          "color": "brown",
+          "icon": "exclamation",
+          "note": "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
+        }
+      ]
+    }
+  ],
+  "rounds": [
+    {
+      "name": "SR",
+      "color": "white"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "OR2",
+      "color": "yellow"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": ["Sell any number of shares", "Buy one share"],
+      "ordered": true
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Issue or redeem shares",
+        "Lay or upgrade track and/or purchase a station",
+        "Run trains",
+        "Pay dividends, half dividends or retain revenue",
+        "Purchase trains"
+      ],
+      "ordered": true,
+      "optional": ["Purchase private companies"]
+    }
+  ],
+  "stock": {
+    "type": "1D",
+    "movement": {
+      "left": [
+        "President sold shares",
+        "Stock has shares in the market",
+        "Dividend less than 1/2 the current price"
+      ],
+      "right": [
+        "Stock is 100% held by players",
+        "Dividend at least stock price, but less than double",
+        "[Double] Dividend two times or more its current price",
+        "[Triple] Dividend three times or more its current price (when $165 or more)"
+      ]
+    },
+    "ledges": [
+      {
+        "color": "orange",
+        "coords": ["4 0", "4 1", "15 1", "15 0", "4 0"]
+      }
+    ],
+    "market": [
+      {
+        "label": "Closed",
+        "color": "black",
+        "textColor": "white"
+      },
+      10,
+      20,
+      30,
+      {
+        "value": 40,
+        "par": true
+      },
+      {
+        "value": 50,
+        "par": true
+      },
+      {
+        "value": 60,
+        "par": true
+      },
+      {
+        "value": 70,
+        "par": true
+      },
+      {
+        "value": 80,
+        "par": true
+      },
+      {
+        "value": 90,
+        "par": true
+      },
+      {
+        "value": 100,
+        "par": true
+      },
+      {
+        "value": 112,
+        "par": true
+      },
+      {
+        "value": 124,
+        "par": true
+      },
+      {
+        "value": 137,
+        "par": true
+      },
+      {
+        "value": 150,
+        "par": true
+      },
+      165,
+      180,
+      195,
+      212,
+      230,
+      250,
+      270,
+      295,
+      320,
+      345,
+      375,
+      405,
+      440,
+      475,
+      510,
+      550
+    ],
+    "limits": [
+      {
+        "color": "orange",
+        "description": "Allowed par values",
+        "min": 40,
+        "max": 150
+      }
+    ]
+  },
+  "bank": 12000,
+  "tiles": {
+    "5": 3,
+    "6": 4,
+    "7": 5,
+    "8": 16,
+    "9": 16,
+    "14": 4,
+    "15": 5,
+    "16": 2,
+    "17": 1,
+    "18": 1,
+    "19": 2,
+    "20": 2,
+    "21": 1,
+    "22": 1,
+    "23": 4,
+    "24": 4,
+    "25": 2,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "30": 1,
+    "31": 1,
+    "39": 1,
+    "40": 1,
+    "41": 2,
+    "42": 2,
+    "43": 2,
+    "44": 1,
+    "45": 2,
+    "46": 2,
+    "47": 2,
+    "51": 2,
+    "57": 4,
+    "70": 1,
+    "290": 1,
+    "291": 1,
+    "292": 1,
+    "293": 1,
+    "294": 2,
+    "295": 2,
+    "296": 1,
+    "297": 2,
+    "611": 4,
+    "619": 3,
+    "298|CHI": {
+      "quantity": 1,
+      "color": "green",
+      "labels": [
+        {
+          "angle": 287,
+          "percent": 0.7,
+          "label": "CHI"
+        }
+      ],
+      "values": [
+        {
+          "angle": 323,
+          "percent": 0.75,
+          "value": 40
+        }
+      ],
+      "cities": [
+        {
+          "angle": 60,
+          "percent": 0.75
+        },
+        {
+          "angle": 120,
+          "percent": 0.75
+        },
+        {
+          "angle": 180,
+          "percent": 0.75
+        },
+        {
+          "angle": 240,
+          "percent": 0.75
+        }
+      ],
+      "track": [
+        {
+          "type": "sharp",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 1
+        },
+        {
+          "type": "straight",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 5
+        }
+      ]
+    },
+    "299|CHI": {
+      "quantity": 1,
+      "color": "brown",
+      "labels": [
+        {
+          "angle": 287,
+          "percent": 0.7,
+          "label": "CHI"
+        }
+      ],
+      "values": [
+        {
+          "angle": 323,
+          "percent": 0.75,
+          "value": 70
+        }
+      ],
+      "cities": [
+        {
+          "angle": 60,
+          "percent": 0.75
+        },
+        {
+          "angle": 120,
+          "percent": 0.75
+        },
+        {
+          "angle": 180,
+          "percent": 0.75
+        },
+        {
+          "angle": 240,
+          "percent": 0.75
+        }
+      ],
+      "track": [
+        {
+          "type": "sharp",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 1
+        },
+        {
+          "type": "straight",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 5
+        }
+      ]
+    },
+    "300|CHI": {
+      "quantity": 1,
+      "color": "gray",
+      "labels": [
+        {
+          "angle": 287,
+          "percent": 0.7,
+          "label": "CHI"
+        }
+      ],
+      "values": [
+        {
+          "angle": 323,
+          "percent": 0.75,
+          "value": 90
+        }
+      ],
+      "cities": [
+        {
+          "angle": 60,
+          "percent": 0.75
+        },
+        {
+          "angle": 120,
+          "percent": 0.75
+        },
+        {
+          "angle": 180,
+          "percent": 0.75
+        },
+        {
+          "angle": 240,
+          "percent": 0.75
+        }
+      ],
+      "track": [
+        {
+          "type": "sharp",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 1
+        },
+        {
+          "type": "straight",
+          "side": 1
+        },
+        {
+          "type": "gentle",
+          "side": 5
+        }
+      ]
+    }
+  },
+  "map": {
+    "hexes": [
+      {
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": [
+          "A3",
+          "A7",
+          "A9",
+          "A11",
+          "A13",
+          "B2",
+          "B4",
+          "B6",
+          "D2",
+          "E3",
+          "E9",
+          "F6"
+        ]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Craig",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["A5"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["A15", "D16", "F12"]
+      },
+      {
+        "color": "offboard",
+        "labels": [
+          {
+            "angle": -240,
+            "label": "E",
+            "percent": 0.6
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": -115,
+          "name": {
+            "name": "Chicago"
+          },
+          "percent": 0.5,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "routeBonuses": [
+          {
+            "angle": -65,
+            "percent": 0.5,
+            "value": "+$20"
+          }
+        ],
+        "track": [
+          {
+            "side": 1,
+            "type": "offboard"
+          },
+          {
+            "side": 6,
+            "type": "offboard"
+          }
+        ],
+        "hexes": ["A17"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Steamboat Springs",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["B8"]
+      },
+      {
+        "names": [
+          {
+            "angle": 180,
+            "color": "brown",
+            "fontStyle": "italic",
+            "name": "Rabbit Ears Pass",
+            "percent": 0.3
+          }
+        ],
+        "shapes": [
+          {
+            "color": "black",
+            "type": "circle",
+            "width": 22
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 60,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["B10"]
+      },
+      {
+        "shapes": [
+          {
+            "color": "black",
+            "type": "circle",
+            "width": 22
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["B12", "C5", "D4", "D10", "E7", "F10"]
+      },
+      {
+        "cities": [
+          {
+            "companies": ["CNW", "GSLP"],
+            "size": 2
+          }
+        ],
+        "color": "gray",
+        "names": [
+          {
+            "angle": -64,
+            "name": "Fort",
+            "percent": 0.78
+          },
+          {
+            "angle": -51,
+            "name": "Collins",
+            "percent": 0.91
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 0,
+          "percent": 0.55,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": ["B14"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Greeley",
+            "percent": 0.6
+          }
+        ],
+        "color": "plain",
+        "hexes": ["B16"]
+      },
+      {
+        "color": "offboard",
+        "labels": [
+          {
+            "angle": 240,
+            "label": "W",
+            "percent": 0.6
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 115,
+          "name": {
+            "name": "Salt Lake City"
+          },
+          "percent": 0.5,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ]
+        },
+        "routeBonuses": [
+          {
+            "angle": 65,
+            "percent": 0.5,
+            "value": "+$50"
+          }
+        ],
+        "track": [
+          {
+            "side": 3,
+            "type": "offboard"
+          },
+          {
+            "side": 4,
+            "type": "offboard"
+          },
+          {
+            "side": 5,
+            "type": "offboard"
+          }
+        ],
+        "hexes": ["C1"]
+      },
+      {
+        "cities": [
+          {
+            "angle": 150,
+            "percent": 0.75,
+            "width": 19
+          },
+          {
+            "angle": 210,
+            "percent": 0.75,
+            "width": 19
+          },
+          {
+            "angle": 270,
+            "percent": 0.75,
+            "width": 19
+          },
+          {
+            "angle": 330,
+            "companies": ["DSPP"],
+            "percent": 0.7,
+            "width": 19
+          }
+        ],
+        "color": "yellow",
+        "labels": [
+          {
+            "angle": 58,
+            "label": "CHI",
+            "percent": 0.85
+          }
+        ],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Grand",
+            "percent": 0.2
+          },
+          {
+            "angle": 0,
+            "name": "Junction",
+            "percent": 0.36
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.2,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "track": [
+          {
+            "side": 2,
+            "type": "stub"
+          },
+          {
+            "side": 3,
+            "type": "stub"
+          },
+          {
+            "side": 4,
+            "type": "stub"
+          },
+          {
+            "side": 5,
+            "type": "stub"
+          }
+        ],
+        "values": [
+          {
+            "angle": 22,
+            "percent": 0.72,
+            "value": 10
+          }
+        ],
+        "hexes": ["C3"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Glenwood Springs",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["C7"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Vail",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["C9"]
+      },
+      {
+        "shapes": [
+          {
+            "color": "black",
+            "type": "circle",
+            "width": 22
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "tunnels": [
+          {
+            "angle": 90,
+            "cost": 40,
+            "percent": 1
+          },
+          {
+            "angle": 150,
+            "cost": 40,
+            "percent": 1
+          }
+        ],
+        "color": "plain",
+        "hexes": ["C11"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Boulder",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["C13"]
+      },
+      {
+        "cities": [
+          {
+            "companies": ["DRG"],
+            "size": 2
+          }
+        ],
+        "color": "yellow",
+        "labels": [
+          {
+            "angle": 180,
+            "label": "Z",
+            "percent": 0.72
+          }
+        ],
+        "names": [
+          {
+            "angle": -35,
+            "name": "Denver",
+            "percent": 0.7
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 2
+          },
+          {
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "angle": 56,
+            "percent": 0.79,
+            "value": 40
+          }
+        ],
+        "hexes": ["C15"]
+      },
+      {
+        "color": "offboard",
+        "labels": [
+          {
+            "angle": -240,
+            "label": "E",
+            "percent": 0.6
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": -115,
+          "name": {
+            "name": "Kansas City"
+          },
+          "percent": 0.5,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "routeBonuses": [
+          {
+            "angle": -65,
+            "percent": 0.5,
+            "value": "+$30"
+          }
+        ],
+        "track": [
+          {
+            "side": 1,
+            "type": "offboard"
+          },
+          {
+            "side": 6,
+            "type": "offboard"
+          }
+        ],
+        "hexes": ["C17"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Gunnison",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["D6"]
+      },
+      {
+        "shapes": [
+          {
+            "color": "black",
+            "type": "circle",
+            "width": 22
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "tunnels": [
+          {
+            "angle": 90,
+            "cost": 40,
+            "percent": 1
+          },
+          {
+            "angle": 270,
+            "cost": 40,
+            "percent": 1
+          }
+        ],
+        "color": "plain",
+        "hexes": ["D8"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Leadville",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "tunnels": [
+          {
+            "angle": 150,
+            "cost": 40,
+            "percent": 1
+          }
+        ],
+        "color": "plain",
+        "hexes": ["D12"]
+      },
+      {
+        "cities": [
+          {
+            "companies": ["CCR"],
+            "size": 2
+          }
+        ],
+        "color": "gray",
+        "names": [
+          {
+            "angle": 160,
+            "name": "Colorado",
+            "percent": 0.68
+          },
+          {
+            "angle": 150,
+            "name": "Springs",
+            "percent": 0.48
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 0,
+          "percent": 0.55,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "40"
+            }
+          ]
+        },
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 3
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 5
+          },
+          {
+            "side": 6
+          }
+        ],
+        "hexes": ["D14"]
+      },
+      {
+        "cities": [{}],
+        "labels": [
+          {
+            "angle": -51,
+            "label": "Z",
+            "percent": 0.72
+          }
+        ],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Silverton",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["E5"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Alamosa",
+            "percent": 0.6
+          }
+        ],
+        "color": "plain",
+        "hexes": ["E11"]
+      },
+      {
+        "cities": [{}],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Cañon City",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["E13"]
+      },
+      {
+        "cities": [
+          {
+            "companies": ["CCP"],
+            "size": 2
+          }
+        ],
+        "color": "yellow",
+        "names": [
+          {
+            "angle": -20,
+            "name": "Pueblo",
+            "percent": 0.6
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          },
+          {
+            "side": 6
+          }
+        ],
+        "values": [
+          {
+            "angle": 63,
+            "percent": 0.73,
+            "value": 20
+          }
+        ],
+        "hexes": ["E15"]
+      },
+      {
+        "color": "offboard",
+        "labels": [
+          {
+            "angle": -240,
+            "label": "E",
+            "percent": 0.6
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": -115,
+          "name": {
+            "name": "Dallas"
+          },
+          "percent": 0.5,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "routeBonuses": [
+          {
+            "angle": -65,
+            "percent": 0.5,
+            "value": "+$30"
+          }
+        ],
+        "track": [
+          {
+            "side": 1,
+            "type": "offboard"
+          },
+          {
+            "side": 2,
+            "type": "offboard"
+          }
+        ],
+        "hexes": ["E17"]
+      },
+      {
+        "color": "offboard",
+        "labels": [
+          {
+            "angle": 240,
+            "label": "W",
+            "percent": 0.6
+          }
+        ],
+        "offBoardRevenue": {
+          "angle": 115,
+          "name": {
+            "name": "Southern California"
+          },
+          "percent": 0.5,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "brown",
+              "cost": "50"
+            }
+          ]
+        },
+        "routeBonuses": [
+          {
+            "angle": 65,
+            "percent": 0.5,
+            "value": "+$30"
+          }
+        ],
+        "track": [
+          {
+            "side": 3,
+            "type": "offboard"
+          },
+          {
+            "side": 4,
+            "type": "offboard"
+          }
+        ],
+        "hexes": ["F2"]
+      },
+      {
+        "cities": [{}],
+        "labels": [
+          {
+            "angle": -105,
+            "label": "Z",
+            "percent": 0.6
+          }
+        ],
+        "names": [
+          {
+            "angle": 0,
+            "name": "Durango",
+            "percent": 0.6
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 40,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["F4"]
+      },
+      {
+        "names": [
+          {
+            "angle": 180,
+            "color": "brown",
+            "fontStyle": "italic",
+            "name": "Wolf Creek Pass",
+            "percent": 0.3
+          }
+        ],
+        "shapes": [
+          {
+            "color": "black",
+            "type": "circle",
+            "width": 22
+          }
+        ],
+        "terrain": [
+          {
+            "angle": 180,
+            "cost": 60,
+            "percent": 0.6,
+            "size": "small",
+            "type": "mountain"
+          }
+        ],
+        "color": "plain",
+        "hexes": ["F8"]
+      },
+      {
+        "cities": [{}],
+        "color": "gray",
+        "names": [
+          {
+            "angle": 0,
+            "name": "Trinidad",
+            "percent": 0.6
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 3
+          }
+        ],
+        "values": [
+          {
+            "angle": 126,
+            "percent": 0.6,
+            "value": 20
+          }
+        ],
+        "hexes": ["F14"]
+      }
+    ]
+  }
+}
