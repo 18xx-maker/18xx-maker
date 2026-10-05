@@ -2,6 +2,7 @@ import { Navigate } from "react-router";
 
 import { addIndex, ascend, keys, map, sortWith } from "ramda";
 
+import HtmlEditor from "@/components/HtmlEditor";
 import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
 
@@ -71,17 +72,19 @@ const TileManifest = () => {
   }, ids);
 
   return (
-    <ColorContext.Provider value="tile">
-      <div
-        className="TileManifest printElement"
-        data-testid={`game-${game.meta.slug}-tile-manifest`}
-      >
-        <div className="TileManifest--Title">
-          {game.info.title} Tile Manifest
+    <HtmlEditor>
+      <ColorContext.Provider value="tile">
+        <div
+          className="TileManifest printElement"
+          data-testid={`game-${game.meta.slug}-tile-manifest`}
+        >
+          <div className="TileManifest--Title">
+            {game.info.title} Tile Manifest
+          </div>
+          {tileNodes}
         </div>
-        {tileNodes}
-      </div>
-    </ColorContext.Provider>
+      </ColorContext.Provider>
+    </HtmlEditor>
   );
 };
 

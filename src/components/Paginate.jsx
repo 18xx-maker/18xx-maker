@@ -2,6 +2,7 @@ import { useId } from "react";
 
 import { map } from "ramda";
 
+import HtmlEditor from "@/components/HtmlEditor";
 import Page from "@/components/Page";
 import PageSetup from "@/components/PageSetup";
 import Svg from "@/components/Svg";
@@ -104,12 +105,12 @@ const Paginate = ({ component, data, config, game, children }) => {
   }, paginationData.yPages);
 
   return (
-    <>
+    <HtmlEditor page=".cutlines">
       <style>{css}</style>
       <Svg className="paginated-svg" defs={defs} />
       {pages}
       <PageSetup landscape={paginationData.landscape} />
-    </>
+    </HtmlEditor>
   );
 };
 

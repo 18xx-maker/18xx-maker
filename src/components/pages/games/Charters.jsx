@@ -14,6 +14,7 @@ import {
 } from "ramda";
 
 import Charter from "@/components/Charter";
+import HtmlEditor from "@/components/HtmlEditor";
 import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
 import Svg from "@/components/Svg";
@@ -309,16 +310,18 @@ const Charters = () => {
   }
 
   return (
-    <div
-      className="charters"
-      data-testid={`game-${game.meta.slug}-charters`}
-      data-layout={charters.layout}
-      data-per-page={data.perPage}
-    >
-      <style>{css}</style>
-      {pages}
-      <PageSetup landscape={false} />
-    </div>
+    <HtmlEditor page=".cutlines" count={2}>
+      <div
+        className="charters"
+        data-testid={`game-${game.meta.slug}-charters`}
+        data-layout={charters.layout}
+        data-per-page={data.perPage}
+      >
+        <style>{css}</style>
+        {pages}
+        <PageSetup landscape={false} />
+      </div>
+    </HtmlEditor>
   );
 };
 

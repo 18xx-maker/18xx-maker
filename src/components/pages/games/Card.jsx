@@ -2,6 +2,7 @@ import { useLocation, useParams } from "react-router";
 
 import { assoc, flatten, map } from "ramda";
 
+import HtmlEditor from "@/components/HtmlEditor";
 import Number from "@/components/cards/Number";
 import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
@@ -151,16 +152,18 @@ const Card = () => {
 `;
 
   return (
-    <div>
-      <style>{css}</style>
-      <div
-        className="printElement"
-        data-testid={`game-${game.meta.slug}-card`}
-        style={{ overflow: "auto", display: "inline-block" }}
-      >
-        {node}
+    <HtmlEditor>
+      <div>
+        <style>{css}</style>
+        <div
+          className="printElement"
+          data-testid={`game-${game.meta.slug}-card`}
+          style={{ overflow: "auto", display: "inline-block" }}
+        >
+          {node}
+        </div>
       </div>
-    </div>
+    </HtmlEditor>
   );
 };
 

@@ -1,5 +1,7 @@
 import { Navigate } from "react-router";
 
+import HtmlEditor from "@/components/HtmlEditor";
+
 import { useConfig, useGame } from "@/hooks";
 
 import "@/components/pages/games/Tiles.css";
@@ -378,37 +380,39 @@ const TileSheet = () => {
   }, pagedTiles);
 
   return (
-    <ColorContext.Provider value="tile">
-      <div
-        data-testid={`game-${game.meta.slug}-tiles`}
-        className={`tileSheet tileSheet--${layout}`}
-      >
-        {keys(offsetClips).length > 0 && (
-          <svg
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ height: 0, width: 0, position: "absolute" }}
-          >
-            <defs>
-              {map(
-                (id) => (
-                  <clipPath id={id} key={id}>
-                    <polygon
-                      points={offsetBleedPoints(offsetClips[id])
-                        .map((p) => p.join(","))
-                        .join(" ")}
-                    />
-                  </clipPath>
-                ),
-                keys(offsetClips),
-              )}
-            </defs>
-          </svg>
-        )}
-        {pageNodes}
-        <PageSetup paper={c.paper} landscape={false} />
-      </div>
-    </ColorContext.Provider>
+    <HtmlEditor page=".TileSheet--Page">
+      <ColorContext.Provider value="tile">
+        <div
+          data-testid={`game-${game.meta.slug}-tiles`}
+          className={`tileSheet tileSheet--${layout}`}
+        >
+          {keys(offsetClips).length > 0 && (
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ height: 0, width: 0, position: "absolute" }}
+            >
+              <defs>
+                {map(
+                  (id) => (
+                    <clipPath id={id} key={id}>
+                      <polygon
+                        points={offsetBleedPoints(offsetClips[id])
+                          .map((p) => p.join(","))
+                          .join(" ")}
+                      />
+                    </clipPath>
+                  ),
+                  keys(offsetClips),
+                )}
+              </defs>
+            </svg>
+          )}
+          {pageNodes}
+          <PageSetup paper={c.paper} landscape={false} />
+        </div>
+      </ColorContext.Provider>
+    </HtmlEditor>
   );
 };
 

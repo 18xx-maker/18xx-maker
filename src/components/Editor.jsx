@@ -15,7 +15,7 @@ export const useEditing = () => {
   return !(print || printParam || getRenderInput());
 };
 
-const Editor = ({ width, height, className, ...pass }) => {
+const Editor = ({ width, height, className, padding, ...pass }) => {
   if (!useEditing()) {
     return (
       <Svg
@@ -33,6 +33,7 @@ const Editor = ({ width, height, className, ...pass }) => {
       key={`${width}x${height}`}
       width={width}
       height={height}
+      padding={padding}
       {...pass}
     />
   );

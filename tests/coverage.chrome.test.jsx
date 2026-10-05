@@ -65,13 +65,14 @@ describe("svg editor", () => {
   const open = async () => {
     const { user } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
+    // The map starts below the toolbar, not at the top of the window
     const [x, y, width, height] = viewBox();
-    expect([x, y]).toEqual([0, 0]);
-    return { user, width, height };
+    expect(y).toBeLessThan(0);
+    return { user, x, y, width, height };
   };
 
   it("pans the view while dragging with the primary button", async () => {
-    const { width, height } = await open();
+    const { x: x0, y: y0, width, height } = await open();
     const svg = editorSvg();
 
     fireEvent.pointerDown(svg, { clientX: 100, clientY: 100, buttons: 1 });
@@ -79,35 +80,35 @@ describe("svg editor", () => {
     fireEvent.pointerMove(svg, { clientX: 228, clientY: 180, buttons: 1 });
 
     const [x, y, w, h] = viewBox();
-    expect(x).toBeCloseTo(-0.1 * width);
-    expect(y).toBeCloseTo(-0.1 * height);
+    expect(x).toBeCloseTo(x0 - 0.1 * width);
+    expect(y).toBeCloseTo(y0 - 0.1 * height);
     expect([w, h]).toEqual([width, height]);
   });
 
   it("does not pan when no button is held", async () => {
-    await open();
+    const { x, y } = await open();
     const svg = editorSvg();
 
     fireEvent.pointerDown(svg, { clientX: 100, clientY: 100 });
     fireEvent.pointerMove(svg, { clientX: 300, clientY: 300, buttons: 0 });
 
-    expect(viewBox().slice(0, 2)).toEqual([0, 0]);
+    expect(viewBox().slice(0, 2)).toEqual([x, y]);
   });
 
   it("zooms around the center with the wheel", async () => {
-    const { width, height } = await open();
+    const { x: x0, y: y0, width, height } = await open();
 
     fireEvent.wheel(editorSvg(), { deltaY: 80 });
 
     const [x, y, w, h] = viewBox();
     expect(w).toBeCloseTo(1.1 * width);
     expect(h).toBeCloseTo(1.1 * height);
-    expect(x).toBeCloseTo(-0.05 * width);
-    expect(y).toBeCloseTo(-0.05 * height);
+    expect(x).toBeCloseTo(x0 - 0.05 * width);
+    expect(y).toBeCloseTo(y0 - 0.05 * height);
   });
 
   it("resets the view with v, but not with a modifier", async () => {
-    const { user, width, height } = await open();
+    const { user, x, y, width, height } = await open();
     fireEvent.wheel(editorSvg(), { deltaY: -400 });
     const zoomed = viewBox();
     expect(zoomed[2]).toBeCloseTo(0.5 * width);
@@ -116,7 +117,7 @@ describe("svg editor", () => {
     expect(viewBox()).toEqual(zoomed);
 
     await user.keyboard("v");
-    expect(viewBox()).toEqual([0, 0, width, height]);
+    expect(viewBox()).toEqual([x, y, width, height]);
   });
 
   it("follows the window size", async () => {
