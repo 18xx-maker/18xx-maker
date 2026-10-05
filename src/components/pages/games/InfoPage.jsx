@@ -64,7 +64,7 @@ const InfoPage = () => {
       {publisherId !== "self" && (
         <div className="flex flex-row place-content-center p-1 border rounded-lg w-16 h-16 shrink-0 overflow-hidden bg-white">
           <img
-            className="block h-full"
+            className="block h-full w-full object-contain"
             alt={`${publisher.name} Logo`}
             src={publisher.imageUrl}
           />
