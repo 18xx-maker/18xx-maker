@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.0.0-beta.130](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.129...v1.0.0-beta.130) (2026-10-05)
+
+
+### :tada: Features
+
+* **export:** write app exports in the CLI folder layout and remember the folder ([#882](https://github.com/18xx-maker/18xx-maker/issues/882)) ([c6296f7](https://github.com/18xx-maker/18xx-maker/commit/c6296f7791ebe45f1c3988ce4589632245413631))
+* **ui:** add a problems page for game files that drift from the schema ([#881](https://github.com/18xx-maker/18xx-maker/issues/881)) ([18e3bef](https://github.com/18xx-maker/18xx-maker/commit/18e3beffcad6c29bd7ca7bd26673e8a9aa32912e))
+* **ui:** add print and paginate keys to the game edit page ([#890](https://github.com/18xx-maker/18xx-maker/issues/890)) ([9c0ede5](https://github.com/18xx-maker/18xx-maker/commit/9c0ede58a5218e17618bfa9cb6c9dc848f8e7ef4)), closes [#868](https://github.com/18xx-maker/18xx-maker/issues/868)
+* **ui:** show the publisher on the game info page ([#878](https://github.com/18xx-maker/18xx-maker/issues/878)) ([ae245dc](https://github.com/18xx-maker/18xx-maker/commit/ae245dcbd150ba5ece149222736a7392ddabd04e))
+
+
+### :bug: Bug Fixes
+
+* **ui:** ignore section keys for sections the game has no data for ([#877](https://github.com/18xx-maker/18xx-maker/issues/877)) ([7dcc606](https://github.com/18xx-maker/18xx-maker/commit/7dcc606def64a8ea394da7621ecd13c6675056fd))
+* **ui:** improve the editor pane on touch screens ([#879](https://github.com/18xx-maker/18xx-maker/issues/879)) ([215c0a0](https://github.com/18xx-maker/18xx-maker/commit/215c0a0864692b7c3a81018b9738e58cfb321f9b))
+* **ui:** print the editor on a white background in every theme ([#867](https://github.com/18xx-maker/18xx-maker/issues/867)) ([efcec3d](https://github.com/18xx-maker/18xx-maker/commit/efcec3d9d6621c2487fe0ba7fa314589d3903cc6))
+
+
+### :broom: Chores
+
+* remove unused archiver and @vitest/ui ([#880](https://github.com/18xx-maker/18xx-maker/issues/880)) ([a3e9ae0](https://github.com/18xx-maker/18xx-maker/commit/a3e9ae056461c94df03b66c82484b9b9735eb615))
+
+
+### :hammer_and_wrench: Code Refactoring
+
+* merge duplicated components and helpers ([#889](https://github.com/18xx-maker/18xx-maker/issues/889)) ([92988e6](https://github.com/18xx-maker/18xx-maker/commit/92988e626e0d9e6bd7865ece5a4bff176003b5c0))
+* **ui:** replace react-syntax-highlighter with shiki ([#891](https://github.com/18xx-maker/18xx-maker/issues/891)) ([ddbebcd](https://github.com/18xx-maker/18xx-maker/commit/ddbebcd87fd8354fb5a1aa88c8a7f4a9444b243d))
+
 ## [1.0.0-beta.129](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.128...v1.0.0-beta.129) (2026-10-05)
 
 
