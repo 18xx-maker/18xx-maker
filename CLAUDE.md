@@ -46,8 +46,9 @@ Layout (projects are defined in `test.projects` in `vitest.config.js`):
 
 - `unit` (node): `src/**/*.test.js`: logic in `src/util` and `src/state`.
 - `component` (real Chromium via `@vitest/browser` + Playwright):
-  `tests/**/*.test.jsx` and `src/**/*.test.jsx`. jsdom is not used; it
-  disagrees with Node on `Request`/`AbortSignal`, which react-router needs.
+  `tests/**/*.test.jsx` and `src/**/*.test.jsx`. Component tests do not use jsdom: it
+  disagrees with Node on `Request`/`AbortSignal`, which react-router needs
+  (a few node-project unit tests opt into jsdom).
   Setup is `tests/support/setup.js`; render with `renderApp` from `tests/support/helpers.jsx`
   (real store + memory router built from `rootRoutes`).
 - `e2e/*.spec.js`: Playwright on `vite preview` of `dist/site` (port 4318).
@@ -134,8 +135,7 @@ Design checklist for tokens and icons:
   into a `legacy` cascade layer and `root.css` undoes the reset for print
   content. Verify real print output (PDF page counts, screenshots with print
   media) after CSS changes, snapshots cannot see CSS.
-- Held back on purpose: `eslint`/`@eslint/js` 9 (eslint-plugin-react and
-  eslint-plugin-vitest do not allow 10), `vite` 7 (electron-vite 5 caps at 7),
+- Held back on purpose: `vite` 7 (electron-vite 5 caps at 7),
   `svgo` 3 (4 rewrites every data SVG), `playwright` pinned (the pinned
   Chromium must be installed).
 - Redux state uses hand-rolled `combineReducers`/`composeReducers`/`reducePath`
