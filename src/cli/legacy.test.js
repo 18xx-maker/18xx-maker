@@ -34,7 +34,7 @@ const added = {
 const crashed = ["1888", "1883ExpressdOrient"];
 
 // Games added after the legacy CLI was retired, they have no legacy output
-const newer = ["18GJ"];
+const newer = ["18GJ", "18Broken"];
 const legacyGames = games.filter((id) => !newer.includes(id));
 
 const data = loadExportData();

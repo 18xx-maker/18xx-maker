@@ -334,6 +334,7 @@
     },
     "loaded": "Your games",
     "bundled": "Bundled games",
+    "test": "Test games",
     "empty": "No games match these filters"
   },
   "game": {

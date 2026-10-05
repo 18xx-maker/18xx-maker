@@ -178,18 +178,28 @@ describe("load games filters", () => {
     expect(headings.map((h) => h.textContent)).toEqual([
       "Your games",
       "Bundled games",
+      "Test games",
     ]);
     const titles = screen
       .getAllByRole("link")
       .map((l) => l.textContent)
       .filter((x) =>
-        ["Bare Game", "Other Game", "Saved Game", "Shikoku 1889"].includes(x),
+        [
+          "Bare Game",
+          "Other Game",
+          "Saved Game",
+          "Shikoku 1889",
+          "18Broken",
+          "18Test",
+        ].includes(x),
       );
     expect(titles).toEqual([
       "Bare Game",
       "Other Game",
       "Saved Game",
       "Shikoku 1889",
+      "18Broken",
+      "18Test",
     ]);
   });
 
@@ -245,7 +255,9 @@ describe("load games filters", () => {
     expect(
       screen.queryByRole("combobox", { name: "Type" }),
     ).not.toBeInTheDocument();
-    expect(screen.queryByRole("heading", { level: 2 })).not.toBeInTheDocument();
+    expect(
+      screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent),
+    ).toEqual(["Test games"]);
   });
 });
 

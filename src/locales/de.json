@@ -334,6 +334,7 @@
     },
     "loaded": "Deine Spiele",
     "bundled": "Mitgelieferte Spiele",
+    "test": "Testspiele",
     "empty": "Keine Spiele entsprechen diesen Filtern"
   },
   "game": {

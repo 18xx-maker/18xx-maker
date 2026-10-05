@@ -10,8 +10,16 @@ import {
 import { brokenGame, validGame } from "@tests/support/brokenGame.js";
 
 describe("gameValidation", () => {
-  it.each(Object.keys(games))("finds no problems in %s", async (id) => {
-    expect(await validateGame(games[id])).toEqual([]);
+  it.each(Object.keys(games).filter((id) => id !== "18Broken"))(
+    "finds no problems in %s",
+    async (id) => {
+      expect(await validateGame(games[id])).toEqual([]);
+    },
+  );
+
+  it("finds problems in the 18Broken test game", async () => {
+    const issues = await validateGame(games["18Broken"]);
+    expect(issues.length).toBeGreaterThan(3);
   });
 
   it("ignores the meta data the app adds", async () => {

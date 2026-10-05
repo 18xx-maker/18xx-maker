@@ -1,0 +1,11 @@
+{
+  "info": {
+    "title": "18Broken",
+    "subtitle": "18xx-Maker Schema Errors Test File",
+    "designer": "Christopher Giroir",
+    "publisher": "dtg"
+  },
+  "exports": { "paginated": true, "png": { "dpi": "300" }, "layouts": "some" },
+  "stock": { "marekt": 10 },
+  "companies": [{ "abbrev": "BR", "name": "Broken Railway", "colour": "red" }]
+}
