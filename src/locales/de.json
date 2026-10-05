@@ -592,6 +592,10 @@
         "label": "Rundenanzeige auf der Karte anzeigen",
         "description": "Ob die Rundenanzeige auf Karten angezeigt wird. Die Spieldatei muss dafür die Position angeben."
       },
+      "movement": {
+        "label": "Kursbewegungs-Legende auf der Karte anzeigen",
+        "description": "Ob die Legende zur Bewegung der Aktienkurse auf Karten angezeigt wird. Die Spieldatei muss dafür die Position angeben."
+      },
       "margin": {
         "label": "Randgröße",
         "description": "Wie groß der Rand um das gedruckte Element ist."
@@ -686,6 +690,10 @@
       "displayRoundTracker": {
         "label": "Rundenanzeige des Aktienmarkts anzeigen",
         "description": "Ob die Rundenanzeige auf Aktienmärkten angezeigt wird. Die Spieldatei muss dafür die Position angeben."
+      },
+      "displayMovement": {
+        "label": "Kursbewegungs-Legende des Aktienmarkts anzeigen",
+        "description": "Ob die Legende zur Bewegung der Aktienkurse auf Aktienmärkten angezeigt wird. Die Spieldatei muss dafür die Position angeben."
       },
       "margin": {
         "label": "Randgröße",

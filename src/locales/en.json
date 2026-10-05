@@ -592,6 +592,10 @@
         "label": "Display Map Round Tracker",
         "description": "Whether or not to show the round tracker on maps. Requires the game file to specify the location."
       },
+      "movement": {
+        "label": "Display Map Movement Legend",
+        "description": "Whether or not to show the share price movement legend on maps. Requires the game file to specify the location."
+      },
       "margin": {
         "label": "Margin Size",
         "description": "How much of a margin exists around the printed item."
@@ -686,6 +690,10 @@
       "displayRoundTracker": {
         "label": "Display Market Round Tracker",
         "description": "Whether or not to show the round tracker on markets. Requires the game file to specify the location."
+      },
+      "displayMovement": {
+        "label": "Display Market Movement Legend",
+        "description": "Whether or not to show the share price movement legend on markets. Requires the game file to specify the location."
       },
       "margin": {
         "label": "Margin Size",

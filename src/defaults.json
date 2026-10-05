@@ -36,6 +36,7 @@
   "maps": {
     "players": true,
     "roundTracker": true,
+    "movement": true,
     "market": true
   },
   "plainMapCompanies": false,
@@ -135,7 +136,8 @@
     "display": {
       "legend": true,
       "par": true,
-      "roundTracker": true
+      "roundTracker": true,
+      "movement": true
     }
   }
 }

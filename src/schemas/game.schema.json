@@ -78,6 +78,10 @@
         "roundTracker": {
           "$ref": "#/definitions/roundTracker"
         },
+        "movement": {
+          "description": "Draw the legend of how the share price moves (stock.movement) on the map, x and y in map units from the top left corner. A market drawn on the map also draws it when stock.display.movement is set.",
+          "$ref": "#/definitions/movement"
+        },
         "market": {
           "type": "object",
           "properties": {
@@ -757,6 +761,20 @@
         ]
       }
     },
+    "movement": {
+      "type": "object",
+      "description": "Where to draw the share price movement legend.",
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "required": ["x", "y"],
+      "additionalProperties": false
+    },
     "roundTracker": {
       "type": "object",
       "description": "Where to draw the round tracker, in cells of the market.",
@@ -890,6 +908,10 @@
             "roundTracker": {
               "$ref": "#/definitions/roundTracker"
             },
+            "movement": {
+              "description": "Draw the legend of how the share price moves (stock.movement) on the market, x and y in cells from the corner. On a 1D market a column is as many cells tall as the column setting. Also drawn on a market placed on the map.",
+              "$ref": "#/definitions/movement"
+            },
             "extraTotalHeight": {
               "description": "Extra height of the page, in units.",
               "type": "number"
@@ -1003,7 +1025,7 @@
           }
         },
         "movement": {
-          "description": "How the share price moves, by direction. Kept for reference, it is not printed.",
+          "description": "How the share price moves, by direction (up, down, left and right are drawn as arrows, any other key as a line of text). Printed as a legend where stock.display.movement or map.movement place it.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
