@@ -6,25 +6,32 @@ import { isControlTarget } from "@/util/keys";
 //
 // The handlers are called with
 //   onPan(dx, dy)  the pointer moved by this many pixels while dragging
-//   onZoom(mult)   the wheel asked for this zoom factor (above 1 zooms out)
+//   onZoom(mult)   the wheel or a pinch asked for this zoom factor (above 1
+//                  zooms out)
 //   onReset()      the "v" key was pressed
 // They are read from a ref, so they may change on every render.
 export const usePanZoom = (ref, handlers) => {
-  const pointer = useRef(null);
+  const pointers = useRef(new Map());
   const latest = useRef(handlers);
   latest.current = handlers;
 
   useEffect(() => {
     const el = ref.current;
 
-    // Only the pointer that started a drag may pan. Without this a move that
-    // never saw its pointerdown (a press that started outside the element, a
-    // second finger, a cancelled drag) is measured from a stale position and
-    // the view jumps. Capturing the pointer keeps the moves and the release
-    // coming to us.
+    // The distance between the two fingers of a pinch, 0 for one pointer
+    const spread = () => {
+      const [a, b] = [...pointers.current.values()];
+      return b ? Math.hypot(a.x - b.x, a.y - b.y) : 0;
+    };
+
+    // Only pointers that started on the element may pan, otherwise a move
+    // that never saw its pointerdown (a press that started outside, a
+    // cancelled drag) is measured from a stale position and the view jumps.
+    // Capturing the pointer keeps the moves and the release coming to us.
+    // One pointer pans, two pointers (fingers) pan and pinch to zoom.
     const onDown = (e) => {
-      if (pointer.current || e.button !== 0) return;
-      pointer.current = { id: e.pointerId, x: e.x, y: e.y };
+      if (e.button !== 0 || pointers.current.size >= 2) return;
+      pointers.current.set(e.pointerId, { x: e.x, y: e.y });
       try {
         el.setPointerCapture(e.pointerId);
       } catch {
@@ -32,24 +39,28 @@ export const usePanZoom = (ref, handlers) => {
       }
     };
     const onUp = (e) => {
-      if (pointer.current?.id !== e.pointerId) return;
-      pointer.current = null;
+      if (!pointers.current.delete(e.pointerId)) return;
       if (el.hasPointerCapture(e.pointerId)) {
         el.releasePointerCapture(e.pointerId);
       }
     };
     const onMove = (e) => {
-      if (pointer.current?.id !== e.pointerId) return;
+      const last = pointers.current.get(e.pointerId);
+      if (!last) return;
       // A release we never saw ends the drag
       if (e.buttons !== 1) {
-        pointer.current = null;
+        pointers.current.delete(e.pointerId);
         return;
       }
 
-      const deltaX = e.x - pointer.current.x;
-      const deltaY = e.y - pointer.current.y;
-      pointer.current = { id: e.pointerId, x: e.x, y: e.y };
-      latest.current.onPan(deltaX, deltaY);
+      const before = spread();
+      pointers.current.set(e.pointerId, { x: e.x, y: e.y });
+      const count = pointers.current.size;
+
+      // Each finger moves half of the movement of their midpoint
+      latest.current.onPan((e.x - last.x) / count, (e.y - last.y) / count);
+      const after = spread();
+      if (before > 0 && after > 0) latest.current.onZoom(before / after);
     };
     const onWheel = (e) => {
       e.preventDefault();

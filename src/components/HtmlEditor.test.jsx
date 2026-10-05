@@ -69,6 +69,62 @@ describe("HtmlEditor", () => {
     expect(transform()).toBe(before);
   });
 
+  it("zooms in when two fingers pinch apart", () => {
+    const { editor, transform } = setup();
+    const scale = () => Number(transform().match(/scale\(([^)]*)\)/)[1]);
+    // Start zoomed out so there is room to zoom in
+    fire(editor, "wheel", { deltaY: 400 });
+    const before = scale();
+    fire(editor, "pointerdown", {
+      pointerId: 1,
+      clientX: 100,
+      clientY: 100,
+      buttons: 1,
+    });
+    fire(editor, "pointerdown", {
+      pointerId: 2,
+      clientX: 200,
+      clientY: 100,
+      buttons: 1,
+    });
+    fire(editor, "pointermove", {
+      pointerId: 2,
+      clientX: 300,
+      clientY: 100,
+      buttons: 1,
+    });
+    expect(scale()).toBeGreaterThan(before);
+    fire(editor, "pointermove", {
+      pointerId: 2,
+      clientX: 150,
+      clientY: 100,
+      buttons: 1,
+    });
+    expect(scale()).toBeLessThan(before * 2);
+  });
+
+  it("wraps floated pages instead of laying them in one line", () => {
+    const store = configureStore({
+      reducer: rootReducer,
+      preloadedState: initialState,
+    });
+    const { container } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <HtmlEditor>
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <div key={n} style={{ float: "left", width: 300, height: 400 }} />
+            ))}
+          </HtmlEditor>
+        </MemoryRouter>
+      </Provider>,
+    );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    const content = container.querySelector("#editor").firstElementChild;
+    expect(content.offsetWidth).toBeLessThan(6 * 300);
+    expect(content.offsetHeight).toBeGreaterThan(400);
+  });
+
   it("renders the children untouched when printing", () => {
     const { container, editor } = setup("/?print=true");
     expect(editor).toBeNull();
