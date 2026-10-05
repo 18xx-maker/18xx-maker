@@ -45,6 +45,7 @@ const Viewport = ({ children }) => {
           // and sit in the middle when narrower than the window, a page wider
           // than the window starts at the left edge and scrolls ("safe")
           !print &&
+            !getRenderInput() &&
             "not-has-[#editor]:pt-16 not-has-[#editor]:flex not-has-[#editor]:flex-col not-has-[#editor]:[align-items:safe_center] print:pt-0 print:block",
         )}
       >
