@@ -99,6 +99,18 @@ describe("createExportIpc", () => {
     ]);
   });
 
+  it("passes the reveal choice on to the service", async () => {
+    const { ipc, service } = setup();
+
+    await ipc.export({ sender }, { id: "x", reveal: true });
+
+    expect(service.run).toHaveBeenCalledWith(
+      7,
+      { id: "x", reveal: true },
+      "ui",
+    );
+  });
+
   it("does not remember a cancelled folder dialog", async () => {
     const { ipc, service, chooseFolder } = setup();
     chooseFolder.mockResolvedValueOnce(undefined);

@@ -25,7 +25,8 @@ zugeschnitten.
 Wenn du ein ganzes Spiel exportierst, wirst du aufgefordert, einen Ordner
 auszuwählen, den sich die App für den nächsten Export merkt. Die Bilder kommen
 nach `<Spiel-ID>/png` darin, genau wie in der Kommandozeile. Die Ausgabe eines Spiels als PNG-Bilder ergibt _VIELE_
-Bilder. Nach Abschluss des Exports öffnet die App den entstandenen Ordner.
+Bilder. Nach Abschluss des Exports öffnet die App den entstandenen Ordner, wenn die
+Einstellung _Ordner nach dem Export öffnen_ aktiv ist.
 
 Beim Export eines ganzen Spiels entsteht ein einzelnes Bild für jedes Plättchen,
 jede Karte, jede Gesellschaftskarte und jeden Token. Bilder, die direkt zu einer

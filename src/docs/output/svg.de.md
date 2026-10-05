@@ -22,7 +22,8 @@ wirst aufgefordert, einen Ordner auszuwählen (die App merkt ihn sich), und in
 `<Spiel-ID>/svg` darin wird für jede Karte (eine pro
 Variante), jeden Aktienmarkt, jede Par-Tabelle, jede Einnahmentabelle, jedes
 Plättchen und jeden Token wird eine Datei geschrieben. Die Dateien enthalten den
-Spielnamen, und die App öffnet den Ordner nach Abschluss des Exports.
+Spielnamen, und die App öffnet den Ordner nach Abschluss des Exports, wenn die Einstellung
+_Ordner nach dem Export öffnen_ aktiv ist.
 
 Seiten, die keine einzelne Zeichnung sind, haben kein SVG: die Karten und
 Gesellschaftskarten (sie bestehen aus Text und Kästen in HTML), die

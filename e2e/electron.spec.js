@@ -49,6 +49,9 @@ const show = async (app, hash) => {
   return window;
 };
 
+// What the app showed in the file manager, recorded instead of opening it
+const shown = (app) => app.evaluate(() => globalThis.shown ?? []);
+
 let out;
 let app;
 
@@ -69,14 +72,16 @@ test.describe("the app exports 18Test", () => {
 
   test("writes pdf, png, svg and a Board 18 box from the options panel", async () => {
     app = await launch();
-    // The folder is chosen without a dialog, and nothing is shown in the
-    // file manager
+    // The folder is chosen without a dialog, and what is shown in the file
+    // manager is recorded
     await app.evaluate(({ dialog, shell }, folder) => {
       dialog.showOpenDialog = async () => ({
         canceled: false,
         filePaths: [folder],
       });
-      shell.showItemInFolder = () => {};
+      shell.showItemInFolder = (file) => {
+        globalThis.shown = [...(globalThis.shown ?? []), file];
+      };
     }, out);
 
     const window = await show(app, "#/games/18Test/map");
@@ -137,6 +142,54 @@ test.describe("the app exports 18Test", () => {
       JSON.parse(fs.readFileSync(path.join(box, "18Test-1.0.json"), "utf-8")),
     ).toMatchObject({ bname: "18Test", version: "1.0" });
     expect(fs.existsSync(`${box}.zip`)).toBe(true);
+
+    // The folder is not shown unless the setting is on
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    expect(await shown(app)).toEqual([]);
+  });
+
+  test("shows the folder after an export when the setting is on", async () => {
+    app = await launch();
+    await app.evaluate(({ dialog, shell }, folder) => {
+      dialog.showOpenDialog = async () => ({
+        canceled: false,
+        filePaths: [folder],
+      });
+      shell.showItemInFolder = (file) => {
+        globalThis.shown = [...(globalThis.shown ?? []), file];
+      };
+    }, out);
+
+    const window = await show(app, "#/settings");
+    await window
+      .getByRole("switch", { name: "Open the folder after exporting" })
+      .click();
+
+    await window.evaluate(() => {
+      window.location.hash = "#/games/18Test/map";
+    });
+    await window.getByRole("button", { name: "Export" }).click();
+    await window.getByRole("menuitem", { name: "Export options" }).click();
+    const panel = window.getByRole("dialog");
+    await panel.getByRole("checkbox", { name: "PDF documents" }).uncheck();
+    await panel.getByRole("checkbox", { name: "SVG images" }).check();
+    const documents = panel.getByRole("group", { name: "Documents" });
+    for (const box of await documents.getByRole("checkbox").all()) {
+      const label = await box.evaluate((el) => el.nextElementSibling.innerText);
+      if (label !== "Map") await box.uncheck();
+    }
+    await panel.getByRole("button", { name: "Choose folder" }).click();
+    await expect(panel.getByText(out)).toBeVisible();
+    await panel.getByRole("button", { name: "Export", exact: true }).click();
+    await expect(window.getByText(/^Exported \d+ files to /)).toBeVisible({
+      timeout: 150_000,
+    });
+
+    const dir = path.join(out, "18Test");
+    await expect.poll(() => shown(app)).toHaveLength(1);
+    const [file] = await shown(app);
+    expect(file.startsWith(dir + path.sep)).toBe(true);
+    expect(fs.existsSync(file)).toBe(true);
   });
 
   test("opens the export menu from another page", async () => {
@@ -167,7 +220,9 @@ test.describe("the app exports 18Test", () => {
         canceled: false,
         filePaths: [folder],
       });
-      shell.showItemInFolder = () => {};
+      shell.showItemInFolder = (file) => {
+        globalThis.shown = [...(globalThis.shown ?? []), file];
+      };
     }, out);
 
     const window = await show(app, "#/games/18Test/map");

@@ -23,7 +23,8 @@ exactly the size of the component.
 If you choose to export a full game you are asked to pick a folder, which the
 app remembers for the next export. The images go in `<game id>/png` in it, the
 same as the command line. Outputing a game to PNG images results in a _LOT_ of images. When
-the export is complete the app will open the resulting folder.
+the export is complete the app will open the resulting folder if the _Open the
+folder after exporting_ setting is on.
 
 Exporting a full game will result in an individual image for every tile, card,
 charter and token. The images that are directly tied to a company will have the

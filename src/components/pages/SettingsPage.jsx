@@ -11,11 +11,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 
 import { useSettings } from "@/hooks";
 import { availableLanguages, detectedLanguage } from "@/locales/language";
-import { createSetLanguage } from "@/state";
-import { selectLanguage } from "@/state/selectors";
+import { createSetLanguage, createSetOpenExportFolder } from "@/state";
+import { selectLanguage, selectOpenExportFolder } from "@/state/selectors";
+import capability from "@/util/capability";
 
 const languageName = (code, display = code) =>
   new Intl.DisplayNames([display], { type: "language" }).of(code);
@@ -37,6 +39,8 @@ const SettingsPage = () => {
   const language = useSelector(selectLanguage) ?? "system";
   const setLanguage = (language) =>
     dispatch(createSetLanguage(language === "system" ? undefined : language));
+
+  const openExportFolder = useSelector(selectOpenExportFolder);
 
   const languages = availableLanguages(i18n);
   const detected = detectedLanguage();
@@ -97,6 +101,25 @@ const SettingsPage = () => {
               fallback: languageName(i18n.options.fallbackLng[0], display),
             })}
       </p>
+      {capability.electron && (
+        <div className="mt-4 max-w-sm">
+          <div className="flex flex-row gap-4 justify-start items-center">
+            <Switch
+              id="settings-open-export-folder"
+              checked={openExportFolder}
+              onCheckedChange={(open) =>
+                dispatch(createSetOpenExportFolder(open))
+              }
+            />
+            <Label htmlFor="settings-open-export-folder">
+              {t("settings.openExportFolder.title")}
+            </Label>
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {t("settings.openExportFolder.description")}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

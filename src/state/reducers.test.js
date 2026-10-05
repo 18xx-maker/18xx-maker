@@ -13,6 +13,7 @@ import {
   SET_EXPORT_SHEET_OPEN,
   SET_GAME,
   SET_LANGUAGE,
+  SET_OPEN_EXPORT_FOLDER,
   SET_SETTINGS,
   SET_SIDEBAR_OPEN,
   SET_SUMMARIES,
@@ -32,6 +33,7 @@ import {
   createSetExportSheetOpen,
   createSetGame,
   createSetLanguage,
+  createSetOpenExportFolder,
   createSetSettings,
   createSetSidebarOpen,
   createSetSummaries,
@@ -372,6 +374,20 @@ describe("settingsReducer", () => {
       sidebarOpen: false,
       language: "de",
     });
+  });
+
+  it("stores the open export folder setting only when it is on", () => {
+    const on = createSetOpenExportFolder(true);
+    expect(on).toEqual({ type: SET_OPEN_EXPORT_FOLDER, open: true });
+    const state = settingsReducer(frozen({ theme: "dark" }), on);
+    expect(state).toEqual({ theme: "dark", openExportFolder: true });
+
+    // Off removes the key, anything but true is off
+    for (const open of [false, undefined, "yes", 1]) {
+      expect(settingsReducer(state, createSetOpenExportFolder(open))).toEqual({
+        theme: "dark",
+      });
+    }
   });
 
   it("clears the language for anything but a language code", () => {

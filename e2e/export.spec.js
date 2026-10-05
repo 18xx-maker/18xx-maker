@@ -243,14 +243,16 @@ for (const format of ["pdf", "png", "svg", "b18"]) {
     const dir = path.join(out, "files");
     fs.mkdirSync(dir);
     app = await launch();
-    // The folder is chosen without a native dialog, nothing is shown in the
-    // file manager
+    // The folder is chosen without a native dialog, what is shown in the file
+    // manager is recorded
     await app.evaluate(({ dialog, shell }, folder) => {
       dialog.showOpenDialog = async () => ({
         canceled: false,
         filePaths: [folder],
       });
-      shell.showItemInFolder = () => {};
+      shell.showItemInFolder = (file) => {
+        globalThis.shown = [...(globalThis.shown ?? []), file];
+      };
     }, dir);
 
     const window = await app.firstWindow();
@@ -291,6 +293,9 @@ for (const format of ["pdf", "png", "svg", "b18"]) {
         ? ["board18-18Test-1.0", "board18-18Test-1.0.zip"]
         : [format],
     );
+    // The setting is off: nothing is shown in the file manager
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    expect(await app.evaluate(() => globalThis.shown ?? [])).toEqual([]);
     check[format](format === "b18" ? game : path.join(game, format), "app");
   });
 }

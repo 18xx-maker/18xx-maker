@@ -21,7 +21,8 @@ config options you have set in the app. You are asked to pick a folder (the app
 remembers it) and one file is written in `<game id>/svg` in it for every map
 (one for each variation), market, par table,
 revenue table, tile and token. The files contain the game name, and the app
-opens the folder when the export is complete.
+opens the folder when the export is complete if the _Open the folder after
+exporting_ setting is on.
 
 The pages that are not one drawing have no SVG: the cards and charters (they are
 text and boxes made with HTML), the background page, the tile manifest and the

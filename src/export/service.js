@@ -14,14 +14,16 @@ import { gameFolder } from "./sink.js";
 //             createPool) of a game in render mode. Closing it closes them.
 // createSink  (out) -> { write(relPath, bytes) }
 // zip         async (out, names) writes the Board 18 zip
-// show        (out, relPath) shows a file in its folder
+// show        (out, relPath) shows a file in its folder, called only when the
+//             request asks for it (reveal)
 // concurrency how many files are captured at the same time
 // pageOptions dpi limits and timeouts for createPageCapture
 //
 // A request is what the renderer plans (see util/exportPlan):
-//   { id, game, config, jobs, dpi, background?, single?, out?, b18?: { names, json } }
+//   { id, game, config, jobs, dpi, background?, single?, out?, reveal?, b18?: { names, json } }
 // where jobs is [{ doc, format, path }] (see exportJobs), config is the layers
-// below the game's own, and out is a folder chosen before (otherwise a dialog
+// below the game's own, and reveal shows the last file in its
+// folder when the export is done, and out is a folder chosen before (otherwise a dialog
 // asks, for a file when single).
 //
 // run(owner, request, ui) resolves with { done, total, failed, cancelled, out }
@@ -53,6 +55,9 @@ export const validateRequest = (request) => {
   if (single && jobs.length !== 1) throw invalid("one file expected");
   if (!(dpi >= 1 && dpi <= MAX_DPI)) {
     throw invalid(`the resolution must be 1 to ${MAX_DPI} dpi`);
+  }
+  if (request.reveal !== undefined && typeof request.reveal !== "boolean") {
+    throw invalid("reveal must be true or false");
   }
   if (background !== undefined && !BACKGROUNDS.includes(background)) {
     throw invalid("the background must be transparent or white");
@@ -215,7 +220,9 @@ export const createExportService = ({
           "success",
         );
       }
-      if (written.length > 0 && !cancelled) show(out, written.at(-1));
+      if (request.reveal === true && written.length > 0 && !cancelled) {
+        show(out, written.at(-1));
+      }
 
       return { done, total, failed, cancelled, out };
     } finally {

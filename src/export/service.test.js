@@ -87,7 +87,7 @@ describe("run", () => {
   it("asks for a folder, captures the files into it and shows the result", async () => {
     const { service, ui, dialogs, show, opened } = setup();
 
-    const result = await service.run(1, request(), ui);
+    const result = await service.run(1, request({ reveal: true }), ui);
 
     expect(dialogs.chooseFolder).toHaveBeenCalledTimes(1);
     expect(files()).toEqual(["a.pdf", "b.pdf"]);
@@ -119,6 +119,18 @@ describe("run", () => {
       expect.stringMatching(/\.pdf$/),
     );
   });
+
+  it.each([[undefined], [false]])(
+    "does not show the folder when reveal is %s",
+    async (reveal) => {
+      const { service, ui, show } = setup();
+
+      const result = await service.run(1, request({ reveal }), ui);
+
+      expect(result.done).toBe(2);
+      expect(show).not.toHaveBeenCalled();
+    },
+  );
 
   it("uses the folder it is given without asking", async () => {
     const { service, ui, dialogs } = setup();
@@ -221,6 +233,7 @@ describe("run", () => {
     await service.run(
       1,
       request({
+        reveal: true,
         jobs: [job("board18-x-1.0/x-1.0/Map.png", "b18")],
         b18: { names, json: { bname: "x" } },
       }),
@@ -241,6 +254,7 @@ describe("run", () => {
     const result = await service.run(
       1,
       request({
+        reveal: true,
         jobs: [
           job("a.pdf"),
           // Writing outside of the folder is refused by the sink
@@ -302,6 +316,7 @@ describe("run", () => {
       const running = service.run(
         7,
         request({
+          reveal: true,
           jobs: [job("a.png", "b18"), job("b.png", "b18"), job("c.png", "b18")],
           b18: {
             names: { folder: "f", zip: "f.zip", json: "f/f.json" },
@@ -407,6 +422,16 @@ describe("run", () => {
 });
 
 describe("validateRequest", () => {
+  it("accepts reveal as a boolean only", () => {
+    expect(() => validateRequest(request({ reveal: true }))).not.toThrow();
+    expect(() => validateRequest(request({ reveal: false }))).not.toThrow();
+    for (const reveal of ["yes", 1, null]) {
+      expect(() => validateRequest(request({ reveal }))).toThrow(
+        "reveal must be true or false",
+      );
+    }
+  });
+
   const bad = (overrides, message) =>
     expect(() => validateRequest(request(overrides))).toThrow(message);
 

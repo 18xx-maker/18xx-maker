@@ -5,6 +5,7 @@ import {
   selectGameForSlug,
   selectGameState,
   selectLanguage,
+  selectOpenExportFolder,
   selectSidebarOpen,
   selectStoredConfig,
   selectTheme,
@@ -143,6 +144,19 @@ describe("settings selectors", () => {
     expect(selectTheme(state)).toBeUndefined();
     expect(selectSidebarOpen(state)).toBeUndefined();
     expect(selectLanguage(state)).toBeUndefined();
+    expect(selectOpenExportFolder(state)).toBe(false);
+  });
+
+  it("read the open export folder setting as on only when it is true", () => {
+    expect(selectOpenExportFolder({})).toBe(false);
+    for (const openExportFolder of [1, "true", null, false]) {
+      expect(selectOpenExportFolder({ settings: { openExportFolder } })).toBe(
+        false,
+      );
+    }
+    expect(
+      selectOpenExportFolder({ settings: { openExportFolder: true } }),
+    ).toBe(true);
   });
 
   it("read the stored settings", () => {

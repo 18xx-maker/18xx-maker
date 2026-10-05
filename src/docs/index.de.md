@@ -58,7 +58,7 @@ Ihr Menü enthält diese Einträge:
 
 Bei den Einträgen für das ganze Spiel wirst du gebeten, einen Ordner in deinem
 Dateisystem auszuwählen, in den alle Dateien geschrieben werden. Die App öffnet
-den Ordner, wenn sie fertig ist. Beim Board18-Eintrag landen eine Zip-Datei und
+den Ordner, wenn sie fertig ist, sofern die Einstellung _Ordner nach dem Export öffnen_ aktiv ist. Beim Board18-Eintrag landen eine Zip-Datei und
 die darin enthaltenen Dateien im Ordner. Um eine einzelne Seite zu exportieren,
 verwende _Exportoptionen_ und wähle die gewünschten Dokumente aus.
 
