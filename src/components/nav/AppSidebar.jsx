@@ -21,9 +21,11 @@ import DownloadItem from "@/components/nav/sidebar/DownloadItem";
 import ExportItem from "@/components/nav/sidebar/ExportItem";
 import Group from "@/components/nav/sidebar/Group";
 import Item from "@/components/nav/sidebar/Item";
+import ProblemsItem from "@/components/nav/sidebar/ProblemsItem";
 import UpdateItem from "@/components/nav/sidebar/UpdateItem";
 
 import { useLoadedGame } from "@/hooks";
+import { selectGameProblems } from "@/state";
 import { selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
 import version from "@/util/version";
@@ -34,6 +36,10 @@ const AppSidebar = (props) => {
   const update = useSelector(prop("update"));
   // The export menu needs the game itself, not only its entry in the store
   const resolved = useSelector((state) => selectGameForSlug(state, game?.slug));
+
+  const problems = useSelector((state) =>
+    selectGameProblems(state, game?.slug),
+  );
 
   const renderItems = (items) => {
     return addIndex(chain)((item, index) => {
@@ -58,6 +64,13 @@ const AppSidebar = (props) => {
             />,
             resolved && <DownloadItem key="game-download" game={resolved} />,
             capability.electron && resolved && <ExportItem key="game-export" />,
+            resolved && problems?.length > 0 && (
+              <ProblemsItem
+                key="game-problems"
+                slug={game.slug}
+                count={problems.length}
+              />
+            ),
           ].filter(Boolean)
         );
       }

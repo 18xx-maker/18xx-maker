@@ -200,6 +200,10 @@ describe("validate", () => {
       expect(run(withExports({})).code).toBe(0);
     });
 
+    it("still accepts the deprecated paginated option", () => {
+      expect(run(withExports({ paginated: true })).code).toBe(0);
+    });
+
     it.each([
       [
         { png: { dpi: 301 } },

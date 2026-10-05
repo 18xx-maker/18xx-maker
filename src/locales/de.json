@@ -31,6 +31,29 @@
     "refresh": "Neu laden",
     "description": "Die neueste Version dieser Datei laden"
   },
+  "problems": {
+    "nav": "Probleme",
+    "title": "Probleme mit diesem Spiel",
+    "count": "{{count}} gefunden in {{title}}",
+    "checking": "Die Spieldatei wird geprüft",
+    "none": "Keine Probleme gefunden",
+    "error": "Fehler",
+    "deprecated": "Veraltet",
+    "more": "und {{count}} weitere",
+    "root": "die Spieldatei",
+    "docs": "Über das Format der Spieldatei",
+    "unknown-field": "Unbekanntes Feld \"{{field}}\". Es wurde möglicherweise umbenannt oder entfernt. Entferne es oder sieh in der Dokumentation nach.",
+    "unknown-field-suggest": "Unbekanntes Feld \"{{field}}\". Es wurde möglicherweise umbenannt oder entfernt. Meintest du \"{{suggestion}}\"?",
+    "type": "Erwartet wurde {{expected}}, gefunden wurde {{found}} {{value}}.",
+    "enum": "{{value}} ist hier nicht erlaubt. Verwende eines von: {{values}}.",
+    "required": "Das Pflichtfeld \"{{field}}\" fehlt.",
+    "generic": "{{message}}",
+    "failed": "Die Spieldatei konnte nicht geprüft werden.",
+    "deprecated-generic": "Dieses Feld ist veraltet.",
+    "deprecations": {
+      "exports_paginated": "Dieses Feld ist veraltet und wird ignoriert. Entferne es, die paginierten PDFs werden automatisch exportiert."
+    }
+  },
   "prototype": {
     "prototype": "Prototyp",
     "description": "Dieses Spiel befindet sich noch in der Entwicklung"

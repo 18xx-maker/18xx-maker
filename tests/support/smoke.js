@@ -66,6 +66,8 @@ export const single = [
       `tiles/${encodeURIComponent(g.tiles ? Object.keys(g.tiles)[0] : "1")}`,
   }),
   page("tokens/0", "-token", always),
+  // Not a print page, so not in the snapshots
+  page("problems", "-problems", always, { redirects: false }),
 ];
 
 export const groups = { b18, parts, single };

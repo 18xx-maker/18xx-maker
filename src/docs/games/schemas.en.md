@@ -43,6 +43,17 @@ the game (formats, pages, resolution, Board18 version and author). It is
 described in the game schema and in [Export options](/docs/games/exports), and
 a value that is not valid, like a resolution over 300 dpi, fails validation.
 
+## Problems page
+
+When you open a game its file is checked against the game schema in the
+background. If something is wrong a Problems entry appears in the menu, below
+Download, with the number of problems. It opens a list with where each problem
+is, what is wrong and how to fix it: unknown fields (a typo, or a field that was
+renamed or removed), values of the wrong type, values that are not allowed, and
+required fields that are missing. Fields that are deprecated are listed too, they
+still work but will be removed in a future version. The page only reports, your
+file is never changed.
+
 ## Validation
 
 To validate all files you can run:

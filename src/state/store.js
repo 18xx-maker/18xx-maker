@@ -7,6 +7,7 @@ import { ALERT_DEFAULT, alertReducer } from "@/state/alerts";
 import { configReducer } from "@/state/config";
 import { errorsReducer } from "@/state/errors";
 import { gameReducer, loadedGameReducer } from "@/state/game";
+import { gameProblemsReducer } from "@/state/gameProblems";
 import { combineReducers } from "@/state/helpers";
 import { settingsReducer } from "@/state/settings";
 import storage from "@/state/storage";
@@ -36,6 +37,7 @@ export const rootReducer = combineReducers({
   config: configReducer,
   game: gameReducer,
   errors: errorsReducer,
+  gameProblems: gameProblemsReducer,
   ui: uiReducer,
 });
 
