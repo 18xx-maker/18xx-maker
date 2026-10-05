@@ -11,11 +11,9 @@ describe("game info publisher", () => {
   it("shows the publisher name, logo and link", async () => {
     renderApp("/games/18Test/");
     const row = await screen.findByTestId("game-publisher");
-    expect(within(row).getByText("Deep Thought Games")).toBeInTheDocument();
-    expect(
-      within(row).getByAltText("Deep Thought Games Logo"),
-    ).toBeInTheDocument();
-    expect(row).toHaveAttribute("href", "http://www.deepthoughtgames.com/");
+    expect(within(row).getByText("18xx Maker")).toBeInTheDocument();
+    expect(within(row).getByAltText("18xx Maker Logo")).toBeInTheDocument();
+    expect(row).toHaveAttribute("href", "https://18xx-maker.com/");
   });
 
   it("shows no publisher row for a game without one", async () => {
