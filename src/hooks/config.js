@@ -1,4 +1,3 @@
-import { diff } from "deep-object-diff";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +8,7 @@ import { mergeDeepRight } from "ramda";
 import { useGame, useValidation } from "@/hooks";
 import { createAlert, createResetConfig, createSetConfig } from "@/state";
 import { createConfigSelector } from "@/state/selectors";
+import { diff } from "@/util/diff";
 import { getRenderInput } from "@/util/renderInput";
 
 const configs = import.meta.glob("../*.json", {
