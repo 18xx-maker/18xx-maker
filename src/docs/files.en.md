@@ -101,3 +101,26 @@ it onto the app or website, or paste its contents into the Import box in the
 Data section. The imported settings replace your current custom settings. A
 dropped json file is treated as a config when it only contains config settings,
 otherwise it is loaded as a game.
+
+## Changes, saving and history
+
+When the loaded game differs from its file, a Changes entry appears in the game
+menu (and in the toolbar), with the number of top level fields that changed. It
+opens a page with a highlighted diff of the game against the file as it was
+loaded or last saved. The diff compares the game as JSON with 2 spaces, so
+whitespace-only differences in your file are not shown.
+
+On the Changes page, "Save" writes the game over its file, with the same
+content as the Download button, so the first save may reformat the file.
+"Revert to saved" drops the changes. Saving works for games in the app, for
+games opened from your file system in a supporting browser (the browser asks
+for permission to write), and for games in the browser's private file system.
+Bundled games can only be downloaded. If the file changed outside 18xx Maker
+since it was loaded, nothing is written until you choose to reload it (losing
+your changes) or to overwrite it.
+
+Every save in the current session is listed on the History page: the file as it
+was before that save. "View diff" compares it with the game as it is now, and
+"Restore" puts it back as your unsaved changes. The history is not kept when
+you load another game or reload the page. Unsaved changes are not kept either:
+the browser asks before the page is closed or reloaded.

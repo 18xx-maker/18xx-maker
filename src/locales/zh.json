@@ -31,6 +31,30 @@
     "refresh": "刷新",
     "description": "重新加载此文件的最新版本"
   },
+  "changes": {
+    "nav": "更改",
+    "title": "更改",
+    "none": "没有更改。游戏与其文件一致。",
+    "summary": "新增 {{added}} 行，删除 {{removed}} 行",
+    "save": "保存",
+    "revert": "还原为已保存的版本",
+    "reformat": "保存时会按下载的方式写入游戏，因此第一次保存可能会重新格式化文件。",
+    "conflict": "自加载以来，文件在应用之外被修改。可以重新加载并丢弃你的更改，或用你的版本覆盖文件。",
+    "reload": "重新加载文件",
+    "overwrite": "覆盖文件",
+    "saved": "游戏已保存",
+    "savedMessage": "{{title}} 已保存到其文件",
+    "saveFailed": "无法保存游戏"
+  },
+  "history": {
+    "nav": "历史",
+    "title": "历史",
+    "none": "本次会话中没有保存过。",
+    "description": "本次会话中的每次保存，最新的在前。每一项是该次保存之前的文件。恢复后会作为你的更改放回。",
+    "view": "查看差异",
+    "hide": "隐藏差异",
+    "restore": "恢复"
+  },
   "problems": {
     "nav": "问题",
     "title": "此游戏的问题",

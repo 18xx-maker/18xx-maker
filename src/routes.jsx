@@ -14,9 +14,11 @@ import PositioningPage from "@/components/pages/elements/PositioningPage";
 import BackgroundPage from "@/components/pages/games/BackgroundPage";
 import CardPage from "@/components/pages/games/CardPage";
 import CardsPage from "@/components/pages/games/CardsPage";
+import ChangesPage from "@/components/pages/games/ChangesPage";
 import CharterPage from "@/components/pages/games/CharterPage";
 import ChartersPage from "@/components/pages/games/ChartersPage";
 import GamePage from "@/components/pages/games/GamePage";
+import HistoryPage from "@/components/pages/games/HistoryPage";
 import InfoPage from "@/components/pages/games/InfoPage";
 import MapPage from "@/components/pages/games/MapPage";
 import MarketPage from "@/components/pages/games/MarketPage";
@@ -72,8 +74,10 @@ export const rootRoutes = [
               { path: "background", element: <BackgroundPage /> },
               { path: "cards", element: <CardsPage /> },
               { path: "cards/:type/:index", element: <CardPage /> },
+              { path: "changes", element: <ChangesPage /> },
               { path: "charters", element: <ChartersPage /> },
               { path: "charters/:index", element: <CharterPage /> },
+              { path: "history", element: <HistoryPage /> },
               { path: "map", element: <MapPage /> },
               { path: "market", element: <MarketPage /> },
               { path: "par", element: <ParPage /> },

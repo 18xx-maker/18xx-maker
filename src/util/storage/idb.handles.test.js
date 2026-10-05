@@ -8,7 +8,9 @@ import {
   loadSummaries,
   openFilePicker,
   peekGame,
+  requestWrite,
   saveGameHandle,
+  writeGame,
 } from "@/util/storage/idb";
 
 // A small in-memory IndexedDB that answers requests asynchronously like the
@@ -214,6 +216,73 @@ describe("system games in IndexedDB", () => {
     await expect(loadGame(id)).rejects.toThrow("Permission denied");
     // The game is kept so it can be tried again
     expect(records("game_file_handles").has(id)).toBe(true);
+  });
+
+  it("asks for write permission only when it isn't granted", async () => {
+    const granted = fileHandle(game);
+    const idGranted = (await saveGameHandle(granted)).split(":")[1];
+    await requestWrite(idGranted);
+    expect(granted.queryPermission).toHaveBeenCalledWith({
+      mode: "readwrite",
+    });
+    expect(granted.requestPermission).not.toHaveBeenCalled();
+
+    const prompt = fileHandle(game, {
+      permission: "prompt",
+      request: "granted",
+    });
+    const idPrompt = (await saveGameHandle(prompt)).split(":")[1];
+    await requestWrite(idPrompt);
+    expect(prompt.requestPermission).toHaveBeenCalledWith({
+      mode: "readwrite",
+    });
+  });
+
+  it("fails when write permission is denied", async () => {
+    const handle = fileHandle(game, {
+      permission: "prompt",
+      request: "denied",
+    });
+    const id = (await saveGameHandle(handle)).split(":")[1];
+
+    await expect(requestWrite(id)).rejects.toThrow("Permission denied");
+  });
+
+  it("writes the text through the stored handle", async () => {
+    const writable = {
+      write: vi.fn(async () => {}),
+      close: vi.fn(async () => {}),
+      abort: vi.fn(async () => {}),
+    };
+    const handle = {
+      ...fileHandle(game),
+      createWritable: async () => writable,
+    };
+    const id = (await saveGameHandle(handle)).split(":")[1];
+
+    await writeGame(id, "text");
+
+    expect(writable.write).toHaveBeenCalledWith("text");
+    expect(writable.close).toHaveBeenCalled();
+    expect(writable.abort).not.toHaveBeenCalled();
+  });
+
+  it("aborts the write when it fails", async () => {
+    const writable = {
+      write: vi.fn(async () => {
+        throw new Error("disk full");
+      }),
+      close: vi.fn(async () => {}),
+      abort: vi.fn(async () => {}),
+    };
+    const handle = {
+      ...fileHandle(game),
+      createWritable: async () => writable,
+    };
+    const id = (await saveGameHandle(handle)).split(":")[1];
+
+    await expect(writeGame(id, "text")).rejects.toThrow("disk full");
+    expect(writable.abort).toHaveBeenCalled();
   });
 
   it("fails for unknown games", async () => {

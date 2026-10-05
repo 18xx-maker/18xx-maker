@@ -26,11 +26,15 @@ const game = (id, title) => ({
 // must keep these snapshots identical.
 describe("root state contract", () => {
   it("has a stable initial shape", () => {
-    const { game, loadedGame, update, ...rest } = rootReducer(undefined, {
-      type: "@@init",
-    });
+    const { game, gameOriginal, loadedGame, update, ...rest } = rootReducer(
+      undefined,
+      {
+        type: "@@init",
+      },
+    );
     // Consumers only rely on these being falsy
     expect(game).toBeFalsy();
+    expect(gameOriginal).toBeFalsy();
     expect(loadedGame).toBeFalsy();
     expect(update).toBeFalsy();
     expect(rest).toMatchInlineSnapshot(`
@@ -40,6 +44,7 @@ describe("root state contract", () => {
         },
         "config": {},
         "errors": {},
+        "gameHistory": [],
         "gameProblems": {
           "issues": [],
           "slug": null,
@@ -92,6 +97,23 @@ describe("root state contract", () => {
           "/paper/width": "must be number",
         },
         "game": {
+          "info": {
+            "designer": "d",
+            "publisher": "p",
+            "subtitle": "s",
+            "title": "Game B",
+          },
+          "map": {
+            "hexes": [],
+          },
+          "meta": {
+            "id": "b",
+            "slug": "system:b",
+            "type": "system",
+          },
+        },
+        "gameHistory": [],
+        "gameOriginal": {
           "info": {
             "designer": "d",
             "publisher": "p",

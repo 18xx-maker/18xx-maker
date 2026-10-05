@@ -17,16 +17,22 @@ import {
 } from "@/components/ui/sidebar";
 
 import { mainMenu } from "@/components/nav";
+import ChangesItem from "@/components/nav/sidebar/ChangesItem";
 import DownloadItem from "@/components/nav/sidebar/DownloadItem";
 import ExportItem from "@/components/nav/sidebar/ExportItem";
 import Group from "@/components/nav/sidebar/Group";
+import HistoryItem from "@/components/nav/sidebar/HistoryItem";
 import Item from "@/components/nav/sidebar/Item";
 import ProblemsItem from "@/components/nav/sidebar/ProblemsItem";
 import UpdateItem from "@/components/nav/sidebar/UpdateItem";
 
 import { useLoadedGame } from "@/hooks";
 import { selectGameProblems } from "@/state";
-import { selectGameForSlug } from "@/state/selectors";
+import {
+  selectGameChangedFields,
+  selectGameForSlug,
+  selectGameHistory,
+} from "@/state/selectors";
 import capability from "@/util/capability";
 import version from "@/util/version";
 
@@ -40,6 +46,9 @@ const AppSidebar = (props) => {
   const issues = useSelector((state) => selectGameProblems(state, game?.slug));
   // A check that could not run is not a problem of the game
   const problems = issues?.filter((issue) => issue.code !== "failed");
+
+  const changedFields = useSelector(selectGameChangedFields);
+  const history = useSelector(selectGameHistory);
 
   const renderItems = (items) => {
     return addIndex(chain)((item, index) => {
@@ -64,6 +73,16 @@ const AppSidebar = (props) => {
             />,
             resolved && <DownloadItem key="game-download" game={resolved} />,
             capability.electron && resolved && <ExportItem key="game-export" />,
+            resolved && changedFields.length > 0 && (
+              <ChangesItem
+                key="game-changes"
+                slug={game.slug}
+                count={changedFields.length}
+              />
+            ),
+            resolved && history.length > 0 && (
+              <HistoryItem key="game-history" slug={game.slug} />
+            ),
             resolved && problems?.length > 0 && (
               <ProblemsItem
                 key="game-problems"

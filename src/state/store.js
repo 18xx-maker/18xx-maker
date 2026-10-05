@@ -6,7 +6,12 @@ import { games } from "@/data";
 import { ALERT_DEFAULT, alertReducer } from "@/state/alerts";
 import { configReducer } from "@/state/config";
 import { errorsReducer } from "@/state/errors";
-import { gameReducer, loadedGameReducer } from "@/state/game";
+import {
+  gameHistoryReducer,
+  gameOriginalReducer,
+  gameReducer,
+  loadedGameReducer,
+} from "@/state/game";
 import { gameProblemsReducer } from "@/state/gameProblems";
 import { combineReducers } from "@/state/helpers";
 import { settingsReducer } from "@/state/settings";
@@ -36,6 +41,8 @@ export const rootReducer = combineReducers({
   settings: settingsReducer,
   config: configReducer,
   game: gameReducer,
+  gameOriginal: gameOriginalReducer,
+  gameHistory: gameHistoryReducer,
   errors: errorsReducer,
   gameProblems: gameProblemsReducer,
   ui: uiReducer,

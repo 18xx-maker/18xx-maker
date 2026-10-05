@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useMatch, useNavigate } from "react-router";
 
 import { addIndex, find, is, map, propEq } from "ramda";
 
-import { ArrowBigLeft, Bolt, RefreshCw } from "lucide-react";
+import { ArrowBigLeft, Bolt, FileDiff, RefreshCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +31,7 @@ import PrintButton from "@/components/page/PrintButton";
 
 import { useGame } from "@/hooks";
 import { refreshGame } from "@/state";
+import { selectGameChanged } from "@/state/selectors";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 import { gameNav } from "@/util/gameNav";
@@ -51,6 +52,7 @@ const Toolbar = () => {
 
   const game = useGame();
   const slug = game.meta.slug;
+  const changed = useSelector(selectGameChanged);
 
   const match = useMatch("/games/:slug/:section/*");
   const item = find(propEq(match.params.section, "section"), gameNav);
@@ -94,6 +96,21 @@ const Toolbar = () => {
           >
             <RefreshCw className="size-6" />
             <span className="max-md:sr-only">{t("refresh.refresh")}</span>
+          </Button>
+        </>
+      )}
+      {changed && (
+        <>
+          <Separator orientation="vertical" />
+          <Button
+            asChild
+            variant="outline"
+            className="border rounded-sm px-2 h-8 m-0 shrink-0"
+          >
+            <Link to={`/games/${slug}/changes`}>
+              <FileDiff className="size-6" />
+              <span className="max-md:sr-only">{t("changes.nav")}</span>
+            </Link>
           </Button>
         </>
       )}

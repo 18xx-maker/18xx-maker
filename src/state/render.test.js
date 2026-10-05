@@ -158,7 +158,7 @@ describe("render input", () => {
       game,
       config: {},
     });
-    const loaded = await loadGame("render:old")(store.dispatch);
+    const loaded = await loadGame("render:old")(store.dispatch, store.getState);
 
     // The id of the game's meta is the default id
     expect(loaded.meta).toEqual({
@@ -176,7 +176,7 @@ describe("render input", () => {
       config: {},
     });
 
-    await loadGame("render:abc")(store.dispatch);
+    await loadGame("render:abc")(store.dispatch, store.getState);
     expect(store.getState().game.info.title).toBe("T");
     expect(store.getState().game.meta.slug).toBe("render:abc");
   });
@@ -188,10 +188,12 @@ describe("render input", () => {
       config: {},
     });
 
-    await expect(loadGame("render:other")(store.dispatch)).rejects.toThrow(
-      "Unknown game type render",
-    );
-    await expect(loadGame("1889")(store.dispatch)).resolves.toMatchObject({
+    await expect(
+      loadGame("render:other")(store.dispatch, store.getState),
+    ).rejects.toThrow("Unknown game type render");
+    await expect(
+      loadGame("1889")(store.dispatch, store.getState),
+    ).resolves.toMatchObject({
       meta: { id: "1889" },
     });
   });

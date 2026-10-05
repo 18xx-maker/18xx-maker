@@ -19,7 +19,7 @@ const languages = new Set(highlighter.getLoadedLanguages());
 
 // Both themes ride on each token as --shiki-light/--shiki-dark variables, the
 // `.shiki` styles in ui.css pick one by the current theme
-const tokenize = (code, language) =>
+export const tokenize = (code, language) =>
   languages.has(language)
     ? highlighter.codeToTokens(code, {
         defaultColor: false,

@@ -111,3 +111,31 @@ Inhalt in das Feld Importieren im Bereich Daten ein. Die importierten
 Einstellungen ersetzen deine aktuellen eigenen Einstellungen. Eine abgelegte
 JSON-Datei wird als Konfiguration behandelt, wenn sie nur Konfigurationswerte
 enthält, andernfalls wird sie als Spiel geladen.
+
+## Änderungen, Speichern und Verlauf
+
+Weicht das geladene Spiel von seiner Datei ab, erscheint im Spielmenü (und in
+der Werkzeugleiste) der Eintrag Änderungen, mit der Anzahl der geänderten Felder
+auf oberster Ebene. Er öffnet eine Seite mit einem hervorgehobenen Diff des
+Spiels gegenüber der Datei, wie sie geladen oder zuletzt gespeichert wurde. Der
+Diff vergleicht das Spiel als JSON mit 2 Leerzeichen, daher werden Unterschiede,
+die nur Leerraum betreffen, nicht angezeigt.
+
+Auf der Seite Änderungen schreibt "Speichern" das Spiel in seine Datei, mit
+demselben Inhalt wie die Schaltfläche Herunterladen, daher kann das erste
+Speichern die Datei neu formatieren. "Auf Gespeichertes zurücksetzen" verwirft
+die Änderungen. Speichern funktioniert für Spiele in der App, für Spiele, die in
+einem unterstützenden Browser aus deinem Dateisystem geöffnet wurden (der
+Browser fragt nach der Schreibberechtigung), und für Spiele im privaten
+Dateisystem des Browsers. Mitgelieferte Spiele können nur heruntergeladen
+werden. Wurde die Datei seit dem Laden außerhalb von 18xx Maker geändert, wird
+nichts geschrieben, bis du entscheidest, sie neu zu laden (und deine Änderungen
+zu verlieren) oder sie zu überschreiben.
+
+Jedes Speichern der aktuellen Sitzung steht auf der Seite Verlauf: die Datei,
+wie sie vor diesem Speichern war. "Diff anzeigen" vergleicht sie mit dem Spiel,
+wie es jetzt ist, und "Wiederherstellen" übernimmt sie als deine nicht
+gespeicherten Änderungen. Der Verlauf geht verloren, wenn du ein anderes Spiel
+lädst oder die Seite neu lädst. Nicht gespeicherte Änderungen bleiben ebenfalls
+nicht erhalten: Der Browser fragt nach, bevor die Seite geschlossen oder neu
+geladen wird.

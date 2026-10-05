@@ -31,6 +31,30 @@
     "refresh": "Neu laden",
     "description": "Die neueste Version dieser Datei laden"
   },
+  "changes": {
+    "nav": "Änderungen",
+    "title": "Änderungen",
+    "none": "Keine Änderungen. Das Spiel entspricht seiner Datei.",
+    "summary": "{{added}} Zeilen hinzugefügt, {{removed}} Zeilen entfernt",
+    "save": "Speichern",
+    "revert": "Auf Gespeichertes zurücksetzen",
+    "reformat": "Beim Speichern wird das Spiel wie beim Herunterladen geschrieben, daher kann das erste Speichern die Datei neu formatieren.",
+    "conflict": "Die Datei wurde seit dem Laden außerhalb der App geändert. Lade sie neu und verliere deine Änderungen, oder überschreibe sie mit deinen.",
+    "reload": "Datei neu laden",
+    "overwrite": "Datei überschreiben",
+    "saved": "Spiel gespeichert",
+    "savedMessage": "{{title}} wurde in seiner Datei gespeichert",
+    "saveFailed": "Das Spiel konnte nicht gespeichert werden"
+  },
+  "history": {
+    "nav": "Verlauf",
+    "title": "Verlauf",
+    "none": "In dieser Sitzung wurde nichts gespeichert.",
+    "description": "Jedes Speichern in dieser Sitzung, das neueste zuerst. Jeder Eintrag ist die Datei, wie sie vor diesem Speichern war. Beim Wiederherstellen wird sie als deine Änderungen übernommen.",
+    "view": "Diff anzeigen",
+    "hide": "Diff ausblenden",
+    "restore": "Wiederherstellen"
+  },
   "problems": {
     "nav": "Probleme",
     "title": "Probleme mit diesem Spiel",
