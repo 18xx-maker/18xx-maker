@@ -484,34 +484,29 @@ export function multiDefaultTo(defaultArgument, ...inputArguments) {
   return holder === undefined ? defaultArgument : holder;
 }
 
-export const compileCompanyTokens = (game, companies) => {
+// Fill a company's `tokens` or `shares` from the game's `tokenTypes` or
+// `shareTypes`: the "minor" type for minors, otherwise "default", or the named
+// type when the company gives a string.
+const compileCompanyTypes = (game, companies, field, typeField, types) => {
+  const available = game[types];
   return map((company) => {
-    if (
-      company.minor &&
-      !company.tokens &&
-      game.tokenTypes &&
-      game.tokenTypes["minor"]
-    ) {
+    if (company.minor && !company[field] && available && available["minor"]) {
       return {
         ...company,
-        tokenType: "minor",
-        tokens: [...game.tokenTypes["minor"]],
+        [typeField]: "minor",
+        [field]: [...available["minor"]],
       };
-    } else if (
-      !company.tokens &&
-      game.tokenTypes &&
-      game.tokenTypes["default"]
-    ) {
+    } else if (!company[field] && available && available["default"]) {
       return {
         ...company,
-        tokenType: "default",
-        tokens: [...game.tokenTypes["default"]],
+        [typeField]: "default",
+        [field]: [...available["default"]],
       };
-    } else if (is(String, company.tokens)) {
+    } else if (is(String, company[field])) {
       return {
         ...company,
-        tokenType: company.tokens,
-        tokens: [...game.tokenTypes[company.tokens]],
+        [typeField]: company[field],
+        [field]: [...available[company[field]]],
       };
     } else {
       return company;
@@ -519,40 +514,11 @@ export const compileCompanyTokens = (game, companies) => {
   }, companies || []);
 };
 
-export const compileCompanyShares = (game, companies) => {
-  return map((company) => {
-    if (
-      company.minor &&
-      !company.shares &&
-      game.shareTypes &&
-      game.shareTypes["minor"]
-    ) {
-      return {
-        ...company,
-        shareType: "minor",
-        shares: [...game.shareTypes["minor"]],
-      };
-    } else if (
-      !company.shares &&
-      game.shareTypes &&
-      game.shareTypes["default"]
-    ) {
-      return {
-        ...company,
-        shareType: "default",
-        shares: [...game.shareTypes["default"]],
-      };
-    } else if (is(String, company.shares)) {
-      return {
-        ...company,
-        shareType: company.shares,
-        shares: [...game.shareTypes[company.shares]],
-      };
-    } else {
-      return company;
-    }
-  }, companies || []);
-};
+export const compileCompanyTokens = (game, companies) =>
+  compileCompanyTypes(game, companies, "tokens", "tokenType", "tokenTypes");
+
+export const compileCompanyShares = (game, companies) =>
+  compileCompanyTypes(game, companies, "shares", "shareType", "shareTypes");
 
 export const compileCompanies = (game) => {
   return compileCompanyTokens(game, compileCompanyShares(game, game.companies));
