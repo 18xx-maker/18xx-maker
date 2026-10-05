@@ -1,5 +1,6 @@
 import Color from "@/components/Color";
 import Name from "@/components/atoms/Name";
+import { centerTownCircles, stadiumPath } from "@/components/atoms/townParts";
 
 import { useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
@@ -54,24 +55,12 @@ const CenterTown = ({
         <Color context="companies">
           {(c) => (
             <>
-              <g key="center-town-outline">
-                <circle
-                  fill={c("centerTown")}
-                  stroke="none"
-                  cx="0"
-                  cy="0"
-                  r={width / 2 + 2}
-                />
-              </g>
-              <g key="center-town-fill">
-                <circle
-                  fill={c(color || "centerTown")}
-                  stroke="none"
-                  cx="0"
-                  cy="0"
-                  r={width / 2}
-                />
-              </g>
+              {centerTownCircles(c, {
+                key: "center-town",
+                cx: "0",
+                r: width / 2,
+                color,
+              })}
               {nameNode}
             </>
           )}
@@ -87,7 +76,7 @@ const CenterTown = ({
           {(c) => (
             <g>
               <path
-                d={`M${totalWidth / 2 - 1},${totalWidth / 2} A${totalWidth / 2},${totalWidth / 2} 0 1,0 ${totalWidth / 2 - 1},-${totalWidth / 2} L-${totalWidth / 2 - 1},-${totalWidth / 2} A${totalWidth / 2},${totalWidth / 2} 0 1,0 -${totalWidth / 2 - 1},${totalWidth / 2} L${totalWidth / 2 - 1},${totalWidth / 2}`}
+                d={stadiumPath(totalWidth / 2, totalWidth / 2, 1)}
                 fill={c("border")}
                 stroke="none"
               />
@@ -113,7 +102,7 @@ const CenterTown = ({
           {(c) => (
             <g>
               <path
-                d={`M${outlineWidth / 2},${outlineWidth / 2} A${outlineWidth / 2},${outlineWidth / 2} 0 1,0 ${outlineWidth / 2},-${outlineWidth / 2} L-${outlineWidth / 2},-${outlineWidth / 2} A${outlineWidth / 2},${outlineWidth / 2} 0 1,0 -${outlineWidth / 2},${outlineWidth / 2} L${outlineWidth / 2},${outlineWidth / 2}`}
+                d={stadiumPath(outlineWidth / 2, outlineWidth / 2)}
                 fill={c("white")}
                 stroke={c(outlineColor || "track")}
                 strokeWidth={`${borderWidth / 2}`}
