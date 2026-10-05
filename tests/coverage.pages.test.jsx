@@ -2,10 +2,10 @@ import { screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import RoundTracker from "@/components/RoundTracker";
-import Charters from "@/components/pages/games/Charters";
-import TileManifest from "@/components/pages/games/TileManifest";
-import TileSheet from "@/components/pages/games/Tiles";
-import B18Tiles from "@/components/pages/games/b18/Tiles";
+import Charters from "@/components/pages/games/ChartersPage";
+import TileManifest from "@/components/pages/games/TileManifestPage";
+import TileSheet from "@/components/pages/games/TilesPage";
+import B18Tiles from "@/components/pages/games/b18/B18TilesPage";
 
 import { games } from "@/data";
 import defaults from "@/defaults.json";

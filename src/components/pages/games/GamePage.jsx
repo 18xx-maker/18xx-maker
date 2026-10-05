@@ -18,7 +18,7 @@ const addRecent = (game) => {
   return game;
 };
 
-const Game = () => {
+const GamePage = () => {
   const match = useMatch("/games/:slug/*");
   const game = useSelector((state) =>
     selectGameForSlug(state, match.params.slug),
@@ -52,4 +52,4 @@ const Game = () => {
   return <Outlet />;
 };
 
-export default Game;
+export default GamePage;

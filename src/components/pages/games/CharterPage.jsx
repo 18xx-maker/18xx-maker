@@ -9,7 +9,7 @@ import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { charterHalfWidth } from "@/util/companyTrains";
 import { getSingleCharterData } from "@/util/sizes";
 
-const Charters = () => {
+const CharterPage = () => {
   const { config } = useConfig();
   const charters = config.charters;
   const paper = config.paper;
@@ -165,4 +165,4 @@ const Charters = () => {
   );
 };
 
-export default Charters;
+export default CharterPage;

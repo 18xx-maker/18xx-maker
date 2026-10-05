@@ -8,7 +8,7 @@ import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies";
 
-const Tokens = () => {
+const B18TokensPage = () => {
   const { config } = useConfig();
   const game = useGame();
 
@@ -79,4 +79,4 @@ const Tokens = () => {
   );
 };
 
-export default Tokens;
+export default B18TokensPage;

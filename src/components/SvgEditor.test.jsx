@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 
 import SvgEditor from "@/components/SvgEditor";
 
-import { TOOLBAR_INSET } from "@/hooks/use-pan-zoom";
+import { TOOLBAR_INSET } from "@/hooks/usePanZoom";
 import { initialState, rootReducer } from "@/state";
 
 const fire = (el, type, init) =>

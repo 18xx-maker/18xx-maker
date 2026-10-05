@@ -20,7 +20,7 @@ import { selectLanguage } from "@/state/selectors";
 const languageName = (code, display = code) =>
   new Intl.DisplayNames([display], { type: "language" }).of(code);
 
-const Settings = () => {
+const SettingsPage = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const [settings, setSettings] = useSettings();
@@ -101,4 +101,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default SettingsPage;

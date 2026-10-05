@@ -30,7 +30,7 @@ import { titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 
-const Info = () => {
+const InfoPage = () => {
   const game = useGame();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -167,4 +167,4 @@ const Info = () => {
   );
 };
 
-export default Info;
+export default InfoPage;

@@ -13,7 +13,7 @@ import { getTile } from "@/util";
 
 const ROTATIONS = [0, 60, 120, 180, 240, 300];
 
-const Tiles = () => {
+const B18TilesPage = () => {
   const game = useGame();
   let params = useParams();
   let color = params.color;
@@ -91,4 +91,4 @@ const Tiles = () => {
   );
 };
 
-export default Tiles;
+export default B18TilesPage;

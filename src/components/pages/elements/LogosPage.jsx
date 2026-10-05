@@ -58,7 +58,7 @@ const LogoCard = ({ logo, Component }) => {
   );
 };
 
-const Logos = () => {
+const LogosPage = () => {
   const { t } = useTranslation();
   const [group, setGroup] = useStringParam("group", groupNames[0]);
 
@@ -103,4 +103,4 @@ const Logos = () => {
   );
 };
 
-export default Logos;
+export default LogosPage;

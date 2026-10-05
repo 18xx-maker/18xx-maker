@@ -12,7 +12,7 @@ import { useConfig, useGame } from "@/hooks";
 import { compileCompanies, overrideCompanies } from "@/util/companies.js";
 import { getTokenGrid } from "@/util/sizes";
 
-const TokenSingle = () => {
+const TokenPage = () => {
   const { config } = useConfig();
   const game = useGame();
   const { index } = useParams();
@@ -199,4 +199,4 @@ const TokenSingle = () => {
   );
 };
 
-export default TokenSingle;
+export default TokenPage;

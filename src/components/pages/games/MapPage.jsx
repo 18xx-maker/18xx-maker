@@ -7,7 +7,7 @@ import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";
 import { useBooleanParam, useIntParam } from "@/util/query";
 
-const Map = () => {
+const MapPage = () => {
   const { config } = useConfig();
   const game = useGame();
 
@@ -29,4 +29,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default MapPage;

@@ -16,7 +16,7 @@ const cos = Math.cos(radians(30));
 const rotatedWidth = (w, h) => Math.abs(w * cos + h * sin);
 const rotatedHeight = (w, h) => Math.abs(h * cos + w * sin);
 
-const Background = () => {
+const BackgroundPage = () => {
   let game = useGame();
   let paper = config.paper;
 
@@ -109,4 +109,4 @@ const Background = () => {
   );
 };
 
-export default Background;
+export default BackgroundPage;

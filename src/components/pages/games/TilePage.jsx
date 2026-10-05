@@ -10,7 +10,7 @@ import { useConfig, useGame } from "@/hooks";
 import { getTile } from "@/util";
 import { getTileScale } from "@/util/sizes";
 
-const TileSheet = () => {
+const TilePage = () => {
   const { config } = useConfig();
   const game = useGame();
   const { id } = useParams();
@@ -46,4 +46,4 @@ const TileSheet = () => {
   );
 };
 
-export default TileSheet;
+export default TilePage;

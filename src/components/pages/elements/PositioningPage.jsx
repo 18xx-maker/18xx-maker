@@ -111,7 +111,7 @@ const Example = ({ id, hex }) => {
   );
 };
 
-const Positioning = () => {
+const PositioningPage = () => {
   const { t } = useTranslation();
 
   return (
@@ -149,4 +149,4 @@ const Positioning = () => {
   );
 };
 
-export default Positioning;
+export default PositioningPage;

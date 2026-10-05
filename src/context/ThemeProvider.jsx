@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { usePrefersDark } from "@/hooks/use-prefers-dark";
+import { usePrefersDark } from "@/hooks/usePrefersDark";
 import { selectTheme } from "@/state/selectors";
 import { getRenderInput } from "@/util/renderInput";
 

@@ -47,7 +47,7 @@ const lastName = (name) => name.toLowerCase().split(/\s+/).pop();
 
 const isLoaded = (game) => game.type !== "bundled";
 
-const LoadGames = () => {
+const LoadGamesPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const summaries = useSelector((state) => state.summaries);
@@ -197,4 +197,4 @@ const LoadGames = () => {
   );
 };
 
-export default LoadGames;
+export default LoadGamesPage;

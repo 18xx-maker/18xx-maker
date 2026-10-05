@@ -4,7 +4,7 @@ import RevenueSingle from "@/components/market/RevenueSingle";
 import { useConfig, useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
 
-const Revenue = () => {
+const RevenuePage = () => {
   const { config } = useConfig();
   const game = useGame();
 
@@ -17,4 +17,4 @@ const Revenue = () => {
   );
 };
 
-export default Revenue;
+export default RevenuePage;

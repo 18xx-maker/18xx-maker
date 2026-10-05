@@ -2,7 +2,7 @@ import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import { useEditing } from "@/components/Editor";
 
-import { TOOLBAR_INSET, usePanZoom } from "@/hooks/use-pan-zoom";
+import { TOOLBAR_INSET, usePanZoom } from "@/hooks/usePanZoom";
 
 const MIN_SCALE = 0.02;
 const MAX_SCALE = 20;

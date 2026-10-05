@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 
-const Elements = () => {
+const ElementsPage = () => {
   return <Outlet />;
 };
 
-export default Elements;
+export default ElementsPage;

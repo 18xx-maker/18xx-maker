@@ -14,7 +14,7 @@ import { compileCompanies, overrideCompanies } from "@/util/companies";
 import { cardCompanyTrains } from "@/util/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
 
-const Card = () => {
+const CardPage = () => {
   const { config } = useConfig();
   const game = useGame();
   const { type, index } = useParams();
@@ -167,4 +167,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default CardPage;

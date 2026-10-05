@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 
-import { usePrefersDark } from "@/hooks/use-prefers-dark";
+import { usePrefersDark } from "@/hooks/usePrefersDark";
 
 // A media query list whose result the test changes
 const mockMedia = (matches) => {

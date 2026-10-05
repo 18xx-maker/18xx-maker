@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import Markdown from "@/components/Markdown";
 
-const Home = () => {
+const HomePage = () => {
   const { i18n } = useTranslation();
 
   const homes = import.meta.glob("../../pages/home.*.md", {
@@ -23,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

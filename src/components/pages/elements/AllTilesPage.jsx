@@ -106,7 +106,7 @@ const UsedBy = ({ games }) => {
   );
 };
 
-const Tiles = () => {
+const AllTilesPage = () => {
   const { t } = useTranslation();
   // Touch screens have no hover: a tap on a tile toggles its popover
   const [openKey, setOpenKey] = useState(null);
@@ -329,4 +329,4 @@ const Tiles = () => {
   );
 };
 
-export default Tiles;
+export default AllTilesPage;

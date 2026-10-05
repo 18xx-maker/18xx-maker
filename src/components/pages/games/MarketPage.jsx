@@ -4,7 +4,7 @@ import MarketSingle from "@/components/market/MarketSingle";
 import { useConfig, useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
 
-const Market = () => {
+const MarketPage = () => {
   const { config } = useConfig();
   const game = useGame();
 
@@ -17,4 +17,4 @@ const Market = () => {
   );
 };
 
-export default Market;
+export default MarketPage;

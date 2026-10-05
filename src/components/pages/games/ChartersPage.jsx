@@ -27,7 +27,7 @@ import { charterHalfWidth } from "@/util/companyTrains";
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
 
-const Charters = () => {
+const ChartersPage = () => {
   const { config } = useConfig();
   const charters = config.charters;
   const paper = config.paper;
@@ -325,4 +325,4 @@ const Charters = () => {
   );
 };
 
-export default Charters;
+export default ChartersPage;

@@ -116,7 +116,7 @@ const pageTiles = (perPage, pages, tiles) => {
   return pageTiles(perPage, append(current, pages), rest);
 };
 
-const TileSheet = () => {
+const TilesPage = () => {
   const { config } = useConfig();
   const game = useGame();
   const paper = config.paper;
@@ -416,4 +416,4 @@ const TileSheet = () => {
   );
 };
 
-export default TileSheet;
+export default TilesPage;

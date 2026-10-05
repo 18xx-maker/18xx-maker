@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import Svg from "@/components/Svg";
 
-import { TOOLBAR_INSET, usePanZoom } from "@/hooks/use-pan-zoom";
+import { TOOLBAR_INSET, usePanZoom } from "@/hooks/usePanZoom";
 
 // The view box that fits the content in the window below the toolbar. padding
 // is the space kept free around the content to start, as a fraction of the

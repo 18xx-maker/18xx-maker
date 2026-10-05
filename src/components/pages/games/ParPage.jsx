@@ -4,7 +4,7 @@ import ParSingle from "@/components/market/ParSingle";
 import { useConfig, useGame } from "@/hooks";
 import { useBooleanParam } from "@/util/query";
 
-const Par = () => {
+const ParPage = () => {
   const { config } = useConfig();
   const game = useGame();
 
@@ -17,4 +17,4 @@ const Par = () => {
   );
 };
 
-export default Par;
+export default ParPage;

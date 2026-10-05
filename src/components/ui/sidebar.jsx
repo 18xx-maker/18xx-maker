@@ -18,7 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/useMobile";
 import { cn } from "@/lib/utils";
 import { selectSidebarOpen } from "@/state/selectors";
 import { createSetSidebarOpen } from "@/state/settings";

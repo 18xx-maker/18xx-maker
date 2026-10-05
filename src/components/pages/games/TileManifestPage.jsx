@@ -24,7 +24,7 @@ const getCol = (tile) => {
   }
 };
 
-const TileManifest = () => {
+const TileManifestPage = () => {
   const game = useGame();
 
   if (!game.tiles) {
@@ -88,4 +88,4 @@ const TileManifest = () => {
   );
 };
 
-export default TileManifest;
+export default TileManifestPage;

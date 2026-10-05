@@ -10,7 +10,7 @@ import { useConfig, useGame } from "@/hooks";
 import { getMapData } from "@/util/map";
 import { useIntParam } from "@/util/query";
 
-const B18Map = () => {
+const B18MapPage = () => {
   const { config } = useConfig();
   const game = useGame();
 
@@ -58,4 +58,4 @@ const B18Map = () => {
   );
 };
 
-export default B18Map;
+export default B18MapPage;

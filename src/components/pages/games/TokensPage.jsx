@@ -264,7 +264,7 @@ const TokenLayout = ({ companies, data, game }) => {
   );
 };
 
-const Tokens = () => {
+const TokensPage = () => {
   const { config } = useConfig();
   const game = useGame();
 
@@ -284,4 +284,4 @@ const Tokens = () => {
   return <TokenLayout companies={companies} data={data} game={game} />;
 };
 
-export default Tokens;
+export default TokensPage;

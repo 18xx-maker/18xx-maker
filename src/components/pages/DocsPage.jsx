@@ -14,7 +14,7 @@ const mds = import.meta.glob("../../docs/**/*.md", {
   query: "?raw",
 });
 
-const Docs = () => {
+const DocsPage = () => {
   const { i18n } = useTranslation();
   const location = useLocation();
 
@@ -72,4 +72,4 @@ const Docs = () => {
   );
 };
 
-export default Docs;
+export default DocsPage;

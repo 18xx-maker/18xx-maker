@@ -1010,7 +1010,7 @@ const groupItems = map(
   atoms,
 );
 
-const Atoms = () => {
+const AtomsPage = () => {
   const { t } = useTranslation();
 
   const [group, setGroup] = useStringParam("group", atoms[0].group);
@@ -1077,4 +1077,4 @@ const Atoms = () => {
   );
 };
 
-export default Atoms;
+export default AtomsPage;

@@ -2,7 +2,7 @@ import CardsComponent from "@/components/cards";
 
 import { useBooleanParam } from "@/util/query";
 
-const Cards = () => {
+const CardsPage = () => {
   const [hidePrivates] = useBooleanParam("hidePrivates");
   const [hideShares] = useBooleanParam("hideShares");
   const [hideTrains] = useBooleanParam("hideTrains");
@@ -15,4 +15,4 @@ const Cards = () => {
   );
 };
 
-export default Cards;
+export default CardsPage;
