@@ -4,7 +4,10 @@
     "designer": "Anthony Fryer",
     "publisher": "traxx",
     "background": "gray",
-    "currency": "$#"
+    "currency": "$#",
+    "titleX": 110,
+    "titleY": 700,
+    "titleSize": 60
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/306259/1888",
@@ -14,7 +17,7 @@
   },
   "wip": true,
   "tokens": ["Round"],
-  "bank": 12000,
+  "bank": 8000,
   "tiles": {
     "1": 1,
     "2": 1,
@@ -66,11 +69,25 @@
       "color": "gray",
       "quantity": 1,
       "track": [
-        { "side": 1, "type": "straight" },
-        { "side": 2, "type": "straight" },
-        { "side": 3, "type": "straight" }
+        {
+          "side": 1,
+          "type": "straight"
+        },
+        {
+          "side": 2,
+          "type": "straight"
+        },
+        {
+          "side": 3,
+          "type": "straight"
+        }
       ],
-      "cities": [{ "size": 3, "rotation": 30 }],
+      "cities": [
+        {
+          "size": 3,
+          "rotation": 30
+        }
+      ],
       "labels": [
         {
           "label": "OO",
@@ -93,10 +110,24 @@
       "color": "gray",
       "quantity": 1,
       "track": [
-        { "side": 2, "type": "sharp" },
-        { "side": 3, "type": "gentle", "cross": "under" },
-        { "side": 4, "type": "gentle", "cross": "over" },
-        { "side": 6, "type": "sharp" }
+        {
+          "side": 2,
+          "type": "sharp"
+        },
+        {
+          "side": 3,
+          "type": "gentle",
+          "cross": "under"
+        },
+        {
+          "side": 4,
+          "type": "gentle",
+          "cross": "over"
+        },
+        {
+          "side": 6,
+          "type": "sharp"
+        }
       ],
       "cities": [
         {
@@ -132,10 +163,24 @@
       "color": "gray",
       "quantity": 1,
       "track": [
-        { "side": 1, "type": "sharp" },
-        { "side": 3, "type": "sharp" },
-        { "side": 4, "type": "gentle", "cross": "over" },
-        { "side": 5, "type": "gentle", "cross": "under" }
+        {
+          "side": 1,
+          "type": "sharp"
+        },
+        {
+          "side": 3,
+          "type": "sharp"
+        },
+        {
+          "side": 4,
+          "type": "gentle",
+          "cross": "over"
+        },
+        {
+          "side": 5,
+          "type": "gentle",
+          "cross": "under"
+        }
       ],
       "cities": [
         {
@@ -167,5 +212,1052 @@
         }
       ]
     }
+  },
+  "map": {
+    "roundTracker": {
+      "type": "col-reverse",
+      "x": 20,
+      "y": 640
+    },
+    "borders": [
+      {
+        "color": "water",
+        "width": 10,
+        "coords": [
+          "C9p5",
+          "C9p6",
+          "D10p5",
+          "D10p6",
+          "D12p1",
+          "E11p6",
+          "E11p1",
+          "F10p6"
+        ]
+      }
+    ],
+    "lines": [
+      {
+        "color": "gray",
+        "width": 3,
+        "dashed": true,
+        "border": false,
+        "coords": ["A9p5", "A9p6", "B10p5", "B10p6", "B10p1"]
+      }
+    ],
+    "borderTexts": [
+      {
+        "coord": "D6x0y25",
+        "label": "J E F F E R S O N",
+        "rotation": -15,
+        "fontSize": 30,
+        "color": "#999",
+        "fontWeight": "bold"
+      },
+      {
+        "coord": "E17x26y45",
+        "label": "N E W   S U F F O L K",
+        "rotation": 30,
+        "fontSize": 30,
+        "color": "#999",
+        "fontWeight": "bold"
+      },
+      {
+        "coord": "C11x-22y56",
+        "label": "Rosamund River",
+        "rotation": 35,
+        "fontSize": 11,
+        "color": "#2a7fb8"
+      },
+      {
+        "coord": "C9s4",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "C11s6",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "D10s4",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "D12s6",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "E11s4",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "E11s5",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      },
+      {
+        "coord": "F10s4",
+        "label": "40",
+        "circle": 9,
+        "bgColor": "blue",
+        "color": "white",
+        "fontSize": 10
+      }
+    ],
+    "hexes": [
+      {
+        "color": "plain",
+        "hexes": [
+          "A3",
+          "A5",
+          "A11",
+          "A17",
+          "B6",
+          "B8",
+          "B10",
+          "B16",
+          "B18",
+          "B20",
+          "C3",
+          "C5",
+          "C11",
+          "C15",
+          "C19",
+          "D2",
+          "D6",
+          "D8",
+          "E5",
+          "E7",
+          "E13",
+          "E15",
+          "E17",
+          "E19",
+          "F4",
+          "F18",
+          "F20",
+          "G7",
+          "G13",
+          "G15",
+          "G19"
+        ]
+      },
+      {
+        "color": "plain",
+        "terrain": [
+          {
+            "type": "mountain",
+            "cost": 80
+          }
+        ],
+        "hexes": ["A13", "B14", "C13", "D12"]
+      },
+      {
+        "color": "plain",
+        "shapes": [
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22
+          }
+        ],
+        "hexes": ["A7", "A15", "D10", "E3"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Dillingham"
+            }
+          }
+        ],
+        "hexes": ["A9"]
+      },
+      {
+        "color": "plain",
+        "cities": [{}],
+        "hexes": ["B4", "D4", "D18", "F12"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Oakwich"
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "icons": [
+          {
+            "type": "port",
+            "angle": 60,
+            "percent": 0.55
+          }
+        ],
+        "offBoardRevenue": {
+          "x": 8,
+          "y": 58,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": ["G5"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "name": {
+              "name": "Eastford"
+            }
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "icons": [
+          {
+            "type": "port",
+            "angle": 60,
+            "percent": 0.55
+          }
+        ],
+        "offBoardRevenue": {
+          "x": 8,
+          "y": 58,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            }
+          ]
+        },
+        "hexes": ["G17"]
+      },
+      {
+        "color": "plain",
+        "shapes": [
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 112,
+            "percent": 0.29
+          },
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 292,
+            "percent": 0.26
+          }
+        ],
+        "hexes": ["C17"]
+      },
+      {
+        "color": "plain",
+        "shapes": [
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 85,
+            "percent": 0.23
+          },
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 308,
+            "percent": 0.36
+          }
+        ],
+        "hexes": ["F6"]
+      },
+      {
+        "color": "plain",
+        "shapes": [
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 120,
+            "percent": 0.25
+          },
+          {
+            "type": "circle",
+            "color": "black",
+            "width": 22,
+            "height": 22,
+            "angle": 283,
+            "percent": 0.31
+          }
+        ],
+        "hexes": ["F14"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": ["NED"]
+          }
+        ],
+        "hexes": ["B12"]
+      },
+      {
+        "color": "plain",
+        "cities": [
+          {
+            "companies": ["BWH"]
+          }
+        ],
+        "hexes": ["F8"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Parkworth City"
+          },
+          "rows": 2,
+          "x": 41,
+          "y": -5,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "30"
+            },
+            {
+              "color": "green",
+              "cost": "50"
+            },
+            {
+              "color": "brown",
+              "cost": "80"
+            },
+            {
+              "color": "gray",
+              "cost": "100"
+            }
+          ]
+        },
+        "hexes": ["A19"]
+      },
+      {
+        "color": "offboard",
+        "cities": [
+          {
+            "companies": ["HSL"]
+          }
+        ],
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          },
+          {
+            "type": "offboard",
+            "side": 4
+          },
+          {
+            "type": "offboard",
+            "side": 5
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Heatherdale"
+          },
+          "rows": 2,
+          "x": -30,
+          "y": 58,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ]
+        },
+        "hexes": ["B2"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 1
+          },
+          {
+            "type": "offboard",
+            "side": 2
+          },
+          {
+            "type": "offboard",
+            "side": 6
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "Lunfordville"
+          },
+          "rows": 2,
+          "x": 35,
+          "y": 5,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ]
+        },
+        "hexes": ["D20"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "icons": [
+          {
+            "type": "port",
+            "angle": 180,
+            "percent": 0.4
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "West Roseport"
+          },
+          "y": 15,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ]
+        },
+        "hexes": ["G9"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 3
+          }
+        ],
+        "icons": [
+          {
+            "type": "port",
+            "angle": 180,
+            "percent": 0.4
+          }
+        ],
+        "offBoardRevenue": {
+          "name": {
+            "name": "East Roseport"
+          },
+          "y": 15,
+          "revenues": [
+            {
+              "color": "yellow",
+              "cost": "20"
+            },
+            {
+              "color": "green",
+              "cost": "40"
+            },
+            {
+              "color": "brown",
+              "cost": "60"
+            },
+            {
+              "color": "gray",
+              "cost": "80"
+            }
+          ]
+        },
+        "hexes": ["G11"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "companies": ["BCR"]
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 60,
+            "percent": 0.64
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 0,
+            "percent": 0.6
+          }
+        ],
+        "hexes": ["C7"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "companies": ["WRT"]
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 6
+          }
+        ],
+        "values": [
+          {
+            "value": 20,
+            "angle": 83,
+            "percent": 0.67
+          }
+        ],
+        "hexes": ["D14"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "companies": ["NSS"]
+          }
+        ],
+        "track": [
+          {
+            "side": 3
+          },
+          {
+            "side": 5
+          }
+        ],
+        "values": [
+          {
+            "value": 30,
+            "angle": 57,
+            "percent": 0.62
+          }
+        ],
+        "labels": [
+          {
+            "label": "B",
+            "angle": 0,
+            "percent": 0.58
+          }
+        ],
+        "hexes": ["F16"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.38
+          },
+          {
+            "angle": 270,
+            "percent": 0.38
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 0,
+            "percent": 0.6
+          }
+        ],
+        "hexes": ["E9", "E11", "D16"]
+      },
+      {
+        "color": "green",
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.38
+          },
+          {
+            "angle": 270,
+            "percent": 0.38,
+            "companies": ["JNS"]
+          }
+        ],
+        "labels": [
+          {
+            "label": "OO",
+            "angle": 0,
+            "percent": 0.6
+          }
+        ],
+        "hexes": ["C9"]
+      },
+      {
+        "color": "yellow",
+        "cities": [
+          {
+            "angle": 90,
+            "percent": 0.46
+          },
+          {
+            "angle": 270,
+            "percent": 0.47,
+            "companies": ["REM"]
+          }
+        ],
+        "track": [
+          {
+            "side": 1
+          },
+          {
+            "side": 4
+          }
+        ],
+        "values": [
+          {
+            "value": 40,
+            "angle": 180,
+            "percent": 0.33
+          }
+        ],
+        "labels": [
+          {
+            "label": "NY",
+            "angle": 0,
+            "percent": 0.65,
+            "size": 28
+          }
+        ],
+        "hexes": ["F10"]
+      }
+    ]
+  },
+  "floatPercent": 60,
+  "players": [
+    {
+      "number": 2,
+      "capital": 1200,
+      "certLimit": 25
+    },
+    {
+      "number": 3,
+      "capital": 800,
+      "certLimit": 20
+    },
+    {
+      "number": 4,
+      "capital": 600,
+      "certLimit": 16
+    },
+    {
+      "number": 5,
+      "capital": 480,
+      "certLimit": 13
+    },
+    {
+      "number": 6,
+      "capital": 400,
+      "certLimit": 11
+    }
+  ],
+  "rounds": [
+    {
+      "name": "OR3",
+      "color": "brown"
+    },
+    {
+      "name": "OR2",
+      "color": "green"
+    },
+    {
+      "name": "OR1",
+      "color": "yellow"
+    },
+    {
+      "name": "SR",
+      "color": "white"
+    }
+  ],
+  "turns": [
+    {
+      "name": "Stock Round",
+      "steps": ["Buy one certificate", "Sell any number of certificates"],
+      "ordered": false
+    },
+    {
+      "name": "Operating Round",
+      "steps": [
+        "Lay or upgrade track",
+        "Purchase a station",
+        "Run trains",
+        "Pay dividends or withhold revenue",
+        "Purchase trains"
+      ],
+      "ordered": true
+    }
+  ],
+  "shareTypes": {
+    "default": [
+      {
+        "quantity": 1,
+        "label": "President's Certificate",
+        "percent": 20,
+        "shares": 2
+      },
+      {
+        "quantity": 8,
+        "percent": 10,
+        "shares": 1
+      }
+    ]
+  },
+  "trains": [
+    {
+      "name": "2/3",
+      "quantity": 6,
+      "rust": "4/5",
+      "color": "yellow"
+    },
+    {
+      "name": "3/4",
+      "quantity": 5,
+      "rust": "6/7",
+      "color": "green"
+    },
+    {
+      "name": "4/5",
+      "quantity": 3,
+      "rust": "D",
+      "color": "green"
+    },
+    {
+      "name": "5/6",
+      "quantity": 2,
+      "color": "brown"
+    },
+    {
+      "name": "6/7",
+      "quantity": 1,
+      "color": "brown"
+    },
+    {
+      "name": "D",
+      "quantity": 9,
+      "color": "gray"
+    }
+  ],
+  "phases": [
+    {
+      "name": "II",
+      "train": "2/3",
+      "limit": 4,
+      "rounds": 1,
+      "tiles": "yellow"
+    },
+    {
+      "name": "III",
+      "train": "3/4",
+      "limit": 4,
+      "rounds": 2,
+      "tiles": "green",
+      "buy_companies": true
+    },
+    {
+      "name": "IV",
+      "train": "4/5",
+      "limit": 3,
+      "rounds": 2,
+      "tiles": "green",
+      "buy_companies": true
+    },
+    {
+      "name": "V",
+      "train": "5/6",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "brown",
+      "events": {
+        "close_companies": true
+      }
+    },
+    {
+      "name": "VI",
+      "train": "6/7",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "brown"
+    },
+    {
+      "name": "D",
+      "train": "D",
+      "limit": 2,
+      "rounds": 3,
+      "tiles": "gray"
+    }
+  ],
+  "companies": [
+    {
+      "name": "HSL",
+      "abbrev": "HSL",
+      "token": {
+        "label": "HSL",
+        "shield": true,
+        "shieldTop": "yellow",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "yellow"
+    },
+    {
+      "name": "BCR",
+      "abbrev": "BCR",
+      "token": {
+        "label": "BCR",
+        "shield": true,
+        "shieldTop": "BCR_green",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "BCR_green"
+    },
+    {
+      "name": "Jefferson & New Suffolk Railroad",
+      "abbrev": "JNS",
+      "token": {
+        "label": "JNS",
+        "shield": true,
+        "shieldTop": "JNS_blue",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "JNS_blue"
+    },
+    {
+      "name": "NED",
+      "abbrev": "NED",
+      "token": {
+        "label": "NED",
+        "shield": true,
+        "shieldTop": "blue",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "blue"
+    },
+    {
+      "name": "WRT",
+      "abbrev": "WRT",
+      "token": {
+        "label": "WRT",
+        "shield": true,
+        "shieldTop": "gray",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "gray"
+    },
+    {
+      "name": "BWH",
+      "abbrev": "BWH",
+      "token": {
+        "label": "BWH",
+        "shield": true,
+        "shieldTop": "BWH_pink",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "BWH_pink"
+    },
+    {
+      "name": "REM",
+      "abbrev": "REM",
+      "token": {
+        "label": "REM",
+        "shield": true,
+        "shieldTop": "red",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "red"
+    },
+    {
+      "name": "NSS",
+      "abbrev": "NSS",
+      "token": {
+        "label": "NSS",
+        "shield": true,
+        "shieldTop": "orange",
+        "color": "white",
+        "fontSize": 16
+      },
+      "color": "orange"
+    }
+  ],
+  "privates": [
+    {
+      "name": "Snow Removal Company",
+      "sym": "1",
+      "description": "The public company that owns this company may ignore the effects of the Blizzard of '92 event. May be purchased by a company from Phase II."
+    },
+    {
+      "name": "Mountain Construction Company",
+      "sym": "2a",
+      "description": "The public company that owns this company may place 1 mountain tile at no cost."
+    },
+    {
+      "name": "Contract Laborers",
+      "sym": "2b",
+      "description": "The public company that owns this company may ignore the effects of the Railroad Strike event. May be purchased by a company from Phase II."
+    },
+    {
+      "name": "Land & Title Company",
+      "sym": "3",
+      "description": "The public company that owns this company may place 1 station in any unreserved location at no cost. No legal route is required to place the station token."
+    },
+    {
+      "name": "Trading Company",
+      "sym": "4a",
+      "description": "The owning player may, during any Stock Round, close this company in exchange for one 10% share of any railroad from the IPO, even to exceed the 60% holding limit. May instead be sold to a public company, when it has no special ability."
+    },
+    {
+      "name": "Bridge Company",
+      "sym": "4b",
+      "description": "The owning company may build two bridges without cost."
+    },
+    {
+      "name": "Investment Company",
+      "sym": "5",
+      "description": "Upon purchase in the Initial Stock Round, the owning player immediately receives 1 share of any railroad from the IPO."
+    },
+    {
+      "name": "Hubert Hunter, esq.",
+      "sym": "6",
+      "description": "Upon purchase in the Initial Stock Round, the owning player receives the President's Certificate of any railroad from the IPO and sets its par value. Closes when the selected railroad purchases its first train. Cannot be sold to a public company."
+    }
+  ],
+  "colors": {
+    "BCR_green": "#00a651",
+    "JNS_blue": "#b9f2ff",
+    "BWH_pink": "#ff6ec7"
   }
 }
