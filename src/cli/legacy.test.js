@@ -27,7 +27,7 @@ const prefix = (id) =>
 const added = { 1888: ["tokens"] };
 
 // Games where the old b18 command crashed, they have no stock market
-const crashed = ["1888", "1883ExpressdOrient", "18GJ"];
+const crashed = ["1888", "1883ExpressdOrient"];
 
 const data = loadExportData();
 const setup = (id) => {
@@ -69,7 +69,7 @@ describe("print file names", () => {
     expect(names.some((name) => name.includes("-map-paginated."))).toBe(true);
   });
 
-  it("names the seven bundled games whose title is not their id", () => {
+  it("names the six bundled games whose title is not their id", () => {
     const renamed = [...games]
       .sort()
       .filter((id) => prefix(id) !== id.toLowerCase());
@@ -77,7 +77,6 @@ describe("print file names", () => {
       ["1871BC", "1871-british-columbia"],
       ["1883ExpressdOrient", "1883-express-d-orient"],
       ["1889", "shikoku-1889"],
-      ["18GJ", "18-grand-junction"],
       ["18LA", "18-los-angeles"],
       ["18TraXX2020", "18traxx"],
       ["TheOldPrince1871", "the-old-prince-1871"],
