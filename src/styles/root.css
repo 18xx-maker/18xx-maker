@@ -450,6 +450,21 @@ body {
   font-weight: normal;
 }
 
+/* Minor charters are short: the turn order (showMinorTurnOrder) is set smaller
+   so it stays clear of the Treasury label */
+.charter--minor dl {
+  padding-bottom: 0.1in;
+}
+
+.charter--minor dt {
+  margin-top: 0.07in;
+  font-size: 0.11in;
+}
+
+.charter--minor dd {
+  font-size: 0.095in;
+}
+
 .charter ul {
   list-style-type: disc;
   list-style-position: outside;

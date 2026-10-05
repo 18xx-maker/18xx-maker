@@ -58,6 +58,7 @@
     "blackBand": false,
     "showPhaseChart": true,
     "showTurnOrder": true,
+    "showMinorTurnOrder": false,
     "trainCards": "charter",
     "trainCardBorder": true,
     "trainCardRound": true,

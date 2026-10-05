@@ -229,6 +229,7 @@
         "blackBand": { "type": "boolean" },
         "showPhaseChart": { "type": "boolean" },
         "showTurnOrder": { "type": "boolean" },
+        "showMinorTurnOrder": { "type": "boolean" },
         "trainCards": { "type": "string", "enum": ["charter", "cards"] },
         "trainCardBorder": { "type": "boolean" },
         "trainCardRound": { "type": "boolean" },

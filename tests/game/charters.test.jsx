@@ -139,3 +139,33 @@ describe("charter train cards", () => {
     expect(cards.scrollHeight).toBeLessThanOrEqual(cards.clientHeight + 1);
   });
 });
+
+describe("minor turn order", () => {
+  const turns = async (opts) => {
+    renderApp(
+      `/games/18Test/charters?config.charters.layout=free&config.charters.showTurnOrder=true${opts}`,
+    );
+    const root = await screen.findByTestId("game-18Test-charters");
+    const has = (c) => all(c, "dl > *").length > 0;
+    const charters = all(root, ".charter");
+    return {
+      minors: charters.filter((c) => c.classList.contains("charter--minor")),
+      majors: charters.filter((c) => !c.classList.contains("charter--minor")),
+      has,
+    };
+  };
+
+  it("hides the turn order on minors by default", async () => {
+    const { minors, majors, has } = await turns("");
+    expect(minors.length).toBeGreaterThan(0);
+    expect(minors.some(has)).toBe(false);
+    expect(majors.some(has)).toBe(true);
+  });
+
+  it("shows the turn order on minors with showMinorTurnOrder", async () => {
+    const { minors, has } = await turns(
+      "&config.charters.showMinorTurnOrder=true",
+    );
+    expect(minors.every(has)).toBe(true);
+  });
+});
