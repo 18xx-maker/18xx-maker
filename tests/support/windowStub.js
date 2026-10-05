@@ -76,11 +76,10 @@ const define = (name, value) =>
 
 // Back to a clean window: no api, picker or render input, an empty
 // localStorage and the given location.
-export const resetWindow = ({ location = {}, api } = {}) => {
+export const resetWindow = ({ location = {} } = {}) => {
   delete globalThis.api;
   delete globalThis.showOpenFilePicker;
   delete globalThis.__RENDER_INPUT__;
-  if (api !== undefined) globalThis.api = api;
   globalThis.location = { hostname: "localhost", ...location };
   globalThis.localStorage.clear();
 };
