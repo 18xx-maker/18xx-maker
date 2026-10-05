@@ -65,7 +65,7 @@ pnpm build && pnpm maker export <game> --format png
 ```
 
 where `<game>` is the id of a bundled game or the path to a game file. The files
-are written to `render/<game>`, named after the game's title.
+are written to `render/<game>/png`, named after the game's title.
 
 Images are made for printing: 300 dpi is the default and the highest
 resolution, a lower one is set with `--dpi` (1 to 300, `--dpi 301` is

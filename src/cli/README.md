@@ -51,7 +51,8 @@ pnpm maker help b18
 ## Export
 
 `export` builds PDF, PNG, SVG and Board 18 files from a game. It needs the built site
-(`pnpm build`) and puts the files in `render/<game>`.
+(`pnpm build`) and puts the files in `render/<game>`: pdf, png and svg files each in a folder
+of that name (`render/<game>/pdf`), the Board 18 box next to them.
 
 ```shell
 pnpm maker export <game|path.json> --format pdf,png,svg,b18

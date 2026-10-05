@@ -207,7 +207,7 @@ make
 # Clean all generated output (from all of the build commands above)
 make clean
 
-# Remove the render folder (where the CLI creates pdfs and Board 18 boxes)
+# Remove the render folder (where the CLI creates pdf, png and svg folders and Board 18 boxes)
 make clean/render
 ```
 

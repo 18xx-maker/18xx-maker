@@ -72,7 +72,7 @@ pnpm build && pnpm maker export <game> --format png
 ```
 
 Dabei ist `<game>` die ID eines mitgelieferten Spiels oder der Pfad zu einer
-Spieldatei. Die Dateien werden in `render/<game>` geschrieben und nach dem Titel
+Spieldatei. Die Dateien werden in `render/<game>/png` geschrieben und nach dem Titel
 des Spiels benannt.
 
 Die Bilder sind zum Drucken gedacht: 300 dpi ist der Standard und zugleich die

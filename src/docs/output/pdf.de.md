@@ -93,22 +93,24 @@ Dadurch wird die App gebaut und anschließend eine Reihe von Dateien im Ordner
 ```
 render
 └── 1889
-    ├── shikoku-1889-background.pdf
-    ├── shikoku-1889-cards-miniEuroDie.pdf
-    ├── shikoku-1889-charters.pdf
-    ├── shikoku-1889-map-paginated.pdf
-    ├── shikoku-1889-map.pdf
-    ├── shikoku-1889-market-paginated.pdf
-    ├── shikoku-1889-market.pdf
-    ├── shikoku-1889-par.pdf
-    ├── shikoku-1889-revenue-paginated.pdf
-    ├── shikoku-1889-revenue.pdf
-    ├── shikoku-1889-tile-manifest.pdf
-    ├── shikoku-1889-tiles-die.pdf
-    └── shikoku-1889-tokens.pdf
+    └── pdf
+        ├── shikoku-1889-background.pdf
+        ├── shikoku-1889-cards-miniEuroDie.pdf
+        ├── shikoku-1889-charters.pdf
+        ├── shikoku-1889-map-paginated.pdf
+        ├── shikoku-1889-map.pdf
+        ├── shikoku-1889-market-paginated.pdf
+        ├── shikoku-1889-market.pdf
+        ├── shikoku-1889-par.pdf
+        ├── shikoku-1889-revenue-paginated.pdf
+        ├── shikoku-1889-revenue.pdf
+        ├── shikoku-1889-tile-manifest.pdf
+        ├── shikoku-1889-tiles-die.pdf
+        └── shikoku-1889-tokens.pdf
 ```
 
-Die Dateien werden nach dem Titel des Spiels benannt (dieselben Namen wie in der
+Jedes Format hat einen eigenen Ordner im Spielordner: PDFs in `pdf`, PNGs in
+`png` und SVGs in `svg`. Die Dateien werden nach dem Titel des Spiels benannt (dieselben Namen wie in der
 App), der Ordner nach der Spiel-ID, die du eingegeben hast. PDFs werden mit
 ihren Hintergründen gedruckt, wie es die App auch tut. Der Befehl endet mit dem
 Code 1, wenn einige Dokumente nicht gedruckt werden konnten (die anderen werden

@@ -40,8 +40,20 @@ let tmp;
 
 // Where the files of 18Test are
 const out = (...parts) => path.join(tmp, "render", "18Test", ...parts);
-const files = (dir = out()) =>
-  fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
+// The names in a folder, with the files of the pdf, png and svg folders of a
+// game folder listed as if they were in it
+const listing = (dir) =>
+  fs.existsSync(dir)
+    ? fs
+        .readdirSync(dir)
+        .flatMap((name) =>
+          ["pdf", "png", "svg"].includes(name)
+            ? fs.readdirSync(path.join(dir, name))
+            : name,
+        )
+        .sort()
+    : [];
+const files = (dir = out()) => listing(dir);
 
 // The urls the browser went to
 const urls = () => mocks.fake.page.goto.mock.calls.map(([url]) => url);
@@ -130,7 +142,9 @@ describe("export formats", () => {
       ]),
     );
     expect(files().every((name) => name.endsWith(".svg"))).toBe(true);
-    expect(fs.readFileSync(out("18test-map.svg"), "utf-8")).toBe("<svg/>\n");
+    expect(fs.readFileSync(out("svg", "18test-map.svg"), "utf-8")).toBe(
+      "<svg/>\n",
+    );
     // No screenshot, no device size
     const methods = mocks.fake.session.send.mock.calls.map(([m]) => m);
     expect(methods).not.toContain("Page.captureScreenshot");
@@ -142,7 +156,9 @@ describe("export formats", () => {
 
     expect(files()).toEqual(["18test-background.png"]);
     expect(
-      readPng(new Uint8Array(fs.readFileSync(out("18test-background.png")))),
+      readPng(
+        new Uint8Array(fs.readFileSync(out("png", "18test-background.png"))),
+      ),
     ).toMatchObject({ pixelsPerMeter: 11811 });
     expect(mocks.fake.session.send).toHaveBeenCalledWith(
       "Emulation.setDeviceMetricsOverride",
@@ -158,7 +174,9 @@ describe("export formats", () => {
     });
 
     expect(
-      readPng(new Uint8Array(fs.readFileSync(out("18test-background.png")))),
+      readPng(
+        new Uint8Array(fs.readFileSync(out("png", "18test-background.png"))),
+      ),
     ).toMatchObject({ pixelsPerMeter: 3780 });
     expect(mocks.fake.session.send).toHaveBeenCalledWith(
       "Emulation.setDeviceMetricsOverride",
@@ -227,6 +245,24 @@ describe("export formats", () => {
       .filter(([method]) => method === "Emulation.setDeviceMetricsOverride")
       .map(([, params]) => params.deviceScaleFactor);
     expect(new Set(sizes)).toEqual(new Set([1]));
+  });
+
+  it("puts each format in its own folder of the game", async () => {
+    await exportCommand("18Test", { format: "pdf,png,svg,b18", docs: "map" });
+
+    expect(files(out("pdf"))).toEqual([
+      "18test-map-paginated.pdf",
+      "18test-map.pdf",
+    ]);
+    expect(files(out("png"))).toEqual(["18test-map.png"]);
+    expect(files(out("svg"))).toEqual(["18test-map.svg"]);
+    expect(fs.readdirSync(out()).sort()).toEqual([
+      "board18-18Test-1.0",
+      "board18-18Test-1.0.zip",
+      "pdf",
+      "png",
+      "svg",
+    ]);
   });
 
   it("does all formats in one run", async () => {
@@ -607,8 +643,7 @@ describe("the exports of a game file", () => {
   const exporting = (exports, name = "boxed.json") =>
     gameFile(name, { exports });
   const boxed = (...parts) => path.join(tmp, "render", "boxed", ...parts);
-  const boxedFiles = (dir = boxed()) =>
-    fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
+  const boxedFiles = (dir = boxed()) => listing(dir);
 
   it("sets every option of the export", async () => {
     const file = exporting({
@@ -626,7 +661,9 @@ describe("the exports of a game file", () => {
       "board18-boxed-5.0.zip",
     ]);
     expect(
-      readPng(new Uint8Array(fs.readFileSync(boxed("18test-background.png")))),
+      readPng(
+        new Uint8Array(fs.readFileSync(boxed("png", "18test-background.png"))),
+      ),
     ).toMatchObject({ pixelsPerMeter: 3780 });
     const json = JSON.parse(
       fs.readFileSync(boxed("board18-boxed-5.0/boxed-5.0.json"), "utf-8"),
@@ -688,7 +725,9 @@ describe("the exports of a game file", () => {
     await exportCommand(file, { docs: "background", dpi: "150" });
     expect(boxedFiles()).toEqual(["18test-background.png"]);
     expect(
-      readPng(new Uint8Array(fs.readFileSync(boxed("18test-background.png")))),
+      readPng(
+        new Uint8Array(fs.readFileSync(boxed("png", "18test-background.png"))),
+      ),
     ).toMatchObject({ pixelsPerMeter: 5906 });
   });
 

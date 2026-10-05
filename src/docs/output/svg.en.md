@@ -64,7 +64,7 @@ pnpm build && pnpm maker export <game> --format svg
 ```
 
 where `<game>` is the id of a bundled game or the path to a game file. The files
-are written to `render/<game>`, named after the game's title.
+are written to `render/<game>/svg`, named after the game's title.
 
 ```bash
 # Only the map and the tiles

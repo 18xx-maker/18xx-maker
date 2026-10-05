@@ -208,7 +208,8 @@ for (const format of ["pdf", "png", "svg", "b18"]) {
       { cwd: out, encoding: "utf-8" },
     );
     expect(result.status, result.stderr).toBe(0);
-    check[format](path.join(out, "18Test"), "cli");
+    const game = path.join(out, "18Test");
+    check[format](format === "b18" ? game : path.join(game, format), "cli");
   });
 }
 

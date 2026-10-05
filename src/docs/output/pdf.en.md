@@ -86,22 +86,24 @@ This will build the app, then output a bunch of files into the
 ```
 render
 └── 1889
-    ├── shikoku-1889-background.pdf
-    ├── shikoku-1889-cards-miniEuroDie.pdf
-    ├── shikoku-1889-charters.pdf
-    ├── shikoku-1889-map-paginated.pdf
-    ├── shikoku-1889-map.pdf
-    ├── shikoku-1889-market-paginated.pdf
-    ├── shikoku-1889-market.pdf
-    ├── shikoku-1889-par.pdf
-    ├── shikoku-1889-revenue-paginated.pdf
-    ├── shikoku-1889-revenue.pdf
-    ├── shikoku-1889-tile-manifest.pdf
-    ├── shikoku-1889-tiles-die.pdf
-    └── shikoku-1889-tokens.pdf
+    └── pdf
+        ├── shikoku-1889-background.pdf
+        ├── shikoku-1889-cards-miniEuroDie.pdf
+        ├── shikoku-1889-charters.pdf
+        ├── shikoku-1889-map-paginated.pdf
+        ├── shikoku-1889-map.pdf
+        ├── shikoku-1889-market-paginated.pdf
+        ├── shikoku-1889-market.pdf
+        ├── shikoku-1889-par.pdf
+        ├── shikoku-1889-revenue-paginated.pdf
+        ├── shikoku-1889-revenue.pdf
+        ├── shikoku-1889-tile-manifest.pdf
+        ├── shikoku-1889-tiles-die.pdf
+        └── shikoku-1889-tokens.pdf
 ```
 
-The files are named after the game's title (the same names the app uses), the
+Each format has its own folder in the game folder: PDFs are in `pdf`, PNGs
+in `png` and SVGs in `svg`. The files are named after the game's title (the same names the app uses), the
 folder after the game id you typed. PDFs are printed with their backgrounds,
 like the app does. The command exits with code 1 if some
 documents could not be printed (the others are still written) and with code 2
