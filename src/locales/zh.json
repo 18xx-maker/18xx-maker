@@ -38,6 +38,7 @@
     "checking": "正在检查游戏文件",
     "none": "未发现问题",
     "error": "错误",
+    "warning": "警告",
     "deprecated": "已弃用",
     "more": "另有 {{count}} 个",
     "root": "游戏文件",

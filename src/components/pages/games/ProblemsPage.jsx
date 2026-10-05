@@ -12,7 +12,12 @@ const MAX_ISSUES = 200;
 
 const Problem = ({ issue }) => {
   const { t } = useTranslation();
-  const warning = issue.severity === "warning";
+  const label =
+    issue.code === "deprecated"
+      ? "problems.deprecated"
+      : issue.code === "failed"
+        ? "problems.warning"
+        : "problems.error";
 
   const text =
     issue.code === "deprecated"
@@ -25,8 +30,10 @@ const Problem = ({ issue }) => {
   return (
     <li className="flex flex-row gap-3 py-3 border-t first:border-t-0">
       <div>
-        <Badge variant={warning ? "outline" : "destructive"}>
-          {t(warning ? "problems.deprecated" : "problems.error")}
+        <Badge
+          variant={issue.severity === "warning" ? "outline" : "destructive"}
+        >
+          {t(label)}
         </Badge>
       </div>
       <div className="min-w-0">

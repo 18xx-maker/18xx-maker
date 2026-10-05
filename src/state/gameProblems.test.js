@@ -31,19 +31,32 @@ describe("gameProblems", () => {
       undefined,
       createGameProblemsRunning("a"),
     );
-    expect(running).toEqual({ slug: "a", status: "running", issues: [] });
+    expect(running).toEqual({ slug: "a", status: "running", issues: null });
     expect(
       gameProblemsReducer(running, createGameProblemsDone("a", [1])),
     ).toEqual({ slug: "a", status: "done", issues: [1] });
   });
 
-  it("selects the problems only when done and for the same game", () => {
+  it("keeps the last problems while checking the same game again", () => {
+    const done = gameProblemsReducer(
+      undefined,
+      createGameProblemsDone("a", [1]),
+    );
+    expect(
+      gameProblemsReducer(done, createGameProblemsRunning("a")).issues,
+    ).toEqual([1]);
+    expect(
+      gameProblemsReducer(done, createGameProblemsRunning("b")).issues,
+    ).toBeNull();
+  });
+
+  it("selects the problems only for the same game", () => {
     const state = (gameProblems) => ({ gameProblems });
     const done = { slug: "a", status: "done", issues: [1] };
     expect(selectGameProblems(state(done), "a")).toEqual([1]);
     expect(selectGameProblems(state(done), "b")).toBeUndefined();
     expect(
-      selectGameProblems(state({ ...done, status: "running" }), "a"),
+      selectGameProblems(state({ ...done, issues: null }), "a"),
     ).toBeUndefined();
   });
 

@@ -38,6 +38,7 @@
     "checking": "Checking the game file",
     "none": "No problems found",
     "error": "Error",
+    "warning": "Warning",
     "deprecated": "Deprecated",
     "more": "and {{count}} more",
     "root": "the game file",

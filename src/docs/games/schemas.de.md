@@ -48,7 +48,7 @@ zu einem Validierungsfehler.
 ## Problemseite
 
 Beim Öffnen eines Spiels wird die Datei im Hintergrund gegen das Spielschema
-geprüft. Stimmt etwas nicht, erscheint im Menü unter Download der Eintrag
+geprüft. Stimmt etwas nicht, erscheint im Spielmenü der Eintrag
 Probleme mit der Anzahl der Probleme. Er öffnet eine Liste, die zeigt, wo jedes
 Problem liegt, was falsch ist und wie es sich beheben lässt: unbekannte Felder
 (ein Tippfehler oder ein Feld, das umbenannt oder entfernt wurde), Werte des

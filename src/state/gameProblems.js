@@ -20,7 +20,13 @@ export const GAME_PROBLEMS_DEFAULT = { slug: null, status: "idle", issues: [] };
 export const gameProblemsReducer = (state = GAME_PROBLEMS_DEFAULT, action) => {
   switch (action.type) {
     case GAME_PROBLEMS_RUNNING:
-      return { slug: action.slug, status: "running", issues: [] };
+      // The last result stays while it is checked again, so the menu does not
+      // flicker on every edit
+      return {
+        slug: action.slug,
+        status: "running",
+        issues: state.slug === action.slug ? state.issues : null,
+      };
     case GAME_PROBLEMS_DONE:
       return { slug: action.slug, status: "done", issues: action.issues };
     default:
@@ -28,10 +34,11 @@ export const gameProblemsReducer = (state = GAME_PROBLEMS_DEFAULT, action) => {
   }
 };
 
-// The problems of the loaded game once they are known
+// The problems of the loaded game once they are known (the last ones while
+// it is checked again)
 export const selectGameProblems = (state, slug) =>
-  state.gameProblems.slug === slug && state.gameProblems.status === "done"
-    ? state.gameProblems.issues
+  state.gameProblems.slug === slug
+    ? (state.gameProblems.issues ?? undefined)
     : undefined;
 
 // Checks a game against the schema. The result is dropped when another game

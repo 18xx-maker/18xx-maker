@@ -46,8 +46,7 @@ a value that is not valid, like a resolution over 300 dpi, fails validation.
 ## Problems page
 
 When you open a game its file is checked against the game schema in the
-background. If something is wrong a Problems entry appears in the menu, below
-Download, with the number of problems. It opens a list with where each problem
+background. If something is wrong a Problems entry appears in the game menu, with the number of problems. It opens a list with where each problem
 is, what is wrong and how to fix it: unknown fields (a typo, or a field that was
 renamed or removed), values of the wrong type, values that are not allowed, and
 required fields that are missing. Fields that are deprecated are listed too, they

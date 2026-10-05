@@ -84,4 +84,23 @@ describe("problems of a game", () => {
     await check(store);
     expect(store.getState().gameProblems.slug).toBe("Valid");
   });
+
+  it("does not count a check that could not run as a problem", async () => {
+    renderApp("/games/18Test/problems", {
+      gameProblems: {
+        slug: "18Test",
+        status: "done",
+        issues: [
+          { severity: "warning", code: "failed", pointer: "", params: {} },
+        ],
+      },
+    });
+
+    const page = await screen.findByTestId("game-18Test-problems");
+    expect(page).toHaveTextContent("Warning");
+    expect(page).not.toHaveTextContent("Deprecated");
+    expect(
+      screen.queryByRole("link", { name: /Problems/ }),
+    ).not.toBeInTheDocument();
+  });
 });

@@ -37,9 +37,9 @@ const AppSidebar = (props) => {
   // The export menu needs the game itself, not only its entry in the store
   const resolved = useSelector((state) => selectGameForSlug(state, game?.slug));
 
-  const problems = useSelector((state) =>
-    selectGameProblems(state, game?.slug),
-  );
+  const issues = useSelector((state) => selectGameProblems(state, game?.slug));
+  // A check that could not run is not a problem of the game
+  const problems = issues?.filter((issue) => issue.code !== "failed");
 
   const renderItems = (items) => {
     return addIndex(chain)((item, index) => {

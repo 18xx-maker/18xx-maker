@@ -38,6 +38,7 @@
     "checking": "Die Spieldatei wird geprüft",
     "none": "Keine Probleme gefunden",
     "error": "Fehler",
+    "warning": "Warnung",
     "deprecated": "Veraltet",
     "more": "und {{count}} weitere",
     "root": "die Spieldatei",

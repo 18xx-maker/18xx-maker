@@ -24,6 +24,10 @@ const schema = () => {
       deprecated: deprecatedPaths(root),
     };
   });
+  // A failed load (offline, a stale chunk) is tried again by the next check
+  compiled.catch(() => {
+    compiled = undefined;
+  });
   return compiled;
 };
 
