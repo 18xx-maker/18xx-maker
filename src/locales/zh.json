@@ -308,6 +308,32 @@
   "game": {
     "info": "游戏信息",
     "sections": "游戏部分",
+    "stats": {
+      "map": "地图",
+      "extras": "更多",
+      "title": "统计",
+      "tiles": "地块",
+      "tileCount": "{{total}}（{{types}} 种）",
+      "yellow": "黄色",
+      "green": "绿色",
+      "brown": "棕色",
+      "gray": "灰色",
+      "other": "其他",
+      "gauges": "轨距",
+      "normal": "标准",
+      "hexes": "地图格数",
+      "variations": "地图变体",
+      "size": "地图大小",
+      "sizeValue": "{{width}} × {{height}}",
+      "companies": "公司",
+      "major": "大公司",
+      "minor": "小公司",
+      "privates": "私有公司",
+      "trains": "火车",
+      "trainCount": "{{total}}（{{types}} 种）",
+      "phases": "阶段",
+      "rounds": "回合"
+    },
     "type": {
       "bundled": {
         "label": "内置",

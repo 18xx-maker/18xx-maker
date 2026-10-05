@@ -308,6 +308,32 @@
   "game": {
     "info": "Spielinformationen",
     "sections": "Spielbereich",
+    "stats": {
+      "map": "Karte",
+      "extras": "Weitere",
+      "title": "Statistik",
+      "tiles": "Plättchen",
+      "tileCount": "{{total}} ({{types}} verschiedene)",
+      "yellow": "Gelb",
+      "green": "Grün",
+      "brown": "Braun",
+      "gray": "Grau",
+      "other": "Andere",
+      "gauges": "Spurweiten",
+      "normal": "Normal",
+      "hexes": "Kartenfelder",
+      "variations": "Kartenvarianten",
+      "size": "Kartengröße",
+      "sizeValue": "{{width}} × {{height}}",
+      "companies": "Gesellschaften",
+      "major": "Große",
+      "minor": "Kleine",
+      "privates": "Privatgesellschaften",
+      "trains": "Züge",
+      "trainCount": "{{total}} ({{types}} Typen)",
+      "phases": "Phasen",
+      "rounds": "Runden"
+    },
     "type": {
       "bundled": {
         "label": "Mitgeliefert",
