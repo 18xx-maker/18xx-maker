@@ -3,9 +3,9 @@ import { Link } from "react-router";
 
 import { map } from "ramda";
 
-import Code from "@/components/Code";
 import Hex from "@/components/Hex";
-import Svg from "@/components/Svg";
+import Code from "@/components/docs/Code";
+import Svg from "@/components/svg/Svg";
 
 const city = { cities: [{}] };
 const centerTown = { centerTowns: [{}] };

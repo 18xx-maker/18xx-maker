@@ -8,7 +8,7 @@ import RouteError from "@/components/RouteError";
 
 import { initialState, rootReducer } from "@/state";
 
-import { allowConsole } from "@tests/console.js";
+import { allowConsole } from "@tests/support/console.js";
 
 const Broken = () => {
   throw new Error("cards do not fit");

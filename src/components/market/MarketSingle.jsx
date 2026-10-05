@@ -1,6 +1,6 @@
 import { Navigate } from "react-router";
 
-import Editor, { useEditing } from "@/components/Editor";
+import Editor, { useEditing } from "@/components/editor/Editor";
 import Market from "@/components/market/Market";
 
 import { unitsToCss } from "@/util";

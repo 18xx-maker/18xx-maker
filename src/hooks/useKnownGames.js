@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { games as bundled } from "@/data";
-import * as idb from "@/util/idb";
 import { loadKnownGames, loadableSummaries } from "@/util/knownGames";
-import * as opfs from "@/util/opfs";
 import { getRenderInput } from "@/util/renderInput";
+import * as idb from "@/util/storage/idb";
+import * as opfs from "@/util/storage/opfs";
 
 const loaders = { internal: opfs.peekGame, system: idb.peekGame };
 

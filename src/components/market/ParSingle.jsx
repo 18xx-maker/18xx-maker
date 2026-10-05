@@ -1,8 +1,8 @@
 import { Navigate } from "react-router";
 
-import Editor, { useEditing } from "@/components/Editor";
-import Svg from "@/components/Svg";
+import Editor, { useEditing } from "@/components/editor/Editor";
 import Par from "@/components/market/Par";
+import Svg from "@/components/svg/Svg";
 
 import { unitsToCss } from "@/util";
 import { getParData } from "@/util/market";

@@ -1,5 +1,6 @@
 import Revenue from "@/components/market/Revenue";
-import { RevenueStory } from "@/components/market/storyFrames";
+
+import { RevenueStory } from "@/stories/marketFrames";
 
 export default {
   title: "Market/Revenue",

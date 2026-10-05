@@ -1,5 +1,6 @@
 import Cutlines from "@/components/Cutlines";
-import { tileSheet } from "@/components/storyFrames";
+
+import { tileSheet } from "@/stories/frames";
 
 export default {
   title: "Print/Cutlines",

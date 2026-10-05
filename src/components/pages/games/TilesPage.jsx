@@ -1,6 +1,6 @@
 import { Navigate } from "react-router";
 
-import HtmlEditor from "@/components/HtmlEditor";
+import HtmlEditor from "@/components/editor/HtmlEditor";
 
 import { useConfig, useGame } from "@/hooks";
 
@@ -30,10 +30,10 @@ import {
 
 import Cutlines from "@/components/Cutlines";
 import Hex from "@/components/Hex";
-import Page from "@/components/Page";
-import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
-import Svg from "@/components/Svg";
+import Page from "@/components/page/Page";
+import PageSetup from "@/components/page/PageSetup";
+import Svg from "@/components/svg/Svg";
 
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
@@ -44,8 +44,8 @@ import {
   offsetBleedPoints,
   offsetNeighbors,
   reorderForBleed,
-} from "@/util/tilesheet";
-import { alignSides, sidesFromTile } from "@/util/track";
+} from "@/util/tiles/tilesheet";
+import { alignSides, sidesFromTile } from "@/util/tiles/track";
 
 const gatherIds = (tiles) => {
   return compose(

@@ -14,15 +14,18 @@ import {
 } from "ramda";
 
 import Charter from "@/components/Charter";
-import HtmlEditor from "@/components/HtmlEditor";
-import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
-import Svg from "@/components/Svg";
+import HtmlEditor from "@/components/editor/HtmlEditor";
+import PageSetup from "@/components/page/PageSetup";
+import Svg from "@/components/svg/Svg";
 
 import { useConfig, useGame } from "@/hooks";
 import { getCharterData } from "@/util";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
-import { charterHalfWidth } from "@/util/companyTrains";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies";
+import { charterHalfWidth } from "@/util/companies/companyTrains";
 
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));

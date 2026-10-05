@@ -1,6 +1,6 @@
 import Par from "@/components/market/Par";
-import { ParStory } from "@/components/market/storyFrames";
 
+import { ParStory } from "@/stories/marketFrames";
 import { colorSelect } from "../../../.storybook/controls";
 
 export default {

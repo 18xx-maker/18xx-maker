@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useMatch, useNavigate } from "react-router";
 
-import Viewport from "@/components/Viewport";
+import Viewport from "@/components/page/Viewport";
 
 import { useEditor } from "@/hooks";
 import { loadGame } from "@/state";

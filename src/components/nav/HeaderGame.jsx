@@ -6,9 +6,8 @@ import { ArrowBigRight, TrainTrack } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import { firstSection } from "@/components/gameNav";
-
 import { useGame } from "@/hooks";
+import { firstSection } from "@/util/gameNav";
 
 const HeaderTitle = () => {
   const { t } = useTranslation();

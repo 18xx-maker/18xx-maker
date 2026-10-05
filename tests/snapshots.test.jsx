@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
-import { findGame, parts } from "@tests/smoke.js";
-import { printMarkup } from "@tests/snapshot.js";
+import { findGame, parts } from "@tests/support/smoke.js";
+import { printMarkup } from "@tests/support/snapshot.js";
 
 // Games whose print output is locked down:
 // 18Test every feature, 1889 classic, 1867 market ledges and many charters,

@@ -1,12 +1,15 @@
 import { addIndex, compose, is, map, propEq, reject } from "ramda";
 
-import Svg from "@/components/Svg";
+import Svg from "@/components/svg/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies";
 
 const B18TokensPage = () => {
   const { config } = useConfig();

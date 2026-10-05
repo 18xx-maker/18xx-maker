@@ -7,7 +7,10 @@ import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
 import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies";
 
 const arrows = {
   up: "↑",

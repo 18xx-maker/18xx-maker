@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 
 import { games } from "@/data";
 
-import { renderApp } from "@tests/helpers.jsx";
+import { renderApp } from "@tests/support/helpers.jsx";
 
 const entries = (router) => router.state.historyAction;
 

@@ -10,13 +10,13 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import Alert from "@/components/Alert";
 import Analytics from "@/components/Analytics";
-import ExportHost from "@/components/ExportHost";
 import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
-import SetSvgColors from "@/components/SetSvgColors";
 import { ShortcutsDialog } from "@/components/Shortcuts";
+import ExportHost from "@/components/export/ExportHost";
 import AppSidebar from "@/components/nav/AppSidebar";
 import Header from "@/components/nav/Header";
+import SetSvgColors from "@/components/svg/SetSvgColors";
 
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { useBindings, useConfig, useEditor } from "@/hooks";
@@ -32,10 +32,10 @@ import {
 import { selectLanguage } from "@/state/selectors";
 import capability from "@/util/capability";
 import { sniffConfigFile } from "@/util/config";
-import * as idb from "@/util/idb";
-import * as opfs from "@/util/opfs";
 import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
+import * as idb from "@/util/storage/idb";
+import * as opfs from "@/util/storage/opfs";
 
 const Root = () => {
   const { t, i18n } = useTranslation();

@@ -2,9 +2,9 @@ import { Navigate } from "react-router";
 
 import { addIndex, ascend, keys, map, sortWith } from "ramda";
 
-import HtmlEditor from "@/components/HtmlEditor";
-import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
+import HtmlEditor from "@/components/editor/HtmlEditor";
+import Svg from "@/components/svg/Svg";
 
 import ColorContext from "@/context/ColorContext";
 import { tiles } from "@/data";

@@ -1,6 +1,6 @@
 import Ledges from "@/components/market/Ledges";
-import { LedgesStory } from "@/components/market/storyFrames";
 
+import { LedgesStory } from "@/stories/marketFrames";
 import { colorSelect } from "../../../.storybook/controls";
 
 export default {

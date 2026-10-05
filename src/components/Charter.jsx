@@ -12,7 +12,7 @@ import Token from "@/components/tokens/Token";
 import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
 import { multiDefaultTo, unitsToCss } from "@/util";
-import { companyTrains } from "@/util/companyTrains";
+import { companyTrains } from "@/util/companies/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
 
 const MIN_CARD_SCALE = 0.2;

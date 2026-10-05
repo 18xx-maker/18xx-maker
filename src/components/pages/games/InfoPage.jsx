@@ -21,7 +21,6 @@ import {
 import { Button } from "@/components/ui/button";
 
 import File from "@/components/File";
-import { firstSection } from "@/components/gameNav";
 import GameStats from "@/components/pages/games/GameStats";
 
 import { useGame } from "@/hooks";
@@ -29,6 +28,7 @@ import { deleteGame, refreshGame } from "@/state";
 import { titleToFilename } from "@/util";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
+import { firstSection } from "@/util/gameNav";
 
 const InfoPage = () => {
   const game = useGame();

@@ -31,7 +31,7 @@ export default defineConfig({
       enabled: true,
       exclude: [
         "src/**/*.stories.*",
-        "src/**/storyFrames.*",
+        "src/stories/**",
         "src/**/__fixtures__/**",
         "src/i18n.js",
         "src/index.jsx",
@@ -99,7 +99,7 @@ export default defineConfig({
           },
           include: ["tests/**/*.test.jsx", "src/**/*.test.jsx"],
           name: "component",
-          setupFiles: ["tests/setup.js"],
+          setupFiles: ["tests/support/setup.js"],
         },
       },
     ],

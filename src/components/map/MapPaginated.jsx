@@ -1,7 +1,7 @@
 import { Navigate } from "react-router";
 
-import Paginate from "@/components/Paginate";
 import Map from "@/components/map/Map";
+import Paginate from "@/components/page/Paginate";
 
 import { getMapData } from "@/util/map";
 

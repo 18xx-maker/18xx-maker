@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { flatten, times } from "ramda";
 
 import Color from "@/components/Color";
-import HtmlEditor from "@/components/HtmlEditor";
-import PageSetup from "@/components/PageSetup";
+import HtmlEditor from "@/components/editor/HtmlEditor";
+import PageSetup from "@/components/page/PageSetup";
 
 import config from "@/defaults.json";
 import { useGame } from "@/hooks/game.js";

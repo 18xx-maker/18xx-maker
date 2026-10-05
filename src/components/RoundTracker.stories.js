@@ -1,5 +1,6 @@
 import RoundTracker from "@/components/RoundTracker";
-import { RoundTrackerStory } from "@/components/storyFrames";
+
+import { RoundTrackerStory } from "@/stories/frames";
 
 export default {
   title: "Print/RoundTracker",

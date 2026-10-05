@@ -12,9 +12,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import Code from "@/components/Code";
 import Hex from "@/components/Hex";
-import Svg from "@/components/Svg";
+import Code from "@/components/docs/Code";
+import Svg from "@/components/svg/Svg";
 
 import { useStringParam } from "@/util/query";
 

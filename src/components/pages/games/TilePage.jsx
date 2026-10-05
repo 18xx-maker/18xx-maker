@@ -1,8 +1,8 @@
 import { Navigate, useParams } from "react-router";
 
 import Hex from "@/components/Hex";
-import HtmlEditor from "@/components/HtmlEditor";
-import Svg from "@/components/Svg";
+import HtmlEditor from "@/components/editor/HtmlEditor";
+import Svg from "@/components/svg/Svg";
 
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";

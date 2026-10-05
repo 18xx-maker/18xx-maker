@@ -12,16 +12,16 @@ import {
   refreshGame,
 } from "@/state";
 import capability from "@/util/capability";
-import * as idb from "@/util/idb";
-import * as opfs from "@/util/opfs";
+import * as idb from "@/util/storage/idb";
+import * as opfs from "@/util/storage/opfs";
 
-vi.mock("@/util/idb", () => ({
+vi.mock("@/util/storage/idb", () => ({
   TYPE: "system",
   loadGame: vi.fn(),
   deleteGame: vi.fn(),
   loadSummaries: vi.fn(),
 }));
-vi.mock("@/util/opfs", () => ({
+vi.mock("@/util/storage/opfs", () => ({
   TYPE: "internal",
   loadGame: vi.fn(),
   deleteGame: vi.fn(),

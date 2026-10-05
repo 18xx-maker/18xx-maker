@@ -29,14 +29,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
 import TileFilters from "@/components/TileFilters";
+import Svg from "@/components/svg/Svg";
 
 import { tiles } from "@/data";
 import useKnownGames from "@/hooks/useKnownGames";
 import { useIntParam, useRangeParam, useStringParam } from "@/util/query";
-import { gamesOfEntry, mergeKnownTiles, tileUsage } from "@/util/tiles";
+import { gamesOfEntry, mergeKnownTiles, tileUsage } from "@/util/tiles/tiles";
 
 const PER_PAGE = 50;
 

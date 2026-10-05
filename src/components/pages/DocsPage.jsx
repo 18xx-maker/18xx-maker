@@ -4,9 +4,9 @@ import { useLocation } from "react-router";
 
 import { isEmpty } from "ramda";
 
-import DocsPager from "@/components/DocsPager";
-import DocsToc from "@/components/DocsToc";
-import Markdown from "@/components/Markdown";
+import DocsPager from "@/components/docs/DocsPager";
+import DocsToc from "@/components/docs/DocsToc";
+import Markdown from "@/components/docs/Markdown";
 
 const mds = import.meta.glob("../../docs/**/*.md", {
   eager: true,

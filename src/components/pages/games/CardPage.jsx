@@ -2,16 +2,19 @@ import { useLocation, useParams } from "react-router";
 
 import { assoc, flatten, map } from "ramda";
 
-import HtmlEditor from "@/components/HtmlEditor";
 import Number from "@/components/cards/Number";
 import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
+import HtmlEditor from "@/components/editor/HtmlEditor";
 
 import { MAX_CARD_BLEED } from "@/export/options.js";
 import { useConfig, useGame } from "@/hooks";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
-import { cardCompanyTrains } from "@/util/companyTrains";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies";
+import { cardCompanyTrains } from "@/util/companies/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
 
 const CardPage = () => {

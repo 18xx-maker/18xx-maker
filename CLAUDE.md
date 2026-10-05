@@ -48,7 +48,7 @@ Layout (projects are defined in `test.projects` in `vitest.config.js`):
 - `component` (real Chromium via `@vitest/browser` + Playwright):
   `tests/**/*.test.jsx` and `src/**/*.test.jsx`. jsdom is not used; it
   disagrees with Node on `Request`/`AbortSignal`, which react-router needs.
-  Setup is `tests/setup.js`; render with `renderApp` from `tests/helpers.jsx`
+  Setup is `tests/support/setup.js`; render with `renderApp` from `tests/support/helpers.jsx`
   (real store + memory router built from `rootRoutes`).
 - `e2e/*.spec.js`: Playwright on `vite preview` of `dist/site` (port 4318).
   Rebuild after any code change, specs never see the dev server.
@@ -67,8 +67,8 @@ Conventions:
   option, tile element, charter/market/token field, ...), so it renders in the
   print pages and the snapshots cover it. Extend an existing entry where one
   fits; add a new one only when the feature needs it.
-- Every route in `rootRoutes` needs a smoke test entry (`tests/routes.js`,
-  `tests/smoke.js`).
+- Every route in `rootRoutes` needs a smoke test entry (`tests/support/routes.js`,
+  `tests/support/smoke.js`).
 - CI enforces a 95% statement floor on `src/state/**`. The state layer is
   pinned by `src/state/*.test.js` (reducers, thunks, root state contract,
   persisted localStorage fixture); a change to stored shape needs a migration
@@ -143,7 +143,7 @@ Design checklist for tokens and icons:
   contract test and persisted fixture passing.
 - Persisted data: `src/state/storage.js` mirrors `config`, `loadedGame` and
   `settings` (theme, sidebarOpen, language; all optional) to localStorage; loaded games
-  live in IndexedDB/OPFS (`src/util/idb.js`, `src/util/opfs.js`). Stored user data must survive every release.
+  live in IndexedDB/OPFS (`src/util/storage/idb.js`, `src/util/storage/opfs.js`). Stored user data must survive every release.
 - The component tests fail on React `console.error` warnings, which is the
   early warning for React deprecations.
 - Print pixel screenshots are only stable on one OS and Chromium build, so keep
@@ -268,7 +268,7 @@ listed under "Exporting" and "Translations" when the field is user facing.
 ## Translations
 
 UI strings live in `src/locales/<lang>.json` (`en` is the source) and the docs
-are `src/docs/**/<slug>.<lang>.md` plus `src/pages/home.<lang>.md`. German (`de`)
+are `src/docs/**/<slug>.<lang>.md` plus `src/home/home.<lang>.md`. German (`de`)
 and Simplified Chinese (`zh`) are AI-generated and kept in step with English.
 
 - **Any change to a doc page or `home.en.md` must update `.de.md` and `.zh.md`
@@ -292,7 +292,7 @@ Images in `src/docs` live in `public/images`.
 
 - Every image has descriptive alt text and a caption: `![alt](/images/x.png "caption")`.
   A titled image renders as a rounded, bordered figure (`DocImage` in
-  `src/components/Markdown.jsx`); never put the caption in the alt text.
+  `src/components/docs/Markdown.jsx`); never put the caption in the alt text.
 - Annotate where it clarifies (circle the control, label parts with arrows,
   one label per thing, nothing overlapping). Crop to whole objects, never cut
   tokens or hexes at the edge.

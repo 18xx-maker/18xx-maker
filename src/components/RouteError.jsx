@@ -4,8 +4,8 @@ import { useRouteError } from "react-router";
 
 import { Button } from "@/components/ui/button";
 
-import Code from "@/components/Code";
 import File from "@/components/File";
+import Code from "@/components/docs/Code";
 
 import { createResetConfig } from "@/state";
 

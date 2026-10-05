@@ -30,10 +30,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import Code from "@/components/Code";
 import File from "@/components/File";
 import { sections } from "@/components/config";
 import Items from "@/components/config/Items";
+import Code from "@/components/docs/Code";
 
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";

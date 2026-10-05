@@ -1,6 +1,6 @@
 import ParCell from "@/components/market/ParCell";
-import { ParCellStory } from "@/components/market/storyFrames";
 
+import { ParCellStory } from "@/stories/marketFrames";
 import { colorSelect } from "../../../.storybook/controls";
 
 const color = colorSelect();

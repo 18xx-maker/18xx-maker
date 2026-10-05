@@ -1,5 +1,6 @@
 import Market from "@/components/market/Market";
-import { MarketStory } from "@/components/market/storyFrames";
+
+import { MarketStory } from "@/stories/marketFrames";
 
 // A trimmed market of 1889 with the par chart and legend below it
 const twoD = {

@@ -1,6 +1,6 @@
 import Private from "@/components/cards/Private";
-import { card } from "@/components/storyFrames";
 
+import { card } from "@/stories/frames";
 import { colorSelect } from "../../../.storybook/controls";
 
 const color = colorSelect();

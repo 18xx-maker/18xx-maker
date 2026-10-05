@@ -2,8 +2,8 @@ import { Navigate } from "react-router";
 
 import { assocPath, is, isNil } from "ramda";
 
-import Svg from "@/components/Svg";
 import Map from "@/components/map/Map";
+import Svg from "@/components/svg/Svg";
 
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";

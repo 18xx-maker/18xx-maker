@@ -1,3 +1,0 @@
-import { gamePages } from "@tests/smoke.js";
-
-gamePages("single");

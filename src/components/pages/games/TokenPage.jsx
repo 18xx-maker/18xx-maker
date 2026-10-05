@@ -2,14 +2,17 @@ import { useParams } from "react-router";
 
 import { addIndex, compose, concat, is, map, propEq, reject } from "ramda";
 
-import HtmlEditor from "@/components/HtmlEditor";
-import Svg from "@/components/Svg";
+import HtmlEditor from "@/components/editor/HtmlEditor";
+import Svg from "@/components/svg/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
-import { compileCompanies, overrideCompanies } from "@/util/companies.js";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies.js";
 import { getTokenGrid } from "@/util/sizes";
 
 const TokenPage = () => {

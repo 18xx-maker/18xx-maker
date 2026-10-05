@@ -5,17 +5,17 @@ import { useLocation, useMatch, useNavigate } from "react-router";
 import { find, propEq } from "ramda";
 
 import { sections as configSections } from "@/components/config";
-import { firstSection, gameNav } from "@/components/gameNav";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
 import { createAlert, createSetExportMenuOpen, refreshGame } from "@/state";
 import { selectExportSheetOpen, selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
-import * as idb from "@/util/idb";
+import { firstSection, gameNav } from "@/util/gameNav";
 import { isControlTarget } from "@/util/keys";
 import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
+import * as idb from "@/util/storage/idb";
 
 // The item before ("[") or after ("]") the current one, wrapping around. With
 // no current item it starts at the first or last.

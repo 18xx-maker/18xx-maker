@@ -1,17 +1,17 @@
 import { useTranslation } from "react-i18next";
 
-import Markdown from "@/components/Markdown";
+import Markdown from "@/components/docs/Markdown";
 
 const HomePage = () => {
   const { i18n } = useTranslation();
 
-  const homes = import.meta.glob("../../pages/home.*.md", {
+  const homes = import.meta.glob("../../home/home.*.md", {
     eager: true,
     import: "default",
     query: "?raw",
   });
   const home = i18n.languages
-    .map((language) => homes[`../../pages/home.${language}.md`])
+    .map((language) => homes[`../../home/home.${language}.md`])
     .find((md) => md !== undefined);
 
   return (

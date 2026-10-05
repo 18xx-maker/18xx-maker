@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { page } from "vitest/browser";
 
-import { renderApp } from "@tests/helpers.jsx";
+import { renderApp } from "@tests/support/helpers.jsx";
 
 // Desktop width: the sidebar is always rendered
 beforeEach(async () => {

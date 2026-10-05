@@ -1,12 +1,15 @@
 import { Navigate, useParams } from "react-router";
 
 import Charter from "@/components/Charter";
-import HtmlEditor from "@/components/HtmlEditor";
-import PageSetup from "@/components/PageSetup";
+import HtmlEditor from "@/components/editor/HtmlEditor";
+import PageSetup from "@/components/page/PageSetup";
 
 import { useConfig, useGame } from "@/hooks";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
-import { charterHalfWidth } from "@/util/companyTrains";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies";
+import { charterHalfWidth } from "@/util/companies/companyTrains";
 import { getSingleCharterData } from "@/util/sizes";
 
 const CharterPage = () => {

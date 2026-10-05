@@ -1,7 +1,7 @@
 import { useLocation, useParams } from "react-router";
 
-import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
+import Svg from "@/components/svg/Svg";
 
 import { useConfig, useGame } from "@/hooks";
 import capability from "@/util/capability";

@@ -2,9 +2,9 @@ import { assocPath, dissocPath, zipObj } from "ramda";
 
 import { DELETE_GAME, SET_GAME } from "@/state/game";
 import capability from "@/util/capability";
-import * as idb from "@/util/idb";
 import { getGameSummary } from "@/util/loading.js";
-import * as opfs from "@/util/opfs";
+import * as idb from "@/util/storage/idb";
+import * as opfs from "@/util/storage/opfs";
 
 export const SET_SUMMARIES = "SET_SUMMARIES";
 

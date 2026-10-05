@@ -9,20 +9,23 @@ import {
   unnest,
 } from "ramda";
 
-import HtmlEditor from "@/components/HtmlEditor";
-import PageSetup from "@/components/PageSetup";
 import Pins from "@/components/Pins";
-import Svg from "@/components/Svg";
 import Number from "@/components/cards/Number";
 import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
+import HtmlEditor from "@/components/editor/HtmlEditor";
+import PageSetup from "@/components/page/PageSetup";
+import Svg from "@/components/svg/Svg";
 
 import { useConfig, useGame } from "@/hooks";
 import { fillArray, maxPlayers, unitsToCss } from "@/util";
 import { getCardData, typeCardConfig } from "@/util/cards";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
-import { cardCompanyTrains } from "@/util/companyTrains";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies";
+import { cardCompanyTrains } from "@/util/companies/companyTrains";
 
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   const { config } = useConfig();

@@ -2,16 +2,19 @@ import { Navigate } from "react-router";
 
 import { addIndex, chain, is, map, splitEvery } from "ramda";
 
-import Editor, { useEditing } from "@/components/Editor";
-import PageSetup from "@/components/PageSetup";
-import Svg from "@/components/Svg";
+import Editor, { useEditing } from "@/components/editor/Editor";
+import PageSetup from "@/components/page/PageSetup";
+import Svg from "@/components/svg/Svg";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
 import { unitsToCss } from "@/util";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies";
 
 // Takes in a game object, a tokens config object and a paper config object.
 //

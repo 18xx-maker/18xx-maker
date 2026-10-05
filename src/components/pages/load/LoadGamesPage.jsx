@@ -28,8 +28,8 @@ import GameRow from "@/components/pages/load/GameRow";
 import { publishers } from "@/data";
 import { createAlert, loadSummaries } from "@/state";
 import capability from "@/util/capability";
-import * as idb from "@/util/idb";
-import * as opfs from "@/util/opfs";
+import * as idb from "@/util/storage/idb";
+import * as opfs from "@/util/storage/opfs";
 
 const sortSummaries = compose(sortBy(prop("title")), chain(values), values);
 

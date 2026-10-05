@@ -9,7 +9,7 @@ import { Check, Download, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
-import Code from "@/components/Code";
+import Code from "@/components/docs/Code";
 
 import { logos } from "@/data";
 import { createDownloadPercent } from "@/state";

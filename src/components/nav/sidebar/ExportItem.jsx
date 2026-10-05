@@ -9,8 +9,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-import { EXPORT_TRIGGER } from "@/components/ExportHost";
 import KeyLabel from "@/components/KeyLabel";
+import { EXPORT_TRIGGER } from "@/components/export/ExportHost";
 
 import { createSetExportMenuOpen } from "@/state";
 
