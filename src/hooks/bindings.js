@@ -138,6 +138,8 @@ export const useBindings = () => {
           }
 
           if (item) {
+            // A section without data for the game has nothing to show
+            if (game && item.disabled?.(game)) return;
             navigate(`/games/${viewingGame.params.slug}/${item.section}`);
             return;
           }
@@ -150,10 +152,9 @@ export const useBindings = () => {
       } else if (loadedGame) {
         // The game state is only the loaded game when the slugs agree
         const first = game ? firstSection(game) : "map";
-        const section =
-          event.key === "e"
-            ? first
-            : find(propEq(event.key, "key"), gameNav)?.section;
+        const item = find(propEq(event.key, "key"), gameNav);
+        if (item && game && item.disabled?.(game)) return;
+        const section = event.key === "e" ? first : item?.section;
 
         if (section) {
           navigate(`/games/${loadedGame.slug}/${section}`);
