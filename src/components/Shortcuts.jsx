@@ -20,6 +20,7 @@ const shortcuts = [
   { id: "atoms", keys: ["a"] },
   { id: "tiles", keys: ["t"] },
   { id: "logos", keys: ["c"] },
+  { id: "positioning", keys: ["p"] },
   { id: "game", keys: ["g"] },
   { id: "edit", keys: ["e"] },
   { id: "section", keys: ["m", "1–9", "0"] },

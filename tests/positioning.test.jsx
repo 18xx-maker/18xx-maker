@@ -7,6 +7,13 @@ const at = (angle, translate) =>
   `rotate(${angle} 0 0) translate(0 ${translate}) rotate(${-angle} 0 0) translate(0 0)`;
 
 describe("auto positioning examples page", () => {
+  it("links to the doc", async () => {
+    renderApp("/elements/positioning");
+    expect(
+      await screen.findByRole("link", { name: /Auto Positioning doc/ }),
+    ).toHaveAttribute("href", "/docs/games/positioning");
+  });
+
   it("draws the transforms the rules promise", async () => {
     renderApp("/elements/positioning");
     await screen.findByTestId("positioning");

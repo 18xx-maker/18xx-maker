@@ -259,7 +259,8 @@
       "title": "Automatische Positionierung",
       "description": "Live-Beispiele zur automatischen Positionierung",
       "page": {
-        "description": "Jede Regel und jeder Sonderfall der automatischen Positionierung, live gezeichnet, mit dem JSON, das ihn erzeugt. Die Regeln stehen in der Doku zur automatischen Positionierung."
+        "description": "Jede Regel und jeder Sonderfall der automatischen Positionierung, live gezeichnet, mit dem JSON, das ihn erzeugt.",
+        "docs": "Die Regeln stehen in der Doku zur automatischen Positionierung"
       },
       "groups": {
         "icons": "Symbole",
@@ -922,6 +923,10 @@
       "logos": {
         "use": "Zur Logos-Seite wechseln",
         "notes": "Nicht auf der Bearbeitungsseite eines Spiels. Schaltet beim Bearbeiten die Konfiguration um"
+      },
+      "positioning": {
+        "use": "Zur Seite Automatische Positionierung wechseln",
+        "notes": "Nicht auf der Bearbeitungsseite eines Spiels"
       },
       "game": {
         "use": "Zur Spielseite wechseln",

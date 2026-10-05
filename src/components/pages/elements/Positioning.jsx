@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 
 import { map } from "ramda";
 
@@ -120,6 +121,11 @@ const Positioning = () => {
       </h1>
       <p className="leading-7 mt-6 text-wrap">
         {t("elements.positioning.page.description")}
+      </p>
+      <p className="leading-7 mt-2">
+        <Link className="underline" to="/docs/games/positioning">
+          {t("elements.positioning.page.docs")}
+        </Link>
       </p>
       {map(
         (group) => (

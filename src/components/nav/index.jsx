@@ -73,6 +73,7 @@ export const mainMenu = [
       },
       {
         icon: Crosshair,
+        shortcut: "p",
         label: "elements.positioning.title",
         to: "/elements/positioning",
       },

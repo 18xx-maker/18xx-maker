@@ -259,7 +259,8 @@
       "title": "Auto Positioning",
       "description": "Live examples of auto positioning",
       "page": {
-        "description": "Every auto positioning rule and edge case, drawn live with the JSON that produces it. See the Auto Positioning doc for the rules."
+        "description": "Every auto positioning rule and edge case, drawn live with the JSON that produces it.",
+        "docs": "Read the Auto Positioning doc for the rules"
       },
       "groups": {
         "icons": "Icons",
@@ -922,6 +923,10 @@
       "logos": {
         "use": "Navigate to the Logos page",
         "notes": "Not on a game edit page. Toggles config when editing"
+      },
+      "positioning": {
+        "use": "Navigate to the Auto Positioning page",
+        "notes": "Not on a game edit page"
       },
       "game": {
         "use": "Navigate to the Game page",
