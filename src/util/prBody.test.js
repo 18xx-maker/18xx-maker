@@ -20,4 +20,11 @@ describe("findRiskyLines", () => {
     expect(findRiskyLines("a fixed: thing, build-app: x")).toEqual([]);
     expect(findRiskyLines()).toEqual([]);
   });
+
+  it("ignores release-please changelog bullets", () => {
+    const bullet =
+      "* **test:** drop jsdom from node unit tests ([#902](https://x))";
+    expect(findRiskyLines(bullet)).toEqual([]);
+    expect(findRiskyLines("* test: x")).toHaveLength(1);
+  });
 });
