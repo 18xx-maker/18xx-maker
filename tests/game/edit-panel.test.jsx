@@ -82,13 +82,26 @@ describe("edit panel", () => {
     expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
     expect(await field("Subtitle")).toHaveValue("18xx-Maker Test Filee");
 
-    // e elsewhere in the page toggles it
+    // The close button closes it
     await user.click(
       screen.getByRole("button", { name: "Close the edit panel" }),
     );
     await waitFor(() =>
       expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument(),
     );
+  });
+
+  it("e with the focus outside a field closes it", async () => {
+    const { user, router } = open(route);
+    await screen.findByTestId("game-internal:abc-map");
+
+    await user.keyboard("e");
+    await panel();
+    await user.keyboard("e");
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument(),
+    );
+    expect(router.state.location.search).toBe("");
   });
 
   it("escape closes it with the focus in a field, on a button or nowhere", async () => {
@@ -354,6 +367,25 @@ describe("edit panel fields", () => {
     await user.clear(tokens);
     await user.tab();
     expect("marketTokens" in store.getState().game.info).toBe(false);
+  });
+
+  it("keeps the value of a number field with a bad input when the panel closes", async () => {
+    const { user, store } = open(`${route}?edit=true`);
+    const tokens = await screen.findByRole("spinbutton", {
+      name: "Market Tokens",
+    });
+    await waitFor(() => {
+      if (store.getState().gameProblems.status !== "done") {
+        throw new Error("not checked yet");
+      }
+    });
+    await user.clear(tokens);
+    await realUser.keyboard("-");
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument(),
+    );
+    expect(store.getState().game.info.marketTokens).toBe(1);
   });
 
   it("a font weight is a number only when the text is", async () => {

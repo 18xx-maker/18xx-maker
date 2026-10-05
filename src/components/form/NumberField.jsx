@@ -21,8 +21,9 @@ const NumberField = ({
   ...pass
 }) => {
   const [text, setText] = useState(format(value));
-  const input = useRef(null);
   const dirty = useRef(false);
+  // The input is gone when the unmount flush runs, so its validity is kept
+  const badInput = useRef(false);
 
   useEffect(() => {
     setText((text) =>
@@ -39,11 +40,7 @@ const NumberField = ({
       if (number !== value) {
         onChange(number);
       }
-    } else if (
-      text.trim() === "" &&
-      onClear &&
-      !input.current?.validity.badInput
-    ) {
+    } else if (text.trim() === "" && onClear && !badInput.current) {
       onInvalid?.(false);
       if (value !== undefined && onClear() === false) {
         setText(format(value));
@@ -66,13 +63,17 @@ const NumberField = ({
 
   return (
     <Input
-      ref={input}
       type="number"
       step="any"
       value={text}
       onChange={(event) => {
         dirty.current = true;
         setText(event.target.value);
+      }}
+      // React skips onChange when a bad input leaves the value empty
+      onInput={(event) => {
+        dirty.current = true;
+        badInput.current = event.target.validity.badInput;
       }}
       onBlur={commit}
       onKeyDown={(event) => event.key === "Enter" && commit()}

@@ -1037,7 +1037,7 @@
       },
       "edit": {
         "use": "Das geladene Spiel im ersten Abschnitt bearbeiten",
-        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel (Formular der Spielinfo) geöffnet oder geschlossen"
+        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel (Formular der Spielinfo) geöffnet oder geschlossen. Sonst zurück zur Spielseite"
       },
       "section": {
         "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",

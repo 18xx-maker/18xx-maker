@@ -39,7 +39,9 @@ export const createGameSaved = (game, previous, savedAt = Date.now()) => ({
 // For editors: the edited game is the result of the function on the game
 export const editGame = (fn) => (dispatch, getState) => {
   const { game } = getState();
-  if (game) dispatch(createEditGame(fn(game)));
+  if (!game) return;
+  const next = fn(game);
+  if (next !== game) dispatch(createEditGame(next));
 };
 
 export const revertGame = () => (dispatch, getState) => {

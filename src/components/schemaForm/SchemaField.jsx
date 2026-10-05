@@ -165,6 +165,7 @@ const useField = (keys, schema) => {
     invalid: errors.length > 0,
     aria: (extra) => ({
       id,
+      "aria-required": required || undefined,
       "aria-invalid": errors.length > 0 || undefined,
       "aria-describedby": describedBy(id, schema.description, errors),
       ...extra,

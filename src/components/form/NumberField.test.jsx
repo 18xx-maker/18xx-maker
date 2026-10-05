@@ -77,6 +77,16 @@ describe("NumberField", () => {
     expect(onInvalid).toHaveBeenLastCalledWith(false);
   });
 
+  it("keeps the value when removed with a bad input", async () => {
+    const onClear = vi.fn();
+    const { user, unmount } = setup({ flush: true, onClear });
+    const input = screen.getByRole("spinbutton");
+    await user.clear(input);
+    await realUser.keyboard("-");
+    unmount();
+    expect(onClear).not.toHaveBeenCalled();
+  });
+
   it("passes on what is typed when removed, only with flush", async () => {
     for (const flush of [false, true]) {
       const { user, onChange, unmount } = setup({ flush });
