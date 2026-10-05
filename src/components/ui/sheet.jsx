@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import { X } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/util/cn";
 
 const Sheet = SheetPrimitive.Root;
 

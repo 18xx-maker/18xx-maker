@@ -1,7 +1,7 @@
 import { Navigate } from "react-router";
 
-import Paginate from "@/components/Paginate";
 import Market from "@/components/market/Market";
+import Paginate from "@/components/page/Paginate";
 
 import { getMarketData } from "@/util/market";
 

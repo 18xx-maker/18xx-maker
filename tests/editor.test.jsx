@@ -1,6 +1,6 @@
 import { screen, within } from "@testing-library/react";
 
-import { renderApp } from "@tests/helpers.jsx";
+import { renderApp } from "@tests/support/helpers.jsx";
 
 // The map svg has no role to query by
 const printElement = (page) =>

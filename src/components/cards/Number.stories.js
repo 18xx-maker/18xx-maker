@@ -1,6 +1,6 @@
 import Number from "@/components/cards/Number";
-import { card } from "@/components/storyFrames";
 
+import { card } from "@/stories/frames";
 import { colorSelect } from "../../../.storybook/controls";
 
 export default {

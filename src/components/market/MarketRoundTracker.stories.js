@@ -1,5 +1,6 @@
 import MarketRoundTracker from "@/components/market/MarketRoundTracker";
-import { MarketRoundTrackerStory } from "@/components/market/storyFrames";
+
+import { MarketRoundTrackerStory } from "@/stories/marketFrames";
 
 export default {
   title: "Market/MarketRoundTracker",

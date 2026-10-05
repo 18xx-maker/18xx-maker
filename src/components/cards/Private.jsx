@@ -5,9 +5,9 @@ import { addIndex, chain, defaultTo, is, map, max, min, reduce } from "ramda";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import Hex from "@/components/Hex";
-import Svg from "@/components/Svg";
 import Tile from "@/components/Tile";
 import Icon from "@/components/atoms/Icon";
+import Svg from "@/components/svg/Svg";
 import GameCompanyToken from "@/components/tokens/GameCompanyToken";
 import Token from "@/components/tokens/Token";
 

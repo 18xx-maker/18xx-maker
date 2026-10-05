@@ -4,7 +4,10 @@ import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
 
 import { useConfig, useGame } from "@/hooks";
-import { compileCompanies, overrideCompanies } from "@/util/companies";
+import {
+  compileCompanies,
+  overrideCompanies,
+} from "@/util/companies/companies";
 
 // This component is in charge of loading the proper company data from the
 // current game from an abbrev and then rendering a token

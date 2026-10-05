@@ -6,7 +6,7 @@ import Charter from "@/components/Charter";
 
 import { games } from "@/data";
 
-import { all, mountElement, one } from "@tests/coverage.render.jsx";
+import { all, mountElement, one } from "@tests/support/render.jsx";
 
 // Needs the print stylesheet, which would change the layout assertions of the
 // other charter tests, so it lives in its own file.

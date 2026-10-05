@@ -37,7 +37,7 @@ describe.each([
 });
 
 describe("translated docs", () => {
-  const docs = import.meta.glob(["../docs/**/*.md", "../pages/*.md"], {
+  const docs = import.meta.glob(["../docs/**/*.md", "../home/*.md"], {
     eager: true,
     import: "default",
     query: "?raw",

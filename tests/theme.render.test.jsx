@@ -1,6 +1,6 @@
 import { screen, waitFor } from "@testing-library/react";
 
-import { renderApp } from "@tests/helpers.jsx";
+import { renderApp } from "@tests/support/helpers.jsx";
 
 // The render input is read when the modules load, so it is set before them
 vi.mock("@/util/renderInput", () => ({

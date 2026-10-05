@@ -1,6 +1,6 @@
 import Cell from "@/components/market/Cell";
-import { CellStory } from "@/components/market/storyFrames";
 
+import { CellStory } from "@/stories/marketFrames";
 import { colorSelect } from "../../../.storybook/controls";
 
 const color = colorSelect();

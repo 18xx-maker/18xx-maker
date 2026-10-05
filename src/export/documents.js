@@ -1,7 +1,10 @@
 import { flatten, map, range } from "ramda";
 
-import { applyCompanyOverrides } from "../util/companyOverrides.js";
-import { cardCompanyTrains, charterHalfWidth } from "../util/companyTrains.js";
+import { applyCompanyOverrides } from "../util/companies/companyOverrides.js";
+import {
+  cardCompanyTrains,
+  charterHalfWidth,
+} from "../util/companies/companyTrains.js";
 import {
   addPaginationData,
   compileCompanies,

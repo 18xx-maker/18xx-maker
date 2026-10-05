@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-node-access */
 import { screen } from "@testing-library/react";
 
-import { renderApp } from "@tests/helpers.jsx";
+import { renderApp } from "@tests/support/helpers.jsx";
 
 const at = (angle, translate) =>
   `rotate(${angle} 0 0) translate(0 ${translate}) rotate(${-angle} 0 0) translate(0 0)`;

@@ -1,5 +1,6 @@
 import Phase from "@/components/Phase";
-import { phase } from "@/components/storyFrames";
+
+import { phase } from "@/stories/frames";
 
 // The phases and trains of 1889
 const phases = [

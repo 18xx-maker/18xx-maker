@@ -1,8 +1,8 @@
 import { createElement } from "react";
 
 import Train from "@/components/cards/Train";
-import { card } from "@/components/storyFrames";
 
+import { card } from "@/stories/frames";
 import { colorSelect } from "../../../.storybook/controls";
 
 const color = colorSelect();

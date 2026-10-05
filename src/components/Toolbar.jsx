@@ -25,14 +25,14 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Toggle } from "@/components/ui/toggle";
 
-import ExportButton from "@/components/ExportButton";
-import PrintButton from "@/components/PrintButton";
-import { gameNav } from "@/components/gameNav";
+import ExportButton from "@/components/export/ExportButton";
+import PrintButton from "@/components/page/PrintButton";
 
 import { useGame } from "@/hooks";
 import { refreshGame } from "@/state";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
+import { gameNav } from "@/util/gameNav";
 import { useBooleanParam, useIntParam } from "@/util/query";
 
 const Toolbar = () => {

@@ -23,7 +23,7 @@ import {
 import * as gutil from "../util/index.js";
 import { getMapData } from "../util/map.js";
 import { getMarketData } from "../util/market.js";
-import { gatherTileColors } from "../util/tiles.js";
+import { gatherTileColors } from "../util/tiles/tiles.js";
 import { b18Names } from "./names.js";
 
 const capitalize = compose(join(""), juxt([compose(toUpper, head), tail]));

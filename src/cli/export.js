@@ -15,7 +15,7 @@ import { docPath } from "#export/names";
 import { runExport } from "#export/run";
 import { createFileSink } from "#export/sink";
 import { resolveConfig } from "#util/resolveConfig";
-import { compileTiles } from "#util/tiles";
+import { compileTiles } from "#util/tiles/tiles";
 
 export { createFileSink };
 

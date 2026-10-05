@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 
-import { renderApp } from "@tests/helpers.jsx";
+import { renderApp } from "@tests/support/helpers.jsx";
 
 describe("markdown images", () => {
   it("are captioned figures with rounded borders on doc pages", async () => {

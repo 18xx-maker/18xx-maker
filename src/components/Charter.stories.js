@@ -1,6 +1,6 @@
 import Charter from "@/components/Charter";
-import { charter } from "@/components/storyFrames";
 
+import { charter } from "@/stories/frames";
 import { colorSelect } from "../../.storybook/controls";
 
 // The phases, trains and turns of 1889

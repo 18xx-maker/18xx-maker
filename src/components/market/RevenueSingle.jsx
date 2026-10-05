@@ -1,6 +1,6 @@
-import Editor, { useEditing } from "@/components/Editor";
-import Svg from "@/components/Svg";
+import Editor, { useEditing } from "@/components/editor/Editor";
 import Revenue from "@/components/market/Revenue";
+import Svg from "@/components/svg/Svg";
 
 import { useConfig, useGame } from "@/hooks";
 import { unitsToCss } from "@/util";

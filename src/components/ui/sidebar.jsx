@@ -18,10 +18,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useMobile";
 import { selectSidebarOpen } from "@/state/selectors";
 import { createSetSidebarOpen } from "@/state/settings";
+import { cn } from "@/util/cn";
 
 const SIDEBAR_WIDTH = "16rem";
 const SIDEBAR_WIDTH_MOBILE = "18rem";

@@ -1,6 +1,6 @@
 import { screen, waitFor } from "@testing-library/react";
 
-import { renderApp } from "@tests/helpers.jsx";
+import { renderApp } from "@tests/support/helpers.jsx";
 
 const html = document.documentElement;
 

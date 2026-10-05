@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { map, range } from "ramda";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/util/cn";
 
 const Slider = React.forwardRef(({ className, ...props }, ref) => (
   <SliderPrimitive.Root

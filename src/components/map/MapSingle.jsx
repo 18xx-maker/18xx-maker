@@ -1,6 +1,6 @@
 import { Navigate } from "react-router";
 
-import Editor from "@/components/Editor";
+import Editor from "@/components/editor/Editor";
 import Map from "@/components/map/Map";
 
 import { getMapData } from "@/util/map";
