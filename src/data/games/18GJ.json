@@ -782,8 +782,7 @@
           {
             "name": {
               "name": "Craig",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -915,7 +914,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["C12", "D5", "E10", "F7", "G10"]
+        "hexes": ["C12", "E10", "F7", "G10"]
       },
       {
         "cities": [
@@ -924,9 +923,9 @@
             "size": 2,
             "name": {
               "name": "Fort Collins",
-              "straight": true,
               "y": -20,
-              "fontSize": 9
+              "fontSize": 9,
+              "straight": true
             }
           }
         ],
@@ -976,8 +975,7 @@
           {
             "name": {
               "name": "Greeley",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1053,10 +1051,10 @@
             "percent": 0.72,
             "name": {
               "name": "Grand Junction",
-              "straight": true,
               "x": -38,
               "y": -2,
-              "fontSize": 9
+              "fontSize": 9,
+              "straight": true
             }
           }
         ],
@@ -1135,8 +1133,7 @@
           {
             "name": {
               "name": "Vail",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1189,8 +1186,7 @@
           {
             "name": {
               "name": "Boulder",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1214,7 +1210,6 @@
             "name": {
               "name": "Denver",
               "reverse": true,
-              "straight": true,
               "y": 16
             }
           }
@@ -1295,8 +1290,7 @@
           {
             "name": {
               "name": "Gunnison",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1349,8 +1343,7 @@
           {
             "name": {
               "name": "Leadville",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1380,10 +1373,10 @@
             "size": 2,
             "name": {
               "name": "Colorado Springs",
-              "straight": true,
               "y": -8,
               "fontSize": 9,
-              "x": -30
+              "x": -30,
+              "straight": true
             }
           }
         ],
@@ -1430,8 +1423,7 @@
           {
             "name": {
               "name": "Silverton",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1459,8 +1451,7 @@
           {
             "name": {
               "name": "Alamosa",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1497,7 +1488,6 @@
             "name": {
               "name": "Pueblo",
               "reverse": true,
-              "straight": true,
               "y": 16,
               "x": 40
             }
@@ -1532,11 +1522,11 @@
           }
         ],
         "offBoardRevenue": {
-          "angle": -115,
+          "angle": -65,
           "name": {
             "name": "Dallas"
           },
-          "percent": 0.5,
+          "percent": 0.4,
           "revenues": [
             {
               "color": "yellow",
@@ -1550,8 +1540,8 @@
         },
         "routeBonuses": [
           {
-            "angle": -65,
-            "percent": 0.5,
+            "angle": 0,
+            "percent": 0.75,
             "value": "+$30"
           }
         ],
@@ -1650,8 +1640,7 @@
           {
             "name": {
               "name": "Trinidad",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1770,13 +1759,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["E2"],
-        "track": [
-          {
-            "side": 3,
-            "type": "stub"
-          }
-        ]
+        "hexes": ["E2"]
       },
       {
         "shapes": [
@@ -1809,8 +1792,7 @@
           {
             "name": {
               "name": "Durango",
-              "reverse": true,
-              "straight": true
+              "reverse": true
             }
           }
         ],
@@ -1835,6 +1817,32 @@
         "track": [
           {
             "side": 1,
+            "type": "stub"
+          }
+        ]
+      },
+      {
+        "shapes": [
+          {
+            "color": "black",
+            "type": "circle",
+            "width": 22
+          }
+        ],
+        "terrain": [
+          {
+            "cost": 40,
+            "size": "small",
+            "type": "mountain",
+            "angle": 180,
+            "percent": 0.6
+          }
+        ],
+        "color": "plain",
+        "hexes": ["D5"],
+        "track": [
+          {
+            "side": 4,
             "type": "stub"
           }
         ]
