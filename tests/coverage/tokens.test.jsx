@@ -7,6 +7,7 @@ import Token from "@/components/tokens/Token";
 
 import CityRotateContext from "@/context/CityRotateContext";
 import { mapThemes } from "@/data";
+import games from "@/data/games";
 
 import { all, drawSvg, one } from "@tests/support/render.jsx";
 
@@ -199,6 +200,14 @@ describe("Company tokens", () => {
 
   it("draws raw tokens for unknown companies", async () => {
     const svg = await drawSvg(<GameCompanyToken abbrev="NOPE" label="X" />);
+    expect(one(svg, "text")).toHaveTextContent("X");
+  });
+
+  it("draws raw tokens when the game has no companies", async () => {
+    const game = { ...games["18Test"], companies: undefined };
+    const svg = await drawSvg(<GameCompanyToken abbrev="NOPE" label="X" />, {
+      game,
+    });
     expect(one(svg, "text")).toHaveTextContent("X");
   });
 

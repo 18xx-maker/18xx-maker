@@ -90,5 +90,3 @@ export const strokedPaths = (items, data, name, honorDashArray) =>
       items || [],
     ),
   );
-
-export default StrokedPath;
