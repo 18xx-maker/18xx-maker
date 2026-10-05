@@ -117,7 +117,7 @@ export const expected = {
     zip: "board18-18Test-1.0.zip",
     folder: "board18-18Test-1.0",
     images: {
-      "Map.png": [1000, 304],
+      "Map.png": [1000, 478],
       "Market.png": [1336, 995],
       "Tokens.png": [60, 1080],
       "Yellow.png": [750, 900],

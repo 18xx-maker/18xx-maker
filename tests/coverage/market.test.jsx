@@ -336,6 +336,85 @@ describe("2D market", () => {
     expect(svg).not.toHaveTextContent("OR3");
   });
 
+  describe("movement legend", () => {
+    const movement = {
+      up: ["Sold out"],
+      down: ["Every share sold"],
+      left: ["Withheld"],
+      right: ["Paid"],
+      "2x right": ["Pay at least two times the current share price, or more"],
+    };
+    const placed = {
+      ...stock,
+      movement,
+      display: { ...stock.display, movement: { x: 2, y: 1 } },
+    };
+    const box = (svg) =>
+      all(svg, "g[transform] > g > rect").find(
+        (r) => r.getAttribute("fill") === "white",
+      ).parentElement.parentElement;
+
+    it("draws arrows and other keys as text where the game says", async () => {
+      const svg = await drawSvg(<StockMarket />, { game: withStock(placed) });
+      expect(box(svg)).toHaveAttribute("transform", "translate(140 135)");
+      for (const text of [
+        "Share price movement",
+        "Sold out",
+        "Every share sold",
+        "Withheld",
+        "Paid",
+      ]) {
+        expect(svg).toHaveTextContent(text);
+      }
+      // Four arrow heads, and the other key wraps over two lines
+      expect(all(box(svg), "polygon")).toHaveLength(4);
+      expect(svg).toHaveTextContent("2x right: Pay at least two times the");
+      expect(svg).toHaveTextContent("current share price, or more");
+    });
+
+    it("leaves out the arrows that have no text", async () => {
+      const svg = await drawSvg(<StockMarket />, {
+        game: withStock({ ...placed, movement: { up: ["Sold out"] } }),
+      });
+      expect(all(box(svg), "polygon")).toHaveLength(1);
+    });
+
+    it("starts at the top when the market has no title", async () => {
+      const svg = await drawSvg(<StockMarket />, {
+        game: withStock({ ...placed, title: false }),
+      });
+      expect(box(svg)).toHaveAttribute("transform", "translate(140 85)");
+    });
+
+    it("draws nothing without a placement, a movement or when off", async () => {
+      const without = await drawSvg(<StockMarket />, {
+        game: withStock({ ...placed, display: {} }),
+      });
+      expect(without).not.toHaveTextContent("Share price movement");
+      const none = await drawSvg(<StockMarket />, {
+        game: withStock({ ...placed, movement: undefined }),
+      });
+      expect(none).not.toHaveTextContent("Share price movement");
+      const off = await drawSvg(<StockMarket />, {
+        game: withStock(placed),
+        search: "?config.stock.display.movement=",
+      });
+      expect(off).not.toHaveTextContent("Share price movement");
+    });
+
+    it("draws on a 1D market", async () => {
+      const svg = await drawSvg(<StockMarket />, {
+        game: withStock({
+          type: "1D",
+          market: [10, 20],
+          movement,
+          display: { movement: { x: 0, y: 5 } },
+        }),
+      });
+      expect(box(svg)).toHaveAttribute("transform", "translate(0 475)");
+    });
+  });
+
   it("draws ledges with borders and dashes", async () => {
     const svg = await drawSvg(<StockMarket />, { game: withStock(stock) });
     const ledges = all(svg, "path").filter((p) =>

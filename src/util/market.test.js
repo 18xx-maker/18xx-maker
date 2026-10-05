@@ -3,6 +3,7 @@ import defaults from "@/defaults.json";
 import {
   getMarketData,
   getMaxLength,
+  getMovementData,
   getParData,
   getRevenueData,
 } from "@/util/market";
@@ -53,6 +54,35 @@ describe("getMarketData", () => {
     expect(data.totalHeight).toBe(985);
     expect(data.humanWidth).toBe("14in");
     expect(data.humanHeight).toBe("10in");
+  });
+
+  it("should grow the page to fit a placed movement legend", () => {
+    const stock = {
+      type: "2D",
+      market: [[10]],
+      movement: { up: ["Sold out"] },
+      display: { movement: { x: 2, y: 3 } },
+    };
+    const movement = getMovementData(stock.movement);
+    const data = getMarketData(stock, config);
+    expect(data.totalWidth).toBe(movement.width + 140);
+    expect(data.totalHeight).toBe(movement.height + 255 + 50);
+    // Not drawn, not counted
+    const off = getMarketData(stock, {
+      ...config,
+      stock: { ...config.stock, display: { movement: false } },
+    });
+    expect(off.totalWidth).toBe(80);
+  });
+
+  it("should wrap and measure the movement legend", () => {
+    const data = getMovementData({
+      left: ["one two three four five six seven eight nine ten eleven twelve"],
+      "2x right": ["x"],
+    });
+    expect(data.arrows.left).toHaveLength(2);
+    expect(data.extras).toEqual(["2x right: x"]);
+    expect(data.arrows.left.every((l) => l.length <= 40)).toBe(true);
   });
 
   it("should size a 1D market in a single row of tall cells", () => {
