@@ -6,7 +6,7 @@
   "piracy": "Verwende diese App nicht, um Spiele zu drucken, für die du keine Lizenz besitzt. Bitte unterstütze unsere 18xx-Designer, -Entwickler und -Verlage.",
   "download": "Herunterladen",
   "save": "Speichern",
-  "show": "Anzeigen",
+  "filter": "Filter",
   "nav": {
     "menu": "Menü",
     "app": "App",
@@ -358,8 +358,7 @@
     "rules": "Regeln",
     "unload": "Spiel entladen",
     "print": {
-      "label": "Drucken",
-      "tooltip": "Drucken"
+      "label": "Drucken"
     }
   },
   "started": {

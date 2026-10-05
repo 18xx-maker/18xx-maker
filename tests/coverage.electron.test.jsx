@@ -427,7 +427,7 @@ describe("export button", () => {
 
     expect(screen.getByRole("button", { name: "Export" })).toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: "print" }),
+      screen.queryByRole("button", { name: "Print" }),
     ).not.toBeInTheDocument();
   });
 

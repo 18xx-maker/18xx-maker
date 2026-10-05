@@ -46,7 +46,7 @@ describe("print button", () => {
     const { user } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
 
-    await user.click(screen.getByRole("button", { name: "print" }));
+    await user.click(screen.getByRole("button", { name: "Print" }));
 
     expect(print).toHaveBeenCalledTimes(1);
   });
@@ -56,7 +56,7 @@ describe("print button", () => {
     await screen.findByTestId("game-18Test-map");
 
     expect(
-      screen.queryByRole("button", { name: "print" }),
+      screen.queryByRole("button", { name: "Print" }),
     ).not.toBeInTheDocument();
   });
 });

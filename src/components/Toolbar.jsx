@@ -67,31 +67,32 @@ const Toolbar = () => {
 
   return (
     <div className="z-40 print:hidden fixed top-4 left-4 rounded-sm border p-1 flex flex-row gap-0.5 bg-background justify-start items-center">
-      <Button asChild variant="outline" className="p-2-px w-8 h-8 m-0">
-        <Link to={`/games/${slug}`} aria-label={t("game.info")}>
+      <Button asChild variant="outline" className="px-2 h-8 m-0 shrink-0">
+        <Link to={`/games/${slug}`}>
           <ArrowBigLeft width="24" height="24" />
+          <span className="max-md:sr-only">{t("game.info")}</span>
         </Link>
       </Button>
       <Separator orientation="vertical" />
       <Toggle
         onPressedChange={toggleConfig}
         pressed={config}
-        aria-label={t("config.toggle")}
         variant="outline"
-        className="rounded-sm p-2 w-8 h-8 m-0"
+        className="rounded-sm px-2 h-8 m-0 shrink-0"
       >
         <Bolt className="w-6 h-6" />
+        <span className="max-md:sr-only">{t("config.toggle")}</span>
       </Toggle>
       {!capability.electron && game.meta.type === "system" && (
         <>
           <Separator orientation="vertical" />
           <Button
             variant="outline"
-            className="border rounded-sm p-2 w-8 h-8 m-0"
+            className="border rounded-sm px-2 h-8 m-0 shrink-0"
             onClick={onRefresh}
-            aria-label={t("refresh.refresh")}
           >
             <RefreshCw className="size-6" />
+            <span className="max-md:sr-only">{t("refresh.refresh")}</span>
           </Button>
         </>
       )}
@@ -101,7 +102,10 @@ const Toolbar = () => {
         onValueChange={(section) => navigate(`/games/${slug}/${section}`)}
         className="w-60"
       >
-        <SelectTrigger aria-label={t("game.sections")}>
+        <SelectTrigger
+          aria-label={t("game.sections")}
+          className="w-auto shrink-0"
+        >
           <SelectValue value={item.section} className="w-60" />
         </SelectTrigger>
         <SelectContent>
@@ -131,7 +135,10 @@ const Toolbar = () => {
           value={`${variation}`}
           onValueChange={(value) => setVariation(parseInt(value))}
         >
-          <SelectTrigger aria-label={t("game.map.variation")} className="ml-2">
+          <SelectTrigger
+            aria-label={t("game.map.variation")}
+            className="ml-2 w-auto shrink-0"
+          >
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -149,8 +156,8 @@ const Toolbar = () => {
       {item.section === "cards" && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-2 h-8">
-              {t("show")}
+            <Button variant="outline" className="ml-2 h-8 shrink-0">
+              {t("filter")}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -164,6 +171,7 @@ const Toolbar = () => {
                 key={name}
                 checked={!hidden}
                 onCheckedChange={toggle}
+                onSelect={(event) => event.preventDefault()}
               >
                 {t(`game.cards.${name}`)}
               </DropdownMenuCheckboxItem>
@@ -172,7 +180,7 @@ const Toolbar = () => {
         </DropdownMenu>
       )}
       {item.pagination && (
-        <div className="ml-2 flex flex-row gap-2 justify-start items-center">
+        <div className="ml-2 flex shrink-0 flex-row gap-2 justify-start items-center whitespace-nowrap">
           <Label htmlFor="paginate-switch">{t("game.paginated")}</Label>
           <Switch
             id="paginate-switch"

@@ -6,7 +6,7 @@
   "piracy": "请勿使用本应用打印您没有授权的游戏。请支持 18xx 的设计师、开发者和出版商。",
   "download": "下载",
   "save": "保存",
-  "show": "显示",
+  "filter": "筛选",
   "nav": {
     "menu": "菜单",
     "app": "应用",
@@ -358,8 +358,7 @@
     "rules": "规则",
     "unload": "卸载游戏",
     "print": {
-      "label": "打印",
-      "tooltip": "打印"
+      "label": "打印"
     }
   },
   "started": {
