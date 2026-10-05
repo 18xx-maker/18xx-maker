@@ -180,6 +180,14 @@ describe("map movement", () => {
     expect(svg).toHaveTextContent("2x right: Paid twice");
   });
 
+  it("scales the legend with the hex width", async () => {
+    const svg = await drawSvg(<MapView />, {
+      game: withMovement({ x: 10, y: 20 }),
+      search: "?config.tiles.mapWidth=300",
+    });
+    expect(placed(svg)).toBe("translate(70 90) scale(2)");
+  });
+
   it("draws nothing without a placement or without movement data", async () => {
     let svg = await drawSvg(<MapView />, { game: withMovement(undefined) });
     expect(svg).not.toHaveTextContent("Share price movement");

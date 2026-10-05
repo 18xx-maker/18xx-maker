@@ -79,7 +79,7 @@
           "$ref": "#/definitions/roundTracker"
         },
         "movement": {
-          "description": "Draw the legend of how the share price moves (stock.movement) on the map, x and y in map units from the top left corner. A market drawn on the map also draws it when stock.display.movement is set.",
+          "description": "Draw the legend of how the share price moves (stock.movement) on the map, x and y in map units from the top left corner. The map page does not grow for the legend, so leave room for it on the map. A market placed on the map draws its own legend when stock.display.movement is set, so set only one of the two.",
           "$ref": "#/definitions/movement"
         },
         "market": {
@@ -909,7 +909,7 @@
               "$ref": "#/definitions/roundTracker"
             },
             "movement": {
-              "description": "Draw the legend of how the share price moves (stock.movement) on the market, x and y in cells from the corner. On a 1D market a column is as many cells tall as the column setting. Also drawn on a market placed on the map.",
+              "description": "Draw the legend of how the share price moves (stock.movement) on the market, x and y in cells from the corner. On a 1D market a column is as many cells tall as the column setting. A market placed on a map draws its own legend, so do not also set map.movement.",
               "$ref": "#/definitions/movement"
             },
             "extraTotalHeight": {

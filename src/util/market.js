@@ -76,15 +76,13 @@ export const getMovementData = (movement) => {
     right: max(textWidth(arrows.right) + MOVEMENT_SIDE, 50),
   };
   const lineCount = (lines) => Math.max(lines.length, 1);
-  const topHeight = max(
+  // The up text starts 20 under the top and its last baseline stays above
+  // the price box
+  const topHeight = Math.max(
     40,
-    MOVEMENT_LINE *
-      Math.max(
-        lineCount(arrows.up),
-        lineCount(arrows.left),
-        lineCount(arrows.right),
-      ) +
+    MOVEMENT_LINE * Math.max(lineCount(arrows.left), lineCount(arrows.right)) +
       6,
+    MOVEMENT_LINE * lineCount(arrows.up) + 12,
   );
   const bottomHeight = max(40, MOVEMENT_LINE * lineCount(arrows.down) + 6);
   const center = {
