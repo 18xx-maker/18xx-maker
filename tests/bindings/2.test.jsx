@@ -72,6 +72,39 @@ describe("section keys", () => {
   });
 });
 
+describe("section keys without data", () => {
+  const noPar = () => ({
+    loadedGame: { title: "t", id: "t", type: "app", slug: "t" },
+    game: {
+      ...games["18Test"],
+      stock: { ...games["18Test"].stock, par: undefined },
+      meta: { id: "t", type: "app", slug: "t" },
+    },
+  });
+
+  it("do nothing on the edit page", async () => {
+    const { user, router } = renderApp("/games/t/map", noPar());
+    await screen.findByTestId("game-t-map");
+
+    await user.keyboard("7");
+    expect(router.state.location.pathname).toBe("/games/t/map");
+
+    await user.keyboard("8");
+    expect(router.state.location.pathname).toBe("/games/t/revenue");
+  });
+
+  it("do nothing outside the edit page", async () => {
+    const { user, router } = renderApp("/", noPar());
+    await screen.findByTestId("home");
+
+    await user.keyboard("7");
+    expect(router.state.location.pathname).toBe("/");
+
+    await user.keyboard("8");
+    expect(router.state.location.pathname).toBe("/games/t/revenue");
+  });
+});
+
 describe("e key", () => {
   it("goes to the first available section of the game", async () => {
     const { user, router } = renderApp("/games/18Test");
