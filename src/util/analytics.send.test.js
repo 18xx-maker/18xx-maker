@@ -1,7 +1,6 @@
-// @vitest-environment jsdom
-// @vitest-environment-options { "url": "https://www.18xx-maker.com/" }
-
 import { init, track } from "@plausible-analytics/tracker";
+
+import { resetWindow } from "@tests/support/windowStub.js";
 
 vi.mock("@plausible-analytics/tracker", () => ({
   init: vi.fn(),
@@ -15,6 +14,7 @@ const importAnalytics = async () => {
 };
 
 beforeEach(() => {
+  resetWindow({ location: { hostname: "www.18xx-maker.com" } });
   vi.clearAllMocks();
 });
 

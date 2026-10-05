@@ -1,5 +1,3 @@
-// @vitest-environment jsdom
-
 import { isControlTarget } from "@/util/keys";
 
 const target = (html, selector) => {

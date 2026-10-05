@@ -1,4 +1,4 @@
-// @vitest-environment jsdom
+import "@tests/support/windowStub.js";
 
 import * as analytics from "@/util/analytics";
 

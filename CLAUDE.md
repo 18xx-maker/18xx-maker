@@ -44,11 +44,13 @@ macOS and Windows run only the unit project on PRs.
 
 Layout (projects are defined in `test.projects` in `vitest.config.js`):
 
-- `unit` (node): `src/**/*.test.js`: logic in `src/util` and `src/state`.
+- `unit` (node): `src/**/*.test.js`: logic in `src/util` and `src/state`. No
+  jsdom: a test that reads `window` or `localStorage` imports
+  `tests/support/windowStub.js` first (`resetWindow` resets it); one that
+  needs a real DOM is a component test.
 - `component` (real Chromium via `@vitest/browser` + Playwright):
   `tests/**/*.test.jsx` and `src/**/*.test.jsx`. Component tests do not use jsdom: it
-  disagrees with Node on `Request`/`AbortSignal`, which react-router needs
-  (a few node-project unit tests opt into jsdom).
+  disagrees with Node on `Request`/`AbortSignal`, which react-router needs.
   Setup is `tests/support/setup.js`; render with `renderApp` from `tests/support/helpers.jsx`
   (real store + memory router built from `rootRoutes`).
 - `e2e/*.spec.js`: Playwright on `vite preview` of `dist/site` (port 4318).

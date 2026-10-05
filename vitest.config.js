@@ -68,8 +68,8 @@ export default defineConfig({
         },
       },
       {
-        // Integration tests run in a real browser (jsdom/Node disagree on
-        // Request/AbortSignal, which react-router needs)
+        // Integration tests run in a real browser (a DOM emulation and Node
+        // disagree on Request/AbortSignal, which react-router needs)
         ...shared,
         // Imported on demand by the app, pre-bundle them so that Vite does
         // not find them mid test and reload the page

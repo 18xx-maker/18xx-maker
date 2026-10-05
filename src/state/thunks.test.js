@@ -1,4 +1,4 @@
-// @vitest-environment jsdom
+import "@tests/support/windowStub.js";
 
 import { games } from "@/data";
 import {
