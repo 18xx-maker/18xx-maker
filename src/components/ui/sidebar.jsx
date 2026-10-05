@@ -368,7 +368,7 @@ const SidebarContent = React.forwardRef(({ className, ...props }, ref) => {
       ref={ref}
       data-sidebar="content"
       className={cn(
-        "flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
+        "flex min-h-0 flex-1 flex-col gap-2 overflow-auto [scrollbar-width:thin] [scrollbar-color:transparent_transparent] hover:[scrollbar-color:hsl(var(--sidebar-border))_transparent] group-data-[collapsible=icon]:overflow-hidden",
         className,
       )}
       {...props}
