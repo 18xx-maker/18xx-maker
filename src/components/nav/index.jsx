@@ -1,6 +1,5 @@
 import {
   Atom,
-  Building2,
   CircleHelp,
   Coins,
   Crosshair,
@@ -14,7 +13,6 @@ import {
   Image,
   Info,
   Layers,
-  Move,
   Package,
   Palette,
   Scissors,
@@ -164,7 +162,7 @@ export const mainMenu = [
         to: "/docs/games/trains",
       },
       {
-        icon: Building2,
+        icon: Shield,
         label: "docs.games.logos.title",
         to: "/docs/games/logos",
       },
@@ -174,7 +172,7 @@ export const mainMenu = [
         to: "/docs/games/overrides",
       },
       {
-        icon: Move,
+        icon: Crosshair,
         label: "docs.games.positioning.title",
         to: "/docs/games/positioning",
       },
