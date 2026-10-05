@@ -706,6 +706,10 @@
         "label": "Show Turn Order",
         "description": "Whether or not to show the phase chart on charters."
       },
+      "showMinorTurnOrder": {
+        "label": "Show Minor Turn Order",
+        "description": "Whether or not to show the turn order on minor charters. Only applies when Show Turn Order is on."
+      },
       "trainCards": {
         "label": "Train Cards",
         "description": "Where the trains a company owns print: on the charter (charter) or on the train cards (cards). Charters without room for them (half width) always use the train cards."

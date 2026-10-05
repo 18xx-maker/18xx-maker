@@ -39,6 +39,7 @@ const Charter = ({
   const charterStyle = config.charters.style;
   const showPhaseChart = config.charters.showPhaseChart;
   const showTurnOrder = config.charters.showTurnOrder;
+  const showMinorTurnOrder = config.charters.showMinorTurnOrder;
   const blackBand = config.charters.blackBand;
   fontFamily = multiDefaultTo("display", fontFamily);
   fontSize = multiDefaultTo(20, fontSize);
@@ -286,7 +287,9 @@ const Charter = ({
                 {halfWidth && (
                   <div className="charter__assets">
                     Assets
-                    {showTurnOrder && <dl>{minor || turnNodes}</dl>}
+                    {showTurnOrder && (
+                      <dl>{(!minor || showMinorTurnOrder) && turnNodes}</dl>
+                    )}
                   </div>
                 )}
                 {halfWidth || (
@@ -373,7 +376,9 @@ const Charter = ({
                         <Currency value={company.capital} type="treasury" />
                       </div>
                     )}
-                    {showTurnOrder && <dl>{minor || turnNodes}</dl>}
+                    {showTurnOrder && (
+                      <dl>{(!minor || showMinorTurnOrder) && turnNodes}</dl>
+                    )}
                   </div>
                 )}
                 {variant && <div className="charter__variant">{variant}</div>}

@@ -706,6 +706,10 @@
         "label": "显示行动顺序",
         "description": "是否在公司执照上显示阶段表。"
       },
+      "showMinorTurnOrder": {
+        "label": "在小公司执照上显示行动顺序",
+        "description": "是否在小公司执照上显示行动顺序。仅在开启“显示行动顺序”时有效。"
+      },
       "trainCards": {
         "label": "火车卡",
         "description": "公司拥有的火车打印在哪里：公司执照上（charter）或火车卡上（cards）。没有空间的执照（半宽）始终使用火车卡。"
