@@ -955,7 +955,19 @@
             }
           ]
         },
+        "removeBorders": [1],
         "hexes": ["A11"]
+      },
+      {
+        "color": "offboard",
+        "track": [
+          {
+            "type": "offboard",
+            "side": 2
+          }
+        ],
+        "removeBorders": [4],
+        "hexes": ["A9"]
       },
       {
         "color": "yellow",

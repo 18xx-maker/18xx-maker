@@ -1,4 +1,4 @@
-import { Fragment, memo } from "react";
+import { Fragment, memo, useId } from "react";
 
 import * as R from "ramda";
 
@@ -36,6 +36,7 @@ import HexContext from "@/context/HexContext";
 import { useOrientation } from "@/context/OrientationContext";
 import PhaseContext from "@/context/PhaseContext";
 import { useConfig } from "@/hooks";
+import hexClip from "@/util/hexClip";
 
 const concat = R.unapply(R.reduce(R.concat, []));
 
@@ -101,6 +102,7 @@ const makeBorder = (track) => (
 const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   const rotation = useOrientation();
   const { config } = useConfig();
+  const seamId = useId();
   const tileCompanies = config.tileCompanies;
 
   if (hex === undefined || hex === null) {
@@ -342,12 +344,22 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
     ),
   );
 
+  // A removed border leaves a gap between the clipped fills of two hexes, so
+  // clip that side to the true edge plus overlap instead
+  const seamClip = !clipPath && hex.removeBorders?.length > 0;
+  const clipId = seamClip ? `hexSeamClip${seamId.replace(/:/g, "")}` : clipPath;
+
   return (
     <g>
+      {seamClip && (
+        <clipPath id={clipId}>
+          <polygon points={hexClip(hex.removeBorders)} />
+        </clipPath>
+      )}
       <PhaseContext.Provider value={hex.color || "plain"}>
         <HexContext.Provider value={hex}>
           <g
-            clipPath={`url(#${clipPath || "hexClipPath"})`}
+            clipPath={`url(#${clipId || "hexClipPath"})`}
             transform={`rotate(${rotation || 0})`}
           >
             <Hex
