@@ -118,6 +118,13 @@
     }
   },
   "docs": {
+    "alert": {
+      "note": "Note",
+      "tip": "Tip",
+      "important": "Important",
+      "warning": "Warning",
+      "caution": "Caution"
+    },
     "toc": "On this page",
     "pager": "Pages",
     "previous": "Previous",
