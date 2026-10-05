@@ -5,7 +5,7 @@
     "designer": "Anthony Fryer",
     "publisher": "traxx",
     "titleX": 10,
-    "titleY": 735,
+    "titleY": 940,
     "titleSize": 40,
     "subtitleSize": 12,
     "extraTotalHeight": 150,
@@ -778,18 +778,18 @@
         ],
         "color": "plain",
         "hexes": [
-          "A3",
-          "A7",
-          "A9",
-          "A11",
-          "A13",
-          "B2",
-          "B4",
-          "B6",
-          "D2",
-          "E3",
-          "E9",
-          "F6"
+          "B3",
+          "B7",
+          "B9",
+          "B11",
+          "B13",
+          "C2",
+          "C4",
+          "C6",
+          "E2",
+          "F3",
+          "F9",
+          "G6"
         ]
       },
       {
@@ -811,11 +811,11 @@
           }
         ],
         "color": "plain",
-        "hexes": ["A5"]
+        "hexes": ["B5"]
       },
       {
         "color": "plain",
-        "hexes": ["A15", "D16", "F12"]
+        "hexes": ["B15", "E16", "G12"]
       },
       {
         "color": "offboard",
@@ -860,7 +860,7 @@
             "type": "offboard"
           }
         ],
-        "hexes": ["A17"]
+        "hexes": ["B17"]
       },
       {
         "cities": [{}],
@@ -881,7 +881,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["B8"]
+        "hexes": ["C8"]
       },
       {
         "names": [
@@ -910,7 +910,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["B10"]
+        "hexes": ["C10"]
       },
       {
         "shapes": [
@@ -930,7 +930,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["B12", "C5", "D4", "D10", "E7", "F10"]
+        "hexes": ["C12", "D5", "E4", "E10", "F7", "G10"]
       },
       {
         "cities": [
@@ -990,7 +990,7 @@
             "side": 6
           }
         ],
-        "hexes": ["B14"]
+        "hexes": ["C14"]
       },
       {
         "cities": [{}],
@@ -1002,7 +1002,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["B16"]
+        "hexes": ["C16"]
       },
       {
         "color": "offboard",
@@ -1051,7 +1051,7 @@
             "type": "offboard"
           }
         ],
-        "hexes": ["C1"]
+        "hexes": ["D1"]
       },
       {
         "cities": [
@@ -1131,7 +1131,7 @@
             "value": 10
           }
         ],
-        "hexes": ["C3"]
+        "hexes": ["D3"]
       },
       {
         "cities": [{}],
@@ -1152,7 +1152,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["C7"]
+        "hexes": ["D7"]
       },
       {
         "cities": [{}],
@@ -1173,7 +1173,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["C9"]
+        "hexes": ["D9"]
       },
       {
         "shapes": [
@@ -1205,7 +1205,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["C11"]
+        "hexes": ["D11"]
       },
       {
         "cities": [{}],
@@ -1226,7 +1226,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["C13"]
+        "hexes": ["D13"]
       },
       {
         "cities": [
@@ -1268,7 +1268,7 @@
             "value": 40
           }
         ],
-        "hexes": ["C15"]
+        "hexes": ["D15"]
       },
       {
         "color": "offboard",
@@ -1313,7 +1313,7 @@
             "type": "offboard"
           }
         ],
-        "hexes": ["C17"]
+        "hexes": ["D17"]
       },
       {
         "cities": [{}],
@@ -1334,7 +1334,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["D6"]
+        "hexes": ["E6"]
       },
       {
         "shapes": [
@@ -1366,7 +1366,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["D8"]
+        "hexes": ["E8"]
       },
       {
         "cities": [{}],
@@ -1394,7 +1394,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["D12"]
+        "hexes": ["E12"]
       },
       {
         "cities": [
@@ -1451,7 +1451,7 @@
             "side": 6
           }
         ],
-        "hexes": ["D14"]
+        "hexes": ["E14"]
       },
       {
         "cities": [{}],
@@ -1479,7 +1479,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["E5"]
+        "hexes": ["F5"]
       },
       {
         "cities": [{}],
@@ -1491,7 +1491,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["E11"]
+        "hexes": ["F11"]
       },
       {
         "cities": [{}],
@@ -1512,7 +1512,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["E13"]
+        "hexes": ["F13"]
       },
       {
         "cities": [
@@ -1547,7 +1547,7 @@
             "value": 20
           }
         ],
-        "hexes": ["E15"]
+        "hexes": ["F15"]
       },
       {
         "color": "offboard",
@@ -1592,7 +1592,7 @@
             "type": "offboard"
           }
         ],
-        "hexes": ["E17"]
+        "hexes": ["F17"]
       },
       {
         "color": "offboard",
@@ -1637,7 +1637,7 @@
             "type": "offboard"
           }
         ],
-        "hexes": ["F2"]
+        "hexes": ["G2"]
       },
       {
         "cities": [{}],
@@ -1665,7 +1665,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["F4"]
+        "hexes": ["G4"]
       },
       {
         "names": [
@@ -1694,7 +1694,7 @@
           }
         ],
         "color": "plain",
-        "hexes": ["F8"]
+        "hexes": ["G8"]
       },
       {
         "cities": [{}],
@@ -1721,7 +1721,61 @@
             "value": 20
           }
         ],
-        "hexes": ["F14"]
+        "hexes": ["G14"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "side": 5,
+            "type": "sharp"
+          }
+        ],
+        "hexes": ["A4", "A6", "A8", "A10", "A12", "A14"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "side": 2,
+            "type": "sharp"
+          }
+        ],
+        "hexes": ["H5", "H7", "H9", "H11"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "side": 4,
+            "type": "sharp"
+          }
+        ],
+        "hexes": ["B1"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "side": 3,
+            "type": "gentle"
+          },
+          {
+            "side": 4,
+            "type": "sharp"
+          }
+        ],
+        "hexes": ["F1"]
+      },
+      {
+        "color": "gray",
+        "track": [
+          {
+            "side": 3,
+            "type": "offboard"
+          }
+        ],
+        "hexes": ["H3"]
       }
     ]
   }
