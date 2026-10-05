@@ -17,13 +17,13 @@ const GameRow = ({ game }) => {
         imageNode = (
           <div className="flex flex-row place-content-center p-1 border rounded-lg w-16 h-16 shrink-0 overflow-hidden bg-white">
             <a
-              className="block h-full"
+              className="block h-full w-full"
               rel="noreferrer"
               target="_blank"
               href={publisher.link}
             >
               <img
-                className="block h-full"
+                className="block h-full w-full object-contain"
                 alt={`${publisher.name} Logo`}
                 src={publisher.imageUrl}
               />
@@ -34,7 +34,7 @@ const GameRow = ({ game }) => {
         imageNode = (
           <div className="border rounded-lg w-16 h-16 shrink-0 overflow-hidden bg-white">
             <img
-              className="block h-full"
+              className="block h-full w-full object-contain"
               alt={`${publisher.name} Logo`}
               src={publisher.imageUrl}
             />
