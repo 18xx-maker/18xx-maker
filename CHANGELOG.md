@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-beta.129](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.128...v1.0.0-beta.129) (2026-10-05)
+
+
+### :tada: Features
+
+* add the 1888 and 1883 Express d'Orient maps and data ([#864](https://github.com/18xx-maker/18xx-maker/issues/864)) ([fba4aa3](https://github.com/18xx-maker/18xx-maker/commit/fba4aa329a6236426b9bd733648d99884bc74fc9)), closes [#861](https://github.com/18xx-maker/18xx-maker/issues/861)
+* **data:** add 18 Grand Junction ([#855](https://github.com/18xx-maker/18xx-maker/issues/855)) ([9bf9846](https://github.com/18xx-maker/18xx-maker/commit/9bf9846a12f7716918dc96ebe7e51f43f7b9500b))
+
 ## [1.0.0-beta.128](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.127...v1.0.0-beta.128) (2026-10-05)
 
 
