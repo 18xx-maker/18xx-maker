@@ -28,7 +28,11 @@ const MarketSingle = ({ config, game }) => {
         data-testid={`game-${game.meta.slug}-market`}
         style={stockFrame}
       >
-        <Editor width={data.totalWidth} height={data.totalHeight}>
+        <Editor
+          width={data.totalWidth}
+          height={data.totalHeight}
+          padding={0.08}
+        >
           <Market
             data={data}
             game={game}

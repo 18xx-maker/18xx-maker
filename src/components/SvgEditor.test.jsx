@@ -21,7 +21,7 @@ const fire = (el, type, init) =>
     );
   });
 
-const setup = () => {
+const setup = (padding) => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: initialState,
@@ -29,7 +29,7 @@ const setup = () => {
   const { container } = render(
     <Provider store={store}>
       <MemoryRouter>
-        <SvgEditor width={1000} height={800}>
+        <SvgEditor width={1000} height={800} padding={padding}>
           <rect width="10" height="10" />
         </SvgEditor>
       </MemoryRouter>
@@ -49,6 +49,20 @@ describe("SvgEditor start view", () => {
     // top of the window
     const scale = window.innerHeight / h;
     expect(-y * scale).toBeGreaterThanOrEqual(TOOLBAR_INSET - 0.5);
+  });
+});
+
+describe("SvgEditor padding", () => {
+  it("keeps space free on every side of the content", () => {
+    const { box } = setup(0.08);
+    const [x, y, w, h] = box().split(" ").map(Number);
+    const scale = window.innerWidth / w;
+    // The content is 1000 x 800, each side keeps 8% of it free
+    const inset = Math.min(TOOLBAR_INSET, window.innerHeight / 4);
+    expect(-x * scale).toBeGreaterThan(0);
+    expect((x + w - 1000) * scale).toBeGreaterThan(0);
+    expect(-y * scale).toBeGreaterThanOrEqual(inset);
+    expect((y + h - 800) * scale).toBeGreaterThan(0);
   });
 });
 
