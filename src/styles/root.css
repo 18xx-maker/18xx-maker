@@ -925,6 +925,16 @@ footer a:hover {
   body {
     background: transparent;
   }
+
+  /* The editor prints on solid white in every theme. ?print=true pages and the
+     exports (render mode) do not get the class and stay transparent. */
+  html.editor-print,
+  html.editor-print body,
+  html.editor-print #viewport {
+    background-color: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
 
 .charter__traincards {

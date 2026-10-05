@@ -5,6 +5,7 @@ import Toolbar from "@/components/Toolbar";
 import Config from "@/components/config/Config";
 
 import { useBooleanParam } from "@/util/query";
+import { getRenderInput } from "@/util/renderInput";
 
 const Viewport = ({ children }) => {
   const [config] = useBooleanParam("config");
@@ -17,6 +18,14 @@ const Viewport = ({ children }) => {
     const classes = ["editor-checkered", "overscroll-none", "print:bg-none"];
     document.documentElement.classList.add(...classes);
     return () => document.documentElement.classList.remove(...classes);
+  }, [print]);
+
+  // The editor prints on white, the exports (render mode) keep their own
+  // transparent background
+  useEffect(() => {
+    if (print || getRenderInput()) return;
+    document.documentElement.classList.add("editor-print");
+    return () => document.documentElement.classList.remove("editor-print");
   }, [print]);
 
   return (
