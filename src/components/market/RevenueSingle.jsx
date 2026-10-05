@@ -15,12 +15,16 @@ const RevenueSingle = () => {
   let paperWidth = unitsToCss(data.totalWidth + 5 + 2 * config.paper.margins);
   let paperHeight = unitsToCss(data.totalHeight + 5 + 2 * config.paper.margins);
 
+  // The editor fills the window, no inline box and no margin around it
+  const frame = editing ? undefined : { display: "inline-block" };
+  const stockFrame = editing ? { margin: 0 } : { display: "inline-block" };
+
   return (
-    <div className="printElement" style={{ display: "inline-block" }}>
+    <div className="printElement" style={frame}>
       <div
         className="stock"
         data-testid={`game-${game.meta.slug}-revenue`}
-        style={{ display: "inline-block" }}
+        style={stockFrame}
       >
         {editing ? (
           <Editor width={data.totalWidth} height={data.totalHeight}>

@@ -21,12 +21,16 @@ const ParSingle = ({ config, game }) => {
   let cssPaperWidth = unitsToCss(paperWidth);
   let cssPaperHeight = unitsToCss(paperHeight);
 
+  // The editor fills the window, no inline box and no margin around it
+  const frame = editing ? undefined : { display: "inline-block" };
+  const stockFrame = editing ? { margin: 0 } : { display: "inline-block" };
+
   return (
-    <div className="printElement" style={{ display: "inline-block" }}>
+    <div className="printElement" style={frame}>
       <div
         className="stock"
         data-testid={`game-${game.meta.slug}-par`}
-        style={{ display: "inline-block" }}
+        style={stockFrame}
       >
         {editing ? (
           <Editor width={data.totalWidth} height={data.totalHeight}>

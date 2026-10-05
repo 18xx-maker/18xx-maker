@@ -1,12 +1,14 @@
 import { Navigate } from "react-router";
 
-import Editor from "@/components/Editor";
+import Editor, { useEditing } from "@/components/Editor";
 import Market from "@/components/market/Market";
 
 import { unitsToCss } from "@/util";
 import { getMarketData } from "@/util/market";
 
 const MarketSingle = ({ config, game }) => {
+  const editing = useEditing();
+
   if (!game.stock || !game.stock.market) {
     return <Navigate to={`/games/${game.meta.slug}/`} replace />;
   }
@@ -15,12 +17,16 @@ const MarketSingle = ({ config, game }) => {
   let paperWidth = unitsToCss(data.totalWidth + 5 + 2 * config.paper.margins);
   let paperHeight = unitsToCss(data.totalHeight + 5 + 2 * config.paper.margins);
 
+  // The editor fills the window, no inline box and no margin around it
+  const frame = editing ? undefined : { display: "inline-block" };
+  const stockFrame = editing ? { margin: 0 } : { display: "inline-block" };
+
   return (
-    <div className="printElement" style={{ display: "inline-block" }}>
+    <div className="printElement" style={frame}>
       <div
         className="stock"
         data-testid={`game-${game.meta.slug}-market`}
-        style={{ display: "inline-block" }}
+        style={stockFrame}
       >
         <Editor width={data.totalWidth} height={data.totalHeight}>
           <Market
