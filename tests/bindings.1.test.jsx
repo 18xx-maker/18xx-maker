@@ -9,6 +9,7 @@ describe("bindings", () => {
     ["a", "atoms"],
     ["c", "logos"],
     ["t", "tiles"],
+    ["p", "positioning"],
   ])("pressing %s brings you to %s", async ([key, id]) => {
     const { user } = renderApp();
 

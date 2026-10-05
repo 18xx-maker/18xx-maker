@@ -11,16 +11,21 @@ there is no other positioning data on the hex. If you want to position your
 elements custom, go right ahead, this should only provide sane defaults for when
 you don't.
 
-If you did want to turn off auto positioning for an element just add a single
-positioning field to that element. For example adding `"angle": 0` will
-effectively turn off auto positioning while leaving the element in the middle of
-the hex.
+If you did want to turn off auto positioning for an element just add one
+positioning field (`angle`, `percent`, `rotate`, `rotation`, `side`, `x` or `y`)
+to that element. For example adding `"angle": 0` will effectively turn off auto
+positioning while leaving the element in the middle of the hex. It only turns it
+off for that element, the other elements of the hex are still positioned.
+
+Every rule below is drawn live, with its JSON, on the [Auto
+Positioning](/elements/positioning) examples page.
 
 ## Rules
 
 ### Icons
 
-Icons (when on a tile with a single city of centerTown) are moved to:
+Icons (when on a tile with a city or a centerTown) are moved to
+([examples](/elements/positioning#icons)):
 
 ```json
 {
@@ -29,7 +34,7 @@ Icons (when on a tile with a single city of centerTown) are moved to:
 }
 ```
 
-If there is also a terrain cost then the terrain is shifted left to:
+If there is also a terrain cost then the icon is shifted left to:
 
 ```json
 {
@@ -40,7 +45,8 @@ If there is also a terrain cost then the terrain is shifted left to:
 
 ### Values
 
-The first value of every tile is auto positioned to the upper right corner:
+The first value of every tile is auto positioned to the upper right corner
+([examples](/elements/positioning#values)). Other values are not moved:
 
 ```json
 {
@@ -51,7 +57,8 @@ The first value of every tile is auto positioned to the upper right corner:
 
 ### Labels
 
-The first label on a tile is auto positioned to the upper left corner:
+The first label on a tile is auto positioned to the upper left corner
+([examples](/elements/positioning#labels)):
 
 ```json
 {
@@ -60,7 +67,8 @@ The first label on a tile is auto positioned to the upper left corner:
 }
 ```
 
-The second label on a tile is auto positioned to the right side:
+The second label on a tile is auto positioned to the right side. Other labels
+are not moved:
 
 ```json
 {
@@ -71,7 +79,8 @@ The second label on a tile is auto positioned to the right side:
 
 ### Terrain
 
-Terrain costs (when on a tile with a single city or centerTown) are moved to:
+Terrain costs (when on a tile with a city or a centerTown) are moved to
+([examples](/elements/positioning#terrain)):
 
 ```json
 {
@@ -80,7 +89,7 @@ Terrain costs (when on a tile with a single city or centerTown) are moved to:
 }
 ```
 
-If there is also an icon then the terrain is shifted right to:
+If there is also an icon then the terrain cost is shifted right to:
 
 ```json
 {

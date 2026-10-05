@@ -194,6 +194,9 @@ export const useBindings = () => {
               .catch((e) => dispatch(createAlert(e.name, e.message, "error")));
           }
           break;
+        case "p":
+          if (!viewingGame) navigate("/elements/positioning");
+          break;
         case "r":
           dispatch(refreshGame());
           break;

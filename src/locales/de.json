@@ -254,6 +254,40 @@
     "cheat": {
       "title": "Spickzettel",
       "description": "Daten aus den enthaltenen 18xx-Spielen"
+    },
+    "positioning": {
+      "title": "Automatische Positionierung",
+      "description": "Live-Beispiele zur automatischen Positionierung",
+      "page": {
+        "description": "Jede Regel und jeder Sonderfall der automatischen Positionierung, live gezeichnet, mit dem JSON, das ihn erzeugt.",
+        "docs": "Die Regeln stehen in der Doku zur automatischen Positionierung"
+      },
+      "groups": {
+        "icons": "Symbole",
+        "terrain": "Gelände",
+        "values": "Werte",
+        "labels": "Beschriftungen",
+        "off": "Ausschalten",
+        "all": "Alles zusammen"
+      },
+      "examples": {
+        "iconCity": "Ein Symbol auf einem Kartenfeld mit Stadt wandert nach angle 0, percent 0.6.",
+        "iconCenterTown": "Eine centerTown verhält sich wie eine Stadt.",
+        "iconTerrain": "Mit zusätzlichem Gelände wandert das Symbol nach angle 30 und das Gelände nach angle 330.",
+        "iconAlone": "Ohne Stadt oder centerTown wird das Symbol nicht verschoben.",
+        "terrainCity": "Gelände auf einem Kartenfeld mit Stadt wandert nach angle 0, percent 0.7.",
+        "terrainCenterTown": "Eine centerTown verhält sich wie eine Stadt.",
+        "terrainIcon": "Mit zusätzlichem Symbol wandert das Gelände nach angle 330 und das Symbol nach angle 30.",
+        "terrainAlone": "Ohne Stadt oder centerTown wird das Gelände nicht verschoben.",
+        "valueOne": "Der erste Wert wandert nach angle 210, percent 0.7.",
+        "valueTwo": "Nur der erste Wert wird verschoben. Der zweite bleibt in der Mitte.",
+        "labelOne": "Die erste Beschriftung wandert nach angle 150, percent 0.7.",
+        "labelTwo": "Die zweite Beschriftung wandert nach angle 270, percent 0.7.",
+        "labelThree": "Nur die ersten beiden Beschriftungen werden verschoben. Die dritte bleibt in der Mitte.",
+        "offAngle": "Jedes Positionsfeld, hier angle 0, schaltet die automatische Positionierung für dieses Gelände aus.",
+        "offOne": "Das Ausschalten gilt pro Element. Das zweite Gelände wird weiterhin verschoben.",
+        "everything": "Eine Stadt, Gelände, ein Symbol, ein Wert und zwei Beschriftungen im Standardlayout."
+      }
     }
   },
   "games": {
@@ -889,6 +923,10 @@
       "logos": {
         "use": "Zur Logos-Seite wechseln",
         "notes": "Nicht auf der Bearbeitungsseite eines Spiels. Schaltet beim Bearbeiten die Konfiguration um"
+      },
+      "positioning": {
+        "use": "Zur Seite Automatische Positionierung wechseln",
+        "notes": "Nicht auf der Bearbeitungsseite eines Spiels"
       },
       "game": {
         "use": "Zur Spielseite wechseln",
