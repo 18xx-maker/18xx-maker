@@ -1,4 +1,3 @@
-import { diff } from "deep-object-diff";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -39,6 +38,7 @@ import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
 import { createAlert } from "@/state";
+import { diff } from "@/util/diff";
 import { useStringParam } from "@/util/query";
 
 export const getPath = split(".");
