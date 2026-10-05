@@ -1077,7 +1077,8 @@
           "type": "string"
         },
         "publisher": {
-          "type": "string"
+          "type": "string",
+          "description": "Id of the publisher (see src/data/publishers), shown on the game info page and in the game list"
         },
         "extraTotalHeight": {
           "type": "number",
