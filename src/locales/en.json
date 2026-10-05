@@ -981,6 +981,14 @@
         "use": "Reset the view of the map or market editor",
         "notes": "Only on the map and market edit pages"
       },
+      "print": {
+        "use": "Print the current section",
+        "notes": "Only on the edit page of a section with a Print button. Not in the app, use x"
+      },
+      "paginate": {
+        "use": "Turn pagination on or off",
+        "notes": "Only on the map, market, par and revenue edit pages"
+      },
       "download": {
         "use": "Download the loaded game file",
         "notes": "Saves the game without its meta data. Only if you have a game loaded."

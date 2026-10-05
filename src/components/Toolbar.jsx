@@ -25,6 +25,7 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Toggle } from "@/components/ui/toggle";
 
+import KeyLabel from "@/components/KeyLabel";
 import ExportButton from "@/components/export/ExportButton";
 import PrintButton from "@/components/page/PrintButton";
 
@@ -181,7 +182,9 @@ const Toolbar = () => {
       )}
       {item.pagination && (
         <div className="ml-2 flex shrink-0 flex-row gap-2 justify-start items-center whitespace-nowrap">
-          <Label htmlFor="paginate-switch">{t("game.paginated")}</Label>
+          <Label htmlFor="paginate-switch">
+            <KeyLabel text={t("game.paginated")} shortcut="n" />
+          </Label>
           <Switch
             id="paginate-switch"
             checked={paginated}

@@ -165,4 +165,75 @@ describe("bindings", () => {
     await user.keyboard("r");
     expect(idb.loadGame).not.toHaveBeenCalled();
   });
+
+  describe("print and paginate", () => {
+    let print;
+    beforeEach(() => {
+      print = vi.spyOn(window, "print").mockImplementation(() => {});
+    });
+    afterEach(() => print.mockRestore());
+
+    it("p prints on a game edit page", async () => {
+      const { user } = renderApp("/games/18Test/map");
+      await screen.findByTestId("game-18Test-map");
+
+      await user.keyboard("p");
+      expect(print).toHaveBeenCalledTimes(1);
+    });
+
+    it("p does not print in print mode", async () => {
+      const { user } = renderApp("/games/18Test/map?print=true");
+      await screen.findByTestId("game-18Test-map");
+
+      await user.keyboard("p");
+      expect(print).not.toHaveBeenCalled();
+    });
+
+    it("p does not print on b18", async () => {
+      const { user } = renderApp("/games/18Test/b18/map");
+      await screen.findByTestId("game-18Test-b18-map");
+
+      await user.keyboard("p");
+      expect(print).not.toHaveBeenCalled();
+    });
+
+    it("p outside a game still opens positioning", async () => {
+      const { user, router } = renderApp("/");
+      await screen.findByTestId("home");
+
+      await user.keyboard("p");
+      expect(router.state.location.pathname).toBe("/elements/positioning");
+      expect(print).not.toHaveBeenCalled();
+    });
+
+    it("n toggles pagination where the switch exists", async () => {
+      const { user, router } = renderApp("/games/18Test/map?variation=1");
+      await screen.findByTestId("game-18Test-map");
+
+      await user.keyboard("n");
+      expect(router.state.location.search).toContain("paginated=true");
+      expect(router.state.location.search).toContain("variation=1");
+      await user.keyboard("n");
+      expect(router.state.location.search).not.toContain("paginated");
+      expect(router.state.location.search).toContain("variation=1");
+    });
+
+    it("n does nothing on a section without pagination", async () => {
+      const { user, router } = renderApp("/games/18Test/tokens");
+      await screen.findByTestId("game-18Test-tokens");
+
+      await user.keyboard("n");
+      expect(router.state.location.search).toBe("");
+    });
+
+    it("labels the print button and paginate switch with their keys", async () => {
+      renderApp("/games/18Test/map");
+      await screen.findByTestId("game-18Test-map");
+
+      expect(screen.getByRole("button", { name: "Print" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("switch", { name: "Paginate" }),
+      ).toBeInTheDocument();
+    });
+  });
 });
