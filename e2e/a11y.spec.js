@@ -51,12 +51,20 @@ const pages = [
     url: "/docs",
     ready: (page) => page.locator("[data-testid^='docs-']"),
   },
+  // Code blocks color their tokens per theme, including comments
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `docs code blocks (${colorScheme})`,
+    url: "/docs/output/svg",
+    colorScheme,
+    ready: (page) => page.locator(".shiki").first(),
+  })),
 ];
 
-for (const { name, url, ready } of pages) {
+for (const { name, url, ready, colorScheme } of pages) {
   test(`no serious or critical accessibility violations: ${name}`, async ({
     page,
   }) => {
+    if (colorScheme) await page.emulateMedia({ colorScheme });
     await page.goto(url);
     await expect(ready(page)).toBeVisible();
     // Wait for the drawer and page transitions to finish

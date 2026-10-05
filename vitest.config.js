@@ -76,13 +76,12 @@ export default defineConfig({
         optimizeDeps: {
           include: [
             "json-schema-library",
-            "react-syntax-highlighter",
-            "react-syntax-highlighter/dist/esm/languages/prism/bash",
-            "react-syntax-highlighter/dist/esm/languages/prism/javascript",
-            "react-syntax-highlighter/dist/esm/languages/prism/json",
-            "react-syntax-highlighter/dist/esm/languages/prism/markdown",
-            "react-syntax-highlighter/dist/esm/styles/prism/coldark-cold",
-            "react-syntax-highlighter/dist/esm/styles/prism/coldark-dark",
+            "shiki/core",
+            "shiki/engine/javascript",
+            "shiki/langs/bash.mjs",
+            "shiki/langs/json.mjs",
+            "shiki/themes/github-dark-default.mjs",
+            "shiki/themes/github-light.mjs",
           ],
         },
         test: {

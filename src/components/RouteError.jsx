@@ -33,7 +33,7 @@ const RouteError = () => {
         {String(error?.message || error?.statusText || error)}
       </pre>
       <h2 className="text-xl">{t("routeError.config")}</h2>
-      <Code language="json" className="w-full">
+      <Code language="json" className="w-full border">
         {JSON.stringify(storedConfig, null, 2)}
       </Code>
       <div className="flex flex-row gap-4">
