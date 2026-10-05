@@ -229,6 +229,21 @@ const RE_mapCoordap = /^([A-Z]+[0-9]+)a([0-9.-]+)p([0-9.-]+)$/;
 const RE_mapCoorda = /^([A-Z]+[0-9]+)a([0-9.-]+)$/;
 const RE_mapCoords = /^([A-Z]+[0-9]+)s([0-9.-]+)$/;
 const RE_mapCoordp = /^([A-Z]+[0-9]+)p([0-9.-]+)$/;
+// The point `length` from the center of a hex along `direction` degrees. The
+// length is stretched by the angle the direction makes with the hex's flat.
+const polarCoord = (data, hex, length, angleFromFlat, direction) => {
+  let [i, j] = toCoords(hex);
+  let x = data.hexX(i, j);
+  let y = data.hexY(i, j);
+
+  length = length / Math.cos(radians(angleFromFlat));
+
+  x += length * Math.sin(radians(-direction));
+  y += length * Math.cos(radians(-direction));
+
+  return `${x} ${y}`;
+};
+
 export const mapCoord = (string, data) => {
   // First attempt x/y coordinates
   let xyTest = string.match(RE_mapCoordxy);
@@ -247,77 +262,55 @@ export const mapCoord = (string, data) => {
   let apTest = string.match(RE_mapCoordap);
 
   if (apTest) {
-    let [i, j] = toCoords(apTest[1]);
-    let x = data.hexX(i, j);
-    let y = data.hexY(i, j);
-
     let angle = Number(apTest[2]);
-    let length = Number(apTest[3] * 75) * data.scale;
 
-    let angleFromFlat = (angle % 60) - (data.horizontal ? 0 : 30);
-    length = length / Math.cos(radians(angleFromFlat));
-
-    x += length * Math.sin(radians(-angle));
-    y += length * Math.cos(radians(-angle));
-
-    return `${x} ${y}`;
+    return polarCoord(
+      data,
+      apTest[1],
+      Number(apTest[3] * 75) * data.scale,
+      (angle % 60) - (data.horizontal ? 0 : 30),
+      angle,
+    );
   }
 
   let aTest = string.match(RE_mapCoorda);
 
   if (aTest) {
-    let [i, j] = toCoords(aTest[1]);
-    let x = data.hexX(i, j);
-    let y = data.hexY(i, j);
-
     let angle = Number(aTest[2]);
-    let length = 75 * data.scale;
 
-    let angleFromFlat = (angle % 60) - (data.horizontal ? 0 : 30);
-    length = length / Math.cos(radians(angleFromFlat));
-
-    x += length * Math.sin(radians(-angle));
-    y += length * Math.cos(radians(-angle));
-
-    return `${x} ${y}`;
+    return polarCoord(
+      data,
+      aTest[1],
+      75 * data.scale,
+      (angle % 60) - (data.horizontal ? 0 : 30),
+      angle,
+    );
   }
 
   let sTest = string.match(RE_mapCoords);
   if (sTest) {
-    let [i, j] = toCoords(sTest[1]);
-    let x = data.hexX(i, j);
-    let y = data.hexY(i, j);
+    let angle = 60 * (sTest[2] - 1) + 90;
 
-    let side = sTest[2];
-    let angle = 60 * (side - 1) + 90;
-    let length = 75 * data.scale;
-
-    let angleFromFlat = (angle % 60) - 30;
-    length = length / Math.cos(radians(angleFromFlat));
-
-    x += length * Math.sin(radians(-(angle + (data.horizontal ? -90 : 0))));
-    y += length * Math.cos(radians(-(angle + (data.horizontal ? -90 : 0))));
-
-    return `${x} ${y}`;
+    return polarCoord(
+      data,
+      sTest[1],
+      75 * data.scale,
+      (angle % 60) - 30,
+      angle + (data.horizontal ? -90 : 0),
+    );
   }
 
   let pTest = string.match(RE_mapCoordp);
   if (pTest) {
-    let [i, j] = toCoords(pTest[1]);
-    let x = data.hexX(i, j);
-    let y = data.hexY(i, j);
+    let angle = 60 * (pTest[2] - 1);
 
-    let point = pTest[2];
-    let angle = 60 * (point - 1);
-    let length = 75 * data.scale;
-
-    let angleFromFlat = (angle % 60) - 30;
-    length = length / Math.cos(radians(angleFromFlat));
-
-    x += length * Math.sin(radians(-(angle + (data.horizontal ? 90 : 0))));
-    y += length * Math.cos(radians(-(angle + (data.horizontal ? 90 : 0))));
-
-    return `${x} ${y}`;
+    return polarCoord(
+      data,
+      pTest[1],
+      75 * data.scale,
+      (angle % 60) - 30,
+      angle + (data.horizontal ? 90 : 0),
+    );
   }
 
   return string;

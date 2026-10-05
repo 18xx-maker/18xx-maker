@@ -13,8 +13,9 @@ import {
   splitEvery,
 } from "ramda";
 
-import Charter from "@/components/Charter";
+import GameCharter, { CharterSpacer } from "@/components/GameCharter";
 import Pins from "@/components/Pins";
+import charterCss from "@/components/charterCss";
 import HtmlEditor from "@/components/editor/HtmlEditor";
 import PageSetup from "@/components/page/PageSetup";
 import Svg from "@/components/svg/Svg";
@@ -25,7 +26,6 @@ import {
   compileCompanies,
   overrideCompanies,
 } from "@/util/companies/companies";
-import { charterHalfWidth } from "@/util/companies/companyTrains";
 
 const isMinor = prop("minor");
 const isMajor = compose(not, prop("minor"));
@@ -65,143 +65,24 @@ const ChartersPage = () => {
   let freePadding = charters.halfWidth ? padding : 0;
   let companies = concat(majors, concat(repeat(null, freePadding), minors));
 
-  let css = `
-.cutlines {
-    padding: ${data.css.cutlines};
-    width: ${data.css.totalWidth};
-    height: ${data.css.totalHeight};
-}
-
-.cutlines--minor {
-    height: ${data.css.totalMinorHeight};
-}
-
-.cutlines--half {
-    width: ${data.css.totalHalfWidth};
-}
-
-.cutlines:after,
-.cutlines:before {
-    width: ${data.css.cutlines};
-    height: ${data.css.height};
-    top: ${data.css.cutlinesAndBleed};
-}
-
-.cutlines--minor:after,
-.cutlines--minor:before {
-    height: ${data.css.minorHeight};
-}
-
-.cutlines--half:after,
-.cutlines--half:before {
-    width: ${data.css.halfWidth};
-}
-
-.cutlines > div:after,
-.cutlines > div:before {
-    width: ${data.css.width};
-    height: ${data.css.cutlines};
-    left: ${data.css.bleed};
-}
-
-.cutlines > div:after {
-    bottom: -${data.css.cutlines};
-}
-
-.cutlines > div:before {
-    top: -${data.css.cutlines};
-}
-
-.cutlines--half > div:before,
-.cutlines--half > div:after {
-    width: ${data.css.halfWidth};
-}
-
-.charter,
-.charter__bleed {
-    height: ${data.css.bleedHeight};
-    width: ${data.css.bleedWidth};
-}
-
-.charter--minor,
-.charter--minor .charter__bleed {
-    height: ${data.css.bleedMinorHeight};
-}
-
-.charter--half,
-.charter--half .charter__bleed {
-    width: ${data.css.bleedHalfWidth};
-}
-
-.charter__body {
-    border: ${data.border}px solid black;
-    margin: ${data.css.bleed};
-    width: ${data.css.width};
-    height: ${data.css.height};
-}
-
-.charter--minor .charter__body {
-    height: ${data.css.minorHeight};
-}
-
-.charter--half .charter__body {
-    width: ${data.css.halfWidth};
-}
-
-.charter--color .charter__hr {
-    height: calc(1.0625in + ${data.css.bleed});
-}
-.charter--color.charter--minor .charter__hr {
-    height: calc(0.875in + ${data.css.bleed});
-}
-
-.charter--carth .charter__hr {
-    top: calc(1.125in + ${data.css.bleed});
-}
-
-.charter--carth.charter--minor .charter__hr,
-.charter--carth.charter--half .charter__hr {
-    top: calc(0.875in + ${data.css.bleed});
-}
-`;
-
   let pages;
   if (data.layout === "free") {
     // No pages, easy
     pages = addIndex(chain)(
       (company, index) =>
         company ? (
-          <Charter
-            game={game.info.title}
+          <GameCharter
             key={`${index}-${company.abbrev}`}
-            name={company.name}
-            subtext={company.subtext}
-            abbrev={company.abbrev}
-            logo={company.logo}
-            color={company.color}
-            token={company.token}
-            tokens={company.tokens}
-            phases={game.phases}
-            turns={game.turns}
-            trains={game.trains}
-            minor={!!company.minor}
             company={company}
-            variant={company.variant}
-            fontFamily={company.fontFamily || game.info.companyFontFamily}
-            fontSize={company.fontSize || game.info.companyFontSize}
-            fontWeight={company.fontWeight || game.info.companyFontWeight}
-            fontStyle={company.fontStyle || game.info.companyFontStyle}
-            halfWidth={charterHalfWidth(charters, !!company.minor)}
+            game={game}
+            charters={charters}
+            subtext={company.subtext}
           />
         ) : (
-          <div
+          <CharterSpacer
             key={`spacer-free-${index}`}
-            className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}
-          >
-            <div
-              className={`charter${charters.halfWidth ? " charter--half" : ""}`}
-            ></div>
-          </div>
+            halfWidth={charters.halfWidth}
+          />
         ),
       companies,
     );
@@ -230,37 +111,18 @@ const ChartersPage = () => {
           {addIndex(map)(
             (company, index) =>
               company ? (
-                <Charter
-                  game={game.info.title}
+                <GameCharter
                   key={`${index}-${company.abbrev}`}
-                  name={company.name}
-                  subtext={company.subtext}
-                  abbrev={company.abbrev}
-                  logo={company.logo}
-                  color={company.color}
-                  token={company.token}
-                  tokens={company.tokens}
-                  phases={game.phases}
-                  turns={game.turns}
-                  trains={game.trains}
-                  minor={!!company.minor}
                   company={company}
-                  variant={company.variant}
-                  fontFamily={company.fontFamily || game.info.companyFontFamily}
-                  fontSize={company.fontSize || game.info.companyFontSize}
-                  fontWeight={company.fontWeight || game.info.companyFontWeight}
-                  fontStyle={company.fontStyle || game.info.companyFontStyle}
-                  halfWidth={charterHalfWidth(charters, !!company.minor)}
+                  game={game}
+                  charters={charters}
+                  subtext={company.subtext}
                 />
               ) : (
-                <div
+                <CharterSpacer
                   key={`spacer-major-${index}`}
-                  className={`cutlines${charters.halfWidth ? " cutlines--half" : ""}`}
-                >
-                  <div
-                    className={`charter${charters.halfWidth ? " charter--half" : ""}`}
-                  ></div>
-                </div>
+                  halfWidth={charters.halfWidth}
+                />
               ),
             majorCompanies,
           )}
@@ -279,27 +141,12 @@ const ChartersPage = () => {
           {pins}
           {map(
             (company) => (
-              <Charter
-                game={game.info.title}
+              <GameCharter
                 key={`${index}-${company.abbrev}`}
-                name={company.name}
-                subtext={company.subtext}
-                abbrev={company.abbrev}
-                logo={company.logo}
-                color={company.color}
-                token={company.token}
-                tokens={company.tokens}
-                phases={game.phases}
-                turns={game.turns}
-                trains={game.trains}
-                minor={!!company.minor}
                 company={company}
-                variant={company.variant}
-                fontFamily={company.fontFamily || game.info.companyFontFamily}
-                fontSize={company.fontSize || game.info.companyFontSize}
-                fontWeight={company.fontWeight || game.info.companyFontWeight}
-                fontStyle={company.fontStyle || game.info.companyFontStyle}
-                halfWidth={charterHalfWidth(charters, !!company.minor)}
+                game={game}
+                charters={charters}
+                subtext={company.subtext}
               />
             ),
             minorCompanies,
@@ -320,7 +167,7 @@ const ChartersPage = () => {
         data-layout={charters.layout}
         data-per-page={data.perPage}
       >
-        <style>{css}</style>
+        <style>{charterCss(data)}</style>
         {pages}
         <PageSetup landscape={false} />
       </div>

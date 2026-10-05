@@ -1,5 +1,6 @@
 import Color from "@/components/Color";
 import Name from "@/components/atoms/Name";
+import { centerTownCircles, stadiumPath } from "@/components/atoms/townParts";
 
 import { useConfig, useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
@@ -20,6 +21,37 @@ const cityPaths = {
   city4PathReverse:
     "M 0 53 L 25 53 A 30 30 0 0 0 53 25 L 53 -25 A 30 30 0 0 0 25 -53 L -25 -53 A 30 30 0 0 0 -53 -25 L -53 25 A 30 30 0 0 0 -25 53 L 0 53",
 };
+
+// A city, the track colored ring around it and the dashed boomtown ring
+const cityRings = (
+  c,
+  { key, cx, cityWidth, centerTownWidth, strokeWidth, strokeDashArray },
+) => [
+  <g key={`city${key}`}>
+    <circle fill={c("city")} stroke="none" cx={cx} cy="0" r={cityWidth} />
+  </g>,
+  <g key={`city${key}-otherthing`}>
+    <circle
+      fill="none"
+      stroke={c("track")}
+      strokeWidth={strokeWidth}
+      cx={cx}
+      cy="0"
+      r={cityWidth}
+    />
+  </g>,
+  <g key={`boomtown${key}-outline`}>
+    <circle
+      fill="none"
+      stroke="black"
+      strokeWidth={strokeWidth}
+      strokeDasharray={strokeDashArray}
+      cx={cx}
+      cy="0"
+      r={centerTownWidth}
+    />
+  </g>,
+];
 
 const Boomtown = ({
   border,
@@ -112,36 +144,14 @@ const Boomtown = ({
         <Color context="companies">
           {(c) => (
             <>
-              <g key="city">
-                <circle
-                  fill={c("city")}
-                  stroke="none"
-                  cx="0"
-                  cy="0"
-                  r={cityWidth}
-                />
-              </g>
-              <g key="city-otherthing">
-                <circle
-                  fill="none"
-                  stroke={c("track")}
-                  strokeWidth={strokeWidth}
-                  cx="0"
-                  cy="0"
-                  r={cityWidth}
-                />
-              </g>
-              <g key="boomtown-outline">
-                <circle
-                  fill="none"
-                  stroke="black"
-                  strokeWidth={strokeWidth}
-                  strokeDasharray={strokeDashArray}
-                  cx="0"
-                  cy="0"
-                  r={centerTownWidth}
-                />
-              </g>
+              {cityRings(c, {
+                key: "",
+                cx: "0",
+                cityWidth,
+                centerTownWidth,
+                strokeWidth,
+                strokeDashArray,
+              })}
               {nameNode}
             </>
           )}
@@ -155,24 +165,12 @@ const Boomtown = ({
         <Color context="companies">
           {(c) => (
             <>
-              <g key="center-town-outline">
-                <circle
-                  fill={c("centerTown")}
-                  stroke="none"
-                  cx="0"
-                  cy="0"
-                  r={centerTownWidth + 2}
-                />
-              </g>
-              <g key="center-town-fill">
-                <circle
-                  fill={c(color || "centerTown")}
-                  stroke="none"
-                  cx="0"
-                  cy="0"
-                  r={centerTownWidth}
-                />
-              </g>
+              {centerTownCircles(c, {
+                key: "center-town",
+                cx: "0",
+                r: centerTownWidth,
+                color,
+              })}
               <g key="boomtown-outline">
                 <circle
                   fill="none"
@@ -198,7 +196,7 @@ const Boomtown = ({
           {(c) => (
             <g>
               <path
-                d={`M${borderWidth - 1},${borderWidth + 1} A${borderWidth},${borderWidth + 1} 0 1,0 ${borderWidth - 1},-${borderWidth + 1} L-${borderWidth - 1},-${borderWidth + 1} A${borderWidth},${borderWidth + 1} 0 1,0 -${borderWidth - 1},${borderWidth + 1} L${borderWidth - 1},${borderWidth + 1}`}
+                d={stadiumPath(borderWidth, borderWidth + 1, 1)}
                 fill={c("border")}
                 stroke="none"
               />
@@ -236,66 +234,22 @@ const Boomtown = ({
         <Color context="companies">
           {(c) => (
             <>
-              <g key="city">
-                <circle
-                  fill={c("city")}
-                  stroke="none"
-                  cx={`${cityWidth}`}
-                  cy="0"
-                  r={cityWidth}
-                />
-              </g>
-              <g key="city-otherthing">
-                <circle
-                  fill="none"
-                  stroke={c("track")}
-                  strokeWidth={strokeWidth}
-                  cx={`${cityWidth}`}
-                  cy="0"
-                  r={cityWidth}
-                />
-              </g>
-              <g key="boomtown-outline">
-                <circle
-                  fill="none"
-                  stroke="black"
-                  strokeWidth={strokeWidth}
-                  strokeDasharray={strokeDashArray}
-                  cx={`${cityWidth}`}
-                  cy="0"
-                  r={centerTownWidth}
-                />
-              </g>
-              <g key="city2">
-                <circle
-                  fill={c("city")}
-                  stroke="none"
-                  cx={`-${cityWidth}`}
-                  cy="0"
-                  r={cityWidth}
-                />
-              </g>
-              <g key="city2-otherthing">
-                <circle
-                  fill="none"
-                  stroke={c("track")}
-                  strokeWidth={strokeWidth}
-                  cx={`-${cityWidth}`}
-                  cy="0"
-                  r={cityWidth}
-                />
-              </g>
-              <g key="boomtown2-outline">
-                <circle
-                  fill="none"
-                  stroke="black"
-                  strokeWidth={strokeWidth}
-                  strokeDasharray={strokeDashArray}
-                  cx={`-${cityWidth}`}
-                  cy="0"
-                  r={centerTownWidth}
-                />
-              </g>
+              {cityRings(c, {
+                key: "",
+                cx: `${cityWidth}`,
+                cityWidth,
+                centerTownWidth,
+                strokeWidth,
+                strokeDashArray,
+              })}
+              {cityRings(c, {
+                key: "2",
+                cx: `-${cityWidth}`,
+                cityWidth,
+                centerTownWidth,
+                strokeWidth,
+                strokeDashArray,
+              })}
               <g>
                 <path
                   d={`M-${cityWidth},${cityWidth} L${cityWidth},${cityWidth}`}
@@ -345,48 +299,24 @@ const Boomtown = ({
               </g>
               <g key="outline">
                 <path
-                  d={`M${centerTownWidth + 4},${centerTownWidth + 4} A${centerTownWidth + 4},${centerTownWidth + 4} 0 1,0 ${centerTownWidth + 4},-${centerTownWidth + 4} L-${centerTownWidth + 4},-${centerTownWidth + 4} A${centerTownWidth + 4},${centerTownWidth + 4} 0 1,0 -${centerTownWidth + 4},${centerTownWidth + 4} L${centerTownWidth + 4},${centerTownWidth + 4}`}
+                  d={stadiumPath(centerTownWidth + 4, centerTownWidth + 4)}
                   fill={c("white")}
                   stroke={c("track")}
                   strokeWidth="2"
                 />
               </g>
-              <g key="center-town-outline">
-                <circle
-                  fill={c("centerTown")}
-                  stroke="none"
-                  cx={`-${centerTownWidth + 3}`}
-                  cy="0"
-                  r={centerTownWidth + 2}
-                />
-              </g>
-              <g key="center-town-fill">
-                <circle
-                  fill={c(color || "centerTown")}
-                  stroke="none"
-                  cx={`-${centerTownWidth + 3}`}
-                  cy="0"
-                  r={centerTownWidth}
-                />
-              </g>
-              <g key="center-town2-outline">
-                <circle
-                  fill={c("centerTown")}
-                  stroke="none"
-                  cx={`${centerTownWidth + 3}`}
-                  cy="0"
-                  r={centerTownWidth + 2}
-                />
-              </g>
-              <g key="center-town2-fill">
-                <circle
-                  fill={c(color || "centerTown")}
-                  stroke="none"
-                  cx={`${centerTownWidth + 3}`}
-                  cy="0"
-                  r={centerTownWidth}
-                />
-              </g>
+              {centerTownCircles(c, {
+                key: "center-town",
+                cx: `-${centerTownWidth + 3}`,
+                r: centerTownWidth,
+                color,
+              })}
+              {centerTownCircles(c, {
+                key: "center-town2",
+                cx: `${centerTownWidth + 3}`,
+                r: centerTownWidth,
+                color,
+              })}
               {nameNode}
             </>
           )}

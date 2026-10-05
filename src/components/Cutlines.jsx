@@ -32,12 +32,20 @@ const HorizontalLines = ({ getY, perRow, pageWidth, height, rowsPerPage }) => {
   );
 };
 
-const ForwardLines = ({ perPage, getX, getY, width, pageHeight }) => {
+const DiagonalLines = ({
+  slope,
+  name,
+  perPage,
+  getX,
+  getY,
+  width,
+  pageHeight,
+}) => {
   let indexes = range(0, 2 * perPage);
 
   let x = (i) =>
     getLineX(
-      -1.732051615,
+      slope,
       getX(Math.floor(i / 2)) + (i % 2 === 0 ? -width : width) / 2,
       getY(Math.floor(i / 2)),
     );
@@ -45,32 +53,7 @@ const ForwardLines = ({ perPage, getX, getY, width, pageHeight }) => {
   return map(
     (index) => (
       <line
-        key={`forward-${index}`}
-        x1={x(index)(0)}
-        y1={0}
-        x2={x(index)(pageHeight)}
-        y2={pageHeight}
-        {...STROKE}
-      />
-    ),
-    indexes,
-  );
-};
-
-const BackwardLines = ({ getX, getY, pageHeight, width, perPage }) => {
-  let indexes = range(0, 2 * perPage);
-
-  let x = (i) =>
-    getLineX(
-      1.732051615,
-      getX(Math.floor(i / 2)) + (i % 2 === 0 ? -width : width) / 2,
-      getY(Math.floor(i / 2)),
-    );
-
-  return map(
-    (index) => (
-      <line
-        key={`forward-${index}`}
+        key={`${name}-${index}`}
         x1={x(index)(0)}
         y1={0}
         x2={x(index)(pageHeight)}
@@ -95,8 +78,8 @@ const Cutlines = () => {
   let c = getTileSheetContext(layout, paper, hexWidth);
   return [
     <HorizontalLines key="horizontal" {...c} />,
-    <ForwardLines key="forward" {...c} />,
-    <BackwardLines key="backward" {...c} />,
+    <DiagonalLines key="forward" name="forward" slope={-1.732051615} {...c} />,
+    <DiagonalLines key="backward" name="backward" slope={1.732051615} {...c} />,
   ];
 };
 
