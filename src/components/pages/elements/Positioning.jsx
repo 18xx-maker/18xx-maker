@@ -9,7 +9,7 @@ import Svg from "@/components/Svg";
 const city = { cities: [{}] };
 const centerTown = { centerTowns: [{}] };
 const icon = { icons: [{ type: "boat" }] };
-const terrain = { terrain: [{ cost: 60 }] };
+const terrain = { terrain: [{ type: "mountain", cost: 60 }] };
 
 const groups = [
   {
@@ -53,11 +53,17 @@ const groups = [
     examples: [
       {
         id: "offAngle",
-        hex: { ...city, terrain: [{ cost: 60, angle: 0 }] },
+        hex: { ...city, terrain: [{ type: "mountain", cost: 60, angle: 0 }] },
       },
       {
         id: "offOne",
-        hex: { ...city, terrain: [{ cost: 60, x: 0 }, { cost: 120 }] },
+        hex: {
+          ...city,
+          terrain: [
+            { type: "mountain", cost: 60, x: 0 },
+            { type: "mountain", cost: 120 },
+          ],
+        },
       },
     ],
   },
