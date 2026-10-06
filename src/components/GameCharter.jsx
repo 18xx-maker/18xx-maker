@@ -4,10 +4,21 @@ import { useConfig } from "@/hooks";
 import { companyNames } from "@/util/companies/companyNames";
 import { charterHalfWidth } from "@/util/companies/companyTrains";
 
-// A charter of a game company, with the game's fonts as the default
-const GameCharter = ({ company, game, charters, ...rest }) => {
+// A charter of a game company, with the game's fonts as the default.
+// withSubtext false drops the company's own subtext (the single charter page
+// never printed it); the alias of the "both" mode still shows.
+const GameCharter = ({
+  company,
+  game,
+  charters,
+  withSubtext = true,
+  ...rest
+}) => {
   const { config } = useConfig();
-  const names = companyNames(company, config.companyNames);
+  const names = companyNames(
+    withSubtext ? company : { ...company, subtext: undefined },
+    config.companyNames,
+  );
 
   return (
     <Charter

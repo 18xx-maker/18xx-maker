@@ -69,6 +69,19 @@ describe("company names", () => {
     },
   );
 
+  it.each([
+    ["name", ["Light Blue Railroad", undefined]],
+    ["alias", ["Sky Blue Line", undefined]],
+    ["both", ["Light Blue Railroad", "Sky Blue Line"]],
+  ])(
+    "prints no company subtext on a single charter in %s",
+    async (mode, exp) => {
+      renderApp(`/games/18Test/charters/1?config.companyNames=${mode}`);
+      const root = await screen.findByTestId("game-18Test-charter");
+      expect(charterTexts(root)[0]).toEqual(exp);
+    },
+  );
+
   it.each(["name", "alias", "both"])(
     "prints the %s on the share cards",
     async (mode) => {

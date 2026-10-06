@@ -36,6 +36,14 @@ describe("applyCompanyOverrides", () => {
     expect(result[2]).toBe(companies[2]);
   });
 
+  it("takes the alias from the override, not the game company", () => {
+    const aliased = [{ name: "A", abbrev: "A", alias: "Own Alias" }];
+    const result = applyCompanyOverrides(overrides, aliased, "set");
+
+    expect(result[0].name).toBe("One");
+    expect(result[0].alias).toBeUndefined();
+  });
+
   it("selects the overrides by index", () => {
     const result = applyCompanyOverrides(overrides, companies, "set", [1, 0]);
     expect(result.map((c) => c.name)).toEqual(["Two", "One", "C"]);

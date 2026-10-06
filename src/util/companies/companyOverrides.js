@@ -31,6 +31,7 @@ export const applyCompanyOverrides = (
       // Remove some fields if they don't exist on the override company
       company.logo = overrideCompanies[index].logo;
       company.token = overrideCompanies[index].token;
+      company.alias = overrideCompanies[index].alias;
     }
 
     return company;
