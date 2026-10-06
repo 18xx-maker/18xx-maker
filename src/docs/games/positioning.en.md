@@ -12,7 +12,8 @@ elements custom, go right ahead, this should only provide sane defaults for when
 you don't.
 
 If you did want to turn off auto positioning for an element just add one
-positioning field (`angle`, `percent`, `rotate`, `rotation`, `side`, `x` or `y`)
+positioning field (`angle`, `percent`, `rotate`, `rotation`, `side`, `mid`, `align`, `x` or
+`y`)
 to that element. For example adding `"angle": 0` will effectively turn off auto
 positioning while leaving the element in the middle of the hex. It only turns it
 off for that element, the other elements of the hex are still positioned.
@@ -97,6 +98,36 @@ If there is also an icon then the terrain cost is shifted right to:
   "percent": 0.7
 }
 ```
+
+## Named Positions
+
+Instead of working out an `angle` and `percent`, a tile element can name a point
+on track with `mid` and turn to the track there with `align`. They work on every
+element that has a position (towns, centerTowns, values, labels, icons, ...).
+Like any other positioning field they turn auto positioning off for that
+element. Every point is for track that starts on side 1, move it to another side
+with `side`.
+
+- `mid` is the midpoint of a track type: `straight` (`angle` 0, `percent` 0, the
+  center), `sharp` (`angle` 30, `percent` 0.57735) or `gentle` (`angle` 60,
+  `percent` 0.26795).
+- `side` with `mid` turns the point like a track that starts on that side, so a
+  `gentle` on side 3 is at `angle` 180. Without `mid`, `side` keeps rotating the
+  element.
+- `align` is `perpendicular` or `parallel` to the track at the point. A town bar
+  on a `sharp` is `perpendicular` with a `rotation` of 120, on a `gentle` 150.
+  `rotate` and `rotation` are added to it as an offset.
+- An explicit `angle` or `percent` replaces the value from `mid`, and `x` and
+  `y` nudge from it.
+
+```json
+{
+  "track": [{ "type": "gentle", "side": 1 }],
+  "towns": [{ "mid": "gentle", "align": "perpendicular" }]
+}
+```
+
+([examples](/elements/positioning#named))
 
 ## Draw Order
 

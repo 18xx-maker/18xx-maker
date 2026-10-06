@@ -4,7 +4,7 @@
 
 例如:18xx-maker 对简单地块有一套自己偏好的标准。如果一个地图六边格只有一座城市和一项地形费用,只要该六边格上没有其他定位数据,自动定位就会把地形费用放到“标准”位置。如果您想自定义元素的位置,尽管去做,本系统只是在您不指定时提供合理的默认值。
 
-如果您想为某个元素关闭自动定位,只需给该元素添加一个定位字段(`angle`、`percent`、`rotate`、`rotation`、`side`、`x` 或 `y`)。例如添加 `"angle": 0` 就会有效地关闭自动定位,同时让元素保持在六边格中央。这只会关闭该元素的自动定位,六边格上的其他元素仍会被定位。
+如果您想为某个元素关闭自动定位,只需给该元素添加一个定位字段(`angle`、`percent`、`rotate`、`rotation`、`side`、`mid`、`align`、`x` 或 `y`)。例如添加 `"angle": 0` 就会有效地关闭自动定位,同时让元素保持在六边格中央。这只会关闭该元素的自动定位,六边格上的其他元素仍会被定位。
 
 下面的每条规则都在[自动定位](/elements/positioning)示例页面上实时绘制,并附有对应的 JSON。
 
@@ -80,6 +80,24 @@
   "percent": 0.7
 }
 ```
+
+## 命名位置
+
+除了自己计算 `angle` 和 `percent`,元素还可以用 `mid` 指定轨道上的一个点,并用 `align` 使其朝向该处的轨道。它们适用于所有带位置的元素(小镇、centerTown、数值、标签、图标等)。与其他定位字段一样,它们会关闭该元素的自动定位。每个点都对应从边 1 开始的轨道,可用 `side` 将其移到其他边。
+
+- `mid` 是某种轨道类型的中点:`straight`(`angle` 0、`percent` 0,即中心)、`sharp`(`angle` 30、`percent` 0.57735)或 `gentle`(`angle` 60、`percent` 0.26795)。
+- `side` 与 `mid` 一起使用时,会像从该边开始的轨道一样旋转该点,因此边 3 上的 `gentle` 位于 `angle` 180。没有 `mid` 时,`side` 仍然是旋转元素。
+- `align` 为 `perpendicular`(垂直)或 `parallel`(平行)于该点处的轨道。`sharp` 上的小镇条为 `perpendicular` 时 `rotation` 是 120,`gentle` 上是 150。`rotate` 和 `rotation` 会作为偏移量叠加。
+- 明确给出的 `angle` 或 `percent` 会替换 `mid` 的值,`x` 和 `y` 则从该点开始微调。
+
+```json
+{
+  "track": [{ "type": "gentle", "side": 1 }],
+  "towns": [{ "mid": "gentle", "align": "perpendicular" }]
+}
+```
+
+([示例](/elements/positioning#named))
 
 ## 绘制顺序
 

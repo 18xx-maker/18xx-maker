@@ -15,7 +15,7 @@ nicht tust.
 
 Wenn du die automatische Positionierung für ein Element ausschalten möchtest,
 füge diesem Element einfach ein Positionsfeld (`angle`, `percent`, `rotate`,
-`rotation`, `side`, `x` oder `y`) hinzu. Wenn du zum Beispiel `"angle": 0`
+`rotation`, `side`, `mid`, `align`, `x` oder `y`) hinzu. Wenn du zum Beispiel `"angle": 0`
 hinzufügst, wird die automatische Positionierung faktisch ausgeschaltet, und das
 Element bleibt in der Mitte des Kartenfelds. Das gilt nur für dieses Element, die
 anderen Elemente des Kartenfelds werden weiterhin positioniert.
@@ -102,6 +102,38 @@ verschoben, nach:
   "percent": 0.7
 }
 ```
+
+## Benannte Positionen
+
+Statt `angle` und `percent` auszurechnen, kann ein Element mit `mid` einen Punkt
+auf einem Gleis benennen und sich mit `align` am Gleis dort ausrichten. Das
+funktioniert bei jedem Element mit Position (Orte, centerTowns, Werte,
+Beschriftungen, Symbole, ...). Wie jedes andere Positionsfeld schalten sie die
+automatische Positionierung für dieses Element aus. Jeder Punkt gilt für ein
+Gleis, das auf Seite 1 beginnt. Mit `side` wird er auf eine andere Seite
+gedreht.
+
+- `mid` ist die Mitte eines Gleistyps: `straight` (`angle` 0, `percent` 0, die
+  Mitte), `sharp` (`angle` 30, `percent` 0.57735) oder `gentle` (`angle` 60,
+  `percent` 0.26795).
+- `side` mit `mid` dreht den Punkt wie ein Gleis, das auf dieser Seite beginnt,
+  ein `gentle` auf Seite 3 liegt also bei `angle` 180. Ohne `mid` dreht `side`
+  weiterhin das Element.
+- `align` ist `perpendicular` (senkrecht) oder `parallel` (parallel) zum Gleis
+  an diesem Punkt. Ein Ortsbalken auf einem `sharp` ist `perpendicular` mit einer
+  `rotation` von 120, auf einem `gentle` 150. `rotate` und `rotation` werden als
+  Versatz addiert.
+- Ein ausdrückliches `angle` oder `percent` ersetzt den Wert aus `mid`, und `x`
+  und `y` verschieben davon ausgehend.
+
+```json
+{
+  "track": [{ "type": "gentle", "side": 1 }],
+  "towns": [{ "mid": "gentle", "align": "perpendicular" }]
+}
+```
+
+([Beispiele](/elements/positioning#named))
 
 ## Zeichenreihenfolge
 

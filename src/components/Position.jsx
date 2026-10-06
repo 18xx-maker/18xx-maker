@@ -12,10 +12,13 @@ import {
 } from "ramda";
 
 import HexContext from "@/context/HexContext";
+import { namedPosition } from "@/util/tiles/trackGeometry";
 
 const autoPositionTypes = ["icon", "label", "terrain", "value"];
 const positionNames = [
+  "align",
   "angle",
+  "mid",
   "percent",
   "rotate",
   "rotation",
@@ -159,7 +162,14 @@ const Position = ({ data, type, pick, children }) => {
     // Set everything to defaults of 0
     let angle = d.angle || 0;
     let rotation = d.rotate || d.rotation || 0;
-    if (d.side) {
+    let percent = d.percent || 0;
+    const named = d.mid ? namedPosition(d.mid, d.side, d.align) : null;
+    if (named) {
+      // A named point on track: explicit angle and percent still win
+      angle = has("angle", d) ? angle : named.angle;
+      percent = has("percent", d) ? percent : named.percent;
+      rotation = rotation + (named.rotation || 0);
+    } else if (d.side) {
       rotation = rotation + (d.side - 1) * 60;
     }
 
@@ -167,10 +177,10 @@ const Position = ({ data, type, pick, children }) => {
     let y = d.y || 0;
 
     // Compute percent distant into translate
-    let translate = 75 * (d.percent || 0);
-    let rotate = -(d.angle || 0) + (rotation || 0);
+    let translate = 75 * percent;
+    let rotate = -angle + (rotation || 0);
 
-    let passing = omit(["order"], d);
+    let passing = omit(["order", "mid", "align"], d);
 
     return [
       <g

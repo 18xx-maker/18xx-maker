@@ -1,7 +1,12 @@
 /* eslint-disable testing-library/no-node-access */
 import { screen } from "@testing-library/react";
 
+import HexTile from "@/components/Hex";
+
+import { namedPosition } from "@/util/tiles/trackGeometry";
+
 import { renderApp } from "@tests/support/helpers.jsx";
+import { all, drawSvg } from "@tests/support/render.jsx";
 
 const at = (angle, translate) =>
   `rotate(${angle} 0 0) translate(0 ${translate}) rotate(${-angle} 0 0) translate(0 0)`;
@@ -53,5 +58,69 @@ describe("auto positioning examples page", () => {
     expect(count("labelTwo", "rotate(270 ")).toBe(1);
     expect(count("labelThree", "rotate(150 ")).toBe(1);
     expect(count("labelThree", "rotate(270 ")).toBe(1);
+  });
+});
+
+describe("named positions", () => {
+  const transforms = async (towns) => {
+    const svg = await drawSvg(<HexTile hex={{ color: "yellow", towns }} />);
+    return all(svg, "g[transform^='rotate']").map((g) =>
+      g.getAttribute("transform"),
+    );
+  };
+  const sharp = namedPosition("sharp");
+  const gentle = namedPosition("gentle");
+
+  it("puts a mid with align where the equivalent angle, percent and rotation do", async () => {
+    expect(
+      await transforms([{ mid: "sharp", align: "perpendicular" }]),
+    ).toEqual(await transforms([{ ...sharp, rotation: 120 }]));
+    expect(await transforms([{ mid: "gentle", align: "parallel" }])).toEqual(
+      await transforms([{ ...gentle, rotation: 240 }]),
+    );
+  });
+
+  it("does not turn the element without align", async () => {
+    expect(await transforms([{ mid: "gentle" }])).toEqual(
+      await transforms([{ ...gentle }]),
+    );
+  });
+
+  it("moves a mid to a side and adds rotate as an offset", async () => {
+    expect(
+      await transforms([
+        { mid: "gentle", side: 3, align: "perpendicular", rotate: 10 },
+      ]),
+    ).toEqual(
+      await transforms([
+        { angle: 180, percent: gentle.percent, rotation: 280 },
+      ]),
+    );
+  });
+
+  it("lets an explicit angle or percent override the mid", async () => {
+    expect(await transforms([{ mid: "sharp", angle: 90 }])).toEqual(
+      await transforms([{ angle: 90, percent: sharp.percent }]),
+    );
+    expect(await transforms([{ mid: "sharp", percent: 0.2 }])).toEqual(
+      await transforms([{ angle: 30, percent: 0.2 }]),
+    );
+  });
+
+  it("nudges with x and y", async () => {
+    expect(await transforms([{ mid: "sharp", x: 5, y: -3 }])).toEqual(
+      await transforms([{ ...sharp, x: 5, y: -3 }]),
+    );
+    expect(
+      (await transforms([{ mid: "sharp", x: 5, y: -3 }])).some((t) =>
+        t.endsWith("translate(5 -3)"),
+      ),
+    ).toBe(true);
+  });
+
+  it("keeps side as a rotation without a mid", async () => {
+    expect(await transforms([{ side: 3 }])).toEqual(
+      await transforms([{ rotation: 120 }]),
+    );
   });
 });

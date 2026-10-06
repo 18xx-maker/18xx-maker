@@ -913,6 +913,37 @@
       "values": [{ "value": 30, "x": 0, "y": 0 }],
       "labels": [{ "label": "O" }]
     },
+    "M1": {
+      "quantity": 1,
+      "color": "yellow",
+      "track": [{ "type": "sharp", "side": 1 }],
+      "centerTowns": [{ "mid": "sharp" }]
+    },
+    "M2": {
+      "quantity": 1,
+      "color": "yellow",
+      "track": [{ "type": "gentle", "side": 1 }],
+      "centerTowns": [{ "mid": "gentle" }]
+    },
+    "M3": {
+      "quantity": 1,
+      "color": "yellow",
+      "track": [{ "type": "gentle", "side": 1 }],
+      "towns": [{ "mid": "gentle", "align": "perpendicular" }]
+    },
+    "M4": {
+      "quantity": 1,
+      "color": "yellow",
+      "track": [
+        { "type": "sharp", "side": 1 },
+        { "type": "sharp", "side": 3 }
+      ],
+      "towns": [
+        { "mid": "sharp", "align": "perpendicular" },
+        { "mid": "sharp", "side": 3, "align": "perpendicular" }
+      ],
+      "values": [{ "value": 10, "mid": "straight", "y": 30 }]
+    },
     "DB801": 1
   },
   "map": {

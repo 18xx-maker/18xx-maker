@@ -85,7 +85,22 @@
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
-        "side": { "type": "number", "minimum": 1, "maximum": 6 },
+        "side": {
+          "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
         "x": { "type": "number" },
         "y": { "type": "number" },
         "percent": { "type": "number", "minimum": 0 }

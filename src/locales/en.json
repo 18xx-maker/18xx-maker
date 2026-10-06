@@ -339,6 +339,7 @@
         "terrain": "Terrain",
         "values": "Values",
         "labels": "Labels",
+        "named": "Named positions",
         "off": "Turning it off",
         "all": "Everything together"
       },
@@ -356,6 +357,10 @@
         "labelOne": "The first label goes to angle 150, percent 0.7.",
         "labelTwo": "The second label goes to angle 270, percent 0.7.",
         "labelThree": "Only the first two labels are moved. The third stays in the middle.",
+        "namedSharp": "mid sharp puts a centerTown on the midpoint of a sharp (angle 30, percent 0.57735).",
+        "namedGentle": "mid gentle puts it on the midpoint of a gentle (angle 60, percent 0.26795).",
+        "namedBar": "align perpendicular turns a town bar across the track at the point.",
+        "namedSide": "side moves the point like a track that starts on that side, here gentle on side 3.",
         "offAngle": "Any positioning field, here angle 0, turns auto positioning off for that terrain.",
         "offOne": "Turning it off is per element. The second terrain is still moved.",
         "everything": "A city, terrain, an icon, a value and two labels in the standard layout."

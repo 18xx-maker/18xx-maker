@@ -5,6 +5,15 @@ import Color from "@/components/Color";
 import { useOrientation } from "@/context/OrientationContext";
 import { useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
+import {
+  CENTER_EDGE_X,
+  CENTER_EDGE_Y,
+  GENTLE_RADIUS,
+  ONE_TWENTY_DEGREES,
+  SHARP_RADIUS,
+  SIXTY_DEGREES,
+  arcPosition,
+} from "@/util/tiles/trackGeometry";
 
 const startEndDeprecated = (type, replace, end, start) => {
   console.log(
@@ -12,18 +21,11 @@ const startEndDeprecated = (type, replace, end, start) => {
   );
 };
 
-const SIXTY_DEGREES = (60 * Math.PI) / 180; // Into Radians
-const ONE_TWENTY_DEGREES = (120 * Math.PI) / 180; // Into Radians
-
 // the distance between two opposing gentle arc's midpoints at a 60° angle
 // important for angled hex sides track hitting those midpoints
 const PATH_OFFSET_UNIT = 17.15;
 
 const BLEED = 10;
-const CENTER_EDGE_X = 0;
-const CENTER_EDGE_Y = 75;
-const SHARP_RADIUS = 43.31025;
-const GENTLE_RADIUS = 129.90375;
 
 // rotate a point <angle> degrees around the center
 const rotatePoint = (x, y, angle) => {
@@ -31,13 +33,6 @@ const rotatePoint = (x, y, angle) => {
     x * Math.cos(angle) + y * Math.sin(angle),
     -x * Math.sin(angle) + y * Math.cos(angle),
   ];
-};
-
-const arcPosition = (percent, radius, arcAngle, xOffset) => {
-  let angle = percent * arcAngle;
-  let x = CENTER_EDGE_X + xOffset - radius + radius * Math.cos(angle);
-  let y = CENTER_EDGE_Y - radius * Math.sin(angle);
-  return [x, y];
 };
 
 // subsumes sharpPath() and gentlePath()

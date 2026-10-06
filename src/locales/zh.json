@@ -339,6 +339,7 @@
         "terrain": "地形",
         "values": "数值",
         "labels": "标签",
+        "named": "命名位置",
         "off": "关闭自动定位",
         "all": "全部组合"
       },
@@ -356,6 +357,10 @@
         "labelOne": "第一个标签会移到 angle 150、percent 0.7。",
         "labelTwo": "第二个标签会移到 angle 270、percent 0.7。",
         "labelThree": "只有前两个标签会被移动,第三个保持在中央。",
+        "namedSharp": "mid sharp 把 centerTown 放在 sharp 的中点(angle 30,percent 0.57735)。",
+        "namedGentle": "mid gentle 把它放在 gentle 的中点(angle 60,percent 0.26795)。",
+        "namedBar": "align perpendicular 使小镇条在该点垂直于轨道。",
+        "namedSide": "side 像从该边开始的轨道一样移动该点,这里是边 3 上的 gentle。",
         "offAngle": "任何定位字段(这里是 angle 0)都会关闭该地形的自动定位。",
         "offOne": "关闭自动定位只针对单个元素,第二个地形仍会被移动。",
         "everything": "城市、地形、图标、一个数值和两个标签,按标准布局排列。"

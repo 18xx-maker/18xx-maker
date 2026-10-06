@@ -125,6 +125,10 @@ describe("b18", () => {
         { rots: 6, dups: 1 },
         { rots: 6, dups: 1 },
         { rots: 6, dups: 1 },
+        { rots: 6, dups: 1 },
+        { rots: 6, dups: 1 },
+        { rots: 6, dups: 1 },
+        { rots: 6, dups: 1 },
       ]);
     });
 

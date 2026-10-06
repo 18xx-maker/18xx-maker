@@ -50,6 +50,39 @@ const groups = [
     ],
   },
   {
+    id: "named",
+    examples: [
+      {
+        id: "namedSharp",
+        hex: {
+          track: [{ type: "sharp", side: 1 }],
+          centerTowns: [{ mid: "sharp" }],
+        },
+      },
+      {
+        id: "namedGentle",
+        hex: {
+          track: [{ type: "gentle", side: 1 }],
+          centerTowns: [{ mid: "gentle" }],
+        },
+      },
+      {
+        id: "namedBar",
+        hex: {
+          track: [{ type: "gentle", side: 1 }],
+          towns: [{ mid: "gentle", align: "perpendicular" }],
+        },
+      },
+      {
+        id: "namedSide",
+        hex: {
+          track: [{ type: "gentle", side: 3 }],
+          towns: [{ mid: "gentle", side: 3, align: "perpendicular" }],
+        },
+      },
+    ],
+  },
+  {
     id: "off",
     examples: [
       {
