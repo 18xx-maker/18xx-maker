@@ -17,7 +17,7 @@ import capability from "@/util/capability";
 import { downloadGame } from "@/util/download";
 import { firstSection, gameNav } from "@/util/gameNav";
 import { isControlTarget } from "@/util/keys";
-import { useBooleanParam, useTogglePanel } from "@/util/query";
+import { openEditSearch, useBooleanParam, useTogglePanel } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
 import * as idb from "@/util/storage/idb";
 
@@ -192,6 +192,19 @@ export const useBindings = () => {
             window.print();
             return;
           }
+        }
+
+        // The JSON editor is a section of the edit panel. In a dialog the
+        // key is for the dialog.
+        if (event.key === "j") {
+          if (
+            canEdit &&
+            !exportSheetOpen &&
+            !document.querySelector('[role="dialog"]')
+          ) {
+            navigate({ search: openEditSearch(location.search, "json") });
+          }
+          return;
         }
 
         if (event.key === "e") {

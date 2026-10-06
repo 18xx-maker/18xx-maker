@@ -124,9 +124,9 @@ geändert werden muss. Feldnamen und Beschreibungen stammen aus dem Schema und
 sind nur auf Englisch. Ein Feld wird übernommen, wenn du es verlässt oder die
 Eingabetaste drückst, und ein geleertes Feld wird aus dem Spiel entfernt (der
 Titel kann nicht entfernt werden). Probleme mit einem Wert, etwa eine Währung
-ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel.
+ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel (zum JSON-Editor siehe unten).
 
-Das Panel hat Tabs: Spielinfo, Züge und Markt. Mit `[` und `]` wechselst du zwischen
+Das Panel hat Tabs: Spielinfo, Züge, Markt und JSON. Mit `[` und `]` wechselst du zwischen
 ihnen (die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
 schließen das Panel). Der Tab Züge hat für jeden Zug des Spiels eine Karte, die
 aus demselben Schema erzeugt wird. Füge mit Zug hinzufügen einen Zug hinzu und
@@ -156,6 +156,35 @@ geändert. Anzeige, Ledges, Limits und Titel sind unter Erweitert JSON-Felder.
 
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.
+
+### JSON-Editor
+
+Der Tab JSON bearbeitet das ganze Spiel als JSON (derselbe Text, den die
+Schaltfläche Herunterladen schreibt, ohne die Meta-Daten). Mit `j` öffnest du
+das Panel in diesem Tab, wechselst dorthin oder schließt, außerhalb des Editors,
+das Panel. Die Seite folgt deiner Eingabe kurz nachdem du aufhörst zu tippen,
+aber nur solange der Text ein gültiges JSON-Objekt mit einem `info`-Objekt und
+einem `info.title` aus Text ist. Solange das nicht der Fall ist, behält das
+Spiel seine letzte gültige Version, und das Problem wird unter dem Editor mit
+Zeile und Spalte angezeigt. Die Meldung des Parsers ist nur auf Englisch. Dein
+unfertiger Text bleibt beim Wechseln des Tabs oder Schließen des Panels
+erhalten, bis du ihn verwirfst oder die Seite neu lädst. Probleme im Spiel
+selbst (ein unbekanntes Feld, ein falscher Typ) warnen nur: Sie sind am Rand
+markiert und auf der [Problemseite](/docs/games/schemas) aufgelistet, und das
+Spiel wird trotzdem aktualisiert.
+
+Formatieren schreibt den Text mit 2 Leerzeichen Einrückung neu. Es ist nur
+verfügbar, solange das JSON gültig ist, und warnt vorher, wenn Namen in einem
+Objekt doppelt vorkommen oder Zahlen mehr Stellen haben, als gespeichert werden
+können, da beides verloren geht. Ein abschließendes Komma oder einfache
+Anführungszeichen lassen sich über die Markierung am Rand beheben. Wird das
+Spiel anderswo geändert (Zurücksetzen auf der Änderungsseite, Wiederherstellen
+aus dem Verlauf), wird der Text aktualisiert. War dein Text in diesem Moment
+nicht gültig, bleibt er unverändert, und ein Hinweis sagt, dass sich das Spiel
+geändert hat.
+
+Tab rückt im Editor ein. Um ihn zu verlassen, drücke Escape (das erste Escape
+verlässt den Editor, ein zweites schließt das Panel) und danach Tab.
 
 ## Änderungen, Speichern und Verlauf
 

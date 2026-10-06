@@ -78,6 +78,10 @@
       "market": {
         "tab": "Market",
         "description": "Edit the stock market: its type, the cells, the legend and how the share price moves. The changes stay in memory until you save them on the Changes page."
+      },
+      "json": {
+        "tab": "JSON",
+        "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
       }
     },
     "tabs": {
@@ -171,6 +175,45 @@
         "left": "Left",
         "right": "Right"
       }
+    }
+  },
+  "jsonEditor": {
+    "label": "Game JSON",
+    "valid": "Valid JSON. The game follows what you type.",
+    "syntaxError": "Line {{line}}, column {{column}}: syntax error.",
+    "notUpdated": "The game was not updated, the page shows the last valid version.",
+    "invalid": {
+      "root": "The game must be a JSON object.",
+      "info": "The game needs an \"info\" object.",
+      "title": "The game needs a title: \"info.title\" must be text."
+    },
+    "changed": "The game was changed elsewhere. Discard the draft to see the new version.",
+    "format": "Format",
+    "formatAnyway": "Format anyway",
+    "discard": "Discard draft",
+    "warn": {
+      "duplicates": "Some names are used twice in an object. Formatting keeps only the last value of each.",
+      "precision": "Some numbers have more digits than can be stored exactly. Formatting rounds them."
+    },
+    "duplicateKey": "This name is used twice in the object. Only the last value counts.",
+    "fixComma": "Remove the trailing comma",
+    "fixQuotes": "Use double quotes",
+    "problems": "Problems found in the game: {{count}}. They are marked in the margin.",
+    "problemsLink": "See all problems",
+    "loadFailed": "The JSON editor could not be loaded.",
+    "retry": "Try again",
+    "renderError": "This version of the game could not be drawn. Fix it in the edit panel and the page comes back.",
+    "phrases": {
+      "foldLine": "Fold line",
+      "unfoldLine": "Unfold line",
+      "foldedLines": "Folded lines",
+      "unfoldedLines": "Unfolded lines",
+      "foldedCode": "folded code",
+      "unfold": "unfold",
+      "to": "to",
+      "diagnostics": "Problems",
+      "noDiagnostics": "No problems",
+      "close": "close"
     }
   },
   "problems": {
@@ -1177,7 +1220,7 @@
     "keys": {
       "escape": {
         "use": "Go back: close the edit or config panel, then leave the edit page for the game page, then go home",
-        "notes": "Does nothing on the home page"
+        "notes": "Does nothing on the home page. In the JSON editor it leaves the editor first, then Tab moves on"
       },
       "docs": {
         "use": "Navigate to the documentation (Using 18xx Maker)"
@@ -1221,6 +1264,10 @@
       "edit": {
         "use": "Edit the loaded game at its first section",
         "notes": "On a game edit page, opens or closes the edit panel (the forms for the game info and trains). Elsewhere: goes back to the game page"
+      },
+      "json": {
+        "use": "Edit the whole game as JSON",
+        "notes": "On a game edit page, opens the edit panel on the JSON tab, switches to it, or closes the panel. Not while typing in the editor. In the editor, Esc leaves it (then Tab moves on) and Tab indents"
       },
       "section": {
         "use": "Edit the loaded game at the map or a section",

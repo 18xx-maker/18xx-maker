@@ -4,8 +4,9 @@ import { useMatch } from "react-router";
 
 import Toolbar from "@/components/Toolbar";
 import Config from "@/components/config/Config";
+import RenderBoundary from "@/components/page/RenderBoundary";
 
-import { useConfig } from "@/hooks";
+import { useConfig, useGame } from "@/hooks";
 import { useEditPanel } from "@/hooks/useEditPanel";
 import { parsePrintScale } from "@/util";
 import { useBooleanParam } from "@/util/query";
@@ -19,6 +20,7 @@ const Viewport = ({ children }) => {
   const [print] = useBooleanParam("print");
   const { open: edit } = useEditPanel();
   const { config: printConfig } = useConfig();
+  const game = useGame();
   const b18 = useMatch("/games/:slug/b18/*");
 
   // The print scale zooms the print pages. The Board18 pages have a fixed page
@@ -74,7 +76,7 @@ const Viewport = ({ children }) => {
             "not-has-[#editor]:pt-16 not-has-[#editor]:flex not-has-[#editor]:flex-col not-has-[#editor]:[align-items:safe_center] print:pt-0! print:block!",
         )}
       >
-        {children}
+        <RenderBoundary game={game}>{children}</RenderBoundary>
       </div>
     </div>
   );

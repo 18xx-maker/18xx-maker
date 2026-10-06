@@ -78,6 +78,10 @@
       "market": {
         "tab": "市场",
         "description": "编辑股票市场:类型、单元格、图例以及股价的移动方式。更改会保留在内存中,直到你在“更改”页面保存。"
+      },
+      "json": {
+        "tab": "JSON",
+        "description": "以 JSON 编辑整个游戏。只要 JSON 有效,页面就会随你的输入而更新。更改保留在内存中,直到你在“更改”页面保存。"
       }
     },
     "tabs": {
@@ -171,6 +175,45 @@
         "left": "左",
         "right": "右"
       }
+    }
+  },
+  "jsonEditor": {
+    "label": "游戏 JSON",
+    "valid": "JSON 有效。游戏会随你的输入而更新。",
+    "syntaxError": "第 {{line}} 行,第 {{column}} 列:语法错误。",
+    "notUpdated": "游戏未更新,页面显示最后一个有效版本。",
+    "invalid": {
+      "root": "游戏必须是一个 JSON 对象。",
+      "info": "游戏需要一个 \"info\" 对象。",
+      "title": "游戏需要标题:\"info.title\" 必须是文本。"
+    },
+    "changed": "游戏已在别处更改。丢弃草稿以查看新版本。",
+    "format": "格式化",
+    "formatAnyway": "仍然格式化",
+    "discard": "丢弃草稿",
+    "warn": {
+      "duplicates": "对象中有些名称重复。格式化只保留每个名称的最后一个值。",
+      "precision": "有些数字的位数超过了可精确保存的范围。格式化会对其取整。"
+    },
+    "duplicateKey": "该名称在对象中重复。只有最后一个值有效。",
+    "fixComma": "删除末尾的逗号",
+    "fixQuotes": "使用双引号",
+    "problems": "在游戏中发现的问题:{{count}} 个。已在边栏标出。",
+    "problemsLink": "查看所有问题",
+    "loadFailed": "无法加载 JSON 编辑器。",
+    "retry": "重试",
+    "renderError": "无法绘制此版本的游戏。请在编辑面板中修复,页面就会恢复。",
+    "phrases": {
+      "foldLine": "折叠行",
+      "unfoldLine": "展开行",
+      "foldedLines": "已折叠的行",
+      "unfoldedLines": "已展开的行",
+      "foldedCode": "已折叠的代码",
+      "unfold": "展开",
+      "to": "到",
+      "diagnostics": "问题",
+      "noDiagnostics": "没有问题",
+      "close": "关闭"
     }
   },
   "problems": {
@@ -1177,7 +1220,7 @@
     "keys": {
       "escape": {
         "use": "返回:先关闭编辑面板或配置面板,再从编辑页面返回游戏页面,最后回到首页",
-        "notes": "在首页上无效"
+        "notes": "在首页上无效。在 JSON 编辑器中,它先离开编辑器,之后 Tab 键继续前进"
       },
       "docs": {
         "use": "前往文档(使用 18xx Maker)"
@@ -1221,6 +1264,10 @@
       "edit": {
         "use": "在第一个部分编辑已加载的游戏",
         "notes": "在游戏编辑页面上,打开或关闭编辑面板(游戏信息和列车的表单)。在其他页面返回游戏页面"
+      },
+      "json": {
+        "use": "以 JSON 编辑整个游戏",
+        "notes": "在游戏编辑页面上,在 JSON 标签页打开编辑面板、切换到该标签页或关闭面板。在编辑器中输入时无效。在编辑器中,Esc 离开编辑器(之后 Tab 键继续前进),Tab 键用于缩进"
       },
       "section": {
         "use": "在地图或某个部分编辑已加载的游戏",

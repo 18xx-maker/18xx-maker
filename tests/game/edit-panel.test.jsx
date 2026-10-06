@@ -505,13 +505,16 @@ describe("edit panel tabs", () => {
     const marketTab = screen.getByRole("tab", { name: "Market" });
     expect(marketTab).toHaveFocus();
     await user.keyboard("{ArrowRight}");
+    const jsonTab = screen.getByRole("tab", { name: "JSON" });
+    expect(jsonTab).toHaveFocus();
+    await user.keyboard("{ArrowRight}");
     expect(info).toHaveFocus();
     await user.keyboard("{ArrowLeft}");
-    expect(marketTab).toHaveFocus();
+    expect(jsonTab).toHaveFocus();
     await user.keyboard("{Home}");
     expect(info).toHaveFocus();
     await user.keyboard("{End}");
-    expect(marketTab).toHaveFocus();
+    expect(jsonTab).toHaveFocus();
   });
 
   it("[ and ] cycle the tabs and wrap, but not while typing", async () => {
@@ -532,7 +535,15 @@ describe("edit panel tabs", () => {
     );
     await user.keyboard("]");
     await waitFor(() =>
+      expect(router.state.location.search).toBe("?edit=true&editSection=json"),
+    );
+    await user.keyboard("]");
+    await waitFor(() =>
       expect(router.state.location.search).toBe("?edit=true"),
+    );
+    await user.keyboard("[[");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?edit=true&editSection=json"),
     );
     await user.keyboard("[[");
     await waitFor(() =>

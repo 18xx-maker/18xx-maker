@@ -110,6 +110,13 @@
     --warning-foreground: 20.5 90.2% 48.2%;
     --warning-text: 20.5 90.2% 36%;
     --error-foreground: 0 72.2% 50.6%;
+    /* The JSON editor of the edit panel: the github-light colors of code blocks */
+    --json-key: #005cc5;
+    --json-string: #032f62;
+    --json-number: #005cc5;
+    --json-literal: #d73a49;
+    --json-punctuation: #6a737d;
+    --json-invalid: #b31d28;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -165,6 +172,23 @@
   }
   svg {
     overflow: visible;
+  }
+}
+
+/* The JSON editor (CodeMirror) of the edit panel. 16px keeps iOS from
+   zooming in on focus, and the focus ring does not animate. */
+@layer components {
+  @media (max-width: 767px) {
+    .cm-editor .cm-content,
+    .cm-editor .cm-gutters {
+      font-size: 16px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cm-editor * {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 }
 

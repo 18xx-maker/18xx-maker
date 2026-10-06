@@ -113,9 +113,9 @@ change to the app. Field names and descriptions come from the schema and are
 only in English. A field is passed on when you leave it or press Enter, and
 emptying a field removes it from the game (the title cannot be removed).
 Problems with a value, like a currency without a `#`, are shown below its field.
-Escape closes the panel.
+Escape closes the panel (see below for the JSON editor).
 
-The panel has tabs: Game info, Trains and Market. Press `[` and `]` to switch between
+The panel has tabs: Game info, Trains, Market and JSON. Press `[` and `]` to switch between
 them (the number keys go to another section of the game and close the panel).
 The Trains tab has a card for each train of the game, generated from the same
 schema. Add a train with Add train, and use the buttons of a card to move it up
@@ -141,6 +141,31 @@ display, ledges, limits and title are JSON fields under Advanced.
 
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
+
+### JSON editor
+
+The JSON tab edits the whole game as JSON (the same text as the Download
+button writes, without the meta). Press `j` to open the panel on this tab, to
+switch to it, or, outside the editor, to close the panel. The page follows what
+you type, a moment after you stop, but only while the text is a valid JSON
+object with an `info` object and a text `info.title`. While it is not, the game
+keeps its last valid version, and the problem is shown below the editor with
+its line and column. The parser's own message is only in English. Your
+unfinished text is kept when you switch tabs or close the panel, until you
+discard it or reload the page. Problems with the game itself (an unknown field,
+a wrong type) only warn: they are marked in the margin and listed on the
+[Problems page](/docs/games/schemas), and the game is still updated.
+
+Format rewrites the text with an indent of 2 spaces. It is only available while
+the JSON is valid, and warns first when names are used twice in an object or
+numbers have more digits than can be stored, as both are lost. A trailing comma
+or single quotes can be fixed from the marker in the margin. Changing the game
+somewhere else (Revert on the Changes page, restoring from the history) updates
+the text. If your text was not valid at that moment it is left alone, and a note
+says the game changed.
+
+Tab indents inside the editor. To leave it, press Escape (the first Escape
+leaves the editor, a second closes the panel) and then Tab.
 
 ## Changes, saving and history
 
