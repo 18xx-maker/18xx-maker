@@ -130,6 +130,19 @@ is a number or a list written as it prints, like `10/20`; text that is not
 numbers, like `$10/$20`, stays text. The abilities of a private are edited as
 JSON, and the other fields, like the note and description, are under More fields.
 
+The Phases tab works the same way for the phases of the game. A card shows
+the name, limit, tiles, train, minor flag and rounds first, and the company,
+the event the phase starts on, the notes, buying companies and events are under
+More fields. The limit is a whole number, `∞` or a fraction like `3/4`. The
+train and the notes are text, or a list when you write one entry on each line
+(a single line is saved as plain text). A phase needs a limit and tiles, which
+cannot be emptied, and a name or a train. A phase with neither shows the
+message of the schema that one of several options must match, and a new phase
+in a game whose phases have no name gets a train instead of a name. The event a
+phase starts on (`on`) is edited as JSON, so type a train name with its quotes,
+like `"3"`. Names are how other parts of the game refer to a phase or a train:
+the panel does not update those references when you rename one.
+
 The Market tab edits the stock market: the type (2D, 1D or 1Diag), a grid of
 the cells, the cell defaults, the legend and the movement. Click a cell, or
 move with the arrow keys, to edit it in the form below the grid: its value,

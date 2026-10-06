@@ -58,6 +58,13 @@ const pages = [
     ready: (page) => page.getByRole("button", { name: "Add private" }),
     more: true,
   },
+  {
+    // With the card of a phase open and its more fields
+    name: "edit panel phases",
+    url: "/games/18Test/map?edit=true&editSection=phases",
+    ready: (page) => page.getByRole("button", { name: "Add phase" }),
+    more: true,
+  },
   // The JSON editor, in both themes
   ...["light", "dark"].map((colorScheme) => ({
     name: `edit panel json (${colorScheme})`,

@@ -1188,6 +1188,291 @@ describe("edit panel privates", () => {
   });
 });
 
+describe("edit panel phases", () => {
+  const phasesRoute = `${route}?edit=true&editSection=phases`;
+  const phases = (store) => store.getState().game.phases;
+  const phaseNames = (store) => phases(store).map((p) => p.name);
+  const withPhases = (list) => ({
+    ...structuredClone(games["18Test"]),
+    phases: list,
+  });
+  const ready = () => screen.findByRole("button", { name: "Add phase" });
+  const text = (index, name) =>
+    within(cards()[index]).getByRole("textbox", { name });
+  const more = (user, index) =>
+    user.click(
+      within(cards()[index]).getByRole("button", { name: "More fields" }),
+    );
+  const keyed = [
+    { train: "2H", limit: 4, tiles: "yellow" },
+    { train: ["3H", "3M"], limit: 4, tiles: "green" },
+  ];
+
+  it("is the tab after the privates, with a card for each phase", async () => {
+    open(phasesRoute);
+    await ready();
+    const tabs = screen.getAllByRole("tab");
+    const privates = tabs.findIndex((tab) => tab.id.endsWith("privates"));
+    expect(tabs[privates + 1]).toHaveAccessibleName("Phases");
+    expect(tabs[privates + 1]).toHaveAttribute("aria-selected", "true");
+    expect(cards()).toHaveLength(games["18Test"].phases.length);
+  });
+
+  it("shows the primary fields of a phase, the rest is behind More fields", async () => {
+    const { user } = open(phasesRoute);
+    await ready();
+    expect(text(0, "Name")).toHaveValue("2");
+    expect(text(0, "Limit")).toHaveValue("4");
+    expect(text(0, "Tiles")).toHaveValue("yellow");
+    expect(text(0, "Train")).toHaveValue("");
+    expect(text(1, "Train")).toHaveValue("3+1");
+    expect(text(4, "Limit")).toHaveValue("3");
+    expect(
+      within(cards()[0]).getByRole("combobox", { name: "Minor" }),
+    ).toHaveTextContent("Yes");
+    expect(
+      within(cards()[0]).getByRole("spinbutton", { name: "Rounds" }),
+    ).toBeVisible();
+    expect(
+      within(cards()[0]).queryByRole("textbox", { name: "Notes" }),
+    ).not.toBeInTheDocument();
+
+    await more(user, 0);
+    const card = within(cards()[0]);
+    expect(card.getByRole("textbox", { name: "Company" })).toBeVisible();
+    expect(card.getByRole("textbox", { name: "Notes" })).toBeVisible();
+    expect(card.getByRole("combobox", { name: "Buy_companies" })).toBeVisible();
+    // The event of a phase is JSON
+    expect(card.getByRole("textbox", { name: "On" }).tagName).toBe("TEXTAREA");
+    // No nested list: the only Add button is the one of the phases
+    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(1);
+  });
+
+  it("marks the limit and the tiles as required, the name is not", async () => {
+    const { user, store } = open(phasesRoute);
+    await ready();
+    const card = within(cards()[0]);
+    expect(card.getByRole("textbox", { name: /Limit/ })).toBeRequired();
+    expect(card.getByRole("textbox", { name: /Tiles/ })).toBeRequired();
+    expect(card.getByRole("textbox", { name: "Name" })).not.toBeRequired();
+
+    await user.clear(text(0, "Tiles"));
+    await user.tab();
+    expect(phases(store)[0].tiles).toBe("yellow");
+    expect(await screen.findByText("This field is required.")).toBeVisible();
+
+    // The name of a phase can be removed
+    await user.clear(text(0, "Name"));
+    await user.tab();
+    expect("name" in phases(store)[0]).toBe(false);
+  });
+
+  it("edits the limit: a number, ∞ or a fraction, anything else is refused", async () => {
+    const { user, store } = open(phasesRoute);
+    await ready();
+    const limit = () => text(1, "Limit");
+
+    await user.clear(limit());
+    await user.type(limit(), "∞{Enter}");
+    expect(phases(store)[1].limit).toBe("∞");
+    await user.clear(limit());
+    await user.type(limit(), "3/4{Enter}");
+    expect(phases(store)[1].limit).toBe("3/4");
+    await user.clear(limit());
+    await user.type(limit(), "0{Enter}");
+    expect(phases(store)[1].limit).toBe("3/4");
+    expect(await screen.findByText(/whole number of at least 1/)).toBeVisible();
+    expect(screen.queryByText(/must be/i)).not.toBeInTheDocument();
+    await user.clear(limit());
+    await user.type(limit(), " 5 {Enter}");
+    expect(phases(store)[1].limit).toBe(5);
+    expect(phases(store)[0].limit).toBe(4);
+  });
+
+  it("the train is one text, or a list with a line each, trimmed", async () => {
+    const { user, store } = open(phasesRoute);
+    await ready();
+    expect(text(1, "Train")).toHaveAccessibleDescription(/One per line/);
+
+    await user.clear(text(1, "Train"));
+    await user.type(text(1, "Train"), "  4H {Enter}{Enter}   2M  {Enter}");
+    await user.tab();
+    expect(phases(store)[1].train).toEqual(["4H", "2M"]);
+    expect(text(1, "Train")).toHaveValue("  4H \n\n   2M  \n");
+
+    await user.clear(text(1, "Train"));
+    await user.type(text(1, "Train"), "3H");
+    await user.tab();
+    expect(phases(store)[1].train).toBe("3H");
+
+    await user.clear(text(1, "Train"));
+    await user.tab();
+    expect("train" in phases(store)[1]).toBe(false);
+    expect(phases(store)[1].name).toBe("3");
+  });
+
+  it("keeps a list of one line when it is left unchanged", async () => {
+    const { user, store } = open(
+      phasesRoute,
+      withPhases([{ name: "2", train: ["4H"], limit: 4, tiles: "yellow" }]),
+    );
+    await ready();
+    expect(text(0, "Train")).toHaveValue("4H");
+    await user.click(text(0, "Train"));
+    await user.tab();
+    expect(phases(store)[0].train).toEqual(["4H"]);
+    expect(selectGameChanged(store.getState())).toBe(false);
+  });
+
+  it("the notes are a text or a list, one per line", async () => {
+    const { user, store } = open(phasesRoute);
+    await ready();
+    await more(user, 0);
+    expect(text(0, "Notes")).toHaveAccessibleDescription(/One per line/);
+    await user.type(text(0, "Notes"), "First{Enter}Second");
+    await user.tab();
+    expect(phases(store)[0].notes).toEqual(["First", "Second"]);
+    expect(phases(store)[0]).toMatchObject({ name: "2", limit: 4 });
+  });
+
+  it("the buy companies flag and the events keep the other keys", async () => {
+    const { user, store } = open(phasesRoute);
+    await ready();
+    await more(user, 4);
+    const card = within(cards()[4]);
+    expect(
+      card.getByRole("combobox", { name: "Close_companies" }),
+    ).toHaveTextContent("Yes");
+
+    await user.click(card.getByRole("combobox", { name: "Remove_tokens" }));
+    await user.click(await screen.findByRole("option", { name: "Yes" }));
+    expect(phases(store)[4].events).toEqual({
+      close_companies: true,
+      remove_tokens: true,
+    });
+    expect(phases(store)[4]).toMatchObject({
+      name: "4",
+      train: "4D",
+      limit: 3,
+    });
+  });
+
+  it("adds a phase that is valid and named to not clash", async () => {
+    const { user, store } = open(phasesRoute);
+    await user.click(await ready());
+    const count = games["18Test"].phases.length;
+    expect(phases(store)).toHaveLength(count + 1);
+    expect(phases(store)[count]).toEqual({
+      name: String(count + 1),
+      limit: 4,
+      tiles: "yellow",
+    });
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent(
+        `Added phase ${count + 1}`,
+      ),
+    );
+    expect(
+      within(cards()[count]).getByRole("button", { name: String(count + 1) }),
+    ).toHaveFocus();
+    // The new phase is valid: the problems check has nothing on it
+    await settled();
+    await waitFor(() =>
+      expect(
+        selectGameProblems(store.getState(), "internal:abc"),
+      ).toBeDefined(),
+    );
+    expect(
+      selectGameProblems(store.getState(), "internal:abc").filter((issue) =>
+        issue.pointer.startsWith(`phases[${count}]`),
+      ),
+    ).toEqual([]);
+  });
+
+  it("adds to a game without phases and removes the key with the last phase", async () => {
+    const { user, store } = open(phasesRoute, withPhases([]));
+    await ready();
+    expect(await screen.findByText("Nothing here yet.")).toBeVisible();
+    await user.click(screen.getByRole("button", { name: "Add phase" }));
+    expect(phases(store)).toEqual([{ name: "1", limit: 4, tiles: "yellow" }]);
+
+    await user.click(button("Remove phase 1"));
+    expect("phases" in store.getState().game).toBe(false);
+    expect(await screen.findByText("Nothing here yet.")).toBeVisible();
+  });
+
+  it("removes a phase and puts it back with undo", async () => {
+    const { user, store } = open(phasesRoute);
+    await ready();
+    await user.click(button("Remove phase 8"));
+    expect(phaseNames(store)).toEqual(["2", "3", "2", "3", "4"]);
+    expect(screen.getByRole("status")).toHaveTextContent("Removed phase 8");
+
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(phases(store)).toEqual(games["18Test"].phases);
+    expect(selectGameChanged(store.getState())).toBe(false);
+  });
+
+  it("moves and duplicates a phase", async () => {
+    const { user, store } = open(phasesRoute);
+    await ready();
+    expect(button("Move phase 4 down")).toBeEnabled();
+    await user.click(button("Move phase 4 down"));
+    expect(phaseNames(store)).toEqual(["2", "3", "2", "3", "8", "4"]);
+    expect(button("Move phase 4 down")).toBeDisabled();
+
+    await user.click(button("Duplicate phase 8"));
+    expect(phaseNames(store)).toEqual(["2", "3", "2", "3", "8", "7", "4"]);
+    expect(phases(store)[5]).toEqual({ ...phases(store)[4], name: "7" });
+  });
+
+  it("shows a phase with no name by its train, or trains", async () => {
+    open(phasesRoute, withPhases(keyed));
+    await ready();
+    expect(cards()).toHaveLength(2);
+    expect(
+      within(cards()[0]).getByRole("button", { name: "2H" }),
+    ).toBeVisible();
+    expect(
+      within(cards()[1]).getByRole("button", { name: "3H, 3M" }),
+    ).toBeVisible();
+    expect(button("Remove phase 3H, 3M")).toBeVisible();
+    expect(text(1, "Train")).toHaveValue("3H\n3M");
+  });
+
+  it("a phase with neither name nor train is #n", async () => {
+    open(phasesRoute, withPhases([{ limit: 4, tiles: "yellow" }]));
+    await ready();
+    expect(
+      within(cards()[0]).getByRole("button", { name: "#1" }),
+    ).toBeVisible();
+  });
+
+  it("a game keyed by train gets a phase with a train, not a name", async () => {
+    const { user, store } = open(phasesRoute, withPhases(keyed));
+    await ready();
+    await user.click(screen.getByRole("button", { name: "Add phase" }));
+    expect(phases(store)[2]).toEqual({
+      train: "3",
+      limit: 4,
+      tiles: "yellow",
+    });
+    expect(phases(store).every((phase) => !("name" in phase))).toBe(true);
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent("Added phase 3"),
+    );
+  });
+
+  it("duplicating a phase without a name does not give the copy one", async () => {
+    const { user, store } = open(phasesRoute, withPhases(keyed));
+    await ready();
+    await user.click(button("Duplicate phase 2H"));
+    expect(phases(store)).toHaveLength(3);
+    expect(phases(store)[1]).toEqual(keyed[0]);
+    expect(phases(store).some((phase) => "name" in phase)).toBe(false);
+  });
+});
+
 describe("edit panel market", () => {
   const marketRoute = `${route}?edit=true&editSection=market`;
   const stock = (store) => store.getState().game.stock;

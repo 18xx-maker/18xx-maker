@@ -279,7 +279,23 @@ from `src/schemas/game.schema.json` (`src/components/schemaForm`):
 `trains`, an `ArrayField` with a card for each item (add, remove with undo,
 duplicate, move, "more fields" for what is not in `PRIMARY_KEYS`, a list shared
 by all the lists, so `revenue` and `company` of a private are in it and
-trains have neither). `PrivatesForm` is the same for `privates`. `abilities` is
+trains have neither). `PrivatesForm` is the same for `privates`.
+`PhasesForm` is the same for `phases` (`PHASE_PRIMARY_KEYS`, defaults
+`limit` and `tiles`): it passes `primary` and `unique` to `ArrayField`, and
+`unique="named"` names a new phase only when the others have names (a phase list
+keyed by train, like 1871, gets a free `train` instead; a copy is renamed only
+when its source has a name), and the card title falls back to the train.
+`isRequired` also counts a key that every branch of an `anyOf` requires (the
+limit and tiles of a phase, not its name or train), so a phase with neither
+shows the raw any-of message. A `limit` (a number or two patterns) is the
+`limit` kind: `parseLimit` takes a whole number of at least 1, `∞` or `3/4` and
+anything else shows `editPanel.invalidLimit`, and `stringOrNumber` matches any
+count of string and number alternatives. A text or a list of texts (the train
+and notes of a phase, exactly `string` and `array` of `string` with no enum or
+pattern) is the `stringList` kind, one entry a line in a textarea
+(`parseList`, `formatList`, `sameList`; one line is saved as a string, so a
+list of one stays a list until it is edited). The `on` of a phase falls back to
+JSON and shows a bare string with its quotes. `abilities` is
 in `JSON_KEYS` and stays a JSON textarea whatever its schema (a nested list
 would lack the required `type` and hide the other keys of an ability), and a
 `description` is a textarea (`LONG_TEXT_KEYS`). A `revenue` (a `oneOf` of a
