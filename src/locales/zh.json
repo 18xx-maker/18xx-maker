@@ -262,7 +262,7 @@
         "description": "地图、公司和游戏的颜色"
       },
       "positioning": {
-        "title": "自动定位",
+        "title": "定位",
         "description": "更轻松地制作地图"
       },
       "exports": {
@@ -328,17 +328,19 @@
       "description": "来自内置 18xx 游戏的数据"
     },
     "positioning": {
-      "title": "自动定位",
-      "description": "自动定位的实时示例",
+      "title": "定位",
+      "description": "每个定位选项和自动定位规则的实时示例",
       "page": {
-        "description": "每条自动定位规则和特殊情况都在此实时绘制,并附上生成它的 JSON。",
-        "docs": "规则请参见自动定位文档"
+        "description": "每个定位选项和每条自动定位规则都在此实时绘制,并附上生成它的 JSON。",
+        "docs": "详情请参见定位文档"
       },
       "groups": {
+        "basic": "定位选项",
         "icons": "图标",
         "terrain": "地形",
         "values": "数值",
         "labels": "标签",
+        "named": "命名位置",
         "off": "关闭自动定位",
         "all": "全部组合"
       },
@@ -356,9 +358,24 @@
         "labelOne": "第一个标签会移到 angle 150、percent 0.7。",
         "labelTwo": "第二个标签会移到 angle 270、percent 0.7。",
         "labelThree": "只有前两个标签会被移动,第三个保持在中央。",
+        "namedSharp": "mid sharp 把 centerTown 放在 sharp 的中点(angle 30,percent 0.577)。",
+        "namedGentle": "mid gentle 把它放在 gentle 的中点(angle 60,percent 0.268)。",
+        "namedBar": "align perpendicular 使小镇条在该点垂直于轨道。",
+        "namedSide": "side 像从该边开始的轨道一样移动该点,这里是边 3 上的 gentle。",
         "offAngle": "任何定位字段(这里是 angle 0)都会关闭该地形的自动定位。",
         "offOne": "关闭自动定位只针对单个元素,第二个地形仍会被移动。",
-        "everything": "城市、地形、图标、一个数值和两个标签,按标准布局排列。"
+        "everything": "城市、地形、图标、一个数值和两个标签,按标准布局排列。",
+        "basicAnglePercent": "angle 和 percent 移动元素:angle 是绕中心的角度,percent 是从中心走向六边格边缘的比例。",
+        "basicXY": "x 和 y 以普通单位从元素原来的位置开始移动它。",
+        "basicRotation": "rotation 让元素在原地旋转。",
+        "basicRotate": "rotate 与 rotation 相同。",
+        "basicSide": "不带 mid 的 side 会把元素旋转 (side - 1) 个六分之一圈:边 1 不旋转,边 2 旋转 60 度。",
+        "basicHidden": "hidden 会移除该元素,其他元素保持原位。",
+        "namedStraight": "mid straight 是中心。配合 align perpendicular,小镇条会横跨轨道。",
+        "namedParallel": "align parallel 让元素在该点沿着轨道放置。",
+        "namedOffset": "rotate 和 rotation 会作为偏移量加到 align 上,这里是 30。",
+        "namedOverride": "明确的 angle 或 percent 会替换 mid 中的值,这里是 percent 0.6。",
+        "namedNudge": "x 和 y 从命名点开始微调元素。"
       }
     }
   },
@@ -1053,7 +1070,7 @@
         "notes": "不适用于游戏编辑页面。编辑时切换配置"
       },
       "positioning": {
-        "use": "前往自动定位页面",
+        "use": "前往定位页面",
         "notes": "不适用于游戏编辑页面"
       },
       "game": {

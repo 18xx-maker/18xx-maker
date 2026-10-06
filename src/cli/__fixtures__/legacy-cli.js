@@ -2509,6 +2509,10 @@ export default {
               { rots: 6, dups: 1 },
               { rots: 6, dups: 1 },
               { rots: 6, dups: 1 },
+              { rots: 6, dups: 1 },
+              { rots: 6, dups: 1 },
+              { rots: 6, dups: 1 },
+              { rots: 6, dups: 1 },
             ],
           },
           {
@@ -2669,7 +2673,7 @@ export default {
         {
           path: "board18-18Test-1.0/18Test-1.0/Yellow.png",
           url: "http://localhost:9000/games/18Test/b18/tiles/yellow?print=true",
-          size: { width: 750, height: 900 },
+          size: { width: 1350, height: 900 },
           omitBackground: true,
         },
         {

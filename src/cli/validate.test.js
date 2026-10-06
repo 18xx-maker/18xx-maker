@@ -286,6 +286,38 @@ describe("validate", () => {
     });
   });
 
+  describe("the named position of a tile element", () => {
+    const withHex = (hex) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          tiles: { X1: { color: "yellow", ...hex } },
+        }),
+      );
+
+    it.each([
+      ["sharp", { centerTowns: [{ mid: "sharp" }] }],
+      ["gentle with align", { towns: [{ mid: "gentle", align: "parallel" }] }],
+      [
+        "a side",
+        { towns: [{ mid: "straight", side: 3, align: "perpendicular" }] },
+      ],
+      ["a value", { values: [{ value: 10, mid: "gentle", y: 5 }] }],
+    ])("accepts %s", (_, hex) => {
+      expect(run(withHex(hex)).code).toBe(0);
+    });
+
+    it.each([
+      [{ towns: [{ mid: "wide" }] }],
+      [{ towns: [{ mid: "sharp", align: "across" }] }],
+      [{ towns: [{ mid: 1 }] }],
+      [{ towns: [{ align: "parallel" }] }],
+    ])("rejects %j", (hex) => {
+      expect(run(withHex(hex)).code).toBe(1);
+    });
+  });
+
   describe("the card sizes of a config", () => {
     const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
     const withSizes = (sizes) =>

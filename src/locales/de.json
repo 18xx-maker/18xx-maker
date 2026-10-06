@@ -262,7 +262,7 @@
         "description": "Farben für Karte, Gesellschaften und Spiel"
       },
       "positioning": {
-        "title": "Automatische Positionierung",
+        "title": "Positionierung",
         "description": "Einfacher Kartenbau"
       },
       "exports": {
@@ -328,18 +328,20 @@
       "description": "Daten aus den enthaltenen 18xx-Spielen"
     },
     "positioning": {
-      "title": "Automatische Positionierung",
-      "description": "Live-Beispiele zur automatischen Positionierung",
+      "title": "Positionierung",
+      "description": "Live-Beispiele für jede Positionierungsoption und Regel der automatischen Positionierung",
       "page": {
-        "description": "Jede Regel und jeder Sonderfall der automatischen Positionierung, live gezeichnet, mit dem JSON, das ihn erzeugt.",
-        "docs": "Die Regeln stehen in der Doku zur automatischen Positionierung"
+        "description": "Jede Positionierungsoption und jede Regel der automatischen Positionierung, live gezeichnet, mit dem JSON, das sie erzeugt.",
+        "docs": "Die Details stehen in der Doku zur Positionierung"
       },
       "groups": {
+        "basic": "Positionierungsoptionen",
         "icons": "Symbole",
         "terrain": "Gelände",
         "values": "Werte",
         "labels": "Beschriftungen",
-        "off": "Ausschalten",
+        "named": "Benannte Positionen",
+        "off": "Automatische Positionierung ausschalten",
         "all": "Alles zusammen"
       },
       "examples": {
@@ -356,9 +358,24 @@
         "labelOne": "Die erste Beschriftung wandert nach angle 150, percent 0.7.",
         "labelTwo": "Die zweite Beschriftung wandert nach angle 270, percent 0.7.",
         "labelThree": "Nur die ersten beiden Beschriftungen werden verschoben. Die dritte bleibt in der Mitte.",
+        "namedSharp": "mid sharp setzt eine centerTown auf die Mitte eines sharp (angle 30, percent 0.577).",
+        "namedGentle": "mid gentle setzt sie auf die Mitte eines gentle (angle 60, percent 0.268).",
+        "namedBar": "align perpendicular dreht einen Ortsbalken am Punkt quer zum Gleis.",
+        "namedSide": "side verschiebt den Punkt wie ein Gleis, das auf dieser Seite beginnt, hier gentle auf Seite 3.",
         "offAngle": "Jedes Positionsfeld, hier angle 0, schaltet die automatische Positionierung für dieses Gelände aus.",
         "offOne": "Das Ausschalten gilt pro Element. Das zweite Gelände wird weiterhin verschoben.",
-        "everything": "Eine Stadt, Gelände, ein Symbol, ein Wert und zwei Beschriftungen im Standardlayout."
+        "everything": "Eine Stadt, Gelände, ein Symbol, ein Wert und zwei Beschriftungen im Standardlayout.",
+        "basicAnglePercent": "angle und percent verschieben das Element: der Winkel um die Mitte und der Anteil des Wegs bis zum Rand des Kartenfelds.",
+        "basicXY": "x und y verschieben das Element in einfachen Einheiten von seiner Position aus.",
+        "basicRotation": "rotation dreht das Element an seiner Stelle.",
+        "basicRotate": "rotate ist dasselbe wie rotation.",
+        "basicSide": "side ohne mid dreht das Element um (side - 1) Sechstel einer Drehung: Seite 1 ist nicht gedreht, Seite 2 um 60 Grad.",
+        "basicHidden": "hidden entfernt das Element. Die anderen behalten ihre Position.",
+        "namedStraight": "mid straight ist die Mitte. Mit align perpendicular kreuzt ein Ortsbalken das Gleis.",
+        "namedParallel": "align parallel legt das Element an diesem Punkt entlang des Gleises.",
+        "namedOffset": "rotate und rotation werden als Versatz zu align addiert, hier 30.",
+        "namedOverride": "Ein ausdrückliches angle oder percent ersetzt den Wert aus mid, hier percent 0.6.",
+        "namedNudge": "x und y verschieben das Element vom benannten Punkt aus."
       }
     }
   },
@@ -1053,7 +1070,7 @@
         "notes": "Nicht auf der Bearbeitungsseite eines Spiels. Schaltet beim Bearbeiten die Konfiguration um"
       },
       "positioning": {
-        "use": "Zur Seite Automatische Positionierung wechseln",
+        "use": "Zur Seite Positionierung wechseln",
         "notes": "Nicht auf der Bearbeitungsseite eines Spiels"
       },
       "game": {

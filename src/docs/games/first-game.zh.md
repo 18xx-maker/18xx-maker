@@ -103,7 +103,7 @@ pnpm maker validate my-game.json
 - [阶段与火车](/docs/games/trains)
 - [股票与标记类型](/docs/games/types)
 - [地图边界与线条](/docs/games/borders)
-- [自动定位](/docs/games/positioning)
+- [定位](/docs/games/positioning)
 - [标志](/docs/games/logos)和[公司替换](/docs/games/overrides)
 - [导出选项](/docs/games/exports),用于设置游戏的导出方式
 - [JSON 模式](/docs/games/schemas),许多编辑器可以用它来补全和检查游戏文件

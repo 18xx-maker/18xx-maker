@@ -421,7 +421,7 @@ describe("tiles of all games", () => {
     const { user, router } = renderApp("/elements/tiles?game=18Test");
     await screen.findByTestId("tiles");
     await waitFor(() => expect(card().length).toBeLessThan(50));
-    // 18Test uses 1, 26 (as 26|T2), 57 (the alias target of 2), 63 and its own T1, B1, B2 and B3
+    // 18Test uses 1, 26 (as 26|T2), 57 (the alias target of 2), 63 and its own T1, B1, B2, B3 and M1 to M4
     expect(Array.from(card(), (c) => c.dataset.testid)).toEqual([
       "tile-1",
       "tile-26",
@@ -431,6 +431,10 @@ describe("tiles of all games", () => {
       "tile-B1",
       "tile-B2",
       "tile-B3",
+      "tile-M1",
+      "tile-M2",
+      "tile-M3",
+      "tile-M4",
     ]);
     expect(screen.getByRole("combobox", { name: "Game" })).toHaveTextContent(
       "18Test",

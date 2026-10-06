@@ -235,7 +235,7 @@ describe("shortcut keys in the sidebar", () => {
     const logos = within(panel).getByRole("link", { name: "Company Logos" });
     expect(logos.querySelector("u")).toHaveTextContent("C");
     const positioning = within(panel)
-      .getAllByRole("link", { name: /Auto Positioning/ })
+      .getAllByRole("link", { name: /Positioning/ })
       .find((link) => link.getAttribute("href") === "/elements/positioning");
     expect(positioning.querySelector("u")).toHaveTextContent("P");
     const docs = within(panel).getByRole("link", { name: "Using 18xx Maker" });

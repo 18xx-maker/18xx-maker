@@ -77,6 +77,14 @@ const command = () => {
     let arrayPath = path.split(".");
 
     forEach((type) => {
+      // align only does something with a mid, so it needs one
+      if (type === "position") {
+        tiles = assocPath(
+          [...arrayPath.slice(0, -1), "dependencies"],
+          { align: ["mid"] },
+          tiles,
+        );
+      }
       forEachObjIndexed((field, name) => {
         tiles = assocPath([...arrayPath, name], field, tiles);
       }, fields.definitions[type].properties);
