@@ -126,7 +126,7 @@ Eingabetaste drückst, und ein geleertes Feld wird aus dem Spiel entfernt (der
 Titel kann nicht entfernt werden). Probleme mit einem Wert, etwa eine Währung
 ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel (zum JSON-Editor siehe unten).
 
-Das Panel hat Tabs: Spielinfo, Züge, Markt und JSON. Mit `[` und `]` wechselst du zwischen
+Das Panel hat für jeden Teil des Spiels, den es bearbeitet, einen Tab. Mit `[` und `]` wechselst du zwischen
 ihnen (die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
 schließen das Panel). Der Tab Züge hat für jeden Zug des Spiels eine Karte, die
 aus demselben Schema erzeugt wird. Füge mit Zug hinzufügen einen Zug hinzu und
@@ -135,6 +135,13 @@ dupliziere oder entferne ihn. Ein entfernter Zug lässt sich direkt danach mit
 Rückgängig zurückholen. Die selten benötigten Felder eines Zugs stehen unter
 Weitere Felder. Ein Feld, das das Schema als veraltet markiert, bleibt
 bearbeitbar und wird mit einer Warnung angezeigt.
+
+Der Tab Privatgesellschaften funktioniert genauso für die Privatgesellschaften
+des Spiels. Eine Karte zeigt zuerst Name, Preis, Einkommen, Gesellschaft, Notiz
+und Beschreibung. Das Einkommen ist eine Zahl oder eine Liste, so geschrieben,
+wie sie gedruckt wird, etwa `10/20`; Text, der keine Zahlen enthält, etwa
+`$10/$20`, bleibt Text. Die Fähigkeiten einer Privatgesellschaft werden als
+JSON bearbeitet, die übrigen Felder stehen unter Weitere Felder.
 
 Der Tab Markt bearbeitet den Aktienmarkt: den Typ (2D, 1D oder 1Diag), ein
 Raster der Zellen, die Zellstandards, die Legende und die Bewegung. Klicke auf

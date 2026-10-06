@@ -277,7 +277,15 @@ from `src/schemas/game.schema.json` (`src/components/schemaForm`):
 `GameInfoForm` for `GAME_INFO_KEYS` in `resolve.js` (`info`, `links`,
 `prototype`, `wip`; widening it means editing that list) and `TrainsForm` for
 `trains`, an `ArrayField` with a card for each item (add, remove with undo,
-duplicate, move, "more fields" for what is not in `PRIMARY_KEYS`). `MarketForm`
+duplicate, move, "more fields" for what is not in `PRIMARY_KEYS`, a list shared
+by all the lists, so `revenue` and `company` of a private are in it and
+trains have neither). `PrivatesForm` is the same for `privates`. `abilities` is
+in `JSON_KEYS` and stays a JSON textarea whatever its schema (a nested list
+would lack the required `type` and hide the other keys of an ability), and a
+`description` is a textarea (`LONG_TEXT_KEYS`). A `revenue` (a `oneOf` of a
+number, a list of numbers and a string) has its own kind: it is typed as `10/20`
+(`parseRevenue`, `formatRevenue`), numbers become a number or a list and any
+other text stays a string. `MarketForm`
 edits `game.stock`: `MarketGrid` is an accessible `role="grid"` of the cells
 (ragged rows, 1Diag drawn in two rows), `CellInspector` edits the selected cell
 through the `cellObject` schema and keeps the shorthand (a number, string or
