@@ -294,6 +294,16 @@ describe("selecting a group", () => {
     expect(screen.queryByTestId("json-editor")).not.toBeInTheDocument();
   });
 
+  it("keeps the selection of a link while the game loads", async () => {
+    // No game in the store yet: the panel is not available until it is loaded
+    const { router } = renderApp(
+      `/games/18Test/map?edit=true&editSection=hex&hex=C11`,
+    );
+    expect(await editorGroup()).toEqual(games["18Test"].map.hexes[8]);
+    expect(params(router).hex).toBe("C11");
+    expect(marks()).toEqual(games["18Test"].map.hexes[8].hexes);
+  });
+
   it("has the tab on the map only, and drops a selection elsewhere", async () => {
     const { router } = open(
       "/games/internal:abc/tokens?edit=true&editSection=hex&hex=C11",

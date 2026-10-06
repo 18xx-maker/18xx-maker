@@ -72,6 +72,22 @@ const Active = ({ data, game, variation }) => {
     [cells],
   );
 
+  // The targets do not draw again when only the hover changes
+  const targets = useMemo(
+    () =>
+      cells.map((cell) => (
+        <polygon
+          key={cell.coord}
+          data-coord={cell.coord}
+          points={cell.points}
+          fill="transparent"
+          style={{ cursor: "pointer" }}
+          onPointerEnter={() => setHover(cell.coord)}
+        />
+      )),
+    [cells],
+  );
+
   const onTap = (target, event) => {
     const coord = target?.closest?.("[data-coord]")?.dataset.coord;
     if (!coord) return;
@@ -152,16 +168,7 @@ const Active = ({ data, game, variation }) => {
           pointerEvents="none"
         />
       )}
-      {cells.map((cell) => (
-        <polygon
-          key={cell.coord}
-          data-coord={cell.coord}
-          points={cell.points}
-          fill="transparent"
-          style={{ cursor: "pointer" }}
-          onPointerEnter={() => setHover(cell.coord)}
-        />
-      ))}
+      {targets}
     </g>
   );
 };

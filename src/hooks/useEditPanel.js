@@ -78,8 +78,9 @@ export const useDropStaleLines = ({ available, open, editSection }) => {
 };
 
 // The hex selected on the map belongs to the open edit panel on the map. A link
-// with one anywhere else has it dropped, and so does a change of variation,
-// with no history entry
+// with one anywhere else, or after the panel was closed, has it dropped, and so
+// does a change of variation, with no history entry. While the game loads the
+// panel is not available yet: the selection waits.
 export const useDropStaleHex = ({ available, open }) => {
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -89,7 +90,7 @@ export const useDropStaleHex = ({ available, open }) => {
   const previous = useRef(variation);
   const selected = params.has("hex");
   const stale =
-    selected && !(available && open && match?.params.section === "map");
+    selected && (match?.params.section !== "map" || (available && !open));
 
   useEffect(() => {
     const changed = previous.current !== variation;
