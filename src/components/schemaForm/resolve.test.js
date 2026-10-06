@@ -7,10 +7,14 @@ import {
   PLAYER_PRIMARY_KEYS,
   clearValue,
   coerceStringOrNumber,
+  defaultValue,
+  formatLines,
   formatList,
   formatRevenue,
+  freeKey,
   humanize,
   insertAt,
+  insertKey,
   isRequired,
   issuesFor,
   kindOf,
@@ -21,14 +25,18 @@ import {
   nextName,
   nextNumber,
   parseLimit,
+  parseLines,
   parseList,
   parseRevenue,
   removeAt,
+  removeKey,
+  renameKey,
   resolveAllOf,
   resolveSchema,
   sameList,
   schemaAt,
   setValue,
+  valueAt,
 } from "./resolve";
 
 describe("resolveSchema", () => {
@@ -257,7 +265,7 @@ describe("kindOf", () => {
       "trains.0.backgroundColor": "string",
       "trains.0.color": "string",
       "trains.0.description": "text",
-      "trains.0.discount": "json",
+      "trains.0.discount": "record",
       "trains.0.image": "string",
       "trains.0.imagePaddingTop": "number",
       "trains.0.imageWidth": "number",
@@ -369,7 +377,7 @@ describe("kindOf", () => {
           kindOf(resolveAllOf(node, schema), key, schema) === "json",
       )
       .map(([key]) => key);
-    expect(json).toEqual(["discount", "rust", "phased", "obsolete"]);
+    expect(json).toEqual(["rust", "phased", "obsolete"]);
   });
 
   it("reads the privates as an array, the fields of a private as real fields", () => {
@@ -398,7 +406,11 @@ describe("kindOf", () => {
     const json = Object.entries(item.properties)
       .filter(
         ([key, node]) =>
-          kindOf(resolveAllOf(node, schema), key, schema) === "json",
+          kindOf(resolveAllOf(node, schema), key, schema, [
+            "privates",
+            0,
+            key,
+          ]) === "json",
       )
       .map(([key]) => key);
     expect(json).toEqual(["token", "abilities"]);
@@ -524,7 +536,11 @@ describe("kindOf", () => {
     const json = Object.entries(item.properties)
       .filter(
         ([key, node]) =>
-          kindOf(resolveAllOf(node, schema), key, schema) === "json",
+          kindOf(resolveAllOf(node, schema), key, schema, [
+            "companies",
+            0,
+            key,
+          ]) === "json",
       )
       .map(([key]) => key);
     expect(json).toEqual(["shares", "tokens", "loans", "trains", "token"]);
@@ -973,5 +989,307 @@ describe("the market", () => {
     expect(issuesFor(issues, ["stock", "market", 3, "legend"])).toEqual([
       issues[3],
     ]);
+  });
+});
+
+describe("the kinds of a record, a list of texts and a list of choices", () => {
+  const record = { type: "object", additionalProperties: { type: "string" } };
+
+  it("reads an object of any names as a record, with $ref values and in the real schema", () => {
+    expect(kindOf(record, "x", {})).toBe("record");
+    expect(
+      kindOf(
+        {
+          type: "object",
+          additionalProperties: { $ref: "#/definitions/v" },
+        },
+        "x",
+        { definitions: { v: { type: "string" } } },
+      ),
+    ).toBe("record");
+    ["colors", "tokenTypes", "shareTypes", "upgrades"].forEach((key) =>
+      expect(
+        kindOf(resolveAllOf(schema.properties[key], schema), key, schema),
+      ).toBe("record"),
+    );
+  });
+
+  it("keeps an object with properties, and any other additionalProperties, as before", () => {
+    expect(
+      kindOf({ ...record, properties: { a: { type: "string" } } }, "x", {}),
+    ).toBe("object");
+    expect(
+      kindOf({ type: "object", additionalProperties: true }, "x", {}),
+    ).toBe("json");
+    expect(kindOf({ type: "object", additionalProperties: {} }, "x", {})).toBe(
+      "json",
+    );
+    expect(kindOf({ type: "object" }, "x", {})).toBe("json");
+  });
+
+  it("reads an array of plain strings as a list of texts, not a pattern or a choice", () => {
+    expect(
+      kindOf({ type: "array", items: { type: "string" } }, "x", schema),
+    ).toBe("stringArray");
+    expect(
+      kindOf({ type: "array", items: { type: "string" } }, "x", undefined),
+    ).toBe("stringArray");
+    expect(
+      kindOf(
+        { type: "array", items: { type: "string", pattern: "^a" } },
+        "x",
+        schema,
+      ),
+    ).toBe("json");
+    expect(
+      kindOf(resolveAllOf(schema.properties.number_cards, schema), "x", schema),
+    ).toBe("stringArray");
+    // The text or list of texts of a phase stays what it was
+    expect(
+      kindOf(
+        {
+          oneOf: [
+            { type: "string" },
+            { type: "array", items: { type: "string" } },
+          ],
+        },
+        "x",
+        schema,
+      ),
+    ).toBe("stringList");
+  });
+
+  it("reads an array of strings from a list as a list of choices", () => {
+    expect(
+      kindOf(
+        { type: "array", items: { type: "string", enum: ["a", "b"] } },
+        "x",
+        schema,
+      ),
+    ).toBe("enumList");
+    expect(
+      kindOf(
+        { type: "array", items: { type: "number", enum: [1, 2] } },
+        "x",
+        schema,
+      ),
+    ).toBe("json");
+    const formats = resolveAllOf(schema.properties.exports, schema).properties;
+    expect(
+      kindOf(resolveAllOf(formats.formats, schema), "formats", schema),
+    ).toBe("enumList");
+    expect(kindOf(resolveAllOf(formats.docs, schema), "docs", schema)).toBe(
+      "enumList",
+    );
+  });
+
+  it("follows a $ref before it reads the kind", () => {
+    const root = { definitions: { v: { type: "boolean" } } };
+    expect(kindOf({ $ref: "#/definitions/v" }, "x", root)).toBe("boolean");
+    expect(kindOf({ $ref: "#/definitions/none" }, "x", root)).toBe("json");
+  });
+});
+
+describe("a $ref into another schema file", () => {
+  it("follows tiles.defs.json, with the refs inside it", () => {
+    const token = resolveSchema(
+      { $ref: "tiles.defs.json#/definitions/roundToken", description: "Mine" },
+      schema,
+    );
+    expect(token.type).toBe("object");
+    expect(token.description).toBe("Mine");
+    expect(token.properties.logo.type).toBe("string");
+    // The rounds of the game are a list of those
+    const rounds = resolveAllOf(schema.properties.rounds, schema);
+    expect(kindOf(rounds, "rounds", schema)).toBe("array");
+  });
+
+  it("follows a ref of the other file in that file, not in the root", () => {
+    // game.schema.json has no definitions/hex of its own: the one that is
+    // found is the one of tiles.defs.json
+    expect(schema.definitions.hex).toBeUndefined();
+    const hex = resolveSchema(
+      { $ref: "tiles.defs.json#/definitions/hex" },
+      schema,
+    );
+    expect(hex.type).toBe("object");
+    // Two levels: a property of the hex is a ref in tiles.defs.json, and what
+    // that points to has refs of its own
+    const nested = Object.values(hex.properties)
+      .map((child) => resolveSchema(child, schema))
+      .filter((child) => child && !child.$ref);
+    expect(nested.length).toBe(Object.keys(hex.properties).length);
+  });
+
+  it("follows three files deep in a document that has its own definitions", () => {
+    // The name of the same definition in the root and in the document: each
+    // ref goes to the document it was written in
+    const root = {
+      definitions: { token: { type: "boolean" } },
+    };
+    const token = resolveSchema(
+      { $ref: "tiles.defs.json#/definitions/gameToken" },
+      root,
+    );
+    expect(token.type).toBe("object");
+    Object.values(token.properties).forEach((child) => {
+      const resolved = resolveSchema(child, root);
+      expect(resolved.$ref).toBeUndefined();
+    });
+  });
+
+  it("stops at a ref that goes round in a circle or to nothing", () => {
+    const root = {
+      definitions: {
+        a: { $ref: "#/definitions/b" },
+        b: { $ref: "#/definitions/a" },
+        self: { $ref: "#/definitions/self" },
+      },
+    };
+    expect(resolveSchema({ $ref: "#/definitions/a" }, root).$ref).toBeDefined();
+    expect(resolveSchema({ $ref: "#/definitions/self" }, root)).toEqual({
+      $ref: "#/definitions/self",
+    });
+    expect(kindOf({ $ref: "#/definitions/a" }, "x", root)).toBe("json");
+    expect(
+      resolveSchema({ $ref: "tiles.defs.json#/definitions/none" }, root).$ref,
+    ).toBe("tiles.defs.json#/definitions/none");
+  });
+});
+
+describe("the schema through a record", () => {
+  const root = {
+    type: "object",
+    properties: {
+      colors: {
+        type: "object",
+        additionalProperties: { $ref: "#/definitions/color" },
+      },
+      fixed: {
+        type: "object",
+        properties: { a: { type: "number" } },
+        additionalProperties: { type: "string" },
+      },
+    },
+    definitions: { color: { type: "string", description: "A color" } },
+  };
+
+  it("finds the schema of the value of any name", () => {
+    expect(schemaAt(root, ["colors", "red"]).description).toBe("A color");
+    expect(schemaAt(root, ["colors", "__proto__"]).type).toBe("string");
+    expect(schemaAt(root, ["colors", "constructor"]).type).toBe("string");
+    // A name that looks like an index is still a name
+    expect(schemaAt(root, ["colors", "1"]).type).toBe("string");
+    expect(schemaAt(root, ["colors", "a.b/c~d"]).type).toBe("string");
+    expect(schemaAt(root, ["fixed", "a"]).type).toBe("number");
+  });
+
+  it("finds the upgrades and the shares of the real schema", () => {
+    expect(schemaAt(schema, ["upgrades", "x"]).type).toBe("array");
+    expect(schemaAt(schema, ["shareTypes", "x"]).type).toBe("array");
+    expect(schemaAt(schema, ["colors", "x"]).oneOf).toBeDefined();
+  });
+
+  it("has no schema for a name of an object that is not a record", () => {
+    expect(schemaAt(schema, ["info", "nothing"])).toBeUndefined();
+    expect(schemaAt(root, ["fixed", "__proto__"]).type).toBe("string");
+  });
+
+  it("the value of a name cannot be unset, the name of a property can", () => {
+    expect(isRequired(root, ["colors", "red"])).toBe(true);
+    expect(isRequired(root, ["fixed", "a"])).toBe(false);
+  });
+
+  it("matches the problem of a name as the validation writes it", () => {
+    const issue = { pointer: "colors.a.b", code: "type", params: {} };
+    expect(issuesFor([issue], ["colors", "a.b"])).toEqual([issue]);
+  });
+});
+
+describe("the names of a record", () => {
+  it("renames in place, removes and inserts, with any name", () => {
+    const record = { a: 1, b: 2, c: 3 };
+    expect(Object.entries(renameKey(record, "b", "x"))).toEqual([
+      ["a", 1],
+      ["x", 2],
+      ["c", 3],
+    ]);
+    expect(Object.keys(removeKey(record, "b"))).toEqual(["a", "c"]);
+    expect(Object.keys(insertKey(record, 1, "n", 9))).toEqual([
+      "a",
+      "n",
+      "b",
+      "c",
+    ]);
+    expect(Object.keys(insertKey(record, 99, "n", 9))).toEqual([
+      "a",
+      "b",
+      "c",
+      "n",
+    ]);
+    const odd = renameKey(record, "a", "__proto__");
+    expect(Object.keys(odd)).toEqual(["__proto__", "b", "c"]);
+    expect(Object.getPrototypeOf(odd)).toBe(Object.prototype);
+    expect(odd.__proto__).toBe(1);
+  });
+
+  it("finds a free name", () => {
+    expect(freeKey({ a: 1 }, "b")).toBe("b");
+    expect(freeKey({ a: 1, a2: 1 }, "a")).toBe("a3");
+    expect(freeKey({ constructor: 1 }, "constructor")).toBe("constructor2");
+  });
+
+  it("starts a new value as the schema asks", () => {
+    expect(defaultValue({ type: "string" })).toBe("");
+    expect(defaultValue({ type: "number", minimum: 1 })).toBe(1);
+    expect(defaultValue({ type: "boolean" })).toBe(false);
+    expect(defaultValue({ type: "array" })).toEqual([]);
+    expect(defaultValue({ type: "object" })).toEqual({});
+    expect(defaultValue({ enum: ["a", "b"] })).toBe("a");
+    expect(defaultValue({ default: [1] })).toEqual([1]);
+    expect(
+      defaultValue({ oneOf: [{ type: "string" }, { type: "object" }] }),
+    ).toBe("");
+    expect(
+      defaultValue(schema.properties.upgrades.additionalProperties),
+    ).toEqual([]);
+  });
+
+  it("sets and clears a value under any name without touching the prototype", () => {
+    const game = { colors: { red: "#f00" } };
+    for (const name of ["__proto__", "constructor", "a.b", "a/b", "a~b", "1"]) {
+      const next = setValue(game, ["colors", name], "#0f0");
+      expect(Object.keys(next.colors).sort()).toEqual(["red", name].sort());
+      expect(valueAt(["colors", name], next)).toBe("#0f0");
+      expect(Object.getPrototypeOf(next.colors)).toBe(Object.prototype);
+      // The next change keeps it
+      const again = setValue(next, ["colors", "blue"], "#00f");
+      expect(Object.keys(again.colors).sort()).toEqual(
+        ["red", name, "blue"].sort(),
+      );
+      expect(valueAt(["colors", name], again)).toBe("#0f0");
+      expect(clearValue(again, ["colors", name]).colors).toEqual({
+        red: "#f00",
+        blue: "#00f",
+      });
+    }
+    expect(game).toEqual({ colors: { red: "#f00" } });
+    expect(valueAt(["colors", "__proto__"], game)).toBeUndefined();
+    expect(valueAt(["colors", "constructor"], game)).toBeUndefined();
+    expect(clearValue(game, ["colors", "__proto__"])).toBe(game);
+  });
+});
+
+describe("one text a line, as a list", () => {
+  it("is always a list, trimmed, with no blank lines", () => {
+    expect(parseLines("a")).toEqual(["a"]);
+    expect(parseLines(" a \n\n b\r\n")).toEqual(["a", "b"]);
+    expect(parseLines("  \n ")).toBeUndefined();
+    expect(parseLines("")).toBeUndefined();
+  });
+
+  it("formats a list a line each", () => {
+    expect(formatLines(["a", "b"])).toBe("a\nb");
+    expect(formatLines(undefined)).toBe("");
   });
 });

@@ -1,15 +1,6 @@
-import {
-  assocPath,
-  dissocPath,
-  equals,
-  init,
-  insert,
-  isEmpty,
-  move,
-  path,
-  remove,
-  uniq,
-} from "ramda";
+import { equals, init, insert, isEmpty, move, path, remove, uniq } from "ramda";
+
+import tilesDefs from "@/schemas/tiles.defs.json";
 
 // The parts of the game file the edit panel has a form for. Widening the
 // panel to more of the game means adding a key here.
@@ -66,16 +57,69 @@ const isLongText = (key, keys) =>
 // one form (the abilities of a private, each has its own type and keys)
 export const JSON_KEYS = ["abilities"];
 
-// The schema node with a local $ref followed (a description next to the $ref
-// wins over the one of the target)
+// The same for a key in one section: the token of a private and of a company
+// is a $ref into tiles.defs.json that has a form of its own, but these cards
+// keep it as JSON
+export const JSON_SECTION_KEYS = [
+  ["privates", "token"],
+  ["companies", "token"],
+];
+
+// The schema documents a $ref can point into besides the root, by file name
+const DOCUMENTS = { "tiles.defs.json": tilesDefs };
+
+const isObject = (value) => value !== null && typeof value === "object";
+const own = (object, key) => isObject(object) && Object.hasOwn(object, key);
+
+// A node of another document with its own local refs written with the file
+// ("#/definitions/x" is "tiles.defs.json#/definitions/x"), so that they are
+// followed in that document and not in the root of the form
+const qualified = new WeakMap();
+const qualify = (node, file) => {
+  if (Array.isArray(node)) return node.map((part) => qualify(part, file));
+  if (!isObject(node)) return node;
+  if (qualified.has(node)) return qualified.get(node);
+  const result = Object.fromEntries(
+    Object.entries(node).map(([key, value]) => [
+      key,
+      key === "$ref" && typeof value === "string" && value.startsWith("#/")
+        ? `${file}${value}`
+        : qualify(value, file),
+    ]),
+  );
+  qualified.set(node, result);
+  return result;
+};
+
+// The schema a $ref points to: in the root for "#/..." and in a known
+// document for "file.json#/...". Undefined for any other.
+const targetOf = ($ref, root) => {
+  const at = $ref.indexOf("#");
+  const file = $ref.slice(0, at).split("/").pop();
+  const pointer = $ref.slice(at + 1);
+  const document = file ? DOCUMENTS[file] : root;
+  if (at < 0 || !pointer.startsWith("/") || !document) return undefined;
+  const target = path(
+    pointer
+      .slice(1)
+      .split("/")
+      .map((part) => part.replace(/~1/g, "/").replace(/~0/g, "~")),
+    document,
+  );
+  return file && target ? qualify(target, file) : target;
+};
+
+// The schema node with a $ref followed, in the root or in another schema file
+// (a description next to the $ref wins over the one of the target). A $ref
+// that goes round in a circle, or to nothing, is left on the node.
 export const resolveSchema = (node, root) => {
   let resolved = node;
-  for (let i = 0; i < 10 && resolved?.$ref; i++) {
+  const seen = new Set();
+  while (resolved?.$ref) {
     const { $ref, ...rest } = resolved;
-    const target = $ref.startsWith("#/")
-      ? path($ref.slice(2).split("/"), root)
-      : undefined;
+    const target = seen.has($ref) ? undefined : targetOf($ref, root);
     if (!target) return resolved;
+    seen.add($ref);
     resolved = { ...target, ...rest };
   }
   return resolved;
@@ -134,6 +178,18 @@ const isStringOrNumber = (alternatives) =>
 const isPlainString = (node) =>
   node?.type === "string" && !node.enum && !node.pattern && !node.$ref;
 
+const isEnumStrings = (node) =>
+  Array.isArray(node?.enum) &&
+  node.enum.length > 0 &&
+  node.enum.every((value) => typeof value === "string");
+
+// An object of any names with one schema for the values (the colors of a
+// game), not the closed set of names of an object with properties
+const isRecord = (node) =>
+  isObject(node.additionalProperties) &&
+  !Array.isArray(node.additionalProperties) &&
+  !isEmpty(node.additionalProperties);
+
 const isStringList = (alternatives) =>
   alternatives.length === 2 &&
   alternatives.some(isPlainString) &&
@@ -148,12 +204,18 @@ const isStringList = (alternatives) =>
 
 // How a (resolved) schema node is edited:
 // string, text, number, boolean, enum, stringOrNumber, limit, stringList,
-// count, revenue, object, array
-// (of objects, needs the root to follow the items), or json for everything
+// count, revenue, object, record (an object of any names, each a value of one
+// schema), array (of objects, needs the root to follow the items),
+// stringArray (of texts), enumList (of choices), or json for everything
 // else, so a new construct never disappears from the form
-export const kindOf = (node, key, root, keys = []) => {
+export const kindOf = (schema, key, root, keys = []) => {
+  const node = resolveSchema(schema, root);
   if (!node || typeof node !== "object" || node.$ref) return "json";
   if (JSON_KEYS.includes(key)) return "json";
+  if (
+    JSON_SECTION_KEYS.some(([section, k]) => keys[0] === section && k === key)
+  )
+    return "json";
   if (Array.isArray(node.enum)) {
     return node.enum.every((value) => typeof value === "string")
       ? "enum"
@@ -165,9 +227,12 @@ export const kindOf = (node, key, root, keys = []) => {
   if (node.type === "number" || node.type === "integer") return "number";
   if (node.type === "boolean") return "boolean";
   if (node.type === "object" && node.properties) return "object";
-  if (node.type === "array" && root) {
+  if (node.type === "object" && isRecord(node)) return "record";
+  if (node.type === "array") {
     const item = resolveAllOf(node.items, root);
-    return item?.type === "object" && item.properties ? "array" : "json";
+    if (root && item?.type === "object" && item.properties) return "array";
+    if (isEnumStrings(item)) return "enumList";
+    return isPlainString(item) ? "stringArray" : "json";
   }
   if (Array.isArray(node.oneOf) && isCount(node.oneOf)) return "count";
   if (Array.isArray(node.oneOf) && isRevenue(node.oneOf)) return "revenue";
@@ -198,11 +263,15 @@ const alternativesOf = (node, root) => {
     : [resolved];
 };
 
-// The schema one step down a path: an index is an item, a name a property,
-// through the alternatives of a oneOf
+// The schema one step down a path: an index is an item, a name a property
+// or, when the object lets in any name, the schema of its values; through the
+// alternatives of a oneOf
 const stepInto = (node, key, root) => {
   for (const part of alternativesOf(node, root)) {
-    const child = isIndex(key) ? part?.items : part?.properties?.[key];
+    const child =
+      (isIndex(key) && part?.items) ||
+      (own(part?.properties, key) && part.properties[key]) ||
+      (isRecord(part ?? {}) && part.additionalProperties);
     if (child) return resolveAllOf(child, root);
   }
   return undefined;
@@ -224,6 +293,10 @@ export const isRequired = (root, keys) => {
   const branches = Array.isArray(parent?.anyOf) ? parent.anyOf : [];
   return (
     !!parent?.required?.includes(key) ||
+    // The value of a name of a record is there as long as the name is
+    (parent?.type === "object" &&
+      isRecord(parent) &&
+      !own(parent.properties, key)) ||
     (branches.length > 0 &&
       branches.every((branch) => branch.required?.includes(key)))
   );
@@ -250,14 +323,24 @@ export const parseRevenue = (text) => {
 export const formatRevenue = (value) =>
   Array.isArray(value) ? value.join("/") : (value ?? "").toString();
 
-// One text a line is a list of texts, the form of the train and the notes of a
-// phase: lines are trimmed and blank ones dropped, no line is no value and one
-// line is a string, not a list
-export const parseList = (text) => {
+// One text a line, always a list (a single line is a list of one), no line is
+// no value: the form of a list of texts
+export const parseLines = (text) => {
   const lines = text
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean);
+  return lines.length === 0 ? undefined : lines;
+};
+
+export const formatLines = (value) =>
+  Array.isArray(value) ? value.join("\n") : (value ?? "").toString();
+
+// One text a line is a list of texts, the form of the train and the notes of a
+// phase: lines are trimmed and blank ones dropped, no line is no value and one
+// line is a string, not a list
+export const parseList = (text) => {
+  const lines = parseLines(text) ?? [];
   if (lines.length === 0) return undefined;
   return lines.length === 1 ? lines[0] : lines;
 };
@@ -281,25 +364,119 @@ export const parseLimit = (text) => {
     : undefined;
 };
 
-export const setValue = (game, keys, value) => assocPath(keys, value, game);
+// Reading and writing a path of the game, safe for the names of a record: any
+// name works, "__proto__" and "constructor" too (ramda sets the prototype for
+// the first and reads the inherited value of the second)
+export const valueAt = (keys, object) =>
+  keys.reduce((node, key) => (own(node, key) ? node[key] : undefined), object);
+
+const copyOf = (node) =>
+  Array.isArray(node)
+    ? [...node]
+    : Object.fromEntries(Object.entries(isObject(node) ? node : {}));
+
+const define = (node, key, value) =>
+  Object.defineProperty(node, key, {
+    value,
+    enumerable: true,
+    writable: true,
+    configurable: true,
+  });
+
+const assocSafe = (keys, value, object) => {
+  if (keys.length === 0) return value;
+  const [key, ...rest] = keys;
+  const child = own(object, key) ? object[key] : undefined;
+  return define(
+    copyOf(object),
+    key,
+    rest.length === 0
+      ? value
+      : assocSafe(rest, value, child ?? (Number.isInteger(rest[0]) ? [] : {})),
+  );
+};
+
+const dissocSafe = (keys, object) => {
+  if (object == null || keys.length === 0) return object;
+  const [key, ...rest] = keys;
+  if (rest.length === 0) {
+    if (Array.isArray(object) && isIndex(key)) return remove(key, 1, object);
+    const result = copyOf(object);
+    delete result[key];
+    return result;
+  }
+  return own(object, key) && object[key] != null
+    ? define(copyOf(object), key, dissocSafe(rest, object[key]))
+    : copyOf(object);
+};
+
+export const setValue = (game, keys, value) => assocSafe(keys, value, game);
 
 // Removes the key, and the objects this left empty (an object that was
 // already empty stays, and the info is never removed)
 export const clearValue = (game, keys) => {
-  if (path(keys, game) === undefined) return game;
+  if (valueAt(keys, game) === undefined) return game;
 
-  let next = dissocPath(keys, game);
+  let next = dissocSafe(keys, game);
   for (
     let parent = init(keys);
     parent.length > 0 &&
     !equals(parent, ["info"]) &&
-    !isEmpty(path(parent, game)) &&
-    isEmpty(path(parent, next));
+    !isEmpty(valueAt(parent, game)) &&
+    isEmpty(valueAt(parent, next));
     parent = init(parent)
   ) {
-    next = dissocPath(parent, next);
+    next = dissocSafe(parent, next);
   }
   return next;
+};
+
+// The entries of a record (an object of any names) in another order or with
+// another name, built so that no name is special
+export const renameKey = (record, from, to) =>
+  Object.fromEntries(
+    Object.entries(record).map(([key, value]) => [
+      key === from ? to : key,
+      value,
+    ]),
+  );
+
+export const removeKey = (record, name) =>
+  Object.fromEntries(Object.entries(record).filter(([key]) => key !== name));
+
+// The record with the name and its value inserted at the index (at the end
+// when out of range)
+export const insertKey = (record, index, name, value) =>
+  Object.fromEntries(insert(index, [name, value], Object.entries(record)));
+
+// The name, or the name and the first number from 2 that is free
+export const freeKey = (record, name) => {
+  let candidate = name;
+  for (let n = 2; own(record, candidate); n++) candidate = `${name}${n}`;
+  return candidate;
+};
+
+// The value a new entry of a record starts with: what the schema asks for
+// (its default, the first choice, the empty value of its type)
+export const defaultValue = (schema, root) => {
+  const node = resolveAllOf(schema, root);
+  if (node?.default !== undefined) return structuredClone(node.default);
+  if (Array.isArray(node?.enum)) return node.enum[0];
+  const alternative = node?.oneOf?.[0] ?? node?.anyOf?.[0];
+  if (alternative) return defaultValue(alternative, root);
+  switch (node?.type) {
+    case "number":
+    case "integer":
+      return node.minimum ?? 0;
+    case "boolean":
+      return false;
+    case "array":
+      return [];
+    case "object":
+      return {};
+    default:
+      return "";
+  }
 };
 
 // The path of a field as the problems write it: trains[0].name
@@ -328,22 +505,22 @@ export const issuesFor = (issues, keys, deep = true) => {
 
 // Inserts the item at the index (at the end when out of range)
 export const insertAt = (game, keys, index, item) => {
-  const list = path(keys, game) ?? [];
+  const list = valueAt(keys, game) ?? [];
   const at = Math.max(0, Math.min(index, list.length));
-  return assocPath(keys, insert(at, item, list), game);
+  return assocSafe(keys, insert(at, item, list), game);
 };
 
 // Removes the item, and the list when this empties it
 export const removeAt = (game, keys, index) => {
-  const list = path(keys, game);
+  const list = valueAt(keys, game);
   if (!Array.isArray(list) || index < 0 || index >= list.length) return game;
   return list.length === 1
-    ? dissocPath(keys, game)
-    : assocPath(keys, remove(index, 1, list), game);
+    ? dissocSafe(keys, game)
+    : assocSafe(keys, remove(index, 1, list), game);
 };
 
 export const moveItem = (game, keys, from, to) => {
-  const list = path(keys, game);
+  const list = valueAt(keys, game);
   if (
     !Array.isArray(list) ||
     from === to ||
@@ -354,7 +531,7 @@ export const moveItem = (game, keys, from, to) => {
   ) {
     return game;
   }
-  return assocPath(keys, move(from, to, list), game);
+  return assocSafe(keys, move(from, to, list), game);
 };
 
 // The first number, from the count of the list up, that no item has as its

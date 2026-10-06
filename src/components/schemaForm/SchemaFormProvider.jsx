@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 
-import { equals, path } from "ramda";
+import { equals } from "ramda";
 
 import { SchemaFormContext } from "@/components/schemaForm/SchemaField";
 import {
@@ -11,6 +11,7 @@ import {
   moveItem,
   removeAt,
   setValue,
+  valueAt,
 } from "@/components/schemaForm/resolve";
 
 import schema from "@/schemas/game.schema.json";
@@ -31,7 +32,7 @@ const SchemaFormProvider = ({ game, children }) => {
   const set = useCallback(
     (keys, value) =>
       edit((g) =>
-        equals(path(keys, g), value) ? g : setValue(g, keys, value),
+        equals(valueAt(keys, g), value) ? g : setValue(g, keys, value),
       ),
     [edit],
   );
