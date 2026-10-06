@@ -241,6 +241,25 @@ describe("cycle keys", () => {
     );
   });
 
+  it("[ and ] cycle the edit panel tabs, not the game sections, while it is open", async () => {
+    const { user, router } = renderApp("/games/18Test/map?edit=true");
+    await screen.findByTestId("edit-panel");
+
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=trains",
+      ),
+    );
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+
+    await user.keyboard("[[");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?edit=true"),
+    );
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+  });
+
   it("[ and ] go to the previous and next docs page", async () => {
     const { user, router } = renderApp("/docs");
 

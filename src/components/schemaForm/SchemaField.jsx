@@ -10,6 +10,18 @@ import { useTranslation } from "react-i18next";
 
 import { path as getIn } from "ramda";
 
+import {
+  ArrowDown,
+  ArrowUp,
+  ChevronDown,
+  ChevronRight,
+  Copy,
+  Plus,
+  Trash2,
+  TriangleAlert,
+} from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -24,17 +36,21 @@ import { Textarea } from "@/components/ui/textarea";
 import NumberField from "@/components/form/NumberField";
 import { issueText } from "@/components/schemaForm/issueText";
 import {
+  PRIMARY_KEYS,
   coerceStringOrNumber,
   humanize,
   isRequired,
   issuesFor,
   kindOf,
-  resolveSchema,
+  newItem,
+  nextName,
+  resolveAllOf,
 } from "@/components/schemaForm/resolve";
 
 // What the fields need of the form: the root schema, the game, its problems
-// and how to set and clear the value of a path. clear returns false when the
-// value cannot be cleared (a required key).
+// and how to set and clear the value of a path, and insert, remove and move the
+// items of a list. clear returns false when the value cannot be cleared (a
+// required key).
 export const SchemaFormContext = createContext(null);
 
 const UNSET = "__unset__";
@@ -81,12 +97,42 @@ const useDraft = (value, submit, format = FORMAT, same) => {
   return { text, change, commit };
 };
 
+// A field the schema marks deprecated stays editable: its label has a badge,
+// and a note (with a way to remove the value) shows while it has a value
+const DeprecatedNote = ({ id, keys, onRemove }) => {
+  const { t } = useTranslation();
+  const key = keys.filter((k) => typeof k !== "number").join("_");
+
+  return (
+    <p
+      id={`${id}-deprecated`}
+      className="flex flex-row flex-wrap items-center gap-1 text-xs text-warning-text"
+    >
+      <TriangleAlert className="size-3.5 shrink-0" aria-hidden="true" />
+      <span>
+        {t([`problems.deprecations.${key}`, "problems.deprecated-generic"])}
+      </span>
+      <button
+        type="button"
+        className="underline underline-offset-2"
+        onClick={onRemove}
+      >
+        {t("editPanel.removeValue")}
+      </button>
+    </p>
+  );
+};
+
 export const FieldShell = ({
   id,
   label,
   required,
   description,
   errors = [],
+  deprecated,
+  hasValue,
+  keys,
+  onRemove,
   children,
 }) => {
   const { t } = useTranslation();
@@ -100,6 +146,11 @@ export const FieldShell = ({
             {" *"}
           </span>
         )}
+        {deprecated && (
+          <span className="ml-2 rounded-md border border-warning-text px-1.5 py-0.5 text-xs font-normal text-warning-text">
+            {t("problems.deprecated")}
+          </span>
+        )}
       </Label>
       {children}
       {description && (
@@ -107,12 +158,19 @@ export const FieldShell = ({
           {description}
         </p>
       )}
+      {deprecated && hasValue && (
+        <DeprecatedNote id={id} keys={keys} onRemove={onRemove} />
+      )}
       {errors.map((error, index) => (
         <p
           key={index}
           id={`${id}-error-${index}`}
           role="alert"
-          className="text-xs text-destructive"
+          className={
+            error.severity === "warning"
+              ? "text-xs text-warning-text"
+              : "text-xs text-destructive"
+          }
         >
           {typeof error === "string" ? error : issueText(t, error)}
         </p>
@@ -121,9 +179,10 @@ export const FieldShell = ({
   );
 };
 
-const describedBy = (id, description, errors) =>
+const describedBy = (id, description, errors, deprecated) =>
   [
     description && `${id}-help`,
+    deprecated && `${id}-deprecated`,
     ...errors.map((_, index) => `${id}-error-${index}`),
   ]
     .filter(Boolean)
@@ -136,9 +195,15 @@ const useField = (keys, schema) => {
   const [local, setLocal] = useState(null);
 
   const value = getIn(keys, form.game);
-  const issues = issuesFor(form.issues, keys);
+  // The deprecated issue is the note of the field (the same warning twice
+  // helps nobody)
+  const issues = issuesFor(form.issues, keys).filter(
+    (issue) => issue.code !== "deprecated",
+  );
   const errors = [...(local ? [t(local)] : []), ...issues];
   const required = isRequired(form.root, keys);
+  const deprecated = !!schema.deprecated;
+  const invalid = errors.some((error) => error.severity !== "warning");
 
   const set = (next) => {
     setLocal(null);
@@ -162,12 +227,21 @@ const useField = (keys, schema) => {
     setLocal,
     label: humanize(keys[keys.length - 1]),
     description: schema.description,
-    invalid: errors.length > 0,
+    keys,
+    deprecated,
+    hasValue: value !== undefined,
+    onRemove: clear,
+    invalid,
     aria: (extra) => ({
       id,
       "aria-required": required || undefined,
-      "aria-invalid": errors.length > 0 || undefined,
-      "aria-describedby": describedBy(id, schema.description, errors),
+      "aria-invalid": invalid || undefined,
+      "aria-describedby": describedBy(
+        id,
+        schema.description,
+        errors,
+        deprecated && value !== undefined,
+      ),
       ...extra,
     }),
   };
@@ -193,7 +267,7 @@ const StringField = ({ keys, schema, long }) => {
   );
 };
 
-const FontWeightField = ({ keys, schema }) => {
+const StringOrNumberField = ({ keys, schema }) => {
   const field = useField(keys, schema);
   const draft = useDraft(
     field.value,
@@ -203,6 +277,45 @@ const FontWeightField = ({ keys, schema }) => {
         : field.set(coerceStringOrNumber(text)),
     FORMAT,
     (text, value) => coerceStringOrNumber(text) === value,
+  );
+
+  return (
+    <FieldShell {...field}>
+      <Input
+        {...field.aria()}
+        value={draft.text}
+        onChange={(event) => draft.change(event.target.value)}
+        onBlur={draft.commit}
+        onKeyDown={(event) => event.key === "Enter" && draft.commit()}
+      />
+    </FieldShell>
+  );
+};
+
+// A whole number of at least 1, or ∞: undefined for any other text
+const parseCount = (text) => {
+  const trimmed = text.trim();
+  if (trimmed === "∞") return trimmed;
+  return /^\d+$/.test(trimmed) && Number(trimmed) >= 1
+    ? Number(trimmed)
+    : undefined;
+};
+
+const CountField = ({ keys, schema }) => {
+  const field = useField(keys, schema);
+  const draft = useDraft(
+    field.value,
+    (text) => {
+      if (text.trim() === "") return field.clear();
+      const count = parseCount(text);
+      if (count === undefined) {
+        field.setLocal("editPanel.invalidCount");
+        return true;
+      }
+      field.set(count);
+    },
+    FORMAT,
+    (text, value) => parseCount(text) === value,
   );
 
   return (
@@ -341,12 +454,296 @@ const ObjectField = ({ keys, schema }) => {
   );
 };
 
+// Moves focus into an item once it is on the page: to its title, or to one of
+// its buttons (the other one of the pair when that is disabled). With no such
+// item it goes to the add button.
+const focusItem = (container, index, action) => {
+  const card = container?.querySelector(`[data-item="${index}"]`);
+  const target =
+    action === "title"
+      ? card?.querySelector("[data-title]")
+      : (card?.querySelector(`[data-action="${action}"]:not(:disabled)`) ??
+        card?.querySelector("[data-action]:not(:disabled)"));
+  (target ?? container?.querySelector("[data-add]"))?.focus();
+};
+
+const IconButton = ({ label, action, children, ...props }) => (
+  <Button
+    type="button"
+    variant="ghost"
+    size="icon"
+    className="size-8"
+    aria-label={label}
+    title={label}
+    data-action={action}
+    {...props}
+  >
+    {children}
+  </Button>
+);
+
+const ItemCard = ({
+  keys,
+  schema,
+  index,
+  count,
+  item,
+  title,
+  kind,
+  onMove,
+  onDuplicate,
+  onRemove,
+}) => {
+  const { t } = useTranslation();
+  const form = useContext(SchemaFormContext);
+  const [open, setOpen] = useState(true);
+  const [more, setMore] = useState(false);
+  const bodyId = useId();
+  const issues = issuesFor(form.issues, keys, false);
+  const names = { item: kind, title };
+
+  const entries = Object.entries(schema.properties);
+  const primary = PRIMARY_KEYS.flatMap((key) =>
+    entries.filter(([k]) => k === key),
+  );
+  const rest = entries.filter(([key]) => !PRIMARY_KEYS.includes(key));
+  const field = ([key, child]) => (
+    <SchemaField key={key} keys={[...keys, key]} schema={child} />
+  );
+
+  return (
+    <li data-item={index} className="flex flex-col gap-3 rounded-md border p-3">
+      <div className="flex flex-row items-center justify-between gap-2">
+        <button
+          type="button"
+          className="flex min-w-0 flex-row items-center gap-1 rounded-sm text-left text-sm font-semibold focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+          aria-expanded={open}
+          aria-controls={bodyId}
+          data-title
+          onClick={() => setOpen(!open)}
+        >
+          {open ? (
+            <ChevronDown className="size-4 shrink-0" aria-hidden="true" />
+          ) : (
+            <ChevronRight className="size-4 shrink-0" aria-hidden="true" />
+          )}
+          <span className="truncate">{title}</span>
+        </button>
+        <div className="flex flex-row">
+          <IconButton
+            action="up"
+            label={t("editPanel.moveUp", names)}
+            disabled={index === 0}
+            onClick={() => onMove(index, index - 1, "up")}
+          >
+            <ArrowUp />
+          </IconButton>
+          <IconButton
+            action="down"
+            label={t("editPanel.moveDown", names)}
+            disabled={index === count - 1}
+            onClick={() => onMove(index, index + 1, "down")}
+          >
+            <ArrowDown />
+          </IconButton>
+          <IconButton
+            action="duplicate"
+            label={t("editPanel.duplicate", names)}
+            onClick={() => onDuplicate(index, item)}
+          >
+            <Copy />
+          </IconButton>
+          <IconButton
+            action="remove"
+            label={t("editPanel.remove", names)}
+            onClick={() => onRemove(index, item)}
+          >
+            <Trash2 />
+          </IconButton>
+        </div>
+      </div>
+      <div id={bodyId} hidden={!open} className="flex flex-col gap-4">
+        {issues.map((issue, i) => (
+          <p key={i} role="alert" className="text-xs text-destructive">
+            {issueText(t, issue)}
+          </p>
+        ))}
+        {primary.map(field)}
+        {rest.length > 0 && (
+          <>
+            <button
+              type="button"
+              className="flex flex-row items-center gap-1 self-start rounded-sm text-sm text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+              aria-expanded={more}
+              onClick={() => setMore(!more)}
+            >
+              {more ? (
+                <ChevronDown className="size-4" aria-hidden="true" />
+              ) : (
+                <ChevronRight className="size-4" aria-hidden="true" />
+              )}
+              {t("editPanel.moreFields")}
+            </button>
+            {more && rest.map(field)}
+          </>
+        )}
+      </div>
+    </li>
+  );
+};
+
+// A list of objects, each a card: add, remove, duplicate and reorder. A
+// removed item can be put back from the note that follows. The cards are keyed
+// by their index, a field that is not left yet is passed on first (a click on
+// a button does not always move the focus out of it).
+const ArrayField = ({ keys, schema }) => {
+  const form = useContext(SchemaFormContext);
+  const { t } = useTranslation();
+  const list = useRef(null);
+  const focus = useRef(null);
+  const [message, setMessage] = useState("");
+  const [removed, setRemoved] = useState(null);
+
+  const items = getIn(keys, form.game) ?? [];
+  const itemSchema = resolveAllOf(schema.items, form.root);
+  const item = t(`editPanel.items.${keys[keys.length - 1]}`);
+  const titleOf = (value, index) => value?.name || `#${index + 1}`;
+
+  // The focus goes where the last action asked for it, once the page has it
+  useEffect(() => {
+    if (!focus.current) return;
+    const { index, action } = focus.current;
+    focus.current = null;
+    focusItem(list.current, index, action);
+  });
+
+  useEffect(() => {
+    if (!removed) return;
+    const timeout = setTimeout(() => setRemoved(null), 10000);
+    return () => clearTimeout(timeout);
+  }, [removed]);
+
+  const commit = () => document.activeElement?.blur?.();
+
+  const add = () => {
+    commit();
+    const current = getIn(keys, form.game) ?? [];
+    const created = newItem(keys, current);
+    setRemoved(null);
+    form.insert(keys, current.length, created);
+    setMessage(t("editPanel.added", { item, title: created.name }));
+    focus.current = { index: current.length, action: "title" };
+  };
+
+  const duplicate = (index, value) => {
+    commit();
+    const current = getIn(keys, form.game) ?? [];
+    const source = current[index] ?? value;
+    const copy = { ...structuredClone(source), name: nextName(current) };
+    setRemoved(null);
+    form.insert(keys, index + 1, copy);
+    setMessage(t("editPanel.duplicated", { item, title: copy.name }));
+  };
+
+  const remove = (index, value) => {
+    commit();
+    const current = getIn(keys, form.game) ?? [];
+    const source = current[index] ?? value;
+    form.remove(keys, index);
+    setRemoved({ index, item: structuredClone(source) });
+    setMessage(t("editPanel.removed", { item, title: titleOf(source, index) }));
+    focus.current = { index, action: "title" };
+  };
+
+  const move = (from, to, action) => {
+    commit();
+    const current = getIn(keys, form.game) ?? [];
+    setRemoved(null);
+    form.move(keys, from, to);
+    setMessage(
+      t("editPanel.moved", {
+        item,
+        title: titleOf(current[from], from),
+        position: to + 1,
+        count: current.length,
+      }),
+    );
+    focus.current = { index: to, action };
+  };
+
+  const undo = () => {
+    form.insert(keys, removed.index, removed.item);
+    setMessage(
+      t("editPanel.restored", {
+        item,
+        title: titleOf(removed.item, removed.index),
+      }),
+    );
+    focus.current = { index: removed.index, action: "title" };
+    setRemoved(null);
+  };
+
+  return (
+    <div ref={list} className="flex flex-col gap-3">
+      {items.length === 0 ? (
+        <p className="text-sm text-muted-foreground">
+          {t("editPanel.emptyList")}
+        </p>
+      ) : (
+        <ul className="flex flex-col gap-3">
+          {items.map((value, index) => (
+            <ItemCard
+              key={index}
+              keys={[...keys, index]}
+              schema={itemSchema}
+              index={index}
+              count={items.length}
+              item={value}
+              title={titleOf(value, index)}
+              kind={item}
+              onMove={move}
+              onDuplicate={duplicate}
+              onRemove={remove}
+            />
+          ))}
+        </ul>
+      )}
+      {removed && (
+        <p className="flex flex-row flex-wrap items-center gap-2 rounded-md border bg-muted px-3 py-2 text-sm">
+          <span>
+            {t("editPanel.removed", {
+              item,
+              title: titleOf(removed.item, removed.index),
+            })}
+          </span>
+          <Button type="button" variant="outline" size="sm" onClick={undo}>
+            {t("editPanel.undo")}
+          </Button>
+        </p>
+      )}
+      <Button
+        type="button"
+        variant="outline"
+        className="self-start"
+        data-add
+        onClick={add}
+      >
+        <Plus />
+        {t("editPanel.add", { item })}
+      </Button>
+      <p role="status" aria-live="polite" className="sr-only">
+        {message}
+      </p>
+    </div>
+  );
+};
+
 const SchemaField = ({ keys, schema }) => {
   const { root } = useContext(SchemaFormContext);
-  const node = resolveSchema(schema, root);
+  const node = resolveAllOf(schema, root);
   const props = { keys, schema: node };
 
-  switch (kindOf(node, keys[keys.length - 1])) {
+  switch (kindOf(node, keys[keys.length - 1], root)) {
     case "string":
       return <StringField {...props} />;
     case "text":
@@ -358,9 +755,13 @@ const SchemaField = ({ keys, schema }) => {
     case "enum":
       return <ChoiceField {...props} options={node.enum} />;
     case "stringOrNumber":
-      return <FontWeightField {...props} />;
+      return <StringOrNumberField {...props} />;
+    case "count":
+      return <CountField {...props} />;
     case "object":
       return <ObjectField {...props} />;
+    case "array":
+      return <ArrayField {...props} />;
     default:
       return <JsonField {...props} />;
   }

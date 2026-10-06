@@ -5,6 +5,7 @@ import { useLocation, useMatch, useNavigate } from "react-router";
 import { find, propEq } from "ramda";
 
 import { sections as configSections } from "@/components/config";
+import { editSections } from "@/components/editPanel/sections";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
@@ -49,6 +50,8 @@ export const useBindings = () => {
     available: canEdit,
     open: editOpen,
     toggle: toggleEdit,
+    editSection,
+    setEditSection,
   } = useEditPanel();
   const [, togglePagination] = useBooleanParam("paginated");
   const { pathname } = location;
@@ -100,13 +103,21 @@ export const useBindings = () => {
 
       // Keys for the game edit page
       if (viewingGame) {
-        // [ and ] cycle the config sections while the panel is open, else the
-        // sections of the game. The sections without data for the game are
-        // skipped.
+        // [ and ] cycle the tabs of the edit panel or the config sections
+        // while a panel is open, else the sections of the game. The sections
+        // without data for the game are skipped.
         if (!print && (event.key === "[" || event.key === "]")) {
           const params = new URLSearchParams(location.search);
 
-          if (params.has("config")) {
+          if (editOpen) {
+            setEditSection(
+              cycle(
+                editSections,
+                editSections.findIndex((s) => s.section === editSection),
+                event.key,
+              ).section,
+            );
+          } else if (params.has("config")) {
             const current = decodeURIComponent(
               params.get("section") || "colors",
             );
@@ -274,6 +285,8 @@ export const useBindings = () => {
       toggleEdit,
       canEdit,
       editOpen,
+      editSection,
+      setEditSection,
       togglePagination,
       dispatch,
       navigate,
