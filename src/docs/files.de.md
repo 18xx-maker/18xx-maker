@@ -126,6 +126,16 @@ Eingabetaste drückst, und ein geleertes Feld wird aus dem Spiel entfernt (der
 Titel kann nicht entfernt werden). Probleme mit einem Wert, etwa eine Währung
 ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel.
 
+Das Panel hat Tabs: Spielinfo und Züge. Mit `[` und `]` wechselst du zwischen
+ihnen (die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
+schließen das Panel). Der Tab Züge hat für jeden Zug des Spiels eine Karte, die
+aus demselben Schema erzeugt wird. Füge mit Zug hinzufügen einen Zug hinzu und
+verschiebe ihn mit den Schaltflächen einer Karte nach oben oder unten,
+dupliziere oder entferne ihn. Ein entfernter Zug lässt sich direkt danach mit
+Rückgängig zurückholen. Die selten benötigten Felder eines Zugs stehen unter
+Weitere Felder. Ein Feld, das das Schema als veraltet markiert, bleibt
+bearbeitbar und wird mit einer Warnung angezeigt.
+
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.
 
