@@ -111,6 +111,10 @@
         "tab": "Output",
         "description": "Edit the revenue chart range, the export defaults and the tile upgrades of the game. The changes stay in memory until you save them on the Changes page."
       },
+      "hex": {
+        "tab": "Hex",
+        "description": "Edit the group of hexes you picked on the map as JSON: its color, what is drawn on it and its coordinates. Click a hex on the map to pick its group. The changes stay in memory until you save them on the Changes page."
+      },
       "json": {
         "tab": "JSON",
         "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
@@ -256,6 +260,19 @@
       "usedBy_other": "{{count}} companies use \"{{name}}\" by name or by default and will no longer find it."
     }
   },
+  "hexEditor": {
+    "label": "Hex group JSON",
+    "hint": "Click a hex on the map to edit its group. Hold Cmd (Ctrl away from macOS) and click another hex to add it to the group, or a hex of the group to take it out. Press Escape to let go of the group.",
+    "pending": "{{coord}} has no hex yet. The group below is added to the map when you change it.",
+    "removed": "This variation of the map removes {{coord}}, so a hex there is not shown.",
+    "inherited": "This hex is copied from the map variation {{variation}} and can only be changed there.",
+    "blocked": {
+      "title": "Hex not moved",
+      "last": "The last hex of the map stays.",
+      "removed": "This variation of the map removes {{coord}}, so it cannot be added.",
+      "inherited": "This group is copied from another map variation and can only be changed there."
+    }
+  },
   "jsonEditor": {
     "label": "Game JSON",
     "valid": "Valid JSON. The game follows what you type.",
@@ -263,6 +280,8 @@
     "notUpdated": "The game was not updated, the page shows the last valid version.",
     "invalid": {
       "root": "The game must be a JSON object.",
+      "group": "The group must be a JSON object.",
+      "hexes": "The group needs a list of at least one coordinate in \"hexes\", like \"B2\".",
       "info": "The game needs an \"info\" object.",
       "title": "The game needs a title: \"info.title\" must be text."
     },

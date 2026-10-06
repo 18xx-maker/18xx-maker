@@ -6,11 +6,15 @@ import { find, propEq } from "ramda";
 
 import { sections as configSections } from "@/components/config";
 import { panelId, tabId } from "@/components/editPanel/EditTabs";
-import { editSections } from "@/components/editPanel/sections";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
-import { useDropStaleLines, useEditPanel } from "@/hooks/useEditPanel";
+import {
+  useDropStaleHex,
+  useDropStaleLines,
+  useEditPanel,
+} from "@/hooks/useEditPanel";
+import { useSelectedHex } from "@/hooks/useSelectedHex";
 import { createAlert, createSetExportMenuOpen, refreshGame } from "@/state";
 import { selectExportSheetOpen, selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
@@ -57,10 +61,13 @@ export const useBindings = () => {
     available: canEdit,
     open: editOpen,
     toggle: toggleEdit,
+    sections: editSections,
     editSection,
     setEditSection,
   } = edit;
   useDropStaleLines(edit);
+  useDropStaleHex(edit);
+  const { hex: selectedHex, clear: clearHex } = useSelectedHex();
   const [, togglePagination] = useBooleanParam("paginated");
   const { pathname } = location;
 
@@ -82,7 +89,9 @@ export const useBindings = () => {
         if (event.defaultPrevented) return;
 
         const params = new URLSearchParams(location.search);
-        if (editOpen) {
+        if (editOpen && selectedHex) {
+          clearHex();
+        } else if (editOpen) {
           toggleEdit();
         } else if (viewingGame && params.has("config")) {
           params.delete("section");
@@ -345,8 +354,11 @@ export const useBindings = () => {
       toggleEdit,
       canEdit,
       editOpen,
+      editSections,
       editSection,
       setEditSection,
+      selectedHex,
+      clearHex,
       togglePagination,
       dispatch,
       navigate,

@@ -1,4 +1,10 @@
-import { openEditSearch, searchString, togglePanelSearch } from "@/util/query";
+import {
+  clearHexSearch,
+  openEditSearch,
+  searchString,
+  selectHexSearch,
+  togglePanelSearch,
+} from "@/util/query";
 
 describe("togglePanelSearch", () => {
   it("opens a panel and closes the other", () => {
@@ -61,5 +67,32 @@ describe("lines", () => {
     expect(openEditSearch(search, "trains")).toBe(
       "edit=true&editSection=trains",
     );
+  });
+});
+
+describe("the selected hex", () => {
+  it("is selected on the hex tab and drops the lines of the json tab", () => {
+    expect(selectHexSearch("?edit=true&editSection=json&lines=3", "C11")).toBe(
+      "edit=true&editSection=hex&hex=C11",
+    );
+    expect(selectHexSearch("?edit=true&hex=A1&variation=1", "B2")).toBe(
+      "edit=true&hex=B2&variation=1&editSection=hex",
+    );
+  });
+
+  it("is cleared alone", () => {
+    expect(clearHexSearch("?edit=true&editSection=hex&hex=C11")).toBe(
+      "edit=true&editSection=hex",
+    );
+  });
+
+  it("is dropped when the panel closes, another opens or the tab is chosen", () => {
+    const search = "?edit=true&editSection=hex&hex=C11&variation=1";
+    expect(togglePanelSearch(search, "edit")).toBe("variation=1");
+    expect(togglePanelSearch(search, "config")).toBe("variation=1&config=true");
+    expect(openEditSearch(search, "json")).toBe(
+      "edit=true&editSection=json&variation=1",
+    );
+    expect(openEditSearch(search, "hex")).toBe("variation=1");
   });
 });

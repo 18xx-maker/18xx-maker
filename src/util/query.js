@@ -129,8 +129,10 @@ export const useStringParam = (key, initial) => {
 // one closes the other (and the config section), closing one leaves the rest
 export const togglePanelSearch = (search, panel) => {
   const params = new URLSearchParams(search);
-  // The selected lines belong to the JSON tab of the edit panel
+  // The selected lines belong to the JSON tab of the edit panel, the
+  // selected hex to the map
   params.delete("lines");
+  params.delete("hex");
 
   if (params.has(panel)) {
     params.delete(panel);
@@ -157,8 +159,25 @@ export const openEditSearch = (search, section) => {
     params.has("edit") ? search : togglePanelSearch(search, "edit"),
   );
   next.delete("lines");
+  next.delete("hex");
   next.set("editSection", encodeURIComponent(section));
   return searchString(next);
+};
+
+// The hex selected on the map is its group's first coordinate (?hex=C11),
+// shown on the Hex tab of the edit panel
+export const selectHexSearch = (search, coord) => {
+  const params = new URLSearchParams(search);
+  params.set("editSection", "hex");
+  params.set("hex", coord);
+  params.delete("lines");
+  return searchString(params);
+};
+
+export const clearHexSearch = (search) => {
+  const params = new URLSearchParams(search);
+  params.delete("hex");
+  return searchString(params);
 };
 
 export const useTogglePanel = (panel) => {

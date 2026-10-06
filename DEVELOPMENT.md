@@ -365,6 +365,19 @@ range of the text. Schema problems come from the problems check
 next one (`nextDiagnostic`). `RenderBoundary` keeps the panel usable
 when the page cannot draw an edited game.
 
+The `hex` section (`HexSection.jsx`, only on the map page: an entry of
+`editSections` with a `page` is filtered by `sectionsFor`) edits one group of
+`map.hexes` as JSON in the same `JsonEditor`, which takes a `lens` (`gameLens`
+in `src/util/jsonEditor.js` is the whole game; the hex lens reads, writes and
+checks one group, and re-roots the problems of the game into it). The selected
+group is `?hex=<its first coordinate>` (`useSelectedHex`, dropped with the panel,
+a variation change or Escape by `useDropStaleHex`). `HexOverlay.jsx` is the
+pointer layer of the pan and zoom map (`MapSingle` passes `interactive`, it is
+only drawn on screen with the edit panel open): `usePanZoom` captures the
+pointer, so it gives `onTap(downTarget, upEvent)` for a press that did not move
+and `SvgEditor` hands it to the overlay through `TapContext`. The pure rules
+(cells, groups, Cmd or Ctrl click, copied variations) are in `src/util/hexEdit.js`.
+
 The files of the CLI and the app have the same layout: `<folder>/<game id>/<format>/<file>`
 (`formatFolder` in `src/export/names.js`, `gameFolder` in `src/export/sink.js`; the
 Board 18 box is in `<game id>` itself). The app saves the folder of the folder

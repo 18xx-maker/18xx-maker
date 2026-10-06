@@ -273,3 +273,186 @@ describe("a coordinate in two groups of 18NC", () => {
     expect(edit.findGroups(result.hexes, "C14")).toEqual([]);
   });
 });
+
+describe("moveHex", () => {
+  const game = {
+    info: { title: "T" },
+    map: {
+      hexes: [
+        { color: "gray", hexes: ["A1", "B2"] },
+        { color: "red", hexes: ["C3"] },
+      ],
+    },
+  };
+
+  it("moves a hex into the selected group", () => {
+    const result = edit.moveHex(game, 0, "C3", "B2");
+    expect(result.game.map.hexes).toEqual([
+      { color: "gray", hexes: ["A1"] },
+      { color: "red", hexes: ["C3", "B2"] },
+    ]);
+    expect(result.anchor).toBe("C3");
+  });
+
+  it("takes a member out and moves the anchor when it was the anchor", () => {
+    const result = edit.moveHex(game, 0, "A1", "A1");
+    expect(result.game.map.hexes[0].hexes).toEqual(["B2"]);
+    expect(result.anchor).toBe("B2");
+  });
+
+  it("clears the selection when the group is gone", () => {
+    const result = edit.moveHex(game, 0, "C3", "C3");
+    expect(result.game.map.hexes).toEqual([
+      { color: "gray", hexes: ["A1", "B2"] },
+    ]);
+    expect(result.anchor).toBeUndefined();
+  });
+
+  it("blocks the last hex of the map", () => {
+    const one = { info: {}, map: { hexes: [{ hexes: ["A1"] }] } };
+    expect(edit.moveHex(one, 0, "A1", "A1")).toEqual({ blocked: "last" });
+  });
+
+  it("makes a group of an empty position when a hex is added to it", () => {
+    const result = edit.moveHex(game, 0, "D4", "B2");
+    expect(result.game.map.hexes).toEqual([
+      { color: "gray", hexes: ["A1"] },
+      { color: "red", hexes: ["C3"] },
+      { color: "plain", hexes: ["D4", "B2"] },
+    ]);
+    expect(result.anchor).toBe("D4");
+  });
+
+  describe("in a variation that copies another", () => {
+    const copy = {
+      info: {},
+      map: [
+        { hexes: [{ color: "red", hexes: ["A1", "B2"] }] },
+        { copy: 0, remove: ["B2"], hexes: [{ hexes: ["C3"] }] },
+      ],
+    };
+
+    it("does not change a group of the source", () => {
+      expect(edit.moveHex(copy, 1, "A1", "C3")).toEqual({
+        blocked: "inherited",
+      });
+    });
+
+    it("does not add a hex the variation removes", () => {
+      expect(edit.moveHex(copy, 1, "C3", "B2")).toEqual({ blocked: "removed" });
+    });
+
+    it("selects the group of the source, read only, and moves in the variation", () => {
+      expect(edit.selectionFor(copy, 1, "B2")).toBe("B2");
+      expect(edit.selectionFor(copy, 1, "A1")).toBe("A1");
+      expect(edit.selectedCoords(copy, 1, "A1")).toEqual(["A1", "B2"]);
+      const result = edit.moveHex(copy, 1, "C3", "D4");
+      expect(result.game.map[1].hexes).toEqual([{ hexes: ["C3", "D4"] }]);
+      expect(result.game.map[0]).toBe(copy.map[0]);
+    });
+
+    it("lets the last local hex go when the source has more", () => {
+      const result = edit.moveHex(copy, 1, "C3", "C3");
+      expect(result.game.map[1].hexes).toEqual([]);
+    });
+  });
+});
+
+describe("selectionFor", () => {
+  it("is the anchor of the group, or the position when no group has it", () => {
+    const game = { map: { hexes: [{ hexes: ["A1", "B2"] }] } };
+    expect(edit.selectionFor(game, 0, "B2")).toBe("A1");
+    expect(edit.selectionFor(game, 0, "C3")).toBe("C3");
+    expect(edit.selectedCoords(game, 0, "A1")).toEqual(["A1", "B2"]);
+    expect(edit.selectedCoords(game, 0, "C3")).toEqual(["C3"]);
+    expect(edit.selectedCoords(game, 0, "")).toEqual([]);
+  });
+
+  it("is the coordinate itself when the anchor is also in a later group", () => {
+    const game = {
+      map: { hexes: [{ hexes: ["A1", "B2"] }, { hexes: ["A1"] }] },
+    };
+    expect(edit.selectionFor(game, 0, "B2")).toBe("B2");
+  });
+});
+
+describe("isMoveClick", () => {
+  it("is Cmd on macOS and Ctrl elsewhere", () => {
+    expect(edit.isMoveClick({ metaKey: true, ctrlKey: false }, true)).toBe(
+      true,
+    );
+    expect(edit.isMoveClick({ metaKey: false, ctrlKey: true }, true)).toBe(
+      false,
+    );
+    expect(edit.isMoveClick({ metaKey: false, ctrlKey: true }, false)).toBe(
+      true,
+    );
+    expect(edit.isMoveClick({ metaKey: true, ctrlKey: false }, false)).toBe(
+      false,
+    );
+  });
+});
+
+describe("groupInvalid", () => {
+  it("accepts an object with a list of coordinates", () => {
+    expect(
+      edit.groupInvalid({ hexes: ["A1", "BB12"], color: "red" }),
+    ).toBeNull();
+  });
+
+  it("rejects what is not an object", () => {
+    for (const value of [null, [], "A1", 3, true]) {
+      expect(edit.groupInvalid(value)).toBe("group");
+    }
+  });
+
+  it("rejects hexes the map could not draw", () => {
+    for (const hexes of [
+      undefined,
+      [],
+      "A1",
+      [3],
+      [null],
+      ["a1"],
+      ["A"],
+      ["A1", "B"],
+      [["1", "1"]],
+      ["A0 "],
+    ]) {
+      expect(edit.groupInvalid({ hexes })).toBe("hexes");
+    }
+    expect(edit.groupInvalid({})).toBe("hexes");
+  });
+});
+
+describe("rerootPointer", () => {
+  it("is the pointer inside the group", () => {
+    expect(edit.rerootPointer("map.hexes[3].color", "map.hexes[3]")).toBe(
+      "color",
+    );
+    expect(edit.rerootPointer("map.hexes[3]", "map.hexes[3]")).toBe("");
+    expect(edit.rerootPointer("map.hexes[3].cities[0].x", "map.hexes[3]")).toBe(
+      "cities[0].x",
+    );
+    expect(edit.rerootPointer("map[1].hexes[3].color", "map[1].hexes[3]")).toBe(
+      "color",
+    );
+  });
+
+  it("is nothing for another group, another variation or another part", () => {
+    expect(
+      edit.rerootPointer("map.hexes[31].color", "map.hexes[3]"),
+    ).toBeNull();
+    expect(edit.rerootPointer("map.hexes[2].color", "map.hexes[3]")).toBeNull();
+    expect(
+      edit.rerootPointer("map[0].hexes[3].color", "map[1].hexes[3]"),
+    ).toBeNull();
+    expect(edit.rerootPointer("trains[0]", "map.hexes[3]")).toBeNull();
+    expect(edit.rerootPointer(undefined, "map.hexes[3]")).toBeNull();
+  });
+
+  it("names the group of a single map or of a variation", () => {
+    expect(edit.groupPrefix({ map: {} }, 0, 3)).toBe("map.hexes[3]");
+    expect(edit.groupPrefix({ map: [{}, {}] }, 1, 3)).toBe("map[1].hexes[3]");
+  });
+});

@@ -31,7 +31,8 @@ const Failed = ({ retry }) => {
 
 const load = () => lazy(() => import("@/components/editPanel/JsonEditor"));
 
-const JsonSection = ({ game }) => {
+// lens: the part of the game to edit, the whole game without one (JsonEditor)
+const JsonSection = ({ game, lens }) => {
   const [attempt, setAttempt] = useState(0);
   // A new lazy component per attempt: the failed one stays failed
   const Editor = useMemo(load, [attempt]);
@@ -42,7 +43,7 @@ const JsonSection = ({ game }) => {
       fallback={<Failed retry={() => setAttempt((n) => n + 1)} />}
     >
       <Suspense fallback={null}>
-        <Editor game={game} />
+        <Editor game={game} lens={lens} />
       </Suspense>
     </Boundary>
   );

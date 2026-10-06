@@ -1,7 +1,5 @@
 import { useTranslation } from "react-i18next";
 
-import { editSections } from "@/components/editPanel/sections";
-
 import { cn } from "@/util/cn";
 
 export const tabId = (section) => `edit-tab-${section}`;
@@ -9,12 +7,12 @@ export const panelId = (section) => `edit-tabpanel-${section}`;
 
 // The tabs of the edit panel. [ and ] switch between them (bindings.js), the
 // arrow keys, Home and End move between them when a tab has the focus.
-const EditTabs = ({ section, setSection }) => {
+const EditTabs = ({ sections, section, setSection }) => {
   const { t } = useTranslation();
 
   const onKeyDown = (event) => {
-    const index = editSections.findIndex((s) => s.section === section);
-    const last = editSections.length - 1;
+    const index = sections.findIndex((s) => s.section === section);
+    const last = sections.length - 1;
     const target = {
       ArrowRight: index === last ? 0 : index + 1,
       ArrowLeft: index === 0 ? last : index - 1,
@@ -24,7 +22,7 @@ const EditTabs = ({ section, setSection }) => {
     if (target === undefined) return;
 
     event.preventDefault();
-    const next = editSections[target].section;
+    const next = sections[target].section;
     setSection(next);
     document.getElementById(tabId(next))?.focus();
   };
@@ -37,7 +35,7 @@ const EditTabs = ({ section, setSection }) => {
         className="inline-flex flex-wrap rounded-md bg-muted p-1 text-foreground"
         onKeyDown={onKeyDown}
       >
-        {editSections.map((item) => {
+        {sections.map((item) => {
           const selected = item.section === section;
           return (
             <button

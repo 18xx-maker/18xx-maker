@@ -2817,7 +2817,8 @@ describe("edit panel rounds", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("rounds"));
     expect(tab).toHaveAccessibleName("Rounds");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 5]).toBe(tab);
+    // The hex tab of the map page and the JSON tab come after it
+    expect(tabs[tabs.length - 4]).toBe(tab);
     expect(cards().length).toBeGreaterThanOrEqual(
       games["18Test"].rounds.length +
         games["18Test"].turns.length +
@@ -2950,7 +2951,7 @@ describe("edit panel tokens", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("tokens"));
     expect(tab).toHaveAccessibleName("Tokens");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 4]).toBe(tab);
+    expect(tabs[tabs.length - 5]).toBe(tab);
     // A token of text is a field, an object is a card
     expect(
       screen.getByRole("textbox", { name: "Value of token Round" }),

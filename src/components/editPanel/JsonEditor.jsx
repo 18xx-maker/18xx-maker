@@ -34,7 +34,7 @@ import {
   keymap,
 } from "@codemirror/view";
 import { tags } from "@lezer/highlight";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useStore } from "react-redux";
 import { Link } from "react-router";
@@ -58,19 +58,16 @@ import { issueText } from "@/components/schemaForm/issueText";
 
 import { editGame, selectGameProblems } from "@/state";
 import { selectEditorKeys } from "@/state/selectors";
-import { gameText } from "@/util/download";
 import {
   debounceDelay,
   duplicateKeys,
   foldRanges,
-  invalidReason,
+  gameLens,
   lossyNumbers,
   minimalChange,
   parseGameText,
   parseTree,
   pointerToRange,
-  sameGame,
-  shareUnchanged,
 } from "@/util/jsonEditor";
 import { sameLines } from "@/util/lineSpec";
 import { useLinesParam } from "@/util/query";
@@ -198,11 +195,22 @@ const modeKeys = (name, extension = []) => [
 // Where the keys of the mode go, so a mode change keeps the view
 const mode = new Compartment();
 
-const JsonEditor = ({ game }) => {
+const JsonEditor = ({ game, lens: given }) => {
   const { t } = useTranslation();
   const store = useStore();
   const slug = game.meta.slug;
-  const issues = useSelector((state) => selectGameProblems(state, slug));
+  const whole = useMemo(() => gameLens(slug), [slug]);
+  const lens = given ?? whole;
+  const lensRef = useRef(lens);
+  lensRef.current = lens;
+  const allIssues = useSelector((state) => selectGameProblems(state, slug));
+  const checked = useSelector(
+    (state) => state.gameProblems.status !== "running",
+  );
+  const issues = useMemo(
+    () => allIssues && lens.issues(allIssues, checked),
+    [allIssues, checked, lens],
+  );
 
   const host = useRef();
   const view = useRef();
@@ -235,7 +243,7 @@ const JsonEditor = ({ game }) => {
   const statusOf = (text) => {
     const parsed = parseGameText(text);
     if (!parsed.ok) return { kind: "syntax", ...parsed };
-    const reason = invalidReason(parsed.value);
+    const reason = lensRef.current.invalidReason(parsed.value);
     return reason ? { kind: "structure", reason } : { kind: "ok" };
   };
 
@@ -248,29 +256,32 @@ const JsonEditor = ({ game }) => {
     const text = view.current.state.doc.toString();
     const next = statusOf(text);
     setStatus(next);
+    const { draftKey, same, write } = lensRef.current;
     if (next.kind !== "ok") {
-      setDraft(slug, text, store.getState().game);
+      setDraft(draftKey, text, store.getState().game);
       return;
     }
-    clearDraft(slug);
+    clearDraft(draftKey);
     setChanged(false);
 
     const { value } = parseGameText(text);
     const current = store.getState().game;
-    if (!current || sameGame(current, value)) return;
+    if (!current || same(current, value)) return;
 
     const start = performance.now();
-    store.dispatch(editGame(() => shareUnchanged(current, value)));
+    store.dispatch(editGame((latest) => write(latest, value)));
     applied.current = store.getState().game;
     lastMs.current = performance.now() - start;
+    lensRef.current.applied?.(value);
   };
   const applyRef = useRef(apply);
   applyRef.current = apply;
 
   // The view lives as long as the game of the slug is the same
   useEffect(() => {
-    const draft = getDraft(slug);
-    const start = draft?.text ?? gameText(store.getState().game);
+    const { draftKey, fold, lines: useLines } = lensRef.current;
+    const draft = getDraft(draftKey);
+    const start = draft?.text ?? lensRef.current.text(store.getState().game);
     const phrases = Object.fromEntries(
       Object.entries(PHRASES).map(([english, key]) => [
         english,
@@ -314,7 +325,13 @@ const JsonEditor = ({ game }) => {
       doc: start,
       extensions: [
         EditorState.phrases.of(phrases),
-        lineSelection(linesRef.current, (next) => setLinesRef.current(next)),
+        ...(useLines
+          ? [
+              lineSelection(linesRef.current, (next) =>
+                setLinesRef.current(next),
+              ),
+            ]
+          : []),
         history(),
         drawSelection(),
         indentOnInput(),
@@ -328,7 +345,7 @@ const JsonEditor = ({ game }) => {
         EditorView.contentAttributes.of({
           "aria-multiline": "true",
           tabindex: "0",
-          "aria-label": tRef.current("jsonEditor.label"),
+          "aria-label": tRef.current(lensRef.current.label),
           "aria-describedby": "json-editor-status",
         }),
         // First, so the keys of the mode see a key before the others do
@@ -381,7 +398,7 @@ const JsonEditor = ({ game }) => {
       ],
     });
 
-    const scrollTo = scrollToLines(state, linesRef.current);
+    const scrollTo = useLines ? scrollToLines(state, linesRef.current) : null;
     const v = new EditorView({
       state,
       parent: host.current,
@@ -394,7 +411,7 @@ const JsonEditor = ({ game }) => {
     setStatus(initial);
     // The editor starts folded: the parts of the game other than info. Not
     // when it was opened on lines or on the text of a draft.
-    if (!scrollTo && !draft && initial.kind === "ok") {
+    if (fold && !scrollTo && !draft && initial.kind === "ok") {
       const effects = foldRanges(start).map((range) => foldEffect.of(range));
       if (effects.length) v.dispatch({ effects });
     }
@@ -409,7 +426,7 @@ const JsonEditor = ({ game }) => {
       v.destroy();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
+  }, [slug, lens.draftKey]);
 
   // The key mode changed: Emacs and Vim load when first chosen, the text and
   // its history stay. An answer to an earlier choice is ignored.
@@ -439,6 +456,7 @@ const JsonEditor = ({ game }) => {
   // clicks are already in the editor
   useEffect(() => {
     const v = view.current;
+    if (!lensRef.current.lines) return;
     if (!v || sameLines(selectedLines(v.state), lines)) return;
     // A fold hides its lines: open the ones the link points into
     const unfold = unfoldLines(v.state, lines);
@@ -467,13 +485,13 @@ const JsonEditor = ({ game }) => {
 
     const text = v.state.doc.toString();
     const parsed = parseGameText(text);
-    if (parsed.ok && sameGame(game, parsed.value)) return;
+    if (parsed.ok && lensRef.current.same(game, parsed.value)) return;
 
     if (!parsed.ok) {
       setChanged(true);
       return;
     }
-    const change = minimalChange(text, gameText(game));
+    const change = minimalChange(text, lensRef.current.text(game));
     if (change) {
       v.dispatch({ changes: change, annotations: external.of(true) });
     }
@@ -506,8 +524,11 @@ const JsonEditor = ({ game }) => {
 
   const discard = () => {
     const v = view.current;
-    const change = minimalChange(text(), gameText(store.getState().game));
-    clearDraft(slug);
+    const change = minimalChange(
+      text(),
+      lensRef.current.text(store.getState().game),
+    );
+    clearDraft(lensRef.current.draftKey);
     setChanged(false);
     setWarning(null);
     if (change) v.dispatch({ changes: change, annotations: external.of(true) });

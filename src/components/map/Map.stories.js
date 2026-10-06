@@ -9,7 +9,7 @@ import { useConfig, useGame } from "@/hooks";
 const hexClipPath =
   "-86.0252,0 -43.0126,-74.5 43.0126,-74.5 86.0252,0 43.0126,74.5 -43.0126,74.5";
 
-const MapStory = ({ coords, hexWidth }) => {
+const MapStory = ({ coords, hexWidth, interactive }) => {
   const game = useGame();
   const { config } = useConfig();
 
@@ -37,6 +37,7 @@ const MapStory = ({ coords, hexWidth }) => {
           tiles: { ...config.tiles, mapWidth: hexWidth },
         },
         variation: 0,
+        interactive,
       }),
     ),
   );
@@ -69,3 +70,10 @@ export const Standard = {};
 export const OutsideCoordinates = { args: { coords: "outside" } };
 
 export const InsideCoordinates = { args: { coords: "inside" } };
+
+// The layer of the hex editor: with the edit panel open (the url) every hex
+// and the empty positions around the map are targets for the pointer
+export const PickingHexes = {
+  args: { interactive: true },
+  parameters: { route: "/games/18Test/map?edit=true&hex=C11&editSection=hex" },
+};

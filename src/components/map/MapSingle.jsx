@@ -30,6 +30,7 @@ const MapSingle = ({ game, config, variation }) => {
           game={game}
           config={config}
           variation={variation}
+          interactive
         />
       </Editor>
       <style>{`@media print {@page {size: ${scalePageSize(data.printWidth, config.printScale)} ${scalePageSize(data.printHeight, config.printScale)}; margin: 0.25in 0.25in 0.25in 0.25in; }}`}</style>
