@@ -7,7 +7,7 @@ import Page from "@/components/page/Page";
 import PageSetup from "@/components/page/PageSetup";
 import Svg from "@/components/svg/Svg";
 
-import { addPaginationData, unitsToCss } from "@/util";
+import { addPaginationData, layoutPaper, unitsToCss } from "@/util";
 
 const Paginate = ({ component, data, config, game, children }) => {
   // Generate an ID to use for svg content
@@ -15,7 +15,10 @@ const Paginate = ({ component, data, config, game, children }) => {
 
   const defs = <g id={contentId}>{children}</g>;
 
-  let paginationData = addPaginationData(data, config);
+  let paginationData = addPaginationData(data, {
+    ...config,
+    paper: layoutPaper(config.paper, config.printScale),
+  });
   let title = game.info.title;
 
   let css = `

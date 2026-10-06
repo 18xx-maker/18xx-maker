@@ -20,6 +20,35 @@
       },
       "additionalProperties": false
     },
+    "cardSizes": {
+      "type": "object",
+      "description": "Optional size per type of card, used instead of width and height. A missing width or height uses the one above.",
+      "properties": {
+        "private": { "$ref": "#/definitions/cardSize" },
+        "share": { "$ref": "#/definitions/cardSize" },
+        "train": { "$ref": "#/definitions/cardSize" },
+        "number": { "$ref": "#/definitions/cardSize" }
+      },
+      "additionalProperties": false
+    },
+    "dieCard": {
+      "type": "object",
+      "description": "The size of the cards of a die layout in units. The paper, margins, cutlines and bleed of a die layout are fixed.",
+      "properties": {
+        "width": {
+          "type": "number",
+          "minimum": 1,
+          "description": "The card width in units."
+        },
+        "height": {
+          "type": "number",
+          "minimum": 1,
+          "description": "The card height in units."
+        },
+        "sizes": { "$ref": "#/definitions/cardSizes" }
+      },
+      "additionalProperties": false
+    },
     "font": {
       "type": "object",
       "properties": {
@@ -62,6 +91,12 @@
   "properties": {
     "theme": { "type": "string" },
     "companiesTheme": { "type": "string" },
+    "printScale": {
+      "type": "number",
+      "minimum": 50,
+      "maximum": 200,
+      "description": "Scales everything that prints, in percent, to correct for a printer that prints too big or too small. 100 is the real size. Paper size and margins stay the same, so the content of a page changes. It is a setting of the user, a game file cannot set it, and exports ignore it."
+    },
     "paper": {
       "allOf": [
         {
@@ -164,13 +199,15 @@
         "border": { "type": "number", "minimum": 0 },
         "blackBand": { "type": "boolean" },
         "sizes": {
+          "$ref": "#/definitions/cardSizes",
+          "description": "Optional size per type of card, used instead of width and height. A missing width or height uses the one above. Ignored by the die layouts, which use the sizes of cards.dice."
+        },
+        "dice": {
           "type": "object",
-          "description": "Optional size per type of card, used instead of width and height. A missing width or height uses the one above. Ignored by the die layouts.",
+          "description": "The card sizes of the die layouts, which ignore width, height and sizes above.",
           "properties": {
-            "private": { "$ref": "#/definitions/cardSize" },
-            "share": { "$ref": "#/definitions/cardSize" },
-            "train": { "$ref": "#/definitions/cardSize" },
-            "number": { "$ref": "#/definitions/cardSize" }
+            "miniEuroDie": { "$ref": "#/definitions/dieCard" },
+            "dtgDie": { "$ref": "#/definitions/dieCard" }
           },
           "additionalProperties": false
         },

@@ -1,5 +1,5 @@
 import defaults from "@/defaults.json";
-import { getCardData, typeCardConfig } from "@/util/cards";
+import { getCardData, resolveCardLayout, typeCardConfig } from "@/util/cards";
 
 const { cards, paper } = defaults;
 
@@ -145,11 +145,117 @@ describe("typeCardConfig", () => {
     expect(typeCardConfig(free, "private")).toBe(free);
   });
 
-  it("ignores the sizes of the die layouts", () => {
+  it("ignores the sizes of the die layouts and uses the size of the die", () => {
     for (const layout of ["miniEuroDie", "dtgDie"]) {
-      const config = { ...cards, layout, sizes };
-      expect(typeCardConfig(config, "private")).toBe(config);
+      const die = cards.dice[layout];
+      expect(
+        typeCardConfig({ ...cards, layout, sizes }, "private"),
+      ).toMatchObject({ width: die.width, height: die.height });
     }
+  });
+
+  it("uses the sizes of the die for the type of card", () => {
+    const dice = {
+      miniEuroDie: {
+        width: 300,
+        height: 200,
+        sizes: { share: { width: 120 }, train: { height: 90 } },
+      },
+    };
+    const config = { ...cards, layout: "miniEuroDie", dice };
+    expect(typeCardConfig(config, "share")).toMatchObject({
+      width: 120,
+      height: 200,
+    });
+    expect(typeCardConfig(config, "train")).toMatchObject({
+      width: 300,
+      height: 90,
+    });
+    expect(typeCardConfig(config, "private")).toMatchObject({
+      width: 300,
+      height: 200,
+    });
+  });
+
+  it("falls back to the size of the die when the config has none", () => {
+    const { dice, ...bare } = cards;
+    expect(dice).toBeDefined();
+    expect(
+      typeCardConfig({ ...bare, layout: "miniEuroDie" }, "private"),
+    ).toMatchObject({ width: 265.748, height: 173.228 });
+    expect(
+      typeCardConfig(
+        { ...bare, layout: "dtgDie", dice: { dtgDie: { width: 260 } } },
+        "private",
+      ),
+    ).toMatchObject({ width: 260, height: 150 });
+  });
+});
+
+describe("resolveCardLayout", () => {
+  it("leaves free layouts to the config and the paper", () => {
+    const free = { ...cards, layout: "free", sizes: { share: { width: 111 } } };
+    const resolved = resolveCardLayout(free, paper, "share");
+    expect(resolved.cards).toMatchObject({ width: 111, height: cards.height });
+    expect(resolved.paper).toBe(paper);
+    expect(resolveCardLayout(free, paper).cards).toBe(free);
+  });
+
+  it("gives the mini euro die the numbers it always had", () => {
+    const resolved = resolveCardLayout({ ...cards, border: 4 }, paper);
+    expect(resolved.cards).toMatchObject({
+      width: 265.748,
+      height: 173.228,
+      cutlines: 25,
+      bleed: 12.5,
+      border: 0,
+    });
+    expect(resolved.paper).toEqual({ width: 850, height: 1100, margins: 25 });
+  });
+
+  it("gives the dtg die the numbers it always had, padding included", () => {
+    const dtg = { ...cards, layout: "dtgDie" };
+    expect(resolveCardLayout(dtg, paper).cards).toMatchObject({
+      width: 250,
+      height: 150,
+      cutlines: 0,
+      bleed: 0,
+      border: 0,
+    });
+    expect(
+      resolveCardLayout({ ...dtg, dtgPadding: 5 }, paper).cards,
+    ).toMatchObject({ width: 240, height: 140, cutlines: 5, bleed: 0 });
+  });
+
+  it("uses the size of the die and of the type on that die", () => {
+    const dice = {
+      miniEuroDie: {
+        width: 300,
+        height: 200,
+        sizes: { number: { width: 100 } },
+      },
+    };
+    const config = { ...cards, dice };
+    expect(resolveCardLayout(config, paper, "share").cards).toMatchObject({
+      width: 300,
+      height: 200,
+    });
+    expect(resolveCardLayout(config, paper, "number").cards).toMatchObject({
+      width: 100,
+      height: 200,
+    });
+  });
+
+  it("lays the die out on the paper divided by the print scale", () => {
+    const resolved = resolveCardLayout(cards, paper, undefined, 125);
+    expect(resolved.paper).toEqual({ width: 680, height: 880, margins: 20 });
+
+    const free = { ...cards, layout: "free" };
+    expect(resolveCardLayout(free, paper, undefined, 125).paper).toEqual({
+      width: 680,
+      height: 880,
+      margins: 20,
+    });
   });
 });
 

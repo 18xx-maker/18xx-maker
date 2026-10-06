@@ -107,6 +107,10 @@ export const sections = [
       {
         note: "paperSize",
       },
+      {
+        name: "printScale",
+        root: true,
+      },
     ],
   },
   {
@@ -460,6 +464,41 @@ export const sections = [
       },
       {
         note: "typeSizesNote",
+      },
+      {
+        note: "diceNote",
+      },
+      {
+        group: [
+          {
+            name: "miniEuroDieWidth",
+            path: "cards.dice.miniEuroDie.width",
+            dimension: true,
+            description: false,
+          },
+          {
+            name: "miniEuroDieHeight",
+            path: "cards.dice.miniEuroDie.height",
+            dimension: true,
+            description: false,
+          },
+        ],
+      },
+      {
+        group: [
+          {
+            name: "dtgDieWidth",
+            path: "cards.dice.dtgDie.width",
+            dimension: true,
+            description: false,
+          },
+          {
+            name: "dtgDieHeight",
+            path: "cards.dice.dtgDie.height",
+            dimension: true,
+            description: false,
+          },
+        ],
       },
       {
         name: "border",

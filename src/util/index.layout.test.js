@@ -3,9 +3,12 @@ import {
   getCharterData,
   getFontProps,
   getTile,
+  layoutPaper,
   multiDefaultTo,
+  parsePrintScale,
   printableHeight,
   printableWidth,
+  scalePageSize,
   titleToFilename,
 } from "@/util/index";
 
@@ -200,5 +203,76 @@ describe("getCharterData", () => {
       // Room for the pins
       usableHeight: 1050,
     });
+  });
+});
+
+describe("parsePrintScale", () => {
+  it("keeps a number in the range", () => {
+    expect(parsePrintScale(100)).toBe(100);
+    expect(parsePrintScale(97.5)).toBe(97.5);
+    expect(parsePrintScale(50)).toBe(50);
+    expect(parsePrintScale(200)).toBe(200);
+  });
+
+  it("clamps what is out of the range", () => {
+    expect(parsePrintScale(10)).toBe(50);
+    expect(parsePrintScale(500)).toBe(200);
+  });
+
+  it("reads a string, like the one of a url parameter", () => {
+    expect(parsePrintScale("110")).toBe(110);
+    expect(parsePrintScale("1000")).toBe(200);
+  });
+
+  it("is 100 when empty or not a number", () => {
+    for (const value of [undefined, null, "", "big", NaN, Infinity]) {
+      expect(parsePrintScale(value)).toBe(100);
+    }
+  });
+});
+
+describe("layoutPaper", () => {
+  const paper = { width: 850, height: 1100, margins: 25 };
+
+  it("is the same paper at 100", () => {
+    expect(layoutPaper(paper)).toBe(paper);
+    expect(layoutPaper(paper, 100)).toBe(paper);
+    expect(layoutPaper(paper, "")).toBe(paper);
+  });
+
+  it("divides the size and the margins by the scale", () => {
+    expect(layoutPaper(paper, 125)).toEqual({
+      width: 680,
+      height: 880,
+      margins: 20,
+    });
+    expect(layoutPaper(paper, 50)).toEqual({
+      width: 1700,
+      height: 2200,
+      margins: 50,
+    });
+  });
+
+  it("only divides a margin that is a number", () => {
+    const margins = { top: 1, right: 2, bottom: 3, left: 4 };
+    expect(layoutPaper({ ...paper, margins }, 125).margins).toBe(margins);
+  });
+
+  it("does not change the paper", () => {
+    layoutPaper(paper, 125);
+    expect(paper).toEqual({ width: 850, height: 1100, margins: 25 });
+  });
+});
+
+describe("scalePageSize", () => {
+  it("is the size at 100", () => {
+    expect(scalePageSize("8.51in")).toBe("8.51in");
+    expect(scalePageSize("8.51in", 100)).toBe("8.51in");
+  });
+
+  it("scales the content and keeps the margins", () => {
+    // 8.5in of content and 0.5in of margins
+    expect(scalePageSize("9in", 110)).toBe(`${8.5 * 1.1 + 0.5}in`);
+    expect(scalePageSize("9in", 50)).toBe("4.75in");
   });
 });

@@ -75,6 +75,9 @@ pnpm maker export <game|path.json> --format pdf,png,svg,b18
 | `--b18-author <author>`   | the Board 18 author, default `b18.author` of `maker config`                                                                                                            |
 | `-d, --debug`             | serve the site on port 9000 and wait, to look at pages                                                                                                                 |
 
+The `printScale` of a config (the printer correction of the app) is ignored by
+exports: they always use the real size.
+
 ### Options in the game file
 
 Every option of the table but `--config`, `--out`, `--jobs`, `--all` and

@@ -3,6 +3,7 @@ import { Navigate } from "react-router";
 import Editor from "@/components/editor/Editor";
 import Map from "@/components/map/Map";
 
+import { scalePageSize } from "@/util";
 import { getMapData } from "@/util/map";
 
 const MapSingle = ({ game, config, variation }) => {
@@ -31,7 +32,7 @@ const MapSingle = ({ game, config, variation }) => {
           variation={variation}
         />
       </Editor>
-      <style>{`@media print {@page {size: ${data.printWidth} ${data.printHeight}; margin: 0.25in 0.25in 0.25in 0.25in; }}`}</style>
+      <style>{`@media print {@page {size: ${scalePageSize(data.printWidth, config.printScale)} ${scalePageSize(data.printHeight, config.printScale)}; margin: 0.25in 0.25in 0.25in 0.25in; }}`}</style>
     </div>
   );
 };

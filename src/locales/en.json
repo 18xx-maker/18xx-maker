@@ -533,6 +533,10 @@
       },
       "paperMargins": {
         "label": "Paper Margins"
+      },
+      "printScale": {
+        "label": "Print Scale",
+        "description": "Scales everything that prints, in percent, to correct for a printer that prints too big or too small. 100 is the real size, the range is 50 to 200. The paper size and margins stay the same, so what fits on a page changes with it. Exports ignore it."
       }
     },
     "tokens": {
@@ -784,7 +788,7 @@
       },
       "layout": {
         "label": "Cards Layout",
-        "description": "Free allows cards to free flow and uses the other options below. Mini euro is for my custom die that cuts mini-euro sized cards and dtgDie uses the standard Deep Thought Games asset die. Either die option overrides the page size as well as the width, height and cutlines option below."
+        "description": "Free allows cards to free flow and uses the other options below. Mini euro is for my custom die that cuts mini-euro sized cards and dtgDie uses the standard Deep Thought Games asset die. Either die option overrides the page size and the cutlines option below, and uses the die card sizes further down instead of the card width and height."
       },
       "width": {
         "label": "Card Width"
@@ -855,7 +859,20 @@
           }
         }
       },
-      "typeSizesNote": "**Card sizes per type.** Leave a width or height blank to use the card width and height above. Types with the same size are printed on the same pages, each different size gets its own pages, and the page orientation follows the first size. The die layouts ignore these sizes."
+      "typeSizesNote": "**Card sizes per type.** Leave a width or height blank to use the card width and height above. Types with the same size are printed on the same pages, each different size gets its own pages, and the page orientation follows the first size. The die layouts ignore these sizes and use their own below.",
+      "miniEuroDieWidth": {
+        "label": "Mini Euro Die Card Width"
+      },
+      "miniEuroDieHeight": {
+        "label": "Mini Euro Die Card Height"
+      },
+      "dtgDieWidth": {
+        "label": "DTG Die Card Width"
+      },
+      "dtgDieHeight": {
+        "label": "DTG Die Card Height"
+      },
+      "diceNote": "**Die card sizes.** The die layouts use these sizes instead of the card width and height above. Set sizes per type of card for a die in the config file, under `cards.dice`."
     },
     "privates": {
       "title": "Privates",

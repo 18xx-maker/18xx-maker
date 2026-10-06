@@ -1,13 +1,4 @@
-import {
-  addIndex,
-  chain,
-  clone,
-  map,
-  prop,
-  range,
-  splitEvery,
-  unnest,
-} from "ramda";
+import { addIndex, chain, map, prop, range, splitEvery, unnest } from "ramda";
 
 import Pins from "@/components/Pins";
 import Number from "@/components/cards/Number";
@@ -19,7 +10,7 @@ import Svg from "@/components/svg/Svg";
 
 import { useConfig, useGame } from "@/hooks";
 import { fillArray, maxPlayers, unitsToCss } from "@/util";
-import { getCardData, typeCardConfig } from "@/util/cards";
+import { getCardData, resolveCardLayout } from "@/util/cards";
 import {
   compileCompanies,
   overrideCompanies,
@@ -113,39 +104,9 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     ...numberNodes,
   ];
 
-  let cardConfig = clone(config.cards);
-  let paperConfig = clone(config.paper);
-  let dtgPadding = cardConfig.dtgPadding;
-
-  switch (config.cards.layout) {
-    case "miniEuroDie":
-      paperConfig.width = 850;
-      paperConfig.height = 1100;
-      paperConfig.margins = 25;
-
-      cardConfig.width = 265.748;
-      cardConfig.height = 173.228;
-      cardConfig.cutlines = 25;
-      cardConfig.bleed = 12.5;
-      cardConfig.border = 0;
-
-      break;
-    case "dtgDie":
-      paperConfig.width = 850;
-      paperConfig.height = 1100;
-      paperConfig.margins = 25;
-
-      cardConfig.width = 250 - 2 * dtgPadding;
-      cardConfig.height = 150 - 2 * dtgPadding;
-      cardConfig.cutlines = dtgPadding;
-      cardConfig.bleed = 0;
-      cardConfig.border = 0;
-
-      break;
-    default:
-      // No overrides for "free" layout
-      break;
-  }
+  const cardConfig = config.cards;
+  const layoutFor = (type) =>
+    resolveCardLayout(config.cards, config.paper, type, config.printScale);
 
   // Each type of card can have its own size. Types with the same size stay
   // together on the same pages, otherwise each size is laid out on its own.
@@ -158,7 +119,8 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
 
   // Types of the same size share pages, in the order each size first appears
   const groups = types.reduce((groups, [type, nodes]) => {
-    const data = getCardData(typeCardConfig(cardConfig, type), paperConfig);
+    const layout = layoutFor(type);
+    const data = getCardData(layout.cards, layout.paper);
     const same = groups.find(
       (group) =>
         group.data.width === data.width && group.data.height === data.height,
@@ -166,15 +128,16 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     if (same) {
       same.nodes = [...same.nodes, ...nodes];
     } else {
-      groups.push({ type, data, nodes });
+      groups.push({ type, layout, data, nodes });
     }
     return groups;
   }, []);
 
   const grouped = groups.length > 1;
+  const noCards = layoutFor();
   let data = groups.length
     ? groups[0].data
-    : getCardData(cardConfig, paperConfig);
+    : getCardData(noCards.cards, noCards.paper);
 
   let pins = null;
 
@@ -219,8 +182,8 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     groups.forEach((group, i) => {
       if (i > 0) {
         group.data = getCardData(
-          typeCardConfig(cardConfig, group.type),
-          paperConfig,
+          group.layout.cards,
+          group.layout.paper,
           orientation,
         );
       }

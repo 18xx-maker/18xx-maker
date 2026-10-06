@@ -31,7 +31,24 @@
 
 ### 卡牌
 
-您可以根据自己拥有的刀模布局,把 `cards.layout` 属性设为 `dtgDie` 或 `miniEuroDie`。与地块一样,设置其中一个选项会覆盖许多其他选项,包括 `cards.sizes`(每种卡牌类型 `private`、`share`、`train` 和 `number` 可选的宽度和高度):刀模布局会忽略它,所有卡牌使用同一种尺寸。
+您可以根据自己拥有的刀模布局,把 `cards.layout` 属性设为 `dtgDie` 或 `miniEuroDie`。与地块一样,设置其中一个选项会覆盖许多其他选项,包括 `cards.sizes`(每种卡牌类型 `private`、`share`、`train` 和 `number` 可选的宽度和高度):刀模布局会忽略它。刀模布局的纸张、边距、裁切线和出血是固定的,但卡牌尺寸不是:它在 `cards.dice` 中,每种刀模一项,默认为上面刀模的尺寸:
+
+```json
+{
+  "cards": {
+    "layout": "dtgDie",
+    "dice": {
+      "dtgDie": {
+        "width": 250,
+        "height": 150,
+        "sizes": { "share": { "width": 200 } }
+      }
+    }
+  }
+}
+```
+
+`width` 和 `height` 的单位为 1/100 英寸。可选的 `sizes` 与 `cards.sizes` 结构相同,用于设置该刀模上某种卡牌类型的尺寸。缺少宽度或高度时使用刀模的尺寸。
 
 ### 自由布局中的定位销
 

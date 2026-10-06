@@ -9,6 +9,7 @@
   "cutlinesOffset": 0,
   "bleed": 12.5,
   "margin": 25,
+  "printScale": 100,
   "paper": {
     "width": 850,
     "height": 1100,
@@ -83,6 +84,16 @@
     "border": 0,
     "blackBand": false,
     "showPins": false,
+    "dice": {
+      "miniEuroDie": {
+        "width": 265.748,
+        "height": 173.228
+      },
+      "dtgDie": {
+        "width": 250,
+        "height": 150
+      }
+    },
     "pins": {
       "innerRadius": 6.25,
       "outerRadius": 12.5,

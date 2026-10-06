@@ -53,3 +53,97 @@ describe("resolveConfig", () => {
     expect(stored.paper.size).toBe(9);
   });
 });
+
+describe("the print scale", () => {
+  const defaults = {
+    printScale: 100,
+    cards: { dice: { dtgDie: { width: 1 } } },
+  };
+
+  it("comes from the defaults, the user, the stored config and the url", () => {
+    expect(resolveConfig({ defaults }).config.printScale).toBe(100);
+
+    const user = { defaults, user: { printScale: 105 } };
+    expect(resolveConfig(user).config.printScale).toBe(105);
+
+    const stored = { ...user, stored: { printScale: 95 } };
+    expect(resolveConfig(stored).config.printScale).toBe(95);
+
+    const search = { ...stored, search: "?config.printScale=110" };
+    expect(resolveConfig(search).config.printScale).toBe(110);
+  });
+
+  it("is not set by the game", () => {
+    const result = resolveConfig({
+      defaults,
+      user: { printScale: 105 },
+      gameConfig: { printScale: 50, cards: { layout: "free" } },
+    });
+    expect(result.config.printScale).toBe(105);
+    expect(result.config.cards.layout).toBe("free");
+    expect(result.gameConfig).toEqual({ cards: { layout: "free" } });
+  });
+
+  it("is a number in range, whatever the url holds", () => {
+    expect(searchToConfig("?config.printScale=110").printScale).toBe(110);
+    expect(searchToConfig("?config.printScale=").printScale).toBe(100);
+    expect(searchToConfig("?config.printScale=abc").printScale).toBe(100);
+    expect(searchToConfig("?config.printScale=5000").printScale).toBe(200);
+  });
+
+  it("is 100 when it is not in any layer", () => {
+    expect(resolveConfig({ defaults: {} }).config).toEqual({});
+  });
+
+  it("is always 100 in render mode", () => {
+    const render = {
+      defaults,
+      user: { printScale: 110 },
+      stored: { printScale: 120 },
+      search: "?config.printScale=130",
+      render: true,
+    };
+    expect(resolveConfig(render).config.printScale).toBe(100);
+    expect(resolveConfig({ defaults: {}, render: true }).config).toEqual({
+      printScale: 100,
+    });
+  });
+
+  it("loads a stored config from before the setting at 100", () => {
+    const stored = { theme: "cmk", paper: { width: 595 } };
+    const { config } = resolveConfig({ defaults, stored });
+    expect(config.printScale).toBe(100);
+    expect(config.cards.dice).toEqual({ dtgDie: { width: 1 } });
+  });
+});
+
+describe("the die sizes in the url", () => {
+  it("are numbers", () => {
+    expect(
+      searchToConfig(
+        "?config.cards.dice.dtgDie.width=260&config.cards.dice.miniEuroDie.sizes.share.height=99.5",
+      ),
+    ).toEqual({
+      cards: {
+        dice: {
+          dtgDie: { width: 260 },
+          miniEuroDie: { sizes: { share: { height: 99.5 } } },
+        },
+      },
+    });
+  });
+
+  it("drop a value that is not a number", () => {
+    expect(
+      searchToConfig(
+        "?config.cards.dice.dtgDie.width=wide&config.cards.dice.dtgDie.height=",
+      ),
+    ).toEqual({ cards: { dice: { dtgDie: {} } } });
+  });
+
+  it("do not change the other values", () => {
+    expect(searchToConfig("?config.cards.layout=dtgDie")).toEqual({
+      cards: { layout: "dtgDie" },
+    });
+  });
+});

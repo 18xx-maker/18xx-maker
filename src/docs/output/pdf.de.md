@@ -124,3 +124,23 @@ Wenn du alle Spiele auf einmal bauen möchtest, kannst du Folgendes ausführen:
 ```bash
 pnpm build && pnpm maker export --all --format pdf
 ```
+
+## Druckskalierung
+
+Wenn dein Drucker etwas zu groß oder zu klein druckt, setze `printScale` in
+deiner Konfiguration (oder im Abschnitt _Layout_ des [Konfigurationsfensters](?config=true))
+auf einen Prozentwert zwischen 50 und 200. 100 ist die tatsächliche Größe, bei
+95 wird alles um 5 % kleiner gedruckt und bei 105 um 5 % größer, in beide
+Richtungen. Papiergröße und Ränder bleiben gleich, daher werden die Bögen neu
+angeordnet: bei einer kleineren Skalierung passen mehr Plättchen, Marker oder
+Karten auf eine Seite, bei einer größeren weniger. Sie skaliert, was du in der
+App und im Druckmenü deines Browsers siehst. Exporte (PDF, PNG, SVG und Board18,
+aus der App oder von der Kommandozeile) verwenden immer die tatsächliche Größe
+und ignorieren sie, ebenso die Board18-Seiten. Es ist eine Einstellung deines
+Druckers, daher kann sie nicht in einer Spieldatei gesetzt werden.
+
+Einige Elemente haben eine feste Breite von 8 Zoll und folgen der Skalierung
+nicht, wenn sie eine Seite breiter machen würde: der Plättchenbogen für die
+Stanze, die Hintergrundseite, die Plättchenübersicht und die Pins der
+Kartenbögen. Prüfe die Druckvorschau, bevor du mit einer größeren Skalierung
+druckst.

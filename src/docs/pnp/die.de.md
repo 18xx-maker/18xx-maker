@@ -53,8 +53,30 @@ Du kannst die Eigenschaft `cards.layout` auf `dtgDie` oder `miniEuroDie`
 setzen, je nachdem, welches Stanzlayout du hast. Genau wie bei Plättchen
 überschreibt eine dieser Optionen viele andere Optionen. Dazu gehört auch
 `cards.sizes`, die optionale Breite und Höhe jedes Kartentyps (`private`,
-`share`, `train` und `number`): Die Stanzlayouts ignorieren sie und verwenden
-eine Größe für alle Karten.
+`share`, `train` und `number`): Die Stanzlayouts ignorieren sie. Papier, Ränder,
+Schnittlinien und Beschnitt eines Stanzlayouts sind fest. Die Kartengröße
+dagegen nicht: Sie steht in `cards.dice`, ein Eintrag pro Stanze, und ist
+standardmäßig die Größe der oben genannten Stanzen:
+
+```json
+{
+  "cards": {
+    "layout": "dtgDie",
+    "dice": {
+      "dtgDie": {
+        "width": 250,
+        "height": 150,
+        "sizes": { "share": { "width": 200 } }
+      }
+    }
+  }
+}
+```
+
+`width` und `height` sind in Einheiten von 1/100 Zoll angegeben. Das optionale
+`sizes` hat dieselbe Form wie `cards.sizes` und legt die Größe eines Kartentyps
+auf dieser Stanze fest. Fehlt eine Breite oder Höhe, wird die Größe der Stanze
+verwendet.
 
 ### Pins in freien Layouts
 

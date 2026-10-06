@@ -37,7 +37,7 @@ import Svg from "@/components/svg/Svg";
 
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
-import { getTile, sortTiles } from "@/util";
+import { getTile, layoutPaper, sortTiles } from "@/util";
 import {
   getTileSheetContext,
   offsetBleedId,
@@ -119,7 +119,7 @@ const pageTiles = (perPage, pages, tiles) => {
 const TilesPage = () => {
   const { config } = useConfig();
   const game = useGame();
-  const paper = config.paper;
+  const paper = layoutPaper(config.paper, config.printScale);
   const { layout, width: hexWidth, gaps, cutBorder } = config.tiles;
 
   if (!game.tiles) {
@@ -409,7 +409,7 @@ const TilesPage = () => {
             </svg>
           )}
           {pageNodes}
-          <PageSetup paper={c.paper} landscape={false} />
+          <PageSetup paper={config.paper} landscape={false} />
         </div>
       </ColorContext.Provider>
     </HtmlEditor>
