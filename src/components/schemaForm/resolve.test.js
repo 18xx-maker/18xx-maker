@@ -253,7 +253,7 @@ describe("kindOf", () => {
       "info.townWidth": "number",
       "info.trackBorderColor": "string",
       "info.trackColor": "string",
-      "info.trackGauge": "enum",
+      "info.trackGauge": "string",
       "info.trackGaugeColor": "string",
       "info.trackWidth": "number",
       "info.transparent": "boolean",

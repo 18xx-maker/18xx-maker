@@ -20,11 +20,14 @@ describe.each(Object.entries(files))("%s", (file, module) => {
     // Stories of the print output are wrapped in an svg, check that something
     // is inside it. The stories of the interface are not drawn in one.
     /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-    const drawn = Story.parameters?.chrome
-      ? container
-      : container.querySelector("svg");
+    // Something the component draws: a control for the interface, whose
+    // stories are not in an svg
+    const drawn = container.querySelector(
+      Story.parameters?.chrome
+        ? "[role], input, button, select, textarea, [data-slot]"
+        : "svg > *",
+    );
     expect(drawn).not.toBeNull();
-    expect(drawn.children.length).toBeGreaterThan(0);
     /* eslint-enable testing-library/no-container, testing-library/no-node-access */
   });
 });

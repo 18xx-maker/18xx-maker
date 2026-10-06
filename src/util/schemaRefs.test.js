@@ -136,8 +136,11 @@ describe("the x-ref annotations of the game schema", () => {
       expect(Object.keys(items.properties ?? {})).toEqual(
         expect.arrayContaining([spec.key, spec.label].filter(Boolean)),
       );
-      // Without a key the items are the names
-      expect(items.type).toBe(spec.key ? items.type : "string");
+      // Without a key the items are the names, with one the key names them
+      const named = spec.key ? items.properties[spec.key] : items;
+      expect(["string", "number", "integer"]).toContain(
+        resolveAllOf(named, schema).type,
+      );
     },
   );
 

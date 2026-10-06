@@ -41,6 +41,7 @@ const Combobox = React.forwardRef(
     ref,
   ) => {
     const listId = React.useId();
+    const anchor = React.useRef(null);
     const [open, setOpen] = React.useState(false);
     const [active, setActive] = React.useState(-1);
     // The list shows every option until something is typed
@@ -116,7 +117,7 @@ const Combobox = React.forwardRef(
         onOpenChange={(next) => !next && close()}
       >
         <PopoverPrimitive.Anchor asChild>
-          <div className="relative">
+          <div ref={anchor} className="relative">
             <Input
               ref={ref}
               id={id}
@@ -162,34 +163,37 @@ const Combobox = React.forwardRef(
             onCloseAutoFocus={(event) => event.preventDefault()}
             onMouseDown={(event) => event.preventDefault()}
             onInteractOutside={(event) => {
-              if (event.target?.id === id) event.preventDefault();
+              if (anchor.current?.contains(event.target))
+                event.preventDefault();
             }}
           >
-            {shown.length === 0 ? (
-              <p className="px-2 py-1.5 text-sm text-muted-foreground">
+            <ul id={listId} role="listbox">
+              {shown.map((option, index) => (
+                <li
+                  key={option.value}
+                  id={optionId(index)}
+                  role="option"
+                  aria-selected={index === active}
+                  className="flex cursor-default flex-row items-baseline justify-between gap-2 rounded-sm px-2 py-1.5 text-sm select-none aria-selected:bg-accent aria-selected:text-accent-foreground"
+                  onMouseMove={() => active !== index && setActive(index)}
+                  onClick={() => pick(option)}
+                >
+                  <span className="truncate font-medium">{option.value}</span>
+                  {option.label && (
+                    <span className="truncate text-xs text-muted-foreground">
+                      {option.label}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+            {shown.length === 0 && (
+              <p
+                role="status"
+                className="px-2 py-1.5 text-sm text-muted-foreground"
+              >
                 {emptyText}
               </p>
-            ) : (
-              <ul id={listId} role="listbox">
-                {shown.map((option, index) => (
-                  <li
-                    key={option.value}
-                    id={optionId(index)}
-                    role="option"
-                    aria-selected={index === active}
-                    className="flex cursor-default flex-row items-baseline justify-between gap-2 rounded-sm px-2 py-1.5 text-sm select-none aria-selected:bg-accent aria-selected:text-accent-foreground"
-                    onMouseMove={() => active !== index && setActive(index)}
-                    onClick={() => pick(option)}
-                  >
-                    <span className="truncate font-medium">{option.value}</span>
-                    {option.label && (
-                      <span className="truncate text-xs text-muted-foreground">
-                        {option.label}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
             )}
           </PopoverPrimitive.Content>
         </PopoverPrimitive.Portal>

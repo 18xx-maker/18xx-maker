@@ -1,7 +1,9 @@
-import { path } from "ramda";
-
 import ReferenceField from "@/components/schemaForm/ReferenceField";
-import { isReferenceValue, referenceOf } from "@/components/schemaForm/resolve";
+import {
+  isReferenceValue,
+  referenceOf,
+  valueAt,
+} from "@/components/schemaForm/resolve";
 
 // The editors that take a field before its kind does, first match wins.
 // match(node, keys, form) gets the resolved schema of the field, its path and
@@ -15,7 +17,7 @@ export const overrides = [
     match: (node, keys, { root, game }) => {
       const reference = referenceOf(node, root);
       if (!reference) return undefined;
-      return isReferenceValue(path(keys, game), reference.mode)
+      return isReferenceValue(valueAt(keys, game), reference.mode)
         ? { reference }
         : undefined;
     },

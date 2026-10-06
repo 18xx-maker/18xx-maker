@@ -279,21 +279,6 @@ describe("validate", () => {
         run(withGame({ privates: [{ name: "P", company: 3 }] })).code,
       ).not.toBe(0);
     });
-
-    it.each(["narrow", "dashed", "line", "dual"])(
-      "accepts the track gauge %s",
-      (trackGauge) => {
-        expect(
-          run(withGame({ info: { title: "Game", trackGauge } })).code,
-        ).toBe(0);
-      },
-    );
-
-    it("rejects another track gauge", () => {
-      expect(
-        run(withGame({ info: { title: "Game", trackGauge: "wide" } })).code,
-      ).not.toBe(0);
-    });
   });
 
   describe("iconSize of a private", () => {

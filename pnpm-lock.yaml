@@ -29,9 +29,6 @@ importers:
       '@lezer/highlight':
         specifier: 1.2.5
         version: 1.2.5
-      '@radix-ui/react-popover':
-        specifier: ^1.1.23
-        version: 1.1.23(@types/react@18.3.12)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       chokidar:
         specifier: ^5.0.0
         version: 5.0.0
@@ -81,6 +78,9 @@ importers:
       '@radix-ui/react-label':
         specifier: ^2.1.15
         version: 2.1.15(@types/react@18.3.12)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@radix-ui/react-popover':
+        specifier: ^1.1.23
+        version: 1.1.23(@types/react@18.3.12)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@radix-ui/react-progress':
         specifier: ^1.1.16
         version: 1.1.16(@types/react@18.3.12)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)

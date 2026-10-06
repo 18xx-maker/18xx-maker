@@ -10,6 +10,7 @@ import {
   insertAt,
   moveItem,
   removeAt,
+  schemaAt,
   setValue,
 } from "@/components/schemaForm/resolve";
 
@@ -30,7 +31,7 @@ const companies = [
 
 // The real schema in a form that holds the game in state: the draft is what the
 // options are read from
-const Form = ({ initial, section = "trains", onGame }) => {
+const Form = ({ initial, section = "trains", keys = [section], onGame }) => {
   const [game, setGame] = useState(initial);
   const latest = useRef(game);
   latest.current = game;
@@ -54,19 +55,20 @@ const Form = ({ initial, section = "trains", onGame }) => {
         move: (keys, from, to) => change((g) => moveItem(g, keys, from, to)),
       }}
     >
-      <SchemaField
-        keys={[section]}
-        schema={root.properties[section]}
-        defaults={{}}
-      />
+      <SchemaField keys={keys} schema={schemaAt(root, keys)} defaults={{}} />
     </SchemaFormContext.Provider>
   );
 };
 
-const setup = (initial, section) => {
+const setup = (initial, section, keys) => {
   let current;
   const view = render(
-    <Form initial={initial} section={section} onGame={(g) => (current = g)} />,
+    <Form
+      initial={initial}
+      section={section}
+      keys={keys}
+      onGame={(g) => (current = g)}
+    />,
   );
   return { ...view, user: userEvent.setup(), game: () => current };
 };
@@ -212,5 +214,63 @@ describe("a reference field", () => {
     expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
     await user.type(box, "ABC{Enter}");
     expect(game().privates[0].company).toBe("ABC");
+  });
+
+  it("keeps a name twice in the list as two chips, removed one at a time", async () => {
+    const { user, game } = setup(trains(["2", "2", "3"]));
+    expect(screen.getAllByRole("button", { name: "Remove 2" })).toHaveLength(2);
+    await user.click(screen.getAllByRole("button", { name: "Remove 2" })[0]);
+    expect(game().trains[0].rust).toEqual(["2", "3"]);
+  });
+
+  it("describes the field by its description and the hint of an unknown name", () => {
+    // The companies of a market cell have a description in the schema
+    setup(
+      { companies, stock: { market: [[{ value: 100, companies: ["ZZZ"] }]] } },
+      "stock",
+      ["stock", "market", 0, 0, "companies"],
+    );
+    const box = screen.getByRole("combobox", { name: /Companies/ });
+    const ids = box.getAttribute("aria-describedby").split(" ");
+    expect(ids).toHaveLength(2);
+    expect(ids.some((id) => id.endsWith("-help"))).toBe(true);
+    expect(ids.some((id) => id.endsWith("-unknown"))).toBe(true);
+    // eslint-disable-next-line testing-library/no-node-access
+    ids.forEach((id) => expect(document.getElementById(id)).not.toBeNull());
+    expect(box).toHaveAccessibleDescription(/Companies shown as bars/);
+    expect(box).toHaveAccessibleDescription(/Not in the companies/);
+  });
+
+  describe("the companies of a market cell, an array only", () => {
+    const cellKeys = ["stock", "market", 0, 0, "companies"];
+    const withCell = (cell) => ({
+      companies,
+      stock: { market: [[{ value: 100, ...cell }]] },
+    });
+    const cellBox = () => screen.getByRole("combobox", { name: /Companies/ });
+
+    it("stores a list of one and removes the key with the last chip", async () => {
+      const { user, game } = setup(withCell({}), "stock", cellKeys);
+      await user.click(cellBox());
+      await user.click(screen.getByRole("option", { name: /^PRR/ }));
+      expect(game().stock.market[0][0].companies).toEqual(["PRR"]);
+
+      await user.click(screen.getByRole("button", { name: "Remove PRR" }));
+      expect(game().stock.market[0][0]).not.toHaveProperty("companies");
+    });
+
+    it("leaves a mixed list of names and objects to the JSON field", () => {
+      setup(
+        withCell({ companies: ["PRR", { company: "NYC", row: 1 }] }),
+        "stock",
+        cellKeys,
+      );
+      expect(
+        screen.queryByRole("combobox", { name: /Companies/ }),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole("textbox", { name: /Companies/ }),
+      ).toBeInTheDocument();
+    });
   });
 });

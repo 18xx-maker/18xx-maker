@@ -485,3 +485,7 @@ When adding a story next to a component (`Name.stories.js`):
 - Use `colorSelect()` from `.storybook/controls.js` for color props and real
   `argTypes` (selects, ranges, booleans) so every prop can be changed.
 - Stories are `.js` files, so use `createElement` instead of JSX.
+  Stories of the interface (`Chrome/...`, the components in
+  `src/components/ui`) may be `.jsx` files. They set `parameters: { chrome: true }`
+  because they are not drawn in an svg: `tests/stories.test.jsx` then checks
+  that the story draws a control (a `role`, input or button) instead of an svg.

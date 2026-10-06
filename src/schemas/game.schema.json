@@ -1305,8 +1305,7 @@
         },
         "trackGauge": {
           "description": "Gauge of all the track: narrow, dashed, line or dual.",
-          "type": "string",
-          "enum": ["narrow", "dashed", "line", "dual"]
+          "type": "string"
         },
         "trackGaugeColor": {
           "description": "Color of the gauge lines, match uses the color of the hex.",

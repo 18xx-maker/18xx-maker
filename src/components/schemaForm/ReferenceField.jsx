@@ -60,9 +60,10 @@ const ReferenceField = ({ keys, schema, reference: { ref, mode } }) => {
     <FieldShell {...field}>
       {multi && names.length > 0 && (
         <div className="flex flex-row flex-wrap gap-1">
-          {names.map((name) => (
+          {names.map((name, index) => (
             <span
-              key={name}
+              // A stored list may repeat a name, so the place is the key
+              key={`${index}-${name}`}
               className="flex flex-row items-center gap-1 rounded-md border py-0.5 pr-0.5 pl-2 text-sm"
             >
               {name}
@@ -70,7 +71,7 @@ const ReferenceField = ({ keys, schema, reference: { ref, mode } }) => {
                 type="button"
                 className="rounded-sm p-0.5 text-muted-foreground hover:text-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
                 aria-label={t("editPanel.reference.remove", { name })}
-                onClick={() => setNames(names.filter((n) => n !== name))}
+                onClick={() => setNames(names.filter((_, i) => i !== index))}
               >
                 <X className="size-3.5" aria-hidden="true" />
               </button>
