@@ -64,9 +64,9 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
   `300G`, `"+#"` druckt `+200`. Er ersetzt die Spielwährung und die
   Währungskonfiguration für diesen Wert und wird ignoriert, wenn der Wert ein
   Text ist. Pfeil und Klammern bleiben erhalten. Halte Formate kurz, der Text
-  wird nicht verkleinert. Ein Zug einer Gesellschaft, der nur einen `name` und
-  ein Format angibt, verweist auf den Spielzug und verwendet es nicht: Ein
-  überschriebenes Format braucht eine vollständige Zugdefinition.
+  wird nicht verkleinert. Ein Format bei einem Zug einer Gesellschaft braucht
+  eine vollständige Zugdefinition mit `color` und Preis: `{ "name",
+"priceFormat" }` allein ist ungültig.
 - **description** Eine Beschreibung, die auf die Zugkarte gedruckt wird. Nützlich
   für beliebige Informationen zum Spiel.
 - **available** Wenn dieser Zug verfügbar wird, sobald ein anderer Zug verkauft

@@ -470,7 +470,7 @@
       "additionalProperties": false
     },
     "companyTrain": {
-      "description": "A train of a company: the name of a game train, { name, quantity } for copies of a game train, or a full train. A format override such as priceFormat needs a full train definition (with a price); { name, priceFormat } alone is a reference to the game train and does not use it.",
+      "description": "A train of a company: the name of a game train, { name, quantity } for copies of a game train, or a full train. A format override such as priceFormat needs a full train definition (with a color and a price); { name, priceFormat } alone is not valid.",
       "anyOf": [
         {
           "type": "string"
