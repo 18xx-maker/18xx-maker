@@ -3,6 +3,12 @@ import { useLocation, useNavigate } from "react-router";
 
 import { equals, map, split } from "ramda";
 
+import { formatLines, parseLines } from "@/util/lineSpec";
+
+// The search string of params with commas as they are: a comma is legal in a
+// query and keeps links such as lines=1-4,15 readable
+export const searchString = (params) => params.toString().replace(/%2C/gi, ",");
+
 export const useRangeParam = (key, initial) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,7 +31,7 @@ export const useRangeParam = (key, initial) => {
         searchParams.set(key, `${state[0]}_${state[1]}`);
       }
 
-      navigate({ search: searchParams.toString() });
+      navigate({ search: searchString(searchParams) });
     },
     [key, initial, navigate, searchParams],
   );
@@ -52,7 +58,7 @@ export const useIntParam = (key, initial) => {
         searchParams.set(key, num.toString());
       }
 
-      navigate({ search: searchParams.toString() });
+      navigate({ search: searchString(searchParams) });
     },
     [initial, key, navigate, searchParams],
   );
@@ -77,7 +83,7 @@ export const useBooleanParam = (key) => {
       searchParams.set(key, true);
     }
 
-    navigate({ search: searchParams.toString() });
+    navigate({ search: searchString(searchParams) });
   }, [value, key, navigate, searchParams]);
 
   return [value, toggle];
@@ -94,18 +100,24 @@ export const useStringParam = (key, initial) => {
 
   let value = initial;
   if (searchParams.has(key)) {
-    value = decodeURIComponent(searchParams.get(key));
+    try {
+      value = decodeURIComponent(searchParams.get(key));
+    } catch {
+      // A malformed link is not a value
+    }
   }
 
+  // drop: other params the change makes meaningless
   const setValue = useCallback(
-    (str) => {
+    (str, { replace = false, drop = [] } = {}) => {
       if (!str || str === initial) {
         searchParams.delete(key);
       } else {
         searchParams.set(key, encodeURIComponent(str));
       }
+      drop.forEach((name) => searchParams.delete(name));
 
-      navigate({ search: searchParams.toString() });
+      navigate({ search: searchString(searchParams) }, { replace });
     },
     [initial, key, navigate, searchParams],
   );
@@ -117,6 +129,8 @@ export const useStringParam = (key, initial) => {
 // one closes the other (and the config section), closing one leaves the rest
 export const togglePanelSearch = (search, panel) => {
   const params = new URLSearchParams(search);
+  // The selected lines belong to the JSON tab of the edit panel
+  params.delete("lines");
 
   if (params.has(panel)) {
     params.delete(panel);
@@ -128,7 +142,7 @@ export const togglePanelSearch = (search, panel) => {
     params.set(panel, true);
   }
 
-  return params.toString();
+  return searchString(params);
 };
 
 // The edit panel on a section: closed it opens on the section, open on
@@ -142,8 +156,9 @@ export const openEditSearch = (search, section) => {
   const next = new URLSearchParams(
     params.has("edit") ? search : togglePanelSearch(search, "edit"),
   );
+  next.delete("lines");
   next.set("editSection", encodeURIComponent(section));
-  return next.toString();
+  return searchString(next);
 };
 
 export const useTogglePanel = (panel) => {
@@ -157,4 +172,31 @@ export const useTogglePanel = (panel) => {
   );
 
   return [open, toggle];
+};
+
+// The lines selected in the JSON editor, as sorted ranges. They are written
+// with replace: a click on the gutter is not a page of history. The text is
+// built by hand (digits, "-" and ",") so it is not encoded twice.
+export const useLinesParam = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const lines = useMemo(
+    () => parseLines(new URLSearchParams(location.search).get("lines")),
+    [location.search],
+  );
+
+  const setLines = useCallback(
+    (ranges) => {
+      const params = new URLSearchParams(location.search);
+      params.delete("lines");
+      const rest = searchString(params);
+      const spec = formatLines(ranges);
+      const parts = [rest, spec && `lines=${spec}`].filter(Boolean);
+      navigate({ search: parts.join("&") }, { replace: true });
+    },
+    [location.search, navigate],
+  );
+
+  return [lines, setLines];
 };

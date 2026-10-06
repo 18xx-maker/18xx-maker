@@ -5,6 +5,7 @@ import { MemoryRouter, useLocation } from "react-router";
 import {
   useBooleanParam,
   useIntParam,
+  useLinesParam,
   useRangeParam,
   useStringParam,
 } from "@/util/query";
@@ -113,5 +114,48 @@ describe("useStringParam", () => {
     param.set("x");
     param.set("");
     expect(param.search()).toBe("");
+  });
+  it("falls back on a malformed value", () => {
+    const param = atUrl(
+      () => useStringParam("section", "colors"),
+      "?section=%25",
+    );
+    expect(param.value()).toBe("colors");
+  });
+
+  it("drops other params with the change", () => {
+    const { result } = renderHook(
+      () => ({
+        hook: useStringParam("editSection", "info"),
+        search: useLocation().search,
+      }),
+      {
+        wrapper: ({ children }) =>
+          createElement(
+            MemoryRouter,
+            { initialEntries: ["/?edit=true&lines=3"] },
+            children,
+          ),
+      },
+    );
+    act(() => result.current.hook[1]("json", { drop: ["lines"] }));
+    expect(result.current.search).toBe("?edit=true&editSection=json");
+  });
+});
+
+describe("useLinesParam", () => {
+  it("reads and writes the canonical spec with commas as they are", () => {
+    const param = atUrl(() => useLinesParam(), "?edit=true&lines=16,15,1-4");
+    expect(param.value()).toEqual([
+      [1, 4],
+      [15, 16],
+    ]);
+    param.set([
+      [2, 3],
+      [9, 9],
+    ]);
+    expect(param.search()).toBe("?edit=true&lines=2-3,9");
+    param.set([]);
+    expect(param.search()).toBe("?edit=true");
   });
 });

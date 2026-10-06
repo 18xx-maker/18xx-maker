@@ -39,7 +39,7 @@ import { useConfig } from "@/hooks";
 import schema from "@/schemas/config.schema.json";
 import { createAlert } from "@/state";
 import { diff } from "@/util/diff";
-import { useStringParam } from "@/util/query";
+import { searchString, useStringParam } from "@/util/query";
 
 export const getPath = split(".");
 export const getSchemaPath = compose(
@@ -56,7 +56,9 @@ const Config = () => {
   const [importText, setImportText] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const [section, setSection] = useStringParam("section", "colors");
+  const [param, setSection] = useStringParam("section", "colors");
+  // An unknown section in the url is the first one
+  const section = sections.some((s) => s.section === param) ? param : "colors";
 
   const items = prop("items", find(propEq(section, "section"), sections)) || [];
 
@@ -83,7 +85,7 @@ const Config = () => {
     const params = new URLSearchParams(location.search);
     params.delete("section");
     params.delete("config");
-    navigate({ search: params.toString() });
+    navigate({ search: searchString(params) });
   };
 
   return (
