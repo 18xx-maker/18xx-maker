@@ -569,20 +569,20 @@ describe("edit panel tabs", () => {
     expect(names(byName("Game"))).toEqual([
       "Game",
       "Players",
-      "Rounds",
       "Phases",
+      "Rounds",
     ]);
     expect(names(byName("Equipment"))).toEqual([
-      "Trains",
-      "Privates",
       "Companies",
+      "Privates",
       "Tokens",
+      "Trains",
     ]);
     expect(names(byName("Look and output"))).toEqual([
+      "Hex",
       "Market",
       "Colors",
       "Output",
-      "Hex",
     ]);
     expect(screen.queryByRole("tab", { name: "JSON" })).not.toBeInTheDocument();
   });
@@ -638,12 +638,10 @@ describe("edit panel tabs", () => {
     );
     await user.keyboard("]");
     await waitFor(() =>
-      expect(router.state.location.search).toBe(
-        "?edit=true&editSection=privates",
-      ),
+      expect(router.state.location.search).toBe("?edit=true&editSection=hex"),
     );
     // Wrapping never lands on JSON
-    await user.click(screen.getByRole("tab", { name: "Hex" }));
+    await user.click(screen.getByRole("tab", { name: "Output" }));
     await user.keyboard("]");
     await waitFor(() =>
       expect(router.state.location.search).toBe("?edit=true"),
@@ -3317,7 +3315,7 @@ describe("edit panel output", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("output"));
     expect(tab).toHaveAccessibleName("Output");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.indexOf(tab) + 1]).toHaveAccessibleName("JSON");
+    expect(tabs[tabs.length - 1]).toBe(tab);
     expect(screen.getByRole("spinbutton", { name: "Max" })).toHaveValue(200);
     expect(screen.getByRole("checkbox", { name: "pdf" })).toBeChecked();
     expect(screen.getByRole("checkbox", { name: "png" })).not.toBeChecked();
