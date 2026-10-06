@@ -12,7 +12,8 @@ You can specify each coordinate in the following ways:
 
 - `A5x10y20` - X and Y coordinate (10, 20) from the center of hex A5.
 - `A5a30p0.5` - Half of the way (0.5) from the center to the side at angle 30 of
-  hex A5. This is similar to most tile positioning.
+  hex A5. This is similar to most tile
+  [positioning](/docs/games/positioning#coordinates).
 - `A5s1` - Middle of side 1 from hex A5.
 - `A5p2` - Second point of hex A5.
 

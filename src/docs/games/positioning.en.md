@@ -1,158 +1,130 @@
 # Positioning
 
-Every element on a tile (cities, towns, values, labels, icons, terrain, ...) can
-be positioned with the same set of fields. When an element has none of them, the
-auto positioning system puts a few common elements in a standard place.
-
-## Options
-
-All of these are optional and work on every element that has a position
-([examples](/elements/positioning#basic)):
-
-- `angle` (-360 to 360, exclusive) is the direction from the center of the hex
-  to put the element, in degrees. 0 is straight down and it turns clockwise.
-- `percent` (0 or more) is how far out along that `angle`: 0 is the center and 1
-  is the middle of the hex edge.
-- `x` and `y` move the element in plain units from where `angle` and `percent`
-  put it.
-- `rotation` (-360 to 360, exclusive) turns the element on its own spot, in
-  degrees. `rotate` is the same field with a shorter name.
-- `side` (1 to 6) rotates the element by (side - 1) sixths of a turn: side 1 is
-  unturned, side 2 is 60 degrees. With `mid` it moves the named point instead, see [Named
-  Positions](#named-positions).
-- `mid` and `align` place and turn the element by the track, see [Named
-  Positions](#named-positions).
-- `hidden` (`true`) does not draw the element. The other elements keep their
-  positions.
-
-```json
-{
-  "labels": [{ "label": "B", "angle": 90, "percent": 0.6, "x": 5 }],
-  "towns": [{ "side": 2 }]
-}
-```
-
-## Auto Positioning
-
-The auto position system will auto apply positioning to items that it finds
-according to some very simple rules. This system is NOT meant to be all
-complete, it's only meant to help with the common 95% case of positioning.
-
-For example: 18xx-maker has a certain standard that it likes to apply for simple
-tiles. If you have a map hex with a single city and a terrain cost, the auto
-positioning will put the terrain cost into the "standard" position as long as
-there is no other positioning data on the hex. If you want to position your
-elements custom, go right ahead, this should only provide sane defaults for when
-you don't.
-
-If you did want to turn off auto positioning for an element just add one
-positioning field (`angle`, `percent`, `rotate`, `rotation`, `side`, `mid`, `align`, `x` or
-`y`)
-to that element. For example adding `"angle": 0` will effectively turn off auto
-positioning while leaving the element in the middle of the hex. It only turns it
-off for that element, the other elements of the hex are still positioned.
-
-Every option and every rule is drawn live, with its JSON, on the
+Every element on a tile (cities, towns, values, labels, icons, terrain, ...) is
+placed with the same small set of fields. This page explains them in the order
+you need them. Every step is drawn live, with its JSON, on the
 [Positioning](/elements/positioning) examples page.
 
-## Rules
+1. [Coordinates](#coordinates): where 0 is and which way things go.
+2. [Placing](#placing): `angle`, `percent`, `x` and `y`.
+3. [Turning](#turning): `rotation`, `rotate` and `side`.
+4. [Named Positions](#named-positions): `mid` and `align`.
+5. [Hiding](#hiding): `hidden`.
+6. [Auto Positioning](#auto-positioning): where things go when you say nothing.
+7. [Draw Order](#draw-order): `order`.
 
-### Icons
+Setting any placement field on an element turns auto positioning off for that
+element, see [Turning It Off](#turning-it-off).
 
-Icons (when on a tile with a city or a centerTown) are moved to
-([examples](/elements/positioning#icons)):
+## Which Elements Can Be Positioned
 
-```json
-{
-  "angle": 0,
-  "percent": 0.6
-}
-```
+These tile elements take the fields on this page: `track`, `cities`, `towns`,
+`centerTowns`, `boomtowns`, `mediumCities`, `labels`, `icons`, `names`, `shapes`,
+`terrain`, `bridges`, `tunnels`, `tunnelEntrances`, `divides`, `values`,
+`goods`, `companies`, `tokens`, `routeBonuses`, `industries` and
+`offBoardRevenue`. `track` and `divides` have no `order`. `borders` only take
+`side`.
 
-If there is also a terrain cost then the icon is shifted left to:
+## Coordinates
 
-```json
-{
-  "angle": 30,
-  "percent": 0.6
-}
-```
+The origin is the center of the hex. Every position is measured from it, in
+units where the middle of an edge is 75 away from the center (a hex is 150 units
+from flat edge to flat edge). The first
+[example](/elements/positioning#place) marks angle 0, 90, 180 and 270.
 
-### Values
+- `angle` is a direction in degrees, **clockwise on the screen**: 0 is straight
+  down, 90 is left, 180 is up and 270 is right.
+- `percent` is how far along that direction, as a fraction of 75 units: 0 is the
+  center and 1 is 75 units out.
+- `x` and `y` are plain screen units: `x` goes right and `y` goes down.
 
-The first value of every tile is auto positioned to the upper right corner
-([examples](/elements/positioning#values)). Other values are not moved:
+Angles are directions on the screen, not directions of the hex. On a tile and on
+a `horizontal` map the middle of an edge is at angle 0, 60, 120 and so on, so
+`percent` 1 is exactly on an edge. On the default `vertical` map the hex is
+turned by 90 degrees: angle 0 points at a corner (about 86.6 units away) and the
+middles of the edges are at angle 30, 90, 150 and so on. Only `mid` (see
+[Named Positions](#named-positions)) follows that turn by itself.
 
-```json
-{
-  "angle": 210,
-  "percent": 0.7
-}
-```
+## Placing
 
-### Labels
-
-The first label on a tile is auto positioned to the upper left corner
-([examples](/elements/positioning#labels)):
-
-```json
-{
-  "angle": 150,
-  "percent": 0.7
-}
-```
-
-The second label on a tile is auto positioned to the right side. Other labels
-are not moved:
+- `angle` (-360 to 360, exclusive, default 0) and `percent` (0 or more, default 0) put the element: first turn by `angle`, then go out by `percent`.
+- `x` and `y` (default 0) then move it by plain screen units. They are not
+  turned by `angle` or by any rotation, so `"x": 10` is always 10 units to the
+  right.
 
 ```json
 {
-  "angle": 270,
-  "percent": 0.7
+  "labels": [{ "label": "B", "angle": 90, "percent": 0.6, "x": 5 }]
 }
 ```
 
-### Terrain
+([examples](/elements/positioning#place))
 
-Terrain costs (when on a tile with a city or a centerTown) are moved to
-([examples](/elements/positioning#terrain)):
+A `percent` above 1 goes past the edge of the hex. Most elements are cut off at
+the edge of the hex, so you only see the part inside. Elements that are drawn
+outside of it are not cut off: `names`, outside `cities`, `shapes` that are not
+`background`, `bridges`, `tunnels`, `offBoardRevenue`, `industries`, `companies`
+and `routeBonuses`.
+
+## Turning
+
+- `rotation` and `rotate` (-360 to 360, exclusive) turn the element on its own
+  spot, clockwise, in degrees. They are the same field with two names. Use only
+  one of them: a `rotate` that is not 0 wins over `rotation`, and `"rotate": 0`
+  falls back to `rotation`. They are never added together.
+- `side` (1 to 6) without `mid` turns the element by (side - 1) sixths of a
+  turn, so side 1 is unturned and side 2 is 60 degrees. It only turns the
+  element and does not move it. It adds to `rotation` or `rotate`. With `mid` it
+  moves the named point instead, see [Named Positions](#named-positions).
 
 ```json
 {
-  "angle": 0,
-  "percent": 0.7
+  "towns": [{ "rotation": 45 }]
 }
 ```
 
-If there is also an icon then the terrain cost is shifted right to:
+([examples](/elements/positioning#turn))
 
-```json
-{
-  "angle": 330,
-  "percent": 0.7
-}
-```
+Not everything turns the same way, because text should stay readable:
+
+| Element                                | `rotation`                         | `rotate` and `side` |
+| -------------------------------------- | ---------------------------------- | ------------------- |
+| towns, cities (and their names), icons | turns                              | turns               |
+| labels, values, terrain                | stays upright, so you see no turn  | turns               |
+| tokens                                 | turns twice as far (the label too) | turns               |
+
+Use `rotate` or `side` when you want the text of a label, value or terrain to
+turn, and `rotate` to turn a token. `"fixed": true` on a token turns it exactly
+as far as the element, whichever of the three fields you use.
 
 ## Named Positions
 
-Instead of working out an `angle` and `percent`, a tile element can name a point
-on track with `mid` and turn to the track there with `align`. They work on every
+Instead of working out an `angle` and `percent`, an element can name a point on
+track with `mid` and turn to the track there with `align`. They work on every
 element that has a position (towns, centerTowns, values, labels, icons, ...).
-Like any other positioning field they turn auto positioning off for that
-element. Every point is for track that starts on side 1, move it to another side
-with `side`.
+The point is for track that starts on side 1, move it to another side with
+`side`.
 
-- `mid` is the midpoint of a track type: `straight` (`angle` 0, `percent` 0, the
-  center), `sharp` (`angle` 30, `percent` 0.577) or `gentle` (`angle` 60,
-  `percent` 0.268).
-- `side` with `mid` turns the point like a track that starts on that side, so a
-  `gentle` on side 3 is at `angle` 180. Without `mid`, `side` keeps rotating the
-  element.
-- `align` is `perpendicular` or `parallel` to the track at the point. A town bar
-  on a `sharp` is `perpendicular` with a `rotation` of 120, on a `gentle` 150.
-  `rotate` and `rotation` are added to it as an offset.
+- `mid` is the midpoint of a track type. Only these full length track types are
+  named:
+
+  | `mid`      | `angle` | `percent` |
+  | ---------- | ------- | --------- |
+  | `straight` | 0       | 0         |
+  | `sharp`    | 30      | 0.577     |
+  | `gentle`   | 60      | 0.268     |
+
+- `side` with `mid` moves the point like a track that starts on that side, so a
+  `gentle` on side 3 is at `angle` 180. This is the one place `side` moves
+  something, without `mid` it only turns the element.
+- `align` is `perpendicular` or `parallel` to the track at the point. It needs a
+  `mid`. A town bar on a `sharp` is `perpendicular` with a `rotation` of 120, on
+  a `gentle` 150. `rotate` and `rotation` are added to it as an offset.
 - An explicit `angle` or `percent` replaces the value from `mid`, and `x` and
   `y` nudge from it.
+- On a `vertical` map the track is drawn turned by 90 degrees and `mid` turns
+  with it, so it lands on the track. A written `angle` or `percent` does not
+  turn.
 
 ```json
 {
@@ -162,6 +134,61 @@ with `side`.
 ```
 
 ([examples](/elements/positioning#named))
+
+## Hiding
+
+`hidden` (`true`) does not draw the element. The other elements keep their
+positions: a hidden element still counts for
+[Auto Positioning](#auto-positioning), so the second label stays the second
+label.
+
+```json
+{
+  "labels": [{ "label": "B", "hidden": true }, { "label": "NY" }]
+}
+```
+
+([examples](/elements/positioning#hide))
+
+## Auto Positioning
+
+Auto positioning puts the common 95% of elements in a standard place so you do
+not have to. It is not meant to be complete. It looks at each element on its
+own: an element is auto positioned when it has none of `angle`, `percent`,
+`rotate`, `rotation`, `side`, `mid`, `align`, `x` or `y`. `hidden` and `order`
+do not count.
+
+| Element | Which ones  | Where (`angle`, `percent`)                | Only when                          |
+| ------- | ----------- | ----------------------------------------- | ---------------------------------- |
+| values  | the first   | 210, 0.7 (upper right)                    | always                             |
+| labels  | the first   | 150, 0.7 (upper left)                     | always                             |
+| labels  | the second  | 270, 0.7 (right)                          | always                             |
+| icons   | all of them | 0, 0.6, or 30, 0.6 if the hex has terrain | the hex has a city or a centerTown |
+| terrain | all of them | 0, 0.7, or 330, 0.7 if the hex has icons  | the hex has a city or a centerTown |
+
+"The first" means the first entry of that array, counting every entry: a hidden
+or hand positioned first label still uses up the first spot, so the next label
+is the second and goes to 270. Other values and labels are not moved. Several
+icons (or several terrain) are all moved to the same spot and overlap, so give
+all but one of them a position.
+
+([examples](/elements/positioning#auto))
+
+### Turning It Off
+
+To keep an element out of auto positioning, give it one placement field. For
+example `"angle": 0` effectively turns it off while leaving the element in the
+middle of the hex. It only turns it off for that element, the other elements of
+the hex are still positioned.
+
+```json
+{
+  "cities": [{}],
+  "terrain": [{ "type": "mountain", "cost": 60, "angle": 0 }]
+}
+```
+
+([examples](/elements/positioning#off))
 
 ## Draw Order
 
@@ -178,6 +205,8 @@ position does not change. For example, to draw a city over a value:
 }
 ```
 
+([examples](/elements/positioning#order))
+
 - A negative number draws the element before all the others, `true` draws it
   last, and `0` draws it after the elements without an `order`.
 - Elements with the same `order` keep the usual order by type.
@@ -185,4 +214,4 @@ position does not change. For example, to draw a city over a value:
   elements cannot go over the border, and elements drawn outside (like outside
   cities or names) cannot go under it.
 - It can cover track.
-- Track, off board track, divides and borders do not have an `order`.
+- Track, divides and borders do not have an `order`.
