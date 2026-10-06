@@ -204,6 +204,13 @@ Spieler braucht eine Nummer, die sich nicht leeren lässt. Die Nummern werden
 weder sortiert noch auf Wiederholungen geprüft: Die Problemprüfung meldet, was
 das Schema nicht erlaubt.
 
+Der Tab Runden bearbeitet die Runden des Rundenzählers (eine Karte für jedes
+Rundenplättchen, zunächst mit Name und Farbe und den anderen Feldern unter
+Weitere Felder), die auf dem Charter gedruckten Züge (ein Name, seine Schritte,
+ob die Schritte nummeriert sind, und die optionalen Schritte), die Notizen zu
+den Pools (ein Name und eine Liste von Notizen mit optionaler Farbe und Icon,
+nur zur Orientierung und nicht gedruckt) und die Farben der Nummernkarten.
+
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.
 

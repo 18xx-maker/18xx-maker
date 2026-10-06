@@ -6,6 +6,9 @@ import tilesDefs from "@/schemas/tiles.defs.json";
 // panel to more of the game means adding a key here.
 export const GAME_INFO_KEYS = ["info", "links", "prototype", "wip"];
 
+// The lists of the rounds tab, in the order of the tab
+export const ROUND_KEYS = ["rounds", "turns", "pools", "number_cards"];
+
 // The fields of an array item shown first, the others are under "more fields"
 export const PRIMARY_KEYS = [
   "name",
@@ -17,7 +20,13 @@ export const PRIMARY_KEYS = [
   "obsolete",
   "revenue",
   "company",
+  "note",
 ];
+
+// The fields of a turn and of a pool of the rounds tab, none is under "more
+// fields"
+export const TURN_PRIMARY_KEYS = ["name", "steps", "ordered", "optional"];
+export const POOL_PRIMARY_KEYS = ["name", "notes"];
 
 // The same for a company: the rest (the shares, tokens, logo and the other
 // charter fields) are under "more fields"
@@ -300,6 +309,7 @@ export const referenceValue = (list, mode) => {
 export const humanize = (key) =>
   key
     .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/_/g, " ")
     .replace(/^./, (char) => char.toUpperCase());
 
 const isIndex = (key) => typeof key === "number" || /^\d+$/.test(key);

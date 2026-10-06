@@ -68,7 +68,7 @@
     "invalidJson": "请输入有效的 JSON。",
     "sections": {
       "info": {
-        "tab": "游戏信息",
+        "tab": "游戏",
         "description": "编辑游戏信息、链接和标记。更改会保留在内存中,直到你在“更改”页面保存。"
       },
       "trains": {
@@ -95,6 +95,10 @@
         "tab": "玩家",
         "description": "编辑游戏的玩家表、银行和限制。更改会保留在内存中,直到你在“更改”页面保存。"
       },
+      "rounds": {
+        "tab": "回合",
+        "description": "编辑回合追踪器的回合、印在公司卡上的行动、关于资金池的备注和数字卡。更改会保留在内存中,直到你在“更改”页面保存。"
+      },
       "json": {
         "tab": "JSON",
         "description": "以 JSON 编辑整个游戏。只要 JSON 有效,页面就会随你的输入而更新。更改保留在内存中,直到你在“更改”页面保存。"
@@ -110,12 +114,22 @@
       "companies": "公司",
       "phases": "阶段",
       "players": "玩家",
+      "rounds": "回合",
+      "turns": "行动",
+      "pools": "资金池",
+      "notes": "备注",
       "legend": "图例项",
       "colors": "颜色",
       "tokenTypes": "标记类型",
       "shareTypes": "股份类型",
       "upgrades": "升级",
       "entry": "条目"
+    },
+    "headings": {
+      "rounds": "回合",
+      "turns": "行动",
+      "pools": "资金池",
+      "notes": "备注"
     },
     "titles": {
       "players_one": "{{count}} 名玩家",

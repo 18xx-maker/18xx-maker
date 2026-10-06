@@ -48,7 +48,7 @@ test("only loads the editor when its tab opens", async ({ page }) => {
   page.on("request", (request) => requested.push(request.url()));
 
   await page.goto("/games/18Test/map?edit=true");
-  await expect(page.getByRole("tab", { name: "Game info" })).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Game" })).toBeVisible();
   await page.getByRole("tab", { name: "Trains" }).click();
   await expect(page.getByRole("button", { name: "Add train" })).toBeVisible();
   expect(requested.filter((url) => /JsonEditor/.test(url))).toEqual([]);

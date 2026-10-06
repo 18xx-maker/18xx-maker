@@ -183,6 +183,13 @@ gives the next number, and a copy gets the next free number too. A player needs
 a number, which cannot be emptied. The numbers are not kept in order or checked
 for repeats: the problems check reports what the schema does not allow.
 
+The Rounds tab edits the rounds of the round tracker (a card for each round
+token, with its name and color first and the other token fields under More
+fields), the turns printed on the charter (a name, its steps, whether the steps
+are numbered, and the optional steps), the notes about the pools (a name and a
+list of notes with an optional color and icon, kept for reference and not
+printed) and the colors of the number cards.
+
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
 

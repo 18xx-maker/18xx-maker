@@ -68,7 +68,7 @@
     "invalidJson": "Gib gültiges JSON ein.",
     "sections": {
       "info": {
-        "tab": "Spielinfo",
+        "tab": "Spiel",
         "description": "Bearbeite die Spielinfo, Links und Markierungen. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
       },
       "trains": {
@@ -95,6 +95,10 @@
         "tab": "Spieler",
         "description": "Bearbeite die Spielertabelle, die Bank und die Limits des Spiels. Die Änderungen bleiben im Speicher, bis du sie auf der Seite „Änderungen“ speicherst."
       },
+      "rounds": {
+        "tab": "Runden",
+        "description": "Bearbeite die Runden des Rundenzählers, die auf dem Charter gedruckten Züge, die Notizen zu den Pools und die Nummernkarten. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
+      },
       "json": {
         "tab": "JSON",
         "description": "Bearbeite das ganze Spiel als JSON. Die Seite folgt deiner Eingabe, solange das JSON gültig ist. Die Änderungen bleiben im Speicher, bis du sie auf der Änderungsseite speicherst."
@@ -110,12 +114,22 @@
       "companies": "Gesellschaft",
       "phases": "Phase",
       "players": "Spieler",
+      "rounds": "Runde",
+      "turns": "Zug",
+      "pools": "Pool",
+      "notes": "Notiz",
       "legend": "Legendeneintrag",
       "colors": "Farbe",
       "tokenTypes": "Token-Typ",
       "shareTypes": "Anteilstyp",
       "upgrades": "Upgrade",
       "entry": "Eintrag"
+    },
+    "headings": {
+      "rounds": "Runden",
+      "turns": "Züge",
+      "pools": "Pools",
+      "notes": "Notizen"
     },
     "titles": {
       "players_one": "{{count}} Spieler",

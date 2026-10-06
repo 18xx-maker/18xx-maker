@@ -321,7 +321,7 @@ passes `PLAYER_PRIMARY_KEYS` as `primary`, `idKey="number"` (a new or copied
 item gets `nextNumber`, the highest number plus one, as a number instead of a
 text name) and `title` (a translation key, `editPanel.titles.players`, counting
 the `titleKey` field: "3 players") to `ArrayField`. A `oneOf` of only strings
-and numbers (`certLimit`) is the `stringOrNumber` kind. All forms use
+and numbers (`certLimit`) is the `stringOrNumber` kind. `RoundsForm` edits `ROUND_KEYS` (`rounds`, `turns`, `pools`, `number_cards`). All forms use
 `SchemaFormProvider`. A field kind without a form (`discount`, other
 `oneOf`s) falls back to a JSON textarea, and
 `resolve.test.js` fails when a property in scope falls back unexpectedly. A

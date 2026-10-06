@@ -5,7 +5,13 @@ import Token from "@/components/tokens/Token";
 import { useConfig } from "@/hooks";
 import { unitsToCss } from "@/util";
 
-export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
+export const getRoundTrackerData = (
+  rounds = [],
+  size,
+  type,
+  rotation,
+  config,
+) => {
   let cell = config.stock.cell;
 
   let getI = (i) =>
@@ -94,7 +100,7 @@ export const getRoundTrackerData = (rounds, size, type, rotation, config) => {
     },
   };
 };
-const RoundTracker = ({ rounds, size, type, rotation }) => {
+const RoundTracker = ({ rounds = [], size, type, rotation }) => {
   const { config } = useConfig();
 
   let data = getRoundTrackerData(rounds, size, type, rotation, config);
