@@ -217,6 +217,7 @@
     "changed": "The game was changed elsewhere. Discard the draft to see the new version.",
     "format": "Format",
     "formatAnyway": "Format anyway",
+    "nextProblem": "Next problem",
     "discard": "Discard draft",
     "warn": {
       "duplicates": "Some names are used twice in an object. Formatting keeps only the last value of each.",
