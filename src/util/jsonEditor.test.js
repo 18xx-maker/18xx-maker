@@ -9,6 +9,7 @@ import {
   parseGameText,
   parseTree,
   pointerParts,
+  pointerToLine,
   pointerToRange,
   sameGame,
   shareUnchanged,
@@ -200,5 +201,46 @@ describe("foldRanges", () => {
     const source =
       '{\n  "info": {\n    "a": 1\n  },\n  "info": {\n    "b": 1\n  },\n  "x": {\n    "c": 1\n  }\n}';
     expect(folded(source)).toEqual(['\n    "c": 1\n  ']);
+  });
+});
+
+describe("pointerToLine", () => {
+  const source = `{
+  "info": { "title": "T" },
+  "map": {
+    "hexes": [
+      { "color": "red" },
+      {
+        "color": "blue"
+      }
+    ]
+  }
+}`;
+  const line = (pointer) => pointerToLine(parseTree(source), source, pointer);
+
+  it("gives the line of a key", () => {
+    expect(line("info")).toBe(2);
+    expect(line("map")).toBe(3);
+  });
+
+  it("gives the line of a nested key", () => {
+    expect(line("info.title")).toBe(2);
+    expect(line("map.hexes[1].color")).toBe(7);
+  });
+
+  it("gives the line of the item for an index", () => {
+    expect(line("map.hexes[0]")).toBe(5);
+    expect(line("map.hexes[1]")).toBe(6);
+  });
+
+  it("falls back to the nearest parent that exists", () => {
+    expect(line("map.hexes[5].color")).toBe(4);
+    expect(line("map.missing.deeper")).toBe(3);
+  });
+
+  it("has no line for the root or a name that is not there", () => {
+    expect(line("")).toBeNull();
+    expect(line("nothing")).toBeNull();
+    expect(pointerToLine(parseTree(""), "", "info")).toBeNull();
   });
 });

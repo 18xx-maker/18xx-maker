@@ -178,6 +178,42 @@ export const pointerToRange = (tree, text, pointer) => {
   return { from: target.from, to: target.to };
 };
 
+// The 1-based line a pointer of a problem starts on: the name of the property,
+// or the item itself for an index. A part that does not exist gives its nearest
+// parent; the root (no pointer) has no line.
+export const pointerToLine = (tree, text, pointer) => {
+  const parts = pointerParts(pointer);
+  if (parts.length === 0) return null;
+  let node = valueOf(tree.topNode);
+  if (!node) return null;
+
+  let start = null;
+  for (const part of parts) {
+    let next = null;
+    let nextStart = null;
+    if (node.name === "Object") {
+      for (let c = node.firstChild; c; c = c.nextSibling) {
+        if (c.name === "Property" && propertyName(c, text) === part) {
+          next = propertyValue(c);
+          nextStart = c.getChild("PropertyName")?.from ?? null;
+        }
+      }
+    } else if (node.name === "Array" && /^\d+$/.test(part)) {
+      let index = 0;
+      for (let c = node.firstChild; c; c = c.nextSibling) {
+        if (isValue(c) && index++ === Number(part)) next = c;
+      }
+      nextStart = next?.from ?? null;
+    }
+    if (!next) break;
+    node = next;
+    start = nextStart ?? start;
+  }
+
+  // Nothing of the path exists: the root has no line to point at
+  return start === null ? null : text.slice(0, start).split("\n").length;
+};
+
 // The ranges of the names that are used twice in an object: JSON.parse keeps
 // the last, and formatting writes it without the others
 export const duplicateKeys = (tree, text) => {
