@@ -130,19 +130,20 @@ const md = (element, className) => {
 };
 
 // A heading has an id (see rehypeHeadingIds) and a # link that shows on hover
-// or keyboard focus and points at it.
+// or keyboard focus and points at it. The page title (h1) has no anchor: the
+// page link itself is enough.
 const heading = (element, className) => {
   const comp = (props) => {
     const { children, id, ...rest } = clean(props);
     return createElement(
       element,
       { ...rest, id, className: clsx(className, "group relative") },
-      id && (
+      id && element !== "h1" && (
         <Link
           to={{ hash: id }}
           data-anchor
           aria-label={`#${id}`}
-          className="absolute -left-6 text-muted-foreground no-underline opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+          className="absolute right-full pr-2 text-muted-foreground no-underline opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
         >
           #
         </Link>
@@ -229,7 +230,10 @@ const components = {
 const Markdown = ({ className, ...pass }) => {
   return (
     <div
-      className={cn("p-4 max-w-prose bg-background text-foreground", className)}
+      className={cn(
+        "p-4 pl-12 max-w-prose bg-background text-foreground",
+        className,
+      )}
     >
       <ReactMarkdown
         components={components}
