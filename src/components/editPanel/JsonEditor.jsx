@@ -94,18 +94,23 @@ const theme = EditorView.theme({
   ".cm-activeLine, .cm-activeLineGutter": {
     backgroundColor: "hsl(var(--accent))",
   },
-  // The lines of the url (distinct from the active line and the selection)
-  ".cm-line.cm-selected-line, .cm-gutterElement.cm-selected-gutter": {
-    backgroundColor: "hsl(var(--line-selected))",
+  // The lines of the url (distinct from the active line and the selection).
+  // Translucent: the selection is drawn behind the lines and shows through
+  // (uiContrast.test.js checks the text on the blend).
+  ".cm-line.cm-selected-line": {
+    backgroundColor: "hsl(var(--line-selected) / 0.5)",
   },
   ".cm-gutterElement.cm-selected-gutter": {
+    backgroundColor: "hsl(var(--line-selected))",
     color: "hsl(var(--foreground))",
   },
   ".cm-lineNumbers .cm-gutterElement": { cursor: "pointer" },
   ".cm-cursor": { borderLeftColor: "hsl(var(--foreground))" },
-  "&.cm-focused .cm-selectionBackground, .cm-selectionBackground": {
-    backgroundColor: "hsl(var(--accent))",
-  },
+  // As specific as the base theme's rule, which else wins with a light grey
+  "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground":
+    {
+      backgroundColor: "hsl(var(--accent))",
+    },
   ".cm-tooltip": {
     color: "hsl(var(--popover-foreground))",
     backgroundColor: "hsl(var(--popover))",
