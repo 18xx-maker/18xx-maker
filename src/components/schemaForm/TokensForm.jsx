@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import SchemaField from "@/components/schemaForm/SchemaField";
 import SchemaFormProvider from "@/components/schemaForm/SchemaFormProvider";
@@ -53,9 +53,22 @@ const PROPS = {
 // schema. The editor of a token is here, not in its item: see TokenEditItem.
 const TokenLists = () => {
   const [editing, setEditing] = useState(null);
+  const list = useRef(null);
+  const index = useRef(null);
+  if (editing) index.current = editing.keys.at(-1);
+
+  // An item that goes from text to an object is another component, so the
+  // button the editor was opened from is gone: the focus goes to the edit
+  // button of the item at the same place, looked up once the editor is closed
+  const focusItem = (event) => {
+    event.preventDefault();
+    list.current
+      ?.querySelector(`[data-token-index="${index.current}"]`)
+      ?.focus();
+  };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div ref={list} className="flex flex-col gap-4">
       {TOKEN_KEYS.map((key) => (
         <SchemaField
           key={key}
@@ -78,6 +91,8 @@ const TokenLists = () => {
         <TokenEditorDialog
           open
           onOpenChange={(open) => !open && setEditing(null)}
+          onCloseAutoFocus={focusItem}
+
           keys={editing.keys}
           schema={gameToken()}
           source="game"

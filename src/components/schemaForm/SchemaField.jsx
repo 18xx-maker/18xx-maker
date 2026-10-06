@@ -460,7 +460,8 @@ const ColorTupleInput = ({ keys, schema }) => {
 
 const ColorTupleField = (props) => {
   const form = useContext(SchemaFormContext);
-  return isTupleValue(valueAt(props.keys, form.game)) ? (
+  const length = tupleLength(props.schema, form.root);
+  return isTupleValue(valueAt(props.keys, form.game), length) ? (
     <ColorTupleInput {...props} />
   ) : (
     <JsonField {...props} />

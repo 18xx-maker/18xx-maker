@@ -150,8 +150,8 @@ Weil eine Gesellschaft viele Felder hat, ist ihre Karte zunächst eingeklappt un
 zeigt Farbe, Name und Kürzel; klicke auf den Titel, um sie zu öffnen. Eine
 eingeklappte Karte zeigt ein Warnzeichen, wenn etwas darin ein Problem hat. Name,
 Kürzel, Farbe und die Markierung „minor“ stehen zuerst, die übrigen Felder, etwa
-Logo und Text der Charter, unter Weitere Felder. Anteile, Züge, Kredite
-und ähnliche Felder werden als JSON bearbeitet, der Token hat einen Editor (siehe Tab „Token“ unten). Eine Gesellschaft braucht einen
+Logo und Text der Charter, unter Weitere Felder. Anteile, Marker, Züge, Kredite
+und ähnliche Felder werden als JSON bearbeitet. Eine Gesellschaft braucht einen
 Namen und ein Kürzel, die sich nicht leeren lassen. Eine neue Gesellschaft
 bekommt ein freies Kürzel, und eine Kopie das Kürzel ihrer Vorlage mit einer
 Zahl (aus PRR wird PRR2). Andere Teile des Spiels, etwa der Markt, verweisen über

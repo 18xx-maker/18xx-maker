@@ -8,8 +8,7 @@ import {
   isBoolOrColorValue,
   isTupleValue,
   padTuple,
-  pruneToken,
-  sameToken,
+  setTokenKey,
   setTuple,
   tokenFromObject,
   tokenToObject,
@@ -23,31 +22,34 @@ const token = resolveAllOf(
   schema,
 );
 
-describe("pruneToken", () => {
-  it("drops empty values and keeps the rest in order", () => {
-    expect(
-      pruneToken({
-        label: "A",
-        color: "",
-        halves: ["", ""],
-        extra: {},
-        bar: false,
-        width: 0,
-        circle: undefined,
-        icon: "train",
-      }),
-    ).toEqual({ label: "A", bar: false, width: 0, icon: "train" });
-    expect(Object.keys(pruneToken({ b: 1, a: 2 }))).toEqual(["b", "a"]);
+describe("setTokenKey", () => {
+  it("sets a value and keeps the order", () => {
+    expect(Object.keys(setTokenKey({ b: 1, a: 2 }, "b", 3))).toEqual([
+      "b",
+      "a",
+    ]);
+    expect(setTokenKey({ bar: true }, "bar", false)).toEqual({ bar: false });
   });
 
-  it("keeps a key the schema does not know", () => {
-    expect(pruneToken({ unknown: "x", label: "" })).toEqual({ unknown: "x" });
+  it("drops the key whose value says nothing, no other key", () => {
+    expect(setTokenKey({ label: "", color: "red" }, "color", "")).toEqual({
+      label: "",
+    });
+    expect(
+      setTokenKey({ halves: ["a", "b"], x: {} }, "halves", ["", ""]),
+    ).toEqual({ x: {} });
+  });
+
+  it("keeps a blank value the game has when another key is set", () => {
+    expect(setTokenKey({ label: "", color: "red" }, "color", "blue")).toEqual({
+      label: "",
+      color: "blue",
+    });
   });
 
   it("makes an object of anything else", () => {
-    expect(pruneToken(undefined)).toEqual({});
-    expect(pruneToken("3")).toEqual({});
-    expect(pruneToken([1])).toEqual({});
+    expect(setTokenKey(undefined, "a", 1)).toEqual({ a: 1 });
+    expect(setTokenKey("3", "a", "")).toEqual({});
   });
 });
 
@@ -90,7 +92,7 @@ describe("a token of the list of tokens", () => {
 
   it("is always an object for a company or a private, none when empty", () => {
     expect(tokenFromObject({ label: "4" })).toEqual({ label: "4" });
-    expect(tokenFromObject({ label: "", color: "" })).toBeUndefined();
+    expect(tokenFromObject({ label: "" })).toEqual({ label: "" });
     expect(tokenFromObject({})).toBeUndefined();
   });
 });
@@ -184,12 +186,7 @@ describe("the values the fields understand", () => {
     for (const value of ["a", [1], null, {}]) {
       expect(isTupleValue(value)).toBe(false);
     }
-  });
-});
-
-describe("sameToken", () => {
-  it("ignores what says nothing", () => {
-    expect(sameToken({ label: "A", color: "" }, { label: "A" })).toBe(true);
-    expect(sameToken({ label: "A" }, { label: "B" })).toBe(false);
+    expect(isTupleValue(["a", "b"], 2)).toBe(true);
+    expect(isTupleValue(["a", "b", "c"], 2)).toBe(false);
   });
 });

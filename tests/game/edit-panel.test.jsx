@@ -3408,6 +3408,62 @@ describe("edit panel token editor", () => {
     expect(token()).toEqual({ mystery: 1 });
   });
 
+  it("changes one key and leaves the blank values of the others", async () => {
+    const { user } = await openCompany({ label: "", color: "red" });
+    const editor = within(await dialog());
+    await user.clear(editor.getByRole("combobox", { name: "Color" }));
+    await user.type(editor.getByRole("combobox", { name: "Color" }), "blue");
+    await user.keyboard("{Enter}");
+    expect(token()).toEqual({ label: "", color: "blue" });
+  });
+
+  it("shows a key the schema does not know as JSON that can be removed", async () => {
+    const { user } = await openCompany({ color: "red", mystery: 1 });
+    const editor = within(await dialog());
+    await user.click(editor.getByRole("button", { name: "Advanced" }));
+    const mystery = editor.getByRole("textbox", { name: "Mystery" });
+    expect(mystery).toHaveValue("1");
+    await user.clear(mystery);
+    await user.tab();
+    expect(token()).toEqual({ color: "red" });
+  });
+
+  it("shows the problem of a value on its field", async () => {
+    allowConsole(/./);
+    await openCompany({ width: "x" });
+    const editor = within(await dialog());
+    const width = editor.getByRole("spinbutton", { name: "Width" });
+    await waitFor(() => expect(width).toHaveAttribute("aria-invalid", "true"));
+  });
+
+  it("goes back to its first state with Reset, decorations added included", async () => {
+    const { user } = await openCompany();
+    const editor = within(await dialog());
+    await addDecoration(user, "Halves");
+    expect(editor.getByRole("button", { name: "Remove Halves" })).toBeVisible();
+    await user.click(editor.getByRole("button", { name: "Reset" }));
+    expect(
+      editor.queryByRole("button", { name: "Remove Halves" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("changes the background of the preview", async () => {
+    const { user } = await openCompany();
+    const editor = within(await dialog());
+    const preview = editor.getByTestId("token-editor-preview");
+    expect(preview).toHaveAttribute("data-background", "light");
+    await user.click(editor.getByRole("button", { name: "Dark" }));
+    expect(preview).toHaveAttribute("data-background", "dark");
+  });
+
+  it("keeps a token shape the editor does not list", async () => {
+    await openCompany({ tokenShape: "hexagon" });
+    const editor = within(await dialog());
+    expect(
+      editor.getByRole("combobox", { name: "Token Shape" }),
+    ).toHaveTextContent("hexagon");
+  });
+
   it("removes the token when its last value goes", async () => {
     const { user } = await openCompany({ color: "red" });
     const editor = within(await dialog());
@@ -3441,9 +3497,24 @@ describe("edit panel token editor", () => {
     await openCompany({ icon: "nope" });
     const editor = within(await dialog());
     expect(editor.getByRole("combobox", { name: "Icon" })).toHaveValue("nope");
+    expect(editor.getByText("The app has no icon named nope.")).toBeVisible();
     expect(
       editor.queryByRole("img", { name: "Preview of the token" }),
     ).not.toBeInTheDocument();
+  });
+
+  it("draws the token again once the icon that failed is cleared", async () => {
+    allowConsole(/./);
+    const { user } = await openCompany({ icon: "nope", color: "red" });
+    const editor = within(await dialog());
+    expect(
+      editor.queryByRole("img", { name: "Preview of the token" }),
+    ).not.toBeInTheDocument();
+    await user.clear(editor.getByRole("combobox", { name: "Icon" }));
+    await user.tab();
+    expect(
+      await editor.findByRole("img", { name: "Preview of the token" }),
+    ).toBeVisible();
   });
 
   it("Escape closes the editor, then the panel", async () => {
@@ -3462,7 +3533,7 @@ describe("edit panel token editor", () => {
     );
   });
 
-  it("opens from a private, which keeps a token that is not an object as JSON", async () => {
+  it("opens from a private and edits its token", async () => {
     const base = structuredClone(games["18Test"]);
     const { user } = open(section("privates"), base);
     await screen.findByRole("button", { name: "Add private" });
@@ -3477,6 +3548,46 @@ describe("edit panel token editor", () => {
     await user.type(editor.getByRole("textbox", { name: "Label" }), "9");
     await user.tab();
     expect(game().privates[2].token).toEqual({ color: "green", label: 9 });
+  });
+
+  it("keeps a token that is text as JSON, with no editor button", async () => {
+    const { user } = open(section("companies"), withCompany("X"));
+    await screen.findByRole("button", { name: "Add company" });
+    await user.click(within(cards()[0]).getAllByRole("button")[0]);
+    await user.click(
+      within(cards()[0]).getByRole("button", { name: "More fields" }),
+    );
+    const card = within(cards()[0]);
+    expect(card.getByRole("textbox", { name: "Token" }).tagName).toBe(
+      "TEXTAREA",
+    );
+    expect(
+      card.queryByRole("button", { name: "Edit token" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("gives the focus to the edit button of a token that became an object", async () => {
+    const { user } = open(section("tokens"), {
+      ...structuredClone(games["18Test"]),
+      tokens: ["Round"],
+    });
+    await screen.findAllByRole("button", { name: "Add token" });
+    await user.click(
+      screen.getByRole("button", { name: "Edit token of Round" }),
+    );
+    const editor = within(await dialog());
+    await user.type(editor.getByRole("combobox", { name: "Color" }), "red");
+    await user.keyboard("{Enter}");
+    expect(game().tokens[0]).toEqual({ label: "Round", color: "red" });
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+    await waitFor(() =>
+      expect(
+        screen.getByRole("button", { name: "Edit token of Round" }),
+      ).toHaveFocus(),
+    );
   });
 
   it("opens from a token of the game, which stays text or a number while only the label is set", async () => {

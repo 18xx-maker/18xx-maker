@@ -11,7 +11,7 @@ import { useConfig, useGame } from "@/hooks";
 // The names a color can be given by: the colors of the game, of the theme of
 // the companies and of the theme of the map. Text is free: any CSS color
 // works too.
-export const useColorNames = () => {
+const useColorNames = () => {
   const { config } = useConfig();
   const game = useGame();
   const { theme, companiesTheme } = config;

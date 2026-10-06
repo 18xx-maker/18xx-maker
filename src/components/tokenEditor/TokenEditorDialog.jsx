@@ -13,10 +13,12 @@ import {
 
 import SchemaField, {
   ChoiceField,
+  JsonField,
   SchemaFormContext,
 } from "@/components/schemaForm/SchemaField";
 import {
   clearValue,
+  issuesFor,
   kindOf,
   pointerOf,
   resolveAllOf,
@@ -30,6 +32,7 @@ import TokenPreview from "@/components/tokenEditor/TokenPreview";
 import {
   TOKEN_GROUPS,
   advancedKeys,
+  setTokenKey,
   tokenFromObject,
   tokenToObject,
 } from "@/components/tokenEditor/tokenModel";
@@ -57,13 +60,19 @@ const editorForm = (form, keys, bare) => {
     ...form,
     game: objectOf(form.game),
     latest: () => objectOf(form.latest()),
-    issues: (form.issues ?? []).flatMap((issue) =>
-      issue.pointer === real || issue.pointer.startsWith(real)
-        ? [{ ...issue, pointer: `token${issue.pointer.slice(real.length)}` }]
-        : [],
-    ),
-    set: (path, value) =>
-      store(setValue(objectOf(form.latest()), path, value).token),
+    issues: issuesFor(form.issues, keys).map((issue) => ({
+      ...issue,
+      pointer: `token${issue.pointer.slice(real.length)}`,
+    })),
+    set: (path, value) => {
+      const object = objectOf(form.latest()).token;
+      // A value that says nothing clears the key it is set at, no other key
+      return store(
+        path.length === 2
+          ? setTokenKey(object, path[1], value)
+          : setValue({ token: object }, path, value).token,
+      );
+    },
     clear: (path) =>
       store(clearValue(objectOf(form.latest()), path).token ?? {}),
   };
@@ -134,6 +143,8 @@ const TokenEditor = ({ keys, schema, source, subject, bare }) => {
   );
   const [background, setBackground] = useState("light");
   const [advanced, setAdvanced] = useState(false);
+  // A new key for the decorations at each Reset, so what they added is gone
+  const [resets, setResets] = useState(0);
   const form = useMemo(
     () => editorForm(outer, keys, bare),
     // keys is a new array on each render, what it says is what matters
@@ -143,6 +154,10 @@ const TokenEditor = ({ keys, schema, source, subject, bare }) => {
 
   const properties = schema.properties ?? {};
   const token = form.game.token;
+  // What the schema does not know is shown as JSON, so it can be removed
+  const unknownKeys = Object.keys(token).filter(
+    (key) => !Object.hasOwn(properties, key),
+  );
   const company =
     source === "company" ? valueAt(keys.slice(0, -1), outer.game) : undefined;
   const prop = (name) =>
@@ -150,8 +165,10 @@ const TokenEditor = ({ keys, schema, source, subject, bare }) => {
       <TokenProp key={name} name={name} properties={properties} />
     );
 
-  const reset = () =>
-    initial === undefined ? outer.clear(keys) : outer.set(keys, initial);
+  const reset = () => {
+    setResets((count) => count + 1);
+    return initial === undefined ? outer.clear(keys) : outer.set(keys, initial);
+  };
 
   return (
     <SchemaFormContext.Provider value={form}>
@@ -226,7 +243,12 @@ const TokenEditor = ({ keys, schema, source, subject, bare }) => {
           <Grid>{TOKEN_GROUPS.colors.map(prop)}</Grid>
         </Group>
         <Group title={t("editPanel.tokenEditor.groups.decorations")}>
-          <DecorationGroups properties={properties} token={token} prop={prop} />
+          <DecorationGroups
+            key={resets}
+            properties={properties}
+            token={token}
+            prop={prop}
+          />
         </Group>
         <section className="flex flex-col gap-3">
           <button
@@ -242,7 +264,14 @@ const TokenEditor = ({ keys, schema, source, subject, bare }) => {
             )}
             {t("editPanel.tokenEditor.groups.advanced")}
           </button>
-          {advanced && <Grid>{advancedKeys(properties).map(prop)}</Grid>}
+          {advanced && (
+            <Grid>
+              {advancedKeys(properties).map(prop)}
+              {unknownKeys.map((key) => (
+                <JsonField key={key} keys={[...VIRTUAL, key]} schema={{}} />
+              ))}
+            </Grid>
+          )}
         </section>
       </div>
     </SchemaFormContext.Provider>
@@ -253,10 +282,19 @@ const TokenEditor = ({ keys, schema, source, subject, bare }) => {
 // schema the object schema of the token, source the place it is drawn for
 // ("company", "private" or "game", see TokenPreview). A token of a list of
 // tokens is bare (text or a number) when it has only a label. Every change is
-// made to the game at once; there is nothing to save or cancel.
-const TokenEditorDialog = ({ open, onOpenChange, ...props }) => (
+// made to the game at once; there is nothing to save or cancel. When it closes
+// the focus goes where onCloseAutoFocus says (default: where it was).
+const TokenEditorDialog = ({
+  open,
+  onOpenChange,
+  onCloseAutoFocus,
+  ...props
+}) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
-    <DialogContent className="max-w-3xl focus:outline-hidden">
+    <DialogContent
+      className="max-w-3xl focus:outline-hidden"
+      onCloseAutoFocus={onCloseAutoFocus}
+    >
       <TokenEditor {...props} />
     </DialogContent>
   </Dialog>

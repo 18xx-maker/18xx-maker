@@ -138,8 +138,8 @@ company has many fields, its card starts closed and shows its color, name and
 abbreviation; click the title to open it. A closed card shows a warning mark
 when something inside it has a problem. The name, abbreviation, color and minor
 flag are shown first, and the other fields, like the logo and the charter text,
-are under More fields. The shares, trains, loans and similar fields are
-edited as JSON, and the token has an editor (see the Tokens tab below). A company needs a name and an abbreviation, which cannot be
+are under More fields. The shares, tokens, trains, loans and similar fields are
+edited as JSON. A company needs a name and an abbreviation, which cannot be
 emptied. A new company gets a free abbreviation, and a copy gets the abbreviation
 of its source with a number (PRR becomes PRR2). Other parts of the game, like
 the market, refer to a company by its abbreviation: the panel does not update

@@ -1035,6 +1035,14 @@ describe("the fields of a token", () => {
       expect(game.token).toBeUndefined();
     });
 
+    it("shows an initial true as a checked box", () => {
+      render(<TokenForm initial={{ token: { bar: true } }} field="bar" />);
+      expect(
+        screen.getByRole("checkbox", { name: "White (true)" }),
+      ).toBeChecked();
+      expect(screen.getByRole("combobox", { name: "Bar" })).toHaveValue("");
+    });
+
     it("shows true as a checked box and clears with the text", async () => {
       const user = userEvent.setup();
       render(
@@ -1086,6 +1094,18 @@ describe("the fields of a token", () => {
       );
       expect(screen.getByRole("combobox", { name: "Halves 2" })).toHaveValue(
         "",
+      );
+    });
+
+    it("keeps a list longer than the schema as JSON, so nothing is cut", () => {
+      render(
+        <TokenForm
+          initial={{ token: { halves: ["a", "b", "c"] } }}
+          field="halves"
+        />,
+      );
+      expect(screen.getByRole("textbox", { name: "Halves" }).tagName).toBe(
+        "TEXTAREA",
       );
     });
 

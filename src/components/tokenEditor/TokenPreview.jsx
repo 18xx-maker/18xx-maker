@@ -17,7 +17,7 @@ const keyOf = (value) => {
 // A token the Token component cannot draw (an edit that fits the JSON but not
 // the schema) shows nothing rather than taking the panel down. It tries again
 // once the value it was given changes.
-export class TokenBoundary extends Component {
+class TokenBoundary extends Component {
   state = { failed: false };
 
   static getDerivedStateFromError() {

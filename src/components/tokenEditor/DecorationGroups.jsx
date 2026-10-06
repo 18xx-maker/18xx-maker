@@ -59,7 +59,7 @@ const DecorationGroups = ({ properties, token, prop }) => {
 
   const remove = (decoration) => {
     setAdded((current) => current.filter((item) => item !== decoration.name));
-    form.set(["token"], omit(decoration.keys, token));
+    form.set(["token"], omit(decoration.keys, form.latest().token));
   };
 
   return (

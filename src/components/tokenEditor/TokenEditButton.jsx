@@ -101,6 +101,7 @@ export const TokenEditItem = ({ keys, title, onOpen }) => {
       aria-label={label}
       title={label}
       data-action="edit"
+      data-token-index={keys[keys.length - 1]}
       onClick={onOpen}
     >
       <TokenPreview

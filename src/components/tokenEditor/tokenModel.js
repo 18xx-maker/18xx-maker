@@ -1,4 +1,4 @@
-import { equals, isEmpty } from "ramda";
+import { isEmpty } from "ramda";
 
 import { resolveAllOf } from "@/components/schemaForm/resolve";
 
@@ -16,14 +16,17 @@ export const isBlank = (value) => {
   return isObject(value) && isEmpty(value);
 };
 
-// The token without what says nothing. A value false stays: the token can ask
-// for it. The key order of the token does not change.
-export const pruneToken = (token) =>
-  Object.fromEntries(
-    Object.entries(isObject(token) ? token : {}).filter(
-      ([, value]) => !isBlank(value),
-    ),
+// The token with a value set at the key, or the key dropped when the value
+// says nothing. A value false stays: the token can ask for it. Every other
+// key stays as it is, a blank one the game has included (it can be on
+// purpose). The key order of the token does not change.
+export const setTokenKey = (token, key, value) => {
+  const object = isObject(token) ? token : {};
+  if (!isBlank(value)) return { ...object, [key]: value };
+  return Object.fromEntries(
+    Object.entries(object).filter(([name]) => name !== key),
   );
+};
 
 // A token of a list of tokens is text or a number (the label) or an object.
 // The editor edits an object.
@@ -40,15 +43,14 @@ export const tokenToObject = (value) => {
 // (bare is false). An object with nothing in it is no token: undefined, or an
 // empty text for a bare item.
 export const tokenFromObject = (object, { bare = false, original } = {}) => {
-  const pruned = pruneToken(object);
-  const keys = Object.keys(pruned);
+  const keys = Object.keys(object);
   const bareOriginal =
     bare && (typeof original === "string" || typeof original === "number");
   if (bareOriginal && keys.length === 0) return "";
   if (bareOriginal && keys.length === 1 && keys[0] === "label") {
-    return pruned.label;
+    return object.label;
   }
-  return keys.length === 0 && !bare ? undefined : pruned;
+  return keys.length === 0 && !bare ? undefined : object;
 };
 
 // The decorations of a token, the shapes drawn on it: the property that turns
@@ -141,9 +143,10 @@ export const isBoolOrColorValue = (value) =>
   typeof value === "boolean" ||
   typeof value === "string";
 
-export const isTupleValue = (value) =>
+// A list longer than the schema asks is left to the JSON field: the tuple
+// field would cut it
+export const isTupleValue = (value, length = Infinity) =>
   value === undefined ||
-  (Array.isArray(value) && value.every((item) => typeof item === "string"));
-
-// Whether the token is the same as it was
-export const sameToken = (a, b) => equals(pruneToken(a), pruneToken(b));
+  (Array.isArray(value) &&
+    value.length <= length &&
+    value.every((item) => typeof item === "string"));
