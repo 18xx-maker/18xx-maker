@@ -145,6 +145,7 @@ test.describe("bundled games", () => {
     // Escape lets go of the group, the next one closes the panel
     await page.keyboard.press("Escape");
     await expect(page).toHaveURL(/\?edit=true&editSection=hex$/);
+    await expect(page.getByTestId("hex-selected")).toHaveCount(0);
     await page.keyboard.press("Escape");
     await expect(panel).toBeHidden();
   });
