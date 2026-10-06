@@ -94,6 +94,22 @@
 { "abbrev": "RED", "banner": "SYSTEM" }
 ```
 
+## 公司牌的副标题
+
+公司可以在公司牌的名称下方打印一行小字，分为三个位置：左侧是起始格或起始城市，中间是目的地，右侧是特殊能力。设置 `home`（字符串或列表，用 " / " 连接）、`destination` 和 `ability`，各位置会分别打印为 `Home: ...`、`Dest: ...` 以及按原样打印的能力。`ability` 不同于不打印的私有公司 `abilities`。没有值的位置保持为空，其他位置保持原位。若要打印自己的文字，请设置 `charterSubtitle` 的 `left`、`middle` 或 `right`；空字符串会清空该位置。文字不会被翻译，过长的位置会以省略号截断。在较小的标题栏（少数公司、`tokensBelow` 以及半宽的 carth 公司牌）中，副标题取代副文字。在紧凑的标题栏中，副标题也会取代 `companyNames: "both"` 作为副文字打印的别名。
+
+示例：
+
+```json
+{
+  "abbrev": "RED",
+  "home": ["H5", "H7"],
+  "destination": "A1",
+  "ability": "Lay a free tile",
+  "charterSubtitle": { "middle": "Goal: A1" }
+}
+```
+
 ## 公司别名
 
 公司可以有一个 `alias`,即第二个名称,例如简称或其他语言的名称。配置页面中的 `companyNames` 配置决定公司执照和股票卡上打印什么:`name`(默认)打印名称,`alias` 改为打印别名(没有别名的公司仍打印名称),`both` 打印名称并在其下方打印别名,取代公司的 `subtext`:

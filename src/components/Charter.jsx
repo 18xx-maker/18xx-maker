@@ -12,6 +12,7 @@ import Token from "@/components/tokens/Token";
 import ColorContext from "@/context/ColorContext";
 import { useConfig } from "@/hooks";
 import { multiDefaultTo, unitsToCss } from "@/util";
+import { charterSubtitle } from "@/util/companies/charterSubtitle";
 import { companyTrains } from "@/util/companies/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
 
@@ -82,6 +83,12 @@ const Charter = ({
   // Many tokens print in their own row under the name instead of squeezing it.
   // Half width charters already stack their tokens, so they ignore it.
   const tokensBelow = !!company.tokensBelow && !halfWidth;
+
+  // The subtitle line under the name. Tight headers have no room for it next
+  // to the subtext, so it replaces the subtext there.
+  const subtitle = charterSubtitle(company);
+  const tightHeader =
+    !!minor || tokensBelow || (charterStyle === "carth" && !!halfWidth);
 
   // A slot on the charter: a shape with its label under it (turned sideways on
   // half width charters). A loan prints no label when it has none, and its
@@ -204,7 +211,7 @@ const Charter = ({
           className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}
         >
           <div
-            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${loans.length > 0 ? " charter--loans" : ""}${company.banner ? " charter--banner" : ""}`}
+            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${loans.length > 0 ? " charter--loans" : ""}${company.banner ? " charter--banner" : ""}${subtitle ? " charter--subtitle" : ""}`}
           >
             <div
               className="charter__bleed"
@@ -250,7 +257,7 @@ const Charter = ({
                   >
                     {name}
                   </div>
-                  {subtext && (
+                  {subtext && !(subtitle && tightHeader) && (
                     <div
                       style={{
                         fontFamily: `${fontFamily}`,
@@ -261,6 +268,17 @@ const Charter = ({
                       }}
                     >
                       {subtext}
+                    </div>
+                  )}
+                  {subtitle && (
+                    <div
+                      className="charter__subtitle"
+                      data-testid="charter-subtitle"
+                      style={{ fontFamily: `${fontFamily}` }}
+                    >
+                      <span>{subtitle.left}</span>
+                      <span>{subtitle.middle}</span>
+                      <span>{subtitle.right}</span>
                     </div>
                   )}
                 </div>

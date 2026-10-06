@@ -5,10 +5,10 @@ import { all, one } from "@tests/support/render.jsx";
 
 // The name and the second line of every charter or share card in a root
 const charterTexts = (root) =>
-  all(root, ".charter__name").map((n) => [
-    n.children[0].textContent,
-    n.children[1]?.textContent,
-  ]);
+  all(root, ".charter__name").map((n) => {
+    const lines = all(n, ":scope > div:not(.charter__subtitle)");
+    return [lines[0].textContent, lines[1]?.textContent];
+  });
 const shareTexts = (root) =>
   all(root, ".card__body").map((b) => [
     one(b, ".share__name")?.textContent.trim(),

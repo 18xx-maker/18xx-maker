@@ -110,3 +110,19 @@ export const WithoutPhaseChart = {
     printConfig: { charters: { showPhaseChart: false, showTurnOrder: false } },
   },
 };
+
+const subtitleCompany = {
+  ...company,
+  home: "H5",
+  destination: "A1",
+  ability: "Lay a free tile",
+};
+
+export const Subtitle = {
+  args: { company: subtitleCompany },
+};
+
+export const SubtitleHalfWidth = {
+  args: { halfWidth: true, company: subtitleCompany },
+  parameters: { printConfig: { charters: { halfWidth: true } } },
+};

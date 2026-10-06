@@ -118,6 +118,30 @@ A company can set `banner` to print a label in a strip along the bottom edge of 
 { "abbrev": "RED", "banner": "SYSTEM" }
 ```
 
+## Charter subtitle
+
+A company can print one line of small text under its name on the charter, with
+three slots: the home hex or starting city on the left, the destination in the
+middle and a special power on the right. Set `home` (a string or a list, joined
+with " / "), `destination` and `ability` and the slots print as `Home: ...`,
+`Dest: ...` and the ability as written. `ability` is not the same as the
+unprinted private `abilities`. A slot without a value stays empty and the others
+keep their place. To print your own text, set `charterSubtitle` with `left`,
+`middle` or `right`; an empty string blanks a slot. The text is not translated
+and a slot that is too long is cut with an ellipsis. On small headers (minors,
+`tokensBelow` and half width carth charters) the subtitle takes the place of the
+subtext. On tight headers the subtitle also replaces the alias that `companyNames: "both"` prints as subtext. Example:
+
+```json
+{
+  "abbrev": "RED",
+  "home": ["H5", "H7"],
+  "destination": "A1",
+  "ability": "Lay a free tile",
+  "charterSubtitle": { "middle": "Goal: A1" }
+}
+```
+
 ## Company aliases
 
 A company can have an `alias`, a second name such as a short form or the name

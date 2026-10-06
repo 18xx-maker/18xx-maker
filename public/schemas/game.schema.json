@@ -1429,6 +1429,47 @@
             "type": "string",
             "description": "A label printed in a strip along the bottom edge of the charter, in the color of the company, to mark a special charter such as a system. Not translated."
           },
+          "home": {
+            "description": "The home hex or starting city of the company, printed on the left of the charter subtitle line as \"Home: <home>\". A list is joined with \" / \". Not translated.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "destination": {
+            "type": "string",
+            "description": "The destination of the company, printed in the middle of the charter subtitle line as \"Dest: <destination>\". Not translated."
+          },
+          "ability": {
+            "type": "string",
+            "description": "A special power of the company, printed on the right of the charter subtitle line. Not the same as the unprinted private abilities. Not translated."
+          },
+          "charterSubtitle": {
+            "type": "object",
+            "description": "Overrides the slots of the charter subtitle line with your own text. An empty string blanks a slot. Not translated.",
+            "additionalProperties": false,
+            "properties": {
+              "left": {
+                "type": "string",
+                "description": "Text for the left slot, instead of \"Home: <home>\"."
+              },
+              "middle": {
+                "type": "string",
+                "description": "Text for the middle slot, instead of \"Dest: <destination>\"."
+              },
+              "right": {
+                "type": "string",
+                "description": "Text for the right slot, instead of the ability."
+              }
+            }
+          },
           "loans": {
             "type": "array",
             "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns that fit the height of the charter (more loans than fit are cut off). Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",

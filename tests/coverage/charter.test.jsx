@@ -410,4 +410,78 @@ describe("Charter", () => {
     expect(one(root, ".charter__treasury")).not.toHaveTextContent("Treasury");
     expect(one(root, "dt")).toBeNull();
   });
+
+  it("draws a subtitle line with home, destination and ability", async () => {
+    const { root } = await mountElement(
+      <Charter
+        {...props}
+        subtext="Sub"
+        company={{
+          ...company,
+          home: ["A1", "B2"],
+          destination: "C3",
+          ability: "Free tile",
+        }}
+      />,
+    );
+    const subtitle = one(root, "[data-testid='charter-subtitle']");
+    expect(all(subtitle, "span").map((span) => span.textContent)).toEqual([
+      "Home: A1 / B2",
+      "Dest: C3",
+      "Free tile",
+    ]);
+    expect(one(root, ".charter")).toHaveClass("charter--subtitle");
+    // A roomy header keeps the subtext
+    expect(one(root, ".charter__name")).toHaveTextContent("Sub");
+  });
+
+  it("draws nothing without subtitle fields", async () => {
+    const { root } = await mountElement(
+      <Charter {...props} company={{ name: "A", abbrev: "A" }} />,
+    );
+    expect(one(root, "[data-testid='charter-subtitle']")).toBeNull();
+    expect(one(root, ".charter")).not.toHaveClass("charter--subtitle");
+  });
+
+  it("replaces the subtext with the subtitle on a tight header", async () => {
+    const { root } = await mountElement(
+      <Charter
+        {...props}
+        minor
+        subtext="Sub"
+        company={{ ...company, home: "A1" }}
+      />,
+    );
+    expect(one(root, "[data-testid='charter-subtitle']")).toHaveTextContent(
+      "Home: A1",
+    );
+    expect(one(root, ".charter__name")).not.toHaveTextContent("Sub");
+  });
+
+  it("draws the subtitle and the token row of a minor tokensBelow", async () => {
+    const { root } = await mountElement(
+      <Charter
+        {...props}
+        minor
+        company={{
+          ...company,
+          tokens: [0, 10, 20],
+          tokensBelow: true,
+          home: "A1",
+        }}
+      />,
+    );
+    expect(one(root, ".charter")).toHaveClass(
+      "charter--minor",
+      "charter--subtitle",
+    );
+    expect(one(root, "[data-testid='charter-subtitle']")).toHaveTextContent(
+      "Home: A1",
+    );
+    const tokens = one(root, ".charter__tokens--below");
+    const subtitle = one(root, "[data-testid='charter-subtitle']");
+    expect(subtitle.getBoundingClientRect().bottom).toBeLessThanOrEqual(
+      tokens.getBoundingClientRect().top + 0.5,
+    );
+  });
 });

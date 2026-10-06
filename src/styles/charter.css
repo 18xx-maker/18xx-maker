@@ -69,6 +69,38 @@
   justify-content: center;
 }
 
+/* Optional one-line subtitle: home, destination and special power. It is the
+   last child of the name, pushed to the bottom of the header. */
+.charter__subtitle {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) fit-content(40%) minmax(0, 1fr);
+  column-gap: 0.1in;
+  font-size: 8pt;
+  line-height: 1.2;
+  font-weight: normal;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.charter__subtitle > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.charter__subtitle > span:nth-child(2) {
+  text-align: center;
+}
+
+.charter__subtitle > span:nth-child(3) {
+  text-align: right;
+}
+
+.charter--half .charter__subtitle {
+  font-size: 6.5pt;
+}
+
 .charter--half .charter__name {
   font-size: 0.18in;
   line-height: 0.22in;
@@ -383,6 +415,12 @@
   padding-bottom: 0.4in;
 }
 
+/* The token row sits under the name, so the subtitle follows the name where
+   the subtext would be instead of dropping to the bottom. */
+.charter__name--tokens-below .charter__subtitle {
+  margin-top: 0;
+}
+
 .charter--minor .charter__name--tokens-below {
   padding-bottom: 0.35in;
 }
@@ -402,6 +440,16 @@
   top: 0.4625in;
   height: 0.35in;
   padding-top: 0;
+}
+
+/* The subtitle line (0.43in to 0.57in) sits between the name and the row. */
+.charter--minor.charter--subtitle .charter__tokens--below {
+  top: 0.575in;
+  height: 0.27in;
+}
+
+.charter--minor.charter--subtitle .charter__name--tokens-below {
+  padding-bottom: 0.3in;
 }
 
 .charter--color .charter__tokens--below {

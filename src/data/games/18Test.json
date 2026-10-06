@@ -108,6 +108,9 @@
       "abbrev": "BLRR",
       "alias": "Black Rail",
       "color": "black",
+      "home": "H5",
+      "destination": "A1",
+      "ability": "Lay a free tile",
       "trains": [
         { "name": "2", "quantity": 2 },
         { "name": "S", "color": "yellow", "price": 50 }
@@ -125,6 +128,12 @@
       "name": "Light Blue Railroad",
       "subtext": "Light Blue Override",
       "abbrev": "LBRR",
+      "home": "B2",
+      "charterSubtitle": {
+        "left": "Starts in B2",
+        "middle": "",
+        "right": "No ability"
+      },
       "alias": "Sky Blue Line",
       "color": "lightBlue"
     },
@@ -134,6 +143,8 @@
       "alias": "The Great Blue Railroad Company of the North",
       "color": "blue",
       "variant": "blue",
+      "home": ["C3", "D4"],
+      "destination": "E5",
       "banner": "SYSTEM",
       "shares": [
         {
@@ -181,6 +192,7 @@
       "color": "lime",
       "tokens": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
       "tokensBelow": true,
+      "ability": "One free token",
       "banner": "SYSTEM"
     },
     {
@@ -223,13 +235,19 @@
       "abbrev": "VRR",
       "color": "violet",
       "minor": true,
+      "home": "F6",
+      "destination": "G7",
+      "ability": "Extra train",
       "banner": "MINOR"
     },
     {
       "name": "Red Railroad",
       "abbrev": "RRR",
       "color": "red",
-      "minor": true
+      "minor": true,
+      "home": "Springfield Junction Station",
+      "destination": "Northern Terminus of the Great Line",
+      "ability": "A very long special power that does not fit"
     },
     {
       "name": "Light Brown Railroad",
@@ -254,7 +272,10 @@
       "name": "Yellow Railroad",
       "abbrev": "YRR",
       "color": "yellow",
-      "minor": true
+      "minor": true,
+      "tokensBelow": true,
+      "home": "B2",
+      "destination": "D4"
     }
   ],
   "trains": [
