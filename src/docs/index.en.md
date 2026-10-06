@@ -6,7 +6,10 @@ use cases. For more information please explore the other docs available from the
 site menu on the left.
 
 New to this? Follow the [first game tutorial](/docs/games/first-game), and see
-the [FAQ](/docs/faq) for common questions.
+the [FAQ](/docs/faq) for common questions. To set up the page, print and
+display settings read the [config panel](/docs/config), and for the desktop app
+and the command line see the [app](/docs/app) and [command line](/docs/output/cli)
+docs.
 
 > [!TIP]
 > These docs are about using 18xx Maker. If you are interested in hacking on the

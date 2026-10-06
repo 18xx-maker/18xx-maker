@@ -14,6 +14,9 @@ info page.
 
 To check a game file for mistakes, run `pnpm maker validate my-game.json` (it
 checks the file against the game schema, see [JSON schemas](/docs/games/schemas)).
+The [command line](/docs/output/cli) page has all the commands, and the
+[config panel](/docs/config) and [desktop app](/docs/app) pages describe the
+settings stored on your device.
 
 ## Using the 18xx Maker app
 

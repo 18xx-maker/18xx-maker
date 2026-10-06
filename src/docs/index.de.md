@@ -6,7 +6,10 @@ häufige Anwendungsfälle. Weitere Informationen findest du in den anderen
 Dokumenten, die du über das Seitenmenü links erreichst.
 
 Neu hier? Folge dem [Tutorial zum ersten Spiel](/docs/games/first-game) und
-wirf einen Blick in die [FAQ](/docs/faq) für häufige Fragen.
+wirf einen Blick in die [FAQ](/docs/faq) für häufige Fragen. Seiten-, Druck-
+und Anzeigeeinstellungen findest du im [Konfigurationsfenster](/docs/config),
+zur Desktop-App und zur Kommandozeile siehe [App](/docs/app) und
+[Kommandozeile](/docs/output/cli).
 
 > [!TIP]
 > Diese Dokumentation erklärt, wie du 18xx Maker verwendest. Wenn du am Code

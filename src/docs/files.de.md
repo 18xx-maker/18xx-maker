@@ -17,6 +17,9 @@ der Informationsseite des Spiels.
 Um eine Spieldatei auf Fehler zu prüfen, führe `pnpm maker validate my-game.json`
 aus (die Datei wird gegen das Spielschema geprüft, siehe
 [JSON-Schemas](/docs/games/schemas)).
+Alle Befehle stehen auf der Seite [Kommandozeile](/docs/output/cli), und die
+Seiten [Konfigurationsfenster](/docs/config) und [Desktop-App](/docs/app)
+beschreiben die auf deinem Gerät gespeicherten Einstellungen.
 
 ## Die 18xx-Maker-App verwenden
 

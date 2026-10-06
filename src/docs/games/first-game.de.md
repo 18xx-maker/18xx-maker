@@ -115,6 +115,9 @@ pnpm maker validate my-game.json
   [18Test](https://github.com/18xx-maker/18xx-maker/blob/main/src/data/games/18Test.json)
   ist klein und nutzt die meisten Funktionen, und [Shikoku 1889](/games/1889)
   ist ein vollständiges kleines Spiel.
+- [Spielseiten](/docs/games/pages), [Aktienmarkt und Par-Tabelle](/docs/games/market),
+  [Plättchen und Felder](/docs/games/tiles), [Privatgesellschaften](/docs/games/privates)
+  und [Spielinformationen und Regeln](/docs/games/game-info)
 - [Phasen und Züge](/docs/games/trains)
 - [Aktien- & Tokentypen](/docs/games/types)
 - [Kartenränder & Linien](/docs/games/borders)

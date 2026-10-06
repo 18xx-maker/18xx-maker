@@ -391,6 +391,14 @@
       "title": "Dateien",
       "description": "Wie 18xx Maker Dateien verwendet"
     },
+    "config": {
+      "title": "Konfigurationsfenster",
+      "description": "Seiten-, Druck- und Anzeigeeinstellungen"
+    },
+    "app": {
+      "title": "Desktop-App und Einstellungen",
+      "description": "Die App installieren und die Einstellungen der App festlegen"
+    },
     "faq": {
       "title": "Fragen & Antworten",
       "description": "Häufige Fragen"
@@ -400,6 +408,10 @@
       "description": "Hilf mit, 18xx Maker zu übersetzen"
     },
     "output": {
+      "cli": {
+        "title": "Kommandozeile",
+        "description": "Aus dem Terminal exportieren und prüfen"
+      },
       "pdf": {
         "title": "PDF-Ausgabe",
         "description": "PDF-Dokumente erzeugen"
@@ -422,6 +434,10 @@
         "title": "Dein erstes Spiel",
         "description": "Ein Rundgang durch eine Spieldatei"
       },
+      "pages": {
+        "title": "Spielseiten",
+        "description": "Welche Seiten ein Spiel erzeugt und wie du sie einrichtest"
+      },
       "schemas": {
         "title": "JSON-Schemas",
         "description": "Validierung von Spieldateien"
@@ -433,6 +449,22 @@
       "types": {
         "title": "Aktien- & Tokentypen",
         "description": "Aktien und Token einfach beschreiben"
+      },
+      "market": {
+        "title": "Aktienmarkt und Par-Tabelle",
+        "description": "Den Markt und die Par-Tabelle beschreiben"
+      },
+      "tiles": {
+        "title": "Plättchen und Felder",
+        "description": "Plättchen beschreiben und auf der Karte platzieren"
+      },
+      "privates": {
+        "title": "Privatgesellschaften",
+        "description": "Privatgesellschaften und ihre Karten beschreiben"
+      },
+      "gameInfo": {
+        "title": "Spielinformationen und Regeln",
+        "description": "Die Seiten für Spielinformationen und Regeln beschreiben"
       },
       "trains": {
         "title": "Phasen und Züge",

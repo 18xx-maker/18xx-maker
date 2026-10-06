@@ -149,3 +149,5 @@ pnpm maker export my-game.json --format png --dpi 300  # 300 dpi
 pnpm maker export my-game.json --no-paginated          # even if the game says paginated: true
 pnpm maker export 1889 --format pdf --config my-config.json
 ```
+
+Die Seite [Kommandozeile](/docs/output/cli) listet alle Befehle und Flags auf.

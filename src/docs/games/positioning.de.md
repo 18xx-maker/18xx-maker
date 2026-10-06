@@ -231,3 +231,5 @@ einem Element eine `order`. Es wird nach allen Elementen seines Feldes ohne
   Städte außerhalb oder Namen) nicht darunter.
 - Sie kann Gleise verdecken.
 - Gleise, Trennlinien und Ränder haben keine `order`.
+
+Die Plättchenelemente selbst sind unter [Plättchen und Felder](/docs/games/tiles#elemente) beschrieben.

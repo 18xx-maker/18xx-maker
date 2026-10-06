@@ -84,6 +84,8 @@ wegzulassen, und `cost` ist optional:
 { "abbrev": "RED", "tokens": [{ "cost": "Home", "start": true }, 40, 100] }
 ```
 
+## Kreditfelder
+
 Eine Gesellschaft kann auch `loans` haben, zusätzliche Felder auf ihrer
 Gesellschaftskarte, zum Beispiel für die Kredite eines Spiels. Jeder Eintrag ist
 die Beschriftung unter dem Feld, und jedes Feld wird als leeres Quadrat im
