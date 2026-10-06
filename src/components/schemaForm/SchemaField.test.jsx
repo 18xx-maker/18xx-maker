@@ -400,3 +400,56 @@ describe("a list of cards", () => {
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
 });
+
+describe("the notes of a list", () => {
+  const initial = { trains: [{ name: "A" }, { name: "B" }] };
+  const status = () => screen.getByRole("status");
+
+  it("announces an add, a remove with undo, a restore and a move", async () => {
+    const user = userEvent.setup();
+    render(<ListForm initial={initial} />);
+
+    await user.click(screen.getByRole("button", { name: "Add train" }));
+    expect(status()).toHaveTextContent("Added train 3");
+
+    await user.click(screen.getByRole("button", { name: "Remove train B" }));
+    expect(status()).toHaveTextContent("Removed train B");
+    expect(screen.queryByRole("button", { name: "B" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Undo" })).toBeVisible();
+
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(status()).toHaveTextContent("Restored train B");
+    expect(
+      screen.queryByRole("button", { name: "Undo" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getAllByRole("button", { name: /^(A|B|3)$/ })
+        .map((b) => b.textContent),
+    ).toEqual(["A", "B", "3"]);
+
+    await user.click(screen.getByRole("button", { name: "Move train B up" }));
+    expect(status()).toHaveTextContent("Moved train B to position 1 of 3");
+  });
+
+  it("drops the undo when the list changes again, and shows the warning", async () => {
+    const user = userEvent.setup();
+    render(
+      <ListForm
+        initial={initial}
+        onChange={(kind) => (kind === "remove" ? "Check the rest" : "")}
+      />,
+    );
+    await user.click(screen.getByRole("button", { name: "Remove train A" }));
+    expect(screen.getByTestId("list-warning")).toHaveTextContent(
+      "Check the rest",
+    );
+    expect(screen.getByRole("button", { name: "Undo" })).toBeVisible();
+
+    await user.click(screen.getByRole("button", { name: "Add train" }));
+    expect(
+      screen.queryByRole("button", { name: "Undo" }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId("list-warning")).not.toBeInTheDocument();
+  });
+});

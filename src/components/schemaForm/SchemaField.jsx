@@ -690,6 +690,45 @@ const ItemCard = ({
   );
 };
 
+// What a list says about its last action: the message for a screen reader,
+// the removed item (put back from the note that follows, which stays until the
+// next action on the list) and a warning to show with the list
+const useListNotes = () => {
+  const [message, setMessage] = useState("");
+  const [removed, setRemoved] = useState(null);
+  const [warning, setWarning] = useState("");
+  return { message, setMessage, removed, setRemoved, warning, setWarning };
+};
+
+// The note of a removed item with its undo, the warning and the live region
+// (the add button goes between them, so each is its own part)
+const RemovedNote = ({ removed, removedText, onUndo }) => {
+  const { t } = useTranslation();
+  return (
+    removed && (
+      <p className="flex flex-row flex-wrap items-center gap-2 rounded-md border bg-muted px-3 py-2 text-sm">
+        <span>{removedText}</span>
+        <Button type="button" variant="outline" size="sm" onClick={onUndo}>
+          {t("editPanel.undo")}
+        </Button>
+      </p>
+    )
+  );
+};
+
+const ListWarning = ({ warning }) =>
+  warning && (
+    <p className="text-xs text-warning-text" data-testid="list-warning">
+      {warning}
+    </p>
+  );
+
+const ListStatus = ({ message, warning }) => (
+  <p role="status" aria-live="polite" className="sr-only">
+    {message} {warning}
+  </p>
+);
+
 // A list of objects, each a card: add, remove, duplicate and reorder. A
 // removed item can be put back from the note that follows, which stays until
 // the next action on the list. The cards are keyed by their index (their
@@ -729,9 +768,9 @@ const ArrayField = ({
   const { t } = useTranslation();
   const list = useRef(null);
   const focus = useRef(null);
-  const [message, setMessage] = useState("");
-  const [removed, setRemoved] = useState(null);
-  const [warning, setWarning] = useState("");
+  const notes = useListNotes();
+  const { message, removed, warning, setMessage, setRemoved, setWarning } =
+    notes;
   // What is open on each card, by index
   const [ui, setUi] = useState([]);
 
@@ -885,24 +924,18 @@ const ArrayField = ({
           ))}
         </ul>
       )}
-      {removed && (
-        <p className="flex flex-row flex-wrap items-center gap-2 rounded-md border bg-muted px-3 py-2 text-sm">
-          <span>
-            {t("editPanel.removed", {
-              item,
-              title: titleOf(removed.item, removed.index),
-            })}
-          </span>
-          <Button type="button" variant="outline" size="sm" onClick={undo}>
-            {t("editPanel.undo")}
-          </Button>
-        </p>
-      )}
-      {warning && (
-        <p className="text-xs text-warning-text" data-testid="list-warning">
-          {warning}
-        </p>
-      )}
+      <RemovedNote
+        removed={removed}
+        removedText={
+          removed &&
+          t("editPanel.removed", {
+            item,
+            title: titleOf(removed.item, removed.index),
+          })
+        }
+        onUndo={undo}
+      />
+      <ListWarning warning={warning} />
       <Button
         type="button"
         variant="outline"
@@ -913,9 +946,7 @@ const ArrayField = ({
         <Plus />
         {t("editPanel.add", { item })}
       </Button>
-      <p role="status" aria-live="polite" className="sr-only">
-        {message} {warning}
-      </p>
+      <ListStatus message={message} warning={warning} />
     </div>
   );
 };
