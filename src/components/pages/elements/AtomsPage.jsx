@@ -1033,7 +1033,7 @@ const AtomsPage = () => {
               <Hex hex={h} id={`${id}`} border={true} bleed={true} />
             </Svg>
             {comment && (
-              <div className="p-4 text-wrap border-t bg-background w-full">
+              <div className="p-4 text-wrap border-t bg-background w-full font-sans font-normal">
                 {comment}
               </div>
             )}
