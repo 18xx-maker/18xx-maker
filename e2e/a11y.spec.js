@@ -51,6 +51,13 @@ const pages = [
     url: "/games/18Test/map?edit=true&editSection=trains",
     ready: (page) => page.getByRole("button", { name: "Add train" }),
   },
+  {
+    // With the card of a private open and its more fields (about 60 fields)
+    name: "edit panel privates",
+    url: "/games/18Test/map?edit=true&editSection=privates",
+    ready: (page) => page.getByRole("button", { name: "Add private" }),
+    more: true,
+  },
   // The JSON editor, in both themes
   ...["light", "dark"].map((colorScheme) => ({
     name: `edit panel json (${colorScheme})`,
@@ -89,7 +96,7 @@ const pages = [
   })),
 ];
 
-for (const { name, url, ready, colorScheme, select } of pages) {
+for (const { name, url, ready, colorScheme, select, more } of pages) {
   test(`no serious or critical accessibility violations: ${name}`, async ({
     page,
   }) => {
@@ -99,6 +106,13 @@ for (const { name, url, ready, colorScheme, select } of pages) {
     if (select) {
       await page.getByRole("gridcell", { name: select }).click();
       await expect(page.getByTestId("cell-inspector")).toBeVisible();
+    }
+    if (more) {
+      await page
+        .getByTestId("edit-panel")
+        .getByRole("button", { name: "More fields" })
+        .first()
+        .click();
     }
     // Wait for the drawer and page transitions to finish
     await page.evaluate(() =>

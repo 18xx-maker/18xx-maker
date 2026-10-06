@@ -494,70 +494,53 @@ describe("edit panel tabs", () => {
   it("moves between tabs with the arrow keys, Home and End", async () => {
     const { user, router } = open(`${route}?edit=true`);
     const info = await screen.findByRole("tab", { name: "Game info" });
+    const tabs = screen.getAllByRole("tab");
+    const last = tabs[tabs.length - 1];
+    expect(tabs[0]).toBe(info);
     info.focus();
 
-    await user.keyboard("{ArrowRight}");
-    const trainsTab = screen.getByRole("tab", { name: "Trains" });
-    expect(trainsTab).toHaveFocus();
-    expect(router.state.location.search).toContain("editSection=trains");
-
-    await user.keyboard("{ArrowRight}");
-    const marketTab = screen.getByRole("tab", { name: "Market" });
-    expect(marketTab).toHaveFocus();
-    await user.keyboard("{ArrowRight}");
-    const jsonTab = screen.getByRole("tab", { name: "JSON" });
-    expect(jsonTab).toHaveFocus();
+    // Right goes through every tab in order
+    for (const tab of tabs.slice(1)) {
+      await user.keyboard("{ArrowRight}");
+      expect(tab).toHaveFocus();
+      expect(tab).toHaveAttribute("aria-selected", "true");
+    }
+    expect(router.state.location.search).toContain("editSection=");
     await user.keyboard("{ArrowRight}");
     expect(info).toHaveFocus();
     await user.keyboard("{ArrowLeft}");
-    expect(jsonTab).toHaveFocus();
+    expect(last).toHaveFocus();
     await user.keyboard("{Home}");
     expect(info).toHaveFocus();
     await user.keyboard("{End}");
-    expect(jsonTab).toHaveFocus();
+    expect(last).toHaveFocus();
   });
 
   it("[ and ] cycle the tabs and wrap, but not while typing", async () => {
     const { user, router } = open(`${route}?edit=true`);
     await screen.findByRole("tab", { name: "Game info" });
+    const tabs = screen.getAllByRole("tab");
+    const selected = () =>
+      screen
+        .getAllByRole("tab")
+        .findIndex((tab) => tab.getAttribute("aria-selected") === "true");
+    expect(selected()).toBe(0);
 
+    for (let i = 1; i < tabs.length; i++) {
+      await user.keyboard("]");
+      await waitFor(() => expect(selected()).toBe(i));
+    }
     await user.keyboard("]");
-    await waitFor(() =>
-      expect(router.state.location.search).toBe(
-        "?edit=true&editSection=trains",
-      ),
-    );
-    await user.keyboard("]");
-    await waitFor(() =>
-      expect(router.state.location.search).toBe(
-        "?edit=true&editSection=market",
-      ),
-    );
-    await user.keyboard("]");
-    await waitFor(() =>
-      expect(router.state.location.search).toBe("?edit=true&editSection=json"),
-    );
-    await user.keyboard("]");
-    await waitFor(() =>
-      expect(router.state.location.search).toBe("?edit=true"),
-    );
+    await waitFor(() => expect(selected()).toBe(0));
+    expect(router.state.location.search).toBe("?edit=true");
+    // A literal [ is typed as [[
     await user.keyboard("[[");
-    await waitFor(() =>
-      expect(router.state.location.search).toBe("?edit=true&editSection=json"),
-    );
+    await waitFor(() => expect(selected()).toBe(tabs.length - 1));
     await user.keyboard("[[");
-    await waitFor(() =>
-      expect(router.state.location.search).toBe(
-        "?edit=true&editSection=market",
-      ),
-    );
-    await user.keyboard("[[");
-    await waitFor(() =>
-      expect(router.state.location.search).toBe(
-        "?edit=true&editSection=trains",
-      ),
-    );
+    await waitFor(() => expect(selected()).toBe(tabs.length - 2));
 
+    await user.click(screen.getByRole("tab", { name: "Trains" }));
+    expect(router.state.location.search).toBe("?edit=true&editSection=trains");
     await user.click(
       (await screen.findAllByRole("textbox", { name: "Name" }))[0],
     );
@@ -942,6 +925,269 @@ describe("edit panel trains", () => {
   });
 });
 
+describe("edit panel privates", () => {
+  const privatesRoute = `${route}?edit=true&editSection=privates`;
+  const privates = (store) => store.getState().game.privates;
+  const privateNames = (store) => privates(store).map((p) => p.name);
+  // The 18Test game with its privates replaced
+  const withPrivates = (list) => ({
+    ...structuredClone(games["18Test"]),
+    privates: list,
+  });
+  const ready = () => screen.findByRole("button", { name: "Add private" });
+
+  it("shows a card for each private with its primary fields", async () => {
+    open(privatesRoute);
+    await ready();
+    expect(cards()).toHaveLength(games["18Test"].privates.length);
+    const first = within(cards()[0]);
+    expect(first.getByRole("textbox", { name: "Name" })).toHaveValue(
+      "Private with an icon",
+    );
+    expect(first.getByRole("textbox", { name: "Price" })).toHaveValue("100");
+    expect(first.getByRole("textbox", { name: "Revenue" })).toHaveValue("5");
+    expect(first.getByRole("textbox", { name: "Company" })).toHaveValue("");
+    expect(
+      within(cards()[1]).getByRole("textbox", { name: "Company" }),
+    ).toHaveValue("PRR");
+    // The rest is behind More fields
+    expect(
+      first.queryByRole("textbox", { name: "Description" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("More fields shows the other fields, abilities and token are JSON", async () => {
+    const { user } = open(privatesRoute);
+    await ready();
+    await user.click(
+      within(cards()[2]).getByRole("button", { name: "More fields" }),
+    );
+    const card = within(cards()[2]);
+    expect(card.getByRole("spinbutton", { name: "Min Players" })).toBeVisible();
+    // A description is a textarea
+    expect(card.getByRole("textbox", { name: "Description" }).tagName).toBe(
+      "TEXTAREA",
+    );
+    expect(card.getByRole("textbox", { name: "Token" }).tagName).toBe(
+      "TEXTAREA",
+    );
+    const abilities = card.getByRole("textbox", { name: "Abilities" });
+    expect(abilities.tagName).toBe("TEXTAREA");
+    // No nested list: the only Add button is the one of the privates
+    expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(1);
+  });
+
+  it("edits a private, what the form has no field for stays", async () => {
+    const abilities = [{ type: "x", extra: 1 }];
+    const { user, store } = open(
+      privatesRoute,
+      withPrivates([
+        {
+          name: "A",
+          price: 20,
+          revenue: [10, 20],
+          token: { color: "green", label: "3" },
+          abilities,
+        },
+      ]),
+    );
+    await ready();
+    const revenue = within(cards()[0]).getByRole("textbox", {
+      name: "Revenue",
+    });
+    expect(revenue).toHaveValue("10/20");
+
+    const price = within(cards()[0]).getByRole("textbox", { name: "Price" });
+    await user.clear(price);
+    await user.type(price, "30{Enter}");
+    expect(privates(store)[0]).toEqual({
+      name: "A",
+      price: 30,
+      revenue: [10, 20],
+      token: { color: "green", label: "3" },
+      abilities,
+    });
+  });
+
+  it("a string price stays a string", async () => {
+    const { user, store } = open(
+      privatesRoute,
+      withPrivates([{ name: "A", price: "$100" }]),
+    );
+    await ready();
+    const price = within(cards()[0]).getByRole("textbox", { name: "Price" });
+    expect(price).toHaveValue("$100");
+    await user.clear(price);
+    await user.type(price, "$120{Enter}");
+    expect(privates(store)[0].price).toBe("$120");
+  });
+
+  it("types the revenue as a number, a list or text", async () => {
+    const { user, store } = open(privatesRoute);
+    await ready();
+    const revenue = within(cards()[0]).getByRole("textbox", {
+      name: "Revenue",
+    });
+    await user.clear(revenue);
+    await user.type(revenue, "10/20{Enter}");
+    expect(privates(store)[0].revenue).toEqual([10, 20]);
+    expect(revenue).toHaveValue("10/20");
+    await user.clear(revenue);
+    await user.type(revenue, "$10/$20{Enter}");
+    expect(privates(store)[0].revenue).toBe("$10/$20");
+    await user.clear(revenue);
+    await user.type(revenue, "7{Enter}");
+    expect(privates(store)[0].revenue).toBe(7);
+    await user.clear(revenue);
+    await user.type(revenue, "{Enter}");
+    expect("revenue" in privates(store)[0]).toBe(false);
+  });
+
+  it("invalid abilities JSON keeps the game and shows the problem", async () => {
+    const abilities = [{ type: "x" }];
+    const { user, store } = open(
+      privatesRoute,
+      withPrivates([{ name: "A", abilities }]),
+    );
+    await ready();
+    await user.click(
+      within(cards()[0]).getByRole("button", { name: "More fields" }),
+    );
+    const field = within(cards()[0]).getByRole("textbox", {
+      name: "Abilities",
+    });
+    await user.clear(field);
+    await user.click(field);
+    await user.paste("[{");
+    await user.tab();
+    expect(await screen.findByText("Enter valid JSON.")).toBeVisible();
+    expect(privates(store)[0].abilities).toEqual(abilities);
+  });
+
+  it("adds a private named to not clash", async () => {
+    const { user, store } = open(privatesRoute);
+    await ready();
+    await user.click(screen.getByRole("button", { name: "Add private" }));
+    const count = games["18Test"].privates.length;
+    expect(privates(store)).toHaveLength(count + 1);
+    expect(privates(store)[count]).toEqual({ name: String(count + 1) });
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent(
+        `Added private ${count + 1}`,
+      ),
+    );
+    expect(
+      within(cards()[count]).getByRole("button", { name: String(count + 1) }),
+    ).toHaveFocus();
+  });
+
+  it("adds to an empty list and removes the key with the last private", async () => {
+    const { user, store } = open(privatesRoute, withPrivates([]));
+    await ready();
+    expect(await screen.findByText("Nothing here yet.")).toBeVisible();
+    await user.click(screen.getByRole("button", { name: "Add private" }));
+    expect(privates(store)).toEqual([{ name: "1" }]);
+
+    await user.click(button("Remove private 1"));
+    expect("privates" in store.getState().game).toBe(false);
+    expect(await screen.findByText("Nothing here yet.")).toBeVisible();
+  });
+
+  it("removes a private and puts it back with undo", async () => {
+    const { user, store } = open(privatesRoute);
+    await ready();
+    await user.click(button("Remove private Private with a company"));
+    expect(privateNames(store)).not.toContain("Private with a company");
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "Removed private Private with a company",
+    );
+
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(privates(store)).toEqual(games["18Test"].privates);
+    expect(selectGameChanged(store.getState())).toBe(false);
+  });
+
+  it("moves and duplicates a private", async () => {
+    const { user, store } = open(privatesRoute);
+    await ready();
+    const [first, second] = games["18Test"].privates.map((p) => p.name);
+    expect(button(`Move private ${first} up`)).toBeDisabled();
+
+    await user.click(button(`Move private ${first} down`));
+    expect(privateNames(store).slice(0, 2)).toEqual([second, first]);
+    expect(button(`Move private ${first} down`)).toHaveFocus();
+
+    await user.click(button(`Duplicate private ${first}`));
+    const count = games["18Test"].privates.length;
+    expect(privates(store)).toHaveLength(count + 1);
+    expect(privates(store)[2]).toEqual({
+      ...privates(store)[1],
+      name: String(count + 1),
+    });
+  });
+
+  it("shows the problem of a private on its card", async () => {
+    const { store } = open(privatesRoute);
+    await ready();
+    act(() =>
+      store.dispatch(
+        editGame((game) => ({
+          ...game,
+          privates: game.privates.map((p, index) =>
+            index === 1 ? { ...p, revenue: "abc" } : p,
+          ),
+        })),
+      ),
+    );
+    await waitFor(
+      () =>
+        expect(within(cards()[1]).getAllByRole("alert").length).toBeGreaterThan(
+          0,
+        ),
+      { timeout: 5000 },
+    );
+    expect(within(cards()[0]).queryAllByRole("alert")).toHaveLength(0);
+  });
+
+  it("an unknown key survives an edit", async () => {
+    const { user, store } = open(
+      privatesRoute,
+      withPrivates([{ name: "A", price: 5, unknownKey: 1 }]),
+    );
+    await ready();
+    const price = within(cards()[0]).getByRole("textbox", { name: "Price" });
+    await user.clear(price);
+    await user.type(price, "6{Enter}");
+    expect(privates(store)[0]).toEqual({ name: "A", price: 6, unknownKey: 1 });
+  });
+
+  it("shows a pattern problem for a price format and keeps an icon size of 0", async () => {
+    const { user, store } = open(privatesRoute, withPrivates([{ name: "A" }]));
+    await ready();
+    await user.click(
+      within(cards()[0]).getByRole("button", { name: "More fields" }),
+    );
+    const format = within(cards()[0]).getByRole("textbox", {
+      name: "Price Format",
+    });
+    await user.type(format, "G{Enter}");
+    expect(privates(store)[0].priceFormat).toBe("G");
+    await waitFor(
+      () =>
+        expect(within(cards()[0]).getAllByRole("alert").length).toBeGreaterThan(
+          0,
+        ),
+      { timeout: 5000 },
+    );
+
+    const size = within(cards()[0]).getByRole("spinbutton", {
+      name: "Icon Size",
+    });
+    await user.type(size, "0{Enter}");
+    expect(privates(store)[0].iconSize).toBe(0);
+  });
+});
+
 describe("edit panel market", () => {
   const marketRoute = `${route}?edit=true&editSection=market`;
   const stock = (store) => store.getState().game.stock;
@@ -961,10 +1207,10 @@ describe("edit panel market", () => {
     stock: { ...games["1858"].stock, legend: undefined },
   };
 
-  it("] and [ reach the Market tab and keep the panel", async () => {
+  it("clicking the Market tab opens it and keeps the panel", async () => {
     const { user, router } = open(`${route}?edit=true`);
     await screen.findByRole("tab", { name: "Market" });
-    await user.keyboard("]]");
+    await user.click(screen.getByRole("tab", { name: "Market" }));
     await waitFor(() =>
       expect(router.state.location.search).toBe(
         "?edit=true&editSection=market",

@@ -115,7 +115,7 @@ emptying a field removes it from the game (the title cannot be removed).
 Problems with a value, like a currency without a `#`, are shown below its field.
 Escape closes the panel (see below for the JSON editor).
 
-The panel has tabs: Game info, Trains, Market and JSON. Press `[` and `]` to switch between
+The panel has a tab for each part of the game it edits. Press `[` and `]` to switch between
 them (the number keys go to another section of the game and close the panel).
 The Trains tab has a card for each train of the game, generated from the same
 schema. Add a train with Add train, and use the buttons of a card to move it up
@@ -123,6 +123,12 @@ or down, duplicate it or remove it. A removed train can be put back with Undo
 right after. The fields of a train that are not needed often are under More
 fields. A field the schema marks as deprecated stays editable and is shown with
 a warning.
+
+The Privates tab works the same way for the privates of the game. A card
+shows the name, price, revenue, and company first. The revenue
+is a number or a list written as it prints, like `10/20`; text that is not
+numbers, like `$10/$20`, stays text. The abilities of a private are edited as
+JSON, and the other fields, like the note and description, are under More fields.
 
 The Market tab edits the stock market: the type (2D, 1D or 1Diag), a grid of
 the cells, the cell defaults, the legend and the movement. Click a cell, or
