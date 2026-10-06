@@ -41,6 +41,7 @@ import {
   scrollToLines,
   selectedLines,
   setSelectedLines,
+  unfoldLines,
 } from "@/components/editPanel/lineSelection";
 import { issueText } from "@/components/schemaForm/issueText";
 
@@ -379,6 +380,9 @@ const JsonEditor = ({ game }) => {
   useEffect(() => {
     const v = view.current;
     if (!v || sameLines(selectedLines(v.state), lines)) return;
+    // A fold hides its lines: open the ones the link points into
+    const unfold = unfoldLines(v.state, lines);
+    if (unfold.length) v.dispatch({ effects: unfold });
     const scroll = scrollToLines(v.state, lines);
     setSelectedLines(v, lines, scroll);
   }, [lines, slug]);

@@ -2,6 +2,7 @@ import {
   MIN_DELAY,
   debounceDelay,
   duplicateKeys,
+  foldRanges,
   invalidReason,
   lossyNumbers,
   minimalChange,
@@ -166,5 +167,38 @@ describe("duplicateKeys and lossyNumbers", () => {
       "1234567890123456789",
       "0.1234567890123456789",
     ]);
+  });
+});
+
+describe("foldRanges", () => {
+  const folded = (source) =>
+    foldRanges(source).map(({ from, to }) => source.slice(from, to));
+
+  it("folds the inside of the containers other than info", () => {
+    const source =
+      '{\n  "info": {\n    "a": 1\n  },\n  "map": {\n    "b": 2\n  },\n  "tiles": [\n    1\n  ]\n}';
+    expect(folded(source)).toEqual(['\n    "b": 2\n  ', "\n    1\n  "]);
+  });
+
+  it("folds nothing for a list or a scalar root, or invalid text", () => {
+    expect(foldRanges("[\n  1,\n  2\n]")).toEqual([]);
+    expect(foldRanges("5")).toEqual([]);
+    expect(foldRanges("")).toEqual([]);
+  });
+
+  it("skips empty and single line containers and scalars", () => {
+    const source =
+      '{\n  "a": {},\n  "b": [],\n  "c": { "x": 1 },\n  "d": 3,\n  "e": null\n}';
+    expect(foldRanges(source)).toEqual([]);
+  });
+
+  it("does not fold an info that is not an object", () => {
+    expect(foldRanges('{\n  "info": [\n    1\n  ]\n}')).toEqual([]);
+  });
+
+  it("skips every info", () => {
+    const source =
+      '{\n  "info": {\n    "a": 1\n  },\n  "info": {\n    "b": 1\n  },\n  "x": {\n    "c": 1\n  }\n}';
+    expect(folded(source)).toEqual(['\n    "c": 1\n  ']);
   });
 });

@@ -8,7 +8,7 @@ import { page as browser, userEvent as realUser } from "vitest/browser";
 import { omit } from "ramda";
 
 import games from "@/data/games";
-import { editGame, revertGame } from "@/state";
+import { createSetExportSheetOpen, editGame, revertGame } from "@/state";
 import { gameText } from "@/util/download";
 import { MIN_DELAY, debounceDelay } from "@/util/jsonEditor";
 
@@ -195,6 +195,60 @@ describe("json editor", () => {
       expect(router.state.location.search).toBe("");
     });
 
+    it.each([
+      ["home", "/"],
+      ["problems", `${base}/problems`],
+    ])("does nothing on the print page of %s", async (_name, url) => {
+      const { user, router } = open(`${url}?print=true`);
+      await user.keyboard("j");
+      expect(router.state.location.pathname).toBe(url);
+      expect(router.state.location.search).toBe("?print=true");
+    });
+
+    it.each([
+      ["game page", route],
+      ["problems", `${base}/problems`],
+      ["home", "/"],
+    ])(
+      "does nothing from the %s with the export options open",
+      async (_n, url) => {
+        const { user, router, store } = open(url);
+        act(() => store.dispatch(createSetExportSheetOpen(true)));
+        await user.keyboard("j");
+        expect(router.state.location.pathname).toBe(url);
+        expect(router.state.location.search).toBe("");
+      },
+    );
+
+    it("does nothing on a page without the edit panel while a dialog is open", async () => {
+      const { user, router } = open(`${base}/problems`);
+      await user.keyboard("?");
+      await screen.findByTestId("shortcuts");
+      await user.keyboard("j");
+      expect(router.state.location.pathname).toBe(`${base}/problems`);
+      expect(router.state.location.search).toBe("");
+    });
+
+    it("goes to the map of a slug other than the loaded one", async () => {
+      // The loaded game has no map: its first section would be the market
+      const { user, router } = open(
+        "/games/internal:other/problems",
+        undefined,
+        games["18Test"],
+        { map: undefined },
+      );
+      await user.keyboard("j");
+      expect(router.state.location.pathname).toBe("/games/internal:other/map");
+      expect(router.state.location.search).toBe(json);
+    });
+
+    it("goes to the map when the game is not in the state", async () => {
+      const { user, router } = renderApp("/games/internal:zzz/problems");
+      await user.keyboard("j");
+      expect(router.state.location.pathname).toBe("/games/internal:zzz/map");
+      expect(router.state.location.search).toBe(json);
+    });
+
     it("does nothing without a loaded game", async () => {
       const { user, router } = renderApp("/");
       await user.keyboard("j");
@@ -254,6 +308,52 @@ describe("json editor", () => {
         expect(state.info).toBe(false);
       },
     );
+
+    it("folds map and tiles of 18Test, not info", async () => {
+      open(jsonRoute);
+      const v = await view();
+      const state = Object.fromEntries(rootState(v));
+      expect(state.map).toBe(true);
+      expect(state.tiles).toBe(true);
+      expect(state.info).toBe(false);
+    });
+
+    it("opens the fold a line link lands in", async () => {
+      const { router } = open(jsonRoute);
+      const v = await view();
+      const doc = v.state.doc;
+      const header = doc.toString().indexOf('"map": {');
+      const line = doc.lineAt(header).number + 1;
+      const hidden = (at) =>
+        folded(v).some(
+          ([from, to]) =>
+            doc.line(at).from > doc.lineAt(from).to && doc.line(at).from <= to,
+        );
+      expect(hidden(line)).toBe(true);
+      const other = folded(v).length;
+
+      await act(() =>
+        router.navigate({ search: `${jsonRoute.split("?")[1]}&lines=${line}` }),
+      );
+      await waitFor(() => expect(hidden(line)).toBe(false));
+      // Only the fold with the line is opened
+      expect(folded(v).length).toBe(other - 1);
+    });
+
+    it("keeps the folds a line link does not land in", async () => {
+      const { router } = open(jsonRoute);
+      const v = await view();
+      const before = folded(v).length;
+      const infoLine = v.state.doc.lineAt(
+        v.state.doc.toString().indexOf('"title"'),
+      ).number;
+      await act(() =>
+        router.navigate({
+          search: `${jsonRoute.split("?")[1]}&lines=${infoLine}`,
+        }),
+      );
+      expect(folded(v).length).toBe(before);
+    });
 
     it("does not fold when opened on lines", async () => {
       open(`${jsonRoute}&lines=3`);
