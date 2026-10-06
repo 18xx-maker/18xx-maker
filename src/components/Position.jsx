@@ -172,7 +172,9 @@ const Position = ({ data, type, pick, children }) => {
       // point on it is turned the same
       angle = has("angle", d) ? angle : named.angle + orientation;
       percent = has("percent", d) ? percent : named.percent;
-      rotation = rotation + (named.rotation ? named.rotation + orientation : 0);
+      rotation =
+        rotation +
+        (named.rotation === undefined ? 0 : named.rotation + orientation);
     } else if (d.side) {
       rotation = rotation + (d.side - 1) * 60;
     }

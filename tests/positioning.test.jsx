@@ -187,6 +187,12 @@ describe("named positions and children", () => {
         90,
       ),
     );
+    // a rotation of 0 (straight, perpendicular) is turned by the map too
+    expect(
+      await html({ towns: [{ mid: "straight", align: "perpendicular" }] }, 90),
+    ).toEqual(
+      await html({ towns: [{ angle: 90, percent: 0, rotation: 90 }] }, 90),
+    );
     expect(await html({ values: [{ value: 3, mid: "gentle" }] }, 90)).toEqual(
       await html(
         { values: [{ value: 3, angle: 150, percent: gentle.percent }] },
