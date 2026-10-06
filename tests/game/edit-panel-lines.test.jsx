@@ -188,6 +188,9 @@ describe("lines of the json editor", () => {
     }
     expect(performance.now() - typing).toBeLessThan(1000);
     expect(selected(v).gutter).toContain(1);
+    // Let the editor finish measuring before the test ends
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await new Promise((resolve) => requestAnimationFrame(resolve));
   });
 
   it("ignores garbage and lines past the end", async () => {

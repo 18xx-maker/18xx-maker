@@ -73,6 +73,10 @@ test("marks lines with clicks on the line numbers", async ({ page }) => {
   await expect(editor(page)).toBeVisible();
   await expect(page).toHaveURL(/editSection=json$/);
 
+  // The editor starts folded: unfold all so the lines are on screen
+  await editor(page).click();
+  await page.keyboard.press("Control+Alt+]");
+
   await number(3).first().click();
   await expect(page).toHaveURL(/editSection=json&lines=3$/);
   await expect(marked).toHaveCount(1);
