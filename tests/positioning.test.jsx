@@ -1,9 +1,10 @@
 /* eslint-disable testing-library/no-node-access */
-import { screen } from "@testing-library/react";
+import { act, screen, within } from "@testing-library/react";
 
 import HexTile from "@/components/Hex";
 
 import OrientationContext from "@/context/OrientationContext";
+import i18n from "@/locales/i18n";
 import { namedPosition } from "@/util/tiles/trackGeometry";
 
 import { renderApp } from "@tests/support/helpers.jsx";
@@ -199,5 +200,196 @@ describe("named positions and children", () => {
         90,
       ),
     );
+  });
+});
+
+describe("positioning examples page groups", () => {
+  const groups = [
+    "place",
+    "turn",
+    "named",
+    "hide",
+    "auto",
+    "off",
+    "all",
+    "order",
+  ];
+  afterEach(() => act(() => i18n.changeLanguage("en")));
+
+  it("lists the groups in the order of the doc and links the doc", async () => {
+    renderApp("/elements/positioning");
+    const nav = within(await screen.findByTestId("positioning-jump"));
+
+    expect(nav.getAllByRole("listitem")).toHaveLength(groups.length);
+    expect(
+      nav
+        .getAllByRole("link", { name: /^[^:]+$/ })
+        .filter((a) => a.getAttribute("href").includes("/elements/"))
+        .map((a) => a.getAttribute("href")),
+    ).toEqual(groups.map((id) => `/elements/positioning#${id}`));
+    expect(
+      nav
+        .getAllByRole("link", { name: /doc section/ })
+        .map((a) => a.getAttribute("href")),
+    ).toEqual(
+      [
+        "placing",
+        "turning",
+        "named-positions",
+        "hiding",
+        "auto-positioning",
+        "turning-it-off",
+        "auto-positioning",
+        "draw-order",
+      ].map((a) => `/docs/games/positioning#${a}`),
+    );
+  });
+
+  it("takes the doc anchors from the language", async () => {
+    renderApp("/elements/positioning", { settings: { language: "de" } });
+    const nav = within(await screen.findByTestId("positioning-jump"));
+
+    expect(
+      nav
+        .getAllByRole("link", { name: /Abschnitt der Doku/ })
+        .map((a) => a.getAttribute("href")),
+    ).toContain("/docs/games/positioning#benannte-positionen");
+  });
+
+  it("has a section for every group and keeps #basic", async () => {
+    renderApp("/elements/positioning");
+    await screen.findByTestId("positioning");
+
+    groups.forEach((id) => expect(document.getElementById(id)).not.toBeNull());
+    expect(document.getElementById("basic")).toContainElement(
+      document.getElementById("place"),
+    );
+    [
+      "coordinates",
+      "placeAll",
+      "placeOutside",
+      "autoIndex",
+      "orderCity",
+    ].forEach((id) =>
+      expect(screen.getByTestId(`positioning-${id}`)).toBeVisible(),
+    );
+  });
+
+  it("draws the coordinates example at the promised angles", async () => {
+    renderApp("/elements/positioning");
+    await screen.findByTestId("positioning");
+    const rotate = [
+      ...screen
+        .getByTestId("positioning-coordinates")
+        .querySelectorAll("svg g[transform^='rotate']"),
+    ].map((g) => g.getAttribute("transform"));
+
+    [0, 90, 180, 270].forEach((angle) =>
+      expect(rotate).toContain(at(angle, 37.5)),
+    );
+  });
+
+  it("draws a percent above 1 only for an element drawn outside the hex", async () => {
+    renderApp("/elements/positioning");
+    const example = await screen.findByTestId("positioning-placeOutside");
+    const text = (s) =>
+      [...example.querySelectorAll("text")].find((t) => t.textContent === s);
+
+    expect(text("Name").closest("[clip-path]")).toBeNull();
+    expect(text("B").closest("[clip-path]")).not.toBeNull();
+  });
+
+  it("goes by the place in the array for auto positioning", async () => {
+    renderApp("/elements/positioning");
+    const example = await screen.findByTestId("positioning-autoIndex");
+    const rotate = [
+      ...example.querySelectorAll("svg g[transform^='rotate']"),
+    ].map((g) => g.getAttribute("transform"));
+
+    expect(rotate).toContain(at(90, 45));
+    expect(rotate.filter((t) => t.startsWith("rotate(270 "))).toHaveLength(1);
+    expect(rotate.some((t) => t.startsWith("rotate(150 "))).toBe(false);
+  });
+});
+
+describe("placing and turning", () => {
+  const draw = async (hex, orientation = 0) =>
+    drawSvg(
+      <OrientationContext.Provider value={orientation}>
+        <HexTile hex={{ color: "yellow", ...hex }} />
+      </OrientationContext.Provider>,
+    );
+  const transforms = async (hex) =>
+    all(await draw(hex), "g[transform^='rotate']").map((g) =>
+      g.getAttribute("transform"),
+    );
+  // The angle of an element on the screen, in degrees
+  const turned = (el) => {
+    const m = el.getCTM();
+    return Math.round((Math.atan2(m.b, m.a) * 180) / Math.PI);
+  };
+  const label = async (extra) =>
+    turned(all(await draw({ labels: [{ label: "B", ...extra }] }), "text")[0]);
+  const token = async (extra) =>
+    turned(
+      all(
+        await draw({ tokens: [{ type: "blank", label: "AB", ...extra }] }),
+        "text",
+      )[0],
+    );
+  const town = async (extra) =>
+    turned(all(await draw({ towns: [{ ...extra }] }), "rect")[0]);
+
+  it("keeps x and y in screen units whatever the angle and rotation", async () => {
+    const plain = await transforms({
+      labels: [{ label: "B", angle: 90, percent: 0.6, x: 10, y: 5 }],
+    });
+    const turnedBy = await transforms({
+      labels: [
+        { label: "B", angle: 90, percent: 0.6, x: 10, y: 5, rotation: 45 },
+      ],
+    });
+
+    [plain, turnedBy].forEach((list) =>
+      expect(list.some((t) => t.endsWith("translate(10 5)"))).toBe(true),
+    );
+    // only the turn in the last rotate changes
+    expect(plain[0].split(" translate")[0]).toEqual(
+      turnedBy[0].split(" translate")[0],
+    );
+  });
+
+  it("does not move an element with side and no mid", async () => {
+    expect(await transforms({ towns: [{ side: 2 }] })).toContain(
+      "rotate(0 0 0) translate(0 0) rotate(60 0 0) translate(0 0)",
+    );
+  });
+
+  it("adds side to rotation", async () => {
+    expect(await town({ side: 2, rotation: 30 })).toBe(90);
+    expect(await town({ side: 2, rotate: 30 })).toBe(90);
+  });
+
+  it("uses a rotate that is not 0 over rotation, and never adds them", async () => {
+    expect(await town({ rotate: 30, rotation: 45 })).toBe(30);
+    expect(await town({ rotate: 0, rotation: 45 })).toBe(45);
+  });
+
+  it("keeps the text of a label upright with rotation, but not with rotate", async () => {
+    expect(await label({ rotation: 45 })).toBe(0);
+    expect(await label({ rotate: 45 })).toBe(45);
+    expect(await label({ side: 2 })).toBe(60);
+  });
+
+  it("turns a town the same with rotation, rotate and side", async () => {
+    expect(await town({ rotation: 45 })).toBe(45);
+    expect(await town({ rotate: 45 })).toBe(45);
+    expect(await town({ side: 2 })).toBe(60);
+  });
+
+  it("turns a token twice as far with rotation, and exactly with rotate or fixed", async () => {
+    expect(await token({ rotation: 45 })).toBe(90);
+    expect(await token({ rotate: 45 })).toBe(45);
+    expect(await token({ rotation: 45, fixed: true })).toBe(45);
   });
 });
