@@ -204,6 +204,13 @@ that opens the color picker and a text field for any CSS color or the name of
 another color; Add color adds one and the name field renames or removes it. A
 color that differs by phase is an object, which stays JSON.
 
+The Output tab edits the range of the revenue chart (the first and last
+revenue and how many are in a row), the export defaults of the game (the
+files to export, the pages, the layouts, the background, the variation and the
+png, card and Board18 options) and the upgrades of the tiles by name: Add
+upgrade adds a name, and its tiles are one per line. The deprecated paginated
+export option is not shown and stays in the file.
+
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
 

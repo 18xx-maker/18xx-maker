@@ -2817,7 +2817,7 @@ describe("edit panel rounds", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("rounds"));
     expect(tab).toHaveAccessibleName("Rounds");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 4]).toBe(tab);
+    expect(tabs[tabs.length - 5]).toBe(tab);
     expect(cards().length).toBeGreaterThanOrEqual(
       games["18Test"].rounds.length +
         games["18Test"].turns.length +
@@ -2950,7 +2950,7 @@ describe("edit panel tokens", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("tokens"));
     expect(tab).toHaveAccessibleName("Tokens");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 3]).toBe(tab);
+    expect(tabs[tabs.length - 4]).toBe(tab);
     // A token of text is a field, an object is a card
     expect(
       screen.getByRole("textbox", { name: "Value of token Round" }),
@@ -3129,7 +3129,7 @@ describe("edit panel colors", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("colors"));
     expect(tab).toHaveAccessibleName("Colors");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 2]).toBe(tab);
+    expect(tabs[tabs.length - 3]).toBe(tab);
     expect(screen.getByRole("textbox", { name: "Accent" })).toHaveValue(
       "#3a7bd5",
     );
@@ -3204,5 +3204,122 @@ describe("edit panel colors", () => {
       JSON.stringify({ 2: "red", 3: "blue" }, null, 2),
     );
     expect(screen.queryByTestId("color-swatch")).not.toBeInTheDocument();
+  });
+});
+
+describe("edit panel output", () => {
+  const outputRoute = `${route}?edit=true&editSection=output`;
+  const ready = () => screen.findByRole("button", { name: "Add upgrade" });
+  const game = () => opened.getState().game;
+  const base = () => structuredClone(games["18Test"]);
+
+  it("is the tab before the JSON editor, with the revenue, exports and upgrades", async () => {
+    open(outputRoute, {
+      ...base(),
+      revenue: { min: 10, max: 200, perRow: 15 },
+      exports: { formats: ["pdf", "svg"], layouts: "all", paginated: true },
+      upgrades: { yellow: ["a", "b"] },
+    });
+    await ready();
+    const tabs = screen.getAllByRole("tab");
+    const tab = tabs.find((candidate) => candidate.id.endsWith("output"));
+    expect(tab).toHaveAccessibleName("Output");
+    expect(tab).toHaveAttribute("aria-selected", "true");
+    expect(tabs[tabs.length - 2]).toBe(tab);
+    expect(screen.getByRole("spinbutton", { name: "Max" })).toHaveValue(200);
+    expect(screen.getByRole("checkbox", { name: "pdf" })).toBeChecked();
+    expect(screen.getByRole("checkbox", { name: "png" })).not.toBeChecked();
+    expect(
+      screen.getByRole("textbox", { name: "Name of yellow" }),
+    ).toBeVisible();
+    expect(screen.getByRole("textbox", { name: "Yellow" })).toHaveValue("a\nb");
+    // The deprecated option is not shown
+    expect(screen.queryByText("Paginated")).not.toBeInTheDocument();
+    expect(screen.queryByText(/paginated/i)).not.toBeInTheDocument();
+    for (const role of ["checkbox", "textbox", "spinbutton", "combobox"]) {
+      expect(
+        screen.queryByRole(role, { name: /paginated/i }),
+      ).not.toBeInTheDocument();
+    }
+  });
+
+  it("leaves the game byte for byte as it was when fields are only visited", async () => {
+    const { user } = open(outputRoute, {
+      ...base(),
+      revenue: { max: 200 },
+      exports: { formats: ["pdf"], paginated: false, png: { dpi: 300 } },
+      upgrades: { yellow: ["a", "b"] },
+    });
+    await ready();
+    const before = JSON.stringify(game());
+    for (const role of ["textbox", "spinbutton", "combobox", "checkbox"]) {
+      for (const box of within(screen.getByTestId("edit-panel")).queryAllByRole(
+        role,
+      )) {
+        box.focus();
+        box.blur();
+      }
+    }
+    await user.tab();
+    expect(JSON.stringify(game())).toBe(before);
+  });
+
+  it("keeps the unknown paginated option when the exports are edited", async () => {
+    const { user } = open(outputRoute, {
+      ...base(),
+      exports: { formats: ["pdf"], paginated: true },
+    });
+    await ready();
+    await user.click(screen.getByRole("checkbox", { name: "png" }));
+    expect(game().exports).toEqual({
+      formats: ["pdf", "png"],
+      paginated: true,
+    });
+  });
+
+  it("keeps paginated when another exports field is edited and cleared", async () => {
+    const { user } = open(outputRoute, {
+      ...base(),
+      exports: { paginated: true },
+    });
+    await ready();
+    const dpi = screen.getByRole("spinbutton", { name: /dpi/i });
+    await user.type(dpi, "300");
+    await user.tab();
+    expect(game().exports).toEqual({ paginated: true, png: { dpi: 300 } });
+    await user.clear(dpi);
+    await user.tab();
+    expect(game().exports.paginated).toBe(true);
+    expect(game().exports).toMatchObject({ paginated: true });
+  });
+
+  it("edits the revenue range", async () => {
+    const { user } = open(outputRoute, { ...base(), revenue: undefined });
+    await ready();
+    const max = screen.getByRole("spinbutton", { name: "Max" });
+    await user.type(max, "250");
+    await user.tab();
+    expect(game().revenue).toEqual({ max: 250 });
+  });
+
+  it("adds, edits and removes an upgrade", async () => {
+    const { user } = open(outputRoute, { ...base(), upgrades: undefined });
+    await ready();
+    await user.click(screen.getByRole("button", { name: "Add upgrade" }));
+    expect(game().upgrades).toEqual({ new: [] });
+    const name = screen.getByRole("textbox", { name: "Name of new" });
+    await user.clear(name);
+    await user.type(name, "green");
+    await user.tab();
+    const tiles = screen.getByRole("textbox", { name: "Green" });
+    await user.type(tiles, "x{Enter}y");
+    await user.tab();
+    expect(game().upgrades).toEqual({ green: ["x", "y"] });
+    await user.click(
+      screen.getByRole("button", { name: "Remove upgrade green" }),
+    );
+    expect(game().upgrades ?? {}).toEqual({});
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(game().upgrades).toEqual({ green: ["x", "y"] });
   });
 });

@@ -111,6 +111,13 @@ const pages = [
     colorScheme,
     ready: (page) => page.getByRole("button", { name: "Add color" }),
   })),
+  ...["light", "dark"].map((colorScheme) => ({
+    // The revenue range, the export defaults and the upgrades
+    name: `edit panel output (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=output",
+    colorScheme,
+    ready: (page) => page.getByRole("button", { name: "Add upgrade" }),
+  })),
   // The JSON editor, in both themes
   ...["light", "dark"].map((colorScheme) => ({
     name: `edit panel json (${colorScheme})`,

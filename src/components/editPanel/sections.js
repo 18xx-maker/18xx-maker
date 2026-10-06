@@ -3,6 +3,7 @@ import ColorsForm from "@/components/schemaForm/ColorsForm";
 import CompaniesForm from "@/components/schemaForm/CompaniesForm";
 import GameInfoForm from "@/components/schemaForm/GameInfoForm";
 import MarketForm from "@/components/schemaForm/MarketForm";
+import OutputForm from "@/components/schemaForm/OutputForm";
 import PhasesForm from "@/components/schemaForm/PhasesForm";
 import PlayersForm from "@/components/schemaForm/PlayersForm";
 import PrivatesForm from "@/components/schemaForm/PrivatesForm";
@@ -25,6 +26,7 @@ export const editSections = [
   { section: "rounds", Form: RoundsForm },
   { section: "tokens", Form: TokensForm },
   { section: "colors", Form: ColorsForm },
+  { section: "output", Form: OutputForm },
   { section: "json", Form: JsonSection, wide: true },
 ];
 

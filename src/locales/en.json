@@ -107,6 +107,10 @@
         "tab": "Colors",
         "description": "Edit the colors of the game by name, each with a swatch. The changes stay in memory until you save them on the Changes page."
       },
+      "output": {
+        "tab": "Output",
+        "description": "Edit the revenue chart range, the export defaults and the tile upgrades of the game. The changes stay in memory until you save them on the Changes page."
+      },
       "json": {
         "tab": "JSON",
         "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."

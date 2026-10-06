@@ -3,6 +3,8 @@ import {
   COLOR_KEYS,
   COMPANY_PRIMARY_KEYS,
   GAME_INFO_KEYS,
+  HIDDEN_PATHS,
+  OUTPUT_KEYS,
   PHASE_PRIMARY_KEYS,
   PLAYER_KEYS,
   PLAYER_PRIMARY_KEYS,
@@ -18,6 +20,7 @@ import {
   humanize,
   insertAt,
   insertKey,
+  isHidden,
   isReferenceValue,
   isRequired,
   issuesFor,
@@ -70,6 +73,14 @@ describe("resolveSchema", () => {
     expect(resolveSchema({ $ref: "other.json#/x" }, root)).toEqual({
       $ref: "other.json#/x",
     });
+  });
+});
+
+describe("HIDDEN_PATHS", () => {
+  it("every entry resolves in the game schema", () => {
+    for (const keys of HIDDEN_PATHS) {
+      expect(schemaAt(schema, keys)).toBeTruthy();
+    }
   });
 });
 
@@ -1479,5 +1490,39 @@ describe("the colors tab", () => {
     expect(
       kindOf({ oneOf: [{ type: "string", pattern: "a" }, record] }, "x", {}),
     ).toBe("json");
+  });
+});
+
+describe("the output tab", () => {
+  it("gives the revenue, exports and upgrades a real form", () => {
+    const unexpected = [];
+    const walk = (node, keys) => {
+      const resolved = resolveSchema(node, schema);
+      const kind = kindOf(resolved, keys[keys.length - 1], schema, keys);
+      if (kind === "json") unexpected.push(keys.join("."));
+      if (kind === "record") {
+        walk(resolved.additionalProperties, [...keys, "name"]);
+      }
+      if (kind === "object") {
+        Object.entries(resolved.properties).forEach(([key, child]) =>
+          walk(child, [...keys, key]),
+        );
+      }
+    };
+    OUTPUT_KEYS.forEach((key) => walk(schema.properties[key], [key]));
+    expect(unexpected).toEqual([]);
+    const upgrades = resolveSchema(schema.properties.upgrades, schema);
+    expect(kindOf(upgrades, "upgrades", schema)).toBe("record");
+    expect(
+      kindOf(upgrades.additionalProperties, "name", schema, ["upgrades"]),
+    ).toBe("stringArray");
+    const formats = schema.properties.exports.properties.formats;
+    expect(kindOf(formats, "formats", schema, ["exports"])).toBe("enumList");
+  });
+
+  it("hides only the deprecated exports.paginated", () => {
+    expect(isHidden(["exports", "paginated"])).toBe(true);
+    expect(isHidden(["exports", "png"])).toBe(false);
+    expect(isHidden(["paginated"])).toBe(false);
   });
 });

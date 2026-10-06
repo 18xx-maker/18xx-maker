@@ -12,6 +12,21 @@ export const ROUND_KEYS = ["rounds", "turns", "pools", "number_cards"];
 // The record of the colors tab
 export const COLOR_KEYS = ["colors"];
 
+// The keys of the output tab: the chart range, the export defaults and the
+// upgrades of the tiles by name
+export const OUTPUT_KEYS = ["revenue", "exports", "upgrades"];
+
+// Properties the schema keeps for old files but the form never shows (they
+// stay in the game untouched): the deprecated and ignored exports.paginated
+export const HIDDEN_PATHS = [["exports", "paginated"]];
+
+export const isHidden = (keys) =>
+  HIDDEN_PATHS.some(
+    (hidden) =>
+      hidden.length === keys.length &&
+      hidden.every((key, index) => key === keys[index]),
+  );
+
 // The lists of the tokens tab, in the order of the tab
 export const TOKEN_KEYS = ["tokens", "tokenTypes", "shareTypes"];
 

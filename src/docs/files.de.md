@@ -227,6 +227,14 @@ beliebige CSS-Farbe oder den Namen einer anderen Farbe; „Farbe hinzufügen“
 fügt eine hinzu, im Namensfeld benennst du sie um oder entfernst sie. Eine
 Farbe, die je nach Phase abweicht, ist ein Objekt und bleibt JSON.
 
+Der Tab „Ausgabe“ bearbeitet den Bereich der Ertragstabelle (den ersten und
+letzten Ertrag und wie viele in einer Zeile stehen), die Export-Voreinstellungen
+des Spiels (die Dateien, die Seiten, die Layouts, den Hintergrund, die Variante
+und die Optionen für PNG, Karten und Board18) und die Upgrades der Kacheln nach
+Name: „Upgrade hinzufügen“ fügt einen Namen hinzu, seine Kacheln stehen je eine
+in einer Zeile. Die veraltete Exportoption paginated wird nicht angezeigt und
+bleibt in der Datei.
+
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.
 

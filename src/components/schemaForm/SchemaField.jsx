@@ -47,6 +47,7 @@ import {
   freeKey,
   humanize,
   insertKey,
+  isHidden,
   isNamed,
   isRequired,
   issuesFor,
@@ -673,9 +674,11 @@ const ObjectField = ({ keys, schema }) => {
           {issueText(t, issue)}
         </p>
       ))}
-      {Object.entries(schema.properties).map(([key, child]) => (
-        <SchemaField key={key} keys={[...keys, key]} schema={child} />
-      ))}
+      {Object.entries(schema.properties)
+        .filter(([key]) => !isHidden([...keys, key]))
+        .map(([key, child]) => (
+          <SchemaField key={key} keys={[...keys, key]} schema={child} />
+        ))}
     </fieldset>
   );
 };
