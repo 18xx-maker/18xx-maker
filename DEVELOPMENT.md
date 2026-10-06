@@ -303,7 +303,7 @@ and help text are the schema keys and descriptions, in English only.
 
 The `json` section (`JsonSection.jsx` lazy loads `JsonEditor.jsx`, a CodeMirror
 6 editor; its packages have their own chunk in `vite.config.js`) edits the
-whole game as text, `j` opens it (`openEditSearch` in `src/util/query.js`). The
+whole game as text, `j` opens it on any page with a game loaded (`openEditSearch` in `src/util/query.js`). The
 pure parts are in `src/util/jsonEditor.js`. A valid text (an object with an
 `info` object and a text title) goes through `editGame` after an adaptive
 debounce, an invalid one never reaches the game and is kept as a session draft

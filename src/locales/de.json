@@ -1272,7 +1272,7 @@
       },
       "json": {
         "use": "Das ganze Spiel als JSON bearbeiten",
-        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel im JSON-Tab geöffnet, dorthin gewechselt oder das Panel geschlossen. Nicht beim Tippen im Editor. Im Editor verlässt Esc ihn (danach springt Tab weiter), Tab rückt ein"
+        "notes": "Auf jeder Seite, solange ein Spiel geladen ist, wird das Bearbeitungspanel im JSON-Tab geöffnet, dorthin gewechselt oder das Panel geschlossen. Die Teile des Spiels außer info sind zunächst eingeklappt. Nicht beim Tippen im Editor. Im Editor verlässt Esc ihn (danach springt Tab weiter), Tab rückt ein"
       },
       "section": {
         "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",

@@ -8,6 +8,7 @@ import { json } from "@codemirror/lang-json";
 import {
   HighlightStyle,
   bracketMatching,
+  foldEffect,
   foldGutter,
   foldKeymap,
   indentOnInput,
@@ -40,6 +41,7 @@ import {
   scrollToLines,
   selectedLines,
   setSelectedLines,
+  unfoldLines,
 } from "@/components/editPanel/lineSelection";
 import { issueText } from "@/components/schemaForm/issueText";
 
@@ -48,6 +50,7 @@ import { gameText } from "@/util/download";
 import {
   debounceDelay,
   duplicateKeys,
+  foldRanges,
   invalidReason,
   lossyNumbers,
   minimalChange,
@@ -344,13 +347,21 @@ const JsonEditor = ({ game }) => {
       ],
     });
 
+    const scrollTo = scrollToLines(state, linesRef.current);
     const v = new EditorView({
       state,
       parent: host.current,
-      scrollTo: scrollToLines(state, linesRef.current),
+      scrollTo,
     });
     view.current = v;
-    setStatus(statusOf(start));
+    const initial = statusOf(start);
+    setStatus(initial);
+    // The editor starts folded: the parts of the game other than info. Not
+    // when it was opened on lines or on the text of a draft.
+    if (!scrollTo && !draft && initial.kind === "ok") {
+      const effects = foldRanges(start).map((range) => foldEffect.of(range));
+      if (effects.length) v.dispatch({ effects });
+    }
     // The game changed while the draft was away
     if (draft && draft.base !== store.getState().game) setChanged(true);
 
@@ -369,6 +380,9 @@ const JsonEditor = ({ game }) => {
   useEffect(() => {
     const v = view.current;
     if (!v || sameLines(selectedLines(v.state), lines)) return;
+    // A fold hides its lines: open the ones the link points into
+    const unfold = unfoldLines(v.state, lines);
+    if (unfold.length) v.dispatch({ effects: unfold });
     const scroll = scrollToLines(v.state, lines);
     setSelectedLines(v, lines, scroll);
   }, [lines, slug]);

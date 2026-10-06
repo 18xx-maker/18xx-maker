@@ -109,6 +109,12 @@ export const useBindings = () => {
         }
       }
 
+      const jsonAllowed =
+        !print &&
+        !getRenderInput() &&
+        !exportSheetOpen &&
+        !document.querySelector('[role="dialog"]');
+
       // Keys for the game edit page
       if (viewingGame) {
         // [ and ] cycle the tabs of the edit panel or the config sections
@@ -209,14 +215,21 @@ export const useBindings = () => {
         }
 
         // The JSON editor is a section of the edit panel. In a dialog the
-        // key is for the dialog.
+        // key is for the dialog. A page without the edit panel (problems,
+        // changes, history, b18) goes to the first section of the game.
         if (event.key === "j") {
-          if (
-            canEdit &&
-            !exportSheetOpen &&
-            !document.querySelector('[role="dialog"]')
-          ) {
-            navigate({ search: openEditSearch(location.search, "json") });
+          if (jsonAllowed) {
+            if (canEdit) {
+              navigate({ search: openEditSearch(location.search, "json") });
+            } else {
+              const slug = viewingGame.params.slug;
+              const section =
+                game && loadedGame?.slug === slug ? firstSection(game) : "map";
+              navigate({
+                pathname: `/games/${slug}/${section}`,
+                search: openEditSearch("", "json"),
+              });
+            }
           }
           return;
         }
@@ -233,6 +246,16 @@ export const useBindings = () => {
         const item = find(propEq(event.key, "key"), gameNav);
         if (item && game && item.disabled?.(game)) return;
         const section = event.key === "e" ? first : item?.section;
+
+        if (event.key === "j") {
+          if (jsonAllowed) {
+            navigate({
+              pathname: `/games/${loadedGame.slug}/${first}`,
+              search: openEditSearch("", "json"),
+            });
+          }
+          return;
+        }
 
         if (section) {
           navigate(`/games/${loadedGame.slug}/${section}`);

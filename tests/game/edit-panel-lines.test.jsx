@@ -1,3 +1,4 @@
+import { unfoldAll } from "@codemirror/language";
 import { EditorView } from "@codemirror/view";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -78,9 +79,19 @@ const mod = /Mac/.test(navigator.platform)
 
 // A mouse down on the line number, as the editor gets it
 const gutterClick = async (v, line, modifiers = {}) => {
+  // The editor starts folded, the line may be inside a fold
+  unfoldAll(v);
   v.dispatch({
     effects: EditorView.scrollIntoView(v.state.doc.line(line).from),
   });
+  // Let the editor measure the unfolded lines, or it maps the click to a line
+  // of the folded layout
+  await act(
+    () =>
+      new Promise((resolve) => {
+        v.requestMeasure({ read: () => null, write: () => resolve() });
+      }),
+  );
   const element = await waitFor(() => {
     const found = all(v, ".cm-lineNumbers .cm-gutterElement").find(
       (el) => el.textContent === String(line),
@@ -185,6 +196,9 @@ describe("lines of the json editor", () => {
     }
     expect(performance.now() - typing).toBeLessThan(1000);
     expect(selected(v).gutter).toContain(1);
+    // Let the editor finish measuring before the test ends
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await new Promise((resolve) => requestAnimationFrame(resolve));
   });
 
   it("ignores garbage and lines past the end", async () => {
@@ -256,7 +270,7 @@ describe("lines of the json editor", () => {
     if (/Mac/.test(navigator.platform)) {
       await gutterClick(v, 4, { ctrlKey: true });
     }
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await act(() => new Promise((resolve) => setTimeout(resolve, 100)));
     expect(selected(v).text).toEqual([]);
     expect(router.state.location.search).toBe("?edit=true&editSection=json");
     await gutterClick(v, 3);
@@ -269,7 +283,9 @@ describe("lines of the json editor", () => {
     const spy = vi.spyOn(v, "dispatch");
     await gutterClick(v, 2);
     await waitFor(() => expect(router.state.location.search).toContain("=2"));
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    // The store (the game's problems) updates the editor while we wait: that
+    // is inside act, or React warns about an update outside of it
+    await act(() => new Promise((resolve) => setTimeout(resolve, 100)));
     // The click made one change of the lines, the url did not make another
     const changes = spy.mock.calls.filter(([spec]) =>
       [spec?.effects].flat(2).some((effect) => Array.isArray(effect?.value)),

@@ -151,8 +151,9 @@ described next.
 ### JSON editor
 
 The JSON tab edits the whole game as JSON (the same text as the Download
-button writes, without the meta). Press `j` to open the panel on this tab, to
-switch to it, or, outside the editor, to close the panel. The page follows what
+button writes, without the meta). Press `j` on any page while a game is loaded to
+open the panel on this tab, to switch to it, or, outside the editor, to close
+the panel. The parts of the game other than `info` start folded. The page follows what
 you type, a moment after you stop, but only while the text is a valid JSON
 object with an `info` object and a text `info.title`. While it is not, the game
 keeps its last valid version, and the problem is shown below the editor with

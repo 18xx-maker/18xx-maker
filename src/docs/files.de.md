@@ -166,9 +166,10 @@ Seite Änderungen, die im Folgenden beschrieben wird.
 ### JSON-Editor
 
 Der Tab JSON bearbeitet das ganze Spiel als JSON (derselbe Text, den die
-Schaltfläche Herunterladen schreibt, ohne die Meta-Daten). Mit `j` öffnest du
-das Panel in diesem Tab, wechselst dorthin oder schließt, außerhalb des Editors,
-das Panel. Die Seite folgt deiner Eingabe kurz nachdem du aufhörst zu tippen,
+Schaltfläche Herunterladen schreibt, ohne die Meta-Daten). Mit `j` öffnest du auf
+jeder Seite, solange ein Spiel geladen ist, das Panel in diesem Tab, wechselst
+dorthin oder schließt, außerhalb des Editors, das Panel. Die Teile des Spiels
+außer `info` sind zunächst eingeklappt. Die Seite folgt deiner Eingabe kurz nachdem du aufhörst zu tippen,
 aber nur solange der Text ein gültiges JSON-Objekt mit einem `info`-Objekt und
 einem `info.title` aus Text ist. Solange das nicht der Fall ist, behält das
 Spiel seine letzte gültige Version, und das Problem wird unter dem Editor mit

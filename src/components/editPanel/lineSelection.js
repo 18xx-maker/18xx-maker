@@ -1,3 +1,4 @@
+import { foldedRanges, unfoldEffect } from "@codemirror/language";
 import {
   Facet,
   RangeSet,
@@ -137,6 +138,21 @@ const highlighter = ViewPlugin.fromClass(
 
 export const setSelectedLines = (view, lines, scroll) =>
   view.dispatch({ effects: scroll ? [set.of(lines), scroll] : set.of(lines) });
+
+// The effects that open the folds hiding any of the lines: a highlight inside
+// a fold would not be seen. The line a fold starts on stays visible.
+export const unfoldLines = (state, lines) => {
+  const effects = [];
+  const { doc } = state;
+  foldedRanges(state).between(0, doc.length, (from, to) => {
+    const first = doc.lineAt(from).number + 1;
+    const last = doc.lineAt(to).number;
+    if (lines.some(([a, b]) => a <= last && b >= first)) {
+      effects.push(unfoldEffect.of({ from, to }));
+    }
+  });
+  return effects;
+};
 
 // The position of the start of a line, which may be past the end
 const lineStart = (state, line) =>
