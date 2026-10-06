@@ -55,24 +55,31 @@
           },
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -87,9 +94,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -132,24 +149,31 @@
         },
         "fontFamily": { "type": "string" },
         "fontSize": { "type": "integer", "minimum": 4 },
-        "hidden": { "type": "boolean", "enum": [true] },
+        "hidden": {
+          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "type": "boolean",
+          "enum": [true]
+        },
         "angle": {
+          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotate": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
           "type": "number",
           "minimum": 1,
           "maximum": 6
@@ -164,9 +188,19 @@
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
-        "x": { "type": "number" },
-        "y": { "type": "number" },
-        "percent": { "type": "number", "minimum": 0 },
+        "x": {
+          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "type": "number",
+          "minimum": 0
+        },
         "order": {
           "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
@@ -208,24 +242,31 @@
           },
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -240,9 +281,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -267,24 +318,31 @@
           "bottom": { "type": "boolean", "enum": [true] },
           "reverse": { "type": "boolean", "enum": [true] },
           "radius": { "type": "number", "exclusiveMinimum": 0 },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -299,9 +357,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -320,23 +388,30 @@
         "type": "object",
         "properties": {
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
@@ -351,9 +426,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          }
         },
         "additionalProperties": false,
         "dependencies": { "align": ["mid"] }
@@ -366,24 +451,31 @@
         "destination": { "type": "boolean", "enum": [true] },
         "width": { "type": "integer", "minimum": 1 },
         "bgFill": { "type": "string" },
-        "hidden": { "type": "boolean", "enum": [true] },
+        "hidden": {
+          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "type": "boolean",
+          "enum": [true]
+        },
         "angle": {
+          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotate": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
           "type": "number",
           "minimum": 1,
           "maximum": 6
@@ -398,9 +490,19 @@
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
-        "x": { "type": "number" },
-        "y": { "type": "number" },
-        "percent": { "type": "number", "minimum": 0 },
+        "x": {
+          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "type": "number",
+          "minimum": 0
+        },
         "order": {
           "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
@@ -447,29 +549,40 @@
         "inverse": { "type": "boolean", "enum": [true] },
         "inverseTextColor": { "type": "string" },
         "angle": {
+          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
-        "percent": { "type": "number", "minimum": 0 },
+        "percent": {
+          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "type": "number",
+          "minimum": 0
+        },
         "width": { "type": "integer", "minimum": 1 },
         "text": { "type": "string" },
         "textColor": { "type": "string" },
         "textBorderWidth": { "type": "number", "minimum": 0 },
         "textBorderColor": { "type": "string" },
-        "hidden": { "type": "boolean", "enum": [true] },
+        "hidden": {
+          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "type": "boolean",
+          "enum": [true]
+        },
         "rotate": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
           "type": "number",
           "minimum": 1,
           "maximum": 6
@@ -484,8 +597,14 @@
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
-        "x": { "type": "number" },
-        "y": { "type": "number" },
+        "x": {
+          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
         "order": {
           "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
@@ -525,24 +644,31 @@
         "properties": {
           "top": { "type": "string" },
           "bottom": { "type": "string" },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -557,9 +683,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -600,24 +736,31 @@
             }
           }
         },
-        "hidden": { "type": "boolean", "enum": [true] },
+        "hidden": {
+          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "type": "boolean",
+          "enum": [true]
+        },
         "angle": {
+          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotate": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
           "type": "number",
           "minimum": 1,
           "maximum": 6
@@ -632,9 +775,19 @@
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
-        "x": { "type": "number" },
-        "y": { "type": "number" },
-        "percent": { "type": "number", "minimum": 0 },
+        "x": {
+          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "type": "number",
+          "minimum": 0
+        },
         "order": {
           "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
@@ -654,24 +807,31 @@
           "width": { "type": "integer", "minimum": 1 },
           "color": { "type": "string" },
           "bgColor": { "type": "string" },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -686,9 +846,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -736,24 +906,31 @@
               ]
             }
           },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -768,9 +945,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -790,24 +977,31 @@
         "properties": {
           "name": { "$ref": "#/definitions/name" },
           "color": { "type": "string" },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -822,9 +1016,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -847,24 +1051,31 @@
           "groups": { "type": "array", "items": { "type": "string" } },
           "width": { "type": "number", "exclusiveMinimum": 0 },
           "color": { "type": "string" },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -879,9 +1090,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -902,24 +1123,31 @@
           "name": { "$ref": "#/definitions/name" },
           "groups": { "type": "array", "items": { "type": "string" } },
           "color": { "type": "string" },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -934,9 +1162,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -978,24 +1216,31 @@
           },
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1010,9 +1255,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -1054,24 +1309,31 @@
           },
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1086,9 +1348,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -1107,24 +1379,31 @@
         "type": "object",
         "properties": {
           "value": { "type": "string" },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1139,9 +1418,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -1197,24 +1486,31 @@
           },
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1229,9 +1525,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -1255,24 +1561,31 @@
             "enum": ["tiny", "small", "medium", "large"]
           },
           "type": { "type": "string" },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1287,9 +1600,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -1312,24 +1635,31 @@
           "width": { "type": "integer", "minimum": 1 },
           "stroke": { "type": "string" },
           "strokeWidth": { "type": "integer", "minimum": 1 },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1344,9 +1674,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -1413,24 +1753,31 @@
               "city"
             ]
           },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1445,9 +1792,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 }
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          }
         },
         "additionalProperties": false,
         "dependencies": { "align": ["mid"] }
@@ -1458,24 +1815,31 @@
       "items": {
         "type": "object",
         "properties": {
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1490,9 +1854,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
@@ -1512,24 +1886,31 @@
         "properties": {
           "value": { "oneOf": [{ "type": "number" }, { "type": "string" }] },
           "outerBorderColor": { "type": "string" },
-          "hidden": { "type": "boolean", "enum": [true] },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
           "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Rotates the element by that many sixths of a turn, or with mid moves the named point to the track that starts on that side.",
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
             "type": "number",
             "minimum": 1,
             "maximum": 6
@@ -1544,9 +1925,19 @@
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "percent": { "type": "number", "minimum": 0 },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
           "order": {
             "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
             "oneOf": [
