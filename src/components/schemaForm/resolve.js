@@ -384,6 +384,7 @@ export const newItem = (items, defaults = {}, unique = true) => {
 // with is not kept (PRR2 is copied as PRR3, not PRR22).
 export const nextAbbrev = (items = [], base = "NEW") => {
   const taken = items.map((item) => String(item?.abbrev ?? "").toLowerCase());
+  if (typeof base !== "string") base = "NEW";
   const stem = base.replace(/\d+$/, "") || base;
   let candidate = base;
   for (let n = 2; taken.includes(candidate.toLowerCase()); n++) {

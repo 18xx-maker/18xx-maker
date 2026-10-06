@@ -2429,6 +2429,17 @@ describe("edit panel companies", () => {
     ]);
   });
 
+  it("duplicates a company whose abbreviation is not a string", async () => {
+    const { user, store } = open(
+      companiesRoute,
+      withCompanies([{ name: "A", abbrev: 3 }]),
+    );
+    await ready();
+    await user.click(button("Duplicate company A"));
+    expect(companies(store)).toHaveLength(2);
+    expect(companies(store)[1].abbrev).toBe("NEW");
+  });
+
   it("a copy does not clash with an abbreviation of another case", async () => {
     const { user, store } = open(
       companiesRoute,
@@ -2464,11 +2475,13 @@ describe("edit panel companies", () => {
       { timeout: 5000 },
     );
     expect(within(cards()[2]).getByRole("img")).toBe(marker);
+    expect(toggleOf(2)).toHaveAttribute("aria-describedby", marker.id);
     expect(screen.getAllByRole("img", { name: /has a problem/ })).toHaveLength(
       1,
     );
 
     await user.click(toggleOf(2));
+    expect(toggleOf(2)).not.toHaveAttribute("aria-describedby");
     expect(
       screen.queryByRole("img", { name: /has a problem/ }),
     ).not.toBeInTheDocument();

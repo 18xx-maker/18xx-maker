@@ -12,7 +12,10 @@ const defaults = (companies) => ({ abbrev: nextAbbrev(companies) });
 
 // A copy gets a free abbreviation too
 const copyOf = (copy, companies) => ({
-  abbrev: nextAbbrev(companies, copy.abbrev || undefined),
+  abbrev: nextAbbrev(
+    companies,
+    typeof copy.abbrev === "string" && copy.abbrev ? copy.abbrev : undefined,
+  ),
 });
 
 // What a closed card shows: the color, the name and the abbreviation. One

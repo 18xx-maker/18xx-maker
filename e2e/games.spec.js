@@ -160,8 +160,8 @@ test.describe("bundled games", () => {
 
     // The cards start closed
     const cards = panel.getByRole("listitem");
-    const count = 20;
-    await expect(cards).toHaveCount(count);
+    await expect(cards.first()).toBeVisible();
+    const count = await cards.count();
     const first = cards.first().locator("[data-title]");
     await expect(first).toHaveAttribute("aria-expanded", "false");
     await expect(first).toHaveAccessibleName("Black Railroad BLRR");

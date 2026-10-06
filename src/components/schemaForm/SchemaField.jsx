@@ -578,6 +578,7 @@ const ItemCard = ({
   const { t } = useTranslation();
   const form = useContext(SchemaFormContext);
   const bodyId = useId();
+  const problemId = useId();
   const issues = issuesFor(form.issues, keys, false);
   const names = { item: kind, title };
   // A closed card shows that a field inside it has a problem (a warning is
@@ -604,6 +605,7 @@ const ItemCard = ({
             className="flex min-w-0 flex-row items-center gap-1 rounded-sm text-left text-sm font-semibold focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
             aria-expanded={open}
             aria-controls={bodyId}
+            aria-describedby={!open && deep.length > 0 ? problemId : undefined}
             data-title
             onClick={() => onOpen(index, !open)}
           >
@@ -617,6 +619,7 @@ const ItemCard = ({
           {!open && deep.length > 0 && (
             <TriangleAlert
               className="size-4 shrink-0 text-destructive"
+              id={problemId}
               role="img"
               aria-label={t("editPanel.hasProblems", names)}
               data-problem

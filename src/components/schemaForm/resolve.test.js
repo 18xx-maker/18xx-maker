@@ -805,6 +805,9 @@ describe("lists", () => {
     expect(nextAbbrev([{ abbrev: "prr" }, { abbrev: "PRR2" }], "PRR")).toBe(
       "PRR3",
     );
+    // A base that is not a string is ignored
+    expect(nextAbbrev([{ abbrev: 3 }], 3)).toBe("NEW");
+    expect(nextAbbrev([{ abbrev: "NEW" }], 3)).toBe("NEW2");
     // A number the base ends with is not kept
     expect(nextAbbrev([{ abbrev: "PRR" }, { abbrev: "PRR2" }], "PRR2")).toBe(
       "PRR3",

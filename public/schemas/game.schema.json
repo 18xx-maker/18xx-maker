@@ -1400,7 +1400,7 @@
             "type": "string"
           },
           "abbrev": {
-            "description": "The short name of the company, such as PRR. It is how the market, the tiles and the map refer to the company, so each company needs its own.",
+            "description": "The short name of the company, such as PRR. It is how the market, the tiles and the map refer to the company, so it should be unique.",
             "type": "string"
           },
           "variant": {
