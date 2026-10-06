@@ -187,7 +187,10 @@ export const useBindings = () => {
           if (item) {
             // A section without data for the game has nothing to show
             if (game && item.disabled?.(game)) return;
-            navigate(`/games/${viewingGame.params.slug}/${item.section}`);
+            navigate({
+              pathname: `/games/${viewingGame.params.slug}/${item.section}`,
+              search: location.search,
+            });
             return;
           }
 

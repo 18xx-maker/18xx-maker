@@ -131,7 +131,7 @@ ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel (zum JSON-
 
 Das Panel hat für jeden Teil des Spiels, den es bearbeitet, einen Tab. Mit `[` und `]` wechselst du zwischen
 ihnen (die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
-schließen das Panel). Der Tab Züge hat für jeden Zug des Spiels eine Karte, die
+lassen das Panel geöffnet). Der Tab Züge hat für jeden Zug des Spiels eine Karte, die
 aus demselben Schema erzeugt wird. Füge mit Zug hinzufügen einen Zug hinzu und
 verschiebe ihn mit den Schaltflächen einer Karte nach oben oder unten,
 dupliziere oder entferne ihn. Ein entfernter Zug lässt sich direkt danach mit

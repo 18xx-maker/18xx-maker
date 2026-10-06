@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useMatch, useNavigate } from "react-router";
+import { Link, useLocation, useMatch, useNavigate } from "react-router";
 
 import { addIndex, find, is, map, propEq } from "ramda";
 
@@ -42,6 +42,7 @@ const Toolbar = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { search } = useLocation();
 
   const [paginated, togglePagination] = useBooleanParam("paginated");
   const [config, toggleConfig] = useTogglePanel("config");
@@ -130,7 +131,12 @@ const Toolbar = () => {
       <Separator orientation="vertical" />
       <Select
         value={item.section}
-        onValueChange={(section) => navigate(`/games/${slug}/${section}`)}
+        onValueChange={(section) =>
+          navigate({
+            pathname: `/games/${slug}/${section}`,
+            search,
+          })
+        }
         className="w-60"
       >
         <SelectTrigger
