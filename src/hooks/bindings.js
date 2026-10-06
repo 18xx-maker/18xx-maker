@@ -10,14 +10,19 @@ import { editSections } from "@/components/editPanel/sections";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
-import { useEditPanel } from "@/hooks/useEditPanel";
+import { useDropStaleLines, useEditPanel } from "@/hooks/useEditPanel";
 import { createAlert, createSetExportMenuOpen, refreshGame } from "@/state";
 import { selectExportSheetOpen, selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
 import { downloadGame } from "@/util/download";
 import { firstSection, gameNav } from "@/util/gameNav";
 import { isControlTarget } from "@/util/keys";
-import { openEditSearch, useBooleanParam, useTogglePanel } from "@/util/query";
+import {
+  openEditSearch,
+  searchString,
+  useBooleanParam,
+  useTogglePanel,
+} from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
 import * as idb from "@/util/storage/idb";
 
@@ -47,13 +52,15 @@ export const useBindings = () => {
   const [shortcuts, setShortcuts] = useState(false);
   const [print] = useBooleanParam("print");
   const [, toggleConfig] = useTogglePanel("config");
+  const edit = useEditPanel();
   const {
     available: canEdit,
     open: editOpen,
     toggle: toggleEdit,
     editSection,
     setEditSection,
-  } = useEditPanel();
+  } = edit;
+  useDropStaleLines(edit);
   const [, togglePagination] = useBooleanParam("paginated");
   const { pathname } = location;
 
@@ -80,7 +87,7 @@ export const useBindings = () => {
         } else if (viewingGame && params.has("config")) {
           params.delete("section");
           params.delete("config");
-          navigate({ search: params.toString() });
+          navigate({ search: searchString(params) });
         } else if (viewingGame) {
           navigate(`/games/${viewingGame.params.slug}`);
         } else if (pathname !== "/") {
@@ -125,9 +132,16 @@ export const useBindings = () => {
             setEditSection(next);
             if (inside) document.getElementById(tabId(next))?.focus();
           } else if (params.has("config")) {
-            const current = decodeURIComponent(
-              params.get("section") || "colors",
-            );
+            let current = params.get("section") || "colors";
+            try {
+              current = decodeURIComponent(current);
+            } catch {
+              // A malformed section is an unknown one
+            }
+            // An unknown section is shown as the first one
+            if (!configSections.some(({ section }) => section === current)) {
+              current = "colors";
+            }
             const next = cycle(
               configSections,
               configSections.findIndex(({ section }) => section === current),
@@ -135,7 +149,7 @@ export const useBindings = () => {
             );
             if (next.section === "colors") params.delete("section");
             else params.set("section", encodeURIComponent(next.section));
-            navigate({ search: params.toString() });
+            navigate({ search: searchString(params) });
           } else {
             const items = game
               ? gameNav.filter((item) => !item.disabled?.(game))

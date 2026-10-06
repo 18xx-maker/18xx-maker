@@ -5,7 +5,8 @@ import TrainsForm from "@/components/schemaForm/TrainsForm";
 
 // The tabs of the edit panel, in order. Adding a section is adding an entry
 // here and its editPanel.sections.<section> strings. A wide section gets more
-// of the screen (the JSON editor).
+// of the screen (the JSON editor). The section names are in links
+// (?edit=true&editSection=json): renaming one breaks them.
 export const editSections = [
   { section: "info", Form: GameInfoForm },
   { section: "trains", Form: TrainsForm },

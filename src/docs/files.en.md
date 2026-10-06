@@ -167,6 +167,23 @@ says the game changed.
 Tab indents inside the editor. To leave it, press Escape (the first Escape
 leaves the editor, a second closes the panel) and then Tab.
 
+### Links to a part of the editor
+
+The address of the page says where you are, so you can share it or come back
+to it: the section (`/games/18Test/tiles`), the open panel and its tab
+(`?edit=true&editSection=json`, `?config=true&section=tokens`) and the card
+filters (`?hidePrivates=true`). A tab or section name that does not exist opens
+the first one.
+
+In the JSON editor, click a line number to mark that line. Shift-click marks
+the lines from the first marked line to the one you click, and Cmd-click (Ctrl
+on Windows and Linux) adds or removes one line, or with Shift as well adds the
+range. The marked lines are in the address as `lines`, for example
+`?edit=true&editSection=json&lines=1-4,15,16,19`, and the editor scrolls to the
+first one when the link is opened. Marking lines does not add pages to the
+browser history. The lines are forgotten when you change the tab or close the
+panel.
+
 ## Changes, saving and history
 
 When the loaded game differs from its file, a Changes entry appears in the game

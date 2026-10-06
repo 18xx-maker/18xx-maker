@@ -32,6 +32,8 @@ const getThemeOptions = (theme) =>
     keys(theme),
   );
 
+// The section names are in links (?config=true&section=tokens): renaming one
+// breaks them.
 export const sections = [
   {
     section: "colors",

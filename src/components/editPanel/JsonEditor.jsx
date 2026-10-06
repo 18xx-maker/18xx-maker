@@ -21,7 +21,6 @@ import {
   drawSelection,
   highlightActiveLine,
   keymap,
-  lineNumbers,
 } from "@codemirror/view";
 import { tags } from "@lezer/highlight";
 import { useEffect, useRef, useState } from "react";
@@ -36,6 +35,12 @@ import {
   getDraft,
   setDraft,
 } from "@/components/editPanel/draftStore";
+import {
+  lineSelection,
+  scrollToLines,
+  selectedLines,
+  setSelectedLines,
+} from "@/components/editPanel/lineSelection";
 import { issueText } from "@/components/schemaForm/issueText";
 
 import { editGame, selectGameProblems } from "@/state";
@@ -52,6 +57,8 @@ import {
   sameGame,
   shareUnchanged,
 } from "@/util/jsonEditor";
+import { sameLines } from "@/util/lineSpec";
+import { useLinesParam } from "@/util/query";
 
 // The text of the editor changed because the game did, not because of typing
 const external = Annotation.define();
@@ -87,10 +94,23 @@ const theme = EditorView.theme({
   ".cm-activeLine, .cm-activeLineGutter": {
     backgroundColor: "hsl(var(--accent))",
   },
-  ".cm-cursor": { borderLeftColor: "hsl(var(--foreground))" },
-  "&.cm-focused .cm-selectionBackground, .cm-selectionBackground": {
-    backgroundColor: "hsl(var(--accent))",
+  // The lines of the url (distinct from the active line and the selection).
+  // Translucent: the selection is drawn behind the lines and shows through
+  // (uiContrast.test.js checks the text on the blend).
+  ".cm-line.cm-selected-line": {
+    backgroundColor: "hsl(var(--line-selected) / 0.5)",
   },
+  ".cm-gutterElement.cm-selected-gutter": {
+    backgroundColor: "hsl(var(--line-selected))",
+    color: "hsl(var(--foreground))",
+  },
+  ".cm-lineNumbers .cm-gutterElement": { cursor: "pointer" },
+  ".cm-cursor": { borderLeftColor: "hsl(var(--foreground))" },
+  // As specific as the base theme's rule, which else wins with a light grey
+  "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground":
+    {
+      backgroundColor: "hsl(var(--accent))",
+    },
   ".cm-tooltip": {
     color: "hsl(var(--popover-foreground))",
     backgroundColor: "hsl(var(--popover))",
@@ -161,8 +181,13 @@ const JsonEditor = ({ game }) => {
   const lastMs = useRef(0);
   const issuesRef = useRef(issues);
   const tRef = useRef(t);
+  const [lines, setLines] = useLinesParam();
+  const linesRef = useRef(lines);
+  const setLinesRef = useRef(setLines);
   issuesRef.current = issues;
   tRef.current = t;
+  linesRef.current = lines;
+  setLinesRef.current = setLines;
 
   // The state of the text: "ok", or why it is not the game
   const [status, setStatus] = useState({ kind: "ok" });
@@ -261,7 +286,7 @@ const JsonEditor = ({ game }) => {
       doc: start,
       extensions: [
         EditorState.phrases.of(phrases),
-        lineNumbers(),
+        lineSelection(linesRef.current, (next) => setLinesRef.current(next)),
         history(),
         drawSelection(),
         indentOnInput(),
@@ -319,7 +344,11 @@ const JsonEditor = ({ game }) => {
       ],
     });
 
-    const v = new EditorView({ state, parent: host.current });
+    const v = new EditorView({
+      state,
+      parent: host.current,
+      scrollTo: scrollToLines(state, linesRef.current),
+    });
     view.current = v;
     setStatus(statusOf(start));
     // The game changed while the draft was away
@@ -334,6 +363,15 @@ const JsonEditor = ({ game }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
+
+  // The lines of the url changed (back, forward, a pasted link): our own
+  // clicks are already in the editor
+  useEffect(() => {
+    const v = view.current;
+    if (!v || sameLines(selectedLines(v.state), lines)) return;
+    const scroll = scrollToLines(v.state, lines);
+    setSelectedLines(v, lines, scroll);
+  }, [lines, slug]);
 
   // The problems of the game changed: check the text against them again
   useEffect(() => {

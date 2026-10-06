@@ -1,4 +1,4 @@
-import { openEditSearch, togglePanelSearch } from "@/util/query";
+import { openEditSearch, searchString, togglePanelSearch } from "@/util/query";
 
 describe("togglePanelSearch", () => {
   it("opens a panel and closes the other", () => {
@@ -43,5 +43,23 @@ describe("openEditSearch", () => {
     expect(
       openEditSearch("?edit=true&editSection=json&paginated=true", "json"),
     ).toBe("paginated=true");
+  });
+});
+
+describe("lines", () => {
+  it("keeps commas as they are in the search", () => {
+    expect(searchString(new URLSearchParams("lines=1-4,15&a=b%2Cc"))).toBe(
+      "lines=1-4,15&a=b,c",
+    );
+  });
+
+  it("are dropped by every panel path", () => {
+    const search = "?edit=true&editSection=json&lines=1-4,15,16";
+    expect(togglePanelSearch(search, "edit")).toBe("");
+    expect(togglePanelSearch(search, "config")).toBe("config=true");
+    expect(openEditSearch(search, "json")).toBe("");
+    expect(openEditSearch(search, "trains")).toBe(
+      "edit=true&editSection=trains",
+    );
   });
 });
