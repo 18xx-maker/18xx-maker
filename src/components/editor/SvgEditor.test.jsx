@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { act, render } from "@testing-library/react";
+import { useContext, useEffect } from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
 import SvgEditor from "@/components/editor/SvgEditor";
 
+import TapContext from "@/context/TapContext";
 import { TOOLBAR_INSET } from "@/hooks/usePanZoom";
 import { initialState, rootReducer } from "@/state";
 
@@ -21,24 +23,41 @@ const fire = (el, type, init) =>
     );
   });
 
-const setup = (padding) => {
+// Gives the taps of the editor to the function
+const Taps = ({ onTap }) => {
+  const tap = useContext(TapContext);
+  useEffect(() => {
+    tap.current = onTap;
+    return () => {
+      tap.current = null;
+    };
+  }, [tap, onTap]);
+  return <rect width="10" height="10" />;
+};
+
+const setup = (padding, onTap = () => {}) => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: initialState,
   });
-  const { container } = render(
+  const tree = (width = 1000, height = 800) => (
     <Provider store={store}>
       <MemoryRouter>
-        <SvgEditor width={1000} height={800} padding={padding}>
-          <rect width="10" height="10" />
+        <SvgEditor width={width} height={height} padding={padding}>
+          <Taps onTap={onTap} />
         </SvgEditor>
       </MemoryRouter>
-    </Provider>,
+    </Provider>
   );
+  const { container, rerender } = render(tree());
   // The editor svg has no role or label to query by
   // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
   const svg = container.querySelector("svg");
-  return { svg, box: () => svg.getAttribute("viewBox") };
+  return {
+    svg,
+    box: () => svg.getAttribute("viewBox"),
+    resize: (width, height) => rerender(tree(width, height)),
+  };
 };
 
 describe("SvgEditor start view", () => {
@@ -137,5 +156,77 @@ describe("SvgEditor pinch", () => {
     const before = box();
     fire(svg, "pointermove", { clientX: 50, clientY: 10, buttons: 1 });
     expect(box()).toBe(before);
+  });
+});
+
+describe("SvgEditor content size", () => {
+  it("fits an untouched view to the new size", () => {
+    const { box, resize } = setup();
+    const before = box();
+    resize(2000, 1600);
+    expect(box()).not.toBe(before);
+  });
+
+  it("keeps a view that was moved when the content gets bigger", () => {
+    const { svg, box, resize } = setup();
+    fire(svg, "pointerdown", { clientX: 100, clientY: 100, buttons: 1 });
+    fire(svg, "pointermove", { clientX: 150, clientY: 100, buttons: 1 });
+    fire(svg, "pointerup", { clientX: 150, clientY: 100, buttons: 0 });
+    const moved = box();
+    resize(2000, 1600);
+    expect(box()).toBe(moved);
+  });
+
+  it("keeps the same svg", () => {
+    const { svg, resize } = setup();
+    resize(2000, 1600);
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(document.querySelector("svg")).toBe(svg);
+  });
+});
+
+describe("SvgEditor taps", () => {
+  const down = { clientX: 100, clientY: 100, buttons: 1 };
+
+  it("gives the content the element the pointer went down on", () => {
+    const onTap = vi.fn();
+    const { svg } = setup(0, onTap);
+    // eslint-disable-next-line testing-library/no-node-access
+    const rect = svg.querySelector("rect");
+    fire(rect, "pointerdown", down);
+    fire(svg, "pointerup", { ...down, clientX: 102, buttons: 0 });
+    expect(onTap).toHaveBeenCalledTimes(1);
+    expect(onTap.mock.calls[0][0]).toBe(rect);
+    expect(onTap.mock.calls[0][1].type).toBe("pointerup");
+  });
+
+  it("is not a tap after a drag, even one back to the start", () => {
+    const onTap = vi.fn();
+    const { svg } = setup(0, onTap);
+    fire(svg, "pointerdown", down);
+    fire(svg, "pointermove", { ...down, clientX: 140 });
+    fire(svg, "pointermove", down);
+    fire(svg, "pointerup", { ...down, buttons: 0 });
+    expect(onTap).not.toHaveBeenCalled();
+  });
+
+  it("is not a tap of a cancelled pointer or with two pointers", () => {
+    const onTap = vi.fn();
+    const { svg } = setup(0, onTap);
+    fire(svg, "pointerdown", down);
+    fire(svg, "pointercancel", { ...down, buttons: 0 });
+    fire(svg, "pointerdown", down);
+    fire(svg, "pointerdown", { ...down, pointerId: 2 });
+    fire(svg, "pointerup", { ...down, pointerId: 2, buttons: 0 });
+    fire(svg, "pointerup", { ...down, buttons: 0 });
+    expect(onTap).not.toHaveBeenCalled();
+  });
+
+  it("is not a tap of a button other than the primary one", () => {
+    const onTap = vi.fn();
+    const { svg } = setup(0, onTap);
+    fire(svg, "pointerdown", { ...down, button: 2 });
+    fire(svg, "pointerup", { ...down, button: 2, buttons: 0 });
+    expect(onTap).not.toHaveBeenCalled();
   });
 });

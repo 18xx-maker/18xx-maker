@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import Svg from "@/components/svg/Svg";
 
+import TapContext from "@/context/TapContext";
 import { TOOLBAR_INSET, usePanZoom } from "@/hooks/usePanZoom";
 
 // The view box that fits the content in the window below the toolbar. padding
@@ -41,6 +42,8 @@ const SvgEditor = ({ width, height, padding = 0, children }) => {
   // Whether the view was moved since it was fitted, a window resize keeps a
   // moved view and refits an untouched one
   const touched = useRef(false);
+  // What the content does with a tap (HexOverlay)
+  const tap = useRef(null);
 
   usePanZoom(svg, {
     onPan: (deltaX, deltaY) => {
@@ -71,7 +74,25 @@ const SvgEditor = ({ width, height, padding = 0, children }) => {
       touched.current = false;
       setViewbox(initial());
     },
+    onTap: (target, event) => tap.current?.(target, event),
   });
+
+  // The content changed size (an edit added a hex): an untouched view is fitted
+  // again, a moved one stays where it is
+  const sized = useRef({ width, height, padding });
+  useEffect(() => {
+    const before = sized.current;
+    sized.current = { width, height, padding };
+    if (
+      before.width === width &&
+      before.height === height &&
+      before.padding === padding
+    ) {
+      return;
+    }
+    if (!touched.current) setViewbox(initial());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height, padding]);
 
   useEffect(() => {
     const onResize = () => {
@@ -112,7 +133,7 @@ const SvgEditor = ({ width, height, padding = 0, children }) => {
         height={`${size.height}px`}
         viewBox={viewBox}
       >
-        {children}
+        <TapContext.Provider value={tap}>{children}</TapContext.Provider>
       </Svg>
     </div>
   );
