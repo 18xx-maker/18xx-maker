@@ -1,9 +1,12 @@
+import { Component } from "react";
+
 import SchemaField from "@/components/schemaForm/SchemaField";
 import SchemaFormProvider from "@/components/schemaForm/SchemaFormProvider";
 import {
   COMPANY_PRIMARY_KEYS,
   nextAbbrev,
 } from "@/components/schemaForm/resolve";
+import CompanyToken from "@/components/tokens/CompanyToken";
 
 import schema from "@/schemas/game.schema.json";
 
@@ -18,17 +21,48 @@ const copyOf = (copy, companies) => ({
   ),
 });
 
-// What a closed card shows: the color, the name and the abbreviation. One
-// inline run of text, so the title reads "Name ABBREV" and truncates as one.
+// A company the token cannot draw (an edit that fits the JSON but not the
+// schema) shows no token rather than taking the panel down
+class TokenBoundary extends Component {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidUpdate(previous) {
+    if (this.state.failed && previous.company !== this.props.company) {
+      this.setState({ failed: false });
+    }
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
+// The token of the company, as the print pages draw it
+const SummaryToken = ({ company }) => {
+  if (typeof company?.abbrev !== "string" || !company.abbrev) return null;
+  return (
+    <TokenBoundary company={company}>
+      <svg
+        viewBox="-25 -25 50 50"
+        className="mr-1.5 inline-block size-5 align-middle"
+        aria-hidden="true"
+        data-testid="company-token"
+      >
+        <CompanyToken company={company} />
+      </svg>
+    </TokenBoundary>
+  );
+};
+
+// What a closed card shows: the token, the name and the abbreviation. One
+// inline run, so the title reads "Name ABBREV" and truncates as one.
 const summary = (company, index) => (
   <span className="truncate">
-    {typeof company?.color === "string" && company.color && (
-      <span
-        className="mr-1.5 inline-block size-3 rounded-full border align-middle"
-        style={{ backgroundColor: company.color }}
-        aria-hidden="true"
-      />
-    )}
+    <SummaryToken company={company} />
     {company?.name || `#${index + 1}`}
     {company?.abbrev && (
       <>

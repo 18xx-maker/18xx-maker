@@ -2254,16 +2254,44 @@ describe("edit panel companies", () => {
     expect(text(0, "Name")).not.toBeVisible();
   });
 
-  it("shows the name and the abbreviation on a closed card, with the color", async () => {
+  it("shows the name and the abbreviation on a closed card, with the company token", async () => {
     open(companiesRoute);
     await ready();
     expect(toggleOf(0)).toHaveAccessibleName("Black Railroad BLRR");
     expect(toggleOf(0)).toHaveTextContent("Black Railroad");
     expect(toggleOf(0)).toHaveTextContent("BLRR");
-    // eslint-disable-next-line testing-library/no-node-access
-    const swatch = toggleOf(0).querySelector("span[style]");
-    expect(swatch).toHaveStyle({ backgroundColor: "rgb(0, 0, 0)" });
-    expect(swatch).toHaveAttribute("aria-hidden", "true");
+    const token = within(toggleOf(0)).getByTestId("company-token");
+    expect(token).toHaveAttribute("aria-hidden", "true");
+    expect(token).toHaveTextContent("BLRR");
+  });
+
+  it("shows no token on a closed card of a company it cannot draw", async () => {
+    const { store } = open(companiesRoute);
+    await ready();
+    act(() =>
+      store.dispatch(
+        editGame((game) => ({
+          ...game,
+          companies: game.companies.map((company, index) =>
+            index === 0
+              ? { name: company.name, abbrev: 7, color: 3 }
+              : index === 1
+                ? { name: company.name }
+                : company,
+          ),
+        })),
+      ),
+    );
+    await waitFor(() =>
+      expect(
+        within(toggleOf(0)).queryByTestId("company-token"),
+      ).not.toBeInTheDocument(),
+    );
+    expect(
+      within(toggleOf(1)).queryByTestId("company-token"),
+    ).not.toBeInTheDocument();
+    expect(toggleOf(2)).toBeVisible();
+    expect(within(toggleOf(2)).getByTestId("company-token")).toBeVisible();
   });
 
   it("opens a card with its primary fields, the rest is behind More fields", async () => {
