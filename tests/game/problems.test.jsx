@@ -224,4 +224,37 @@ describe("problems of a game", () => {
       screen.queryByRole("link", { name: /Problems/ }),
     ).not.toBeInTheDocument();
   });
+
+  it("checks the game restored at start, before a game page is opened", async () => {
+    const { store, user } = renderApp("/", {
+      game: brokenGame(),
+      loadedGame: { slug: "Broken", title: "Broken", id: "Broken" },
+    });
+
+    await waitFor(() =>
+      expect(store.getState().gameProblems).toMatchObject({
+        slug: "Broken",
+        status: "done",
+      }),
+    );
+    if (!screen.queryByRole("link", { name: /Problems/ })) {
+      await user.click(screen.getByRole("button", { name: "Toggle Sidebar" }));
+    }
+    const link = await screen.findByRole("link", { name: /Problems/ });
+    expect(link).toHaveAttribute("href", "/games/Broken/problems");
+    expect(link.closest("li")).toHaveTextContent("5");
+  });
+
+  it("checks a game loaded from storage at start", async () => {
+    const { store } = renderApp("/", {
+      loadedGame: { slug: "bundled:18Test", title: "18Test", id: "18Test" },
+    });
+
+    await waitFor(() =>
+      expect(store.getState().gameProblems).toMatchObject({
+        slug: "18Test",
+        status: "done",
+      }),
+    );
+  });
 });

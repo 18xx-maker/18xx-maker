@@ -13,6 +13,7 @@ import Analytics from "@/components/Analytics";
 import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
 import { ShortcutsDialog } from "@/components/Shortcuts";
+import ValidateGame from "@/components/ValidateGame";
 import ExportHost from "@/components/export/ExportHost";
 import AppSidebar from "@/components/nav/AppSidebar";
 import Header from "@/components/nav/Header";
@@ -255,6 +256,7 @@ body {
             </defs>
           </svg>
           <SetSvgColors />
+          <ValidateGame />
           {render ? (
             <RenderState />
           ) : (
