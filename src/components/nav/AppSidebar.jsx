@@ -71,8 +71,8 @@ const AppSidebar = (props) => {
               label={t("nav.edit")}
               shortcut="e"
             />,
-            resolved && <DownloadItem key="game-download" game={resolved} />,
             capability.electron && resolved && <ExportItem key="game-export" />,
+            resolved && <DownloadItem key="game-download" game={resolved} />,
             resolved && changedFields.length > 0 && (
               <ChangesItem
                 key="game-changes"

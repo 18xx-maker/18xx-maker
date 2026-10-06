@@ -224,7 +224,7 @@ describe("edit panel", () => {
     await user.keyboard("]");
     await waitFor(() =>
       expect(router.state.location.search).toBe(
-        "?edit=true&editSection=trains",
+        "?edit=true&editSection=players",
       ),
     );
     expect(router.state.location.pathname).toBe(route);
@@ -232,7 +232,7 @@ describe("edit panel", () => {
 
     await user.keyboard("2");
     await waitFor(() => expect(router.state.location.pathname).not.toBe(route));
-    expect(router.state.location.search).toBe("?edit=true&editSection=trains");
+    expect(router.state.location.search).toBe("?edit=true&editSection=players");
     expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
   });
 });
@@ -1216,13 +1216,13 @@ describe("edit panel phases", () => {
     { train: ["3H", "3M"], limit: 4, tiles: "green" },
   ];
 
-  it("is the tab after the companies, with a card for each phase", async () => {
+  it("is the tab after the trains, with a card for each phase", async () => {
     open(phasesRoute);
     await ready();
     const tabs = screen.getAllByRole("tab");
-    const companies = tabs.findIndex((tab) => tab.id.endsWith("companies"));
-    expect(tabs[companies + 1]).toHaveAccessibleName("Phases");
-    expect(tabs[companies + 1]).toHaveAttribute("aria-selected", "true");
+    const trains = tabs.findIndex((tab) => tab.id.endsWith("trains"));
+    expect(tabs[trains + 1]).toHaveAccessibleName("Phases");
+    expect(tabs[trains + 1]).toHaveAttribute("aria-selected", "true");
     expect(cards()).toHaveLength(games["18Test"].phases.length);
   });
 
@@ -2265,13 +2265,13 @@ describe("edit panel companies", () => {
   const text = (index, name) =>
     within(cards()[index]).getByRole("textbox", { name });
 
-  it("is the tab after the privates, with a closed card for each company", async () => {
+  it("is the tab before the privates, with a closed card for each company", async () => {
     open(companiesRoute);
     await ready();
     const tabs = screen.getAllByRole("tab");
     const privates = tabs.findIndex((tab) => tab.id.endsWith("privates"));
-    expect(tabs[privates + 1]).toHaveAccessibleName("Companies");
-    expect(tabs[privates + 1]).toHaveAttribute("aria-selected", "true");
+    expect(tabs[privates - 1]).toHaveAccessibleName("Companies");
+    expect(tabs[privates - 1]).toHaveAttribute("aria-selected", "true");
     expect(cards()).toHaveLength(games["18Test"].companies.length);
     for (let i = 0; i < cards().length; i++) {
       expect(toggleOf(i)).toHaveAttribute("aria-expanded", "false");
@@ -2815,8 +2815,8 @@ describe("edit panel rounds", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("rounds"));
     expect(tab).toHaveAccessibleName("Rounds");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    // The tokens, colors, output, hex and JSON tabs come after it
-    expect(tabs[tabs.length - 6]).toBe(tab);
+    // The colors, output and JSON tabs come after it
+    expect(tabs[tabs.length - 4]).toBe(tab);
     expect(cards().length).toBeGreaterThanOrEqual(
       games["18Test"].rounds.length +
         games["18Test"].turns.length +
@@ -2949,7 +2949,7 @@ describe("edit panel tokens", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("tokens"));
     expect(tab).toHaveAccessibleName("Tokens");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 5]).toBe(tab);
+    expect(tabs[tabs.length - 8]).toBe(tab);
     // A token of text is a field, an object is a card
     expect(
       screen.getByRole("textbox", { name: "Value of token Round" }),
@@ -3128,7 +3128,7 @@ describe("edit panel colors", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("colors"));
     expect(tab).toHaveAccessibleName("Colors");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 4]).toBe(tab);
+    expect(tabs[tabs.length - 3]).toBe(tab);
     expect(screen.getByRole("textbox", { name: "Accent" })).toHaveValue(
       "#3a7bd5",
     );
@@ -3224,7 +3224,7 @@ describe("edit panel output", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("output"));
     expect(tab).toHaveAccessibleName("Output");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 3]).toBe(tab);
+    expect(tabs[tabs.length - 2]).toBe(tab);
     expect(screen.getByRole("spinbutton", { name: "Max" })).toHaveValue(200);
     expect(screen.getByRole("checkbox", { name: "pdf" })).toBeChecked();
     expect(screen.getByRole("checkbox", { name: "png" })).not.toBeChecked();
