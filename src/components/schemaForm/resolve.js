@@ -6,6 +6,9 @@ import tilesDefs from "@/schemas/tiles.defs.json";
 // panel to more of the game means adding a key here.
 export const GAME_INFO_KEYS = ["info", "links", "prototype", "wip"];
 
+// The lists of the rounds tab, in the order of the tab
+export const ROUND_KEYS = ["rounds", "turns", "pools", "number_cards"];
+
 // The fields of an array item shown first, the others are under "more fields"
 export const PRIMARY_KEYS = [
   "name",

@@ -461,7 +461,7 @@ const trainsRoute = `${route}?edit=true&editSection=trains`;
 describe("edit panel tabs", () => {
   it("shows the tabs, switches by click and keeps the tab in the url", async () => {
     const { user, router } = open(`${route}?edit=true`);
-    const info = await screen.findByRole("tab", { name: "Game info" });
+    const info = await screen.findByRole("tab", { name: "Game" });
     const tab = screen.getByRole("tab", { name: "Trains" });
     expect(info).toHaveAttribute("aria-selected", "true");
     expect(tab).toHaveAttribute("aria-selected", "false");
@@ -494,7 +494,7 @@ describe("edit panel tabs", () => {
 
   it("moves between tabs with the arrow keys, Home and End", async () => {
     const { user, router } = open(`${route}?edit=true`);
-    const info = await screen.findByRole("tab", { name: "Game info" });
+    const info = await screen.findByRole("tab", { name: "Game" });
     const tabs = screen.getAllByRole("tab");
     const last = tabs[tabs.length - 1];
     expect(tabs[0]).toBe(info);
@@ -519,7 +519,7 @@ describe("edit panel tabs", () => {
 
   it("[ and ] cycle the tabs and wrap, but not while typing", async () => {
     const { user, router } = open(`${route}?edit=true`);
-    await screen.findByRole("tab", { name: "Game info" });
+    await screen.findByRole("tab", { name: "Game" });
     const tabs = screen.getAllByRole("tab");
     const selected = () =>
       screen
@@ -552,9 +552,10 @@ describe("edit panel tabs", () => {
 
   it("an unknown tab in the url is the first tab", async () => {
     open(`${route}?edit=true&editSection=nope`);
-    expect(
-      await screen.findByRole("tab", { name: "Game info" }),
-    ).toHaveAttribute("aria-selected", "true");
+    expect(await screen.findByRole("tab", { name: "Game" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
   });
 
   it("forgets the tab when the panel closes", async () => {
@@ -568,9 +569,10 @@ describe("edit panel tabs", () => {
     expect(router.state.location.search).toBe("");
 
     await user.keyboard("e");
-    expect(
-      await screen.findByRole("tab", { name: "Game info" }),
-    ).toHaveAttribute("aria-selected", "true");
+    expect(await screen.findByRole("tab", { name: "Game" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
   });
 
   it("forgets the tab when the config panel opens", async () => {
@@ -2775,5 +2777,61 @@ describe("edit panel players", () => {
     ).toBeVisible();
     expect(players(store)[0].certLimit).toBe("3/4");
     expect(within(cards()[0]).getByRole("button", { name: "2" })).toBeVisible();
+  });
+});
+
+describe("edit panel rounds", () => {
+  const roundsRoute = `${route}?edit=true&editSection=rounds`;
+  const ready = () => screen.findByRole("button", { name: "Add round" });
+  const game = () => opened.getState().game;
+
+  it("is the tab before the JSON editor, with a card for each round, turn and pool", async () => {
+    open(roundsRoute);
+    await ready();
+    const tabs = screen.getAllByRole("tab");
+    const tab = tabs.find((candidate) => candidate.id.endsWith("rounds"));
+    expect(tab).toHaveAccessibleName("Rounds");
+    expect(tab).toHaveAttribute("aria-selected", "true");
+    expect(tabs[tabs.length - 2]).toBe(tab);
+    expect(cards().length).toBeGreaterThanOrEqual(
+      games["18Test"].rounds.length +
+        games["18Test"].turns.length +
+        games["18Test"].pools.length,
+    );
+    expect(screen.getByRole("button", { name: "Add turn" })).toBeVisible();
+    expect(screen.getByRole("button", { name: "Add pool" })).toBeVisible();
+  });
+
+  it("selects by click", async () => {
+    const { user, router } = open(`${route}?edit=true`);
+    await panel();
+    await user.click(screen.getByRole("tab", { name: "Rounds" }));
+    await ready();
+    expect(router.state.location.search).toBe("?edit=true&editSection=rounds");
+  });
+
+  it("adds and removes a round", async () => {
+    const { user } = open(roundsRoute);
+    await ready();
+    const count = game().rounds.length;
+    await user.click(screen.getByRole("button", { name: "Add round" }));
+    expect(game().rounds).toHaveLength(count + 1);
+    await user.click(
+      screen.getAllByRole("button", { name: /^Remove round / })[count],
+    );
+    expect(game().rounds).toHaveLength(count);
+  });
+
+  it("edits the number cards, one color per line", async () => {
+    const { user } = open(roundsRoute, {
+      ...structuredClone(games["18Test"]),
+      number_cards: ["red", "blue"],
+    });
+    await ready();
+    const area = screen.getByRole("textbox", { name: /number/i });
+    expect(area).toHaveValue("red\nblue");
+    await user.type(area, "\ngreen");
+    await user.tab();
+    expect(game().number_cards).toEqual(["red", "blue", "green"]);
   });
 });

@@ -95,7 +95,7 @@ test.describe("bundled games", () => {
     await expect(panel).toBeVisible();
 
     const tabs = panel.getByRole("tablist");
-    await expect(tabs.getByRole("tab", { name: "Game info" })).toHaveAttribute(
+    await expect(tabs.getByRole("tab", { name: "Game" })).toHaveAttribute(
       "aria-selected",
       "true",
     );

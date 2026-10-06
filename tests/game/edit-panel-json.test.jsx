@@ -772,7 +772,7 @@ describe("json editor", () => {
       const { user } = open(jsonRoute);
       await cursorAfter('"title": "18Test');
       await realUser.keyboard("Y");
-      await user.click(screen.getByRole("tab", { name: "Game info" }));
+      await user.click(screen.getByRole("tab", { name: "Game" }));
       expect(opened.getState().game.info.title).toBe("18TestY");
     });
   });

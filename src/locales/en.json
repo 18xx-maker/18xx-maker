@@ -68,7 +68,7 @@
     "invalidJson": "Enter valid JSON.",
     "sections": {
       "info": {
-        "tab": "Game info",
+        "tab": "Game",
         "description": "Edit the game info, links and flags. The changes stay in memory until you save them on the Changes page."
       },
       "trains": {
@@ -95,6 +95,10 @@
         "tab": "Players",
         "description": "Edit the players table, the bank and the limits of the game. The changes stay in memory until you save them on the Changes page."
       },
+      "rounds": {
+        "tab": "Rounds",
+        "description": "Edit the rounds of the round tracker, the turns printed on the charter, the notes about the pools and the number cards. The changes stay in memory until you save them on the Changes page."
+      },
       "json": {
         "tab": "JSON",
         "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
@@ -110,6 +114,11 @@
       "companies": "company",
       "phases": "phase",
       "players": "player",
+      "rounds": "round",
+      "turns": "turn",
+      "pools": "pool",
+      "notes": "note",
+      "number_cards": "number card",
       "legend": "legend entry",
       "colors": "color",
       "tokenTypes": "token type",

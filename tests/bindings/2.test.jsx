@@ -275,7 +275,7 @@ describe("cycle keys", () => {
     const { user } = renderApp("/games/18Test/map?edit=true");
     await screen.findByTestId("edit-panel");
     const [info, second] = screen.getAllByRole("tab");
-    expect(info).toHaveAccessibleName("Game info");
+    expect(info).toHaveAccessibleName("Game");
 
     info.focus();
     await user.keyboard("]");

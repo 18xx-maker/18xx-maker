@@ -172,7 +172,7 @@ describe("lines of the json editor", () => {
     expect(selected(v).text).toEqual([300, 301, 302]);
 
     // A tab drops the lines, Back brings them and a new editor
-    await user.click(screen.getByRole("tab", { name: "Game info" }));
+    await user.click(screen.getByRole("tab", { name: "Game" }));
     await waitFor(() =>
       expect(screen.queryByTestId("json-editor")).not.toBeInTheDocument(),
     );
@@ -407,7 +407,7 @@ describe("lines of the json editor", () => {
     );
     await view();
     await user.keyboard("[[");
-    expect(router.state.location.search).toBe("?edit=true&editSection=players");
+    expect(router.state.location.search).toBe("?edit=true&editSection=rounds");
   });
 
   it("is ignored and dropped without the JSON tab of an open panel", async () => {
@@ -454,9 +454,10 @@ describe("deep links", () => {
 
   it("fall back to the first edit tab for an unknown one", async () => {
     open(`${route}?edit=true&editSection=nope`);
-    expect(
-      await screen.findByRole("tab", { name: "Game info" }),
-    ).toHaveAttribute("aria-selected", "true");
+    expect(await screen.findByRole("tab", { name: "Game" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
   });
 
   it("open the edit tab of the link on every section with an edit toggle", async () => {

@@ -5,6 +5,7 @@ import {
   PHASE_PRIMARY_KEYS,
   PLAYER_KEYS,
   PLAYER_PRIMARY_KEYS,
+  ROUND_KEYS,
   clearValue,
   coerceStringOrNumber,
   defaultValue,
@@ -1376,5 +1377,34 @@ describe("what a reference stores", () => {
     expect(referenceValue(["4"], "either")).toBe("4");
     expect(referenceValue(["4"], "list")).toEqual(["4"]);
     expect(referenceValue(["4", "5"], "either")).toEqual(["4", "5"]);
+  });
+});
+
+describe("the rounds tab", () => {
+  it("gives the fields of the rounds, turns, pools and number cards a real form, but the shapes", () => {
+    const unexpected = [];
+    const walk = (node, keys) => {
+      const resolved = resolveSchema(node, schema);
+      const kind = kindOf(resolved, keys[keys.length - 1], schema);
+      if (kind === "json") unexpected.push(keys.join("."));
+      if (kind === "array") {
+        walk(resolveSchema(resolved.items, schema), [...keys, "0"]);
+      }
+      if (kind === "object") {
+        Object.entries(resolved.properties).forEach(([key, child]) =>
+          walk(child, [...keys, key]),
+        );
+      }
+    };
+    ROUND_KEYS.forEach((key) => walk(schema.properties[key], [key]));
+    // The shapes of a round token are JSON, as on a train or a tile
+    expect(unexpected).toEqual([
+      "rounds.0.bar",
+      "rounds.0.circle",
+      "rounds.0.shield",
+      "rounds.0.shield3",
+      "rounds.0.kiteshield",
+      "rounds.0.star5",
+    ]);
   });
 });
