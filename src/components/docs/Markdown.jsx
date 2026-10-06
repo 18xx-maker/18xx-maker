@@ -229,7 +229,10 @@ const components = {
 const Markdown = ({ className, ...pass }) => {
   return (
     <div
-      className={cn("p-4 max-w-prose bg-background text-foreground", className)}
+      className={cn(
+        "p-4 pl-10 max-w-prose bg-background text-foreground",
+        className,
+      )}
     >
       <ReactMarkdown
         components={components}

@@ -63,7 +63,7 @@ const DocsPage = () => {
         <Markdown className="max-w-200 [&_p]:max-w-[65ch] [&_ul]:max-w-[65ch]">
           {source}
         </Markdown>
-        <div className="max-w-200 px-4 pb-4">
+        <div className="max-w-200 pr-4 pb-4 pl-10">
           <DocsPager />
         </div>
       </div>

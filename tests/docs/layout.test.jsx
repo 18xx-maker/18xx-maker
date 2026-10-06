@@ -15,6 +15,9 @@ describe("docs layout", () => {
     // eslint-disable-next-line testing-library/no-node-access
     expect(docs.querySelectorAll(".mx-auto")).toHaveLength(0);
     expect(article).not.toHaveClass("max-w-prose");
+    // room for the hover heading anchor, which sits 24px left of the text
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(docs.querySelector(".max-w-200.p-4")).toHaveClass("pl-10");
   });
 
   it("leaves the home page at the default width", async () => {
@@ -25,5 +28,6 @@ describe("docs layout", () => {
 
     expect(article).toHaveClass("max-w-prose");
     expect(article).not.toHaveClass("max-w-200");
+    expect(article).toHaveClass("pl-10");
   });
 });
