@@ -13,6 +13,7 @@ import {
   compileCompanies,
   overrideCompanies,
 } from "@/util/companies/companies";
+import { companyNames } from "@/util/companies/companyNames";
 import { cardCompanyTrains } from "@/util/companies/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
 
@@ -66,15 +67,16 @@ const CardPage = () => {
 
       let share = shares[index];
       let company = share.company;
+      let names = companyNames(company, config.companyNames, share.subtext);
       node = (
         <Share
-          name={company.name}
           abbrev={company.abbrev}
           logo={company.logo}
           color={company.color}
           token={company.token || company.color}
           {...share}
-          subtext={company.subtext || share.subtext}
+          name={names.name}
+          subtext={names.subtext}
           variant={company.variant || share.variant}
           fontFamily={company.fontFamily || game.info.companyFontFamily}
         />

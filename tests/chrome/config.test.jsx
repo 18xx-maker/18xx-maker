@@ -229,6 +229,19 @@ describe("config drawer", () => {
     expect(store.getState().errors).toEqual({});
   });
 
+  it("chooses what companies are named", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/charters?config=true&section=colors",
+    );
+    await user.click(
+      await screen.findByRole("combobox", { name: "Company Names" }),
+    );
+    await user.click(await screen.findByRole("option", { name: "both" }));
+    await waitFor(() =>
+      expect(store.getState().config.companyNames).toBe("both"),
+    );
+  });
+
   it("sets the print scale and does not store one out of range", async () => {
     const { user, store } = renderApp(
       "/games/18Test/map?config=true&section=layout",

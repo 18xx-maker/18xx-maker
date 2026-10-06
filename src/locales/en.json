@@ -582,6 +582,10 @@
         "label": "Companies Theme",
         "description": "The company theme determines which colors are used for all of the elements on the maps and tiles."
       },
+      "companyNames": {
+        "label": "Company Names",
+        "description": "Chooses what charters and share cards print as the name of a company: its name, its alias (the name when it has none), or both with the alias under the name."
+      },
       "companySvgLogos": {
         "label": "Company Logos",
         "description": "This lets you choose to use SVG logos (when available) for companies instead of only colors and text. The different settings are explained on the [logos doc](/docs/games/logos) page."

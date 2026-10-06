@@ -15,6 +15,7 @@ import {
   compileCompanies,
   overrideCompanies,
 } from "@/util/companies/companies";
+import { companyNames } from "@/util/companies/companyNames";
 import { cardCompanyTrains } from "@/util/companies/companyTrains";
 
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
@@ -54,26 +55,26 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   );
   let shareNodes = addIndex(chain)((company, index) => {
     let shares = fillArray(prop("quantity"), company.shares || []);
-    return addIndex(map)(
-      (share, i) => (
+    return addIndex(map)((share, i) => {
+      const names = companyNames(company, config.companyNames, share.subtext);
+      return (
         <Share
           key={`${index}-${company.abbrev}-${i}`}
           company={company}
-          name={company.name}
           abbrev={company.abbrev}
           logo={company.logo}
           color={company.color}
           token={company.token || company.color}
           {...share}
-          subtext={company.subtext || share.subtext}
+          name={names.name}
+          subtext={names.subtext}
           variant={company.variant || share.variant}
           fontFamily={company.fontFamily || game.info.companyFontFamily}
           fontWeight={company.fontWeight || game.info.companyFontWeight}
           fontStyle={company.fontStyle || game.info.companyFontStyle}
         />
-      ),
-      shares,
-    );
+      );
+    }, shares);
   }, companies);
   let trainNodes = addIndex(map)(
     (train, index) => (

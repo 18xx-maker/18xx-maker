@@ -43,7 +43,7 @@ const CharterPage = () => {
         company={company}
         game={game}
         charters={charters}
-        subName={company.subName}
+        withSubtext={false}
       />
       <PageSetup landscape={false} />
     </div>

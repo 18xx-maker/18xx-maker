@@ -112,3 +112,17 @@ bereits und ignorieren die Einstellung:
   "tokensBelow": true
 }
 ```
+
+## Alias einer Gesellschaft
+
+Eine Gesellschaft kann einen `alias` haben, einen zweiten Namen, etwa eine
+Kurzform oder den Namen in einer anderen Sprache. Die Konfiguration
+`companyNames` (auf der Konfigurationsseite) legt fest, was die Gesellschaftskarten
+und die Aktienkarten drucken: `name` (der Standard) druckt den Namen, `alias`
+druckt stattdessen den Alias (den Namen, wenn die Gesellschaft keinen hat), und
+`both` druckt den Namen mit dem Alias darunter, anstelle des `subtext` der
+Gesellschaft:
+
+```json
+{ "name": "Baltimore & Ohio Railroad", "abbrev": "B&O", "alias": "B&O" }
+```

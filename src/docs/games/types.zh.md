@@ -85,3 +85,11 @@
   "tokensBelow": true
 }
 ```
+
+## 公司别名
+
+公司可以有一个 `alias`,即第二个名称,例如简称或其他语言的名称。配置页面中的 `companyNames` 配置决定公司执照和股票卡上打印什么:`name`(默认)打印名称,`alias` 改为打印别名(没有别名的公司仍打印名称),`both` 打印名称并在其下方打印别名,取代公司的 `subtext`:
+
+```json
+{ "name": "Baltimore & Ohio Railroad", "abbrev": "B&O", "alias": "B&O" }
+```

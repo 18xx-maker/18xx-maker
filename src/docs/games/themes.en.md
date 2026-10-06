@@ -87,6 +87,9 @@ merged over it, so a company theme only needs the colors it changes. These names
 accepted as aliases: `cyan` (`lightBlue`), `grey` (`gray`), `lightGreen`
 (`brightGreen`), `navy` (`navyBlue`) and `purple` (`violet`).
 
+What a charter prints as the name of a company is a separate setting, see
+[company aliases](/docs/games/types).
+
 ## Colors in a game file
 
 A game can add its own colors with the `colors` field. They are merged over the

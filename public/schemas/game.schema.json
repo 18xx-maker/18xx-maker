@@ -1475,6 +1475,10 @@
             "description": "Text under the name of the company.",
             "type": "string"
           },
+          "alias": {
+            "description": "A second name of the company. The companyNames config chooses whether the charter and the share cards print the name, the alias, or both.",
+            "type": "string"
+          },
           "subName": {
             "description": "A second line under the name of the charter.",
             "type": "string"
