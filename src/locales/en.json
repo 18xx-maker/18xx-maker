@@ -120,9 +120,15 @@
         "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
       }
     },
-    "tabs": {
-      "label": "Sections",
-      "hint": "switch tabs"
+    "groups": {
+      "game": "Game",
+      "equipment": "Equipment",
+      "output": "Look and output",
+      "other": "Other"
+    },
+    "nav": {
+      "label": "Edit mode",
+      "forms": "Forms"
     },
     "items": {
       "trains": "train",

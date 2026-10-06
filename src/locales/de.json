@@ -120,9 +120,15 @@
         "description": "Bearbeite das ganze Spiel als JSON. Die Seite folgt deiner Eingabe, solange das JSON gültig ist. Die Änderungen bleiben im Speicher, bis du sie auf der Änderungsseite speicherst."
       }
     },
-    "tabs": {
-      "label": "Bereiche",
-      "hint": "Tabs wechseln"
+    "groups": {
+      "game": "Spiel",
+      "equipment": "Ausstattung",
+      "output": "Aussehen und Ausgabe",
+      "other": "Weitere"
+    },
+    "nav": {
+      "label": "Bearbeitungsmodus",
+      "forms": "Formulare"
     },
     "items": {
       "trains": "Zug",

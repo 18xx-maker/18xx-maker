@@ -5,7 +5,11 @@ import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-import EditTabs, { panelId, tabId } from "@/components/editPanel/EditTabs";
+import EditNav, {
+  EditSwitch,
+  panelId,
+  tabId,
+} from "@/components/editPanel/EditNav";
 
 import { useGame } from "@/hooks/game";
 import { useEditPanel } from "@/hooks/useEditPanel";
@@ -16,7 +20,15 @@ import { cn } from "@/util/cn";
 const EditPanel = () => {
   const { t } = useTranslation();
   const game = useGame();
-  const { toggle, sections, editSection, setEditSection } = useEditPanel();
+  const {
+    toggle,
+    sections,
+    groups,
+    formSection,
+    json,
+    editSection,
+    setEditSection,
+  } = useEditPanel();
   const { hex, clear } = useSelectedHex();
   const { Form, wide } = sections.find((s) => s.section === editSection);
 
@@ -43,27 +55,45 @@ const EditPanel = () => {
         wide ? "md:w-1/2" : "md:w-1/3",
       )}
     >
-      <div className="flex flex-row items-center justify-between gap-4 p-4 border-b">
-        <h1 className="text-3xl font-bold">{t("editPanel.title")}</h1>
-        <Button
-          variant="outline"
-          size="icon"
-          aria-label={t("editPanel.close")}
-          onClick={toggle}
-        >
-          <X />
-        </Button>
+      <div className="flex flex-col gap-3 p-4 border-b">
+        <div className="flex flex-row flex-wrap items-center justify-between gap-x-4 gap-y-2">
+          <h1 className="text-2xl font-bold">{t("editPanel.title")}</h1>
+          <div className="flex flex-row items-center gap-2">
+            <EditSwitch
+              json={json}
+              formSection={formSection}
+              setSection={setEditSection}
+            />
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label={t("editPanel.close")}
+              onClick={toggle}
+            >
+              <X />
+            </Button>
+          </div>
+        </div>
+        {!json && (
+          <EditNav
+            groups={groups}
+            section={editSection}
+            setSection={setEditSection}
+          />
+        )}
       </div>
       <div className="flex-1 overflow-y-auto overscroll-contain p-4 flex flex-col gap-4">
-        <EditTabs
-          sections={sections}
-          section={editSection}
-          setSection={setEditSection}
-        />
         <div
-          role="tabpanel"
+          {...(json
+            ? {
+                role: "region",
+                "aria-label": t("editPanel.sections.json.tab"),
+              }
+            : {
+                role: "tabpanel",
+                "aria-labelledby": tabId(editSection),
+              })}
           id={panelId(editSection)}
-          aria-labelledby={tabId(editSection)}
           className={cn("flex flex-col gap-4", wide && "flex-1 min-h-0")}
         >
           <p className="text-sm text-muted-foreground">

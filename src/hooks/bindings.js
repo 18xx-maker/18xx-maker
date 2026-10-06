@@ -5,7 +5,7 @@ import { useLocation, useMatch, useNavigate } from "react-router";
 import { find, propEq } from "ramda";
 
 import { sections as configSections } from "@/components/config";
-import { panelId, tabId } from "@/components/editPanel/EditTabs";
+import { panelId, tabId } from "@/components/editPanel/EditNav";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
@@ -61,7 +61,8 @@ export const useBindings = () => {
     available: canEdit,
     open: editOpen,
     toggle: toggleEdit,
-    sections: editSections,
+    forms: formSections,
+    formSection,
     editSection,
     setEditSection,
   } = edit;
@@ -133,11 +134,15 @@ export const useBindings = () => {
           const params = new URLSearchParams(location.search);
 
           if (editOpen) {
-            const next = cycle(
-              editSections,
-              editSections.findIndex((s) => s.section === editSection),
-              event.key,
-            ).section;
+            // Only the form sections cycle; from the JSON editor it goes to
+            // the last form
+            const index = formSections.findIndex(
+              (s) => s.section === editSection,
+            );
+            const next =
+              index === -1
+                ? formSection
+                : cycle(formSections, index, event.key).section;
             // With the focus on a tab or in the panel it goes to the new tab:
             // the panel is replaced, the old tab is not selected any more
             const active = document.activeElement;
@@ -145,7 +150,12 @@ export const useBindings = () => {
               active?.closest?.('[role="tablist"]') ||
               document.getElementById(panelId(editSection))?.contains(active);
             setEditSection(next);
-            if (inside) document.getElementById(tabId(next))?.focus();
+            if (inside) {
+              // The chips are not there in the JSON editor: after the render
+              const focus = () => document.getElementById(tabId(next))?.focus();
+              if (editSection === "json") setTimeout(focus, 0);
+              else focus();
+            }
           } else if (params.has("config")) {
             let current = params.get("section") || "colors";
             try {
@@ -354,7 +364,8 @@ export const useBindings = () => {
       toggleEdit,
       canEdit,
       editOpen,
-      editSections,
+      formSections,
+      formSection,
       editSection,
       setEditSection,
       selectedHex,

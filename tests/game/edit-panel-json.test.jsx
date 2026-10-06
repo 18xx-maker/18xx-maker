@@ -98,8 +98,8 @@ afterEach(() => {
 describe("json editor", () => {
   it("shows the game file as text on its tab and in the url", async () => {
     const { user, router } = open(`${route}?edit=true`);
-    const tab = await screen.findByRole("tab", { name: "JSON" });
-    expect(tab).toHaveAttribute("aria-selected", "false");
+    const tab = await screen.findByRole("button", { name: "JSON" });
+    expect(tab).toHaveAttribute("aria-pressed", "false");
     expect(router.state.location.search).toBe("?edit=true");
 
     await user.click(tab);
@@ -114,8 +114,8 @@ describe("json editor", () => {
   it("opens from the deep link", async () => {
     open(jsonRoute);
     await view();
-    expect(screen.getByRole("tab", { name: "JSON" })).toHaveAttribute(
-      "aria-selected",
+    expect(screen.getByRole("button", { name: "JSON" })).toHaveAttribute(
+      "aria-pressed",
       "true",
     );
   });
@@ -367,8 +367,9 @@ describe("json editor", () => {
       const text = first.state.doc.toString();
       await setText(text.replace('"title"', '"title" ,,'));
       await waitFor(() => expect(status()).toHaveTextContent("syntax error"));
+      await user.click(screen.getByRole("button", { name: "Forms" }));
       await user.click(screen.getByRole("tab", { name: "Trains" }));
-      await user.click(screen.getByRole("tab", { name: "JSON" }));
+      await user.click(screen.getByRole("button", { name: "JSON" }));
       const v = await view();
       expect(v.state.doc.toString()).toContain(",,");
       expect(folded(v)).toEqual([]);
@@ -382,8 +383,9 @@ describe("json editor", () => {
       unfoldAll(first);
       expect(folded(first)).toEqual([]);
 
+      await user.click(screen.getByRole("button", { name: "Forms" }));
       await user.click(screen.getByRole("tab", { name: "Trains" }));
-      await user.click(screen.getByRole("tab", { name: "JSON" }));
+      await user.click(screen.getByRole("button", { name: "JSON" }));
       const v = await waitFor(async () => {
         const found = await view();
         if (found === first) throw new Error("same view");
@@ -400,8 +402,8 @@ describe("json editor", () => {
     await realUser.keyboard("jec?[[");
 
     expect(router.state.location.search).toBe("?edit=true&editSection=json");
-    expect(screen.getByRole("tab", { name: "JSON" })).toHaveAttribute(
-      "aria-selected",
+    expect(screen.getByRole("button", { name: "JSON" })).toHaveAttribute(
+      "aria-pressed",
       "true",
     );
     expect(screen.queryByTestId("shortcuts")).not.toBeInTheDocument();
@@ -727,8 +729,9 @@ describe("json editor", () => {
       await setText("{ draft");
       await waitFor(() => expect(status()).toHaveTextContent("syntax error"));
 
+      await user.click(screen.getByRole("button", { name: "Forms" }));
       await user.click(screen.getByRole("tab", { name: "Trains" }));
-      await user.click(screen.getByRole("tab", { name: "JSON" }));
+      await user.click(screen.getByRole("button", { name: "JSON" }));
       expect((await view()).state.doc.toString()).toBe("{ draft");
       await waitFor(() => expect(status()).toHaveTextContent("syntax error"));
 
@@ -772,7 +775,7 @@ describe("json editor", () => {
       const { user } = open(jsonRoute);
       await cursorAfter('"title": "18Test');
       await realUser.keyboard("Y");
-      await user.click(screen.getByRole("tab", { name: "Game" }));
+      await user.click(screen.getByRole("button", { name: "Forms" }));
       expect(opened.getState().game.info.title).toBe("18TestY");
     });
   });

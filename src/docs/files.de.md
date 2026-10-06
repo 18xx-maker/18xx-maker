@@ -129,8 +129,7 @@ Eingabetaste drückst, und ein geleertes Feld wird aus dem Spiel entfernt (der
 Titel kann nicht entfernt werden). Probleme mit einem Wert, etwa eine Währung
 ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel (zum JSON-Editor siehe unten).
 
-Das Panel hat für jeden Teil des Spiels, den es bearbeitet, einen Tab. Mit `[` und `]` wechselst du zwischen
-ihnen (die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
+Das Panel hat für jeden Teil des Spiels, den es bearbeitet, einen Bereich, als Chips unter den Gruppen Spiel, Ausstattung und Aussehen und Ausgabe. Der Schalter Formulare | JSON in der Kopfzeile wechselt zwischen diesen Formularen und dem JSON-Editor (unten); Formulare führt zurück zum zuletzt geöffneten Formular. Mit `[` und `]` wechselst du zwischen den Formularbereichen (aus dem JSON-Editor gehen sie zum letzten Formular; die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
 lassen das Panel geöffnet). Der Tab Züge hat für jeden Zug des Spiels eine Karte, die
 aus demselben Schema erzeugt wird. Füge mit Zug hinzufügen einen Zug hinzu und
 verschiebe ihn mit den Schaltflächen einer Karte nach oben oder unten,

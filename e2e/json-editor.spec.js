@@ -53,7 +53,7 @@ test("only loads the editor when its tab opens", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Add train" })).toBeVisible();
   expect(requested.filter((url) => /JsonEditor/.test(url))).toEqual([]);
 
-  await page.getByRole("tab", { name: "JSON" }).click();
+  await page.getByRole("button", { name: "JSON" }).click();
   await expect(editor(page)).toBeVisible();
   expect(requested.filter((url) => /JsonEditor/.test(url))).not.toEqual([]);
   // The Emacs and Vim keys load when they are chosen, not with the editor
@@ -93,7 +93,7 @@ test("marks lines with clicks on the line numbers", async ({ page }) => {
   const marked = page.locator(".cm-line.cm-selected-line");
 
   await page.goto("/games/18Test/map?edit=true");
-  await page.getByRole("tab", { name: "JSON" }).click();
+  await page.getByRole("button", { name: "JSON" }).click();
   await expect(editor(page)).toBeVisible();
   await expect(page).toHaveURL(/editSection=json$/);
 

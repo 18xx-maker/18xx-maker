@@ -120,9 +120,15 @@
         "description": "以 JSON 编辑整个游戏。只要 JSON 有效,页面就会随你的输入而更新。更改保留在内存中,直到你在“更改”页面保存。"
       }
     },
-    "tabs": {
-      "label": "分区",
-      "hint": "切换标签页"
+    "groups": {
+      "game": "游戏",
+      "equipment": "配件",
+      "output": "外观与输出",
+      "other": "其他"
+    },
+    "nav": {
+      "label": "编辑模式",
+      "forms": "表单"
     },
     "items": {
       "trains": "列车",

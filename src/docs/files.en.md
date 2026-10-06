@@ -118,8 +118,12 @@ emptying a field removes it from the game (the title cannot be removed).
 Problems with a value, like a currency without a `#`, are shown below its field.
 Escape closes the panel (see below for the JSON editor).
 
-The panel has a tab for each part of the game it edits. Press `[` and `]` to switch between
-them (the number keys go to another section of the game and keep the panel open).
+The panel has a section for each part of the game it edits, shown as chips under
+the group names Game, Equipment and Look and output. The Forms | JSON switch in
+the header goes between these forms and the JSON editor (below), and Forms goes
+back to the form you were on. Press `[` and `]` to switch between the form
+sections (from the JSON editor they go to the last form; the number keys go to
+another section of the game and keep the panel open).
 The Trains tab has a card for each train of the game, generated from the same
 schema. Add a train with Add train, and use the buttons of a card to move it up
 or down, duplicate it or remove it. A removed train can be put back with Undo

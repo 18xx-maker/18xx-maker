@@ -172,7 +172,7 @@ describe("lines of the json editor", () => {
     expect(selected(v).text).toEqual([300, 301, 302]);
 
     // A tab drops the lines, Back brings them and a new editor
-    await user.click(screen.getByRole("tab", { name: "Game" }));
+    await user.click(screen.getByRole("button", { name: "Forms" }));
     await waitFor(() =>
       expect(screen.queryByTestId("json-editor")).not.toBeInTheDocument(),
     );
@@ -242,7 +242,7 @@ describe("lines of the json editor", () => {
 
   it("selects with clicks on the line numbers, without history", async () => {
     const { user, router } = open(`${route}?edit=true`);
-    await user.click(await screen.findByRole("tab", { name: "JSON" }));
+    await user.click(await screen.findByRole("button", { name: "JSON" }));
     const v = await view();
     expect(router.state.historyAction).toBe("PUSH");
 
@@ -319,7 +319,7 @@ describe("lines of the json editor", () => {
 
   it("follows Back and Forward, which skip the replaced states", async () => {
     const { user, router } = open(`${route}?edit=true`);
-    await user.click(await screen.findByRole("tab", { name: "JSON" }));
+    await user.click(await screen.findByRole("button", { name: "JSON" }));
     const v = await view();
     await gutterClick(v, 3);
     await gutterClick(v, 5, { shiftKey: true });
@@ -347,7 +347,7 @@ describe("lines of the json editor", () => {
   it("keeps the lines and history when the JSON tab is clicked again", async () => {
     const { user, router } = open(`${jsonRoute}&lines=3`);
     const v = await view();
-    await user.click(screen.getByRole("tab", { name: "JSON" }));
+    await user.click(screen.getByRole("button", { name: "JSON" }));
     expect(router.state.location.search).toBe(
       "?edit=true&editSection=json&lines=3",
     );
@@ -378,6 +378,7 @@ describe("lines of the json editor", () => {
   it("is dropped when the tab, panel or config changes", async () => {
     const { user, router } = open(`${jsonRoute}&lines=3`);
     await view();
+    await user.click(screen.getByRole("button", { name: "Forms" }));
     await user.click(screen.getByRole("tab", { name: "Trains" }));
     expect(router.state.location.search).toBe("?edit=true&editSection=trains");
 
@@ -406,8 +407,9 @@ describe("lines of the json editor", () => {
       router.navigate({ search: `${jsonRoute.split("?")[1]}&lines=3` }),
     );
     await view();
+    // [ from the JSON editor goes to the last form (the first, the panel was closed)
     await user.keyboard("[[");
-    expect(router.state.location.search).toBe("?edit=true&editSection=output");
+    expect(router.state.location.search).toBe("?edit=true");
   });
 
   it("is ignored and dropped without the JSON tab of an open panel", async () => {
