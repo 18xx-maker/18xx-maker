@@ -57,3 +57,46 @@ test("only loads the editor when its tab opens", async ({ page }) => {
   await expect(editor(page)).toBeVisible();
   expect(requested.filter((url) => /JsonEditor/.test(url))).not.toEqual([]);
 });
+
+// A click on a line number marks the line in the url without a history entry,
+// a link with lines marks them
+test("marks lines with clicks on the line numbers", async ({ page }) => {
+  const meta = process.platform === "darwin" ? "Meta" : "Control";
+  const number = (line) =>
+    page.locator(".cm-lineNumbers .cm-gutterElement", {
+      hasText: new RegExp(`^${line}$`),
+    });
+  const marked = page.locator(".cm-line.cm-selected-line");
+
+  await page.goto("/games/18Test/map?edit=true");
+  await page.getByRole("tab", { name: "JSON" }).click();
+  await expect(editor(page)).toBeVisible();
+  await expect(page).toHaveURL(/editSection=json$/);
+
+  await number(3).first().click();
+  await expect(page).toHaveURL(/editSection=json&lines=3$/);
+  await expect(marked).toHaveCount(1);
+
+  await number(5)
+    .first()
+    .click({ modifiers: ["Shift"] });
+  await expect(page).toHaveURL(/lines=3-5$/);
+  await expect(marked).toHaveCount(3);
+
+  await number(8)
+    .first()
+    .click({ modifiers: [meta] });
+  await expect(page).toHaveURL(/lines=3-5,8$/);
+  await expect(marked).toHaveCount(4);
+
+  // The clicks did not add history: Back leaves the JSON tab
+  await page.goBack();
+  await expect(page).toHaveURL(/\?edit=true$/);
+  await page.goForward();
+  await expect(page).toHaveURL(/lines=3-5,8$/);
+  await expect(marked).toHaveCount(4);
+
+  await page.goto("/games/18Test/map?edit=true&editSection=json&lines=2,4-5");
+  await expect(marked).toHaveCount(3);
+  await expect(page).toHaveURL(/lines=2,4-5$/);
+});
