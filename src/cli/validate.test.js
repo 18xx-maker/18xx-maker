@@ -220,6 +220,82 @@ describe("validate", () => {
     expect(lines).toEqual([""]);
   });
 
+  describe("the references of a game", () => {
+    const withGame = (game) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({ info: { title: "Game" }, ...game }),
+      );
+
+    // x-ref is an annotation: a name the game does not have is still valid
+    it.each([
+      ["a private company", { privates: [{ name: "P", company: "NOPE" }] }],
+      [
+        "a train event that is a name",
+        {
+          trains: [
+            { name: "2", color: "white", price: 1, quantity: 1, rust: "NOPE" },
+          ],
+        },
+      ],
+      [
+        "a train event that is a list",
+        {
+          trains: [
+            {
+              name: "2",
+              color: "white",
+              price: 1,
+              quantity: 1,
+              rust: ["3", "NOPE"],
+            },
+          ],
+        },
+      ],
+      [
+        "a train event that names the Nth train",
+        {
+          trains: [
+            {
+              name: "2",
+              color: "white",
+              quantity: 1,
+              price: 1,
+              rust: { on: "NOPE", index: 2 },
+            },
+          ],
+        },
+      ],
+      [
+        "a company of a market cell, in a oneOf",
+        { stock: { market: [[{ companies: ["NOPE"] }]] } },
+      ],
+    ])("accepts %s that names nothing", (_, game) => {
+      expect(run(withGame(game)).code).toBe(0);
+    });
+
+    it("still rejects a value of the wrong type", () => {
+      expect(
+        run(withGame({ privates: [{ name: "P", company: 3 }] })).code,
+      ).not.toBe(0);
+    });
+
+    it.each(["narrow", "dashed", "line", "dual"])(
+      "accepts the track gauge %s",
+      (trackGauge) => {
+        expect(
+          run(withGame({ info: { title: "Game", trackGauge } })).code,
+        ).toBe(0);
+      },
+    );
+
+    it("rejects another track gauge", () => {
+      expect(
+        run(withGame({ info: { title: "Game", trackGauge: "wide" } })).code,
+      ).not.toBe(0);
+    });
+  });
+
   describe("iconSize of a private", () => {
     const withPrivate = (iconSize) =>
       writeTmp(
