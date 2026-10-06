@@ -14,7 +14,7 @@ describe("docs previous and next", () => {
     expect(previous).toHaveTextContent("Using 18xx Maker");
     expect(within(nav).getByRole("link", { name: /Next/ })).toHaveAttribute(
       "href",
-      "/docs/faq",
+      "/docs/config",
     );
   });
 
@@ -24,7 +24,21 @@ describe("docs previous and next", () => {
 
     expect(within(nav).getByRole("link", { name: /Next/ })).toHaveAttribute(
       "href",
-      "/docs/output/pdf",
+      "/docs/output/cli",
+    );
+  });
+
+  it("puts the new game pages in sidebar order", async () => {
+    renderApp("/docs/games/tiles");
+    const nav = await pager();
+
+    expect(within(nav).getByRole("link", { name: /Previous/ })).toHaveAttribute(
+      "href",
+      "/docs/games/market",
+    );
+    expect(within(nav).getByRole("link", { name: /Next/ })).toHaveAttribute(
+      "href",
+      "/docs/games/privates",
     );
   });
 

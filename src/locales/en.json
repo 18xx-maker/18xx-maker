@@ -379,6 +379,14 @@
       "title": "Files",
       "description": "How 18xx Maker uses files"
     },
+    "config": {
+      "title": "Config Panel",
+      "description": "Page, print and display settings"
+    },
+    "app": {
+      "title": "Desktop App and Settings",
+      "description": "Install the app and set up the app settings"
+    },
     "faq": {
       "title": "Questions & Answers",
       "description": "Common questions"
@@ -388,6 +396,10 @@
       "description": "Help translate 18xx Maker"
     },
     "output": {
+      "cli": {
+        "title": "Command Line",
+        "description": "Export and validate from the terminal"
+      },
       "pdf": {
         "title": "PDF Output",
         "description": "Generate PDF documents"
@@ -410,6 +422,10 @@
         "title": "Your First Game",
         "description": "A tour of a game file"
       },
+      "pages": {
+        "title": "Game Pages",
+        "description": "Which pages a game makes and how to set them up"
+      },
       "schemas": {
         "title": "JSON Schemas",
         "description": "Validation of game files"
@@ -421,6 +437,22 @@
       "types": {
         "title": "Share & Token Types",
         "description": "Easily describe shares and tokens"
+      },
+      "market": {
+        "title": "Stock Market and Par Chart",
+        "description": "Describe the market and the par chart"
+      },
+      "tiles": {
+        "title": "Tiles and Hexes",
+        "description": "Describe tiles and place them on the map"
+      },
+      "privates": {
+        "title": "Private Companies",
+        "description": "Describe private companies and their cards"
+      },
+      "gameInfo": {
+        "title": "Game Info and Rules",
+        "description": "Describe the game info and rules pages"
       },
       "trains": {
         "title": "Phases and Trains",

@@ -379,6 +379,14 @@
       "title": "文件",
       "description": "18xx Maker 如何使用文件"
     },
+    "config": {
+      "title": "配置面板",
+      "description": "页面、打印和显示设置"
+    },
+    "app": {
+      "title": "桌面应用与设置",
+      "description": "安装应用并设置应用选项"
+    },
     "faq": {
       "title": "常见问题",
       "description": "常见问题解答"
@@ -388,6 +396,10 @@
       "description": "帮助翻译 18xx Maker"
     },
     "output": {
+      "cli": {
+        "title": "命令行",
+        "description": "在终端中导出和验证"
+      },
       "pdf": {
         "title": "PDF 输出",
         "description": "生成 PDF 文档"
@@ -410,6 +422,10 @@
         "title": "您的第一款游戏",
         "description": "游戏文件导览"
       },
+      "pages": {
+        "title": "游戏页面",
+        "description": "游戏生成哪些页面以及如何设置"
+      },
       "schemas": {
         "title": "JSON 模式",
         "description": "游戏文件的校验"
@@ -421,6 +437,22 @@
       "types": {
         "title": "股票与标记类型",
         "description": "轻松描述股票和标记"
+      },
+      "market": {
+        "title": "股市与发行价表",
+        "description": "描述股市和发行价表"
+      },
+      "tiles": {
+        "title": "地块与六边格",
+        "description": "描述地块并将其放在地图上"
+      },
+      "privates": {
+        "title": "私有公司",
+        "description": "描述私有公司及其卡片"
+      },
+      "gameInfo": {
+        "title": "游戏信息与规则",
+        "description": "描述游戏信息和规则页面"
       },
       "trains": {
         "title": "阶段与火车",

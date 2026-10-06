@@ -6,7 +6,7 @@
 
 18xx Maker 的应用和网页中预先打包了许多 json 文件。例如 [Shikoku 1889](/games/1889/map) 和 [The Old Prince 1871](/games/TheOldPrince1871/map)。这些游戏始终列在[加载游戏](/games)页面上。您可以通过游戏信息页面上的“下载”(网站)或“保存”(应用)按钮下载 json,了解这些游戏是如何构建的。
 
-若要检查游戏文件是否有错误,请运行 `pnpm maker validate my-game.json`(它会根据游戏模式校验文件,参见 [JSON 模式](/docs/games/schemas))。
+若要检查游戏文件是否有错误,请运行 `pnpm maker validate my-game.json`(它会根据游戏模式校验文件,参见 [JSON 模式](/docs/games/schemas))。所有命令见[命令行](/docs/output/cli)页面,保存在您设备上的设置见[配置面板](/docs/config)和[桌面应用](/docs/app)页面。
 
 ## 使用 18xx Maker 应用
 

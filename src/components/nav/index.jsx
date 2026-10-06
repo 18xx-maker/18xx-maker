@@ -1,5 +1,7 @@
 import {
   Atom,
+  BookOpenText,
+  ChartNoAxesCombined,
   CircleHelp,
   Coins,
   Crosshair,
@@ -8,11 +10,14 @@ import {
   FileStack,
   FolderOpen,
   Globe,
+  HandCoins,
   Hexagon,
   House,
   Image,
   Info,
   Layers,
+  LayoutDashboard,
+  MonitorDown,
   Package,
   Palette,
   Scissors,
@@ -20,7 +25,9 @@ import {
   Settings2,
   Shapes,
   Shield,
+  SlidersHorizontal,
   SquareDashed,
+  SquareTerminal,
   SwatchBook,
   TrainFront,
   TrainTrack,
@@ -92,6 +99,16 @@ export const mainMenu = [
         to: "/docs/files",
       },
       {
+        icon: SlidersHorizontal,
+        label: "docs.config.title",
+        to: "/docs/config",
+      },
+      {
+        icon: MonitorDown,
+        label: "docs.app.title",
+        to: "/docs/app",
+      },
+      {
         icon: CircleHelp,
         label: "docs.faq.title",
         to: "/docs/faq",
@@ -106,6 +123,11 @@ export const mainMenu = [
   {
     label: "nav.docsOutput",
     items: [
+      {
+        icon: SquareTerminal,
+        label: "docs.output.cli.title",
+        to: "/docs/output/cli",
+      },
       {
         icon: ScrollText,
         label: "docs.output.pdf.title",
@@ -137,6 +159,11 @@ export const mainMenu = [
         to: "/docs/games/first-game",
       },
       {
+        icon: LayoutDashboard,
+        label: "docs.games.pages.title",
+        to: "/docs/games/pages",
+      },
+      {
         icon: SwatchBook,
         label: "docs.games.schemas.title",
         to: "/docs/games/schemas",
@@ -155,6 +182,26 @@ export const mainMenu = [
         icon: Coins,
         label: "docs.games.types.title",
         to: "/docs/games/types",
+      },
+      {
+        icon: ChartNoAxesCombined,
+        label: "docs.games.market.title",
+        to: "/docs/games/market",
+      },
+      {
+        icon: Hexagon,
+        label: "docs.games.tiles.title",
+        to: "/docs/games/tiles",
+      },
+      {
+        icon: HandCoins,
+        label: "docs.games.privates.title",
+        to: "/docs/games/privates",
+      },
+      {
+        icon: BookOpenText,
+        label: "docs.games.gameInfo.title",
+        to: "/docs/games/game-info",
       },
       {
         icon: TrainFront,

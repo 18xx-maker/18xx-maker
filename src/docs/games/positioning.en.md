@@ -218,3 +218,5 @@ position does not change. For example, to draw a city over a value:
   cities or names) cannot go under it.
 - It can cover track.
 - Track, divides and borders do not have an `order`.
+
+The tile elements themselves are described in [Tiles and Hexes](/docs/games/tiles#elements).

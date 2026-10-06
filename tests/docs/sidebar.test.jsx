@@ -13,9 +13,24 @@ describe("docs sidebar", () => {
     expect(await screen.findByTestId("docs-games/exports")).toBeInTheDocument();
 
     const groups = {
-      "Getting started": ["Using 18xx Maker", "Files", "Translation"],
-      Output: ["PDF Output", "PNG Output", "Board18 Output"],
-      "Game files": ["JSON Schemas", "Logos", "Export Options"],
+      "Getting started": [
+        "Using 18xx Maker",
+        "Files",
+        "Config Panel",
+        "Desktop App and Settings",
+        "Translation",
+      ],
+      Output: ["Command Line", "PDF Output", "PNG Output", "Board18 Output"],
+      "Game files": [
+        "Game Pages",
+        "JSON Schemas",
+        "Stock Market and Par Chart",
+        "Tiles and Hexes",
+        "Private Companies",
+        "Game Info and Rules",
+        "Logos",
+        "Export Options",
+      ],
       "Print and play": ["Tokens", "Die Cutter"],
     };
 
