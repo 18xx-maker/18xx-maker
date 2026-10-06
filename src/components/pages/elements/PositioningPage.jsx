@@ -198,7 +198,7 @@ const Example = ({ id, hex }) => {
       >
         <Hex hex={hex} id={id} border={true} bleed={true} />
       </Svg>
-      <div className="p-4 text-wrap border-t bg-background w-full">
+      <div className="p-4 text-wrap border-t bg-background w-full font-sans font-normal">
         {t(`elements.positioning.examples.${id}`)}
       </div>
       <Code className="m-0 w-full grow border-t" language="json">

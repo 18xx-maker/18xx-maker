@@ -23,4 +23,37 @@ describe("elements pages fonts", () => {
     const card = page.querySelector(".checkered");
     expect(card).toHaveClass("font-display", "font-bold");
   });
+
+  // The card root sets the print font for the SVG labels; the description
+  // text under the SVG is body text and must not inherit it.
+  const expectBodyFont = (card) => {
+    // eslint-disable-next-line testing-library/no-node-access
+    const description = card.querySelector(".border-t.bg-background");
+    expect(description).toHaveClass("font-sans", "font-normal");
+    expect(description).not.toHaveClass("font-bold");
+    expect(description).not.toHaveClass("font-display");
+  };
+
+  it("shows positioning descriptions in the body font", async () => {
+    renderApp("/elements/positioning");
+    const page = await screen.findByTestId("positioning");
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const card = page.querySelector(".checkered");
+    expect(card).toHaveClass("font-display", "font-bold");
+    expectBodyFont(card);
+  });
+
+  it("shows atom descriptions in the body font", async () => {
+    renderApp("/elements?group=Track");
+    const page = await screen.findByTestId("atoms");
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const description = page.querySelector(".border-t.bg-background");
+    expect(description).not.toBeNull();
+    // eslint-disable-next-line testing-library/no-node-access
+    const card = description.closest(".checkered");
+    expect(card).toHaveClass("font-display", "font-bold");
+    expectBodyFont(card);
+  });
 });
