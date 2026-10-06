@@ -2591,3 +2591,191 @@ describe("edit panel companies", () => {
     ).not.toBeInTheDocument();
   });
 });
+
+describe("edit panel players", () => {
+  const playersRoute = `${route}?edit=true&editSection=players`;
+  const players = (store) => store.getState().game.players;
+  const ready = () => screen.findByRole("button", { name: "Add player" });
+  const box = (el, name) => within(el).getByRole("textbox", { name });
+  const spin = (el, name) => within(el).getByRole("spinbutton", { name });
+  const withPlayers = (list) => ({
+    ...structuredClone(games["18Test"]),
+    players: list,
+  });
+  const count = games["18Test"].players.length;
+
+  it("is the tab before the JSON editor, with a card for each player count", async () => {
+    open(playersRoute);
+    await ready();
+    const tabs = screen.getAllByRole("tab");
+    const tab = tabs.find((candidate) => candidate.id.endsWith("players"));
+    expect(tab).toHaveAccessibleName("Players");
+    expect(tab).toHaveAttribute("aria-selected", "true");
+    expect(cards()).toHaveLength(count);
+    expect(
+      within(cards()[0]).getByRole("button", { name: "1 players" }),
+    ).toBeVisible();
+  });
+
+  it("selects by click", async () => {
+    const { user, router } = open(`${route}?edit=true`);
+    await panel();
+    await user.click(screen.getByRole("tab", { name: "Players" }));
+    await ready();
+    expect(router.state.location.search).toBe("?edit=true&editSection=players");
+  });
+
+  it("edits the bank, the capital, the cert limit and the float percent", async () => {
+    const { user, store } = open(playersRoute);
+    await ready();
+    const panelScope = screen.getByTestId("edit-panel");
+    const bank = box(panelScope, /^Bank$/);
+    expect(bank).toHaveValue("12345");
+
+    await user.clear(bank);
+    await user.type(bank, "∞{Enter}");
+    expect(store.getState().game.bank).toBe("∞");
+    await user.clear(bank);
+    await user.type(bank, "9000{Enter}");
+    expect(store.getState().game.bank).toBe(9000);
+
+    // The game's value comes before the cards
+    const capital = within(panelScope).getAllByRole("textbox", {
+      name: /^Capital$/,
+    })[0];
+    await user.type(capital, "600{Enter}");
+    expect(store.getState().game.capital).toBe(600);
+
+    const limit = within(panelScope).getAllByRole("textbox", {
+      name: /^Cert Limit$/,
+    })[0];
+    await user.type(limit, "3/4{Enter}");
+    expect(store.getState().game.certLimit).toBe("3/4");
+    await user.clear(limit);
+    await user.type(limit, "20{Enter}");
+    expect(store.getState().game.certLimit).toBe(20);
+
+    const float = spin(panelScope, /^Float Percent$/);
+    await user.type(float, "60{Enter}");
+    expect(store.getState().game.floatPercent).toBe(60);
+  });
+
+  it("reports an out of range float percent and a bank that is not allowed", async () => {
+    const { user, store } = open(playersRoute);
+    await ready();
+    const panelScope = screen.getByTestId("edit-panel");
+    await user.type(spin(panelScope, /^Float Percent$/), "150{Enter}");
+    await user.type(box(panelScope, /^Bank$/), "abc{Enter}");
+    await settled();
+    await waitFor(() => {
+      const pointers = selectGameProblems(store.getState(), "internal:abc").map(
+        (issue) => issue.pointer,
+      );
+      expect(pointers).toEqual(
+        expect.arrayContaining(["floatPercent", "bank"]),
+      );
+    });
+  });
+
+  it("shows the number, capital and cert limit, the bank is under More fields", async () => {
+    const { user } = open(playersRoute);
+    await ready();
+    const card = cards()[1];
+    expect(spin(card, /Number/)).toHaveValue(2);
+    expect(box(card, /Capital/)).toHaveValue("1200");
+    expect(box(card, /Cert Limit/)).toHaveValue("28");
+    expect(
+      within(card).queryByRole("textbox", { name: /^Bank$/ }),
+    ).not.toBeInTheDocument();
+    await user.click(within(card).getByRole("button", { name: "More fields" }));
+    expect(within(card).getByRole("textbox", { name: /^Bank$/ })).toBeVisible();
+  });
+
+  it("adds a player with the next number as a number, and removes the key with the last one", async () => {
+    const { user, store } = open(
+      playersRoute,
+      withPlayers([{ number: 3 }, { number: 5 }]),
+    );
+    await ready();
+    await user.click(screen.getByRole("button", { name: "Add player" }));
+    expect(players(store)).toEqual([
+      { number: 3 },
+      { number: 5 },
+      { number: 6 },
+    ]);
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent(
+        "Added player 6 players",
+      ),
+    );
+
+    await user.click(button("Remove player 6 players"));
+    await user.click(button("Remove player 5 players"));
+    await user.click(button("Remove player 3 players"));
+    expect("players" in store.getState().game).toBe(false);
+    expect(await screen.findByText("Nothing here yet.")).toBeVisible();
+
+    await user.click(screen.getByRole("button", { name: "Add player" }));
+    expect(players(store)).toEqual([{ number: 1 }]);
+  });
+
+  it("duplicates a player with a free number, also when numbers repeat", async () => {
+    const { user, store } = open(
+      playersRoute,
+      withPlayers([{ number: 2, capital: 100 }, { number: 2 }]),
+    );
+    await ready();
+    await user.click(
+      screen.getAllByRole("button", { name: "Duplicate player 2 players" })[0],
+    );
+    expect(players(store).map((p) => p.number)).toEqual([2, 3, 2]);
+    expect(players(store)[1].capital).toBe(100);
+  });
+
+  it("removes with undo, and moves", async () => {
+    const { user, store } = open(playersRoute);
+    await ready();
+    await user.click(button("Remove player 2 players"));
+    expect(players(store).map((p) => p.number)).toEqual([1, 3, 4, 5, 6]);
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(players(store).map((p) => p.number)).toEqual([1, 2, 3, 4, 5, 6]);
+
+    await user.click(button("Move player 1 players down"));
+    expect(players(store).map((p) => p.number)).toEqual([2, 1, 3, 4, 5, 6]);
+  });
+
+  it("retitles a card when its number changes, and a number cannot be cleared", async () => {
+    const { user, store } = open(playersRoute);
+    await ready();
+    const first = () => cards()[0];
+    await user.clear(spin(first(), /Number/));
+    await user.type(spin(first(), /Number/), "7{Enter}");
+    expect(players(store)[0].number).toBe(7);
+    expect(
+      within(first()).getByRole("button", { name: "7 players" }),
+    ).toBeVisible();
+    expect(button("Remove player 7 players")).toBeVisible();
+
+    await user.clear(spin(first(), /Number/));
+    await user.tab();
+    expect(players(store)[0].number).toBe(7);
+    expect(await screen.findByText("This field is required.")).toBeVisible();
+  });
+
+  it("keeps a text cert limit as text, and the trains and companies keep their names", async () => {
+    const { user, store } = open(
+      playersRoute,
+      withPlayers([{ number: 2, certLimit: "3/4" }]),
+    );
+    await ready();
+    expect(box(cards()[0], /Cert Limit/)).toHaveValue("3/4");
+    await user.click(screen.getByRole("tab", { name: "Trains" }));
+    expect(
+      await screen.findByRole("button", { name: "Add train" }),
+    ).toBeVisible();
+    expect(players(store)[0].certLimit).toBe("3/4");
+    expect(
+      within(cards()[0]).getByRole("button", { name: /^2/ }),
+    ).toBeVisible();
+  });
+});

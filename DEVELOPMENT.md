@@ -316,7 +316,13 @@ edits `game.stock`: `MarketGrid` is an accessible `role="grid"` of the cells
 through the `cellObject` schema and keeps the shorthand (a number, string or
 null) when a cell needs no more, and the pure edits (rows, columns, type,
 movement) are in `src/util/marketEdit.js`. The market is never deleted, the
-last row or column leaves `market: []`. All forms use
+last row or column leaves `market: []`. `PlayersForm` edits `PLAYER_KEYS`
+(`bank`, `capital`, `certLimit`, `floatPercent`) and the `players` table: it
+passes `PLAYER_PRIMARY_KEYS` as `primary`, `idKey="number"` (a new or copied
+item gets `nextNumber`, the highest number plus one, as a number instead of a
+text name) and `title` (a translation key, `editPanel.titles.players`, counting
+the `titleKey` field: "3 players") to `ArrayField`. A `oneOf` of only strings
+and numbers (`certLimit`) is the `stringOrNumber` kind. All forms use
 `SchemaFormProvider`. A field kind without a form (`rust`, `phased`,
 `obsolete`, `discount`, other `oneOf`s) falls back to a JSON textarea, and
 `resolve.test.js` fails when a property in scope falls back unexpectedly. A

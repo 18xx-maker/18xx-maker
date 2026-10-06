@@ -198,6 +198,29 @@ test.describe("bundled games", () => {
     await expect(cards).toHaveCount(count);
   });
 
+  test("edits players in the edit panel", async ({ page }) => {
+    await page.goto("/games/18Test/map?edit=true");
+    const panel = page.getByTestId("edit-panel");
+    await panel
+      .getByRole("tablist")
+      .getByRole("tab", { name: "Players" })
+      .click();
+    await expect(page).toHaveURL(/\?edit=true&editSection=players$/);
+
+    const count = 6;
+    await expect(panel.getByRole("listitem")).toHaveCount(count);
+    await panel.getByRole("button", { name: "Add player" }).click();
+    await expect(panel.getByRole("listitem")).toHaveCount(count + 1);
+    await expect(
+      panel.getByRole("button", { name: "Remove player 7 players" }),
+    ).toBeVisible();
+
+    await panel
+      .getByRole("button", { name: "Remove player 7 players" })
+      .click();
+    await expect(panel.getByRole("listitem")).toHaveCount(count);
+  });
+
   test("adds a phase in the edit panel", async ({ page }) => {
     await page.goto("/games/18Test/map?edit=true");
     const panel = page.getByTestId("edit-panel");

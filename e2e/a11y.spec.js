@@ -79,6 +79,24 @@ const pages = [
     ready: (page) => page.getByRole("button", { name: "Add phase" }),
     more: true,
   },
+  {
+    // The scalars and the list, a card with a text cert limit and the undo note
+    name: "edit panel players",
+    url: "/games/18Test/map?edit=true&editSection=players",
+    ready: (page) => page.getByRole("button", { name: "Add player" }),
+    before: async (page) => {
+      const limit = page
+        .getByTestId("edit-panel")
+        .getByRole("listitem")
+        .first()
+        .getByRole("textbox", { name: /Cert Limit/ });
+      await limit.fill("3/4");
+      await limit.blur();
+      await page
+        .getByRole("button", { name: "Remove player 2 players" })
+        .click();
+    },
+  },
   // The JSON editor, in both themes
   ...["light", "dark"].map((colorScheme) => ({
     name: `edit panel json (${colorScheme})`,
@@ -117,13 +135,23 @@ const pages = [
   })),
 ];
 
-for (const { name, url, ready, colorScheme, select, open, more } of pages) {
+for (const {
+  name,
+  url,
+  ready,
+  colorScheme,
+  select,
+  open,
+  more,
+  before,
+} of pages) {
   test(`no serious or critical accessibility violations: ${name}`, async ({
     page,
   }) => {
     if (colorScheme) await page.emulateMedia({ colorScheme });
     await page.goto(url);
     await expect(ready(page)).toBeVisible();
+    if (before) await before(page);
     if (select) {
       await page.getByRole("gridcell", { name: select }).click();
       await expect(page.getByTestId("cell-inspector")).toBeVisible();

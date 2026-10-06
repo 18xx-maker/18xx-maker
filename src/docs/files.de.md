@@ -189,6 +189,18 @@ verwendet: Beim Verschieben oder Entfernen eines Eintrags siehst du, wie viele
 Zellen jetzt auf einen anderen Eintrag zeigen, ihre Nummern werden nicht
 geändert. Anzeige, Ledges, Limits und Titel sind unter Erweitert JSON-Felder.
 
+Der Tab Spieler bearbeitet die Bank, das Kapital und das Zertifikatslimit des
+Spiels, den Prozentsatz, der von einer Gesellschaft verkauft sein muss, damit
+sie gestartet wird, und die Spielertabelle: eine Karte für jede Spielerzahl,
+mit einem Titel wie „3 Spieler“, zunächst mit Nummer, Kapital und
+Zertifikatslimit und der Bank unter Weitere Felder. Bank, Kapital und
+Zertifikatslimit sind eine Zahl oder Text: Eine ganze Zahl wird als Zahl
+gespeichert, Text wie `∞` oder `3/4` bleibt Text. Spieler hinzufügen vergibt die
+nächste Nummer, und auch eine Kopie bekommt die nächste freie Nummer. Ein
+Spieler braucht eine Nummer, die sich nicht leeren lässt. Die Nummern werden
+weder sortiert noch auf Wiederholungen geprüft: Die Problemprüfung meldet, was
+das Schema nicht erlaubt.
+
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.
 

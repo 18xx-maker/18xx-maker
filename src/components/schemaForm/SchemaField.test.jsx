@@ -321,6 +321,29 @@ describe("a list of cards", () => {
     expect(codes()).toEqual(["a", "a2", "", "c2"]);
   });
 
+  it("identifies the items by another key, titled with a translation", async () => {
+    const user = userEvent.setup();
+    render(
+      <ListForm
+        initial={{ trains: [{ name: "x", code: "7" }, { name: "y" }] }}
+        primary={["name", "code"]}
+        idKey="code"
+        titleKey="code"
+        title="editPanel.titles.players"
+        defaults={{}}
+      />,
+    );
+    // An item without the key falls back to its position
+    expect(toggle("7 players")).toBeVisible();
+    expect(toggle("#2")).toBeVisible();
+
+    await user.click(screen.getByRole("button", { name: "Add train" }));
+    expect(screen.getAllByRole("textbox", { name: "Code" })[2]).toHaveValue(
+      "1",
+    );
+    expect(toggle("1 players")).toBeVisible();
+  });
+
   it("shows the summary in place of the title", () => {
     render(
       <ListForm
