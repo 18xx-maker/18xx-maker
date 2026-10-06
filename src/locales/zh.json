@@ -113,7 +113,8 @@
       "legend": "图例项"
     },
     "titles": {
-      "players": "{{count}} 名玩家"
+      "players_one": "{{count}} 名玩家",
+      "players_other": "{{count}} 名玩家"
     },
     "emptyList": "这里还没有内容。",
     "add": "添加{{item}}",

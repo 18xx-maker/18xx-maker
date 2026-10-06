@@ -113,7 +113,8 @@
       "legend": "legend entry"
     },
     "titles": {
-      "players": "{{count}} players"
+      "players_one": "{{count}} player",
+      "players_other": "{{count}} players"
     },
     "emptyList": "Nothing here yet.",
     "add": "Add {{item}}",

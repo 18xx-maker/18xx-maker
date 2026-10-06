@@ -194,7 +194,7 @@ Spiels, den Prozentsatz, der von einer Gesellschaft verkauft sein muss, damit
 sie gestartet wird, und die Spielertabelle: eine Karte für jede Spielerzahl,
 mit einem Titel wie „3 Spieler“, zunächst mit Nummer, Kapital und
 Zertifikatslimit und der Bank unter Weitere Felder. Bank, Kapital und
-Zertifikatslimit sind eine Zahl oder Text: Eine ganze Zahl wird als Zahl
+Zertifikatslimit sind eine Zahl oder Text: Eine Zahl wird als Zahl
 gespeichert, Text wie `∞` oder `3/4` bleibt Text. Spieler hinzufügen vergibt die
 nächste Nummer, und auch eine Kopie bekommt die nächste freie Nummer. Ein
 Spieler braucht eine Nummer, die sich nicht leeren lässt. Die Nummern werden

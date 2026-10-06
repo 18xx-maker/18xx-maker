@@ -174,8 +174,8 @@ The Players tab edits the bank, the capital and the certificate limit of the
 game, the percent of a company that must be sold for it to float, and the
 players table: a card for each player count, titled like "3 players", with its
 number, capital and certificate limit first and the bank under More fields.
-The bank, the capital and the certificate limit are a number or text: a whole
-number is saved as a number, and text like `∞` or `3/4` stays text. Add player
+The bank, the capital and the certificate limit are a number or text: a number
+is saved as a number, and text like `∞` or `3/4` stays text. Add player
 gives the next number, and a copy gets the next free number too. A player needs
 a number, which cannot be emptied. The numbers are not kept in order or checked
 for repeats: the problems check reports what the schema does not allow.

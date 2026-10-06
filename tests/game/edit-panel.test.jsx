@@ -2613,7 +2613,7 @@ describe("edit panel players", () => {
     expect(tab).toHaveAttribute("aria-selected", "true");
     expect(cards()).toHaveLength(count);
     expect(
-      within(cards()[0]).getByRole("button", { name: "1 players" }),
+      within(cards()[0]).getByRole("button", { name: "1 player" }),
     ).toBeVisible();
   });
 
@@ -2740,7 +2740,7 @@ describe("edit panel players", () => {
     await user.click(screen.getByRole("button", { name: "Undo" }));
     expect(players(store).map((p) => p.number)).toEqual([1, 2, 3, 4, 5, 6]);
 
-    await user.click(button("Move player 1 players down"));
+    await user.click(button("Move player 1 player down"));
     expect(players(store).map((p) => p.number)).toEqual([2, 1, 3, 4, 5, 6]);
   });
 
@@ -2762,7 +2762,7 @@ describe("edit panel players", () => {
     expect(await screen.findByText("This field is required.")).toBeVisible();
   });
 
-  it("keeps a text cert limit as text, and the trains and companies keep their names", async () => {
+  it("keeps a text cert limit as text, and the trains keep their names", async () => {
     const { user, store } = open(
       playersRoute,
       withPlayers([{ number: 2, certLimit: "3/4" }]),
@@ -2774,8 +2774,6 @@ describe("edit panel players", () => {
       await screen.findByRole("button", { name: "Add train" }),
     ).toBeVisible();
     expect(players(store)[0].certLimit).toBe("3/4");
-    expect(
-      within(cards()[0]).getByRole("button", { name: /^2/ }),
-    ).toBeVisible();
+    expect(within(cards()[0]).getByRole("button", { name: "2" })).toBeVisible();
   });
 });

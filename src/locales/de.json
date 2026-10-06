@@ -113,7 +113,8 @@
       "legend": "Legendeneintrag"
     },
     "titles": {
-      "players": "{{count}} Spieler"
+      "players_one": "{{count}} Spieler",
+      "players_other": "{{count}} Spieler"
     },
     "emptyList": "Noch nichts vorhanden.",
     "add": "{{item}} hinzufügen",
