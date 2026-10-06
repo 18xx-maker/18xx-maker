@@ -310,7 +310,7 @@ test.describe("bundled games", () => {
   });
 });
 
-// The "#" anchor of a heading hangs 24px left of the text and must stay
+// The "#" anchor of a heading hangs left of the text, as wide as the heading scales it, and must stay
 // inside the scrolling content area instead of being clipped by it
 for (const width of [1280, 375]) {
   test(`heading anchors are not clipped by the content area at ${width}px`, async ({
@@ -318,7 +318,7 @@ for (const width of [1280, 375]) {
   }) => {
     await page.setViewportSize({ width, height: 800 });
     await page.goto("/docs/games/exports");
-    const heading = page.locator("[data-testid^='docs-'] h2").first();
+    const heading = page.locator("[data-testid^='docs-'] h1").first();
     await heading.hover();
     const anchor = heading.locator("a").first();
     await expect(anchor).toBeVisible();

@@ -17,12 +17,12 @@ describe("docs layout", () => {
     expect(article).not.toHaveClass("max-w-prose");
     // room for the hover heading anchor, which hangs left of the text
     // eslint-disable-next-line testing-library/no-node-access
-    expect(docs.querySelector(".max-w-200.p-4")).toHaveClass("pl-10");
+    expect(docs.querySelector(".max-w-200.p-4")).toHaveClass("pl-12");
     // the anchor ends at the heading's left edge whatever the heading size,
     // so it never overlaps the title text
     // eslint-disable-next-line testing-library/no-node-access
     const anchor = docs.querySelector("h1 [data-anchor]");
-    expect(anchor).toHaveClass("right-full", "text-base");
+    expect(anchor).toHaveClass("right-full");
     expect(anchor).not.toHaveClass("-left-6");
   });
 
@@ -34,6 +34,6 @@ describe("docs layout", () => {
 
     expect(article).toHaveClass("max-w-prose");
     expect(article).not.toHaveClass("max-w-200");
-    expect(article).toHaveClass("pl-10");
+    expect(article).toHaveClass("pl-12");
   });
 });

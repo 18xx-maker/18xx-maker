@@ -142,7 +142,7 @@ const heading = (element, className) => {
           to={{ hash: id }}
           data-anchor
           aria-label={`#${id}`}
-          className="absolute right-full pr-2 text-base font-normal text-muted-foreground no-underline opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+          className="absolute right-full pr-2 text-muted-foreground no-underline opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
         >
           #
         </Link>
@@ -230,7 +230,7 @@ const Markdown = ({ className, ...pass }) => {
   return (
     <div
       className={cn(
-        "p-4 pl-10 max-w-prose bg-background text-foreground",
+        "p-4 pl-12 max-w-prose bg-background text-foreground",
         className,
       )}
     >
