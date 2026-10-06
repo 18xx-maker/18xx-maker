@@ -1,9 +1,10 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { slugify } from "@/util/headingIds";
 
-const root = new URL(".", import.meta.url).pathname;
+const root = fileURLToPath(new URL(".", import.meta.url));
 const locales = ["en", "de", "zh"];
 
 const files = (dir = "") =>
@@ -11,7 +12,7 @@ const files = (dir = "") =>
     entry.isDirectory()
       ? files(join(dir, entry.name))
       : /\.(en|de|zh)\.md$/.test(entry.name)
-        ? [join(dir, entry.name)]
+        ? [join(dir, entry.name).replaceAll("\\", "/")]
         : [],
   );
 
@@ -20,7 +21,10 @@ const pages = [
   ...new Set(files().map((f) => f.replace(/\.(en|de|zh)\.md$/, ""))),
 ];
 const read = (page, lang) =>
-  readFileSync(join(root, `${page}.${lang}.md`), "utf8");
+  readFileSync(join(root, `${page}.${lang}.md`), "utf8").replaceAll(
+    "\r\n",
+    "\n",
+  );
 
 const withoutCode = (markdown) => markdown.replace(/^```[\s\S]*?^```/gm, "");
 
