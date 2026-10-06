@@ -4,6 +4,7 @@ import {
   cellAt,
   cellKeys,
   changeType,
+  clampCell,
   columnCells,
   columnCount,
   createMarket,
@@ -22,6 +23,7 @@ import {
   rowsOf,
   setCell,
   setCellField,
+  setMovement,
 } from "./marketEdit";
 
 const game = (stock) => ({ info: { title: "T" }, stock });
@@ -69,6 +71,9 @@ describe("reading the market", () => {
   it("counts the cells of a legend entry", () => {
     expect(legendUses(twoD().stock, 1)).toBe(1);
     expect(legendUses(twoD().stock, 0)).toBe(0);
+    expect(legendUses(twoD().stock, 0, 5)).toBe(1);
+    expect(legendUses(twoD().stock, 5, 1)).toBe(1);
+    expect(legendUses(twoD().stock, 2, Infinity)).toBe(0);
   });
 });
 
@@ -369,5 +374,71 @@ describe("the market page with no cells", () => {
     );
     expect(data.rows).toBe(2);
     expect(data.columns).toBe(3);
+  });
+});
+
+describe("clampCell", () => {
+  it("keeps a place inside the market", () => {
+    const { stock } = twoD();
+    expect(clampCell(stock, { row: 1, col: 1 })).toEqual({ row: 1, col: 1 });
+    expect(clampCell(stock, { row: 1, col: 9 })).toEqual({ row: 1, col: 1 });
+    expect(clampCell(stock, { row: 9, col: 0 })).toEqual({ row: 3, col: 0 });
+    expect(clampCell(stock, { row: -1, col: -1 })).toEqual({ row: 0, col: 0 });
+  });
+
+  it("is nothing without a place, cells or rows", () => {
+    expect(clampCell(twoD().stock, null)).toBeNull();
+    expect(
+      clampCell({ type: "2D", market: [] }, { row: 0, col: 0 }),
+    ).toBeNull();
+    expect(
+      clampCell({ type: "2D", market: [[]] }, { row: 0, col: 0 }),
+    ).toBeNull();
+    expect(
+      clampCell({ type: "1D", market: [] }, { row: 0, col: 0 }),
+    ).toBeNull();
+  });
+});
+
+describe("setMovement", () => {
+  const moving = () =>
+    game({ type: "1D", market: [1], movement: { up: ["a"], "2x": ["b"] } });
+
+  it("sets the texts of a key, without empty lines", () => {
+    const next = setMovement(moving(), "down", [" x ", "", "y"]);
+    expect(next.stock.movement).toEqual({
+      up: ["a"],
+      "2x": ["b"],
+      down: ["x", "y"],
+    });
+    expect(
+      setMovement(game({ type: "1D" }), "up", ["a"]).stock.movement,
+    ).toEqual({ up: ["a"] });
+  });
+
+  it("removes a key without texts, and the movement with the last key", () => {
+    expect(setMovement(moving(), "2x", ["  ", ""]).stock.movement).toEqual({
+      up: ["a"],
+    });
+    const one = game({ movement: { up: ["a"] } });
+    expect("movement" in setMovement(one, "up", []).stock).toBe(false);
+  });
+
+  it("is the same game when nothing changes", () => {
+    const g = moving();
+    expect(setMovement(g, "up", ["a"])).toBe(g);
+    expect(setMovement(g, "left", [])).toBe(g);
+    const none = game(undefined);
+    expect(setMovement(none, "up", ["a"])).toBe(none);
+  });
+
+  it("never touches the display of the movement", () => {
+    const g = game({
+      movement: { up: ["a"] },
+      display: { movement: { x: 1, y: 2 } },
+    });
+    expect(setMovement(g, "up", []).stock.display).toEqual({
+      movement: { x: 1, y: 2 },
+    });
   });
 });

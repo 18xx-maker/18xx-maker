@@ -74,6 +74,10 @@
       "trains": {
         "tab": "Züge",
         "description": "Bearbeite die Züge des Spiels. Füge Züge hinzu, entferne, kopiere und sortiere sie mit den Schaltflächen jedes Zugs."
+      },
+      "market": {
+        "tab": "Markt",
+        "description": "Bearbeite den Aktienmarkt: seinen Typ, die Zellen, die Legende und wie sich der Aktienkurs bewegt. Die Änderungen bleiben im Speicher, bis du sie auf der Seite „Änderungen“ speicherst."
       }
     },
     "tabs": {
@@ -81,7 +85,8 @@
       "hint": "Tabs wechseln"
     },
     "items": {
-      "trains": "Zug"
+      "trains": "Zug",
+      "legend": "Legendeneintrag"
     },
     "emptyList": "Noch nichts vorhanden.",
     "add": "{{item}} hinzufügen",
@@ -97,7 +102,74 @@
     "moved": "{{item}} {{title}} auf Position {{position}} von {{count}} verschoben",
     "duplicated": "{{item}} als {{title}} dupliziert",
     "restored": "{{item}} {{title}} wiederhergestellt",
-    "invalidCount": "Gib eine ganze Zahl ab 1 oder ∞ ein."
+    "invalidCount": "Gib eine ganze Zahl ab 1 oder ∞ ein.",
+    "market": {
+      "gridLabel": "Zellen des Aktienmarkts",
+      "gridHint": "Mit den Pfeiltasten wechselst du zwischen Zellen. Entf leert eine Zelle. Eine Zifferntaste springt zum Wert der Zelle. Enter springt zu den Zellfeldern.",
+      "diagNote": "Ein 1Diag-Markt wird in zwei Reihen gezeichnet: oben die geraden Zellen, unten die ungeraden. Eine Spalte besteht aus zwei Zellen.",
+      "empty": "Dieses Spiel hat noch keinen Aktienmarkt.",
+      "create": "Markt erstellen",
+      "created": "Markt mit 3 Zeilen und 3 Spalten erstellt",
+      "noCells": "Der Markt hat keine Zellen.",
+      "addRow": "Zeile hinzufügen",
+      "addColumn": "Spalte hinzufügen",
+      "selectCell": "Wähle eine Zelle, um sie zu bearbeiten oder um Zeilen und Spalten hinzuzufügen, zu verschieben und zu entfernen.",
+      "row": "Zeile",
+      "column": "Spalte",
+      "position": "Zeile {{row}}, Spalte {{column}}",
+      "positionFlat": "Zelle {{column}}",
+      "cellEmpty": "leer",
+      "cellPar": "Par",
+      "cellLegend": "Legende {{number}}",
+      "cellProblem": "hat ein Problem",
+      "addRowAbove": "Zeile oberhalb hinzufügen",
+      "addRowBelow": "Zeile unterhalb hinzufügen",
+      "moveRowUp": "Zeile {{row}} nach oben verschieben",
+      "moveRowDown": "Zeile {{row}} nach unten verschieben",
+      "duplicateRow": "Zeile {{row}} duplizieren",
+      "removeRow": "Zeile {{row}} entfernen",
+      "addColumnLeft": "Spalte links hinzufügen",
+      "addColumnRight": "Spalte rechts hinzufügen",
+      "moveColumnLeft": "Spalte {{column}} nach links verschieben",
+      "moveColumnRight": "Spalte {{column}} nach rechts verschieben",
+      "duplicateColumn": "Spalte {{column}} duplizieren",
+      "removeColumn": "Spalte {{column}} entfernen",
+      "addedRow": "Zeile {{row}} hinzugefügt",
+      "movedRow": "Verschoben in Zeile {{row}} von {{count}}",
+      "duplicatedRow": "Zeile {{row}} dupliziert",
+      "removedRow": "Zeile {{row}} entfernt",
+      "restoredRow": "Zeile wiederhergestellt",
+      "addedColumn": "Spalte {{column}} hinzugefügt",
+      "movedColumn": "Verschoben in Spalte {{column}} von {{count}}",
+      "duplicatedColumn": "Spalte {{column}} dupliziert",
+      "removedColumn": "Spalte {{column}} entfernt",
+      "restoredColumn": "Spalte wiederhergestellt",
+      "typeChanged": "Der Markttyp ist jetzt {{type}}",
+      "typeRestored": "Der Markttyp ist wieder {{type}}",
+      "rowsRemoved_one": "{{count}} Zeile wurde aus dem Markt entfernt.",
+      "rowsRemoved_other": "{{count}} Zeilen wurden aus dem Markt entfernt.",
+      "shorthand": "Diese Zelle wird als {{as}} gespeichert, bis du ein zweites Feld setzt.",
+      "legendMissing": "Die Legende hat keinen Eintrag {{index}} (der erste ist 0).",
+      "parMissing": "Diese Zelle ist ein Par-Wert, aber der Markt hat keine Par-Tabelle.",
+      "legendAffected_one": "{{count}} Zelle verwendet eine Legendennummer, die jetzt einen anderen Eintrag meint.",
+      "legendAffected_other": "{{count}} Zellen verwenden eine Legendennummer, die jetzt einen anderen Eintrag meint.",
+      "arrows": "Pfeile",
+      "cellDefaults": "Zellstandards",
+      "legend": "Legende",
+      "newLegend": "Neuer Eintrag",
+      "movement": "Bewegung",
+      "advanced": "Erweitert (Anzeige, Ledges, Limits)",
+      "movementLines": "Ein Text pro Zeile.",
+      "newKey": "Neuer Schlüssel",
+      "newKeyText": "Text",
+      "addKey": "Schlüssel hinzufügen",
+      "directions": {
+        "up": "Oben",
+        "down": "Unten",
+        "left": "Links",
+        "right": "Rechts"
+      }
+    }
   },
   "problems": {
     "nav": "Probleme",

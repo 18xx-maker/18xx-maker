@@ -242,7 +242,7 @@ export const nextName = (items = []) => {
 
 // A new item: the defaults of its list (what the schema requires besides the
 // name), named to not clash with the others
-export const newItem = (items, defaults = {}) => ({
-  name: nextName(items),
+export const newItem = (items, defaults = {}, unique = true) => ({
+  ...(unique && { name: nextName(items) }),
   ...defaults,
 });

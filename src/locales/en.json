@@ -74,6 +74,10 @@
       "trains": {
         "tab": "Trains",
         "description": "Edit the trains of the game. Add, remove, copy and reorder them with the buttons of each train."
+      },
+      "market": {
+        "tab": "Market",
+        "description": "Edit the stock market: its type, the cells, the legend and how the share price moves. The changes stay in memory until you save them on the Changes page."
       }
     },
     "tabs": {
@@ -81,7 +85,8 @@
       "hint": "switch tabs"
     },
     "items": {
-      "trains": "train"
+      "trains": "train",
+      "legend": "legend entry"
     },
     "emptyList": "Nothing here yet.",
     "add": "Add {{item}}",
@@ -97,7 +102,74 @@
     "moved": "Moved {{item}} {{title}} to position {{position}} of {{count}}",
     "duplicated": "Duplicated {{item}} as {{title}}",
     "restored": "Restored {{item}} {{title}}",
-    "invalidCount": "Enter a whole number of at least 1, or ∞."
+    "invalidCount": "Enter a whole number of at least 1, or ∞.",
+    "market": {
+      "gridLabel": "Stock market cells",
+      "gridHint": "Arrow keys move between cells. Delete empties a cell. A number key goes to the value of the cell. Enter goes to the cell fields.",
+      "diagNote": "A 1Diag market is drawn in two rows: the even cells on top, the odd cells below. A column is two cells.",
+      "empty": "This game has no stock market yet.",
+      "create": "Create a market",
+      "created": "Created a market of 3 rows and 3 columns",
+      "noCells": "The market has no cells.",
+      "addRow": "Add row",
+      "addColumn": "Add column",
+      "selectCell": "Select a cell to edit it, or to add, move and remove rows and columns.",
+      "row": "Row",
+      "column": "Column",
+      "position": "Row {{row}}, column {{column}}",
+      "positionFlat": "Cell {{column}}",
+      "cellEmpty": "empty",
+      "cellPar": "par",
+      "cellLegend": "legend {{number}}",
+      "cellProblem": "has a problem",
+      "addRowAbove": "Add row above",
+      "addRowBelow": "Add row below",
+      "moveRowUp": "Move row {{row}} up",
+      "moveRowDown": "Move row {{row}} down",
+      "duplicateRow": "Duplicate row {{row}}",
+      "removeRow": "Remove row {{row}}",
+      "addColumnLeft": "Add column to the left",
+      "addColumnRight": "Add column to the right",
+      "moveColumnLeft": "Move column {{column}} left",
+      "moveColumnRight": "Move column {{column}} right",
+      "duplicateColumn": "Duplicate column {{column}}",
+      "removeColumn": "Remove column {{column}}",
+      "addedRow": "Added row {{row}}",
+      "movedRow": "Moved to row {{row}} of {{count}}",
+      "duplicatedRow": "Duplicated row {{row}}",
+      "removedRow": "Removed row {{row}}",
+      "restoredRow": "Restored the row",
+      "addedColumn": "Added column {{column}}",
+      "movedColumn": "Moved to column {{column}} of {{count}}",
+      "duplicatedColumn": "Duplicated column {{column}}",
+      "removedColumn": "Removed column {{column}}",
+      "restoredColumn": "Restored the column",
+      "typeChanged": "The market type is now {{type}}",
+      "typeRestored": "The market type is back to {{type}}",
+      "rowsRemoved_one": "{{count}} row was removed from the market.",
+      "rowsRemoved_other": "{{count}} rows were removed from the market.",
+      "shorthand": "This cell is saved as {{as}} until you set a second field.",
+      "legendMissing": "The legend has no entry {{index}} (the first is 0).",
+      "parMissing": "This cell is a par value, but the market has no par chart.",
+      "legendAffected_one": "{{count}} cell uses a legend number that now means another entry.",
+      "legendAffected_other": "{{count}} cells use a legend number that now means another entry.",
+      "arrows": "Arrows",
+      "cellDefaults": "Cell defaults",
+      "legend": "Legend",
+      "newLegend": "New entry",
+      "movement": "Movement",
+      "advanced": "Advanced (display, ledges, limits)",
+      "movementLines": "One text on each line.",
+      "newKey": "New key",
+      "newKeyText": "Text",
+      "addKey": "Add key",
+      "directions": {
+        "up": "Up",
+        "down": "Down",
+        "left": "Left",
+        "right": "Right"
+      }
+    }
   },
   "problems": {
     "nav": "Problems",

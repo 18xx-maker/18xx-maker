@@ -4,7 +4,7 @@ import { page as browser, userEvent as realUser } from "vitest/browser";
 import { omit } from "ramda";
 
 import games from "@/data/games";
-import { editGame } from "@/state";
+import { editGame, selectGameProblems } from "@/state";
 import { selectGameChanged } from "@/state/selectors";
 
 import { renderApp } from "@tests/support/helpers.jsx";
@@ -26,9 +26,9 @@ afterEach(async () => {
   opened = undefined;
 });
 
-const open = (route) => {
+const open = (route, base = games["18Test"]) => {
   const game = {
-    ...structuredClone(games["18Test"]),
+    ...structuredClone(base),
     meta: { id: "abc", type: "internal", slug: "internal:abc" },
   };
   const view = renderApp(route, {
@@ -502,13 +502,16 @@ describe("edit panel tabs", () => {
     expect(router.state.location.search).toContain("editSection=trains");
 
     await user.keyboard("{ArrowRight}");
+    const marketTab = screen.getByRole("tab", { name: "Market" });
+    expect(marketTab).toHaveFocus();
+    await user.keyboard("{ArrowRight}");
     expect(info).toHaveFocus();
     await user.keyboard("{ArrowLeft}");
-    expect(trainsTab).toHaveFocus();
+    expect(marketTab).toHaveFocus();
     await user.keyboard("{Home}");
     expect(info).toHaveFocus();
     await user.keyboard("{End}");
-    expect(trainsTab).toHaveFocus();
+    expect(marketTab).toHaveFocus();
   });
 
   it("[ and ] cycle the tabs and wrap, but not while typing", async () => {
@@ -523,7 +526,19 @@ describe("edit panel tabs", () => {
     );
     await user.keyboard("]");
     await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=market",
+      ),
+    );
+    await user.keyboard("]");
+    await waitFor(() =>
       expect(router.state.location.search).toBe("?edit=true"),
+    );
+    await user.keyboard("[[");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=market",
+      ),
     );
     await user.keyboard("[[");
     await waitFor(() =>
@@ -913,5 +928,648 @@ describe("edit panel trains", () => {
     expect(
       within(cards()[0]).getByRole("textbox", { name: "Name" }),
     ).not.toBeVisible();
+  });
+});
+
+describe("edit panel market", () => {
+  const marketRoute = `${route}?edit=true&editSection=market`;
+  const stock = (store) => store.getState().game.stock;
+  const market = (store) => stock(store).market;
+  const grid = () => screen.findByRole("grid", { name: "Stock market cells" });
+  const cell = (row, column) =>
+    screen.getByRole("gridcell", {
+      name: new RegExp(`^Row ${row}, column ${column}:`),
+    });
+  const cells = (index) =>
+    within(
+      within(screen.getByRole("grid")).getAllByRole("row")[index],
+    ).queryAllByRole("gridcell");
+  const inspector = () => screen.findByTestId("cell-inspector");
+  const oneD = {
+    ...games["1858"],
+    stock: { ...games["1858"].stock, legend: undefined },
+  };
+
+  it("] and [ reach the Market tab and keep the panel", async () => {
+    const { user, router } = open(`${route}?edit=true`);
+    await screen.findByRole("tab", { name: "Market" });
+    await user.keyboard("]]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=market",
+      ),
+    );
+    expect(await grid()).toBeVisible();
+    expect(screen.getByRole("tab", { name: "Market" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("shows the rows and cells of the market, a triangle stays one", async () => {
+    open(marketRoute);
+    await grid();
+    const rows = within(screen.getByRole("grid")).getAllByRole("row");
+    expect(rows).toHaveLength(11);
+    expect(
+      rows.map((row) => within(row).queryAllByRole("gridcell").length),
+    ).toEqual(games["18Test"].stock.market.map((row) => row.length));
+    expect(cell(1, 1)).toHaveAccessibleName(
+      "Row 1, column 1: 60, legend 1, down",
+    );
+    expect(cell(1, 7)).toHaveAccessibleName("Row 1, column 7: 100, par");
+    expect(cell(1, 2)).toHaveAccessibleName("Row 1, column 2: 67");
+    expect(cells(1)[0]).toHaveAttribute("aria-colindex", "1");
+    expect(rows[2]).toHaveAttribute("aria-rowindex", "3");
+    // Empty cells are not drawn past the end of a row
+    expect(
+      screen.queryByRole("gridcell", { name: /^Row 11, column 8:/ }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("colors a legend cell and a par cell and marks them without color", async () => {
+    open(marketRoute);
+    await grid();
+    const plain = getComputedStyle(cell(1, 2)).backgroundColor;
+    const legend = getComputedStyle(cell(1, 1)).backgroundColor;
+    const par = getComputedStyle(cell(1, 7)).backgroundColor;
+    expect(new Set([plain, legend, par]).size).toBe(3);
+    expect(cell(1, 7)).toHaveTextContent("P");
+    expect(cell(1, 1)).toHaveTextContent("1");
+    expect(cell(1, 1)).toHaveTextContent("↓");
+  });
+
+  it("selects with a click and the arrow keys and shows the cell", async () => {
+    const { user } = open(marketRoute);
+    await grid();
+    expect(screen.queryByTestId("cell-inspector")).not.toBeInTheDocument();
+
+    await user.click(cell(2, 4));
+    expect(cell(2, 4)).toHaveAttribute("aria-selected", "true");
+    expect(cell(2, 4)).toHaveAttribute("tabindex", "0");
+    expect(cell(1, 1)).toHaveAttribute("tabindex", "-1");
+    expect(within(await inspector()).getByRole("heading")).toHaveTextContent(
+      "Row 2, column 4",
+    );
+    expect(
+      within(await inspector()).getByRole("textbox", { name: "Value" }),
+    ).toHaveValue("70");
+
+    await user.keyboard("{ArrowRight}");
+    expect(cell(2, 5)).toHaveFocus();
+    await user.keyboard("{ArrowDown}");
+    expect(cell(3, 5)).toHaveFocus();
+    await user.keyboard("{ArrowUp}{ArrowLeft}");
+    expect(cell(2, 4)).toHaveFocus();
+    await user.keyboard("{End}");
+    expect(cell(2, 19)).toHaveFocus();
+    await user.keyboard("{Home}");
+    expect(cell(2, 1)).toHaveFocus();
+    // The last cell of a short row: down goes to the last cell of the next
+    await user.click(cell(3, 16));
+    await user.keyboard("{ArrowDown}");
+    expect(cell(4, 13)).toHaveFocus();
+    await user.keyboard("{ArrowRight}");
+    expect(cell(4, 13)).toHaveFocus();
+  });
+
+  it("edits the value of a cell in the game", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    expect(selectGameChanged(store.getState())).toBe(false);
+    await user.click(cell(1, 2));
+    const value = within(await inspector()).getByRole("textbox", {
+      name: "Value",
+    });
+    await user.clear(value);
+    await user.type(value, "68{Enter}");
+
+    // The shorthand stays: only a value
+    expect(market(store)[0][1]).toBe(68);
+    expect(cell(1, 2)).toHaveAccessibleName("Row 1, column 2: 68");
+    expect(selectGameChanged(store.getState())).toBe(true);
+  });
+
+  it("promotes a number to an object with a second field and demotes it again", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(1, 2));
+    expect(
+      within(await inspector()).getByText(/saved as 67 until/),
+    ).toBeVisible();
+
+    await user.click(
+      within(await inspector()).getByRole("combobox", { name: "Par" }),
+    );
+    await user.click(await screen.findByRole("option", { name: "Yes" }));
+    expect(market(store)[0][1]).toEqual({ value: 67, par: true });
+    expect(screen.queryByText(/saved as/)).not.toBeInTheDocument();
+
+    await user.click(
+      within(await inspector()).getByRole("combobox", { name: "Par" }),
+    );
+    await user.click(await screen.findByRole("option", { name: "Not set" }));
+    expect(market(store)[0][1]).toBe(67);
+    expect(selectGameChanged(store.getState())).toBe(false);
+  });
+
+  it("a label on an empty cell is a string, a value and a label an object", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    act(() =>
+      store.dispatch(
+        editGame((g) => ({
+          ...g,
+          stock: {
+            ...g.stock,
+            market: [[null, "Close"], ...g.stock.market.slice(1)],
+          },
+        })),
+      ),
+    );
+    await user.click(cell(1, 1));
+    expect(within(await inspector()).getByText(/saved as null/)).toBeVisible();
+    await user.type(
+      within(await inspector()).getByRole("textbox", { name: "Label" }),
+      "x{Enter}",
+    );
+    expect(market(store)[0][0]).toBe("x");
+
+    await user.type(
+      within(await inspector()).getByRole("textbox", { name: "Value" }),
+      "9{Enter}",
+    );
+    expect(market(store)[0][0]).toEqual({ label: "x", value: 9 });
+    await user.click(cell(1, 2));
+    expect(
+      within(await inspector()).getByText(/saved as "Close"/),
+    ).toBeVisible();
+  });
+
+  it("sets and clears the arrows of a cell", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(1, 2));
+    await user.click(
+      within(await inspector()).getByRole("button", { name: "More fields" }),
+    );
+    const arrows = within(await inspector()).getByRole("group", {
+      name: "Arrows",
+    });
+    await user.click(within(arrows).getByRole("button", { name: "Up" }));
+    expect(market(store)[0][1]).toEqual({ value: 67, arrow: "up" });
+    await user.click(within(arrows).getByRole("button", { name: "Right" }));
+    expect(market(store)[0][1].arrow).toEqual(["up", "right"]);
+    await user.click(within(arrows).getByRole("button", { name: "Up" }));
+    expect(market(store)[0][1].arrow).toBe("right");
+    await user.click(within(arrows).getByRole("button", { name: "Right" }));
+    expect(market(store)[0][1]).toBe(67);
+  });
+
+  it("Delete empties the cell, but not while typing in the inspector", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(1, 2));
+    const value = within(await inspector()).getByRole("textbox", {
+      name: "Value",
+    });
+    await user.click(value);
+    await user.keyboard("{Backspace}{Backspace}{Delete}{ArrowLeft}8");
+    expect(value).toHaveValue("8");
+    expect(market(store)[0][1]).toBe(67);
+    await user.clear(value);
+    await user.type(value, "67");
+    expect(cell(1, 2)).toHaveAttribute("aria-selected", "true");
+
+    act(() => cell(1, 2).focus());
+    await user.keyboard("{Delete}");
+    expect(market(store)[0][1]).toBeNull();
+    expect(cell(1, 2)).toHaveAccessibleName("Row 1, column 2: empty");
+  });
+
+  it("a digit on a cell goes on in its value field", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(1, 2));
+    await inspector();
+    act(() => cell(1, 2).focus());
+    await user.keyboard("5");
+    const value = within(await inspector()).getByRole("textbox", {
+      name: "Value",
+    });
+    expect(value).toHaveFocus();
+    expect(value).toHaveValue("5");
+    await user.keyboard("0{Enter}");
+    expect(market(store)[0][1]).toBe(50);
+  });
+
+  it("adds, moves, duplicates and removes a row", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(2, 2));
+    const before = structuredClone(market(store));
+
+    await user.click(button("Add row above"));
+    expect(market(store)).toHaveLength(12);
+    expect(market(store)[1]).toEqual(Array(19).fill(null));
+    expect(market(store)[2]).toEqual(before[1]);
+    expect(cell(2, 2)).toHaveFocus();
+    expect(screen.getByTestId("market-status")).toHaveTextContent(
+      "Added row 2",
+    );
+
+    await user.click(button("Move row 2 down"));
+    expect(market(store)[2]).toEqual(Array(19).fill(null));
+    await user.click(button("Duplicate row 3"));
+    expect(market(store)[3]).toEqual(market(store)[2]);
+    await user.click(button("Remove row 4"));
+    await user.click(cell(3, 1));
+    await user.click(button("Remove row 3"));
+    expect(market(store)).toHaveLength(11);
+    expect(market(store)[1]).toEqual(before[1]);
+    expect(market(store)[2]).toEqual(before[2]);
+    expect(selectGameChanged(store.getState())).toBe(false);
+  });
+
+  it("removes a row and puts it back with undo", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(3, 2));
+    await user.click(button("Remove row 3"));
+    expect(market(store)).toHaveLength(10);
+    expect(
+      screen.getByText("Removed row 3", { selector: "span" }),
+    ).toBeVisible();
+    // The cell that took the place is selected
+    expect(cell(3, 1)).toBeVisible();
+
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(market(store)).toEqual(games["18Test"].stock.market);
+    expect(selectGameChanged(store.getState())).toBe(false);
+    expect(
+      screen.queryByRole("button", { name: "Undo" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("disables moving at the edges", async () => {
+    const { user } = open(marketRoute);
+    await grid();
+    expect(button("Add row above")).toBeDisabled();
+    await user.click(cell(1, 1));
+    expect(button("Move row 1 up")).toBeDisabled();
+    expect(button("Move column 1 left")).toBeDisabled();
+    expect(button("Move row 1 down")).toBeEnabled();
+    await user.click(cell(11, 7));
+    expect(button("Move row 11 down")).toBeDisabled();
+  });
+
+  it("adds, moves, duplicates and removes a column, the triangle stays one", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(1, 2));
+    const lengths = () => market(store).map((row) => row.length);
+    const before = lengths();
+
+    await user.click(button("Add column to the right"));
+    // Rows with at least 3 cells get one
+    expect(lengths()).toEqual(before.map((n) => (n >= 2 ? n + 1 : n)));
+    expect(market(store)[0][2]).toBeNull();
+    await user.click(button("Duplicate column 3"));
+    expect(market(store)[0][3]).toBeNull();
+    await user.click(button("Move column 4 left"));
+    await user.click(button("Remove column 3"));
+    await user.click(button("Remove column 3"));
+    expect(market(store)).toEqual(games["18Test"].stock.market);
+  });
+
+  it("removes the last column and the last row, the market stays", async () => {
+    const { user, store } = open(marketRoute, {
+      ...games["18Test"],
+      stock: { ...games["18Test"].stock, market: [[5]] },
+    });
+    await grid();
+    await user.click(cell(1, 1));
+    await user.click(button("Remove column 1"));
+    expect(market(store)).toEqual([[]]);
+    expect(stock(store).type).toBe("2D");
+    expect(await screen.findByText("The market has no cells.")).toBeVisible();
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(market(store)).toEqual([[5]]);
+  });
+
+  it("shows a market of one row for 1D, with column actions only", async () => {
+    const { user, store } = open(marketRoute, oneD);
+    await grid();
+    expect(within(screen.getByRole("grid")).getAllByRole("row")).toHaveLength(
+      1,
+    );
+    await user.click(screen.getAllByRole("gridcell")[3]);
+    expect(
+      screen.queryByRole("group", { name: "Row" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("group", { name: "Column" })).toBeVisible();
+    expect(screen.getByRole("gridcell", { name: /^Cell 4:/ })).toBeVisible();
+    const count = market(store).length;
+    await user.click(button("Add column to the left"));
+    expect(market(store)).toHaveLength(count + 1);
+    expect(market(store)[3]).toBeNull();
+    await user.keyboard("{ArrowDown}");
+  });
+
+  it("draws a 1Diag market in two rows, a column is two cells", async () => {
+    const diag = {
+      ...games["18Test"],
+      stock: { type: "1Diag", market: [1, 2, 3, 4, 5] },
+    };
+    const { user, store } = open(marketRoute, diag);
+    await grid();
+    const rows = within(screen.getByRole("grid")).getAllByRole("row");
+    expect(rows).toHaveLength(2);
+    expect(within(rows[0]).getAllByRole("gridcell")).toHaveLength(3);
+    expect(within(rows[1]).getAllByRole("gridcell")).toHaveLength(2);
+    expect(screen.getByText(/two rows: the even cells on top/)).toBeVisible();
+
+    await user.click(screen.getByRole("gridcell", { name: /^Cell 2:/ }));
+    await user.keyboard("{ArrowRight}");
+    expect(screen.getByRole("gridcell", { name: /^Cell 4:/ })).toHaveFocus();
+    await user.keyboard("{ArrowUp}");
+    expect(screen.getByRole("gridcell", { name: /^Cell 3:/ })).toHaveFocus();
+    await user.keyboard("{ArrowDown}");
+    expect(screen.getByRole("gridcell", { name: /^Cell 4:/ })).toHaveFocus();
+
+    await user.click(button("Add column to the left"));
+    expect(market(store)).toEqual(
+      [1, 2, 3, 4, 5].flatMap((n, i) => (i === 2 ? [null, null, n] : [n])),
+    );
+    await user.click(button("Remove column 2"));
+    expect(market(store)).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  it("changes the type, warns when rows are dropped and undoes it", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    const changes = [];
+    store.subscribe(() => changes.push(stock(store).type));
+
+    await user.click(screen.getByRole("combobox", { name: /Type/ }));
+    await user.click(await screen.findByRole("option", { name: "1D" }));
+    expect(stock(store).type).toBe("1D");
+    expect(market(store)).toEqual(games["18Test"].stock.market[0]);
+    expect(stock(store).legend).toEqual(games["18Test"].stock.legend);
+    expect(
+      await screen.findByText("10 rows were removed from the market."),
+    ).toBeVisible();
+    expect(within(screen.getByRole("grid")).getAllByRole("row")).toHaveLength(
+      1,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(stock(store).type).toBe("2D");
+    expect(market(store)).toEqual(games["18Test"].stock.market);
+    expect(selectGameChanged(store.getState())).toBe(false);
+  });
+
+  it("a flat market becomes the row of a 2D market, in one edit", async () => {
+    const { user, store } = open(marketRoute, oneD);
+    await grid();
+    let edits = 0;
+    store.subscribe(() => edits++);
+    await user.click(screen.getByRole("combobox", { name: /Type/ }));
+    await user.click(await screen.findByRole("option", { name: "2D" }));
+    expect(market(store)).toEqual([oneD.stock.market]);
+    expect(edits).toBe(1);
+    expect(
+      screen.queryByText(/rows? w(as|ere) removed/),
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows the problems of a cell on the cell and its field", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    act(() =>
+      store.dispatch(
+        editGame((g) => ({
+          ...g,
+          stock: {
+            ...g.stock,
+            market: [
+              [
+                { value: 60, legend: -1, par: "yes" },
+                ...g.stock.market[0].slice(1),
+              ],
+              ...g.stock.market.slice(1),
+            ],
+          },
+        })),
+      ),
+    );
+    await waitFor(() =>
+      expect(cell(1, 1)).toHaveAccessibleName(/has a problem/),
+    );
+    await user.click(cell(1, 1));
+    const fields = await inspector();
+    await waitFor(() =>
+      expect(within(fields).getAllByRole("alert").length).toBeGreaterThan(0),
+    );
+    expect(
+      selectGameProblems(store.getState(), "internal:abc").some((i) =>
+        i.pointer.startsWith("stock.market[0][0]"),
+      ),
+    ).toBe(true);
+  });
+
+  it("warns about a legend number and a par without a chart, outside the problems", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await settled();
+    const before = selectGameProblems(store.getState(), "internal:abc");
+    act(() =>
+      store.dispatch(
+        editGame((g) => ({
+          ...g,
+          stock: {
+            ...g.stock,
+            par: undefined,
+            market: [
+              [
+                { value: 60, legend: 9, par: true },
+                ...g.stock.market[0].slice(1),
+              ],
+              ...g.stock.market.slice(1),
+            ],
+          },
+        })),
+      ),
+    );
+    await user.click(cell(1, 1));
+    expect(
+      await screen.findByText("The legend has no entry 9 (the first is 0)."),
+    ).toBeVisible();
+    expect(
+      screen.getByText(
+        "This cell is a par value, but the market has no par chart.",
+      ),
+    ).toBeVisible();
+    await settled();
+    expect(selectGameProblems(store.getState(), "internal:abc")).toEqual(
+      before,
+    );
+  });
+
+  it("warns when a legend entry that cells use is moved or removed", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(screen.getByRole("button", { name: "Legend" }));
+    const used = (legend) =>
+      within(screen.getByRole("grid"))
+        .getAllByRole("gridcell")
+        .filter((c) =>
+          c.getAttribute("aria-label").includes(`legend ${legend}`),
+        ).length;
+    expect(used(1)).toBeGreaterThan(0);
+
+    await user.click(
+      screen.getAllByRole("button", { name: /^Move legend entry .* down$/ })[0],
+    );
+    expect(store.getState().game.stock.legend[1].color).toBe("yellow");
+    expect(screen.getByTestId("list-warning")).toHaveTextContent(
+      /cells? uses? a legend number that now means another entry/,
+    );
+
+    await user.click(
+      screen.getAllByRole("button", { name: /^Remove legend entry / })[2],
+    );
+    expect(screen.getByTestId("list-warning")).toHaveTextContent(
+      /cells? uses? a legend number/,
+    );
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(screen.queryByTestId("list-warning")).not.toBeInTheDocument();
+  });
+
+  it("a new legend entry has its description, and is a legend entry", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(screen.getByRole("button", { name: "Legend" }));
+    await user.click(screen.getByRole("button", { name: "Add legend entry" }));
+    expect(stock(store).legend).toHaveLength(4);
+    expect(stock(store).legend[3]).toEqual({ description: "New entry" });
+    await user.click(
+      screen.getByRole("button", { name: "Duplicate legend entry New entry" }),
+    );
+    expect(stock(store).legend[4]).toEqual({ description: "New entry" });
+  });
+
+  it("edits the cell defaults", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(screen.getByRole("button", { name: "Cell defaults" }));
+    await user.type(await field("Color"), "blue{Enter}");
+    expect(stock(store).cell).toEqual({ color: "blue" });
+    await user.clear(await field("Color"));
+    await user.tab();
+    expect("cell" in stock(store)).toBe(false);
+  });
+
+  it("edits the movement and never the place it is drawn", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(screen.getByRole("button", { name: "Movement" }));
+    const up = screen.getByRole("textbox", { name: "Up" });
+    expect(up).toHaveValue("Sold out");
+    await user.clear(up);
+    await user.type(up, "First{Enter}Second");
+    await user.tab();
+    expect(stock(store).movement.up).toEqual(["First", "Second"]);
+    expect(stock(store).display).toEqual(games["18Test"].stock.display);
+
+    await user.type(screen.getByRole("textbox", { name: "New key" }), "3x");
+    await user.type(
+      screen.getByRole("textbox", { name: "Text" }),
+      "Far{Enter}",
+    );
+    expect(stock(store).movement["3x"]).toEqual(["Far"]);
+    await user.clear(screen.getByRole("textbox", { name: "3x" }));
+    await user.tab();
+    expect("3x" in stock(store).movement).toBe(false);
+    expect(stock(store).display).toEqual(games["18Test"].stock.display);
+  });
+
+  it("keeps ledges, limits and display as JSON", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(screen.getByRole("button", { name: /^Advanced/ }));
+    const display = screen.getByRole("textbox", { name: "Display" });
+    expect(JSON.parse(display.value)).toEqual(games["18Test"].stock.display);
+    await user.clear(screen.getByRole("textbox", { name: "Limits" }));
+    await user.type(screen.getByRole("textbox", { name: "Limits" }), "[[]");
+    await user.tab();
+    expect(stock(store).limits).toEqual([]);
+  });
+
+  it("an empty market renders the panel and the market page, without leaving", async () => {
+    const { user, router, store } = open(
+      `${route.replace("map", "market")}?edit=true&editSection=market`,
+    );
+    await grid();
+    for (const [index] of market(store).entries()) {
+      void index;
+    }
+    act(() =>
+      store.dispatch(
+        editGame((g) => ({ ...g, stock: { ...g.stock, market: [] } })),
+      ),
+    );
+    expect(await screen.findByText("The market has no cells.")).toBeVisible();
+    expect(router.state.location.pathname).toContain("/market");
+    await user.click(screen.getByRole("button", { name: "Add row" }));
+    expect(market(store)).toEqual([[null]]);
+    expect(screen.getByRole("gridcell", { name: /empty/ })).toBeVisible();
+  });
+
+  it("a game without a stock market can create one", async () => {
+    const { user, store } = open(marketRoute, omit(["stock"], games["18Test"]));
+    expect(
+      await screen.findByText("This game has no stock market yet."),
+    ).toBeVisible();
+    await user.click(screen.getByRole("button", { name: "Create a market" }));
+    expect(stock(store)).toEqual({
+      type: "2D",
+      market: Array.from({ length: 3 }, () => [null, null, null]),
+    });
+    expect(await grid()).toBeVisible();
+  });
+
+  it("edits the right cell after a row was moved", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(1, 2));
+    await user.click(button("Move row 1 down"));
+    expect(cell(2, 2)).toHaveAttribute("aria-selected", "true");
+    const value = within(await inspector()).getByRole("textbox", {
+      name: "Value",
+    });
+    expect(value).toHaveValue("67");
+    await user.clear(value);
+    await user.type(value, "77{Enter}");
+    expect(market(store)[1][1]).toBe(77);
+    expect(market(store)[0][1]).toEqual(games["18Test"].stock.market[1][1]);
+  });
+
+  it("keeps what is typed in a field when another cell is picked", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(1, 2));
+    const value = within(await inspector()).getByRole("textbox", {
+      name: "Value",
+    });
+    await user.clear(value);
+    await user.type(value, "99");
+    await user.click(cell(1, 3));
+    expect(market(store)[0][1]).toBe(99);
+    expect(market(store)[0][2]).toBe(71);
   });
 });

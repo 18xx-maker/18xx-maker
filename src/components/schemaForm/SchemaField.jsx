@@ -61,7 +61,7 @@ const FORMAT = (value) =>
 // also passed on when the field is removed (closing the panel, going to
 // another page), which fires no blur. submit returns false to refuse the text,
 // which then goes back to the value.
-const useDraft = (value, submit, format = FORMAT, same) => {
+export const useDraft = (value, submit, format = FORMAT, same) => {
   const [text, setText] = useState(format(value));
   const dirty = useRef(false);
   const latest = useRef({});
@@ -188,7 +188,7 @@ const describedBy = (id, description, errors, deprecated) =>
     .filter(Boolean)
     .join(" ") || undefined;
 
-const useField = (keys, schema) => {
+export const useField = (keys, schema) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const id = useId();
@@ -396,7 +396,7 @@ const BooleanField = (props) => {
 };
 
 // Anything without a form: the JSON of the value, set when the field is left
-const JsonField = ({ keys, schema }) => {
+export const JsonField = ({ keys, schema }) => {
   const field = useField(keys, schema);
   const format = (value) =>
     value === undefined ? "" : JSON.stringify(value, null, 2);
@@ -467,7 +467,7 @@ const focusItem = (container, index, action) => {
   (target ?? container?.querySelector("[data-add]"))?.focus();
 };
 
-const IconButton = ({ label, action, children, ...props }) => (
+export const IconButton = ({ label, action, children, ...props }) => (
   <Button
     type="button"
     variant="ghost"
@@ -483,6 +483,7 @@ const IconButton = ({ label, action, children, ...props }) => (
 );
 
 const ItemCard = ({
+  primaryKeys,
   keys,
   schema,
   index,
@@ -504,10 +505,10 @@ const ItemCard = ({
   const names = { item: kind, title };
 
   const entries = Object.entries(schema.properties);
-  const primary = PRIMARY_KEYS.flatMap((key) =>
+  const primary = primaryKeys.flatMap((key) =>
     entries.filter(([k]) => k === key),
   );
-  const rest = entries.filter(([key]) => !PRIMARY_KEYS.includes(key));
+  const rest = entries.filter(([key]) => !primaryKeys.includes(key));
   const field = ([key, child]) => (
     <SchemaField key={key} keys={[...keys, key]} schema={child} />
   );
@@ -601,20 +602,34 @@ const ItemCard = ({
 // always move the focus out of it), and the game is read after that.
 const FRESH_CARD = { open: true, more: false };
 
-const ArrayField = ({ keys, schema, defaults }) => {
+// primary are the fields shown first, the others are under more fields.
+// titleKey is the field that names an item. Names are kept unique (a new item
+// or a copy gets a free one) unless unique is false, as in a legend.
+// onChange(kind, from, to) gives back a warning to show with the list after a
+// move or remove.
+const ArrayField = ({
+  keys,
+  schema,
+  defaults,
+  primary = PRIMARY_KEYS,
+  titleKey = "name",
+  unique = true,
+  onChange,
+}) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const list = useRef(null);
   const focus = useRef(null);
   const [message, setMessage] = useState("");
   const [removed, setRemoved] = useState(null);
+  const [warning, setWarning] = useState("");
   // What is open on each card, by index
   const [ui, setUi] = useState([]);
 
   const items = getIn(keys, form.game) ?? [];
   const itemSchema = resolveAllOf(schema.items, form.root);
   const item = t(`editPanel.items.${keys[keys.length - 1]}`);
-  const titleOf = (value, index) => value?.name || `#${index + 1}`;
+  const titleOf = (value, index) => value?.[titleKey] || `#${index + 1}`;
   const uiOf = (index) => ui[index] ?? FRESH_CARD;
   // The same change of the cards as of the items
   const changeUi = (fn) =>
@@ -645,10 +660,13 @@ const ArrayField = ({ keys, schema, defaults }) => {
   const add = () => {
     commit();
     const before = current();
-    const created = newItem(before, defaults);
+    const created = newItem(before, defaults, unique);
     setRemoved(null);
+    setWarning("");
     form.insert(keys, before.length, created);
-    setMessage(t("editPanel.added", { item, title: created.name }));
+    setMessage(
+      t("editPanel.added", { item, title: titleOf(created, before.length) }),
+    );
     focus.current = { index: before.length, action: "title" };
   };
 
@@ -657,18 +675,22 @@ const ArrayField = ({ keys, schema, defaults }) => {
     const before = current();
     const copy = {
       ...structuredClone(before[index]),
-      name: nextName(before),
+      ...(unique && { name: nextName(before) }),
     };
     setRemoved(null);
+    setWarning("");
     form.insert(keys, index + 1, copy);
     changeUi((cards) => cards.toSpliced(index + 1, 0, FRESH_CARD));
-    setMessage(t("editPanel.duplicated", { item, title: copy.name }));
+    setMessage(
+      t("editPanel.duplicated", { item, title: titleOf(copy, index + 1) }),
+    );
   };
 
   const remove = (index) => {
     commit();
     const source = current()[index];
     form.remove(keys, index);
+    setWarning(onChange?.("remove", index, index) ?? "");
     setRemoved({ index, item: structuredClone(source), card: uiOf(index) });
     changeUi((cards) => cards.toSpliced(index, 1));
     setMessage(t("editPanel.removed", { item, title: titleOf(source, index) }));
@@ -680,6 +702,7 @@ const ArrayField = ({ keys, schema, defaults }) => {
     const before = current();
     setRemoved(null);
     form.move(keys, from, to);
+    setWarning(onChange?.("move", from, to) ?? "");
     changeUi((cards) => moveIn(from, to, cards));
     setMessage(
       t("editPanel.moved", {
@@ -695,6 +718,7 @@ const ArrayField = ({ keys, schema, defaults }) => {
   const undo = () => {
     commit();
     form.insert(keys, removed.index, removed.item);
+    setWarning("");
     changeUi((cards) => cards.toSpliced(removed.index, 0, removed.card));
     setMessage(
       t("editPanel.restored", {
@@ -717,6 +741,7 @@ const ArrayField = ({ keys, schema, defaults }) => {
           {items.map((value, index) => (
             <ItemCard
               key={index}
+              primaryKeys={primary}
               keys={[...keys, index]}
               schema={itemSchema}
               index={index}
@@ -747,6 +772,11 @@ const ArrayField = ({ keys, schema, defaults }) => {
           </Button>
         </p>
       )}
+      {warning && (
+        <p className="text-xs text-warning-text" data-testid="list-warning">
+          {warning}
+        </p>
+      )}
       <Button
         type="button"
         variant="outline"
@@ -758,13 +788,13 @@ const ArrayField = ({ keys, schema, defaults }) => {
         {t("editPanel.add", { item })}
       </Button>
       <p role="status" aria-live="polite" className="sr-only">
-        {message}
+        {message} {warning}
       </p>
     </div>
   );
 };
 
-const SchemaField = ({ keys, schema, defaults }) => {
+const SchemaField = ({ keys, schema, ...rest }) => {
   const { root } = useContext(SchemaFormContext);
   const node = resolveAllOf(schema, root);
   const props = { keys, schema: node };
@@ -787,7 +817,7 @@ const SchemaField = ({ keys, schema, defaults }) => {
     case "object":
       return <ObjectField {...props} />;
     case "array":
-      return <ArrayField {...props} defaults={defaults} />;
+      return <ArrayField {...props} {...rest} />;
     default:
       return <JsonField {...props} />;
   }

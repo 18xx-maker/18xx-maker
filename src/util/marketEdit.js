@@ -1,4 +1,13 @@
-import { assocPath, equals, insert, isEmpty, move, remove } from "ramda";
+import {
+  assocPath,
+  dissocPath,
+  equals,
+  insert,
+  isEmpty,
+  move,
+  omit,
+  remove,
+} from "ramda";
 
 // Edits of the stock market (game.stock.market) for the edit panel. Plain
 // functions from a game to a game: each returns the very same game when
@@ -251,9 +260,46 @@ export const createMarket = (game) => {
   return assocPath(["stock"], { ...game.stock, type, market }, game);
 };
 
-// The cells that take the color of a legend entry
-export const legendUses = (stock, index) =>
+// The cells that use a legend number from the first to the last (the others
+// of the list when to is left out)
+export const legendUses = (stock, from, to = from) =>
   rowsOf(stock)
     .flat()
-    .filter((cell) => cell && typeof cell === "object" && cell.legend === index)
-    .length;
+    .filter(
+      (cell) =>
+        cell &&
+        typeof cell === "object" &&
+        Number.isInteger(cell.legend) &&
+        cell.legend >= Math.min(from, to) &&
+        cell.legend <= Math.max(from, to),
+    ).length;
+
+// The place kept inside the market: the row and cell it has, or nothing when
+// there is none
+export const clampCell = (stock, place) => {
+  const rows = rowsOf(stock);
+  if (!place || rows.length === 0) return null;
+  const row = Math.max(0, Math.min(place.row, rows.length - 1));
+  const length = rows[row].length;
+  if (length === 0) return null;
+  return { row, col: Math.max(0, Math.min(place.col, length - 1)) };
+};
+
+// The movement texts of a direction or other key (one text per line, empty
+// lines left out). No texts remove the key, and the movement with its last.
+export const setMovement = (game, key, texts) => {
+  if (!game.stock) return game;
+  const cleaned = texts.map((text) => text.trim()).filter(Boolean);
+  const movement = game.stock.movement ?? {};
+
+  if (cleaned.length === 0) {
+    if (!(key in movement)) return game;
+    const rest = omit([key], movement);
+    return isEmpty(rest)
+      ? dissocPath(["stock", "movement"], game)
+      : assocPath(["stock", "movement"], rest, game);
+  }
+  return equals(movement[key], cleaned)
+    ? game
+    : assocPath(["stock", "movement", key], cleaned, game);
+};
