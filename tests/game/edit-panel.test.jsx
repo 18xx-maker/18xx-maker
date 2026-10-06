@@ -764,6 +764,85 @@ describe("edit panel trains", () => {
     expect(trains(store)[0].name).toBe("typed");
   });
 
+  it("duplicates and undoes a removal with what was typed, without a focus change", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    const name = within(cards()[1]).getByRole("textbox", { name: "Name" });
+    await user.clear(name);
+    await user.type(name, "5");
+
+    act(() => button("Duplicate train 3+1").click());
+    expect(names(store)).toEqual(["2", "5", "6", "4D", "8E"]);
+    expect(trains(store)[2]).toEqual({ ...trains(store)[1], name: "6" });
+
+    const typed = within(cards()[3]).getByRole("textbox", { name: "Name" });
+    await user.clear(typed);
+    await user.type(typed, "x");
+    act(() => button("Remove train 4D").click());
+    expect(names(store)).toEqual(["2", "5", "6", "8E"]);
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(names(store)).toEqual(["2", "5", "6", "x", "8E"]);
+  });
+
+  it("undo passes on what is typed first", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(button("Remove train 8E"));
+    const name = within(cards()[0]).getByRole("textbox", { name: "Name" });
+    await user.clear(name);
+    await user.type(name, "typed");
+    act(() => button("Undo").click());
+    expect(names(store)).toEqual(["typed", "3+1", "4D", "8E"]);
+  });
+
+  it("keeps the undo note until the next action on the list", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    try {
+      const { user } = open(trainsRoute);
+      await screen.findByRole("button", { name: "Add train" });
+      await user.click(button("Remove train 2"));
+      await act(() => vi.advanceTimersByTimeAsync(30000));
+      expect(screen.getByRole("button", { name: "Undo" })).toBeVisible();
+      await user.click(button("Move train 3+1 down"));
+      expect(
+        screen.queryByRole("button", { name: "Undo" }),
+      ).not.toBeInTheDocument();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("a collapsed card and More fields follow the train when it moves or one is removed", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(within(cards()[0]).getByRole("button", { name: "2" }));
+    await user.click(
+      within(cards()[1]).getByRole("button", { name: "More fields" }),
+    );
+
+    await user.click(button("Move train 2 down"));
+    expect(
+      within(cards()[1]).getByRole("button", { name: "2" }),
+    ).toHaveAttribute("aria-expanded", "false");
+    expect(
+      within(cards()[0]).getByRole("textbox", { name: "Description" }),
+    ).toBeVisible();
+    expect(
+      within(cards()[1]).queryByRole("textbox", { name: "Description" }),
+    ).not.toBeInTheDocument();
+
+    await user.click(button("Remove train 3+1"));
+    expect(
+      within(cards()[0]).getByRole("button", { name: "2" }),
+    ).toHaveAttribute("aria-expanded", "false");
+    expect(
+      within(cards()[0]).queryByRole("textbox", { name: "Description" }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(cards()[1]).getByRole("button", { name: "4D" }),
+    ).toHaveAttribute("aria-expanded", "true");
+  });
+
   it("keeps working after the changes are reverted with the panel open", async () => {
     const { user, store } = open(trainsRoute);
     await screen.findByRole("button", { name: "Add train" });

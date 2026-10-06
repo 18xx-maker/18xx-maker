@@ -57,6 +57,10 @@ describe("a deprecated field", () => {
     expect(screen.getByText("Deprecated")).toBeVisible();
     // One note: the validation warning is not shown a second time
     expect(screen.getAllByText("This field is deprecated.")).toHaveLength(1);
+    // The note is the paragraph around the text
+    // eslint-disable-next-line testing-library/no-node-access
+    const note = screen.getByText("This field is deprecated.").closest("p");
+    expect(note).toHaveClass("text-warning-text");
 
     const input = screen.getByRole("spinbutton", { name: /Players/ });
     expect(input).not.toBeInvalid();

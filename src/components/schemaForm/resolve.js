@@ -221,9 +221,9 @@ export const nextName = (items = []) => {
   return String(n);
 };
 
-// A new item for the list at the path: a train has what the schema requires,
-// named to not clash with the others
-export const newItem = (keys, items) => ({
+// A new item: the defaults of its list (what the schema requires besides the
+// name), named to not clash with the others
+export const newItem = (items, defaults = {}) => ({
   name: nextName(items),
-  ...(keys[keys.length - 1] === "trains" && { color: "gray", quantity: 1 }),
+  ...defaults,
 });

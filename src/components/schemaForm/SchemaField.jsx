@@ -8,7 +8,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
-import { path as getIn } from "ramda";
+import { path as getIn, move as moveIn } from "ramda";
 
 import {
   ArrowDown,
@@ -487,7 +487,10 @@ const ItemCard = ({
   schema,
   index,
   count,
-  item,
+  open,
+  more,
+  onOpen,
+  onMore,
   title,
   kind,
   onMove,
@@ -496,8 +499,6 @@ const ItemCard = ({
 }) => {
   const { t } = useTranslation();
   const form = useContext(SchemaFormContext);
-  const [open, setOpen] = useState(true);
-  const [more, setMore] = useState(false);
   const bodyId = useId();
   const issues = issuesFor(form.issues, keys, false);
   const names = { item: kind, title };
@@ -520,7 +521,7 @@ const ItemCard = ({
           aria-expanded={open}
           aria-controls={bodyId}
           data-title
-          onClick={() => setOpen(!open)}
+          onClick={() => onOpen(index, !open)}
         >
           {open ? (
             <ChevronDown className="size-4 shrink-0" aria-hidden="true" />
@@ -549,14 +550,14 @@ const ItemCard = ({
           <IconButton
             action="duplicate"
             label={t("editPanel.duplicate", names)}
-            onClick={() => onDuplicate(index, item)}
+            onClick={() => onDuplicate(index)}
           >
             <Copy />
           </IconButton>
           <IconButton
             action="remove"
             label={t("editPanel.remove", names)}
-            onClick={() => onRemove(index, item)}
+            onClick={() => onRemove(index)}
           >
             <Trash2 />
           </IconButton>
@@ -575,7 +576,7 @@ const ItemCard = ({
               type="button"
               className="flex flex-row items-center gap-1 self-start rounded-sm text-sm text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
               aria-expanded={more}
-              onClick={() => setMore(!more)}
+              onClick={() => onMore(index, !more)}
             >
               {more ? (
                 <ChevronDown className="size-4" aria-hidden="true" />
@@ -593,21 +594,42 @@ const ItemCard = ({
 };
 
 // A list of objects, each a card: add, remove, duplicate and reorder. A
-// removed item can be put back from the note that follows. The cards are keyed
-// by their index, a field that is not left yet is passed on first (a click on
-// a button does not always move the focus out of it).
-const ArrayField = ({ keys, schema }) => {
+// removed item can be put back from the note that follows, which stays until
+// the next action on the list. The cards are keyed by their index (their
+// drafts follow the game), what is open on a card follows the item. A field
+// that is not left yet is passed on first (a click on a button does not
+// always move the focus out of it), and the game is read after that.
+const FRESH_CARD = { open: true, more: false };
+
+const ArrayField = ({ keys, schema, defaults }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const list = useRef(null);
   const focus = useRef(null);
   const [message, setMessage] = useState("");
   const [removed, setRemoved] = useState(null);
+  // What is open on each card, by index
+  const [ui, setUi] = useState([]);
 
   const items = getIn(keys, form.game) ?? [];
   const itemSchema = resolveAllOf(schema.items, form.root);
   const item = t(`editPanel.items.${keys[keys.length - 1]}`);
   const titleOf = (value, index) => value?.name || `#${index + 1}`;
+  const uiOf = (index) => ui[index] ?? FRESH_CARD;
+  // The same change of the cards as of the items
+  const changeUi = (fn) =>
+    setUi((current) =>
+      fn(
+        Array.from(
+          { length: Math.max(current.length, items.length) },
+          (_, i) => current[i] ?? FRESH_CARD,
+        ),
+      ),
+    );
+  const setCard = (index, patch) =>
+    changeUi((cards) =>
+      cards.map((card, i) => (i === index ? { ...card, ...patch } : card)),
+    );
 
   // The focus goes where the last action asked for it, once the page has it
   useEffect(() => {
@@ -617,62 +639,63 @@ const ArrayField = ({ keys, schema }) => {
     focusItem(list.current, index, action);
   });
 
-  useEffect(() => {
-    if (!removed) return;
-    const timeout = setTimeout(() => setRemoved(null), 10000);
-    return () => clearTimeout(timeout);
-  }, [removed]);
-
   const commit = () => document.activeElement?.blur?.();
+  const current = () => getIn(keys, form.latest()) ?? [];
 
   const add = () => {
     commit();
-    const current = getIn(keys, form.game) ?? [];
-    const created = newItem(keys, current);
+    const before = current();
+    const created = newItem(before, defaults);
     setRemoved(null);
-    form.insert(keys, current.length, created);
+    form.insert(keys, before.length, created);
     setMessage(t("editPanel.added", { item, title: created.name }));
-    focus.current = { index: current.length, action: "title" };
+    focus.current = { index: before.length, action: "title" };
   };
 
-  const duplicate = (index, value) => {
+  const duplicate = (index) => {
     commit();
-    const current = getIn(keys, form.game) ?? [];
-    const source = current[index] ?? value;
-    const copy = { ...structuredClone(source), name: nextName(current) };
+    const before = current();
+    const copy = {
+      ...structuredClone(before[index]),
+      name: nextName(before),
+    };
     setRemoved(null);
     form.insert(keys, index + 1, copy);
+    changeUi((cards) => cards.toSpliced(index + 1, 0, FRESH_CARD));
     setMessage(t("editPanel.duplicated", { item, title: copy.name }));
   };
 
-  const remove = (index, value) => {
+  const remove = (index) => {
     commit();
-    const current = getIn(keys, form.game) ?? [];
-    const source = current[index] ?? value;
+    const source = current()[index];
     form.remove(keys, index);
-    setRemoved({ index, item: structuredClone(source) });
+    setRemoved({ index, item: structuredClone(source), card: uiOf(index) });
+    changeUi((cards) => cards.toSpliced(index, 1));
     setMessage(t("editPanel.removed", { item, title: titleOf(source, index) }));
     focus.current = { index, action: "title" };
   };
 
   const move = (from, to, action) => {
     commit();
-    const current = getIn(keys, form.game) ?? [];
+    const before = current();
     setRemoved(null);
     form.move(keys, from, to);
+    changeUi((cards) => moveIn(from, to, cards));
     setMessage(
       t("editPanel.moved", {
         item,
-        title: titleOf(current[from], from),
+        title: titleOf(before[from], from),
         position: to + 1,
-        count: current.length,
+        count: before.length,
       }),
     );
     focus.current = { index: to, action };
   };
 
   const undo = () => {
+    commit();
     form.insert(keys, removed.index, removed.item);
+    changeUi((cards) => cards.toSpliced(removed.index, 0, removed.card));
     setMessage(
       t("editPanel.restored", {
         item,
@@ -698,7 +721,10 @@ const ArrayField = ({ keys, schema }) => {
               schema={itemSchema}
               index={index}
               count={items.length}
-              item={value}
+              open={uiOf(index).open}
+              more={uiOf(index).more}
+              onOpen={(i, open) => setCard(i, { open })}
+              onMore={(i, more) => setCard(i, { more })}
               title={titleOf(value, index)}
               kind={item}
               onMove={move}
@@ -738,7 +764,7 @@ const ArrayField = ({ keys, schema }) => {
   );
 };
 
-const SchemaField = ({ keys, schema }) => {
+const SchemaField = ({ keys, schema, defaults }) => {
   const { root } = useContext(SchemaFormContext);
   const node = resolveAllOf(schema, root);
   const props = { keys, schema: node };
@@ -761,7 +787,7 @@ const SchemaField = ({ keys, schema }) => {
     case "object":
       return <ObjectField {...props} />;
     case "array":
-      return <ArrayField {...props} />;
+      return <ArrayField {...props} defaults={defaults} />;
     default:
       return <JsonField {...props} />;
   }

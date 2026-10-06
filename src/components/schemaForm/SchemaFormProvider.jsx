@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
 import { equals, path } from "ramda";
 
@@ -21,6 +21,7 @@ import { editGame, selectGameProblems } from "@/state";
 // changes page.
 const SchemaFormProvider = ({ game, children }) => {
   const dispatch = useDispatch();
+  const store = useStore();
   const issues = useSelector((state) =>
     selectGameProblems(state, game.meta.slug),
   );
@@ -56,9 +57,23 @@ const SchemaFormProvider = ({ game, children }) => {
     [edit],
   );
 
+  // The game now, not the one of the last render: an edit that was just
+  // dispatched (a blur) is in it
+  const latest = useCallback(() => store.getState().game, [store]);
+
   const context = useMemo(
-    () => ({ root: schema, game, issues, set, clear, insert, remove, move }),
-    [game, issues, set, clear, insert, remove, move],
+    () => ({
+      root: schema,
+      game,
+      issues,
+      latest,
+      set,
+      clear,
+      insert,
+      remove,
+      move,
+    }),
+    [game, issues, latest, set, clear, insert, remove, move],
   );
 
   return (

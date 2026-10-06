@@ -329,9 +329,10 @@ describe("lists", () => {
     expect(nextName([{ name: "3" }, { name: "2" }, { name: "x" }])).toBe("4");
   });
 
-  it("makes a train that is valid", () => {
-    expect(newItem(["trains"], [])).toEqual({
-      name: "1",
+  it("makes an item with the defaults of its list and a free name", () => {
+    expect(newItem([])).toEqual({ name: "1" });
+    expect(newItem([{ name: "1" }], { color: "gray", quantity: 1 })).toEqual({
+      name: "2",
       color: "gray",
       quantity: 1,
     });
