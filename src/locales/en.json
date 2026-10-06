@@ -110,7 +110,12 @@
       "companies": "company",
       "phases": "phase",
       "players": "player",
-      "legend": "legend entry"
+      "legend": "legend entry",
+      "colors": "color",
+      "tokenTypes": "token type",
+      "shareTypes": "share type",
+      "upgrades": "upgrade",
+      "entry": "entry"
     },
     "titles": {
       "players_one": "{{count}} player",
@@ -202,6 +207,13 @@
         "left": "Left",
         "right": "Right"
       }
+    },
+    "onePerLineList": "One per line. Always saved as a list, even for a single line.",
+    "record": {
+      "name": "Name of {{name}}",
+      "emptyName": "Enter a name.",
+      "duplicateName": "Another entry already has this name.",
+      "newName": "new"
     }
   },
   "jsonEditor": {

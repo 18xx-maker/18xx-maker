@@ -110,7 +110,12 @@
       "companies": "公司",
       "phases": "阶段",
       "players": "玩家",
-      "legend": "图例项"
+      "legend": "图例项",
+      "colors": "颜色",
+      "tokenTypes": "标记类型",
+      "shareTypes": "股份类型",
+      "upgrades": "升级",
+      "entry": "条目"
     },
     "titles": {
       "players_one": "{{count}} 名玩家",
@@ -202,6 +207,13 @@
         "left": "左",
         "right": "右"
       }
+    },
+    "onePerLineList": "每行一项。始终保存为列表,即使只有一行。",
+    "record": {
+      "name": "{{name}}的名称",
+      "emptyName": "请输入名称。",
+      "duplicateName": "已有其他条目使用这个名称。",
+      "newName": "新"
     }
   },
   "jsonEditor": {

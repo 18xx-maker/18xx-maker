@@ -8,7 +8,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
-import { equals, path as getIn, move as moveIn } from "ramda";
+import { equals, move as moveIn } from "ramda";
 
 import {
   ArrowDown,
@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -38,9 +39,13 @@ import { issueText } from "@/components/schemaForm/issueText";
 import {
   PRIMARY_KEYS,
   coerceStringOrNumber,
+  defaultValue,
+  formatLines,
   formatList,
   formatRevenue,
+  freeKey,
   humanize,
+  insertKey,
   isNamed,
   isRequired,
   issuesFor,
@@ -49,10 +54,14 @@ import {
   nextId,
   nextName,
   parseLimit,
+  parseLines,
   parseList,
   parseRevenue,
+  removeKey,
+  renameKey,
   resolveAllOf,
   sameList,
+  valueAt,
 } from "@/components/schemaForm/resolve";
 
 // What the fields need of the form: the root schema, the game, its problems
@@ -202,7 +211,7 @@ export const useField = (keys, schema) => {
   const id = useId();
   const [local, setLocal] = useState(null);
 
-  const value = getIn(keys, form.game);
+  const value = valueAt(keys, form.game);
   // The deprecated issue is the note of the field (the same warning twice
   // helps nobody)
   const issues = issuesFor(form.issues, keys).filter(
@@ -404,6 +413,87 @@ const StringListField = ({ keys, schema }) => {
       <p id={hint} className="text-xs text-muted-foreground">
         {t("editPanel.onePerLine")}
       </p>
+    </FieldShell>
+  );
+};
+
+// One text a line, always a list of texts, even for a line (the numbers of
+// the number cards, the upgrades of a tile)
+const StringArrayField = ({ keys, schema }) => {
+  const { t } = useTranslation();
+  const field = useField(keys, schema);
+  const draft = useDraft(
+    field.value,
+    (text) => {
+      const lines = parseLines(text);
+      if (lines === undefined) return field.clear();
+      if (!equals(lines, field.value)) field.set(lines);
+    },
+    formatLines,
+    (text, value) => equals(parseLines(text), value),
+  );
+  const aria = field.aria();
+  const hint = `${field.id}-hint`;
+
+  return (
+    <FieldShell {...field}>
+      <Textarea
+        {...aria}
+        aria-describedby={[aria["aria-describedby"], hint]
+          .filter(Boolean)
+          .join(" ")}
+        value={draft.text}
+        onChange={(event) => draft.change(event.target.value)}
+        onBlur={draft.commit}
+      />
+      <p id={hint} className="text-xs text-muted-foreground">
+        {t("editPanel.onePerLineList")}
+      </p>
+    </FieldShell>
+  );
+};
+
+// A list of choices: a checkbox for each, in the order of the schema, then the
+// values the game has that the schema does not know (they stay until unchecked).
+// No choice is no value.
+const EnumListField = ({ keys, schema }) => {
+  const { root } = useContext(SchemaFormContext);
+  const field = useField(keys, schema);
+  const options = resolveAllOf(schema.items, root).enum;
+  const current = Array.isArray(field.value) ? field.value : [];
+  const shown = [
+    ...options,
+    ...current.filter(
+      (value, i) => !options.includes(value) && current.indexOf(value) === i,
+    ),
+  ];
+
+  const toggle = (value, on) => {
+    const next = shown.filter((option) =>
+      option === value ? on : current.includes(option),
+    );
+    if (next.length === 0) field.clear();
+    else field.set(next);
+  };
+
+  return (
+    <FieldShell {...field}>
+      <div
+        {...field.aria({ role: "group", id: field.id })}
+        aria-label={field.label}
+        className="flex flex-col gap-2"
+      >
+        {shown.map((option, index) => (
+          <div key={String(option)} className="flex items-center gap-2">
+            <Checkbox
+              id={`${field.id}-${index}`}
+              checked={current.includes(option)}
+              onCheckedChange={(on) => toggle(option, on === true)}
+            />
+            <Label htmlFor={`${field.id}-${index}`}>{String(option)}</Label>
+          </div>
+        ))}
+      </div>
     </FieldShell>
   );
 };
@@ -774,7 +864,7 @@ const ArrayField = ({
   // What is open on each card, by index
   const [ui, setUi] = useState([]);
 
-  const items = getIn(keys, form.game) ?? [];
+  const items = valueAt(keys, form.game) ?? [];
   const itemSchema = resolveAllOf(schema.items, form.root);
   const item = t(`editPanel.items.${keys[keys.length - 1]}`);
   // A phase may have no name and be known by its train (or trains)
@@ -812,7 +902,7 @@ const ArrayField = ({
   });
 
   const commit = () => document.activeElement?.blur?.();
-  const current = () => getIn(keys, form.latest()) ?? [];
+  const current = () => valueAt(keys, form.latest()) ?? [];
 
   const add = () => {
     commit();
@@ -951,6 +1041,203 @@ const ArrayField = ({
   );
 };
 
+// One name of a record and its value: the name is typed and passed on when
+// the field is left, a name that is empty or taken is refused with a message
+// and goes back. The rows are keyed by position, so what is typed in a row
+// stays with it when its name changes.
+const RecordRow = ({ keys, name, index, schema, item, onRename, onRemove }) => {
+  const { t } = useTranslation();
+  const [problem, setProblem] = useState(null);
+  const errorId = useId();
+  const draft = useDraft(name, (text) => {
+    const to = text.trim();
+    if (to === name) return false;
+    const refused = onRename(name, to);
+    if (refused) {
+      setProblem(refused);
+      return false;
+    }
+  });
+  const names = { item, title: name };
+
+  return (
+    <li data-item={index} className="flex flex-col gap-3 rounded-md border p-3">
+      <div className="flex flex-row items-start gap-2">
+        <div className="flex min-w-0 grow flex-col gap-1">
+          <Input
+            value={draft.text}
+            aria-label={t("editPanel.record.name", { name })}
+            aria-invalid={problem ? true : undefined}
+            aria-describedby={problem ? errorId : undefined}
+            data-title
+            onChange={(event) => {
+              setProblem(null);
+              draft.change(event.target.value);
+            }}
+            onBlur={draft.commit}
+            onKeyDown={(event) => event.key === "Enter" && draft.commit()}
+          />
+          {problem && (
+            <p id={errorId} role="alert" className="text-xs text-destructive">
+              {t(problem)}
+            </p>
+          )}
+        </div>
+        <IconButton
+          action="remove"
+          label={t("editPanel.remove", names)}
+          onClick={() => onRemove(index)}
+        >
+          <Trash2 />
+        </IconButton>
+      </div>
+      <SchemaField keys={[...keys, name]} schema={schema} />
+    </li>
+  );
+};
+
+// An object of any names, each a row: add, rename and remove. A removed row
+// can be put back from the note that follows, which stays until the next
+// action on the record; it comes back under a free name when its own was
+// taken in the meantime. The object is always written whole, in the order of
+// the rows (a name that is a whole number is listed first by JavaScript).
+const RecordField = ({ keys, schema }) => {
+  const form = useContext(SchemaFormContext);
+  const { t } = useTranslation();
+  const list = useRef(null);
+  const focus = useRef(null);
+  const notes = useListNotes();
+  const { message, removed, warning, setMessage, setRemoved, setWarning } =
+    notes;
+
+  const record = valueAt(keys, form.game) ?? {};
+  const names = Object.keys(record);
+  const valueSchema = resolveAllOf(schema.additionalProperties, form.root);
+  const item = t([
+    `editPanel.items.${keys[keys.length - 1]}`,
+    "editPanel.items.entry",
+  ]);
+  const issues = issuesFor(form.issues, keys, false);
+
+  useEffect(() => {
+    if (!focus.current) return;
+    const { index, action } = focus.current;
+    focus.current = null;
+    focusItem(list.current, index, action);
+  });
+
+  const commit = () => document.activeElement?.blur?.();
+  const current = () => valueAt(keys, form.latest()) ?? {};
+  // Writes the record, and clears the key when this empties it
+  const write = (next) => {
+    if (Object.keys(next).length === 0 && form.clear(keys) !== false) return;
+    form.set(keys, next);
+  };
+
+  const add = () => {
+    commit();
+    const before = current();
+    const name = freeKey(before, t("editPanel.record.newName"));
+    setRemoved(null);
+    setWarning("");
+    form.set(
+      keys,
+      insertKey(
+        before,
+        names.length,
+        name,
+        defaultValue(valueSchema, form.root),
+      ),
+    );
+    setMessage(t("editPanel.added", { item, title: name }));
+    focus.current = { index: Object.keys(before).length, action: "title" };
+  };
+
+  const rename = (from, to) => {
+    const before = current();
+    if (to === "") return "editPanel.record.emptyName";
+    if (Object.hasOwn(before, to)) return "editPanel.record.duplicateName";
+    form.set(keys, renameKey(before, from, to));
+  };
+
+  const remove = (index) => {
+    commit();
+    const before = current();
+    const name = Object.keys(before)[index];
+    setRemoved({ index, name, value: structuredClone(before[name]) });
+    setWarning("");
+    write(removeKey(before, name));
+    setMessage(t("editPanel.removed", { item, title: name }));
+    focus.current = { index, action: "title" };
+  };
+
+  const undo = () => {
+    commit();
+    const before = current();
+    const name = freeKey(before, removed.name);
+    form.set(keys, insertKey(before, removed.index, name, removed.value));
+    setMessage(t("editPanel.restored", { item, title: name }));
+    focus.current = { index: removed.index, action: "title" };
+    setRemoved(null);
+  };
+
+  return (
+    <fieldset ref={list} className="flex flex-col gap-4 rounded-md border p-3">
+      <legend className="px-1 text-sm font-semibold">
+        {humanize(keys[keys.length - 1])}
+      </legend>
+      {schema.description && (
+        <p className="-mt-2 text-xs text-muted-foreground">
+          {schema.description}
+        </p>
+      )}
+      {issues.map((issue, index) => (
+        <p key={index} role="alert" className="text-xs text-destructive">
+          {issueText(t, issue)}
+        </p>
+      ))}
+      {names.length === 0 ? (
+        <p className="text-sm text-muted-foreground">
+          {t("editPanel.emptyList")}
+        </p>
+      ) : (
+        <ul className="flex flex-col gap-3">
+          {names.map((name, index) => (
+            <RecordRow
+              key={index}
+              keys={keys}
+              name={name}
+              index={index}
+              schema={valueSchema}
+              item={item}
+              onRename={rename}
+              onRemove={remove}
+            />
+          ))}
+        </ul>
+      )}
+      <RemovedNote
+        removed={removed}
+        removedText={
+          removed && t("editPanel.removed", { item, title: removed.name })
+        }
+        onUndo={undo}
+      />
+      <Button
+        type="button"
+        variant="outline"
+        className="self-start"
+        data-add
+        onClick={add}
+      >
+        <Plus />
+        {t("editPanel.add", { item })}
+      </Button>
+      <ListStatus message={message} warning={warning} />
+    </fieldset>
+  );
+};
+
 const SchemaField = ({ keys, schema, ...rest }) => {
   const { root } = useContext(SchemaFormContext);
   const node = resolveAllOf(schema, root);
@@ -985,6 +1272,12 @@ const SchemaField = ({ keys, schema, ...rest }) => {
       return <CountField {...props} />;
     case "object":
       return <ObjectField {...props} />;
+    case "record":
+      return <RecordField {...props} />;
+    case "stringArray":
+      return <StringArrayField {...props} />;
+    case "enumList":
+      return <EnumListField {...props} />;
     case "array":
       return <ArrayField {...props} {...rest} />;
     default:

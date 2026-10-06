@@ -110,7 +110,12 @@
       "companies": "Gesellschaft",
       "phases": "Phase",
       "players": "Spieler",
-      "legend": "Legendeneintrag"
+      "legend": "Legendeneintrag",
+      "colors": "Farbe",
+      "tokenTypes": "Token-Typ",
+      "shareTypes": "Anteilstyp",
+      "upgrades": "Upgrade",
+      "entry": "Eintrag"
     },
     "titles": {
       "players_one": "{{count}} Spieler",
@@ -202,6 +207,13 @@
         "left": "Links",
         "right": "Rechts"
       }
+    },
+    "onePerLineList": "Eine pro Zeile. Wird immer als Liste gespeichert, auch bei einer einzelnen Zeile.",
+    "record": {
+      "name": "Name von {{name}}",
+      "emptyName": "Gib einen Namen ein.",
+      "duplicateName": "Ein anderer Eintrag hat diesen Namen bereits.",
+      "newName": "neu"
     }
   },
   "jsonEditor": {
