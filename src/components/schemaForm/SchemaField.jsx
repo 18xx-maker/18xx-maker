@@ -874,6 +874,20 @@ const ArrayField = ({
   const items = valueAt(keys, form.game) ?? [];
   const itemSchema = resolveAllOf(schema.items, form.root);
   const item = t(`editPanel.items.${keys[keys.length - 1]}`);
+  // The items of a list have the key that identifies them (a name) unless the
+  // schema has none, like a note of a pool: then it is not made up. What the
+  // schema requires of such an item is started empty (a note has a text).
+  const hasId = Object.hasOwn(itemSchema.properties ?? {}, idKey);
+  const seed = hasId
+    ? {}
+    : Object.fromEntries(
+        (itemSchema.required ?? [])
+          .filter((key) => itemSchema.properties?.[key]?.type === "string")
+          .map((key) => [key, ""]),
+      );
+  const heading = t(`editPanel.headings.${keys[keys.length - 1]}`, {
+    defaultValue: "",
+  });
   // A phase may have no name and be known by its train (or trains)
   const titleOf = (value, index) =>
     (title
@@ -881,6 +895,7 @@ const ArrayField = ({
         value[titleKey] !== "" &&
         t(title, { count: value[titleKey] })
       : value?.[titleKey]) ||
+    value?.note ||
     [value?.train].flat().filter(Boolean).join(", ") ||
     `#${index + 1}`;
   const initial = startCollapsed ? CLOSED_CARD : FRESH_CARD;
@@ -914,7 +929,10 @@ const ArrayField = ({
   const add = () => {
     commit();
     const before = current();
-    const created = newItem(before, defaults, unique, idKey);
+    const created = {
+      ...seed,
+      ...newItem(before, defaults, hasId && unique, idKey),
+    };
     setRemoved(null);
     setWarning("");
     form.insert(keys, before.length, created);
@@ -930,9 +948,10 @@ const ArrayField = ({
     const before = current();
     const copy = {
       ...structuredClone(before[index]),
-      ...((unique === true || (unique && isNamed([before[index]]))) && {
-        [idKey]: nextId(before, idKey),
-      }),
+      ...(hasId &&
+        (unique === true || (unique && isNamed([before[index]]))) && {
+          [idKey]: nextId(before, idKey),
+        }),
       ...(unique === "named" &&
         !isNamed([before[index]]) && { train: nextName(before, "train") }),
     };
@@ -993,6 +1012,16 @@ const ArrayField = ({
 
   return (
     <div ref={list} className="flex flex-col gap-3">
+      {heading && (
+        <div className="flex flex-col gap-1">
+          <h3 className="text-sm font-medium">{heading}</h3>
+          {schema.description && (
+            <p className="text-xs text-muted-foreground">
+              {schema.description}
+            </p>
+          )}
+        </div>
+      )}
       {items.length === 0 ? (
         <p className="text-sm text-muted-foreground">
           {t("editPanel.emptyList")}

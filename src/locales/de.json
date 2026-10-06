@@ -118,13 +118,18 @@
       "turns": "Zug",
       "pools": "Pool",
       "notes": "Notiz",
-      "number_cards": "Nummernkarte",
       "legend": "Legendeneintrag",
       "colors": "Farbe",
       "tokenTypes": "Token-Typ",
       "shareTypes": "Anteilstyp",
       "upgrades": "Upgrade",
       "entry": "Eintrag"
+    },
+    "headings": {
+      "rounds": "Runden",
+      "turns": "Züge",
+      "pools": "Pools",
+      "notes": "Notizen"
     },
     "titles": {
       "players_one": "{{count}} Spieler",

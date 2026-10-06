@@ -118,13 +118,18 @@
       "turns": "turn",
       "pools": "pool",
       "notes": "note",
-      "number_cards": "number card",
       "legend": "legend entry",
       "colors": "color",
       "tokenTypes": "token type",
       "shareTypes": "share type",
       "upgrades": "upgrade",
       "entry": "entry"
+    },
+    "headings": {
+      "rounds": "Rounds",
+      "turns": "Turns",
+      "pools": "Pools",
+      "notes": "Notes"
     },
     "titles": {
       "players_one": "{{count}} player",

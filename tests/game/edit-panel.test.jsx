@@ -1244,7 +1244,7 @@ describe("edit panel phases", () => {
     const card = within(cards()[0]);
     expect(card.getByRole("combobox", { name: "Company" })).toBeVisible();
     expect(card.getByRole("textbox", { name: "Notes" })).toBeVisible();
-    expect(card.getByRole("combobox", { name: "Buy_companies" })).toBeVisible();
+    expect(card.getByRole("combobox", { name: "Buy companies" })).toBeVisible();
     // The event of a phase names a train
     expect(card.getByRole("combobox", { name: "On" })).toBeVisible();
     // No nested list: the only Add button is the one of the phases
@@ -1344,10 +1344,10 @@ describe("edit panel phases", () => {
     await more(user, 4);
     const card = within(cards()[4]);
     expect(
-      card.getByRole("combobox", { name: "Close_companies" }),
+      card.getByRole("combobox", { name: "Close companies" }),
     ).toHaveTextContent("Yes");
 
-    await user.click(card.getByRole("combobox", { name: "Remove_tokens" }));
+    await user.click(card.getByRole("combobox", { name: "Remove tokens" }));
     await user.click(await screen.findByRole("option", { name: "Yes" }));
     expect(phases(store)[4].events).toEqual({
       close_companies: true,
@@ -2822,13 +2822,90 @@ describe("edit panel rounds", () => {
     expect(game().rounds).toHaveLength(count);
   });
 
+  it("keeps the page drawing when the last round is removed", async () => {
+    const { user } = open(roundsRoute);
+    await ready();
+    const count = game().rounds.length;
+    for (let i = 0; i < count; i++) {
+      await user.click(
+        screen.getAllByRole("button", { name: /^Remove round / })[0],
+      );
+    }
+    expect(game().rounds ?? []).toEqual([]);
+    expect(await screen.findByTestId("game-internal:abc-map")).toBeVisible();
+    expect(screen.getByTestId("edit-panel")).toBeVisible();
+  });
+
+  it("titles the lists", async () => {
+    open(roundsRoute);
+    await ready();
+    const scope = within(screen.getByTestId("edit-panel"));
+    ["Rounds", "Turns", "Pools", "Notes"].forEach((name) =>
+      expect(scope.getAllByRole("heading", { name })[0]).toBeVisible(),
+    );
+    expect(scope.getByRole("textbox", { name: "Number cards" })).toBeVisible();
+  });
+
+  it("adds a note to a pool with a text and no name, and removes it", async () => {
+    const { user } = open(roundsRoute);
+    await ready();
+    const pool = () => game().pools[0];
+    const count = pool().notes.length;
+    await user.click(screen.getByRole("button", { name: "Add note" }));
+    expect(pool().notes).toHaveLength(count + 1);
+    expect(pool().notes[count]).toEqual({ note: "" });
+
+    await user.click(
+      screen.getAllByRole("button", { name: /^Duplicate note / })[0],
+    );
+    expect(pool().notes).toHaveLength(count + 2);
+    pool().notes.forEach((note) => expect(note).not.toHaveProperty("name"));
+
+    await user.click(
+      screen.getAllByRole("button", { name: /^Remove note / })[0],
+    );
+    await user.click(
+      screen.getAllByRole("button", { name: /^Remove note / })[0],
+    );
+    expect(pool().notes).toHaveLength(count);
+  });
+
+  it("edits a turn: its steps, ordered and optional steps", async () => {
+    const { user } = open(roundsRoute);
+    await ready();
+    const count = game().turns.length;
+    await user.click(screen.getByRole("button", { name: "Add turn" }));
+    expect(game().turns).toHaveLength(count + 1);
+    expect(game().turns[count].name).toBeTruthy();
+
+    const card = cards().find((el) =>
+      within(el).queryByRole("button", {
+        name: "Remove turn " + game().turns[count].name,
+      }),
+    );
+    const steps = within(card).getByRole("textbox", { name: "Steps" });
+    await user.type(steps, "Buy{Enter}Sell");
+    await user.tab();
+    expect(game().turns[count].steps).toEqual(["Buy", "Sell"]);
+    await user.click(within(card).getByRole("combobox", { name: "Ordered" }));
+    await user.click(await screen.findByRole("option", { name: "Yes" }));
+    expect(game().turns[count].ordered).toBe(true);
+
+    await user.click(
+      within(card).getByRole("button", {
+        name: "Remove turn " + game().turns[count].name,
+      }),
+    );
+    expect(game().turns).toHaveLength(count);
+  });
+
   it("edits the number cards, one color per line", async () => {
     const { user } = open(roundsRoute, {
       ...structuredClone(games["18Test"]),
       number_cards: ["red", "blue"],
     });
     await ready();
-    const area = screen.getByRole("textbox", { name: /number/i });
+    const area = screen.getByRole("textbox", { name: "Number cards" });
     expect(area).toHaveValue("red\nblue");
     await user.type(area, "\ngreen");
     await user.tab();

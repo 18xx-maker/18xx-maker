@@ -578,6 +578,7 @@ describe("helpers", () => {
   it("humanizes keys", () => {
     expect(humanize("titleFontWeight")).toBe("Title Font Weight");
     expect(humanize("bgg")).toBe("Bgg");
+    expect(humanize("number_cards")).toBe("Number cards");
   });
 
   it("knows the required keys", () => {

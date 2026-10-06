@@ -20,7 +20,13 @@ export const PRIMARY_KEYS = [
   "obsolete",
   "revenue",
   "company",
+  "note",
 ];
+
+// The fields of a turn and of a pool of the rounds tab, none is under "more
+// fields"
+export const TURN_PRIMARY_KEYS = ["name", "steps", "ordered", "optional"];
+export const POOL_PRIMARY_KEYS = ["name", "notes"];
 
 // The same for a company: the rest (the shares, tokens, logo and the other
 // charter fields) are under "more fields"
@@ -303,6 +309,7 @@ export const referenceValue = (list, mode) => {
 export const humanize = (key) =>
   key
     .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/_/g, " ")
     .replace(/^./, (char) => char.toUpperCase());
 
 const isIndex = (key) => typeof key === "number" || /^\d+$/.test(key);
