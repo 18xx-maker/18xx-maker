@@ -1417,8 +1417,13 @@ describe("edit panel market", () => {
   it("a flat market becomes the row of a 2D market, in one edit", async () => {
     const { user, store } = open(marketRoute, oneD);
     await grid();
+    // count game edits only: other dispatches (validation) also notify
     let edits = 0;
-    store.subscribe(() => edits++);
+    let last = stock(store);
+    store.subscribe(() => {
+      if (stock(store) !== last) edits++;
+      last = stock(store);
+    });
     await user.click(screen.getByRole("combobox", { name: /Type/ }));
     await user.click(await screen.findByRole("option", { name: "2D" }));
     expect(market(store)).toEqual([oneD.stock.market]);
