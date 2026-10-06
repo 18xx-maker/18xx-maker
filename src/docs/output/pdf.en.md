@@ -115,3 +115,21 @@ If you want to build all games at once you can run:
 ```bash
 pnpm build && pnpm maker export --all --format pdf
 ```
+
+## Print Scale
+
+If your printer prints a little too big or too small, set `printScale` in your
+config (or in the _Layout_ section of the [config](?config=true) panel) to a
+percentage from 50 to 200. 100 is the real size, 95 prints everything 5% smaller
+and 105 prints everything 5% bigger, in both directions. The paper size and
+margins stay the same, so the sheets are laid out again: at a smaller scale more
+tiles, tokens or cards fit on a page, at a bigger scale fewer do. It scales what
+you see in the app and in your browser's print menu. Exports (PDF, PNG, SVG and
+Board18, from the app or the command line) always use the real size and ignore
+it, and so do the Board18 pages. It is a setting of your printer, so a game file
+cannot set it.
+
+A few things have a fixed width of 8 inches and do not follow the scale when it
+makes a page wider: the die tile sheet, the background page, the tile manifest
+and the pins of the card sheets. Check the print preview before printing at a
+bigger scale.

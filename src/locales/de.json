@@ -533,6 +533,10 @@
       },
       "paperMargins": {
         "label": "Papierränder"
+      },
+      "printScale": {
+        "label": "Druckskalierung",
+        "description": "Skaliert alles, was gedruckt wird, in Prozent, um einen Drucker auszugleichen, der zu groß oder zu klein druckt. 100 ist die tatsächliche Größe, der Bereich geht von 50 bis 200. Papiergröße und Ränder bleiben gleich, daher ändert sich, was auf eine Seite passt. Exporte ignorieren sie."
       }
     },
     "tokens": {
@@ -784,7 +788,7 @@
       },
       "layout": {
         "label": "Kartenlayout",
-        "description": "„Free“ lässt die Karten frei fließen und verwendet die weiteren Optionen unten. „Mini euro“ ist für meine eigene Stanze, die Karten im Mini-Euro-Format schneidet, und „dtgDie“ nutzt die Standard-Stanze von Deep Thought Games. Beide Stanzoptionen überschreiben die Seitengröße sowie die Optionen für Breite, Höhe und Schnittlinien unten."
+        "description": "„Free“ lässt die Karten frei fließen und verwendet die weiteren Optionen unten. „Mini euro“ ist für meine eigene Stanze, die Karten im Mini-Euro-Format schneidet, und „dtgDie“ nutzt die Standard-Stanze von Deep Thought Games. Beide Stanzoptionen überschreiben die Seitengröße und die Schnittlinien-Option unten und verwenden die weiter unten angegebenen Kartengrößen der Stanze statt der Kartenbreite und -höhe."
       },
       "width": {
         "label": "Kartenbreite"
@@ -855,7 +859,20 @@
           }
         }
       },
-      "typeSizesNote": "**Kartengrößen pro Typ.** Lass eine Breite oder Höhe leer, um die Kartenbreite und -höhe von oben zu verwenden. Typen mit derselben Größe werden auf denselben Seiten gedruckt, jede andere Größe bekommt eigene Seiten, und die Seitenausrichtung folgt der ersten Größe. Die Stanzlayouts ignorieren diese Größen."
+      "typeSizesNote": "**Kartengrößen pro Typ.** Lass eine Breite oder Höhe leer, um die Kartenbreite und -höhe von oben zu verwenden. Typen mit derselben Größe werden auf denselben Seiten gedruckt, jede andere Größe bekommt eigene Seiten, und die Seitenausrichtung folgt der ersten Größe. Die Stanzlayouts ignorieren diese Größen und verwenden ihre eigenen weiter unten.",
+      "miniEuroDieWidth": {
+        "label": "Kartenbreite der Mini-Euro-Stanze"
+      },
+      "miniEuroDieHeight": {
+        "label": "Kartenhöhe der Mini-Euro-Stanze"
+      },
+      "dtgDieWidth": {
+        "label": "Kartenbreite der DTG-Stanze"
+      },
+      "dtgDieHeight": {
+        "label": "Kartenhöhe der DTG-Stanze"
+      },
+      "diceNote": "**Kartengrößen der Stanzen.** Die Stanzlayouts verwenden diese Größen statt der Kartenbreite und -höhe von oben. Größen pro Kartentyp für eine Stanze legst du in der Konfigurationsdatei unter `cards.dice` fest."
     },
     "privates": {
       "title": "Privatgesellschaften",

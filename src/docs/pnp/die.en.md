@@ -49,7 +49,28 @@ You can set the `cards.layout` property to `dtgDie` or `miniEuroDie` depending
 on which die layout you have. Just like on tiles setting one of these options
 overrides a lot of other options. This includes `cards.sizes`, the optional
 width and height of each type of card (`private`, `share`, `train` and
-`number`): the die layouts ignore it and use one size for every card.
+`number`): the die layouts ignore it. The paper, margins, cutlines and bleed of
+a die layout are fixed. Its card size is not: it is in `cards.dice`, one entry
+for each die, and defaults to the size of the dies above:
+
+```json
+{
+  "cards": {
+    "layout": "dtgDie",
+    "dice": {
+      "dtgDie": {
+        "width": 250,
+        "height": 150,
+        "sizes": { "share": { "width": 200 } }
+      }
+    }
+  }
+}
+```
+
+`width` and `height` are in units of 1/100 inch. The optional `sizes` has the
+same shape as `cards.sizes` and sets the size of a type of card on that die. A
+missing width or height uses the size of the die.
 
 ### Pins on free layouts
 
