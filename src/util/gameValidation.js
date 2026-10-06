@@ -32,12 +32,44 @@ const schema = () => {
 };
 
 // The paths (["exports", "paginated"]) of the properties the schema marks
-// deprecated. They stay valid, so only a warning is shown.
-export const deprecatedPaths = (node, path = []) =>
-  Object.entries(node.properties || {}).flatMap(([key, child]) => [
-    ...(child.deprecated ? [[...path, key]] : []),
-    ...deprecatedPaths(child, [...path, key]),
-  ]);
+// deprecated. They stay valid, so only a warning is shown. Items of a list are
+// "*" (["trains", "*", "players"]). Local $refs, allOf and items are followed,
+// each $ref once per path (a definition can contain itself).
+export const deprecatedPaths = (
+  node,
+  root = node,
+  path = [],
+  followed = new Set(),
+) => {
+  if (!node || typeof node !== "object") return [];
+
+  if (node.$ref) {
+    if (!node.$ref.startsWith("#/") || followed.has(node.$ref)) return [];
+    const target = node.$ref
+      .slice(2)
+      .split("/")
+      .reduce((n, part) => n?.[part], root);
+    return deprecatedPaths(
+      target,
+      root,
+      path,
+      new Set([...followed, node.$ref]),
+    );
+  }
+
+  return [
+    ...Object.entries(node.properties || {}).flatMap(([key, child]) => [
+      ...(child.deprecated ? [[...path, key]] : []),
+      ...deprecatedPaths(child, root, [...path, key], followed),
+    ]),
+    ...(node.items
+      ? deprecatedPaths(node.items, root, [...path, "*"], followed)
+      : []),
+    ...(node.allOf || []).flatMap((part) =>
+      deprecatedPaths(part, root, path, followed),
+    ),
+  ];
+};
 
 // "#/map/hexes/0/color" is map.hexes[0].color
 export const readablePointer = (pointer = "") =>
@@ -148,16 +180,36 @@ const translate = (error) => {
   }
 };
 
+// The paths in the data a (wildcard) path of the schema leads to
 const present = (data, path) => {
-  let node = data;
-  for (const key of path) {
-    if (node === null || typeof node !== "object" || !(key in node)) {
-      return false;
-    }
-    node = node[key];
+  if (path.length === 0) return [[]];
+  const [key, ...rest] = path;
+  if (data === null || typeof data !== "object") return [];
+
+  if (key === "*") {
+    return Array.isArray(data)
+      ? data.flatMap((item, index) =>
+          present(item, rest).map((tail) => [index, ...tail]),
+        )
+      : [];
   }
-  return true;
+  return key in data
+    ? present(data[key], rest).map((tail) => [key, ...tail])
+    : [];
 };
+
+// A warning for each place in the data of a deprecated path of the schema
+export const deprecatedIssues = (deprecated, data) =>
+  deprecated.flatMap((path) =>
+    present(data, path).map((found) =>
+      issue(
+        "deprecated",
+        `#/${found.join("/")}`,
+        { key: path.filter((part) => part !== "*").join("_") },
+        WARNING,
+      ),
+    ),
+  );
 
 // Every problem of a game: schema errors first, then deprecated fields
 export const validateGame = async (game) => {
@@ -167,16 +219,5 @@ export const validateGame = async (game) => {
 
   const errors = validator.validate(data).errors.flatMap(leaves).map(translate);
 
-  const warnings = deprecated
-    .filter((path) => present(data, path))
-    .map((path) =>
-      issue(
-        "deprecated",
-        `#/${path.join("/")}`,
-        { key: path.join("_") },
-        WARNING,
-      ),
-    );
-
-  return [...errors, ...warnings];
+  return [...errors, ...deprecatedIssues(deprecated, data)];
 };

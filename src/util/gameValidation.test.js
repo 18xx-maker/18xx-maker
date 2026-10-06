@@ -1,6 +1,7 @@
 import { games } from "@/data";
 import {
   closest,
+  deprecatedIssues,
   deprecatedPaths,
   readablePointer,
   shorten,
@@ -103,6 +104,74 @@ describe("gameValidation", () => {
           },
         }),
       ).toEqual([["a"], ["b", "c"]]);
+    });
+
+    const root = {
+      definitions: {
+        train: {
+          properties: { name: {}, players: { deprecated: true } },
+        },
+        loop: {
+          properties: {
+            self: { $ref: "#/definitions/loop" },
+            old: { deprecated: true },
+          },
+        },
+      },
+      properties: {
+        trains: {
+          type: "array",
+          items: {
+            allOf: [{ $ref: "#/definitions/train" }, { required: ["name"] }],
+          },
+        },
+        companies: {
+          type: "array",
+          items: {
+            properties: {
+              trains: {
+                type: "array",
+                items: { $ref: "#/definitions/train" },
+              },
+            },
+          },
+        },
+        loop: { $ref: "#/definitions/loop" },
+        external: { $ref: "tiles.defs.json#/definitions/hex" },
+      },
+    };
+
+    it("follows items, allOf and $ref, ends on a $ref that contains itself", () => {
+      expect(deprecatedPaths(root)).toEqual([
+        ["trains", "*", "players"],
+        ["companies", "*", "trains", "*", "players"],
+        ["loop", "old"],
+      ]);
+    });
+
+    it("warns for each item that has a deprecated field", () => {
+      const data = {
+        trains: [{ name: "a" }, { name: "b", players: 3 }, { players: 4 }],
+        companies: [{ trains: [{ players: 2 }] }, {}],
+        loop: { old: 1 },
+      };
+      expect(
+        deprecatedIssues(deprecatedPaths(root), data).map(
+          ({ pointer, params, severity }) => [pointer, params.key, severity],
+        ),
+      ).toEqual([
+        ["trains[1].players", "trains_players", "warning"],
+        ["trains[2].players", "trains_players", "warning"],
+        [
+          "companies[0].trains[0].players",
+          "companies_trains_players",
+          "warning",
+        ],
+        ["loop.old", "loop_old", "warning"],
+      ]);
+      expect(deprecatedIssues(deprecatedPaths(root), { trains: "x" })).toEqual(
+        [],
+      );
     });
 
     it("has no deprecated property without a message", async () => {
