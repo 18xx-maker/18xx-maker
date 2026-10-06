@@ -15,21 +15,3 @@ footer a {
 footer a:hover {
   color: rgb(95 35 132);
 }
-
-.LegalNotes {
-  background-color: #a00;
-  border-bottom: 2px solid #900;
-  color: #fff;
-  font-family: sans-serif;
-}
-
-.LegalNotes strong {
-  font-weight: bold;
-}
-
-.WIP {
-  background-color: #ffa;
-  border-bottom: 2px solid #dda;
-  font-family: sans-serif;
-  font-weight: normal;
-}

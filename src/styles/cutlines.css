@@ -20,10 +20,6 @@
   box-sizing: border-box;
 }
 
-.cutlines-inner {
-  position: relative;
-}
-
 .cutlines::before {
   content: "";
   width: 0.25in;
