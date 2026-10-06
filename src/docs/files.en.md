@@ -119,7 +119,7 @@ Problems with a value, like a currency without a `#`, are shown below its field.
 Escape closes the panel (see below for the JSON editor).
 
 The panel has a section for each part of the game it edits, shown as chips under
-the group names Game, Equipment and Look and output. The Forms | JSON switch in
+the group names "Game", "Equipment" and "Look and output". The Forms | JSON switch in
 the header goes between these forms and the JSON editor (below), and Forms goes
 back to the form you were on. Press `[` and `]` to switch between the form
 sections (from the JSON editor they go to the last form; the number keys go to
@@ -244,16 +244,16 @@ coordinate of the group (`?edit=true&editSection=hex&hex=C11`). Picking hexes
 works on the pan and zoom map on screen while the panel is open, and the
 printed and exported maps do not change. A map variation that copies another
 shows the hexes it copies read only: change them in the variation they come
-from. The keyboard way to edit a group is the JSON tab.
+from. The keyboard way to edit a group is the JSON editor (the JSON switch in the panel header).
 
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
 
 ### JSON editor
 
-The JSON tab edits the whole game as JSON (the same text as the Download
+The JSON editor edits the whole game as JSON (the same text as the Download
 button writes, without the meta). Press `j` on any page while a game is loaded to
-open the panel on this tab, to switch to it, or, outside the editor, to close
+open the panel on the JSON editor, to switch to it, or, outside the editor, to close
 the panel. The parts of the game other than `info` start folded. The page follows what
 you type, a moment after you stop, but only while the text is a valid JSON
 object with an `info` object and a text `info.title`. While it is not, the game

@@ -4,6 +4,8 @@ import { afterAll, afterEach, beforeAll, expect, vi } from "vitest";
 
 import { resetDrafts } from "@/components/editPanel/draftStore";
 
+import { resetLastForm } from "@/hooks/lastForm";
+
 import { checkConsole } from "@tests/support/console.js";
 
 import "@tests/support/i18n";
@@ -55,3 +57,6 @@ afterEach(check);
 
 // The JSON editor keeps unfinished text for the session
 afterEach(resetDrafts);
+
+// The form the JSON switch goes back to is module state
+afterEach(resetLastForm);

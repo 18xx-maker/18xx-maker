@@ -606,7 +606,7 @@ describe("edit panel tabs", () => {
     expect(screen.queryByRole("tab")).not.toBeInTheDocument();
     expect(screen.getByRole("region", { name: "JSON" })).toBeVisible();
 
-    // Forms goes back to the last form and drops the selected lines
+    // Forms goes back to the last form
     await user.click(screen.getByRole("button", { name: "Forms" }));
     expect(router.state.location.search).toBe("?edit=true&editSection=output");
     expect(screen.getByRole("tab", { name: "Output" })).toHaveAttribute(
@@ -645,6 +645,42 @@ describe("edit panel tabs", () => {
     await user.keyboard("]");
     await waitFor(() =>
       expect(router.state.location.search).toBe("?edit=true"),
+    );
+  });
+
+  it("Forms from a JSON deep link goes to the first form", async () => {
+    const { user, router } = open(`${route}?edit=true&editSection=json`);
+    await user.click(await screen.findByRole("button", { name: "Forms" }));
+    expect(router.state.location.search).toBe("?edit=true");
+    expect(await screen.findByRole("tab", { name: "Game" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+  });
+
+  it("Forms after Trains and JSON goes back to Trains", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("tab", { name: "Trains" });
+    await user.click(screen.getByRole("button", { name: "JSON" }));
+    await screen.findByTestId("json-editor");
+    await user.click(screen.getByRole("button", { name: "Forms" }));
+    expect(await screen.findByRole("tab", { name: "Trains" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+  });
+
+  it("] from a button in the JSON region focuses the target chip", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("tab", { name: "Trains" });
+    await user.click(screen.getByRole("button", { name: "JSON" }));
+    await screen.findByTestId("json-editor");
+    const button = screen.getByRole("button", { name: "Format" });
+    button.focus();
+    expect(button).toHaveFocus();
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(screen.getByRole("tab", { name: "Trains" })).toHaveFocus(),
     );
   });
 

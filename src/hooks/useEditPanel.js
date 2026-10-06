@@ -9,6 +9,7 @@ import {
   sectionsFor,
 } from "@/components/editPanel/sections";
 
+import { getLastForm, resetLastForm, setLastForm } from "@/hooks/lastForm";
 import { useEditor } from "@/hooks/useEditor";
 import { gameNav } from "@/util/gameNav";
 import { COORD_PATTERN } from "@/util/hexEdit";
@@ -20,10 +21,6 @@ import {
   useTogglePanel,
 } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
-
-// The form section the panel was on before the JSON switch, so Forms goes back
-// to it. Not persisted; the hook and the bindings share it.
-let lastForm = null;
 
 // The edit panel (forms for parts of the game) belongs to the sections of the toolbar: the
 // ones with an edit toggle. The print page of an export has none, nor has render mode.
@@ -43,11 +40,6 @@ export const useEditPanel = () => {
     ? param
     : forms[0].section;
   const json = editSection === "json";
-  if (!json) lastForm = editSection;
-  // The form Forms goes back to: the last one, unless the page has no such one
-  const formSection = forms.some((s) => s.section === lastForm)
-    ? lastForm
-    : forms[0].section;
 
   // The selected lines belong to the JSON editor: leaving it drops them
   // (the section already shown stays as it is, lines and history included)
@@ -65,6 +57,14 @@ export const useEditPanel = () => {
     !getRenderInput() &&
     section !== "b18" &&
     !!find(propEq(section, "section"), gameNav);
+
+  // Closing the panel forgets the form
+  if (available && !open) resetLastForm();
+  else if (available && !json) setLastForm(editSection);
+  // The form Forms goes back to: the last one, unless the page has no such one
+  const formSection = forms.some((s) => s.section === getLastForm())
+    ? getLastForm()
+    : forms[0].section;
 
   return {
     available,

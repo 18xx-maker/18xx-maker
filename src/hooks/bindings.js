@@ -5,7 +5,11 @@ import { useLocation, useMatch, useNavigate } from "react-router";
 import { find, propEq } from "ramda";
 
 import { sections as configSections } from "@/components/config";
-import { panelId, tabId } from "@/components/editPanel/EditNav";
+import {
+  focusTabAfterRender,
+  panelId,
+  tabId,
+} from "@/components/editPanel/EditNav";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
@@ -151,10 +155,9 @@ export const useBindings = () => {
               document.getElementById(panelId(editSection))?.contains(active);
             setEditSection(next);
             if (inside) {
-              // The chips are not there in the JSON editor: after the render
-              const focus = () => document.getElementById(tabId(next))?.focus();
-              if (editSection === "json") setTimeout(focus, 0);
-              else focus();
+              // The chips are not there in the JSON editor: after the commit
+              if (editSection === "json") focusTabAfterRender(next);
+              else document.getElementById(tabId(next))?.focus();
             }
           } else if (params.has("config")) {
             let current = params.get("section") || "colors";

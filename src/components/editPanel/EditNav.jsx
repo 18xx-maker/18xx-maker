@@ -1,9 +1,17 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { cn } from "@/util/cn";
 
 export const tabId = (section) => `edit-tab-${section}`;
 export const panelId = (section) => `edit-tabpanel-${section}`;
+
+// A tab to focus once the chips are mounted (from the JSON editor they are not
+// there yet): EditNav takes it after its commit
+let pendingFocus = null;
+export const focusTabAfterRender = (section) => {
+  pendingFocus = section;
+};
 
 // The Forms | JSON switch of the edit panel header. JSON is a mode of its own
 // (a wide code editor), the forms are the chips of EditNav.
@@ -53,6 +61,12 @@ export const EditSwitch = ({ json, formSection, setSection }) => {
 const EditNav = ({ groups, section, setSection }) => {
   const { t } = useTranslation();
   const sections = groups.flatMap((g) => g.sections);
+
+  useEffect(() => {
+    if (!pendingFocus) return;
+    document.getElementById(tabId(pendingFocus))?.focus();
+    pendingFocus = null;
+  });
 
   const onKeyDown = (event) => {
     const index = sections.findIndex((s) => s.section === section);
