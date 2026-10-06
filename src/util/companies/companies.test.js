@@ -66,6 +66,17 @@ describe("compileCompanies", () => {
     expect(company.tokens).toEqual(["Big"]);
   });
 
+  it("should give a company an empty list for a type that is gone", () => {
+    const [company] = compileCompanies({
+      tokenTypes: { default: ["A"] },
+      companies: [{ abbrev: "A", tokens: "three", shares: "two" }],
+    });
+
+    expect(company.tokenType).toBe("three");
+    expect(company.tokens).toEqual([]);
+    expect(company.shares).toEqual([]);
+  });
+
   it("should handle games without companies or types", () => {
     expect(compileCompanies({})).toEqual([]);
     expect(compileCompanies({ companies: [{ abbrev: "A" }] })).toEqual([

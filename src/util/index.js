@@ -552,7 +552,7 @@ const compileCompanyTypes = (game, companies, field, typeField, types) => {
       return {
         ...company,
         [typeField]: company[field],
-        [field]: [...available[company[field]]],
+        [field]: [...(available?.[company[field]] ?? [])],
       };
     } else {
       return company;

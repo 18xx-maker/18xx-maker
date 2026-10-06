@@ -97,6 +97,13 @@ const pages = [
         .click();
     },
   },
+  ...["light", "dark"].map((colorScheme) => ({
+    // The tokens of the game, the token types and the share types
+    name: `edit panel tokens (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=tokens",
+    colorScheme,
+    ready: (page) => page.getByRole("button", { name: "Add share" }).first(),
+  })),
   // The JSON editor, in both themes
   ...["light", "dark"].map((colorScheme) => ({
     name: `edit panel json (${colorScheme})`,

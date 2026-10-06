@@ -99,6 +99,10 @@
         "tab": "回合",
         "description": "编辑回合追踪器的回合、印在公司卡上的行动、关于资金池的备注和数字卡。更改会保留在内存中,直到你在“更改”页面保存。"
       },
+      "tokens": {
+        "tab": "标记",
+        "description": "编辑游戏的标记,以及公司的标记类型和股份类型。更改会保留在内存中,直到你在“更改”页面保存。"
+      },
       "json": {
         "tab": "JSON",
         "description": "以 JSON 编辑整个游戏。只要 JSON 有效,页面就会随你的输入而更新。更改保留在内存中,直到你在“更改”页面保存。"
@@ -118,6 +122,8 @@
       "turns": "行动",
       "pools": "资金池",
       "notes": "备注",
+      "tokens": "标记",
+      "shares": "股份",
       "legend": "图例项",
       "colors": "颜色",
       "tokenTypes": "标记类型",
@@ -129,7 +135,8 @@
       "rounds": "回合",
       "turns": "行动",
       "pools": "资金池",
-      "notes": "备注"
+      "notes": "备注",
+      "tokens": "标记"
     },
     "titles": {
       "players_one": "{{count}} 名玩家",
@@ -137,6 +144,8 @@
     },
     "emptyList": "这里还没有内容。",
     "add": "添加{{item}}",
+    "addWithOptions": "添加带选项的{{item}}",
+    "itemValue": "{{item}} {{title}} 的值",
     "remove": "删除{{item}} {{title}}",
     "moveUp": "上移{{item}} {{title}}",
     "moveDown": "下移{{item}} {{title}}",
@@ -233,7 +242,9 @@
       "name": "{{name}}的名称",
       "emptyName": "请输入名称。",
       "duplicateName": "已有其他条目使用这个名称。",
-      "newName": "新"
+      "newName": "新",
+      "usedBy_one": "{{count}} 家公司按名称或默认使用“{{name}}”,之后将找不到它。",
+      "usedBy_other": "{{count}} 家公司按名称或默认使用“{{name}}”,之后将找不到它。"
     }
   },
   "jsonEditor": {

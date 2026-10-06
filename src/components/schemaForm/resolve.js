@@ -9,6 +9,9 @@ export const GAME_INFO_KEYS = ["info", "links", "prototype", "wip"];
 // The lists of the rounds tab, in the order of the tab
 export const ROUND_KEYS = ["rounds", "turns", "pools", "number_cards"];
 
+// The lists of the tokens tab, in the order of the tab
+export const TOKEN_KEYS = ["tokens", "tokenTypes", "shareTypes"];
+
 // The fields of an array item shown first, the others are under "more fields"
 export const PRIMARY_KEYS = [
   "name",
@@ -27,6 +30,12 @@ export const PRIMARY_KEYS = [
 // fields"
 export const TURN_PRIMARY_KEYS = ["name", "steps", "ordered", "optional"];
 export const POOL_PRIMARY_KEYS = ["name", "notes"];
+
+// The same for a token of the game, a token of a token type and a share of a
+// share type: the rest is under "more fields"
+export const GAME_TOKEN_PRIMARY_KEYS = ["label", "icon", "logo", "color"];
+export const CHARTER_TOKEN_PRIMARY_KEYS = ["cost", "start"];
+export const SHARE_PRIMARY_KEYS = ["quantity", "label", "percent", "cost"];
 
 // The same for a company: the rest (the shares, tokens, logo and the other
 // charter fields) are under "more fields"
@@ -211,6 +220,23 @@ const isStringList = (alternatives) =>
       !a.items.$ref,
   );
 
+// The list items that are text, a number or an object (a token of the game):
+// the schema of the object, undefined for any other items (text that names
+// something else in the game is a reference, not text)
+export const mixedItem = (node, root) => {
+  const parts = alternativesOf(node, root);
+  const objects = parts.filter((part) => part?.type === "object");
+  return objects.length === 1 &&
+    objects[0].properties &&
+    parts.length > 1 &&
+    parts.every(
+      (part) =>
+        ["string", "number", "object"].includes(part?.type) && !part["x-ref"],
+    )
+    ? objects[0]
+    : undefined;
+};
+
 // How a (resolved) schema node is edited:
 // string, text, number, boolean, enum, stringOrNumber, limit, stringList,
 // count, revenue, object, record (an object of any names, each a value of one
@@ -240,6 +266,7 @@ export const kindOf = (schema, key, root, keys = []) => {
   if (node.type === "array") {
     const item = resolveAllOf(node.items, root);
     if (root && item?.type === "object" && item.properties) return "array";
+    if (root && mixedItem(node.items, root)) return "array";
     if (isEnumStrings(item)) return "enumList";
     return isPlainString(item) ? "stringArray" : "json";
   }

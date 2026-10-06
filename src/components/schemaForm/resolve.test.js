@@ -6,6 +6,7 @@ import {
   PLAYER_KEYS,
   PLAYER_PRIMARY_KEYS,
   ROUND_KEYS,
+  TOKEN_KEYS,
   clearValue,
   coerceStringOrNumber,
   defaultValue,
@@ -20,6 +21,7 @@ import {
   isRequired,
   issuesFor,
   kindOf,
+  mixedItem,
   moveItem,
   newItem,
   nextAbbrev,
@@ -528,6 +530,9 @@ describe("kindOf", () => {
     expect(kinds.logo).toBe("string");
     expect(kinds.home).toBe("stringList");
     expect(kinds.marketTokens).toBe("number");
+    // A type name or a list: the tokens tab edits the types, not these
+    expect(kinds.tokens).toBe("json");
+    expect(kinds.shares).toBe("json");
     expect(kinds.charterSubtitle).toBe("object");
     expect(Object.keys(kinds)).toEqual(
       expect.arrayContaining(COMPANY_PRIMARY_KEYS),
@@ -1407,5 +1412,51 @@ describe("the rounds tab", () => {
       "rounds.0.kiteshield",
       "rounds.0.star5",
     ]);
+  });
+});
+
+describe("the tokens tab", () => {
+  it("gives the tokens, token types and share types a real form", () => {
+    const unexpected = [];
+    const walk = (node, keys) => {
+      const resolved = resolveSchema(node, schema);
+      const kind = kindOf(resolved, keys[keys.length - 1], schema);
+      if (kind === "json") unexpected.push(keys.join("."));
+      if (kind === "record") {
+        walk(resolved.additionalProperties, [...keys, "name"]);
+      }
+      if (kind === "array") {
+        walk(mixedItem(resolved.items, schema) ?? resolved.items, [
+          ...keys,
+          "0",
+        ]);
+      }
+      if (kind === "object") {
+        Object.entries(resolved.properties).forEach(([key, child]) =>
+          walk(child, [...keys, key]),
+        );
+      }
+    };
+    TOKEN_KEYS.forEach((key) => walk(schema.properties[key], [key]));
+    // The shapes of a token are JSON, as on a train or a tile
+    expect(unexpected.every((path) => path.startsWith("tokens.0."))).toBe(true);
+  });
+
+  it("knows list items of text, a number or an object, but not a reference", () => {
+    const tokens = resolveSchema(schema.properties.tokens, schema);
+    expect(kindOf(tokens, "tokens", schema)).toBe("array");
+    expect(mixedItem(tokens.items, schema).properties.label).toBeDefined();
+    expect(mixedItem({ type: "string" }, schema)).toBeUndefined();
+    expect(
+      mixedItem(
+        {
+          oneOf: [
+            { type: "string", "x-ref": { from: "x" } },
+            { type: "object", properties: {} },
+          ],
+        },
+        schema,
+      ),
+    ).toBeUndefined();
   });
 });
