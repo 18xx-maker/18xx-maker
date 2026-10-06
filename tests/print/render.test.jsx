@@ -28,5 +28,11 @@ describe("print scale in render mode", () => {
     const viewport = document.getElementById("viewport-children");
     expect(viewport).not.toHaveAttribute("data-print-scale");
     expect(getComputedStyle(root).zoom).toBe("1");
+    // The layout is the one of scale 100 (the 11in sheet less the margins),
+    // not the paper divided by the scale (10.5in / 1.1)
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(root.querySelector(".cards")).toHaveStyle({
+      width: `${10.5 * 96}px`,
+    });
   });
 });
