@@ -43,3 +43,18 @@ describe("warning text", () => {
     expect(contrast(text, token(source, "muted"))).toBeGreaterThanOrEqual(4.5);
   });
 });
+
+describe("selected lines", () => {
+  it.each([
+    ["light", ":root {"],
+    ["dark", ".dark {"],
+  ])("keep the text readable on the %s background", (_, selector) => {
+    const source = block(selector);
+    const line = token(source, "line-selected");
+    expect(contrast(token(source, "foreground"), line)).toBeGreaterThanOrEqual(
+      4.5,
+    );
+    // Different from the active line and the selection
+    expect(line).not.toEqual(token(source, "accent"));
+  });
+});

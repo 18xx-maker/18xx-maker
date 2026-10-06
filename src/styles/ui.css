@@ -117,6 +117,8 @@
     --json-literal: #d73a49;
     --json-punctuation: #6a737d;
     --json-invalid: #b31d28;
+    /* The lines of the JSON editor a link points at (not --accent: that is the active line) */
+    --line-selected: 48 96% 82%;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -162,6 +164,7 @@
     --json-literal: #ff7b72;
     --json-punctuation: #8b949e;
     --json-invalid: #ffa198;
+    --line-selected: 48 60% 22%;
   }
 }
 @layer base {
