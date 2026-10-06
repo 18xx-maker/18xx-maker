@@ -15,9 +15,15 @@ describe("docs layout", () => {
     // eslint-disable-next-line testing-library/no-node-access
     expect(docs.querySelectorAll(".mx-auto")).toHaveLength(0);
     expect(article).not.toHaveClass("max-w-prose");
-    // room for the hover heading anchor, which sits 24px left of the text
+    // room for the hover heading anchor, which hangs left of the text
     // eslint-disable-next-line testing-library/no-node-access
     expect(docs.querySelector(".max-w-200.p-4")).toHaveClass("pl-10");
+    // the anchor ends at the heading's left edge whatever the heading size,
+    // so it never overlaps the title text
+    // eslint-disable-next-line testing-library/no-node-access
+    const anchor = docs.querySelector("h1 [data-anchor]");
+    expect(anchor).toHaveClass("right-full", "text-base");
+    expect(anchor).not.toHaveClass("-left-6");
   });
 
   it("leaves the home page at the default width", async () => {
