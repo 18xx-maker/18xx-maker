@@ -213,6 +213,18 @@ test.describe("the app exports 18Test", () => {
     ).toBeVisible();
   });
 
+  test("opens the JSON editor with the j key", async () => {
+    app = await launch();
+
+    const window = await show(app, "#/games/18Test/map");
+    await expect(window.getByRole("button", { name: "Export" })).toBeVisible();
+    await window.keyboard.press("j");
+    await expect(
+      window.getByRole("textbox", { name: "Game JSON" }),
+    ).toBeVisible();
+    await expect(window.getByRole("status")).toContainText("Valid JSON");
+  });
+
   test("quits in the middle of an export without leaving windows behind", async () => {
     app = await launch();
     await app.evaluate(({ dialog, shell }, folder) => {

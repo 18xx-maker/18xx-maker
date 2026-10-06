@@ -51,6 +51,13 @@ const pages = [
     url: "/games/18Test/map?edit=true&editSection=trains",
     ready: (page) => page.getByRole("button", { name: "Add train" }),
   },
+  // The JSON editor, in both themes
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `edit panel json (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=json",
+    colorScheme,
+    ready: (page) => page.getByRole("textbox", { name: "Game JSON" }),
+  })),
   {
     name: "edit panel market",
     url: "/games/18Test/map?edit=true&editSection=market",

@@ -155,7 +155,13 @@
     --info-foreground: 200.4 98% 39.4%;
     --warning-foreground: 20.5 90.2% 48.2%;
     --warning-text: 20.5 90.2% 60%;
-    --error-foreground: 0 72.2% 50.6%;
+    --error-foreground: 0 72.2% 50.6%; /* The github-dark-default colors of code blocks */
+    --json-key: #79c0ff;
+    --json-string: #a5d6ff;
+    --json-number: #79c0ff;
+    --json-literal: #ff7b72;
+    --json-punctuation: #8b949e;
+    --json-invalid: #ffa198;
   }
 }
 @layer base {

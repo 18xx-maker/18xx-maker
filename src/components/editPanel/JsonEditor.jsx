@@ -80,8 +80,8 @@ const theme = EditorView.theme({
   ".cm-scroller": { fontFamily: "var(--font-mono, monospace)" },
   ".cm-gutters": {
     color: "hsl(var(--muted-foreground))",
-    backgroundColor: "hsl(var(--muted))",
-    border: "none",
+    backgroundColor: "hsl(var(--background))",
+    borderRight: "1px solid hsl(var(--border))",
   },
   ".cm-activeLine, .cm-activeLineGutter": {
     backgroundColor: "hsl(var(--accent))",
@@ -269,6 +269,7 @@ const JsonEditor = ({ game }) => {
         EditorView.lineWrapping,
         EditorView.contentAttributes.of({
           "aria-multiline": "true",
+          tabindex: "0",
           "aria-label": tRef.current("jsonEditor.label"),
           "aria-describedby": "json-editor-status",
         }),
