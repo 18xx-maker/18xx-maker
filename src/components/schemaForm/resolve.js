@@ -116,11 +116,30 @@ export const humanize = (key) =>
 
 const isIndex = (key) => typeof key === "number" || /^\d+$/.test(key);
 
+// The parts of a schema node a path can go on in: a oneOf is replaced by its
+// alternatives (resolved, and their own oneOf too), as the cells of a market
+// are null, a number, a string or an object
+const alternativesOf = (node, root) => {
+  const resolved = resolveAllOf(node, root);
+  return Array.isArray(resolved?.oneOf)
+    ? resolved.oneOf.flatMap((part) => alternativesOf(part, root))
+    : [resolved];
+};
+
+// The schema one step down a path: an index is an item, a name a property,
+// through the alternatives of a oneOf
+const stepInto = (node, key, root) => {
+  for (const part of alternativesOf(node, root)) {
+    const child = isIndex(key) ? part?.items : part?.properties?.[key];
+    if (child) return resolveAllOf(child, root);
+  }
+  return undefined;
+};
+
 // The schema of the value at a path in the game, an index is an item
 export const schemaAt = (root, keys) =>
   keys.reduce(
-    (node, key) =>
-      resolveAllOf(isIndex(key) ? node?.items : node?.properties?.[key], root),
+    (node, key) => stepInto(node, key, root),
     resolveAllOf(root, root),
   );
 

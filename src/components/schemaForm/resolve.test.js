@@ -14,6 +14,7 @@ import {
   removeAt,
   resolveAllOf,
   resolveSchema,
+  schemaAt,
   setValue,
 } from "./resolve";
 
@@ -336,5 +337,72 @@ describe("lists", () => {
       color: "gray",
       quantity: 1,
     });
+  });
+});
+
+describe("the market", () => {
+  it("finds the schema of a cell field through rows, oneOf and $ref", () => {
+    const value = schemaAt(schema, ["stock", "market", 1, 3, "value"]);
+    expect(value.description).toMatch(/price shown/);
+    // A flat market has the cell right under the list
+    expect(schemaAt(schema, ["stock", "market", 3, "value"])).toEqual(value);
+    expect(schemaAt(schema, ["stock", "market", 3, "legend"]).type).toBe(
+      "integer",
+    );
+    // The row of a 2D market is a list, the cell of it an item
+    expect(schemaAt(schema, ["stock", "market", 1]).oneOf).toBeDefined();
+    expect(schemaAt(schema, ["stock", "market", 1, 3]).oneOf).toBeDefined();
+    expect(schemaAt(schema, ["stock", "market", 1, 3, "nope"])).toBeUndefined();
+    expect(schemaAt(schema, ["stock", "legend", 0, "description"]).type).toBe(
+      "string",
+    );
+  });
+
+  it("reads the cell fields as real fields, except arrow, companies and tokens", () => {
+    const kinds = Object.fromEntries(
+      Object.keys(schema.definitions.cellObject.properties).map((key) => [
+        key,
+        kindOf(schemaAt(schema, ["stock", "market", 0, 0, key]), key, schema),
+      ]),
+    );
+    expect(kinds).toMatchObject({
+      value: "stringOrNumber",
+      label: "stringOrNumber",
+      color: "string",
+      legend: "number",
+      par: "boolean",
+      width: "number",
+    });
+    expect(Object.keys(kinds).filter((key) => kinds[key] === "json")).toEqual([
+      "arrow",
+      "companies",
+      "tokens",
+    ]);
+  });
+
+  it("no cell field is required, a number is a valid segment", () => {
+    expect(isRequired(schema, ["stock", "market", 1, 3, "value"])).toBe(false);
+    expect(isRequired(schema, ["stock", "legend", 0, "description"])).toBe(
+      true,
+    );
+  });
+
+  it("finds the problems of a cell by the pointer the validation writes", () => {
+    const issues = [
+      { pointer: "stock.market[1][3].value" },
+      { pointer: "stock.market[1][3]" },
+      { pointer: "stock.market[1][30]" },
+      { pointer: "stock.market[3].legend" },
+    ];
+    expect(issuesFor(issues, ["stock", "market", 1, 3, "value"])).toEqual([
+      issues[0],
+    ]);
+    expect(issuesFor(issues, ["stock", "market", 1, 3])).toEqual([
+      issues[0],
+      issues[1],
+    ]);
+    expect(issuesFor(issues, ["stock", "market", 3, "legend"])).toEqual([
+      issues[3],
+    ]);
   });
 });
