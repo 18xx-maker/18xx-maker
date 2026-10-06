@@ -32,9 +32,13 @@ export const useEditPanel = () => {
     : DEFAULT_EDIT_SECTION;
 
   // The selected lines belong to the JSON tab: leaving it drops them
+  // (the tab already shown stays as it is, lines and history included)
   const setEditSection = useCallback(
-    (next) => setParam(next, { drop: ["lines"] }),
-    [setParam],
+    (next) => {
+      if (next === editSection) return;
+      setParam(next, { drop: ["lines"] });
+    },
+    [setParam, editSection],
   );
 
   const section = match?.params.section;

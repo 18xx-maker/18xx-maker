@@ -138,6 +138,10 @@ export const useBindings = () => {
             } catch {
               // A malformed section is an unknown one
             }
+            // An unknown section is shown as the first one
+            if (!configSections.some(({ section }) => section === current)) {
+              current = "colors";
+            }
             const next = cycle(
               configSections,
               configSections.findIndex(({ section }) => section === current),
