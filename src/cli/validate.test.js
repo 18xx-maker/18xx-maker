@@ -181,6 +181,25 @@ describe("validate", () => {
     expect(lines).toEqual([""]);
   });
 
+  describe("iconSize of a private", () => {
+    const withPrivate = (iconSize) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          privates: [{ name: "P", icon: "share", iconSize }],
+        }),
+      );
+
+    it("accepts a positive number", () => {
+      expect(run(withPrivate(1.5)).code).toBe(0);
+    });
+
+    it.each([0, -1, "2"])("rejects %j", (value) => {
+      expect(run(withPrivate(value)).code).not.toBe(0);
+    });
+  });
+
   describe("the exports of a game", () => {
     const withExports = (exports) =>
       writeTmp(

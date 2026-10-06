@@ -1751,6 +1751,11 @@
           "iconColor": {
             "type": "string"
           },
+          "iconSize": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Size of the icon, token, company, tile or hex graphic of this private, as a multiplier of the default size (0.3in, or the big style size). Defaults to 1. With the small style and several graphics, the width is capped so they share the row."
+          },
           "tile": {
             "type": "string"
           },

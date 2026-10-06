@@ -55,6 +55,18 @@ text, and companies drawn as plain map tokens ignore the `token` field.
 }
 ```
 
+## Private Icon Size
+
+A private's icon, token, company, tile or hex graphic is drawn at a default
+size. Set `iconSize` on a private to scale it: a multiplier of the default, so
+`1.5` is half again as large and `0.75` is smaller. It works in both the small
+and big private styles. In the small style with several graphics, the width is
+capped so they still share the row.
+
+```json
+{ "name": "Big Icon", "icon": "share", "iconSize": 1.5 }
+```
+
 ## Tool Config Options
 
 You can set the size of each type of token in the tool. Sizes are in hundredths of

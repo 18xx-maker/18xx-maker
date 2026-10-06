@@ -895,7 +895,7 @@
       "title": "Privates",
       "style": {
         "label": "Private Style",
-        "description": "Different styles of private cards. Small uses small icons while big uses bigger ones."
+        "description": "Different styles of private cards. Small uses small icons while big uses bigger ones. A private can scale its icon with iconSize."
       }
     },
     "trains": {

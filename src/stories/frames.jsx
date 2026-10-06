@@ -127,8 +127,8 @@ const CardPage = ({ children }) => {
   top: 0;
   right: 0;
   padding: 0.4in 0.125in 1em 0.5em;
-  width: 25%;
-  height: 45%;
+  width: calc(25% * var(--private-icon-scale, 1));
+  height: calc(45% * var(--private-icon-scale, 1));
   float: none;
 }
 

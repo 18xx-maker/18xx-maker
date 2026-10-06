@@ -305,6 +305,26 @@ describe("Private", () => {
     ).toBe("2");
   });
 
+  it("scales icons with iconSize on the card body only when set", async () => {
+    const { root } = await mountElement(
+      <Private {...base} icon="meat" iconSize={1.5} />,
+    );
+    expect(
+      one(root, ".card__body").style.getPropertyValue("--private-icon-scale"),
+    ).toBe("1.5");
+    expect(
+      one(root, ".private__description").style.getPropertyValue(
+        "--private-icon-scale",
+      ),
+    ).toBe("");
+    const { root: plain } = await mountElement(
+      <Private {...base} icon="meat" />,
+    );
+    expect(
+      one(plain, ".card__body").style.getPropertyValue("--private-icon-scale"),
+    ).toBe("");
+  });
+
   it("leaves a single icon at full size", async () => {
     const { root } = await mountElement(<Private {...base} icon="meat" />);
     expect(
@@ -412,6 +432,9 @@ describe("Cards page", () => {
     const css = page.querySelector("style").textContent;
     expect(css).toContain(
       ".private__description {\n  padding: 0 35% 0 var(--card-padding);",
+    );
+    expect(css).toContain(
+      "width: calc(25% * var(--private-icon-scale, 1));\n  height: calc(45% * var(--private-icon-scale, 1));",
     );
     // Free layout has no pins
     // eslint-disable-next-line testing-library/no-node-access
