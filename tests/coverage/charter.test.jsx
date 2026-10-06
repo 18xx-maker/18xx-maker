@@ -457,4 +457,31 @@ describe("Charter", () => {
     );
     expect(one(root, ".charter__name")).not.toHaveTextContent("Sub");
   });
+
+  it("draws the subtitle and the token row of a minor tokensBelow", async () => {
+    const { root } = await mountElement(
+      <Charter
+        {...props}
+        minor
+        company={{
+          ...company,
+          tokens: [0, 10, 20],
+          tokensBelow: true,
+          home: "A1",
+        }}
+      />,
+    );
+    expect(one(root, ".charter")).toHaveClass(
+      "charter--minor",
+      "charter--subtitle",
+    );
+    expect(one(root, "[data-testid='charter-subtitle']")).toHaveTextContent(
+      "Home: A1",
+    );
+    const tokens = one(root, ".charter__tokens--below");
+    const subtitle = one(root, "[data-testid='charter-subtitle']");
+    expect(subtitle.getBoundingClientRect().bottom).toBeLessThanOrEqual(
+      tokens.getBoundingClientRect().top + 0.5,
+    );
+  });
 });

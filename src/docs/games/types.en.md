@@ -130,7 +130,7 @@ keep their place. To print your own text, set `charterSubtitle` with `left`,
 `middle` or `right`; an empty string blanks a slot. The text is not translated
 and a slot that is too long is cut with an ellipsis. On small headers (minors,
 `tokensBelow` and half width carth charters) the subtitle takes the place of the
-subtext:
+subtext. On tight headers the subtitle also replaces the alias that `companyNames: "both"` prints as subtext. Example:
 
 ```json
 {

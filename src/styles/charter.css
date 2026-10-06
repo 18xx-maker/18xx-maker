@@ -74,7 +74,7 @@
 .charter__subtitle {
   margin-top: auto;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(0, 1fr) fit-content(40%) minmax(0, 1fr);
   column-gap: 0.1in;
   font-size: 8pt;
   line-height: 1.2;
@@ -440,6 +440,16 @@
   top: 0.4625in;
   height: 0.35in;
   padding-top: 0;
+}
+
+/* The subtitle line (0.43in to 0.57in) sits between the name and the row. */
+.charter--minor.charter--subtitle .charter__tokens--below {
+  top: 0.575in;
+  height: 0.27in;
+}
+
+.charter--minor.charter--subtitle .charter__name--tokens-below {
+  padding-bottom: 0.3in;
 }
 
 .charter--color .charter__tokens--below {

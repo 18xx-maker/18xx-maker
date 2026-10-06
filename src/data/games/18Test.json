@@ -272,7 +272,10 @@
       "name": "Yellow Railroad",
       "abbrev": "YRR",
       "color": "yellow",
-      "minor": true
+      "minor": true,
+      "tokensBelow": true,
+      "home": "B2",
+      "destination": "D4"
     }
   ],
   "trains": [

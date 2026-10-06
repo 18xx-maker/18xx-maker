@@ -134,7 +134,7 @@ Platz. Für eigenen Text setze `charterSubtitle` mit `left`, `middle` oder
 `right`; ein leerer String leert ein Feld. Der Text wird nicht übersetzt, und ein
 zu langes Feld wird mit einer Ellipse abgeschnitten. Bei kleinen Kopfzeilen
 (Minors, `tokensBelow` und Carth-Karten halber Breite) ersetzt der Untertitel den
-Untertext:
+Untertext. Bei engen Kopfzeilen ersetzt der Untertitel auch den Alias, den `companyNames: "both"` als Untertext druckt. Beispiel:
 
 ```json
 {
