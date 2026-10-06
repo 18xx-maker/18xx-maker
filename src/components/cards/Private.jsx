@@ -341,7 +341,7 @@ const Private = (props) => {
                 <div
                   className="card__body"
                   style={
-                    iconSize !== undefined
+                    iconSize != null
                       ? { "--private-icon-scale": iconSize }
                       : undefined
                   }

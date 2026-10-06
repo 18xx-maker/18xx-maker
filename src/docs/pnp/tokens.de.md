@@ -67,7 +67,8 @@ Privatgesellschaft wird in einer Standardgröße gezeichnet. Mit `iconSize` an d
 Privatgesellschaft skalierst du es: ein Multiplikator der Standardgröße, `1.5`
 ist also anderthalbmal so groß und `0.75` kleiner. Das funktioniert in den
 Stilen „small“ und „big“. Im Stil „small“ mit mehreren Grafiken wird die Breite
-begrenzt, sodass sie sich weiterhin die Zeile teilen.
+begrenzt, sodass sie sich weiterhin die Zeile teilen. Im Stil „big“ können Werte über 1 auf kleinen Karten
+die Beschreibung und das Einnahmenfeld überlappen.
 
 ```json
 { "name": "Big Icon", "icon": "share", "iconSize": 1.5 }

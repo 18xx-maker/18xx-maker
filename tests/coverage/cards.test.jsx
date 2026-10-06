@@ -323,6 +323,12 @@ describe("Private", () => {
     expect(
       one(plain, ".card__body").style.getPropertyValue("--private-icon-scale"),
     ).toBe("");
+    const { root: nul } = await mountElement(
+      <Private {...base} icon="meat" iconSize={null} />,
+    );
+    expect(
+      one(nul, ".card__body").style.getPropertyValue("--private-icon-scale"),
+    ).toBe("");
   });
 
   it("leaves a single icon at full size", async () => {
