@@ -110,7 +110,7 @@ describe("kindOf", () => {
       "x",
       "stringOrNumber",
     ],
-    [{ oneOf: [{ type: "string" }, { type: "boolean" }] }, "x", "json"],
+    [{ oneOf: [{ type: "string" }, { type: "boolean" }] }, "x", "boolOrColor"],
     [{ type: "object", properties: {} }, "x", "object"],
     [{ type: "object" }, "x", "json"],
     [{ type: "array", items: {} }, "x", "json"],
@@ -519,7 +519,7 @@ describe("kindOf", () => {
     expect(kindOf(of("string", "string", "number"), "x", schema)).toBe(
       "stringOrNumber",
     );
-    expect(kindOf(of("string", "boolean"), "x", schema)).toBe("json");
+    expect(kindOf(of("string", "boolean"), "x", schema)).toBe("boolOrColor");
     expect(kindOf(of("string", "string"), "x", schema)).toBe("json");
     expect(kindOf(of("number", "number"), "x", schema)).toBe("json");
   });
@@ -1399,7 +1399,7 @@ describe("what a reference stores", () => {
 });
 
 describe("the rounds tab", () => {
-  it("gives the fields of the rounds, turns, pools and number cards a real form, but the shapes", () => {
+  it("gives the fields of the rounds, turns, pools and number cards a real form", () => {
     const unexpected = [];
     const walk = (node, keys) => {
       const resolved = resolveSchema(node, schema);
@@ -1415,15 +1415,8 @@ describe("the rounds tab", () => {
       }
     };
     ROUND_KEYS.forEach((key) => walk(schema.properties[key], [key]));
-    // The shapes of a round token are JSON, as on a train or a tile
-    expect(unexpected).toEqual([
-      "rounds.0.bar",
-      "rounds.0.circle",
-      "rounds.0.shield",
-      "rounds.0.shield3",
-      "rounds.0.kiteshield",
-      "rounds.0.star5",
-    ]);
+    // The shapes of a round token are true or a color
+    expect(unexpected).toEqual([]);
   });
 });
 
@@ -1450,8 +1443,7 @@ describe("the tokens tab", () => {
       }
     };
     TOKEN_KEYS.forEach((key) => walk(schema.properties[key], [key]));
-    // The shapes of a token are JSON, as on a train or a tile
-    expect(unexpected.every((path) => path.startsWith("tokens.0."))).toBe(true);
+    expect(unexpected).toEqual([]);
   });
 
   it("knows list items of text, a number or an object, but not a reference", () => {
@@ -1524,5 +1516,58 @@ describe("the output tab", () => {
     expect(isHidden(["exports", "paginated"])).toBe(true);
     expect(isHidden(["exports", "png"])).toBe(false);
     expect(isHidden(["paginated"])).toBe(false);
+  });
+
+  describe("the fields of a token", () => {
+    const token = resolveAllOf(
+      schema.properties.companies.items.properties.token,
+      schema,
+    );
+    const kind = (key) =>
+      kindOf(resolveAllOf(token.properties[key], schema), key, schema, [
+        "tokens",
+        0,
+        key,
+      ]);
+
+    it("reads the shapes that are true or a color as boolOrColor", () => {
+      for (const key of [
+        "bar",
+        "circle",
+        "shield",
+        "shield3",
+        "kiteshield",
+        "star5",
+      ]) {
+        expect(kind(key)).toBe("boolOrColor");
+      }
+    });
+
+    it("keeps the length of a list of colors that has one", () => {
+      for (const key of [
+        "halves",
+        "quarters",
+        "sexies",
+        "sunrise",
+        "hexagram",
+      ]) {
+        expect(kind(key)).toBe("colorTuple");
+      }
+      expect(
+        kindOf({ type: "array", items: { type: "string" } }, "x", schema),
+      ).toBe("stringArray");
+      expect(
+        kindOf(
+          { type: "array", items: { type: "string" }, minItems: 1 },
+          "x",
+          schema,
+        ),
+      ).toBe("stringArray");
+    });
+
+    it("reads a width of text or a number as stringOrNumber", () => {
+      expect(kind("labelStrokeWidth")).toBe("stringOrNumber");
+      expect(kind("label")).toBe("stringOrNumber");
+    });
   });
 });

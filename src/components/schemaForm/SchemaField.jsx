@@ -66,6 +66,14 @@ import {
   sameList,
   valueAt,
 } from "@/components/schemaForm/resolve";
+import ColorInput from "@/components/tokenEditor/ColorInput";
+import {
+  isBoolOrColorValue,
+  isTupleValue,
+  padTuple,
+  setTuple,
+  tupleLength,
+} from "@/components/tokenEditor/tokenModel";
 
 // What the fields need of the form: the root schema, the game, its problems
 // and how to set and clear the value of a path, and insert, remove and move the
@@ -339,6 +347,126 @@ const ColorValueField = (props) => {
   );
 };
 
+// True or a color (the shapes of a token: true draws it in white): a color
+// that is typed or picked, and a checkbox for true. A value that is neither
+// stays JSON.
+const BoolOrColorInput = ({ keys, schema }) => {
+  const { t } = useTranslation();
+  const field = useField(keys, schema);
+  const draft = useDraft(
+    field.value,
+    (text) => {
+      if (text.trim() !== "") return field.set(text.trim());
+      if (typeof field.value === "string") return field.clear();
+    },
+    (value) => (typeof value === "string" ? value : ""),
+  );
+  const aria = field.aria();
+
+  return (
+    <FieldShell {...field}>
+      <ColorInput
+        {...aria}
+        value={draft.text}
+        pickLabel={t("editPanel.pickColor", { name: field.label })}
+        onChange={draft.change}
+        onSelect={(color) => {
+          draft.change(color);
+          field.set(color);
+        }}
+        onCommit={draft.commit}
+      />
+      <div className="flex flex-row items-center gap-2">
+        <Checkbox
+          id={`${field.id}-true`}
+          checked={field.value === true}
+          onCheckedChange={(on) =>
+            on === true ? field.set(true) : field.clear()
+          }
+        />
+        <Label htmlFor={`${field.id}-true`}>
+          {t("editPanel.tokenEditor.white")}
+        </Label>
+      </div>
+    </FieldShell>
+  );
+};
+
+const BoolOrColorField = (props) => {
+  const form = useContext(SchemaFormContext);
+  return isBoolOrColorValue(valueAt(props.keys, form.game)) ? (
+    <BoolOrColorInput {...props} />
+  ) : (
+    <JsonField {...props} />
+  );
+};
+
+// One color of a list of colors of a fixed length
+const TupleColor = ({ keys, field, length, index }) => {
+  const { t } = useTranslation();
+  const form = useContext(SchemaFormContext);
+  const name = t("editPanel.tokenEditor.colorAt", {
+    name: field.label,
+    index: index + 1,
+  });
+  const draft = useDraft(padTuple(field.value, length)[index], (text) => {
+    const next = setTuple(valueAt(keys, form.latest()), length, index, text);
+    return next === undefined ? field.clear() : field.set(next);
+  });
+
+  return (
+    <ColorInput
+      aria-label={name}
+      value={draft.text}
+      pickLabel={t("editPanel.pickColor", { name })}
+      onChange={draft.change}
+      onSelect={(color) => {
+        draft.change(color);
+        field.set(setTuple(valueAt(keys, form.latest()), length, index, color));
+      }}
+      onCommit={draft.commit}
+    />
+  );
+};
+
+// A list of colors of the same length every time (halves are two): a color
+// for each place, the places left empty stay in the list so the colors keep
+// theirs. A value that is not a list of texts stays JSON.
+const ColorTupleInput = ({ keys, schema }) => {
+  const { root } = useContext(SchemaFormContext);
+  const field = useField(keys, schema);
+  const length = tupleLength(schema, root);
+
+  return (
+    <FieldShell {...field}>
+      <div
+        {...field.aria({ role: "group", "aria-required": undefined })}
+        aria-labelledby={`${field.id}-label`}
+        className="flex flex-col gap-2"
+      >
+        {Array.from({ length }, (_, index) => (
+          <TupleColor
+            key={index}
+            keys={keys}
+            field={field}
+            length={length}
+            index={index}
+          />
+        ))}
+      </div>
+    </FieldShell>
+  );
+};
+
+const ColorTupleField = (props) => {
+  const form = useContext(SchemaFormContext);
+  return isTupleValue(valueAt(props.keys, form.game)) ? (
+    <ColorTupleInput {...props} />
+  ) : (
+    <JsonField {...props} />
+  );
+};
+
 const StringOrNumberField = ({ keys, schema }) => {
   const field = useField(keys, schema);
   const draft = useDraft(
@@ -580,7 +708,12 @@ const NumberValueField = ({ keys, schema }) => {
 };
 
 // A choice with an entry for "not set", unless the key is required
-const ChoiceField = ({ keys, schema, options, labelOf = (value) => value }) => {
+export const ChoiceField = ({
+  keys,
+  schema,
+  options,
+  labelOf = (value) => value,
+}) => {
   const { t } = useTranslation();
   const field = useField(keys, schema);
 
@@ -712,8 +845,10 @@ const IconButton = ({ label, action, children, ...props }) => (
   </Button>
 );
 
-// The buttons of an item: move, duplicate and remove
+// The buttons of an item: move, duplicate and remove, after the action of the
+// list for its items (a button of its own, like the editor of a token)
 const ItemButtons = ({
+  action,
   names,
   index,
   count,
@@ -723,7 +858,8 @@ const ItemButtons = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row items-center">
+      {action}
       <IconButton
         action="up"
         label={t("editPanel.moveUp", names)}
@@ -771,6 +907,7 @@ const ItemCard = ({
   onMore,
   title,
   kind,
+  action,
   onMove,
   onDuplicate,
   onRemove,
@@ -827,6 +964,7 @@ const ItemCard = ({
           )}
         </div>
         <ItemButtons
+          action={action}
           names={names}
           index={index}
           count={count}
@@ -874,6 +1012,7 @@ const ScalarRow = ({
   index,
   count,
   kind,
+  action,
   onMove,
   onDuplicate,
   onRemove,
@@ -904,6 +1043,7 @@ const ScalarRow = ({
       />
       <div className="shrink-0">
         <ItemButtons
+          action={action}
           names={names}
           index={index}
           count={count}
@@ -976,7 +1116,9 @@ const CLOSED_CARD = { open: false, more: false };
 // defaults may be a function of the items. titleKeys are the fields that
 // name an item that has no name, the first one set.
 // onChange(kind, from, to) gives back a warning to show with the list after a
-// move, remove or insert (a duplicate) of an item.
+// move, remove or insert (a duplicate) of an item. itemAction(item, keys,
+// title) is a button of its own for each item, beside its move, duplicate and
+// remove buttons (not in the title, a button cannot hold a button).
 const ArrayField = ({
   keys,
   schema,
@@ -992,6 +1134,7 @@ const ArrayField = ({
   onChange,
   itemKey,
   titleKeys,
+  itemAction,
 }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
@@ -1200,6 +1343,11 @@ const ArrayField = ({
                 index={index}
                 count={items.length}
                 kind={item}
+                action={itemAction?.(
+                  value,
+                  [...keys, index],
+                  titleOf(value, index),
+                )}
                 onMove={move}
                 onDuplicate={duplicate}
                 onRemove={remove}
@@ -1219,6 +1367,11 @@ const ArrayField = ({
                 onMore={(i, more) => setCard(i, { more })}
                 title={titleOf(value, index)}
                 kind={item}
+                action={itemAction?.(
+                  value,
+                  [...keys, index],
+                  titleOf(value, index),
+                )}
                 onMove={move}
                 onDuplicate={duplicate}
                 onRemove={remove}
@@ -1543,6 +1696,10 @@ const SchemaField = ({ keys, schema, ...rest }) => {
       return <StringArrayField {...props} />;
     case "enumList":
       return <EnumListField {...props} />;
+    case "boolOrColor":
+      return <BoolOrColorField {...props} />;
+    case "colorTuple":
+      return <ColorTupleField {...props} />;
     case "array":
       return <ArrayField {...props} {...rest} />;
     default:
