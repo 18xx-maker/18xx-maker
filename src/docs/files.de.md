@@ -186,6 +186,24 @@ geändert hat.
 Tab rückt im Editor ein. Um ihn zu verlassen, drücke Escape (das erste Escape
 verlässt den Editor, ein zweites schließt das Panel) und danach Tab.
 
+### Links zu einem Teil des Editors
+
+Die Adresse der Seite sagt, wo du bist, sodass du sie teilen oder später wieder
+öffnen kannst: der Abschnitt (`/games/18Test/tiles`), das geöffnete Panel und
+sein Tab (`?edit=true&editSection=json`, `?config=true&section=tokens`) und die
+Kartenfilter (`?hidePrivates=true`). Ein Tab- oder Abschnittsname, den es nicht
+gibt, öffnet den ersten.
+
+Klicke im JSON-Editor auf eine Zeilennummer, um die Zeile zu markieren.
+Umschalt-Klick markiert die Zeilen von der ersten markierten Zeile bis zu der,
+die du anklickst, und Cmd-Klick (Strg unter Windows und Linux) fügt eine Zeile
+hinzu oder entfernt sie, mit zusätzlicher Umschalttaste fügt es den Bereich
+hinzu. Die markierten Zeilen stehen als `lines` in der Adresse, zum Beispiel
+`?edit=true&editSection=json&lines=1-4,15,16,19`, und der Editor scrollt beim
+Öffnen des Links zur ersten. Das Markieren von Zeilen legt keine Seiten im
+Browserverlauf an. Die Zeilen werden vergessen, wenn du den Tab wechselst oder
+das Panel schließt.
+
 ## Änderungen, Speichern und Verlauf
 
 Weicht das geladene Spiel von seiner Datei ab, erscheint im Spielmenü (und in
