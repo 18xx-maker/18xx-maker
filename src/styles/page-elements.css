@@ -1,0 +1,96 @@
+.tokens {
+  position: relative;
+  margin: 2em auto;
+  page-break-inside: avoid;
+}
+
+.background {
+  height: 10.25in;
+  width: 8in;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+.background .text {
+  width: 165%;
+  height: 170%;
+  position: absolute;
+  top: -5.25in;
+  left: -4in;
+  transform: rotate(-30deg);
+}
+
+.background span {
+  display: block;
+  float: left;
+  margin: 0 0.0625in 0 0;
+  color: #fff;
+  opacity: 0.2;
+}
+
+@layer legacy {
+  svg {
+    overflow: visible;
+  }
+}
+
+.map {
+  position: relative;
+}
+
+.map svg {
+  display: block;
+}
+
+.tileSheet div.row {
+  clear: left;
+  page-break-inside: avoid;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.tileSheet--die {
+  width: 8in;
+  margin: auto;
+}
+
+.tileSheet--die div.row {
+  overflow: hidden;
+}
+
+.tileSheet--offset div.row:nth-child(even) {
+  padding-left: 1.73205in;
+}
+
+.tileSheet svg {
+  float: left;
+  position: relative;
+}
+
+.tileSheet--individual div.row svg {
+  margin: 0 0.125in 0.125in 0;
+}
+
+.tileSheet--die div.row svg {
+  margin: 0 0.05in 0 0;
+}
+
+.tileSheet--individual div.row svg:last-child {
+  margin: 0 0 0.125in;
+}
+
+.tileSheet--die div.row:first-child,
+.tileSheet--die div.row:last-child {
+  overflow: visible;
+}
+
+.tileSheet--die div.row svg:last-child {
+  margin: 0;
+}
+
+@layer legacy {
+  a {
+    text-decoration: none;
+  }
+}

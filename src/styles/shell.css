@@ -1,0 +1,52 @@
+html {
+  /* Not the background shorthand: it would reset the editor-checkered image */
+  background-color: transparent;
+  margin: 0; /* this affects the margin on the html before sending to printer */
+  -webkit-print-color-adjust: exact;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: stretch;
+}
+
+/* The page canvas shows the html background (the checkers), not the theme color */
+html.editor-checkered body {
+  background-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-print-color-adjust: exact;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: stretch;
+}
+
+@layer legacy {
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5,
+  body h6 {
+    font-family: display;
+  }
+}
+
+#viewport-children {
+  font-family: display;
+  font-weight: bold;
+}
+
+#root,
+#dropzone {
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: stretch;
+}
+
+@layer legacy {
+  p {
+    font-weight: normal;
+  }
+}

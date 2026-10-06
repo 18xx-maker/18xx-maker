@@ -3,7 +3,14 @@ import { screen } from "@testing-library/react";
 import Charter from "@/components/Charter";
 
 import { games } from "@/data";
-import rootCss from "@/styles/root.css?raw";
+import charter_traincardsCss from "@/styles/charter-traincards.css?raw";
+import charterCss from "@/styles/charter.css?raw";
+import cutlinesCss from "@/styles/cutlines.css?raw";
+import footerCss from "@/styles/footer.css?raw";
+import marketCss from "@/styles/market.css?raw";
+import page_elementsCss from "@/styles/page-elements.css?raw";
+import print_pagesCss from "@/styles/print-pages.css?raw";
+import shellCss from "@/styles/shell.css?raw";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 import { all, mountElement, one } from "@tests/support/render.jsx";
@@ -58,11 +65,20 @@ describe("game charters", () => {
 });
 
 describe("charter train cards", () => {
-  // Component tests run without the app's stylesheets, layout needs root.css
+  // Component tests run without the app's stylesheets, layout needs the print stylesheets
   beforeEach(() => {
     const style = document.createElement("style");
     style.dataset.test = "root-css";
-    style.textContent = rootCss;
+    style.textContent = [
+      shellCss,
+      page_elementsCss,
+      charterCss,
+      marketCss,
+      cutlinesCss,
+      footerCss,
+      print_pagesCss,
+      charter_traincardsCss,
+    ].join("\n");
     document.head.append(style);
   });
   afterEach(() => {

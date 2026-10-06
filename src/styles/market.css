@@ -1,0 +1,109 @@
+.prices {
+  position: relative;
+  overflow: hidden;
+  page-break-inside: avoid;
+  height: 8in;
+}
+
+.stock {
+  position: relative;
+  margin: 0.25in;
+}
+
+.stock table {
+  border-collapse: collapse;
+}
+
+.stock td {
+  line-height: 0.15in;
+  font-size: 0.15in;
+  border: 1px solid black;
+  padding: 0.05in;
+  box-sizing: border-box;
+  vertical-align: top;
+  text-align: left;
+  position: relative;
+}
+
+.stock .market {
+  position: relative;
+}
+
+.stock td.empty {
+  border: none;
+}
+
+.stock table.diag td.double {
+  width: 1in;
+}
+
+.stock table.diag td.start {
+  border-width: 1px 0 1px 1px;
+  width: 1in;
+}
+
+.stock table.diag td.start-half {
+  border-width: 1px 1px 1px 0;
+  width: 0.5in;
+}
+
+.stock table.diag td.end {
+  border-width: 1px 1px 1px 0;
+  width: 1in;
+}
+
+.stock table.diag td.end-half {
+  border-width: 1px 0 1px 1px;
+  width: 0.5in;
+}
+
+.legend {
+  position: absolute;
+  bottom: -0.125in;
+  right: 3.1in;
+  width: 3in;
+  padding-left: 0.35in;
+}
+
+ul.notes {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding-left: 0.125in;
+}
+
+ul.notes li {
+  margin-bottom: 0.125in;
+  text-align: left;
+  position: relative;
+  font-size: 0.15in;
+  line-height: 0.2in;
+}
+
+ul.notes li i {
+  font-size: 0.15in;
+  line-height: 0.25in;
+  height: 0.25in;
+  width: 0.25in;
+  display: inline-block;
+  margin-right: 0.1in;
+  text-align: center;
+  border-radius: 0.125in;
+}
+
+ul.notes li span {
+  display: inline-block;
+  font-size: 0.1in;
+  line-height: 0.24in;
+  height: 0.15in;
+  width: 0.15in;
+  border-radius: 0.075in;
+  text-align: center;
+  position: absolute;
+  left: -0.2in;
+  top: 0.01in;
+}
