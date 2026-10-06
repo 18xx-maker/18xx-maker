@@ -4,8 +4,9 @@
  * it declares the layer order. Only the relative order of the unlayered rules,
  * and of the legacy ones, matters; same-named layers merge in source order.
  *
- * The rules below that are wrapped in the legacy layer are the ones that would
- * otherwise beat the Tailwind utilities used by the app chrome. Everything
+ * The rules wrapped in the legacy layer (in shell.css and page-elements.css)
+ * are the ones that would otherwise beat the Tailwind utilities used by the
+ * app chrome. Everything
  * else is unlayered, like the runtime <style> blocks of the print pages, so
  * print pages are resolved by specificity exactly as they always were.
  */

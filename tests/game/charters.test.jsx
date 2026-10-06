@@ -68,7 +68,7 @@ describe("charter train cards", () => {
   // Component tests run without the app's stylesheets, layout needs the print stylesheets
   beforeEach(() => {
     const style = document.createElement("style");
-    style.dataset.test = "root-css";
+    style.dataset.test = "print-css";
     style.textContent = [
       shellCss,
       page_elementsCss,
@@ -83,7 +83,7 @@ describe("charter train cards", () => {
   });
   afterEach(() => {
     // eslint-disable-next-line testing-library/no-node-access
-    document.head.querySelector("style[data-test=root-css]")?.remove();
+    document.head.querySelector("style[data-test=print-css]")?.remove();
   });
 
   // The cards stack above the phase chart, they must never print over it
