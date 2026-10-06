@@ -64,8 +64,18 @@ const open = (route, options) => {
 const route = "/games/internal:abc/map";
 const jsonRoute = `${route}?edit=true&editSection=json`;
 
+// The check of the game dispatches to the store, which updates the editor:
+// let it settle before the test goes on, or it lands outside of act
+const checked = () =>
+  waitFor(() => {
+    if (opened.getState().gameProblems.status !== "done") {
+      throw new Error("not checked yet");
+    }
+  });
+
 const view = async () => {
   const host = await screen.findByTestId("json-editor");
+  await checked();
   return waitFor(() => {
     const found = EditorView.findFromDOM(host);
     if (!found) throw new Error("no editor yet");
