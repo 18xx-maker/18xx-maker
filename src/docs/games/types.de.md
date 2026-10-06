@@ -121,6 +121,31 @@ Eine Gesellschaft kann `banner` setzen, um ein Label in einem Streifen am untere
 { "abbrev": "RED", "banner": "SYSTEM" }
 ```
 
+## Untertitel der Gesellschaftskarte
+
+Eine Gesellschaft kann unter ihrem Namen auf der Gesellschaftskarte eine Zeile
+kleinen Text drucken, mit drei Feldern: das Heimatfeld oder die Startstadt links,
+das Ziel in der Mitte und eine Sonderfähigkeit rechts. Setze `home` (ein String
+oder eine Liste, verbunden mit " / "), `destination` und `ability`, und die
+Felder werden als `Home: ...`, `Dest: ...` und die Fähigkeit wie geschrieben
+gedruckt. `ability` ist nicht dasselbe wie die ungedruckten `abilities` einer
+Privatgesellschaft. Ein Feld ohne Wert bleibt leer und die anderen behalten ihren
+Platz. Für eigenen Text setze `charterSubtitle` mit `left`, `middle` oder
+`right`; ein leerer String leert ein Feld. Der Text wird nicht übersetzt, und ein
+zu langes Feld wird mit einer Ellipse abgeschnitten. Bei kleinen Kopfzeilen
+(Minors, `tokensBelow` und Carth-Karten halber Breite) ersetzt der Untertitel den
+Untertext:
+
+```json
+{
+  "abbrev": "RED",
+  "home": ["H5", "H7"],
+  "destination": "A1",
+  "ability": "Lay a free tile",
+  "charterSubtitle": { "middle": "Goal: A1" }
+}
+```
+
 ## Alias einer Gesellschaft
 
 Eine Gesellschaft kann einen `alias` haben, einen zweiten Namen, etwa eine

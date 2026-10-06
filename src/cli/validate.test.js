@@ -177,6 +177,22 @@ describe("validate", () => {
     expect(run(file).code).toBe(code);
   });
 
+  it.each([
+    [
+      `"home":["A1","B2"],"destination":"C3","ability":"x","charterSubtitle":{"left":"a","middle":"","right":"c"}`,
+      0,
+    ],
+    [`"home":"A1"`, 0],
+    [`"destination":5`, 1],
+    [`"charterSubtitle":{"top":"a"}`, 1],
+  ])("validates charter subtitle fields %s", (fields, code) => {
+    const file = writeTmp(
+      "game.json",
+      `{"info":{"title":"x"},"companies":[{"name":"A","abbrev":"A",${fields}}]}`,
+    );
+    expect(run(file).code).toBe(code);
+  });
+
   it("reports files that are not json as errors", () => {
     const broken = writeTmp("broken.json", "{");
 

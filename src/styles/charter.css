@@ -69,6 +69,38 @@
   justify-content: center;
 }
 
+/* Optional one-line subtitle: home, destination and special power. It is the
+   last child of the name, pushed to the bottom of the header. */
+.charter__subtitle {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: 0.1in;
+  font-size: 8pt;
+  line-height: 1.2;
+  font-weight: normal;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.charter__subtitle > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.charter__subtitle > span:nth-child(2) {
+  text-align: center;
+}
+
+.charter__subtitle > span:nth-child(3) {
+  text-align: right;
+}
+
+.charter--half .charter__subtitle {
+  font-size: 6.5pt;
+}
+
 .charter--half .charter__name {
   font-size: 0.18in;
   line-height: 0.22in;
@@ -381,6 +413,12 @@
   justify-content: flex-start;
   padding-top: 0.125in;
   padding-bottom: 0.4in;
+}
+
+/* The token row sits under the name, so the subtitle follows the name where
+   the subtext would be instead of dropping to the bottom. */
+.charter__name--tokens-below .charter__subtitle {
+  margin-top: 0;
 }
 
 .charter--minor .charter__name--tokens-below {
