@@ -156,7 +156,7 @@ export const FieldShell = ({
 
   return (
     <div className="flex flex-col gap-1">
-      <Label htmlFor={id}>
+      <Label htmlFor={id} id={`${id}-label`}>
         {label}
         {required && (
           <span className="text-destructive" aria-hidden="true">
@@ -468,10 +468,11 @@ const EnumListField = ({ keys, schema }) => {
     ),
   ];
 
+  // Only the value changes: the order and the duplicates of the rest stay
   const toggle = (value, on) => {
-    const next = shown.filter((option) =>
-      option === value ? on : current.includes(option),
-    );
+    const next = on
+      ? [...current, value]
+      : current.filter((item) => item !== value);
     if (next.length === 0) field.clear();
     else field.set(next);
   };
@@ -479,8 +480,12 @@ const EnumListField = ({ keys, schema }) => {
   return (
     <FieldShell {...field}>
       <div
-        {...field.aria({ role: "group", id: field.id })}
-        aria-label={field.label}
+        {...field.aria({
+          role: "group",
+          id: field.id,
+          "aria-required": undefined,
+        })}
+        aria-labelledby={`${field.id}-label`}
         className="flex flex-col gap-2"
       >
         {shown.map((option, index) => (
@@ -623,15 +628,16 @@ const ObjectField = ({ keys, schema }) => {
 
 // Moves focus into an item once it is on the page: to its title, or to one of
 // its buttons (the other one of the pair when that is disabled). With no such
-// item it goes to the add button.
+// item it goes to the add button. Only the list's own items count: a card can
+// hold a record whose rows are items too.
 const focusItem = (container, index, action) => {
-  const card = container?.querySelector(`[data-item="${index}"]`);
+  const card = container?.querySelector(`:scope > ul > [data-item="${index}"]`);
   const target =
     action === "title"
       ? card?.querySelector("[data-title]")
       : (card?.querySelector(`[data-action="${action}"]:not(:disabled)`) ??
         card?.querySelector("[data-action]:not(:disabled)"));
-  (target ?? container?.querySelector("[data-add]"))?.focus();
+  (target ?? container?.querySelector(":scope > [data-add]"))?.focus();
 };
 
 const IconButton = ({ label, action, children, ...props }) => (
@@ -1047,14 +1053,16 @@ const ArrayField = ({
 // stays with it when its name changes.
 const RecordRow = ({ keys, name, index, schema, item, onRename, onRemove }) => {
   const { t } = useTranslation();
-  const [problem, setProblem] = useState(null);
+  // The refusal belongs to the name it was given for
+  const [refusal, setProblem] = useState(null);
+  const problem = refusal?.name === name ? refusal.text : null;
   const errorId = useId();
   const draft = useDraft(name, (text) => {
     const to = text.trim();
     if (to === name) return false;
     const refused = onRename(name, to);
     if (refused) {
-      setProblem(refused);
+      setProblem({ name, text: refused });
       return false;
     }
   });
@@ -1086,7 +1094,7 @@ const RecordRow = ({ keys, name, index, schema, item, onRename, onRemove }) => {
         <IconButton
           action="remove"
           label={t("editPanel.remove", names)}
-          onClick={() => onRemove(index)}
+          onClick={() => onRemove(name)}
         >
           <Trash2 />
         </IconButton>
@@ -1160,10 +1168,12 @@ const RecordField = ({ keys, schema }) => {
     form.set(keys, renameKey(before, from, to));
   };
 
-  const remove = (index) => {
+  // By name: the rows can have been reordered by a rename since they rendered
+  const remove = (name) => {
     commit();
     const before = current();
-    const name = Object.keys(before)[index];
+    const index = Object.keys(before).indexOf(name);
+    if (index < 0) return;
     setRemoved({ index, name, value: structuredClone(before[name]) });
     setWarning("");
     write(removeKey(before, name));

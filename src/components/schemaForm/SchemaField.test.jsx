@@ -455,6 +455,45 @@ describe("the notes of a list", () => {
   });
 });
 
+describe("the focus of a list with records inside", () => {
+  it("lands on the button of the moved card, not on a row of a record before it", async () => {
+    const user = userEvent.setup();
+    const root = structuredClone(listRoot);
+    root.properties.trains.items.properties.discount = {
+      type: "object",
+      additionalProperties: { type: "number" },
+    };
+    render(
+      <ListForm
+        root={root}
+        startCollapsed
+        initial={{
+          trains: [
+            { name: "A", discount: { x: 1, y: 2 } },
+            { name: "B", discount: { p: 1, q: 2 } },
+          ],
+        }}
+      />,
+    );
+    for (const name of ["A", "B"]) {
+      await user.click(toggle(name));
+      await user.click(
+        screen.getAllByRole("button", { name: "More fields" })[
+          name === "A" ? 0 : 1
+        ],
+      );
+    }
+
+    await user.click(screen.getByRole("button", { name: "Move train A down" }));
+    expect(
+      screen.getByRole("button", { name: "Move train A up" }),
+    ).toHaveFocus();
+
+    await user.click(screen.getByRole("button", { name: "Remove train B" }));
+    expect(toggle("A")).toHaveFocus();
+  });
+});
+
 // One field of a form that holds the game in state, and the game as it is
 const fieldRoot = {
   type: "object",
@@ -464,6 +503,7 @@ const fieldRoot = {
       description: "Colors by name.",
       additionalProperties: { type: "string" },
     },
+    discount: { type: "object", additionalProperties: { type: "number" } },
     cards: { type: "array", items: { type: "string" } },
     formats: {
       type: "array",
@@ -613,6 +653,94 @@ describe("a record field", () => {
     expect(screen.getByRole("textbox", { name: "Reddish" })).toHaveValue(
       "#f00",
     );
+  });
+
+  it("renames with Enter once, without a message", async () => {
+    const user = userEvent.setup();
+    render(<FieldForm initial={initial} field="colors" />);
+    const input = screen.getByRole("textbox", { name: "Name of green" });
+    await user.clear(input);
+    await user.type(input, "lime{Enter}");
+    expect(Object.keys(current.colors)).toEqual(["red", "lime", "blue"]);
+    await user.tab();
+    expect(Object.keys(current.colors)).toEqual(["red", "lime", "blue"]);
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+
+    const taken = screen.getByRole("textbox", { name: "Name of lime" });
+    await user.clear(taken);
+    await user.type(taken, "red{Enter}");
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
+    expect(taken).toHaveValue("lime");
+    await user.tab();
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
+  });
+
+  it("follows a row by its name when a rename puts whole numbers first", async () => {
+    const user = userEvent.setup();
+    const issue = {
+      severity: "error",
+      code: "generic",
+      pointer: "discount[2]",
+      params: { message: "bad two" },
+    };
+    render(
+      <FieldForm
+        initial={{ discount: { 4: 50, D: 10 } }}
+        field="discount"
+        issues={[issue]}
+      />,
+    );
+    const four = screen.getByRole("spinbutton", { name: "4" });
+    await user.clear(four);
+    await user.type(four, "60");
+    await user.tab();
+    expect(current.discount).toEqual({ 4: 60, D: 10 });
+
+    const name = screen.getByRole("textbox", { name: "Name of D" });
+    await user.clear(name);
+    await user.type(name, "2");
+    await user.tab();
+    expect(Object.entries(current.discount)).toEqual([
+      ["2", 10],
+      ["4", 60],
+    ]);
+    expect(nameInputs()).toEqual(["2", "4"]);
+    expect(screen.getByRole("spinbutton", { name: "2" })).toBeInvalid();
+    expect(screen.getByRole("spinbutton", { name: "4" })).toBeValid();
+
+    // The button of the row removes that row, wherever it went
+    await user.click(screen.getByRole("button", { name: /^Remove .* 4$/ }));
+    expect(current.discount).toEqual({ 2: 10 });
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(Object.entries(current.discount)).toEqual([
+      ["2", 10],
+      ["4", 60],
+    ]);
+    expect(screen.getByRole("spinbutton", { name: "2" })).toBeInvalid();
+    expect(screen.getByRole("spinbutton", { name: "4" })).toBeValid();
+  });
+
+  it("does not keep a refusal on a row that took another name", async () => {
+    const user = userEvent.setup();
+    render(
+      <FieldForm
+        initial={{ discount: { 4: 50, D: 10, E: 5 } }}
+        field="discount"
+      />,
+    );
+    const d = screen.getByRole("textbox", { name: "Name of D" });
+    await user.clear(d);
+    await user.type(d, "4");
+    await user.tab();
+    expect(screen.getAllByRole("alert")).toHaveLength(1);
+
+    // E becomes 2 and goes first: the second row is "4" now
+    const e = screen.getByRole("textbox", { name: "Name of E" });
+    await user.clear(e);
+    await user.type(e, "2");
+    await user.tab();
+    expect(nameInputs()).toEqual(["2", "4", "D"]);
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 
   it("works with names that are special to JavaScript or to a path", async () => {
@@ -780,10 +908,27 @@ describe("a list of choices", () => {
     ).toEqual(["true", "false", "true"]);
 
     await user.click(box("png"));
-    expect(current.formats).toEqual(["pdf", "png", "svg"]);
+    expect(current.formats).toEqual(["svg", "pdf", "png"]);
     await user.click(box("pdf"));
     await user.click(box("png"));
     expect(current.formats).toEqual(["svg"]);
+  });
+
+  it("only adds to or removes from the list, in the order it has", async () => {
+    const user = userEvent.setup();
+    render(<FieldForm initial={{ formats: ["png", "pdf"] }} field="formats" />);
+    await user.click(box("svg"));
+    expect(current.formats).toEqual(["png", "pdf", "svg"]);
+    await user.click(box("png"));
+    expect(current.formats).toEqual(["pdf", "svg"]);
+  });
+
+  it("is a group named by its label, which is not required itself", () => {
+    render(<FieldForm initial={{ formats: ["pdf"] }} field="formats" />);
+    const group = screen.getByRole("group", { name: "Formats" });
+    expect(group).not.toBeRequired();
+    expect(group).toHaveAttribute("aria-labelledby");
+    expect(group).not.toHaveAttribute("aria-label");
   });
 
   it("clears the key with no choice left", async () => {
@@ -806,7 +951,7 @@ describe("a list of choices", () => {
     );
     expect(box("gif")).toBeChecked();
     await user.click(box("svg"));
-    expect(current.formats).toEqual(["pdf", "svg", "gif"]);
+    expect(current.formats).toEqual(["pdf", "gif", "gif", "svg"]);
 
     await user.click(box("gif"));
     expect(current.formats).toEqual(["pdf", "svg"]);
