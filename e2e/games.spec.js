@@ -149,6 +149,36 @@ test.describe("bundled games", () => {
     await expect(panel.getByRole("listitem")).toHaveCount(count);
   });
 
+  test("adds a phase in the edit panel", async ({ page }) => {
+    await page.goto("/games/18Test/map?edit=true");
+    const panel = page.getByTestId("edit-panel");
+    await panel
+      .getByRole("tablist")
+      .getByRole("tab", { name: "Phases" })
+      .click();
+    await expect(page).toHaveURL(/\?edit=true&editSection=phases$/);
+
+    const count = 6;
+    await expect(panel.getByRole("listitem")).toHaveCount(count);
+    await panel.getByRole("button", { name: "Add phase" }).click();
+    await expect(panel.getByRole("listitem")).toHaveCount(count + 1);
+    const name = String(count + 1);
+    await expect(
+      panel.getByRole("button", { name: `Move phase ${name} down` }),
+    ).toBeDisabled();
+
+    const train = panel
+      .getByRole("listitem")
+      .nth(count)
+      .getByRole("textbox", { name: "Train" });
+    await train.fill("4H\n2M");
+    await train.blur();
+    await expect(train).toHaveValue("4H\n2M");
+
+    await panel.getByRole("button", { name: `Remove phase ${name}` }).click();
+    await expect(panel.getByRole("listitem")).toHaveCount(count);
+  });
+
   test("edits a price in the market grid and the market page follows", async ({
     page,
   }) => {

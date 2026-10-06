@@ -17,15 +17,29 @@ import { renderApp } from "@tests/support/helpers.jsx";
 
 let opened;
 
+// The editor, the edit panel and the game check load on demand. Loaded once
+// here, they resolve in the same tick as the render that asks for them and not
+// at a random time outside act
+beforeAll(async () => {
+  await Promise.all([
+    import("@/components/editPanel/EditPanel"),
+    import("@/components/editPanel/JsonEditor"),
+    import("@/util/gameValidation"),
+  ]);
+});
+
+// The game is checked in the background and the result lands on the editor:
+// wait for it inside act, so no test ends with an update in flight
 afterEach(async () => {
   if (opened) {
-    await waitFor(() => {
-      if (opened.getState().gameProblems.status === "running") {
-        throw new Error("still checking the game");
+    const store = opened;
+    opened = undefined;
+    await act(async () => {
+      while (store.getState().gameProblems.status === "running") {
+        await new Promise((resolve) => setTimeout(resolve, 20));
       }
     });
   }
-  opened = undefined;
 });
 
 const open = (route, options) => {
@@ -306,6 +320,8 @@ describe("lines of the json editor", () => {
     expect(router.state.location.pathname).toBe(route);
     await act(() => router.navigate(1));
     await waitFor(() => expect(router.state.location.search).toContain("=3-5"));
+    // Forward builds the editor again: let it load before the test ends
+    await view();
   });
 
   it("follows a new url while it is open", async () => {

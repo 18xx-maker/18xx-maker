@@ -142,6 +142,22 @@ wie sie gedruckt wird, etwa `10/20`; Text, der keine Zahlen enthält, etwa
 `$10/$20`, bleibt Text. Die Fähigkeiten einer Privatgesellschaft werden als
 JSON bearbeitet, die übrigen Felder, etwa Notiz und Beschreibung, stehen unter Weitere Felder.
 
+Der Tab Phasen funktioniert genauso für die Phasen des Spiels. Eine Karte zeigt
+zuerst Name, Limit, Plättchen, Zug, die Markierung „minor“ und Runden. Die
+Gesellschaft, das Ereignis, bei dem die Phase beginnt, die Notizen, der Kauf von
+Gesellschaften und die Ereignisse stehen unter Weitere Felder. Das Limit ist
+eine ganze Zahl, `∞` oder ein Bruch wie `3/4`. Zug und Notizen sind Text oder
+eine Liste, wenn du einen Eintrag pro Zeile schreibst (eine einzelne Zeile wird
+als einfacher Text gespeichert). Eine Phase braucht ein Limit und Plättchen, die
+sich nicht leeren lassen, und einen Namen oder einen Zug. Hat eine Phase
+keines von beiden, zeigt das Feld die Meldung des Schemas, dass eine von
+mehreren Optionen passen muss. In einem Spiel, dessen Phasen keinen Namen haben,
+bekommt eine neue Phase statt eines Namens einen Zug. Das Ereignis, bei dem eine
+Phase beginnt (`on`), wird als JSON bearbeitet, also schreibe einen Zugnamen mit
+Anführungszeichen, etwa `"3"`. Über Namen verweisen andere Teile des Spiels auf
+eine Phase oder einen Zug: Das Panel aktualisiert diese Verweise nicht, wenn du
+einen umbenennst.
+
 Der Tab Markt bearbeitet den Aktienmarkt: den Typ (2D, 1D oder 1Diag), ein
 Raster der Zellen, die Zellstandards, die Legende und die Bewegung. Klicke auf
 eine Zelle oder bewege dich mit den Pfeiltasten, um sie im Formular unter dem

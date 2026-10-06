@@ -38,15 +38,20 @@ import { issueText } from "@/components/schemaForm/issueText";
 import {
   PRIMARY_KEYS,
   coerceStringOrNumber,
+  formatList,
   formatRevenue,
   humanize,
+  isNamed,
   isRequired,
   issuesFor,
   kindOf,
   newItem,
   nextName,
+  parseLimit,
+  parseList,
   parseRevenue,
   resolveAllOf,
+  sameList,
 } from "@/components/schemaForm/resolve";
 
 // What the fields need of the form: the root schema, the game, its problems
@@ -329,21 +334,28 @@ const parseCount = (text) => {
     : undefined;
 };
 
-const CountField = ({ keys, schema }) => {
+// A number or text from a short list (a train quantity, a phase limit): the
+// parse gives undefined for text that is neither, which shows the message
+const CountField = ({
+  keys,
+  schema,
+  parse = parseCount,
+  invalid = "editPanel.invalidCount",
+}) => {
   const field = useField(keys, schema);
   const draft = useDraft(
     field.value,
     (text) => {
       if (text.trim() === "") return field.clear();
-      const count = parseCount(text);
+      const count = parse(text);
       if (count === undefined) {
-        field.setLocal("editPanel.invalidCount");
+        field.setLocal(invalid);
         return true;
       }
       field.set(count);
     },
     FORMAT,
-    (text, value) => parseCount(text) === value,
+    (text, value) => parse(text) === value,
   );
 
   return (
@@ -355,6 +367,42 @@ const CountField = ({ keys, schema }) => {
         onBlur={draft.commit}
         onKeyDown={(event) => event.key === "Enter" && draft.commit()}
       />
+    </FieldShell>
+  );
+};
+
+// One text a line: a string for one line, a list for more (the train and the
+// notes of a phase)
+const StringListField = ({ keys, schema }) => {
+  const { t } = useTranslation();
+  const field = useField(keys, schema);
+  const draft = useDraft(
+    field.value,
+    (text) => {
+      const list = parseList(text);
+      if (list === undefined) return field.clear();
+      if (!sameList(text, field.value)) field.set(list);
+    },
+    formatList,
+    sameList,
+  );
+  const aria = field.aria();
+  const hint = `${field.id}-hint`;
+
+  return (
+    <FieldShell {...field}>
+      <Textarea
+        {...aria}
+        aria-describedby={[aria["aria-describedby"], hint]
+          .filter(Boolean)
+          .join(" ")}
+        value={draft.text}
+        onChange={(event) => draft.change(event.target.value)}
+        onBlur={draft.commit}
+      />
+      <p id={hint} className="text-xs text-muted-foreground">
+        {t("editPanel.onePerLine")}
+      </p>
     </FieldShell>
   );
 };
@@ -632,7 +680,9 @@ const FRESH_CARD = { open: true, more: false };
 
 // primary are the fields shown first, the others are under more fields.
 // titleKey is the field that names an item. Names are kept unique (a new item
-// or a copy gets a free one) unless unique is false, as in a legend.
+// or a copy gets a free one) unless unique is false, as in a legend. With
+// unique "named" only a list that has names gets them (phases may be keyed by
+// train).
 // onChange(kind, from, to) gives back a warning to show with the list after a
 // move, remove or insert (a duplicate) of an item.
 const ArrayField = ({
@@ -657,7 +707,11 @@ const ArrayField = ({
   const items = getIn(keys, form.game) ?? [];
   const itemSchema = resolveAllOf(schema.items, form.root);
   const item = t(`editPanel.items.${keys[keys.length - 1]}`);
-  const titleOf = (value, index) => value?.[titleKey] || `#${index + 1}`;
+  // A phase may have no name and be known by its train (or trains)
+  const titleOf = (value, index) =>
+    value?.[titleKey] ||
+    [value?.train].flat().filter(Boolean).join(", ") ||
+    `#${index + 1}`;
   const uiOf = (index) => ui[index] ?? FRESH_CARD;
   // The same change of the cards as of the items
   const changeUi = (fn) =>
@@ -703,7 +757,11 @@ const ArrayField = ({
     const before = current();
     const copy = {
       ...structuredClone(before[index]),
-      ...(unique && { name: nextName(before) }),
+      ...((unique === true || (unique && isNamed([before[index]]))) && {
+        name: nextName(before),
+      }),
+      ...(unique === "named" &&
+        !isNamed([before[index]]) && { train: nextName(before, "train") }),
     };
     setRemoved(null);
     setWarning("");
@@ -841,6 +899,16 @@ const SchemaField = ({ keys, schema, ...rest }) => {
       return <ChoiceField {...props} options={node.enum} />;
     case "stringOrNumber":
       return <StringOrNumberField {...props} />;
+    case "limit":
+      return (
+        <CountField
+          {...props}
+          parse={parseLimit}
+          invalid="editPanel.invalidLimit"
+        />
+      );
+    case "stringList":
+      return <StringListField {...props} />;
     case "revenue":
       return <RevenueField {...props} />;
     case "count":
