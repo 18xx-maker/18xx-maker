@@ -3161,6 +3161,22 @@ describe("edit panel colors", () => {
     );
   });
 
+  it("does not bring a color back when it is removed after picking it", async () => {
+    const { user } = open(colorsRoute, {
+      ...structuredClone(games["18Test"]),
+      colors: { short: "pink" },
+    });
+    await ready();
+    fireEvent.change(screen.getByLabelText("Pick a color for Short"), {
+      target: { value: "#112233" },
+    });
+    expect(game().colors).toEqual({ short: "#112233" });
+    await user.click(
+      screen.getByRole("button", { name: "Remove color short" }),
+    );
+    expect(game().colors ?? {}).toEqual({});
+  });
+
   it("adds, renames and removes a color", async () => {
     const { user } = open(colorsRoute, {
       ...structuredClone(games["18Test"]),

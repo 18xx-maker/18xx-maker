@@ -303,7 +303,7 @@ const ColorField = ({ keys, schema }) => {
     <FieldShell {...field}>
       <div className="flex flex-row items-center gap-2">
         <span
-          className="relative size-9 shrink-0 overflow-hidden rounded-md border"
+          className="relative size-9 shrink-0 overflow-hidden rounded-md border focus-within:ring-1 focus-within:ring-ring"
           style={{ backgroundColor: preview || undefined }}
           data-testid="color-swatch"
         >
@@ -312,10 +312,7 @@ const ColorField = ({ keys, schema }) => {
             aria-label={t("editPanel.pickColor", { name: field.label })}
             className="absolute inset-0 size-full cursor-pointer opacity-0"
             value={HEX.test(preview) ? preview : "#000000"}
-            onChange={(event) => {
-              draft.change(event.target.value);
-              field.set(event.target.value);
-            }}
+            onChange={(event) => field.set(event.target.value)}
           />
         </span>
         <Input

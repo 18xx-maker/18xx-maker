@@ -248,10 +248,12 @@ const isColor = (alternatives) =>
 
 // How a (resolved) schema node is edited:
 // string, text, number, boolean, enum, stringOrNumber, limit, stringList,
-// count, revenue, color (text, or colors by phase as JSON), object, record (an object of any names, each a value of one
-// schema), array (of objects, needs the root to follow the items),
+// count, revenue, color, object, record (an object of any names, each a value
+// of one schema), array (of objects, needs the root to follow the items),
 // stringArray (of texts), enumList (of choices), or json for everything
-// else, so a new construct never disappears from the form
+// else, so a new construct never disappears from the form.
+// The color kind is structural (text, or an object of colors by phase, shown
+// as JSON), not tied to a field name.
 export const kindOf = (schema, key, root, keys = []) => {
   const node = resolveSchema(schema, root);
   if (!node || typeof node !== "object" || node.$ref) return "json";
