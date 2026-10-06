@@ -29,6 +29,8 @@ ways:
 1. Click on the "Open File" button from the [Load Games](/games) page.
 1. Drag a valid JSON file into the app window
 
+To start from scratch, click the "New Game" button on the [Load Games](/games) page. The app asks where to save the new game, writes a small game there (a title and a block of 4 by 4 hexes) and opens it on the map, ready to edit. The new file is listed like any game you open.
+
 In all cases the app will save the location of this file in its memory and then
 display the game. You will now see this file listed on the [Load Games](/games)
 page. The trash icon on this page **WILL NOT** delete the file, but it will
@@ -56,6 +58,8 @@ You can load a file from your computer in a few ways:
 1. Hit the "o" key from anywhere in the app
 1. Click on the "Open File" button from the [Load Games](/games) page.
 1. Drag a valid JSON file into the browser window
+
+To start from scratch, click the "New Game" button on the [Load Games](/games) page. The browser asks where to save the new game, writes a small game there (a title and a block of 4 by 4 hexes) and opens it on the map, ready to edit. The new file is listed like any game you open. A browser that can not save files this way (see below) keeps the new game in the Origin Private File System instead.
 
 In all cases the browser will save the location of this file in its memory and
 then display the game. You will now see this file listed on the [Load
@@ -87,6 +91,8 @@ instead. You can open files in one of two ways:
 
 1. Click on the "Open File" button from the [Load Games](/games) page.
 1. Drag a valid JSON file into the browser window
+
+The "New Game" button on the [Load Games](/games) page creates a small game (a title and a block of 4 by 4 hexes) in this separate place and opens it on the map, ready to edit. Use the Download button on the game page to get a copy as a file.
 
 Once you do this the contents of this file are saved to your local computer in a
 separate place that only the browser can view. Games will appear on the [Load

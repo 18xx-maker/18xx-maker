@@ -32,6 +32,8 @@ mehrere Arten öffnen:
 1. Klicke auf der Seite [Spiele laden](/games) auf die Schaltfläche „Datei öffnen“
 1. Ziehe eine gültige JSON-Datei in das App-Fenster
 
+Um bei null anzufangen, klicke auf der Seite [Spiele laden](/games) auf die Schaltfläche „Neues Spiel“. Die App fragt, wo das neue Spiel gespeichert werden soll, schreibt dort ein kleines Spiel (einen Titel und einen Block aus 4 mal 4 Feldern) und öffnet es auf der Karte, bereit zum Bearbeiten. Die neue Datei erscheint in der Liste wie jedes Spiel, das du öffnest.
+
 In allen Fällen speichert die App den Speicherort dieser Datei in ihrem Speicher
 und zeigt dann das Spiel an. Du siehst diese Datei jetzt auf der Seite
 [Spiele laden](/games) aufgelistet. Das Papierkorb-Symbol auf dieser Seite
@@ -61,6 +63,8 @@ Du kannst eine Datei von deinem Computer auf mehrere Arten laden:
 1. Drücke von überall in der App die Taste „o“
 1. Klicke auf der Seite [Spiele laden](/games) auf die Schaltfläche „Datei öffnen“
 1. Ziehe eine gültige JSON-Datei ins Browserfenster
+
+Um bei null anzufangen, klicke auf der Seite [Spiele laden](/games) auf die Schaltfläche „Neues Spiel“. Der Browser fragt, wo das neue Spiel gespeichert werden soll, schreibt dort ein kleines Spiel (einen Titel und einen Block aus 4 mal 4 Feldern) und öffnet es auf der Karte, bereit zum Bearbeiten. Die neue Datei erscheint in der Liste wie jedes Spiel, das du öffnest. Ein Browser, der Dateien nicht auf diese Weise speichern kann (siehe unten), legt das neue Spiel stattdessen im Origin Private File System ab.
 
 In allen Fällen speichert der Browser den Speicherort dieser Datei in seinem
 Speicher und zeigt dann das Spiel an. Du siehst diese Datei jetzt auf der Seite
@@ -95,6 +99,8 @@ zu verwenden. Du kannst Dateien auf zwei Arten öffnen:
 
 1. Klicke auf der Seite [Spiele laden](/games) auf die Schaltfläche „Datei öffnen“
 1. Ziehe eine gültige JSON-Datei ins Browserfenster
+
+Die Schaltfläche „Neues Spiel“ auf der Seite [Spiele laden](/games) erstellt an diesem separaten Ort ein kleines Spiel (einen Titel und einen Block aus 4 mal 4 Feldern) und öffnet es auf der Karte, bereit zum Bearbeiten. Mit der Schaltfläche „Herunterladen“ auf der Spielseite bekommst du eine Kopie als Datei.
 
 Danach wird der Inhalt dieser Datei auf deinem lokalen Computer an einer
 separaten Stelle gespeichert, die nur der Browser sehen kann. Spiele erscheinen
