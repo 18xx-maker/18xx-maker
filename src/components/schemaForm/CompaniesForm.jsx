@@ -47,7 +47,7 @@ const SummaryToken = ({ company }) => {
   return (
     <TokenBoundary company={company}>
       <svg
-        viewBox="-25 -25 50 50"
+        viewBox="-26 -26 52 52"
         className="mr-1.5 inline-block size-5 align-middle"
         aria-hidden="true"
         data-testid="company-token"

@@ -7,6 +7,7 @@ import games from "@/data/games";
 import { editGame, selectGameProblems } from "@/state";
 import { selectGameChanged } from "@/state/selectors";
 
+import { allowConsole } from "@tests/support/console.js";
 import { renderApp } from "@tests/support/helpers.jsx";
 
 // An editable game with a saved original, so changes are known
@@ -2259,7 +2260,9 @@ describe("edit panel companies", () => {
     await ready();
     expect(toggleOf(0)).toHaveAccessibleName("Black Railroad BLRR");
     expect(toggleOf(0)).toHaveTextContent("Black Railroad");
-    expect(toggleOf(0)).toHaveTextContent("BLRR");
+    expect(
+      within(toggleOf(0)).getByText("BLRR", { selector: "span" }),
+    ).toBeVisible();
     const token = within(toggleOf(0)).getByTestId("company-token");
     expect(token).toHaveAttribute("aria-hidden", "true");
     expect(token).toHaveTextContent("BLRR");
@@ -2292,6 +2295,35 @@ describe("edit panel companies", () => {
     ).not.toBeInTheDocument();
     expect(toggleOf(2)).toBeVisible();
     expect(within(toggleOf(2)).getByTestId("company-token")).toBeVisible();
+  });
+
+  it("drops a token that fails to draw and brings it back once the company is valid", async () => {
+    allowConsole(/./);
+    const { store, user } = open(companiesRoute);
+    await ready();
+    const setToken = (token) =>
+      act(() =>
+        store.dispatch(
+          editGame((game) => ({
+            ...game,
+            companies: game.companies.map((company, index) =>
+              index === 0 ? { ...company, token } : company,
+            ),
+          })),
+        ),
+      );
+    setToken({ icon: "nope" });
+    await waitFor(() =>
+      expect(
+        within(toggleOf(0)).queryByTestId("company-token"),
+      ).not.toBeInTheDocument(),
+    );
+    await user.click(toggleOf(0));
+    expect(toggleOf(0)).toHaveAttribute("aria-expanded", "true");
+    setToken({ icon: "train" });
+    await waitFor(() =>
+      expect(within(toggleOf(0)).getByTestId("company-token")).toBeVisible(),
+    );
   });
 
   it("opens a card with its primary fields, the rest is behind More fields", async () => {
