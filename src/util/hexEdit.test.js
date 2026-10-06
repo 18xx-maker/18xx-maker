@@ -399,6 +399,13 @@ describe("isMoveClick", () => {
   });
 });
 
+describe("moveKey", () => {
+  it("is Cmd on macOS and Ctrl elsewhere", () => {
+    expect(edit.moveKey(true)).toBe("Cmd");
+    expect(edit.moveKey(false)).toBe("Ctrl");
+  });
+});
+
 describe("groupInvalid", () => {
   it("accepts an object with a list of coordinates", () => {
     expect(

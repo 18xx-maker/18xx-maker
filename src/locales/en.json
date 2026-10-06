@@ -318,6 +318,7 @@
   "hexEditor": {
     "label": "Hex group JSON",
     "hint": "Click a hex on the map to edit its group. Hold Cmd (Ctrl away from macOS) and click another hex to add it to the group, or a hex of the group to take it out. Press Escape to let go of the group.",
+    "moveHint": "{{key}}-click another hex to add it to this group, or a hex of this group to take it out. Press Escape outside the editor to let go of the group.",
     "pending": "{{coord}} has no hex yet. The group below is added to the map when you change it.",
     "removed": "This variation of the map removes {{coord}}, so a hex there is not shown.",
     "inherited": "This hex is copied from the map variation {{variation}} and can only be changed there.",

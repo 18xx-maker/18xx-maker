@@ -235,6 +235,8 @@ const onMac = () =>
   typeof navigator !== "undefined" &&
   /Mac|iPhone|iPad/.test(navigator.platform);
 
+export const moveKey = (mac = onMac()) => (mac ? "Cmd" : "Ctrl");
+
 export const isMoveClick = (event, mac = onMac()) =>
   mac ? event.metaKey : event.ctrlKey;
 
