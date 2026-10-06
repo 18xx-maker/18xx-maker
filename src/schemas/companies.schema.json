@@ -20,6 +20,10 @@
           "abbrev": {
             "type": "string"
           },
+          "alias": {
+            "description": "A second name of the company. The companyNames config chooses whether the charter and the share cards print the name, the alias, or both.",
+            "type": "string"
+          },
           "logo": {
             "type": "string"
           },

@@ -109,3 +109,16 @@ charters already stack their tokens and ignore it:
   "tokensBelow": true
 }
 ```
+
+## Company aliases
+
+A company can have an `alias`, a second name such as a short form or the name
+in another language. The `companyNames` config (on the config page) chooses
+what the charters and the share cards print: `name` (the default) prints the
+name, `alias` prints the alias instead (the name for a company without one),
+and `both` prints the name with the alias under it, in place of the `subtext`
+of the company:
+
+```json
+{ "name": "Baltimore & Ohio Railroad", "abbrev": "B&O", "alias": "B&O" }
+```

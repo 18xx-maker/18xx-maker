@@ -49,6 +49,10 @@ export const sections = [
         themePreview: "companies",
       },
       {
+        name: "companyNames",
+        root: true,
+      },
+      {
         group: [
           {
             name: "companySvgLogos",

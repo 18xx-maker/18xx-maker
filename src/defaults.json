@@ -45,6 +45,7 @@
   "straightCityNames": false,
   "theme": "gmt",
   "companiesTheme": "rob",
+  "companyNames": "name",
   "export": {
     "allLayouts": false
   },

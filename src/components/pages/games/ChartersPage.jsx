@@ -75,7 +75,6 @@ const ChartersPage = () => {
             company={company}
             game={game}
             charters={charters}
-            subtext={company.subtext}
           />
         ) : (
           <CharterSpacer
@@ -115,7 +114,6 @@ const ChartersPage = () => {
                   company={company}
                   game={game}
                   charters={charters}
-                  subtext={company.subtext}
                 />
               ) : (
                 <CharterSpacer
@@ -145,7 +143,6 @@ const ChartersPage = () => {
                 company={company}
                 game={game}
                 charters={charters}
-                subtext={company.subtext}
               />
             ),
             minorCompanies,

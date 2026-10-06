@@ -646,6 +646,40 @@ describe("validate", () => {
       expect(run(file).code).toBe(0);
     });
 
+    it("accepts an alias on a company of a game", () => {
+      expect(
+        run(
+          withGame({
+            companies: [{ name: "A", abbrev: "A", color: "red", alias: "B" }],
+          }),
+        ).code,
+      ).toBe(0);
+    });
+
+    it("accepts an alias on a company of a company file", () => {
+      const file = writeTmp(
+        "companies.json",
+        JSON.stringify({
+          name: "Set",
+          abbrev: "S",
+          companies: [{ name: "A", abbrev: "A", color: "red", alias: "B" }],
+        }),
+      );
+      expect(run(file).code).toBe(0);
+    });
+
+    it("rejects an alias that is not a string", () => {
+      const file = writeTmp(
+        "companies.json",
+        JSON.stringify({
+          name: "Set",
+          abbrev: "S",
+          companies: [{ name: "A", abbrev: "A", color: "red", alias: 1 }],
+        }),
+      );
+      expect(run(file).code).toBe(1);
+    });
+
     it("rejects an unknown token property on a company of a company file", () => {
       const file = writeTmp(
         "companies.json",

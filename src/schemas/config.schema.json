@@ -91,6 +91,11 @@
   "properties": {
     "theme": { "type": "string" },
     "companiesTheme": { "type": "string" },
+    "companyNames": {
+      "type": "string",
+      "enum": ["name", "alias", "both"],
+      "description": "What the charters and share cards print as the name of a company. name is the name, alias is the alias of the company (the name when it has none), both is the name with the alias under it."
+    },
     "printScale": {
       "type": "number",
       "minimum": 50,
@@ -373,6 +378,7 @@
   "required": [
     "bleed",
     "companiesTheme",
+    "companyNames",
     "companySvgLogos",
     "coords",
     "cutlines",

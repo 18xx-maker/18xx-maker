@@ -550,6 +550,10 @@
         "label": "公司主题",
         "description": "公司主题决定地图和地块上所有元素使用的颜色。"
       },
+      "companyNames": {
+        "label": "公司名称",
+        "description": "选择公司执照和股票卡上打印的公司名称:名称、别名(没有别名时使用名称),或两者都打印,别名位于名称下方。"
+      },
       "companySvgLogos": {
         "label": "公司标志",
         "description": "您可以选择为公司使用 SVG 标志(如有),而不是仅使用颜色和文字。各项设置的说明请见[标志](/docs/games/logos)文档页面。"

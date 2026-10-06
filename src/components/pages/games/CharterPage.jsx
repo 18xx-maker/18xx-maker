@@ -39,12 +39,7 @@ const CharterPage = () => {
       style={{ display: "inline-block" }}
     >
       <style>{charterCss(data)}</style>
-      <GameCharter
-        company={company}
-        game={game}
-        charters={charters}
-        subName={company.subName}
-      />
+      <GameCharter company={company} game={game} charters={charters} />
       <PageSetup landscape={false} />
     </div>
   );

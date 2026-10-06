@@ -550,6 +550,10 @@
         "label": "Gesellschaften-Farbschema",
         "description": "Das Gesellschaften-Farbschema legt fest, welche Farben für alle Elemente auf Karten und Plättchen verwendet werden."
       },
+      "companyNames": {
+        "label": "Gesellschaftsnamen",
+        "description": "Legt fest, was Gesellschaftskarten und Aktienkarten als Namen einer Gesellschaft drucken: den Namen, den Alias (den Namen, wenn es keinen gibt) oder beides, mit dem Alias unter dem Namen."
+      },
       "companySvgLogos": {
         "label": "Gesellschaftslogos",
         "description": "Hier kannst du wählen, ob für Gesellschaften (sofern verfügbar) SVG-Logos statt nur Farben und Text verwendet werden. Die einzelnen Einstellungen sind auf der Seite [Logos](/docs/games/logos) erklärt."

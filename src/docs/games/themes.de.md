@@ -99,6 +99,9 @@ Farben enthalten muss, die es ändert. Diese Namen werden außerdem als Aliase
 akzeptiert: `cyan` (`lightBlue`), `grey` (`gray`), `lightGreen`
 (`brightGreen`), `navy` (`navyBlue`) und `purple` (`violet`).
 
+Was eine Gesellschaftskarte als Namen der Gesellschaft druckt, ist eine eigene
+Einstellung, siehe [Alias einer Gesellschaft](/docs/games/types).
+
 ## Farben in einer Spieldatei
 
 Ein Spiel kann mit dem Feld `colors` eigene Farben hinzufügen. Sie werden über
