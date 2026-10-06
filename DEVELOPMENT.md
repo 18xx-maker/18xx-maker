@@ -277,7 +277,13 @@ from `src/schemas/game.schema.json` (`src/components/schemaForm`):
 `GameInfoForm` for `GAME_INFO_KEYS` in `resolve.js` (`info`, `links`,
 `prototype`, `wip`; widening it means editing that list) and `TrainsForm` for
 `trains`, an `ArrayField` with a card for each item (add, remove with undo,
-duplicate, move, "more fields" for what is not in `PRIMARY_KEYS`). Both use
+duplicate, move, "more fields" for what is not in `PRIMARY_KEYS`). `MarketForm`
+edits `game.stock`: `MarketGrid` is an accessible `role="grid"` of the cells
+(ragged rows, 1Diag drawn in two rows), `CellInspector` edits the selected cell
+through the `cellObject` schema and keeps the shorthand (a number, string or
+null) when a cell needs no more, and the pure edits (rows, columns, type,
+movement) are in `src/util/marketEdit.js`. The market is never deleted, the
+last row or column leaves `market: []`. All forms use
 `SchemaFormProvider`. A field kind without a form (`rust`, `phased`,
 `obsolete`, `discount`, other `oneOf`s) falls back to a JSON textarea, and
 `resolve.test.js` fails when a property in scope falls back unexpectedly. A

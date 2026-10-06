@@ -126,7 +126,7 @@ Eingabetaste drückst, und ein geleertes Feld wird aus dem Spiel entfernt (der
 Titel kann nicht entfernt werden). Probleme mit einem Wert, etwa eine Währung
 ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel.
 
-Das Panel hat Tabs: Spielinfo und Züge. Mit `[` und `]` wechselst du zwischen
+Das Panel hat Tabs: Spielinfo, Züge und Markt. Mit `[` und `]` wechselst du zwischen
 ihnen (die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
 schließen das Panel). Der Tab Züge hat für jeden Zug des Spiels eine Karte, die
 aus demselben Schema erzeugt wird. Füge mit Zug hinzufügen einen Zug hinzu und
@@ -135,6 +135,24 @@ dupliziere oder entferne ihn. Ein entfernter Zug lässt sich direkt danach mit
 Rückgängig zurückholen. Die selten benötigten Felder eines Zugs stehen unter
 Weitere Felder. Ein Feld, das das Schema als veraltet markiert, bleibt
 bearbeitbar und wird mit einer Warnung angezeigt.
+
+Der Tab Markt bearbeitet den Aktienmarkt: den Typ (2D, 1D oder 1Diag), ein
+Raster der Zellen, die Zellstandards, die Legende und die Bewegung. Klicke auf
+eine Zelle oder bewege dich mit den Pfeiltasten, um sie im Formular unter dem
+Raster zu bearbeiten: Wert, Beschriftung, Farbe, Legendeneintrag, Par-Markierung,
+Pfeile und mehr. Entf leert eine Zelle, und eine Zifferntaste springt zu ihrem
+Wert. Die Schaltflächen über dem Raster fügen die Zeile oder Spalte der
+gewählten Zelle hinzu, verschieben, duplizieren oder entfernen sie; eine
+entfernte Zeile oder Spalte lässt sich mit Rückgängig zurückholen. Ein Markt ist
+oft ein Dreieck, deshalb können Zeilen unterschiedlich lang sein und werden nie
+aufgefüllt. Ein 1Diag-Markt wird in zwei Reihen gezeichnet, eine Spalte besteht
+aus zwei Zellen. Eine Zelle, die nur einen Wert oder nur eine Beschriftung hat,
+wird als diese Zahl oder dieser Text gespeichert und wird zu einem Objekt, wenn
+du ein zweites Feld setzt. Beim Wechsel des Typs zu 1D oder 1Diag bleibt nur die
+erste Zeile erhalten, mit Rückgängig. Legendeneinträge werden über ihre Nummer
+verwendet: Beim Verschieben oder Entfernen eines Eintrags siehst du, wie viele
+Zellen jetzt auf einen anderen Eintrag zeigen, ihre Nummern werden nicht
+geändert. Anzeige, Ledges, Limits und Titel sind unter Erweitert JSON-Felder.
 
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.

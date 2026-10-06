@@ -119,6 +119,23 @@ test.describe("bundled games", () => {
     await expect(panel.getByRole("listitem")).toHaveCount(4);
   });
 
+  test("edits a price in the market grid and the market page follows", async ({
+    page,
+  }) => {
+    await page.goto("/games/18Test/market?edit=true&editSection=market");
+    const panel = page.getByTestId("edit-panel");
+    await panel.getByRole("gridcell", { name: /^Row 1, column 2:/ }).click();
+    const value = panel.getByRole("textbox", { name: "Value", exact: true });
+    await value.fill("68");
+    await value.press("Enter");
+    await expect(
+      panel.getByRole("gridcell", { name: /^Row 1, column 2: 68/ }),
+    ).toBeVisible();
+    await expect(
+      page.locator("[data-testid^='game-18Test-market']"),
+    ).toContainText("68");
+  });
+
   test("opens a real game and its pages", async ({ page }) => {
     await page.goto("/games/");
     await page

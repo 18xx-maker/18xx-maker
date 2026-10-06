@@ -115,7 +115,7 @@ emptying a field removes it from the game (the title cannot be removed).
 Problems with a value, like a currency without a `#`, are shown below its field.
 Escape closes the panel.
 
-The panel has tabs: Game info and Trains. Press `[` and `]` to switch between
+The panel has tabs: Game info, Trains and Market. Press `[` and `]` to switch between
 them (the number keys go to another section of the game and close the panel).
 The Trains tab has a card for each train of the game, generated from the same
 schema. Add a train with Add train, and use the buttons of a card to move it up
@@ -123,6 +123,21 @@ or down, duplicate it or remove it. A removed train can be put back with Undo
 right after. The fields of a train that are not needed often are under More
 fields. A field the schema marks as deprecated stays editable and is shown with
 a warning.
+
+The Market tab edits the stock market: the type (2D, 1D or 1Diag), a grid of
+the cells, the cell defaults, the legend and the movement. Click a cell, or
+move with the arrow keys, to edit it in the form below the grid: its value,
+label, color, legend entry, par flag, arrows and more. Delete empties a cell
+and a number key goes to its value. The buttons above the grid add, move,
+duplicate and remove the row or column of the selected cell; a removed row or
+column can be put back with Undo. A market is often a triangle, so rows can
+have different lengths and are never padded. A 1Diag market is drawn in two
+rows and a column of it is two cells. A cell that only has a value or only a
+label is saved as that number or text, and becomes an object when you set a
+second field. Changing the type to 1D or 1Diag keeps the first row only, with
+an Undo. Legend entries are used by their number: moving or removing one shows
+how many cells now point to another entry, their numbers are not changed. The
+display, ledges, limits and title are JSON fields under Advanced.
 
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
