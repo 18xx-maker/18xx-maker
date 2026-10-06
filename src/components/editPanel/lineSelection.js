@@ -50,6 +50,21 @@ const gutterMarkers = (state, ranges) => {
   return RangeSet.of(markers);
 };
 
+// Whether a transaction adds or removes a line break
+const breaksLines = (tr) => {
+  let breaks = false;
+  tr.changes.iterChanges((fromA, toA, fromB, toB, inserted) => {
+    if (
+      inserted.lines > 1 ||
+      tr.startState.doc.lineAt(fromA).number !==
+        tr.startState.doc.lineAt(toA).number
+    ) {
+      breaks = true;
+    }
+  });
+  return breaks;
+};
+
 // The lines the view starts with
 const initialLines = Facet.define({ combine: (values) => values[0] ?? [] });
 
@@ -61,8 +76,13 @@ const selectedField = StateField.define({
   update(value, tr) {
     let { lines } = value;
     for (const effect of tr.effects) if (effect.is(set)) lines = effect.value;
-    if (lines === value.lines && (!tr.docChanged || lines.length === 0)) {
-      return value;
+    if (lines === value.lines) {
+      if (!tr.docChanged || lines.length === 0) return value;
+      // An edit inside lines only moves the markers; one that adds or removes
+      // a line break changes which lines exist and rebuilds them
+      if (!breaksLines(tr)) {
+        return { lines, markers: value.markers.map(tr.changes) };
+      }
     }
     return { lines, markers: gutterMarkers(tr.state, lines) };
   },
@@ -125,7 +145,7 @@ const lineStart = (state, line) =>
 // The effect that brings the first of the lines into view, if there is one
 export const scrollToLines = (state, lines) => {
   const first = firstLine(lines);
-  return first === undefined
+  return first === undefined || first > state.doc.lines
     ? undefined
     : EditorView.scrollIntoView(lineStart(state, first), {
         y: "start",
@@ -144,6 +164,9 @@ export const lineSelection = (initial, onChange) => {
     lineNumbers({
       domEventHandlers: {
         mousedown(view, block, event) {
+          // Only the primary button (and not a ctrl-click, the context menu
+          // of a Mac) selects
+          if (event.button !== 0 || (mac() && event.ctrlKey)) return false;
           const line = view.state.doc.lineAt(block.from).number;
           const current = view.state.field(selectedField).lines;
           const modifier = mac() ? event.metaKey : event.ctrlKey;

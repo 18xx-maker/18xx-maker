@@ -1,8 +1,13 @@
 import { EditorView } from "@codemirror/view";
-import { act, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { RouterProvider, createMemoryRouter } from "react-router";
 import { page as browser } from "vitest/browser";
 
+import { sections as configSections } from "@/components/config";
+
 import games from "@/data/games";
+import { useBooleanParam, useStringParam } from "@/util/query";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
@@ -160,21 +165,41 @@ describe("lines of the json editor", () => {
   });
 
   it("is cheap for a range of the whole file", async () => {
+    const begin = performance.now();
     open(`${jsonRoute}&lines=1-999999`);
     const v = await view();
-    const start = performance.now();
     await waitFor(() => expect(selected(v).text.length).toBeGreaterThan(5));
-    expect(performance.now() - start).toBeLessThan(3000);
     // Only the lines in view are decorated
     expect(selected(v).text.length).toBeLessThan(v.state.doc.lines);
     expect(selected(v).text.length).toBeLessThan(200);
+    expect(performance.now() - begin).toBeLessThan(3000);
+
+    // A big document, then typing in it: the markers of the lines are moved,
+    // not built again for every key
+    v.dispatch({
+      changes: { from: v.state.doc.length, insert: "\n".repeat(100_000) },
+    });
+    const typing = performance.now();
+    for (let i = 0; i < 30; i++) {
+      v.dispatch({ changes: { from: 0, insert: " " } });
+    }
+    expect(performance.now() - typing).toBeLessThan(1000);
+    expect(selected(v).gutter).toContain(1);
   });
 
   it("ignores garbage and lines past the end", async () => {
     const { router } = open(`${jsonRoute}&lines=a,0,-3,x-y,,99999999`);
     const v = await view();
     expect(selected(v).text).toEqual([]);
+    // A spec wholly past the end does not scroll
+    expect(v.scrollDOM.scrollTop).toBe(0);
     expect(router.state.location.search).toContain("lines=");
+  });
+
+  it("keeps the valid token among garbage", async () => {
+    open(`${jsonRoute}&lines=a,0,3,99999999`);
+    const v = await view();
+    await waitFor(() => expect(selected(v).text).toEqual([3]));
   });
 
   it("selects with clicks on the line numbers, without history", async () => {
@@ -224,6 +249,20 @@ describe("lines of the json editor", () => {
     expect(router.state.historyAction).toBe("REPLACE");
   });
 
+  it("ignores the other buttons and the ctrl click of a Mac", async () => {
+    const { router } = open(jsonRoute);
+    const v = await view();
+    await gutterClick(v, 3, { button: 2 });
+    if (/Mac/.test(navigator.platform)) {
+      await gutterClick(v, 4, { ctrlKey: true });
+    }
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    expect(selected(v).text).toEqual([]);
+    expect(router.state.location.search).toBe("?edit=true&editSection=json");
+    await gutterClick(v, 3);
+    await waitFor(() => expect(selected(v).text).toEqual([3]));
+  });
+
   it("does not dispatch again for its own clicks", async () => {
     const { router } = open(jsonRoute);
     const v = await view();
@@ -263,6 +302,37 @@ describe("lines of the json editor", () => {
     await waitFor(() => expect(selected(v).text).toEqual([7, 8]));
   });
 
+  it("keeps the lines and history when the JSON tab is clicked again", async () => {
+    const { user, router } = open(`${jsonRoute}&lines=3`);
+    const v = await view();
+    await user.click(screen.getByRole("tab", { name: "JSON" }));
+    expect(router.state.location.search).toBe(
+      "?edit=true&editSection=json&lines=3",
+    );
+    expect(router.state.historyAction).toBe("POP");
+    expect(selected(v).text).toEqual([3]);
+  });
+
+  it("keeps the highlight when the editor is rebuilt for another slug", async () => {
+    const { router } = open(`${jsonRoute}&lines=3`);
+    const first = await view();
+    // The editor lives as long as the slug of the game: a new slug builds a
+    // new one, which starts from the lines of the url
+    await act(() =>
+      router.navigate({
+        pathname: `/games/${games["1889"].meta.slug}/map`,
+        search: `?${jsonRoute.split("?")[1]}&lines=3`,
+      }),
+    );
+    const again = await waitFor(async () => {
+      const found = await view();
+      if (found === first) throw new Error("not rebuilt yet");
+      return found;
+    });
+    await waitFor(() => expect(selected(again).text).toEqual([3]));
+    expect(router.state.location.search).toContain("lines=3");
+  });
+
   it("is dropped when the tab, panel or config changes", async () => {
     const { user, router } = open(`${jsonRoute}&lines=3`);
     await view();
@@ -299,7 +369,9 @@ describe("lines of the json editor", () => {
   });
 
   it("is ignored and dropped without the JSON tab of an open panel", async () => {
-    const { router } = open(`${route}?edit=true&editSection=trains&lines=3`);
+    const { router, unmount } = open(
+      `${route}?edit=true&editSection=trains&lines=3`,
+    );
     await screen.findByTestId("edit-panel");
     await waitFor(() =>
       expect(router.state.location.search).toBe(
@@ -307,6 +379,7 @@ describe("lines of the json editor", () => {
       ),
     );
     expect(router.state.historyAction).toBe("REPLACE");
+    unmount();
 
     const closed = open(`${route}?lines=3`);
     await screen.findAllByTestId("game-internal:abc-map");
@@ -364,13 +437,79 @@ describe("deep links", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("push a history entry for a tab, a config section and a card filter", async () => {
+  it("push a history entry for a tab", async () => {
     const { user, router } = open(`${route}?edit=true`);
     await user.click(await screen.findByRole("tab", { name: "Trains" }));
     expect(router.state.historyAction).toBe("PUSH");
     expect(router.state.location.search).toBe("?edit=true&editSection=trains");
     await act(() => router.navigate(-1));
     expect(router.state.location.search).toBe("?edit=true");
+  });
+
+  it("push a history entry for a config section, and Back restores it", async () => {
+    const { user, router } = open(`${route}?config=true`);
+    await user.click(
+      await screen.findByRole("combobox", { name: "Config Section" }),
+    );
+    await user.click(await screen.findByRole("option", { name: "Tokens" }));
+    expect(router.state.location.search).toBe("?config=true&section=tokens");
+    expect(router.state.historyAction).toBe("PUSH");
+    await act(() => router.navigate(-1));
+    expect(router.state.location.search).toBe("?config=true");
+    expect(
+      await screen.findByRole("combobox", { name: "Config Section" }),
+    ).toHaveTextContent("Colors");
+  });
+
+  it("drop lines on a section without an edit toggle for the config panel", async () => {
+    const { router } = open(
+      "/games/internal:abc/tokens?config=true&section=tokens&lines=3",
+    );
+    expect(
+      await screen.findByRole("combobox", { name: "Config Section" }),
+    ).toHaveTextContent("Tokens");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?config=true&section=tokens"),
+    );
+    expect(router.state.historyAction).toBe("REPLACE");
+  });
+
+  it("cycle from the first section with [ and ] when the config section is unknown", async () => {
+    const { user, router } = open(`${route}?config=true&section=nope`);
+    await screen.findByRole("combobox", { name: "Config Section" });
+    await user.keyboard("]");
+    expect(router.state.location.search).toBe(
+      `?config=true&section=${encodeURIComponent(configSections[1].section)}`,
+    );
+    await act(() => router.navigate({ search: "?config=true&section=nope" }));
+    await user.keyboard("[[");
+    expect(router.state.location.search).toBe(
+      `?config=true&section=${encodeURIComponent(configSections.at(-1).section)}`,
+    );
+  });
+
+  it("keep the commas of lines in the params the app writes", async () => {
+    const Probe = () => {
+      const [, toggle] = useBooleanParam("print");
+      const [, setString] = useStringParam("editSection", "info");
+      return (
+        <>
+          <button onClick={toggle}>toggle</button>
+          <button onClick={() => setString("trains")}>string</button>
+        </>
+      );
+    };
+    const user = userEvent.setup();
+    const probe = createMemoryRouter([{ path: "*", element: <Probe /> }], {
+      initialEntries: ["/?lines=1-4,15"],
+    });
+    render(<RouterProvider router={probe} />);
+    await user.click(screen.getByRole("button", { name: "toggle" }));
+    expect(probe.state.location.search).toBe("?lines=1-4,15&print=true");
+    await user.click(screen.getByRole("button", { name: "string" }));
+    expect(probe.state.location.search).toBe(
+      "?lines=1-4,15&print=true&editSection=trains",
+    );
   });
 
   it("push a history entry for a card filter", async () => {
