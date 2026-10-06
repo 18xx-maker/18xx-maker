@@ -14,24 +14,34 @@ const Notice = () => {
   );
 };
 
-// A game with a part the pages cannot draw (an edit that fits the JSON but not
-// the schema) must not take the edit panel with it. The page is drawn again
-// as soon as the game changes.
+// With the edit panel open, a game with a part the pages cannot draw (an edit
+// that fits the JSON but not the schema) must not take the panel with it. The
+// page is drawn again as soon as the game, the config or the page changes.
+// Without the panel, and in render mode, the error goes on to the route error
+// page (which offers to reset the config) or fails the export.
 class RenderBoundary extends Component {
-  state = { failed: false };
+  state = { error: null };
 
-  static getDerivedStateFromError() {
-    return { failed: true };
+  static getDerivedStateFromError(error) {
+    return { error: { value: error } };
   }
 
   componentDidUpdate(previous) {
-    if (this.state.failed && previous.game !== this.props.game) {
-      this.setState({ failed: false });
+    const { game, config, pathname } = this.props;
+    if (
+      this.state.error &&
+      (previous.game !== game ||
+        previous.config !== config ||
+        previous.pathname !== pathname)
+    ) {
+      this.setState({ error: null });
     }
   }
 
   render() {
-    return this.state.failed ? <Notice /> : this.props.children;
+    if (!this.state.error) return this.props.children;
+    if (!this.props.active) throw this.state.error.value;
+    return <Notice />;
   }
 }
 

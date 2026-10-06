@@ -10,9 +10,10 @@ import {
 import { useEditor } from "@/hooks/useEditor";
 import { gameNav } from "@/util/gameNav";
 import { useBooleanParam, useStringParam, useTogglePanel } from "@/util/query";
+import { getRenderInput } from "@/util/renderInput";
 
 // The edit panel (forms for parts of the game) belongs to the sections of the toolbar: the
-// ones with an edit toggle. The print page of an export has none.
+// ones with an edit toggle. The print page of an export has none, nor has render mode.
 export const useEditPanel = () => {
   const editor = useEditor();
   const match = useMatch("/games/:slug/:section/*");
@@ -28,6 +29,7 @@ export const useEditPanel = () => {
   const available =
     editor &&
     !print &&
+    !getRenderInput() &&
     section !== "b18" &&
     !!find(propEq(section, "section"), gameNav);
 

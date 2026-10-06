@@ -17,6 +17,7 @@ import { lintGutter, linter } from "@codemirror/lint";
 import { Annotation, EditorState, StateEffect } from "@codemirror/state";
 import {
   EditorView,
+  closeHoverTooltips,
   drawSelection,
   highlightActiveLine,
   keymap,
@@ -185,7 +186,7 @@ const JsonEditor = ({ game }) => {
     const next = statusOf(text);
     setStatus(next);
     if (next.kind !== "ok") {
-      setDraft(slug, text);
+      setDraft(slug, text, store.getState().game);
       return;
     }
     clearDraft(slug);
@@ -205,7 +206,8 @@ const JsonEditor = ({ game }) => {
 
   // The view lives as long as the game of the slug is the same
   useEffect(() => {
-    const start = getDraft(slug) ?? gameText(store.getState().game);
+    const draft = getDraft(slug);
+    const start = draft?.text ?? gameText(store.getState().game);
     const phrases = Object.fromEntries(
       Object.entries(PHRASES).map(([english, key]) => [
         english,
@@ -247,7 +249,10 @@ const JsonEditor = ({ game }) => {
 
     const leave = (v) => {
       // Escape leaves the editor unless it has a popup of its own to close
-      if (v.dom.querySelector(".cm-tooltip")) return false;
+      if (v.dom.querySelector(".cm-tooltip")) {
+        v.dispatch({ effects: closeHoverTooltips });
+        return true;
+      }
       v.contentDOM.blur();
       return true;
     };
@@ -275,13 +280,15 @@ const JsonEditor = ({ game }) => {
         }),
         keymap.of([
           { key: "Escape", run: leave },
-          {
-            key: "Shift-Alt-f",
+          // Shift makes the key a capital: where the platform reports it so
+          // (macOS), only the capital name matches
+          ...["Shift-Alt-f", "Shift-Alt-F"].map((key) => ({
+            key,
             run: () => {
               document.getElementById("json-editor-format")?.click();
               return true;
             },
-          },
+          })),
           indentWithTab,
           ...foldKeymap,
           ...historyKeymap,
@@ -315,6 +322,8 @@ const JsonEditor = ({ game }) => {
     const v = new EditorView({ state, parent: host.current });
     view.current = v;
     setStatus(statusOf(start));
+    // The game changed while the draft was away
+    if (draft && draft.base !== store.getState().game) setChanged(true);
 
     return () => {
       // Typing that is waiting for its turn is not lost
@@ -363,8 +372,9 @@ const JsonEditor = ({ game }) => {
   const valid = status.kind === "ok";
 
   const format = (confirmed = false) => {
-    if (!valid) return;
     const source = text();
+    // The text may be ahead of the status: the key can come before the check
+    if (statusOf(source).kind !== "ok") return;
     const tree = parseTree(source);
     if (!confirmed) {
       if (duplicateKeys(tree, source).length) return setWarning("duplicates");

@@ -1,4 +1,4 @@
-import { Component, Suspense, lazy, useState } from "react";
+import { Component, Suspense, lazy, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
@@ -32,10 +32,15 @@ const Failed = ({ retry }) => {
 const load = () => lazy(() => import("@/components/editPanel/JsonEditor"));
 
 const JsonSection = ({ game }) => {
-  const [Editor, setEditor] = useState(load);
+  const [attempt, setAttempt] = useState(0);
+  // A new lazy component per attempt: the failed one stays failed
+  const Editor = useMemo(load, [attempt]);
 
   return (
-    <Boundary key={Editor} fallback={<Failed retry={() => setEditor(load)} />}>
+    <Boundary
+      key={attempt}
+      fallback={<Failed retry={() => setAttempt((n) => n + 1)} />}
+    >
       <Suspense fallback={null}>
         <Editor game={game} />
       </Suspense>
