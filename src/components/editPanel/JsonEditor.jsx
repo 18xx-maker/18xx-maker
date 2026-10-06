@@ -202,6 +202,7 @@ const JsonEditor = ({ game }) => {
   const [changed, setChanged] = useState(false);
   const [warning, setWarning] = useState(null);
   const [problemCount, setProblemCount] = useState(0);
+  const problems = useRef(0);
 
   const statusOf = (text) => {
     const parsed = parseGameText(text);
@@ -337,7 +338,13 @@ const JsonEditor = ({ game }) => {
         }),
         theme,
         EditorView.updateListener.of((update) => {
-          setProblemCount(diagnosticCount(update.state));
+          // Every update, but React only hears of a change: the linter reports
+          // on its own timer, and an update with the same count is no render
+          const count = diagnosticCount(update.state);
+          if (count !== problems.current) {
+            problems.current = count;
+            setProblemCount(count);
+          }
           if (!update.docChanged) return;
           if (update.transactions.some((tr) => tr.annotation(external))) return;
           clearTimeout(timer.current);
@@ -361,6 +368,7 @@ const JsonEditor = ({ game }) => {
       scrollTo,
     });
     view.current = v;
+    problems.current = 0;
     setProblemCount(0);
     const initial = statusOf(start);
     setStatus(initial);
