@@ -5,9 +5,11 @@ import { find, propEq } from "ramda";
 
 import {
   DEFAULT_EDIT_SECTION,
+  groupSections,
   sectionsFor,
 } from "@/components/editPanel/sections";
 
+import { getLastForm, resetLastForm, setLastForm } from "@/hooks/lastForm";
 import { useEditor } from "@/hooks/useEditor";
 import { gameNav } from "@/util/gameNav";
 import { COORD_PATTERN } from "@/util/hexEdit";
@@ -29,14 +31,18 @@ export const useEditPanel = () => {
   const [open, toggle] = useTogglePanel("edit");
   const [param, setParam] = useStringParam("editSection", DEFAULT_EDIT_SECTION);
   const section = match?.params.section;
-  // The tabs of the page, an unknown one in the url is the first one
+  // The sections of the page, the forms in the order of their groups. An
+  // unknown one in the url is the first form.
   const sections = sectionsFor(section);
+  const groups = groupSections(sections.filter((s) => !s.pinned));
+  const forms = groups.flatMap((g) => g.sections);
   const editSection = sections.some((s) => s.section === param)
     ? param
-    : DEFAULT_EDIT_SECTION;
+    : forms[0].section;
+  const json = editSection === "json";
 
-  // The selected lines belong to the JSON tab: leaving it drops them
-  // (the tab already shown stays as it is, lines and history included)
+  // The selected lines belong to the JSON editor: leaving it drops them
+  // (the section already shown stays as it is, lines and history included)
   const setEditSection = useCallback(
     (next) => {
       if (next === editSection) return;
@@ -52,11 +58,23 @@ export const useEditPanel = () => {
     section !== "b18" &&
     !!find(propEq(section, "section"), gameNav);
 
+  // Closing the panel forgets the form
+  if (available && !open) resetLastForm();
+  else if (available && !json) setLastForm(editSection);
+  // The form Forms goes back to: the last one, unless the page has no such one
+  const formSection = forms.some((s) => s.section === getLastForm())
+    ? getLastForm()
+    : forms[0].section;
+
   return {
     available,
     open: available && open,
     toggle,
     sections,
+    groups,
+    forms,
+    formSection,
+    json,
     editSection,
     setEditSection,
   };

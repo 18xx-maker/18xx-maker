@@ -120,9 +120,15 @@
         "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
       }
     },
-    "tabs": {
-      "label": "Sections",
-      "hint": "switch tabs"
+    "groups": {
+      "game": "Game",
+      "equipment": "Equipment",
+      "output": "Look and output",
+      "other": "Other"
+    },
+    "nav": {
+      "label": "Edit mode",
+      "forms": "Forms"
     },
     "items": {
       "trains": "train",
@@ -1463,15 +1469,15 @@
       },
       "json": {
         "use": "Edit the whole game as JSON",
-        "notes": "On any page while a game is loaded, opens the edit panel on the JSON tab, switches to it, or closes the panel. The parts of the game other than info start folded. Not while typing in the editor. In the editor, Esc leaves it (then Tab moves on) and Tab indents"
+        "notes": "On any page while a game is loaded, opens the edit panel on the JSON editor, switches to it (the JSON switch in the panel header), or closes the panel. The parts of the game other than info start folded. Not while typing in the editor. In the editor, Esc leaves it (then Tab moves on) and Tab indents"
       },
       "section": {
         "use": "Edit the loaded game at the map or a section",
         "notes": "Only if you have a game loaded. Closes the edit panel, use [ and ] to change its tab"
       },
       "cycle": {
-        "use": "Previous and next: docs page, game section, edit panel tab or config section",
-        "notes": "On a docs page it stops at the first and last page. On the edit page it cycles the game sections, or the tabs of the edit panel or the config sections while that panel is open"
+        "use": "Previous and next: docs page, game section, edit panel form section or config section",
+        "notes": "On a docs page it stops at the first and last page. On the edit page it cycles the game sections, or the form sections of the edit panel or the config sections while that panel is open. The JSON editor is skipped; from it the key goes to the last form"
       },
       "view": {
         "use": "Reset the view of the map or market editor",

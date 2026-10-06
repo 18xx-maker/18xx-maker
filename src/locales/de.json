@@ -120,9 +120,15 @@
         "description": "Bearbeite das ganze Spiel als JSON. Die Seite folgt deiner Eingabe, solange das JSON gültig ist. Die Änderungen bleiben im Speicher, bis du sie auf der Änderungsseite speicherst."
       }
     },
-    "tabs": {
-      "label": "Bereiche",
-      "hint": "Tabs wechseln"
+    "groups": {
+      "game": "Spiel",
+      "equipment": "Ausstattung",
+      "output": "Aussehen und Ausgabe",
+      "other": "Weitere"
+    },
+    "nav": {
+      "label": "Bearbeitungsmodus",
+      "forms": "Formulare"
     },
     "items": {
       "trains": "Zug",
@@ -1463,15 +1469,15 @@
       },
       "json": {
         "use": "Das ganze Spiel als JSON bearbeiten",
-        "notes": "Auf jeder Seite, solange ein Spiel geladen ist, wird das Bearbeitungspanel im JSON-Tab geöffnet, dorthin gewechselt oder das Panel geschlossen. Die Teile des Spiels außer info sind zunächst eingeklappt. Nicht beim Tippen im Editor. Im Editor verlässt Esc ihn (danach springt Tab weiter), Tab rückt ein"
+        "notes": "Auf jeder Seite, solange ein Spiel geladen ist, wird das Bearbeitungspanel im JSON-Editor geöffnet, dorthin gewechselt (der JSON-Schalter in der Kopfzeile des Panels) oder das Panel geschlossen. Die Teile des Spiels außer info sind zunächst eingeklappt. Nicht beim Tippen im Editor. Im Editor verlässt Esc ihn (danach springt Tab weiter), Tab rückt ein"
       },
       "section": {
         "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",
         "notes": "Nur wenn ein Spiel geladen ist. Schließt das Bearbeitungspanel, zum Wechseln seines Tabs [ und ] verwenden"
       },
       "cycle": {
-        "use": "Zurück und weiter: Doku-Seite, Spielabschnitt, Tab des Bearbeitungspanels oder Konfigurationsabschnitt",
-        "notes": "Auf einer Doku-Seite endet es bei der ersten und letzten Seite. Auf der Bearbeitungsseite wechselt es durch die Spielabschnitte, oder durch die Tabs des Bearbeitungspanels bzw. die Konfigurationsabschnitte, solange das jeweilige Panel offen ist"
+        "use": "Zurück und weiter: Doku-Seite, Spielabschnitt, Formularbereich des Bearbeitungspanels oder Konfigurationsabschnitt",
+        "notes": "Auf einer Doku-Seite endet es bei der ersten und letzten Seite. Auf der Bearbeitungsseite wechselt es durch die Spielabschnitte, oder durch die Formularbereiche des Bearbeitungspanels bzw. die Konfigurationsabschnitte, solange das jeweilige Panel offen ist. Der JSON-Editor wird übersprungen; von ihm aus geht die Taste zum letzten Formular"
       },
       "view": {
         "use": "Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen",

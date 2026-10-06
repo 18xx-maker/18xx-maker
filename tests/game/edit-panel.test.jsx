@@ -557,6 +557,133 @@ describe("edit panel tabs", () => {
     expect(router.state.location.pathname).toBe(route);
   });
 
+  it("groups the chips under the group names", async () => {
+    open(`${route}?edit=true`);
+    await screen.findByRole("tab", { name: "Game" });
+    const groups = screen.getAllByRole("tablist");
+    const names = (group) =>
+      within(group)
+        .getAllByRole("tab")
+        .map((tab) => tab.textContent);
+    const byName = (name) => groups.find((g) => g.ariaLabel === name);
+    expect(names(byName("Game"))).toEqual([
+      "Game",
+      "Players",
+      "Phases",
+      "Rounds",
+    ]);
+    expect(names(byName("Equipment"))).toEqual([
+      "Companies",
+      "Privates",
+      "Tokens",
+      "Trains",
+    ]);
+    expect(names(byName("Look and output"))).toEqual([
+      "Hex",
+      "Market",
+      "Colors",
+      "Output",
+    ]);
+    expect(screen.queryByRole("tab", { name: "JSON" })).not.toBeInTheDocument();
+  });
+
+  it("has the Forms | JSON switch in every section and goes to the JSON editor", async () => {
+    const { user, router } = open(trainsRoute);
+    for (const name of ["Trains", "Players", "Output"]) {
+      await user.click(await screen.findByRole("tab", { name }));
+      expect(screen.getByRole("button", { name: "Forms" })).toHaveAttribute(
+        "aria-pressed",
+        "true",
+      );
+    }
+    await user.click(screen.getByRole("button", { name: "JSON" }));
+    expect(router.state.location.search).toBe("?edit=true&editSection=json");
+    expect(screen.getByRole("button", { name: "JSON" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    // The chips are for the forms
+    expect(screen.queryByRole("tab")).not.toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "JSON" })).toBeVisible();
+
+    // Forms goes back to the last form
+    await user.click(screen.getByRole("button", { name: "Forms" }));
+    expect(router.state.location.search).toBe("?edit=true&editSection=output");
+    expect(screen.getByRole("tab", { name: "Output" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+  });
+
+  it("Forms drops the lines of the JSON editor", async () => {
+    const { user, router } = open(
+      `${route}?edit=true&editSection=json&lines=3`,
+    );
+    await user.click(await screen.findByRole("button", { name: "Forms" }));
+    expect(router.state.location.search).not.toContain("lines");
+  });
+
+  it("[ and ] from the JSON editor go to the last form and cycle the forms only", async () => {
+    const { user, router } = open(trainsRoute);
+    await screen.findByRole("tab", { name: "Trains" });
+    await user.click(screen.getByRole("button", { name: "JSON" }));
+    await screen.findByTestId("json-editor");
+    // The focus is not in the editor, so the key is a shortcut
+    await user.click(document.body);
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=trains",
+      ),
+    );
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?edit=true&editSection=hex"),
+    );
+    // Wrapping never lands on JSON
+    await user.click(screen.getByRole("tab", { name: "Output" }));
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?edit=true"),
+    );
+  });
+
+  it("Forms from a JSON deep link goes to the first form", async () => {
+    const { user, router } = open(`${route}?edit=true&editSection=json`);
+    await user.click(await screen.findByRole("button", { name: "Forms" }));
+    expect(router.state.location.search).toBe("?edit=true");
+    expect(await screen.findByRole("tab", { name: "Game" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+  });
+
+  it("Forms after Trains and JSON goes back to Trains", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("tab", { name: "Trains" });
+    await user.click(screen.getByRole("button", { name: "JSON" }));
+    await screen.findByTestId("json-editor");
+    await user.click(screen.getByRole("button", { name: "Forms" }));
+    expect(await screen.findByRole("tab", { name: "Trains" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+  });
+
+  it("] from a button in the JSON region focuses the target chip", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("tab", { name: "Trains" });
+    await user.click(screen.getByRole("button", { name: "JSON" }));
+    await screen.findByTestId("json-editor");
+    const button = screen.getByRole("button", { name: "Format" });
+    button.focus();
+    expect(button).toHaveFocus();
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(screen.getByRole("tab", { name: "Trains" })).toHaveFocus(),
+    );
+  });
+
   it("an unknown tab in the url is the first tab", async () => {
     open(`${route}?edit=true&editSection=nope`);
     expect(await screen.findByRole("tab", { name: "Game" })).toHaveAttribute(
@@ -1216,13 +1343,14 @@ describe("edit panel phases", () => {
     { train: ["3H", "3M"], limit: 4, tiles: "green" },
   ];
 
-  it("is the tab after the trains, with a card for each phase", async () => {
+  it("is the tab after the players, with a card for each phase", async () => {
     open(phasesRoute);
     await ready();
     const tabs = screen.getAllByRole("tab");
-    const trains = tabs.findIndex((tab) => tab.id.endsWith("trains"));
-    expect(tabs[trains + 1]).toHaveAccessibleName("Phases");
-    expect(tabs[trains + 1]).toHaveAttribute("aria-selected", "true");
+    const phases = tabs.findIndex((tab) => tab.id.endsWith("phases"));
+    expect(tabs[phases - 1]).toHaveAccessibleName("Players");
+    expect(tabs[phases]).toHaveAccessibleName("Phases");
+    expect(tabs[phases]).toHaveAttribute("aria-selected", "true");
     expect(cards()).toHaveLength(games["18Test"].phases.length);
   });
 
@@ -2629,7 +2757,7 @@ describe("edit panel players", () => {
   });
   const count = games["18Test"].players.length;
 
-  it("is the tab before the JSON editor, with a card for each player count", async () => {
+  it("is a tab, with a card for each player count", async () => {
     open(playersRoute);
     await ready();
     const tabs = screen.getAllByRole("tab");
@@ -2808,15 +2936,14 @@ describe("edit panel rounds", () => {
   const ready = () => screen.findByRole("button", { name: "Add round" });
   const game = () => opened.getState().game;
 
-  it("is the tab before the JSON editor, with a card for each round, turn and pool", async () => {
+  it("is a tab, with a card for each round, turn and pool", async () => {
     open(roundsRoute);
     await ready();
     const tabs = screen.getAllByRole("tab");
     const tab = tabs.find((candidate) => candidate.id.endsWith("rounds"));
     expect(tab).toHaveAccessibleName("Rounds");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    // The colors, output and JSON tabs come after it
-    expect(tabs[tabs.length - 4]).toBe(tab);
+    expect(tabs[tabs.indexOf(tab) + 1]).toHaveAccessibleName("Companies");
     expect(cards().length).toBeGreaterThanOrEqual(
       games["18Test"].rounds.length +
         games["18Test"].turns.length +
@@ -2942,14 +3069,14 @@ describe("edit panel tokens", () => {
   const ready = () => screen.findAllByRole("button", { name: "Add token" });
   const game = () => opened.getState().game;
 
-  it("is the tab before the JSON editor, with a row or card for each token", async () => {
+  it("is a tab, with a row or card for each token", async () => {
     open(tokensRoute);
     await ready();
     const tabs = screen.getAllByRole("tab");
     const tab = tabs.find((candidate) => candidate.id.endsWith("tokens"));
     expect(tab).toHaveAccessibleName("Tokens");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 8]).toBe(tab);
+    expect(tabs[tabs.indexOf(tab) + 1]).toHaveAccessibleName("Trains");
     // A token of text is a field, an object is a card
     expect(
       screen.getByRole("textbox", { name: "Value of token Round" }),
@@ -3118,7 +3245,7 @@ describe("edit panel colors", () => {
   const ready = () => screen.findByRole("button", { name: "Add color" });
   const game = () => opened.getState().game;
 
-  it("is the tab before the JSON editor, with a swatch and a text field for each color", async () => {
+  it("is a tab, with a swatch and a text field for each color", async () => {
     open(colorsRoute, {
       ...structuredClone(games["18Test"]),
       colors: { short: "pink", accent: "#3a7bd5" },
@@ -3128,7 +3255,7 @@ describe("edit panel colors", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("colors"));
     expect(tab).toHaveAccessibleName("Colors");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 3]).toBe(tab);
+    expect(tabs[tabs.indexOf(tab) + 1]).toHaveAccessibleName("Output");
     expect(screen.getByRole("textbox", { name: "Accent" })).toHaveValue(
       "#3a7bd5",
     );
@@ -3212,7 +3339,7 @@ describe("edit panel output", () => {
   const game = () => opened.getState().game;
   const base = () => structuredClone(games["18Test"]);
 
-  it("is the tab before the JSON editor, with the revenue, exports and upgrades", async () => {
+  it("is a tab, with the revenue, exports and upgrades", async () => {
     open(outputRoute, {
       ...base(),
       revenue: { min: 10, max: 200, perRow: 15 },
@@ -3224,7 +3351,7 @@ describe("edit panel output", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("output"));
     expect(tab).toHaveAccessibleName("Output");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 2]).toBe(tab);
+    expect(tabs[tabs.length - 1]).toBe(tab);
     expect(screen.getByRole("spinbutton", { name: "Max" })).toHaveValue(200);
     expect(screen.getByRole("checkbox", { name: "pdf" })).toBeChecked();
     expect(screen.getByRole("checkbox", { name: "png" })).not.toBeChecked();

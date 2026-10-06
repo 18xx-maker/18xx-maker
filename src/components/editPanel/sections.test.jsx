@@ -1,0 +1,51 @@
+import { describe, expect, it } from "vitest";
+
+import {
+  DEFAULT_EDIT_SECTION,
+  editGroups,
+  editSections,
+  formSections,
+  groupSections,
+} from "@/components/editPanel/sections";
+
+import de from "@/locales/de.json";
+import en from "@/locales/en.json";
+import zh from "@/locales/zh.json";
+
+const locales = { en, de, zh };
+const locale = (lang) => locales[lang].editPanel;
+
+describe("edit sections", () => {
+  it("has unique ids", () => {
+    const ids = editSections.map((s) => s.section);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it("puts every form section in a known group, and only JSON is pinned", () => {
+    for (const s of formSections) expect(editGroups).toContain(s.group);
+    expect(editSections.filter((s) => s.pinned).map((s) => s.section)).toEqual([
+      "json",
+    ]);
+    expect(formSections.map((s) => s.section)).not.toContain("json");
+    expect(DEFAULT_EDIT_SECTION).toBe(formSections[0].section);
+  });
+
+  it("lists the groups in order and puts a section without a group in other", () => {
+    const grouped = groupSections(formSections);
+    expect(grouped.map((g) => g.group)).toEqual(editGroups);
+    const extra = { section: "extra", Form: () => null };
+    const other = groupSections([...formSections, extra]).at(-1);
+    expect(other).toEqual({ group: "other", sections: [extra] });
+  });
+
+  it.each(["en", "de", "zh"])("has the strings in %s", (lang) => {
+    const strings = locale(lang);
+    for (const s of editSections) {
+      expect(strings.sections[s.section].tab).toBeTruthy();
+      expect(strings.sections[s.section].description).toBeTruthy();
+    }
+    for (const group of [...editGroups, "other"]) {
+      expect(strings.groups[group]).toBeTruthy();
+    }
+  });
+});
