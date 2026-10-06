@@ -3,17 +3,22 @@ import * as R from "ramda";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 
-const formatCell = (value) => {
+const formatCell = (value, valueFormat) => {
   if (Array.isArray(value)) {
     return R.addIndex(R.chain)(
       (v, i) => [
-        <Currency key={`currency-${i}`} value={v} type="train" />,
+        <Currency
+          key={`currency-${i}`}
+          value={v}
+          type="train"
+          format={valueFormat}
+        />,
         <br key={`br-${i}`} />,
       ],
       value,
     );
   } else {
-    return <Currency value={value} type="train" />;
+    return <Currency value={value} type="train" format={valueFormat} />;
   }
 };
 
@@ -137,7 +142,7 @@ const Phase = ({ phases, trains, minor, company }) => {
 
       // Prices for each trach
       let prices = R.map(
-        (t) => <li key={t.name}>{formatCell(t.price)}</li>,
+        (t) => <li key={t.name}>{formatCell(t.price, t.priceFormat)}</li>,
         phaseTrains,
       );
 

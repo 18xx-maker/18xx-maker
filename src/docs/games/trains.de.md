@@ -59,6 +59,14 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
   einem Pfeil unter dem Preis angezeigt.
 - **tradeIn** Der Wert dieses Zuges beim Eintauschen. Wird in Klammern unter dem
   Preis angezeigt.
+- **priceFormat**, **upgradeFormat**, **tradeInFormat** Ein Formatstring für die
+  jeweilige Zahl, in dem das erste `#` durch den Wert ersetzt wird: `"#G"` druckt
+  `300G`, `"+#"` druckt `+200`. Er ersetzt die Spielwährung und die
+  Währungskonfiguration für diesen Wert und wird ignoriert, wenn der Wert ein
+  Text ist. Pfeil und Klammern bleiben erhalten. Halte Formate kurz, der Text
+  wird nicht verkleinert. Ein Zug einer Gesellschaft, der nur einen `name` und
+  ein Format angibt, verweist auf den Spielzug und verwendet es nicht: Ein
+  überschriebenes Format braucht eine vollständige Zugdefinition.
 - **description** Eine Beschreibung, die auf die Zugkarte gedruckt wird. Nützlich
   für beliebige Informationen zum Spiel.
 - **available** Wenn dieser Zug verfügbar wird, sobald ein anderer Zug verkauft

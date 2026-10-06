@@ -450,6 +450,75 @@ describe("validate", () => {
     });
   });
 
+  describe("the format strings of trains and privates", () => {
+    const withGame = (game) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({ info: { title: "Game" }, ...game }),
+      );
+    const train = (extra) => ({
+      trains: [
+        { name: "2", color: "white", price: 100, quantity: 2, ...extra },
+      ],
+    });
+    const priv = (extra) => ({
+      privates: [{ name: "P", price: 20, revenue: 5, ...extra }],
+    });
+
+    it.each([
+      ["priceFormat", "#G"],
+      ["upgradeFormat", "+#"],
+      ["tradeInFormat", "-# trade"],
+    ])("accepts %s on a train", (field, value) => {
+      expect(run(withGame(train({ [field]: value }))).code).toBe(0);
+    });
+
+    it.each([
+      ["priceFormat", "#G"],
+      ["revenueFormat", "+#"],
+    ])("accepts %s on a private", (field, value) => {
+      expect(run(withGame(priv({ [field]: value }))).code).toBe(0);
+    });
+
+    it("accepts a format on a full company train", () => {
+      const game = {
+        ...train({}),
+        companies: [
+          {
+            name: "A",
+            abbrev: "A",
+            trains: [{ name: "S", color: "red", price: 50, priceFormat: "#G" }],
+          },
+        ],
+      };
+      expect(run(withGame(game)).code).toBe(0);
+    });
+
+    it.each([
+      ["a train price", train({ priceFormat: "G" })],
+      ["a train upgrade", train({ upgradeFormat: "G" })],
+      ["a train trade in", train({ tradeInFormat: "G" })],
+      ["a private price", priv({ priceFormat: "G" })],
+      ["a private revenue", priv({ revenueFormat: "G" })],
+    ])("rejects a format without # on %s", (_, game) => {
+      expect(run(withGame(game)).code).toBe(1);
+    });
+
+    it.each([
+      ["a train price", train({ priceFormat: 1 })],
+      ["a private revenue", priv({ revenueFormat: ["#"] })],
+    ])("rejects a format that is not a string on %s", (_, game) => {
+      expect(run(withGame(game)).code).toBe(1);
+    });
+
+    it.each([
+      ["a train", train({ costFormat: "#G" })],
+      ["a private", priv({ bidFormat: "#G" })],
+    ])("still rejects an unknown key on %s", (_, game) => {
+      expect(run(withGame(game)).code).toBe(1);
+    });
+  });
+
   describe("the sections of a game", () => {
     const withGame = (game) =>
       writeTmp(

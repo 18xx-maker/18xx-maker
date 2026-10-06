@@ -253,6 +253,7 @@
       "name": "2",
       "quantity": 4,
       "price": 80,
+      "priceFormat": "#G",
       "color": "yellow",
       "rust": "4D"
     },
@@ -261,7 +262,9 @@
       "quantity": 3,
       "price": 300,
       "upgrade": 200,
+      "upgradeFormat": "+#",
       "tradeIn": 100,
+      "tradeInFormat": "-# trade",
       "color": "green",
       "obsolete": "8E"
     },
@@ -288,7 +291,9 @@
     {
       "name": "Private with an icon",
       "price": 100,
+      "priceFormat": "#G",
       "revenue": 5,
+      "revenueFormat": "+#",
       "icon": "share",
       "description": "Description"
     },

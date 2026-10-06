@@ -45,12 +45,14 @@ const Private = (props) => {
     descFontStyle,
     descColor,
     price,
+    priceFormat,
     priceFontSize,
     priceFontFamily,
     priceFontWeight,
     priceFontStyle,
     priceColor,
     revenue,
+    revenueFormat,
     revenueFontSize,
     revenueFontFamily,
     revenueFontWeight,
@@ -220,12 +222,19 @@ const Private = (props) => {
     revenueNode = addIndex(chain)(
       (r, i) => [
         ...(i > 0 ? [<span key={`separator-${i}`}>/</span>] : []),
-        <Currency key={`value-${i}`} value={r} type="private" />,
+        <Currency
+          key={`value-${i}`}
+          value={r}
+          type="private"
+          format={revenueFormat}
+        />,
       ],
       revenue,
     );
   } else if (revenue !== null && revenue !== undefined) {
-    revenueNode = <Currency value={revenue} type="private" />;
+    revenueNode = (
+      <Currency value={revenue} type="private" format={revenueFormat} />
+    );
   }
 
   let playersNode = null;
@@ -415,7 +424,11 @@ const Private = (props) => {
                       ...priceFont,
                     }}
                   >
-                    <Currency value={price} type="private" />
+                    <Currency
+                      value={price}
+                      type="private"
+                      format={priceFormat}
+                    />
                   </div>
                   {playersNode && (
                     <div

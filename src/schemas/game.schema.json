@@ -291,6 +291,11 @@
         }
       ]
     },
+    "valueFormat": {
+      "description": "A format string that must contain a # character, which is replaced by the number.",
+      "type": "string",
+      "pattern": "^(.*)#(.*)$"
+    },
     "train": {
       "type": "object",
       "properties": {
@@ -307,6 +312,10 @@
               "type": "string"
             }
           ]
+        },
+        "priceFormat": {
+          "description": "Format string for the price, where the first # is replaced by the number, e.g. #G or # credits. Overrides the game currency and the currency config. Not used when price is text.",
+          "$ref": "#/definitions/valueFormat"
         },
         "color": {
           "type": "string"
@@ -356,6 +365,10 @@
             }
           ]
         },
+        "upgradeFormat": {
+          "description": "Format string for the upgrade cost, where the first # is replaced by the number, e.g. +#. The arrow stays.",
+          "$ref": "#/definitions/valueFormat"
+        },
         "tradeIn": {
           "description": "Value of this train when traded in, shown in parentheses under the price",
           "oneOf": [
@@ -367,6 +380,10 @@
               "type": "string"
             }
           ]
+        },
+        "tradeInFormat": {
+          "description": "Format string for the trade-in value, where the first # is replaced by the number, e.g. -# trade. The parentheses stay.",
+          "$ref": "#/definitions/valueFormat"
         },
         "description": {
           "type": "string"
@@ -453,6 +470,7 @@
       "additionalProperties": false
     },
     "companyTrain": {
+      "description": "A train of a company: the name of a game train, { name, quantity } for copies of a game train, or a full train. A format override such as priceFormat needs a full train definition (with a price); { name, priceFormat } alone is a reference to the game train and does not use it.",
       "anyOf": [
         {
           "type": "string"
@@ -1776,6 +1794,10 @@
               }
             ]
           },
+          "priceFormat": {
+            "description": "Format string for the price, where the first # is replaced by the number, e.g. #G. Overrides the game currency and the currency config. Not used when price is text.",
+            "$ref": "#/definitions/valueFormat"
+          },
           "debt": {
             "type": "number",
             "minimum": 0
@@ -1798,6 +1820,10 @@
                 "pattern": "^.?.?[0-9].?%? ?/ ?.?.?[0-9].?%?$"
               }
             ]
+          },
+          "revenueFormat": {
+            "description": "Format string for the revenue, where the first # is replaced by each number, e.g. #G. Overrides the game currency and the currency config. Not used for text revenue.",
+            "$ref": "#/definitions/valueFormat"
           },
           "nameFontFamily": {
             "description": "Font family of the name.",

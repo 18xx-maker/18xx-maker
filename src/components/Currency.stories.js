@@ -21,6 +21,7 @@ export default {
   args: { value: 1100, type: "train" },
   argTypes: {
     value: { control: { type: "number", min: 0, step: 10 } },
+    format: { control: "text" },
     type: {
       control: "select",
       options: [
@@ -53,4 +54,9 @@ export const Market = {
 // Text values are printed as they are
 export const Text = {
   args: { value: "Free" },
+};
+
+// A format string beats the game currency and the config
+export const Format = {
+  args: { value: 1100, format: "#G" },
 };
