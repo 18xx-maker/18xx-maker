@@ -3,6 +3,7 @@ import {
   COLOR_KEYS,
   COMPANY_PRIMARY_KEYS,
   GAME_INFO_KEYS,
+  HIDDEN_PATHS,
   OUTPUT_KEYS,
   PHASE_PRIMARY_KEYS,
   PLAYER_KEYS,
@@ -72,6 +73,14 @@ describe("resolveSchema", () => {
     expect(resolveSchema({ $ref: "other.json#/x" }, root)).toEqual({
       $ref: "other.json#/x",
     });
+  });
+});
+
+describe("HIDDEN_PATHS", () => {
+  it("every entry resolves in the game schema", () => {
+    for (const keys of HIDDEN_PATHS) {
+      expect(schemaAt(schema, keys)).toBeTruthy();
+    }
   });
 });
 

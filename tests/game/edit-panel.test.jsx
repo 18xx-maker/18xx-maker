@@ -3235,6 +3235,12 @@ describe("edit panel output", () => {
     expect(screen.getByRole("textbox", { name: "Yellow" })).toHaveValue("a\nb");
     // The deprecated option is not shown
     expect(screen.queryByText("Paginated")).not.toBeInTheDocument();
+    expect(screen.queryByText(/paginated/i)).not.toBeInTheDocument();
+    for (const role of ["checkbox", "textbox", "spinbutton", "combobox"]) {
+      expect(
+        screen.queryByRole(role, { name: /paginated/i }),
+      ).not.toBeInTheDocument();
+    }
   });
 
   it("leaves the game byte for byte as it was when fields are only visited", async () => {
@@ -3246,11 +3252,13 @@ describe("edit panel output", () => {
     });
     await ready();
     const before = JSON.stringify(game());
-    for (const box of within(screen.getByTestId("edit-panel")).getAllByRole(
-      "textbox",
-    )) {
-      box.focus();
-      box.blur();
+    for (const role of ["textbox", "spinbutton", "combobox", "checkbox"]) {
+      for (const box of within(screen.getByTestId("edit-panel")).queryAllByRole(
+        role,
+      )) {
+        box.focus();
+        box.blur();
+      }
     }
     await user.tab();
     expect(JSON.stringify(game())).toBe(before);
@@ -3267,6 +3275,22 @@ describe("edit panel output", () => {
       formats: ["pdf", "png"],
       paginated: true,
     });
+  });
+
+  it("keeps paginated when another exports field is edited and cleared", async () => {
+    const { user } = open(outputRoute, {
+      ...base(),
+      exports: { paginated: true },
+    });
+    await ready();
+    const dpi = screen.getByRole("spinbutton", { name: /dpi/i });
+    await user.type(dpi, "300");
+    await user.tab();
+    expect(game().exports).toEqual({ paginated: true, png: { dpi: 300 } });
+    await user.clear(dpi);
+    await user.tab();
+    expect(game().exports.paginated).toBe(true);
+    expect(game().exports).toMatchObject({ paginated: true });
   });
 
   it("edits the revenue range", async () => {
@@ -3295,5 +3319,7 @@ describe("edit panel output", () => {
       screen.getByRole("button", { name: "Remove upgrade green" }),
     );
     expect(game().upgrades ?? {}).toEqual({});
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(game().upgrades).toEqual({ green: ["x", "y"] });
   });
 });
