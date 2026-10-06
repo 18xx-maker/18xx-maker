@@ -38,7 +38,7 @@ const CharterPage = () => {
       data-testid={`game-${game.meta.slug}-charter`}
       style={{ display: "inline-block" }}
     >
-      <style>{charterCss(data)}</style>
+      <style>{charterCss(data, !!company?.banner)}</style>
       <GameCharter
         company={company}
         game={game}

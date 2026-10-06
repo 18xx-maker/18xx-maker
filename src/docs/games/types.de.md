@@ -113,6 +113,14 @@ bereits und ignorieren die Einstellung:
 }
 ```
 
+## Banner der Gesellschaftskarte
+
+Eine Gesellschaft kann `banner` setzen, um ein Label in einem Streifen am unteren Rand ihrer Gesellschaftskarte in der Farbe der Gesellschaft zu drucken, zum Beispiel um ein System oder eine andere besondere Karte zu kennzeichnen. Der Text wird so gedruckt, wie du ihn schreibst, und nicht übersetzt. Der Streifen liegt innerhalb der Karte, sie behält also ihre Größe und der Inhalt rückt nach oben, um Abstand zu halten:
+
+```json
+{ "abbrev": "RED", "banner": "SYSTEM" }
+```
+
 ## Alias einer Gesellschaft
 
 Eine Gesellschaft kann einen `alias` haben, einen zweiten Namen, etwa eine

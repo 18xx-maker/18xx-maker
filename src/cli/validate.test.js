@@ -166,6 +166,17 @@ describe("validate", () => {
     expect(run(file).code).toBe(code);
   });
 
+  it.each([
+    ['"SYSTEM"', 0],
+    [5, 1],
+  ])("validates banner of %s", (value, code) => {
+    const file = writeTmp(
+      "game.json",
+      `{"info":{"title":"x"},"companies":[{"name":"A","abbrev":"A","banner":${value}}]}`,
+    );
+    expect(run(file).code).toBe(code);
+  });
+
   it("reports files that are not json as errors", () => {
     const broken = writeTmp("broken.json", "{");
 
