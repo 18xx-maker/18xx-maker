@@ -1,4 +1,40 @@
-# Automatische Positionierung
+# Positionierung
+
+Jedes Element auf einem Plättchen (Städte, Orte, Werte, Beschriftungen, Symbole,
+Gelände, ...) lässt sich mit denselben Feldern positionieren. Hat ein Element
+keines davon, setzt die automatische Positionierung einige häufige Elemente an
+eine Standardstelle.
+
+## Optionen
+
+Alle sind optional und funktionieren bei jedem Element mit Position
+([Beispiele](/elements/positioning#basic)):
+
+- `angle` (-360 bis 360, ausschließlich) ist die Richtung von der Mitte des
+  Kartenfelds, in der das Element sitzt, in Grad. 0 ist gerade nach unten, und
+  es dreht im Uhrzeigersinn.
+- `percent` (0 oder mehr) ist, wie weit es in dieser `angle`-Richtung nach außen
+  geht: 0 ist die Mitte und 1 die Mitte der Kartenfeldkante.
+- `x` und `y` verschieben das Element in einfachen Einheiten von der Stelle, an
+  die `angle` und `percent` es setzen.
+- `rotation` (-360 bis 360, ausschließlich) dreht das Element an seiner Stelle,
+  in Grad. `rotate` ist dasselbe Feld mit kürzerem Namen.
+- `side` (1 bis 6) dreht das Element um so viele Sechstel einer Drehung, Seite 2
+  dreht es also um 60 Grad. Mit `mid` verschiebt es stattdessen den benannten
+  Punkt, siehe [Benannte Positionen](#benannte-positionen).
+- `mid` und `align` setzen und drehen das Element nach dem Gleis, siehe [Benannte
+  Positionen](#benannte-positionen).
+- `hidden` (`true`) zeichnet das Element nicht. Die anderen Elemente behalten
+  ihre Positionen.
+
+```json
+{
+  "labels": [{ "label": "B", "angle": 90, "percent": 0.6, "x": 5 }],
+  "towns": [{ "side": 2 }]
+}
+```
+
+## Automatische Positionierung
 
 Das System zur automatischen Positionierung wendet nach sehr einfachen Regeln
 automatisch Positionen auf die Elemente an, die es findet. Dieses System soll
@@ -20,8 +56,8 @@ hinzufügst, wird die automatische Positionierung faktisch ausgeschaltet, und da
 Element bleibt in der Mitte des Kartenfelds. Das gilt nur für dieses Element, die
 anderen Elemente des Kartenfelds werden weiterhin positioniert.
 
-Jede der folgenden Regeln wird auf der Beispielseite [Automatische
-Positionierung](/elements/positioning) live mit ihrem JSON gezeichnet.
+Jede Option und jede Regel wird auf der Beispielseite
+[Positionierung](/elements/positioning) live mit ihrem JSON gezeichnet.
 
 ## Regeln
 

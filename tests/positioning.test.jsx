@@ -16,7 +16,7 @@ describe("auto positioning examples page", () => {
   it("links to the doc", async () => {
     renderApp("/elements/positioning");
     expect(
-      await screen.findByRole("link", { name: /Auto Positioning doc/ }),
+      await screen.findByRole("link", { name: /Positioning doc/ }),
     ).toHaveAttribute("href", "/docs/games/positioning");
   });
 
@@ -32,6 +32,17 @@ describe("auto positioning examples page", () => {
       ].map((g) => g.getAttribute("transform"));
     const count = (id, prefix) =>
       rotate(id).filter((t) => t.startsWith(prefix)).length;
+
+    // generic options: each example is drawn with its own transform
+    const has = (id, s) =>
+      screen.getByTestId(`positioning-${id}`).innerHTML.includes(s);
+    expect(rotate("basicAnglePercent")).toContain(at(90, 45));
+    expect(has("basicXY", "translate(20 -15)")).toBe(true);
+    expect(has("basicHidden", "NY")).toBe(true);
+    expect(has("basicHidden", ">B<")).toBe(false);
+    expect(
+      screen.getByTestId("positioning-basicRotation").innerHTML,
+    ).not.toEqual(screen.getByTestId("positioning-basicSide").innerHTML);
 
     // icons: only with a city or centerTown, 30 when there is terrain too
     expect(rotate("iconCity")).toContain(at(0, 45));

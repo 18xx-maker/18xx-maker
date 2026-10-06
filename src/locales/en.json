@@ -262,7 +262,7 @@
         "description": "Map, company and game colors"
       },
       "positioning": {
-        "title": "Auto Positioning",
+        "title": "Positioning",
         "description": "Easier map creation"
       },
       "exports": {
@@ -328,19 +328,20 @@
       "description": "Data from included 18xx games"
     },
     "positioning": {
-      "title": "Auto Positioning",
-      "description": "Live examples of auto positioning",
+      "title": "Positioning",
+      "description": "Live examples of every positioning option and auto positioning rule",
       "page": {
-        "description": "Every auto positioning rule and edge case, drawn live with the JSON that produces it.",
-        "docs": "Read the Auto Positioning doc for the rules"
+        "description": "Every positioning option and every auto positioning rule, drawn live with the JSON that produces it.",
+        "docs": "Read the Positioning doc for the details"
       },
       "groups": {
+        "basic": "Positioning options",
         "icons": "Icons",
         "terrain": "Terrain",
         "values": "Values",
         "labels": "Labels",
         "named": "Named positions",
-        "off": "Turning it off",
+        "off": "Turning auto positioning off",
         "all": "Everything together"
       },
       "examples": {
@@ -363,7 +364,18 @@
         "namedSide": "side moves the point like a track that starts on that side, here gentle on side 3.",
         "offAngle": "Any positioning field, here angle 0, turns auto positioning off for that terrain.",
         "offOne": "Turning it off is per element. The second terrain is still moved.",
-        "everything": "A city, terrain, an icon, a value and two labels in the standard layout."
+        "everything": "A city, terrain, an icon, a value and two labels in the standard layout.",
+        "basicAnglePercent": "angle and percent move the element: the angle around the center, and the percent of the way out to the hex edge.",
+        "basicXY": "x and y move the element in plain units from where it would be.",
+        "basicRotation": "rotation turns the element on its own spot.",
+        "basicRotate": "rotate is the same as rotation.",
+        "basicSide": "side without mid rotates the element by that many sixths of a turn.",
+        "basicHidden": "hidden removes the element. The others keep their position.",
+        "namedStraight": "mid straight is the center. With align perpendicular a town bar crosses the track.",
+        "namedParallel": "align parallel lays the element along the track at the point.",
+        "namedOffset": "rotate and rotation are added to align as an offset, here 30.",
+        "namedOverride": "An explicit angle or percent replaces the one from mid, here percent 0.6.",
+        "namedNudge": "x and y nudge the element from the named point."
       }
     }
   },
@@ -1058,7 +1070,7 @@
         "notes": "Not on a game edit page. Toggles config when editing"
       },
       "positioning": {
-        "use": "Navigate to the Auto Positioning page",
+        "use": "Navigate to the Positioning page",
         "notes": "Not on a game edit page"
       },
       "game": {

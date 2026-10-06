@@ -14,6 +14,35 @@ const terrain = { terrain: [{ type: "mountain", cost: 60 }] };
 
 const groups = [
   {
+    id: "basic",
+    examples: [
+      {
+        id: "basicAnglePercent",
+        hex: { labels: [{ label: "B", angle: 90, percent: 0.6 }] },
+      },
+      {
+        id: "basicXY",
+        hex: { labels: [{ label: "B", x: 20, y: -15 }] },
+      },
+      {
+        id: "basicRotation",
+        hex: { towns: [{ rotation: 45 }] },
+      },
+      {
+        id: "basicRotate",
+        hex: { towns: [{ rotate: 45 }] },
+      },
+      {
+        id: "basicSide",
+        hex: { towns: [{ side: 2 }] },
+      },
+      {
+        id: "basicHidden",
+        hex: { labels: [{ label: "B", hidden: true }, { label: "NY" }] },
+      },
+    ],
+  },
+  {
     id: "icons",
     examples: [
       { id: "iconCity", hex: { ...city, ...icon } },
@@ -78,6 +107,38 @@ const groups = [
         hex: {
           track: [{ type: "gentle", side: 3 }],
           towns: [{ mid: "gentle", side: 3, align: "perpendicular" }],
+        },
+      },
+      {
+        id: "namedStraight",
+        hex: { towns: [{ mid: "straight", align: "perpendicular" }] },
+      },
+      {
+        id: "namedParallel",
+        hex: {
+          track: [{ type: "gentle", side: 1 }],
+          towns: [{ mid: "gentle", align: "parallel" }],
+        },
+      },
+      {
+        id: "namedOffset",
+        hex: {
+          track: [{ type: "gentle", side: 1 }],
+          towns: [{ mid: "gentle", align: "perpendicular", rotate: 30 }],
+        },
+      },
+      {
+        id: "namedOverride",
+        hex: {
+          track: [{ type: "gentle", side: 1 }],
+          labels: [{ label: "B", mid: "gentle", percent: 0.6 }],
+        },
+      },
+      {
+        id: "namedNudge",
+        hex: {
+          track: [{ type: "gentle", side: 1 }],
+          labels: [{ label: "B", mid: "gentle", x: 15, y: 10 }],
         },
       },
     ],

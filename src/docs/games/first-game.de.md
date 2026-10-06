@@ -118,7 +118,7 @@ pnpm maker validate my-game.json
 - [Phasen und Züge](/docs/games/trains)
 - [Aktien- & Tokentypen](/docs/games/types)
 - [Kartenränder & Linien](/docs/games/borders)
-- [Automatische Positionierung](/docs/games/positioning)
+- [Positionierung](/docs/games/positioning)
 - [Logos](/docs/games/logos) und [Gesellschaften austauschen](/docs/games/overrides)
 - [Exportoptionen](/docs/games/exports), um festzulegen, wie dein Spiel
   exportiert wird

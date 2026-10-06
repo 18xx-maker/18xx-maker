@@ -1,4 +1,38 @@
-# Auto Positioning
+# Positioning
+
+Every element on a tile (cities, towns, values, labels, icons, terrain, ...) can
+be positioned with the same set of fields. When an element has none of them, the
+auto positioning system puts a few common elements in a standard place.
+
+## Options
+
+All of these are optional and work on every element that has a position
+([examples](/elements/positioning#basic)):
+
+- `angle` (-360 to 360, exclusive) is the direction from the center of the hex
+  to put the element, in degrees. 0 is straight down and it turns clockwise.
+- `percent` (0 or more) is how far out along that `angle`: 0 is the center and 1
+  is the middle of the hex edge.
+- `x` and `y` move the element in plain units from where `angle` and `percent`
+  put it.
+- `rotation` (-360 to 360, exclusive) turns the element on its own spot, in
+  degrees. `rotate` is the same field with a shorter name.
+- `side` (1 to 6) rotates the element by that many sixths of a turn, so side 2
+  turns it 60 degrees. With `mid` it moves the named point instead, see [Named
+  Positions](#named-positions).
+- `mid` and `align` place and turn the element by the track, see [Named
+  Positions](#named-positions).
+- `hidden` (`true`) does not draw the element. The other elements keep their
+  positions.
+
+```json
+{
+  "labels": [{ "label": "B", "angle": 90, "percent": 0.6, "x": 5 }],
+  "towns": [{ "side": 2 }]
+}
+```
+
+## Auto Positioning
 
 The auto position system will auto apply positioning to items that it finds
 according to some very simple rules. This system is NOT meant to be all
@@ -18,8 +52,8 @@ to that element. For example adding `"angle": 0` will effectively turn off auto
 positioning while leaving the element in the middle of the hex. It only turns it
 off for that element, the other elements of the hex are still positioned.
 
-Every rule below is drawn live, with its JSON, on the [Auto
-Positioning](/elements/positioning) examples page.
+Every option and every rule is drawn live, with its JSON, on the
+[Positioning](/elements/positioning) examples page.
 
 ## Rules
 
