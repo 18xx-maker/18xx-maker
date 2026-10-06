@@ -228,10 +228,13 @@ describe("selecting a group", () => {
   });
 
   it("shows how to move hexes while a group is selected", async () => {
-    const { router } = open(editRoute);
-    expect(screen.queryByText(/click another hex/)).not.toBeInTheDocument();
+    const { router } = open(`${editRoute}&editSection=hex`);
+    await screen.findByText(/Click a hex on the map to edit its group/);
+    expect(
+      screen.queryByText(/(Cmd|Ctrl)-click another hex/),
+    ).not.toBeInTheDocument();
     await pick(router, "C11");
-    expect(screen.getByText(/click another hex/)).toBeVisible();
+    expect(screen.getByText(/(Cmd|Ctrl)-click another hex/)).toBeVisible();
   });
 
   it("selects an empty position without changing the game", async () => {
@@ -383,7 +386,7 @@ describe.each([
   it("names the key to hold", async () => {
     const { router } = open(editRoute);
     await pick(router, "C11");
-    expect(screen.getByText(/click another hex/)).toHaveTextContent(
+    expect(screen.getByText(/(Cmd|Ctrl)-click another hex/)).toHaveTextContent(
       mac ? /^Cmd-click/ : /^Ctrl-click/,
     );
   });
@@ -626,14 +629,18 @@ describe("a map that copies another", () => {
     await realUser.click(cell("A1"));
     await waitFor(() => expect(params(router).hex).toBe("A1"));
     await screen.findByRole("note");
-    expect(screen.queryByText(/click another hex/)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/(Cmd|Ctrl)-click another hex/),
+    ).not.toBeInTheDocument();
   });
 
   it("hides the move hint where the variation removes the hex", async () => {
     const { router } = open(copyRoute, source());
     await pick(router, "B2");
     expect(await screen.findByText(/removes B2/)).toBeVisible();
-    expect(screen.queryByText(/click another hex/)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/(Cmd|Ctrl)-click another hex/),
+    ).not.toBeInTheDocument();
   });
 
   it("edits the groups of the variation itself", async () => {
