@@ -119,6 +119,36 @@ test.describe("bundled games", () => {
     await expect(panel.getByRole("listitem")).toHaveCount(4);
   });
 
+  test("adds a private in the edit panel", async ({ page }) => {
+    await page.goto("/games/18Test/map?edit=true");
+    const panel = page.getByTestId("edit-panel");
+    await panel
+      .getByRole("tablist")
+      .getByRole("tab", { name: "Privates" })
+      .click();
+    await expect(page).toHaveURL(/\?edit=true&editSection=privates$/);
+
+    const count = 6;
+    await expect(panel.getByRole("listitem")).toHaveCount(count);
+    await panel.getByRole("button", { name: "Add private" }).click();
+    await expect(panel.getByRole("listitem")).toHaveCount(count + 1);
+    const name = String(count + 1);
+    await expect(
+      panel.getByRole("button", { name: `Move private ${name} down` }),
+    ).toBeDisabled();
+
+    const revenue = panel
+      .getByRole("listitem")
+      .nth(count)
+      .getByRole("textbox", { name: "Revenue" });
+    await revenue.fill("10/20");
+    await revenue.press("Enter");
+    await expect(revenue).toHaveValue("10/20");
+
+    await panel.getByRole("button", { name: `Remove private ${name}` }).click();
+    await expect(panel.getByRole("listitem")).toHaveCount(count);
+  });
+
   test("edits a price in the market grid and the market page follows", async ({
     page,
   }) => {

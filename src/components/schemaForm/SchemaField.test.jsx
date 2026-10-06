@@ -44,6 +44,80 @@ const setup = (game, issues = []) => {
   return { set, clear, view, user: userEvent.setup() };
 };
 
+const revenueRoot = {
+  type: "object",
+  properties: {
+    revenue: {
+      oneOf: [
+        { type: "number", minimum: 0 },
+        { type: "array", items: { type: "number", minimum: 0 } },
+        { type: "string" },
+      ],
+    },
+  },
+};
+
+const setupRevenue = (game) => {
+  const set = vi.fn();
+  const clear = vi.fn();
+  const element = (game) => (
+    <SchemaFormContext.Provider
+      value={{
+        root: revenueRoot,
+        game,
+        issues: [],
+        set,
+        clear,
+        insert() {},
+        remove() {},
+        move() {},
+      }}
+    >
+      <SchemaField keys={["revenue"]} schema={revenueRoot.properties.revenue} />
+    </SchemaFormContext.Provider>
+  );
+  const view = render(element(game));
+  return {
+    set,
+    clear,
+    user: userEvent.setup(),
+    rerender: (next) => view.rerender(element(next)),
+  };
+};
+
+describe("a revenue field", () => {
+  it("shows a list as 10/20 and sets what is typed", async () => {
+    const { set, clear, user } = setupRevenue({ revenue: [10, 20] });
+    const input = screen.getByRole("textbox", { name: /Revenue/ });
+    expect(input).toHaveValue("10/20");
+
+    await user.clear(input);
+    await user.type(input, "5{Enter}");
+    expect(set).toHaveBeenLastCalledWith(["revenue"], 5);
+    await user.clear(input);
+    await user.type(input, "10, 30{Enter}");
+    expect(set).toHaveBeenLastCalledWith(["revenue"], [10, 30]);
+    await user.clear(input);
+    await user.type(input, "$10/$20{Enter}");
+    expect(set).toHaveBeenLastCalledWith(["revenue"], "$10/$20");
+    await user.clear(input);
+    await user.type(input, "{Enter}");
+    expect(clear).toHaveBeenCalledWith(["revenue"]);
+  });
+
+  it("keeps the draft when the value it makes comes back, and follows other changes", async () => {
+    const { rerender, user } = setupRevenue({ revenue: [10, 20] });
+    const input = screen.getByRole("textbox", { name: /Revenue/ });
+    await user.clear(input);
+    await user.type(input, "10, 30");
+    // The same list in a new array: the text is not rewritten
+    rerender({ revenue: [10, 30] });
+    expect(input).toHaveValue("10, 30");
+    rerender({ revenue: [1, 2] });
+    expect(input).toHaveValue("1/2");
+  });
+});
+
 const deprecation = {
   severity: "warning",
   code: "deprecated",

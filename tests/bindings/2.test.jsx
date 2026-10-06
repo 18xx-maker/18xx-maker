@@ -245,10 +245,13 @@ describe("cycle keys", () => {
     const { user, router } = renderApp("/games/18Test/map?edit=true");
     await screen.findByTestId("edit-panel");
 
+    const tabs = screen.getAllByRole("tab");
+    const section = (tab) => tab.id.replace("edit-tab-", "");
+
     await user.keyboard("]");
     await waitFor(() =>
       expect(router.state.location.search).toBe(
-        "?edit=true&editSection=trains",
+        `?edit=true&editSection=${section(tabs[1])}`,
       ),
     );
     expect(router.state.location.pathname).toBe("/games/18Test/map");
@@ -258,20 +261,28 @@ describe("cycle keys", () => {
       expect(router.state.location.search).toBe("?edit=true"),
     );
     expect(router.state.location.pathname).toBe("/games/18Test/map");
+
+    // [ from the first tab wraps to the last
+    await user.keyboard("[[");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        `?edit=true&editSection=${section(tabs[tabs.length - 1])}`,
+      ),
+    );
   });
 
   it("[ and ] move the focus to the new tab from a tab or from the panel", async () => {
     const { user } = renderApp("/games/18Test/map?edit=true");
     await screen.findByTestId("edit-panel");
-    const info = screen.getByRole("tab", { name: "Game info" });
-    const trains = screen.getByRole("tab", { name: "Trains" });
+    const [info, second] = screen.getAllByRole("tab");
+    expect(info).toHaveAccessibleName("Game info");
 
     info.focus();
     await user.keyboard("]");
-    await waitFor(() => expect(trains).toHaveFocus());
-    expect(trains).toHaveAttribute("aria-selected", "true");
+    await waitFor(() => expect(second).toHaveFocus());
+    expect(second).toHaveAttribute("aria-selected", "true");
 
-    const add = await screen.findByRole("button", { name: "Add train" });
+    const add = await screen.findByRole("button", { name: /^Add / });
     add.focus();
     await user.keyboard("[[");
     await waitFor(() => expect(info).toHaveFocus());

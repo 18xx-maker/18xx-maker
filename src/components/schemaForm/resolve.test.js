@@ -3,6 +3,7 @@ import {
   GAME_INFO_KEYS,
   clearValue,
   coerceStringOrNumber,
+  formatRevenue,
   humanize,
   insertAt,
   isRequired,
@@ -11,6 +12,7 @@ import {
   moveItem,
   newItem,
   nextName,
+  parseRevenue,
   removeAt,
   resolveAllOf,
   resolveSchema,
@@ -48,6 +50,19 @@ describe("kindOf", () => {
   it.each([
     [{ type: "string" }, "x", "string"],
     [{ type: "string" }, "notes", "text"],
+    [{ type: "string" }, "description", "text"],
+    [{ type: "array", items: { type: "object" } }, "abilities", "json"],
+    [
+      {
+        oneOf: [
+          { type: "number" },
+          { type: "array", items: { type: "number" } },
+          { type: "string" },
+        ],
+      },
+      "x",
+      "revenue",
+    ],
     [{ type: "number" }, "x", "number"],
     [{ type: "integer" }, "x", "number"],
     [{ type: "boolean" }, "x", "boolean"],
@@ -128,6 +143,38 @@ describe("kindOf", () => {
       )
       .map(([key]) => key);
     expect(json).toEqual(["discount", "rust", "phased", "obsolete"]);
+  });
+
+  it("reads the privates as an array, the fields of a private as real fields", () => {
+    expect(kindOf(schema.properties.privates, "privates", schema)).toBe(
+      "array",
+    );
+    const item = resolveAllOf(schema.properties.privates.items, schema);
+    const kinds = Object.fromEntries(
+      Object.entries(item.properties).map(([key, node]) => [
+        key,
+        kindOf(resolveAllOf(node, schema), key, schema),
+      ]),
+    );
+    expect(kinds.name).toBe("string");
+    expect(kinds.price).toBe("stringOrNumber");
+    expect(kinds.revenue).toBe("revenue");
+    expect(kinds.company).toBe("string");
+    expect(kinds.description).toBe("text");
+    expect(kinds.abilities).toBe("json");
+    expect(kinds.iconSize).toBe("number");
+    expect(kinds.priceFormat).toBe("string");
+  });
+
+  it("lists the private fields that are a JSON textarea", () => {
+    const item = resolveAllOf(schema.properties.privates.items, schema);
+    const json = Object.entries(item.properties)
+      .filter(
+        ([key, node]) =>
+          kindOf(resolveAllOf(node, schema), key, schema) === "json",
+      )
+      .map(([key]) => key);
+    expect(json).toEqual(["token", "abilities"]);
   });
 
   it("shows a property that is new to the schema without a component change", () => {
@@ -225,6 +272,35 @@ describe("helpers", () => {
     expect(issuesFor(issues, ["trains", 1], false)).toEqual([issues[1]]);
     expect(issuesFor(issues, ["trains", 1, "name"])).toEqual([issues[0]]);
     expect(issuesFor(issues, ["trains"])).toHaveLength(4);
+  });
+});
+
+describe("revenue", () => {
+  it.each([
+    ["5", 5],
+    [" 5 ", 5],
+    ["10/20", [10, 20]],
+    ["10 / 20", [10, 20]],
+    ["10, 20", [10, 20]],
+    ["10/20/30", [10, 20, 30]],
+    ["-5", -5],
+    ["2.5", 2.5],
+    ["$10/$20", "$10/$20"],
+    ["10%/20%", "10%/20%"],
+    ["abc", "abc"],
+    ["10/", "10/"],
+    ["", undefined],
+    ["  ", undefined],
+  ])("parses %j as %j", (text, value) => {
+    expect(parseRevenue(text)).toEqual(value);
+  });
+
+  it("formats a list as the card prints it", () => {
+    expect(formatRevenue([10, 20])).toBe("10/20");
+    expect(formatRevenue(5)).toBe("5");
+    expect(formatRevenue("$10/$20")).toBe("$10/$20");
+    expect(formatRevenue(undefined)).toBe("");
+    expect(parseRevenue(formatRevenue([10, 20]))).toEqual([10, 20]);
   });
 });
 
