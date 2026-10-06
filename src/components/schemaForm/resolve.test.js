@@ -3,6 +3,8 @@ import {
   COMPANY_PRIMARY_KEYS,
   GAME_INFO_KEYS,
   PHASE_PRIMARY_KEYS,
+  PLAYER_KEYS,
+  PLAYER_PRIMARY_KEYS,
   clearValue,
   coerceStringOrNumber,
   formatList,
@@ -15,7 +17,9 @@ import {
   moveItem,
   newItem,
   nextAbbrev,
+  nextId,
   nextName,
+  nextNumber,
   parseLimit,
   parseList,
   parseRevenue,
@@ -444,6 +448,51 @@ describe("kindOf", () => {
     expect(json).toEqual(["on"]);
   });
 
+  it("reads the bank, the limits and the players as real fields", () => {
+    const kinds = Object.fromEntries(
+      PLAYER_KEYS.map((key) => [
+        key,
+        kindOf(resolveAllOf(schema.properties[key], schema), key, schema, [
+          key,
+        ]),
+      ]),
+    );
+    expect(kinds).toEqual({
+      bank: "stringOrNumber",
+      capital: "stringOrNumber",
+      certLimit: "stringOrNumber",
+      floatPercent: "number",
+    });
+    expect(kindOf(schema.properties.players, "players", schema)).toBe("array");
+    const item = resolveAllOf(schema.properties.players.items, schema);
+    const itemKinds = Object.fromEntries(
+      Object.entries(item.properties).map(([key, node]) => [
+        key,
+        kindOf(resolveAllOf(node, schema), key, schema, ["players", 0, key]),
+      ]),
+    );
+    expect(itemKinds).toEqual({
+      bank: "stringOrNumber",
+      capital: "stringOrNumber",
+      certLimit: "stringOrNumber",
+      number: "number",
+    });
+    expect(Object.keys(itemKinds)).toEqual(
+      expect.arrayContaining(PLAYER_PRIMARY_KEYS),
+    );
+  });
+
+  it("reads a oneOf of only strings and numbers as text or number, other mixes stay JSON", () => {
+    const of = (...types) => ({ oneOf: types.map((type) => ({ type })) });
+    expect(kindOf(of("string", "number"), "x", schema)).toBe("stringOrNumber");
+    expect(kindOf(of("string", "string", "number"), "x", schema)).toBe(
+      "stringOrNumber",
+    );
+    expect(kindOf(of("string", "boolean"), "x", schema)).toBe("json");
+    expect(kindOf(of("string", "string"), "x", schema)).toBe("json");
+    expect(kindOf(of("number", "number"), "x", schema)).toBe("json");
+  });
+
   it("reads the companies as an array, the fields of a company as real fields", () => {
     expect(kindOf(schema.properties.companies, "companies", schema)).toBe(
       "array",
@@ -713,6 +762,24 @@ describe("setValue and clearValue", () => {
   it("keeps an object that still has keys", () => {
     const two = { info: { title: "A" }, links: { bgg: "a", rules: "b" } };
     expect(clearValue(two, ["links", "bgg"]).links).toEqual({ rules: "b" });
+  });
+});
+
+describe("numbered items", () => {
+  it("the next number is the highest plus one, as a number", () => {
+    expect(nextNumber([])).toBe(1);
+    expect(nextNumber(undefined)).toBe(1);
+    expect(nextNumber([{ number: 2 }, { number: 5 }, { number: 3 }])).toBe(6);
+    expect(nextNumber([{ number: "4" }, {}, { number: 2 }])).toBe(3);
+    expect(nextNumber([{ n: 7 }], "n")).toBe(8);
+  });
+
+  it("an id is a name or a number, the name is unchanged", () => {
+    expect(nextId([{ name: "1" }])).toBe("2");
+    expect(nextId([{ number: 2 }], "number")).toBe(3);
+    expect(nextName([{ name: "1" }, { name: "2" }])).toBe("3");
+    expect(newItem([{ number: 4 }], {}, true, "number")).toEqual({ number: 5 });
+    expect(newItem([{ name: "1" }], { x: 1 })).toEqual({ name: "2", x: 1 });
   });
 });
 

@@ -91,6 +91,10 @@
         "tab": "市场",
         "description": "编辑股票市场:类型、单元格、图例以及股价的移动方式。更改会保留在内存中,直到你在“更改”页面保存。"
       },
+      "players": {
+        "tab": "玩家",
+        "description": "编辑游戏的玩家表、银行和限制。更改会保留在内存中,直到你在“更改”页面保存。"
+      },
       "json": {
         "tab": "JSON",
         "description": "以 JSON 编辑整个游戏。只要 JSON 有效,页面就会随你的输入而更新。更改保留在内存中,直到你在“更改”页面保存。"
@@ -105,7 +109,12 @@
       "privates": "私有公司",
       "companies": "公司",
       "phases": "阶段",
+      "players": "玩家",
       "legend": "图例项"
+    },
+    "titles": {
+      "players_one": "{{count}} 名玩家",
+      "players_other": "{{count}} 名玩家"
     },
     "emptyList": "这里还没有内容。",
     "add": "添加{{item}}",

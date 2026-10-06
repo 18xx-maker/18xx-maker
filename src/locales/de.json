@@ -91,6 +91,10 @@
         "tab": "Markt",
         "description": "Bearbeite den Aktienmarkt: seinen Typ, die Zellen, die Legende und wie sich der Aktienkurs bewegt. Die Änderungen bleiben im Speicher, bis du sie auf der Seite „Änderungen“ speicherst."
       },
+      "players": {
+        "tab": "Spieler",
+        "description": "Bearbeite die Spielertabelle, die Bank und die Limits des Spiels. Die Änderungen bleiben im Speicher, bis du sie auf der Seite „Änderungen“ speicherst."
+      },
       "json": {
         "tab": "JSON",
         "description": "Bearbeite das ganze Spiel als JSON. Die Seite folgt deiner Eingabe, solange das JSON gültig ist. Die Änderungen bleiben im Speicher, bis du sie auf der Änderungsseite speicherst."
@@ -105,7 +109,12 @@
       "privates": "Privatgesellschaft",
       "companies": "Gesellschaft",
       "phases": "Phase",
+      "players": "Spieler",
       "legend": "Legendeneintrag"
+    },
+    "titles": {
+      "players_one": "{{count}} Spieler",
+      "players_other": "{{count}} Spieler"
     },
     "emptyList": "Noch nichts vorhanden.",
     "add": "{{item}} hinzufügen",

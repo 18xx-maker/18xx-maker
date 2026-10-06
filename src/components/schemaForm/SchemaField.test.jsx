@@ -216,7 +216,10 @@ const listRoot = {
   },
 };
 
-const ListForm = ({ initial, issues = [], ...props }) => {
+const numberRoot = structuredClone(listRoot);
+numberRoot.properties.trains.items.properties.code = { type: "number" };
+
+const ListForm = ({ initial, issues = [], root = listRoot, ...props }) => {
   const [game, setGame] = useState(initial);
   const latest = useRef(game);
   latest.current = game;
@@ -227,7 +230,7 @@ const ListForm = ({ initial, issues = [], ...props }) => {
   return (
     <SchemaFormContext.Provider
       value={{
-        root: listRoot,
+        root,
         game,
         issues,
         latest: () => latest.current,
@@ -241,7 +244,7 @@ const ListForm = ({ initial, issues = [], ...props }) => {
     >
       <SchemaField
         keys={["trains"]}
-        schema={listRoot.properties.trains}
+        schema={root.properties.trains}
         defaults={{}}
         {...props}
       />
@@ -319,6 +322,31 @@ describe("a list of cards", () => {
 
     await user.click(screen.getByRole("button", { name: "Duplicate train A" }));
     expect(codes()).toEqual(["a", "a2", "", "c2"]);
+  });
+
+  it("identifies the items by another key, titled with a translation", async () => {
+    const user = userEvent.setup();
+    render(
+      <ListForm
+        root={numberRoot}
+        initial={{ trains: [{ name: "x", code: 7 }, { name: "y" }] }}
+        primary={["name", "code"]}
+        idKey="code"
+        titleKey="code"
+        title="editPanel.titles.players"
+        defaults={{}}
+      />,
+    );
+    // An item without the key falls back to its position
+    expect(toggle("7 players")).toBeVisible();
+    expect(toggle("#2")).toBeVisible();
+
+    await user.click(screen.getByRole("button", { name: "Add train" }));
+    // The new code is a number, not text
+    expect(screen.getAllByRole("spinbutton", { name: "Code" })[2]).toHaveValue(
+      8,
+    );
+    expect(toggle("8 players")).toBeVisible();
   });
 
   it("shows the summary in place of the title", () => {
