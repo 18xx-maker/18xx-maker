@@ -19,17 +19,17 @@ import TrainsForm from "@/components/schemaForm/TrainsForm";
 // page is only for that page of the game (the hex tab is for the map).
 export const editSections = [
   { section: "info", Form: GameInfoForm },
-  { section: "trains", Form: TrainsForm },
-  { section: "privates", Form: PrivatesForm },
+  { section: "players", Form: PlayersForm },
+  { section: "hex", Form: HexSection, page: "map" },
   { section: "companies", Form: CompaniesForm },
+  { section: "privates", Form: PrivatesForm },
+  { section: "tokens", Form: TokensForm },
+  { section: "trains", Form: TrainsForm },
   { section: "phases", Form: PhasesForm },
   { section: "market", Form: MarketForm },
-  { section: "players", Form: PlayersForm },
   { section: "rounds", Form: RoundsForm },
-  { section: "tokens", Form: TokensForm },
   { section: "colors", Form: ColorsForm },
   { section: "output", Form: OutputForm },
-  { section: "hex", Form: HexSection, page: "map" },
   { section: "json", Form: JsonSection, wide: true },
 ];
 
