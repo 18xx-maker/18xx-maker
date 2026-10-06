@@ -444,7 +444,13 @@
       "up": ["Sold out"],
       "down": ["Every share sold"],
       "left": ["Withheld revenue"],
-      "right": ["Paid dividends"]
+      "right": ["Paid dividends"],
+      "2x right": [
+        "pay dividend at least two times current share price, or more than the current share price"
+      ]
+    },
+    "display": {
+      "movement": { "x": 9, "y": 7 }
     },
     "market": [
       [
@@ -932,6 +938,10 @@
       "x": 500,
       "y": 180
     },
+    "movement": {
+      "x": 0,
+      "y": 280
+    },
     "hexes": [
       {
         "color": "offboard",
@@ -1018,6 +1028,10 @@
         "color": "water",
         "removeBorders": [3],
         "hexes": ["B16"]
+      },
+      {
+        "color": "plain",
+        "hexes": ["C11", "C13", "C15", "C17", "D12", "D14", "D16"]
       }
     ]
   }

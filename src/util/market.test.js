@@ -3,6 +3,7 @@ import defaults from "@/defaults.json";
 import {
   getMarketData,
   getMaxLength,
+  getMovementData,
   getParData,
   getRevenueData,
 } from "@/util/market";
@@ -53,6 +54,74 @@ describe("getMarketData", () => {
     expect(data.totalHeight).toBe(985);
     expect(data.humanWidth).toBe("14in");
     expect(data.humanHeight).toBe("10in");
+  });
+
+  it("should grow the page to fit a placed movement legend", () => {
+    const stock = {
+      type: "2D",
+      market: [[10]],
+      movement: { up: ["Sold out"] },
+      display: { movement: { x: 2, y: 3 } },
+    };
+    const movement = getMovementData(stock.movement);
+    const data = getMarketData(stock, config);
+    expect(data.totalWidth).toBe(movement.width + 140);
+    expect(data.totalHeight).toBe(movement.height + 255 + 50);
+    // Not drawn, not counted
+    const off = getMarketData(stock, {
+      ...config,
+      stock: { ...config.stock, display: { movement: false } },
+    });
+    expect(off.totalWidth).toBe(80);
+  });
+
+  it("should wrap and measure the movement legend", () => {
+    const data = getMovementData({
+      left: ["one two three four five six seven eight nine ten eleven twelve"],
+      "2x right": ["x"],
+    });
+    expect(data.arrows.left).toHaveLength(2);
+    expect(data.extras).toEqual(["2x right: x"]);
+    expect(data.arrows.left.every((l) => l.length <= 40)).toBe(true);
+  });
+
+  it("should size the movement legend exactly", () => {
+    const pick = (d) => ({
+      width: d.width,
+      height: d.height,
+      center: d.center,
+      topHeight: d.topHeight,
+    });
+    // An empty legend and one short up line fit the minimum box
+    const min = {
+      width: 180,
+      height: 150,
+      center: { x: 90, y: 85 },
+      topHeight: 40,
+    };
+    expect(pick(getMovementData({}))).toEqual(min);
+    expect(pick(getMovementData({ up: ["Sold out"] }))).toEqual(min);
+    // Three up lines grow the top so the last baseline stays above the box
+    const three = getMovementData({ up: ["a", "b", "c"] });
+    expect(pick(three)).toEqual({
+      width: 180,
+      height: 164,
+      center: { x: 90, y: 99 },
+      topHeight: 54,
+    });
+    // Text starts 20 under the top: the last baseline is above the Price box
+    const lastBaseline = 20 + 2 * three.lineHeight;
+    expect(lastBaseline).toBeLessThan(three.topHeight);
+    // Long right text widens the box
+    expect(pick(getMovementData({ right: ["Paid twice and more"] }))).toEqual({
+      ...min,
+      width: 259.5,
+    });
+    // Other keys add a line of text under the compass
+    expect(pick(getMovementData({ "2x right": ["Paid twice"] }))).toEqual({
+      ...min,
+      height: 174,
+    });
   });
 
   it("should size a 1D market in a single row of tall cells", () => {

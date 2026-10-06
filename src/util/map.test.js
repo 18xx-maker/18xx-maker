@@ -334,13 +334,13 @@ describe("getMapData", () => {
     const data = util.getMapData(games["18Test"], "outside", 150);
 
     it("should compute the size of the map", () => {
-      // Hexes run A11 to B16 and the title hex A17: x up to 17, y up to 2
-      expect([data.maxX, data.maxY]).toEqual([17, 2]);
+      // Hexes run A11 to D16 and the title hex A17: x up to 17, y up to 4
+      expect([data.maxX, data.maxY]).toEqual([17, 4]);
       expect(data.horizontal).toBe(false);
       expect(data.totalWidth).toBe(1450);
-      expect(data.totalHeight).toBeCloseTo(403.1, 1);
+      expect(data.totalHeight).toBeCloseTo(662.9, 1);
       expect(data.humanWidth).toBe("15in");
-      expect(data.humanHeight).toBe("5in");
+      expect(data.humanHeight).toBe("8in");
       expect(data.printWidth).toBe("15.02in");
     });
 

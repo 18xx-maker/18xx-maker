@@ -537,6 +537,18 @@ describe("validate", () => {
         },
       ],
       [
+        "a market with a movement legend",
+        {
+          stock: {
+            type: "2D",
+            market: [[10]],
+            movement: { up: ["Sold out"], "2x right": ["Paid"] },
+            display: { movement: { x: 1, y: 2 } },
+          },
+          map: { hexes: [], movement: { x: 10, y: 20 } },
+        },
+      ],
+      [
         "a 1D market with ledges",
         {
           stock: {
@@ -646,6 +658,21 @@ describe("validate", () => {
         "an unknown turn property",
         { turns: [{ name: "T", step: [] }] },
         "step",
+      ],
+      [
+        "a market movement without y",
+        { stock: { display: { movement: { x: 1 } } } },
+        "y",
+      ],
+      [
+        "a map movement with an unknown property",
+        { map: { hexes: [], movement: { x: 1, y: 1, z: 1 } } },
+        "z",
+      ],
+      [
+        "a movement that is not a list",
+        { stock: { movement: { up: "Sold out" } } },
+        "up",
       ],
       ["a bad market type", { stock: { type: "3D" } }, "type"],
       ["an unknown stock property", { stock: { markets: [] } }, "markets"],

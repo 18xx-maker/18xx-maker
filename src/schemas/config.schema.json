@@ -124,9 +124,10 @@
           "properties": {
             "legend": { "type": "boolean" },
             "par": { "type": "boolean" },
-            "roundTracker": { "type": "boolean" }
+            "roundTracker": { "type": "boolean" },
+            "movement": { "type": "boolean" }
           },
-          "required": ["legend", "par", "roundTracker"],
+          "required": ["legend", "par", "roundTracker", "movement"],
           "additionalProperties": false
         }
       },
@@ -318,12 +319,13 @@
     },
     "maps": {
       "type": "object",
-      "required": ["market", "players", "roundTracker"],
+      "required": ["market", "players", "roundTracker", "movement"],
       "additionalProperties": false,
       "properties": {
         "market": { "type": "boolean" },
         "players": { "type": "boolean" },
-        "roundTracker": { "type": "boolean" }
+        "roundTracker": { "type": "boolean" },
+        "movement": { "type": "boolean" }
       }
     },
     "plainMapCompanies": { "type": "boolean" },

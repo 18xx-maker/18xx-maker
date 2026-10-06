@@ -8,6 +8,7 @@ import Borders from "@/components/map/Borders";
 import Coordinates from "@/components/map/Coordinates";
 import Lines from "@/components/map/Lines";
 import MapMarket from "@/components/map/MapMarket";
+import MapMovement from "@/components/map/MapMovement";
 import MapPlayers from "@/components/map/MapPlayers";
 import MapRoundTracker from "@/components/map/MapRoundTracker";
 import Title from "@/components/map/Title";
@@ -69,6 +70,7 @@ const Map = ({ name, game, config, variation }) => {
         roundTracker={data.map.roundTracker}
         hexWidth={hexWidth}
       />
+      <MapMovement movement={data.map.movement} hexWidth={hexWidth} />
       <MapPlayers players={data.map.players} hexWidth={hexWidth} />
       <Lines data={data} />
       <Borders data={data} />

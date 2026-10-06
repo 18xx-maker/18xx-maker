@@ -592,6 +592,10 @@
         "label": "在地图上显示回合记录",
         "description": "是否在地图上显示回合记录。需要游戏文件指定位置。"
       },
+      "movement": {
+        "label": "在地图上显示股价变动图例",
+        "description": "是否在地图上显示股价变动图例。需要游戏文件指定位置。"
+      },
       "margin": {
         "label": "边距大小",
         "description": "打印内容四周留出的边距大小。"
@@ -686,6 +690,10 @@
       "displayRoundTracker": {
         "label": "显示股市回合记录",
         "description": "是否在股市上显示回合记录。需要游戏文件指定位置。"
+      },
+      "displayMovement": {
+        "label": "显示股市股价变动图例",
+        "description": "是否在股市上显示股价变动图例。需要游戏文件指定位置。"
       },
       "margin": {
         "label": "边距大小",

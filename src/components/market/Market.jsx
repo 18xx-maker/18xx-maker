@@ -5,6 +5,7 @@ import Legend from "@/components/Legend";
 import Cell from "@/components/market/Cell";
 import Ledges from "@/components/market/Ledges";
 import MarketRoundTracker from "@/components/market/MarketRoundTracker";
+import Movement from "@/components/market/Movement";
 import Par from "@/components/market/Par";
 
 import { multiDefaultTo } from "@/util";
@@ -111,6 +112,23 @@ const Market = ({ data, game, config, title, displayTitle }) => {
     );
   }
 
+  let movement = null;
+  if (
+    data.config.stock.display.movement &&
+    data.display.movement &&
+    data.stock.movement
+  ) {
+    let x = data.display.movement.x * data.config.stock.cell.width;
+    let y = data.display.movement.y * data.config.stock.cell.height;
+    movement = (
+      <g
+        transform={`translate(${x} ${y + (data.stock.title === false ? 0 : 50)})`}
+      >
+        <Movement title="Share price movement" movement={data.stock.movement} />
+      </g>
+    );
+  }
+
   let legendNode = null;
 
   if (data.type === "2D") {
@@ -200,6 +218,7 @@ const Market = ({ data, game, config, title, displayTitle }) => {
       {roundTracker}
       {cells}
       {par}
+      {movement}
       {legendNode}
       <Ledges data={data} />
     </g>

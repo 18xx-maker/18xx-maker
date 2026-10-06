@@ -172,6 +172,9 @@ export const sections = [
       {
         name: "roundTracker",
       },
+      {
+        name: "movement",
+      },
     ],
   },
   {
@@ -271,6 +274,10 @@ export const sections = [
       {
         name: "displayRoundTracker",
         path: "stock.display.roundTracker",
+      },
+      {
+        name: "displayMovement",
+        path: "stock.display.movement",
       },
     ],
   },

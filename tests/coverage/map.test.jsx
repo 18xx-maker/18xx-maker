@@ -156,6 +156,56 @@ describe("map lines and borders", () => {
   });
 });
 
+describe("map movement", () => {
+  const stock = {
+    ...base.stock,
+    movement: { up: ["Sold out"], "2x right": ["Paid twice"] },
+  };
+  const withMovement = (movement) => ({
+    ...withMap({ hexes, movement }),
+    stock,
+  });
+  const placed = (svg) =>
+    all(svg, "text")
+      .find((t) => t.textContent === "Share price movement")
+      .parentElement.parentElement.getAttribute("transform");
+
+  it("draws the movement legend where the game says", async () => {
+    const svg = await drawSvg(<MapView />, {
+      game: withMovement({ x: 10, y: 20 }),
+    });
+    expect(placed(svg)).toBe("translate(60 70) scale(1)");
+    expect(svg).toHaveTextContent("Share price movement");
+    expect(svg).toHaveTextContent("Sold out");
+    expect(svg).toHaveTextContent("2x right: Paid twice");
+  });
+
+  it("scales the legend with the hex width", async () => {
+    const svg = await drawSvg(<MapView />, {
+      game: withMovement({ x: 10, y: 20 }),
+      search: "?config.tiles.mapWidth=300",
+    });
+    expect(placed(svg)).toBe("translate(70 90) scale(2)");
+  });
+
+  it("draws nothing without a placement or without movement data", async () => {
+    let svg = await drawSvg(<MapView />, { game: withMovement(undefined) });
+    expect(svg).not.toHaveTextContent("Share price movement");
+    svg = await drawSvg(<MapView />, {
+      game: { ...withMovement({ x: 0, y: 0 }), stock: {} },
+    });
+    expect(svg).not.toHaveTextContent("Share price movement");
+  });
+
+  it("hides the legend when configured", async () => {
+    const svg = await drawSvg(<MapView />, {
+      game: withMovement({ x: 0, y: 0 }),
+      search: "?config.maps.movement=",
+    });
+    expect(svg).not.toHaveTextContent("Share price movement");
+  });
+});
+
 describe("map extras", () => {
   const extras = {
     hexes,
