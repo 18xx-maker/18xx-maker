@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router";
 
+import { COORD_PATTERN } from "@/util/hexEdit";
 import { clearHexSearch, selectHexSearch } from "@/util/query";
 
 // The hex selected on the map (?hex=C11, the first coordinate of its group).
@@ -8,7 +9,9 @@ import { clearHexSearch, selectHexSearch } from "@/util/query";
 export const useSelectedHex = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const hex = new URLSearchParams(search).get("hex") || "";
+  const raw = new URLSearchParams(search).get("hex") || "";
+  // Only a coordinate is a selection: nothing else may reach the game
+  const hex = COORD_PATTERN.test(raw) ? raw : "";
 
   const select = useCallback(
     (coord) =>

@@ -285,6 +285,12 @@ describe("moveHex", () => {
     },
   };
 
+  it("refuses a selection or a hex that is not a coordinate", () => {
+    expect(edit.moveHex(game, 0, "zz", "B2")).toEqual({ blocked: "invalid" });
+    expect(edit.moveHex(game, 0, "C3", "zz")).toEqual({ blocked: "invalid" });
+    expect(edit.moveHex(game, 0, "", "B2")).toEqual({ blocked: "invalid" });
+  });
+
   it("moves a hex into the selected group", () => {
     const result = edit.moveHex(game, 0, "C3", "B2");
     expect(result.game.map.hexes).toEqual([

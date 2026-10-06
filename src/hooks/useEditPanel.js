@@ -10,6 +10,7 @@ import {
 
 import { useEditor } from "@/hooks/useEditor";
 import { gameNav } from "@/util/gameNav";
+import { COORD_PATTERN } from "@/util/hexEdit";
 import {
   clearHexSearch,
   searchString,
@@ -90,7 +91,10 @@ export const useDropStaleHex = ({ available, open }) => {
   const previous = useRef(variation);
   const selected = params.has("hex");
   const stale =
-    selected && (match?.params.section !== "map" || (available && !open));
+    selected &&
+    (!COORD_PATTERN.test(params.get("hex")) ||
+      match?.params.section !== "map" ||
+      (available && !open));
 
   useEffect(() => {
     const changed = previous.current !== variation;

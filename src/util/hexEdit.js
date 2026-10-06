@@ -192,6 +192,9 @@ export const selectedCoords = (game, variation, selected) => {
 // "removed" (the variation takes the hex away) or "inherited" (the group is
 // the one of a copied variation).
 export const moveHex = (game, variation, selected, coord) => {
+  if (!COORD_PATTERN.test(selected) || !COORD_PATTERN.test(coord)) {
+    return { blocked: "invalid" };
+  }
   const hexes = localHexes(game, variation);
   const index = findGroup(hexes, selected);
   const keep = inheritedCount(game, variation);
