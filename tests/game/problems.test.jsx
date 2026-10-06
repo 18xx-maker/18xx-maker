@@ -1,8 +1,12 @@
 /* eslint-disable testing-library/no-node-access -- the viewport wrapper and the badge sibling have no role */
 import { act, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { page as browser } from "vitest/browser";
 
+import { resetDrafts, setDraft } from "@/components/editPanel/draftStore";
+
 import { createSetGame, validateLoadedGame } from "@/state";
+import { gameText } from "@/util/download";
 
 import { brokenGame, validGame } from "@tests/support/brokenGame.js";
 import { renderApp } from "@tests/support/helpers.jsx";
@@ -40,6 +44,120 @@ describe("problems of a game", () => {
     expect(link).toHaveAttribute("href", "/games/Broken/problems");
     expect(link).toHaveAttribute("aria-current", "page");
     expect(link.closest("li")).toHaveTextContent("5");
+  });
+
+  it("links every row to its line of the json editor", async () => {
+    const game = brokenGame();
+    const { store } = renderApp("/games/Broken/problems", {
+      game,
+      loadedGame: { slug: "Broken", title: "Broken", id: "Broken" },
+    });
+    await check(store);
+
+    // The first section of the game is the tokens, and the lines are the ones
+    // of the text the editor starts with
+    const lines = gameText(game).split("\n");
+    const lineOf = (needle) =>
+      lines.findIndex((line) => line.includes(needle)) + 1;
+    const href = (line) =>
+      `/games/Broken/tokens?edit=true&editSection=json&lines=${line}`;
+
+    expect(
+      await screen.findByRole("link", {
+        name: "Open stock.marekt in the JSON editor",
+      }),
+    ).toHaveAttribute("href", href(lineOf('"marekt"')));
+    // An item of a list is the line of its own brace
+    expect(
+      screen.getByRole("link", {
+        name: "Open companies[0] in the JSON editor",
+      }),
+    ).toHaveAttribute("href", href(lineOf('"name": "No abbrev"') - 1));
+    expect(
+      screen.getByRole("link", {
+        name: "Open exports.png.dpi in the JSON editor",
+      }),
+    ).toHaveAttribute("href", href(lineOf('"dpi"')));
+    expect(
+      screen.getAllByRole("link", { name: /in the JSON editor/ }),
+    ).toHaveLength(5);
+  });
+
+  it("opens the json editor with the line when a row is followed", async () => {
+    const game = brokenGame();
+    const { store, router } = renderApp("/games/Broken/problems", {
+      game,
+      loadedGame: { slug: "Broken", title: "Broken", id: "Broken" },
+    });
+    await check(store);
+
+    await userEvent.click(
+      await screen.findByRole("link", {
+        name: "Open stock.marekt in the JSON editor",
+      }),
+    );
+
+    expect(await screen.findByTestId("json-editor")).toBeInTheDocument();
+    const line =
+      gameText(game)
+        .split("\n")
+        .findIndex((text) => text.includes('"marekt"')) + 1;
+    expect(router.state.location.pathname).toBe("/games/Broken/tokens");
+    expect(router.state.location.search).toContain(`lines=${line}`);
+  });
+
+  it("leaves a row without a line as text and links the others", async () => {
+    renderApp("/games/Broken/problems", {
+      game: brokenGame(),
+      loadedGame: { slug: "Broken", title: "Broken", id: "Broken" },
+      gameProblems: {
+        slug: "Broken",
+        status: "done",
+        issues: [
+          { severity: "error", code: "failed", pointer: "", params: {} },
+          {
+            severity: "error",
+            code: "additionalProperties",
+            pointer: "exports.png.dpi",
+            params: {},
+          },
+        ],
+      },
+    });
+
+    const link = await screen.findByRole("link", {
+      name: "Open exports.png.dpi in the JSON editor",
+    });
+    expect(link).toHaveAttribute("href", expect.stringContaining("lines="));
+    expect(
+      screen.getAllByRole("link", { name: /in the JSON editor/ }),
+    ).toHaveLength(1);
+  });
+
+  it("links without a line when the editor has an unsaved draft", async () => {
+    const game = brokenGame();
+    setDraft("Broken", "{", game);
+    try {
+      const { store } = renderApp("/games/Broken/problems", {
+        game,
+        loadedGame: { slug: "Broken", title: "Broken", id: "Broken" },
+      });
+      await check(store);
+
+      const link = await screen.findByRole("link", {
+        name: "Open stock.marekt in the JSON editor",
+      });
+      expect(link).toHaveAttribute(
+        "href",
+        expect.stringContaining("edit=true&editSection=json"),
+      );
+      expect(link).not.toHaveAttribute(
+        "href",
+        expect.stringContaining("lines="),
+      );
+    } finally {
+      resetDrafts();
+    }
   });
 
   it("is a plain page, not the pan and zoom editor", async () => {
@@ -99,6 +217,9 @@ describe("problems of a game", () => {
     const page = await screen.findByTestId("game-18Test-problems");
     expect(page).toHaveTextContent("Warning");
     expect(page).not.toHaveTextContent("Deprecated");
+    expect(
+      within(page).queryByRole("link", { name: /JSON editor/ }),
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByRole("link", { name: /Problems/ }),
     ).not.toBeInTheDocument();

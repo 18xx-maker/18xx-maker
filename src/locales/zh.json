@@ -238,6 +238,7 @@
     "warning": "警告",
     "deprecated": "已弃用",
     "more": "另有 {{count}} 个",
+    "openInEditor": "在 JSON 编辑器中打开 {{pointer}}",
     "root": "游戏文件",
     "docs": "关于游戏文件格式",
     "unknown-field": "未知字段“{{field}}”。它可能已被重命名或移除。请删除它,或查看文档。",

@@ -238,6 +238,7 @@
     "warning": "Warning",
     "deprecated": "Deprecated",
     "more": "and {{count}} more",
+    "openInEditor": "Open {{pointer}} in the JSON editor",
     "root": "the game file",
     "docs": "About the game file format",
     "unknown-field": "Unknown field \"{{field}}\". It may have been renamed or removed. Remove it, or see the docs.",
