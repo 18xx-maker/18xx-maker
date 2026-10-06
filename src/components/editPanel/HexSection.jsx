@@ -15,6 +15,7 @@ import {
   inheritedGroup,
   isRemoved,
   localHexes,
+  moveKey,
   newGroup,
   replaceGroup,
   rerootPointer,
@@ -127,13 +128,20 @@ const HexSection = ({ game }) => {
     }
   }
 
+  const removed = index < 0 && isRemoved(game, variation, current);
+
   return (
     <div className="flex flex-1 flex-col gap-2 min-h-0">
       {index < 0 && (
         <p role="note" className="text-sm">
-          {isRemoved(game, variation, current)
+          {removed
             ? t("hexEditor.removed", { coord: current })
             : t("hexEditor.pending", { coord: current })}
+        </p>
+      )}
+      {!removed && (
+        <p className="text-sm text-muted-foreground">
+          {t("hexEditor.moveHint", { key: moveKey() })}
         </p>
       )}
       <JsonSection

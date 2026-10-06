@@ -227,6 +227,16 @@ describe("selecting a group", () => {
     expect(marks()).toEqual(["B14"]);
   });
 
+  it("shows how to move hexes while a group is selected", async () => {
+    const { router } = open(`${editRoute}&editSection=hex`);
+    await screen.findByText(/Click a hex on the map to edit its group/);
+    expect(
+      screen.queryByText(/(Cmd|Ctrl)-click another hex/),
+    ).not.toBeInTheDocument();
+    await pick(router, "C11");
+    expect(screen.getByText(/(Cmd|Ctrl)-click another hex/)).toBeVisible();
+  });
+
   it("selects an empty position without changing the game", async () => {
     const { router, store } = open(editRoute);
     const before = store.getState().game;
@@ -372,6 +382,14 @@ describe.each([
   ["elsewhere with Ctrl", false],
 ])("moving hexes between groups %s", (_, mac) => {
   beforeEach(() => asMac(mac));
+
+  it("names the key to hold", async () => {
+    const { router } = open(editRoute);
+    await pick(router, "C11");
+    expect(screen.getByText(/(Cmd|Ctrl)-click another hex/)).toHaveTextContent(
+      mac ? /^Cmd-click/ : /^Ctrl-click/,
+    );
+  });
 
   it("adds a hex to the selected group and takes it from its group", async () => {
     const { router } = open(editRoute);
@@ -603,6 +621,26 @@ describe("a map that copies another", () => {
       "copied from the map variation 1",
     );
     expect(screen.queryByTestId("json-editor")).not.toBeInTheDocument();
+  });
+
+  it("hides the move hint in the read only view", async () => {
+    const { router } = open(copyRoute, source());
+    await waitForCell("A1");
+    await realUser.click(cell("A1"));
+    await waitFor(() => expect(params(router).hex).toBe("A1"));
+    await screen.findByRole("note");
+    expect(
+      screen.queryByText(/(Cmd|Ctrl)-click another hex/),
+    ).not.toBeInTheDocument();
+  });
+
+  it("hides the move hint where the variation removes the hex", async () => {
+    const { router } = open(copyRoute, source());
+    await pick(router, "B2");
+    expect(await screen.findByText(/removes B2/)).toBeVisible();
+    expect(
+      screen.queryByText(/(Cmd|Ctrl)-click another hex/),
+    ).not.toBeInTheDocument();
   });
 
   it("edits the groups of the variation itself", async () => {
