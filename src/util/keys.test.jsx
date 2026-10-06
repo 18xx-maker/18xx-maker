@@ -18,6 +18,8 @@ describe("isControlTarget", () => {
     ["<div role='combobox'><span id='t'></span></div>", "#t"],
     ["<button role='checkbox' id='t'></button>", "#t"],
     ["<span role='slider' id='t'></span>", "#t"],
+    ["<div class='cm-editor'><div id='t'></div></div>", "#t"],
+    ["<div contenteditable='true' id='t'></div>", "#t"],
   ])("is true for keys typed into %s", (html, selector) => {
     expect(isControlTarget(target(html, selector))).toBe(true);
   });

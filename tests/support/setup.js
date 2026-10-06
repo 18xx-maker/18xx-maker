@@ -2,6 +2,8 @@ import { configure } from "@testing-library/dom";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { afterAll, afterEach, beforeAll, expect, vi } from "vitest";
 
+import { resetDrafts } from "@/components/editPanel/draftStore";
+
 import { checkConsole } from "@tests/support/console.js";
 
 import "@tests/support/i18n";
@@ -50,3 +52,6 @@ afterAll(() => {
 });
 
 afterEach(check);
+
+// The JSON editor keeps unfinished text for the session
+afterEach(resetDrafts);
