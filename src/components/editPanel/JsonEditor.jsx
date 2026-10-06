@@ -14,7 +14,12 @@ import {
   indentOnInput,
   syntaxHighlighting,
 } from "@codemirror/language";
-import { lintGutter, linter } from "@codemirror/lint";
+import {
+  diagnosticCount,
+  lintGutter,
+  linter,
+  nextDiagnostic,
+} from "@codemirror/lint";
 import { Annotation, EditorState, StateEffect } from "@codemirror/state";
 import {
   EditorView,
@@ -196,6 +201,8 @@ const JsonEditor = ({ game }) => {
   const [status, setStatus] = useState({ kind: "ok" });
   const [changed, setChanged] = useState(false);
   const [warning, setWarning] = useState(null);
+  const [problemCount, setProblemCount] = useState(0);
+  const problems = useRef(0);
 
   const statusOf = (text) => {
     const parsed = parseGameText(text);
@@ -331,6 +338,13 @@ const JsonEditor = ({ game }) => {
         }),
         theme,
         EditorView.updateListener.of((update) => {
+          // Every update, but React only hears of a change: the linter reports
+          // on its own timer, and an update with the same count is no render
+          const count = diagnosticCount(update.state);
+          if (count !== problems.current) {
+            problems.current = count;
+            setProblemCount(count);
+          }
           if (!update.docChanged) return;
           if (update.transactions.some((tr) => tr.annotation(external))) return;
           clearTimeout(timer.current);
@@ -354,6 +368,8 @@ const JsonEditor = ({ game }) => {
       scrollTo,
     });
     view.current = v;
+    problems.current = 0;
+    setProblemCount(0);
     const initial = statusOf(start);
     setStatus(initial);
     // The editor starts folded: the parts of the game other than info. Not
@@ -440,6 +456,10 @@ const JsonEditor = ({ game }) => {
     if (change) view.current.dispatch({ changes: change });
   };
 
+  const nextProblem = () => {
+    if (view.current && nextDiagnostic(view.current)) view.current.focus();
+  };
+
   const discard = () => {
     const v = view.current;
     const change = minimalChange(text(), gameText(store.getState().game));
@@ -470,6 +490,17 @@ const JsonEditor = ({ game }) => {
           onClick={() => format()}
         >
           {t("jsonEditor.format")}
+        </Button>
+        <Button
+          id="json-editor-next-problem"
+          type="button"
+          variant="outline"
+          size="sm"
+          aria-disabled={problemCount === 0}
+          aria-describedby="json-editor-status"
+          onClick={nextProblem}
+        >
+          {t("jsonEditor.nextProblem")}
         </Button>
         {!valid && (
           <Button type="button" variant="outline" size="sm" onClick={discard}>

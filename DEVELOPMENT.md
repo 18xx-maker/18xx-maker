@@ -340,7 +340,8 @@ pure parts are in `src/util/jsonEditor.js`. A valid text (an object with an
 debounce, an invalid one never reaches the game and is kept as a session draft
 (`draftStore.js`). A change of the game from elsewhere replaces only the changed
 range of the text. Schema problems come from the problems check
-(`selectGameProblems`) and only warn. `RenderBoundary` keeps the panel usable
+(`selectGameProblems`) and only warn; the Next problem button jumps to the
+next one (`nextDiagnostic`). `RenderBoundary` keeps the panel usable
 when the page cannot draw an edited game.
 
 The files of the CLI and the app have the same layout: `<folder>/<game id>/<format>/<file>`

@@ -217,6 +217,7 @@
     "changed": "Das Spiel wurde anderswo geändert. Verwirf den Entwurf, um die neue Version zu sehen.",
     "format": "Formatieren",
     "formatAnyway": "Trotzdem formatieren",
+    "nextProblem": "Nächstes Problem",
     "discard": "Entwurf verwerfen",
     "warn": {
       "duplicates": "Einige Namen kommen in einem Objekt doppelt vor. Beim Formatieren bleibt nur der letzte Wert.",

@@ -217,6 +217,7 @@
     "changed": "游戏已在别处更改。丢弃草稿以查看新版本。",
     "format": "格式化",
     "formatAnyway": "仍然格式化",
+    "nextProblem": "下一个问题",
     "discard": "丢弃草稿",
     "warn": {
       "duplicates": "对象中有些名称重复。格式化只保留每个名称的最后一个值。",

@@ -1,6 +1,6 @@
 import { undo } from "@codemirror/commands";
 import { foldedRanges, unfoldAll } from "@codemirror/language";
-import { diagnosticCount } from "@codemirror/lint";
+import { diagnosticCount, forceLinting } from "@codemirror/lint";
 import { EditorView } from "@codemirror/view";
 import { act, screen, waitFor } from "@testing-library/react";
 import { page as browser, userEvent as realUser } from "vitest/browser";
@@ -463,6 +463,65 @@ describe("json editor", () => {
     expect(
       screen.getByRole("link", { name: "See all problems" }),
     ).toBeVisible();
+  });
+
+  describe("next problem", () => {
+    const nextButton = () =>
+      screen.getByRole("button", { name: "Next problem" });
+
+    it("cycles through the problems and wraps", async () => {
+      open(jsonRoute);
+      await cursorAfter('"info": {');
+      await realUser.keyboard('"bogus": 1,');
+      const v = await view();
+      const text = v.state.doc.toString();
+      const at = text.lastIndexOf("\n}");
+      v.dispatch({ changes: { from: at, insert: ',\n"bogusTwo": 2' } });
+      await waitFor(() => expect(diagnosticCount(v.state)).toBe(2), {
+        timeout: 5000,
+      });
+      await waitFor(() =>
+        expect(nextButton()).toHaveAttribute("aria-disabled", "false"),
+      );
+      v.dispatch({ selection: { anchor: 0 } });
+
+      const heads = [];
+      for (let i = 0; i < 3; i++) {
+        await realUser.click(nextButton());
+        heads.push(v.state.selection.main.from);
+      }
+      expect(heads[0]).toBeLessThan(heads[1]);
+      expect(heads[2]).toBe(heads[0]);
+      expect(v.hasFocus).toBe(true);
+    });
+
+    it("goes to a syntax error", async () => {
+      open(jsonRoute);
+      await setText("{ not json");
+      const v = await view();
+      v.dispatch({ selection: { anchor: 0 } });
+      await waitFor(() =>
+        expect(nextButton()).toHaveAttribute("aria-disabled", "false"),
+      );
+      await realUser.click(nextButton());
+      expect(v.state.selection.main.from).toBeGreaterThan(0);
+      await waitFor(() => expect(pick(v, ".cm-tooltip-lint")).not.toBeNull());
+    });
+
+    it("does nothing without problems", async () => {
+      open(jsonRoute);
+      const v = await view();
+      v.dispatch({ selection: { anchor: 5 } });
+      // Let the linter run, so a problem would be found before the click
+      forceLinting(v);
+      await settled();
+      expect(diagnosticCount(v.state)).toBe(0);
+      expect(nextButton()).toHaveAttribute("aria-disabled", "true");
+      // aria-disabled does not block clicks
+      nextButton().click();
+      expect(v.state.selection.main.from).toBe(5);
+      expect(v.hasFocus).toBe(false);
+    });
   });
 
   it("keeps the focus, the text and the cursor when the game does not change", async () => {
