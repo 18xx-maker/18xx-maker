@@ -9,6 +9,9 @@ export const GAME_INFO_KEYS = ["info", "links", "prototype", "wip"];
 // The lists of the rounds tab, in the order of the tab
 export const ROUND_KEYS = ["rounds", "turns", "pools", "number_cards"];
 
+// The record of the colors tab
+export const COLOR_KEYS = ["colors"];
+
 // The lists of the tokens tab, in the order of the tab
 export const TOKEN_KEYS = ["tokens", "tokenTypes", "shareTypes"];
 
@@ -237,9 +240,15 @@ export const mixedItem = (node, root) => {
     : undefined;
 };
 
+// A color of the game: text, or an object of colors by phase
+const isColor = (alternatives) =>
+  alternatives.length === 2 &&
+  alternatives.some(isPlainString) &&
+  alternatives.some((a) => a.type === "object" && isRecord(a));
+
 // How a (resolved) schema node is edited:
 // string, text, number, boolean, enum, stringOrNumber, limit, stringList,
-// count, revenue, object, record (an object of any names, each a value of one
+// count, revenue, color (text, or colors by phase as JSON), object, record (an object of any names, each a value of one
 // schema), array (of objects, needs the root to follow the items),
 // stringArray (of texts), enumList (of choices), or json for everything
 // else, so a new construct never disappears from the form
@@ -272,6 +281,9 @@ export const kindOf = (schema, key, root, keys = []) => {
   }
   if (Array.isArray(node.oneOf) && isCount(node.oneOf)) return "count";
   if (Array.isArray(node.oneOf) && isRevenue(node.oneOf)) return "revenue";
+  if (Array.isArray(node.oneOf) && isColor(alternativesOf(node, root))) {
+    return "color";
+  }
   if (Array.isArray(node.oneOf) && isStringList(node.oneOf)) {
     return "stringList";
   }

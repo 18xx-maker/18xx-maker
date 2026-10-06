@@ -15,7 +15,8 @@
   "prototype": true,
   "wip": true,
   "colors": {
-    "short": "pink"
+    "short": "pink",
+    "accent": "#3a7bd5"
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgamefamily/19/18xx",

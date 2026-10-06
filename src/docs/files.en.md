@@ -199,6 +199,11 @@ with a token in it), and a share type lists its shares (the quantity, label,
 percent and cost first). When you rename or remove a type, the editor warns how
 many companies still use it by the old name.
 
+The Colors tab edits the named colors of the game. Each color has a swatch
+that opens the color picker and a text field for any CSS color or the name of
+another color; Add color adds one and the name field renames or removes it. A
+color that differs by phase is an object, which stays JSON.
+
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
 

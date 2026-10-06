@@ -103,6 +103,10 @@
         "tab": "Tokens",
         "description": "Edit the tokens of the game, the token types and the share types of the companies. The changes stay in memory until you save them on the Changes page."
       },
+      "colors": {
+        "tab": "Colors",
+        "description": "Edit the colors of the game by name, each with a swatch. The changes stay in memory until you save them on the Changes page."
+      },
       "json": {
         "tab": "JSON",
         "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
@@ -145,6 +149,7 @@
     "emptyList": "Nothing here yet.",
     "add": "Add {{item}}",
     "addWithOptions": "Add {{item}} with options",
+    "pickColor": "Pick a color for {{name}}",
     "itemValue": "Value of {{item}} {{title}}",
     "remove": "Remove {{item}} {{title}}",
     "moveUp": "Move {{item}} {{title}} up",

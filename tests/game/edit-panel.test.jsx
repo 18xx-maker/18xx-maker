@@ -1,4 +1,10 @@
-import { act, screen, waitFor, within } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { page as browser, userEvent as realUser } from "vitest/browser";
 
 import { omit } from "ramda";
@@ -2811,7 +2817,7 @@ describe("edit panel rounds", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("rounds"));
     expect(tab).toHaveAccessibleName("Rounds");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 3]).toBe(tab);
+    expect(tabs[tabs.length - 4]).toBe(tab);
     expect(cards().length).toBeGreaterThanOrEqual(
       games["18Test"].rounds.length +
         games["18Test"].turns.length +
@@ -2944,7 +2950,7 @@ describe("edit panel tokens", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("tokens"));
     expect(tab).toHaveAccessibleName("Tokens");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 2]).toBe(tab);
+    expect(tabs[tabs.length - 3]).toBe(tab);
     // A token of text is a field, an object is a card
     expect(
       screen.getByRole("textbox", { name: "Value of token Round" }),
@@ -3105,5 +3111,82 @@ describe("edit panel tokens", () => {
       screen.getByRole("button", { name: "Remove token type spare" }),
     );
     expect(screen.queryByTestId("list-warning")).not.toBeInTheDocument();
+  });
+});
+
+describe("edit panel colors", () => {
+  const colorsRoute = `${route}?edit=true&editSection=colors`;
+  const ready = () => screen.findByRole("button", { name: "Add color" });
+  const game = () => opened.getState().game;
+
+  it("is the tab before the JSON editor, with a swatch and a text field for each color", async () => {
+    open(colorsRoute, {
+      ...structuredClone(games["18Test"]),
+      colors: { short: "pink", accent: "#3a7bd5" },
+    });
+    await ready();
+    const tabs = screen.getAllByRole("tab");
+    const tab = tabs.find((candidate) => candidate.id.endsWith("colors"));
+    expect(tab).toHaveAccessibleName("Colors");
+    expect(tab).toHaveAttribute("aria-selected", "true");
+    expect(tabs[tabs.length - 2]).toBe(tab);
+    expect(screen.getByRole("textbox", { name: "Accent" })).toHaveValue(
+      "#3a7bd5",
+    );
+    const swatches = screen.getAllByTestId("color-swatch");
+    expect(swatches).toHaveLength(2);
+    expect(swatches[0]).toHaveStyle({ backgroundColor: "rgb(255, 192, 203)" });
+    expect(
+      screen.getByLabelText("Pick a color for Accent", { selector: "input" }),
+    ).toHaveValue("#3a7bd5");
+  });
+
+  it("edits a color as text, and with the picker", async () => {
+    const { user } = open(colorsRoute, {
+      ...structuredClone(games["18Test"]),
+      colors: { short: "pink" },
+    });
+    await ready();
+    const text = screen.getByRole("textbox", { name: "Short" });
+    await user.clear(text);
+    await user.type(text, "#fff");
+    await user.tab();
+    expect(game().colors).toEqual({ short: "#fff" });
+    fireEvent.change(screen.getByLabelText("Pick a color for Short"), {
+      target: { value: "#112233" },
+    });
+    expect(game().colors).toEqual({ short: "#112233" });
+    expect(screen.getByRole("textbox", { name: "Short" })).toHaveValue(
+      "#112233",
+    );
+  });
+
+  it("adds, renames and removes a color", async () => {
+    const { user } = open(colorsRoute, {
+      ...structuredClone(games["18Test"]),
+      colors: { short: "pink" },
+    });
+    await ready();
+    await user.click(screen.getByRole("button", { name: "Add color" }));
+    expect(game().colors).toEqual({ short: "pink", new: "" });
+    const name = screen.getByRole("textbox", { name: "Name of new" });
+    await user.clear(name);
+    await user.type(name, "lime");
+    await user.tab();
+    expect(Object.keys(game().colors)).toEqual(["short", "lime"]);
+    await user.click(screen.getByRole("button", { name: "Remove color lime" }));
+    expect(game().colors).toEqual({ short: "pink" });
+  });
+
+  it("leaves a color by phase as JSON", async () => {
+    open(colorsRoute, {
+      ...structuredClone(games["18Test"]),
+      colors: { phased: { 2: "red", 3: "blue" } },
+    });
+    await ready();
+    expect(screen.getByRole("textbox", { name: "Phased" })).toHaveValue(
+      JSON.stringify({ 2: "red", 3: "blue" }, null, 2),
+    );
+    expect(screen.queryByTestId("color-swatch")).not.toBeInTheDocument();
   });
 });

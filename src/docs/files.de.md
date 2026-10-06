@@ -221,6 +221,12 @@ seine Aktien (zunächst Anzahl, Label, Prozent und Kosten). Benennst du einen
 Typ um oder entfernst ihn, warnt der Editor, wie viele Gesellschaften ihn
 noch unter dem alten Namen verwenden.
 
+Der Tab „Farben“ bearbeitet die benannten Farben des Spiels. Jede Farbe hat
+eine Farbfläche, die die Farbauswahl öffnet, und ein Textfeld für eine
+beliebige CSS-Farbe oder den Namen einer anderen Farbe; „Farbe hinzufügen“
+fügt eine hinzu, im Namensfeld benennst du sie um oder entfernst sie. Eine
+Farbe, die je nach Phase abweicht, ist ein Objekt und bleibt JSON.
+
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.
 

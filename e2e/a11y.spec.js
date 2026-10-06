@@ -104,6 +104,13 @@ const pages = [
     colorScheme,
     ready: (page) => page.getByRole("button", { name: "Add share" }).first(),
   })),
+  ...["light", "dark"].map((colorScheme) => ({
+    // The named colors of the game, each with a swatch
+    name: `edit panel colors (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=colors",
+    colorScheme,
+    ready: (page) => page.getByRole("button", { name: "Add color" }),
+  })),
   // The JSON editor, in both themes
   ...["light", "dark"].map((colorScheme) => ({
     name: `edit panel json (${colorScheme})`,
