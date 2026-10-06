@@ -53,6 +53,9 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
           }
           return slug;
         }),
+    // Asks where to save a new game (a template with the given title) and
+    // gives its slug, or undefined when the dialog is cancelled
+    newGame: (title) => ipcRenderer.invoke("newGame", title),
     loadConfig: () => ipcRenderer.invoke("loadConfig"),
     loadPlatformAndVersions: () =>
       ipcRenderer.sendSync("loadPlatformAndVersions"),

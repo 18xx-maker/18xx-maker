@@ -20,6 +20,16 @@ describe("the preload api", () => {
     expect(api.deleteGame).toBeTypeOf("function");
     expect(api.saveGame).toBeTypeOf("function");
     expect(api.renderInput).toBeUndefined();
+    expect(api.newGame).toBeTypeOf("function");
+  });
+
+  it("asks the main process for a new game with a title only", async () => {
+    const ipc = fakeIpc();
+    ipc.invoke.mockResolvedValue("electron:abc");
+    const api = createApi({ ipcRenderer: ipc, webUtils: {}, argv: [] });
+
+    expect(await api.newGame("My Game")).toBe("electron:abc");
+    expect(ipc.invoke).toHaveBeenCalledWith("newGame", "My Game");
   });
 
   it("gives a capture window only the input of its export", () => {
@@ -32,6 +42,7 @@ describe("the preload api", () => {
 
     expect(api).toEqual({ renderInput: { id: "18Test" } });
     expect(api.saveGame).toBeUndefined();
+    expect(api.newGame).toBeUndefined();
     expect(ipc.sendSync).toHaveBeenCalledWith("getRenderInput", "abc");
   });
 });
