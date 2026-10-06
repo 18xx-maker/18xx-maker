@@ -369,7 +369,7 @@
         "basicXY": "x und y verschieben das Element in einfachen Einheiten von seiner Position aus.",
         "basicRotation": "rotation dreht das Element an seiner Stelle.",
         "basicRotate": "rotate ist dasselbe wie rotation.",
-        "basicSide": "side ohne mid dreht das Element um so viele Sechstel einer Drehung.",
+        "basicSide": "side ohne mid dreht das Element um (side - 1) Sechstel einer Drehung: Seite 1 ist nicht gedreht, Seite 2 um 60 Grad.",
         "basicHidden": "hidden entfernt das Element. Die anderen behalten ihre Position.",
         "namedStraight": "mid straight ist die Mitte. Mit align perpendicular kreuzt ein Ortsbalken das Gleis.",
         "namedParallel": "align parallel legt das Element an diesem Punkt entlang des Gleises.",

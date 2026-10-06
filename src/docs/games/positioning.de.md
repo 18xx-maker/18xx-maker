@@ -19,8 +19,8 @@ Alle sind optional und funktionieren bei jedem Element mit Position
   die `angle` und `percent` es setzen.
 - `rotation` (-360 bis 360, ausschließlich) dreht das Element an seiner Stelle,
   in Grad. `rotate` ist dasselbe Feld mit kürzerem Namen.
-- `side` (1 bis 6) dreht das Element um so viele Sechstel einer Drehung, Seite 2
-  dreht es also um 60 Grad. Mit `mid` verschiebt es stattdessen den benannten
+- `side` (1 bis 6) dreht das Element um (side - 1) Sechstel einer Drehung: Seite 1
+  ist nicht gedreht, Seite 2 um 60 Grad. Mit `mid` verschiebt es stattdessen den benannten
   Punkt, siehe [Benannte Positionen](#benannte-positionen).
 - `mid` und `align` setzen und drehen das Element nach dem Gleis, siehe [Benannte
   Positionen](#benannte-positionen).

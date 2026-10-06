@@ -369,7 +369,7 @@
         "basicXY": "x 和 y 以普通单位从元素原来的位置开始移动它。",
         "basicRotation": "rotation 让元素在原地旋转。",
         "basicRotate": "rotate 与 rotation 相同。",
-        "basicSide": "不带 mid 的 side 会把元素旋转相应的六分之一圈数。",
+        "basicSide": "不带 mid 的 side 会把元素旋转 (side - 1) 个六分之一圈:边 1 不旋转,边 2 旋转 60 度。",
         "basicHidden": "hidden 会移除该元素,其他元素保持原位。",
         "namedStraight": "mid straight 是中心。配合 align perpendicular,小镇条会横跨轨道。",
         "namedParallel": "align parallel 让元素在该点沿着轨道放置。",

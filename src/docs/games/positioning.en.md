@@ -17,8 +17,8 @@ All of these are optional and work on every element that has a position
   put it.
 - `rotation` (-360 to 360, exclusive) turns the element on its own spot, in
   degrees. `rotate` is the same field with a shorter name.
-- `side` (1 to 6) rotates the element by that many sixths of a turn, so side 2
-  turns it 60 degrees. With `mid` it moves the named point instead, see [Named
+- `side` (1 to 6) rotates the element by (side - 1) sixths of a turn: side 1 is
+  unturned, side 2 is 60 degrees. With `mid` it moves the named point instead, see [Named
   Positions](#named-positions).
 - `mid` and `align` place and turn the element by the track, see [Named
   Positions](#named-positions).

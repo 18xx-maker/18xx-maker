@@ -111,7 +111,10 @@ const groups = [
       },
       {
         id: "namedStraight",
-        hex: { towns: [{ mid: "straight", align: "perpendicular" }] },
+        hex: {
+          track: [{ type: "straight", side: 2 }],
+          towns: [{ mid: "straight", align: "perpendicular" }],
+        },
       },
       {
         id: "namedParallel",

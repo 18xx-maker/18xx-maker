@@ -34,15 +34,22 @@ describe("auto positioning examples page", () => {
       rotate(id).filter((t) => t.startsWith(prefix)).length;
 
     // generic options: each example is drawn with its own transform
-    const has = (id, s) =>
-      screen.getByTestId(`positioning-${id}`).innerHTML.includes(s);
+    const svg = (id) =>
+      screen.getByTestId(`positioning-${id}`).querySelector("svg").innerHTML;
+    const has = (id, s) => svg(id).includes(s);
     expect(rotate("basicAnglePercent")).toContain(at(90, 45));
     expect(has("basicXY", "translate(20 -15)")).toBe(true);
+    expect(has("basicRotation", "rotate(45 ")).toBe(true);
+    expect(has("basicRotate", "rotate(45 ")).toBe(true);
+    // the svg holds the example id as text, so compare without it
+    const drawn = (id) => svg(id).replace(/<text.*<\/text>/, "");
+    expect(drawn("basicRotation")).toEqual(drawn("basicRotate"));
+    expect(has("basicSide", "rotate(60 0 0)")).toBe(true);
+    expect(has("basicSide", "rotate(45 ")).toBe(false);
+    // the hidden first label keeps its index, so NY is drawn at the second
     expect(has("basicHidden", "NY")).toBe(true);
     expect(has("basicHidden", ">B<")).toBe(false);
-    expect(
-      screen.getByTestId("positioning-basicRotation").innerHTML,
-    ).not.toEqual(screen.getByTestId("positioning-basicSide").innerHTML);
+    expect(has("basicHidden", "rotate(270 ")).toBe(true);
 
     // icons: only with a city or centerTown, 30 when there is terrain too
     expect(rotate("iconCity")).toContain(at(0, 45));
