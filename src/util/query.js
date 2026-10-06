@@ -120,8 +120,10 @@ export const togglePanelSearch = (search, panel) => {
 
   if (params.has(panel)) {
     params.delete(panel);
+    if (panel === "edit") params.delete("editSection");
   } else {
     params.delete(panel === "edit" ? "config" : "edit");
+    params.delete("editSection");
     if (panel === "edit") params.delete("section");
     params.set(panel, true);
   }

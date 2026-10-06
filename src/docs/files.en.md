@@ -115,6 +115,15 @@ emptying a field removes it from the game (the title cannot be removed).
 Problems with a value, like a currency without a `#`, are shown below its field.
 Escape closes the panel.
 
+The panel has tabs: Game info and Trains. Press `[` and `]` to switch between
+them (the number keys go to another section of the game and close the panel).
+The Trains tab has a card for each train of the game, generated from the same
+schema. Add a train with Add train, and use the buttons of a card to move it up
+or down, duplicate it or remove it. A removed train can be put back with Undo
+right after. The fields of a train that are not needed often are under More
+fields. A field the schema marks as deprecated stays editable and is shown with
+a warning.
+
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
 

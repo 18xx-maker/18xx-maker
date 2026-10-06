@@ -89,6 +89,36 @@ test.describe("bundled games", () => {
     await expect(panel).toBeHidden();
   });
 
+  test("adds a train in the edit panel", async ({ page }) => {
+    await page.goto("/games/18Test/map?edit=true");
+    const panel = page.getByTestId("edit-panel");
+    await expect(panel).toBeVisible();
+
+    const tabs = panel.getByRole("tablist");
+    await expect(tabs.getByRole("tab", { name: "Game info" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+    await tabs.getByRole("tab", { name: "Trains" }).click();
+    await expect(page).toHaveURL(/\?edit=true&editSection=trains$/);
+
+    await expect(panel.getByRole("listitem")).toHaveCount(4);
+    await panel.getByRole("button", { name: "Add train" }).click();
+    await expect(panel.getByRole("listitem")).toHaveCount(5);
+    await expect(
+      panel.getByRole("button", { name: "Move train 5 up" }),
+    ).toBeEnabled();
+    await expect(
+      panel.getByRole("button", { name: "Move train 5 down" }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("link", { name: "Changes" }).first(),
+    ).toBeVisible();
+
+    await panel.getByRole("button", { name: "Remove train 5" }).click();
+    await expect(panel.getByRole("listitem")).toHaveCount(4);
+  });
+
   test("opens a real game and its pages", async ({ page }) => {
     await page.goto("/games/");
     await page

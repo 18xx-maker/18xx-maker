@@ -57,16 +57,47 @@
   },
   "editPanel": {
     "toggle": "Bearbeiten",
-    "title": "Spielinfo",
+    "title": "Spiel bearbeiten",
     "close": "Bearbeitungspanel schließen",
-    "description": "Bearbeite die Spielinfo, Links und Markierungen. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst.",
     "changes": "Änderungen prüfen und speichern",
     "unset": "Nicht gesetzt",
     "true": "Ja",
     "false": "Nein",
     "required": "Dieses Feld ist erforderlich.",
     "invalidNumber": "Gib eine Zahl ein.",
-    "invalidJson": "Gib gültiges JSON ein."
+    "invalidJson": "Gib gültiges JSON ein.",
+    "sections": {
+      "info": {
+        "tab": "Spielinfo",
+        "description": "Bearbeite die Spielinfo, Links und Markierungen. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
+      },
+      "trains": {
+        "tab": "Züge",
+        "description": "Bearbeite die Züge des Spiels. Füge Züge hinzu, entferne, kopiere und sortiere sie mit den Schaltflächen jedes Zugs."
+      }
+    },
+    "tabs": {
+      "label": "Bereiche",
+      "hint": "Tabs wechseln"
+    },
+    "items": {
+      "trains": "Zug"
+    },
+    "emptyList": "Noch nichts vorhanden.",
+    "add": "{{item}} hinzufügen",
+    "remove": "{{item}} {{title}} entfernen",
+    "moveUp": "{{item}} {{title}} nach oben",
+    "moveDown": "{{item}} {{title}} nach unten",
+    "duplicate": "{{item}} {{title}} duplizieren",
+    "moreFields": "Weitere Felder",
+    "removeValue": "Entfernen",
+    "undo": "Rückgängig",
+    "added": "{{item}} {{title}} hinzugefügt",
+    "removed": "{{item}} {{title}} entfernt",
+    "moved": "{{item}} {{title}} auf Position {{position}} von {{count}} verschoben",
+    "duplicated": "{{item}} als {{title}} dupliziert",
+    "restored": "{{item}} {{title}} wiederhergestellt",
+    "invalidCount": "Gib eine ganze Zahl ab 1 oder ∞ ein."
   },
   "problems": {
     "nav": "Probleme",
@@ -1079,15 +1110,15 @@
       },
       "edit": {
         "use": "Das geladene Spiel im ersten Abschnitt bearbeiten",
-        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel (Formular der Spielinfo) geöffnet oder geschlossen. Sonst zurück zur Spielseite"
+        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel (Formulare für Spielinfo und Züge) geöffnet oder geschlossen. Sonst zurück zur Spielseite"
       },
       "section": {
         "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",
-        "notes": "Nur wenn ein Spiel geladen ist"
+        "notes": "Nur wenn ein Spiel geladen ist. Schließt das Bearbeitungspanel, zum Wechseln seines Tabs [ und ] verwenden"
       },
       "cycle": {
-        "use": "Zurück und weiter: Doku-Seite, Spielabschnitt oder Konfigurationsabschnitt",
-        "notes": "Auf einer Doku-Seite endet es bei der ersten und letzten Seite. Auf der Bearbeitungsseite wechselt es durch die Spielabschnitte, oder durch die Konfigurationsabschnitte, solange das Panel offen ist"
+        "use": "Zurück und weiter: Doku-Seite, Spielabschnitt, Tab des Bearbeitungspanels oder Konfigurationsabschnitt",
+        "notes": "Auf einer Doku-Seite endet es bei der ersten und letzten Seite. Auf der Bearbeitungsseite wechselt es durch die Spielabschnitte, oder durch die Tabs des Bearbeitungspanels bzw. die Konfigurationsabschnitte, solange das jeweilige Panel offen ist"
       },
       "view": {
         "use": "Die Ansicht des Karten- oder Aktienmarkt-Editors zurücksetzen",

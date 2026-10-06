@@ -5,16 +5,18 @@ import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-import GameInfoForm from "@/components/schemaForm/GameInfoForm";
+import EditTabs, { panelId, tabId } from "@/components/editPanel/EditTabs";
+import { editSections } from "@/components/editPanel/sections";
 
 import { useGame } from "@/hooks/game";
 import { useEditPanel } from "@/hooks/useEditPanel";
 
-// The game info form beside the live render of the section
+// The forms for parts of the game beside the live render of the section
 const EditPanel = () => {
   const { t } = useTranslation();
   const game = useGame();
-  const { toggle } = useEditPanel();
+  const { toggle, editSection, setEditSection } = useEditPanel();
+  const { Form } = editSections.find((s) => s.section === editSection);
 
   // Escape closes the panel from anywhere inside it. An open select closes
   // itself first, it has already claimed the key. The key is ours, so the
@@ -47,10 +49,18 @@ const EditPanel = () => {
         </Button>
       </div>
       <div className="flex-1 overflow-y-auto overscroll-contain p-4 flex flex-col gap-4">
-        <p className="text-sm text-muted-foreground">
-          {t("editPanel.description")}
-        </p>
-        <GameInfoForm game={game} />
+        <EditTabs section={editSection} setSection={setEditSection} />
+        <div
+          role="tabpanel"
+          id={panelId(editSection)}
+          aria-labelledby={tabId(editSection)}
+          className="flex flex-col gap-4"
+        >
+          <p className="text-sm text-muted-foreground">
+            {t(`editPanel.sections.${editSection}.description`)}
+          </p>
+          <Form game={game} />
+        </div>
         <Button asChild variant="outline" className="self-start">
           <Link to={`/games/${game.meta.slug}/changes`}>
             {t("editPanel.changes")}

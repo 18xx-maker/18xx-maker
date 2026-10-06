@@ -241,6 +241,42 @@ describe("cycle keys", () => {
     );
   });
 
+  it("[ and ] cycle the edit panel tabs, not the game sections, while it is open", async () => {
+    const { user, router } = renderApp("/games/18Test/map?edit=true");
+    await screen.findByTestId("edit-panel");
+
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=trains",
+      ),
+    );
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+
+    await user.keyboard("[[");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?edit=true"),
+    );
+    expect(router.state.location.pathname).toBe("/games/18Test/map");
+  });
+
+  it("[ and ] move the focus to the new tab from a tab or from the panel", async () => {
+    const { user } = renderApp("/games/18Test/map?edit=true");
+    await screen.findByTestId("edit-panel");
+    const info = screen.getByRole("tab", { name: "Game info" });
+    const trains = screen.getByRole("tab", { name: "Trains" });
+
+    info.focus();
+    await user.keyboard("]");
+    await waitFor(() => expect(trains).toHaveFocus());
+    expect(trains).toHaveAttribute("aria-selected", "true");
+
+    const add = await screen.findByRole("button", { name: "Add train" });
+    add.focus();
+    await user.keyboard("[[");
+    await waitFor(() => expect(info).toHaveFocus());
+  });
+
   it("[ and ] go to the previous and next docs page", async () => {
     const { user, router } = renderApp("/docs");
 

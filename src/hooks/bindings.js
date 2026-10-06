@@ -5,6 +5,8 @@ import { useLocation, useMatch, useNavigate } from "react-router";
 import { find, propEq } from "ramda";
 
 import { sections as configSections } from "@/components/config";
+import { panelId, tabId } from "@/components/editPanel/EditTabs";
+import { editSections } from "@/components/editPanel/sections";
 import { docsPages } from "@/components/nav";
 
 import { useLoadedGame } from "@/hooks/game";
@@ -49,6 +51,8 @@ export const useBindings = () => {
     available: canEdit,
     open: editOpen,
     toggle: toggleEdit,
+    editSection,
+    setEditSection,
   } = useEditPanel();
   const [, togglePagination] = useBooleanParam("paginated");
   const { pathname } = location;
@@ -100,13 +104,27 @@ export const useBindings = () => {
 
       // Keys for the game edit page
       if (viewingGame) {
-        // [ and ] cycle the config sections while the panel is open, else the
-        // sections of the game. The sections without data for the game are
-        // skipped.
+        // [ and ] cycle the tabs of the edit panel or the config sections
+        // while a panel is open, else the sections of the game. The sections
+        // without data for the game are skipped.
         if (!print && (event.key === "[" || event.key === "]")) {
           const params = new URLSearchParams(location.search);
 
-          if (params.has("config")) {
+          if (editOpen) {
+            const next = cycle(
+              editSections,
+              editSections.findIndex((s) => s.section === editSection),
+              event.key,
+            ).section;
+            // With the focus on a tab or in the panel it goes to the new tab:
+            // the panel is replaced, the old tab is not selected any more
+            const active = document.activeElement;
+            const inside =
+              active?.closest?.('[role="tablist"]') ||
+              document.getElementById(panelId(editSection))?.contains(active);
+            setEditSection(next);
+            if (inside) document.getElementById(tabId(next))?.focus();
+          } else if (params.has("config")) {
             const current = decodeURIComponent(
               params.get("section") || "colors",
             );
@@ -274,6 +292,8 @@ export const useBindings = () => {
       toggleEdit,
       canEdit,
       editOpen,
+      editSection,
+      setEditSection,
       togglePagination,
       dispatch,
       navigate,

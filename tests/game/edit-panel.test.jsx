@@ -1,6 +1,8 @@
 import { act, screen, waitFor, within } from "@testing-library/react";
 import { page as browser, userEvent as realUser } from "vitest/browser";
 
+import { omit } from "ramda";
+
 import games from "@/data/games";
 import { editGame } from "@/state";
 import { selectGameChanged } from "@/state/selectors";
@@ -206,14 +208,19 @@ describe("edit panel", () => {
     await screen.findByRole("heading", { name: "Configuration" });
   });
 
-  it("keeps the panel for [ and ], drops it for a number", async () => {
+  it("[ and ] change the tab, a number goes to a section and drops the panel", async () => {
     const { user, router } = open(route);
     await screen.findByTestId("game-internal:abc-map");
     await user.keyboard("e");
     await panel();
 
     await user.keyboard("]");
-    await waitFor(() => expect(router.state.location.pathname).not.toBe(route));
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=trains",
+      ),
+    );
+    expect(router.state.location.pathname).toBe(route);
     expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
 
     await user.keyboard("1");
@@ -440,5 +447,471 @@ describe("edit panel fields", () => {
     await waitFor(async () =>
       expect(await field("Subtitle")).toHaveValue("18xx-Maker Test File"),
     );
+  });
+});
+
+const trains = (store) => store.getState().game.trains;
+const names = (store) => trains(store).map((train) => train.name);
+const cards = () =>
+  within(screen.getByTestId("edit-panel")).getAllByRole("listitem");
+const button = (name) => screen.getByRole("button", { name });
+const trainsRoute = `${route}?edit=true&editSection=trains`;
+
+describe("edit panel tabs", () => {
+  it("shows the tabs, switches by click and keeps the tab in the url", async () => {
+    const { user, router } = open(`${route}?edit=true`);
+    const info = await screen.findByRole("tab", { name: "Game info" });
+    const tab = screen.getByRole("tab", { name: "Trains" });
+    expect(info).toHaveAttribute("aria-selected", "true");
+    expect(tab).toHaveAttribute("aria-selected", "false");
+    expect(info).toHaveAttribute("tabindex", "0");
+    expect(tab).toHaveAttribute("tabindex", "-1");
+    expect(screen.getByRole("tabpanel")).toHaveAttribute(
+      "aria-labelledby",
+      info.id,
+    );
+    expect(info).toHaveAttribute(
+      "aria-controls",
+      screen.getByRole("tabpanel").id,
+    );
+
+    await user.click(tab);
+    expect(router.state.location.search).toBe("?edit=true&editSection=trains");
+    expect(tab).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tabpanel")).toHaveAttribute(
+      "aria-labelledby",
+      tab.id,
+    );
+    expect(
+      await screen.findByRole("button", { name: "Add train" }),
+    ).toBeVisible();
+
+    await user.click(info);
+    expect(router.state.location.search).toBe("?edit=true");
+    expect(await field("Title")).toBeVisible();
+  });
+
+  it("moves between tabs with the arrow keys, Home and End", async () => {
+    const { user, router } = open(`${route}?edit=true`);
+    const info = await screen.findByRole("tab", { name: "Game info" });
+    info.focus();
+
+    await user.keyboard("{ArrowRight}");
+    const trainsTab = screen.getByRole("tab", { name: "Trains" });
+    expect(trainsTab).toHaveFocus();
+    expect(router.state.location.search).toContain("editSection=trains");
+
+    await user.keyboard("{ArrowRight}");
+    expect(info).toHaveFocus();
+    await user.keyboard("{ArrowLeft}");
+    expect(trainsTab).toHaveFocus();
+    await user.keyboard("{Home}");
+    expect(info).toHaveFocus();
+    await user.keyboard("{End}");
+    expect(trainsTab).toHaveFocus();
+  });
+
+  it("[ and ] cycle the tabs and wrap, but not while typing", async () => {
+    const { user, router } = open(`${route}?edit=true`);
+    await screen.findByRole("tab", { name: "Game info" });
+
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=trains",
+      ),
+    );
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?edit=true"),
+    );
+    await user.keyboard("[[");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=trains",
+      ),
+    );
+
+    await user.click(
+      (await screen.findAllByRole("textbox", { name: "Name" }))[0],
+    );
+    await user.keyboard("[[]");
+    expect(router.state.location.search).toBe("?edit=true&editSection=trains");
+    expect(router.state.location.pathname).toBe(route);
+  });
+
+  it("an unknown tab in the url is the first tab", async () => {
+    open(`${route}?edit=true&editSection=nope`);
+    expect(
+      await screen.findByRole("tab", { name: "Game info" }),
+    ).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("forgets the tab when the panel closes", async () => {
+    const { user, router } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument(),
+    );
+    expect(router.state.location.search).toBe("");
+
+    await user.keyboard("e");
+    expect(
+      await screen.findByRole("tab", { name: "Game info" }),
+    ).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("forgets the tab when the config panel opens", async () => {
+    const { user, router } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+
+    await user.click(screen.getByRole("button", { name: "Config" }));
+    await screen.findByRole("heading", { name: "Configuration" });
+    expect(router.state.location.search).toBe("?config=true");
+  });
+
+  it("the close button works from the trains tab", async () => {
+    const { user } = open(trainsRoute);
+    await user.click(
+      await screen.findByRole("button", { name: "Close the edit panel" }),
+    );
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument(),
+    );
+  });
+});
+
+describe("edit panel trains", () => {
+  it("shows a card for each train with its fields", async () => {
+    open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    expect(cards()).toHaveLength(4);
+    const first = within(cards()[0]);
+    expect(first.getByRole("textbox", { name: "Name" })).toHaveValue("2");
+    expect(first.getByRole("textbox", { name: "Quantity" })).toHaveValue("4");
+    expect(first.getByRole("textbox", { name: "Price" })).toHaveValue("80");
+    expect(first.getByRole("textbox", { name: "Color" })).toHaveValue("yellow");
+    // The rest is behind More fields
+    expect(
+      first.queryByRole("textbox", { name: "Description" }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(cards()[3]).getByRole("textbox", { name: "Quantity" }),
+    ).toHaveValue("∞");
+  });
+
+  it("More fields shows the other fields of a train", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(
+      within(cards()[0]).getByRole("button", { name: "More fields" }),
+    );
+    expect(
+      within(cards()[0]).getByRole("textbox", { name: "Description" }),
+    ).toBeVisible();
+    expect(
+      within(cards()[0]).getByRole("spinbutton", { name: "Players" }),
+    ).toBeVisible();
+  });
+
+  it("edits a field of a train in the game", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    const price = within(cards()[1]).getByRole("textbox", { name: "Price" });
+    await user.clear(price);
+    await user.type(price, "200{Enter}");
+    expect(trains(store)[1].price).toBe(200);
+    expect(trains(store)[0].price).toBe(80);
+
+    // Quantity is a whole number or the infinity sign
+    const quantity = within(cards()[1]).getByRole("textbox", {
+      name: "Quantity",
+    });
+    await user.clear(quantity);
+    await user.type(quantity, "∞{Enter}");
+    expect(trains(store)[1].quantity).toBe("∞");
+    await user.clear(quantity);
+    await user.type(quantity, "0{Enter}");
+    expect(trains(store)[1].quantity).toBe("∞");
+    expect(await screen.findByText(/whole number of at least 1/)).toBeVisible();
+    await user.clear(quantity);
+    await user.type(quantity, "5{Enter}");
+    expect(trains(store)[1].quantity).toBe(5);
+  });
+
+  it("adds a train that is valid and named to not clash", async () => {
+    const { user, store } = open(trainsRoute);
+    await user.click(await screen.findByRole("button", { name: "Add train" }));
+    expect(names(store)).toEqual(["2", "3+1", "4D", "8E", "5"]);
+    expect(trains(store)[4]).toEqual({
+      name: "5",
+      color: "gray",
+      quantity: 1,
+    });
+    expect(selectGameChanged(store.getState())).toBe(true);
+    expect(cards()).toHaveLength(5);
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent("Added train 5"),
+    );
+    // The focus goes to the new train
+    expect(within(cards()[4]).getByRole("button", { name: "5" })).toHaveFocus();
+  });
+
+  it("adds to a game without trains and removes the key with the last train", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    act(() => store.dispatch(editGame((game) => omit(["trains"], game))));
+    expect(await screen.findByText("Nothing here yet.")).toBeVisible();
+
+    await user.click(screen.getByRole("button", { name: "Add train" }));
+    expect(trains(store)).toEqual([{ name: "1", color: "gray", quantity: 1 }]);
+
+    await user.click(button("Remove train 1"));
+    expect("trains" in store.getState().game).toBe(false);
+    expect(await screen.findByText("Nothing here yet.")).toBeVisible();
+  });
+
+  it("removes a train and puts it back with undo", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+
+    await user.click(button("Remove train 3+1"));
+    expect(names(store)).toEqual(["2", "4D", "8E"]);
+    expect(screen.getByRole("status")).toHaveTextContent("Removed train 3+1");
+    // The focus goes to the next card
+    expect(
+      within(cards()[1]).getByRole("button", { name: "4D" }),
+    ).toHaveFocus();
+
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(names(store)).toEqual(["2", "3+1", "4D", "8E"]);
+    expect(trains(store)[1]).toEqual(games["18Test"].trains[1]);
+    expect(
+      screen.queryByRole("button", { name: "Undo" }),
+    ).not.toBeInTheDocument();
+    // Undo is back to the original game
+    expect(selectGameChanged(store.getState())).toBe(false);
+  });
+
+  it("the focus goes to Add train after removing the last train", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(button("Remove train 8E"));
+    expect(names(store)).toEqual(["2", "3+1", "4D"]);
+    expect(screen.getByRole("button", { name: "Undo" })).toBeVisible();
+    // The next card does not exist: the focus is not lost
+    expect(screen.getByRole("button", { name: "Add train" })).toHaveFocus();
+  });
+
+  it("moves a train up and down, the focus stays on the button", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    expect(button("Move train 2 up")).toBeDisabled();
+    expect(button("Move train 8E down")).toBeDisabled();
+
+    await user.click(button("Move train 2 down"));
+    expect(names(store)).toEqual(["3+1", "2", "4D", "8E"]);
+    expect(button("Move train 2 down")).toHaveFocus();
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "Moved train 2 to position 2 of 4",
+    );
+
+    await user.click(button("Move train 2 up"));
+    expect(names(store)).toEqual(["2", "3+1", "4D", "8E"]);
+    // At the top the button is disabled: the focus moves to the other one
+    expect(button("Move train 2 down")).toHaveFocus();
+    expect(selectGameChanged(store.getState())).toBe(false);
+  });
+
+  it("duplicates a train after the source with a name that is free", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(button("Duplicate train 3+1"));
+
+    expect(names(store)).toEqual(["2", "3+1", "5", "4D", "8E"]);
+    expect(trains(store)[2]).toEqual({ ...trains(store)[1], name: "5" });
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "Duplicated train as 5",
+    );
+  });
+
+  it("edits the right train after a reorder", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(button("Move train 2 down"));
+
+    const price = within(cards()[1]).getByRole("textbox", { name: "Price" });
+    expect(price).toHaveValue("80");
+    await user.clear(price);
+    await user.type(price, "99{Enter}");
+    expect(trains(store)[1]).toMatchObject({ name: "2", price: 99 });
+    expect(trains(store)[0].name).toBe("3+1");
+    expect(trains(store)[0].price).not.toBe(99);
+  });
+
+  it("passes on what is typed before it removes another train", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    const name = within(cards()[1]).getByRole("textbox", { name: "Name" });
+    await user.clear(name);
+    await user.type(name, "typed");
+
+    // A click that does not move the focus, as on Safari
+    act(() => button("Remove train 2").click());
+    expect(names(store)).toEqual(["typed", "4D", "8E"]);
+    expect(trains(store)[0].name).toBe("typed");
+  });
+
+  it("duplicates and undoes a removal with what was typed, without a focus change", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    const name = within(cards()[1]).getByRole("textbox", { name: "Name" });
+    await user.clear(name);
+    await user.type(name, "5");
+
+    act(() => button("Duplicate train 3+1").click());
+    expect(names(store)).toEqual(["2", "5", "6", "4D", "8E"]);
+    expect(trains(store)[2]).toEqual({ ...trains(store)[1], name: "6" });
+
+    const typed = within(cards()[3]).getByRole("textbox", { name: "Name" });
+    await user.clear(typed);
+    await user.type(typed, "x");
+    act(() => button("Remove train 4D").click());
+    expect(names(store)).toEqual(["2", "5", "6", "8E"]);
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(names(store)).toEqual(["2", "5", "6", "x", "8E"]);
+  });
+
+  it("undo passes on what is typed first", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(button("Remove train 8E"));
+    const name = within(cards()[0]).getByRole("textbox", { name: "Name" });
+    await user.clear(name);
+    await user.type(name, "typed");
+    act(() => button("Undo").click());
+    expect(names(store)).toEqual(["typed", "3+1", "4D", "8E"]);
+  });
+
+  it("keeps the undo note until the next action on the list", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    try {
+      const { user } = open(trainsRoute);
+      await screen.findByRole("button", { name: "Add train" });
+      await user.click(button("Remove train 2"));
+      await act(() => vi.advanceTimersByTimeAsync(30000));
+      expect(screen.getByRole("button", { name: "Undo" })).toBeVisible();
+      await user.click(button("Move train 3+1 down"));
+      expect(
+        screen.queryByRole("button", { name: "Undo" }),
+      ).not.toBeInTheDocument();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("a collapsed card and More fields follow the train when it moves or one is removed", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(within(cards()[0]).getByRole("button", { name: "2" }));
+    await user.click(
+      within(cards()[1]).getByRole("button", { name: "More fields" }),
+    );
+
+    await user.click(button("Move train 2 down"));
+    expect(
+      within(cards()[1]).getByRole("button", { name: "2" }),
+    ).toHaveAttribute("aria-expanded", "false");
+    expect(
+      within(cards()[0]).getByRole("textbox", { name: "Description" }),
+    ).toBeVisible();
+    expect(
+      within(cards()[1]).queryByRole("textbox", { name: "Description" }),
+    ).not.toBeInTheDocument();
+
+    await user.click(button("Remove train 3+1"));
+    expect(
+      within(cards()[0]).getByRole("button", { name: "2" }),
+    ).toHaveAttribute("aria-expanded", "false");
+    expect(
+      within(cards()[0]).queryByRole("textbox", { name: "Description" }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(cards()[1]).getByRole("button", { name: "4D" }),
+    ).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("keeps working after the changes are reverted with the panel open", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    await user.click(button("Remove train 2"));
+    expect(names(store)).toEqual(["3+1", "4D", "8E"]);
+
+    act(() => store.dispatch(editGame(() => store.getState().gameOriginal)));
+    await waitFor(() => expect(cards()).toHaveLength(4));
+    const name = within(cards()[0]).getByRole("textbox", { name: "Name" });
+    expect(name).toHaveValue("2");
+    await user.clear(name);
+    await user.type(name, "two{Enter}");
+    expect(names(store)).toEqual(["two", "3+1", "4D", "8E"]);
+  });
+
+  it("an empty name shows it is required and keeps the old name", async () => {
+    const { user, store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    const name = within(cards()[0]).getByRole("textbox", { name: "Name" });
+    await user.clear(name);
+    await user.tab();
+
+    expect(trains(store)[0].name).toBe("2");
+    expect(await screen.findByText("This field is required.")).toBeVisible();
+  });
+
+  it("shows the problem of a train on its card", async () => {
+    const { store } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    act(() =>
+      store.dispatch(
+        editGame((game) => ({
+          ...game,
+          trains: game.trains.map(({ color, ...train }, index) =>
+            index === 1 ? train : { color, ...train },
+          ),
+        })),
+      ),
+    );
+    await waitFor(
+      () =>
+        expect(within(cards()[1]).getAllByRole("alert").length).toBeGreaterThan(
+          0,
+        ),
+      { timeout: 5000 },
+    );
+    expect(within(cards()[0]).queryAllByRole("alert")).toHaveLength(0);
+  });
+
+  it("the live region says what changed", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    const status = screen.getByRole("status");
+    expect(status).toHaveAttribute("aria-live", "polite");
+    await user.click(button("Remove train 8E"));
+    expect(status).toHaveTextContent("Removed train 8E");
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(status).toHaveTextContent("Restored train 8E");
+  });
+
+  it("a card collapses", async () => {
+    const { user } = open(trainsRoute);
+    await screen.findByRole("button", { name: "Add train" });
+    const toggle = within(cards()[0]).getByRole("button", { name: "2" });
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await user.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(
+      within(cards()[0]).getByRole("textbox", { name: "Name" }),
+    ).not.toBeVisible();
   });
 });
