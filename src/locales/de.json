@@ -107,6 +107,10 @@
         "tab": "Farben",
         "description": "Bearbeite die Farben des Spiels nach Namen, jeweils mit einer Farbfläche. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
       },
+      "output": {
+        "tab": "Ausgabe",
+        "description": "Bearbeite den Bereich der Ertragstabelle, die Export-Voreinstellungen und die Kachel-Upgrades des Spiels. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
+      },
       "json": {
         "tab": "JSON",
         "description": "Bearbeite das ganze Spiel als JSON. Die Seite folgt deiner Eingabe, solange das JSON gültig ist. Die Änderungen bleiben im Speicher, bis du sie auf der Änderungsseite speicherst."
