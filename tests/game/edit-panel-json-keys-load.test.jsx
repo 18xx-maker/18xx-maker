@@ -7,8 +7,8 @@ import { createSetEditorKeys } from "@/state";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
-// The Emacs and Vim modules are replaced: Vim loads when the test lets it,
-// Emacs never does
+// The Emacs and Vim modules are replaced: Vim loads when the test lets it
+// (the gate of each test), Emacs never does
 const gate = vi.hoisted(() => ({ release: undefined, ready: undefined }));
 
 vi.mock("@/components/editPanel/editorVim", async () => {
@@ -46,6 +46,9 @@ const view = async () => {
 };
 
 beforeEach(async () => {
+  // The mocked Vim module is made again, so it waits for this test's gate
+  // whichever tests ran before
+  vi.resetModules();
   globalThis.IS_REACT_ACT_ENVIRONMENT = false;
   await browser.viewport(1280, 900);
   gate.ready = new Promise((resolve) => {

@@ -213,7 +213,8 @@ const JsonEditor = ({ game }) => {
   const tRef = useRef(t);
   const keys = useSelector(selectEditorKeys);
   // The loaded keys of the mode (normal ones until the mode has loaded)
-  const modeExtension = useRef(modeKeys("normal"));
+  const modeExtension = useRef();
+  modeExtension.current ??= modeKeys("normal");
   const modeRequest = useRef(0);
   const [keysFailed, setKeysFailed] = useState(false);
   const [lines, setLines] = useLinesParam();

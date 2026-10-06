@@ -47,21 +47,27 @@ export const isMac = () =>
 
 // Shift makes the key a capital where the platform reports it so: only the
 // capital name matches (with Shift left out of the name, except with Alt, where
-// macOS reports the Option character instead)
+// macOS reports the Option character instead). Only a key with Shift has a
+// capital name: a key without it must not also match the capital, which
+// belongs to the key with Shift.
 const names = (key) => {
   const parts = key.split("-");
   const last = parts.pop();
-  if (last.length !== 1 || last === last.toUpperCase()) return [key];
-  const capital = [...parts, last.toUpperCase()].join("-");
-  return parts.includes("Shift") && !parts.includes("Alt")
-    ? [
-        key,
-        parts
-          .filter((part) => part !== "Shift")
-          .concat(last.toUpperCase())
-          .join("-"),
-      ]
-    : [key, capital];
+  if (
+    !parts.includes("Shift") ||
+    last.length !== 1 ||
+    last === last.toUpperCase()
+  ) {
+    return [key];
+  }
+  const capital = last.toUpperCase();
+  return [
+    key,
+    (parts.includes("Alt")
+      ? [...parts, capital]
+      : parts.filter((part) => part !== "Shift").concat(capital)
+    ).join("-"),
+  ];
 };
 
 // The keymap of a mode. The Normal keys (Mod is Ctrl, or Cmd on macOS) are

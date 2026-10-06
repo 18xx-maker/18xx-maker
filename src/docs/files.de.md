@@ -250,14 +250,16 @@ Rückgängig und Alles auswählen behalten in Normal ihre üblichen Tasten. In V
 verlässt Escape den Editor nur, wenn Vim im Normalmodus ist und kein Befehl
 aussteht. Die Suche hat in Emacs und Vim eigene Tasten.
 
-| Aktion                                 | Normal                                     | Emacs        | Vim        |
-| -------------------------------------- | ------------------------------------------ | ------------ | ---------- |
-| Formatieren                            | `Mod-Shift-F`, `Shift-Alt-F`               | `C-c C-f`    | `:format`  |
-| Spiel jetzt aus dem Text aktualisieren | `Mod-S`                                    | `C-x C-s`    | `:w`       |
-| Nächstes Problem                       | `F8`                                       | `M-g n`      | `]d`       |
-| Vorheriges Problem                     | `Shift-F8`                                 | `M-g p`      | `[d`       |
-| Suchen                                 | `Mod-F` (`Mod-G` für den nächsten Treffer) | `C-s`, `C-r` | `/`, `?`   |
-| Alles ein- oder ausklappen             | `Ctrl-Alt-[`, `Ctrl-Alt-]`                 |              | `zM`, `zR` |
+| Aktion                                 | Normal                       | Emacs        | Vim        |
+| -------------------------------------- | ---------------------------- | ------------ | ---------- |
+| Formatieren                            | `Mod-Shift-f`, `Shift-Alt-f` | `C-c C-f`    | `:format`  |
+| Spiel jetzt aus dem Text aktualisieren | `Mod-s`                      | `C-x C-s`    | `:w`       |
+| Nächstes Problem                       | `F8`                         | `M-g n`      | `]d`       |
+| Vorheriges Problem                     | `Shift-F8`                   | `M-g p`      | `[d`       |
+| Suchen                                 | `Mod-f`                      | `C-s`, `C-r` | `/`, `?`   |
+| Nächster Treffer                       | `Mod-g`                      |              |            |
+| Vorheriger Treffer                     | `Shift-Mod-g`                |              |            |
+| Alles ein- oder ausklappen             | `Ctrl-Alt-[`, `Ctrl-Alt-]`   |              | `zM`, `zR` |
 
 ### Links zu einem Teil des Editors
 

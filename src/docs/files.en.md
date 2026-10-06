@@ -224,14 +224,16 @@ keep their usual keys in Normal. In Vim, Escape leaves the editor only when
 Vim is in normal mode with no command pending. Search has its own keys in
 Emacs and Vim.
 
-| Action                            | Normal                               | Emacs        | Vim        |
-| --------------------------------- | ------------------------------------ | ------------ | ---------- |
-| Format                            | `Mod-Shift-F`, `Shift-Alt-F`         | `C-c C-f`    | `:format`  |
-| Update the game from the text now | `Mod-S`                              | `C-x C-s`    | `:w`       |
-| Next problem                      | `F8`                                 | `M-g n`      | `]d`       |
-| Previous problem                  | `Shift-F8`                           | `M-g p`      | `[d`       |
-| Search                            | `Mod-F` (`Mod-G` for the next match) | `C-s`, `C-r` | `/`, `?`   |
-| Fold or unfold everything         | `Ctrl-Alt-[`, `Ctrl-Alt-]`           |              | `zM`, `zR` |
+| Action                            | Normal                       | Emacs        | Vim        |
+| --------------------------------- | ---------------------------- | ------------ | ---------- |
+| Format                            | `Mod-Shift-f`, `Shift-Alt-f` | `C-c C-f`    | `:format`  |
+| Update the game from the text now | `Mod-s`                      | `C-x C-s`    | `:w`       |
+| Next problem                      | `F8`                         | `M-g n`      | `]d`       |
+| Previous problem                  | `Shift-F8`                   | `M-g p`      | `[d`       |
+| Search                            | `Mod-f`                      | `C-s`, `C-r` | `/`, `?`   |
+| Next match                        | `Mod-g`                      |              |            |
+| Previous match                    | `Shift-Mod-g`                |              |            |
+| Fold or unfold everything         | `Ctrl-Alt-[`, `Ctrl-Alt-]`   |              | `zM`, `zR` |
 
 ### Links to a part of the editor
 

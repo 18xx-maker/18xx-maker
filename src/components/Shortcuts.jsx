@@ -37,17 +37,7 @@ const shortcuts = [
 ];
 
 // The keys of the JSON editor per mode, from the table its keymap is made of
-const editorActions = [
-  "format",
-  "apply",
-  "nextProblem",
-  "prevProblem",
-  "search",
-  "findNext",
-  "findPrevious",
-  "foldAll",
-  "unfoldAll",
-];
+const editorActions = Object.keys(keyTable.normal);
 
 const Kbd = ({ children }) => (
   <kbd className="rounded-md border bg-accent px-1.5 py-0.5 font-mono text-sm">

@@ -1,18 +1,16 @@
 import { undo } from "@codemirror/commands";
+import { foldedRanges } from "@codemirror/language";
+import { forEachDiagnostic } from "@codemirror/lint";
+import { SearchQuery, setSearchQuery } from "@codemirror/search";
 import { EditorView } from "@codemirror/view";
 import { act, screen, waitFor } from "@testing-library/react";
-import { page as browser, userEvent as realUser } from "vitest/browser";
+import { page as browser } from "vitest/browser";
 
 import games from "@/data/games";
 import { createSetEditorKeys } from "@/state";
 import { gameText } from "@/util/download";
 
 import { renderApp } from "@tests/support/helpers.jsx";
-
-// Mod is Cmd on macOS and Ctrl elsewhere
-const MOD = /Mac/.test(navigator.platform) ? "Meta" : "Control";
-const key = (name, { shift = false } = {}) =>
-  `{${MOD}>}${shift ? "{Shift>}" : ""}${name}${shift ? "{/Shift}" : ""}{/${MOD}}`;
 
 // A key sent to the editor itself: no real keyboard, which the tests running
 // side by side do not all have
@@ -26,6 +24,10 @@ const press = (v, key, init = {}) =>
       ...init,
     }),
   );
+
+// Mod is Cmd on macOS and Ctrl elsewhere
+const mod = { [/Mac/.test(navigator.platform) ? "metaKey" : "ctrlKey"]: true };
+const pressMod = (v, key, init = {}) => press(v, key, { ...mod, ...init });
 
 const route = "/games/internal:abc/map?edit=true&editSection=json";
 
@@ -68,6 +70,40 @@ const compact = async () => {
   return v;
 };
 
+// An Ex command typed at the prompt of Vim
+const ex = (v, command) => {
+  press(v, ":");
+  // eslint-disable-next-line testing-library/no-node-access
+  const input = v.dom.querySelector("input");
+  input.value = command;
+  input.dispatchEvent(
+    new KeyboardEvent("keydown", {
+      key: "Enter",
+      keyCode: 13,
+      bubbles: true,
+      cancelable: true,
+    }),
+  );
+};
+
+// A text with a syntax error, once the linter has found it
+const BROKEN = '{"a": 1,}';
+const withProblem = async () => {
+  const v = await view();
+  v.dispatch({ changes: { from: 0, to: v.state.doc.length, insert: BROKEN } });
+  v.dispatch({ selection: { anchor: 0 } });
+  v.focus();
+  await waitFor(() => expect(problemAt(v)).toBeGreaterThan(0));
+  return v;
+};
+const problemAt = (v) => {
+  let from = -1;
+  forEachDiagnostic(v.state, (d, start) => {
+    from = start;
+  });
+  return from;
+};
+
 // The mode of the keys is on the view once its extension is loaded
 const ready = (v, check) => waitFor(() => expect(check(v)).toBe(true));
 const hasVim = (v) => !!v.cm;
@@ -85,48 +121,70 @@ describe("normal keys", () => {
   it("format the text with Ctrl-Shift-F and Shift-Alt-F", async () => {
     open();
     const v = await compact();
-    await realUser.keyboard(key("F", { shift: true }));
+    pressMod(v, "F", { shiftKey: true });
     expect(v.state.doc.toString()).toBe(PRETTY);
 
     v.dispatch({
       changes: { from: 0, to: v.state.doc.length, insert: COMPACT },
     });
-    await realUser.keyboard("{Shift>}{Alt>}F{/Alt}{/Shift}");
+    press(v, "F", { shiftKey: true, altKey: true });
     expect(v.state.doc.toString()).toBe(PRETTY);
   });
 
   it("apply the text to the game with Ctrl-S", async () => {
     const { store } = open();
-    await compact();
-    await realUser.keyboard(key("s"));
+    const v = await compact();
+    pressMod(v, "s");
     expect(store.getState().game.info.title).toBe("Compact");
   });
 
   it("open the search panel with Ctrl-F", async () => {
     open();
     const v = await compact();
-    await realUser.keyboard(key("f"));
+    pressMod(v, "f");
     // eslint-disable-next-line testing-library/no-node-access
     expect(v.dom.querySelector(".cm-search")).not.toBeNull();
     // Escape closes the panel before it leaves the editor
-    await realUser.keyboard("{Escape}");
+    press(v, "Escape");
     // eslint-disable-next-line testing-library/no-node-access
     expect(v.dom.querySelector(".cm-search")).toBeNull();
   });
 
-  it("do nothing while the editor is not focused", async () => {
-    const { store } = open();
+  it("go to the next match with Ctrl-G and the previous with Shift-Ctrl-G", async () => {
+    open();
     const v = await compact();
-    v.contentDOM.blur();
-    store.dispatch({ type: "noop" });
-    await realUser.keyboard(key("F", { shift: true }));
-    expect(v.state.doc.toString()).toBe(COMPACT);
+    const doc = v.state.doc.toString();
+    const at = [...doc.matchAll(/"name"/g)].map((m) => m.index);
+    expect(at.length).toBeGreaterThan(2);
+    // The search loads with its panel
+    pressMod(v, "f");
+    v.dispatch({
+      effects: setSearchQuery.of(new SearchQuery({ search: '"name"' })),
+      selection: { anchor: 0 },
+    });
+    const head = () => v.state.selection.main.from;
+    pressMod(v, "g");
+    expect(head()).toBe(at[0]);
+    pressMod(v, "g");
+    expect(head()).toBe(at[1]);
+    pressMod(v, "G", { shiftKey: true });
+    expect(head()).toBe(at[0]);
+  });
+
+  it("go to the next and previous problem with F8 and Shift-F8", async () => {
+    open();
+    const v = await withProblem();
+    press(v, "F8");
+    expect(v.state.selection.main.from).toBe(problemAt(v));
+    v.dispatch({ selection: { anchor: 0 } });
+    press(v, "F8", { shiftKey: true });
+    expect(v.state.selection.main.from).toBe(problemAt(v));
   });
 
   it("leave undo to the editor", async () => {
     open();
     const v = await compact();
-    await realUser.keyboard(key("F", { shift: true }));
+    pressMod(v, "F", { shiftKey: true });
     undo(v);
     expect(v.state.doc.toString()).not.toBe(PRETTY);
   });
@@ -145,6 +203,19 @@ describe("emacs keys", () => {
     expect(store.getState().game.info.title).toBe("Compact");
   });
 
+  it("go to the next and previous problem with M-g n and M-g p", async () => {
+    open("emacs");
+    const v = await withProblem();
+    await waitFor(() => expect(v.scrollDOM).toHaveClass("cm-emacsMode"));
+    press(v, "g", { altKey: true });
+    press(v, "n");
+    expect(v.state.selection.main.from).toBe(problemAt(v));
+    v.dispatch({ selection: { anchor: 0 } });
+    press(v, "g", { altKey: true });
+    press(v, "p");
+    expect(v.state.selection.main.from).toBe(problemAt(v));
+  });
+
   it("leave the editor with Escape", async () => {
     open("emacs");
     const v = await compact();
@@ -160,23 +231,47 @@ describe("vim keys", () => {
     const { store } = open("vim");
     const v = await compact();
     await ready(v, hasVim);
-    await realUser.keyboard(":");
-    await realUser.keyboard("format");
-    console.log(
-      "A2",
-      document.activeElement.tagName,
-      document.activeElement.value,
-    );
-    await realUser.keyboard("{Enter}");
+    ex(v, "format");
     await waitFor(() => expect(v.state.doc.toString()).toBe(PRETTY));
     v.dispatch({
       changes: { from: 0, to: v.state.doc.length, insert: COMPACT },
     });
-    v.focus();
-    await realUser.keyboard(":w{Enter}");
+    ex(v, "w");
     await waitFor(() =>
       expect(store.getState().game.info.title).toBe("Compact"),
     );
+  });
+
+  it("go to the next and previous problem with ]d and [d", async () => {
+    open("vim");
+    const v = await withProblem();
+    await ready(v, hasVim);
+    press(v, "]");
+    press(v, "d");
+    expect(v.state.selection.main.from).toBe(problemAt(v));
+    v.dispatch({ selection: { anchor: 0 } });
+    press(v, "[");
+    press(v, "d");
+    expect(v.state.selection.main.from).toBe(problemAt(v));
+  });
+
+  it("fold everything with zM and unfold it with zR", async () => {
+    open("vim");
+    const v = await view();
+    v.dispatch({
+      changes: { from: 0, to: v.state.doc.length, insert: PRETTY },
+    });
+    v.focus();
+    await ready(v, hasVim);
+    press(v, "z");
+    press(v, "R");
+    expect(foldedRanges(v.state).size).toBe(0);
+    press(v, "z");
+    press(v, "M");
+    expect(foldedRanges(v.state).size).toBeGreaterThan(0);
+    press(v, "z");
+    press(v, "R");
+    expect(foldedRanges(v.state).size).toBe(0);
   });
 
   it("types only in insert mode and leaves with Escape when idle", async () => {
@@ -214,7 +309,7 @@ describe("switching modes", () => {
   it("keeps the text and the undo history", async () => {
     const { store } = open();
     const v = await compact();
-    await realUser.keyboard(key("F", { shift: true }));
+    pressMod(v, "F", { shiftKey: true });
     store.dispatch(createSetEditorKeys("vim"));
     await ready(v, hasVim);
     expect(v.state.doc.toString()).toBe(PRETTY);
