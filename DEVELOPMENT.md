@@ -287,8 +287,9 @@ closed card shows a color swatch, the name and the abbreviation), `defaults` as
 a function of the items (`newItem` accepts one, so a new company gets a free
 `abbrev` from `nextAbbrev`) and `copyOf` (a copy gets a free abbrev, case
 insensitive: PRR becomes PRR2). A closed card whose fields have a problem shows
-a marker (`editPanel.hasProblems`). The shares, tokens, token, trains, loans and
-capital of a company are JSON fields for now. `PhasesForm` is the same for `phases` (`PHASE_PRIMARY_KEYS`, defaults
+a marker (`editPanel.hasProblems`). The shares, tokens, token, trains and loans
+of a company are JSON fields for now.
+`PhasesForm` is the same for `phases` (`PHASE_PRIMARY_KEYS`, defaults
 `limit` and `tiles`): it passes `primary` and `unique` to `ArrayField`, and
 `unique="named"` names a new phase only when the others have names (a phase list
 keyed by train, like 1871, gets a free `train` instead; a copy is renamed only

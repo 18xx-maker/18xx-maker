@@ -15,23 +15,27 @@ const copyOf = (copy, companies) => ({
   abbrev: nextAbbrev(companies, copy.abbrev || undefined),
 });
 
-// What a closed card shows: the color, the name and the abbreviation
+// What a closed card shows: the color, the name and the abbreviation. One
+// inline run of text, so the title reads "Name ABBREV" and truncates as one.
 const summary = (company, index) => (
-  <>
+  <span className="truncate">
     {typeof company?.color === "string" && company.color && (
       <span
-        className="size-3 shrink-0 rounded-full border"
+        className="mr-1.5 inline-block size-3 rounded-full border align-middle"
         style={{ backgroundColor: company.color }}
         aria-hidden="true"
       />
     )}
-    <span className="truncate">{company?.name || `#${index + 1}`}</span>
+    {company?.name || `#${index + 1}`}
     {company?.abbrev && (
-      <span className="shrink-0 font-normal text-muted-foreground">
-        {company.abbrev}
-      </span>
+      <>
+        {" "}
+        <span className="font-normal text-muted-foreground">
+          {company.abbrev}
+        </span>
+      </>
     )}
-  </>
+  </span>
 );
 
 // The companies of the game, generated from the game schema. The cards start

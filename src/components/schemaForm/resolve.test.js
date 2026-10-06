@@ -1,5 +1,6 @@
 import schema from "@/schemas/game.schema.json";
 import {
+  COMPANY_PRIMARY_KEYS,
   GAME_INFO_KEYS,
   PHASE_PRIMARY_KEYS,
   clearValue,
@@ -13,6 +14,7 @@ import {
   kindOf,
   moveItem,
   newItem,
+  nextAbbrev,
   nextName,
   parseLimit,
   parseList,
@@ -442,6 +444,43 @@ describe("kindOf", () => {
     expect(json).toEqual(["on"]);
   });
 
+  it("reads the companies as an array, the fields of a company as real fields", () => {
+    expect(kindOf(schema.properties.companies, "companies", schema)).toBe(
+      "array",
+    );
+    const item = resolveAllOf(schema.properties.companies.items, schema);
+    const kinds = Object.fromEntries(
+      Object.entries(item.properties).map(([key, node]) => [
+        key,
+        kindOf(resolveAllOf(node, schema), key, schema, ["companies", 0, key]),
+      ]),
+    );
+    expect(kinds.name).toBe("string");
+    expect(kinds.abbrev).toBe("string");
+    expect(kinds.color).toBe("string");
+    expect(kinds.minor).toBe("boolean");
+    expect(kinds.logo).toBe("string");
+    expect(kinds.home).toBe("stringList");
+    expect(kinds.marketTokens).toBe("number");
+    expect(kinds.charterSubtitle).toBe("object");
+    expect(Object.keys(kinds)).toEqual(
+      expect.arrayContaining(COMPANY_PRIMARY_KEYS),
+    );
+  });
+
+  // Until they get a form these are a JSON textarea: a field that is new to
+  // the schema must not silently join them
+  it("lists the company fields that are a JSON textarea", () => {
+    const item = resolveAllOf(schema.properties.companies.items, schema);
+    const json = Object.entries(item.properties)
+      .filter(
+        ([key, node]) =>
+          kindOf(resolveAllOf(node, schema), key, schema) === "json",
+      )
+      .map(([key]) => key);
+    expect(json).toEqual(["shares", "tokens", "loans", "trains", "token"]);
+  });
+
   it("shows a property that is new to the schema without a component change", () => {
     const mock = {
       properties: {
@@ -746,6 +785,33 @@ describe("lists", () => {
       color: "gray",
       quantity: 1,
     });
+  });
+
+  it("takes the defaults of a list from a function of its items", () => {
+    const defaults = (items) => ({ abbrev: `A${items.length}` });
+    expect(newItem([{ name: "1" }, { name: "2" }], defaults)).toEqual({
+      name: "3",
+      abbrev: "A2",
+    });
+    expect(newItem([], defaults, false)).toEqual({ abbrev: "A0" });
+  });
+
+  it("makes an abbreviation no item has, whatever the case", () => {
+    expect(nextAbbrev([])).toBe("NEW");
+    expect(nextAbbrev(undefined)).toBe("NEW");
+    expect(nextAbbrev([{ abbrev: "NEW" }, { name: "x" }])).toBe("NEW2");
+    expect(nextAbbrev([{ abbrev: "new" }, { abbrev: "New2" }])).toBe("NEW3");
+    expect(nextAbbrev([{ abbrev: "PRR" }], "PRR")).toBe("PRR2");
+    expect(nextAbbrev([{ abbrev: "prr" }, { abbrev: "PRR2" }], "PRR")).toBe(
+      "PRR3",
+    );
+    // A number the base ends with is not kept
+    expect(nextAbbrev([{ abbrev: "PRR" }, { abbrev: "PRR2" }], "PRR2")).toBe(
+      "PRR3",
+    );
+    // A base that is only a number stays whole
+    expect(nextAbbrev([{ abbrev: "7" }], "7")).toBe("72");
+    expect(nextAbbrev([{ abbrev: "PRR" }], "ABC")).toBe("ABC");
   });
 
   describe("with names only where the list has them", () => {

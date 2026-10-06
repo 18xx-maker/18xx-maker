@@ -1,9 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useRef, useState } from "react";
 
 import SchemaField, {
   SchemaFormContext,
 } from "@/components/schemaForm/SchemaField";
+import {
+  clearValue,
+  insertAt,
+  moveItem,
+  removeAt,
+  setValue,
+} from "@/components/schemaForm/resolve";
 
 // A schema with a deprecated field: no field of the real game schema is
 // deprecated for the panel yet
@@ -186,5 +194,181 @@ describe("a deprecated field", () => {
     ]);
     expect(screen.getByRole("spinbutton", { name: /Players/ })).toBeInvalid();
     expect(screen.getByRole("alert")).toHaveClass("text-destructive");
+  });
+});
+
+// A list in a form that holds the game in state, like the real provider
+const listRoot = {
+  type: "object",
+  properties: {
+    trains: {
+      type: "array",
+      items: {
+        type: "object",
+        required: ["name"],
+        properties: {
+          name: { type: "string" },
+          code: { type: "string" },
+          note: { type: "string" },
+        },
+      },
+    },
+  },
+};
+
+const ListForm = ({ initial, issues = [], ...props }) => {
+  const [game, setGame] = useState(initial);
+  const latest = useRef(game);
+  latest.current = game;
+  const change = (fn) => {
+    latest.current = fn(latest.current);
+    setGame(latest.current);
+  };
+  return (
+    <SchemaFormContext.Provider
+      value={{
+        root: listRoot,
+        game,
+        issues,
+        latest: () => latest.current,
+        set: (keys, value) => change((g) => setValue(g, keys, value)),
+        clear: (keys) => change((g) => clearValue(g, keys)),
+        insert: (keys, index, item) =>
+          change((g) => insertAt(g, keys, index, item)),
+        remove: (keys, index) => change((g) => removeAt(g, keys, index)),
+        move: (keys, from, to) => change((g) => moveItem(g, keys, from, to)),
+      }}
+    >
+      <SchemaField
+        keys={["trains"]}
+        schema={listRoot.properties.trains}
+        defaults={{}}
+        {...props}
+      />
+    </SchemaFormContext.Provider>
+  );
+};
+
+const toggle = (name) => screen.getByRole("button", { name });
+
+describe("a list of cards", () => {
+  const initial = { trains: [{ name: "A", code: "a" }, { name: "B" }] };
+
+  it("starts open, and closed with startCollapsed", () => {
+    const { unmount } = render(<ListForm initial={initial} />);
+    expect(toggle("A")).toHaveAttribute("aria-expanded", "true");
+    expect(toggle("B")).toHaveAttribute("aria-expanded", "true");
+    unmount();
+
+    render(<ListForm initial={initial} startCollapsed />);
+    expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
+    expect(toggle("B")).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("opens an added and a copied card, the others stay closed", async () => {
+    const user = userEvent.setup();
+    render(<ListForm initial={initial} startCollapsed />);
+
+    await user.click(screen.getByRole("button", { name: "Add train" }));
+    expect(toggle("3")).toHaveAttribute("aria-expanded", "true");
+    expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
+
+    await user.click(screen.getByRole("button", { name: "Duplicate train B" }));
+    // The copy is after its source and open
+    const toggles = screen
+      .getAllByRole("button", { name: /^(A|B|3|4)$/ })
+      .map((button) => [button.textContent, button.ariaExpanded]);
+    expect(toggles).toEqual([
+      ["A", "false"],
+      ["B", "false"],
+      ["4", "true"],
+      ["3", "true"],
+    ]);
+  });
+
+  it("keeps what is open when a card moves, is removed and comes back", async () => {
+    const user = userEvent.setup();
+    render(<ListForm initial={initial} startCollapsed />);
+    await user.click(toggle("B"));
+
+    await user.click(screen.getByRole("button", { name: "Move train B up" }));
+    expect(toggle("B")).toHaveAttribute("aria-expanded", "true");
+    expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
+
+    await user.click(screen.getByRole("button", { name: "Remove train B" }));
+    expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(toggle("B")).toHaveAttribute("aria-expanded", "true");
+    expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("takes defaults from a function of the items and a hook for copies", async () => {
+    const user = userEvent.setup();
+    render(
+      <ListForm
+        initial={initial}
+        primary={["name", "code"]}
+        defaults={(items) => ({ code: `c${items.length}` })}
+        copyOf={(copy) => ({ code: `${copy.code ?? "x"}2` })}
+      />,
+    );
+    await user.click(screen.getByRole("button", { name: "Add train" }));
+    const codes = () =>
+      screen.getAllByRole("textbox", { name: "Code" }).map((i) => i.value);
+    expect(codes()).toEqual(["a", "", "c2"]);
+
+    await user.click(screen.getByRole("button", { name: "Duplicate train A" }));
+    expect(codes()).toEqual(["a", "a2", "", "c2"]);
+  });
+
+  it("shows the summary in place of the title", () => {
+    render(
+      <ListForm
+        initial={initial}
+        summary={(item) => <span>{`${item.name}!`}</span>}
+      />,
+    );
+    expect(toggle("A!")).toBeVisible();
+  });
+
+  it("marks a closed card that has a problem, an open one has the message", async () => {
+    const user = userEvent.setup();
+    const issues = [
+      {
+        severity: "error",
+        code: "generic",
+        pointer: "trains[1].note",
+        params: { message: "bad" },
+      },
+    ];
+    render(<ListForm initial={initial} issues={issues} startCollapsed />);
+    const marker = screen.getByRole("img", {
+      name: "The train B has a problem",
+    });
+    expect(marker).toBeVisible();
+    expect(screen.getAllByRole("img")).toHaveLength(1);
+
+    await user.click(toggle("B"));
+    expect(
+      screen.queryByRole("img", { name: /has a problem/ }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("does not mark a card for the deprecation note", () => {
+    render(
+      <ListForm
+        initial={initial}
+        startCollapsed
+        issues={[
+          {
+            severity: "warning",
+            code: "deprecated",
+            pointer: "trains[0].note",
+            params: { key: "note" },
+          },
+        ]}
+      />,
+    );
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
 });
