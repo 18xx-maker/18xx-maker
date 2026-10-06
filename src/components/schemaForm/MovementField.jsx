@@ -58,7 +58,9 @@ const AddKey = () => {
   const { t } = useTranslation();
   const [key, setKey] = useState("");
   const [text, setText] = useState("");
-  const ready = key.trim() !== "" && text.trim() !== "";
+  // A key that is there has its own field, adding it would replace its texts
+  const exists = key.trim() in (form.game.stock?.movement ?? {});
+  const ready = key.trim() !== "" && text.trim() !== "" && !exists;
 
   const add = () => {
     if (!ready) return;

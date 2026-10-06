@@ -467,7 +467,7 @@ const focusItem = (container, index, action) => {
   (target ?? container?.querySelector("[data-add]"))?.focus();
 };
 
-export const IconButton = ({ label, action, children, ...props }) => (
+const IconButton = ({ label, action, children, ...props }) => (
   <Button
     type="button"
     variant="ghost"
@@ -606,7 +606,7 @@ const FRESH_CARD = { open: true, more: false };
 // titleKey is the field that names an item. Names are kept unique (a new item
 // or a copy gets a free one) unless unique is false, as in a legend.
 // onChange(kind, from, to) gives back a warning to show with the list after a
-// move or remove.
+// move, remove or insert (a duplicate) of an item.
 const ArrayField = ({
   keys,
   schema,
@@ -680,6 +680,7 @@ const ArrayField = ({
     setRemoved(null);
     setWarning("");
     form.insert(keys, index + 1, copy);
+    setWarning(onChange?.("insert", index + 1, index + 1) ?? "");
     changeUi((cards) => cards.toSpliced(index + 1, 0, FRESH_CARD));
     setMessage(
       t("editPanel.duplicated", { item, title: titleOf(copy, index + 1) }),

@@ -979,11 +979,22 @@ describe("edit panel market", () => {
       rows.map((row) => within(row).queryAllByRole("gridcell").length),
     ).toEqual(games["18Test"].stock.market.map((row) => row.length));
     expect(cell(1, 1)).toHaveAccessibleName(
-      "Row 1, column 1: 60, legend 1, down",
+      "Row 1, column 1: 60, legend 0, down",
     );
     expect(cell(1, 7)).toHaveAccessibleName("Row 1, column 7: 100, par");
     expect(cell(1, 2)).toHaveAccessibleName("Row 1, column 2: 67");
-    expect(cells(1)[0]).toHaveAttribute("aria-colindex", "1");
+    // The row number is the first column
+    expect(cells(1)[0]).toHaveAttribute("aria-colindex", "2");
+    expect(within(rows[0]).getByRole("rowheader")).toHaveAttribute(
+      "aria-colindex",
+      "1",
+    );
+    expect(screen.getByRole("grid")).toHaveAttribute(
+      "aria-colcount",
+      String(
+        Math.max(...games["18Test"].stock.market.map((r) => r.length)) + 1,
+      ),
+    );
     expect(rows[2]).toHaveAttribute("aria-rowindex", "3");
     // Empty cells are not drawn past the end of a row
     expect(
@@ -999,7 +1010,7 @@ describe("edit panel market", () => {
     const par = getComputedStyle(cell(1, 7)).backgroundColor;
     expect(new Set([plain, legend, par]).size).toBe(3);
     expect(cell(1, 7)).toHaveTextContent("P");
-    expect(cell(1, 1)).toHaveTextContent("1");
+    expect(cell(1, 1)).toHaveTextContent("60↓0");
     expect(cell(1, 1)).toHaveTextContent("↓");
   });
 
@@ -1293,13 +1304,17 @@ describe("edit panel market", () => {
     expect(within(rows[1]).getAllByRole("gridcell")).toHaveLength(2);
     expect(screen.getByText(/two rows: the even cells on top/)).toBeVisible();
 
-    await user.click(screen.getByRole("gridcell", { name: /^Cell 2:/ }));
+    const diagCell = (name) =>
+      screen.getByRole("gridcell", { name: new RegExp(`^${name}:`) });
+    await user.click(diagCell("Column 1, bottom"));
     await user.keyboard("{ArrowRight}");
-    expect(screen.getByRole("gridcell", { name: /^Cell 4:/ })).toHaveFocus();
+    expect(diagCell("Column 2, bottom")).toHaveFocus();
     await user.keyboard("{ArrowUp}");
-    expect(screen.getByRole("gridcell", { name: /^Cell 3:/ })).toHaveFocus();
+    expect(diagCell("Column 2, top")).toHaveFocus();
     await user.keyboard("{ArrowDown}");
-    expect(screen.getByRole("gridcell", { name: /^Cell 4:/ })).toHaveFocus();
+    expect(diagCell("Column 2, bottom")).toHaveFocus();
+    // The inspector names the cell as the grid does
+    expect(await inspector()).toHaveTextContent("Column 2, bottom");
 
     await user.click(button("Add column to the left"));
     expect(market(store)).toEqual(
@@ -1307,6 +1322,72 @@ describe("edit panel market", () => {
     );
     await user.click(button("Remove column 2"));
     expect(market(store)).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  it("adds, duplicates and moves the half full last column of a 1Diag market", async () => {
+    const diag = {
+      ...games["18Test"],
+      stock: { type: "1Diag", market: [1, 2, 3, 4, 5] },
+    };
+    const { user, store } = open(marketRoute, diag);
+    await grid();
+    await user.click(screen.getByRole("gridcell", { name: /^Column 3, top:/ }));
+    await user.click(button("Add column to the right"));
+    expect(market(store)).toEqual([1, 2, 3, 4, 5, null, null, null]);
+    await user.click(button("Remove column 4"));
+    await user.click(screen.getByRole("gridcell", { name: /^Column 3, top:/ }));
+    await user.click(button("Duplicate column 3"));
+    expect(market(store)).toEqual([1, 2, 3, 4, 5, null, 5, null]);
+    await user.click(button("Remove column 4"));
+    await user.click(button("Move column 3 left"));
+    expect(market(store)).toEqual([1, 2, 5, null, 3, 4]);
+  });
+
+  it("removing a column that empties rows drops them, undo brings them back", async () => {
+    const { user, store } = open(marketRoute, {
+      ...games["18Test"],
+      stock: { ...games["18Test"].stock, market: [[1, 2], [3], [4, 5]] },
+    });
+    await grid();
+    await user.click(cell(1, 1));
+    await user.click(button("Remove column 1"));
+    expect(market(store)).toEqual([[2], [5]]);
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(market(store)).toEqual([[1, 2], [3], [4, 5]]);
+  });
+
+  it("forgets the undo of a removed row when the type changes", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(cell(3, 1));
+    await user.click(button("Remove row 3"));
+    expect(
+      screen.getByText("Removed row 3", { selector: "span" }),
+    ).toBeVisible();
+    await user.click(screen.getByRole("combobox", { name: /Type/ }));
+    await user.click(await screen.findByRole("option", { name: "1Diag" }));
+    expect(
+      screen.queryByText("Removed row 3", { selector: "span" }),
+    ).not.toBeInTheDocument();
+    expect(stock(store).type).toBe("1Diag");
+  });
+
+  it("forgets the note of the rows a type change dropped at the next edit", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(screen.getByRole("combobox", { name: /Type/ }));
+    await user.click(await screen.findByRole("option", { name: "1D" }));
+    expect(
+      await screen.findByText("10 rows were removed from the market."),
+    ).toBeVisible();
+    await user.click(screen.getByRole("gridcell", { name: /^Cell 2:/ }));
+    await user.keyboard("{Delete}");
+    expect(market(store)[1]).toBeNull();
+    await waitFor(() =>
+      expect(
+        screen.queryByText("10 rows were removed from the market."),
+      ).not.toBeInTheDocument(),
+    );
   });
 
   it("changes the type, warns when rows are dropped and undoes it", async () => {
@@ -1463,6 +1544,18 @@ describe("edit panel market", () => {
     expect(stock(store).legend[4]).toEqual({ description: "New entry" });
   });
 
+  it("warns when duplicating a legend entry moves the ones after it", async () => {
+    const { user } = open(marketRoute);
+    await grid();
+    await user.click(screen.getByRole("button", { name: "Legend" }));
+    await user.click(
+      screen.getAllByRole("button", { name: /^Duplicate legend entry / })[0],
+    );
+    expect(screen.getByTestId("list-warning")).toHaveTextContent(
+      /cells? uses? a legend number that now means another entry/,
+    );
+  });
+
   it("edits the cell defaults", async () => {
     const { user, store } = open(marketRoute);
     await grid();
@@ -1496,6 +1589,17 @@ describe("edit panel market", () => {
     await user.tab();
     expect("3x" in stock(store).movement).toBe(false);
     expect(stock(store).display).toEqual(games["18Test"].stock.display);
+  });
+
+  it("does not add a movement key that is there, it would replace its texts", async () => {
+    const { user, store } = open(marketRoute);
+    await grid();
+    await user.click(screen.getByRole("button", { name: "Movement" }));
+    await user.type(screen.getByRole("textbox", { name: "New key" }), "up");
+    await user.type(screen.getByRole("textbox", { name: "Text" }), "Other");
+    expect(screen.getByRole("button", { name: "Add key" })).toBeDisabled();
+    await user.type(screen.getByRole("textbox", { name: "Text" }), "{Enter}");
+    expect(stock(store).movement.up).toEqual(["Sold out"]);
   });
 
   it("keeps ledges, limits and display as JSON", async () => {

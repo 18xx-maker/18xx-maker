@@ -182,40 +182,76 @@ const mapRows = (game, fn) => {
   return withRows(game, rows);
 };
 
+// The row filled up with nulls to whole columns: a 1Diag market with an odd
+// number of cells ends with a half full column
+const fill = (row, size) =>
+  row.length % size === 0
+    ? row
+    : [...row, ...Array(size - (row.length % size)).fill(null)];
+
 // Inserts a column before the one at the index, in every row that is that
-// long. With the cells of a removed column (columnCells) they go back where
-// they came from.
+// long (or one column short of it, to add at the end). With the cells of a
+// removed column (columnCells) they go back where they came from. A half full
+// column the new one comes after is filled up first.
 export const insertColumn = (game, at, cells) => {
   if (!game.stock || at < 0) return game;
   const size = unit(game.stock.type);
   return mapRows(game, (row, index) => {
     const wanted = cells
       ? cells[index]
-      : row.length >= at * size
+      : Math.ceil(row.length / size) >= at
         ? Array(size).fill(null)
         : undefined;
     if (!wanted) return undefined;
-    const place = Math.min(at * size, row.length);
-    return [...row.slice(0, place), ...wanted, ...row.slice(place)];
+    const whole = at * size >= row.length ? fill(row, size) : row;
+    const place = Math.min(at * size, whole.length);
+    return [...whole.slice(0, place), ...wanted, ...whole.slice(place)];
   });
 };
 
+// The rows of a 2D market that removing the column leaves empty, none when
+// that is every row (the market keeps its rows then)
+export const emptiedRows = (stock, at) => {
+  if (isFlat(stock?.type)) return [];
+  const size = unit(stock?.type);
+  const rows = rowsOf(stock);
+  const emptied = rows.flatMap((row, index) =>
+    row.length > at * size &&
+    row.length - Math.min(size, row.length - at * size) === 0
+      ? [index]
+      : [],
+  );
+  return emptied.length === rows.length ? [] : emptied;
+};
+
+// Removes a column. A row of a 2D market it empties goes too, nothing could
+// select it any more.
 export const removeColumn = (game, at) => {
   if (!game.stock || at < 0) return game;
   const size = unit(game.stock.type);
-  return mapRows(game, (row) =>
+  const emptied = emptiedRows(game.stock, at);
+  const next = mapRows(game, (row) =>
     row.length > at * size ? row.toSpliced(at * size, size) : undefined,
   );
+  return emptied.length === 0
+    ? next
+    : setRows(
+        next,
+        next.stock.market.filter((_, index) => !emptied.includes(index)),
+      );
 };
 
-// Moves a column among the others, in the rows that have both places
+// Moves a column among the others, in the rows that have both places (a half
+// full column is filled up to move)
 export const moveColumn = (game, from, to) => {
   if (!game.stock || from === to || from < 0 || to < 0) return game;
   const size = unit(game.stock.type);
   return mapRows(game, (row) => {
-    if (row.length <= Math.max(from, to) * size) return undefined;
-    const cells = row.slice(from * size, from * size + size);
-    return row.toSpliced(from * size, size).toSpliced(to * size, 0, ...cells);
+    if (Math.ceil(row.length / size) <= Math.max(from, to)) return undefined;
+    const last = Math.ceil(row.length / size) - 1;
+    const whole = Math.max(from, to) === last ? fill(row, size) : row;
+    const cells = whole.slice(from * size, from * size + size);
+    return whole.toSpliced(from * size, size).toSpliced(to * size, 0, ...cells);
   });
 };
 

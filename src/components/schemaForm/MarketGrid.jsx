@@ -28,6 +28,7 @@ import {
   columnCount,
   duplicateColumn,
   duplicateRow,
+  emptiedRows,
   insertColumn,
   insertRow,
   isFlat,
@@ -45,6 +46,21 @@ const cellText = (cell) => {
   const object = normalizeCell(cell);
   if (!object) return "";
   return "value" in object ? String(object.value) : String(object.label ?? "");
+};
+
+// How a cell is called: by its row and column, or the cell of a flat market. A
+// column of a 1Diag market is two cells, on top and below.
+export const placeName = (t, stock, row, col) => {
+  if (stock.type === "1Diag")
+    return t(
+      col % 2 === 0
+        ? "editPanel.market.positionDiagTop"
+        : "editPanel.market.positionDiagBottom",
+      { column: Math.floor(col / 2) + 1 },
+    );
+  return isFlat(stock.type)
+    ? t("editPanel.market.positionFlat", { column: col + 1 })
+    : t("editPanel.market.position", { row: row + 1, column: col + 1 });
 };
 
 const IconButton = ({ label, disabled, onClick, children, ...props }) => (
@@ -91,7 +107,7 @@ const Toolbar = ({ label, items }) => (
 // The rows are as long as they are (a market is often a triangle), so the
 // indexes are set on every row and cell. A 1Diag market is drawn as the
 // market page does: two rows, the second half a cell to the right.
-const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
+const MarketGrid = ({ stock, selected, select, announce }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const grid = useRef(null);
@@ -145,7 +161,6 @@ const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
     document.activeElement?.blur?.();
     form.edit(fn);
     setRemoved(undo);
-    onUndo?.();
     pick(place);
     announce(message);
   };
@@ -225,6 +240,7 @@ const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
           kind: "column",
           index: column,
           cells: structuredClone(columnCells(form.latest().stock, column)),
+          rows: emptiedRows(form.latest().stock, column),
           col,
         },
       ),
@@ -237,7 +253,12 @@ const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
     form.edit((g) =>
       kind === "row"
         ? insertRow(g, index, removed.row)
-        : insertColumn(g, index, removed.cells),
+        : insertColumn(
+            // The rows the removal emptied come back before their cells
+            removed.rows.reduce((game, at) => insertRow(game, at, []), g),
+            index,
+            removed.cells,
+          ),
     );
     setRemoved(null);
     pick(
@@ -321,14 +342,12 @@ const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
   const cellName = (r, c, cell) => {
     const object = normalizeCell(cell) ?? {};
     const text = cellText(cell) || t("editPanel.market.cellEmpty");
-    const where = flat
-      ? t("editPanel.market.positionFlat", { column: c + 1 })
-      : t("editPanel.market.position", { row: r + 1, column: c + 1 });
+    const where = placeName(t, stock, r, c);
     return [
       `${where}: ${text}`,
       object.par && t("editPanel.market.cellPar"),
       Number.isInteger(object.legend) &&
-        t("editPanel.market.cellLegend", { number: object.legend + 1 }),
+        t("editPanel.market.cellLegend", { number: object.legend }),
       object.arrow && [object.arrow].flat().join(" "),
       problems(r, c) && t("editPanel.market.cellProblem"),
     ]
@@ -358,7 +377,7 @@ const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
       <div
         key={k}
         role="gridcell"
-        aria-colindex={(diag ? Math.floor(k / 2) : k) + 1}
+        aria-colindex={(diag ? Math.floor(k / 2) : k) + (flat ? 1 : 2)}
         aria-selected={isSelected}
         aria-label={cellName(r, k, cell)}
         tabIndex={
@@ -401,7 +420,7 @@ const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
             aria-hidden="true"
             className="absolute right-0.5 top-0 text-[9px] font-bold leading-none"
           >
-            {object.legend + 1}
+            {object.legend}
           </span>
         )}
         {problems(r, k) && (
@@ -601,7 +620,7 @@ const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
                 aria-label={t("editPanel.market.gridLabel")}
                 aria-describedby="market-grid-hint"
                 aria-rowcount={drawn.length}
-                aria-colcount={columns}
+                aria-colcount={columns + (flat ? 0 : 1)}
                 onKeyDown={onKeyDown}
                 data-testid="market-grid"
                 className="overflow-x-auto rounded-md border p-2"
@@ -620,6 +639,7 @@ const MarketGrid = ({ stock, selected, select, announce, onUndo }) => {
                       {!flat && (
                         <span
                           role="rowheader"
+                          aria-colindex={1}
                           className="flex w-5 shrink-0 items-center justify-end pr-1 text-[10px] text-muted-foreground"
                         >
                           {index + 1}

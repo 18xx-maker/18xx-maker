@@ -1,4 +1,4 @@
-import { useContext, useId, useState } from "react";
+import { useContext, useEffect, useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ChevronDown, ChevronRight, Plus } from "lucide-react";
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 
 import CellInspector from "@/components/schemaForm/CellInspector";
-import MarketGrid from "@/components/schemaForm/MarketGrid";
+import MarketGrid, { placeName } from "@/components/schemaForm/MarketGrid";
 import MovementField from "@/components/schemaForm/MovementField";
 import SchemaField, {
   FieldShell,
@@ -29,7 +29,6 @@ import {
   clampCell,
   createMarket,
   droppedRows,
-  isFlat,
   legendUses,
 } from "@/util/marketEdit";
 
@@ -74,6 +73,15 @@ const TypeField = ({ announce }) => {
   const { t } = useTranslation();
   const field = useField(["stock", "type"], stockSchema.type);
   const [dropped, setDropped] = useState(null);
+  const market = form.game.stock?.market;
+
+  // The note goes with the next edit of the market: putting the old one back
+  // would drop it
+  useEffect(() => {
+    if (!dropped) return;
+    if (!("after" in dropped)) setDropped({ ...dropped, after: market });
+    else if (dropped.after !== market) setDropped(null);
+  }, [dropped, market]);
 
   const change = (type) => {
     const stock = form.latest().stock;
@@ -155,21 +163,15 @@ const MarketEditor = () => {
   }
 
   const selected = clampCell(stock, selection);
-  const flat = isFlat(stock.type);
-  const heading = !selected
-    ? ""
-    : flat
-      ? t("editPanel.market.positionFlat", { column: selected.col + 1 })
-      : t("editPanel.market.position", {
-          row: selected.row + 1,
-          column: selected.col + 1,
-        });
+  const heading = selected
+    ? placeName(t, stock, selected.row, selected.col)
+    : "";
 
   // Cells use a legend entry by its number: the ones after a change of the
   // list point to another entry
   const legendChange = (kind, from, to) => {
     const count =
-      kind === "remove"
+      kind !== "move"
         ? legendUses(form.latest().stock, from, Infinity)
         : legendUses(form.latest().stock, from, to);
     return count > 0
@@ -181,6 +183,7 @@ const MarketEditor = () => {
     <div className="flex flex-col gap-4">
       <TypeField announce={announce} />
       <MarketGrid
+        key={stock.type}
         stock={stock}
         selected={selected}
         select={setSelection}

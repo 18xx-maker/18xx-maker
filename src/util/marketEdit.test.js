@@ -12,6 +12,7 @@ import {
   droppedRows,
   duplicateColumn,
   duplicateRow,
+  emptiedRows,
   insertColumn,
   insertRow,
   legendUses,
@@ -231,6 +232,45 @@ describe("columns", () => {
     expect(market(removeColumn(diag(), 1))).toEqual([1, 2, 5]);
     expect(market(removeColumn(diag(), 2))).toEqual([1, 2, 3, 4]);
     expect(market(moveColumn(diag(), 0, 1))).toEqual([3, 4, 1, 2, 5]);
+  });
+
+  it("adds, duplicates and moves the half full last column of a 1Diag market", () => {
+    // The last column has the cell on top only
+    expect(market(insertColumn(diag(), 3))).toEqual([
+      1,
+      2,
+      3,
+      4,
+      5,
+      null,
+      null,
+      null,
+    ]);
+    expect(market(duplicateColumn(diag(), 2))).toEqual([
+      1,
+      2,
+      3,
+      4,
+      5,
+      null,
+      5,
+    ]);
+    expect(market(moveColumn(diag(), 2, 1))).toEqual([1, 2, 5, null, 3, 4]);
+    expect(market(moveColumn(diag(), 1, 2))).toEqual([1, 2, 5, null, 3, 4]);
+    // A column that is not the last one leaves the half full one as it is
+    expect(market(duplicateColumn(diag(), 0))).toEqual([1, 2, 1, 2, 3, 4, 5]);
+    const g = diag();
+    expect(insertColumn(g, 4)).toBe(g);
+  });
+
+  it("drops the rows a removed column empties, unless that is every row", () => {
+    const g = game({ type: "2D", market: [[1, 2], [3], [4, 5]] });
+    expect(emptiedRows(g.stock, 0)).toEqual([1]);
+    expect(market(removeColumn(g, 0))).toEqual([[2], [5]]);
+    expect(market(removeColumn(g, 1))).toEqual([[1], [3], [4]]);
+    const all = game({ type: "2D", market: [[1], [2]] });
+    expect(emptiedRows(all.stock, 0)).toEqual([]);
+    expect(market(removeColumn(all, 0))).toEqual([[], []]);
   });
 
   it("removes a column from the rows that have it, the last leaves an empty market", () => {
