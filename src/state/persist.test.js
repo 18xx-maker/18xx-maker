@@ -150,6 +150,20 @@ describe("loading persisted state", () => {
     });
   });
 
+  it("reads settings stored before editorKeys existed as normal", async () => {
+    window.localStorage.setItem("settings", JSON.stringify({ theme: "dark" }));
+    const { store } = await importStore();
+    const { selectEditorKeys } = await import("@/state/selectors");
+    const { createSetEditorKeys } = await import("@/state/settings");
+
+    expect(selectEditorKeys(store.getState())).toBe("normal");
+    store.dispatch(createSetEditorKeys("vim"));
+    expect(JSON.parse(window.localStorage.getItem("settings"))).toEqual({
+      theme: "dark",
+      editorKeys: "vim",
+    });
+  });
+
   it("ignores keys that are not persisted", async () => {
     window.localStorage.setItem("alert", JSON.stringify({ open: true }));
     window.localStorage.setItem("errors", JSON.stringify({ a: "b" }));

@@ -8,6 +8,7 @@ import {
   SET_ALERT,
   SET_CONFIG,
   SET_DOWNLOAD_PERCENT,
+  SET_EDITOR_KEYS,
   SET_ERRORS,
   SET_EXPORT_MENU_OPEN,
   SET_EXPORT_SHEET_OPEN,
@@ -28,6 +29,7 @@ import {
   createResetConfig,
   createResetErrors,
   createSetConfig,
+  createSetEditorKeys,
   createSetErrors,
   createSetExportMenuOpen,
   createSetExportSheetOpen,
@@ -385,6 +387,24 @@ describe("settingsReducer", () => {
     // Off removes the key, anything but true is off
     for (const open of [false, undefined, "yes", 1]) {
       expect(settingsReducer(state, createSetOpenExportFolder(open))).toEqual({
+        theme: "dark",
+      });
+    }
+  });
+
+  it("stores the editor keys only for vim and emacs", () => {
+    const vim = createSetEditorKeys("vim");
+    expect(vim).toEqual({ type: SET_EDITOR_KEYS, keys: "vim" });
+    const state = settingsReducer(frozen({ theme: "dark" }), vim);
+    expect(state).toEqual({ theme: "dark", editorKeys: "vim" });
+    expect(settingsReducer(state, createSetEditorKeys("emacs"))).toEqual({
+      theme: "dark",
+      editorKeys: "emacs",
+    });
+
+    // Normal is the default, anything else is not a mode
+    for (const keys of ["normal", undefined, "nano", 1]) {
+      expect(settingsReducer(state, createSetEditorKeys(keys))).toEqual({
         theme: "dark",
       });
     }

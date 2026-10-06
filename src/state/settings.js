@@ -5,6 +5,7 @@ export const SET_SETTINGS = "SET_SETTINGS";
 export const SET_SIDEBAR_OPEN = "SET_SIDEBAR_OPEN";
 export const SET_LANGUAGE = "SET_LANGUAGE";
 export const SET_OPEN_EXPORT_FOLDER = "SET_OPEN_EXPORT_FOLDER";
+export const SET_EDITOR_KEYS = "SET_EDITOR_KEYS";
 
 export const createSetSettings = (settings) => ({
   type: SET_SETTINGS,
@@ -24,6 +25,11 @@ export const createSetLanguage = (language) => ({
 export const createSetOpenExportFolder = (open) => ({
   type: SET_OPEN_EXPORT_FOLDER,
   open,
+});
+
+export const createSetEditorKeys = (keys) => ({
+  type: SET_EDITOR_KEYS,
+  keys,
 });
 
 export const settingsReducer = (state = {}, action) => {
@@ -47,6 +53,11 @@ export const settingsReducer = (state = {}, action) => {
         ? { ...state, openExportFolder: true }
         : dissoc("openExportFolder", state);
     }
+    case SET_EDITOR_KEYS:
+      // Normal is the default, so only vim and emacs are stored
+      return action.keys === "vim" || action.keys === "emacs"
+        ? { ...state, editorKeys: action.keys }
+        : dissoc("editorKeys", state);
     default:
       return state;
   }

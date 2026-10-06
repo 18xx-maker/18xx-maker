@@ -76,13 +76,17 @@ export default defineConfig({
         optimizeDeps: {
           include: [
             "json-schema-library",
+            "@codemirror/autocomplete",
             "@codemirror/commands",
             "@codemirror/lang-json",
             "@codemirror/language",
             "@codemirror/lint",
+            "@codemirror/search",
             "@codemirror/state",
             "@codemirror/view",
             "@lezer/highlight",
+            "@replit/codemirror-emacs",
+            "@replit/codemirror-vim",
             "shiki/core",
             "shiki/engine/javascript",
             "shiki/langs/bash.mjs",

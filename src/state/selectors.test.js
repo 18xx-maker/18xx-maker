@@ -1,6 +1,7 @@
 import { games } from "@/data";
 import {
   createConfigSelector,
+  selectEditorKeys,
   selectGame,
   selectGameForSlug,
   selectGameState,
@@ -171,6 +172,17 @@ describe("settings selectors", () => {
     expect(
       selectOpenExportFolder({ settings: { openExportFolder: true } }),
     ).toBe(true);
+  });
+
+  it("read the editor keys as normal unless they are vim or emacs", () => {
+    expect(selectEditorKeys({})).toBe("normal");
+    for (const editorKeys of ["normal", "nano", 1, null]) {
+      expect(selectEditorKeys({ settings: { editorKeys } })).toBe("normal");
+    }
+    expect(selectEditorKeys({ settings: { editorKeys: "vim" } })).toBe("vim");
+    expect(selectEditorKeys({ settings: { editorKeys: "emacs" } })).toBe(
+      "emacs",
+    );
   });
 
   it("read the stored settings", () => {

@@ -24,7 +24,7 @@ const manualChunks = (id) => {
 
   // The JSON editor of the edit panel (CodeMirror) loads with it, on demand
   if (
-    /node_modules\/(\.pnpm\/[^/]+\/node_modules\/)?(@codemirror|@lezer|style-mod|w3c-keyname|crelt|@marijn)\//.test(
+    /node_modules\/(\.pnpm\/[^/]+\/node_modules\/)?(@codemirror|@replit|@lezer|style-mod|w3c-keyname|crelt|@marijn)\//.test(
       id,
     )
   ) {

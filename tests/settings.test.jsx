@@ -128,3 +128,31 @@ describe("language setting", () => {
     expect(select).toHaveTextContent("System");
   });
 });
+
+describe("editor keys setting", () => {
+  it("is normal by default, stores vim and emacs, and normal removes it", async () => {
+    const { user, store } = renderApp("/settings", { settings: {} });
+    const select = await screen.findByRole("combobox", { name: "Editor keys" });
+    expect(select).toHaveTextContent("Normal");
+
+    await user.click(select);
+    await user.click(await screen.findByRole("option", { name: "Vim" }));
+    expect(store.getState().settings).toEqual({ editorKeys: "vim" });
+    expect(select).toHaveTextContent("Vim");
+
+    await user.click(select);
+    await user.click(await screen.findByRole("option", { name: "Emacs" }));
+    expect(store.getState().settings).toEqual({ editorKeys: "emacs" });
+
+    await user.click(select);
+    await user.click(await screen.findByRole("option", { name: "Normal" }));
+    expect(store.getState().settings).toEqual({});
+  });
+
+  it("shows the stored mode", async () => {
+    renderApp("/settings", { settings: { editorKeys: "emacs" } });
+    expect(
+      await screen.findByRole("combobox", { name: "Editor keys" }),
+    ).toHaveTextContent("Emacs");
+  });
+});
