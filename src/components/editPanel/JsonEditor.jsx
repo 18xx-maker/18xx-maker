@@ -426,7 +426,7 @@ const JsonEditor = ({ game, lens: given }) => {
       v.destroy();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug, lens.draftKey]);
+  }, [slug, lens]);
 
   // The key mode changed: Emacs and Vim load when first chosen, the text and
   // its history stay. An answer to an earlier choice is ignored.

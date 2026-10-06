@@ -304,6 +304,21 @@ describe("selecting a group", () => {
     expect(marks()).toEqual(games["18Test"].map.hexes[8].hexes);
   });
 
+  it("ignores a hex that is not a coordinate and drops it", async () => {
+    const { router, store } = open(`${editRoute}&editSection=hex&hex=zz`);
+    await waitForCell("C11");
+    const before = store.getState().game;
+    await waitFor(() => expect(params(router).hex).toBeUndefined());
+    expect(screen.queryByTestId("json-editor")).not.toBeInTheDocument();
+
+    router.navigate(`${editRoute}&editSection=hex&hex=zz`, { replace: true });
+    asMac(true);
+    await realUser.click(cell("C13"), { modifiers: ["Meta"] });
+    // A plain selection of the group, not a move
+    await waitFor(() => expect(params(router).hex).toBe("C11"));
+    expect(store.getState().game).toBe(before);
+  });
+
   it("has the tab on the map only, and drops a selection elsewhere", async () => {
     const { router } = open(
       "/games/internal:abc/tokens?edit=true&editSection=hex&hex=C11",
@@ -522,6 +537,32 @@ describe("editing the group as JSON", () => {
     expect(await editor()).toBe(v);
     expect(JSON.parse(v.state.doc.toString()).hexes).toEqual(["C13", "C11"]);
     expect(hexes()[8].hexes).toEqual(["C13", "C11"]);
+  });
+
+  it("keeps the draft under the anchor the edit moved to", async () => {
+    const { router } = open(editRoute);
+    await pick(router, "B12");
+
+    await type({ color: "red", hexes: ["D18"] });
+    await waitFor(() => expect(params(router).hex).toBe("D18"));
+    await type({ color: "red", hexes: [] });
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent(
+        "The game was not updated",
+      ),
+    );
+
+    // Away and back to the old position: its text is the group, not the draft
+    await pick(router, "C11");
+    await pick(router, "B12");
+    await waitFor(async () =>
+      expect(await editorGroup()).toEqual({ color: "plain", hexes: ["B12"] }),
+    );
+
+    // The draft is under the new anchor
+    await pick(router, "C11");
+    await pick(router, "D18");
+    await waitFor(async () => expect((await editorGroup()).hexes).toEqual([]));
   });
 
   it("creates the group of an empty position on the first change", async () => {

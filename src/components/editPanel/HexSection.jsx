@@ -64,7 +64,10 @@ const HexSection = ({ game }) => {
         : localHexes(game, variation)[index];
     };
     return {
-      draftKey: `${slug}#hex:${variation}:${current}`,
+      // Read when used: an edit that moves the anchor moves the key with it
+      get draftKey() {
+        return `${slug}#hex:${variation}:${state.anchor}`;
+      },
       label: "hexEditor.label",
       lines: false,
       fold: false,
