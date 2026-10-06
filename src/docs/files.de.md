@@ -237,6 +237,28 @@ geändert hat.
 Tab rückt im Editor ein. Um ihn zu verlassen, drücke Escape (das erste Escape
 verlässt den Editor, ein zweites schließt das Panel) und danach Tab.
 
+#### Editor-Tasten
+
+Die Einstellung Editor-Tasten auf der [Einstellungsseite](/settings) wählt die
+Tasten des JSON-Editors: Normal (Standard), Emacs oder Vim. Die Emacs- und
+Vim-Tasten werden geladen, wenn du sie wählst, und beim Wechsel der Einstellung
+bleiben dein Text und sein Rückgängig-Verlauf erhalten. Die Tasten funktionieren
+nur, solange der Editor den Fokus hat. `Mod` ist Cmd unter macOS und Strg unter
+Windows und Linux. In Emacs und Vim funktionieren unter macOS auch die normalen
+Tasten; auf anderen Systemen gehört Strg dem Modus. Kopieren, Einfügen,
+Rückgängig und Alles auswählen behalten in Normal ihre üblichen Tasten. In Vim
+verlässt Escape den Editor nur, wenn Vim im Normalmodus ist und kein Befehl
+aussteht. Die Suche hat in Emacs und Vim eigene Tasten.
+
+| Aktion                                 | Normal                                     | Emacs        | Vim        |
+| -------------------------------------- | ------------------------------------------ | ------------ | ---------- |
+| Formatieren                            | `Mod-Shift-F`, `Shift-Alt-F`               | `C-c C-f`    | `:format`  |
+| Spiel jetzt aus dem Text aktualisieren | `Mod-S`                                    | `C-x C-s`    | `:w`       |
+| Nächstes Problem                       | `F8`                                       | `M-g n`      | `]d`       |
+| Vorheriges Problem                     | `Shift-F8`                                 | `M-g p`      | `[d`       |
+| Suchen                                 | `Mod-F` (`Mod-G` für den nächsten Treffer) | `C-s`, `C-r` | `/`, `?`   |
+| Alles ein- oder ausklappen             | `Ctrl-Alt-[`, `Ctrl-Alt-]`                 |              | `zM`, `zR` |
+
 ### Links zu einem Teil des Editors
 
 Die Adresse der Seite sagt, wo du bist, sodass du sie teilen oder später wieder

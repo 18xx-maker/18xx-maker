@@ -260,7 +260,8 @@
       "diagnostics": "问题",
       "noDiagnostics": "没有问题",
       "close": "关闭"
-    }
+    },
+    "keysFailed": "无法加载 Emacs 或 Vim 按键。编辑器使用普通按键。"
   },
   "problems": {
     "nav": "问题",
@@ -358,6 +359,13 @@
     "openExportFolder": {
       "title": "导出后打开文件夹",
       "description": "导出完成后在文件管理器中显示导出的文件。如果系统允许，将重用该文件夹已打开的窗口。"
+    },
+    "editorKeys": {
+      "title": "编辑器按键",
+      "normal": "普通",
+      "emacs": "Emacs",
+      "vim": "Vim",
+      "description": "JSON 编辑器的按键。选择 Emacs 或 Vim 时才会加载。格式化、应用、问题和搜索在每种模式下都有各自的按键。"
     }
   },
   "app": {
@@ -1379,6 +1387,23 @@
       "app": {
         "use": "前往应用信息页面",
         "notes": "仅限应用。"
+      }
+    },
+    "editor": {
+      "title": "JSON 编辑器按键",
+      "description": "在 JSON 编辑器中可用的按键，取决于编辑器按键设置。",
+      "note": "在 Emacs 和 Vim 模式下，macOS 上普通按键也可用。在其他系统上，这些按键属于该模式。",
+      "action": "操作",
+      "actions": {
+        "format": "格式化 JSON",
+        "apply": "立即用文本更新游戏",
+        "nextProblem": "跳到下一个问题",
+        "prevProblem": "跳到上一个问题",
+        "search": "搜索",
+        "findNext": "查找下一个匹配",
+        "findPrevious": "查找上一个匹配",
+        "foldAll": "全部折叠",
+        "unfoldAll": "全部展开"
       }
     }
   }

@@ -260,7 +260,8 @@
       "diagnostics": "Probleme",
       "noDiagnostics": "Keine Probleme",
       "close": "schließen"
-    }
+    },
+    "keysFailed": "Die Emacs- oder Vim-Tasten konnten nicht geladen werden. Der Editor verwendet die normalen Tasten."
   },
   "problems": {
     "nav": "Probleme",
@@ -358,6 +359,13 @@
     "openExportFolder": {
       "title": "Ordner nach dem Export öffnen",
       "description": "Zeigt die exportierten Dateien in deinem Dateimanager an, wenn ein Export fertig ist. Ein bereits geöffnetes Fenster dieses Ordners wird wiederverwendet, wo dein System das erlaubt."
+    },
+    "editorKeys": {
+      "title": "Editor-Tasten",
+      "normal": "Normal",
+      "emacs": "Emacs",
+      "vim": "Vim",
+      "description": "Die Tasten des JSON-Editors. Emacs und Vim werden geladen, wenn du sie wählst. Formatieren, Übernehmen, Probleme und Suche haben in jedem Modus eigene Tasten."
     }
   },
   "app": {
@@ -1379,6 +1387,23 @@
       "app": {
         "use": "Zur Seite „App-Informationen“ wechseln",
         "notes": "Nur in der App."
+      }
+    },
+    "editor": {
+      "title": "Tasten des JSON-Editors",
+      "description": "Tasten, die im JSON-Editor funktionieren, je nach Einstellung der Editor-Tasten.",
+      "note": "In Emacs und Vim funktionieren unter macOS auch die normalen Tasten. Auf anderen Systemen gehören diese Tasten dem Modus.",
+      "action": "Aktion",
+      "actions": {
+        "format": "JSON formatieren",
+        "apply": "Spiel jetzt aus dem Text aktualisieren",
+        "nextProblem": "Zum nächsten Problem springen",
+        "prevProblem": "Zum vorherigen Problem springen",
+        "search": "Suchen",
+        "findNext": "Nächsten Treffer finden",
+        "findPrevious": "Vorherigen Treffer finden",
+        "foldAll": "Alles einklappen",
+        "unfoldAll": "Alles ausklappen"
       }
     }
   }

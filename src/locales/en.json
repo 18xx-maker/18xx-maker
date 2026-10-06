@@ -260,7 +260,8 @@
       "diagnostics": "Problems",
       "noDiagnostics": "No problems",
       "close": "close"
-    }
+    },
+    "keysFailed": "The Emacs or Vim keys could not be loaded. The editor uses the normal keys."
   },
   "problems": {
     "nav": "Problems",
@@ -358,6 +359,13 @@
     "openExportFolder": {
       "title": "Open the folder after exporting",
       "description": "Shows the exported files in your file manager when an export finishes. An open window of that folder is reused where your system allows it."
+    },
+    "editorKeys": {
+      "title": "Editor keys",
+      "normal": "Normal",
+      "emacs": "Emacs",
+      "vim": "Vim",
+      "description": "The keys of the JSON editor. Emacs and Vim load when you choose them. Format, apply, problems and search have their own keys in each mode."
     }
   },
   "app": {
@@ -1379,6 +1387,23 @@
       "app": {
         "use": "Navigate to the App Info page",
         "notes": "App only."
+      }
+    },
+    "editor": {
+      "title": "JSON editor keys",
+      "description": "Keys that work inside the JSON editor, by the editor keys setting.",
+      "note": "In Emacs and Vim, the normal keys also work on macOS. Elsewhere those keys belong to the mode.",
+      "action": "Action",
+      "actions": {
+        "format": "Format the JSON",
+        "apply": "Update the game from the text now",
+        "nextProblem": "Go to the next problem",
+        "prevProblem": "Go to the previous problem",
+        "search": "Search",
+        "findNext": "Find the next match",
+        "findPrevious": "Find the previous match",
+        "foldAll": "Fold all",
+        "unfoldAll": "Unfold all"
       }
     }
   }

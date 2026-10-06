@@ -84,6 +84,19 @@ JSON 标签页以 JSON 编辑整个游戏(与“下载”按钮写入的文本�
 
 在编辑器中 Tab 键用于缩进。要离开编辑器,请按 Escape(第一次 Escape 离开编辑器,第二次关闭面板),然后按 Tab。
 
+#### 编辑器按键
+
+[设置页面](/settings)上的“编辑器按键”设置决定 JSON 编辑器的按键:普通(默认)、Emacs 或 Vim。Emacs 和 Vim 按键在你选择时才会加载,更改设置会保留你的文本及其撤销历史。这些按键仅在编辑器获得焦点时有效。`Mod` 在 macOS 上是 Cmd,在 Windows 和 Linux 上是 Ctrl。在 Emacs 和 Vim 模式下,macOS 上普通按键也可用;在其他系统上,Ctrl 属于该模式。复制、粘贴、撤销和全选在普通模式下保持常用按键。在 Vim 中,只有处于普通模式且没有待完成命令时,Escape 才会离开编辑器。搜索在 Emacs 和 Vim 中有各自的按键。
+
+| 操作               | 普通                            | Emacs        | Vim        |
+| ------------------ | ------------------------------- | ------------ | ---------- |
+| 格式化             | `Mod-Shift-F`、`Shift-Alt-F`    | `C-c C-f`    | `:format`  |
+| 立即用文本更新游戏 | `Mod-S`                         | `C-x C-s`    | `:w`       |
+| 下一个问题         | `F8`                            | `M-g n`      | `]d`       |
+| 上一个问题         | `Shift-F8`                      | `M-g p`      | `[d`       |
+| 搜索               | `Mod-F`(`Mod-G` 查找下一个匹配) | `C-s`、`C-r` | `/`、`?`   |
+| 全部折叠或展开     | `Ctrl-Alt-[`、`Ctrl-Alt-]`      |              | `zM`、`zR` |
+
 ### 指向编辑器某一部分的链接
 
 页面的地址会记录你所在的位置,因此可以分享或以后再回来:章节(`/games/18Test/tiles`)、打开的面板及其标签页(`?edit=true&editSection=json`、`?config=true&section=tokens`)以及卡牌筛选(`?hidePrivates=true`)。不存在的标签页或章节名称会打开第一个。
