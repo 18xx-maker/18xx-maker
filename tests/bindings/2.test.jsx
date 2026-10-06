@@ -77,6 +77,45 @@ describe("section keys", () => {
   });
 });
 
+describe("section keys with a panel open", () => {
+  it("keep the config panel open", async () => {
+    const { user, router } = renderApp(
+      "/games/18Test/map?config=true&section=tokens",
+    );
+    await screen.findByTestId("game-18Test-map");
+
+    await user.keyboard("2");
+    await waitFor(() =>
+      expect(router.state.location.pathname).not.toBe("/games/18Test/map"),
+    );
+    expect(router.state.location.search).toBe("?config=true&section=tokens");
+  });
+
+  it("keep the edit panel open", async () => {
+    const search = "?edit=true&editSection=json&lines=3-4";
+    const { user, router } = renderApp(`/games/18Test/map${search}`);
+    await screen.findByTestId("edit-panel");
+
+    await user.keyboard("4");
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/18Test/tiles"),
+    );
+    expect(router.state.location.search).toBe(search);
+    expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
+  });
+
+  it("carry over options like paginated", async () => {
+    const { user, router } = renderApp("/games/18Test/map?paginated=true");
+    await screen.findByRole("combobox", { name: "Game Section" });
+
+    await user.keyboard("4");
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/18Test/tiles"),
+    );
+    expect(router.state.location.search).toBe("?paginated=true");
+  });
+});
+
 describe("section keys without data", () => {
   const noPar = () => ({
     loadedGame: { title: "t", id: "t", type: "app", slug: "t" },
@@ -209,14 +248,15 @@ describe("esc and m", () => {
 
 describe("cycle keys", () => {
   it("[ and ] cycle the sections on the edit page", async () => {
-    const { user, router } = renderApp("/games/18Test/map");
-    await screen.findByTestId("game-18Test-map");
+    const { user, router } = renderApp("/games/18Test/map?paginated=true");
+    await screen.findByRole("combobox", { name: "Game Section" });
 
     await user.keyboard("]");
     await waitFor(() =>
       expect(router.state.location.pathname).not.toBe("/games/18Test/map"),
     );
     const next = router.state.location.pathname;
+    expect(router.state.location.search).toBe("?paginated=true");
 
     await user.keyboard("[[");
     await waitFor(() =>

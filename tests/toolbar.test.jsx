@@ -97,6 +97,20 @@ describe("toolbar", () => {
   });
 });
 
+describe("section select", () => {
+  it("keeps the query when choosing a section", async () => {
+    const { user, router } = renderApp("/games/18Test/map?config=true");
+    await screen.findByTestId("game-18Test-map");
+
+    await user.click(screen.getByRole("combobox", { name: "Game Section" }));
+    await user.click(await screen.findByRole("option", { name: /Tiles/ }));
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/18Test/tiles"),
+    );
+    expect(router.state.location.search).toBe("?config=true");
+  });
+});
+
 describe("edit link", () => {
   it("starts at the map when the game has one", async () => {
     renderApp("/games/18Test");

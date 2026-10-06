@@ -209,7 +209,7 @@ describe("edit panel", () => {
     await screen.findByRole("heading", { name: "Configuration" });
   });
 
-  it("[ and ] change the tab, a number goes to a section and drops the panel", async () => {
+  it("[ and ] change the tab, a number goes to a section and keeps the panel", async () => {
     const { user, router } = open(route);
     await screen.findByTestId("game-internal:abc-map");
     await user.keyboard("e");
@@ -224,9 +224,10 @@ describe("edit panel", () => {
     expect(router.state.location.pathname).toBe(route);
     expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
 
-    await user.keyboard("1");
-    await waitFor(() => expect(router.state.location.search).toBe(""));
-    expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument();
+    await user.keyboard("2");
+    await waitFor(() => expect(router.state.location.pathname).not.toBe(route));
+    expect(router.state.location.search).toBe("?edit=true&editSection=trains");
+    expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
   });
 });
 
