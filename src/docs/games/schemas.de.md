@@ -55,7 +55,8 @@ Problem liegt, was falsch ist und wie es sich beheben lässt: unbekannte Felder
 falschen Typs, nicht erlaubte Werte und fehlende Pflichtfelder. Veraltete Felder
 werden ebenfalls aufgeführt, sie funktionieren noch, werden aber in einer
 zukünftigen Version entfernt. Die Seite meldet nur, deine Datei wird nie
-verändert.
+verändert. Jede Zeile verlinkt auf den JSON-Editor im Bearbeitungsbereich, an der
+Zeile des Problems.
 
 ## Validierung
 
