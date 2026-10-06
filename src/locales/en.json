@@ -75,6 +75,10 @@
         "tab": "Trains",
         "description": "Edit the trains of the game. Add, remove, copy and reorder them with the buttons of each train."
       },
+      "privates": {
+        "tab": "Privates",
+        "description": "Edit the privates of the game. Add, remove, copy and reorder them with the buttons of each private."
+      },
       "market": {
         "tab": "Market",
         "description": "Edit the stock market: its type, the cells, the legend and how the share price moves. The changes stay in memory until you save them on the Changes page."
@@ -90,6 +94,7 @@
     },
     "items": {
       "trains": "train",
+      "privates": "private",
       "legend": "legend entry"
     },
     "emptyList": "Nothing here yet.",

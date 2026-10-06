@@ -34,7 +34,7 @@ const EditTabs = ({ section, setSection }) => {
       <div
         role="tablist"
         aria-label={t("editPanel.tabs.label")}
-        className="inline-flex rounded-md bg-muted p-1 text-foreground"
+        className="inline-flex flex-wrap rounded-md bg-muted p-1 text-foreground"
         onKeyDown={onKeyDown}
       >
         {editSections.map((item) => {

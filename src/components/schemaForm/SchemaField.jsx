@@ -8,7 +8,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
-import { path as getIn, move as moveIn } from "ramda";
+import { equals, path as getIn, move as moveIn } from "ramda";
 
 import {
   ArrowDown,
@@ -38,12 +38,14 @@ import { issueText } from "@/components/schemaForm/issueText";
 import {
   PRIMARY_KEYS,
   coerceStringOrNumber,
+  formatRevenue,
   humanize,
   isRequired,
   issuesFor,
   kindOf,
   newItem,
   nextName,
+  parseRevenue,
   resolveAllOf,
 } from "@/components/schemaForm/resolve";
 
@@ -277,6 +279,32 @@ const StringOrNumberField = ({ keys, schema }) => {
         : field.set(coerceStringOrNumber(text)),
     FORMAT,
     (text, value) => coerceStringOrNumber(text) === value,
+  );
+
+  return (
+    <FieldShell {...field}>
+      <Input
+        {...field.aria()}
+        value={draft.text}
+        onChange={(event) => draft.change(event.target.value)}
+        onBlur={draft.commit}
+        onKeyDown={(event) => event.key === "Enter" && draft.commit()}
+      />
+    </FieldShell>
+  );
+};
+
+// A number, a list of numbers (10/20) or text, from what is typed
+const RevenueField = ({ keys, schema }) => {
+  const field = useField(keys, schema);
+  const draft = useDraft(
+    field.value,
+    (text) => {
+      const revenue = parseRevenue(text);
+      return revenue === undefined ? field.clear() : field.set(revenue);
+    },
+    formatRevenue,
+    (text, value) => equals(parseRevenue(text), value),
   );
 
   return (
@@ -813,6 +841,8 @@ const SchemaField = ({ keys, schema, ...rest }) => {
       return <ChoiceField {...props} options={node.enum} />;
     case "stringOrNumber":
       return <StringOrNumberField {...props} />;
+    case "revenue":
+      return <RevenueField {...props} />;
     case "count":
       return <CountField {...props} />;
     case "object":

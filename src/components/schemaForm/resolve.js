@@ -24,10 +24,16 @@ export const PRIMARY_KEYS = [
   "rust",
   "phased",
   "obsolete",
+  "revenue",
+  "company",
 ];
 
 // Strings that are long text, shown in a textarea
-export const LONG_TEXT_KEYS = ["notes"];
+export const LONG_TEXT_KEYS = ["notes", "description"];
+
+// Keys edited as JSON whatever their schema: a list of objects that is not
+// one form (the abilities of a private, each has its own type and keys)
+export const JSON_KEYS = ["abilities"];
 
 // The schema node with a local $ref followed (a description next to the $ref
 // wins over the one of the target)
@@ -77,12 +83,21 @@ const isCount = (alternatives) =>
     (a) => a.type === "string" && a.enum?.every((v) => typeof v === "string"),
   );
 
+// A number, a list of numbers or text: the revenue of a private
+const isRevenue = (alternatives) =>
+  alternatives.length === 3 &&
+  ["number", "array", "string"].every((type) =>
+    typesOf(alternatives).includes(type),
+  );
+
 // How a (resolved) schema node is edited:
-// string, text, number, boolean, enum, stringOrNumber, count, object, array
+// string, text, number, boolean, enum, stringOrNumber, count, revenue, object,
+// array
 // (of objects, needs the root to follow the items), or json for everything
 // else, so a new construct never disappears from the form
 export const kindOf = (node, key, root) => {
   if (!node || typeof node !== "object" || node.$ref) return "json";
+  if (JSON_KEYS.includes(key)) return "json";
   if (Array.isArray(node.enum)) {
     return node.enum.every((value) => typeof value === "string")
       ? "enum"
@@ -99,6 +114,7 @@ export const kindOf = (node, key, root) => {
     return item?.type === "object" && item.properties ? "array" : "json";
   }
   if (Array.isArray(node.oneOf) && isCount(node.oneOf)) return "count";
+  if (Array.isArray(node.oneOf) && isRevenue(node.oneOf)) return "revenue";
   if (Array.isArray(node.oneOf) && node.oneOf.length === 2) {
     const types = typesOf(node.oneOf);
     if (types.includes("string") && types.includes("number")) {
@@ -155,6 +171,20 @@ export const coerceStringOrNumber = (text) => {
   const trimmed = text.trim();
   return /^-?\d+(\.\d+)?$/.test(trimmed) ? Number(trimmed) : text;
 };
+
+// Numbers separated by / or , are a list (one number is a number), any other
+// text stays text ("$10/$20"), empty is no value
+export const parseRevenue = (text) => {
+  if (text.trim() === "") return undefined;
+  const parts = text.split(/[/,]/).map((part) => part.trim());
+  if (!parts.every((part) => /^-?\d+(\.\d+)?$/.test(part))) return text;
+  const numbers = parts.map(Number);
+  return numbers.length === 1 ? numbers[0] : numbers;
+};
+
+// A list is written as the card prints it: 10/20
+export const formatRevenue = (value) =>
+  Array.isArray(value) ? value.join("/") : (value ?? "").toString();
 
 export const setValue = (game, keys, value) => assocPath(keys, value, game);
 
