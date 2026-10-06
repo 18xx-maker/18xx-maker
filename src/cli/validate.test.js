@@ -138,6 +138,18 @@ describe("validate", () => {
     );
   });
 
+  it.each([
+    [{ name: "A", abbrev: "A" }, 0],
+    [{ name: "A" }, 1],
+    [{ name: "A", abbrev: 3 }, 1],
+  ])("checks the abbrev of the company %j", (company, code) => {
+    const file = writeTmp(
+      "game.json",
+      JSON.stringify({ info: { title: "x" }, companies: [company] }),
+    );
+    expect(run(file).code).toBe(code);
+  });
+
   it("accepts loan slots with labels or empty slots", () => {
     const valid = writeTmp(
       "game.json",

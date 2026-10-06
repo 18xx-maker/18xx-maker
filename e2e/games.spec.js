@@ -149,6 +149,55 @@ test.describe("bundled games", () => {
     await expect(panel.getByRole("listitem")).toHaveCount(count);
   });
 
+  test("edits the companies in the edit panel", async ({ page }) => {
+    await page.goto("/games/18Test/map?edit=true");
+    const panel = page.getByTestId("edit-panel");
+    await panel
+      .getByRole("tablist")
+      .getByRole("tab", { name: "Companies" })
+      .click();
+    await expect(page).toHaveURL(/\?edit=true&editSection=companies$/);
+
+    // The cards start closed
+    const cards = panel.getByRole("listitem");
+    await expect(cards.first()).toBeVisible();
+    const count = await cards.count();
+    const first = cards.first().locator("[data-title]");
+    await expect(first).toHaveAttribute("aria-expanded", "false");
+    await expect(first).toHaveAccessibleName("Black Railroad BLRR");
+
+    // A new company is open, and has an abbreviation of its own
+    await panel.getByRole("button", { name: "Add company" }).click();
+    await expect(cards).toHaveCount(count + 1);
+    const added = cards.nth(count);
+    await expect(added.locator("[data-title]")).toHaveAttribute(
+      "aria-expanded",
+      "true",
+    );
+    await expect(added.getByRole("textbox", { name: "Abbrev" })).toHaveValue(
+      "NEW",
+    );
+
+    // A problem in a field of a closed card is marked on the card
+    await first.click();
+    await cards.first().getByRole("button", { name: "More fields" }).click();
+    const trains = cards.first().getByRole("textbox", { name: "Trains" });
+    await trains.fill("3");
+    await trains.blur();
+    await first.click();
+    await expect(first).toHaveAttribute("aria-expanded", "false");
+    await expect(
+      cards.first().getByRole("img", {
+        name: "The company Black Railroad has a problem",
+      }),
+    ).toBeVisible();
+
+    await panel
+      .getByRole("button", { name: `Remove company ${count + 1}` })
+      .click();
+    await expect(cards).toHaveCount(count);
+  });
+
   test("adds a phase in the edit panel", async ({ page }) => {
     await page.goto("/games/18Test/map?edit=true");
     const panel = page.getByTestId("edit-panel");

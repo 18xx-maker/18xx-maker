@@ -1396,9 +1396,15 @@
         "required": ["name", "abbrev"],
         "properties": {
           "name": {
+            "description": "The name of the company, printed on its charter and cards.",
+            "type": "string"
+          },
+          "abbrev": {
+            "description": "The short name of the company, such as PRR. It is how the market, the tiles and the map refer to the company, so it should be unique.",
             "type": "string"
           },
           "variant": {
+            "description": "A variant label printed on the charter, for a company that has more than one version.",
             "type": "string"
           },
           "shares": {

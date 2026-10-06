@@ -280,6 +280,15 @@ from `src/schemas/game.schema.json` (`src/components/schemaForm`):
 duplicate, move, "more fields" for what is not in `PRIMARY_KEYS`, a list shared
 by all the lists, so `revenue` and `company` of a private are in it and
 trains have neither). `PrivatesForm` is the same for `privates`.
+`CompaniesForm` is the same for `companies` (`COMPANY_PRIMARY_KEYS`: name,
+abbrev, color, minor). It passes `startCollapsed` (the cards of the items the
+list starts with are closed; an added or copied item is open), `summary` (the
+closed card shows a color swatch, the name and the abbreviation), `defaults` as
+a function of the items (`newItem` accepts one, so a new company gets a free
+`abbrev` from `nextAbbrev`) and `copyOf` (a copy gets a free abbrev, case
+insensitive: PRR becomes PRR2). A closed card whose fields have a problem shows
+a marker (`editPanel.hasProblems`). The shares, tokens, token, trains and loans
+of a company are JSON fields for now.
 `PhasesForm` is the same for `phases` (`PHASE_PRIMARY_KEYS`, defaults
 `limit` and `tiles`): it passes `primary` and `unique` to `ArrayField`, and
 `unique="named"` names a new phase only when the others have names (a phase list

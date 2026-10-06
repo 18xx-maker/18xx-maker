@@ -1,4 +1,5 @@
 import JsonSection from "@/components/editPanel/JsonSection";
+import CompaniesForm from "@/components/schemaForm/CompaniesForm";
 import GameInfoForm from "@/components/schemaForm/GameInfoForm";
 import MarketForm from "@/components/schemaForm/MarketForm";
 import PhasesForm from "@/components/schemaForm/PhasesForm";
@@ -13,6 +14,7 @@ export const editSections = [
   { section: "info", Form: GameInfoForm },
   { section: "trains", Form: TrainsForm },
   { section: "privates", Form: PrivatesForm },
+  { section: "companies", Form: CompaniesForm },
   { section: "phases", Form: PhasesForm },
   { section: "market", Form: MarketForm },
   { section: "json", Form: JsonSection, wide: true },

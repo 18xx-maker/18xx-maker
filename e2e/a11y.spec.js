@@ -59,6 +59,20 @@ const pages = [
     more: true,
   },
   {
+    // The cards start closed
+    name: "edit panel companies",
+    url: "/games/18Test/map?edit=true&editSection=companies",
+    ready: (page) => page.getByRole("button", { name: "Add company" }),
+  },
+  {
+    // With the first card open and its more fields
+    name: "edit panel companies open",
+    url: "/games/18Test/map?edit=true&editSection=companies",
+    ready: (page) => page.getByRole("button", { name: "Add company" }),
+    open: true,
+    more: true,
+  },
+  {
     // With the card of a phase open and its more fields
     name: "edit panel phases",
     url: "/games/18Test/map?edit=true&editSection=phases",
@@ -103,7 +117,7 @@ const pages = [
   })),
 ];
 
-for (const { name, url, ready, colorScheme, select, more } of pages) {
+for (const { name, url, ready, colorScheme, select, open, more } of pages) {
   test(`no serious or critical accessibility violations: ${name}`, async ({
     page,
   }) => {
@@ -113,6 +127,14 @@ for (const { name, url, ready, colorScheme, select, more } of pages) {
     if (select) {
       await page.getByRole("gridcell", { name: select }).click();
       await expect(page.getByTestId("cell-inspector")).toBeVisible();
+    }
+    if (open) {
+      await page
+        .getByTestId("edit-panel")
+        .getByRole("listitem")
+        .first()
+        .locator("[data-title]")
+        .click();
     }
     if (more) {
       await page

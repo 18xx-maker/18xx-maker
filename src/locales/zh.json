@@ -79,6 +79,10 @@
         "tab": "私有公司",
         "description": "编辑游戏的私有公司。使用每个私有公司的按钮来添加、删除、复制和重新排序。"
       },
+      "companies": {
+        "tab": "公司",
+        "description": "编辑游戏的公司。使用每个公司的按钮来添加、删除、复制和重新排序。公司有很多字段,所以它的卡片一开始是折叠的。"
+      },
       "phases": {
         "tab": "阶段",
         "description": "编辑游戏的阶段。用每个阶段上的按钮添加、删除、复制和调整顺序。"
@@ -99,6 +103,7 @@
     "items": {
       "trains": "列车",
       "privates": "私有公司",
+      "companies": "公司",
       "phases": "阶段",
       "legend": "图例项"
     },
@@ -109,6 +114,7 @@
     "moveDown": "下移{{item}} {{title}}",
     "duplicate": "复制{{item}} {{title}}",
     "moreFields": "更多字段",
+    "hasProblems": "{{item}} {{title}} 有问题",
     "removeValue": "删除",
     "undo": "撤销",
     "added": "已添加{{item}} {{title}}",
