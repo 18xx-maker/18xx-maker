@@ -52,7 +52,7 @@ export const namedPosition = (mid, side = 1, align) => {
   let percent = 0;
   if (track.radius) {
     const [x, y] = arcPosition(0.5, track.radius, track.arcAngle, 0);
-    percent = round(Math.hypot(x, y) / CENTER_EDGE_Y, 5);
+    percent = round(Math.hypot(x, y) / CENTER_EDGE_Y, 3);
     angle = Math.round((Math.atan2(-x, y) * 180) / Math.PI);
   }
 

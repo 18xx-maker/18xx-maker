@@ -109,8 +109,8 @@ element. Every point is for track that starts on side 1, move it to another side
 with `side`.
 
 - `mid` is the midpoint of a track type: `straight` (`angle` 0, `percent` 0, the
-  center), `sharp` (`angle` 30, `percent` 0.57735) or `gentle` (`angle` 60,
-  `percent` 0.26795).
+  center), `sharp` (`angle` 30, `percent` 0.577) or `gentle` (`angle` 60,
+  `percent` 0.268).
 - `side` with `mid` turns the point like a track that starts on that side, so a
   `gentle` on side 3 is at `angle` 180. Without `mid`, `side` keeps rotating the
   element.

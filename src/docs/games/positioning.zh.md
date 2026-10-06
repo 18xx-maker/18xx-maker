@@ -85,7 +85,7 @@
 
 除了自己计算 `angle` 和 `percent`,元素还可以用 `mid` 指定轨道上的一个点,并用 `align` 使其朝向该处的轨道。它们适用于所有带位置的元素(小镇、centerTown、数值、标签、图标等)。与其他定位字段一样,它们会关闭该元素的自动定位。每个点都对应从边 1 开始的轨道,可用 `side` 将其移到其他边。
 
-- `mid` 是某种轨道类型的中点:`straight`(`angle` 0、`percent` 0,即中心)、`sharp`(`angle` 30、`percent` 0.57735)或 `gentle`(`angle` 60、`percent` 0.26795)。
+- `mid` 是某种轨道类型的中点:`straight`(`angle` 0、`percent` 0,即中心)、`sharp`(`angle` 30、`percent` 0.577)或 `gentle`(`angle` 60、`percent` 0.268)。
 - `side` 与 `mid` 一起使用时,会像从该边开始的轨道一样旋转该点,因此边 3 上的 `gentle` 位于 `angle` 180。没有 `mid` 时,`side` 仍然是旋转元素。
 - `align` 为 `perpendicular`(垂直)或 `parallel`(平行)于该点处的轨道。`sharp` 上的小镇条为 `perpendicular` 时 `rotation` 是 120,`gentle` 上是 150。`rotate` 和 `rotation` 会作为偏移量叠加。
 - 明确给出的 `angle` 或 `percent` 会替换 `mid` 的值,`x` 和 `y` 则从该点开始微调。

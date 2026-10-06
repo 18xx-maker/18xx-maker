@@ -312,6 +312,7 @@ describe("validate", () => {
       [{ towns: [{ mid: "wide" }] }],
       [{ towns: [{ mid: "sharp", align: "across" }] }],
       [{ towns: [{ mid: 1 }] }],
+      [{ towns: [{ align: "parallel" }] }],
     ])("rejects %j", (hex) => {
       expect(run(withHex(hex)).code).toBe(1);
     });

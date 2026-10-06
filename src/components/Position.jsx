@@ -12,6 +12,7 @@ import {
 } from "ramda";
 
 import HexContext from "@/context/HexContext";
+import { useOrientation } from "@/context/OrientationContext";
 import { namedPosition } from "@/util/tiles/trackGeometry";
 
 const autoPositionTypes = ["icon", "label", "terrain", "value"];
@@ -136,6 +137,7 @@ const autoPosition = (d, i, hex, type) => {
 
 const Position = ({ data, type, pick, children }) => {
   const hex = useContext(HexContext);
+  const orientation = useOrientation();
 
   if (!data) {
     data = [];
@@ -166,9 +168,11 @@ const Position = ({ data, type, pick, children }) => {
     const named = d.mid ? namedPosition(d.mid, d.side, d.align) : null;
     if (named) {
       // A named point on track: explicit angle and percent still win
-      angle = has("angle", d) ? angle : named.angle;
+      // Track is drawn turned by the orientation inside the map hex, so a
+      // point on it is turned the same
+      angle = has("angle", d) ? angle : named.angle + orientation;
       percent = has("percent", d) ? percent : named.percent;
-      rotation = rotation + (named.rotation || 0);
+      rotation = rotation + (named.rotation ? named.rotation + orientation : 0);
     } else if (d.side) {
       rotation = rotation + (d.side - 1) * 60;
     }
@@ -180,7 +184,10 @@ const Position = ({ data, type, pick, children }) => {
     let translate = 75 * percent;
     let rotate = -angle + (rotation || 0);
 
-    let passing = omit(["order", "mid", "align"], d);
+    // The children only see the rotation; with a mid it is the effective one
+    let passing = named
+      ? { ...omit(["order", "mid", "align", "rotate"], d), rotation }
+      : omit(["order", "mid", "align"], d);
 
     return [
       <g

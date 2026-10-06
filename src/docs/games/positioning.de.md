@@ -114,8 +114,8 @@ Gleis, das auf Seite 1 beginnt. Mit `side` wird er auf eine andere Seite
 gedreht.
 
 - `mid` ist die Mitte eines Gleistyps: `straight` (`angle` 0, `percent` 0, die
-  Mitte), `sharp` (`angle` 30, `percent` 0.57735) oder `gentle` (`angle` 60,
-  `percent` 0.26795).
+  Mitte), `sharp` (`angle` 30, `percent` 0.577) oder `gentle` (`angle` 60,
+  `percent` 0.268).
 - `side` mit `mid` dreht den Punkt wie ein Gleis, das auf dieser Seite beginnt,
   ein `gentle` auf Seite 3 liegt also bei `angle` 180. Ohne `mid` dreht `side`
   weiterhin das Element.

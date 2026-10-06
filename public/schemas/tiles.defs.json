@@ -99,7 +99,8 @@
           }
         },
         "additionalProperties": false,
-        "required": ["label"]
+        "required": ["label"],
+        "dependencies": { "align": ["mid"] }
       }
     },
     "name": {
@@ -172,7 +173,8 @@
         }
       },
       "additionalProperties": false,
-      "required": ["name"]
+      "required": ["name"],
+      "dependencies": { "align": ["mid"] }
     },
     "names": { "type": "array", "items": { "$ref": "#/definitions/name" } },
     "goods": {
@@ -249,7 +251,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "companies": {
@@ -307,7 +310,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "divides": {
@@ -351,7 +355,8 @@
           "y": { "type": "number" },
           "percent": { "type": "number", "minimum": 0 }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "companyToken": {
@@ -402,7 +407,8 @@
         }
       },
       "required": ["company"],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
     },
     "genericToken": {
       "type": "object",
@@ -500,7 +506,8 @@
         "fontFamily": { "type": "string" },
         "fontSize": { "type": "integer", "minimum": 4 }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
     },
     "tokens": {
       "type": "array",
@@ -561,7 +568,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "offBoardRevenue": {
@@ -632,7 +640,8 @@
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
     },
     "boomtowns": {
       "type": "array",
@@ -689,7 +698,8 @@
           },
           "groups": { "type": "array", "items": { "type": "string" } }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "cities": {
@@ -769,7 +779,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "mediumCities": {
@@ -823,7 +834,8 @@
           },
           "groups": { "type": "array", "items": { "type": "string" } }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "centerTowns": {
@@ -878,7 +890,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "towns": {
@@ -932,7 +945,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "bridges": {
@@ -1007,7 +1021,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "tunnels": {
@@ -1082,7 +1097,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "routeBonuses": {
@@ -1134,7 +1150,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "shapes": {
@@ -1223,7 +1240,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "terrain": {
@@ -1280,7 +1298,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "icons": {
@@ -1336,7 +1355,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "track": {
@@ -1429,7 +1449,8 @@
           "y": { "type": "number" },
           "percent": { "type": "number", "minimum": 0 }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "tunnelEntrances": {
@@ -1480,7 +1501,8 @@
             ]
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
       }
     },
     "values": {
@@ -1534,7 +1556,8 @@
           }
         },
         "additionalProperties": false,
-        "required": ["value"]
+        "required": ["value"],
+        "dependencies": { "align": ["mid"] }
       }
     },
     "hex": {

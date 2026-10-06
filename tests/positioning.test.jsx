@@ -3,6 +3,7 @@ import { screen } from "@testing-library/react";
 
 import HexTile from "@/components/Hex";
 
+import OrientationContext from "@/context/OrientationContext";
 import { namedPosition } from "@/util/tiles/trackGeometry";
 
 import { renderApp } from "@tests/support/helpers.jsx";
@@ -121,6 +122,58 @@ describe("named positions", () => {
   it("keeps side as a rotation without a mid", async () => {
     expect(await transforms([{ side: 3 }])).toEqual(
       await transforms([{ rotation: 120 }]),
+    );
+  });
+});
+
+describe("named positions and children", () => {
+  const html = async (hex, orientation = 0) => {
+    const svg = await drawSvg(
+      <OrientationContext.Provider value={orientation}>
+        <HexTile hex={{ color: "yellow", ...hex }} />
+      </OrientationContext.Provider>,
+    );
+    return svg.innerHTML;
+  };
+  const gentle = namedPosition("gentle");
+
+  it("hands the aligned rotation to a value", async () => {
+    expect(
+      await html({
+        values: [{ value: 30, mid: "gentle", align: "perpendicular" }],
+      }),
+    ).toEqual(
+      await html({ values: [{ value: 30, ...gentle, rotation: 150 }] }),
+    );
+  });
+
+  it("hands the aligned rotation to a city", async () => {
+    expect(
+      await html({
+        cities: [{ mid: "gentle", align: "perpendicular", size: 2 }],
+      }),
+    ).toEqual(
+      await html({
+        cities: [{ ...gentle, rotation: 150, size: 2 }],
+      }),
+    );
+  });
+
+  it("follows the track on a vertical map", async () => {
+    // gentle on side 1 is at angle 60, and the track is turned by 90 more
+    expect(
+      await html({ towns: [{ mid: "gentle", align: "parallel" }] }, 90),
+    ).toEqual(
+      await html(
+        { towns: [{ angle: 150, percent: gentle.percent, rotation: 330 }] },
+        90,
+      ),
+    );
+    expect(await html({ values: [{ value: 3, mid: "gentle" }] }, 90)).toEqual(
+      await html(
+        { values: [{ value: 3, angle: 150, percent: gentle.percent }] },
+        90,
+      ),
     );
   });
 });
