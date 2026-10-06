@@ -79,6 +79,10 @@
         "tab": "Privates",
         "description": "Edit the privates of the game. Add, remove, copy and reorder them with the buttons of each private."
       },
+      "companies": {
+        "tab": "Companies",
+        "description": "Edit the companies of the game. Add, remove, copy and reorder them with the buttons of each company. A company has many fields, so its card starts closed."
+      },
       "phases": {
         "tab": "Phases",
         "description": "Edit the phases of the game. Add, remove, copy and reorder them with the buttons of each phase."
@@ -99,6 +103,7 @@
     "items": {
       "trains": "train",
       "privates": "private",
+      "companies": "company",
       "phases": "phase",
       "legend": "legend entry"
     },
@@ -109,6 +114,7 @@
     "moveDown": "Move {{item}} {{title}} down",
     "duplicate": "Duplicate {{item}} {{title}}",
     "moreFields": "More fields",
+    "hasProblems": "The {{item}} {{title}} has a problem",
     "removeValue": "Remove",
     "undo": "Undo",
     "added": "Added {{item}} {{title}}",

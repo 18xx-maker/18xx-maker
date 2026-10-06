@@ -79,6 +79,10 @@
         "tab": "Privatgesellschaften",
         "description": "Bearbeite die Privatgesellschaften des Spiels. Füge sie hinzu, entferne, kopiere und sortiere sie mit den Schaltflächen jeder Privatgesellschaft."
       },
+      "companies": {
+        "tab": "Gesellschaften",
+        "description": "Bearbeite die Gesellschaften des Spiels. Füge sie hinzu, entferne, kopiere und sortiere sie mit den Schaltflächen jeder Gesellschaft. Eine Gesellschaft hat viele Felder, deshalb ist ihre Karte zunächst eingeklappt."
+      },
       "phases": {
         "tab": "Phasen",
         "description": "Bearbeite die Phasen des Spiels. Füge Phasen hinzu, entferne, kopiere und sortiere sie mit den Schaltflächen jeder Phase."
@@ -99,6 +103,7 @@
     "items": {
       "trains": "Zug",
       "privates": "Privatgesellschaft",
+      "companies": "Gesellschaft",
       "phases": "Phase",
       "legend": "Legendeneintrag"
     },
@@ -109,6 +114,7 @@
     "moveDown": "{{item}} {{title}} nach unten",
     "duplicate": "{{item}} {{title}} duplizieren",
     "moreFields": "Weitere Felder",
+    "hasProblems": "{{item}} {{title}} hat ein Problem",
     "removeValue": "Entfernen",
     "undo": "Rückgängig",
     "added": "{{item}} {{title}} hinzugefügt",

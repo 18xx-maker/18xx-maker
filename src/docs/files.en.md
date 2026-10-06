@@ -130,6 +130,18 @@ is a number or a list written as it prints, like `10/20`; text that is not
 numbers, like `$10/$20`, stays text. The abilities of a private are edited as
 JSON, and the other fields, like the note and description, are under More fields.
 
+The Companies tab works the same way for the companies of the game. Because a
+company has many fields, its card starts closed and shows its color, name and
+abbreviation; click the title to open it. A closed card shows a warning mark
+when something inside it has a problem. The name, abbreviation, color and minor
+flag are shown first, and the other fields, like the logo and the charter text,
+are under More fields. The shares, tokens, trains, loans and similar fields are
+edited as JSON. A company needs a name and an abbreviation, which cannot be
+emptied. A new company gets a free abbreviation, and a copy gets the abbreviation
+of its source with a number (PRR becomes PRR2). Other parts of the game, like
+the market, refer to a company by its abbreviation: the panel does not update
+those references when you rename one.
+
 The Phases tab works the same way for the phases of the game. A card shows
 the name, limit, tiles, train, minor flag and rounds first, and the company,
 the event the phase starts on, the notes, buying companies and events are under

@@ -142,6 +142,19 @@ wie sie gedruckt wird, etwa `10/20`; Text, der keine Zahlen enthält, etwa
 `$10/$20`, bleibt Text. Die Fähigkeiten einer Privatgesellschaft werden als
 JSON bearbeitet, die übrigen Felder, etwa Notiz und Beschreibung, stehen unter Weitere Felder.
 
+Der Tab Gesellschaften funktioniert genauso für die Gesellschaften des Spiels.
+Weil eine Gesellschaft viele Felder hat, ist ihre Karte zunächst eingeklappt und
+zeigt Farbe, Name und Kürzel; klicke auf den Titel, um sie zu öffnen. Eine
+eingeklappte Karte zeigt ein Warnzeichen, wenn etwas darin ein Problem hat. Name,
+Kürzel, Farbe und die Markierung „minor“ stehen zuerst, die übrigen Felder, etwa
+Logo und Text der Charter, unter Weitere Felder. Anteile, Marker, Züge, Kredite
+und ähnliche Felder werden als JSON bearbeitet. Eine Gesellschaft braucht einen
+Namen und ein Kürzel, die sich nicht leeren lassen. Eine neue Gesellschaft
+bekommt ein freies Kürzel, und eine Kopie das Kürzel ihrer Vorlage mit einer
+Zahl (aus PRR wird PRR2). Andere Teile des Spiels, etwa der Markt, verweisen über
+das Kürzel auf eine Gesellschaft: Das Panel aktualisiert diese Verweise nicht,
+wenn du eines umbenennst.
+
 Der Tab Phasen funktioniert genauso für die Phasen des Spiels. Eine Karte zeigt
 zuerst Name, Limit, Plättchen, Zug, die Markierung „minor“ und Runden. Die
 Gesellschaft, das Ereignis, bei dem die Phase beginnt, die Notizen, der Kauf von
