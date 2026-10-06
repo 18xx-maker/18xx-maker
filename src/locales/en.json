@@ -91,6 +91,10 @@
         "tab": "Market",
         "description": "Edit the stock market: its type, the cells, the legend and how the share price moves. The changes stay in memory until you save them on the Changes page."
       },
+      "players": {
+        "tab": "Players",
+        "description": "Edit the players table, the bank and the limits of the game. The changes stay in memory until you save them on the Changes page."
+      },
       "json": {
         "tab": "JSON",
         "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
@@ -105,7 +109,11 @@
       "privates": "private",
       "companies": "company",
       "phases": "phase",
+      "players": "player",
       "legend": "legend entry"
+    },
+    "titles": {
+      "players": "{{count}} players"
     },
     "emptyList": "Nothing here yet.",
     "add": "Add {{item}}",

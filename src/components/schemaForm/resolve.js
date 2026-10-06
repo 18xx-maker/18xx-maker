@@ -43,6 +43,13 @@ export const PHASE_PRIMARY_KEYS = [
   "rounds",
 ];
 
+// The game-wide values of the players tab; the players table itself is
+// "players"
+export const PLAYER_KEYS = ["bank", "capital", "certLimit", "floatPercent"];
+
+// The fields of a player count shown first: the bank is under "more fields"
+export const PLAYER_PRIMARY_KEYS = ["number", "capital", "certLimit"];
+
 // Strings that are long text, shown in a textarea
 export const LONG_TEXT_KEYS = ["notes", "description"];
 
@@ -364,6 +371,19 @@ export const nextName = (items = [], key = "name") => {
   return String(n);
 };
 
+// The highest number of the items plus one, for a list whose items are
+// identified by a number (the players): a number, not text
+export const nextNumber = (items = [], key = "number") =>
+  items.reduce(
+    (max, item) =>
+      typeof item?.[key] === "number" && item[key] > max ? item[key] : max,
+    0,
+  ) + 1;
+
+// The free identity of a new item: a name, or a number for a list keyed by one
+export const nextId = (items, idKey = "name") =>
+  idKey === "name" ? nextName(items) : nextNumber(items, idKey);
+
 // Whether the items are named: phases may be keyed by their train instead
 export const isNamed = (items) => items.some((item) => item?.name);
 
@@ -371,12 +391,17 @@ export const isNamed = (items) => items.some((item) => item?.name);
 // name), named to not clash with the others. With unique "named" a list of
 // items that have no names, a phase list keyed by train, gets a train that is
 // free instead (a name would make one phase differ from the others).
-export const newItem = (items, defaults = {}, unique = true) => {
+export const newItem = (
+  items,
+  defaults = {},
+  unique = true,
+  idKey = "name",
+) => {
   const base = typeof defaults === "function" ? defaults(items) : defaults;
   if (unique === "named" && items.length > 0 && !isNamed(items)) {
     return { ...base, train: nextName(items, "train") };
   }
-  return { ...(unique && { name: nextName(items) }), ...base };
+  return { ...(unique && { [idKey]: nextId(items, idKey) }), ...base };
 };
 
 // An abbreviation no company has, whatever the case: the base, or the base

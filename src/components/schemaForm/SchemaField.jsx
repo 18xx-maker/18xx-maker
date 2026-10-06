@@ -46,6 +46,7 @@ import {
   issuesFor,
   kindOf,
   newItem,
+  nextId,
   nextName,
   parseLimit,
   parseList,
@@ -699,7 +700,9 @@ const FRESH_CARD = { open: true, more: false };
 const CLOSED_CARD = { open: false, more: false };
 
 // primary are the fields shown first, the others are under more fields.
-// titleKey is the field that names an item. Names are kept unique (a new item
+// titleKey is the field that names an item and idKey the one that identifies
+// it (a number for the players); with title (a translation key) a card is
+// titled with it, counting the titleKey (3 players). Names are kept unique (a new item
 // or a copy gets a free one) unless unique is false, as in a legend. With
 // unique "named" only a list that has names gets them (phases may be keyed by
 // train). With startCollapsed the cards of the items the list starts with
@@ -714,6 +717,8 @@ const ArrayField = ({
   defaults,
   primary = PRIMARY_KEYS,
   titleKey = "name",
+  idKey = "name",
+  title,
   unique = true,
   startCollapsed = false,
   summary,
@@ -735,7 +740,11 @@ const ArrayField = ({
   const item = t(`editPanel.items.${keys[keys.length - 1]}`);
   // A phase may have no name and be known by its train (or trains)
   const titleOf = (value, index) =>
-    value?.[titleKey] ||
+    (title
+      ? value?.[titleKey] != null &&
+        value[titleKey] !== "" &&
+        t(title, { count: value[titleKey] })
+      : value?.[titleKey]) ||
     [value?.train].flat().filter(Boolean).join(", ") ||
     `#${index + 1}`;
   const initial = startCollapsed ? CLOSED_CARD : FRESH_CARD;
@@ -769,7 +778,7 @@ const ArrayField = ({
   const add = () => {
     commit();
     const before = current();
-    const created = newItem(before, defaults, unique);
+    const created = newItem(before, defaults, unique, idKey);
     setRemoved(null);
     setWarning("");
     form.insert(keys, before.length, created);
@@ -786,7 +795,7 @@ const ArrayField = ({
     const copy = {
       ...structuredClone(before[index]),
       ...((unique === true || (unique && isNamed([before[index]]))) && {
-        name: nextName(before),
+        [idKey]: nextId(before, idKey),
       }),
       ...(unique === "named" &&
         !isNamed([before[index]]) && { train: nextName(before, "train") }),
