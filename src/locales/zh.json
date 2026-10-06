@@ -258,6 +258,61 @@
       "newName": "新",
       "usedBy_one": "{{count}} 家公司按名称或默认使用“{{name}}”,之后将找不到它。",
       "usedBy_other": "{{count}} 家公司按名称或默认使用“{{name}}”,之后将找不到它。"
+    },
+    "tokenEditor": {
+      "edit": "编辑标记",
+      "editFor": "编辑 {{title}} 的标记",
+      "title": "编辑标记",
+      "titleFor": "编辑 {{subject}} 的标记",
+      "description": "每次更改都会立即写入游戏。",
+      "preview": "标记预览",
+      "background": "预览背景",
+      "backgrounds": {
+        "light": "浅色",
+        "dark": "深色"
+      },
+      "reset": "重置",
+      "groups": {
+        "shape": "形状",
+        "content": "内容",
+        "colors": "颜色",
+        "decorations": "装饰",
+        "advanced": "高级"
+      },
+      "addDecoration": "添加装饰",
+      "removeDecoration": "移除{{name}}",
+      "decorations": {
+        "bar": "横条",
+        "target": "靶心",
+        "stripe": "条纹",
+        "stripes": "多条条纹",
+        "curvedStripes": "弧形条纹",
+        "spiral": "螺旋",
+        "circle": "圆形",
+        "shield": "盾牌",
+        "shield3": "三段盾牌",
+        "kiteshield": "风筝盾",
+        "star5": "五角星",
+        "square": "方形",
+        "halves": "两半",
+        "quarters": "四等分",
+        "sexies": "六等分",
+        "sunrise": "日出",
+        "hexagram": "六角星"
+      },
+      "shapes": {
+        "circle": "圆形",
+        "square": "方形"
+      },
+      "white": "白色 (true)",
+      "colorAt": "{{name}} {{index}}",
+      "noColors": "没有名为 \"{{value}}\" 的颜色，将按输入使用。",
+      "noAssets": "没有名为 \"{{value}}\" 的{{asset}}，将按输入使用。",
+      "unknownAsset": "应用中没有名为 {{value}} 的{{asset}}。",
+      "assets": {
+        "icon": "图标",
+        "logo": "标志"
+      }
     }
   },
   "hexEditor": {

@@ -258,6 +258,61 @@
       "newName": "new",
       "usedBy_one": "{{count}} company uses \"{{name}}\" by name or by default and will no longer find it.",
       "usedBy_other": "{{count}} companies use \"{{name}}\" by name or by default and will no longer find it."
+    },
+    "tokenEditor": {
+      "edit": "Edit token",
+      "editFor": "Edit token of {{title}}",
+      "title": "Edit token",
+      "titleFor": "Edit token of {{subject}}",
+      "description": "Every change goes into the game as you make it.",
+      "preview": "Preview of the token",
+      "background": "Background of the preview",
+      "backgrounds": {
+        "light": "Light",
+        "dark": "Dark"
+      },
+      "reset": "Reset",
+      "groups": {
+        "shape": "Shape",
+        "content": "Content",
+        "colors": "Colors",
+        "decorations": "Decorations",
+        "advanced": "Advanced"
+      },
+      "addDecoration": "Add decoration",
+      "removeDecoration": "Remove {{name}}",
+      "decorations": {
+        "bar": "Bar",
+        "target": "Target",
+        "stripe": "Stripe",
+        "stripes": "Stripes",
+        "curvedStripes": "Curved stripes",
+        "spiral": "Spiral",
+        "circle": "Circle",
+        "shield": "Shield",
+        "shield3": "Three part shield",
+        "kiteshield": "Kite shield",
+        "star5": "Five pointed star",
+        "square": "Square",
+        "halves": "Halves",
+        "quarters": "Quarters",
+        "sexies": "Sexies",
+        "sunrise": "Sunrise",
+        "hexagram": "Hexagram"
+      },
+      "shapes": {
+        "circle": "Circle",
+        "square": "Square"
+      },
+      "white": "White (true)",
+      "colorAt": "{{name}} {{index}}",
+      "noColors": "No color is named \"{{value}}\", it is used as typed.",
+      "noAssets": "No {{asset}} is named \"{{value}}\", it is used as typed.",
+      "unknownAsset": "The app has no {{asset}} named {{value}}.",
+      "assets": {
+        "icon": "icon",
+        "logo": "logo"
+      }
     }
   },
   "hexEditor": {

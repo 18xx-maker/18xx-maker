@@ -93,14 +93,6 @@ const isLongText = (key, keys) =>
 // one form (the abilities of a private, each has its own type and keys)
 export const JSON_KEYS = ["abilities"];
 
-// The same for a key in one section: the token of a private and of a company
-// is a $ref into tiles.defs.json that has a form of its own, but these cards
-// keep it as JSON
-export const JSON_SECTION_KEYS = [
-  ["privates", "token"],
-  ["companies", "token"],
-];
-
 // The schema documents a $ref can point into besides the root, by file name
 const DOCUMENTS = { "tiles.defs.json": tilesDefs };
 
@@ -261,11 +253,27 @@ const isColor = (alternatives) =>
   alternatives.some(isPlainString) &&
   alternatives.some((a) => a.type === "object" && isRecord(a));
 
+// True or a color: the shapes of a token ("true draws it in white"). The
+// alternatives are a boolean (or the one value true) and a plain string.
+const isBoolOrColor = (alternatives) =>
+  alternatives.length === 2 &&
+  alternatives.some(isPlainString) &&
+  alternatives.some((a) => a.type === "boolean");
+
+// A list of text that always has the same length (the two colors of halves):
+// its minimum and maximum agree
+const isTuple = (node, item) =>
+  Number.isInteger(node.minItems) &&
+  node.minItems > 0 &&
+  node.minItems === node.maxItems &&
+  isPlainString(item);
+
 // How a (resolved) schema node is edited:
 // string, text, number, boolean, enum, stringOrNumber, limit, stringList,
 // count, revenue, color, object, record (an object of any names, each a value
 // of one schema), array (of objects, needs the root to follow the items),
-// stringArray (of texts), enumList (of choices), or json for everything
+// stringArray (of texts), colorTuple (a fixed number of texts, the length is
+// kept), boolOrColor (true or a text), enumList (of choices), or json for everything
 // else, so a new construct never disappears from the form.
 // The color kind is structural (text, or an object of colors by phase, shown
 // as JSON), not tied to a field name.
@@ -273,10 +281,6 @@ export const kindOf = (schema, key, root, keys = []) => {
   const node = resolveSchema(schema, root);
   if (!node || typeof node !== "object" || node.$ref) return "json";
   if (JSON_KEYS.includes(key)) return "json";
-  if (
-    JSON_SECTION_KEYS.some(([section, k]) => keys[0] === section && k === key)
-  )
-    return "json";
   if (Array.isArray(node.enum)) {
     return node.enum.every((value) => typeof value === "string")
       ? "enum"
@@ -294,12 +298,16 @@ export const kindOf = (schema, key, root, keys = []) => {
     if (root && item?.type === "object" && item.properties) return "array";
     if (root && mixedItem(node.items, root)) return "array";
     if (isEnumStrings(item)) return "enumList";
+    if (isTuple(node, item)) return "colorTuple";
     return isPlainString(item) ? "stringArray" : "json";
   }
   if (Array.isArray(node.oneOf) && isCount(node.oneOf)) return "count";
   if (Array.isArray(node.oneOf) && isRevenue(node.oneOf)) return "revenue";
   if (Array.isArray(node.oneOf) && isColor(alternativesOf(node, root))) {
     return "color";
+  }
+  if (Array.isArray(node.oneOf) && isBoolOrColor(node.oneOf)) {
+    return "boolOrColor";
   }
   if (Array.isArray(node.oneOf) && isStringList(node.oneOf)) {
     return "stringList";

@@ -258,6 +258,61 @@
       "newName": "neu",
       "usedBy_one": "{{count}} Gesellschaft nutzt „{{name}}“ per Name oder als Standard und findet es nicht mehr.",
       "usedBy_other": "{{count}} Gesellschaften nutzen „{{name}}“ per Name oder als Standard und finden es nicht mehr."
+    },
+    "tokenEditor": {
+      "edit": "Token bearbeiten",
+      "editFor": "Token von {{title}} bearbeiten",
+      "title": "Token bearbeiten",
+      "titleFor": "Token von {{subject}} bearbeiten",
+      "description": "Jede Änderung geht sofort in das Spiel.",
+      "preview": "Vorschau des Tokens",
+      "background": "Hintergrund der Vorschau",
+      "backgrounds": {
+        "light": "Hell",
+        "dark": "Dunkel"
+      },
+      "reset": "Zurücksetzen",
+      "groups": {
+        "shape": "Form",
+        "content": "Inhalt",
+        "colors": "Farben",
+        "decorations": "Verzierungen",
+        "advanced": "Erweitert"
+      },
+      "addDecoration": "Verzierung hinzufügen",
+      "removeDecoration": "{{name}} entfernen",
+      "decorations": {
+        "bar": "Balken",
+        "target": "Zielscheibe",
+        "stripe": "Streifen",
+        "stripes": "Streifen (mehrere)",
+        "curvedStripes": "Gebogene Streifen",
+        "spiral": "Spirale",
+        "circle": "Kreis",
+        "shield": "Schild",
+        "shield3": "Dreiteiliges Schild",
+        "kiteshield": "Drachenschild",
+        "star5": "Fünfzackiger Stern",
+        "square": "Quadrat",
+        "halves": "Hälften",
+        "quarters": "Viertel",
+        "sexies": "Sechstel",
+        "sunrise": "Sonnenaufgang",
+        "hexagram": "Hexagramm"
+      },
+      "shapes": {
+        "circle": "Kreis",
+        "square": "Quadrat"
+      },
+      "white": "Weiß (true)",
+      "colorAt": "{{name}} {{index}}",
+      "noColors": "Keine Farbe heißt \"{{value}}\", der Text wird so verwendet.",
+      "noAssets": "Kein {{asset}} heißt \"{{value}}\", der Text wird so verwendet.",
+      "unknownAsset": "Die App hat kein {{asset}} namens {{value}}.",
+      "assets": {
+        "icon": "Symbol",
+        "logo": "Logo"
+      }
     }
   },
   "hexEditor": {

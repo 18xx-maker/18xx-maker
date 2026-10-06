@@ -1,6 +1,9 @@
+import { configureStore } from "@reduxjs/toolkit";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useRef, useState } from "react";
+import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router";
 
 import SchemaField, {
   SchemaFormContext,
@@ -11,8 +14,12 @@ import {
   isRequired,
   moveItem,
   removeAt,
+  resolveAllOf,
   setValue,
 } from "@/components/schemaForm/resolve";
+
+import gameSchema from "@/schemas/game.schema.json";
+import { initialState, rootReducer } from "@/state";
 
 // A schema with a deprecated field: no field of the real game schema is
 // deprecated for the panel yet
@@ -958,5 +965,157 @@ describe("a list of choices", () => {
     expect(
       screen.queryByRole("checkbox", { name: "gif" }),
     ).not.toBeInTheDocument();
+  });
+});
+
+describe("the fields of a token", () => {
+  const token = resolveAllOf(
+    gameSchema.properties.companies.items.properties.token,
+    gameSchema,
+  );
+  let game;
+
+  const TokenForm = ({ initial, field }) => {
+    const [value, setValue_] = useState(initial);
+    const latest = useRef(value);
+    latest.current = value;
+    game = value;
+    const change = (fn) => {
+      latest.current = fn(latest.current);
+      setValue_(latest.current);
+    };
+    return (
+      <Provider
+        store={configureStore({
+          reducer: rootReducer,
+          preloadedState: initialState,
+        })}
+      >
+        <MemoryRouter>
+          <SchemaFormContext.Provider
+            value={{
+              root: gameSchema,
+              game: value,
+              issues: [],
+              latest: () => latest.current,
+              set: (keys, next) => change((g) => setValue(g, keys, next)),
+              clear: (keys) => change((g) => clearValue(g, keys)),
+              insert() {},
+              remove() {},
+              move() {},
+            }}
+          >
+            <SchemaField
+              keys={["token", field]}
+              schema={token.properties[field]}
+            />
+          </SchemaFormContext.Provider>
+        </MemoryRouter>
+      </Provider>
+    );
+  };
+
+  describe("true or a color", () => {
+    it("is a color that is typed, and a checkbox for true", async () => {
+      const user = userEvent.setup();
+      render(<TokenForm initial={{ token: {} }} field="bar" />);
+      const color = screen.getByRole("combobox", { name: "Bar" });
+      expect(
+        screen.getByRole("checkbox", { name: "White (true)" }),
+      ).not.toBeChecked();
+
+      await user.type(color, "red{Enter}");
+      expect(game.token.bar).toBe("red");
+
+      await user.click(screen.getByRole("checkbox", { name: "White (true)" }));
+      expect(game.token.bar).toBe(true);
+      expect(color).toHaveValue("");
+
+      await user.click(screen.getByRole("checkbox", { name: "White (true)" }));
+      expect(game.token).toBeUndefined();
+    });
+
+    it("shows an initial true as a checked box", () => {
+      render(<TokenForm initial={{ token: { bar: true } }} field="bar" />);
+      expect(
+        screen.getByRole("checkbox", { name: "White (true)" }),
+      ).toBeChecked();
+      expect(screen.getByRole("combobox", { name: "Bar" })).toHaveValue("");
+    });
+
+    it("shows true as a checked box and clears with the text", async () => {
+      const user = userEvent.setup();
+      render(
+        <TokenForm initial={{ token: { circle: "blue" } }} field="circle" />,
+      );
+      const color = screen.getByRole("combobox", { name: "Circle" });
+      expect(color).toHaveValue("blue");
+      await user.clear(color);
+      await user.tab();
+      expect(game.token).toBeUndefined();
+    });
+
+    it("keeps a value it does not understand as JSON", () => {
+      render(<TokenForm initial={{ token: { bar: 3 } }} field="bar" />);
+      expect(screen.getByRole("textbox", { name: "Bar" }).tagName).toBe(
+        "TEXTAREA",
+      );
+    });
+  });
+
+  describe("a list of colors of a fixed length", () => {
+    it("is a field for each color and keeps the length", async () => {
+      const user = userEvent.setup();
+      render(<TokenForm initial={{ token: {} }} field="quarters" />);
+      expect(screen.getAllByRole("combobox")).toHaveLength(4);
+      await user.type(
+        screen.getByRole("combobox", { name: "Quarters 3" }),
+        "red{Enter}",
+      );
+      expect(game.token.quarters).toEqual(["", "", "red", ""]);
+      await user.type(
+        screen.getByRole("combobox", { name: "Quarters 1" }),
+        "blue{Enter}",
+      );
+      expect(game.token.quarters).toEqual(["blue", "", "red", ""]);
+      await user.clear(screen.getByRole("combobox", { name: "Quarters 3" }));
+      await user.tab();
+      await user.clear(screen.getByRole("combobox", { name: "Quarters 1" }));
+      await user.tab();
+      expect(game.token).toBeUndefined();
+    });
+
+    it("pads a list that is too short", () => {
+      render(
+        <TokenForm initial={{ token: { halves: ["red"] } }} field="halves" />,
+      );
+      expect(screen.getByRole("combobox", { name: "Halves 1" })).toHaveValue(
+        "red",
+      );
+      expect(screen.getByRole("combobox", { name: "Halves 2" })).toHaveValue(
+        "",
+      );
+    });
+
+    it("keeps a list longer than the schema as JSON, so nothing is cut", () => {
+      render(
+        <TokenForm
+          initial={{ token: { halves: ["a", "b", "c"] } }}
+          field="halves"
+        />,
+      );
+      expect(screen.getByRole("textbox", { name: "Halves" }).tagName).toBe(
+        "TEXTAREA",
+      );
+    });
+
+    it("keeps a value it does not understand as JSON", () => {
+      render(
+        <TokenForm initial={{ token: { halves: "red" } }} field="halves" />,
+      );
+      expect(screen.getByRole("textbox", { name: "Halves" }).tagName).toBe(
+        "TEXTAREA",
+      );
+    });
   });
 });

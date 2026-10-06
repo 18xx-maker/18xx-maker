@@ -199,6 +199,19 @@ with a token in it), and a share type lists its shares (the quantity, label,
 percent and cost first). When you rename or remove a type, the editor warns how
 many companies still use it by the old name.
 
+The token of a company and of a private (under More fields), and each token of
+the Tokens tab, has an Edit token button that opens the token editor in a
+dialog. A preview shows the token as it prints, on a light or a dark
+background, and every change goes into the game as you make it: there is
+nothing to save, and Reset goes back to the token as it was when the dialog
+opened. The shape, the content (logo, icon and label), the colors and the
+decorations (a bar, stripes, a shield, halves and so on, each with its own
+options) are grouped, and every other property is under Advanced. A shape that
+takes a color is a color or true (white), and one with several colors, like
+halves, has a field for each color. A token of the list of tokens that has only
+a label stays text or a number. What the editor does not know stays in the
+token.
+
 The Colors tab edits the named colors of the game. Each color has a swatch
 that opens the color picker and a text field for any CSS color or the name of
 another color; Add color adds one and the name field renames or removes it. A
