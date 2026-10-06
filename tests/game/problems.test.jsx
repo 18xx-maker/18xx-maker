@@ -3,6 +3,8 @@ import { act, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { page as browser } from "vitest/browser";
 
+import { resetDrafts, setDraft } from "@/components/editPanel/draftStore";
+
 import { createSetGame, validateLoadedGame } from "@/state";
 import { gameText } from "@/util/download";
 
@@ -102,6 +104,60 @@ describe("problems of a game", () => {
         .findIndex((text) => text.includes('"marekt"')) + 1;
     expect(router.state.location.pathname).toBe("/games/Broken/tokens");
     expect(router.state.location.search).toContain(`lines=${line}`);
+  });
+
+  it("leaves a row without a line as text and links the others", async () => {
+    renderApp("/games/Broken/problems", {
+      game: brokenGame(),
+      loadedGame: { slug: "Broken", title: "Broken", id: "Broken" },
+      gameProblems: {
+        slug: "Broken",
+        status: "done",
+        issues: [
+          { severity: "error", code: "failed", pointer: "", params: {} },
+          {
+            severity: "error",
+            code: "additionalProperties",
+            pointer: "exports.png.dpi",
+            params: {},
+          },
+        ],
+      },
+    });
+
+    const link = await screen.findByRole("link", {
+      name: "Open exports.png.dpi in the JSON editor",
+    });
+    expect(link).toHaveAttribute("href", expect.stringContaining("lines="));
+    expect(
+      screen.getAllByRole("link", { name: /in the JSON editor/ }),
+    ).toHaveLength(1);
+  });
+
+  it("links without a line when the editor has an unsaved draft", async () => {
+    const game = brokenGame();
+    setDraft("Broken", "{", game);
+    try {
+      const { store } = renderApp("/games/Broken/problems", {
+        game,
+        loadedGame: { slug: "Broken", title: "Broken", id: "Broken" },
+      });
+      await check(store);
+
+      const link = await screen.findByRole("link", {
+        name: "Open stock.marekt in the JSON editor",
+      });
+      expect(link).toHaveAttribute(
+        "href",
+        expect.stringContaining("edit=true&editSection=json"),
+      );
+      expect(link).not.toHaveAttribute(
+        "href",
+        expect.stringContaining("lines="),
+      );
+    } finally {
+      resetDrafts();
+    }
   });
 
   it("is a plain page, not the pan and zoom editor", async () => {

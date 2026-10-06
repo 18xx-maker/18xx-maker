@@ -83,9 +83,12 @@ const ProblemsPage = () => {
   const [json, setJson] = useState(null);
   useEffect(() => {
     let current = true;
-    import("@/util/jsonEditor").then((module) => {
-      if (current) setJson(module);
-    });
+    import("@/util/jsonEditor")
+      .then((module) => {
+        if (current) setJson(module);
+      })
+      // If it fails to load the rows stay plain text
+      .catch(() => {});
     return () => {
       current = false;
     };

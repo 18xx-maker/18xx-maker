@@ -52,7 +52,7 @@ renamed or removed), values of the wrong type, values that are not allowed, and
 required fields that are missing. Fields that are deprecated are listed too, they
 still work but will be removed in a future version. The page only reports, your
 file is never changed.
-Each row links to the JSON editor of the edit panel, at the line of the problem.
+Each row that points into the file links to the JSON editor of the edit panel, at the line of the problem.
 
 ## Validation
 
