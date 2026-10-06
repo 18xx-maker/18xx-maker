@@ -2445,7 +2445,9 @@ describe("edit panel companies", () => {
   it("marks a closed card with a problem, and shows the message when it is open", async () => {
     const { user, store } = open(companiesRoute);
     await ready();
-    expect(screen.queryByRole("img", { name: /has a problem/ })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: /has a problem/ }),
+    ).not.toBeInTheDocument();
     act(() =>
       store.dispatch(
         editGame((game) => ({
@@ -2511,6 +2513,8 @@ describe("edit panel companies", () => {
     expect(
       within(cards()[0]).queryByRole("textbox", { name: "Abbrev" }),
     ).not.toBeInTheDocument();
-    expect(screen.queryByRole("img", { name: /has a problem/ })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("img", { name: /has a problem/ }),
+    ).not.toBeInTheDocument();
   });
 });
