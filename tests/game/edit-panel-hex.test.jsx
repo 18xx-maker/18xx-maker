@@ -445,7 +445,18 @@ describe.each([
     const box = svg().getAttribute("viewBox");
 
     // A hex past the edge of the map makes it bigger
-    await realUser.click(cell("E9"), { modifiers: [modifier(mac)] });
+    // (a synthetic tap: the zoomed map can put the hex out of the window)
+    const down = {
+      pointerId: 7,
+      button: 0,
+      buttons: 1,
+      bubbles: true,
+      clientX: 700,
+      clientY: 700,
+      [mac ? "metaKey" : "ctrlKey"]: true,
+    };
+    fireEvent.pointerDown(cell("E9"), down);
+    fireEvent.pointerUp(svg(), { ...down, buttons: 0 });
     await waitFor(() => expect(groupOf("E9")).toBeTruthy());
     expect(svg()).toHaveAttribute("viewBox", box);
   });
