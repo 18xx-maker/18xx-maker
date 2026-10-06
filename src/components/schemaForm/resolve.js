@@ -28,6 +28,17 @@ export const PRIMARY_KEYS = [
   "company",
 ];
 
+// The same for a phase: the others (the company, the event it happens on, the
+// notes, buying companies and events) are under "more fields"
+export const PHASE_PRIMARY_KEYS = [
+  "name",
+  "limit",
+  "tiles",
+  "train",
+  "minor",
+  "rounds",
+];
+
 // Strings that are long text, shown in a textarea
 export const LONG_TEXT_KEYS = ["notes", "description"];
 
@@ -99,9 +110,34 @@ const isRevenue = (alternatives) =>
     typesOf(alternatives).includes(type),
   );
 
+// Text or a number, whatever the count of alternatives (the limit of a phase
+// is a number or one of two patterns): every alternative is a string or a
+// number, with at least a number and a string that is not a choice
+const isStringOrNumber = (alternatives) =>
+  alternatives.every((a) => ["string", "number", "integer"].includes(a.type)) &&
+  alternatives.some((a) => a.type === "number" || a.type === "integer") &&
+  alternatives.some((a) => a.type === "string" && !a.enum);
+
+// Text or a list of texts: the train and the notes of a phase. A choice, a
+// pattern or a $ref makes it something else.
+const isPlainString = (node) =>
+  node?.type === "string" && !node.enum && !node.pattern && !node.$ref;
+
+const isStringList = (alternatives) =>
+  alternatives.length === 2 &&
+  alternatives.some(isPlainString) &&
+  alternatives.some(
+    (a) =>
+      a.type === "array" &&
+      !a.enum &&
+      !a.$ref &&
+      isPlainString(a.items) &&
+      !a.items.$ref,
+  );
+
 // How a (resolved) schema node is edited:
-// string, text, number, boolean, enum, stringOrNumber, count, revenue, object,
-// array
+// string, text, number, boolean, enum, stringOrNumber, limit, stringList,
+// count, revenue, object, array
 // (of objects, needs the root to follow the items), or json for everything
 // else, so a new construct never disappears from the form
 export const kindOf = (node, key, root, keys = []) => {
@@ -124,11 +160,11 @@ export const kindOf = (node, key, root, keys = []) => {
   }
   if (Array.isArray(node.oneOf) && isCount(node.oneOf)) return "count";
   if (Array.isArray(node.oneOf) && isRevenue(node.oneOf)) return "revenue";
-  if (Array.isArray(node.oneOf) && node.oneOf.length === 2) {
-    const types = typesOf(node.oneOf);
-    if (types.includes("string") && types.includes("number")) {
-      return "stringOrNumber";
-    }
+  if (Array.isArray(node.oneOf) && isStringList(node.oneOf)) {
+    return "stringList";
+  }
+  if (Array.isArray(node.oneOf) && isStringOrNumber(node.oneOf)) {
+    return key === "limit" ? "limit" : "stringOrNumber";
   }
   return "json";
 };
@@ -168,11 +204,19 @@ export const schemaAt = (root, keys) =>
     resolveAllOf(root, root),
   );
 
-// A key listed in the required of its parent cannot be unset
-export const isRequired = (root, keys) =>
-  !!schemaAt(root, keys.slice(0, -1))?.required?.includes(
-    keys[keys.length - 1],
+// A key listed in the required of its parent cannot be unset, nor one that
+// every branch of its anyOf requires (the limit of a phase, but not its name,
+// which the train can stand in for)
+export const isRequired = (root, keys) => {
+  const parent = schemaAt(root, keys.slice(0, -1));
+  const key = keys[keys.length - 1];
+  const branches = Array.isArray(parent?.anyOf) ? parent.anyOf : [];
+  return (
+    !!parent?.required?.includes(key) ||
+    (branches.length > 0 &&
+      branches.every((branch) => branch.required?.includes(key)))
   );
+};
 
 // Text that is a whole number is a number (a font weight of 700), anything
 // else stays text ("bold")
@@ -194,6 +238,37 @@ export const parseRevenue = (text) => {
 // A list is written as the card prints it: 10/20
 export const formatRevenue = (value) =>
   Array.isArray(value) ? value.join("/") : (value ?? "").toString();
+
+// One text a line is a list of texts, the form of the train and the notes of a
+// phase: lines are trimmed and blank ones dropped, no line is no value and one
+// line is a string, not a list
+export const parseList = (text) => {
+  const lines = text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  if (lines.length === 0) return undefined;
+  return lines.length === 1 ? lines[0] : lines;
+};
+
+export const formatList = (value) =>
+  Array.isArray(value) ? value.join("\n") : (value ?? "").toString();
+
+// The text is the value, a list of one line (["4H"]) is the same as that line
+export const sameList = (text, value) => {
+  const parsed = parseList(text);
+  return equals(parsed, value) || equals([parsed], value);
+};
+
+// A whole number of at least 1, "∞" or one digit over one digit ("3/4"), the
+// limit of a phase: undefined for any other text
+export const parseLimit = (text) => {
+  const trimmed = text.trim();
+  if (trimmed === "∞" || /^\d\/\d$/.test(trimmed)) return trimmed;
+  return /^\d+$/.test(trimmed) && Number(trimmed) >= 1
+    ? Number(trimmed)
+    : undefined;
+};
 
 export const setValue = (game, keys, value) => assocPath(keys, value, game);
 
@@ -271,17 +346,25 @@ export const moveItem = (game, keys, from, to) => {
   return assocPath(keys, move(from, to, list), game);
 };
 
-// The first number, from the count of the list up, that no item is named
-export const nextName = (items = []) => {
-  const names = items.map((item) => item?.name);
+// The first number, from the count of the list up, that no item has as its
+// name (or another key, the train of a phase)
+export const nextName = (items = [], key = "name") => {
+  const names = items.map((item) => String(item?.[key]));
   let n = items.length + 1;
   while (names.includes(String(n))) n++;
   return String(n);
 };
 
+// Whether the items are named: phases may be keyed by their train instead
+export const isNamed = (items) => items.some((item) => item?.name);
+
 // A new item: the defaults of its list (what the schema requires besides the
-// name), named to not clash with the others
-export const newItem = (items, defaults = {}, unique = true) => ({
-  ...(unique && { name: nextName(items) }),
-  ...defaults,
-});
+// name), named to not clash with the others. With unique "named" a list of
+// items that have no names, a phase list keyed by train, gets a train that is
+// free instead (a name would make one phase differ from the others).
+export const newItem = (items, defaults = {}, unique = true) => {
+  if (unique === "named" && items.length > 0 && !isNamed(items)) {
+    return { ...defaults, train: nextName(items, "train") };
+  }
+  return { ...(unique && { name: nextName(items) }), ...defaults };
+};

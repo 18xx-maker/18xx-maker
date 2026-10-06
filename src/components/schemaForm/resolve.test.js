@@ -1,8 +1,10 @@
 import schema from "@/schemas/game.schema.json";
 import {
   GAME_INFO_KEYS,
+  PHASE_PRIMARY_KEYS,
   clearValue,
   coerceStringOrNumber,
+  formatList,
   formatRevenue,
   humanize,
   insertAt,
@@ -12,10 +14,13 @@ import {
   moveItem,
   newItem,
   nextName,
+  parseLimit,
+  parseList,
   parseRevenue,
   removeAt,
   resolveAllOf,
   resolveSchema,
+  sameList,
   schemaAt,
   setValue,
 } from "./resolve";
@@ -81,6 +86,205 @@ describe("kindOf", () => {
     [undefined, "x", "json"],
   ])("%j (%s) is %s", (node, key, kind) => {
     expect(kindOf(node, key)).toBe(kind);
+  });
+
+  it("reads two or more scalar alternatives with a number and text as stringOrNumber", () => {
+    const text = { type: "string", pattern: "^x$" };
+    expect(
+      kindOf({ oneOf: [{ type: "integer" }, text, { type: "string" }] }, "x"),
+    ).toBe("stringOrNumber");
+    // Only a choice of text next to the number is a count
+    expect(
+      kindOf(
+        { oneOf: [{ type: "integer" }, { type: "string", enum: ["∞"] }] },
+        "quantity",
+      ),
+    ).toBe("count");
+    // Without text that is free, or with something that is not scalar
+    expect(
+      kindOf(
+        {
+          oneOf: [
+            { type: "number" },
+            { type: "string", enum: ["a"] },
+            { type: "string", enum: ["b"] },
+          ],
+        },
+        "x",
+      ),
+    ).toBe("json");
+    expect(
+      kindOf(
+        {
+          oneOf: [{ type: "string" }, { type: "boolean" }, { type: "number" }],
+        },
+        "x",
+      ),
+    ).toBe("json");
+    expect(
+      kindOf(
+        { oneOf: [{ type: "number" }, { type: "string" }, { type: "object" }] },
+        "x",
+      ),
+    ).toBe("json");
+    // The certificate limit is number or text
+    expect(
+      kindOf(
+        resolveSchema(schema.definitions.numberOrSlash, schema),
+        "certLimit",
+      ),
+    ).toBe("stringOrNumber");
+  });
+
+  it("reads a text or a list of texts as stringList, in either order", () => {
+    const string = { type: "string" };
+    const list = { type: "array", items: { type: "string" } };
+    expect(kindOf({ oneOf: [string, list] }, "notes")).toBe("stringList");
+    expect(kindOf({ oneOf: [list, string] }, "train")).toBe("stringList");
+    // A choice, a pattern or a $ref is something else
+    expect(
+      kindOf({ oneOf: [{ type: "string", enum: ["a"] }, list] }, "x"),
+    ).toBe("json");
+    expect(
+      kindOf({ oneOf: [{ type: "string", pattern: "^a" }, list] }, "x"),
+    ).toBe("json");
+    expect(
+      kindOf(
+        { oneOf: [string, { type: "array", items: { type: "number" } }] },
+        "x",
+      ),
+    ).toBe("json");
+    expect(
+      kindOf(
+        { oneOf: [string, { type: "array", items: { $ref: "#/x" } }] },
+        "x",
+      ),
+    ).toBe("json");
+    expect(kindOf({ oneOf: [string, list, { type: "boolean" }] }, "x")).toBe(
+      "json",
+    );
+  });
+
+  it("keeps the arrow of a cell and a train event as JSON", () => {
+    const cell = resolveAllOf(schema.definitions.cellObject, schema);
+    expect(
+      kindOf(resolveAllOf(cell.properties.arrow, schema), "arrow", schema),
+    ).toBe("json");
+    expect(
+      kindOf(resolveAllOf(schema.definitions.trainEvent, schema), "on", schema),
+    ).toBe("json");
+  });
+
+  // Widening what a kind matches must not move a field of these sections
+  it("pins the kind of every game info and train field", () => {
+    const kinds = {};
+    const walk = (node, keys) => {
+      const resolved = resolveAllOf(node, schema);
+      const kind = kindOf(resolved, keys[keys.length - 1], schema, keys);
+      if (kind !== "object") {
+        kinds[keys.join(".")] = kind;
+        return;
+      }
+      Object.entries(resolved.properties).forEach(([key, child]) =>
+        walk(child, [...keys, key]),
+      );
+    };
+    GAME_INFO_KEYS.forEach((key) => walk(schema.properties[key], [key]));
+    const train = resolveAllOf(schema.properties.trains.items, schema);
+    Object.entries(train.properties).forEach(([key, child]) =>
+      walk(child, ["trains", 0, key]),
+    );
+    expect(kinds).toEqual({
+      "info.background": "string",
+      "info.borderWidth": "number",
+      "info.capitalization": "enum",
+      "info.cityWidth": "number",
+      "info.companyFontFamily": "string",
+      "info.companyFontSize": "number",
+      "info.companyFontStyle": "string",
+      "info.companyFontWeight": "stringOrNumber",
+      "info.currency": "string",
+      "info.designer": "string",
+      "info.designerFontFamily": "string",
+      "info.designerFontWeight": "stringOrNumber",
+      "info.designerSize": "number",
+      "info.extraStationTokens": "number",
+      "info.extraTotalHeight": "number",
+      "info.extraTotalWidth": "number",
+      "info.mapCoordinates": "enum",
+      "info.marketTokens": "number",
+      "info.mustSellInBlocks": "boolean",
+      "info.nameFontFamily": "string",
+      "info.nameFontSize": "number",
+      "info.nameFontWeight": "stringOrNumber",
+      "info.notes": "text",
+      "info.orientation": "enum",
+      "info.publisher": "string",
+      "info.subtitle": "string",
+      "info.subtitleFontFamily": "string",
+      "info.subtitleFontWeight": "stringOrNumber",
+      "info.subtitleSize": "number",
+      "info.title": "string",
+      "info.titleFontFamily": "string",
+      "info.titleFontWeight": "stringOrNumber",
+      "info.titleRotate": "number",
+      "info.titleSize": "number",
+      "info.titleX": "number",
+      "info.titleY": "number",
+      "info.townBorderWidth": "number",
+      "info.townWidth": "number",
+      "info.trackBorderColor": "string",
+      "info.trackColor": "string",
+      "info.trackGauge": "string",
+      "info.trackGaugeColor": "string",
+      "info.trackWidth": "number",
+      "info.transparent": "boolean",
+      "info.valueFontFamily": "string",
+      "info.valueFontSize": "number",
+      "info.valueFontWeight": "stringOrNumber",
+      "links.bgg": "string",
+      "links.license": "string",
+      "links.purchase": "string",
+      "links.rules": "string",
+      prototype: "boolean",
+      "trains.0.available": "string",
+      "trains.0.backgroundColor": "string",
+      "trains.0.color": "string",
+      "trains.0.description": "text",
+      "trains.0.discount": "json",
+      "trains.0.image": "string",
+      "trains.0.imagePaddingTop": "number",
+      "trains.0.imageWidth": "number",
+      "trains.0.longevityFontFamily": "string",
+      "trains.0.longevityFontSize": "number",
+      "trains.0.name": "string",
+      "trains.0.nameFontFamily": "string",
+      "trains.0.nameFontSize": "number",
+      "trains.0.obsolete": "json",
+      "trains.0.obsoletedText": "string",
+      "trains.0.permanent": "boolean",
+      "trains.0.permanentColor": "string",
+      "trains.0.permanentText": "string",
+      "trains.0.phase": "boolean",
+      "trains.0.phased": "json",
+      "trains.0.phasedText": "string",
+      "trains.0.players": "number",
+      "trains.0.price": "stringOrNumber",
+      "trains.0.priceFontFamily": "string",
+      "trains.0.priceFontSize": "number",
+      "trains.0.priceFormat": "string",
+      "trains.0.print": "number",
+      "trains.0.quantity": "count",
+      "trains.0.quantity_label": "string",
+      "trains.0.rust": "json",
+      "trains.0.rustedText": "string",
+      "trains.0.tradeIn": "stringOrNumber",
+      "trains.0.tradeInFormat": "string",
+      "trains.0.upgrade": "stringOrNumber",
+      "trains.0.upgradeFormat": "string",
+      "trains.0.variant": "string",
+      wip: "boolean",
+    });
   });
 
   it("a description is text in trains and privates, one line elsewhere", () => {
@@ -194,6 +398,50 @@ describe("kindOf", () => {
     expect(json).toEqual(["token", "abilities"]);
   });
 
+  it("reads the phases as an array, the fields of a phase as real fields", () => {
+    expect(kindOf(schema.properties.phases, "phases", schema)).toBe("array");
+    const item = resolveAllOf(schema.properties.phases.items, schema);
+    const kinds = Object.fromEntries(
+      Object.entries(item.properties).map(([key, node]) => [
+        key,
+        kindOf(resolveAllOf(node, schema), key, schema, ["phases", 0, key]),
+      ]),
+    );
+    expect(kinds).toEqual({
+      name: "string",
+      minor: "boolean",
+      company: "string",
+      train: "stringList",
+      limit: "limit",
+      rounds: "number",
+      tiles: "string",
+      on: "json",
+      notes: "stringList",
+      buy_companies: "boolean",
+      events: "object",
+    });
+    expect(Object.keys(kinds)).toEqual(
+      expect.arrayContaining(PHASE_PRIMARY_KEYS),
+    );
+    const events = resolveAllOf(item.properties.events, schema);
+    expect(
+      Object.entries(events.properties).map(([key, node]) =>
+        kindOf(resolveAllOf(node, schema), key, schema),
+      ),
+    ).toEqual(["boolean", "boolean"]);
+  });
+
+  it("lists the phase fields that are a JSON textarea", () => {
+    const item = resolveAllOf(schema.properties.phases.items, schema);
+    const json = Object.entries(item.properties)
+      .filter(
+        ([key, node]) =>
+          kindOf(resolveAllOf(node, schema), key, schema) === "json",
+      )
+      .map(([key]) => key);
+    expect(json).toEqual(["on"]);
+  });
+
   it("shows a property that is new to the schema without a component change", () => {
     const mock = {
       properties: {
@@ -227,6 +475,16 @@ describe("helpers", () => {
     expect(isRequired(schema, ["info", "title"])).toBe(true);
     expect(isRequired(schema, ["info", "subtitle"])).toBe(false);
     expect(isRequired(schema, ["links", "bgg"])).toBe(false);
+  });
+
+  it("a key every branch of an anyOf requires is required", () => {
+    expect(isRequired(schema, ["phases", 0, "limit"])).toBe(true);
+    expect(isRequired(schema, ["phases", 0, "tiles"])).toBe(true);
+    // The name or the train, not both
+    expect(isRequired(schema, ["phases", 0, "name"])).toBe(false);
+    expect(isRequired(schema, ["phases", 0, "train"])).toBe(false);
+    expect(isRequired(schema, ["phases", 0, "notes"])).toBe(false);
+    expect(isRequired(schema, ["trains", 0, "train"])).toBe(false);
   });
 
   it("knows the required keys of an item, with allOf merged", () => {
@@ -319,6 +577,59 @@ describe("revenue", () => {
     expect(formatRevenue("$10/$20")).toBe("$10/$20");
     expect(formatRevenue(undefined)).toBe("");
     expect(parseRevenue(formatRevenue([10, 20]))).toEqual([10, 20]);
+  });
+});
+
+describe("one text a line", () => {
+  it.each([
+    ["", undefined],
+    ["  \n \n", undefined],
+    ["4H", "4H"],
+    ["  4H  ", "4H"],
+    ["4H\n2M", ["4H", "2M"]],
+    ["4H\r\n\n  2M \n", ["4H", "2M"]],
+  ])("parses %j as %j", (text, value) => {
+    expect(parseList(text)).toEqual(value);
+  });
+
+  it("formats a list a line each, a string as it is", () => {
+    expect(formatList(["4H", "2M"])).toBe("4H\n2M");
+    expect(formatList("4H")).toBe("4H");
+    expect(formatList(undefined)).toBe("");
+  });
+
+  it("round trips what it formats", () => {
+    for (const value of ["4H", ["4H", "2M"]]) {
+      expect(parseList(formatList(value))).toEqual(value);
+    }
+  });
+
+  it("a list of one line is the same as that line", () => {
+    expect(sameList("4H", "4H")).toBe(true);
+    expect(sameList("4H", ["4H"])).toBe(true);
+    expect(sameList("4H\n2M", ["4H", "2M"])).toBe(true);
+    expect(sameList("4H\n2M", "4H")).toBe(false);
+    expect(sameList("4H", ["4H", "2M"])).toBe(false);
+    expect(sameList("", undefined)).toBe(true);
+    expect(sameList("4H", undefined)).toBe(false);
+  });
+});
+
+describe("parseLimit", () => {
+  it.each([
+    ["4", 4],
+    [" 12 ", 12],
+    ["∞", "∞"],
+    ["3/4", "3/4"],
+    [" 3/4 ", "3/4"],
+    ["0", undefined],
+    ["-1", undefined],
+    ["2.5", undefined],
+    ["3 / 4", undefined],
+    ["12/4", undefined],
+    ["many", undefined],
+  ])("parses %j as %j", (text, value) => {
+    expect(parseLimit(text)).toBe(value);
   });
 });
 
@@ -430,6 +741,30 @@ describe("lists", () => {
       name: "2",
       color: "gray",
       quantity: 1,
+    });
+  });
+
+  describe("with names only where the list has them", () => {
+    const defaults = { limit: 4, tiles: "yellow" };
+
+    it("names a phase when the others are named, or there are none", () => {
+      expect(newItem([], defaults, "named")).toEqual({
+        name: "1",
+        ...defaults,
+      });
+      expect(
+        newItem([{ name: "2" }, { train: "3" }], defaults, "named"),
+      ).toEqual({ name: "3", ...defaults });
+    });
+
+    it("gives a phase a train, not a name, when the others are keyed by train", () => {
+      expect(
+        newItem([{ train: "2" }, { train: ["3", "4"] }], defaults, "named"),
+      ).toEqual({ ...defaults, train: "3" });
+      expect(newItem([{ train: "2" }], defaults, "named")).toEqual({
+        ...defaults,
+        train: "3",
+      });
     });
   });
 });

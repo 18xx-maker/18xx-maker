@@ -79,6 +79,10 @@
         "tab": "Privatgesellschaften",
         "description": "Bearbeite die Privatgesellschaften des Spiels. Füge sie hinzu, entferne, kopiere und sortiere sie mit den Schaltflächen jeder Privatgesellschaft."
       },
+      "phases": {
+        "tab": "Phasen",
+        "description": "Bearbeite die Phasen des Spiels. Füge Phasen hinzu, entferne, kopiere und sortiere sie mit den Schaltflächen jeder Phase."
+      },
       "market": {
         "tab": "Markt",
         "description": "Bearbeite den Aktienmarkt: seinen Typ, die Zellen, die Legende und wie sich der Aktienkurs bewegt. Die Änderungen bleiben im Speicher, bis du sie auf der Seite „Änderungen“ speicherst."
@@ -95,6 +99,7 @@
     "items": {
       "trains": "Zug",
       "privates": "Privatgesellschaft",
+      "phases": "Phase",
       "legend": "Legendeneintrag"
     },
     "emptyList": "Noch nichts vorhanden.",
@@ -112,6 +117,8 @@
     "duplicated": "{{item}} als {{title}} dupliziert",
     "restored": "{{item}} {{title}} wiederhergestellt",
     "invalidCount": "Gib eine ganze Zahl ab 1 oder ∞ ein.",
+    "invalidLimit": "Gib eine ganze Zahl ab 1, ∞ oder eine Ziffer über einer Ziffer wie 3/4 ein.",
+    "onePerLine": "Eine pro Zeile. Eine einzelne Zeile wird als Text gespeichert, mehrere als Liste.",
     "market": {
       "gridLabel": "Zellen des Aktienmarkts",
       "gridHint": "Mit den Pfeiltasten wechselst du zwischen Zellen. Entf leert eine Zelle. Eine Zifferntaste springt zum Wert der Zelle. Enter springt zu den Zellfeldern.",
@@ -1268,7 +1275,7 @@
       },
       "edit": {
         "use": "Das geladene Spiel im ersten Abschnitt bearbeiten",
-        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel (Formulare für Spielinfo und Züge) geöffnet oder geschlossen. Sonst zurück zur Spielseite"
+        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel geöffnet oder geschlossen. Sonst zurück zur Spielseite"
       },
       "json": {
         "use": "Das ganze Spiel als JSON bearbeiten",
