@@ -229,6 +229,59 @@ describe("config drawer", () => {
     expect(store.getState().errors).toEqual({});
   });
 
+  it("sets the print scale and does not store one out of range", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/map?config=true&section=layout",
+    );
+    const field = await screen.findByRole("spinbutton", {
+      name: "Print Scale",
+    });
+    expect(field).toHaveValue(100);
+
+    await user.clear(field);
+    await user.type(field, "110");
+    await user.tab();
+    await waitFor(() => expect(store.getState().config.printScale).toBe(110));
+
+    await user.clear(field);
+    await user.type(field, "300");
+    await user.tab();
+    await waitFor(() =>
+      expect(Object.keys(store.getState().errors)).toContain("#/printScale"),
+    );
+    expect(store.getState().config.printScale).toBe(110);
+  });
+
+  it("sets the size of the cards of a die", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/cards?config=true&section=cards",
+    );
+    await screen.findByRole("button", { name: "Close Config" });
+
+    const width = screen.getByRole("textbox", {
+      name: "Mini Euro Die Card Width",
+    });
+    expect(width).toHaveValue("2.65748");
+    expect(
+      screen.getByRole("textbox", { name: "Mini Euro Die Card Height" }),
+    ).toHaveValue("1.73228");
+    expect(
+      screen.getByRole("textbox", { name: "DTG Die Card Width" }),
+    ).toHaveValue("2.5");
+    expect(
+      screen.getByRole("textbox", { name: "DTG Die Card Height" }),
+    ).toHaveValue("1.5");
+
+    await user.clear(width);
+    await user.type(width, "3{Enter}");
+    await waitFor(() =>
+      expect(store.getState().config.cards.dice).toEqual({
+        miniEuroDie: { width: 300 },
+      }),
+    );
+    expect(store.getState().errors).toEqual({});
+  });
+
   it("resets the stored config to the defaults", async () => {
     const { user, store } = renderApp(
       "/games/18Test/map?config=true&section=data",

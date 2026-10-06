@@ -1,6 +1,7 @@
 import { curry, map, range } from "ramda";
 
 import { useConfig } from "@/hooks";
+import { layoutPaper } from "@/util";
 import { getTileSheetContext } from "@/util/tiles/tilesheet";
 
 const STROKE = {
@@ -69,7 +70,7 @@ const Cutlines = () => {
   const { config } = useConfig();
   const hexWidth = config.tiles.width;
   const layout = config.tiles.layout;
-  const paper = config.paper;
+  const paper = layoutPaper(config.paper, config.printScale);
 
   if (layout !== "offset") {
     return null;

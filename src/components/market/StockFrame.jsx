@@ -1,7 +1,7 @@
 import Editor, { useEditing } from "@/components/editor/Editor";
 import Svg from "@/components/svg/Svg";
 
-import { unitsToCss } from "@/util";
+import { parsePrintScale, unitsToCss } from "@/util";
 
 // The print box around a single market, par or revenue chart: the editor when
 // editing, an svg otherwise, and the page size of the printed sheet.
@@ -15,9 +15,13 @@ const StockFrame = ({
 }) => {
   const editing = useEditing();
 
-  const paperWidth = unitsToCss(data.totalWidth + 5 + 2 * config.paper.margins);
+  // The chart is zoomed by the print scale, the margins stay the real ones
+  const factor = parsePrintScale(config.printScale) / 100;
+  const paperWidth = unitsToCss(
+    (data.totalWidth + 5) * factor + 2 * config.paper.margins,
+  );
   const paperHeight = unitsToCss(
-    data.totalHeight + 5 + 2 * config.paper.margins,
+    (data.totalHeight + 5) * factor + 2 * config.paper.margins,
   );
 
   // The editor fills the window, no inline box and no margin around it

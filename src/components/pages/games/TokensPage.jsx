@@ -10,16 +10,18 @@ import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
-import { unitsToCss } from "@/util";
+import { layoutPaper, unitsToCss } from "@/util";
 import {
   compileCompanies,
   overrideCompanies,
 } from "@/util/companies/companies";
 
-// Takes in a game object, a tokens config object and a paper config object.
+// Takes in a game object, a tokens config object, a paper config object and
+// the print scale. The sheet is laid out on the scaled paper (layoutPaper),
+// `paper` in the data stays the real one for the page setup.
 //
 // Returns data that's needed to layout a token sheet.
-const getTokenData = (game, tokens, paper) => {
+const getTokenData = (game, tokens, paper, printScale) => {
   let { marketTokenSize, stationTokenSize, generalTokenSize, bleed } = tokens;
 
   // Extra token counts from config
@@ -41,8 +43,9 @@ const getTokenData = (game, tokens, paper) => {
   let totalWidth = width + 2 * bleedWidth;
 
   // Paper setup
-  let usableWidth = paper.width - 2 * paper.margins;
-  let usableHeight = paper.height - 2 * paper.margins;
+  const sheet = layoutPaper(paper, printScale);
+  let usableWidth = sheet.width - 2 * sheet.margins;
+  let usableHeight = sheet.height - 2 * sheet.margins;
 
   // Page row and column settings
   let perRow = Math.floor(usableWidth / totalWidth);
@@ -282,7 +285,12 @@ const TokensPage = () => {
     selection,
   );
 
-  const data = getTokenData(game, config.tokens, config.paper);
+  const data = getTokenData(
+    game,
+    config.tokens,
+    config.paper,
+    config.printScale,
+  );
 
   return <TokenLayout companies={companies} data={data} game={game} />;
 };

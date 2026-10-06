@@ -20,7 +20,7 @@ import PageSetup from "@/components/page/PageSetup";
 import Svg from "@/components/svg/Svg";
 
 import { useConfig, useGame } from "@/hooks";
-import { getCharterData } from "@/util";
+import { getCharterData, layoutPaper } from "@/util";
 import {
   compileCompanies,
   overrideCompanies,
@@ -32,7 +32,7 @@ const isMajor = compose(not, prop("minor"));
 const ChartersPage = () => {
   const { config } = useConfig();
   const charters = config.charters;
-  const paper = config.paper;
+  const paper = layoutPaper(config.paper, config.printScale);
   const override = config.overrideCompanies;
   const selection = config.overrideSelection;
   const game = useGame();

@@ -1,10 +1,13 @@
 import clsx from "clsx";
 import { Suspense, lazy, useEffect } from "react";
+import { useMatch } from "react-router";
 
 import Toolbar from "@/components/Toolbar";
 import Config from "@/components/config/Config";
 
+import { useConfig } from "@/hooks";
 import { useEditPanel } from "@/hooks/useEditPanel";
+import { parsePrintScale } from "@/util";
 import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
 
@@ -15,6 +18,14 @@ const Viewport = ({ children }) => {
   const [config] = useBooleanParam("config");
   const [print] = useBooleanParam("print");
   const { open: edit } = useEditPanel();
+  const { config: printConfig } = useConfig();
+  const b18 = useMatch("/games/:slug/b18/*");
+
+  // The print scale zooms the print pages. The Board18 pages have a fixed page
+  // size and the exports (render mode) a fixed size, they are never scaled.
+  const printScale =
+    b18 || getRenderInput() ? 100 : parsePrintScale(printConfig.printScale);
+  const scaled = printScale !== 100;
 
   // The scroll past the edge (macOS rubber banding) shows the page canvas,
   // not #viewport, so the editor background and overscroll rule go on <html>
@@ -50,6 +61,10 @@ const Viewport = ({ children }) => {
       )}
       <div
         id="viewport-children"
+        {...(scaled && {
+          "data-print-scale": "",
+          style: { "--print-scale": printScale / 100 },
+        })}
         className={clsx(
           // Plain pages (no pan and zoom editor) start below the fixed toolbar
           // and sit in the middle when narrower than the window, a page wider
