@@ -5,6 +5,7 @@ import { useLocation, useMatch, useNavigate } from "react-router";
 import { find, propEq } from "ramda";
 
 import { sections as configSections } from "@/components/config";
+import { panelId, tabId } from "@/components/editPanel/EditTabs";
 import { editSections } from "@/components/editPanel/sections";
 import { docsPages } from "@/components/nav";
 
@@ -110,13 +111,19 @@ export const useBindings = () => {
           const params = new URLSearchParams(location.search);
 
           if (editOpen) {
-            setEditSection(
-              cycle(
-                editSections,
-                editSections.findIndex((s) => s.section === editSection),
-                event.key,
-              ).section,
-            );
+            const next = cycle(
+              editSections,
+              editSections.findIndex((s) => s.section === editSection),
+              event.key,
+            ).section;
+            // With the focus on a tab or in the panel it goes to the new tab:
+            // the panel is replaced, the old tab is not selected any more
+            const active = document.activeElement;
+            const inside =
+              active?.closest?.('[role="tablist"]') ||
+              document.getElementById(panelId(editSection))?.contains(active);
+            setEditSection(next);
+            if (inside) document.getElementById(tabId(next))?.focus();
           } else if (params.has("config")) {
             const current = decodeURIComponent(
               params.get("section") || "colors",
