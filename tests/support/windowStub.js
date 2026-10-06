@@ -79,6 +79,7 @@ const define = (name, value) =>
 export const resetWindow = ({ location = {} } = {}) => {
   delete globalThis.api;
   delete globalThis.showOpenFilePicker;
+  delete globalThis.showSaveFilePicker;
   delete globalThis.__RENDER_INPUT__;
   globalThis.location = { hostname: "localhost", ...location };
   globalThis.localStorage.clear();

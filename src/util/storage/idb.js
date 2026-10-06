@@ -216,20 +216,48 @@ export const writeGame = (id, text) =>
     }
   });
 
+const PICKER = {
+  excludeAcceptAllOption: true,
+  id: "18xx-maker-games",
+  types: [
+    {
+      description: "18xx-maker Game",
+      accept: {
+        "application/json": [".json"],
+      },
+    },
+  ],
+};
+
+// Asks where to save a new game, writes the text there and remembers the file
+// like an opened one. It needs a user gesture, so call it straight from the
+// click. Gives the slug, or undefined when the picker is cancelled.
+export const createGameFile = (text, suggestedName) =>
+  window
+    .showSaveFilePicker({ ...PICKER, suggestedName })
+    .then(async (handle) => {
+      const writable = await handle.createWritable();
+      try {
+        await writable.write(text);
+        await writable.close();
+      } catch (e) {
+        await writable.abort().catch(() => {});
+        throw e;
+      }
+
+      return saveGameHandle(handle);
+    })
+    .catch((e) => {
+      if (e.name === "AbortError") {
+        return;
+      }
+
+      throw e;
+    });
+
 export const openFilePicker = () =>
   window
-    .showOpenFilePicker({
-      excludeAcceptAllOption: true,
-      id: "18xx-maker-games",
-      types: [
-        {
-          description: "18xx-maker Game",
-          accept: {
-            "application/json": [".json"],
-          },
-        },
-      ],
-    })
+    .showOpenFilePicker(PICKER)
     .then((handles) => {
       if (handles.length === 1) {
         return saveGameHandle(handles[0]);

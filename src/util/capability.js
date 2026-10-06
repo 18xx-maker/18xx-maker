@@ -14,6 +14,7 @@ const opfs =
   typeof navigator.storage.getDirectory === "function" &&
   !import.meta.env.VITE_NO_OPFS;
 const file_system_api = typeof window.showOpenFilePicker === "function";
+const save_file_picker = typeof window.showSaveFilePicker === "function";
 
 // Full game capabilities
 const internal = opfs;
@@ -28,5 +29,6 @@ export default {
     idb,
     opfs,
     file_system_api,
+    save_file_picker,
   },
 };
