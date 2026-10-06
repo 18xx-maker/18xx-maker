@@ -566,6 +566,7 @@ const ItemCard = ({
   count,
   open,
   more,
+  summary,
   onOpen,
   onMore,
   title,
@@ -579,6 +580,11 @@ const ItemCard = ({
   const bodyId = useId();
   const issues = issuesFor(form.issues, keys, false);
   const names = { item: kind, title };
+  // A closed card shows that a field inside it has a problem (a warning is
+  // one too, the deprecated note is not)
+  const deep = issuesFor(form.issues, keys).filter(
+    (issue) => issue.code !== "deprecated",
+  );
 
   const entries = Object.entries(schema.properties);
   const primary = primaryKeys.flatMap((key) =>
@@ -592,21 +598,31 @@ const ItemCard = ({
   return (
     <li data-item={index} className="flex flex-col gap-3 rounded-md border p-3">
       <div className="flex flex-row items-center justify-between gap-2">
-        <button
-          type="button"
-          className="flex min-w-0 flex-row items-center gap-1 rounded-sm text-left text-sm font-semibold focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
-          aria-expanded={open}
-          aria-controls={bodyId}
-          data-title
-          onClick={() => onOpen(index, !open)}
-        >
-          {open ? (
-            <ChevronDown className="size-4 shrink-0" aria-hidden="true" />
-          ) : (
-            <ChevronRight className="size-4 shrink-0" aria-hidden="true" />
+        <div className="flex min-w-0 flex-row items-center gap-2">
+          <button
+            type="button"
+            className="flex min-w-0 flex-row items-center gap-1 rounded-sm text-left text-sm font-semibold focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+            aria-expanded={open}
+            aria-controls={bodyId}
+            data-title
+            onClick={() => onOpen(index, !open)}
+          >
+            {open ? (
+              <ChevronDown className="size-4 shrink-0" aria-hidden="true" />
+            ) : (
+              <ChevronRight className="size-4 shrink-0" aria-hidden="true" />
+            )}
+            {summary ? summary : <span className="truncate">{title}</span>}
+          </button>
+          {!open && deep.length > 0 && (
+            <TriangleAlert
+              className="size-4 shrink-0 text-destructive"
+              role="img"
+              aria-label={t("editPanel.hasProblems", names)}
+              data-problem
+            />
           )}
-          <span className="truncate">{title}</span>
-        </button>
+        </div>
         <div className="flex flex-row">
           <IconButton
             action="up"
@@ -677,12 +693,16 @@ const ItemCard = ({
 // that is not left yet is passed on first (a click on a button does not
 // always move the focus out of it), and the game is read after that.
 const FRESH_CARD = { open: true, more: false };
+const CLOSED_CARD = { open: false, more: false };
 
 // primary are the fields shown first, the others are under more fields.
 // titleKey is the field that names an item. Names are kept unique (a new item
 // or a copy gets a free one) unless unique is false, as in a legend. With
 // unique "named" only a list that has names gets them (phases may be keyed by
-// train).
+// train). With startCollapsed the cards of the items the list starts with
+// are closed (a new or copied item is open). summary(item) is what a card shows
+// as its title, copyOf(copy, items) changes a copy before it is inserted, and
+// defaults may be a function of the items.
 // onChange(kind, from, to) gives back a warning to show with the list after a
 // move, remove or insert (a duplicate) of an item.
 const ArrayField = ({
@@ -692,6 +712,9 @@ const ArrayField = ({
   primary = PRIMARY_KEYS,
   titleKey = "name",
   unique = true,
+  startCollapsed = false,
+  summary,
+  copyOf,
   onChange,
 }) => {
   const form = useContext(SchemaFormContext);
@@ -712,14 +735,15 @@ const ArrayField = ({
     value?.[titleKey] ||
     [value?.train].flat().filter(Boolean).join(", ") ||
     `#${index + 1}`;
-  const uiOf = (index) => ui[index] ?? FRESH_CARD;
+  const initial = startCollapsed ? CLOSED_CARD : FRESH_CARD;
+  const uiOf = (index) => ui[index] ?? initial;
   // The same change of the cards as of the items
   const changeUi = (fn) =>
     setUi((current) =>
       fn(
         Array.from(
           { length: Math.max(current.length, items.length) },
-          (_, i) => current[i] ?? FRESH_CARD,
+          (_, i) => current[i] ?? initial,
         ),
       ),
     );
@@ -746,6 +770,7 @@ const ArrayField = ({
     setRemoved(null);
     setWarning("");
     form.insert(keys, before.length, created);
+    changeUi((cards) => cards.toSpliced(before.length, 0, FRESH_CARD));
     setMessage(
       t("editPanel.added", { item, title: titleOf(created, before.length) }),
     );
@@ -763,6 +788,7 @@ const ArrayField = ({
       ...(unique === "named" &&
         !isNamed([before[index]]) && { train: nextName(before, "train") }),
     };
+    if (copyOf) Object.assign(copy, copyOf(copy, before));
     setRemoved(null);
     setWarning("");
     form.insert(keys, index + 1, copy);
@@ -835,6 +861,7 @@ const ArrayField = ({
               count={items.length}
               open={uiOf(index).open}
               more={uiOf(index).more}
+              summary={summary?.(value, index)}
               onOpen={(i, open) => setCard(i, { open })}
               onMore={(i, more) => setCard(i, { more })}
               title={titleOf(value, index)}

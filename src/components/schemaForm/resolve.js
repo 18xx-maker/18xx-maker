@@ -28,6 +28,10 @@ export const PRIMARY_KEYS = [
   "company",
 ];
 
+// The same for a company: the rest (the shares, tokens, logo and the other
+// charter fields) are under "more fields"
+export const COMPANY_PRIMARY_KEYS = ["name", "abbrev", "color", "minor"];
+
 // The same for a phase: the others (the company, the event it happens on, the
 // notes, buying companies and events) are under "more fields"
 export const PHASE_PRIMARY_KEYS = [
@@ -368,8 +372,22 @@ export const isNamed = (items) => items.some((item) => item?.name);
 // items that have no names, a phase list keyed by train, gets a train that is
 // free instead (a name would make one phase differ from the others).
 export const newItem = (items, defaults = {}, unique = true) => {
+  const base = typeof defaults === "function" ? defaults(items) : defaults;
   if (unique === "named" && items.length > 0 && !isNamed(items)) {
-    return { ...defaults, train: nextName(items, "train") };
+    return { ...base, train: nextName(items, "train") };
   }
-  return { ...(unique && { name: nextName(items) }), ...defaults };
+  return { ...(unique && { name: nextName(items) }), ...base };
+};
+
+// An abbreviation no company has, whatever the case: the base, or the base
+// and the first number from 2 that is free (PRR, PRR2). A number the base ends
+// with is not kept (PRR2 is copied as PRR3, not PRR22).
+export const nextAbbrev = (items = [], base = "NEW") => {
+  const taken = items.map((item) => String(item?.abbrev ?? "").toLowerCase());
+  const stem = base.replace(/\d+$/, "") || base;
+  let candidate = base;
+  for (let n = 2; taken.includes(candidate.toLowerCase()); n++) {
+    candidate = `${stem}${n}`;
+  }
+  return candidate;
 };
