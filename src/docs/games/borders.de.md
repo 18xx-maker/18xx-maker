@@ -13,7 +13,8 @@ Jede Koordinate kannst du auf folgende Arten angeben:
 
 - `A5x10y20` - X- und Y-Koordinate (10, 20) ab der Mitte von Kartenfeld A5.
 - `A5a30p0.5` - Halber Weg (0.5) von der Mitte zur Seite im Winkel 30 von
-  Kartenfeld A5. Das ähnelt der Positionierung bei den meisten Plättchen.
+  Kartenfeld A5. Das ähnelt der
+  [Positionierung](/docs/games/positioning#koordinaten) bei den meisten Plättchen.
 - `A5s1` - Mitte von Seite 1 von Kartenfeld A5.
 - `A5p2` - Zweiter Punkt von Kartenfeld A5.
 

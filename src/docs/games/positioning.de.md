@@ -1,166 +1,144 @@
 # Positionierung
 
 Jedes Element auf einem Plättchen (Städte, Orte, Werte, Beschriftungen, Symbole,
-Gelände, ...) lässt sich mit denselben Feldern positionieren. Hat ein Element
-keines davon, setzt die automatische Positionierung einige häufige Elemente an
-eine Standardstelle.
+Gelände, ...) wird mit demselben kleinen Satz von Feldern platziert. Diese Seite
+erklärt sie in der Reihenfolge, in der du sie brauchst. Jeder Schritt ist live,
+mit seinem JSON, auf der Beispielseite
+[Positionierung](/elements/positioning) gezeichnet.
 
-## Optionen
+1. [Koordinaten](#koordinaten): wo 0 liegt und in welche Richtung es geht.
+2. [Platzieren](#platzieren): `angle`, `percent`, `x` und `y`.
+3. [Drehen](#drehen): `rotation`, `rotate` und `side`.
+4. [Benannte Positionen](#benannte-positionen): `mid` und `align`.
+5. [Ausblenden](#ausblenden): `hidden`.
+6. [Automatische Positionierung](#automatische-positionierung): wohin etwas
+   kommt, wenn du nichts angibst.
+7. [Zeichenreihenfolge](#zeichenreihenfolge): `order`.
 
-Alle sind optional und funktionieren bei jedem Element mit Position
-([Beispiele](/elements/positioning#basic)):
+Ein Platzierungsfeld an einem Element schaltet die automatische Positionierung
+für dieses Element aus, siehe [Ausschalten](#ausschalten).
 
-- `angle` (-360 bis 360, ausschließlich) ist die Richtung von der Mitte des
-  Kartenfelds, in der das Element sitzt, in Grad. 0 ist gerade nach unten, und
-  es dreht im Uhrzeigersinn.
-- `percent` (0 oder mehr) ist, wie weit es in dieser `angle`-Richtung nach außen
-  geht: 0 ist die Mitte und 1 die Mitte der Kartenfeldkante.
-- `x` und `y` verschieben das Element in einfachen Einheiten von der Stelle, an
-  die `angle` und `percent` es setzen.
-- `rotation` (-360 bis 360, ausschließlich) dreht das Element an seiner Stelle,
-  in Grad. `rotate` ist dasselbe Feld mit kürzerem Namen.
-- `side` (1 bis 6) dreht das Element um (side - 1) Sechstel einer Drehung: Seite 1
-  ist nicht gedreht, Seite 2 um 60 Grad. Mit `mid` verschiebt es stattdessen den benannten
-  Punkt, siehe [Benannte Positionen](#benannte-positionen).
-- `mid` und `align` setzen und drehen das Element nach dem Gleis, siehe [Benannte
-  Positionen](#benannte-positionen).
-- `hidden` (`true`) zeichnet das Element nicht. Die anderen Elemente behalten
-  ihre Positionen.
+## Welche Elemente sich positionieren lassen
 
-```json
-{
-  "labels": [{ "label": "B", "angle": 90, "percent": 0.6, "x": 5 }],
-  "towns": [{ "side": 2 }]
-}
-```
+Diese Plättchenelemente nehmen die Felder dieser Seite: `track`, `cities`,
+`towns`, `centerTowns`, `boomtowns`, `mediumCities`, `labels`, `icons`, `names`,
+`shapes`, `terrain`, `bridges`, `tunnels`, `tunnelEntrances`, `divides`,
+`values`, `goods`, `companies`, `tokens`, `routeBonuses`, `industries` und
+`offBoardRevenue`. `track` und `divides` haben keine `order`. `borders` nehmen
+nur `side`.
 
-## Automatische Positionierung
+## Koordinaten
 
-Das System zur automatischen Positionierung wendet nach sehr einfachen Regeln
-automatisch Positionen auf die Elemente an, die es findet. Dieses System soll
-NICHT alles abdecken, sondern nur bei den üblichen 95 % der Positionierungsfälle
-helfen.
+Der Ursprung ist die Mitte des Kartenfelds. Jede Position wird von dort
+gemessen, in Einheiten, bei denen die Mitte einer Kante 75 von der Mitte
+entfernt ist (ein Kartenfeld ist von Kante zu Kante 150 Einheiten breit). Das
+erste [Beispiel](/elements/positioning#place) zeigt angle 0, 90, 180 und 270.
 
-18xx-maker hat zum Beispiel einen bestimmten Standard, den es auf einfache
-Plättchen anwendet. Wenn du ein Kartenfeld mit einer einzelnen Stadt und
-Geländekosten hast, setzt die automatische Positionierung die Geländekosten an
-die „Standard“-Position, solange auf dem Kartenfeld keine anderen
-Positionsdaten stehen. Wenn du deine Elemente selbst positionieren möchtest,
-tu das ruhig. Das System soll nur sinnvolle Standardwerte liefern, wenn du es
-nicht tust.
+- `angle` ist eine Richtung in Grad, **im Uhrzeigersinn auf dem Bildschirm**: 0
+  ist gerade nach unten, 90 nach links, 180 nach oben und 270 nach rechts.
+- `percent` ist, wie weit es in dieser Richtung geht, als Bruchteil von 75
+  Einheiten: 0 ist die Mitte und 1 ist 75 Einheiten weit draußen.
+- `x` und `y` sind einfache Bildschirmeinheiten: `x` geht nach rechts und `y`
+  nach unten.
 
-Wenn du die automatische Positionierung für ein Element ausschalten möchtest,
-füge diesem Element einfach ein Positionsfeld (`angle`, `percent`, `rotate`,
-`rotation`, `side`, `mid`, `align`, `x` oder `y`) hinzu. Wenn du zum Beispiel `"angle": 0`
-hinzufügst, wird die automatische Positionierung faktisch ausgeschaltet, und das
-Element bleibt in der Mitte des Kartenfelds. Das gilt nur für dieses Element, die
-anderen Elemente des Kartenfelds werden weiterhin positioniert.
+Winkel sind Richtungen auf dem Bildschirm, nicht Richtungen des Kartenfelds. Auf
+einem Plättchen und auf einer Karte mit `horizontal` liegt die Mitte einer Kante
+bei angle 0, 60, 120 und so weiter, `percent` 1 liegt also genau auf einer
+Kante. Auf der Standardkarte `vertical` ist das Kartenfeld um 90 Grad gedreht:
+angle 0 zeigt auf eine Ecke (etwa 86.6 Einheiten entfernt), und die Kantenmitten
+liegen bei angle 30, 90, 150 und so weiter. Nur `mid` (siehe
+[Benannte Positionen](#benannte-positionen)) folgt dieser Drehung von selbst.
 
-Jede Option und jede Regel wird auf der Beispielseite
-[Positionierung](/elements/positioning) live mit ihrem JSON gezeichnet.
+## Platzieren
 
-## Regeln
-
-### Symbole
-
-Symbole (auf einem Plättchen mit einer Stadt oder centerTown) werden verschoben
-nach ([Beispiele](/elements/positioning#icons)):
+- `angle` (-360 bis 360, ausschließlich, Standard 0) und `percent` (0 oder mehr,
+  Standard 0) setzen das Element: erst um `angle` drehen, dann um `percent`
+  nach außen gehen.
+- `x` und `y` (Standard 0) verschieben es dann in einfachen Bildschirmeinheiten.
+  Sie werden weder von `angle` noch von einer Drehung gedreht, `"x": 10` ist
+  also immer 10 Einheiten nach rechts.
 
 ```json
 {
-  "angle": 0,
-  "percent": 0.6
+  "labels": [{ "label": "B", "angle": 90, "percent": 0.6, "x": 5 }]
 }
 ```
 
-Wenn es zusätzlich Geländekosten gibt, wird das Symbol nach links verschoben, nach:
+([Beispiele](/elements/positioning#place))
+
+Ein `percent` über 1 geht über die Kante des Kartenfelds hinaus. Die meisten
+Elemente werden an der Kante des Kartenfelds abgeschnitten, du siehst also nur
+den Teil innen. Elemente, die außerhalb gezeichnet werden, werden nicht
+abgeschnitten: `names`, `cities` außerhalb, `shapes` ohne `background`,
+`bridges`, `tunnels`, `offBoardRevenue`, `industries`, `companies` und
+`routeBonuses`.
+
+## Drehen
+
+- `rotation` und `rotate` (-360 bis 360, ausschließlich) drehen das Element an
+  seiner Stelle, im Uhrzeigersinn, in Grad. Es ist dasselbe Feld mit zwei
+  Namen. Nimm nur eines davon: ein `rotate` ungleich 0 gewinnt gegen `rotation`,
+  und `"rotate": 0` fällt auf `rotation` zurück. Sie werden nie addiert.
+- `side` (1 bis 6) ohne `mid` dreht das Element um (side - 1) Sechstel einer
+  Drehung: Seite 1 ist nicht gedreht, Seite 2 um 60 Grad. Es dreht das Element
+  nur und verschiebt es nicht. Es wird zu `rotation` oder `rotate` addiert. Mit
+  `mid` verschiebt es stattdessen den benannten Punkt, siehe
+  [Benannte Positionen](#benannte-positionen).
 
 ```json
 {
-  "angle": 30,
-  "percent": 0.6
+  "towns": [{ "rotation": 45 }]
 }
 ```
 
-### Werte
+([Beispiele](/elements/positioning#turn))
 
-Der erste Wert jedes Plättchens wird automatisch in die obere rechte Ecke
-positioniert ([Beispiele](/elements/positioning#values)). Weitere Werte werden
-nicht verschoben:
+Nicht alles dreht sich gleich, denn Text soll lesbar bleiben:
 
-```json
-{
-  "angle": 210,
-  "percent": 0.7
-}
-```
+| Element                                | `rotation`                                  | `rotate` und `side` |
+| -------------------------------------- | ------------------------------------------- | ------------------- |
+| Orte, Städte (und ihre Namen), Symbole | dreht                                       | dreht               |
+| Beschriftungen, Werte, Gelände         | bleibt aufrecht, du siehst keine Drehung    | dreht               |
+| Token                                  | dreht doppelt so weit (die Aufschrift auch) | dreht               |
 
-### Beschriftungen
+Nimm `rotate` oder `side`, wenn sich der Text einer Beschriftung, eines Werts
+oder von Gelände drehen soll, und `rotate`, um einen Token zu drehen.
+`"fixed": true` an einem Token dreht ihn genau so weit wie das Element, egal
+welches der drei Felder du benutzt.
 
-Die erste Beschriftung auf einem Plättchen wird automatisch in die obere linke
-Ecke positioniert ([Beispiele](/elements/positioning#labels)):
-
-```json
-{
-  "angle": 150,
-  "percent": 0.7
-}
-```
-
-Die zweite Beschriftung auf einem Plättchen wird automatisch an die rechte
-Seite positioniert. Weitere Beschriftungen werden nicht verschoben:
-
-```json
-{
-  "angle": 270,
-  "percent": 0.7
-}
-```
-
-### Gelände
-
-Geländekosten (auf einem Plättchen mit einer Stadt oder centerTown) werden
-verschoben nach ([Beispiele](/elements/positioning#terrain)):
-
-```json
-{
-  "angle": 0,
-  "percent": 0.7
-}
-```
-
-Wenn es zusätzlich ein Symbol gibt, werden die Geländekosten nach rechts
-verschoben, nach:
-
-```json
-{
-  "angle": 330,
-  "percent": 0.7
-}
-```
+Mit `mid` bleibt der Text von Beschriftungen, Werten und Gelände aufrecht,
+welches Feld du auch benutzt.
 
 ## Benannte Positionen
 
 Statt `angle` und `percent` auszurechnen, kann ein Element mit `mid` einen Punkt
-auf einem Gleis benennen und sich mit `align` am Gleis dort ausrichten. Das
-funktioniert bei jedem Element mit Position (Orte, centerTowns, Werte,
-Beschriftungen, Symbole, ...). Wie jedes andere Positionsfeld schalten sie die
-automatische Positionierung für dieses Element aus. Jeder Punkt gilt für ein
-Gleis, das auf Seite 1 beginnt. Mit `side` wird er auf eine andere Seite
-gedreht.
+auf einem Gleis benennen und sich mit `align` zum Gleis an dieser Stelle
+drehen. Sie funktionieren bei jedem Element mit Position (Orte, centerTowns,
+Werte, Beschriftungen, Symbole, ...). Der Punkt gilt für ein Gleis, das auf
+Seite 1 beginnt, mit `side` verschiebst du ihn auf eine andere Seite.
 
-- `mid` ist die Mitte eines Gleistyps: `straight` (`angle` 0, `percent` 0, die
-  Mitte), `sharp` (`angle` 30, `percent` 0.577) oder `gentle` (`angle` 60,
-  `percent` 0.268).
-- `side` mit `mid` dreht den Punkt wie ein Gleis, das auf dieser Seite beginnt,
-  ein `gentle` auf Seite 3 liegt also bei `angle` 180. Ohne `mid` dreht `side`
-  weiterhin das Element.
+- `mid` ist die Mitte eines Gleistyps. Nur diese Gleistypen in voller Länge
+  haben einen Namen:
+
+  | `mid`      | `angle` | `percent` |
+  | ---------- | ------- | --------- |
+  | `straight` | 0       | 0         |
+  | `sharp`    | 30      | 0.577     |
+  | `gentle`   | 60      | 0.268     |
+
+- `side` mit `mid` verschiebt den Punkt wie ein Gleis, das auf dieser Seite
+  beginnt, ein `gentle` auf Seite 3 liegt also bei `angle` 180. Das ist die
+  einzige Stelle, an der `side` etwas verschiebt, ohne `mid` dreht es das
+  Element nur.
 - `align` ist `perpendicular` (senkrecht) oder `parallel` (parallel) zum Gleis
-  an diesem Punkt. Ein Ortsbalken auf einem `sharp` ist `perpendicular` mit einer
-  `rotation` von 120, auf einem `gentle` 150. `rotate` und `rotation` werden als
-  Versatz addiert.
+  an diesem Punkt. Es braucht ein `mid`. Ein Ortsbalken auf einem `sharp` ist
+  `perpendicular` mit einer `rotation` von 120, auf einem `gentle` 150. `rotate`
+  und `rotation` werden als Versatz addiert.
 - Ein ausdrückliches `angle` oder `percent` ersetzt den Wert aus `mid`, und `x`
   und `y` verschieben davon ausgehend.
+- Auf einer Karte mit `vertical` wird das Gleis um 90 Grad gedreht gezeichnet, und
+  `mid` dreht sich mit, es liegt also auf dem Gleis. Ein geschriebenes `angle`
+  oder `percent` dreht sich nicht.
 
 ```json
 {
@@ -170,6 +148,62 @@ gedreht.
 ```
 
 ([Beispiele](/elements/positioning#named))
+
+## Ausblenden
+
+`hidden` (`true`) zeichnet das Element nicht. Die anderen Elemente behalten ihre
+Positionen: ein ausgeblendetes Element zählt weiter für die
+[Automatische Positionierung](#automatische-positionierung), die zweite
+Beschriftung bleibt also die zweite Beschriftung.
+
+```json
+{
+  "labels": [{ "label": "B", "hidden": true }, { "label": "NY" }]
+}
+```
+
+([Beispiele](/elements/positioning#hide))
+
+## Automatische Positionierung
+
+Die automatische Positionierung setzt die üblichen 95% der Elemente an eine
+Standardstelle, damit du es nicht tun musst. Sie soll nicht vollständig sein. Sie
+betrachtet jedes Element für sich: ein Element wird automatisch positioniert,
+wenn es keines von `angle`, `percent`, `rotate`, `rotation`, `side`, `mid`,
+`align`, `x` oder `y` hat. `hidden` und `order` zählen nicht.
+
+| Element      | Welche     | Wohin (`angle`, `percent`)                      | Nur wenn                                |
+| ------------ | ---------- | ----------------------------------------------- | --------------------------------------- |
+| Werte        | der erste  | 210, 0.7 (oben rechts)                          | immer                                   |
+| Beschriftung | die erste  | 150, 0.7 (oben links)                           | immer                                   |
+| Beschriftung | die zweite | 270, 0.7 (rechts)                               | immer                                   |
+| Symbole      | alle       | 0, 0.6, oder 30, 0.6 wenn das Feld Gelände hat  | das Feld hat eine Stadt oder centerTown |
+| Gelände      | alle       | 0, 0.7, oder 330, 0.7 wenn das Feld Symbole hat | das Feld hat eine Stadt oder centerTown |
+
+"Der erste" meint den ersten Eintrag dieses Arrays, jeder Eintrag zählt mit: eine
+ausgeblendete oder von Hand positionierte erste Beschriftung belegt trotzdem die
+erste Stelle, die nächste Beschriftung ist also die zweite und kommt nach 270.
+Weitere Werte und Beschriftungen werden nicht verschoben. Mehrere Symbole (oder
+mehrere Geländefelder) wandern alle an dieselbe Stelle und überlappen sich, gib
+also allen außer einem eine Position.
+
+([Beispiele](/elements/positioning#auto))
+
+### Ausschalten
+
+Um ein Element aus der automatischen Positionierung herauszuhalten, gib ihm ein
+Platzierungsfeld. Zum Beispiel schaltet `"angle": 0` sie wirksam aus und lässt
+das Element in der Mitte des Kartenfelds. Das gilt nur für dieses Element, die
+anderen Elemente des Kartenfelds werden weiterhin positioniert.
+
+```json
+{
+  "cities": [{}],
+  "terrain": [{ "type": "mountain", "cost": 60, "angle": 0 }]
+}
+```
+
+([Beispiele](/elements/positioning#off))
 
 ## Zeichenreihenfolge
 
@@ -187,6 +221,8 @@ einem Element eine `order`. Es wird nach allen Elementen seines Feldes ohne
 }
 ```
 
+([Beispiele](/elements/positioning#order))
+
 - Eine negative Zahl zeichnet das Element vor allen anderen, `true` zeichnet es
   zuletzt und `0` zeichnet es nach den Elementen ohne `order`.
 - Elemente mit gleicher `order` behalten die übliche Reihenfolge nach Typ.
@@ -194,4 +230,4 @@ einem Element eine `order`. Es wird nach allen Elementen seines Feldes ohne
   eines Feldes können nicht über den Rand, und außen gezeichnete Elemente (wie
   Städte außerhalb oder Namen) nicht darunter.
 - Sie kann Gleise verdecken.
-- Gleise, Off-Board-Gleise, Trennlinien und Ränder haben keine `order`.
+- Gleise, Trennlinien und Ränder haben keine `order`.
