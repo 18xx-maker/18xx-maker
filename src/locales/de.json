@@ -99,6 +99,10 @@
         "tab": "Runden",
         "description": "Bearbeite die Runden des Rundenzählers, die auf dem Charter gedruckten Züge, die Notizen zu den Pools und die Nummernkarten. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
       },
+      "tokens": {
+        "tab": "Token",
+        "description": "Bearbeite die Token des Spiels sowie die Token-Typen und Anteilstypen der Gesellschaften. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
+      },
       "json": {
         "tab": "JSON",
         "description": "Bearbeite das ganze Spiel als JSON. Die Seite folgt deiner Eingabe, solange das JSON gültig ist. Die Änderungen bleiben im Speicher, bis du sie auf der Änderungsseite speicherst."
@@ -118,6 +122,8 @@
       "turns": "Zug",
       "pools": "Pool",
       "notes": "Notiz",
+      "tokens": "Token",
+      "shares": "Anteil",
       "legend": "Legendeneintrag",
       "colors": "Farbe",
       "tokenTypes": "Token-Typ",
@@ -129,7 +135,8 @@
       "rounds": "Runden",
       "turns": "Züge",
       "pools": "Pools",
-      "notes": "Notizen"
+      "notes": "Notizen",
+      "tokens": "Token"
     },
     "titles": {
       "players_one": "{{count}} Spieler",
@@ -137,6 +144,8 @@
     },
     "emptyList": "Noch nichts vorhanden.",
     "add": "{{item}} hinzufügen",
+    "addWithOptions": "{{item}} mit Optionen hinzufügen",
+    "itemValue": "Wert von {{item}} {{title}}",
     "remove": "{{item}} {{title}} entfernen",
     "moveUp": "{{item}} {{title}} nach oben",
     "moveDown": "{{item}} {{title}} nach unten",

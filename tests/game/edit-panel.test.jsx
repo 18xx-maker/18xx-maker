@@ -2793,7 +2793,7 @@ describe("edit panel rounds", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("rounds"));
     expect(tab).toHaveAccessibleName("Rounds");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 2]).toBe(tab);
+    expect(tabs[tabs.length - 3]).toBe(tab);
     expect(cards().length).toBeGreaterThanOrEqual(
       games["18Test"].rounds.length +
         games["18Test"].turns.length +
@@ -2911,5 +2911,102 @@ describe("edit panel rounds", () => {
     await user.type(area, "\ngreen");
     await user.tab();
     expect(game().number_cards).toEqual(["red", "blue", "green"]);
+  });
+});
+
+describe("edit panel tokens", () => {
+  const tokensRoute = `${route}?edit=true&editSection=tokens`;
+  const ready = () => screen.findAllByRole("button", { name: "Add token" });
+  const game = () => opened.getState().game;
+
+  it("is the tab before the JSON editor, with a row or card for each token", async () => {
+    open(tokensRoute);
+    await ready();
+    const tabs = screen.getAllByRole("tab");
+    const tab = tabs.find((candidate) => candidate.id.endsWith("tokens"));
+    expect(tab).toHaveAccessibleName("Tokens");
+    expect(tab).toHaveAttribute("aria-selected", "true");
+    expect(tabs[tabs.length - 2]).toBe(tab);
+    // A token of text is a field, an object is a card
+    expect(
+      screen.getByRole("textbox", { name: "Value of token Round" }),
+    ).toBeVisible();
+    expect(
+      screen.getAllByRole("button", { name: "Add token with options" })[0],
+    ).toBeVisible();
+    expect(
+      screen.getAllByRole("button", { name: "Add share" }).length,
+    ).toBeGreaterThan(0);
+  });
+
+  it("edits a text token, as a number when it is one", async () => {
+    const { user } = open(tokensRoute, {
+      ...structuredClone(games["18Test"]),
+      tokens: ["Round", 5],
+    });
+    await ready();
+    const first = screen.getByRole("textbox", { name: "Value of token Round" });
+    await user.clear(first);
+    await user.type(first, "Stop");
+    await user.tab();
+    const second = screen.getByRole("textbox", { name: "Value of token 5" });
+    await user.clear(second);
+    await user.type(second, "7");
+    await user.tab();
+    expect(game().tokens).toEqual(["Stop", 7]);
+  });
+
+  it("adds, duplicates, moves and removes tokens of text and of options", async () => {
+    const { user } = open(tokensRoute, {
+      ...structuredClone(games["18Test"]),
+      tokens: ["A"],
+    });
+    await ready();
+    await user.click(screen.getAllByRole("button", { name: "Add token" })[0]);
+    expect(game().tokens).toEqual(["A", ""]);
+    await user.click(
+      screen.getAllByRole("button", { name: "Add token with options" })[0],
+    );
+    expect(game().tokens).toEqual(["A", "", {}]);
+
+    await user.type(
+      screen.getAllByRole("textbox", { name: "Label" })[0],
+      "Mail",
+    );
+    await user.tab();
+    expect(game().tokens[2]).toEqual({ label: "Mail" });
+    await user.click(
+      screen.getByRole("button", { name: "Duplicate token Mail" }),
+    );
+    expect(game().tokens[3]).toEqual({ label: "Mail" });
+    await user.click(screen.getByRole("button", { name: "Duplicate token A" }));
+    expect(game().tokens.slice(0, 2)).toEqual(["A", "A"]);
+    await user.click(
+      screen.getAllByRole("button", { name: "Move token A down" })[0],
+    );
+    await user.click(
+      screen.getAllByRole("button", { name: "Remove token A" })[0],
+    );
+    await user.click(
+      screen.getAllByRole("button", { name: "Remove token Mail" })[0],
+    );
+    expect(game().tokens).toEqual(["A", "", { label: "Mail" }]);
+  });
+
+  it("edits the tokens and shares of a type, named for what they are", async () => {
+    const { user } = open(tokensRoute, {
+      ...structuredClone(games["18Test"]),
+      tokenTypes: { minor: ["Minor"] },
+      shareTypes: { minor: [{ quantity: 1, label: "Minor Certificate" }] },
+    });
+    await ready();
+    await user.click(screen.getAllByRole("button", { name: "Add token" })[1]);
+    expect(game().tokenTypes.minor).toEqual(["Minor", ""]);
+    await user.click(screen.getByRole("button", { name: "Add share" }));
+    expect(game().shareTypes.minor[1]).toEqual({ quantity: 0 });
+    await user.click(
+      screen.getByRole("button", { name: "Remove share Minor Certificate" }),
+    );
+    expect(game().shareTypes.minor).toEqual([{ quantity: 0 }]);
   });
 });

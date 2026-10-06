@@ -407,7 +407,7 @@ describe("lines of the json editor", () => {
     );
     await view();
     await user.keyboard("[[");
-    expect(router.state.location.search).toBe("?edit=true&editSection=rounds");
+    expect(router.state.location.search).toBe("?edit=true&editSection=tokens");
   });
 
   it("is ignored and dropped without the JSON tab of an open panel", async () => {

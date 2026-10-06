@@ -51,6 +51,7 @@ import {
   isRequired,
   issuesFor,
   kindOf,
+  mixedItem,
   newItem,
   nextId,
   nextName,
@@ -656,6 +657,52 @@ const IconButton = ({ label, action, children, ...props }) => (
   </Button>
 );
 
+// The buttons of an item: move, duplicate and remove
+const ItemButtons = ({
+  names,
+  index,
+  count,
+  onMove,
+  onDuplicate,
+  onRemove,
+}) => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex flex-row">
+      <IconButton
+        action="up"
+        label={t("editPanel.moveUp", names)}
+        disabled={index === 0}
+        onClick={() => onMove(index, index - 1, "up")}
+      >
+        <ArrowUp />
+      </IconButton>
+      <IconButton
+        action="down"
+        label={t("editPanel.moveDown", names)}
+        disabled={index === count - 1}
+        onClick={() => onMove(index, index + 1, "down")}
+      >
+        <ArrowDown />
+      </IconButton>
+      <IconButton
+        action="duplicate"
+        label={t("editPanel.duplicate", names)}
+        onClick={() => onDuplicate(index)}
+      >
+        <Copy />
+      </IconButton>
+      <IconButton
+        action="remove"
+        label={t("editPanel.remove", names)}
+        onClick={() => onRemove(index)}
+      >
+        <Trash2 />
+      </IconButton>
+    </div>
+  );
+};
+
 const ItemCard = ({
   primaryKeys,
   keys,
@@ -724,38 +771,14 @@ const ItemCard = ({
             />
           )}
         </div>
-        <div className="flex flex-row">
-          <IconButton
-            action="up"
-            label={t("editPanel.moveUp", names)}
-            disabled={index === 0}
-            onClick={() => onMove(index, index - 1, "up")}
-          >
-            <ArrowUp />
-          </IconButton>
-          <IconButton
-            action="down"
-            label={t("editPanel.moveDown", names)}
-            disabled={index === count - 1}
-            onClick={() => onMove(index, index + 1, "down")}
-          >
-            <ArrowDown />
-          </IconButton>
-          <IconButton
-            action="duplicate"
-            label={t("editPanel.duplicate", names)}
-            onClick={() => onDuplicate(index)}
-          >
-            <Copy />
-          </IconButton>
-          <IconButton
-            action="remove"
-            label={t("editPanel.remove", names)}
-            onClick={() => onRemove(index)}
-          >
-            <Trash2 />
-          </IconButton>
-        </div>
+        <ItemButtons
+          names={names}
+          index={index}
+          count={count}
+          onMove={onMove}
+          onDuplicate={onDuplicate}
+          onRemove={onRemove}
+        />
       </div>
       <div id={bodyId} hidden={!open} className="flex flex-col gap-4">
         {issues.map((issue, i) => (
@@ -783,6 +806,54 @@ const ItemCard = ({
           </>
         )}
       </div>
+    </li>
+  );
+};
+
+// An item of a list that is text or a number (a token of the game): one
+// field, typed and passed on when it is left, as a number when it is one
+const ScalarRow = ({
+  keys,
+  value,
+  title,
+  index,
+  count,
+  kind,
+  onMove,
+  onDuplicate,
+  onRemove,
+}) => {
+  const { t } = useTranslation();
+  const form = useContext(SchemaFormContext);
+  const names = { item: kind, title };
+  const draft = useDraft(
+    value,
+    (text) => form.set(keys, coerceStringOrNumber(text)),
+    FORMAT,
+    (text, current) => coerceStringOrNumber(text) === current,
+  );
+
+  return (
+    <li
+      data-item={index}
+      className="flex flex-row items-center justify-between gap-2 rounded-md border p-3"
+    >
+      <Input
+        value={draft.text}
+        aria-label={t("editPanel.itemValue", names)}
+        data-title
+        onChange={(event) => draft.change(event.target.value)}
+        onBlur={draft.commit}
+        onKeyDown={(event) => event.key === "Enter" && draft.commit()}
+      />
+      <ItemButtons
+        names={names}
+        index={index}
+        count={count}
+        onMove={onMove}
+        onDuplicate={onDuplicate}
+        onRemove={onRemove}
+      />
     </li>
   );
 };
@@ -860,6 +931,7 @@ const ArrayField = ({
   summary,
   copyOf,
   onChange,
+  itemKey,
 }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
@@ -872,8 +944,12 @@ const ArrayField = ({
   const [ui, setUi] = useState([]);
 
   const items = valueAt(keys, form.game) ?? [];
-  const itemSchema = resolveAllOf(schema.items, form.root);
-  const item = t(`editPanel.items.${keys[keys.length - 1]}`);
+  // Items that are text, a number or an object (a token of the game) are a
+  // field or a card each
+  const objectSchema = mixedItem(schema.items, form.root);
+  const itemSchema = objectSchema ?? resolveAllOf(schema.items, form.root);
+  // itemKey names the items of a list in a record, whose last key is a name
+  const item = t(`editPanel.items.${itemKey ?? keys[keys.length - 1]}`);
   // The items of a list have the key that identifies them (a name) unless the
   // schema has none, like a note of a pool: then it is not made up. What the
   // schema requires of such an item is started empty (a note has a text).
@@ -882,20 +958,34 @@ const ArrayField = ({
     ? {}
     : Object.fromEntries(
         (itemSchema.required ?? [])
-          .filter((key) => itemSchema.properties?.[key]?.type === "string")
-          .map((key) => [key, ""]),
+          .filter((key) =>
+            ["string", "number"].includes(itemSchema.properties?.[key]?.type),
+          )
+          .map((key) => [
+            key,
+            defaultValue(itemSchema.properties[key], form.root),
+          ]),
       );
-  const heading = t(`editPanel.headings.${keys[keys.length - 1]}`, {
-    defaultValue: "",
-  });
+  const heading = itemKey
+    ? ""
+    : t(`editPanel.headings.${keys[keys.length - 1]}`, {
+        defaultValue: "",
+      });
   // A phase may have no name and be known by its train (or trains)
   const titleOf = (value, index) =>
+    (typeof value !== "object" && value !== "" && value != null
+      ? String(value)
+      : null) ||
     (title
       ? value?.[titleKey] != null &&
         value[titleKey] !== "" &&
         t(title, { count: value[titleKey] })
       : value?.[titleKey]) ||
     value?.note ||
+    (!hasId &&
+      [value?.label, value?.icon, value?.logo, value?.cost]
+        .filter((text) => text != null && text !== "")
+        .map(String)[0]) ||
     [value?.train].flat().filter(Boolean).join(", ") ||
     `#${index + 1}`;
   const initial = startCollapsed ? CLOSED_CARD : FRESH_CARD;
@@ -926,13 +1016,17 @@ const ArrayField = ({
   const commit = () => document.activeElement?.blur?.();
   const current = () => valueAt(keys, form.latest()) ?? [];
 
-  const add = () => {
+  // A list of mixed items adds text, or an object when asked for
+  const add = (options) => {
     commit();
     const before = current();
-    const created = {
-      ...seed,
-      ...newItem(before, defaults, hasId && unique, idKey),
-    };
+    const created =
+      objectSchema && !options
+        ? ""
+        : {
+            ...seed,
+            ...newItem(before, defaults, hasId && unique, idKey),
+          };
     setRemoved(null);
     setWarning("");
     form.insert(keys, before.length, created);
@@ -946,16 +1040,23 @@ const ArrayField = ({
   const duplicate = (index) => {
     commit();
     const before = current();
-    const copy = {
-      ...structuredClone(before[index]),
-      ...(hasId &&
-        (unique === true || (unique && isNamed([before[index]]))) && {
-          [idKey]: nextId(before, idKey),
-        }),
-      ...(unique === "named" &&
-        !isNamed([before[index]]) && { train: nextName(before, "train") }),
-    };
-    if (copyOf) Object.assign(copy, copyOf(copy, before));
+    const copy =
+      typeof before[index] === "object"
+        ? {
+            ...structuredClone(before[index]),
+            ...(hasId &&
+              (unique === true || (unique && isNamed([before[index]]))) && {
+                [idKey]: nextId(before, idKey),
+              }),
+            ...(unique === "named" &&
+              !isNamed([before[index]]) && {
+                train: nextName(before, "train"),
+              }),
+          }
+        : before[index];
+    if (copyOf && typeof copy === "object") {
+      Object.assign(copy, copyOf(copy, before));
+    }
     setRemoved(null);
     setWarning("");
     form.insert(keys, index + 1, copy);
@@ -1028,26 +1129,41 @@ const ArrayField = ({
         </p>
       ) : (
         <ul className="flex flex-col gap-3">
-          {items.map((value, index) => (
-            <ItemCard
-              key={index}
-              primaryKeys={primary}
-              keys={[...keys, index]}
-              schema={itemSchema}
-              index={index}
-              count={items.length}
-              open={uiOf(index).open}
-              more={uiOf(index).more}
-              summary={summary?.(value, index)}
-              onOpen={(i, open) => setCard(i, { open })}
-              onMore={(i, more) => setCard(i, { more })}
-              title={titleOf(value, index)}
-              kind={item}
-              onMove={move}
-              onDuplicate={duplicate}
-              onRemove={remove}
-            />
-          ))}
+          {items.map((value, index) =>
+            typeof value !== "object" || value === null ? (
+              <ScalarRow
+                key={index}
+                keys={[...keys, index]}
+                value={value}
+                title={titleOf(value, index)}
+                index={index}
+                count={items.length}
+                kind={item}
+                onMove={move}
+                onDuplicate={duplicate}
+                onRemove={remove}
+              />
+            ) : (
+              <ItemCard
+                key={index}
+                primaryKeys={primary}
+                keys={[...keys, index]}
+                schema={itemSchema}
+                index={index}
+                count={items.length}
+                open={uiOf(index).open}
+                more={uiOf(index).more}
+                summary={summary?.(value, index)}
+                onOpen={(i, open) => setCard(i, { open })}
+                onMore={(i, more) => setCard(i, { more })}
+                title={titleOf(value, index)}
+                kind={item}
+                onMove={move}
+                onDuplicate={duplicate}
+                onRemove={remove}
+              />
+            ),
+          )}
         </ul>
       )}
       <RemovedNote
@@ -1067,11 +1183,22 @@ const ArrayField = ({
         variant="outline"
         className="self-start"
         data-add
-        onClick={add}
+        onClick={() => add(false)}
       >
         <Plus />
         {t("editPanel.add", { item })}
       </Button>
+      {objectSchema && (
+        <Button
+          type="button"
+          variant="outline"
+          className="self-start"
+          onClick={() => add(true)}
+        >
+          <Plus />
+          {t("editPanel.addWithOptions", { item })}
+        </Button>
+      )}
       <ListStatus message={message} warning={warning} />
     </div>
   );
@@ -1081,7 +1208,16 @@ const ArrayField = ({
 // the field is left, a name that is empty or taken is refused with a message
 // and goes back. The rows are keyed by position, so what is typed in a row
 // stays with it when its name changes.
-const RecordRow = ({ keys, name, index, schema, item, onRename, onRemove }) => {
+const RecordRow = ({
+  keys,
+  name,
+  index,
+  schema,
+  item,
+  rows,
+  onRename,
+  onRemove,
+}) => {
   const { t } = useTranslation();
   // The refusal belongs to the name it was given for
   const [refusal, setProblem] = useState(null);
@@ -1129,7 +1265,7 @@ const RecordRow = ({ keys, name, index, schema, item, onRename, onRemove }) => {
           <Trash2 />
         </IconButton>
       </div>
-      <SchemaField keys={[...keys, name]} schema={schema} />
+      <SchemaField keys={[...keys, name]} schema={schema} {...rows} />
     </li>
   );
 };
@@ -1139,7 +1275,8 @@ const RecordRow = ({ keys, name, index, schema, item, onRename, onRemove }) => {
 // action on the record; it comes back under a free name when its own was
 // taken in the meantime. The object is always written whole, in the order of
 // the rows (a name that is a whole number is listed first by JavaScript).
-const RecordField = ({ keys, schema }) => {
+// rows are the props of the field of each row's value
+const RecordField = ({ keys, schema, rows }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const list = useRef(null);
@@ -1250,6 +1387,7 @@ const RecordField = ({ keys, schema }) => {
               index={index}
               schema={valueSchema}
               item={item}
+              rows={rows}
               onRename={rename}
               onRemove={remove}
             />
@@ -1317,7 +1455,7 @@ const SchemaField = ({ keys, schema, ...rest }) => {
     case "object":
       return <ObjectField {...props} />;
     case "record":
-      return <RecordField {...props} />;
+      return <RecordField {...props} {...rest} />;
     case "stringArray":
       return <StringArrayField {...props} />;
     case "enumList":

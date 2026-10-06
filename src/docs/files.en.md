@@ -190,6 +190,14 @@ are numbered, and the optional steps), the notes about the pools (a name and a
 list of notes with an optional color and icon, kept for reference and not
 printed) and the colors of the number cards.
 
+The Tokens tab edits the tokens of the token sheet, the token types and the
+share types. A token is a row of text or a number (the label of a white token)
+or, with Add token with options, a card with its label, icon, logo and color
+first and the other token fields under More fields. A token type lists the
+token spaces of a charter the same way (a cost, and whether the company starts
+with a token in it), and a share type lists its shares (the quantity, label,
+percent and cost first).
+
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
 

@@ -6,6 +6,7 @@ import PhasesForm from "@/components/schemaForm/PhasesForm";
 import PlayersForm from "@/components/schemaForm/PlayersForm";
 import PrivatesForm from "@/components/schemaForm/PrivatesForm";
 import RoundsForm from "@/components/schemaForm/RoundsForm";
+import TokensForm from "@/components/schemaForm/TokensForm";
 import TrainsForm from "@/components/schemaForm/TrainsForm";
 
 // The tabs of the edit panel, in order. Adding a section is adding an entry
@@ -21,6 +22,7 @@ export const editSections = [
   { section: "market", Form: MarketForm },
   { section: "players", Form: PlayersForm },
   { section: "rounds", Form: RoundsForm },
+  { section: "tokens", Form: TokensForm },
   { section: "json", Form: JsonSection, wide: true },
 ];
 

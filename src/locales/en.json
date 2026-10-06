@@ -99,6 +99,10 @@
         "tab": "Rounds",
         "description": "Edit the rounds of the round tracker, the turns printed on the charter, the notes about the pools and the number cards. The changes stay in memory until you save them on the Changes page."
       },
+      "tokens": {
+        "tab": "Tokens",
+        "description": "Edit the tokens of the game, the token types and the share types of the companies. The changes stay in memory until you save them on the Changes page."
+      },
       "json": {
         "tab": "JSON",
         "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
@@ -118,6 +122,8 @@
       "turns": "turn",
       "pools": "pool",
       "notes": "note",
+      "tokens": "token",
+      "shares": "share",
       "legend": "legend entry",
       "colors": "color",
       "tokenTypes": "token type",
@@ -129,7 +135,8 @@
       "rounds": "Rounds",
       "turns": "Turns",
       "pools": "Pools",
-      "notes": "Notes"
+      "notes": "Notes",
+      "tokens": "Tokens"
     },
     "titles": {
       "players_one": "{{count}} player",
@@ -137,6 +144,8 @@
     },
     "emptyList": "Nothing here yet.",
     "add": "Add {{item}}",
+    "addWithOptions": "Add {{item}} with options",
+    "itemValue": "Value of {{item}} {{title}}",
     "remove": "Remove {{item}} {{title}}",
     "moveUp": "Move {{item}} {{title}} up",
     "moveDown": "Move {{item}} {{title}} down",
