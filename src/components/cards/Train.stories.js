@@ -38,6 +38,9 @@ export default {
     price: { control: { type: "number", min: 0, step: 10 } },
     tradeIn: { control: { type: "number", min: 0, step: 10 } },
     upgrade: { control: { type: "number", min: 0, step: 10 } },
+    priceFormat: { control: "text" },
+    upgradeFormat: { control: "text" },
+    tradeInFormat: { control: "text" },
     color,
     backgroundColor: color,
     permanentColor: color,
@@ -89,4 +92,18 @@ export const WithImages = {
 
 export const TextStyle = {
   parameters: { printConfig: { trains: { style: "text" } } },
+};
+
+// A format string replaces the first # by the number
+export const FormatStrings = {
+  args: {
+    name: "3+1",
+    price: 300,
+    priceFormat: "#G",
+    upgrade: 200,
+    upgradeFormat: "+#",
+    tradeIn: 100,
+    tradeInFormat: "-# trade",
+    color: "green",
+  },
 };

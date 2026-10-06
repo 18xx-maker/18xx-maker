@@ -52,6 +52,13 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   arrow under the price.
 - **tradeIn** The value of this train when traded in. Shown in parentheses under
   the price.
+- **priceFormat**, **upgradeFormat**, **tradeInFormat** A format string for the
+  matching number, where the first `#` is replaced by the value: `"#G"` prints
+  `300G`, `"+#"` prints `+200`. It replaces the game currency and the currency
+  config for that value, and is ignored when the value is text. The arrow and
+  parentheses stay. Keep formats short, the text is not shrunk. A format on a
+  company train needs a full train definition, with a `color` and a price:
+  `{ "name", "priceFormat" }` alone is not valid.
 - **description** A description string printed on the train card. Useful for
   random information for play.
 - **available** If this train becomes available when another train is sold you

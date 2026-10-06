@@ -27,10 +27,13 @@ const Train = ({ train, trains, bare }) => {
     nameFontSize,
     nameFontFamily,
     price,
+    priceFormat,
     priceFontSize,
     priceFontFamily,
     tradeIn,
+    tradeInFormat,
     upgrade,
+    upgradeFormat,
     color,
     description,
     players,
@@ -283,17 +286,28 @@ const Train = ({ train, trains, bare }) => {
                     fontFamily: `${priceFontFamily}`,
                   }}
                 >
-                  <Currency value={price} type="train" />
+                  <Currency value={price} type="train" format={priceFormat} />
                   {(upgrade != null || tradeIn != null) && (
                     <div className="train__sub_prices">
                       {upgrade != null && (
                         <div className="train__upgrade_price">
-                          &rarr; <Currency value={upgrade} type="train" />
+                          &rarr;{" "}
+                          <Currency
+                            value={upgrade}
+                            type="train"
+                            format={upgradeFormat}
+                          />
                         </div>
                       )}
                       {tradeIn != null && (
                         <div className="train__trade_in_price">
-                          (<Currency value={tradeIn} type="train" />)
+                          (
+                          <Currency
+                            value={tradeIn}
+                            type="train"
+                            format={tradeInFormat}
+                          />
+                          )
                         </div>
                       )}
                     </div>
