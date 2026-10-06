@@ -295,6 +295,7 @@
       "revenue": 5,
       "revenueFormat": "+#",
       "icon": "share",
+      "iconSize": 1.25,
       "description": "Description"
     },
     {
@@ -302,6 +303,7 @@
       "price": 140,
       "revenue": 10,
       "company": "PRR",
+      "iconSize": 0.75,
       "description": "Description"
     },
     {
@@ -324,7 +326,8 @@
       "price": 180,
       "revenue": 20,
       "tile": "T1",
-      "description": "This tile is defined in the game file",
+      "iconSize": 1.25,
+      "description": "This tile is defined in the game file, and drawn large: the text wraps around the tile and keeps going for a few more lines so the size can be checked against the price and revenue boxes",
       "variant": "unused"
     },
     {

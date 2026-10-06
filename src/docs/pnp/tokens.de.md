@@ -60,6 +60,20 @@ Kartentokens gezeichnet werden, ignorieren das Feld `token`.
 }
 ```
 
+## Symbolgröße bei Privatgesellschaften
+
+Das Symbol, der Token, die Gesellschaft, das Plättchen oder das Feld einer
+Privatgesellschaft wird in einer Standardgröße gezeichnet. Mit `iconSize` an der
+Privatgesellschaft skalierst du es: ein Multiplikator der Standardgröße, `1.5`
+ist also anderthalbmal so groß und `0.75` kleiner. Das funktioniert in den
+Stilen „small“ und „big“. Im Stil „small“ mit mehreren Grafiken wird die Breite
+begrenzt, sodass sie sich weiterhin die Zeile teilen. Im Stil „big“ können Werte über 1 auf kleinen Karten
+die Beschreibung und das Einnahmenfeld überlappen.
+
+```json
+{ "name": "Big Icon", "icon": "share", "iconSize": 1.5 }
+```
+
 ## Optionen in der Werkzeugkonfiguration
 
 Du kannst im Werkzeug die Größe jeder Tokenart festlegen. Die Größen sind in

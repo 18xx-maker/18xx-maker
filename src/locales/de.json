@@ -895,7 +895,7 @@
       "title": "Privatgesellschaften",
       "style": {
         "label": "Stil der Privatgesellschaften",
-        "description": "Verschiedene Stile für Karten von Privatgesellschaften. „Small“ verwendet kleine Symbole, „big“ größere."
+        "description": "Verschiedene Stile für Karten von Privatgesellschaften. „Small“ verwendet kleine Symbole, „big“ größere. Eine Privatgesellschaft kann ihr Symbol mit iconSize skalieren."
       }
     },
     "trains": {

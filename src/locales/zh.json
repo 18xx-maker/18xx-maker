@@ -895,7 +895,7 @@
       "title": "私有公司",
       "style": {
         "label": "私有公司样式",
-        "description": "私有公司卡牌的不同样式。“Small”使用小图标,“big”使用大图标。"
+        "description": "私有公司卡牌的不同样式。“Small”使用小图标,“big”使用大图标。私有公司可以用 iconSize 缩放自己的图标。"
       }
     },
     "trains": {

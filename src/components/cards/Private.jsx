@@ -81,6 +81,7 @@ const Private = (props) => {
     maxPlayers,
     icon,
     iconColor,
+    iconSize,
     hex,
     tile,
     token,
@@ -337,7 +338,14 @@ const Private = (props) => {
                   backgroundColor: c(backgroundColor),
                 }}
               >
-                <div className="card__body">
+                <div
+                  className="card__body"
+                  style={
+                    iconSize != null
+                      ? { "--private-icon-scale": iconSize }
+                      : undefined
+                  }
+                >
                   <div
                     className="private__name"
                     style={{

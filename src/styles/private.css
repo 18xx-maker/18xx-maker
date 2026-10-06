@@ -107,8 +107,11 @@
   float: left;
   box-sizing: content-box;
   padding: 0 1em 7em 0;
-  width: min(0.3in, calc(100% / var(--private-icons, 1) - 1em));
-  height: 0.3in;
+  width: min(
+    calc(0.3in * var(--private-icon-scale, 1)),
+    calc(100% / var(--private-icons, 1) - 1em)
+  );
+  height: calc(0.3in * var(--private-icon-scale, 1));
 
   svg {
     width: 100%;
