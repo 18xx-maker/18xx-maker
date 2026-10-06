@@ -24,6 +24,12 @@ export const selectLanguage = (state) => {
 export const selectOpenExportFolder = (state) =>
   state.settings?.openExportFolder === true;
 
+// The key mode of the JSON editor: normal unless the setting is vim or emacs
+export const selectEditorKeys = (state) => {
+  const keys = state.settings?.editorKeys;
+  return keys === "vim" || keys === "emacs" ? keys : "normal";
+};
+
 export const selectExportMenuOpen = (state) => !!state.ui?.exportMenuOpen;
 export const selectExportSheetOpen = (state) => !!state.ui?.exportSheetOpen;
 

@@ -15,8 +15,16 @@ import { Switch } from "@/components/ui/switch";
 
 import { useSettings } from "@/hooks";
 import { availableLanguages, detectedLanguage } from "@/locales/language";
-import { createSetLanguage, createSetOpenExportFolder } from "@/state";
-import { selectLanguage, selectOpenExportFolder } from "@/state/selectors";
+import {
+  createSetEditorKeys,
+  createSetLanguage,
+  createSetOpenExportFolder,
+} from "@/state";
+import {
+  selectEditorKeys,
+  selectLanguage,
+  selectOpenExportFolder,
+} from "@/state/selectors";
 import capability from "@/util/capability";
 
 const languageName = (code, display = code) =>
@@ -39,6 +47,8 @@ const SettingsPage = () => {
   const language = useSelector(selectLanguage) ?? "system";
   const setLanguage = (language) =>
     dispatch(createSetLanguage(language === "system" ? undefined : language));
+
+  const editorKeys = useSelector(selectEditorKeys);
 
   const openExportFolder = useSelector(selectOpenExportFolder);
 
@@ -100,6 +110,32 @@ const SettingsPage = () => {
               language: languageName(detected, display),
               fallback: languageName(i18n.options.fallbackLng[0], display),
             })}
+      </p>
+      <div className="flex flex-row gap-4 justify-start items-center mt-4 max-w-sm">
+        <Label htmlFor="settings-editor-keys">
+          {t("settings.editorKeys.title")}
+        </Label>
+        <Select
+          id="settings-editor-keys"
+          value={editorKeys}
+          onValueChange={(keys) => dispatch(createSetEditorKeys(keys))}
+        >
+          <SelectTrigger aria-label={t("settings.editorKeys.title")}>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="normal">
+              {t("settings.editorKeys.normal")}
+            </SelectItem>
+            <SelectItem value="emacs">
+              {t("settings.editorKeys.emacs")}
+            </SelectItem>
+            <SelectItem value="vim">{t("settings.editorKeys.vim")}</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      <p className="mt-2 text-sm text-muted-foreground">
+        {t("settings.editorKeys.description")}
       </p>
       {capability.electron && (
         <div className="mt-4 max-w-sm">

@@ -56,6 +56,30 @@ test("only loads the editor when its tab opens", async ({ page }) => {
   await page.getByRole("tab", { name: "JSON" }).click();
   await expect(editor(page)).toBeVisible();
   expect(requested.filter((url) => /JsonEditor/.test(url))).not.toEqual([]);
+  // The Emacs and Vim keys load when they are chosen, not with the editor
+  expect(requested.filter((url) => /editor(Vim|Emacs)/.test(url))).toEqual([]);
+});
+
+test("loads the Vim keys when they are chosen", async ({ page }) => {
+  const requested = [];
+  page.on("request", (request) => requested.push(request.url()));
+
+  await page.goto("/settings");
+  await page.getByRole("combobox", { name: "Editor keys" }).click();
+  await page.getByRole("option", { name: "Vim" }).click();
+  await page.goto("/games/18Test/map?edit=true&editSection=json");
+  await expect(editor(page)).toBeVisible();
+  await expect
+    .poll(() => requested.filter((url) => /editorVim/.test(url)).length)
+    .toBeGreaterThan(0);
+  expect(requested.filter((url) => /editorEmacs/.test(url))).toEqual([]);
+
+  // In Vim the text is typed in insert mode
+  await editor(page).click();
+  await page.keyboard.press("Control+End");
+  await page.keyboard.press("i");
+  await page.keyboard.type("j");
+  await expect(status(page)).toContainText("syntax error");
 });
 
 // A click on a line number marks the line in the url without a history entry,

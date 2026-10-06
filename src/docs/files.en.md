@@ -212,6 +212,29 @@ says the game changed.
 Tab indents inside the editor. To leave it, press Escape (the first Escape
 leaves the editor, a second closes the panel) and then Tab.
 
+#### Editor keys
+
+The Editor keys setting on the [Settings page](/settings) chooses the keys of
+the JSON editor: Normal (the default), Emacs or Vim. The Emacs and Vim keys
+load when you choose them, and changing the setting keeps your text and its
+undo history. The keys only work while the editor has focus. `Mod` is Cmd on
+macOS and Ctrl on Windows and Linux. In Emacs and Vim the Normal keys also work
+on macOS; elsewhere Ctrl belongs to the mode. Copy, paste, undo and select all
+keep their usual keys in Normal. In Vim, Escape leaves the editor only when
+Vim is in normal mode with no command pending. Search has its own keys in
+Emacs and Vim.
+
+| Action                            | Normal                       | Emacs        | Vim        |
+| --------------------------------- | ---------------------------- | ------------ | ---------- |
+| Format                            | `Mod-Shift-f`, `Shift-Alt-f` | `C-c C-f`    | `:format`  |
+| Update the game from the text now | `Mod-s`                      | `C-x C-s`    | `:w`       |
+| Next problem                      | `F8`                         | `M-g n`      | `]d`       |
+| Previous problem                  | `Shift-F8`                   | `M-g p`      | `[d`       |
+| Search                            | `Mod-f`                      | `C-s`, `C-r` | `/`, `?`   |
+| Next match                        | `Mod-g`                      |              |            |
+| Previous match                    | `Shift-Mod-g`                |              |            |
+| Fold or unfold everything         | `Ctrl-Alt-[`, `Ctrl-Alt-]`   |              | `zM`, `zR` |
+
 ### Links to a part of the editor
 
 The address of the page says where you are, so you can share it or come back

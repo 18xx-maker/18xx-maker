@@ -7,6 +7,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import { keyTable } from "@/components/editPanel/editorKeyTable";
+
 // The one list of keybindings, shown in the ? dialog and in the docs. The keys
 // are handled in src/hooks/bindings.js. Text is under "shortcuts.keys.<id>".
 const shortcuts = [
@@ -33,6 +35,9 @@ const shortcuts = [
   { id: "export", keys: ["x"] },
   { id: "app", keys: ["u"] },
 ];
+
+// The keys of the JSON editor per mode, from the table its keymap is made of
+const editorActions = Object.keys(keyTable.normal);
 
 const Kbd = ({ children }) => (
   <kbd className="rounded-md border bg-accent px-1.5 py-0.5 font-mono text-sm">
@@ -80,6 +85,41 @@ const Shortcuts = () => {
         </tbody>
       </table>
       <p className="mt-4 leading-7">{t("shortcuts.exportMenu")}</p>
+      <h2 className="mt-6 text-2xl font-bold">{t("shortcuts.editor.title")}</h2>
+      <p className="mt-2 leading-7">{t("shortcuts.editor.description")}</p>
+      <table className="mt-4 w-full" data-testid="editor-keys">
+        <thead>
+          <tr>
+            <th className="border px-4 py-2 text-left font-bold">
+              {t("shortcuts.editor.action")}
+            </th>
+            {Object.keys(keyTable).map((mode) => (
+              <th key={mode} className="border px-4 py-2 text-left font-bold">
+                {t(`settings.editorKeys.${mode}`)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {editorActions.map((action) => (
+            <tr key={action} className="m-0 border-t p-0 even:bg-muted">
+              <td className="border px-4 py-2 text-left">
+                {t(`shortcuts.editor.actions.${action}`)}
+              </td>
+              {Object.entries(keyTable).map(([mode, table]) => (
+                <td key={mode} className="border px-4 py-2 text-left">
+                  <span className="flex flex-wrap gap-1">
+                    {(table[action] ?? []).map((key) => (
+                      <Kbd key={key}>{key}</Kbd>
+                    ))}
+                  </span>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="mt-4 leading-7">{t("shortcuts.editor.note")}</p>
     </div>
   );
 };

@@ -20,10 +20,15 @@ import {
   linter,
   nextDiagnostic,
 } from "@codemirror/lint";
-import { Annotation, EditorState, StateEffect } from "@codemirror/state";
+import {
+  Annotation,
+  Compartment,
+  EditorState,
+  Prec,
+  StateEffect,
+} from "@codemirror/state";
 import {
   EditorView,
-  closeHoverTooltips,
   drawSelection,
   highlightActiveLine,
   keymap,
@@ -41,6 +46,7 @@ import {
   getDraft,
   setDraft,
 } from "@/components/editPanel/draftStore";
+import { editorActions, editorKeymap } from "@/components/editPanel/editorKeys";
 import {
   lineSelection,
   scrollToLines,
@@ -51,6 +57,7 @@ import {
 import { issueText } from "@/components/schemaForm/issueText";
 
 import { editGame, selectGameProblems } from "@/state";
+import { selectEditorKeys } from "@/state/selectors";
 import { gameText } from "@/util/download";
 import {
   debounceDelay,
@@ -73,6 +80,12 @@ const external = Annotation.define();
 
 // The problems of the game changed: the linter runs again
 const recheck = StateEffect.define();
+
+// The extension of the Emacs or Vim keys, which are loaded when chosen
+const modes = {
+  emacs: () => import("@/components/editPanel/editorEmacs"),
+  vim: () => import("@/components/editPanel/editorVim"),
+};
 
 // Documents this long are checked later after typing
 const BIG = 200_000;
@@ -176,6 +189,15 @@ const fixes = (text, offset, t) => {
   return [];
 };
 
+// The keys of a mode: its extension (Emacs, Vim) sees a key before the others
+const modeKeys = (name, extension = []) => [
+  Prec.highest(extension),
+  Prec.high(editorKeymap(name)),
+];
+
+// Where the keys of the mode go, so a mode change keeps the view
+const mode = new Compartment();
+
 const JsonEditor = ({ game }) => {
   const { t } = useTranslation();
   const store = useStore();
@@ -189,6 +211,12 @@ const JsonEditor = ({ game }) => {
   const lastMs = useRef(0);
   const issuesRef = useRef(issues);
   const tRef = useRef(t);
+  const keys = useSelector(selectEditorKeys);
+  // The loaded keys of the mode (normal ones until the mode has loaded)
+  const modeExtension = useRef();
+  modeExtension.current ??= modeKeys("normal");
+  const modeRequest = useRef(0);
+  const [keysFailed, setKeysFailed] = useState(false);
   const [lines, setLines] = useLinesParam();
   const linesRef = useRef(lines);
   const setLinesRef = useRef(setLines);
@@ -282,16 +310,6 @@ const JsonEditor = ({ game }) => {
       return found;
     };
 
-    const leave = (v) => {
-      // Escape leaves the editor unless it has a popup of its own to close
-      if (v.dom.querySelector(".cm-tooltip")) {
-        v.dispatch({ effects: closeHoverTooltips });
-        return true;
-      }
-      v.contentDOM.blur();
-      return true;
-    };
-
     const state = EditorState.create({
       doc: start,
       extensions: [
@@ -313,17 +331,19 @@ const JsonEditor = ({ game }) => {
           "aria-label": tRef.current("jsonEditor.label"),
           "aria-describedby": "json-editor-status",
         }),
+        // First, so the keys of the mode see a key before the others do
+        mode.of(modeExtension.current),
+        editorActions.of({
+          format: () => {
+            document.getElementById("json-editor-format")?.click();
+            return true;
+          },
+          apply: () => {
+            applyRef.current();
+            return true;
+          },
+        }),
         keymap.of([
-          { key: "Escape", run: leave },
-          // Shift makes the key a capital: where the platform reports it so
-          // (macOS), only the capital name matches
-          ...["Shift-Alt-f", "Shift-Alt-F"].map((key) => ({
-            key,
-            run: () => {
-              document.getElementById("json-editor-format")?.click();
-              return true;
-            },
-          })),
           indentWithTab,
           ...foldKeymap,
           ...historyKeymap,
@@ -390,6 +410,30 @@ const JsonEditor = ({ game }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
+
+  // The key mode changed: Emacs and Vim load when first chosen, the text and
+  // its history stay. An answer to an earlier choice is ignored.
+  useEffect(() => {
+    const request = ++modeRequest.current;
+    setKeysFailed(false);
+    const use = (name, extension = []) => {
+      modeExtension.current = modeKeys(name, extension);
+      view.current?.dispatch({
+        effects: mode.reconfigure(modeExtension.current),
+      });
+    };
+    if (!modes[keys]) return use("normal");
+    modes[keys]()
+      .then((loaded) => loaded.default)
+      .then(
+        (extension) => request === modeRequest.current && use(keys, extension),
+        () => {
+          if (request !== modeRequest.current) return;
+          use("normal");
+          setKeysFailed(true);
+        },
+      );
+  }, [keys]);
 
   // The lines of the url changed (back, forward, a pasted link): our own
   // clicks are already in the editor
@@ -534,6 +578,7 @@ const JsonEditor = ({ game }) => {
         )}
         {!valid && <p>{t("jsonEditor.notUpdated")}</p>}
         {changed && <p>{t("jsonEditor.changed")}</p>}
+        {keysFailed && <p>{t("jsonEditor.keysFailed")}</p>}
         {warning && (
           <p>
             {t(`jsonEditor.warn.${warning}`)}{" "}
