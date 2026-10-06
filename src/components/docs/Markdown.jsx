@@ -130,14 +130,15 @@ const md = (element, className) => {
 };
 
 // A heading has an id (see rehypeHeadingIds) and a # link that shows on hover
-// or keyboard focus and points at it.
+// or keyboard focus and points at it. The page title (h1) has no anchor: the
+// page link itself is enough.
 const heading = (element, className) => {
   const comp = (props) => {
     const { children, id, ...rest } = clean(props);
     return createElement(
       element,
       { ...rest, id, className: clsx(className, "group relative") },
-      id && (
+      id && element !== "h1" && (
         <Link
           to={{ hash: id }}
           data-anchor

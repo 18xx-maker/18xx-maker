@@ -18,10 +18,16 @@ describe("docs layout", () => {
     // room for the hover heading anchor, which hangs left of the text
     // eslint-disable-next-line testing-library/no-node-access
     expect(docs.querySelector(".max-w-200.p-4")).toHaveClass("pl-12");
-    // the anchor ends at the heading's left edge whatever the heading size,
-    // so it never overlaps the title text
+    // the page title has no anchor
     // eslint-disable-next-line testing-library/no-node-access
-    const anchor = docs.querySelector("h1 [data-anchor]");
+    expect(docs.querySelector("h1")).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(docs.querySelector("h1 [data-anchor]")).toBeNull();
+    // the anchor ends at the heading's left edge whatever the heading size,
+    // so it never overlaps the heading text
+    // eslint-disable-next-line testing-library/no-node-access
+    const anchor = docs.querySelector("h2 [data-anchor], h3 [data-anchor]");
+    expect(anchor).not.toBeNull();
     expect(anchor).toHaveClass("right-full");
     expect(anchor).not.toHaveClass("-left-6");
   });
