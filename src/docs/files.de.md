@@ -150,8 +150,8 @@ Weil eine Gesellschaft viele Felder hat, ist ihre Karte zunächst eingeklappt un
 zeigt Farbe, Name und Kürzel; klicke auf den Titel, um sie zu öffnen. Eine
 eingeklappte Karte zeigt ein Warnzeichen, wenn etwas darin ein Problem hat. Name,
 Kürzel, Farbe und die Markierung „minor“ stehen zuerst, die übrigen Felder, etwa
-Logo und Text der Charter, unter Weitere Felder. Anteile, Marker, Züge, Kredite
-und ähnliche Felder werden als JSON bearbeitet. Eine Gesellschaft braucht einen
+Logo und Text der Charter, unter Weitere Felder. Anteile, Züge, Kredite
+und ähnliche Felder werden als JSON bearbeitet, der Token hat einen Editor (siehe Tab „Token“ unten). Eine Gesellschaft braucht einen
 Namen und ein Kürzel, die sich nicht leeren lassen. Eine neue Gesellschaft
 bekommt ein freies Kürzel, und eine Kopie das Kürzel ihrer Vorlage mit einer
 Zahl (aus PRR wird PRR2). Andere Teile des Spiels, etwa der Markt, verweisen über
@@ -220,6 +220,20 @@ Felder“. Ein Token-Typ listet die Tokenfelder eines Charters auf dieselbe Weis
 seine Aktien (zunächst Anzahl, Label, Prozent und Kosten). Benennst du einen
 Typ um oder entfernst ihn, warnt der Editor, wie viele Gesellschaften ihn
 noch unter dem alten Namen verwenden.
+
+Der Token einer Gesellschaft und einer Privatgesellschaft (unter Weitere Felder)
+und jeder Token im Tab „Token“ hat eine Schaltfläche Token bearbeiten, die den
+Token-Editor in einem Dialog öffnet. Eine Vorschau zeigt den Token, wie er
+gedruckt wird, auf hellem oder dunklem Hintergrund, und jede Änderung geht
+sofort in das Spiel: Es gibt nichts zu speichern, und Zurücksetzen stellt den
+Token so wieder her, wie er beim Öffnen des Dialogs war. Form, Inhalt (Logo,
+Symbol und Beschriftung), Farben und Verzierungen (ein Balken, Streifen, ein
+Schild, Hälften und so weiter, jeweils mit eigenen Optionen) sind gruppiert,
+alle anderen Eigenschaften stehen unter Erweitert. Eine Form, die eine Farbe
+nimmt, ist eine Farbe oder true (weiß), und eine mit mehreren Farben, etwa
+Hälften, hat für jede Farbe ein Feld. Ein Token in der Liste der Token, der nur
+eine Beschriftung hat, bleibt Text oder eine Zahl. Was der Editor nicht kennt,
+bleibt im Token erhalten.
 
 Der Tab „Farben“ bearbeitet die benannten Farben des Spiels. Jede Farbe hat
 eine Farbfläche, die die Farbauswahl öffnet, und ein Textfeld für eine

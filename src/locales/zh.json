@@ -256,12 +256,12 @@
       "usedBy_other": "{{count}} 家公司按名称或默认使用“{{name}}”,之后将找不到它。"
     },
     "tokenEditor": {
-      "edit": "编辑代币",
-      "editFor": "编辑 {{title}} 的代币",
-      "title": "编辑代币",
-      "titleFor": "编辑 {{subject}} 的代币",
+      "edit": "编辑标记",
+      "editFor": "编辑 {{title}} 的标记",
+      "title": "编辑标记",
+      "titleFor": "编辑 {{subject}} 的标记",
       "description": "每次更改都会立即写入游戏。",
-      "preview": "代币预览",
+      "preview": "标记预览",
       "background": "预览背景",
       "backgrounds": {
         "light": "浅色",

@@ -72,6 +72,25 @@ const pages = [
     open: true,
     more: true,
   },
+  // The token editor of the first company, with a decoration and the advanced
+  // fields open, in both themes
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `token editor (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=companies",
+    colorScheme,
+    ready: (page) => page.getByRole("button", { name: "Add company" }),
+    before: async (page) => {
+      const card = page.getByTestId("edit-panel").getByRole("listitem").first();
+      await card.locator("[data-title]").click();
+      await card.getByRole("button", { name: "More fields" }).click();
+      await card.getByRole("button", { name: "Edit token" }).click();
+      const dialog = page.getByRole("dialog");
+      await expect(dialog).toBeVisible();
+      await dialog.getByRole("combobox", { name: "Add decoration" }).click();
+      await page.getByRole("option", { name: "Halves" }).click();
+      await dialog.getByRole("button", { name: "Advanced" }).click();
+    },
+  })),
   {
     // With the card of a phase open and its more fields
     name: "edit panel phases",
