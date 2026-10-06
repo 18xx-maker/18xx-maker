@@ -103,6 +103,10 @@
         "tab": "标记",
         "description": "编辑游戏的标记,以及公司的标记类型和股份类型。更改会保留在内存中,直到你在“更改”页面保存。"
       },
+      "colors": {
+        "tab": "颜色",
+        "description": "按名称编辑游戏的颜色,每种颜色都有色块。更改会保留在内存中,直到你在“更改”页面保存。"
+      },
       "json": {
         "tab": "JSON",
         "description": "以 JSON 编辑整个游戏。只要 JSON 有效,页面就会随你的输入而更新。更改保留在内存中,直到你在“更改”页面保存。"
@@ -145,6 +149,7 @@
     "emptyList": "这里还没有内容。",
     "add": "添加{{item}}",
     "addWithOptions": "添加带选项的{{item}}",
+    "pickColor": "为 {{name}} 选择颜色",
     "itemValue": "{{item}} {{title}} 的值",
     "remove": "删除{{item}} {{title}}",
     "moveUp": "上移{{item}} {{title}}",

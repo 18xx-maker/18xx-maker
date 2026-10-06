@@ -103,6 +103,10 @@
         "tab": "Token",
         "description": "Bearbeite die Token des Spiels sowie die Token-Typen und Aktientypen der Gesellschaften. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
       },
+      "colors": {
+        "tab": "Farben",
+        "description": "Bearbeite die Farben des Spiels nach Namen, jeweils mit einer Farbfläche. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
+      },
       "json": {
         "tab": "JSON",
         "description": "Bearbeite das ganze Spiel als JSON. Die Seite folgt deiner Eingabe, solange das JSON gültig ist. Die Änderungen bleiben im Speicher, bis du sie auf der Änderungsseite speicherst."
@@ -145,6 +149,7 @@
     "emptyList": "Noch nichts vorhanden.",
     "add": "{{item}} hinzufügen",
     "addWithOptions": "{{item}} mit Optionen hinzufügen",
+    "pickColor": "Farbe für {{name}} wählen",
     "itemValue": "Wert von {{item}} {{title}}",
     "remove": "{{item}} {{title}} entfernen",
     "moveUp": "{{item}} {{title}} nach oben",

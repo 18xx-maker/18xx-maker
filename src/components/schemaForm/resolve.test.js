@@ -1,5 +1,6 @@
 import schema from "@/schemas/game.schema.json";
 import {
+  COLOR_KEYS,
   COMPANY_PRIMARY_KEYS,
   GAME_INFO_KEYS,
   PHASE_PRIMARY_KEYS,
@@ -1458,5 +1459,25 @@ describe("the tokens tab", () => {
         schema,
       ),
     ).toBeUndefined();
+  });
+});
+
+describe("the colors tab", () => {
+  it("edits the colors record as swatch fields, and a color by phase as JSON", () => {
+    const record = resolveSchema(schema.properties.colors, schema);
+    expect(kindOf(record, "colors", schema)).toBe("record");
+    const value = resolveSchema(record.additionalProperties, schema);
+    expect(kindOf(value, "short", schema)).toBe("color");
+    expect(COLOR_KEYS).toEqual(["colors"]);
+  });
+
+  it("does not take other texts or objects for a color", () => {
+    const string = { type: "string" };
+    const record = { type: "object", additionalProperties: string };
+    expect(kindOf({ oneOf: [string, string] }, "x", {})).toBe("json");
+    expect(kindOf({ oneOf: [string, record] }, "x", {})).toBe("color");
+    expect(
+      kindOf({ oneOf: [{ type: "string", pattern: "a" }, record] }, "x", {}),
+    ).toBe("json");
   });
 });

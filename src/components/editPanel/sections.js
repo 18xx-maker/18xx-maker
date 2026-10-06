@@ -1,4 +1,5 @@
 import JsonSection from "@/components/editPanel/JsonSection";
+import ColorsForm from "@/components/schemaForm/ColorsForm";
 import CompaniesForm from "@/components/schemaForm/CompaniesForm";
 import GameInfoForm from "@/components/schemaForm/GameInfoForm";
 import MarketForm from "@/components/schemaForm/MarketForm";
@@ -23,6 +24,7 @@ export const editSections = [
   { section: "players", Form: PlayersForm },
   { section: "rounds", Form: RoundsForm },
   { section: "tokens", Form: TokensForm },
+  { section: "colors", Form: ColorsForm },
   { section: "json", Form: JsonSection, wide: true },
 ];
 

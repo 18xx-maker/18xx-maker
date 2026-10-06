@@ -286,6 +286,58 @@ const StringField = ({ keys, schema, long }) => {
   );
 };
 
+// The preview of a color is a swatch that is also the picker: a native color
+// input over it, which only knows #rrggbb. The color names of the game and
+// other CSS colors are typed.
+const HEX = /^#[0-9a-f]{6}$/i;
+
+const ColorField = ({ keys, schema }) => {
+  const { t } = useTranslation();
+  const field = useField(keys, schema);
+  const draft = useDraft(field.value, (text) =>
+    text.trim() === "" ? field.clear() : field.set(text.trim()),
+  );
+  const preview = draft.text.trim();
+
+  return (
+    <FieldShell {...field}>
+      <div className="flex flex-row items-center gap-2">
+        <span
+          className="relative size-9 shrink-0 overflow-hidden rounded-md border focus-within:ring-1 focus-within:ring-ring"
+          style={{ backgroundColor: preview || undefined }}
+          data-testid="color-swatch"
+        >
+          <input
+            type="color"
+            aria-label={t("editPanel.pickColor", { name: field.label })}
+            className="absolute inset-0 size-full cursor-pointer opacity-0"
+            value={HEX.test(preview) ? preview : "#000000"}
+            onChange={(event) => field.set(event.target.value)}
+          />
+        </span>
+        <Input
+          {...field.aria()}
+          value={draft.text}
+          onChange={(event) => draft.change(event.target.value)}
+          onBlur={draft.commit}
+          onKeyDown={(event) => event.key === "Enter" && draft.commit()}
+        />
+      </div>
+    </FieldShell>
+  );
+};
+
+// A color by phase is an object: JSON, as the other shapes
+const ColorValueField = (props) => {
+  const form = useContext(SchemaFormContext);
+  const value = valueAt(props.keys, form.game);
+  return value !== null && typeof value === "object" ? (
+    <JsonField {...props} />
+  ) : (
+    <ColorField {...props} />
+  );
+};
+
 const StringOrNumberField = ({ keys, schema }) => {
   const field = useField(keys, schema);
   const draft = useDraft(
@@ -1472,6 +1524,8 @@ const SchemaField = ({ keys, schema, ...rest }) => {
           invalid="editPanel.invalidLimit"
         />
       );
+    case "color":
+      return <ColorValueField {...props} />;
     case "stringList":
       return <StringListField {...props} />;
     case "revenue":
