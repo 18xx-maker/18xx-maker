@@ -67,13 +67,14 @@ const SchemaFormProvider = ({ game, children }) => {
       game,
       issues,
       latest,
+      edit,
       set,
       clear,
       insert,
       remove,
       move,
     }),
-    [game, issues, latest, set, clear, insert, remove, move],
+    [game, issues, latest, edit, set, clear, insert, remove, move],
   );
 
   return (

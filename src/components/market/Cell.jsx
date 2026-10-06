@@ -3,6 +3,7 @@ import { addIndex, findIndex, is, map, propEq } from "ramda";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import Position from "@/components/Position";
+import resolveCellColor from "@/components/market/resolveCellColor";
 import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
 import Token from "@/components/tokens/Token";
 
@@ -30,24 +31,8 @@ const Cell = ({ cell: rawCell, game, config, data }) => {
   return (
     <Color>
       {(c, t) => {
-        // Standard colors
-        let color = cell.color
-          ? c(cell.color)
-          : data.cell && data.cell.color
-            ? c(data.cell.color)
-            : c("plain");
-
+        let color = resolveCellColor(cell, data, c);
         let arrowColor = cell.arrowColor ? c(cell.arrowColor) : c("black");
-
-        // Check if legend is used
-        if (Number.isInteger(cell.legend) && cell.legend < data.legend.length) {
-          color = c(data.legend[cell.legend].color);
-        }
-
-        // Check if this is a par
-        if (cell.par) {
-          color = data.par && data.par.color ? c(data.par.color) : c("gray");
-        }
 
         // Set labelColor by explicit labelColor or text color with color from above
         let labelColor = cell.labelColor || t(color);

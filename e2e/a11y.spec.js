@@ -52,6 +52,18 @@ const pages = [
     ready: (page) => page.getByRole("button", { name: "Add train" }),
   },
   {
+    name: "edit panel market",
+    url: "/games/18Test/map?edit=true&editSection=market",
+    ready: (page) => page.getByRole("grid", { name: "Stock market cells" }),
+  },
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `edit panel market cell (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=market",
+    colorScheme,
+    ready: (page) => page.getByRole("grid", { name: "Stock market cells" }),
+    select: /^Row 1, column 7:/,
+  })),
+  {
     name: "settings",
     url: "/settings",
     ready: (page) => page.getByTestId("settings"),
@@ -70,13 +82,17 @@ const pages = [
   })),
 ];
 
-for (const { name, url, ready, colorScheme } of pages) {
+for (const { name, url, ready, colorScheme, select } of pages) {
   test(`no serious or critical accessibility violations: ${name}`, async ({
     page,
   }) => {
     if (colorScheme) await page.emulateMedia({ colorScheme });
     await page.goto(url);
     await expect(ready(page)).toBeVisible();
+    if (select) {
+      await page.getByRole("gridcell", { name: select }).click();
+      await expect(page.getByTestId("cell-inspector")).toBeVisible();
+    }
     // Wait for the drawer and page transitions to finish
     await page.evaluate(() =>
       Promise.all(document.getAnimations().map((a) => a.finished)),

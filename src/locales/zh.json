@@ -74,6 +74,10 @@
       "trains": {
         "tab": "列车",
         "description": "编辑游戏的列车。用每辆列车上的按钮添加、删除、复制和调整顺序。"
+      },
+      "market": {
+        "tab": "市场",
+        "description": "编辑股票市场:类型、单元格、图例以及股价的移动方式。更改会保留在内存中,直到你在“更改”页面保存。"
       }
     },
     "tabs": {
@@ -81,7 +85,8 @@
       "hint": "切换标签页"
     },
     "items": {
-      "trains": "列车"
+      "trains": "列车",
+      "legend": "图例项"
     },
     "emptyList": "这里还没有内容。",
     "add": "添加{{item}}",
@@ -97,7 +102,76 @@
     "moved": "已将{{item}} {{title}}移到第 {{position}} 位(共 {{count}})",
     "duplicated": "已将{{item}}复制为 {{title}}",
     "restored": "已恢复{{item}} {{title}}",
-    "invalidCount": "请输入至少为 1 的整数,或 ∞。"
+    "invalidCount": "请输入至少为 1 的整数,或 ∞。",
+    "market": {
+      "gridLabel": "股票市场单元格",
+      "gridHint": "用方向键在单元格之间移动。Delete 清空单元格。数字键跳到单元格的数值。Enter 跳到单元格字段。",
+      "diagNote": "1Diag 市场分两行绘制:偶数单元格在上,奇数单元格在下。一列是两个单元格。",
+      "empty": "此游戏还没有股票市场。",
+      "create": "创建市场",
+      "created": "已创建 3 行 3 列的市场",
+      "noCells": "市场没有单元格。",
+      "addRow": "添加行",
+      "addColumn": "添加列",
+      "selectCell": "选择一个单元格来编辑它,或添加、移动和删除行和列。",
+      "row": "行",
+      "column": "列",
+      "position": "第 {{row}} 行,第 {{column}} 列",
+      "positionFlat": "单元格 {{column}}",
+      "positionDiagTop": "第 {{column}} 列,上",
+      "positionDiagBottom": "第 {{column}} 列,下",
+      "cellEmpty": "空",
+      "cellPar": "发行价",
+      "cellLegend": "图例 {{number}}",
+      "cellProblem": "有问题",
+      "addRowAbove": "在上方添加行",
+      "addRowBelow": "在下方添加行",
+      "moveRowUp": "上移第 {{row}} 行",
+      "moveRowDown": "下移第 {{row}} 行",
+      "duplicateRow": "复制第 {{row}} 行",
+      "removeRow": "删除第 {{row}} 行",
+      "addColumnLeft": "在左侧添加列",
+      "addColumnRight": "在右侧添加列",
+      "moveColumnLeft": "左移第 {{column}} 列",
+      "moveColumnRight": "右移第 {{column}} 列",
+      "duplicateColumn": "复制第 {{column}} 列",
+      "removeColumn": "删除第 {{column}} 列",
+      "addedRow": "已添加第 {{row}} 行",
+      "movedRow": "已移到第 {{row}} 行(共 {{count}} 行)",
+      "duplicatedRow": "已复制第 {{row}} 行",
+      "removedRow": "已删除第 {{row}} 行",
+      "restoredRow": "已恢复该行",
+      "addedColumn": "已添加第 {{column}} 列",
+      "movedColumn": "已移到第 {{column}} 列(共 {{count}} 列)",
+      "duplicatedColumn": "已复制第 {{column}} 列",
+      "removedColumn": "已删除第 {{column}} 列",
+      "restoredColumn": "已恢复该列",
+      "typeChanged": "市场类型现在是 {{type}}",
+      "typeRestored": "市场类型已恢复为 {{type}}",
+      "rowsRemoved_one": "已从市场中删除 {{count}} 行。",
+      "rowsRemoved_other": "已从市场中删除 {{count}} 行。",
+      "shorthand": "在你设置第二个字段之前,此单元格保存为 {{as}}。",
+      "legendMissing": "图例中没有第 {{index}} 项(第一项是 0)。",
+      "parMissing": "此单元格是发行价,但市场没有发行价表。",
+      "legendAffected_one": "{{count}} 个单元格使用的图例编号现在指向另一项。",
+      "legendAffected_other": "{{count}} 个单元格使用的图例编号现在指向另一项。",
+      "arrows": "箭头",
+      "cellDefaults": "单元格默认值",
+      "legend": "图例",
+      "newLegend": "新项",
+      "movement": "移动",
+      "advanced": "高级(显示、ledges、limits、标题)",
+      "movementLines": "每行一段文字。",
+      "newKey": "新键",
+      "newKeyText": "文字",
+      "addKey": "添加键",
+      "directions": {
+        "up": "上",
+        "down": "下",
+        "left": "左",
+        "right": "右"
+      }
+    }
   },
   "problems": {
     "nav": "问题",
