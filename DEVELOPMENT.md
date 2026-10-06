@@ -293,6 +293,17 @@ it inside lists (`trains[2].players`). Edits go through `editGame`, so the
 Changes page, problems check and unsaved-edit handling work unchanged. Labels
 and help text are the schema keys and descriptions, in English only.
 
+The `json` section (`JsonSection.jsx` lazy loads `JsonEditor.jsx`, a CodeMirror
+6 editor; its packages have their own chunk in `vite.config.js`) edits the
+whole game as text, `j` opens it (`openEditSearch` in `src/util/query.js`). The
+pure parts are in `src/util/jsonEditor.js`. A valid text (an object with an
+`info` object and a text title) goes through `editGame` after an adaptive
+debounce, an invalid one never reaches the game and is kept as a session draft
+(`draftStore.js`). A change of the game from elsewhere replaces only the changed
+range of the text. Schema problems come from the problems check
+(`selectGameProblems`) and only warn. `RenderBoundary` keeps the panel usable
+when the page cannot draw an edited game.
+
 The files of the CLI and the app have the same layout: `<folder>/<game id>/<format>/<file>`
 (`formatFolder` in `src/export/names.js`, `gameFolder` in `src/export/sink.js`; the
 Board 18 box is in `<game id>` itself). The app saves the folder of the folder

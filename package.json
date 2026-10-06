@@ -189,6 +189,13 @@
     }
   },
   "dependencies": {
+    "@codemirror/commands": "6.11.1",
+    "@codemirror/lang-json": "6.0.2",
+    "@codemirror/language": "6.12.4",
+    "@codemirror/lint": "6.9.7",
+    "@codemirror/state": "6.7.6",
+    "@codemirror/view": "6.43.13",
+    "@lezer/highlight": "1.2.5",
     "chokidar": "^5.0.0",
     "diff": "^9.0.0",
     "electron-updater": "^6.8.9",

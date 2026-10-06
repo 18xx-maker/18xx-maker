@@ -131,6 +131,21 @@ export const togglePanelSearch = (search, panel) => {
   return params.toString();
 };
 
+// The edit panel on a section: closed it opens on the section, open on
+// another section it goes to the section, open on the section it closes
+export const openEditSearch = (search, section) => {
+  const params = new URLSearchParams(search);
+  if (params.has("edit") && params.get("editSection") === section) {
+    return togglePanelSearch(search, "edit");
+  }
+
+  const next = new URLSearchParams(
+    params.has("edit") ? search : togglePanelSearch(search, "edit"),
+  );
+  next.set("editSection", encodeURIComponent(section));
+  return next.toString();
+};
+
 export const useTogglePanel = (panel) => {
   const navigate = useNavigate();
   const location = useLocation();

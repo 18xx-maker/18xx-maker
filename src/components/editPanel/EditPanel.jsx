@@ -10,13 +10,14 @@ import { editSections } from "@/components/editPanel/sections";
 
 import { useGame } from "@/hooks/game";
 import { useEditPanel } from "@/hooks/useEditPanel";
+import { cn } from "@/util/cn";
 
 // The forms for parts of the game beside the live render of the section
 const EditPanel = () => {
   const { t } = useTranslation();
   const game = useGame();
   const { toggle, editSection, setEditSection } = useEditPanel();
-  const { Form } = editSections.find((s) => s.section === editSection);
+  const { Form, wide } = editSections.find((s) => s.section === editSection);
 
   // Escape closes the panel from anywhere inside it. An open select closes
   // itself first, it has already claimed the key. The key is ours, so the
@@ -35,7 +36,10 @@ const EditPanel = () => {
       role="complementary"
       aria-label={t("editPanel.title")}
       onKeyDown={onKeyDown}
-      className="print:hidden z-50 fixed inset-0 md:left-auto md:w-1/3 md:min-w-96 flex flex-col bg-background md:border-l shadow-lg"
+      className={cn(
+        "print:hidden z-50 fixed inset-0 md:left-auto md:min-w-96 flex flex-col bg-background md:border-l shadow-lg",
+        wide ? "md:w-1/2" : "md:w-1/3",
+      )}
     >
       <div className="flex flex-row items-center justify-between gap-4 p-4 border-b">
         <h1 className="text-3xl font-bold">{t("editPanel.title")}</h1>
@@ -54,7 +58,7 @@ const EditPanel = () => {
           role="tabpanel"
           id={panelId(editSection)}
           aria-labelledby={tabId(editSection)}
-          className="flex flex-col gap-4"
+          className={cn("flex flex-col gap-4", wide && "flex-1 min-h-0")}
         >
           <p className="text-sm text-muted-foreground">
             {t(`editPanel.sections.${editSection}.description`)}

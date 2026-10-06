@@ -22,6 +22,15 @@ const manualChunks = (id) => {
     return;
   }
 
+  // The JSON editor of the edit panel (CodeMirror) loads with it, on demand
+  if (
+    /node_modules\/(\.pnpm\/[^/]+\/node_modules\/)?(@codemirror|@lezer|style-mod|w3c-keyname|crelt|@marijn)\//.test(
+      id,
+    )
+  ) {
+    return;
+  }
+
   // All other vendor packages
   if (id.includes("node_modules")) {
     return "vendor";

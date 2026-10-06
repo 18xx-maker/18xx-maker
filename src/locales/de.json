@@ -78,6 +78,10 @@
       "market": {
         "tab": "Markt",
         "description": "Bearbeite den Aktienmarkt: seinen Typ, die Zellen, die Legende und wie sich der Aktienkurs bewegt. Die Änderungen bleiben im Speicher, bis du sie auf der Seite „Änderungen“ speicherst."
+      },
+      "json": {
+        "tab": "JSON",
+        "description": "Bearbeite das ganze Spiel als JSON. Die Seite folgt deiner Eingabe, solange das JSON gültig ist. Die Änderungen bleiben im Speicher, bis du sie auf der Änderungsseite speicherst."
       }
     },
     "tabs": {
@@ -171,6 +175,45 @@
         "left": "Links",
         "right": "Rechts"
       }
+    }
+  },
+  "jsonEditor": {
+    "label": "Spiel-JSON",
+    "valid": "Gültiges JSON. Das Spiel folgt deiner Eingabe.",
+    "syntaxError": "Zeile {{line}}, Spalte {{column}}: Syntaxfehler.",
+    "notUpdated": "Das Spiel wurde nicht aktualisiert, die Seite zeigt die letzte gültige Version.",
+    "invalid": {
+      "root": "Das Spiel muss ein JSON-Objekt sein.",
+      "info": "Das Spiel braucht ein \"info\"-Objekt.",
+      "title": "Das Spiel braucht einen Titel: \"info.title\" muss Text sein."
+    },
+    "changed": "Das Spiel wurde anderswo geändert. Verwirf den Entwurf, um die neue Version zu sehen.",
+    "format": "Formatieren",
+    "formatAnyway": "Trotzdem formatieren",
+    "discard": "Entwurf verwerfen",
+    "warn": {
+      "duplicates": "Einige Namen kommen in einem Objekt doppelt vor. Beim Formatieren bleibt nur der letzte Wert.",
+      "precision": "Einige Zahlen haben mehr Stellen, als genau gespeichert werden können. Beim Formatieren werden sie gerundet."
+    },
+    "duplicateKey": "Dieser Name kommt im Objekt doppelt vor. Nur der letzte Wert zählt.",
+    "fixComma": "Abschließendes Komma entfernen",
+    "fixQuotes": "Doppelte Anführungszeichen verwenden",
+    "problems": "Im Spiel gefundene Probleme: {{count}}. Sie sind am Rand markiert.",
+    "problemsLink": "Alle Probleme ansehen",
+    "loadFailed": "Der JSON-Editor konnte nicht geladen werden.",
+    "retry": "Erneut versuchen",
+    "renderError": "Diese Version des Spiels konnte nicht gezeichnet werden. Korrigiere sie im Bearbeitungspanel, dann kommt die Seite zurück.",
+    "phrases": {
+      "foldLine": "Zeile einklappen",
+      "unfoldLine": "Zeile ausklappen",
+      "foldedLines": "Eingeklappte Zeilen",
+      "unfoldedLines": "Ausgeklappte Zeilen",
+      "foldedCode": "eingeklappter Code",
+      "unfold": "ausklappen",
+      "to": "bis",
+      "diagnostics": "Probleme",
+      "noDiagnostics": "Keine Probleme",
+      "close": "schließen"
     }
   },
   "problems": {
@@ -1177,7 +1220,7 @@
     "keys": {
       "escape": {
         "use": "Zurück: schließt zuerst das Bearbeitungs- oder Konfigurationspanel, verlässt dann die Bearbeitungsseite und wechselt zur Spielseite, dann zur Startseite",
-        "notes": "Tut auf der Startseite nichts"
+        "notes": "Tut auf der Startseite nichts. Im JSON-Editor verlässt es zuerst den Editor, danach springt Tab weiter"
       },
       "docs": {
         "use": "Zur Dokumentation wechseln (18xx Maker verwenden)"
@@ -1221,6 +1264,10 @@
       "edit": {
         "use": "Das geladene Spiel im ersten Abschnitt bearbeiten",
         "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel (Formulare für Spielinfo und Züge) geöffnet oder geschlossen. Sonst zurück zur Spielseite"
+      },
+      "json": {
+        "use": "Das ganze Spiel als JSON bearbeiten",
+        "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel im JSON-Tab geöffnet, dorthin gewechselt oder das Panel geschlossen. Nicht beim Tippen im Editor. Im Editor verlässt Esc ihn (danach springt Tab weiter), Tab rückt ein"
       },
       "section": {
         "use": "Das geladene Spiel an der Karte oder einem Abschnitt bearbeiten",
