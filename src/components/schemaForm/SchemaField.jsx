@@ -760,6 +760,8 @@ const ArrayField = ({
       ...((unique === true || (unique && isNamed([before[index]]))) && {
         name: nextName(before),
       }),
+      ...(unique === "named" &&
+        !isNamed([before[index]]) && { train: nextName(before, "train") }),
     };
     setRemoved(null);
     setWarning("");

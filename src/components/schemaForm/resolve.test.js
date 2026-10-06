@@ -733,6 +733,10 @@ describe("lists", () => {
     expect(nextName([{ name: "2" }])).toBe("3");
     expect(nextName([{ name: "2" }, { name: "3" }])).toBe("4");
     expect(nextName([{ name: "3" }, { name: "2" }, { name: "x" }])).toBe("4");
+    expect(nextName([{ train: "2" }, { train: ["3", "4"] }], "train")).toBe(
+      "5",
+    );
+    expect(nextName([{ train: ["2", "3"] }, { limit: 4 }], "train")).toBe("4");
   });
 
   it("makes an item with the defaults of its list and a free name", () => {
@@ -760,7 +764,7 @@ describe("lists", () => {
     it("gives a phase a train, not a name, when the others are keyed by train", () => {
       expect(
         newItem([{ train: "2" }, { train: ["3", "4"] }], defaults, "named"),
-      ).toEqual({ ...defaults, train: "3" });
+      ).toEqual({ ...defaults, train: "5" });
       expect(newItem([{ train: "2" }], defaults, "named")).toEqual({
         ...defaults,
         train: "3",

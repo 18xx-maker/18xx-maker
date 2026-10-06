@@ -349,7 +349,12 @@ export const moveItem = (game, keys, from, to) => {
 // The first number, from the count of the list up, that no item has as its
 // name (or another key, the train of a phase)
 export const nextName = (items = [], key = "name") => {
-  const names = items.map((item) => String(item?.[key]));
+  const names = items.flatMap((item) =>
+    [item?.[key]]
+      .flat()
+      .filter((name) => name !== undefined)
+      .map(String),
+  );
   let n = items.length + 1;
   while (names.includes(String(n))) n++;
   return String(n);

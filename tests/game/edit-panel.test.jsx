@@ -1468,7 +1468,7 @@ describe("edit panel phases", () => {
     await ready();
     await user.click(button("Duplicate phase 2H"));
     expect(phases(store)).toHaveLength(3);
-    expect(phases(store)[1]).toEqual(keyed[0]);
+    expect(phases(store)[1]).toEqual({ ...keyed[0], train: "3" });
     expect(phases(store).some((phase) => "name" in phase)).toBe(false);
   });
 });

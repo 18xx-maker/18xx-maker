@@ -117,7 +117,7 @@
     "duplicated": "{{item}} als {{title}} dupliziert",
     "restored": "{{item}} {{title}} wiederhergestellt",
     "invalidCount": "Gib eine ganze Zahl ab 1 oder ∞ ein.",
-    "invalidLimit": "Gib eine ganze Zahl ab 1, ∞ oder eine Ziffer über einer Ziffer wie 3/4 ein.",
+    "invalidLimit": "Gib eine ganze Zahl ab 1, ∞ oder einen Bruch aus zwei Ziffern wie 3/4 ein.",
     "onePerLine": "Eine pro Zeile. Eine einzelne Zeile wird als Text gespeichert, mehrere als Liste.",
     "market": {
       "gridLabel": "Zellen des Aktienmarkts",
