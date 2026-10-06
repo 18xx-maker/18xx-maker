@@ -316,6 +316,56 @@ describe("validate", () => {
     });
   });
 
+  describe("the print scale of a config", () => {
+    const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
+    const withScale = (printScale) =>
+      writeTmp("config.json", JSON.stringify({ ...defaults, printScale }));
+
+    it.each([50, 95, 100, 110.5, 200])("accepts %s", (value) => {
+      expect(run(withScale(value)).code).toBe(0);
+    });
+
+    it.each([49, 201, 0, "110", true])("rejects %j", (value) => {
+      const { code, lines } = run(withScale(value));
+      expect(code).toBe(1);
+      expect(lines.some((l) => l.startsWith("#/printScale"))).toBe(true);
+    });
+  });
+
+  describe("the die sizes of a config", () => {
+    const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
+    const withDice = (dice) =>
+      writeTmp(
+        "config.json",
+        JSON.stringify({ ...defaults, cards: { ...defaults.cards, dice } }),
+      );
+
+    it.each([
+      ["none", {}],
+      ["a width", { dtgDie: { width: 260 } }],
+      ["both dice", { miniEuroDie: { height: 170.5 }, dtgDie: { width: 1 } }],
+      [
+        "sizes per type",
+        { miniEuroDie: { sizes: { share: { width: 100 }, number: {} } } },
+      ],
+    ])("accepts %s", (_, dice) => {
+      expect(run(withDice(dice)).code).toBe(0);
+    });
+
+    it.each([
+      [{ dtgDie: { width: 0 } }, "#/cards/dice/dtgDie/width"],
+      [{ dtgDie: { height: "tall" } }, "#/cards/dice/dtgDie/height"],
+      [{ dtgDie: { cutlines: 5 } }, "#/cards/dice/dtgDie"],
+      [{ dtgDie: { paper: { width: 5 } } }, "#/cards/dice/dtgDie"],
+      [{ miniEuroDie: { sizes: { token: {} } } }, "#/cards/dice/miniEuroDie"],
+      [{ bigDie: { width: 5 } }, "#/cards/dice"],
+    ])("rejects %j", (dice, pointer) => {
+      const { code, lines } = run(withDice(dice));
+      expect(code).toBe(1);
+      expect(lines.some((l) => l.startsWith(pointer))).toBe(true);
+    });
+  });
+
   describe("the tile cut border of a config", () => {
     const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
     const withCutBorder = (cutBorder) =>

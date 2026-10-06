@@ -24,7 +24,12 @@ const initialConfig = renderInput
   ? mergeDeepRight(defaultConfig, renderInput.config)
   : mergeDeepRight(defaultConfig, userConfig);
 
-const selectConfig = createConfigSelector(initialConfig);
+// Exports (render mode) are never scaled by the print scale of the user
+const selectConfig = createConfigSelector(
+  initialConfig,
+  undefined,
+  !!renderInput,
+);
 
 export const useConfig = () => {
   const { t } = useTranslation();

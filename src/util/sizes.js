@@ -7,34 +7,16 @@ import { getCharterData } from "./index.js";
 // own). The pages style themselves with these, and the export uses them for
 // the size of the capture.
 
-// A card on its own: no cutlines or border, and the die layouts have their own
-// sizes. The type ("private", "share", "train" or "number") picks the size set
-// for it in `cards.sizes`. It has no bleed unless one is asked for (in units),
-// which is not the bleed of the sheets (`cards.bleed`).
-export const getSingleCardData = (cards, paper, type, bleed = 0) => {
-  const cardConfig = {
-    ...typeCardConfig(cards, type),
-    cutlines: 0,
-    bleed,
-    border: 0,
-  };
-
-  switch (cards.layout) {
-    case "miniEuroDie":
-      cardConfig.width = 265.748;
-      cardConfig.height = 173.228;
-      break;
-    case "dtgDie":
-      cardConfig.width = 250;
-      cardConfig.height = 150;
-      break;
-    default:
-      // No overrides for "free" layout
-      break;
-  }
-
-  return getCardData(cardConfig, paper);
-};
+// A card on its own: no cutlines or border. The type ("private", "share",
+// "train" or "number") picks the size set for it in `cards.sizes` (or in
+// `cards.dice` for the die layouts, which have no padding here). It has no
+// bleed unless one is asked for (in units), which is not the bleed of the
+// sheets (`cards.bleed`).
+export const getSingleCardData = (cards, paper, type, bleed = 0) =>
+  getCardData(
+    { ...typeCardConfig(cards, type), cutlines: 0, bleed, border: 0 },
+    paper,
+  );
 
 // A charter on its own: no bleed, cutlines or border
 export const getSingleCharterData = (charters, paper) =>

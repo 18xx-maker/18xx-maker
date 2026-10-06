@@ -65,7 +65,7 @@ export const selectGame = (state, inGames) =>
 // Builds the memoized selector of the resolved config: (state, search, game)
 // returns { config, searchConfig, gameConfig }. Identical inputs (stored
 // config, search string and game config) return the identical object.
-export const createConfigSelector = (defaults, user) =>
+export const createConfigSelector = (defaults, user, render = false) =>
   createSelector(
     [
       selectStoredConfig,
@@ -73,7 +73,7 @@ export const createConfigSelector = (defaults, user) =>
       (_state, _s, game) => game?.config,
     ],
     (stored, search, gameConfig) =>
-      resolveConfig({ defaults, user, stored, search, gameConfig }),
+      resolveConfig({ defaults, user, stored, search, gameConfig, render }),
     // Searches are free text: keep a few results rather than one per string
     {
       memoize: lruMemoize,

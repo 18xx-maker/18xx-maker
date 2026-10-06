@@ -60,6 +60,20 @@ describe("config selector", () => {
     });
   });
 
+  it("keeps the print scale at 100 in render mode", () => {
+    const scaled = { printScale: 100 };
+    const state = { config: { printScale: 120 } };
+    const search = "?config.printScale=130";
+    expect(
+      createConfigSelector(scaled, { printScale: 110 })(state, search).config
+        .printScale,
+    ).toBe(130);
+    expect(
+      createConfigSelector(scaled, { printScale: 110 }, true)(state, search)
+        .config.printScale,
+    ).toBe(100);
+  });
+
   it("keeps a bounded number of results for distinct searches", () => {
     const state = { config: {} };
     const g = game("system:x", {});

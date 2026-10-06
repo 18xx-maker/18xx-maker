@@ -120,6 +120,52 @@ export const unitsToInches = (units) => units / 100.0;
 export const unitsToCss = compose(inchesToCss, unitsToInches);
 export const unitsToCssMm = compose(mmToCss, inchesToMm, unitsToInches);
 
+// The print scale is a percentage that corrects for printers that print a bit
+// too big or too small. The range matches `printScale` in the config schema.
+export const MIN_PRINT_SCALE = 50;
+export const MAX_PRINT_SCALE = 200;
+
+// A print scale from anything a config can hold (the URL gives a string):
+// a number inside the range, 100 when it is empty or not a number
+export const parsePrintScale = (value) => {
+  const scale =
+    value === null || value === undefined || value === "" ? NaN : Number(value);
+  if (!Number.isFinite(scale)) {
+    return 100;
+  }
+  return Math.min(MAX_PRINT_SCALE, Math.max(MIN_PRINT_SCALE, scale));
+};
+
+// The paper the layout is worked out on when the print is scaled: the content
+// is zoomed by the scale, so it is laid out on a paper that is the real one
+// divided by it. At 100 it is the same paper. Margins that are not a number
+// (per side) are left as they are.
+export const layoutPaper = (paper, printScale = 100) => {
+  const scale = parsePrintScale(printScale);
+  if (scale === 100) {
+    return paper;
+  }
+
+  const factor = scale / 100;
+  return {
+    ...paper,
+    width: paper.width / factor,
+    height: paper.height / factor,
+    ...(is(Number, paper.margins) && { margins: paper.margins / factor }),
+  };
+};
+
+// A page size in inches ("8.51in", for a page of 0.25in margins) for a page
+// with its content zoomed by the print scale: the content grows, the margins
+// stay the same.
+export const scalePageSize = (size, printScale = 100, margins = 0.5) => {
+  const scale = parsePrintScale(printScale);
+  if (scale === 100) {
+    return size;
+  }
+  return `${(parseFloat(size) - margins) * (scale / 100) + margins}in`;
+};
+
 export const printableWidth = ({ width, margins }) => {
   let margin = 0;
   if (is(Number, margins)) {

@@ -44,6 +44,33 @@ describe("getSingleCardData", () => {
     expect(data.totalWidth).toBe(data.bleedWidth);
   });
 
+  it("keeps the size of a die card, without padding", () => {
+    expect(
+      getSingleCardData({ ...cards, layout: "miniEuroDie" }, paper),
+    ).toMatchObject({ width: 265.748, height: 173.228 });
+    expect(
+      getSingleCardData({ ...cards, layout: "dtgDie" }, paper),
+    ).toMatchObject({ width: 250, height: 150 });
+    expect(
+      getSingleCardData({ ...cards, layout: "dtgDie", dtgPadding: 6 }, paper),
+    ).toMatchObject({ width: 250, height: 150, cutlines: 0, bleed: 0 });
+  });
+
+  it("uses the size of the die set in the config", () => {
+    const dice = {
+      dtgDie: { width: 260, height: 160, sizes: { train: { height: 100 } } },
+    };
+    const config = { ...cards, layout: "dtgDie", dice };
+    expect(getSingleCardData(config, paper)).toMatchObject({
+      width: 260,
+      height: 160,
+    });
+    expect(getSingleCardData(config, paper, "train")).toMatchObject({
+      width: 260,
+      height: 100,
+    });
+  });
+
   it("does not change the config", () => {
     const config = { ...cards, bleed: 4 };
     getSingleCardData(config, paper);

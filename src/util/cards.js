@@ -1,4 +1,4 @@
-import { unitsToCss } from "./index.js";
+import { layoutPaper, unitsToCss } from "./index.js";
 
 // Sizes are floats, so a row that fills the page exactly can come out a hair
 // short (0.3 / 0.1 is 2.9999999999999996)
@@ -6,20 +6,80 @@ const fit = (space, size) => Math.floor(space / size + 1e-9);
 
 const dieLayouts = ["miniEuroDie", "dtgDie"];
 
+export const isDieLayout = (layout) => dieLayouts.includes(layout);
+
+// What the die layouts do not take from the config: the paper they are cut
+// for, and the cutlines and bleed of the mini euro die. The size of a die card
+// is `cards.dice` in the config, these are its sizes when the config has none.
+const DIE_PAPER = { width: 850, height: 1100, margins: 25 };
+const MINI_EURO_CUTLINES = 25;
+const MINI_EURO_BLEED = 12.5;
+const DIE_SIZES = {
+  miniEuroDie: { width: 265.748, height: 173.228 },
+  dtgDie: { width: 250, height: 150 },
+};
+
 // The card config for one type of card ("private", "share", "train" or
 // "number"): its own width and height from `cards.sizes` where set, the shared
-// ones otherwise. The die layouts force their own size and ignore overrides.
+// ones otherwise. The die layouts have their own sizes, `cards.dice.<layout>`
+// with the `sizes` of that die, and ignore `cards.sizes`.
 export const typeCardConfig = (cards, type) => {
-  const size = cards.sizes?.[type];
-  if (!size || dieLayouts.includes(cards.layout)) {
+  const die = isDieLayout(cards.layout);
+  const dieConfig = die ? (cards.dice?.[cards.layout] ?? {}) : undefined;
+  const size = (die ? dieConfig.sizes : cards.sizes)?.[type];
+  if (!die && !size) {
     return cards;
   }
 
+  const base = die
+    ? {
+        width: dieConfig.width ?? DIE_SIZES[cards.layout].width,
+        height: dieConfig.height ?? DIE_SIZES[cards.layout].height,
+      }
+    : cards;
+
   return {
     ...cards,
-    ...(size.width !== undefined && { width: size.width }),
-    ...(size.height !== undefined && { height: size.height }),
+    width: size?.width ?? base.width,
+    height: size?.height ?? base.height,
   };
+};
+
+// The card config and paper to lay the sheets of one type of card out on (the
+// type is optional). The die layouts take their own paper, cutlines and bleed.
+// The paper is the one the layout is worked out on, see layoutPaper.
+export const resolveCardLayout = (cards, paper, type, printScale = 100) => {
+  const typed = typeCardConfig(cards, type);
+
+  switch (cards.layout) {
+    case "miniEuroDie":
+      return {
+        cards: {
+          ...typed,
+          cutlines: MINI_EURO_CUTLINES,
+          bleed: MINI_EURO_BLEED,
+          border: 0,
+        },
+        paper: layoutPaper(DIE_PAPER, printScale),
+      };
+    case "dtgDie": {
+      const padding = cards.dtgPadding ?? 0;
+      return {
+        cards: {
+          ...typed,
+          width: typed.width - 2 * padding,
+          height: typed.height - 2 * padding,
+          cutlines: padding,
+          bleed: 0,
+          border: 0,
+        },
+        paper: layoutPaper(DIE_PAPER, printScale),
+      };
+    }
+    default:
+      // No overrides for "free" layout
+      return { cards: typed, paper: layoutPaper(paper, printScale) };
+  }
 };
 
 // `orientation` ("portrait" or "landscape") forces the page orientation, by

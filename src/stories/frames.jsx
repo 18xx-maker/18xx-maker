@@ -7,8 +7,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useMemo } from "react";
 import { Provider } from "react-redux";
 
-import { clone } from "ramda";
-
 import RoundTracker from "@/components/RoundTracker";
 import Svg from "@/components/svg/Svg";
 
@@ -16,7 +14,7 @@ import { games } from "@/data";
 import { useConfig } from "@/hooks";
 import { initialState, rootReducer } from "@/state";
 import { getCharterData } from "@/util";
-import { getCardData } from "@/util/cards";
+import { getSingleCardData } from "@/util/sizes";
 
 // A store like the preview one, but with this story's config on top of the
 // toolbar themes
@@ -71,28 +69,8 @@ const Page = ({ width, height, css, children }) => (
 const CardPage = ({ children }) => {
   const { config } = useConfig();
 
-  let cardConfig = clone(config.cards);
-  let paperConfig = clone(config.paper);
-
   // Like the single card page: no cutlines, bleed or border
-  cardConfig.cutlines = 0;
-  cardConfig.bleed = 0;
-  cardConfig.border = 0;
-
-  switch (config.cards.layout) {
-    case "miniEuroDie":
-      cardConfig.width = 265.748;
-      cardConfig.height = 173.228;
-      break;
-    case "dtgDie":
-      cardConfig.width = 250;
-      cardConfig.height = 150;
-      break;
-    default:
-      break;
-  }
-
-  const data = getCardData(cardConfig, paperConfig);
+  const data = getSingleCardData(config.cards, config.paper);
 
   let css = `
 .cutlines {
