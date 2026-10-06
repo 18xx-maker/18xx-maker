@@ -1064,7 +1064,7 @@ describe("edit panel privates", () => {
     expect(privates(store)[0].abilities).toEqual(abilities);
   });
 
-  it("adds a private named to not clash, and removes the key with the last", async () => {
+  it("adds a private named to not clash", async () => {
     const { user, store } = open(privatesRoute);
     await ready();
     await user.click(screen.getByRole("button", { name: "Add private" }));
@@ -1161,7 +1161,7 @@ describe("edit panel privates", () => {
     expect(privates(store)[0]).toEqual({ name: "A", price: 6, unknownKey: 1 });
   });
 
-  it("shows a pattern problem for a price format and accepts an icon size of 0", async () => {
+  it("shows a pattern problem for a price format and keeps an icon size of 0", async () => {
     const { user, store } = open(privatesRoute, withPrivates([{ name: "A" }]));
     await ready();
     await user.click(
@@ -1207,7 +1207,7 @@ describe("edit panel market", () => {
     stock: { ...games["1858"].stock, legend: undefined },
   };
 
-  it("] and [ reach the Market tab and keep the panel", async () => {
+  it("clicking the Market tab opens it and keeps the panel", async () => {
     const { user, router } = open(`${route}?edit=true`);
     await screen.findByRole("tab", { name: "Market" });
     await user.click(screen.getByRole("tab", { name: "Market" }));

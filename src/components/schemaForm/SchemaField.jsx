@@ -828,7 +828,7 @@ const SchemaField = ({ keys, schema, ...rest }) => {
   const node = resolveAllOf(schema, root);
   const props = { keys, schema: node };
 
-  switch (kindOf(node, keys[keys.length - 1], root)) {
+  switch (kindOf(node, keys[keys.length - 1], root, keys)) {
     case "string":
       return <StringField {...props} />;
     case "text":

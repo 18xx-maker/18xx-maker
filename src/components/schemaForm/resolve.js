@@ -31,6 +31,15 @@ export const PRIMARY_KEYS = [
 // Strings that are long text, shown in a textarea
 export const LONG_TEXT_KEYS = ["notes", "description"];
 
+// The sections where a description is long text (the description of a market
+// legend entry is a one-line label)
+export const LONG_DESCRIPTION_SECTIONS = ["trains", "privates"];
+
+const isLongText = (key, keys) =>
+  key === "description"
+    ? LONG_DESCRIPTION_SECTIONS.includes(keys[0])
+    : LONG_TEXT_KEYS.includes(key);
+
 // Keys edited as JSON whatever their schema: a list of objects that is not
 // one form (the abilities of a private, each has its own type and keys)
 export const JSON_KEYS = ["abilities"];
@@ -95,7 +104,7 @@ const isRevenue = (alternatives) =>
 // array
 // (of objects, needs the root to follow the items), or json for everything
 // else, so a new construct never disappears from the form
-export const kindOf = (node, key, root) => {
+export const kindOf = (node, key, root, keys = []) => {
   if (!node || typeof node !== "object" || node.$ref) return "json";
   if (JSON_KEYS.includes(key)) return "json";
   if (Array.isArray(node.enum)) {
@@ -104,7 +113,7 @@ export const kindOf = (node, key, root) => {
       : "json";
   }
   if (node.type === "string") {
-    return LONG_TEXT_KEYS.includes(key) ? "text" : "string";
+    return isLongText(key, keys) ? "text" : "string";
   }
   if (node.type === "number" || node.type === "integer") return "number";
   if (node.type === "boolean") return "boolean";
@@ -172,11 +181,11 @@ export const coerceStringOrNumber = (text) => {
   return /^-?\d+(\.\d+)?$/.test(trimmed) ? Number(trimmed) : text;
 };
 
-// Numbers separated by / or , are a list (one number is a number), any other
-// text stays text ("$10/$20"), empty is no value
+// Numbers separated by / (or a comma and a space) are a list (one number is a
+// number), any other text stays text ("$10/$20", "1,000"), empty is no value
 export const parseRevenue = (text) => {
   if (text.trim() === "") return undefined;
-  const parts = text.split(/[/,]/).map((part) => part.trim());
+  const parts = text.split(/\/|,\s/).map((part) => part.trim());
   if (!parts.every((part) => /^-?\d+(\.\d+)?$/.test(part))) return text;
   const numbers = parts.map(Number);
   return numbers.length === 1 ? numbers[0] : numbers;

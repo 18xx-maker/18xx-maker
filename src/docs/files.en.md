@@ -125,10 +125,10 @@ fields. A field the schema marks as deprecated stays editable and is shown with
 a warning.
 
 The Privates tab works the same way for the privates of the game. A card
-shows the name, price, revenue, company, note and description first. The revenue
+shows the name, price, revenue, and company first. The revenue
 is a number or a list written as it prints, like `10/20`; text that is not
 numbers, like `$10/$20`, stays text. The abilities of a private are edited as
-JSON, and the other fields are under More fields.
+JSON, and the other fields, like the note and description, are under More fields.
 
 The Market tab edits the stock market: the type (2D, 1D or 1Diag), a grid of
 the cells, the cell defaults, the legend and the movement. Click a cell, or

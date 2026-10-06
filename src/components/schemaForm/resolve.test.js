@@ -50,7 +50,6 @@ describe("kindOf", () => {
   it.each([
     [{ type: "string" }, "x", "string"],
     [{ type: "string" }, "notes", "text"],
-    [{ type: "string" }, "description", "text"],
     [{ type: "array", items: { type: "object" } }, "abilities", "json"],
     [
       {
@@ -84,6 +83,24 @@ describe("kindOf", () => {
     expect(kindOf(node, key)).toBe(kind);
   });
 
+  it("a description is text in trains and privates, one line elsewhere", () => {
+    const node = { type: "string" };
+    expect(
+      kindOf(node, "description", schema, ["trains", 0, "description"]),
+    ).toBe("text");
+    expect(
+      kindOf(node, "description", schema, ["privates", 0, "description"]),
+    ).toBe("text");
+    expect(
+      kindOf(node, "description", schema, [
+        "stock",
+        "legend",
+        0,
+        "description",
+      ]),
+    ).toBe("string");
+  });
+
   // A new construct in the schema must not silently end up as raw JSON
   it("gives every property of the edited sections a real form", () => {
     const unexpected = [];
@@ -109,7 +126,7 @@ describe("kindOf", () => {
     const kinds = Object.fromEntries(
       Object.entries(train.properties).map(([key, node]) => [
         key,
-        kindOf(resolveAllOf(node, schema), key, schema),
+        kindOf(resolveAllOf(node, schema), key, schema, ["privates", 0, key]),
       ]),
     );
     expect(kinds.name).toBe("string");
@@ -153,7 +170,7 @@ describe("kindOf", () => {
     const kinds = Object.fromEntries(
       Object.entries(item.properties).map(([key, node]) => [
         key,
-        kindOf(resolveAllOf(node, schema), key, schema),
+        kindOf(resolveAllOf(node, schema), key, schema, ["privates", 0, key]),
       ]),
     );
     expect(kinds.name).toBe("string");
@@ -282,6 +299,7 @@ describe("revenue", () => {
     ["10/20", [10, 20]],
     ["10 / 20", [10, 20]],
     ["10, 20", [10, 20]],
+    ["1,000", "1,000"],
     ["10/20/30", [10, 20, 30]],
     ["-5", -5],
     ["2.5", 2.5],

@@ -137,11 +137,10 @@ Weitere Felder. Ein Feld, das das Schema als veraltet markiert, bleibt
 bearbeitbar und wird mit einer Warnung angezeigt.
 
 Der Tab Privatgesellschaften funktioniert genauso für die Privatgesellschaften
-des Spiels. Eine Karte zeigt zuerst Name, Preis, Einkommen, Gesellschaft, Notiz
-und Beschreibung. Das Einkommen ist eine Zahl oder eine Liste, so geschrieben,
+des Spiels. Eine Karte zeigt zuerst Name, Preis, Einkommen, und Gesellschaft. Das Einkommen ist eine Zahl oder eine Liste, so geschrieben,
 wie sie gedruckt wird, etwa `10/20`; Text, der keine Zahlen enthält, etwa
 `$10/$20`, bleibt Text. Die Fähigkeiten einer Privatgesellschaft werden als
-JSON bearbeitet, die übrigen Felder stehen unter Weitere Felder.
+JSON bearbeitet, die übrigen Felder, etwa Notiz und Beschreibung, stehen unter Weitere Felder.
 
 Der Tab Markt bearbeitet den Aktienmarkt: den Typ (2D, 1D oder 1Diag), ein
 Raster der Zellen, die Zellstandards, die Legende und die Bewegung. Klicke auf
