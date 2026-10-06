@@ -318,7 +318,7 @@ for (const width of [1280, 375]) {
   }) => {
     await page.setViewportSize({ width, height: 800 });
     await page.goto("/docs/games/exports");
-    const heading = page.locator("[data-testid^='docs-'] h1").first();
+    const heading = page.locator("[data-testid^='docs-'] h2").first();
     await heading.hover();
     const anchor = heading.locator("a").first();
     await expect(anchor).toBeVisible();
