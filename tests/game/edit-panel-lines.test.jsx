@@ -1,3 +1,4 @@
+import { unfoldAll } from "@codemirror/language";
 import { EditorView } from "@codemirror/view";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -78,6 +79,8 @@ const mod = /Mac/.test(navigator.platform)
 
 // A mouse down on the line number, as the editor gets it
 const gutterClick = async (v, line, modifiers = {}) => {
+  // The editor starts folded, the line may be inside a fold
+  unfoldAll(v);
   v.dispatch({
     effects: EditorView.scrollIntoView(v.state.doc.line(line).from),
   });

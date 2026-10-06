@@ -1272,7 +1272,7 @@
       },
       "json": {
         "use": "Edit the whole game as JSON",
-        "notes": "On a game edit page, opens the edit panel on the JSON tab, switches to it, or closes the panel. Not while typing in the editor. In the editor, Esc leaves it (then Tab moves on) and Tab indents"
+        "notes": "On any page while a game is loaded, opens the edit panel on the JSON tab, switches to it, or closes the panel. The parts of the game other than info start folded. Not while typing in the editor. In the editor, Esc leaves it (then Tab moves on) and Tab indents"
       },
       "section": {
         "use": "Edit the loaded game at the map or a section",

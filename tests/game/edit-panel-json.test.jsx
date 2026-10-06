@@ -1,4 +1,5 @@
 import { undo } from "@codemirror/commands";
+import { foldedRanges, unfoldAll } from "@codemirror/language";
 import { diagnosticCount } from "@codemirror/lint";
 import { EditorView } from "@codemirror/view";
 import { act, screen, waitFor } from "@testing-library/react";
@@ -156,6 +157,140 @@ describe("json editor", () => {
     await screen.findByTestId("game-internal:abc-map");
     await user.keyboard("j");
     expect(router.state.location.search).toBe("?print=true");
+  });
+
+  describe("j on any page", () => {
+    const base = "/games/internal:abc";
+    const json = "?edit=true&editSection=json";
+
+    it.each([
+      ["game page", base, "map"],
+      ["problems", `${base}/problems`, "map"],
+      ["changes", `${base}/changes`, "map"],
+      ["home", "/", "map"],
+    ])("opens the editor from the %s", async (_name, url, section) => {
+      const { user, router } = open(url);
+      await user.keyboard("j");
+      await view();
+      expect(router.state.location.pathname).toBe(`${base}/${section}`);
+      expect(router.state.location.search).toBe(json);
+    });
+
+    it("goes to the first section the game has", async () => {
+      const { user, router } = open("/", undefined, games["18Test"], {
+        map: undefined,
+      });
+      await user.keyboard("j");
+      await view();
+      expect(router.state.location.pathname).toBe(`${base}/market`);
+      expect(router.state.location.search).toBe(json);
+    });
+
+    it("does nothing on home while a dialog is open", async () => {
+      const { user, router } = open("/");
+      await user.keyboard("?");
+      await screen.findByTestId("shortcuts");
+      await user.keyboard("j");
+      expect(router.state.location.pathname).toBe("/");
+      expect(router.state.location.search).toBe("");
+    });
+
+    it("does nothing without a loaded game", async () => {
+      const { user, router } = renderApp("/");
+      await user.keyboard("j");
+      expect(router.state.location.pathname).toBe("/");
+      expect(router.state.location.search).toBe("");
+    });
+  });
+
+  describe("folding", () => {
+    const folded = (v) => {
+      const ranges = [];
+      foldedRanges(v.state).between(0, v.state.doc.length, (from, to) =>
+        ranges.push([from, to]),
+      );
+      return ranges;
+    };
+
+    // The root keys of the text in order, with whether they are folded
+    const rootState = (v) => {
+      const text = v.state.doc.toString();
+      const ranges = folded(v);
+      return Object.keys(JSON.parse(text)).map((key) => {
+        const at = text.indexOf(`\n  "${key}": `) + 1;
+        const open = text.indexOf(":", at) + 2;
+        return [key, ranges.some(([from]) => from === open + 1)];
+      });
+    };
+
+    it.each([
+      ["18Test", games["18Test"]],
+      [
+        "the biggest game",
+        Object.values(games).sort(
+          (a, b) => JSON.stringify(b).length - JSON.stringify(a).length,
+        )[0],
+      ],
+    ])(
+      "starts with the root containers folded but info (%s)",
+      async (_n, game) => {
+        open(jsonRoute, undefined, game);
+        const v = await view();
+        const text = v.state.doc.toString();
+        expect(text).toBe(gameText(opened.getState().game));
+        const root = JSON.parse(text);
+        const state = Object.fromEntries(rootState(v));
+        const expected = Object.keys(root).filter(
+          (key) =>
+            key !== "info" &&
+            root[key] &&
+            typeof root[key] === "object" &&
+            JSON.stringify(root[key], null, 2).includes("\n"),
+        );
+        expect(expected.length).toBeGreaterThan(0);
+        for (const key of Object.keys(root)) {
+          expect(state[key]).toBe(expected.includes(key));
+        }
+        expect(state.info).toBe(false);
+      },
+    );
+
+    it("does not fold when opened on lines", async () => {
+      open(`${jsonRoute}&lines=3`);
+      const v = await view();
+      expect(folded(v)).toEqual([]);
+    });
+
+    it("does not fold a restored draft", async () => {
+      const { user } = open(jsonRoute);
+      const first = await view();
+      const text = first.state.doc.toString();
+      await setText(text.replace('"title"', '"title" ,,'));
+      await waitFor(() => expect(status()).toHaveTextContent("syntax error"));
+      await user.click(screen.getByRole("tab", { name: "Trains" }));
+      await user.click(screen.getByRole("tab", { name: "JSON" }));
+      const v = await view();
+      expect(v.state.doc.toString()).toContain(",,");
+      expect(folded(v)).toEqual([]);
+    });
+
+    it("folds again when the tab is left and come back to", async () => {
+      const { user } = open(jsonRoute);
+      const first = await view();
+      const [range] = folded(first);
+      expect(range).toBeDefined();
+      unfoldAll(first);
+      expect(folded(first)).toEqual([]);
+
+      await user.click(screen.getByRole("tab", { name: "Trains" }));
+      await user.click(screen.getByRole("tab", { name: "JSON" }));
+      const v = await waitFor(async () => {
+        const found = await view();
+        if (found === first) throw new Error("same view");
+        return found;
+      });
+      expect(folded(v).length).toBeGreaterThan(0);
+    });
   });
 
   it("keys typed in the editor are not shortcuts", async () => {

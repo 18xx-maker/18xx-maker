@@ -118,6 +118,26 @@ const propertyName = (property, text) => {
 
 export const parseTree = (text) => jsonLanguage.parser.parse(text);
 
+// The inside of every top level object or list of the game other than `info`,
+// the ranges the editor starts folded. A container with nothing between its
+// brackets has nothing to fold.
+export const foldRanges = (text, tree = parseTree(text)) => {
+  const root = valueOf(tree.topNode);
+  const ranges = [];
+  if (root?.name !== "Object") return ranges;
+  for (let c = root.firstChild; c; c = c.nextSibling) {
+    if (c.name !== "Property" || propertyName(c, text) === "info") continue;
+    const value = propertyValue(c);
+    if (!value || (value.name !== "Object" && value.name !== "Array")) continue;
+    const from = value.from + 1;
+    const to = value.to - 1;
+    if (to > from && text.slice(from, to).includes("\n")) {
+      ranges.push({ from, to });
+    }
+  }
+  return ranges;
+};
+
 // The range of the text a pointer of a problem ("map.hexes[0].color") is
 // about: the value, or the name of the property when the value is a list or
 // an object. A part that does not exist gives its nearest parent, the root
