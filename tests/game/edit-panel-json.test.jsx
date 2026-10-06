@@ -1,3 +1,4 @@
+import { undo } from "@codemirror/commands";
 import { diagnosticCount } from "@codemirror/lint";
 import { EditorView } from "@codemirror/view";
 import { act, screen, waitFor } from "@testing-library/react";
@@ -8,6 +9,7 @@ import { omit } from "ramda";
 import games from "@/data/games";
 import { editGame, revertGame } from "@/state";
 import { gameText } from "@/util/download";
+import { MIN_DELAY, debounceDelay } from "@/util/jsonEditor";
 
 import { allowConsole } from "@tests/support/console.js";
 import { renderApp } from "@tests/support/helpers.jsx";
@@ -28,9 +30,10 @@ afterEach(async () => {
   opened = undefined;
 });
 
-const open = (route, options) => {
+const open = (route, options, source = games["18Test"], edit = {}) => {
   const game = {
-    ...structuredClone(games["18Test"]),
+    ...structuredClone(source),
+    ...edit,
     meta: { id: "abc", type: "internal", slug: "internal:abc" },
   };
   const view = renderApp(
@@ -59,6 +62,8 @@ const view = async () => {
     return found;
   });
 };
+// eslint-disable-next-line testing-library/no-node-access
+const pick = (v, selector) => v.dom.querySelector(selector);
 const content = () => screen.getByRole("textbox", { name: "Game JSON" });
 const status = () => screen.getByRole("status");
 
@@ -309,6 +314,45 @@ describe("json editor", () => {
       );
     });
 
+    it("escape closes an open tooltip first and keeps the panel", async () => {
+      const { user } = open(jsonRoute);
+      await setText("{ not json");
+      const v = await view();
+      await waitFor(() => expect(diagnosticCount(v.state)).toBeGreaterThan(0));
+      const mark = await waitFor(() => {
+        const found = pick(v, ".cm-lintRange");
+        if (!found) throw new Error("no mark yet");
+        return found;
+      });
+      await realUser.hover(mark);
+      await waitFor(() => expect(pick(v, ".cm-tooltip")).toBeTruthy());
+      v.contentDOM.focus();
+
+      await user.keyboard("{Escape}");
+      await waitFor(() => expect(pick(v, ".cm-tooltip")).toBeNull());
+      expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
+    });
+
+    it("shift-alt-f formats valid text and ignores text that is not valid yet", async () => {
+      open(jsonRoute);
+      const v = await view();
+      const game = JSON.parse(v.state.doc.toString());
+      await setText(JSON.stringify(game));
+      v.contentDOM.focus();
+      await realUser.keyboard("{Shift>}{Alt>}F{/Alt}{/Shift}");
+      expect(v.state.doc.toString()).toBe(JSON.stringify(game, null, 2));
+
+      // The text is broken and the status has not caught up yet
+      const errors = [];
+      const onError = (event) => errors.push(event.message);
+      window.addEventListener("error", onError);
+      await setText("{");
+      await realUser.keyboard("{Shift>}{Alt>}F{/Alt}{/Shift}");
+      window.removeEventListener("error", onError);
+      expect(errors).toEqual([]);
+      expect(v.state.doc.toString()).toBe("{");
+    });
+
     it("tab indents", async () => {
       open(jsonRoute);
       const v = await cursorAfter('"info": {');
@@ -405,6 +449,31 @@ describe("json editor", () => {
       expect(JSON.stringify({ ...localStorage })).not.toContain("draft");
     });
 
+    it("says the game changed when a draft comes back after an edit elsewhere", async () => {
+      const { user } = open(jsonRoute);
+      await setText("{ draft");
+      await waitFor(() => expect(status()).toHaveTextContent("syntax error"));
+      await user.click(
+        screen.getByRole("button", { name: "Close the edit panel" }),
+      );
+      await waitFor(() =>
+        expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument(),
+      );
+      act(() => {
+        opened.dispatch(
+          editGame((game) => ({
+            ...game,
+            info: { ...game.info, title: "Elsewhere" },
+          })),
+        );
+      });
+      await user.keyboard("j");
+      expect((await view()).state.doc.toString()).toBe("{ draft");
+      await waitFor(() =>
+        expect(status()).toHaveTextContent("changed elsewhere"),
+      );
+    });
+
     it("applies typing that waits when the tab is left", async () => {
       const { user } = open(jsonRoute);
       await cursorAfter('"title": "18Test');
@@ -431,6 +500,71 @@ describe("json editor", () => {
       expect(screen.queryByTestId("render-error")).not.toBeInTheDocument(),
     );
     expect(screen.getByTestId("game-internal:abc-map")).toBeInTheDocument();
+  });
+
+  it("starts a new view for another game, undo does not bring back old text", async () => {
+    const { router } = open(jsonRoute);
+    const first = await view();
+    expect(first.state.doc.toString()).toContain("18Test");
+
+    await act(async () => {
+      await router.navigate(`/games/1889/map?edit=true&editSection=json`);
+    });
+    const second = await waitFor(async () => {
+      const found = await view();
+      if (found === first) throw new Error("same view");
+      return found;
+    });
+    await waitFor(() => expect(second.state.doc.toString()).toContain("1889"));
+    const text = second.state.doc.toString();
+    expect(undo(second)).toBe(false);
+    expect(second.state.doc.toString()).toBe(text);
+    expect(text).not.toContain('"title": "18Test"');
+  });
+
+  describe("a big game", () => {
+    it("applies a keystroke, slows the debounce and keeps the unchanged parts", async () => {
+      const [largest] = Object.values(games).sort(
+        (a, b) => JSON.stringify(b).length - JSON.stringify(a).length,
+      );
+      open(jsonRoute, undefined, largest);
+      const before = opened.getState().game;
+      const v = await cursorAfter('"title": "');
+      await realUser.keyboard("X");
+
+      await waitFor(
+        () => expect(opened.getState().game.info.title).toMatch(/^X/),
+        { timeout: 10000 },
+      );
+      const after = opened.getState().game;
+      for (const key of Object.keys(before).filter((k) => k !== "info")) {
+        expect(after[key]).toBe(before[key]);
+      }
+      expect(after.info).not.toBe(before.info);
+      expect(v.state.doc.toString()).toContain('"title": "X');
+      expect(debounceDelay(1000)).toBeGreaterThan(MIN_DELAY);
+    });
+  });
+
+  it("shows the route error when the page cannot draw and the panel is closed", async () => {
+    allowConsole(/./);
+    open(route, undefined, games["18Test"], { map: 5 });
+    await screen.findByTestId("route-error");
+    expect(screen.queryByTestId("render-error")).not.toBeInTheDocument();
+  });
+
+  it("draws the page again when the page changes", async () => {
+    allowConsole(/./);
+    const { router } = open(jsonRoute, undefined, games["18Test"], { map: 5 });
+    await screen.findByTestId("render-error");
+
+    await act(async () => {
+      await router.navigate("/games/internal:abc/tokens?edit=true");
+    });
+    await waitFor(() =>
+      expect(screen.queryByTestId("render-error")).not.toBeInTheDocument(),
+    );
+    expect(screen.getByTestId("game-internal:abc-tokens")).toBeInTheDocument();
   });
 
   it("works under StrictMode", async () => {
