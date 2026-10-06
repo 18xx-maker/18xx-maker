@@ -247,7 +247,8 @@
       "name": "White Railroad",
       "abbrev": "WRR",
       "color": "white",
-      "minor": true
+      "minor": true,
+      "banner": "MINOR"
     },
     {
       "name": "Yellow Railroad",

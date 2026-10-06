@@ -1,6 +1,8 @@
 // The page css of the charter pages: cutlines, bleed and the size of a charter
-// from the layout data of `getCharterData` or `getSingleCharterData`
-const charterCss = (data) => `
+// from the layout data of `getCharterData` or `getSingleCharterData`. A banner
+// strip bleeds past the cut like the header, so the pages that print one ask
+// for the bleed (and the border of the body it sits in) as a custom property.
+const charterCss = (data, banner = false) => `
 .cutlines {
     padding: ${data.css.cutlines};
     width: ${data.css.totalWidth};
@@ -98,6 +100,14 @@ const charterCss = (data) => `
 .charter--carth.charter--half .charter__hr {
     top: calc(0.875in + ${data.css.bleed});
 }
-`;
+${
+  banner
+    ? `
+.charter--banner {
+    --charter-bleed: calc(${data.css.bleed} + ${data.border}px);
+}
+`
+    : ""
+}`;
 
 export default charterCss;

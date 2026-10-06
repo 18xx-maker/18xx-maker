@@ -11,8 +11,10 @@ import "@/styles/card.css";
 import { describe, expect, it } from "vitest";
 
 import Charter from "@/components/Charter";
+import charterCss from "@/components/charterCss";
 
 import { games } from "@/data";
+import { getCharterData } from "@/util";
 
 import { all, mountElement, one } from "@tests/support/render.jsx";
 
@@ -123,5 +125,45 @@ describe("Charter banner", () => {
     const strip = one(root, ".charter__banner").getBoundingClientRect();
     const variant = one(root, ".charter__variant").getBoundingClientRect();
     expect(variant.bottom).toBeLessThanOrEqual(strip.top + 0.5);
+  });
+
+  it.each([
+    [12.5, 0],
+    [30, 0],
+    [30, 2],
+  ])(
+    "reaches the edge of the bleed (bleed %s, border %s)",
+    async (bleed, border) => {
+      const data = getCharterData(
+        { layout: "free", cutlines: 10, bleed, border },
+        { width: 850, height: 1100, margins: 25 },
+      );
+      const { root } = await mountElement(
+        <>
+          <style>{charterCss(data, true)}</style>
+          <Charter {...props} company={{ ...company, banner: "SYSTEM" }} />
+        </>,
+      );
+      const edge = one(root, ".charter__bleed").getBoundingClientRect();
+      const strip = one(root, ".charter__banner").getBoundingClientRect();
+      expect(strip.left).toBeCloseTo(edge.left, 0);
+      expect(strip.right).toBeCloseTo(edge.right, 0);
+      expect(strip.bottom).toBeCloseTo(edge.bottom, 0);
+    },
+  );
+
+  it("has dark text on a white company, with the border of the header", async () => {
+    const { root } = await mountElement(
+      <Charter
+        {...props}
+        color="white"
+        company={{ ...company, color: "white", banner: "MINOR" }}
+      />,
+    );
+    const strip = one(root, ".charter__banner");
+    const style = getComputedStyle(strip);
+    expect(style.borderTopWidth).toBe("2px");
+    expect(style.borderTopColor).toBe("rgb(0, 0, 0)");
+    expect(style.color).not.toBe("rgb(255, 255, 255)");
   });
 });

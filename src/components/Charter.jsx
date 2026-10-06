@@ -193,6 +193,10 @@ const Charter = ({
     );
   }, turns || []);
 
+  // The banner is the color of the header band
+  const bandColor =
+    charterStyle === "color" ? color : color === "white" ? "black" : color;
+
   return (
     <Color context="companies">
       {(c, t, _, p) => (
@@ -386,10 +390,14 @@ const Charter = ({
                   <div
                     className="charter__banner"
                     style={{
-                      backgroundColor: c(color),
-                      color: t(c(color)),
+                      backgroundColor: c(bandColor),
+                      color: t(c(bandColor)),
                       fontFamily: `${fontFamily}`,
-                      borderTop: color === "white" ? "2px solid black" : null,
+                      borderTop:
+                        charterStyle === "color" &&
+                        (color === "white" || blackBand)
+                          ? "2px solid black"
+                          : null,
                     }}
                   >
                     {company.banner}

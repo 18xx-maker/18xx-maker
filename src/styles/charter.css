@@ -487,12 +487,14 @@
 
 .charter__banner {
   position: absolute;
-  /* Bleeds past the cut like the header does */
-  bottom: -0.125in;
-  left: -0.125in;
-  width: calc(100% + 0.25in);
-  height: calc(var(--banner-h) + 0.125in);
-  padding-bottom: 0.125in;
+  /* Bleeds past the cut like the header does. The page sets --charter-bleed
+     to the bleed plus the border of the body. */
+  --bleed: var(--charter-bleed, 0.125in);
+  bottom: calc(-1 * var(--bleed));
+  left: calc(-1 * var(--bleed));
+  width: calc(100% + 2 * var(--bleed));
+  height: calc(var(--banner-h) + var(--bleed));
+  padding-bottom: var(--bleed);
   box-sizing: border-box;
   display: flex;
   align-items: center;

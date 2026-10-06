@@ -162,7 +162,12 @@ const ChartersPage = () => {
       data-layout={charters.layout}
       data-per-page={data.perPage}
     >
-      <style>{charterCss(data)}</style>
+      <style>
+        {charterCss(
+          data,
+          gameCompanies.some((c) => c.banner),
+        )}
+      </style>
       {pages}
       <PageSetup landscape={false} />
     </div>
