@@ -196,7 +196,8 @@ or, with Add token with options, a card with its label, icon, logo and color
 first and the other token fields under More fields. A token type lists the
 token spaces of a charter the same way (a cost, and whether the company starts
 with a token in it), and a share type lists its shares (the quantity, label,
-percent and cost first).
+percent and cost first). When you rename or remove a type, the editor warns how
+many companies still use it by the old name.
 
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.

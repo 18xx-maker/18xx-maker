@@ -530,6 +530,9 @@ describe("kindOf", () => {
     expect(kinds.logo).toBe("string");
     expect(kinds.home).toBe("stringList");
     expect(kinds.marketTokens).toBe("number");
+    // A type name or a list: the tokens tab edits the types, not these
+    expect(kinds.tokens).toBe("json");
+    expect(kinds.shares).toBe("json");
     expect(kinds.charterSubtitle).toBe("object");
     expect(Object.keys(kinds)).toEqual(
       expect.arrayContaining(COMPANY_PRIMARY_KEYS),

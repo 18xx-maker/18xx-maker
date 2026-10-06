@@ -242,7 +242,9 @@
       "name": "Name of {{name}}",
       "emptyName": "Enter a name.",
       "duplicateName": "Another entry already has this name.",
-      "newName": "new"
+      "newName": "new",
+      "usedBy_one": "{{count}} company uses \"{{name}}\" by name or by default and will no longer find it.",
+      "usedBy_other": "{{count}} companies use \"{{name}}\" by name or by default and will no longer find it."
     }
   },
   "jsonEditor": {

@@ -101,7 +101,7 @@
       },
       "tokens": {
         "tab": "Token",
-        "description": "Bearbeite die Token des Spiels sowie die Token-Typen und Anteilstypen der Gesellschaften. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
+        "description": "Bearbeite die Token des Spiels sowie die Token-Typen und Aktientypen der Gesellschaften. Die Änderungen bleiben im Speicher, bis du sie auf der Seite Änderungen speicherst."
       },
       "json": {
         "tab": "JSON",
@@ -123,11 +123,11 @@
       "pools": "Pool",
       "notes": "Notiz",
       "tokens": "Token",
-      "shares": "Anteil",
+      "shares": "Aktie",
       "legend": "Legendeneintrag",
       "colors": "Farbe",
       "tokenTypes": "Token-Typ",
-      "shareTypes": "Anteilstyp",
+      "shareTypes": "Aktientyp",
       "upgrades": "Upgrade",
       "entry": "Eintrag"
     },
@@ -242,7 +242,9 @@
       "name": "Name von {{name}}",
       "emptyName": "Gib einen Namen ein.",
       "duplicateName": "Ein anderer Eintrag hat diesen Namen bereits.",
-      "newName": "neu"
+      "newName": "neu",
+      "usedBy_one": "{{count}} Gesellschaft nutzt „{{name}}“ per Name oder als Standard und findet es nicht mehr.",
+      "usedBy_other": "{{count}} Gesellschaften nutzen „{{name}}“ per Name oder als Standard und finden es nicht mehr."
     }
   },
   "jsonEditor": {

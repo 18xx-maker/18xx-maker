@@ -211,13 +211,15 @@ ob die Schritte nummeriert sind, und die optionalen Schritte), die Notizen zu
 den Pools (ein Name und eine Liste von Notizen mit optionaler Farbe und Icon,
 nur zur Orientierung und nicht gedruckt) und die Farben der Nummernkarten.
 
-Der Tab Token bearbeitet die Token des Token-Bogens, die Token-Typen und die
-Anteilstypen. Ein Token ist eine Zeile mit Text oder einer Zahl (das Label eines
+Der Tab „Token“ bearbeitet die Token des Token-Bogens, die Token-Typen und die
+Aktientypen. Ein Token ist eine Zeile mit Text oder einer Zahl (das Label eines
 weißen Tokens) oder, mit „Token mit Optionen hinzufügen“, eine Karte, zunächst
-mit Label, Icon, Logo und Farbe und den anderen Token-Feldern unter Weitere
-Felder. Ein Token-Typ listet die Token-Felder eines Charters auf dieselbe Weise
-(Kosten und ob die Gesellschaft mit einem Token darin startet), ein Anteilstyp
-seine Anteile (zunächst Anzahl, Label, Prozent und Kosten).
+mit Label, Icon, Logo und Farbe und den anderen Tokenfeldern unter „Weitere
+Felder“. Ein Token-Typ listet die Tokenfelder eines Charters auf dieselbe Weise
+(Kosten und ob die Gesellschaft mit einem Token darin startet), ein Aktientyp
+seine Aktien (zunächst Anzahl, Label, Prozent und Kosten). Benennst du einen
+Typ um oder entfernst ihn, warnt der Editor, wie viele Gesellschaften ihn
+noch unter dem alten Namen verwenden.
 
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.

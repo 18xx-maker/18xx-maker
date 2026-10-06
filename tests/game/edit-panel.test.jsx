@@ -2095,6 +2095,24 @@ describe("edit panel market", () => {
     expect(stock(store).legend[4]).toEqual({ description: "New entry" });
   });
 
+  it("titles a legend entry by its description, not by token fields", async () => {
+    const { user } = open(marketRoute, {
+      ...structuredClone(games["18Test"]),
+      stock: {
+        ...structuredClone(games["18Test"].stock),
+        legend: [{ color: "red", label: "Hidden", cost: 5 }, { color: "blue" }],
+      },
+    });
+    await grid();
+    await user.click(screen.getByRole("button", { name: "Legend" }));
+    expect(
+      screen.getByRole("button", { name: "Remove legend entry #1" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("button", { name: "Remove legend entry #2" }),
+    ).toBeVisible();
+  });
+
   it("warns when duplicating a legend entry moves the ones after it", async () => {
     const { user } = open(marketRoute);
     await grid();
@@ -3008,5 +3026,84 @@ describe("edit panel tokens", () => {
       screen.getByRole("button", { name: "Remove share Minor Certificate" }),
     );
     expect(game().shareTypes.minor).toEqual([{ quantity: 0 }]);
+  });
+
+  it("puts back a removed text token", async () => {
+    const { user } = open(tokensRoute, {
+      ...structuredClone(games["18Test"]),
+      tokens: ["A", "B"],
+    });
+    await ready();
+    await user.click(
+      screen.getAllByRole("button", { name: "Remove token A" })[0],
+    );
+    expect(game().tokens).toEqual(["B"]);
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(game().tokens).toEqual(["A", "B"]);
+  });
+
+  it("duplicates a null token as a null token", async () => {
+    const { user } = open(tokensRoute, {
+      ...structuredClone(games["18Test"]),
+      tokens: [null],
+    });
+    await ready();
+    const copy = screen.getAllByRole("button", { name: /^Duplicate token / });
+    await user.click(copy[0]);
+    expect(game().tokens).toEqual([null, null]);
+  });
+
+  it("warns how many companies use a token type or share type that is renamed or removed", async () => {
+    const { user } = open(tokensRoute, {
+      ...structuredClone(games["18Test"]),
+      tokenTypes: { default: ["A"], three: ["A", "B", "C"] },
+      shareTypes: { default: [{ quantity: 1 }] },
+      companies: [
+        { name: "One", abbrev: "O", color: "red", tokens: "three" },
+        { name: "Two", abbrev: "T", color: "blue", tokens: "three" },
+        { name: "Three", abbrev: "H", color: "green" },
+      ],
+    });
+    await ready();
+    const rename = async (from, to) => {
+      const name = screen.getByRole("textbox", { name: `Name of ${from}` });
+      await user.clear(name);
+      await user.type(name, to);
+      await user.tab();
+    };
+    await rename("three", "four");
+    expect(Object.keys(game().tokenTypes)).toEqual(["default", "four"]);
+    expect(screen.getByTestId("list-warning")).toHaveTextContent(
+      '2 companies use "three" by name or by default',
+    );
+
+    await user.click(
+      screen.getByRole("button", { name: "Remove token type default" }),
+    );
+    expect(screen.getByTestId("list-warning")).toHaveTextContent(
+      '1 company uses "default" by name or by default',
+    );
+    await user.click(screen.getByRole("button", { name: "Undo" }));
+    expect(screen.queryByTestId("list-warning")).not.toBeInTheDocument();
+
+    await user.click(
+      screen.getByRole("button", { name: "Remove share type default" }),
+    );
+    expect(screen.getByTestId("list-warning")).toHaveTextContent(
+      '3 companies use "default" by name or by default',
+    );
+  });
+
+  it("does not warn about a type no company uses", async () => {
+    const { user } = open(tokensRoute, {
+      ...structuredClone(games["18Test"]),
+      tokenTypes: { spare: ["A"] },
+      companies: [],
+    });
+    await ready();
+    await user.click(
+      screen.getByRole("button", { name: "Remove token type spare" }),
+    );
+    expect(screen.queryByTestId("list-warning")).not.toBeInTheDocument();
   });
 });

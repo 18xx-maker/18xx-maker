@@ -839,6 +839,7 @@ const ScalarRow = ({
       className="flex flex-row items-center justify-between gap-2 rounded-md border p-3"
     >
       <Input
+        className="min-w-0 flex-1"
         value={draft.text}
         aria-label={t("editPanel.itemValue", names)}
         data-title
@@ -846,14 +847,16 @@ const ScalarRow = ({
         onBlur={draft.commit}
         onKeyDown={(event) => event.key === "Enter" && draft.commit()}
       />
-      <ItemButtons
-        names={names}
-        index={index}
-        count={count}
-        onMove={onMove}
-        onDuplicate={onDuplicate}
-        onRemove={onRemove}
-      />
+      <div className="shrink-0">
+        <ItemButtons
+          names={names}
+          index={index}
+          count={count}
+          onMove={onMove}
+          onDuplicate={onDuplicate}
+          onRemove={onRemove}
+        />
+      </div>
     </li>
   );
 };
@@ -915,7 +918,8 @@ const CLOSED_CARD = { open: false, more: false };
 // train). With startCollapsed the cards of the items the list starts with
 // are closed (a new or copied item is open). summary(item) is what a card shows
 // as its title, copyOf(copy, items) changes a copy before it is inserted, and
-// defaults may be a function of the items.
+// defaults may be a function of the items. titleKeys are the fields that
+// name an item that has no name, the first one set.
 // onChange(kind, from, to) gives back a warning to show with the list after a
 // move, remove or insert (a duplicate) of an item.
 const ArrayField = ({
@@ -932,6 +936,7 @@ const ArrayField = ({
   copyOf,
   onChange,
   itemKey,
+  titleKeys,
 }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
@@ -982,10 +987,11 @@ const ArrayField = ({
         t(title, { count: value[titleKey] })
       : value?.[titleKey]) ||
     value?.note ||
-    (!hasId &&
-      [value?.label, value?.icon, value?.logo, value?.cost]
-        .filter((text) => text != null && text !== "")
-        .map(String)[0]) ||
+    (titleKeys
+      ?.map((key) => value?.[key])
+      .filter((text) => text != null && text !== "")
+      .map(String)[0] ??
+      null) ||
     [value?.train].flat().filter(Boolean).join(", ") ||
     `#${index + 1}`;
   const initial = startCollapsed ? CLOSED_CARD : FRESH_CARD;
@@ -1041,7 +1047,7 @@ const ArrayField = ({
     commit();
     const before = current();
     const copy =
-      typeof before[index] === "object"
+      before[index] !== null && typeof before[index] === "object"
         ? {
             ...structuredClone(before[index]),
             ...(hasId &&
@@ -1054,7 +1060,7 @@ const ArrayField = ({
               }),
           }
         : before[index];
-    if (copyOf && typeof copy === "object") {
+    if (copyOf && copy !== null && typeof copy === "object") {
       Object.assign(copy, copyOf(copy, before));
     }
     setRemoved(null);
@@ -1275,8 +1281,11 @@ const RecordRow = ({
 // action on the record; it comes back under a free name when its own was
 // taken in the meantime. The object is always written whole, in the order of
 // the rows (a name that is a whole number is listed first by JavaScript).
-// rows are the props of the field of each row's value
-const RecordField = ({ keys, schema, rows }) => {
+// rows are the props of the field of each row's value. usedBy is the field of
+// a company that names a row ("tokens" or "shares"): renaming or removing a
+// row leaves the companies that use it by that name, and a warning says how
+// many.
+const RecordField = ({ keys, schema, rows, usedBy }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const list = useRef(null);
@@ -1328,10 +1337,25 @@ const RecordField = ({ keys, schema, rows }) => {
     focus.current = { index: Object.keys(before).length, action: "title" };
   };
 
+  // The companies that use a row of the record: by its name, or by default
+  // (the "minor" row for a minor, otherwise "default")
+  const usersOf = (name, record) =>
+    (form.latest().companies ?? []).filter((company) => {
+      const own = company?.[usedBy];
+      if (typeof own === "string") return own === name;
+      if (own) return false;
+      return name === (company?.minor && record.minor ? "minor" : "default");
+    }).length;
+  const usedWarning = (name, record) => {
+    const count = usedBy ? usersOf(name, record) : 0;
+    return count > 0 ? t("editPanel.record.usedBy", { count, name }) : "";
+  };
+
   const rename = (from, to) => {
     const before = current();
     if (to === "") return "editPanel.record.emptyName";
     if (Object.hasOwn(before, to)) return "editPanel.record.duplicateName";
+    setWarning(usedWarning(from, before));
     form.set(keys, renameKey(before, from, to));
   };
 
@@ -1342,7 +1366,7 @@ const RecordField = ({ keys, schema, rows }) => {
     const index = Object.keys(before).indexOf(name);
     if (index < 0) return;
     setRemoved({ index, name, value: structuredClone(before[name]) });
-    setWarning("");
+    setWarning(usedWarning(name, before));
     write(removeKey(before, name));
     setMessage(t("editPanel.removed", { item, title: name }));
     focus.current = { index, action: "title" };
@@ -1353,6 +1377,7 @@ const RecordField = ({ keys, schema, rows }) => {
     const before = current();
     const name = freeKey(before, removed.name);
     form.set(keys, insertKey(before, removed.index, name, removed.value));
+    setWarning("");
     setMessage(t("editPanel.restored", { item, title: name }));
     focus.current = { index: removed.index, action: "title" };
     setRemoved(null);
@@ -1401,6 +1426,7 @@ const RecordField = ({ keys, schema, rows }) => {
         }
         onUndo={undo}
       />
+      <ListWarning warning={warning} />
       <Button
         type="button"
         variant="outline"

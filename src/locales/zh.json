@@ -242,7 +242,9 @@
       "name": "{{name}}的名称",
       "emptyName": "请输入名称。",
       "duplicateName": "已有其他条目使用这个名称。",
-      "newName": "新"
+      "newName": "新",
+      "usedBy_one": "{{count}} 家公司按名称或默认使用“{{name}}”,之后将找不到它。",
+      "usedBy_other": "{{count}} 家公司按名称或默认使用“{{name}}”,之后将找不到它。"
     }
   },
   "jsonEditor": {
