@@ -1,0 +1,103 @@
+@media print {
+  .map {
+    padding: 0;
+  }
+
+  .stock {
+    margin: 0;
+  }
+
+  .tokens {
+    margin: 0;
+  }
+
+  .TileManifest {
+    margin: 0 auto;
+  }
+
+  .b18 .tiles {
+    margin: 0;
+  }
+}
+
+.paginated__page {
+  position: relative;
+}
+
+.paginated__page svg {
+  overflow: hidden;
+  display: block;
+}
+
+.paginated-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tiles {
+  margin: 0.25in;
+}
+
+.tiles label {
+  display: block;
+}
+
+/*
+ * Print pages are laid out with the browser defaults, undo the Tailwind
+ * preflight reset for everything rendered inside them (:where keeps the
+ * specificity at zero so the rules above still win)
+ */
+:where(#viewport-children) *,
+:where(#viewport-children) ::before,
+:where(#viewport-children) ::after {
+  box-sizing: content-box;
+  border-style: none;
+  border-color: currentcolor;
+}
+
+:where(#viewport-children) table {
+  box-sizing: border-box;
+}
+
+#viewport-children {
+  line-height: normal;
+  color: #000;
+  /* The cut lines are z-index: -1, keep them above the viewport background */
+  isolation: isolate;
+}
+
+:where(#viewport-children) svg {
+  display: inline;
+  vertical-align: baseline;
+}
+
+/*
+ * The print scale (config.printScale) zooms the print pages. The layouts are
+ * worked out on the paper divided by the scale (layoutPaper), so the zoomed
+ * pages fill the real paper. The pan and zoom editor itself is not zoomed, only
+ * the pages inside it (the svg editors fit their content to the window). The
+ * attribute is only there when the scale is not 100.
+ */
+#viewport-children[data-print-scale] > :not(style, #editor, :has(#editor)),
+#viewport-children[data-print-scale] > #editor > div > :not(style) {
+  zoom: var(--print-scale);
+}
+
+/* Printing never has a background of its own, the theme must not leak in */
+@media print {
+  html,
+  body {
+    background: transparent;
+  }
+
+  /* The editor prints on solid white in every theme. ?print=true pages and the
+     exports (render mode) do not get the class and stay transparent. */
+  html.editor-print,
+  html.editor-print body,
+  html.editor-print #viewport {
+    background-color: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

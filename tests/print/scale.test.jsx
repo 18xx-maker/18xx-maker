@@ -1,6 +1,13 @@
 import { screen, waitFor } from "@testing-library/react";
 
-import "@/styles/root.css";
+import "@/styles/shell.css";
+import "@/styles/page-elements.css";
+import "@/styles/charter.css";
+import "@/styles/market.css";
+import "@/styles/cutlines.css";
+import "@/styles/footer.css";
+import "@/styles/print-pages.css";
+import "@/styles/charter-traincards.css";
 
 import { games } from "@/data";
 

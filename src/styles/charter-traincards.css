@@ -1,0 +1,36 @@
+.charter__traincards {
+  --train-card-scale: 0.5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.0625in;
+  margin-top: 0.0625in;
+  /* Takes the room the phase chart leaves, Charter.jsx shrinks the cards to fit */
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  align-content: flex-start;
+}
+
+.charter__traincard {
+  position: relative;
+  overflow: hidden;
+}
+
+.charter__traincards--border .charter__traincard::after {
+  /* An outline would be painted under the scaled card, so draw it on top */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid #000;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.charter__traincards--round .charter__traincard {
+  border-radius: 0.0625in;
+}
+
+.charter__traincard > div {
+  transform: scale(var(--train-card-scale));
+  transform-origin: top left;
+}

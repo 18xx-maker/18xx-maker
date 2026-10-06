@@ -1,0 +1,17 @@
+footer {
+  width: 800px;
+  margin: 0 auto;
+  font-weight: normal;
+  font-family: sans-serif;
+  font-size: 0.8em;
+}
+
+footer a {
+  font-weight: bold;
+  text-decoration: underline;
+  color: black;
+}
+
+footer a:hover {
+  color: rgb(95 35 132);
+}

@@ -1,9 +1,34 @@
+/*
+ * Import order is load bearing: the stylesheets are unlayered (or in the legacy
+ * layer) and later rules win at equal specificity. ui.css comes first because
+ * it declares the layer order. Only the relative order of the unlayered rules,
+ * and of the legacy ones, matters; same-named layers merge in source order.
+ *
+ * The rules wrapped in the legacy layer (in shell.css and page-elements.css)
+ * are the ones that would otherwise beat the Tailwind utilities used by the
+ * app chrome. Everything
+ * else is unlayered, like the runtime <style> blocks of the print pages, so
+ * print pages are resolved by specificity exactly as they always were.
+ */
+/* Tailwind, the layer order and the app chrome theme (must stay first), then
+   fonts and the markdown docs */
 @import "./ui.css";
 @import "./fonts.css";
 @import "./markdown.css";
-@import "./root.css";
+
+/* The former root.css, in its original order */
+@import "./shell.css";
+@import "./page-elements.css";
+@import "./charter.css";
+@import "./market.css";
+@import "./cutlines.css";
+@import "./footer.css";
+@import "./print-pages.css";
+@import "./charter-traincards.css";
+
+/* Print page families, each in the order they always loaded */
 @import "./b18.css";
-@import "./manifest.css";
+@import "./tile-manifest.css";
 @import "./card.css";
 @import "./private.css";
 @import "./share.css";

@@ -133,10 +133,23 @@ Design checklist for tokens and icons:
 
 - The UI is shadcn/Radix + Tailwind 4 (`src/components/ui`, theme tokens in
   `src/styles/ui.css`); MUI is gone. Print pages (`#viewport-children`) must
-  not be touched by Tailwind's preflight: the legacy stylesheets are imported
-  into a `legacy` cascade layer and `root.css` undoes the reset for print
+  not be touched by Tailwind's preflight: the print stylesheets are
+  deliberately unlayered (like the runtime `<style>` blocks of the print
+  pages), so they beat every Tailwind layer, and only four element rules
+  (`h1`-`h6`, `p`, `svg`, `a`) sit in the `legacy` layer so they do not beat
+  the chrome's utilities. `print-pages.css` undoes the reset for print
   content. Verify real print output (PDF page counts, screenshots with print
   media) after CSS changes, snapshots cannot see CSS.
+- CSS layout (`src/styles`): `index.css` is the only entry and its import
+  order is load bearing (`ui.css` first, it declares the layer order; later
+  unlayered rules win at equal specificity), so never reorder it. It
+  imports `ui.css`, `fonts.css`, `markdown.css`, then the print pages in
+  order: `shell.css` (html, body, root), `page-elements.css` (tokens, map,
+  tile sheets), `charter.css`, `market.css`, `cutlines.css`, `footer.css`,
+  `print-pages.css` (print media, paginated pages, the preflight undo, print
+  scale), `charter-traincards.css`, then `b18.css`, `tile-manifest.css`,
+  `card.css`, `private.css`, `share.css`, `train.css`, `number.css`. Tests
+  that need the print layout import the slices (`?raw` to inject them).
 - Held back on purpose: `vite` 7 (electron-vite 5 caps at 7),
   `svgo` 3 (4 rewrites every data SVG), `playwright` pinned (the pinned
   Chromium must be installed).
