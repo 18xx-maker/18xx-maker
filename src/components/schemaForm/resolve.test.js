@@ -432,7 +432,7 @@ describe("kindOf", () => {
           ]) === "json",
       )
       .map(([key]) => key);
-    expect(json).toEqual(["token", "abilities"]);
+    expect(json).toEqual(["abilities"]);
   });
 
   it("reads the phases as an array, the fields of a phase as real fields", () => {
@@ -565,7 +565,7 @@ describe("kindOf", () => {
           ]) === "json",
       )
       .map(([key]) => key);
-    expect(json).toEqual(["shares", "tokens", "loans", "trains", "token"]);
+    expect(json).toEqual(["shares", "tokens", "loans", "trains"]);
   });
 
   it("shows a property that is new to the schema without a component change", () => {

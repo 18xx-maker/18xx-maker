@@ -93,14 +93,6 @@ const isLongText = (key, keys) =>
 // one form (the abilities of a private, each has its own type and keys)
 export const JSON_KEYS = ["abilities"];
 
-// The same for a key in one section: the token of a private and of a company
-// is a $ref into tiles.defs.json that has a form of its own, but these cards
-// keep it as JSON
-export const JSON_SECTION_KEYS = [
-  ["privates", "token"],
-  ["companies", "token"],
-];
-
 // The schema documents a $ref can point into besides the root, by file name
 const DOCUMENTS = { "tiles.defs.json": tilesDefs };
 
@@ -289,10 +281,6 @@ export const kindOf = (schema, key, root, keys = []) => {
   const node = resolveSchema(schema, root);
   if (!node || typeof node !== "object" || node.$ref) return "json";
   if (JSON_KEYS.includes(key)) return "json";
-  if (
-    JSON_SECTION_KEYS.some(([section, k]) => keys[0] === section && k === key)
-  )
-    return "json";
   if (Array.isArray(node.enum)) {
     return node.enum.every((value) => typeof value === "string")
       ? "enum"

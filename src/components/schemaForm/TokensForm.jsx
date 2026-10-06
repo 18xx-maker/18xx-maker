@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import SchemaField from "@/components/schemaForm/SchemaField";
 import SchemaFormProvider from "@/components/schemaForm/SchemaFormProvider";
 import {
@@ -5,7 +7,11 @@ import {
   GAME_TOKEN_PRIMARY_KEYS,
   SHARE_PRIMARY_KEYS,
   TOKEN_KEYS,
+  mixedItem,
+  resolveAllOf,
 } from "@/components/schemaForm/resolve";
+import { TokenEditItem } from "@/components/tokenEditor/TokenEditButton";
+import TokenEditorDialog from "@/components/tokenEditor/TokenEditorDialog";
 
 import schema from "@/schemas/game.schema.json";
 
@@ -16,8 +22,15 @@ import schema from "@/schemas/game.schema.json";
 // Companies name a type by its row name, so a row says how many companies use
 // it (usedBy) when it is renamed or removed.
 const TITLE_KEYS = ["label", "icon", "logo", "cost"];
+// The schema of a token of the game that is an object
+const gameToken = () =>
+  mixedItem(resolveAllOf(schema.properties.tokens, schema).items, schema);
+
 const PROPS = {
-  tokens: { primary: GAME_TOKEN_PRIMARY_KEYS, titleKeys: TITLE_KEYS },
+  tokens: {
+    primary: GAME_TOKEN_PRIMARY_KEYS,
+    titleKeys: TITLE_KEYS,
+  },
   tokenTypes: {
     usedBy: "tokens",
     rows: {
@@ -36,10 +49,12 @@ const PROPS = {
   },
 };
 
-// The tokens, token types and share types of the game, generated from the
-// game schema
-const TokensForm = ({ game }) => (
-  <SchemaFormProvider game={game}>
+// The tokens, token types and share types of the game, generated from the game
+// schema. The editor of a token is here, not in its item: see TokenEditItem.
+const TokenLists = () => {
+  const [editing, setEditing] = useState(null);
+
+  return (
     <div className="flex flex-col gap-4">
       {TOKEN_KEYS.map((key) => (
         <SchemaField
@@ -47,9 +62,36 @@ const TokensForm = ({ game }) => (
           keys={[key]}
           schema={schema.properties[key]}
           {...PROPS[key]}
+          {...(key === "tokens" && {
+            // The editor of a token, beside the buttons of each token
+            itemAction: (value, keys, title) => (
+              <TokenEditItem
+                keys={keys}
+                title={title}
+                onOpen={() => setEditing({ keys, title })}
+              />
+            ),
+          })}
         />
       ))}
+      {editing && (
+        <TokenEditorDialog
+          open
+          onOpenChange={(open) => !open && setEditing(null)}
+          keys={editing.keys}
+          schema={gameToken()}
+          source="game"
+          bare
+          subject={editing.title}
+        />
+      )}
     </div>
+  );
+};
+
+const TokensForm = ({ game }) => (
+  <SchemaFormProvider game={game}>
+    <TokenLists />
   </SchemaFormProvider>
 );
 

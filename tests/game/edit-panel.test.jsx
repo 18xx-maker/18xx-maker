@@ -966,7 +966,7 @@ describe("edit panel privates", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("More fields shows the other fields, abilities and token are JSON", async () => {
+  it("More fields shows the other fields, the token has an editor and abilities are JSON", async () => {
     const { user } = open(privatesRoute);
     await ready();
     await user.click(
@@ -978,9 +978,7 @@ describe("edit panel privates", () => {
     expect(card.getByRole("textbox", { name: "Description" }).tagName).toBe(
       "TEXTAREA",
     );
-    expect(card.getByRole("textbox", { name: "Token" }).tagName).toBe(
-      "TEXTAREA",
-    );
+    expect(card.getByRole("button", { name: "Edit token" })).toBeVisible();
     const abilities = card.getByRole("textbox", { name: "Abilities" });
     expect(abilities.tagName).toBe("TEXTAREA");
     // No nested list: the only Add button is the one of the privates
@@ -3321,5 +3319,226 @@ describe("edit panel output", () => {
     expect(game().upgrades ?? {}).toEqual({});
     await user.click(screen.getByRole("button", { name: "Undo" }));
     expect(game().upgrades).toEqual({ green: ["x", "y"] });
+  });
+});
+
+describe("edit panel token editor", () => {
+  const section = (name) => `${route}?edit=true&editSection=${name}`;
+  const game = () => opened.getState().game;
+  const withCompany = (token) => {
+    const base = structuredClone(games["18Test"]);
+    if (token === undefined) delete base.companies[0].token;
+    else base.companies[0] = { ...base.companies[0], token };
+    return base;
+  };
+  const token = () => game().companies[0].token;
+  const dialog = () => screen.findByRole("dialog");
+
+  // Opens the editor of the token of the first company
+  const openCompany = async (value) => {
+    const view = open(section("companies"), withCompany(value));
+    await screen.findByRole("button", { name: "Add company" });
+    await view.user.click(within(cards()[0]).getAllByRole("button")[0]);
+    await view.user.click(
+      within(cards()[0]).getByRole("button", { name: "More fields" }),
+    );
+    await view.user.click(
+      within(cards()[0]).getByRole("button", { name: "Edit token" }),
+    );
+    return view;
+  };
+  const addDecoration = async (user, name) => {
+    await user.click(screen.getByRole("combobox", { name: "Add decoration" }));
+    await user.click(await screen.findByRole("option", { name }));
+  };
+
+  it("opens from a company and changes the token as you go, the rest stays", async () => {
+    const { user } = await openCompany();
+    const editor = within(await dialog());
+    expect(token()).toBeUndefined();
+    expect(
+      screen.getByRole("dialog", { name: "Edit token of Black Railroad BLRR" }),
+    ).toBeVisible();
+    expect(
+      editor.getByRole("img", { name: "Preview of the token" }),
+    ).toBeVisible();
+
+    await user.type(editor.getByRole("combobox", { name: "Color" }), "red");
+    await user.keyboard("{Enter}");
+    expect(token()).toEqual({ color: "red" });
+    expect(game().companies[0].name).toBe("Black Railroad");
+
+    await addDecoration(user, "Bar");
+    expect(token()).toEqual({ color: "red", bar: true });
+    await user.type(editor.getByRole("combobox", { name: "Bar" }), "blue");
+    await user.keyboard("{Enter}");
+    expect(token()).toEqual({ color: "red", bar: "blue" });
+  });
+
+  it("changes the shape of the token", async () => {
+    const { user } = await openCompany();
+    const editor = within(await dialog());
+    await user.click(editor.getByRole("combobox", { name: "Token Shape" }));
+    await user.click(await screen.findByRole("option", { name: "Square" }));
+    expect(token()).toEqual({ tokenShape: "square" });
+  });
+
+  it("keeps the length of a list of colors", async () => {
+    const { user } = await openCompany();
+    const editor = within(await dialog());
+    await addDecoration(user, "Halves");
+    expect(token()).toBeUndefined();
+    await user.type(editor.getByRole("combobox", { name: "Halves 2" }), "blue");
+    await user.keyboard("{Enter}");
+    expect(token()).toEqual({ halves: ["", "blue"] });
+    await user.type(editor.getByRole("combobox", { name: "Halves 1" }), "red");
+    await user.keyboard("{Enter}");
+    expect(token()).toEqual({ halves: ["red", "blue"] });
+    await user.click(editor.getByRole("button", { name: "Remove Halves" }));
+    expect(token()).toBeUndefined();
+  });
+
+  it("keeps a key the schema does not know, and removes a token with nothing in it", async () => {
+    const { user } = await openCompany({ color: "red", mystery: 1 });
+    const editor = within(await dialog());
+    await user.clear(editor.getByRole("combobox", { name: "Color" }));
+    await user.tab();
+    expect(token()).toEqual({ mystery: 1 });
+    await user.click(editor.getByRole("button", { name: "Advanced" }));
+    expect(token()).toEqual({ mystery: 1 });
+  });
+
+  it("removes the token when its last value goes", async () => {
+    const { user } = await openCompany({ color: "red" });
+    const editor = within(await dialog());
+    await user.clear(editor.getByRole("combobox", { name: "Color" }));
+    await user.tab();
+    expect(game().companies[0]).not.toHaveProperty("token");
+  });
+
+  it("resets to the token as it was when the editor opened", async () => {
+    const { user } = await openCompany({ color: "red", label: "X" });
+    const editor = within(await dialog());
+    await user.type(editor.getByRole("combobox", { name: "Color" }), "dark");
+    await user.keyboard("{Enter}");
+    await addDecoration(user, "Bar");
+    expect(token()).toEqual({ color: "reddark", label: "X", bar: true });
+    await user.click(editor.getByRole("button", { name: "Reset" }));
+    expect(token()).toEqual({ color: "red", label: "X" });
+  });
+
+  it("resets to no token when there was none", async () => {
+    const { user } = await openCompany();
+    const editor = within(await dialog());
+    await user.type(editor.getByRole("combobox", { name: "Color" }), "red");
+    await user.keyboard("{Enter}");
+    await user.click(editor.getByRole("button", { name: "Reset" }));
+    expect(game().companies[0]).not.toHaveProperty("token");
+  });
+
+  it("draws a token it cannot draw as nothing and does not fall over", async () => {
+    allowConsole(/./);
+    await openCompany({ icon: "nope" });
+    const editor = within(await dialog());
+    expect(editor.getByRole("combobox", { name: "Icon" })).toHaveValue("nope");
+    expect(
+      editor.queryByRole("img", { name: "Preview of the token" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("Escape closes the editor, then the panel", async () => {
+    const { user } = await openCompany();
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+    expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
+    await user.click(
+      await screen.findByRole("button", { name: "Add company" }),
+    );
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("opens from a private, which keeps a token that is not an object as JSON", async () => {
+    const base = structuredClone(games["18Test"]);
+    const { user } = open(section("privates"), base);
+    await screen.findByRole("button", { name: "Add private" });
+    const card = within(cards()[2]);
+    await user.click(card.getByRole("button", { name: "More fields" }));
+    await user.click(card.getByRole("button", { name: "Edit token" }));
+    const editor = within(await dialog());
+    expect(
+      screen.getByRole("dialog", { name: /Edit token of / }),
+    ).toBeVisible();
+    await user.clear(editor.getByRole("textbox", { name: "Label" }));
+    await user.type(editor.getByRole("textbox", { name: "Label" }), "9");
+    await user.tab();
+    expect(game().privates[2].token).toEqual({ color: "green", label: 9 });
+  });
+
+  it("opens from a token of the game, which stays text or a number while only the label is set", async () => {
+    const { user } = open(section("tokens"), {
+      ...structuredClone(games["18Test"]),
+      tokens: ["Round", 5, { label: "Obj" }],
+    });
+    await screen.findAllByRole("button", { name: "Add token" });
+    await user.click(
+      screen.getByRole("button", { name: "Edit token of Round" }),
+    );
+    let editor = within(await dialog());
+    const label = editor.getByRole("textbox", { name: "Label" });
+    expect(label).toHaveValue("Round");
+    await user.clear(label);
+    await user.type(label, "Stop");
+    await user.tab();
+    expect(game().tokens[0]).toBe("Stop");
+
+    await user.type(editor.getByRole("combobox", { name: "Color" }), "red");
+    await user.keyboard("{Enter}");
+    expect(game().tokens[0]).toEqual({ label: "Stop", color: "red" });
+    await user.keyboard("{Escape}");
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+
+    await user.click(screen.getByRole("button", { name: "Edit token of 5" }));
+    editor = within(await dialog());
+    const number = editor.getByRole("textbox", { name: "Label" });
+    await user.clear(number);
+    await user.type(number, "7");
+    await user.tab();
+    expect(game().tokens[1]).toBe(7);
+    await user.keyboard("{Escape}");
+
+    await user.click(
+      await screen.findByRole("button", { name: "Edit token of Obj" }),
+    );
+    editor = within(await dialog());
+    await user.clear(editor.getByRole("textbox", { name: "Label" }));
+    await user.tab();
+    expect(game().tokens[2]).toEqual({});
+  });
+
+  it("puts the button beside the item buttons, not inside the title button", async () => {
+    open(section("tokens"), {
+      ...structuredClone(games["18Test"]),
+      tokens: ["Round", { label: "Obj" }],
+    });
+    await screen.findAllByRole("button", { name: "Add token" });
+    // A button in the title button would be invalid: the edit button is one
+    // of the buttons of the card, beside the title
+    const obj = within(cards()[1]);
+    expect(
+      obj.getByRole("button", { name: "Edit token of Obj" }),
+    ).toBeVisible();
+    expect(
+      within(obj.getAllByRole("button")[0]).queryByRole("button"),
+    ).not.toBeInTheDocument();
+    expect(
+      within(cards()[0]).getByRole("button", { name: "Edit token of Round" }),
+    ).toBeVisible();
   });
 });
