@@ -6,6 +6,7 @@ import Hex from "@/components/Hex";
 import BorderTexts from "@/components/map/BorderTexts";
 import Borders from "@/components/map/Borders";
 import Coordinates from "@/components/map/Coordinates";
+import HexOverlay from "@/components/map/HexOverlay";
 import Lines from "@/components/map/Lines";
 import MapMarket from "@/components/map/MapMarket";
 import MapMovement from "@/components/map/MapMovement";
@@ -16,7 +17,8 @@ import Title from "@/components/map/Title";
 import { multiDefaultTo } from "@/util";
 import { getMapData, toAlpha, toCoords } from "@/util/map";
 
-const Map = ({ name, game, config, variation }) => {
+// interactive: the hexes can be picked (the pan and zoom map of the editor)
+const Map = ({ name, game, config, variation, interactive = false }) => {
   const coords = config.coords;
   const hexWidth = config.tiles.mapWidth;
 
@@ -75,6 +77,12 @@ const Map = ({ name, game, config, variation }) => {
       <Lines data={data} />
       <Borders data={data} />
       <BorderTexts data={data} />
+      <HexOverlay
+        interactive={interactive}
+        data={data}
+        game={game}
+        variation={variation}
+      />
     </>
   );
 };

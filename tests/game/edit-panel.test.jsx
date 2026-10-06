@@ -2817,7 +2817,8 @@ describe("edit panel rounds", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("rounds"));
     expect(tab).toHaveAccessibleName("Rounds");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 5]).toBe(tab);
+    // The tokens, colors, output, hex and JSON tabs come after it
+    expect(tabs[tabs.length - 6]).toBe(tab);
     expect(cards().length).toBeGreaterThanOrEqual(
       games["18Test"].rounds.length +
         games["18Test"].turns.length +
@@ -2950,7 +2951,7 @@ describe("edit panel tokens", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("tokens"));
     expect(tab).toHaveAccessibleName("Tokens");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 4]).toBe(tab);
+    expect(tabs[tabs.length - 5]).toBe(tab);
     // A token of text is a field, an object is a card
     expect(
       screen.getByRole("textbox", { name: "Value of token Round" }),
@@ -3129,7 +3130,7 @@ describe("edit panel colors", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("colors"));
     expect(tab).toHaveAccessibleName("Colors");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 3]).toBe(tab);
+    expect(tabs[tabs.length - 4]).toBe(tab);
     expect(screen.getByRole("textbox", { name: "Accent" })).toHaveValue(
       "#3a7bd5",
     );
@@ -3225,7 +3226,7 @@ describe("edit panel output", () => {
     const tab = tabs.find((candidate) => candidate.id.endsWith("output"));
     expect(tab).toHaveAccessibleName("Output");
     expect(tab).toHaveAttribute("aria-selected", "true");
-    expect(tabs[tabs.length - 2]).toBe(tab);
+    expect(tabs[tabs.length - 3]).toBe(tab);
     expect(screen.getByRole("spinbutton", { name: "Max" })).toHaveValue(200);
     expect(screen.getByRole("checkbox", { name: "pdf" })).toBeChecked();
     expect(screen.getByRole("checkbox", { name: "png" })).not.toBeChecked();

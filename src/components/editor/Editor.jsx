@@ -29,13 +29,7 @@ const Editor = ({ width, height, className, padding, ...pass }) => {
   }
 
   return (
-    <SvgEditor
-      key={`${width}x${height}`}
-      width={width}
-      height={height}
-      padding={padding}
-      {...pass}
-    />
+    <SvgEditor width={width} height={height} padding={padding} {...pass} />
   );
 };
 

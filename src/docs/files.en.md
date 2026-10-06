@@ -211,6 +211,24 @@ png, card and Board18 options) and the upgrades of the tiles by name: Add
 upgrade adds a name, and its tiles are one per line. The deprecated paginated
 export option is not shown and stays in the file.
 
+The Hex tab is only on the map page. Click a hex on the map to pick its group,
+the entry of `map.hexes` that lists it: the tab then shows only that group as
+JSON (its color, its coordinates and what is drawn on it) and the hexes of the
+group are outlined on the map. Empty positions can be picked too, and so can
+the row and the column just past the map. The page follows the text while it is
+a valid group, an object with a `hexes` list of at least one coordinate such as
+`B2`; anything else stays a draft and the game keeps its last valid version.
+Hold Cmd (Ctrl on Windows and Linux) and click another hex to move it into the
+group, out of the group it was in, or click a hex of the group to take it out.
+A group left with no hex is removed, and the last hex of the map stays. The
+group of an empty position is added to the game when you first change it.
+Escape lets go of the group. The address keeps it as `hex`, the first
+coordinate of the group (`?edit=true&editSection=hex&hex=C11`). Picking hexes
+works on the pan and zoom map on screen while the panel is open, and the
+printed and exported maps do not change. A map variation that copies another
+shows the hexes it copies read only: change them in the variation they come
+from. The keyboard way to edit a group is the JSON tab.
+
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
 

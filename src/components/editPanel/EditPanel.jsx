@@ -6,26 +6,28 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import EditTabs, { panelId, tabId } from "@/components/editPanel/EditTabs";
-import { editSections } from "@/components/editPanel/sections";
 
 import { useGame } from "@/hooks/game";
 import { useEditPanel } from "@/hooks/useEditPanel";
+import { useSelectedHex } from "@/hooks/useSelectedHex";
 import { cn } from "@/util/cn";
 
 // The forms for parts of the game beside the live render of the section
 const EditPanel = () => {
   const { t } = useTranslation();
   const game = useGame();
-  const { toggle, editSection, setEditSection } = useEditPanel();
-  const { Form, wide } = editSections.find((s) => s.section === editSection);
+  const { toggle, sections, editSection, setEditSection } = useEditPanel();
+  const { hex, clear } = useSelectedHex();
+  const { Form, wide } = sections.find((s) => s.section === editSection);
 
   // Escape closes the panel from anywhere inside it. An open select closes
-  // itself first, it has already claimed the key. The key is ours, so the
-  // global bindings leave it alone.
+  // itself first, it has already claimed the key. A selected hex is cleared
+  // first. The key is ours, so the global bindings leave it alone.
   const onKeyDown = (event) => {
     if (event.key === "Escape" && !event.defaultPrevented) {
       event.preventDefault();
-      toggle();
+      if (hex) clear();
+      else toggle();
     }
   };
 
@@ -53,7 +55,11 @@ const EditPanel = () => {
         </Button>
       </div>
       <div className="flex-1 overflow-y-auto overscroll-contain p-4 flex flex-col gap-4">
-        <EditTabs section={editSection} setSection={setEditSection} />
+        <EditTabs
+          sections={sections}
+          section={editSection}
+          setSection={setEditSection}
+        />
         <div
           role="tabpanel"
           id={panelId(editSection)}

@@ -6,6 +6,9 @@ import { isControlTarget } from "@/util/keys";
 // editors start with their content below it.
 export const TOOLBAR_INSET = 72;
 
+// How far a pointer may move and still be a tap, in pixels
+export const TAP_DISTANCE = 4;
+
 // Pointer, wheel and keyboard handling shared by the pan and zoom editors.
 //
 // The handlers are called with
@@ -14,9 +17,17 @@ export const TOOLBAR_INSET = 72;
 //                  1 zooms out). A pinch also passes the {x, y} point between
 //                  the fingers, relative to the element, to zoom around
 //   onReset()      the "v" key was pressed
+//   onTap(target, event)  a single pointer went down and up on the element
+//                  without moving (under TAP_DISTANCE pixels, no second
+//                  pointer): target is where the pointer went down, event is
+//                  the pointerup. The pointer is captured by the element, so
+//                  the target of the up (and of a click) is always the
+//                  element itself.
 // They are read from a ref, so they may change on every render.
 export const usePanZoom = (ref, handlers) => {
   const pointers = useRef(new Map());
+  // The press that may still be a tap: where it started and on what
+  const tap = useRef(null);
   const latest = useRef(handlers);
   latest.current = handlers;
 
@@ -36,6 +47,11 @@ export const usePanZoom = (ref, handlers) => {
     // One pointer pans, two pointers (fingers) pan and pinch to zoom.
     const onDown = (e) => {
       if (e.button !== 0 || pointers.current.size >= 2) return;
+      // A second pointer makes a gesture, not a tap
+      tap.current =
+        pointers.current.size === 0
+          ? { id: e.pointerId, target: e.target, x: e.x, y: e.y }
+          : null;
       pointers.current.set(e.pointerId, { x: e.x, y: e.y });
       try {
         el.setPointerCapture(e.pointerId);
@@ -48,6 +64,15 @@ export const usePanZoom = (ref, handlers) => {
       if (el.hasPointerCapture(e.pointerId)) {
         el.releasePointerCapture(e.pointerId);
       }
+      const start = tap.current;
+      if (pointers.current.size === 0) tap.current = null;
+      if (
+        e.type === "pointerup" &&
+        start?.id === e.pointerId &&
+        Math.hypot(e.x - start.x, e.y - start.y) < TAP_DISTANCE
+      ) {
+        latest.current.onTap?.(start.target, e);
+      }
     };
     const onMove = (e) => {
       const last = pointers.current.get(e.pointerId);
@@ -56,6 +81,12 @@ export const usePanZoom = (ref, handlers) => {
       if (e.buttons !== 1) {
         pointers.current.delete(e.pointerId);
         return;
+      }
+
+      // A press that moved is a drag, even when it comes back
+      const start = tap.current;
+      if (start && Math.hypot(e.x - start.x, e.y - start.y) >= TAP_DISTANCE) {
+        tap.current = null;
       }
 
       const before = spread();
@@ -89,7 +120,10 @@ export const usePanZoom = (ref, handlers) => {
 
     // A finger we never saw lift (the window lost focus mid-gesture) would
     // leave a phantom pointer that turns the next drag into a pinch
-    const clear = () => pointers.current.clear();
+    const clear = () => {
+      pointers.current.clear();
+      tap.current = null;
+    };
     const onVisibility = () => {
       if (document.hidden) clear();
     };

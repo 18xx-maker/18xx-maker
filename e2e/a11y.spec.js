@@ -118,6 +118,19 @@ const pages = [
     colorScheme,
     ready: (page) => page.getByRole("button", { name: "Add upgrade" }),
   })),
+  // The Hex tab of the map page: the group picked on the map as JSON, and
+  // the hint before one is picked
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `edit panel hex (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=hex&hex=C11",
+    colorScheme,
+    ready: (page) => page.getByRole("textbox", { name: "Hex group JSON" }),
+  })),
+  {
+    name: "edit panel hex hint",
+    url: "/games/18Test/map?edit=true&editSection=hex",
+    ready: (page) => page.getByText(/Click a hex on the map to edit its group/),
+  },
   // The JSON editor, in both themes
   ...["light", "dark"].map((colorScheme) => ({
     name: `edit panel json (${colorScheme})`,

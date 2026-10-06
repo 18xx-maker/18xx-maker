@@ -30,7 +30,9 @@ const hexFrame = { width: 540, height: 540, viewBox: "-90 -90 180 180" };
 //   svg: true for the default frame, or { width, height, viewBox }
 //   game: the id of a bundled game to load into the store (the router starts
 //         at /games/<id>, which is where the game hooks look for it)
-const Frame = ({ Story, mapTheme, companyTheme, svg, game }) => {
+//   route: where the router starts instead, for components that read the
+//          page or the url (/games/18Test/map?edit=true)
+const Frame = ({ Story, mapTheme, companyTheme, svg, game, route }) => {
   // The store only changes with the toolbar, never with the story args
   const store = useMemo(
     () =>
@@ -57,7 +59,7 @@ const Frame = ({ Story, mapTheme, companyTheme, svg, game }) => {
 
   return (
     <Provider store={store}>
-      <MemoryRouter initialEntries={[game ? `/games/${game}` : "/"]}>
+      <MemoryRouter initialEntries={[route ?? (game ? `/games/${game}` : "/")]}>
         {element}
       </MemoryRouter>
     </Provider>
@@ -97,6 +99,7 @@ const preview = {
         companyTheme={globals.companyTheme}
         svg={parameters.svg}
         game={parameters.game}
+        route={parameters.route}
       />
     ),
   ],

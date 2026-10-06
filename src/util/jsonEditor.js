@@ -2,6 +2,8 @@ import { jsonLanguage } from "@codemirror/lang-json";
 
 import { equals, omit } from "ramda";
 
+import { gameText } from "@/util/download";
+
 // The pure parts of the JSON editor of the edit panel (JsonEditor.jsx): reading
 // the text, deciding whether it can replace the game and finding the places
 // in the text that issues of the game point to.
@@ -260,3 +262,28 @@ export const lossyNumbers = (tree, text) => {
   });
   return found;
 };
+
+// What the editor edits. The whole game is the default; another lens edits a
+// part of it (the Hex tab edits one group of hexes):
+//   draftKey       what its unparsed text is kept under
+//   label          the translation key of the label of the editor
+//   text(game)     the text of the part of the game
+//   invalidReason(value)  why a parsed value is not the part, or null
+//   same(game, value)     whether the game already has the value
+//   write(game, value)    the game with the value as the part
+//   applied(value)        called after the value was put on the game
+//   issues(issues, done)  the problems of the game that are in the part, as
+//                         pointers into the text (done: the check of the game
+//                         has ended, so the problems are of this game)
+//   lines, fold    whether the lines of the url and the folds are used
+export const gameLens = (slug) => ({
+  draftKey: slug,
+  label: "jsonEditor.label",
+  text: gameText,
+  invalidReason,
+  same: sameGame,
+  write: shareUnchanged,
+  issues: (issues) => issues,
+  lines: true,
+  fold: true,
+});

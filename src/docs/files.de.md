@@ -235,6 +235,28 @@ Name: „Upgrade hinzufügen“ fügt einen Namen hinzu, seine Kacheln stehen je
 in einer Zeile. Die veraltete Exportoption paginated wird nicht angezeigt und
 bleibt in der Datei.
 
+Der Hex-Tab gibt es nur auf der Kartenseite. Klicke auf ein Kartenfeld auf der
+Karte, um seine Gruppe zu wählen, den Eintrag von `map.hexes`, der es auflistet:
+Der Tab zeigt dann nur diese Gruppe als JSON (ihre Farbe, ihre Koordinaten und
+was darauf gezeichnet wird), und die Kartenfelder der Gruppe sind auf der Karte
+umrandet. Auch leere Positionen lassen sich wählen, ebenso die Reihe und die
+Spalte direkt hinter der Karte. Die Seite folgt dem Text, solange er eine
+gültige Gruppe ist, ein Objekt mit einer Liste `hexes` aus mindestens einer
+Koordinate wie `B2`; alles andere bleibt ein Entwurf, und das Spiel behält seine
+letzte gültige Version. Halte Cmd (Strg unter Windows und Linux) gedrückt und
+klicke auf ein anderes Kartenfeld, um es in die Gruppe zu verschieben, aus der
+Gruppe, in der es war, oder klicke auf ein Kartenfeld der Gruppe, um es zu
+entfernen. Eine Gruppe ohne Kartenfeld wird entfernt, und das letzte Kartenfeld
+der Karte bleibt. Die Gruppe einer leeren Position wird zum Spiel hinzugefügt,
+sobald du sie zum ersten Mal änderst. Mit Escape lässt du die Gruppe los. Die
+Adresse behält sie als `hex`, die erste Koordinate der Gruppe
+(`?edit=true&editSection=hex&hex=C11`). Das Wählen von Kartenfeldern funktioniert
+auf der Karte mit Schwenken und Zoomen am Bildschirm, solange das Panel offen
+ist; die gedruckten und exportierten Karten ändern sich nicht. Eine Kartenvariante,
+die eine andere kopiert, zeigt die kopierten Kartenfelder schreibgeschützt: Ändere
+sie in der Variante, aus der sie stammen. Der Weg über die Tastatur ist der
+JSON-Tab.
+
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.
 

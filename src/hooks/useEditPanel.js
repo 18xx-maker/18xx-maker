@@ -1,16 +1,18 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useLocation, useMatch, useNavigate } from "react-router";
 
 import { find, propEq } from "ramda";
 
 import {
   DEFAULT_EDIT_SECTION,
-  editSections,
+  sectionsFor,
 } from "@/components/editPanel/sections";
 
 import { useEditor } from "@/hooks/useEditor";
 import { gameNav } from "@/util/gameNav";
+import { COORD_PATTERN } from "@/util/hexEdit";
 import {
+  clearHexSearch,
   searchString,
   useBooleanParam,
   useStringParam,
@@ -26,8 +28,10 @@ export const useEditPanel = () => {
   const [print] = useBooleanParam("print");
   const [open, toggle] = useTogglePanel("edit");
   const [param, setParam] = useStringParam("editSection", DEFAULT_EDIT_SECTION);
-  // An unknown section in the url is the first one
-  const editSection = editSections.some((s) => s.section === param)
+  const section = match?.params.section;
+  // The tabs of the page, an unknown one in the url is the first one
+  const sections = sectionsFor(section);
+  const editSection = sections.some((s) => s.section === param)
     ? param
     : DEFAULT_EDIT_SECTION;
 
@@ -41,7 +45,6 @@ export const useEditPanel = () => {
     [setParam, editSection],
   );
 
-  const section = match?.params.section;
   const available =
     editor &&
     !print &&
@@ -53,6 +56,7 @@ export const useEditPanel = () => {
     available,
     open: available && open,
     toggle,
+    sections,
     editSection,
     setEditSection,
   };
@@ -72,6 +76,32 @@ export const useDropStaleLines = ({ available, open, editSection }) => {
     params.delete("lines");
     navigate({ search: searchString(params) }, { replace: true });
   }, [stale, search, navigate]);
+};
+
+// The hex selected on the map belongs to the open edit panel on the map. A link
+// with one anywhere else, or after the panel was closed, has it dropped, and so
+// does a change of variation, with no history entry. While the game loads the
+// panel is not available yet: the selection waits.
+export const useDropStaleHex = ({ available, open }) => {
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const match = useMatch("/games/:slug/:section/*");
+  const params = new URLSearchParams(search);
+  const variation = params.get("variation");
+  const previous = useRef(variation);
+  const selected = params.has("hex");
+  const stale =
+    selected &&
+    (!COORD_PATTERN.test(params.get("hex")) ||
+      match?.params.section !== "map" ||
+      (available && !open));
+
+  useEffect(() => {
+    const changed = previous.current !== variation;
+    previous.current = variation;
+    if (!selected || !(stale || changed)) return;
+    navigate({ search: clearHexSearch(search) }, { replace: true });
+  }, [stale, selected, variation, search, navigate]);
 };
 
 const hasLines = (search) => new URLSearchParams(search).has("lines");

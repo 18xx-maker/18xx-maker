@@ -119,6 +119,37 @@ test.describe("bundled games", () => {
     await expect(panel.getByRole("listitem")).toHaveCount(4);
   });
 
+  test("picks a group of hexes on the map and edits it", async ({ page }) => {
+    await page.goto("/games/18Test/map?edit=true");
+    const panel = page.getByTestId("edit-panel");
+    await expect(panel).toBeVisible();
+    const editor = panel.getByRole("textbox", { name: "Hex group JSON" });
+
+    // A real click: the svg captures the pointer, so the click is a tap
+    await page.locator('[data-coord="C11"]').click();
+    await expect(page).toHaveURL(/\?edit=true&editSection=hex&hex=C11$/);
+    await expect(panel.getByRole("tab", { name: "Hex" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+    await expect(editor).toContainText('"C11"');
+    await expect(editor).not.toContainText('"B12"');
+
+    // Cmd on macOS, Ctrl elsewhere moves a hex into the group
+    const platform = await page.evaluate(() => navigator.platform);
+    const modifier = /Mac/.test(platform) ? "Meta" : "Control";
+    await page.locator('[data-coord="B12"]').click({ modifiers: [modifier] });
+    await expect(editor).toContainText('"B12"');
+    await expect(page).toHaveURL(/hex=C11$/);
+
+    // Escape lets go of the group, the next one closes the panel
+    await page.keyboard.press("Escape");
+    await expect(page).toHaveURL(/\?edit=true&editSection=hex$/);
+    await expect(page.getByTestId("hex-selected")).toHaveCount(0);
+    await page.keyboard.press("Escape");
+    await expect(panel).toBeHidden();
+  });
+
   test("adds a private in the edit panel", async ({ page }) => {
     await page.goto("/games/18Test/map?edit=true");
     const panel = page.getByTestId("edit-panel");
