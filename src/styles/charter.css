@@ -477,3 +477,53 @@
 .charter--loans.charter--half dl {
   padding-right: 1.875in;
 }
+
+/* A strip along the bottom edge that marks a special charter (company.banner).
+   It is drawn over the bottom of the box, so the charter keeps its size, and
+   the contents keep clear of it. */
+.charter--banner {
+  --banner-h: 0.2in;
+}
+
+.charter__banner {
+  position: absolute;
+  /* Bleeds past the cut like the header does */
+  bottom: -0.125in;
+  left: -0.125in;
+  width: calc(100% + 0.25in);
+  height: calc(var(--banner-h) + 0.125in);
+  padding-bottom: 0.125in;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.11in;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.charter--banner .charter__trains,
+.charter--banner .charter__treasury,
+.charter--banner .charter__assets {
+  padding-bottom: calc(0.125in + var(--banner-h));
+}
+
+.charter--banner dl {
+  padding-bottom: calc(0.125in + var(--banner-h));
+}
+
+.charter--banner.charter--minor dl {
+  padding-bottom: calc(0.1in + var(--banner-h));
+}
+
+.charter--banner .charter__loans {
+  bottom: var(--banner-h);
+}
+
+.charter--banner.charter--half .charter__tokens {
+  padding-bottom: calc(0.125in + var(--banner-h));
+}

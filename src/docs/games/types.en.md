@@ -110,6 +110,14 @@ charters already stack their tokens and ignore it:
 }
 ```
 
+## Charter banner
+
+A company can set `banner` to print a label in a strip along the bottom edge of its charter, in the color of the company, for example to mark a system or another special charter. The text is printed as written and is not translated. The strip sits inside the charter, so the charter keeps its size and the contents move up to stay clear of it:
+
+```json
+{ "abbrev": "RED", "banner": "SYSTEM" }
+```
+
 ## Company aliases
 
 A company can have an `alias`, a second name such as a short form or the name

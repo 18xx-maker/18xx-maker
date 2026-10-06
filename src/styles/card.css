@@ -57,3 +57,7 @@
   font-style: italic;
   font-family: sans-serif;
 }
+
+.charter--banner .charter__variant {
+  bottom: var(--banner-h);
+}

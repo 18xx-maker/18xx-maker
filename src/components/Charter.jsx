@@ -200,7 +200,7 @@ const Charter = ({
           className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}
         >
           <div
-            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${loans.length > 0 ? " charter--loans" : ""}`}
+            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${loans.length > 0 ? " charter--loans" : ""}${company.banner ? " charter--banner" : ""}`}
           >
             <div
               className="charter__bleed"
@@ -382,6 +382,19 @@ const Charter = ({
                   </div>
                 )}
                 {variant && <div className="charter__variant">{variant}</div>}
+                {company.banner && (
+                  <div
+                    className="charter__banner"
+                    style={{
+                      backgroundColor: c(color),
+                      color: t(c(color)),
+                      fontFamily: `${fontFamily}`,
+                      borderTop: color === "white" ? "2px solid black" : null,
+                    }}
+                  >
+                    {company.banner}
+                  </div>
+                )}
               </div>
             </div>
           </div>
