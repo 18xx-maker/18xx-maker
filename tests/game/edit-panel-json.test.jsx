@@ -1,6 +1,6 @@
 import { undo } from "@codemirror/commands";
 import { foldedRanges, unfoldAll } from "@codemirror/language";
-import { diagnosticCount } from "@codemirror/lint";
+import { diagnosticCount, forceLinting } from "@codemirror/lint";
 import { EditorView } from "@codemirror/view";
 import { act, screen, waitFor } from "@testing-library/react";
 import { page as browser, userEvent as realUser } from "vitest/browser";
@@ -512,11 +512,15 @@ describe("json editor", () => {
       open(jsonRoute);
       const v = await view();
       v.dispatch({ selection: { anchor: 5 } });
+      // Let the linter run, so a problem would be found before the click
+      forceLinting(v);
+      await settled();
       expect(diagnosticCount(v.state)).toBe(0);
       expect(nextButton()).toHaveAttribute("aria-disabled", "true");
       // aria-disabled does not block clicks
       nextButton().click();
       expect(v.state.selection.main.from).toBe(5);
+      expect(v.hasFocus).toBe(false);
     });
   });
 

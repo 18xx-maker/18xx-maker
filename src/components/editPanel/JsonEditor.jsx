@@ -449,9 +449,7 @@ const JsonEditor = ({ game }) => {
   };
 
   const nextProblem = () => {
-    if (!view.current) return;
-    nextDiagnostic(view.current);
-    view.current.focus();
+    if (view.current && nextDiagnostic(view.current)) view.current.focus();
   };
 
   const discard = () => {
