@@ -36,6 +36,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import NumberField from "@/components/form/NumberField";
 import { issueText } from "@/components/schemaForm/issueText";
+import { overrideFor } from "@/components/schemaForm/overrides";
 import {
   PRIMARY_KEYS,
   coerceStringOrNumber,
@@ -1249,9 +1250,13 @@ const RecordField = ({ keys, schema }) => {
 };
 
 const SchemaField = ({ keys, schema, ...rest }) => {
-  const { root } = useContext(SchemaFormContext);
+  const form = useContext(SchemaFormContext);
+  const { root } = form;
   const node = resolveAllOf(schema, root);
   const props = { keys, schema: node };
+
+  const custom = overrideFor(node, keys, form);
+  if (custom) return custom.override.render({ ...props, ...custom.props });
 
   switch (kindOf(node, keys[keys.length - 1], root, keys)) {
     case "string":

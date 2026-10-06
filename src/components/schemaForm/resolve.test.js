@@ -15,6 +15,7 @@ import {
   humanize,
   insertAt,
   insertKey,
+  isReferenceValue,
   isRequired,
   issuesFor,
   kindOf,
@@ -28,6 +29,9 @@ import {
   parseLines,
   parseList,
   parseRevenue,
+  referenceList,
+  referenceOf,
+  referenceValue,
   removeAt,
   removeKey,
   renameKey,
@@ -1291,5 +1295,86 @@ describe("one text a line, as a list", () => {
   it("formats a list a line each", () => {
     expect(formatLines(["a", "b"])).toBe("a\nb");
     expect(formatLines(undefined)).toBe("");
+  });
+});
+
+describe("referenceOf", () => {
+  const at = (...keys) => schemaAt(schema, keys);
+  const company = { from: "companies", key: "abbrev", label: "name" };
+  const train = { from: "trains", key: "name" };
+
+  it("is a string for a plain reference", () => {
+    expect(referenceOf(at("privates", 0, "company"), schema)).toEqual({
+      ref: company,
+      mode: "single",
+    });
+  });
+
+  it("is a string or a list for a train event, through the nested oneOf", () => {
+    for (const key of ["rust", "phased", "obsolete"]) {
+      expect(referenceOf(at("trains", 0, key), schema)).toEqual({
+        ref: train,
+        mode: "either",
+      });
+    }
+    expect(referenceOf(at("phases", 0, "on"), schema)?.mode).toBe("either");
+  });
+
+  it("is a list for a list of names, even with objects in it", () => {
+    expect(
+      referenceOf(at("stock", "market", 0, 0, "companies"), schema),
+    ).toEqual({ ref: company, mode: "list" });
+  });
+
+  it("is not one for a string without x-ref", () => {
+    expect(referenceOf(at("privates", 0, "name"), schema)).toBeUndefined();
+    expect(referenceOf(at("trains", 0, "name"), schema)).toBeUndefined();
+  });
+
+  it("is not one for a field of another type", () => {
+    expect(referenceOf(at("trains", 0, "price"), schema)).toBeUndefined();
+    expect(referenceOf(at("phases", 0, "limit"), schema)).toBeUndefined();
+    expect(referenceOf(at("phases", 0, "train"), schema)).toBeUndefined();
+    expect(referenceOf(undefined, schema)).toBeUndefined();
+  });
+});
+
+describe("isReferenceValue", () => {
+  it("is nothing, a string or a list of strings, as the mode allows", () => {
+    expect(isReferenceValue(undefined, "single")).toBe(true);
+    expect(isReferenceValue("4", "single")).toBe(true);
+    expect(isReferenceValue("4", "either")).toBe(true);
+    expect(isReferenceValue(["4", "5"], "either")).toBe(true);
+    expect(isReferenceValue(["4"], "list")).toBe(true);
+    expect(isReferenceValue("4", "list")).toBe(false);
+    expect(isReferenceValue(["4"], "single")).toBe(false);
+  });
+
+  it("is not an object, a list with one, or false", () => {
+    expect(isReferenceValue({ on: "4", index: 2 }, "either")).toBe(false);
+    expect(isReferenceValue(["4", { on: "4", index: 2 }], "either")).toBe(
+      false,
+    );
+    expect(isReferenceValue(false, "list")).toBe(false);
+    expect(isReferenceValue(3, "single")).toBe(false);
+  });
+});
+
+describe("what a reference stores", () => {
+  it("reads a string or a list as a list", () => {
+    expect(referenceList(undefined)).toEqual([]);
+    expect(referenceList("4")).toEqual(["4"]);
+    expect(referenceList(["4", "5"])).toEqual(["4", "5"]);
+  });
+
+  it("stores nothing for no name, never an empty string or list", () => {
+    expect(referenceValue([], "either")).toBeUndefined();
+    expect(referenceValue([], "list")).toBeUndefined();
+  });
+
+  it("stores a string for one name only where the schema allows it", () => {
+    expect(referenceValue(["4"], "either")).toBe("4");
+    expect(referenceValue(["4"], "list")).toEqual(["4"]);
+    expect(referenceValue(["4", "5"], "either")).toEqual(["4", "5"]);
   });
 });
