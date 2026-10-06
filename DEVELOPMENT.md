@@ -303,8 +303,7 @@ count of string and number alternatives. A text or a list of texts (the train
 and notes of a phase, exactly `string` and `array` of `string` with no enum or
 pattern) is the `stringList` kind, one entry a line in a textarea
 (`parseList`, `formatList`, `sameList`; one line is saved as a string, so a
-list of one stays a list until it is edited). The `on` of a phase falls back to
-JSON and shows a bare string with its quotes. `abilities` is
+list of one stays a list until it is edited). `abilities` is
 in `JSON_KEYS` and stays a JSON textarea whatever its schema (a nested list
 would lack the required `type` and hide the other keys of an ability), and a
 `description` is a textarea (`LONG_TEXT_KEYS`). A `revenue` (a `oneOf` of a
@@ -323,14 +322,36 @@ item gets `nextNumber`, the highest number plus one, as a number instead of a
 text name) and `title` (a translation key, `editPanel.titles.players`, counting
 the `titleKey` field: "3 players") to `ArrayField`. A `oneOf` of only strings
 and numbers (`certLimit`) is the `stringOrNumber` kind. All forms use
-`SchemaFormProvider`. A field kind without a form (`rust`, `phased`,
-`obsolete`, `discount`, other `oneOf`s) falls back to a JSON textarea, and
+`SchemaFormProvider`. A field kind without a form (`discount`, other
+`oneOf`s) falls back to a JSON textarea, and
 `resolve.test.js` fails when a property in scope falls back unexpectedly. A
 property with `"deprecated": true` in the schema stays editable, with a
 badge and a note, and `deprecatedPaths` in `src/util/gameValidation.js` finds
 it inside lists (`trains[2].players`). Edits go through `editGame`, so the
 Changes page, problems check and unsaved-edit handling work unchanged. Labels
 and help text are the schema keys and descriptions, in English only.
+
+A string (or list of strings) that names something else in the game has a
+combobox. The schema says so with an annotation next to the type, ignored by
+validation: `"x-ref": { "from": "companies", "key": "abbrev", "label": "name" }`
+(`from` is the dotted path of a list in the game, `key` the property of its
+items that names them, left out for a list of strings, `label` the text shown
+beside the name). It goes on the leaf string schema, so a shared definition
+(`trainItem`, which `rust`, `phased`, `obsolete` and the `on` of a phase use)
+covers every place that uses it. `refPaths` and `refOptions` in
+`src/util/schemaRefs.js` find the annotations and read the names from the game
+as edited now; `referenceOf` in `resolve.js` finds one through `$ref` and
+`oneOf` and says if the field is a string, a list or both. `SchemaField` asks
+the registry in `schemaForm/overrides.jsx` before the kind of the field: the
+default entry renders `ReferenceField` (the `Combobox` of `ui/combobox.jsx`,
+on a Radix popover so the scrolling panel does not clip it) for a field with an
+`x-ref` whose value is nothing, a string or a list of strings, and a value
+that holds an object (`{ on, index }`) stays in the JSON field. Free text is
+always accepted and a name the game does not have shows a hint, not an error.
+A string is stored as one where the schema allows it, a list of one stays a
+list otherwise, and an empty value is removed. To annotate a field, add the
+`x-ref`, run `make`, and the test in `schemaRefs.test.js` checks that `from` and
+`key` exist in the schema.
 
 The `json` section (`JsonSection.jsx` lazy loads `JsonEditor.jsx`, a CodeMirror
 6 editor; its packages have their own chunk in `vite.config.js`) edits the

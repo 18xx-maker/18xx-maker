@@ -245,6 +245,57 @@ export const kindOf = (schema, key, root, keys = []) => {
   return "json";
 };
 
+// A field that names something else in the game (the schema marks the string
+// with x-ref): { ref, mode }, or undefined for any other field. mode is
+// "single" for a string, "list" for a list of strings and "either" for both
+// (a train event is a name or a list of them). The alternatives that are
+// objects (the Nth train of a name) are allowed: a value that is one is not
+// edited here (see isReferenceValue).
+export const referenceOf = (node, root) => {
+  const parts = alternativesOf(node, root);
+  let ref;
+  let single = false;
+  let list = false;
+
+  for (const part of parts) {
+    if (part?.type === "string" && part["x-ref"]) {
+      ref = part["x-ref"];
+      single = true;
+    } else if (part?.type === "array" && part.items) {
+      const items = alternativesOf(part.items, root);
+      const named = items.find((item) => item?.type === "string");
+      if (!named?.["x-ref"]) return undefined;
+      ref = named["x-ref"];
+      list = true;
+    } else if (part?.type !== "object") {
+      return undefined;
+    }
+  }
+  if (!ref) return undefined;
+  return { ref, mode: single && list ? "either" : single ? "single" : "list" };
+};
+
+// Whether the value is what a reference field edits: nothing, a string (not
+// for a list) or a list of strings (not for a string). Anything else (an
+// object, a list with one) stays in the JSON field, so nothing is lost.
+export const isReferenceValue = (value, mode) =>
+  value === undefined ||
+  (typeof value === "string" && mode !== "list") ||
+  (Array.isArray(value) &&
+    mode !== "single" &&
+    value.every((item) => typeof item === "string"));
+
+// The strings of a reference value as a list
+export const referenceList = (value) =>
+  value === undefined ? [] : [value].flat();
+
+// The value to store for a list of names: nothing for none, a string for one
+// when the schema allows a string, a list otherwise
+export const referenceValue = (list, mode) => {
+  if (list.length === 0) return undefined;
+  return list.length === 1 && mode === "either" ? list[0] : list;
+};
+
 // "titleFontWeight" is "Title Font Weight"
 export const humanize = (key) =>
   key

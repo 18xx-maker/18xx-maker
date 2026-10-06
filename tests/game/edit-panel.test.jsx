@@ -947,9 +947,9 @@ describe("edit panel privates", () => {
     );
     expect(first.getByRole("textbox", { name: "Price" })).toHaveValue("100");
     expect(first.getByRole("textbox", { name: "Revenue" })).toHaveValue("5");
-    expect(first.getByRole("textbox", { name: "Company" })).toHaveValue("");
+    expect(first.getByRole("combobox", { name: "Company" })).toHaveValue("");
     expect(
-      within(cards()[1]).getByRole("textbox", { name: "Company" }),
+      within(cards()[1]).getByRole("combobox", { name: "Company" }),
     ).toHaveValue("PRR");
     // The rest is behind More fields
     expect(
@@ -1240,11 +1240,11 @@ describe("edit panel phases", () => {
 
     await more(user, 0);
     const card = within(cards()[0]);
-    expect(card.getByRole("textbox", { name: "Company" })).toBeVisible();
+    expect(card.getByRole("combobox", { name: "Company" })).toBeVisible();
     expect(card.getByRole("textbox", { name: "Notes" })).toBeVisible();
     expect(card.getByRole("combobox", { name: "Buy_companies" })).toBeVisible();
-    // The event of a phase is JSON
-    expect(card.getByRole("textbox", { name: "On" }).tagName).toBe("TEXTAREA");
+    // The event of a phase names a train
+    expect(card.getByRole("combobox", { name: "On" })).toBeVisible();
     // No nested list: the only Add button is the one of the phases
     expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(1);
   });

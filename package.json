@@ -196,6 +196,7 @@
     "@codemirror/state": "6.7.6",
     "@codemirror/view": "6.43.13",
     "@lezer/highlight": "1.2.5",
+    "@radix-ui/react-popover": "^1.1.23",
     "chokidar": "^5.0.0",
     "diff": "^9.0.0",
     "electron-updater": "^6.8.9",

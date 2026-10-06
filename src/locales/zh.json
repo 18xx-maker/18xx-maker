@@ -139,6 +139,12 @@
     "invalidCount": "请输入至少为 1 的整数,或 ∞。",
     "invalidLimit": "请输入至少为 1 的整数、∞,或一位数字除以一位数字,如 3/4。",
     "onePerLine": "每行一项。单独一行保存为文本,多行保存为列表。",
+    "reference": {
+      "from": { "trains": "列车", "companies": "公司" },
+      "unknown": "不在本游戏的{{collection}}中:{{value}}。",
+      "noMatches": "没有匹配项。按 Enter 使用“{{value}}”。",
+      "remove": "删除 {{name}}"
+    },
     "market": {
       "gridLabel": "股票市场单元格",
       "gridHint": "用方向键在单元格之间移动。Delete 清空单元格。数字键跳到单元格的数值。Enter 跳到单元格字段。",

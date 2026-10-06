@@ -139,6 +139,12 @@
     "invalidCount": "Enter a whole number of at least 1, or ∞.",
     "invalidLimit": "Enter a whole number of at least 1, ∞, or one digit over one digit, like 3/4.",
     "onePerLine": "One per line. A single line is saved as text, more lines as a list.",
+    "reference": {
+      "from": { "trains": "trains", "companies": "companies" },
+      "unknown": "Not in the {{collection}} of this game: {{value}}.",
+      "noMatches": "No matches. Enter uses \"{{value}}\".",
+      "remove": "Remove {{name}}"
+    },
     "market": {
       "gridLabel": "Stock market cells",
       "gridHint": "Arrow keys move between cells. Delete empties a cell. A number key goes to the value of the cell. Enter goes to the cell fields.",

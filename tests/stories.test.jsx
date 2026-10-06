@@ -17,11 +17,14 @@ describe.each(Object.entries(files))("%s", (file, module) => {
   it.each(Object.entries(stories))("%s renders", async (name, Story) => {
     const { container } = render(<Story />);
 
-    // Stories are wrapped in an svg, so check that something is inside it
+    // Stories of the print output are wrapped in an svg, check that something
+    // is inside it. The stories of the interface are not drawn in one.
     /* eslint-disable testing-library/no-container, testing-library/no-node-access */
-    const svg = container.querySelector("svg");
-    expect(svg).not.toBeNull();
-    expect(svg.children.length).toBeGreaterThan(0);
+    const drawn = Story.parameters?.chrome
+      ? container
+      : container.querySelector("svg");
+    expect(drawn).not.toBeNull();
+    expect(drawn.children.length).toBeGreaterThan(0);
     /* eslint-enable testing-library/no-container, testing-library/no-node-access */
   });
 });
