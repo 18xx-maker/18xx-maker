@@ -97,6 +97,9 @@ Use `rotate` or `side` when you want the text of a label, value or terrain to
 turn, and `rotate` to turn a token. `"fixed": true` on a token turns it exactly
 as far as the element, whichever of the three fields you use.
 
+With `mid`, the text of labels, values and terrain stays upright whichever
+field you use.
+
 ## Named Positions
 
 Instead of working out an `angle` and `percent`, an element can name a point on

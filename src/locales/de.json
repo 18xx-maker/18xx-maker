@@ -409,7 +409,7 @@
         "basicSide": "side ohne mid dreht das Element um (side - 1) Sechstel einer Drehung: Seite 1 ist nicht gedreht, Seite 2 um 60 Grad.",
         "turnLabelRotation": "rotation dreht den Text einer Beschriftung nicht, er bleibt aufrecht.",
         "turnLabelRotate": "rotate dreht auch den Text einer Beschriftung.",
-        "turnToken": "Mit rotate lässt sich eine Spielmarke drehen.",
+        "turnToken": "Mit rotate lässt sich ein Token drehen.",
         "namedSharp": "mid sharp setzt eine centerTown auf die Mitte eines sharp (angle 30, percent 0.577).",
         "namedGentle": "mid gentle setzt sie auf die Mitte eines gentle (angle 60, percent 0.268).",
         "namedBar": "align perpendicular dreht einen Ortsbalken am Punkt quer zum Gleis.",

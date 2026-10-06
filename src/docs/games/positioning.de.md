@@ -106,6 +106,9 @@ oder von Gelände drehen soll, und `rotate`, um einen Token zu drehen.
 `"fixed": true` an einem Token dreht ihn genau so weit wie das Element, egal
 welches der drei Felder du benutzt.
 
+Mit `mid` bleibt der Text von Beschriftungen, Werten und Gelände aufrecht,
+welches Feld du auch benutzt.
+
 ## Benannte Positionen
 
 Statt `angle` und `percent` auszurechnen, kann ein Element mit `mid` einen Punkt

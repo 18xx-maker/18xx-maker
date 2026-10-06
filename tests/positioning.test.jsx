@@ -354,8 +354,9 @@ describe("placing and turning", () => {
       expect(list.some((t) => t.endsWith("translate(10 5)"))).toBe(true),
     );
     // only the turn in the last rotate changes
-    expect(plain[0].split(" translate")[0]).toEqual(
-      turnedBy[0].split(" translate")[0],
+    const moved = (list) => list.find((t) => t.includes("translate("));
+    expect(moved(plain).split(" translate")[0]).toEqual(
+      moved(turnedBy).split(" translate")[0],
     );
   });
 
