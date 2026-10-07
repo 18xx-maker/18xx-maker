@@ -75,6 +75,7 @@
     "title": "Edit game",
     "close": "Close the edit panel",
     "changes": "Review and save changes",
+    "memoryNote": "Changes stay in memory until you save them on the Changes page.",
     "unset": "Not set",
     "true": "Yes",
     "false": "No",
@@ -84,55 +85,55 @@
     "sections": {
       "info": {
         "tab": "Game",
-        "description": "Edit the game info, links and flags. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the game info, links and flags."
       },
       "trains": {
         "tab": "Trains",
-        "description": "Edit the trains of the game. Add, remove, copy and reorder them with the buttons of each train."
+        "description": "Edit the trains of the game, one card for each."
       },
       "privates": {
         "tab": "Privates",
-        "description": "Edit the privates of the game. Add, remove, copy and reorder them with the buttons of each private."
+        "description": "Edit the privates of the game, one card for each."
       },
       "companies": {
         "tab": "Companies",
-        "description": "Edit the companies of the game. Add, remove, copy and reorder them with the buttons of each company. A company has many fields, so its card starts closed."
+        "description": "Edit the companies of the game, one card for each (the cards start closed)."
       },
       "phases": {
         "tab": "Phases",
-        "description": "Edit the phases of the game. Add, remove, copy and reorder them with the buttons of each phase."
+        "description": "Edit the phases of the game, one card for each."
       },
       "market": {
         "tab": "Market",
-        "description": "Edit the stock market: its type, the cells, the legend and how the share price moves. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the stock market: its type, cells, legend and how the share price moves."
       },
       "players": {
         "tab": "Players",
-        "description": "Edit the players table, the bank and the limits of the game. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the players table, the bank and the limits of the game."
       },
       "rounds": {
         "tab": "Rounds",
-        "description": "Edit the rounds of the round tracker, the turns printed on the charter, the notes about the pools and the number cards. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the rounds, the charter turns, the pool notes and the number cards."
       },
       "tokens": {
         "tab": "Tokens",
-        "description": "Edit the tokens of the game, the token types and the share types of the companies. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the game tokens, the token types and the share types."
       },
       "colors": {
         "tab": "Colors",
-        "description": "Edit the colors of the game by name, each with a swatch. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the colors of the game by name."
       },
       "output": {
         "tab": "Output",
-        "description": "Edit the revenue chart range, the export defaults and the tile upgrades of the game. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the revenue chart range, the export defaults and the tile upgrades."
       },
       "hex": {
         "tab": "Hex",
-        "description": "Edit the group of hexes you picked on the map as JSON: its color, what is drawn on it and its coordinates. Click a hex on the map to pick its group. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the picked group of hexes as JSON; click a hex on the map to pick its group."
       },
       "json": {
         "tab": "JSON",
-        "description": "Edit the whole game as JSON. The page follows what you type while the JSON is valid. The changes stay in memory until you save them on the Changes page."
+        "description": "Edit the whole game as JSON; the page follows while the JSON is valid."
       }
     },
     "groups": {
@@ -143,7 +144,9 @@
     },
     "nav": {
       "label": "Edit mode",
-      "forms": "Forms"
+      "forms": "Forms",
+      "problems_one": "{{count}} problem",
+      "problems_other": "{{count}} problems"
     },
     "items": {
       "trains": "train",
@@ -197,7 +200,10 @@
     "invalidLimit": "Enter a whole number of at least 1, ∞, or one digit over one digit, like 3/4.",
     "onePerLine": "One per line. A single line is saved as text, more lines as a list.",
     "reference": {
-      "from": { "trains": "trains", "companies": "companies" },
+      "from": {
+        "trains": "trains",
+        "companies": "companies"
+      },
       "unknown": "Not in the {{collection}} of this game: {{value}}.",
       "noMatches": "No matches. Enter uses \"{{value}}\".",
       "remove": "Remove {{name}}"

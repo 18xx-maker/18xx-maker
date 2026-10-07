@@ -131,7 +131,9 @@ the group names "Game", "Equipment" and "Look and output". The Forms | JSON swit
 the header goes between these forms and the JSON editor (below), and Forms goes
 back to the form you were on. Press `[` and `]` to switch between the form
 sections (from the JSON editor they go to the last form; the number keys go to
-another section of the game and keep the panel open).
+another section of the game and keep the panel open). A red dot on a chip
+marks a section with problems; its label says how many. Changes stay in memory
+until you save them from the Review and save changes button below the form.
 The Trains tab has a card for each train of the game, generated from the same
 schema. Add a train with Add train, and use the buttons of a card to move it up
 or down, duplicate it or remove it. A removed train can be put back with Undo
