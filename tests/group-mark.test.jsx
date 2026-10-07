@@ -85,7 +85,6 @@ describe("group marks on the print pieces", () => {
       <Charter {...charterProps} company={company("BRR")} />,
     );
     expect(marks(root)).toHaveLength(1);
-    expect(one(root, ".charter").className).toContain("charter--group");
   });
 
   it("prints nothing on a charter without a group", async () => {
@@ -93,7 +92,6 @@ describe("group marks on the print pieces", () => {
       <Charter {...charterProps} company={company("PRR")} />,
     );
     expect(marks(root)).toHaveLength(0);
-    expect(one(root, ".charter").className).not.toContain("charter--group");
   });
 
   it("prints the mark on a half width charter", async () => {
@@ -119,4 +117,53 @@ describe("group marks on the print pieces", () => {
       expect(marks(other.root)).toHaveLength(0);
     },
   );
+});
+
+describe("group mark details", () => {
+  const withGroups = (groups) => ({ ...game, groups });
+
+  it("draws an ellipse wider than it is tall", async () => {
+    const { root } = await mountElement(<GroupMark group="e" />, {
+      game: withGroups([{ id: "e", shape: "ellipse", color: "red" }]),
+    });
+    const ellipse = one(root, "ellipse");
+    expect(Number(ellipse.getAttribute("rx"))).toBeGreaterThan(
+      Number(ellipse.getAttribute("ry")),
+    );
+  });
+
+  it("prints black text on a light fill", async () => {
+    const { root } = await mountElement(<GroupMark group="l" />, {
+      game: withGroups([{ id: "l", color: "yellow", text: "L" }]),
+    });
+    expect(one(root, "text").getAttribute("fill")).not.toBe("#fff");
+  });
+
+  it("makes room for the mark on a president's share with a group", async () => {
+    const marked = await mountElement(
+      <Share company={company("BRR")} president shares={1} color="blue" />,
+    );
+    expect(one(marked.root, ".share").className).toContain("share--group");
+    const plain = await mountElement(
+      <Share company={company("BRR")} shares={1} color="blue" />,
+    );
+    expect(one(plain.root, ".share").className).not.toContain("share--group");
+  });
+
+  it("puts the share mark in the corner of left and gmt shares", async () => {
+    for (const style of ["left", "gmt"]) {
+      const { root } = await mountElement(
+        <Share company={company("BRR")} president shares={1} color="blue" />,
+        { search: `?config.cards.shareStyle=${style}` },
+      );
+      expect(one(root, `.share--${style} .share__group`)).not.toBeNull();
+    }
+  });
+
+  it("prints the mark on a small style private", async () => {
+    const { root } = await mountElement(<Private name="P" group="blue" />, {
+      search: "?config.privates.style=small",
+    });
+    expect(one(root, ".private__name .private__group")).not.toBeNull();
+  });
 });

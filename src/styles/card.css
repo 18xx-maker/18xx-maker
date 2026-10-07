@@ -60,23 +60,13 @@
 
 .charter__group {
   position: absolute;
-  bottom: 0.1875in;
-  right: 0.0625in;
-  width: 0.35in;
-  height: 0.35in;
+  top: 0.3in;
+  width: 0.4in;
+  height: 0.4in;
 }
 
-.charter--banner .charter__group {
-  bottom: calc(var(--banner-h) + 0.1875in);
-}
-
-/* The mark keeps the loan slots off the bottom right corner */
-.charter--group .charter__loans {
-  bottom: 0.5in;
-}
-
-.charter--group.charter--banner .charter__loans {
-  bottom: calc(var(--banner-h) + 0.5in);
+.charter--minor .charter__group {
+  top: 0.2375in;
 }
 
 .charter--banner .charter__variant {

@@ -99,6 +99,8 @@ Zeichenkette oder `null` lässt das Feld ohne Beschriftung:
 
 Der erste Kredit steht in der rechten Spalte, und die Kredite füllen sie von oben nach unten und gehen dann in der Spalte links davon weiter. Kredite, die nicht passen, werden abgeschnitten; halte die Anzahl bei Minors und Gesellschaftskarten halber Breite daher klein.
 
+Eine Gesellschaftskarte mit einer [Gruppe](/docs/games/game-info#gruppen) druckt ihr Zeichen im Kopf neben den Token, sodass es nie ein Kreditfeld belegt.
+
 ## Token unter dem Namen
 
 Eine Gesellschaft mit vielen Tokens kann `tokensBelow` setzen, um ihre Tokenfelder

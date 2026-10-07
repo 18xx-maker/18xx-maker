@@ -95,6 +95,10 @@ header, in columns that fit the height of the charter, so it is never mistaken f
 
 The first loan is in the right column and the loans fill it from top to bottom, then continue in the column to its left. Loans that do not fit are cut off, so keep the number small on minors and half width charters.
 
+A charter with a [group](/docs/games/game-info#groups) prints its mark in the header, next to the tokens, so it never takes a loan slot.
+
+A charter with a [group](/docs/games/game-info#groups) prints its mark in the header, next to the tokens, so it never takes a loan slot.
+
 ## Tokens below the name
 
 A company with many tokens can set `tokensBelow` to print its token slots in a
