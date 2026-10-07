@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useStore } from "react-redux";
 
@@ -36,18 +36,22 @@ const HexSection = ({ game }) => {
   const [variation] = useIntParam("variation", 0);
   const { hex: anchor, select } = useSelectedHex();
 
-  // The anchor our own edit moved the selection to, until the url has it
-  const own = useRef(null);
-  // The anchor of the url at the last render, and how many times the selection
-  // was changed from outside (a click on the map): the editor starts over
-  const seen = useRef(anchor);
-  const generation = useRef(0);
-  if (seen.current !== anchor) {
-    seen.current = anchor;
-    if (own.current !== anchor) generation.current += 1;
-    own.current = null;
+  // State, so that a render that is thrown away or run twice changes nothing:
+  // the anchor of the url at the last render, how many times the selection was
+  // changed from outside (a click on the map: the editor starts over), and the
+  // anchor our own edit moved the selection to, until the url has it
+  const [sync, setSync] = useState({ seen: anchor, generation: 0, own: null });
+  let now = sync;
+  if (sync.seen !== anchor) {
+    now = {
+      seen: anchor,
+      generation: sync.generation + (sync.own === anchor ? 0 : 1),
+      own: null,
+    };
+    setSync(now);
   }
-  const current = own.current ?? anchor;
+  const { generation } = now;
+  const current = now.own ?? anchor;
 
   const urlAnchor = useRef(anchor);
   urlAnchor.current = anchor;
@@ -85,7 +89,7 @@ const HexSection = ({ game }) => {
         const next = anchorOf(value);
         state.anchor = next;
         if (next !== urlAnchor.current) {
-          own.current = next;
+          setSync((was) => ({ ...was, own: next }));
           selectRef.current(next);
         }
       },
@@ -96,7 +100,7 @@ const HexSection = ({ game }) => {
       },
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [generation.current, slug, variation]);
+  }, [generation, slug, variation]);
 
   if (!variationMap(game, variation)) return null;
   if (!current) return <p className="text-sm">{t("hexEditor.hint")}</p>;
@@ -125,7 +129,7 @@ const HexSection = ({ game }) => {
   const removed = index < 0 && isRemoved(game, variation, current);
 
   return (
-    <div className="flex flex-1 flex-col gap-2 min-h-0">
+    <div className="flex flex-1 flex-col gap-2 min-h-0" data-anchor={current}>
       {index < 0 && (
         <p role="note" className="text-sm">
           {removed
@@ -139,7 +143,7 @@ const HexSection = ({ game }) => {
         </p>
       )}
       <JsonSection
-        key={`${slug}:${variation}:${generation.current}`}
+        key={`${slug}:${variation}:${generation}`}
         game={game}
         lens={lens}
       />

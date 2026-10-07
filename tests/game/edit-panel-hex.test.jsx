@@ -80,14 +80,22 @@ const marks = () =>
     el.getAttribute("data-selected"),
   );
 
-const editor = async () => {
-  const host = await screen.findByTestId("json-editor");
-  return waitFor(() => {
+// The editor of the group at an anchor, when given: the host is looked up
+// again on every try, a host found before the editor started over is gone
+const editor = (anchor) =>
+  waitFor(() => {
+    const host = screen.queryByTestId("json-editor");
+    if (!host) throw new Error("no editor host yet");
+    if (
+      anchor !== undefined &&
+      host.closest("[data-anchor]")?.getAttribute("data-anchor") !== anchor
+    ) {
+      throw new Error(`the editor is not at ${anchor} yet`);
+    }
     const found = EditorView.findFromDOM(host);
     if (!found) throw new Error("no editor yet");
     return found;
   });
-};
 const editorGroup = async () =>
   JSON.parse((await editor()).state.doc.toString());
 
@@ -105,7 +113,7 @@ const pick = async (router, coord, anchor = coord) => {
   await waitForCell(coord);
   await realUser.click(cell(coord));
   await waitFor(() => expect(params(router).hex).toBe(anchor));
-  await editor();
+  await editor(anchor);
 };
 const modifier = (mac) => (mac ? "Meta" : "Control");
 
@@ -555,6 +563,18 @@ describe("editing the group as JSON", () => {
     expect(await editor()).toBe(v);
     expect(JSON.parse(v.state.doc.toString()).hexes).toEqual(["C13", "C11"]);
     expect(hexes()[8].hexes).toEqual(["C13", "C11"]);
+  });
+
+  it("keeps the editor through edits that move the selection twice", async () => {
+    const { router } = open(editRoute);
+    await pick(router, "C11");
+    const v = await editor("C11");
+
+    await type({ color: "plain", hexes: ["C13", "C11"] });
+    await type({ color: "plain", hexes: ["C15", "C11"] });
+    await waitFor(() => expect(params(router).hex).toBe("C15"));
+    expect(await editor("C15")).toBe(v);
+    expect(JSON.parse(v.state.doc.toString()).hexes).toEqual(["C15", "C11"]);
   });
 
   it("keeps the draft under the anchor the edit moved to", async () => {

@@ -30,12 +30,16 @@ const Failed = ({ retry }) => {
 };
 
 const load = () => lazy(() => import("@/components/editPanel/JsonEditor"));
+// The first attempt shares one component: a new one per mount would suspend
+// every time the editor starts over. A retry gets its own, a failed one stays
+// failed.
+const first = load();
 
 // lens: the part of the game to edit, the whole game without one (JsonEditor)
 const JsonSection = ({ game, lens }) => {
   const [attempt, setAttempt] = useState(0);
   // A new lazy component per attempt: the failed one stays failed
-  const Editor = useMemo(load, [attempt]);
+  const Editor = useMemo(() => (attempt === 0 ? first : load()), [attempt]);
 
   return (
     <Boundary
