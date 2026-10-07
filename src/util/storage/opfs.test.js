@@ -2,10 +2,12 @@ import { validate } from "uuid";
 
 import {
   deleteGame,
+  findGame,
   loadGame,
   loadSummaries,
   overwriteGame,
   peekGame,
+  saveGameAs,
   saveGameFile,
 } from "@/util/storage/opfs";
 
@@ -216,5 +218,99 @@ describe("internal games in OPFS", () => {
     const id = (await saveGameFile(JSON.stringify(game))).split(":")[1];
     await deleteGame(id);
     expect(games().size).toBe(0);
+  });
+
+  describe("saving as", () => {
+    it("names the game after the sanitized name", async () => {
+      const slug = await saveGameAs("My Game.json", "{}");
+
+      expect(slug).toBe("internal:My Game");
+      expect(games().get("My Game.json")).toBe("{}");
+    });
+
+    it("gives an id that is safe in a URL and survives a round trip", async () => {
+      const slug = await saveGameAs("a#b%c?d&e:f ü 游戏", JSON.stringify(game));
+
+      expect(slug).toBe("internal:abcdef ü 游戏");
+      const id = slug.split(":")[1];
+      expect(Object.keys(await loadSummaries())).toEqual([slug]);
+      expect((await loadGame(id)).meta.slug).toBe(slug);
+    });
+
+    it("rejects a name with nothing usable", async () => {
+      await expect(saveGameAs("???", "{}")).rejects.toMatchObject({
+        code: "invalid",
+      });
+      expect(games()?.size ?? 0).toBe(0);
+    });
+
+    it("does not overwrite a game, whatever the case of the name", async () => {
+      await saveGameAs("my-game", '{"a":1}');
+
+      await expect(saveGameAs("My-Game", '{"a":2}')).rejects.toMatchObject({
+        code: "exists",
+      });
+      expect(games().get("my-game.json")).toBe('{"a":1}');
+      expect(games().size).toBe(1);
+    });
+
+    it("replaces the exact game that exists when asked", async () => {
+      await saveGameAs("my-game", '{"a":1}');
+
+      const slug = await saveGameAs("My-Game", '{"a":2}', { overwrite: true });
+
+      expect(slug).toBe("internal:my-game");
+      expect(games().get("my-game.json")).toBe('{"a":2}');
+      expect(games().size).toBe(1);
+    });
+
+    it("finds a game by name without case", async () => {
+      await saveGameAs("my-game", "{}");
+      const uuid = (await saveGameFile(JSON.stringify(game))).split(":")[1];
+
+      expect(await findGame("MY-GAME.json")).toBe("my-game");
+      expect(await findGame(uuid)).toBe(uuid);
+      expect(await findGame("other")).toBeUndefined();
+      expect(await findGame("???")).toBeUndefined();
+    });
+
+    it("keeps games with uuid ids working next to named ones", async () => {
+      const slug = await saveGameFile(JSON.stringify(game));
+      await saveGameAs("named", JSON.stringify(game));
+
+      expect(Object.keys(await loadSummaries()).sort()).toEqual(
+        [slug, "internal:named"].sort(),
+      );
+    });
+
+    it("writes through a worker when createWritable is unavailable", async () => {
+      const original = storage.root.getDirectoryHandle;
+      storage.root.getDirectoryHandle = async (...args) => {
+        const dir = await original(...args);
+        const getFileHandle = dir.getFileHandle;
+        dir.getFileHandle = async (...a) => {
+          const handle = await getFileHandle(...a);
+          delete handle.createWritable;
+          return handle;
+        };
+        return dir;
+      };
+      const posted = [];
+      class FakeWorker {
+        postMessage(data) {
+          posted.push(data);
+          queueMicrotask(() => this.onmessage({ data: null }));
+        }
+        terminate() {}
+      }
+      vi.stubGlobal("Worker", FakeWorker);
+      URL.createObjectURL = vi.fn(() => "blob:x");
+      URL.revokeObjectURL = vi.fn();
+
+      expect(await saveGameAs("worker game", "{}")).toBe(
+        "internal:worker game",
+      );
+      expect(posted[0].filename).toBe("worker game.json");
+    });
   });
 });

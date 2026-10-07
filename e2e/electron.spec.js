@@ -213,6 +213,44 @@ test.describe("the app exports 18Test", () => {
     ).toBeVisible();
   });
 
+  test("saves a copy of a bundled game where the save dialog says", async () => {
+    app = await launch();
+    const file = path.join(out, "my-copy.json");
+    await app.evaluate(({ dialog }, filePath) => {
+      dialog.showSaveDialog = async (...args) => {
+        globalThis.dialogOptions = args.at(-1);
+        return { canceled: false, filePath };
+      };
+    }, file);
+
+    const window = await show(app, "#/games/18Test");
+    await window.getByRole("button", { name: "Save as..." }).click();
+
+    await expect(window).toHaveURL((url) =>
+      url.hash.startsWith("#/games/electron:"),
+    );
+    const game = JSON.parse(fs.readFileSync(file, "utf-8"));
+    expect(game.info.title).toBe("18Test");
+    expect(game.meta).toBeUndefined();
+    const options = await app.evaluate(() => globalThis.dialogOptions);
+    expect(options.defaultPath).toBe("18test.json");
+    expect(options.title).toBe("Save as");
+
+    // The copy is a game of the app and one of the recents
+    const slug = new URL(window.url()).hash.slice("#/games/".length);
+    const config = path.join(out, "user-data", "config.json");
+    await expect
+      .poll(() =>
+        JSON.parse(fs.readFileSync(config, "utf-8")).recents.map(
+          (recent) => recent.slug,
+        ),
+      )
+      .toContain(slug);
+    expect(
+      Object.values(JSON.parse(fs.readFileSync(config, "utf-8")).summaries),
+    ).toEqual([expect.objectContaining({ slug, path: file })]);
+  });
+
   test("opens the JSON editor with the j key", async () => {
     app = await launch();
 

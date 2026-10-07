@@ -454,4 +454,61 @@ describe("createGameFile", () => {
     expect(calls).toEqual(["write", "abort"]);
     expect(idb.databases).toEqual({});
   });
+
+  describe("registered files", () => {
+    // Handles of the same file answer isSameEntry like the browser does
+    const sameFile = (id, game) => ({
+      ...fileHandle(game),
+      id,
+      isSameEntry: vi.fn(async (other) => other.id === id),
+    });
+
+    it("reuses the id of a file that is already registered", async () => {
+      const first = await saveGameHandle(sameFile("a", game));
+      await saveGameHandle(sameFile("b", game));
+      const again = await saveGameHandle(
+        sameFile("a", { ...game, map: { x: 1 } }),
+      );
+
+      expect(again).toBe(first);
+      expect(Object.keys(await loadSummaries())).toHaveLength(2);
+    });
+
+    it("gives a new id to a file that is not registered", async () => {
+      const first = await saveGameHandle(sameFile("a", game));
+      const second = await saveGameHandle(sameFile("b", game));
+      expect(second).not.toBe(first);
+    });
+
+    it("reuses the id of the file a save as picked again", async () => {
+      const calls = [];
+      const handle = sameFile("a", game);
+      const known = await saveGameHandle(handle);
+      window.showSaveFilePicker = async () => ({
+        ...handle,
+        createWritable: async () => ({
+          write: async () => calls.push("write"),
+          close: async () => calls.push("close"),
+          abort: async () => {},
+        }),
+      });
+
+      expect(await createGameFile("{}", "x.json")).toBe(known);
+      expect(Object.keys(await loadSummaries())).toEqual([known]);
+    });
+
+    it("saves the text it was given", async () => {
+      let written;
+      window.showSaveFilePicker = async () => ({
+        ...fileHandle(game),
+        createWritable: async () => ({
+          write: async (text) => (written = text),
+          close: async () => {},
+          abort: async () => {},
+        }),
+      });
+      await createGameFile('{"info":{"title":"T"}}', "t.json");
+      expect(written).toBe('{"info":{"title":"T"}}');
+    });
+  });
 });
