@@ -15,6 +15,14 @@ import { MIN_DELAY, debounceDelay } from "@/util/jsonEditor";
 import { allowConsole } from "@tests/support/console.js";
 import { renderApp } from "@tests/support/helpers.jsx";
 
+// A game that is not in the state is loaded in the background and a failed
+// load goes back to the library: keep the load pending so the key is pressed
+// while the page is still on its route, however slow the machine is
+vi.mock("@/util/storage/opfs", async (importOriginal) => ({
+  ...(await importOriginal()),
+  loadGame: vi.fn(() => new Promise(() => {})),
+}));
+
 let opened;
 
 // An edit starts the check of the game in the background: let it end inside
