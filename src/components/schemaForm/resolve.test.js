@@ -1,3 +1,4 @@
+import en from "@/locales/schema.en.json";
 import schema from "@/schemas/game.schema.json";
 import {
   COLOR_KEYS,
@@ -952,7 +953,7 @@ describe("lists", () => {
 describe("the market", () => {
   it("finds the schema of a cell field through rows, oneOf and $ref", () => {
     const value = schemaAt(schema, ["stock", "market", 1, 3, "value"]);
-    expect(value.description).toMatch(/price shown/);
+    expect(en[value.description]).toMatch(/price shown/);
     // A flat market has the cell right under the list
     expect(schemaAt(schema, ["stock", "market", 3, "value"])).toEqual(value);
     expect(schemaAt(schema, ["stock", "market", 3, "legend"]).type).toBe(

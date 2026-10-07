@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://18xx-maker.com/schemas/de/tiles.schema.json",
+  "type": "object",
+  "propertyNames": { "pattern": "^[0-9a-zA-Z]+(\\|[0-9a-zA-Z]+)?$" },
+  "additionalProperties": { "$ref": "tiles.defs.json#/definitions/hex" }
+}

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://18xx-maker.com/schemas/companies.schema.json",
+  "$id": "https://18xx-maker.com/schemas/de/companies.schema.json",
   "type": "object",
   "properties": {
     "name": {
@@ -21,7 +21,7 @@
             "type": "string"
           },
           "alias": {
-            "description": "schema.game.companies.items.alias",
+            "description": "Ein zweiter Name der Gesellschaft. Die Konfiguration companyNames wählt, ob die Gesellschaftskarte und die Anteilskarten den Namen, den Alias oder beides drucken.",
             "type": "string"
           },
           "logo": {

@@ -1,0 +1,2819 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://18xx-maker.com/schemas/de/tiles.defs.json",
+  "definitions": {
+    "side": { "type": "integer", "minimum": 1, "maximum": 6 },
+    "rotation": {
+      "type": "integer",
+      "multipleOf": 60,
+      "minimum": 0,
+      "maximum": 300
+    },
+    "removeBorders": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": { "type": "number", "minimum": 1, "maximum": 6 }
+        },
+        { "type": "boolean", "enum": [true] }
+      ]
+    },
+    "borders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "side": { "$ref": "#/definitions/side" },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "color": { "type": "string" },
+          "width": { "type": "number" }
+        },
+        "additionalProperties": false,
+        "required": ["color"]
+      }
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "size": { "type": "number" },
+          "color": { "type": "string" },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": ["label"],
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "straight": { "type": "boolean", "enum": [true] },
+        "color": { "type": "string" },
+        "bgColor": { "type": "string" },
+        "offset": {
+          "type": "number",
+          "default": 50,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "fontStyle": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"]
+        },
+        "fontWeight": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["normal", "bold", "bolder", "lighter"]
+            },
+            { "type": "number" }
+          ]
+        },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "integer", "minimum": 4 },
+        "hidden": {
+          "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name"],
+      "dependencies": { "align": ["mid"] }
+    },
+    "names": { "type": "array", "items": { "$ref": "#/definitions/name" } },
+    "goods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "text": { "type": "string" },
+          "textColor": { "type": "string" },
+          "textBorderWidth": { "type": "number", "minimum": 0 },
+          "textBorderColor": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "label": { "type": "string" },
+          "left": { "type": "number" },
+          "right": { "type": "number" },
+          "bottom": { "type": "boolean", "enum": [true] },
+          "reverse": { "type": "boolean", "enum": [true] },
+          "radius": { "type": "number", "exclusiveMinimum": 0 },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "divides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "companyToken": {
+      "type": "object",
+      "properties": {
+        "company": { "type": "string" },
+        "destination": { "type": "boolean", "enum": [true] },
+        "width": { "type": "integer", "minimum": 1 },
+        "bgFill": { "type": "string" },
+        "hidden": {
+          "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "required": ["company"],
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "genericToken": {
+      "type": "object",
+      "properties": {
+        "logo": { "type": "string" },
+        "label": { "type": "string", "minLength": 1 },
+        "color": { "type": "string" },
+        "bgFill": { "type": "string" },
+        "iconColor": { "type": "string" },
+        "outline": { "type": "string" },
+        "outlineWidth": { "type": "integer", "minimum": 1 },
+        "circle": { "type": "string" },
+        "shield": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "shield3": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "kiteshield": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "shieldTop": { "type": "string" },
+        "shield3TopLeft": { "type": "string" },
+        "shield3TopCenter": { "type": "string" },
+        "shield3TopRight": { "type": "string" },
+        "square": { "type": "string" },
+        "spiral": { "type": "string" },
+        "target": { "type": "string" },
+        "stripe": { "type": "string" },
+        "stripes": { "type": "string" },
+        "curvedStripes": { "type": "string" },
+        "halves": { "type": "array", "items": { "type": "string" } },
+        "quarters": { "type": "array", "items": { "type": "string" } },
+        "destination": { "type": "boolean", "enum": [true] },
+        "reserved": { "type": "boolean", "enum": [true] },
+        "inverse": { "type": "boolean", "enum": [true] },
+        "inverseTextColor": { "type": "string" },
+        "angle": {
+          "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "percent": {
+          "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+          "type": "number",
+          "minimum": 0
+        },
+        "width": { "type": "integer", "minimum": 1 },
+        "text": { "type": "string" },
+        "textColor": { "type": "string" },
+        "textBorderWidth": { "type": "number", "minimum": 0 },
+        "textBorderColor": { "type": "string" },
+        "hidden": {
+          "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "rotate": {
+          "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+          "type": "number"
+        },
+        "order": {
+          "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        },
+        "fontStyle": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"]
+        },
+        "fontWeight": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["normal", "bold", "bolder", "lighter"]
+            },
+            { "type": "number" }
+          ]
+        },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "integer", "minimum": 4 }
+      },
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/companyToken" },
+          { "$ref": "#/definitions/genericToken" }
+        ]
+      }
+    },
+    "industries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "top": { "type": "string" },
+          "bottom": { "type": "string" },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "offBoardRevenue": {
+      "type": "object",
+      "properties": {
+        "name": { "$ref": "#/definitions/name" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "rows": { "type": "integer", "minimum": 1 },
+        "groups": { "type": "array", "items": { "type": "string" } },
+        "revenues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": { "type": "string" },
+              "value": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "revenue": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "cost": { "oneOf": [{ "type": "string" }, { "type": "number" }] },
+              "phase": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "phaseColor": { "type": "string" },
+              "textColor": { "type": "string" }
+            }
+          }
+        },
+        "hidden": {
+          "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "boomtowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "city": { "type": "boolean", "enum": [true] },
+          "dashed": { "type": "boolean", "enum": [false] },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "bgColor": { "type": "string" },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          },
+          "groups": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "cities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "oneOf": [
+              { "type": "integer", "minimum": 1, "maximum": 6, "default": 1 },
+              { "type": "string", "enum": ["2Y", "1S1Y", "2S1Y", "3Ferry"] }
+            ]
+          },
+          "width": { "type": "integer", "minimum": 1 },
+          "extend": { "type": "string", "enum": ["left", "right"] },
+          "pass": { "type": "boolean", "enum": [true] },
+          "outside": { "type": "boolean", "enum": [true] },
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "companies": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": { "type": "string" },
+                    "color": { "type": "string" }
+                  }
+                },
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            }
+          },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "mediumCities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          },
+          "groups": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "centerTowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "width": { "type": "number", "exclusiveMinimum": 0 },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "towns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "bridges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "tunnels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "routeBonuses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "shapes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "background": { "type": "boolean", "enum": [true] },
+          "type": {
+            "type": "string",
+            "enum": [
+              "circle",
+              "diamond",
+              "ellipse",
+              "hexagon",
+              "square",
+              "triangle"
+            ]
+          },
+          "text": { "type": "string" },
+          "textColor": { "type": "string" },
+          "textBorderWidth": { "type": "number", "minimum": 0 },
+          "textBorderColor": { "type": "string" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "terrain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cost": { "type": "number" },
+          "size": {
+            "type": "string",
+            "enum": ["tiny", "small", "medium", "large"]
+          },
+          "type": { "type": "string" },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "icons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "noCircle": { "type": "boolean" },
+          "type": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "stroke": { "type": "string" },
+          "strokeWidth": { "type": "integer", "minimum": 1 },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "track": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sides": {
+            "type": "array",
+            "items": { "type": "number", "minimum": 1, "maximum": 6 }
+          },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "borderColor": { "type": "string" },
+          "gaugeColor": { "type": "string" },
+          "revenue": { "type": "integer", "minimum": 0 },
+          "gauge": {
+            "type": "string",
+            "enum": ["narrow", "dual", "dashed", "line"]
+          },
+          "offset": { "type": "number" },
+          "cross": {
+            "type": "string",
+            "enum": ["over", "under", "top", "bottom"]
+          },
+          "path": { "type": "string" },
+          "start": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "end": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom",
+              "mid",
+              "sharp",
+              "gentle",
+              "straight",
+              "bent",
+              "offboard",
+              "stub",
+              "stop",
+              "straightStop",
+              "gentleStop",
+              "gentleStopRev",
+              "sharpStop",
+              "sharpStopRev",
+              "city"
+            ]
+          },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "tunnelEntrances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "oneOf": [{ "type": "number" }, { "type": "string" }] },
+          "outerBorderColor": { "type": "string" },
+          "hidden": {
+            "description": "true zeichnet das Element nicht. Die anderen Elemente behalten ihre Positionen, und ein verstecktes Element zählt weiterhin für die automatische Positionierung.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Richtung vom Mittelpunkt des Hex, in Grad im Uhrzeigersinn auf dem Bildschirm: 0 ist unten, 90 links, 180 oben, 270 rechts. Standard ist 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotation, und ein rotate ungleich 0 hat Vorrang vor rotation. Anders als rotation dreht es auch den Text von Beschriftungen, Werten und Gelände.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Dreht das Element an seiner Stelle, in Grad im Uhrzeigersinn. Dasselbe wie rotate, aber der Text von Beschriftungen, Werten und Gelände bleibt aufrecht. Verwende nur eines von rotate und rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "Eine Hexseite (1 bis 6). Ohne mid dreht es das Element um (side - 1) Sechstel einer Drehung (Schritte von 60 Grad): Seite 1 ist ungedreht, Seite 2 sind 60 Grad, und es verschiebt das Element nicht. Mit mid verschiebt es den benannten Punkt auf das Gleis, das auf dieser Seite beginnt.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Setzt das Element auf den Mittelpunkt eines Gleistyps, der auf Seite 1 beginnt: straight (die Mitte), sharp oder gentle. Verwende side, um eine andere Seite zu wählen. Ein ausdrücklicher angle oder percent überschreibt es, und x und y verschieben davon aus.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "Mit mid dreht es das Element so, dass es senkrecht oder parallel zum Gleis an diesem Punkt liegt. rotate und rotation werden als Versatz hinzugefügt.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Verschiebt das Element um so viele Einheiten nach rechts (negativ: links), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Verschiebt das Element um so viele Einheiten nach unten (negativ: oben), in Bildschirmeinheiten von dort, wo angle und percent es hinsetzen. Wird nicht von angle oder rotation gedreht. Standard ist 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "Wie weit hinaus entlang angle, als Bruchteil von 75 Einheiten: 0 ist die Mitte und 1 ist die Mitte einer Hexkante auf einem Plättchen. Über 1 ist jenseits der Kante, wo nur Elemente sichtbar sind, die außerhalb des Hex gezeichnet werden. Standard ist 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Zeichenreihenfolge. Ein Element mit order wird nach allen Elementen des Plättchens gezeichnet, die keines haben (auf derselben Seite des Plättchenrands), der niedrigste Wert zuerst, sodass es über Dingen liegen kann, unter denen es normalerweise liegt (eine Stadt über einem Wert). Eine negative Zahl zeichnet es vor allen, und true zeichnet es zuletzt. Seine Position ändert sich nicht, nur wann es gezeichnet wird.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": ["value"],
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "hex": {
+      "type": "object",
+      "properties": {
+        "print": { "type": "integer", "minimum": 0 },
+        "quantity": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "tile": { "type": "string" },
+        "color": { "type": "string" },
+        "stripeRotation": {
+          "type": "number",
+          "description": "Überschreibt die Drehung (in Grad) der Streifen für eine gestreifte Farbe wie \"yellow/blue\"."
+        },
+        "encoding": { "type": "string" },
+        "group": {
+          "type": "string",
+          "pattern": "^[0-9a-z]+$",
+          "description": "Plättchen werden zum Drucken natürlich nach Farbe in Gruppen sortiert. Das überschreibt diese Gruppierung. Nützlich für Plättchen mit aufwendigen Rändern oder anderen Beschnittproblemen."
+        },
+        "broken": {
+          "type": "boolean",
+          "enum": [true],
+          "description": "Markiert dieses Plättchen als defekt und nicht bereit für den Export."
+        },
+        "clipPath": {
+          "type": "boolean",
+          "enum": [false],
+          "description": "Entfernt den speziellen Beschnitt-clipPath beim Drucken dieser Plättchen. Sie werden immer ohne Beschnitt gedruckt."
+        },
+        "borders": { "$ref": "#/definitions/borders" },
+        "centerTowns": { "$ref": "#/definitions/centerTowns" },
+        "cities": { "$ref": "#/definitions/cities" },
+        "boomtowns": { "$ref": "#/definitions/boomtowns" },
+        "mediumCities": { "$ref": "#/definitions/mediumCities" },
+        "companies": { "$ref": "#/definitions/companies" },
+        "divides": { "$ref": "#/definitions/divides" },
+        "goods": { "$ref": "#/definitions/goods" },
+        "half": {
+          "description": "Zeichnet nur diese Hälfte des Feldes, durch die Mitte geschnitten, mit einem Rand rund um den gezeichneten Teil. Nur für Kartenfelder: Plättchen ignorieren es. Was außerhalb des Feldes gezeichnet wird, etwa seine ID oder ein Bonus, wird nicht abgeschnitten. Die Seiten, durch die der Schnitt verläuft, enden am Schnitt, der keinen Rand erhält.",
+          "type": "string",
+          "enum": ["top", "bottom", "left", "right"]
+        },
+        "icons": { "$ref": "#/definitions/icons" },
+        "industries": { "$ref": "#/definitions/industries" },
+        "labels": { "$ref": "#/definitions/labels" },
+        "names": { "$ref": "#/definitions/names" },
+        "offBoardRevenue": { "$ref": "#/definitions/offBoardRevenue" },
+        "removeBorders": { "$ref": "#/definitions/removeBorders" },
+        "rotation": { "$ref": "#/definitions/rotation" },
+        "rotations": {
+          "oneOf": [
+            { "$ref": "#/definitions/side" },
+            { "type": "array", "items": { "$ref": "#/definitions/rotation" } }
+          ]
+        },
+        "bridges": { "$ref": "#/definitions/bridges" },
+        "tunnels": { "$ref": "#/definitions/tunnels" },
+        "routeBonuses": { "$ref": "#/definitions/routeBonuses" },
+        "shapes": { "$ref": "#/definitions/shapes" },
+        "terrain": { "$ref": "#/definitions/terrain" },
+        "tokens": { "$ref": "#/definitions/tokens" },
+        "towns": { "$ref": "#/definitions/towns" },
+        "track": { "$ref": "#/definitions/track" },
+        "tunnelEntrances": { "$ref": "#/definitions/tunnelEntrances" },
+        "values": { "$ref": "#/definitions/values" },
+        "hexes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[A-Z]+[0-9]+$" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "token": {
+      "type": "object",
+      "description": "Ein Token. Die Eigenschaften sind die, die die Token-Komponente liest.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
+        },
+        "logoWidth": { "type": "number", "description": "Breite des Logos." },
+        "icon": {
+          "type": "string",
+          "description": "Name eines Icons, das auf den Token gezeichnet wird."
+        },
+        "iconWidth": { "type": "number", "description": "Breite des Icons." },
+        "iconColor": {
+          "type": "string",
+          "description": "Farbe des Icons oder Logos."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertikale Position des Icons."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text, der auf den Token geschrieben wird."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Farbe des Beschriftungstextes."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Überschreibt die vertikale Position der Beschriftung."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Farbe der Kontur um die Beschriftung."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Breite der Kontur um die Beschriftung."
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Eine zweite, kleinere Textzeile, die mit der Beschriftung angezeigt wird."
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "Ob die zweite Zeile über oder unter der Beschriftung steht. Standard ist unten (below)."
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "Farbe der zweiten Zeile. Standard ist die Farbe der Beschriftung."
+        },
+        "color": {
+          "type": "string",
+          "description": "Hintergrundfarbe des Tokens."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Schriftgröße der Beschriftung."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Schriftfamilie der Beschriftung."
+        },
+        "width": {
+          "type": "number",
+          "description": "Breite (Radius) des Tokens, standardmäßig 25."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square zeichnet einen quadratischen Token, alles andere einen Kreis."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Winkel der Formen, unabhängig von der Drehung."
+        },
+        "rotation": { "type": "number", "description": "Drehung des Tokens." },
+        "fixed": {
+          "type": "boolean",
+          "description": "Hebt jede Drehung des Tokens auf."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "Ein Zieltoken, standardmäßig kleiner."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "Ein reservierter Token, grau gezeichnet."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Zeichnet das Gegenstück des Tokens: kein Logo, nur Text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Beschriftungsfarbe eines inversen Tokens."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Zeichnet Beschnitt um den Token für den Druck."
+        },
+        "bar": {
+          "description": "true zeichnet einen weißen Balken hinter die Beschriftung, ein Farbstring zeichnet einen Balken in dieser Farbe.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Höhe des Balkens." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Farbe des Rands des Balkens."
+        },
+        "outline": { "type": "string", "description": "Farbe der Kontur." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Breite der Kontur."
+        },
+        "target": {
+          "type": "string",
+          "description": "Farbe einer Zielscheibenform."
+        },
+        "stripe": { "type": "string", "description": "Farbe eines Streifens." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Breite des Streifens."
+        },
+        "stripes": { "type": "string", "description": "Farbe der Streifen." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Breite der Streifen."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Abstand der Streifen von der Mitte."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Farbe gebogener Streifen."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Breite der gebogenen Streifen."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Abstand der gebogenen Streifen von der Mitte."
+        },
+        "spiral": { "type": "string", "description": "Farbe einer Spirale." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Breite der Spirale."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Abstand zwischen den Windungen der Spirale."
+        },
+        "circle": {
+          "description": "Farbe eines Kreises in der Mitte, true für weiß.",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius des Kreises, 25 ist der ganze Token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Randfarbe des Kreises."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines Schilds, true für weiß."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Farbe der Oberseite des Schilds."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines dreiteiligen Schilds, true für weiß."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Farbe oben links des dreiteiligen Schilds."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Farbe oben Mitte des dreiteiligen Schilds."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Farbe oben rechts des dreiteiligen Schilds."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines Kiteshields, true für weiß."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines fünfzackigen Sterns, true für weiß."
+        },
+        "square": {
+          "type": "string",
+          "description": "Farbe eines Quadrats auf dem Token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben der Hälften."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Vier Farben der Viertel."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben, die sich über sechs Teile abwechseln."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Drei Farben des Sonnenaufgangs."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben der Dreiecke des Hexagramms."
+        }
+      },
+      "additionalProperties": false
+    },
+    "gameToken": {
+      "type": "object",
+      "description": "Ein Token des Spiels: wie viele gedruckt werden und der Token selbst.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
+        },
+        "logoWidth": { "type": "number", "description": "Breite des Logos." },
+        "icon": {
+          "type": "string",
+          "description": "Name eines Icons, das auf den Token gezeichnet wird."
+        },
+        "iconWidth": { "type": "number", "description": "Breite des Icons." },
+        "iconColor": {
+          "type": "string",
+          "description": "Farbe des Icons oder Logos."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertikale Position des Icons."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text, der auf den Token geschrieben wird."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Farbe des Beschriftungstextes."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Überschreibt die vertikale Position der Beschriftung."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Farbe der Kontur um die Beschriftung."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Breite der Kontur um die Beschriftung."
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Eine zweite, kleinere Textzeile, die mit der Beschriftung angezeigt wird."
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "Ob die zweite Zeile über oder unter der Beschriftung steht. Standard ist unten (below)."
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "Farbe der zweiten Zeile. Standard ist die Farbe der Beschriftung."
+        },
+        "color": {
+          "type": "string",
+          "description": "Hintergrundfarbe des Tokens."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Schriftgröße der Beschriftung."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Schriftfamilie der Beschriftung."
+        },
+        "width": {
+          "type": "number",
+          "description": "Breite (Radius) des Tokens, standardmäßig 25."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square zeichnet einen quadratischen Token, alles andere einen Kreis."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Winkel der Formen, unabhängig von der Drehung."
+        },
+        "rotation": { "type": "number", "description": "Drehung des Tokens." },
+        "fixed": {
+          "type": "boolean",
+          "description": "Hebt jede Drehung des Tokens auf."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "Ein Zieltoken, standardmäßig kleiner."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "Ein reservierter Token, grau gezeichnet."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Zeichnet das Gegenstück des Tokens: kein Logo, nur Text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Beschriftungsfarbe eines inversen Tokens."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Zeichnet Beschnitt um den Token für den Druck."
+        },
+        "bar": {
+          "description": "true zeichnet einen weißen Balken hinter die Beschriftung, ein Farbstring zeichnet einen Balken in dieser Farbe.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Höhe des Balkens." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Farbe des Rands des Balkens."
+        },
+        "outline": { "type": "string", "description": "Farbe der Kontur." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Breite der Kontur."
+        },
+        "target": {
+          "type": "string",
+          "description": "Farbe einer Zielscheibenform."
+        },
+        "stripe": { "type": "string", "description": "Farbe eines Streifens." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Breite des Streifens."
+        },
+        "stripes": { "type": "string", "description": "Farbe der Streifen." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Breite der Streifen."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Abstand der Streifen von der Mitte."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Farbe gebogener Streifen."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Breite der gebogenen Streifen."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Abstand der gebogenen Streifen von der Mitte."
+        },
+        "spiral": { "type": "string", "description": "Farbe einer Spirale." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Breite der Spirale."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Abstand zwischen den Windungen der Spirale."
+        },
+        "circle": {
+          "description": "Farbe eines Kreises in der Mitte, true für weiß.",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius des Kreises, 25 ist der ganze Token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Randfarbe des Kreises."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines Schilds, true für weiß."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Farbe der Oberseite des Schilds."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines dreiteiligen Schilds, true für weiß."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Farbe oben links des dreiteiligen Schilds."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Farbe oben Mitte des dreiteiligen Schilds."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Farbe oben rechts des dreiteiligen Schilds."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines Kiteshields, true für weiß."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines fünfzackigen Sterns, true für weiß."
+        },
+        "square": {
+          "type": "string",
+          "description": "Farbe eines Quadrats auf dem Token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben der Hälften."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Vier Farben der Viertel."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben, die sich über sechs Teile abwechseln."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Drei Farben des Sonnenaufgangs."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben der Dreiecke des Hexagramms."
+        },
+        "quantity": {
+          "description": "Wie viele dieser Token gedruckt werden. ∞ braucht print, um die Anzahl anzugeben.",
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "print": {
+          "description": "Wie viele dieser Token gedruckt werden, überschreibt quantity.",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "roundToken": {
+      "type": "object",
+      "description": "Ein Token auf dem Rundenzähler: die Runde und ihr Token.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
+        },
+        "logoWidth": { "type": "number", "description": "Breite des Logos." },
+        "icon": {
+          "type": "string",
+          "description": "Name eines Icons, das auf den Token gezeichnet wird."
+        },
+        "iconWidth": { "type": "number", "description": "Breite des Icons." },
+        "iconColor": {
+          "type": "string",
+          "description": "Farbe des Icons oder Logos."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertikale Position des Icons."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text, der auf den Token geschrieben wird."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Farbe des Beschriftungstextes."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Überschreibt die vertikale Position der Beschriftung."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Farbe der Kontur um die Beschriftung."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Breite der Kontur um die Beschriftung."
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Eine zweite, kleinere Textzeile, die mit der Beschriftung angezeigt wird."
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "Ob die zweite Zeile über oder unter der Beschriftung steht. Standard ist unten (below)."
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "Farbe der zweiten Zeile. Standard ist die Farbe der Beschriftung."
+        },
+        "color": {
+          "type": "string",
+          "description": "Hintergrundfarbe des Tokens."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Schriftgröße der Beschriftung."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Schriftfamilie der Beschriftung."
+        },
+        "width": {
+          "type": "number",
+          "description": "Breite (Radius) des Tokens, standardmäßig 25."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square zeichnet einen quadratischen Token, alles andere einen Kreis."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Winkel der Formen, unabhängig von der Drehung."
+        },
+        "rotation": { "type": "number", "description": "Drehung des Tokens." },
+        "fixed": {
+          "type": "boolean",
+          "description": "Hebt jede Drehung des Tokens auf."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "Ein Zieltoken, standardmäßig kleiner."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "Ein reservierter Token, grau gezeichnet."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Zeichnet das Gegenstück des Tokens: kein Logo, nur Text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Beschriftungsfarbe eines inversen Tokens."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Zeichnet Beschnitt um den Token für den Druck."
+        },
+        "bar": {
+          "description": "true zeichnet einen weißen Balken hinter die Beschriftung, ein Farbstring zeichnet einen Balken in dieser Farbe.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Höhe des Balkens." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Farbe des Rands des Balkens."
+        },
+        "outline": { "type": "string", "description": "Farbe der Kontur." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Breite der Kontur."
+        },
+        "target": {
+          "type": "string",
+          "description": "Farbe einer Zielscheibenform."
+        },
+        "stripe": { "type": "string", "description": "Farbe eines Streifens." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Breite des Streifens."
+        },
+        "stripes": { "type": "string", "description": "Farbe der Streifen." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Breite der Streifen."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Abstand der Streifen von der Mitte."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Farbe gebogener Streifen."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Breite der gebogenen Streifen."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Abstand der gebogenen Streifen von der Mitte."
+        },
+        "spiral": { "type": "string", "description": "Farbe einer Spirale." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Breite der Spirale."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Abstand zwischen den Windungen der Spirale."
+        },
+        "circle": {
+          "description": "Farbe eines Kreises in der Mitte, true für weiß.",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius des Kreises, 25 ist der ganze Token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Randfarbe des Kreises."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines Schilds, true für weiß."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Farbe der Oberseite des Schilds."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines dreiteiligen Schilds, true für weiß."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Farbe oben links des dreiteiligen Schilds."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Farbe oben Mitte des dreiteiligen Schilds."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Farbe oben rechts des dreiteiligen Schilds."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines Kiteshields, true für weiß."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Farbe eines fünfzackigen Sterns, true für weiß."
+        },
+        "square": {
+          "type": "string",
+          "description": "Farbe eines Quadrats auf dem Token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben der Hälften."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Vier Farben der Viertel."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben, die sich über sechs Teile abwechseln."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Drei Farben des Sonnenaufgangs."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Zwei Farben der Dreiecke des Hexagramms."
+        },
+        "name": {
+          "description": "Der Name der Runde, ihre Beschriftung.",
+          "type": "string"
+        },
+        "small": {
+          "description": "Den Rundentoken kleiner zeichnen.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name"]
+    }
+  },
+  "type": "object",
+  "propertyNames": { "pattern": "^[0-9a-zA-Z]+(\\|[0-9a-zA-Z]+)?$" },
+  "additionalProperties": { "$ref": "#/definitions/hex" }
+}

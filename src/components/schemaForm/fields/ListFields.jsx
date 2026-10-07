@@ -37,6 +37,7 @@ import {
   resolveAllOf,
   valueAt,
 } from "@/components/schemaForm/resolve";
+import { useSchemaText } from "@/components/schemaForm/schemaText";
 
 // Moves focus into an item once it is on the page: to its title, or to one of
 // its buttons (the other one of the pair when that is disabled). With no such
@@ -360,6 +361,7 @@ export const ArrayField = ({
 }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
+  const text = useSchemaText();
   const list = useRef(null);
   const focus = useRef(null);
   const notes = useListNotes();
@@ -544,7 +546,7 @@ export const ArrayField = ({
           <h3 className="text-sm font-medium">{heading}</h3>
           {schema.description && (
             <p className="text-xs text-muted-foreground">
-              {schema.description}
+              {text(schema.description)}
             </p>
           )}
         </div>

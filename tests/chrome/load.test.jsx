@@ -294,7 +294,10 @@ describe("load games page", () => {
       await waitFor(() =>
         expect(router.state.location.pathname).toBe("/games/"),
       );
-      expect(screen.getByRole("link", { name: "Broken Game" })).toBeVisible();
+      // The library page loads its summaries again after the redirect
+      expect(
+        await screen.findByRole("link", { name: "Broken Game" }),
+      ).toBeVisible();
     });
 
     it("can still be forgotten from the library", async () => {

@@ -5,10 +5,12 @@ import SchemaField from "@/components/schemaForm/SchemaField";
 import { SchemaFormContext } from "@/components/schemaForm/fields/shared";
 import { issueText } from "@/components/schemaForm/issueText";
 import { humanize, isHidden, issuesFor } from "@/components/schemaForm/resolve";
+import { useSchemaText } from "@/components/schemaForm/schemaText";
 
 export const ObjectField = ({ keys, schema }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
+  const text = useSchemaText();
   const issues = issuesFor(form.issues, keys, false);
 
   return (
@@ -18,7 +20,7 @@ export const ObjectField = ({ keys, schema }) => {
       </legend>
       {schema.description && (
         <p className="-mt-2 text-xs text-muted-foreground">
-          {schema.description}
+          {text(schema.description)}
         </p>
       )}
       {issues.map((issue, index) => (

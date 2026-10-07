@@ -1,14 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://18xx-maker.com/schemas/theme.schema.json",
+  "$id": "https://18xx-maker.com/schemas/zh/theme.schema.json",
   "definitions": {
     "color": {
       "type": "string",
-      "description": "schema.theme.color",
+      "description": "单个十六进制或 rgb 编码的颜色字符串",
       "pattern": "(#[0-9a-f]{3}([0-9a-f]{3})?([0-9a-f]{2})?)|(rgb\\([0-9]+,[0-9]+,[0-9]+\\))"
     },
     "themeColor": {
-      "description": "schema.theme.themeColor",
+      "description": "一个颜色,或某种情境下的颜色子分组",
       "oneOf": [
         {
           "$ref": "#/definitions/color"

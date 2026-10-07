@@ -25,6 +25,7 @@ import {
   setValue,
   valueAt,
 } from "@/components/schemaForm/resolve";
+import { englishSchemaText } from "@/components/schemaForm/schemaText";
 import AssetPicker from "@/components/tokenEditor/AssetPicker";
 import ColorField from "@/components/tokenEditor/ColorField";
 import DecorationGroups from "@/components/tokenEditor/DecorationGroups";
@@ -112,7 +113,7 @@ const TokenProp = ({ name, properties }) => {
   }
   if (
     kindOf(schema, name, form.root, keys) === "string" &&
-    /\bcolou?rs?\b/i.test(schema.description ?? "")
+    /\bcolou?rs?\b/i.test(englishSchemaText(schema.description) ?? "")
   ) {
     return <ColorField keys={keys} schema={schema} />;
   }

@@ -9,7 +9,7 @@ pre-commit:
   commands:
     schemas:
       run: make && pnpm --silent validate:schemas
-      glob: "{public,src}/schemas/*.json"
+      glob: "{public/schemas/**/*.json,src/schemas/**/*.json,src/locales/schema.*.json}"
       stage_fixed: true
       priority: 10
     validate:

@@ -1,0 +1,2678 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://18xx-maker.com/schemas/zh/tiles.defs.json",
+  "definitions": {
+    "side": { "type": "integer", "minimum": 1, "maximum": 6 },
+    "rotation": {
+      "type": "integer",
+      "multipleOf": 60,
+      "minimum": 0,
+      "maximum": 300
+    },
+    "removeBorders": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": { "type": "number", "minimum": 1, "maximum": 6 }
+        },
+        { "type": "boolean", "enum": [true] }
+      ]
+    },
+    "borders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "side": { "$ref": "#/definitions/side" },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "color": { "type": "string" },
+          "width": { "type": "number" }
+        },
+        "additionalProperties": false,
+        "required": ["color"]
+      }
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "size": { "type": "number" },
+          "color": { "type": "string" },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": ["label"],
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "straight": { "type": "boolean", "enum": [true] },
+        "color": { "type": "string" },
+        "bgColor": { "type": "string" },
+        "offset": {
+          "type": "number",
+          "default": 50,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "fontStyle": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"]
+        },
+        "fontWeight": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["normal", "bold", "bolder", "lighter"]
+            },
+            { "type": "number" }
+          ]
+        },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "integer", "minimum": 4 },
+        "hidden": {
+          "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+          "type": "number"
+        },
+        "y": {
+          "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+          "type": "number"
+        },
+        "percent": {
+          "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name"],
+      "dependencies": { "align": ["mid"] }
+    },
+    "names": { "type": "array", "items": { "$ref": "#/definitions/name" } },
+    "goods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "text": { "type": "string" },
+          "textColor": { "type": "string" },
+          "textBorderWidth": { "type": "number", "minimum": 0 },
+          "textBorderColor": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "label": { "type": "string" },
+          "left": { "type": "number" },
+          "right": { "type": "number" },
+          "bottom": { "type": "boolean", "enum": [true] },
+          "reverse": { "type": "boolean", "enum": [true] },
+          "radius": { "type": "number", "exclusiveMinimum": 0 },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "divides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "companyToken": {
+      "type": "object",
+      "properties": {
+        "company": { "type": "string" },
+        "destination": { "type": "boolean", "enum": [true] },
+        "width": { "type": "integer", "minimum": 1 },
+        "bgFill": { "type": "string" },
+        "hidden": {
+          "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+          "type": "number"
+        },
+        "y": {
+          "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+          "type": "number"
+        },
+        "percent": {
+          "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "required": ["company"],
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "genericToken": {
+      "type": "object",
+      "properties": {
+        "logo": { "type": "string" },
+        "label": { "type": "string", "minLength": 1 },
+        "color": { "type": "string" },
+        "bgFill": { "type": "string" },
+        "iconColor": { "type": "string" },
+        "outline": { "type": "string" },
+        "outlineWidth": { "type": "integer", "minimum": 1 },
+        "circle": { "type": "string" },
+        "shield": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "shield3": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "kiteshield": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "shieldTop": { "type": "string" },
+        "shield3TopLeft": { "type": "string" },
+        "shield3TopCenter": { "type": "string" },
+        "shield3TopRight": { "type": "string" },
+        "square": { "type": "string" },
+        "spiral": { "type": "string" },
+        "target": { "type": "string" },
+        "stripe": { "type": "string" },
+        "stripes": { "type": "string" },
+        "curvedStripes": { "type": "string" },
+        "halves": { "type": "array", "items": { "type": "string" } },
+        "quarters": { "type": "array", "items": { "type": "string" } },
+        "destination": { "type": "boolean", "enum": [true] },
+        "reserved": { "type": "boolean", "enum": [true] },
+        "inverse": { "type": "boolean", "enum": [true] },
+        "inverseTextColor": { "type": "string" },
+        "angle": {
+          "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "percent": {
+          "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+          "type": "number",
+          "minimum": 0
+        },
+        "width": { "type": "integer", "minimum": 1 },
+        "text": { "type": "string" },
+        "textColor": { "type": "string" },
+        "textBorderWidth": { "type": "number", "minimum": 0 },
+        "textBorderColor": { "type": "string" },
+        "hidden": {
+          "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "rotate": {
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+          "type": "number"
+        },
+        "y": {
+          "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+          "type": "number"
+        },
+        "order": {
+          "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        },
+        "fontStyle": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"]
+        },
+        "fontWeight": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["normal", "bold", "bolder", "lighter"]
+            },
+            { "type": "number" }
+          ]
+        },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "integer", "minimum": 4 }
+      },
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/companyToken" },
+          { "$ref": "#/definitions/genericToken" }
+        ]
+      }
+    },
+    "industries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "top": { "type": "string" },
+          "bottom": { "type": "string" },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "offBoardRevenue": {
+      "type": "object",
+      "properties": {
+        "name": { "$ref": "#/definitions/name" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "rows": { "type": "integer", "minimum": 1 },
+        "groups": { "type": "array", "items": { "type": "string" } },
+        "revenues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": { "type": "string" },
+              "value": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "revenue": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "cost": { "oneOf": [{ "type": "string" }, { "type": "number" }] },
+              "phase": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "phaseColor": { "type": "string" },
+              "textColor": { "type": "string" }
+            }
+          }
+        },
+        "hidden": {
+          "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+          "type": "number"
+        },
+        "y": {
+          "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+          "type": "number"
+        },
+        "percent": {
+          "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "boomtowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "city": { "type": "boolean", "enum": [true] },
+          "dashed": { "type": "boolean", "enum": [false] },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "bgColor": { "type": "string" },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          },
+          "groups": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "cities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "oneOf": [
+              { "type": "integer", "minimum": 1, "maximum": 6, "default": 1 },
+              { "type": "string", "enum": ["2Y", "1S1Y", "2S1Y", "3Ferry"] }
+            ]
+          },
+          "width": { "type": "integer", "minimum": 1 },
+          "extend": { "type": "string", "enum": ["left", "right"] },
+          "pass": { "type": "boolean", "enum": [true] },
+          "outside": { "type": "boolean", "enum": [true] },
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "companies": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": { "type": "string" },
+                    "color": { "type": "string" }
+                  }
+                },
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            }
+          },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "mediumCities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          },
+          "groups": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "centerTowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "width": { "type": "number", "exclusiveMinimum": 0 },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "towns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "bridges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "tunnels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "routeBonuses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "shapes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "background": { "type": "boolean", "enum": [true] },
+          "type": {
+            "type": "string",
+            "enum": [
+              "circle",
+              "diamond",
+              "ellipse",
+              "hexagon",
+              "square",
+              "triangle"
+            ]
+          },
+          "text": { "type": "string" },
+          "textColor": { "type": "string" },
+          "textBorderWidth": { "type": "number", "minimum": 0 },
+          "textBorderColor": { "type": "string" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "terrain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cost": { "type": "number" },
+          "size": {
+            "type": "string",
+            "enum": ["tiny", "small", "medium", "large"]
+          },
+          "type": { "type": "string" },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "icons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "noCircle": { "type": "boolean" },
+          "type": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "stroke": { "type": "string" },
+          "strokeWidth": { "type": "integer", "minimum": 1 },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "track": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sides": {
+            "type": "array",
+            "items": { "type": "number", "minimum": 1, "maximum": 6 }
+          },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "borderColor": { "type": "string" },
+          "gaugeColor": { "type": "string" },
+          "revenue": { "type": "integer", "minimum": 0 },
+          "gauge": {
+            "type": "string",
+            "enum": ["narrow", "dual", "dashed", "line"]
+          },
+          "offset": { "type": "number" },
+          "cross": {
+            "type": "string",
+            "enum": ["over", "under", "top", "bottom"]
+          },
+          "path": { "type": "string" },
+          "start": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "end": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom",
+              "mid",
+              "sharp",
+              "gentle",
+              "straight",
+              "bent",
+              "offboard",
+              "stub",
+              "stop",
+              "straightStop",
+              "gentleStop",
+              "gentleStopRev",
+              "sharpStop",
+              "sharpStopRev",
+              "city"
+            ]
+          },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "tunnelEntrances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "oneOf": [{ "type": "number" }, { "type": "string" }] },
+          "outerBorderColor": { "type": "string" },
+          "hidden": {
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "y": {
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
+            "type": "number"
+          },
+          "percent": {
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": ["value"],
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "hex": {
+      "type": "object",
+      "properties": {
+        "print": { "type": "integer", "minimum": 0 },
+        "quantity": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "tile": { "type": "string" },
+        "color": { "type": "string" },
+        "stripeRotation": {
+          "type": "number",
+          "description": "覆盖条纹颜色(例如 \"yellow/blue\")的条纹旋转角度(以度计)。"
+        },
+        "encoding": { "type": "string" },
+        "group": {
+          "type": "string",
+          "pattern": "^[0-9a-z]+$",
+          "description": "地块会按颜色自然分组打印。此项覆盖该分组。适用于带有华丽边框或其他出血问题的地块。"
+        },
+        "broken": {
+          "type": "boolean",
+          "enum": [true],
+          "description": "将此地块标记为已损坏,不可导出。"
+        },
+        "clipPath": {
+          "type": "boolean",
+          "enum": [false],
+          "description": "打印这些地块时移除特殊的出血 clipPath。它们将始终无出血打印。"
+        },
+        "borders": { "$ref": "#/definitions/borders" },
+        "centerTowns": { "$ref": "#/definitions/centerTowns" },
+        "cities": { "$ref": "#/definitions/cities" },
+        "boomtowns": { "$ref": "#/definitions/boomtowns" },
+        "mediumCities": { "$ref": "#/definitions/mediumCities" },
+        "companies": { "$ref": "#/definitions/companies" },
+        "divides": { "$ref": "#/definitions/divides" },
+        "goods": { "$ref": "#/definitions/goods" },
+        "half": {
+          "description": "只绘制六边形的这一半,从中心切开,已绘制部分的四周都有边框。仅用于地图六边形:板块会忽略它。绘制在六边形之外的内容,如其编号或奖励,不会被裁掉。切线经过的边在切线处结束,切线处没有边框。",
+          "type": "string",
+          "enum": ["top", "bottom", "left", "right"]
+        },
+        "icons": { "$ref": "#/definitions/icons" },
+        "industries": { "$ref": "#/definitions/industries" },
+        "labels": { "$ref": "#/definitions/labels" },
+        "names": { "$ref": "#/definitions/names" },
+        "offBoardRevenue": { "$ref": "#/definitions/offBoardRevenue" },
+        "removeBorders": { "$ref": "#/definitions/removeBorders" },
+        "rotation": { "$ref": "#/definitions/rotation" },
+        "rotations": {
+          "oneOf": [
+            { "$ref": "#/definitions/side" },
+            { "type": "array", "items": { "$ref": "#/definitions/rotation" } }
+          ]
+        },
+        "bridges": { "$ref": "#/definitions/bridges" },
+        "tunnels": { "$ref": "#/definitions/tunnels" },
+        "routeBonuses": { "$ref": "#/definitions/routeBonuses" },
+        "shapes": { "$ref": "#/definitions/shapes" },
+        "terrain": { "$ref": "#/definitions/terrain" },
+        "tokens": { "$ref": "#/definitions/tokens" },
+        "towns": { "$ref": "#/definitions/towns" },
+        "track": { "$ref": "#/definitions/track" },
+        "tunnelEntrances": { "$ref": "#/definitions/tunnelEntrances" },
+        "values": { "$ref": "#/definitions/values" },
+        "hexes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[A-Z]+[0-9]+$" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "token": {
+      "type": "object",
+      "description": "一个标记。其属性是 Token 组件读取的那些。",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "要绘制在标记上的 svg 标志的名称。"
+        },
+        "logoWidth": { "type": "number", "description": "标志的宽度。" },
+        "icon": {
+          "type": "string",
+          "description": "要绘制在标记上的图标的名称。"
+        },
+        "iconWidth": { "type": "number", "description": "图标的宽度。" },
+        "iconColor": { "type": "string", "description": "图标或标志的颜色。" },
+        "iconY": { "type": "number", "description": "图标的垂直位置。" },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "写在标记上的文字。"
+        },
+        "labelColor": { "type": "string", "description": "标签文字的颜色。" },
+        "labelY": { "type": "number", "description": "覆盖标签的垂直位置。" },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "标签周围描边的颜色。"
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "标签周围描边的宽度。"
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "与标签一同显示的第二行较小文字。"
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "第二行在标签上方还是下方。默认为下方。"
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "第二行的颜色。默认为标签的颜色。"
+        },
+        "color": { "type": "string", "description": "标记的背景颜色。" },
+        "fontSize": { "type": "number", "description": "标签的字号。" },
+        "fontFamily": { "type": "string", "description": "标签的字体。" },
+        "width": {
+          "type": "number",
+          "description": "标记的宽度(半径),默认为 25。"
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square 绘制方形标记,其他值绘制圆形。"
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "图形的角度,与 rotation 无关。"
+        },
+        "rotation": { "type": "number", "description": "标记的旋转。" },
+        "fixed": { "type": "boolean", "description": "取消标记的所有旋转。" },
+        "destination": {
+          "type": "boolean",
+          "description": "目的地标记,默认更小。"
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "预留标记,绘制为灰色。"
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "绘制标记的反色版本:没有标志,只有文字。"
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "反色标记的标签颜色。"
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "为打印在标记周围绘制出血。"
+        },
+        "bar": {
+          "description": "true 在标签后面绘制白色条,颜色字符串则绘制该颜色的条。",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "条的高度。" },
+        "barBorderColor": { "type": "string", "description": "条边框的颜色。" },
+        "outline": { "type": "string", "description": "轮廓的颜色。" },
+        "outlineWidth": { "type": "number", "description": "轮廓的宽度。" },
+        "target": { "type": "string", "description": "靶形图案的颜色。" },
+        "stripe": { "type": "string", "description": "一条条纹的颜色。" },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "条纹的宽度。"
+        },
+        "stripes": { "type": "string", "description": "多条条纹的颜色。" },
+        "stripesWidth": { "type": "number", "description": "多条条纹的宽度。" },
+        "stripesDistance": {
+          "type": "number",
+          "description": "条纹距中心的距离。"
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "弧形条纹的颜色。"
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "弧形条纹的宽度。"
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "弧形条纹距中心的距离。"
+        },
+        "spiral": { "type": "string", "description": "螺旋的颜色。" },
+        "spiralWidth": { "type": "number", "description": "螺旋的宽度。" },
+        "spiralDistance": {
+          "type": "number",
+          "description": "螺旋各圈之间的距离。"
+        },
+        "circle": {
+          "description": "中间圆圈的颜色,true 为白色。",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "圆圈的半径,25 为整个标记。"
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "圆圈的边框颜色。"
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "盾形的颜色,true 为白色。"
+        },
+        "shieldTop": { "type": "string", "description": "盾形顶部的颜色。" },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "三段盾形的颜色,true 为白色。"
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "三段盾形左上部分的颜色。"
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "三段盾形上中部分的颜色。"
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "三段盾形右上部分的颜色。"
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "鸢形盾的颜色,true 为白色。"
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "五角星的颜色,true 为白色。"
+        },
+        "square": { "type": "string", "description": "标记上方块的颜色。" },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "两个半边的两种颜色。"
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "四个四分之一的四种颜色。"
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "在六个部分上交替的两种颜色。"
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "日出图案的三种颜色。"
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "六角星各三角形的两种颜色。"
+        }
+      },
+      "additionalProperties": false
+    },
+    "gameToken": {
+      "type": "object",
+      "description": "游戏的一种标记:打印多少个,以及标记本身。",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "要绘制在标记上的 svg 标志的名称。"
+        },
+        "logoWidth": { "type": "number", "description": "标志的宽度。" },
+        "icon": {
+          "type": "string",
+          "description": "要绘制在标记上的图标的名称。"
+        },
+        "iconWidth": { "type": "number", "description": "图标的宽度。" },
+        "iconColor": { "type": "string", "description": "图标或标志的颜色。" },
+        "iconY": { "type": "number", "description": "图标的垂直位置。" },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "写在标记上的文字。"
+        },
+        "labelColor": { "type": "string", "description": "标签文字的颜色。" },
+        "labelY": { "type": "number", "description": "覆盖标签的垂直位置。" },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "标签周围描边的颜色。"
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "标签周围描边的宽度。"
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "与标签一同显示的第二行较小文字。"
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "第二行在标签上方还是下方。默认为下方。"
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "第二行的颜色。默认为标签的颜色。"
+        },
+        "color": { "type": "string", "description": "标记的背景颜色。" },
+        "fontSize": { "type": "number", "description": "标签的字号。" },
+        "fontFamily": { "type": "string", "description": "标签的字体。" },
+        "width": {
+          "type": "number",
+          "description": "标记的宽度(半径),默认为 25。"
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square 绘制方形标记,其他值绘制圆形。"
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "图形的角度,与 rotation 无关。"
+        },
+        "rotation": { "type": "number", "description": "标记的旋转。" },
+        "fixed": { "type": "boolean", "description": "取消标记的所有旋转。" },
+        "destination": {
+          "type": "boolean",
+          "description": "目的地标记,默认更小。"
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "预留标记,绘制为灰色。"
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "绘制标记的反色版本:没有标志,只有文字。"
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "反色标记的标签颜色。"
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "为打印在标记周围绘制出血。"
+        },
+        "bar": {
+          "description": "true 在标签后面绘制白色条,颜色字符串则绘制该颜色的条。",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "条的高度。" },
+        "barBorderColor": { "type": "string", "description": "条边框的颜色。" },
+        "outline": { "type": "string", "description": "轮廓的颜色。" },
+        "outlineWidth": { "type": "number", "description": "轮廓的宽度。" },
+        "target": { "type": "string", "description": "靶形图案的颜色。" },
+        "stripe": { "type": "string", "description": "一条条纹的颜色。" },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "条纹的宽度。"
+        },
+        "stripes": { "type": "string", "description": "多条条纹的颜色。" },
+        "stripesWidth": { "type": "number", "description": "多条条纹的宽度。" },
+        "stripesDistance": {
+          "type": "number",
+          "description": "条纹距中心的距离。"
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "弧形条纹的颜色。"
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "弧形条纹的宽度。"
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "弧形条纹距中心的距离。"
+        },
+        "spiral": { "type": "string", "description": "螺旋的颜色。" },
+        "spiralWidth": { "type": "number", "description": "螺旋的宽度。" },
+        "spiralDistance": {
+          "type": "number",
+          "description": "螺旋各圈之间的距离。"
+        },
+        "circle": {
+          "description": "中间圆圈的颜色,true 为白色。",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "圆圈的半径,25 为整个标记。"
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "圆圈的边框颜色。"
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "盾形的颜色,true 为白色。"
+        },
+        "shieldTop": { "type": "string", "description": "盾形顶部的颜色。" },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "三段盾形的颜色,true 为白色。"
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "三段盾形左上部分的颜色。"
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "三段盾形上中部分的颜色。"
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "三段盾形右上部分的颜色。"
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "鸢形盾的颜色,true 为白色。"
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "五角星的颜色,true 为白色。"
+        },
+        "square": { "type": "string", "description": "标记上方块的颜色。" },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "两个半边的两种颜色。"
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "四个四分之一的四种颜色。"
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "在六个部分上交替的两种颜色。"
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "日出图案的三种颜色。"
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "六角星各三角形的两种颜色。"
+        },
+        "quantity": {
+          "description": "此标记的打印数量。∞ 需要同时设置 print 来说明数量。",
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "print": {
+          "description": "此标记的打印数量,会覆盖 quantity。",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "roundToken": {
+      "type": "object",
+      "description": "回合记录表上的标记:回合及其标记。",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "要绘制在标记上的 svg 标志的名称。"
+        },
+        "logoWidth": { "type": "number", "description": "标志的宽度。" },
+        "icon": {
+          "type": "string",
+          "description": "要绘制在标记上的图标的名称。"
+        },
+        "iconWidth": { "type": "number", "description": "图标的宽度。" },
+        "iconColor": { "type": "string", "description": "图标或标志的颜色。" },
+        "iconY": { "type": "number", "description": "图标的垂直位置。" },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "写在标记上的文字。"
+        },
+        "labelColor": { "type": "string", "description": "标签文字的颜色。" },
+        "labelY": { "type": "number", "description": "覆盖标签的垂直位置。" },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "标签周围描边的颜色。"
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "标签周围描边的宽度。"
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "与标签一同显示的第二行较小文字。"
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "第二行在标签上方还是下方。默认为下方。"
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "第二行的颜色。默认为标签的颜色。"
+        },
+        "color": { "type": "string", "description": "标记的背景颜色。" },
+        "fontSize": { "type": "number", "description": "标签的字号。" },
+        "fontFamily": { "type": "string", "description": "标签的字体。" },
+        "width": {
+          "type": "number",
+          "description": "标记的宽度(半径),默认为 25。"
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square 绘制方形标记,其他值绘制圆形。"
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "图形的角度,与 rotation 无关。"
+        },
+        "rotation": { "type": "number", "description": "标记的旋转。" },
+        "fixed": { "type": "boolean", "description": "取消标记的所有旋转。" },
+        "destination": {
+          "type": "boolean",
+          "description": "目的地标记,默认更小。"
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "预留标记,绘制为灰色。"
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "绘制标记的反色版本:没有标志,只有文字。"
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "反色标记的标签颜色。"
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "为打印在标记周围绘制出血。"
+        },
+        "bar": {
+          "description": "true 在标签后面绘制白色条,颜色字符串则绘制该颜色的条。",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "条的高度。" },
+        "barBorderColor": { "type": "string", "description": "条边框的颜色。" },
+        "outline": { "type": "string", "description": "轮廓的颜色。" },
+        "outlineWidth": { "type": "number", "description": "轮廓的宽度。" },
+        "target": { "type": "string", "description": "靶形图案的颜色。" },
+        "stripe": { "type": "string", "description": "一条条纹的颜色。" },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "条纹的宽度。"
+        },
+        "stripes": { "type": "string", "description": "多条条纹的颜色。" },
+        "stripesWidth": { "type": "number", "description": "多条条纹的宽度。" },
+        "stripesDistance": {
+          "type": "number",
+          "description": "条纹距中心的距离。"
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "弧形条纹的颜色。"
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "弧形条纹的宽度。"
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "弧形条纹距中心的距离。"
+        },
+        "spiral": { "type": "string", "description": "螺旋的颜色。" },
+        "spiralWidth": { "type": "number", "description": "螺旋的宽度。" },
+        "spiralDistance": {
+          "type": "number",
+          "description": "螺旋各圈之间的距离。"
+        },
+        "circle": {
+          "description": "中间圆圈的颜色,true 为白色。",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "圆圈的半径,25 为整个标记。"
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "圆圈的边框颜色。"
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "盾形的颜色,true 为白色。"
+        },
+        "shieldTop": { "type": "string", "description": "盾形顶部的颜色。" },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "三段盾形的颜色,true 为白色。"
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "三段盾形左上部分的颜色。"
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "三段盾形上中部分的颜色。"
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "三段盾形右上部分的颜色。"
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "鸢形盾的颜色,true 为白色。"
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "五角星的颜色,true 为白色。"
+        },
+        "square": { "type": "string", "description": "标记上方块的颜色。" },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "两个半边的两种颜色。"
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "四个四分之一的四种颜色。"
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "在六个部分上交替的两种颜色。"
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "日出图案的三种颜色。"
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "六角星各三角形的两种颜色。"
+        },
+        "name": { "description": "回合的名称,即其标签。", "type": "string" },
+        "small": { "description": "将回合标记画得更小。", "type": "boolean" }
+      },
+      "additionalProperties": false,
+      "required": ["name"]
+    }
+  },
+  "type": "object",
+  "propertyNames": { "pattern": "^[0-9a-zA-Z]+(\\|[0-9a-zA-Z]+)?$" },
+  "additionalProperties": { "$ref": "#/definitions/hex" }
+}

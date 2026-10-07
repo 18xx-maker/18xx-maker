@@ -242,14 +242,24 @@ by `src/cli/validate.js`). `tiles.defs.json` is **generated**; never edit it.
   `elements` map in `src/cli/compile-schemas.js` (`pnpm maker compile`,
   or `make`). `game.schema.json` and `tiles.schema.json` reference it via
   `tiles.defs.json#/definitions/hex`.
-- **Published copies:** `make` copies every `src/schemas/{companies,config,game,
-publishers,theme,tiles}.schema.json` and `tiles.defs.json` to
-  `public/schemas/` (what `$schema` URLs and editors use). Both the generated
-  file and the `public/schemas` copies are committed; the pre-commit hook runs
+- **Published copies:** `make` (`maker compile locales`) writes every
+  `src/schemas/{companies,config,game,publishers,theme,tiles}.schema.json` and
+  `tiles.defs.json` to `public/schemas/` (what `$schema` URLs and editors use)
+  with the text of the schema in English, and to `public/schemas/de/` and
+  `public/schemas/zh/` in German and Chinese (their `$id` points into the
+  folder, the relative `$ref`s follow). Both the generated file and the
+  `public/schemas` copies are committed; the pre-commit hook runs
   `make && pnpm validate:schemas` and restages them.
+- **Schema text is keys:** every `description` (and `deprecationMessage`) in a
+  source schema is a key like `schema.game.exports.layouts`, never text. The
+  text lives in `src/locales/schema.{en,de,zh}.json` (flat files of key to
+  text). The keys of `en` are the source; `de` and `zh` keep the same keys and
+  placeholders. `compile` fails on a key without text. The UI looks the text up
+  by language (`useSchemaText`); `resolveSchemaKeys`
+  (`src/util/schemaKeys.js`) puts it back.
 - `validate.js` registers each schema by `$id`; a new schema file must be
   added to `schemas` in `validate.js`, `determineSchema` (how a data file is
-  matched to it) and the `schemas` list in the `Makefile`.
+  matched to it) and `PUBLISHED` in `src/cli/compile-schemas.js`.
 
 Adding to a schema:
 
@@ -257,11 +267,15 @@ Adding to a schema:
    in `tiles.src.json`; a property shared by tile elements in
    `fields.schema.json` (and add the element path to `elements` in
    `compile-schemas.js` if it is a new element type). Keep
-   `additionalProperties: false` and give every property a `description`.
-2. Run `make` (compiles `tiles.defs.json`, copies to `public/schemas`). Do not
-   hand-edit or skip the copy: `compile-schemas.test.js` fails if
-   `tiles.defs.json` differs from a fresh compile.
-3. Run `pnpm prettier --write src/schemas public/schemas` if `make` output
+   `additionalProperties: false` and give every property a `description`
+   that is a key (`schema.<file>.<path>`, like its neighbours), with its text
+   in `schema.en.json`, `schema.de.json` and `schema.zh.json` (the same key in
+   all three; a deprecated field also has a `deprecationMessage` key ending in
+   `.deprecated`). Identical text shares one key.
+2. Run `make` (compiles `tiles.defs.json`, writes `public/schemas` and its
+   `de` and `zh` folders). Do not hand-edit or skip it: `compile-schemas.test.js`
+   fails if `tiles.defs.json` or a published copy differs from a fresh compile.
+3. Run `pnpm prettier --write src/schemas public/schemas src/locales` if `make` output
    needs formatting (`pnpm pretty` checks it).
 4. Add or extend a fixture/test: positive and negative cases in
    `src/cli/validate.test.js` (e.g. the `exports of a game` block), and use
@@ -295,6 +309,10 @@ and Simplified Chinese (`zh`) are AI-generated and kept in step with English.
   with the same keys and `{{vars}}`/`<tags>` (`src/locales/locales.test.js`
   enforces it). Never hardcode user-visible text in the app chrome; print output
   is not translated.
+- **Schema text** (the descriptions of the JSON schemas) is in
+  `src/locales/schema.{en,de,zh}.json`, flat key to text files with the same
+  keys in all three (see "JSON schemas"); `locales.test.js` checks them like
+  the UI strings and fails on a key no schema uses.
 - Reuse the terminology already in `de.json`/`zh.json` (tile, token, charter,
   par, ...) so docs match the UI. Write new docs in the repo's neutral voice;
   German uses informal "du".

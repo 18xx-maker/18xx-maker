@@ -31,6 +31,7 @@ import {
   resolveAllOf,
   valueAt,
 } from "@/components/schemaForm/resolve";
+import { useSchemaText } from "@/components/schemaForm/schemaText";
 
 // One name of a record and its value: the name is typed and passed on when
 // the field is left, a name that is empty or taken is refused with a message
@@ -110,6 +111,7 @@ const RecordRow = ({
 export const RecordField = ({ keys, schema, rows, usedBy }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
+  const text = useSchemaText();
   const list = useRef(null);
   const focus = useRef(null);
   const notes = useListNotes();
@@ -212,7 +214,7 @@ export const RecordField = ({ keys, schema, rows, usedBy }) => {
       </legend>
       {schema.description && (
         <p className="-mt-2 text-xs text-muted-foreground">
-          {schema.description}
+          {text(schema.description)}
         </p>
       )}
       {issues.map((issue, index) => (

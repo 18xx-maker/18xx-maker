@@ -1,22 +1,20 @@
 .PHONY: all clean docker/site docker/serve docker/develop docker/start docker/clean docker/prune
 .DEFAULT_GOAL: all
 
-schemas := companies config game publishers theme tiles
-defs := tiles
+locales := en de zh
 
-all: $(patsubst %,public/schemas/%.schema.json,$(schemas)) $(patsubst %,public/schemas/%.defs.json,$(defs))
+all: public/schemas/game.schema.json
 
-public/schemas/%.defs.json: src/schemas/%.defs.json
-	@echo "Copying $< to $@"
-	@cp $< $@
-
-public/schemas/%.schema.json: src/schemas/%.schema.json
-	@echo "Copying $< to $@"
-	@cp $< $@
-
-src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.src.json
+# The tile definitions are generated from the fields and the tile source
+src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.src.json src/cli/compile-schemas.js
 	@echo "Compiling $@"
 	@node ./bin/maker.js compile
+
+# The published schemas, with their text in every language, are written
+# together by one command
+public/schemas/game.schema.json: $(wildcard src/schemas/*.json) $(patsubst %,src/locales/schema.%.json,$(locales)) src/schemas/tiles.defs.json src/cli/compile-schemas.js src/util/schemaKeys.js
+	@echo "Writing the schemas of $(locales) to public/schemas"
+	@node ./bin/maker.js compile locales
 
 clean:
 	@echo "Removing generated output"
