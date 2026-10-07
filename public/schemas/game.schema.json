@@ -469,6 +469,38 @@
         "permanentColor": {
           "description": "Color of the text of a permanent train.",
           "type": "string"
+        },
+        "back": {
+          "description": "The back of the train card, printed behind the front when the cards duplex config is on (it needs the free cards layout). All copies of the train share it. Either a title and text on a colored background, or (with a name) a full train that prints like a normal train card with its own values.",
+          "anyOf": [
+            {
+              "description": "A plain back with a title and text on a colored background.",
+              "type": "object",
+              "properties": {
+                "title": {
+                  "description": "Large text on the back, the name of the train by default.",
+                  "type": "string"
+                },
+                "text": {
+                  "description": "Smaller text under the title.",
+                  "type": "string"
+                },
+                "color": {
+                  "description": "Color of the text.",
+                  "type": "string"
+                },
+                "backgroundColor": {
+                  "description": "Background color of the back.",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "description": "A full train definition, printed as a normal train card. Its own back and quantity are ignored.",
+              "$ref": "#/definitions/train"
+            }
+          ]
         }
       },
       "required": ["name", "color"],

@@ -2,6 +2,7 @@ import {
   cardCompanyTrains,
   charterHalfWidth,
   companyTrains,
+  referencedTrains,
 } from "@/util/companies/companyTrains";
 
 const gameTrains = [
@@ -123,5 +124,25 @@ describe("cardCompanyTrains", () => {
       gameTrains[1],
     ]);
     expect(cardCompanyTrains(undefined, charters)).toEqual([]);
+  });
+});
+
+describe("referencedTrains", () => {
+  it("has the game trains, the card trains and the named backs", () => {
+    const own = { name: "own" };
+    const flip = { name: "5D", price: 1000 };
+    const trains = [
+      { name: "4D", back: flip },
+      { name: "2", back: { text: "no name" } },
+      { name: "3" },
+    ];
+    expect(referencedTrains(trains, [own]).map((t) => t.name)).toEqual([
+      "4D",
+      "2",
+      "3",
+      "own",
+      "5D",
+    ]);
+    expect(referencedTrains()).toEqual([]);
   });
 });

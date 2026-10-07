@@ -14,7 +14,10 @@ import {
   overrideCompanies,
 } from "@/util/companies/companies";
 import { companyNames } from "@/util/companies/companyNames";
-import { cardCompanyTrains } from "@/util/companies/companyTrains";
+import {
+  cardCompanyTrains,
+  referencedTrains,
+} from "@/util/companies/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
 
 const CardPage = () => {
@@ -38,19 +41,22 @@ const CardPage = () => {
       node = <Private players={game.players} {...game.privates[index]} />;
       break;
     case "train": {
-      const trains = [
-        ...(game.trains || []),
-        ...cardCompanyTrains(
-          overrideCompanies(
-            compileCompanies(game),
-            config.overrideCompanies,
-            config.overrideSelection,
-          ),
-          config.charters,
-          game.trains,
+      const ownTrains = cardCompanyTrains(
+        overrideCompanies(
+          compileCompanies(game),
+          config.overrideCompanies,
+          config.overrideSelection,
         ),
-      ];
-      node = <Train train={trains[index]} trains={trains} />;
+        config.charters,
+        game.trains,
+      );
+      const trains = [...(game.trains || []), ...ownTrains];
+      node = (
+        <Train
+          train={trains[index]}
+          trains={referencedTrains(game.trains, ownTrains)}
+        />
+      );
       break;
     }
     case "share": {

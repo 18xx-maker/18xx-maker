@@ -87,6 +87,18 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
   nötig, wenn eines von `rust`, `obsolete` oder `phased` gesetzt ist.
 - **players** Eine Spielerzahl, für die dieser Zug verwendet wird _(könnte bald
   wie bei Privatgesellschaften auf min/max Spieler umgestellt werden)_.
+- **back** Die Rückseite der Karte dieses Zuges, die hinter die Vorderseite
+  gedruckt wird, wenn die Konfiguration
+  [duplex](/docs/output/pdf#doppelseitige-karten) aktiv ist. Alle Exemplare
+  des Zuges teilen sie. Sie ist entweder eine einfache Rückseite mit einem
+  `title` (standardmäßig der Name des Zuges), einem kleineren `text` darunter,
+  einer `color` für den Text und einer `backgroundColor`, oder ein vollständiger
+  Zug (mit `name` und `color` sowie den obigen Feldern), der wie eine normale
+  Zugkarte mit eigenen Werten gedruckt wird, für einen Zug, der auf seiner
+  anderen Seite ein anderer Zug ist. Eine vollständige Rückseite übernimmt die
+  Zugfelder der Zugseite, aber nicht `title` oder `text`; ihr eigenes `back`
+  und `quantity` werden ignoriert. Hinter einem Zug ohne `back` bleibt die
+  Karte leer.
 
 ## Beispiele
 

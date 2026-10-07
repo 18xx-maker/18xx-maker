@@ -220,6 +220,11 @@
           "type": "boolean",
           "description": "Draw the pin markers on free layouts too. Fixed layouts (die layouts) always draw them. Free layouts reserve no space for pins, so adjust the pins positions or margins to keep them clear of content."
         },
+        "duplex": {
+          "type": "string",
+          "enum": ["off", "separate", "long"],
+          "description": "Print the backs of train cards. off prints no backs, separate prints all the fronts and then all the backs in the same order (for flipping the sheets by hand), long prints a sheet of backs after every sheet of fronts, mirrored for a printer set to flip on the long edge. Needs the free cards layout, the die layouts ignore it."
+        },
         "pins": { "$ref": "#/definitions/pins" }
       },
       "required": [

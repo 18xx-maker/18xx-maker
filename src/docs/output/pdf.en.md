@@ -133,3 +133,24 @@ A few things have a fixed width of 8 inches and do not follow the scale when it
 makes a page wider: the die tile sheet, the background page, the tile manifest
 and the pins of the card sheets. Check the print preview before printing at a
 bigger scale.
+
+## Double-sided Cards
+
+Train cards can have a back: give a train a `back` in the game file (see the
+[train fields](/docs/games/trains#train-fields)) and set `duplex` in the _Cards_
+part of the config. `off` (the default) prints no backs, `long` prints a page of
+backs after every page of fronts, and `separate` prints all the fronts and then
+all the backs in the same order, unmirrored on their own sheets, for cutting
+and gluing the backs to the fronts, not for feeding the sheets through the
+printer again.
+
+Use `long` with the printer set to double-sided, flip on the long edge: the
+backs are right aligned, so every back lands behind its front. A card
+without a back leaves an empty slot, and a page of backs without any back is
+left out. Print at 100% scale with the same cutlines and margins on both sides,
+a printer that moves the page between sides is not corrected.
+
+Duplex needs the free cards layout, the die layouts ignore it, and `long` prints
+on portrait pages. The pins of a page of backs are on the other side. It is a setting of
+your printer, so a game file cannot set it, and the PDF export of the cards
+follows it too. The PNG export of cards stays fronts only.

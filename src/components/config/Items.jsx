@@ -7,8 +7,12 @@ import Input from "@/components/config/Input";
 import PinConfig from "@/components/config/PinConfig";
 import ThemePreview from "@/components/config/ThemePreview";
 
+import { useConfig } from "@/hooks";
+import { isDieLayout } from "@/util/cards";
+
 const Items = ({ section, items }) => {
   const { t } = useTranslation();
+  const { config } = useConfig();
 
   return addIndex(chain)((item, index) => {
     if (item.group) {
@@ -27,6 +31,11 @@ const Items = ({ section, items }) => {
     }
 
     if (item.note) {
+      // A note for the die layouts only shows with one of them
+      if (item.dieOnly && !isDieLayout(config.cards.layout)) {
+        return [];
+      }
+
       return [
         <div
           key={`${section}.${item.note}`}
@@ -55,6 +64,7 @@ const Items = ({ section, items }) => {
         dimension={item.dimension}
         clearable={item.clearable}
         inherit={item.inherit}
+        fallback={item.fallback}
         label={t(`config.${section}.${item.name}.label`)}
         description={
           item.description !== false &&

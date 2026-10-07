@@ -28,10 +28,11 @@ const Input = ({
   clearable = false,
   inherit,
   large = false,
+  fallback,
 }) => {
   const { config, setConfig } = useConfig();
   const { isValidByInputName } = useValidation();
-  const value = path(split(".", name), config);
+  const value = path(split(".", name), config) ?? fallback;
 
   const error = !isValidByInputName(name);
   const className = clsx({ "border-error": error });

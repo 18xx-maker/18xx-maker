@@ -309,7 +309,12 @@
       "price": 80,
       "priceFormat": "#G",
       "color": "yellow",
-      "rust": "4D"
+      "rust": "4D",
+      "back": {
+        "title": "Two Train",
+        "text": "Rusts when the first 4D is bought",
+        "backgroundColor": "yellow"
+      }
     },
     {
       "name": "3+1",
@@ -320,7 +325,13 @@
       "tradeIn": 100,
       "tradeInFormat": "-# trade",
       "color": "green",
-      "obsolete": "8E"
+      "obsolete": "8E",
+      "rust": "5D",
+      "back": {
+        "text": "Obsolete when the first 8E is bought",
+        "color": "white",
+        "backgroundColor": "black"
+      }
     },
     {
       "name": "4D",
@@ -328,7 +339,14 @@
       "price": 800,
       "color": "brown",
       "variant": "heavy",
-      "phased": "8E"
+      "phased": "8E",
+      "back": {
+        "name": "5D",
+        "price": 1000,
+        "color": "brown",
+        "description": "Flip side of the 4D",
+        "permanent": false
+      }
     },
     {
       "name": "8E",

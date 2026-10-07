@@ -48,6 +48,23 @@ describe.each(slugs)("%s snapshots", (slug) => {
     });
 });
 
+// The cards with the backs of the trains, which only the free layout and the
+// duplex config print: front pages followed by their mirrored back pages
+describe("18Test duplex cards", () => {
+  expected.push("18Test/cards-duplex.html");
+
+  it("output is unchanged", async () => {
+    const html = await printMarkup(
+      "18Test",
+      "cards?print=true&config.cards.layout=free&config.cards.duplex=long",
+      "-cards",
+    );
+    await expect(html).toMatchFileSnapshot(
+      "./__snapshots__/18Test/cards-duplex.html",
+    );
+  });
+});
+
 // vitest never reports snapshot files that no test writes anymore (a removed
 // game or page), so check for them here
 describe("snapshot files", () => {
