@@ -22,6 +22,7 @@ import SchemaField, {
   useField,
 } from "@/components/schemaForm/SchemaField";
 import SchemaFormProvider from "@/components/schemaForm/SchemaFormProvider";
+import { usePanelState } from "@/components/schemaForm/usePanelState";
 
 import schema from "@/schemas/game.schema.json";
 import {
@@ -40,7 +41,7 @@ const ADVANCED = ["display", "ledges", "limits", "title"];
 
 // A part of the form that is shown when it is opened
 const Group = ({ title, children }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = usePanelState(`group:${title}`, false);
   const id = useId();
 
   return (
@@ -135,7 +136,7 @@ const MarketEditor = () => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const [selection, setSelection] = useState(null);
-  const [more, setMore] = useState(false);
+  const [more, setMore] = usePanelState("market:more", false);
   const [message, setMessage] = useState("");
   const stock = form.game.stock;
 

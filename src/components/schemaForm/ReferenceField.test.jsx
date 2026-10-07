@@ -1,6 +1,8 @@
+import { configureStore } from "@reduxjs/toolkit";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useRef, useState } from "react";
+import { Provider } from "react-redux";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -17,6 +19,7 @@ import {
 } from "@/components/schemaForm/resolve";
 
 import root from "@/schemas/game.schema.json";
+import { initialState, rootReducer } from "@/state";
 
 const train = (name, extra = {}) => ({
   name,
@@ -34,6 +37,9 @@ const companies = [
 // The real schema in a form that holds the game in state: the draft is what the
 // options are read from
 const Form = ({ initial, section = "trains", keys = [section], onGame }) => {
+  const [store] = useState(() =>
+    configureStore({ reducer: rootReducer, preloadedState: initialState }),
+  );
   const [game, setGame] = useState(initial);
   const latest = useRef(game);
   latest.current = game;
@@ -43,24 +49,30 @@ const Form = ({ initial, section = "trains", keys = [section], onGame }) => {
     setGame(latest.current);
   };
   return (
-    <SchemaFormContext.Provider
-      value={{
-        root,
-        game,
-        issues: [],
-        latest: () => latest.current,
-        set: (keys, value) => change((g) => setValue(g, keys, value)),
-        clear: (keys) => change((g) => clearValue(g, keys)),
-        insert: (keys, index, item) =>
-          change((g) => insertAt(g, keys, index, item)),
-        remove: (keys, index) => change((g) => removeAt(g, keys, index)),
-        move: (keys, from, to) => change((g) => moveItem(g, keys, from, to)),
-      }}
-    >
-      <TooltipProvider>
-        <SchemaField keys={keys} schema={schemaAt(root, keys)} defaults={{}} />
-      </TooltipProvider>
-    </SchemaFormContext.Provider>
+    <Provider store={store}>
+      <SchemaFormContext.Provider
+        value={{
+          root,
+          game,
+          issues: [],
+          latest: () => latest.current,
+          set: (keys, value) => change((g) => setValue(g, keys, value)),
+          clear: (keys) => change((g) => clearValue(g, keys)),
+          insert: (keys, index, item) =>
+            change((g) => insertAt(g, keys, index, item)),
+          remove: (keys, index) => change((g) => removeAt(g, keys, index)),
+          move: (keys, from, to) => change((g) => moveItem(g, keys, from, to)),
+        }}
+      >
+        <TooltipProvider>
+          <SchemaField
+            keys={keys}
+            schema={schemaAt(root, keys)}
+            defaults={{}}
+          />
+        </TooltipProvider>
+      </SchemaFormContext.Provider>
+    </Provider>
   );
 };
 

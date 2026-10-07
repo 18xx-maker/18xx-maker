@@ -38,6 +38,7 @@ import {
   valueAt,
 } from "@/components/schemaForm/resolve";
 import { useSchemaText } from "@/components/schemaForm/schemaText";
+import { usePanelState } from "@/components/schemaForm/usePanelState";
 
 // Moves focus into an item once it is on the page: to its title, or to one of
 // its buttons (the other one of the pair when that is disabled). With no such
@@ -325,6 +326,7 @@ export const ListStatus = ({ message, warning }) => (
 // that is not left yet is passed on first (a click on a button does not
 // always move the focus out of it), and the game is read after that.
 const FRESH_CARD = { open: true, more: false };
+const EMPTY = [];
 const CLOSED_CARD = { open: false, more: false };
 
 // primary are the fields shown first, the others are under more fields.
@@ -368,7 +370,7 @@ export const ArrayField = ({
   const { message, removed, warning, setMessage, setRemoved, setWarning } =
     notes;
   // What is open on each card, by index
-  const [ui, setUi] = useState([]);
+  const [ui, setUi] = usePanelState(`cards:${keys.join("/")}`, EMPTY);
 
   const items = valueAt(keys, form.game) ?? [];
   // Items that are text, a number or an object (a token of the game) are a
