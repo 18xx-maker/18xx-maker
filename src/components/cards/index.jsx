@@ -82,11 +82,17 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
       );
     }, shares);
   }, companies);
+  // Every train a card can refer to, the back trains with a name included
+  const allTrains = [
+    ...(game.trains || []),
+    ...ownTrains,
+    ...(game.trains || []).map((t) => t.back).filter((b) => b && b.name),
+  ];
   let trainNodes = addIndex(map)(
     (train, index) => (
       <Train
         train={train}
-        trains={[...(game.trains || []), ...ownTrains]}
+        trains={allTrains}
         key={`train-${train.name}-${index}`}
       />
     ),
@@ -98,7 +104,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
       train.back ? (
         <TrainBack
           train={train}
-          trains={[...(game.trains || []), ...ownTrains]}
+          trains={allTrains}
           key={`train-back-${train.name}-${index}`}
         />
       ) : null,

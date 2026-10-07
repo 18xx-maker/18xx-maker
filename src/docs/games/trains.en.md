@@ -83,8 +83,10 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   train by default), a smaller `text` under it, a `color` for the text and a
   `backgroundColor`, or a full train (it has a `name` and a `color`, and any of
   the fields above) that prints like a normal train card with its own values,
-  for a train that is another train on its other side. A train without a `back`
-  has a blank card behind it.
+  for a train that is another train on its other side. A full back takes the
+  train fields of the train page, but not `title` or `text`, and its own `back`
+  and `quantity` are ignored. A train without a `back` has a blank card behind
+  it.
 
 ## Examples
 

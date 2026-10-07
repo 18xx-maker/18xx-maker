@@ -49,6 +49,14 @@ const isBack = (page) => page.classList.contains("cards--back");
 const PER_ROW = 2;
 
 describe("duplex", () => {
+  it("looks up a train that only exists as a back, like 5D, for rust", async () => {
+    const root = await showCards("&config.cards.duplex=long");
+    const front = [...root.querySelectorAll(".card.train")].find((card) =>
+      card.textContent.startsWith("3+1"),
+    );
+    expect(front).toHaveTextContent("Rusted by 5D");
+  });
+
   it("prints a page of backs after the page of fronts they belong to", async () => {
     const pages = pagesOf(await showCards("&config.cards.duplex=long"));
 

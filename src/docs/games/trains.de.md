@@ -95,7 +95,9 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
   einer `color` für den Text und einer `backgroundColor`, oder ein vollständiger
   Zug (mit `name` und `color` sowie den obigen Feldern), der wie eine normale
   Zugkarte mit eigenen Werten gedruckt wird, für einen Zug, der auf seiner
-  anderen Seite ein anderer Zug ist. Hinter einem Zug ohne `back` bleibt die
+  anderen Seite ein anderer Zug ist. Eine vollständige Rückseite übernimmt die
+  Zugfelder der Zugseite, aber nicht `title` oder `text`; ihr eigenes `back`
+  und `quantity` werden ignoriert. Hinter einem Zug ohne `back` bleibt die
   Karte leer.
 
 ## Beispiele

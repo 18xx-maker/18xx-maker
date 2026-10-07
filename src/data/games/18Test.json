@@ -326,6 +326,7 @@
       "tradeInFormat": "-# trade",
       "color": "green",
       "obsolete": "8E",
+      "rust": "5D",
       "back": {
         "text": "Obsolete when the first 8E is bought",
         "color": "white",

@@ -50,5 +50,6 @@ export const FullTrain = {
         name: "2",
         back: { name: "3", color: "green", price: 180 },
       },
+      trains: [],
     }),
 };
