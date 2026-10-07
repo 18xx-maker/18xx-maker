@@ -186,7 +186,9 @@ const LoadGamesPage = () => {
       <p className="leading-7 my-4 text-wrap">{t("games.description")}</p>
       <div className="flex flex-wrap gap-2">
         {canCreate && (
-          <Button onClick={newGame}>
+          // primary-foreground is the purple accent of links, too faint on the
+          // primary background
+          <Button className="text-background" onClick={newGame}>
             <Plus />
             {t("game.new")}
           </Button>
