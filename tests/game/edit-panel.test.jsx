@@ -606,6 +606,8 @@ describe("edit panel tabs", () => {
     expect(screen.queryByRole("tab")).not.toBeInTheDocument();
     expect(screen.getByRole("region", { name: "JSON" })).toBeVisible();
 
+    await screen.findByTestId("json-editor");
+
     // Forms goes back to the last form
     await user.click(screen.getByRole("button", { name: "Forms" }));
     expect(router.state.location.search).toBe("?edit=true&editSection=output");
@@ -619,6 +621,7 @@ describe("edit panel tabs", () => {
     const { user, router } = open(
       `${route}?edit=true&editSection=json&lines=3`,
     );
+    await screen.findByTestId("json-editor");
     await user.click(await screen.findByRole("button", { name: "Forms" }));
     expect(router.state.location.search).not.toContain("lines");
   });
@@ -650,6 +653,7 @@ describe("edit panel tabs", () => {
 
   it("Forms from a JSON deep link goes to the first form", async () => {
     const { user, router } = open(`${route}?edit=true&editSection=json`);
+    await screen.findByTestId("json-editor");
     await user.click(await screen.findByRole("button", { name: "Forms" }));
     expect(router.state.location.search).toBe("?edit=true");
     expect(await screen.findByRole("tab", { name: "Game" })).toHaveAttribute(
