@@ -132,6 +132,10 @@
         "tab": "六边格",
         "description": "以 JSON 编辑选中的六边格组;点击地图上的六边格即可选中它所在的组。"
       },
+      "config": {
+        "tab": "配置",
+        "description": "以 JSON 编辑该游戏的配置;开启“允许游戏配置”时生效。"
+      },
       "json": {
         "tab": "JSON",
         "description": "以 JSON 编辑整个游戏;只要 JSON 有效,页面就会随之更新。"
@@ -361,11 +365,13 @@
   },
   "jsonEditor": {
     "label": "游戏 JSON",
+    "configLabel": "游戏配置 JSON",
     "valid": "JSON 有效。游戏会随你的输入而更新。",
     "syntaxError": "第 {{line}} 行,第 {{column}} 列:语法错误。",
     "notUpdated": "游戏未更新,页面显示最后一个有效版本。",
     "invalid": {
       "root": "游戏必须是一个 JSON 对象。",
+      "config": "配置必须是 JSON 对象。",
       "group": "组必须是一个 JSON 对象。",
       "hexes": "组需要在 \"hexes\" 中包含至少一个坐标的列表,例如 \"B2\"。",
       "info": "游戏需要一个 \"info\" 对象。",
@@ -1388,6 +1394,30 @@
       "value": {
         "label": "数值",
         "description": "地图和轨道地块上的数值"
+      }
+    },
+    "fonts": {
+      "title": "字体",
+      "gameFonts": "该游戏在自己的配置中设置了字体,它们优先于这里的设置。",
+      "field": "{{role}}:{{field}}",
+      "family": "字体族",
+      "size": "大小",
+      "weight": "粗细",
+      "style": "样式",
+      "clear": "清除{{field}}",
+      "roles": {
+        "body": {
+          "label": "正文字体",
+          "description": "所有文字的字体。其他字体都以它为起点,留空的设置保持文字的默认值。"
+        },
+        "card": {
+          "label": "卡牌字体",
+          "description": "私有公司卡牌上的文字。卡牌字体没有大小。"
+        },
+        "title": {
+          "label": "标题字体",
+          "description": "城市、小镇、场外区域和独立六边形的名称。"
+        }
       }
     },
     "data": {

@@ -35,10 +35,11 @@ export const SECTION_KEYS = {
   market: ["stock"],
   colors: COLOR_KEYS,
   output: OUTPUT_KEYS,
+  config: ["config"],
 };
 
 // The game keys no form edits: they have a tab only in the JSON editor
-export const UNTABBED_KEYS = ["groups", "tiles", "config"];
+export const UNTABBED_KEYS = ["groups", "tiles"];
 
 // How many problems a section has. A deprecated field is a note, not a
 // problem. No result yet (unknown) is no problem.

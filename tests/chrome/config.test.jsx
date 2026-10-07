@@ -473,3 +473,140 @@ describe("number fields", () => {
     });
   });
 });
+
+describe("fonts section", () => {
+  const route = "/games/18Test/map?config=true&section=fonts";
+  const field = (role, name) =>
+    screen.findByRole("combobox", { name: `${role}: ${name}` });
+  const chooseOption = async (user, name, option) => {
+    await user.click(await screen.findByRole("combobox", { name }));
+    await user.click(await screen.findByRole("option", { name: option }));
+  };
+
+  it("is selectable through the url", async () => {
+    renderApp(route);
+    expect(
+      await screen.findByRole("combobox", { name: "Config Section" }),
+    ).toHaveTextContent("Fonts");
+    expect(screen.getByText("Title font")).toBeInTheDocument();
+    expect(screen.getByText("Body font")).toBeInTheDocument();
+    expect(screen.getByText("Card font")).toBeInTheDocument();
+    // A card has no size
+    expect(
+      screen.queryByRole("spinbutton", { name: "Card font: Size" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("stores only what is set, and nothing when all is cleared", async () => {
+    const { user, store } = renderApp(route);
+    const family = await field("Title font", "Family");
+    const size = screen.getByRole("spinbutton", { name: "Title font: Size" });
+
+    await user.type(family, "serif{Enter}");
+    await waitFor(() =>
+      expect(store.getState().config).toEqual({
+        fonts: { roles: { title: { family: "serif" } } },
+      }),
+    );
+
+    await user.type(size, "14{Enter}");
+    await chooseOption(user, "Title font: Weight", "bold");
+    await chooseOption(user, "Title font: Style", "italic");
+    await waitFor(() =>
+      expect(store.getState().config.fonts.roles.title).toEqual({
+        family: "serif",
+        size: 14,
+        weight: "bold",
+        style: "italic",
+      }),
+    );
+
+    await user.click(
+      screen.getByRole("button", { name: "Clear Title font: Style" }),
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Clear Title font: Weight" }),
+    );
+    await user.clear(size);
+    await user.keyboard("{Enter}");
+    await user.clear(family);
+    await user.keyboard("{Enter}");
+
+    // The roles, title and fonts that are left empty go with the last field
+    await waitFor(() => expect(store.getState().config).toEqual({}));
+    expect(store.getState().config.fonts).toBeUndefined();
+    expect(store.getState().errors).toEqual({});
+  });
+
+  it("keeps the other settings of fonts when one role is cleared", async () => {
+    const { user, store } = renderApp(route, {
+      config: {
+        fonts: {
+          families: { fancy: "Georgia" },
+          roles: { title: { style: "italic" } },
+        },
+      },
+    });
+    await user.click(
+      await screen.findByRole("button", { name: "Clear Title font: Style" }),
+    );
+    await waitFor(() =>
+      expect(store.getState().config).toEqual({
+        fonts: { families: { fancy: "Georgia" } },
+      }),
+    );
+  });
+
+  it("does not store a size of 0", async () => {
+    const { user, store } = renderApp(route);
+    await user.type(
+      await screen.findByRole("spinbutton", { name: "Title font: Size" }),
+      "0{Enter}",
+    );
+    await waitFor(() =>
+      expect(Object.keys(store.getState().errors)).toContain(
+        "#/fonts/roles/title/size",
+      ),
+    );
+    expect(store.getState().config.fonts).toBeUndefined();
+  });
+
+  it("stores a numeric weight as a number", async () => {
+    const { user, store } = renderApp(route);
+    await chooseOption(user, "Body font: Weight", "700");
+    await waitFor(() =>
+      expect(store.getState().config.fonts.roles.body.weight).toBe(700),
+    );
+  });
+
+  it("shows a valid weight that is not in the list", async () => {
+    renderApp(route, {
+      config: { fonts: { roles: { body: { weight: 450 } } } },
+    });
+    expect(await field("Body font", "Weight")).toHaveTextContent("450");
+  });
+
+  it("shows what a role falls back to", async () => {
+    renderApp(route, {
+      config: { fonts: { roles: { body: { family: "serif", size: 9 } } } },
+    });
+    expect(await field("Title font", "Family")).toHaveAttribute(
+      "placeholder",
+      "serif",
+    );
+    expect(
+      screen.getByRole("spinbutton", { name: "Title font: Size" }),
+    ).toHaveAttribute("placeholder", "9");
+  });
+
+  it("says that the fonts of the game win only when its config is used", async () => {
+    const note = /sets fonts in its own config/;
+    const { unmount } = renderApp(route);
+    await field("Title font", "Family");
+    expect(screen.queryByText(note)).not.toBeInTheDocument();
+    unmount();
+
+    renderApp(route, { config: { allowGameConfig: true } });
+    expect(await screen.findByText(note)).toBeInTheDocument();
+  });
+});

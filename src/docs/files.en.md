@@ -254,6 +254,15 @@ printed and exported maps do not change. A map variation that copies another
 shows the hexes it copies read only: change them in the variation they come
 from. The keyboard way to edit a group is the JSON editor (the JSON switch in the panel header).
 
+The Config tab edits the `config` of the game as JSON, the settings that are
+applied for this game when _Allow game config_ is on in the [config
+panel](/docs/config). It is an object like `{ "fonts": { "roles": { "title": {
+"style": "italic" } } } }`. The page follows the text while it is a JSON
+object; anything else stays a draft. A value the [config
+schema](/docs/games/schemas) does not allow (a font `size` of `"big"`) is
+marked in the text and puts a red dot on the tab. Emptying the object removes
+`config` from the game.
+
 The edits stay in the loaded game. Review and save them on the Changes page,
 described next.
 

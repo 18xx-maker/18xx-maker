@@ -1,8 +1,9 @@
 import { jsonLanguage } from "@codemirror/lang-json";
 
-import { equals, omit } from "ramda";
+import { assoc, dissoc, equals, isEmpty, omit } from "ramda";
 
 import { gameText } from "@/util/download";
+import { rerootPointer } from "@/util/hexEdit";
 
 // The pure parts of the JSON editor of the edit panel (JsonEditor.jsx): reading
 // the text, deciding whether it can replace the game and finding the places
@@ -286,4 +287,26 @@ export const gameLens = (slug) => ({
   issues: (issues) => issues,
   lines: true,
   fold: true,
+});
+
+// The Config tab: the `config` of the game, as an object. No config is an
+// empty object, and an empty object is no config.
+export const configLens = (slug) => ({
+  draftKey: `${slug}#config`,
+  label: "jsonEditor.configLabel",
+  text: (game) => JSON.stringify(game.config ?? {}, null, 2),
+  invalidReason: (value) => (isObject(value) ? null : "config"),
+  same: (game, value) => equals(game.config ?? {}, value),
+  write: (game, value) =>
+    isEmpty(value) ? dissoc("config", game) : assoc("config", value, game),
+  // The problems under `config`, as pointers into it
+  issues: (issues, done) =>
+    done
+      ? issues.flatMap((issue) => {
+          const pointer = rerootPointer(issue.pointer, "config");
+          return pointer === null ? [] : [{ ...issue, pointer }];
+        })
+      : [],
+  lines: false,
+  fold: false,
 });

@@ -29,11 +29,12 @@
 | 私有公司   | 私有公司的样式                                                |
 | 火车       | 火车的样式以及是否显示图片                                    |
 | 货币       | 每种金额的货币写法                                            |
+| 字体       | 正文、标题和卡牌字体的字体族、大小、粗细和样式                |
 | 数据       | 重置、复制、下载和导入您的配置,以及允许游戏自带的配置         |
 
 ## 字体
 
-`fonts` 设置在一处给出某类文字的字体。目前面板中还没有对应的控件:请在您的 `config.json`、在数据部分导入的 JSON、`?config.fonts...` 参数或游戏文件的 `config` 中设置。
+`fonts` 设置在一处给出某类文字的字体。“字体”部分设置 `body`、`title` 和 `card` 角色的字体族、大小、粗细和样式(卡牌没有大小)。留空的字段表示未设置,并显示它回退到的正文字体;只有您设置的内容才会被保存。其他角色和 `families` 中的名称请在您的 `config.json`、在数据部分导入的 JSON、`?config.fonts...` 参数或游戏文件的 `config` 中设置(编辑面板的[配置标签页](/docs/files)可编辑后者)。当游戏自己设置了 `fonts` 并且开启了“允许游戏配置”时,该部分会提示:以游戏为准。
 
 ```json
 {
@@ -56,7 +57,7 @@
 
 ## 深层链接
 
-每个部分在地址中都有名称,因此可以直接链接到它:`?config=true&section=tokens` 会在“标记”部分打开面板。名称有 `colors`、`export`、`layout`、`tokens`、`maps`、`tiles`、`stock`(股市)、`charters`、`cards`、`privates`、`trains`、`currency` 和 `data`。未知的名称会打开“颜色与公司”。
+每个部分在地址中都有名称,因此可以直接链接到它:`?config=true&section=tokens` 会在“标记”部分打开面板。名称有 `colors`、`export`、`layout`、`tokens`、`maps`、`tiles`、`stock`(股市)、`charters`、`cards`、`privates`、`trains`、`currency`、`fonts` 和 `data`。未知的名称会打开“颜色与公司”。
 
 ## 保存和分享您的配置
 

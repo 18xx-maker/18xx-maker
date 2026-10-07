@@ -77,6 +77,33 @@ describe("gameValidation", () => {
     expect(await validateGame(renamedGame())).toEqual([]);
   });
 
+  it("checks the values of the config of the game against the config schema", async () => {
+    const game = (config) => ({ ...validGame(), config });
+    expect(await validateGame(game({ margin: 10 }))).toEqual([]);
+
+    const issues = await validateGame(
+      game({ fonts: { roles: { title: { size: "big" } } } }),
+    );
+    expect(issues).toHaveLength(1);
+    expect(issues[0]).toMatchObject({
+      severity: "error",
+      code: "type",
+      pointer: "config.fonts.roles.title.size",
+    });
+
+    const unknown = await validateGame(
+      game({ fonts: { roles: { title: { colour: "red" } } } }),
+    );
+    expect(unknown.map((issue) => issue.pointer)).toEqual([
+      "config.fonts.roles.title.colour",
+    ]);
+  });
+
+  it("reports an unknown setting of the config of the game once", async () => {
+    const issues = await validateGame({ ...validGame(), config: { fnts: {} } });
+    expect(issues.map((issue) => issue.pointer)).toEqual(["config.fnts"]);
+  });
+
   it("ignores the meta data the app adds", async () => {
     expect(await validateGame(validGame())).toEqual([]);
   });
