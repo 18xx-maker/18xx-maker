@@ -325,8 +325,10 @@ and numbers (`certLimit`) is the `stringOrNumber` kind. `RoundsForm` edits `ROUN
 `SchemaFormProvider`. A field kind without a form (other
 `oneOf`s) falls back to a JSON textarea, and
 `resolve.test.js` fails when a property in scope falls back unexpectedly. A
-property with `"deprecated": true` in the schema stays editable, with a
-badge and a note, and `deprecatedPaths` in `src/util/gameValidation.js` finds
+property with `"deprecated": true` in the schema stays editable while the
+game has it, with a badge and a note, and is not offered when it is unset
+(`isUnsetDeprecated`; a new top level name goes next to the old one in the key
+list of its form). `deprecatedPaths` in `src/util/gameValidation.js` finds `deprecatedPaths` in `src/util/gameValidation.js` finds
 it inside lists (`trains[2].players`). Edits go through `editGame`, so the
 Changes page, problems check and unsaved-edit handling work unchanged. Labels
 and help text are the schema keys and descriptions, in English only.

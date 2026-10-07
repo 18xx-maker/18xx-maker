@@ -196,10 +196,7 @@
     "invalidLimit": "Gib eine ganze Zahl ab 1, ∞ oder einen Bruch aus zwei Ziffern wie 3/4 ein.",
     "onePerLine": "Eine pro Zeile. Eine einzelne Zeile wird als Text gespeichert, mehrere als Liste.",
     "reference": {
-      "from": {
-        "trains": "Züge",
-        "companies": "Gesellschaften"
-      },
+      "from": { "trains": "Züge", "companies": "Gesellschaften" },
       "unknown": "Nicht bei den {{collection}} dieses Spiels: {{value}}.",
       "noMatches": "Keine Treffer. Enter übernimmt \"{{value}}\".",
       "remove": "{{name}} entfernen"
