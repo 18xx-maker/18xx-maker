@@ -90,9 +90,13 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
 - **back** Die Rückseite der Karte dieses Zuges, die hinter die Vorderseite
   gedruckt wird, wenn die Konfiguration
   [duplex](/docs/output/pdf#doppelseitige-karten) aktiv ist. Alle Exemplare
-  des Zuges teilen sie. Sie hat einen `title` (standardmäßig der Name des
-  Zuges), einen kleineren `text` darunter, eine `color` für den Text und eine
-  `backgroundColor`. Hinter einem Zug ohne `back` bleibt die Karte leer.
+  des Zuges teilen sie. Sie ist entweder eine einfache Rückseite mit einem
+  `title` (standardmäßig der Name des Zuges), einem kleineren `text` darunter,
+  einer `color` für den Text und einer `backgroundColor`, oder ein vollständiger
+  Zug (mit `name` und `color` sowie den obigen Feldern), der wie eine normale
+  Zugkarte mit eigenen Werten gedruckt wird, für einen Zug, der auf seiner
+  anderen Seite ein anderer Zug ist. Hinter einem Zug ohne `back` bleibt die
+  Karte leer.
 
 ## Beispiele
 

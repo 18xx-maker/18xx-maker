@@ -586,6 +586,7 @@ describe("validate", () => {
         "everything",
         { title: "2", text: "Rusts", color: "white", backgroundColor: "red" },
       ],
+      ["a full train", { name: "3", color: "green", price: 200 }],
     ])("accepts %s", (_, back) => {
       expect(run(withBack(back)).code).toBe(0);
     });
@@ -594,6 +595,8 @@ describe("validate", () => {
       ["a string", "Two"],
       ["an unknown field", { title: "2", image: "2T" }],
       ["a number title", { title: 2 }],
+      ["a train without a color", { name: "3", price: 200 }],
+      ["a train mixed with a title", { name: "3", color: "green", title: "3" }],
     ])("rejects %s", (_, back) => {
       expect(run(withBack(back)).code).toBe(1);
     });

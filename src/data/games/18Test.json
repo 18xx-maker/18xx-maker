@@ -338,7 +338,14 @@
       "price": 800,
       "color": "brown",
       "variant": "heavy",
-      "phased": "8E"
+      "phased": "8E",
+      "back": {
+        "name": "5D",
+        "price": 1000,
+        "color": "brown",
+        "description": "Flip side of the 4D",
+        "permanent": false
+      }
     },
     {
       "name": "8E",

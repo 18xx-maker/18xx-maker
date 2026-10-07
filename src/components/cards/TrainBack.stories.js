@@ -41,3 +41,14 @@ export const Dark = {
 export const LongTitle = {
   args: { title: "The Great Northern Express", text: "A long title wraps" },
 };
+
+// A back with a name is a full train, printed like a normal train card
+export const FullTrain = {
+  render: () =>
+    createElement(TrainBack, {
+      train: {
+        name: "2",
+        back: { name: "3", color: "green", price: 180 },
+      },
+    }),
+};

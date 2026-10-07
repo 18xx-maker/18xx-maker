@@ -96,7 +96,11 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   let trainBackNodes = addIndex(map)(
     (train, index) =>
       train.back ? (
-        <TrainBack train={train} key={`train-back-${train.name}-${index}`} />
+        <TrainBack
+          train={train}
+          trains={[...(game.trains || []), ...ownTrains]}
+          key={`train-back-${train.name}-${index}`}
+        />
       ) : null,
     trains,
   );

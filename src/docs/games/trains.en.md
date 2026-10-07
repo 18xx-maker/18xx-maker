@@ -79,9 +79,12 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   to min/max players like on privates soon)_.
 - **back** The back of this train's card, printed behind the front when the
   [duplex](/docs/output/pdf#double-sided-cards) config is on. All copies of the
-  train share it. It has a `title` (the name of the train by default), a smaller
-  `text` under it, a `color` for the text and a `backgroundColor`. A train
-  without a `back` has a blank card behind it.
+  train share it. It is either a plain back with a `title` (the name of the
+  train by default), a smaller `text` under it, a `color` for the text and a
+  `backgroundColor`, or a full train (it has a `name` and a `color`, and any of
+  the fields above) that prints like a normal train card with its own values,
+  for a train that is another train on its other side. A train without a `back`
+  has a blank card behind it.
 
 ## Examples
 

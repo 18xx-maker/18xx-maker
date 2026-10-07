@@ -25,6 +25,8 @@ const kindOf = (card) => {
   }
   if (card.classList.contains("train")) {
     if (text.startsWith("280G")) return "2";
+    if (text.startsWith("5D")) return "5D";
+    if (text.startsWith("4D")) return "4D";
     return text.startsWith("3+1") ? "3+1" : "none";
   }
   return "other";
@@ -83,8 +85,9 @@ describe("duplex", () => {
         });
         // A train has its back behind it, the others nothing
         const kind = kindOf(card);
+        const expected = kind === "4D" ? "5D" : kind;
         expect(kindOf(behind)).toBe(
-          kind === "none" || kind === "other" ? "blank" : kind,
+          kind === "none" || kind === "other" ? "blank" : expected,
         );
       });
     });
@@ -136,6 +139,21 @@ describe("duplex", () => {
     expect(kinds.filter((kind) => kind === "back?")).toHaveLength(0);
   });
 
+  it("prints a back that is a full train as a normal train card", async () => {
+    const root = await showCards("&config.cards.duplex=long");
+    const backs = pagesOf(root)
+      .filter(isBack)
+      .flatMap((page) => slotsOf(page))
+      .filter((card) => kindOf(card) === "5D");
+    // The 2 copies of the 4D, a normal card (not a title back) of the 5D
+    expect(backs).toHaveLength(2);
+    backs.forEach((card) => {
+      expect(card).not.toHaveClass("train-back");
+      expect(card.querySelector(".train__price")).toHaveTextContent(/1,000/);
+      expect(card).toHaveTextContent(/Flip side of the 4D/);
+    });
+  });
+
   it("backs the trains of the companies that print on the cards", async () => {
     const root = await showCards(
       "&config.cards.duplex=long&config.charters.trainCards=cards",
@@ -158,7 +176,7 @@ describe("duplex", () => {
     const pages = pagesOf(root);
     const flags = pages.map((page) => (isBack(page) ? "back" : "front"));
     // Letter fits 9 in landscape, separate does not force portrait
-    expect(flags).toEqual([...Array(6).fill("front"), "back"]);
+    expect(flags).toEqual([...Array(6).fill("front"), "back", "back"]);
 
     // Not mirrored: the backs follow the order of the trains
     const backs = pages
@@ -174,6 +192,11 @@ describe("duplex", () => {
       "3+1",
       "3+1",
       "3+1",
+      "5D",
+      "5D",
+      "blank",
+      "blank",
+      "blank",
     ]);
     expect(backs.filter((kind) => kind === "2")).toHaveLength(4);
   });

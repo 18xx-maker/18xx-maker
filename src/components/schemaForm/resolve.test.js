@@ -281,10 +281,7 @@ describe("kindOf", () => {
       "links.rules": "string",
       prototype: "boolean",
       "trains.0.available": "string",
-      "trains.0.back.backgroundColor": "string",
-      "trains.0.back.color": "string",
-      "trains.0.back.text": "string",
-      "trains.0.back.title": "string",
+      "trains.0.back": "json",
       "trains.0.backgroundColor": "string",
       "trains.0.color": "string",
       "trains.0.description": "text",
@@ -400,7 +397,7 @@ describe("kindOf", () => {
           kindOf(resolveAllOf(node, schema), key, schema) === "json",
       )
       .map(([key]) => key);
-    expect(json).toEqual(["rust", "phased", "obsolete"]);
+    expect(json).toEqual(["rust", "phased", "obsolete", "back"]);
   });
 
   it("reads the privates as an array, the fields of a private as real fields", () => {
