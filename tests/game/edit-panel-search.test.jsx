@@ -5,9 +5,12 @@ import games from "@/data/games";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
-const open = (section) => {
+const open = (section, companies) => {
   const game = {
     ...structuredClone(games["18Test"]),
+    ...(companies && {
+      companies: structuredClone(games["18Test"].companies).slice(0, companies),
+    }),
     meta: { id: "abc", type: "internal", slug: "internal:abc" },
   };
   return renderApp(`/games/internal:abc/map?edit=true&editSection=${section}`, {
@@ -27,29 +30,42 @@ beforeEach(async () => {
 });
 
 describe("edit panel field search", () => {
-  it("opens the card of a match, focuses the field and goes on with Enter", async () => {
+  it("opens the card of a match, marks the field and goes on with Enter", async () => {
     const { user } = open("companies");
     await user.type(await search(), "abbrev{Enter}");
     const first = within(cards()[0]).getByRole("textbox", { name: "Abbrev" });
     expect(first).toBeVisible();
-    expect(first).toHaveFocus();
+    expect(first).toHaveAttribute("data-search-match");
+    // The focus stays in the box, so Enter goes on to the next match
+    expect(await search()).toHaveFocus();
     expect(
       screen.getByText(/^Abbrev \(Black Railroad BLRR\), match 1 of /),
     ).toBeInTheDocument();
 
-    await user.type(await search(), "{Enter}");
+    await user.keyboard("{Enter}");
     const second = within(cards()[1]).getByRole("textbox", { name: "Abbrev" });
     expect(second).toBeVisible();
-    expect(second).toHaveFocus();
+    expect(second).toHaveAttribute("data-search-match");
+    expect(first).not.toHaveAttribute("data-search-match");
+    expect(await search()).toHaveFocus();
     // The first card stays open
     expect(first).toBeVisible();
+
+    // Alt+Enter focuses the field of the current match
+    await user.keyboard("{Alt>}{Enter}{/Alt}");
+    expect(second).toHaveFocus();
+    expect(
+      screen.getByText(/^Abbrev \(Light Blue Railroad LBRR\), match 2 of /),
+    ).toBeInTheDocument();
   });
 
   it("goes back with Shift+Enter and says when nothing matches", async () => {
     const { user } = open("companies");
     await user.type(await search(), "abbrev{Shift>}{Enter}{/Shift}");
     const last = cards().at(-1);
-    expect(within(last).getByRole("textbox", { name: "Abbrev" })).toHaveFocus();
+    expect(
+      within(last).getByRole("textbox", { name: "Abbrev" }),
+    ).toHaveAttribute("data-search-match");
 
     await user.clear(await search());
     await user.type(await search(), "nothinglikethis{Enter}");
@@ -136,5 +152,49 @@ describe("edit panel list filter", () => {
     expect(
       screen.queryByRole("searchbox", { name: /Filter/ }),
     ).not.toBeInTheDocument();
+  });
+
+  it("has no filter on a list of one company", async () => {
+    open("companies", 1);
+    await screen.findByTestId("edit-panel");
+    await waitFor(() => expect(cards()).toHaveLength(1));
+    expect(
+      screen.queryByRole("searchbox", { name: /Filter/ }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("keeps the filter box when the filtered item is removed", async () => {
+    const { user } = open("companies", 2);
+    await user.type(await narrow(), "black");
+    await waitFor(() => expect(cards()).toHaveLength(1));
+    await user.click(
+      screen.getByRole("button", { name: /^Remove company Black Railroad/ }),
+    );
+    // One item is left, the filter text still hides it, and can be cleared
+    expect(await narrow()).toHaveValue("black");
+    await user.clear(await narrow());
+    await waitFor(() => expect(cards()).toHaveLength(1));
+  });
+
+  it("clears the filter on a duplicate and focuses the copy", async () => {
+    const { user } = open("companies");
+    await user.type(await narrow(), "navy");
+    await waitFor(() => expect(cards()).toHaveLength(1));
+    await user.click(
+      screen.getByRole("button", { name: /^Duplicate company Navy Railroad/ }),
+    );
+    await waitFor(() => expect(narrow()).resolves.toHaveValue(""));
+    await waitFor(() => expect(cards().length).toBeGreaterThan(20));
+    expect(within(cards()[4]).getAllByRole("button")[0]).toHaveFocus();
+  });
+
+  it("clears the text with the first Escape and closes the panel with the next", async () => {
+    const { user } = open("companies");
+    await user.type(await narrow(), "navy");
+    await user.keyboard("{Escape}");
+    expect(await narrow()).toHaveValue("");
+    expect(screen.getByTestId("edit-panel")).toBeInTheDocument();
+    await user.keyboard("{Escape}");
+    expect(screen.queryByTestId("edit-panel")).not.toBeInTheDocument();
   });
 });

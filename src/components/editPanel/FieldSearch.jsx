@@ -29,9 +29,20 @@ export const findFields = (root, query) => {
     .filter(({ target }) => target);
 };
 
+// What marks the field of the current match while the focus stays in the box
+const MARK = ["ring-2", "ring-ring"];
+const mark = (target) => {
+  document.querySelectorAll("[data-search-match]").forEach((old) => {
+    old.removeAttribute("data-search-match");
+    old.classList.remove(...MARK);
+  });
+  target.setAttribute("data-search-match", "");
+  target.classList.add(...MARK);
+};
+
 // Opens the cards that hold a field, the outermost first, then scrolls to the
-// field and focuses it
-export const revealField = ({ el, target }) => {
+// field and marks it, or focuses it
+export const revealField = ({ el, target }, focus = false) => {
   const titles = [];
   for (let node = el, hidden; (hidden = node.closest("[hidden]"));) {
     const card = hidden.closest("[data-item]");
@@ -47,7 +58,8 @@ export const revealField = ({ el, target }) => {
     }
   });
   target.scrollIntoView({ block: "center" });
-  target.focus();
+  mark(target);
+  if (focus) target.focus();
 };
 
 // The title of the card a field is in, to tell the same field of several cards
@@ -62,8 +74,9 @@ const cardTitle = (el) => {
 };
 
 // Finds a field of the open form by its name: Enter goes to the first match,
-// opening the card it is in, and again to the next one (Shift+Enter goes
-// back). Escape clears the text first.
+// opening the card it is in and marking the field, and again to the next one
+// (Shift+Enter goes back) with the focus staying in the box. Alt+Enter focuses
+// the field of the current match. Escape clears the text first.
 const FieldSearch = ({ panel }) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
@@ -76,7 +89,7 @@ const FieldSearch = ({ panel }) => {
     setStatus("");
   };
 
-  const go = (step) => {
+  const go = (step, focus = false) => {
     const found = findFields(document.getElementById(panel), query);
     if (found.length === 0) {
       setStatus(t("editPanel.search.none"));
@@ -84,7 +97,7 @@ const FieldSearch = ({ panel }) => {
     }
     const next =
       index < 0
-        ? step > 0
+        ? step >= 0
           ? 0
           : found.length - 1
         : (index + step + found.length) % found.length;
@@ -98,13 +111,13 @@ const FieldSearch = ({ panel }) => {
         count: found.length,
       }),
     );
-    revealField(field);
+    revealField(field, focus);
   };
 
   const onKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      go(event.shiftKey ? -1 : 1);
+      go(event.altKey ? 0 : event.shiftKey ? -1 : 1, event.altKey);
     } else if (event.key === "Escape" && query) {
       // The panel closes on the next one
       event.preventDefault();

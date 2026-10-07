@@ -326,13 +326,15 @@ export const ListStatus = ({ message, warning }) => (
 // drafts follow the game), what is open on a card follows the item. A field
 // that is not left yet is passed on first (a click on a button does not
 // always move the focus out of it), and the game is read after that.
-// The fields of an item the filter reads, beside its title
-const FILTER_KEYS = ["name", "abbrev", "title", "note", "train"];
 const FRESH_CARD = { open: true, more: false };
 const CLOSED_CARD = { open: false, more: false };
 
 // A stable default for the panel state of a list, so it does not change per render
 const EMPTY = [];
+
+// The fields of an item the filter reads, beside its title (which has the
+// train of a phase without a name)
+const FILTER_KEYS = ["name", "abbrev", "title", "note"];
 
 // primary are the fields shown first, the others are under more fields.
 // titleKey is the field that names an item and idKey the one that identifies
@@ -510,12 +512,15 @@ export const ArrayField = ({
     }
     setRemoved(null);
     setWarning("");
+    // A copy may not match the filter and would not be seen
+    setFilter("");
     form.insert(keys, index + 1, copy);
     setWarning(onChange?.("insert", index + 1, index + 1) ?? "");
     changeUi((cards) => cards.toSpliced(index + 1, 0, FRESH_CARD));
     setMessage(
       t("editPanel.duplicated", { item, title: titleOf(copy, index + 1) }),
     );
+    focus.current = { index: index + 1, action: "title" };
   };
 
   const remove = (index) => {
@@ -574,7 +579,7 @@ export const ArrayField = ({
           )}
         </div>
       )}
-      {filterable && items.length > 1 && (
+      {filterable && (items.length > 1 || filter) && (
         <div className="flex flex-col gap-1">
           <div className="relative">
             <Search
