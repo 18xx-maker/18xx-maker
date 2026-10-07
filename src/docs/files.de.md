@@ -12,7 +12,11 @@ und die Website eingebunden sind. Einige Beispiele sind [Shikoku
 Diese Spiele werden immer auf der Seite [Spiele laden](/games) aufgelistet. Du
 kannst die JSON-Datei herunterladen, um zu sehen, wie die Spiele aufgebaut sind,
 über die Schaltfläche „Herunterladen“ (im Web) oder „Speichern“ (in der App) auf
-der Informationsseite des Spiels.
+der Informationsseite des Spiels. Um eine Kopie zu behalten, die du bearbeiten
+und speichern kannst, nutze „Speichern unter...“ im Spielmenü (oder auf der
+Seite „Änderungen“): Du wirst nach einem Dateinamen gefragt, eine Kopie des
+Spiels in seinem aktuellen Zustand wird gespeichert und geöffnet. Das
+mitgelieferte Spiel selbst ändert sich nie.
 
 Um eine Spieldatei auf Fehler zu prüfen, führe `pnpm maker validate my-game.json`
 aus (die Datei wird gegen das Spielschema geprüft, siehe
@@ -366,8 +370,9 @@ Speichern die Datei neu formatieren. "Auf Gespeichertes zurücksetzen" verwirft
 die Änderungen. Speichern funktioniert für Spiele in der App, für Spiele, die in
 einem unterstützenden Browser aus deinem Dateisystem geöffnet wurden (der
 Browser fragt nach der Schreibberechtigung), und für Spiele im privaten
-Dateisystem des Browsers. Mitgelieferte Spiele können nur heruntergeladen
-werden. Wurde die Datei seit dem Laden außerhalb von 18xx Maker geändert, wird
+Dateisystem des Browsers. Mitgelieferte Spiele haben keine Datei und können nicht überschrieben
+werden: Nutze „Speichern unter...“, um eine Kopie zu speichern, oder
+Herunterladen. Wurde die Datei seit dem Laden außerhalb von 18xx Maker geändert, wird
 nichts geschrieben, bis du entscheidest, sie neu zu laden (und deine Änderungen
 zu verlieren) oder sie zu überschreiben.
 
