@@ -319,7 +319,7 @@
       "limit": 3,
       "tiles": "brown",
       "events": {
-        "close_companies": true
+        "closeCompanies": true
       }
     },
     {
@@ -328,7 +328,7 @@
       "limit": 2,
       "tiles": "gray",
       "events": {
-        "remove_tokens": true
+        "removeTokens": true
       }
     }
   ],

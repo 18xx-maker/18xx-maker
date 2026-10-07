@@ -1796,20 +1796,39 @@
               }
             ]
           },
+          "buyCompanies": {
+            "type": "boolean",
+            "description": "schema.game.phases.items.buyCompanies"
+          },
           "buy_companies": {
-            "type": "boolean"
+            "type": "boolean",
+            "deprecated": true,
+            "description": "schema.game.phases.items.buy_companies",
+            "deprecationMessage": "schema.game.phases.items.buy_companies.deprecated"
           },
           "events": {
             "description": "schema.game.phases.items.events",
             "type": "object",
             "properties": {
+              "closeCompanies": {
+                "description": "schema.game.phases.items.events.closeCompanies",
+                "type": "boolean"
+              },
               "close_companies": {
                 "description": "schema.game.phases.items.events.close_companies",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "schema.game.phases.items.events.close_companies.deprecated"
+              },
+              "removeTokens": {
+                "description": "schema.game.phases.items.events.removeTokens",
                 "type": "boolean"
               },
               "remove_tokens": {
                 "description": "schema.game.phases.items.events.remove_tokens",
-                "type": "boolean"
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "schema.game.phases.items.events.remove_tokens.deprecated"
               }
             },
             "additionalProperties": {

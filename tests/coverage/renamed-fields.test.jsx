@@ -1,8 +1,15 @@
 import { describe, expect, it } from "vitest";
 
+import Phase from "@/components/Phase";
 import Title from "@/components/map/Title";
 
-import { all, drawSvg, withInfo } from "@tests/support/render.jsx";
+import {
+  all,
+  drawSvg,
+  mountElement,
+  one,
+  withInfo,
+} from "@tests/support/render.jsx";
 
 // A field that was renamed keeps working under its old name, renders the same
 // as the new name, and the new name wins when a game has both.
@@ -46,5 +53,49 @@ describe("renamed info font sizes", () => {
     expect((await sizes({ ...base, [old]: 0 }))[index]).toBe("0");
     // A 0 of the new name does not fall through to the old name
     expect((await sizes({ ...base, [old]: 9, [current]: 0 }))[index]).toBe("0");
+  });
+});
+
+const notes = async (phase) => {
+  const { root } = await mountElement(
+    <Phase
+      minor={false}
+      trains={[{ name: "2", price: 80, quantity: 6 }]}
+      phases={[
+        { name: "2", ...phase },
+        { name: "3", notes: "Other" },
+      ]}
+    />,
+  );
+  return one(root, "tbody tr td.phase__notes").textContent;
+};
+
+describe("renamed phase fields", () => {
+  it.each([
+    ["buy_companies", "buyCompanies", "Private companies may be purchased."],
+    ["close_companies", "closeCompanies", "Private companies close."],
+    ["remove_tokens", "removeTokens", "Private tokens removed."],
+  ])("%s renders the same as %s", async (old, current, note) => {
+    const events = old !== "buy_companies";
+    const make = (key, value) =>
+      events ? { events: { [key]: value } } : { [key]: value };
+    const viaOld = await notes(make(old, true));
+    expect(viaOld).toBe(note);
+    expect(await notes(make(current, true))).toBe(viaOld);
+    // The new name wins, a false does not fall through to the old name
+    expect(
+      await notes(
+        events
+          ? { events: { [old]: true, [current]: false } }
+          : { [old]: true, [current]: false },
+      ),
+    ).toBe("");
+    expect(
+      await notes(
+        events
+          ? { events: { [old]: false, [current]: true } }
+          : { [old]: false, [current]: true },
+      ),
+    ).toBe(note);
   });
 });

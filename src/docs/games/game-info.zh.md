@@ -67,9 +67,9 @@
 
 `phases` 在[阶段与火车](/docs/games/trains)中说明。其中三个字段会在公司执照的阶段表里为该阶段的备注添加一句话:
 
-- `buy_companies: true` 打印 `Private companies may be purchased.`
-- `events.close_companies: true` 打印 `Private companies close.`
-- `events.remove_tokens: true` 打印 `Private tokens removed.`
+- `buyCompanies: true` 打印 `Private companies may be purchased.`
+- `events.closeCompanies: true` 打印 `Private companies close.`
+- `events.removeTokens: true` 打印 `Private tokens removed.`
 
 `events` 是布尔值对象。您添加的其他事件会保留在文件中,打印时会被忽略。
 

@@ -421,7 +421,10 @@
       "exports_paginated": "此字段已弃用并被忽略。请删除它,分页 PDF 会自动导出。",
       "info_titleSize": "仍然有效。请将“titleSize”重命名为“titleFontSize”。",
       "info_subtitleSize": "仍然有效。请将“subtitleSize”重命名为“subtitleFontSize”。",
-      "info_designerSize": "仍然有效。请将“designerSize”重命名为“designerFontSize”。"
+      "info_designerSize": "仍然有效。请将“designerSize”重命名为“designerFontSize”。",
+      "phases_buy_companies": "仍然有效。请将“buy_companies”重命名为“buyCompanies”。",
+      "phases_events_close_companies": "仍然有效。请将“close_companies”重命名为“closeCompanies”。",
+      "phases_events_remove_tokens": "仍然有效。请将“remove_tokens”重命名为“removeTokens”。"
     }
   },
   "prototype": {

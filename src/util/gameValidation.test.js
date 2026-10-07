@@ -14,7 +14,8 @@ import {
 import { brokenGame, validGame } from "@tests/support/brokenGame.js";
 import {
   deprecatedGame,
-  deprecatedKeys,
+  renamedGame,
+  renames,
 } from "@tests/support/deprecatedGame.js";
 
 describe("gameValidation", () => {
@@ -43,32 +44,25 @@ describe("gameValidation", () => {
     }
   });
 
-  it("warns once for each renamed field that keeps its old name", async () => {
+  it.each(renames)("warns about $old", async ({ old, key }) => {
     const issues = await validateGame(deprecatedGame());
-    expect(
-      issues.map((issue) => [issue.pointer, issue.params.key]).sort(),
-    ).toEqual(
-      Object.entries(deprecatedKeys)
-        .map(([pointer, key]) => [pointer, key])
-        .sort(),
+    expect(issues.find((issue) => issue.pointer === old)).toEqual({
+      severity: "warning",
+      code: "deprecated",
+      pointer: old,
+      params: { key },
+    });
+  });
+
+  it("warns only about the old names", async () => {
+    const issues = await validateGame(deprecatedGame());
+    expect(issues.map((issue) => issue.pointer).sort()).toEqual(
+      renames.map((r) => r.old).sort(),
     );
-    for (const issue of issues) {
-      expect(issue).toMatchObject({ severity: "warning", code: "deprecated" });
-    }
   });
 
   it("does not warn when a game uses the new names", async () => {
-    const game = deprecatedGame();
-    game.info = {
-      ...game.info,
-      titleFontSize: 100,
-      subtitleFontSize: 30,
-      designerFontSize: 20,
-    };
-    for (const key of ["titleSize", "subtitleSize", "designerSize"]) {
-      delete game.info[key];
-    }
-    expect(await validateGame(game)).toEqual([]);
+    expect(await validateGame(renamedGame())).toEqual([]);
   });
 
   it("ignores the meta data the app adds", async () => {
@@ -228,6 +222,9 @@ describe("gameValidation", () => {
         "info.titleSize",
         "info.subtitleSize",
         "info.designerSize",
+        "phases.*.buy_companies",
+        "phases.*.events.close_companies",
+        "phases.*.events.remove_tokens",
         "exports.paginated",
       ]);
     });

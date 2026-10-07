@@ -28,12 +28,13 @@ needed for programs like [18xx.games](https://www.18xx.games/).
   (train name) and an `index` field specifying which train triggers this phase.
 - **notes** A string or array of strings of notes for this phase. Some notes
   will be added from other fields, this is for custom ones.
-- **buy_companies** A boolean that says if privates can be bought in during this
-  phase.
+- **buyCompanies** A boolean that says if privates can be bought in during this
+  phase. The old name `buy_companies` still works.
 - **events** An object full of boolean fields that state that other events
   happen when this phase triggers (such as privates closing or tokens being
   removed). The exact format of these events is tied to the implementation of
-  games on [18xx.games](https://18xx.games).
+  games on [18xx.games](https://18xx.games). `closeCompanies` and `removeTokens`
+  were `close_companies` and `remove_tokens`, the old names still work.
 
 ## Train Fields
 
@@ -104,7 +105,7 @@ bundled game) that shows `on`, `index`, `rust`, `events`, `notes`, `print` and
       "rounds": 2,
       "tiles": "green",
       "on": "3",
-      "buy_companies": true,
+      "buyCompanies": true,
       "notes": "Privates may be bought"
     },
     {
@@ -113,7 +114,7 @@ bundled game) that shows `on`, `index`, `rust`, `events`, `notes`, `print` and
       "rounds": 3,
       "tiles": "brown",
       "on": { "on": "5", "index": 2 },
-      "events": { "close_companies": true }
+      "events": { "closeCompanies": true }
     },
     { "name": "D", "limit": 2, "tiles": "brown", "on": ["6", "D"] }
   ],

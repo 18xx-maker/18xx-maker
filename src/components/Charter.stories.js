@@ -6,14 +6,14 @@ import { colorSelect } from "../../.storybook/controls";
 // The phases, trains and turns of 1889
 const phases = [
   { name: "2", limit: 4, rounds: 1, tiles: "yellow" },
-  { name: "3", limit: 4, rounds: 2, tiles: "green", buy_companies: true },
-  { name: "4", limit: 3, rounds: 2, tiles: "green", buy_companies: true },
+  { name: "3", limit: 4, rounds: 2, tiles: "green", buyCompanies: true },
+  { name: "4", limit: 3, rounds: 2, tiles: "green", buyCompanies: true },
   {
     name: "5",
     limit: 2,
     rounds: 3,
     tiles: "brown",
-    events: { close_companies: true },
+    events: { closeCompanies: true },
   },
   { name: "6", limit: 2, rounds: 3, tiles: "brown" },
   { name: "D", limit: 2, rounds: 3, tiles: "brown" },

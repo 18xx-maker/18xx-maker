@@ -1370,7 +1370,7 @@ describe("edit panel phases", () => {
     const card = within(cards()[0]);
     expect(card.getByRole("combobox", { name: "Company" })).toBeVisible();
     expect(card.getByRole("textbox", { name: "Notes" })).toBeVisible();
-    expect(card.getByRole("combobox", { name: "Buy companies" })).toBeVisible();
+    expect(card.getByRole("combobox", { name: "Buy Companies" })).toBeVisible();
     // The event of a phase names a train
     expect(card.getByRole("combobox", { name: "On" })).toBeVisible();
     // No nested list: the only Add button is the one of the phases
@@ -1470,14 +1470,14 @@ describe("edit panel phases", () => {
     await more(user, 4);
     const card = within(cards()[4]);
     expect(
-      card.getByRole("combobox", { name: "Close companies" }),
+      card.getByRole("combobox", { name: "Close Companies" }),
     ).toHaveTextContent("Yes");
 
-    await user.click(card.getByRole("combobox", { name: "Remove tokens" }));
+    await user.click(card.getByRole("combobox", { name: "Remove Tokens" }));
     await user.click(await screen.findByRole("option", { name: "Yes" }));
     expect(phases(store)[4].events).toEqual({
-      close_companies: true,
-      remove_tokens: true,
+      closeCompanies: true,
+      removeTokens: true,
     });
     expect(phases(store)[4]).toMatchObject({
       name: "4",

@@ -19,5 +19,14 @@
       "colour": "red"
     }
   ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": 4,
+      "tiles": "yellow",
+      "buy_companies": true,
+      "events": { "close_companies": true, "remove_tokens": true }
+    }
+  ],
   "floatPercent": 60
 }

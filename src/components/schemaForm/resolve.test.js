@@ -454,6 +454,7 @@ describe("kindOf", () => {
       tiles: "string",
       on: "json",
       notes: "stringList",
+      buyCompanies: "boolean",
       buy_companies: "boolean",
       events: "object",
     });
@@ -465,7 +466,7 @@ describe("kindOf", () => {
       Object.entries(events.properties).map(([key, node]) =>
         kindOf(resolveAllOf(node, schema), key, schema),
       ),
-    ).toEqual(["boolean", "boolean"]);
+    ).toEqual(["boolean", "boolean", "boolean", "boolean"]);
   });
 
   it("lists the phase fields that are a JSON textarea", () => {

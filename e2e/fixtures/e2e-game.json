@@ -356,7 +356,7 @@
       "train": "3+1",
       "limit": 4,
       "tiles": "green",
-      "buy_companies": true
+      "buyCompanies": true
     },
     {
       "name": "2",
@@ -368,7 +368,7 @@
       "train": "3+1",
       "limit": 4,
       "tiles": "green",
-      "buy_companies": true
+      "buyCompanies": true
     },
     {
       "name": "4",
@@ -376,7 +376,7 @@
       "limit": 3,
       "tiles": "brown",
       "events": {
-        "close_companies": true
+        "closeCompanies": true
       }
     },
     {

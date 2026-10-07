@@ -97,9 +97,9 @@ also in the statistics of the Info page.
 fields put a sentence in the notes of the phase on the phase chart of the
 charters:
 
-- `buy_companies: true` prints `Private companies may be purchased.`
-- `events.close_companies: true` prints `Private companies close.`
-- `events.remove_tokens: true` prints `Private tokens removed.`
+- `buyCompanies: true` prints `Private companies may be purchased.`
+- `events.closeCompanies: true` prints `Private companies close.`
+- `events.removeTokens: true` prints `Private tokens removed.`
 
 `events` is an object of booleans. Any other event you add is kept in the file
 and ignored when printing.

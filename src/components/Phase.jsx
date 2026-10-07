@@ -108,13 +108,14 @@ const Phase = ({ phases, trains, minor, company }) => {
           ? [...phase.notes]
           : [phase.notes]
         : [];
-      if (phase.buy_companies) {
+      if (phase.buyCompanies ?? phase.buy_companies) {
         notes.push("Private companies may be purchased.");
       }
-      if ((phase.events || {}).close_companies) {
+      const events = phase.events || {};
+      if (events.closeCompanies ?? events.close_companies) {
         notes.push("Private companies close.");
       }
-      if ((phase.events || {}).remove_tokens) {
+      if (events.removeTokens ?? events.remove_tokens) {
         notes.push("Private tokens removed.");
       }
       let noteNodes = R.addIndex(R.map)((n, i) => <li key={i}>{n}</li>, notes);

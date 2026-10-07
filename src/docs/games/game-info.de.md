@@ -101,9 +101,9 @@ Anzahl der Runden steht auch in der Statistik der Infoseite.
 seiner Felder setzen einen Satz in die Notizen der Phase in der Phasentabelle
 der Gesellschaftskarten:
 
-- `buy_companies: true` druckt `Private companies may be purchased.`
-- `events.close_companies: true` druckt `Private companies close.`
-- `events.remove_tokens: true` druckt `Private tokens removed.`
+- `buyCompanies: true` druckt `Private companies may be purchased.`
+- `events.closeCompanies: true` druckt `Private companies close.`
+- `events.removeTokens: true` druckt `Private tokens removed.`
 
 `events` ist ein Objekt aus Wahrheitswerten. Jedes andere Ereignis, das du
 hinzufügst, bleibt in der Datei und wird beim Drucken ignoriert.

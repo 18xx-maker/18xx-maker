@@ -1796,20 +1796,39 @@
               }
             ]
           },
+          "buyCompanies": {
+            "type": "boolean",
+            "description": "Privatgesellschaften können in dieser Phase gekauft werden. Die Phasenkarte vermerkt es."
+          },
           "buy_companies": {
-            "type": "boolean"
+            "type": "boolean",
+            "deprecated": true,
+            "description": "Veraltet, verwende buyCompanies.",
+            "deprecationMessage": "Veraltet, verwende buyCompanies."
           },
           "events": {
-            "description": "Ereignisse der Phase, ein Objekt aus booleschen Feldern. close_companies und remove_tokens werden auf der Phasenkarte angezeigt, andere Ereignisse werden ignoriert.",
+            "description": "Ereignisse der Phase, ein Objekt aus booleschen Feldern. closeCompanies und removeTokens werden auf der Phasenkarte angezeigt, andere Ereignisse werden ignoriert.",
             "type": "object",
             "properties": {
-              "close_companies": {
+              "closeCompanies": {
                 "description": "Die Privatgesellschaften werden geschlossen.",
                 "type": "boolean"
               },
-              "remove_tokens": {
+              "close_companies": {
+                "description": "Veraltet, verwende closeCompanies.",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "Veraltet, verwende closeCompanies."
+              },
+              "removeTokens": {
                 "description": "Die Token der Privatgesellschaften werden von der Karte entfernt.",
                 "type": "boolean"
+              },
+              "remove_tokens": {
+                "description": "Veraltet, verwende removeTokens.",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "Veraltet, verwende removeTokens."
               }
             },
             "additionalProperties": {

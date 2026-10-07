@@ -1796,20 +1796,39 @@
               }
             ]
           },
+          "buyCompanies": {
+            "type": "boolean",
+            "description": "在此阶段可以购买私有公司。阶段卡上会注明。"
+          },
           "buy_companies": {
-            "type": "boolean"
+            "type": "boolean",
+            "deprecated": true,
+            "description": "已弃用，请使用 buyCompanies。",
+            "deprecationMessage": "已弃用，请使用 buyCompanies。"
           },
           "events": {
-            "description": "阶段的事件,一个布尔字段的对象。close_companies 和 remove_tokens 显示在阶段卡上,其他事件会被忽略。",
+            "description": "阶段的事件,一个布尔字段的对象。closeCompanies 和 removeTokens 显示在阶段卡上,其他事件会被忽略。",
             "type": "object",
             "properties": {
-              "close_companies": {
+              "closeCompanies": {
                 "description": "私有公司关闭。",
                 "type": "boolean"
               },
-              "remove_tokens": {
+              "close_companies": {
+                "description": "已弃用，请使用 closeCompanies。",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "已弃用，请使用 closeCompanies。"
+              },
+              "removeTokens": {
                 "description": "私有公司的标记从地图上移除。",
                 "type": "boolean"
+              },
+              "remove_tokens": {
+                "description": "已弃用，请使用 removeTokens。",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "已弃用，请使用 removeTokens。"
               }
             },
             "additionalProperties": {

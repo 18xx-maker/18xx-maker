@@ -1796,20 +1796,39 @@
               }
             ]
           },
+          "buyCompanies": {
+            "type": "boolean",
+            "description": "Privates may be purchased in this phase. The phase card notes it."
+          },
           "buy_companies": {
-            "type": "boolean"
+            "type": "boolean",
+            "deprecated": true,
+            "description": "Deprecated, use buyCompanies.",
+            "deprecationMessage": "Deprecated, use buyCompanies."
           },
           "events": {
-            "description": "Events of the phase, an object of boolean fields. close_companies and remove_tokens show on the phase card, other events are ignored.",
+            "description": "Events of the phase, an object of boolean fields. closeCompanies and removeTokens show on the phase card, other events are ignored.",
             "type": "object",
             "properties": {
-              "close_companies": {
+              "closeCompanies": {
                 "description": "The privates close.",
                 "type": "boolean"
               },
-              "remove_tokens": {
+              "close_companies": {
+                "description": "Deprecated, use closeCompanies.",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "Deprecated, use closeCompanies."
+              },
+              "removeTokens": {
                 "description": "The tokens of private companies are removed from the map.",
                 "type": "boolean"
+              },
+              "remove_tokens": {
+                "description": "Deprecated, use removeTokens.",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "Deprecated, use removeTokens."
               }
             },
             "additionalProperties": {
