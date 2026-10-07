@@ -172,6 +172,7 @@ describe("export keys", () => {
       expect(store.getState().ui).toEqual({
         exportMenuOpen: false,
         exportSheetOpen: false,
+        panel: {},
       }),
     );
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
@@ -199,6 +200,7 @@ describe("export keys", () => {
     expect(store.getState().ui).toEqual({
       exportMenuOpen: false,
       exportSheetOpen: false,
+      panel: {},
     });
   });
 

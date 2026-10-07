@@ -22,6 +22,7 @@ import SchemaField, {
   useField,
 } from "@/components/schemaForm/SchemaField";
 import SchemaFormProvider from "@/components/schemaForm/SchemaFormProvider";
+import { usePanelState } from "@/components/schemaForm/usePanelState";
 
 import schema from "@/schemas/game.schema.json";
 import {
@@ -39,8 +40,8 @@ const TYPES = stockSchema.type.enum;
 const ADVANCED = ["display", "ledges", "limits", "title"];
 
 // A part of the form that is shown when it is opened
-const Group = ({ title, children }) => {
-  const [open, setOpen] = useState(false);
+const Group = ({ id: name, title, children }) => {
+  const [open, setOpen] = usePanelState(`group:${name}`, false);
   const id = useId();
 
   return (
@@ -135,7 +136,7 @@ const MarketEditor = () => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const [selection, setSelection] = useState(null);
-  const [more, setMore] = useState(false);
+  const [more, setMore] = usePanelState("market:more", false);
   const [message, setMessage] = useState("");
   const stock = form.game.stock;
 
@@ -206,12 +207,12 @@ const MarketEditor = () => {
           </p>
         )
       )}
-      <Group title={t("editPanel.market.cellDefaults")}>
+      <Group id="cellDefaults" title={t("editPanel.market.cellDefaults")}>
         {Object.entries(stockSchema.cell.properties).map(([key, child]) => (
           <SchemaField key={key} keys={["stock", "cell", key]} schema={child} />
         ))}
       </Group>
-      <Group title={t("editPanel.market.legend")}>
+      <Group id="legend" title={t("editPanel.market.legend")}>
         <SchemaField
           keys={["stock", "legend"]}
           schema={stockSchema.legend}
@@ -222,10 +223,10 @@ const MarketEditor = () => {
           onChange={legendChange}
         />
       </Group>
-      <Group title={t("editPanel.market.movement")}>
+      <Group id="movement" title={t("editPanel.market.movement")}>
         <MovementField />
       </Group>
-      <Group title={t("editPanel.market.advanced")}>
+      <Group id="advanced" title={t("editPanel.market.advanced")}>
         {ADVANCED.map((key) => (
           <JsonField
             key={key}

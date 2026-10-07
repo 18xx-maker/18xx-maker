@@ -15,6 +15,7 @@ import {
   SET_GAME,
   SET_LANGUAGE,
   SET_OPEN_EXPORT_FOLDER,
+  SET_PANEL_STATE,
   SET_SETTINGS,
   SET_SIDEBAR_OPEN,
   SET_SUMMARIES,
@@ -36,6 +37,7 @@ import {
   createSetGame,
   createSetLanguage,
   createSetOpenExportFolder,
+  createSetPanelState,
   createSetSettings,
   createSetSidebarOpen,
   createSetSummaries,
@@ -50,6 +52,7 @@ import {
   uiReducer,
   updateReducer,
 } from "@/state";
+import { selectPanelState } from "@/state/selectors";
 
 const game = (id = "a", type = "system", title = "Game A") => ({
   info: { title, subtitle: "sub", designer: "des", publisher: "pub", extra: 1 },
@@ -463,6 +466,7 @@ describe("uiReducer", () => {
     expect(uiReducer(undefined, { type: "@@INIT" })).toEqual({
       exportMenuOpen: false,
       exportSheetOpen: false,
+      panel: {},
     });
   });
 
@@ -473,11 +477,49 @@ describe("uiReducer", () => {
     expect(sheet).toEqual({ type: SET_EXPORT_SHEET_OPEN, open: true });
 
     const open = [menu, sheet].reduce(uiReducer, undefined);
-    expect(open).toEqual({ exportMenuOpen: true, exportSheetOpen: true });
-    expect(uiReducer(frozen(open), createSetExportMenuOpen(false))).toEqual({
-      exportMenuOpen: false,
-      exportSheetOpen: true,
+    expect(open).toMatchObject({ exportMenuOpen: true, exportSheetOpen: true });
+    expect(
+      uiReducer(frozen(open), createSetExportMenuOpen(false)),
+    ).toMatchObject({ exportMenuOpen: false, exportSheetOpen: true });
+  });
+
+  it("keeps the state of the edit panel by key", () => {
+    const set = createSetPanelState("cards:a", [{ open: false }]);
+    expect(set).toEqual({
+      type: SET_PANEL_STATE,
+      key: "cards:a",
+      value: [{ open: false }],
     });
+    const state = [set, createSetPanelState("group:b", true)].reduce(
+      uiReducer,
+      undefined,
+    );
+    expect(state.panel).toEqual({
+      "cards:a": [{ open: false }],
+      "group:b": true,
+    });
+    expect(selectPanelState({ ui: state }, "group:b")).toBe(true);
+    expect(selectPanelState({ ui: state }, "none")).toBeUndefined();
+    expect(selectPanelState({}, "none")).toBeUndefined();
+  });
+
+  it("forgets the state of the edit panel when the game is replaced", () => {
+    const state = frozen({
+      exportMenuOpen: true,
+      exportSheetOpen: false,
+      panel: { "group:legend": true },
+    });
+    expect(uiReducer(state, createSetGame(game()))).toEqual({
+      ...state,
+      panel: {},
+    });
+    expect(uiReducer(state, createDeleteGame("system:a"))).toEqual({
+      ...state,
+      panel: {},
+    });
+    expect(uiReducer(state, createSetGame(game(), { keepEdits: true }))).toBe(
+      state,
+    );
   });
 
   it("ignores other actions", () => {

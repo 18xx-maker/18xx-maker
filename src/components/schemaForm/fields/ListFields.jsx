@@ -38,6 +38,7 @@ import {
   valueAt,
 } from "@/components/schemaForm/resolve";
 import { useSchemaText } from "@/components/schemaForm/schemaText";
+import { usePanelState } from "@/components/schemaForm/usePanelState";
 
 // Moves focus into an item once it is on the page: to its title, or to one of
 // its buttons (the other one of the pair when that is disabled). With no such
@@ -327,6 +328,9 @@ export const ListStatus = ({ message, warning }) => (
 const FRESH_CARD = { open: true, more: false };
 const CLOSED_CARD = { open: false, more: false };
 
+// A stable default for the panel state of a list, so it does not change per render
+const EMPTY = [];
+
 // primary are the fields shown first, the others are under more fields.
 // titleKey is the field that names an item and idKey the one that identifies
 // it (a number for the players); with title (a translation key) a card is
@@ -368,7 +372,7 @@ export const ArrayField = ({
   const { message, removed, warning, setMessage, setRemoved, setWarning } =
     notes;
   // What is open on each card, by index
-  const [ui, setUi] = useState([]);
+  const [ui, setUi] = usePanelState(`cards:${keys.join("/")}`, EMPTY);
 
   const items = valueAt(keys, form.game) ?? [];
   // Items that are text, a number or an object (a token of the game) are a

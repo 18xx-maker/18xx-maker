@@ -300,7 +300,17 @@ const listRoot = {
 const numberRoot = structuredClone(listRoot);
 numberRoot.properties.trains.items.properties.code = { type: "number" };
 
-const ListForm = ({ initial, issues = [], root = listRoot, ...props }) => {
+const newStore = () =>
+  configureStore({ reducer: rootReducer, preloadedState: initialState });
+
+const ListForm = ({
+  initial,
+  issues = [],
+  root = listRoot,
+  store: given,
+  ...props
+}) => {
+  const [store] = useState(() => given ?? newStore());
   const [game, setGame] = useState(initial);
   const latest = useRef(game);
   latest.current = game;
@@ -310,27 +320,29 @@ const ListForm = ({ initial, issues = [], root = listRoot, ...props }) => {
     setGame(latest.current);
   };
   return (
-    <SchemaFormContext.Provider
-      value={{
-        root,
-        game,
-        issues,
-        latest: () => latest.current,
-        set: (keys, value) => change((g) => setValue(g, keys, value)),
-        clear: (keys) => change((g) => clearValue(g, keys)),
-        insert: (keys, index, item) =>
-          change((g) => insertAt(g, keys, index, item)),
-        remove: (keys, index) => change((g) => removeAt(g, keys, index)),
-        move: (keys, from, to) => change((g) => moveItem(g, keys, from, to)),
-      }}
-    >
-      <SchemaField
-        keys={["trains"]}
-        schema={root.properties.trains}
-        defaults={{}}
-        {...props}
-      />
-    </SchemaFormContext.Provider>
+    <Provider store={store}>
+      <SchemaFormContext.Provider
+        value={{
+          root,
+          game,
+          issues,
+          latest: () => latest.current,
+          set: (keys, value) => change((g) => setValue(g, keys, value)),
+          clear: (keys) => change((g) => clearValue(g, keys)),
+          insert: (keys, index, item) =>
+            change((g) => insertAt(g, keys, index, item)),
+          remove: (keys, index) => change((g) => removeAt(g, keys, index)),
+          move: (keys, from, to) => change((g) => moveItem(g, keys, from, to)),
+        }}
+      >
+        <SchemaField
+          keys={["trains"]}
+          schema={root.properties.trains}
+          defaults={{}}
+          {...props}
+        />
+      </SchemaFormContext.Provider>
+    </Provider>
   );
 };
 
@@ -362,6 +374,19 @@ describe("a list of cards", () => {
     render(<ListForm initial={initial} startCollapsed />);
     expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
     expect(toggle("B")).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("keeps what is open when the form is shown again", async () => {
+    const user = userEvent.setup();
+    const store = newStore();
+    const { unmount } = render(<ListForm initial={initial} store={store} />);
+    await user.click(toggle("A"));
+    expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
+    unmount();
+
+    render(<ListForm initial={initial} store={store} />);
+    expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
+    expect(toggle("B")).toHaveAttribute("aria-expanded", "true");
   });
 
   it("opens an added and a copied card, the others stay closed", async () => {
@@ -637,6 +662,7 @@ const fieldRoot = {
 let current;
 
 const FieldForm = ({ initial, field, issues = [] }) => {
+  const [store] = useState(newStore);
   const [game, setGame] = useState(initial);
   const latest = useRef(game);
   latest.current = game;
@@ -646,24 +672,26 @@ const FieldForm = ({ initial, field, issues = [] }) => {
     setGame(latest.current);
   };
   return (
-    <SchemaFormContext.Provider
-      value={{
-        root: fieldRoot,
-        game,
-        issues,
-        latest: () => latest.current,
-        set: (keys, value) => change((g) => setValue(g, keys, value)),
-        clear: (keys) =>
-          isRequired(fieldRoot, keys)
-            ? false
-            : change((g) => clearValue(g, keys)),
-        insert() {},
-        remove() {},
-        move() {},
-      }}
-    >
-      <SchemaField keys={[field]} schema={fieldRoot.properties[field]} />
-    </SchemaFormContext.Provider>
+    <Provider store={store}>
+      <SchemaFormContext.Provider
+        value={{
+          root: fieldRoot,
+          game,
+          issues,
+          latest: () => latest.current,
+          set: (keys, value) => change((g) => setValue(g, keys, value)),
+          clear: (keys) =>
+            isRequired(fieldRoot, keys)
+              ? false
+              : change((g) => clearValue(g, keys)),
+          insert() {},
+          remove() {},
+          move() {},
+        }}
+      >
+        <SchemaField keys={[field]} schema={fieldRoot.properties[field]} />
+      </SchemaFormContext.Provider>
+    </Provider>
   );
 };
 
