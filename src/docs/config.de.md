@@ -13,8 +13,13 @@ der Werkzeugleiste einer Spielseite oder von jeder Seite aus mit
   im lokalen Speicher deines Browsers gespeichert (die App speichert sie auf
   dieselbe Weise).
 - **Ein Spiel kann eine eigene `config` haben.** Eine Spieldatei kann ein Feld
-  `config` enthalten, das nur für dieses Spiel über deine Einstellungen gelegt
-  wird. Das Fenster zeigt und bearbeitet deine Einstellungen, nicht dieses Feld.
+  `config` mit Einstellungen nur für dieses Spiel enthalten. Es wird nur dann
+  über deine Einstellungen gelegt, wenn _Spiel-Konfiguration erlauben_ aktiv ist
+  (Bereich Daten, standardmäßig aus). Ein Spiel kann weder die Druckskalierung
+  noch diese Einstellung setzen. Hat ein Spiel eine `config`, die ignoriert
+  wird, erscheint in der Werkzeugleiste eine Warnschaltfläche, die den Bereich
+  Daten öffnet. Das Fenster zeigt und bearbeitet deine Einstellungen, nicht
+  dieses Feld.
 - **Nur deine Änderungen werden gespeichert.** Alle anderen Einstellungen folgen
   den Standardwerten, sodass eine neue Version einen Standardwert verbessern
   kann, den du nie angefasst hast.
@@ -28,7 +33,7 @@ eingebauten Standardwerten, der `config.json`, die der Kommandozeile übergeben
 wurde (siehe [Kommandozeile](/docs/output/cli)), dem, was du im Fenster
 einstellst, Parametern der Form `?config.<einstellung>=wert` in der Adresse
 (zum Beispiel `?config.cards.layout=die`) und zuletzt der `config` des Spiels
-selbst.
+selbst (wenn erlaubt).
 
 ## Abschnitte
 

@@ -77,6 +77,8 @@ game file, so to go against it give the flag another value, for example
 wait, to look at the pages).
 
 Exports ignore the print scale of a config: they always have the real size.
+The `config` of a game file only applies when `allowGameConfig` is set in the
+`--config` file or in `src/config.json`.
 
 ### print and b18
 

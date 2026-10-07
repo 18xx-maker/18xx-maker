@@ -80,6 +80,8 @@ ausliefern und warten, um sich die Seiten anzusehen).
 
 Exporte ignorieren die Druckskalierung einer Konfiguration: Sie haben immer die
 Originalgröße.
+Die `config` einer Spieldatei wird nur angewendet, wenn `allowGameConfig` in der
+`--config`-Datei oder in `src/config.json` gesetzt ist.
 
 ### print und b18
 

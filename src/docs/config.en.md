@@ -11,8 +11,11 @@ any page with [?config=true](?config=true).
   export, not to one game. They are saved with your browser's local storage (the
   app stores them the same way).
 - **A game can have its own `config`.** A game file can carry a `config` field
-  that is applied on top of yours for that game only. The panel shows and edits
-  your settings, not that field.
+  with settings for that game only. It is applied on top of yours only when
+  _Allow game config_ is on (Data section, off by default). A game cannot set
+  the print scale or that setting. When a game has a `config` that is ignored,
+  a warning button appears in the toolbar that opens the Data section. The
+  panel shows and edits your settings, not that field.
 - **Only your changes are stored.** Every other setting follows the defaults, so
   a new release can improve a default you never touched.
 - **Exports use it too.** An export uses your config, with two exceptions: it
@@ -24,7 +27,7 @@ From lowest to highest, a setting comes from the built in defaults, the
 `config.json` the command line was given (see [Command
 Line](/docs/output/cli)), what you set in the panel, `?config.<setting>=value`
 parameters in the address (for example `?config.cards.layout=die`) and last the
-game's own `config`.
+game's own `config` (when allowed).
 
 ## Sections
 
