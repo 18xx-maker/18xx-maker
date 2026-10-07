@@ -281,6 +281,15 @@ die eine andere kopiert, zeigt die kopierten Kartenfelder schreibgeschützt: Än
 sie in der Variante, aus der sie stammen. Der Weg über die Tastatur ist der
 JSON-Editor (der JSON-Schalter in der Kopfzeile des Panels).
 
+Der Tab Konfiguration bearbeitet die `config` des Spiels als JSON, die
+Einstellungen, die für dieses Spiel gelten, wenn im [Konfigurationsfenster](/docs/config)
+_Spiel-Konfiguration erlauben_ aktiv ist. Sie ist ein Objekt wie
+`{ "fonts": { "roles": { "title": { "style": "italic" } } } }`. Die Seite folgt
+dem Text, solange er ein JSON-Objekt ist; alles andere bleibt ein Entwurf. Ein
+Wert, den das [Konfigurationsschema](/docs/games/schemas) nicht erlaubt (eine
+`size` der Schrift von `"big"`), wird im Text markiert und setzt einen roten
+Punkt auf den Tab. Ein leeres Objekt entfernt `config` aus dem Spiel.
+
 Die Änderungen bleiben im geladenen Spiel. Prüfe und speichere sie auf der
 Seite Änderungen, die im Folgenden beschrieben wird.
 

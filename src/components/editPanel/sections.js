@@ -1,3 +1,4 @@
+import ConfigSection from "@/components/editPanel/ConfigSection";
 import HexSection from "@/components/editPanel/HexSection";
 import JsonSection from "@/components/editPanel/JsonSection";
 import ColorsForm from "@/components/schemaForm/ColorsForm";
@@ -34,6 +35,7 @@ export const editSections = [
   { section: "market", group: "output", Form: MarketForm },
   { section: "colors", group: "output", Form: ColorsForm },
   { section: "output", group: "output", Form: OutputForm },
+  { section: "config", group: "output", Form: ConfigSection, wide: true },
   { section: "json", Form: JsonSection, wide: true, pinned: true },
 ];
 

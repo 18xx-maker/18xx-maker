@@ -1,5 +1,6 @@
 import {
   MIN_DELAY,
+  configLens,
   debounceDelay,
   duplicateKeys,
   foldRanges,
@@ -242,5 +243,58 @@ describe("pointerToLine", () => {
     expect(line("")).toBeNull();
     expect(line("nothing")).toBeNull();
     expect(pointerToLine(parseTree(""), "", "info")).toBeNull();
+  });
+});
+
+describe("configLens", () => {
+  const lens = configLens("g");
+
+  it("edits the config of the game as an object", () => {
+    expect(lens.draftKey).toBe("g#config");
+    expect(lens.text({})).toBe("{}");
+    expect(lens.text({ config: { margin: 1 } })).toBe(
+      JSON.stringify({ margin: 1 }, null, 2),
+    );
+    expect(lens.same({}, {})).toBe(true);
+    expect(lens.same({ config: { margin: 1 } }, { margin: 1 })).toBe(true);
+    expect(lens.same({ config: { margin: 1 } }, { margin: 2 })).toBe(false);
+  });
+
+  it.each([
+    [[], "config"],
+    ["x", "config"],
+    [null, "config"],
+    [{}, null],
+    [{ margin: 1 }, null],
+  ])("%j is %s", (value, reason) => {
+    expect(lens.invalidReason(value)).toBe(reason);
+  });
+
+  it("writes the config and keeps the other references", () => {
+    const info = { title: "T" };
+    const game = { info, config: { margin: 1 } };
+    const next = lens.write(game, { margin: 2 });
+    expect(next.config).toEqual({ margin: 2 });
+    expect(next.info).toBe(info);
+  });
+
+  it("drops the key for an empty config", () => {
+    const next = lens.write({ info: {}, config: { margin: 1 } }, {});
+    expect("config" in next).toBe(false);
+    expect(lens.write({ info: {} }, {})).toEqual({ info: {} });
+  });
+
+  it("re-roots the problems under config and leaves the others", () => {
+    const issues = [
+      { code: "type", pointer: "config.fonts.roles.title.size" },
+      { code: "type", pointer: "config" },
+      { code: "type", pointer: "configuration" },
+      { code: "type", pointer: "info.title" },
+    ];
+    expect(lens.issues(issues, true).map((i) => i.pointer)).toEqual([
+      "fonts.roles.title.size",
+      "",
+    ]);
+    expect(lens.issues(issues, false)).toEqual([]);
   });
 });

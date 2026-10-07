@@ -50,6 +50,14 @@ describe("edit sections", () => {
     }
   });
 
+  it("has the config tab before the pinned JSON, wide, with its dot source", () => {
+    const ids = editSections.map((s) => s.section);
+    expect(ids.indexOf("config")).toBe(ids.indexOf("json") - 1);
+    expect(editSections.find((s) => s.section === "config").wide).toBe(true);
+    expect(SECTION_KEYS.config).toEqual(["config"]);
+    expect(UNTABBED_KEYS).not.toContain("config");
+  });
+
   it("has a dot source for every form section", () => {
     for (const { section } of formSections) {
       expect([section, section === "hex" || section in SECTION_KEYS]).toEqual([

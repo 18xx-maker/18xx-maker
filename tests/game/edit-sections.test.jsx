@@ -17,6 +17,7 @@ describe("edit panel sections", () => {
       "market",
       "colors",
       "output",
+      "config",
       "json",
     ]);
   });

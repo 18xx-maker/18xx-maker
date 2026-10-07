@@ -14,13 +14,15 @@ const schema = () => {
     import("json-schema-library"),
     import("@/schemas/game.schema.json"),
     import("@/schemas/tiles.defs.json"),
-  ]).then(([{ compileSchema, draft07 }, game, tiles]) => {
+    import("@/schemas/config.schema.json"),
+  ]).then(([{ compileSchema, draft07 }, game, tiles, config]) => {
     const root = game.default;
     return {
       compiled: compileSchema(root, {
         drafts: [draft07],
         remotes: [tiles.default],
       }),
+      config: compileSchema(config.default, { drafts: [draft07] }),
       deprecated: deprecatedPaths(root),
     };
   });
@@ -360,10 +362,27 @@ export const deprecatedIssues = (deprecated, data) =>
     ),
   );
 
+// The game schema only checks the names of the settings of `config`: the
+// values are checked against the config schema. The config of a game is part
+// of the settings, so what it lacks is no mistake.
+const configErrors = (validator, config) => {
+  if (!isObject(config)) return [];
+  return validator
+    .validate(config)
+    .errors.filter((e) => e.code !== "required-property-error")
+    .flatMap((e) => leaves(e))
+    .filter((e) => e.code !== "required-property-error")
+    .map((e) => ({
+      ...e,
+      data: { ...e.data, pointer: `#/config${e.data.pointer.slice(1)}` },
+    }))
+    .map(translate);
+};
+
 // Every problem of a game: schema errors first, then removed and deprecated
 // fields
 export const validateGame = async (game) => {
-  const { compiled: validator, deprecated } = await schema();
+  const { compiled: validator, config, deprecated } = await schema();
   // meta is added by the app, the schema does not allow it
   const data = omit(["meta"], game);
 
@@ -381,5 +400,10 @@ export const validateGame = async (game) => {
     .map(translate)
     .filter((e) => !gone.has(e.pointer));
 
-  return [...errors, ...removed, ...deprecatedIssues(deprecated, data)];
+  return [
+    ...errors,
+    ...configErrors(config, data.config),
+    ...removed,
+    ...deprecatedIssues(deprecated, data),
+  ];
 };
