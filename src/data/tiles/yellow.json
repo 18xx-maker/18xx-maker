@@ -344,7 +344,6 @@
   },
   "71": {
     "color": "yellow",
-    "broken": true,
     "values": [
       {
         "angle": 180,
@@ -1863,7 +1862,6 @@
   },
   "403": {
     "color": "yellow",
-    "broken": true,
     "cities": [
       {
         "angle": 180,
@@ -2211,7 +2209,6 @@
   },
   "601": {
     "color": "yellow",
-    "broken": true,
     "cities": [
       {
         "name": {
@@ -2743,7 +2740,6 @@
   },
   "741": {
     "color": "yellow",
-    "broken": true,
     "labels": [
       {
         "label": "£",
@@ -2769,7 +2765,6 @@
   },
   "742": {
     "color": "yellow",
-    "broken": true,
     "labels": [
       {
         "angle": 240,
@@ -2795,7 +2790,6 @@
   },
   "743": {
     "color": "yellow",
-    "broken": true,
     "rotations": 3,
     "labels": [
       {
@@ -2819,7 +2813,6 @@
   },
   "744": {
     "color": "yellow",
-    "broken": true,
     "rotations": 3,
     "labels": [
       {
@@ -2857,7 +2850,6 @@
   },
   "745": {
     "color": "yellow",
-    "broken": true,
     "labels": [
       {
         "angle": 180,
@@ -2919,7 +2911,6 @@
   },
   "787": {
     "color": "yellow",
-    "broken": true,
     "rotations": [0],
     "labels": [
       {

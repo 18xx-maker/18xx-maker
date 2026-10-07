@@ -27,13 +27,6 @@
         },
         "textColor": {
           "type": "string"
-        },
-        "textBorderWidth": {
-          "type": "number",
-          "minimum": 0
-        },
-        "textBorderColor": {
-          "type": "string"
         }
       }
     },
@@ -93,17 +86,6 @@
         "dashed": {
           "type": "boolean",
           "enum": [true]
-        }
-      }
-    },
-    "revenue": {
-      "type": "object",
-      "properties": {
-        "groups": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },

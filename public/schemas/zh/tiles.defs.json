@@ -220,8 +220,6 @@
           "width": { "type": "integer", "minimum": 1 },
           "text": { "type": "string" },
           "textColor": { "type": "string" },
-          "textBorderWidth": { "type": "number", "minimum": 0 },
-          "textBorderColor": { "type": "string" },
           "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
           "borderColor": { "type": "string" },
           "borderWidth": { "type": "number", "minimum": 0 },
@@ -450,7 +448,6 @@
         "company": { "type": "string" },
         "destination": { "type": "boolean", "enum": [true] },
         "width": { "type": "integer", "minimum": 1 },
-        "bgFill": { "type": "string" },
         "hidden": {
           "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
           "type": "boolean",
@@ -518,7 +515,6 @@
         "logo": { "type": "string" },
         "label": { "type": "string", "minLength": 1 },
         "color": { "type": "string" },
-        "bgFill": { "type": "string" },
         "iconColor": { "type": "string" },
         "outline": { "type": "string" },
         "outlineWidth": { "type": "integer", "minimum": 1 },
@@ -547,7 +543,6 @@
         "destination": { "type": "boolean", "enum": [true] },
         "reserved": { "type": "boolean", "enum": [true] },
         "inverse": { "type": "boolean", "enum": [true] },
-        "inverseTextColor": { "type": "string" },
         "angle": {
           "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
           "type": "number",
@@ -560,10 +555,6 @@
           "minimum": 0
         },
         "width": { "type": "integer", "minimum": 1 },
-        "text": { "type": "string" },
-        "textColor": { "type": "string" },
-        "textBorderWidth": { "type": "number", "minimum": 0 },
-        "textBorderColor": { "type": "string" },
         "hidden": {
           "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
           "type": "boolean",
@@ -714,7 +705,6 @@
         "name": { "$ref": "#/definitions/name" },
         "reverse": { "type": "boolean", "enum": [true] },
         "rows": { "type": "integer", "minimum": 1 },
-        "groups": { "type": "array", "items": { "type": "string" } },
         "revenues": {
           "type": "array",
           "items": {
@@ -865,8 +855,7 @@
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
             ]
-          },
-          "groups": { "type": "array", "items": { "type": "string" } }
+          }
         },
         "additionalProperties": false,
         "dependencies": { "align": ["mid"] }
@@ -889,7 +878,6 @@
           "outside": { "type": "boolean", "enum": [true] },
           "name": { "$ref": "#/definitions/name" },
           "color": { "type": "string" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "companies": {
             "type": "array",
             "items": {
@@ -1035,8 +1023,7 @@
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
             ]
-          },
-          "groups": { "type": "array", "items": { "type": "string" } }
+          }
         },
         "additionalProperties": false,
         "dependencies": { "align": ["mid"] }
@@ -1048,7 +1035,6 @@
         "type": "object",
         "properties": {
           "name": { "$ref": "#/definitions/name" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "width": { "type": "number", "exclusiveMinimum": 0 },
           "color": { "type": "string" },
           "hidden": {
@@ -1121,7 +1107,6 @@
         "type": "object",
         "properties": {
           "name": { "$ref": "#/definitions/name" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "color": { "type": "string" },
           "hidden": {
             "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
@@ -1462,8 +1447,6 @@
           },
           "text": { "type": "string" },
           "textColor": { "type": "string" },
-          "textBorderWidth": { "type": "number", "minimum": 0 },
-          "textBorderColor": { "type": "string" },
           "color": { "type": "string" },
           "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
           "borderColor": { "type": "string" },
@@ -1967,16 +1950,10 @@
           "type": "number",
           "description": "覆盖条纹颜色(例如 \"yellow/blue\")的条纹旋转角度(以度计)。"
         },
-        "encoding": { "type": "string" },
         "group": {
           "type": "string",
           "pattern": "^[0-9a-z]+$",
           "description": "地块会按颜色自然分组打印。此项覆盖该分组。适用于带有华丽边框或其他出血问题的地块。"
-        },
-        "broken": {
-          "type": "boolean",
-          "enum": [true],
-          "description": "将此地块标记为已损坏,不可导出。"
         },
         "clipPath": {
           "type": "boolean",

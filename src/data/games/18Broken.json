@@ -3,9 +3,18 @@
     "title": "18Broken",
     "subtitle": "18xx-Maker Schema Errors Test File",
     "designer": "Christopher Giroir",
-    "publisher": "18xx-maker"
+    "publisher": "18xx-maker",
+    "capitalization": "incremental"
   },
   "exports": { "paginated": true, "png": { "dpi": "300" }, "layouts": "some" },
   "stock": { "marekt": 10 },
-  "companies": [{ "abbrev": "BR", "name": "Broken Railway", "colour": "red" }]
+  "companies": [
+    {
+      "abbrev": "BR",
+      "name": "Broken Railway",
+      "subName": "Broken",
+      "colour": "red"
+    }
+  ],
+  "floatPercent": 60
 }

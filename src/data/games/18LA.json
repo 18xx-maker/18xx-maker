@@ -7,7 +7,6 @@
     "background": "orange",
     "marketTokens": 2,
     "extraStationTokens": 3,
-    "capitalization": "incremental",
     "titleX": 10,
     "titleY": 650,
     "titleSize": 40,
@@ -398,22 +397,6 @@
       "events": {
         "remove_tokens": true
       }
-    }
-  ],
-  "pools": [
-    {
-      "name": "Stock Market",
-      "notes": [
-        {
-          "color": "orange",
-          "note": "Corporations issue/redeem stock at one value lower/higher"
-        },
-        {
-          "color": "brown",
-          "icon": "exclamation",
-          "note": "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
-        }
-      ]
     }
   ],
   "rounds": [

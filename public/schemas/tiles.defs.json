@@ -220,8 +220,6 @@
           "width": { "type": "integer", "minimum": 1 },
           "text": { "type": "string" },
           "textColor": { "type": "string" },
-          "textBorderWidth": { "type": "number", "minimum": 0 },
-          "textBorderColor": { "type": "string" },
           "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
           "borderColor": { "type": "string" },
           "borderWidth": { "type": "number", "minimum": 0 },
@@ -450,7 +448,6 @@
         "company": { "type": "string" },
         "destination": { "type": "boolean", "enum": [true] },
         "width": { "type": "integer", "minimum": 1 },
-        "bgFill": { "type": "string" },
         "hidden": {
           "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
           "type": "boolean",
@@ -518,7 +515,6 @@
         "logo": { "type": "string" },
         "label": { "type": "string", "minLength": 1 },
         "color": { "type": "string" },
-        "bgFill": { "type": "string" },
         "iconColor": { "type": "string" },
         "outline": { "type": "string" },
         "outlineWidth": { "type": "integer", "minimum": 1 },
@@ -547,7 +543,6 @@
         "destination": { "type": "boolean", "enum": [true] },
         "reserved": { "type": "boolean", "enum": [true] },
         "inverse": { "type": "boolean", "enum": [true] },
-        "inverseTextColor": { "type": "string" },
         "angle": {
           "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
           "type": "number",
@@ -560,10 +555,6 @@
           "minimum": 0
         },
         "width": { "type": "integer", "minimum": 1 },
-        "text": { "type": "string" },
-        "textColor": { "type": "string" },
-        "textBorderWidth": { "type": "number", "minimum": 0 },
-        "textBorderColor": { "type": "string" },
         "hidden": {
           "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
           "type": "boolean",
@@ -714,7 +705,6 @@
         "name": { "$ref": "#/definitions/name" },
         "reverse": { "type": "boolean", "enum": [true] },
         "rows": { "type": "integer", "minimum": 1 },
-        "groups": { "type": "array", "items": { "type": "string" } },
         "revenues": {
           "type": "array",
           "items": {
@@ -865,8 +855,7 @@
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
             ]
-          },
-          "groups": { "type": "array", "items": { "type": "string" } }
+          }
         },
         "additionalProperties": false,
         "dependencies": { "align": ["mid"] }
@@ -889,7 +878,6 @@
           "outside": { "type": "boolean", "enum": [true] },
           "name": { "$ref": "#/definitions/name" },
           "color": { "type": "string" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "companies": {
             "type": "array",
             "items": {
@@ -1035,8 +1023,7 @@
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
             ]
-          },
-          "groups": { "type": "array", "items": { "type": "string" } }
+          }
         },
         "additionalProperties": false,
         "dependencies": { "align": ["mid"] }
@@ -1048,7 +1035,6 @@
         "type": "object",
         "properties": {
           "name": { "$ref": "#/definitions/name" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "width": { "type": "number", "exclusiveMinimum": 0 },
           "color": { "type": "string" },
           "hidden": {
@@ -1121,7 +1107,6 @@
         "type": "object",
         "properties": {
           "name": { "$ref": "#/definitions/name" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "color": { "type": "string" },
           "hidden": {
             "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
@@ -1462,8 +1447,6 @@
           },
           "text": { "type": "string" },
           "textColor": { "type": "string" },
-          "textBorderWidth": { "type": "number", "minimum": 0 },
-          "textBorderColor": { "type": "string" },
           "color": { "type": "string" },
           "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
           "borderColor": { "type": "string" },
@@ -1967,16 +1950,10 @@
           "type": "number",
           "description": "Override the rotation (in degrees) of the stripes for a striped color such as \"yellow/blue\"."
         },
-        "encoding": { "type": "string" },
         "group": {
           "type": "string",
           "pattern": "^[0-9a-z]+$",
           "description": "Tiles are naturually sorted into groups based on color for printing. This overrides that grouping. Useful for tiles with fancy borders or other bleed issues."
-        },
-        "broken": {
-          "type": "boolean",
-          "enum": [true],
-          "description": "Marks this tile as being broken and not ready for exporting."
         },
         "clipPath": {
           "type": "boolean",

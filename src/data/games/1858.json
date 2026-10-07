@@ -8,7 +8,6 @@
     "orientation": "horizontal",
     "titleX": 1600,
     "titleY": 1000,
-    "mustSellInBlocks": false,
     "currency": "P#"
   },
   "links": {
@@ -38,18 +37,6 @@
       "number": 6,
       "certLimit": 11,
       "capital": 250
-    }
-  ],
-  "pools": [
-    {
-      "name": "Bank Pool",
-      "notes": [
-        {
-          "color": "purple",
-          "icon": "exclamation",
-          "note": "No more than 50% of a corporation's shares may be in the market at any time"
-        }
-      ]
     }
   ],
   "rounds": [

@@ -10,8 +10,6 @@
     "subtitleSize": 12,
     "extraTotalHeight": 150,
     "background": "orange",
-    "capitalization": "incremental",
-    "mustSellInBlocks": true,
     "currency": "$#",
     "notes": "Based on 1846. Fewer than 5 players: SLVS is relegated to tier 2, with 2-3 players also one of CCR and CCP. No train may serve two E or two W locations. Black dots are minor income centers ($10 per dot per OR for a company with a train). Tunnel markers add to the cost of crossing that border."
   },
@@ -402,22 +400,6 @@
       "notes": [
         "Government subsidy pool: $160 (2-3 players) or $200 (4-5 players)",
         "Minor income centers are removed from the map and the charters"
-      ]
-    }
-  ],
-  "pools": [
-    {
-      "name": "Stock Market",
-      "notes": [
-        {
-          "color": "orange",
-          "note": "Corporations issue/redeem stock at one value lower/higher"
-        },
-        {
-          "color": "brown",
-          "icon": "exclamation",
-          "note": "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
-        }
       ]
     }
   ],

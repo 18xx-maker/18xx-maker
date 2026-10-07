@@ -5360,7 +5360,6 @@
   },
   "775": {
     "color": "brown",
-    "broken": true,
     "rotations": [0],
     "values": [
       {
@@ -5536,7 +5535,6 @@
   },
   "782": {
     "color": "brown",
-    "broken": true,
     "labels": [
       {
         "label": "£",
@@ -5581,7 +5579,6 @@
   },
   "783": {
     "color": "brown",
-    "broken": true,
     "labels": [
       {
         "label": "£",
@@ -5626,7 +5623,6 @@
   },
   "784": {
     "color": "brown",
-    "broken": true,
     "labels": [
       {
         "label": "£",
@@ -5670,7 +5666,6 @@
   },
   "785": {
     "color": "brown",
-    "broken": true,
     "labels": [
       {
         "label": "£",
@@ -5741,7 +5736,6 @@
   },
   "789": {
     "color": "brown",
-    "broken": true,
     "rotations": [0],
     "labels": [
       {

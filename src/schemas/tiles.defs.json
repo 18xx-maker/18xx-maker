@@ -208,8 +208,6 @@
           "width": { "type": "integer", "minimum": 1 },
           "text": { "type": "string" },
           "textColor": { "type": "string" },
-          "textBorderWidth": { "type": "number", "minimum": 0 },
-          "textBorderColor": { "type": "string" },
           "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
           "borderColor": { "type": "string" },
           "borderWidth": { "type": "number", "minimum": 0 },
@@ -420,7 +418,6 @@
         "company": { "type": "string" },
         "destination": { "type": "boolean", "enum": [true] },
         "width": { "type": "integer", "minimum": 1 },
-        "bgFill": { "type": "string" },
         "hidden": {
           "description": "schema.fields.position.hidden",
           "type": "boolean",
@@ -482,7 +479,6 @@
         "logo": { "type": "string" },
         "label": { "type": "string", "minLength": 1 },
         "color": { "type": "string" },
-        "bgFill": { "type": "string" },
         "iconColor": { "type": "string" },
         "outline": { "type": "string" },
         "outlineWidth": { "type": "integer", "minimum": 1 },
@@ -511,7 +507,6 @@
         "destination": { "type": "boolean", "enum": [true] },
         "reserved": { "type": "boolean", "enum": [true] },
         "inverse": { "type": "boolean", "enum": [true] },
-        "inverseTextColor": { "type": "string" },
         "angle": {
           "description": "schema.fields.position.angle",
           "type": "number",
@@ -524,10 +519,6 @@
           "minimum": 0
         },
         "width": { "type": "integer", "minimum": 1 },
-        "text": { "type": "string" },
-        "textColor": { "type": "string" },
-        "textBorderWidth": { "type": "number", "minimum": 0 },
-        "textBorderColor": { "type": "string" },
         "hidden": {
           "description": "schema.fields.position.hidden",
           "type": "boolean",
@@ -666,7 +657,6 @@
         "name": { "$ref": "#/definitions/name" },
         "reverse": { "type": "boolean", "enum": [true] },
         "rows": { "type": "integer", "minimum": 1 },
-        "groups": { "type": "array", "items": { "type": "string" } },
         "revenues": {
           "type": "array",
           "items": {
@@ -805,8 +795,7 @@
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
             ]
-          },
-          "groups": { "type": "array", "items": { "type": "string" } }
+          }
         },
         "additionalProperties": false,
         "dependencies": { "align": ["mid"] }
@@ -829,7 +818,6 @@
           "outside": { "type": "boolean", "enum": [true] },
           "name": { "$ref": "#/definitions/name" },
           "color": { "type": "string" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "companies": {
             "type": "array",
             "items": {
@@ -963,8 +951,7 @@
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
             ]
-          },
-          "groups": { "type": "array", "items": { "type": "string" } }
+          }
         },
         "additionalProperties": false,
         "dependencies": { "align": ["mid"] }
@@ -976,7 +963,6 @@
         "type": "object",
         "properties": {
           "name": { "$ref": "#/definitions/name" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "width": { "type": "number", "exclusiveMinimum": 0 },
           "color": { "type": "string" },
           "hidden": {
@@ -1043,7 +1029,6 @@
         "type": "object",
         "properties": {
           "name": { "$ref": "#/definitions/name" },
-          "groups": { "type": "array", "items": { "type": "string" } },
           "color": { "type": "string" },
           "hidden": {
             "description": "schema.fields.position.hidden",
@@ -1360,8 +1345,6 @@
           },
           "text": { "type": "string" },
           "textColor": { "type": "string" },
-          "textBorderWidth": { "type": "number", "minimum": 0 },
-          "textBorderColor": { "type": "string" },
           "color": { "type": "string" },
           "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
           "borderColor": { "type": "string" },
@@ -1829,16 +1812,10 @@
           "type": "number",
           "description": "schema.tiles.hex.stripeRotation"
         },
-        "encoding": { "type": "string" },
         "group": {
           "type": "string",
           "pattern": "^[0-9a-z]+$",
           "description": "schema.tiles.hex.group"
-        },
-        "broken": {
-          "type": "boolean",
-          "enum": [true],
-          "description": "schema.tiles.hex.broken"
         },
         "clipPath": {
           "type": "boolean",

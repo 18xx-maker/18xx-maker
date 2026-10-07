@@ -8411,7 +8411,6 @@
   },
   "754": {
     "color": "green",
-    "broken": true,
     "labels": [
       {
         "label": "£",
@@ -8450,7 +8449,6 @@
   },
   "755": {
     "color": "green",
-    "broken": true,
     "labels": [
       {
         "label": "£",
@@ -8631,7 +8629,6 @@
   },
   "761": {
     "color": "green",
-    "broken": true,
     "labels": [
       {
         "label": "£",
@@ -8761,7 +8758,6 @@
   },
   "788": {
     "color": "green",
-    "broken": true,
     "rotations": [0],
     "labels": [
       {
@@ -10692,7 +10688,6 @@
   },
   "802|3": {
     "color": "green",
-    "broken": true,
     "values": [
       {
         "angle": 210,

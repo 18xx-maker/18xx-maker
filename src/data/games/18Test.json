@@ -353,9 +353,6 @@
       "quantity": "∞",
       "print": 2,
       "price": 1100,
-      "discount": {
-        "4D": 200
-      },
       "color": "gray"
     }
   ],
@@ -453,27 +450,6 @@
       "train": "8E",
       "limit": 2,
       "tiles": "brown"
-    }
-  ],
-  "pools": [
-    {
-      "name": "Market",
-      "notes": [
-        {
-          "color": "orange",
-          "note": "Shares in the market pay dividends to the corporation"
-        },
-        {
-          "color": "brown",
-          "icon": "exclamation",
-          "note": "No more than 50% of a corporation's shares may be in the market at any time"
-        },
-        {
-          "color": "red",
-          "icon": "times",
-          "note": "Shares cannot be sold during the first stock round"
-        }
-      ]
     }
   ],
   "rounds": [

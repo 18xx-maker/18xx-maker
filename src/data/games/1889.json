@@ -8,7 +8,6 @@
     "titleX": 40,
     "titleY": 880,
     "titleSize": 100,
-    "mustSellInBlocks": true,
     "currency": "¥#"
   },
   "links": {
@@ -43,27 +42,6 @@
       "number": 6,
       "certLimit": 11,
       "capital": 390
-    }
-  ],
-  "pools": [
-    {
-      "name": "Bank Pool",
-      "notes": [
-        {
-          "color": "blue",
-          "note": "Shares in the market pay dividends to the corporation"
-        },
-        {
-          "color": "purple",
-          "icon": "exclamation",
-          "note": "No more than 50% of a corporation's shares may be in the market at any time"
-        },
-        {
-          "color": "red",
-          "icon": "times",
-          "note": "Shares cannot be sold during the first stock round"
-        }
-      ]
     }
   ],
   "rounds": [
@@ -397,12 +375,7 @@
       "price": 1100,
       "color": "brown",
       "description": "Cost ¥800 when trading in a 4T, 5T or 6T",
-      "available": "6",
-      "discount": {
-        "4": 300,
-        "5": 300,
-        "6": 300
-      }
+      "available": "6"
     }
   ],
   "tokenTypes": {
@@ -425,7 +398,6 @@
       }
     ]
   },
-  "floatPercent": 50,
   "companies": [
     {
       "name": "Awa Railroad",
@@ -528,79 +500,35 @@
       "price": 20,
       "revenue": 5,
       "hex": "K4",
-      "description": "Blocks Takamatsu (K4).",
-      "sym": "TR",
-      "abilities": [
-        {
-          "type": "blocks_hexes",
-          "hexes": ["K4"]
-        }
-      ]
+      "description": "Blocks Takamatsu (K4)."
     },
     {
       "name": "Mitsubishi Ferry",
       "price": 30,
       "revenue": 5,
       "tile": "437",
-      "description": "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a corporation controlled by another player. The player need not control a corporation or have connectivity to the placed tile from one of their corporations. This does not close the company.",
-      "sym": "MF",
-      "abilities": [
-        {
-          "type": "tile_lay",
-          "hexes": ["B11", "G10", "I12", "J9"],
-          "tiles": ["437"],
-          "owner_type": "player"
-        }
-      ]
+      "description": "Player owner may place the port tile on a coastal town (B11, G10, I12, or J9) without a tile on it already, outside of the operating rounds of a corporation controlled by another player. The player need not control a corporation or have connectivity to the placed tile from one of their corporations. This does not close the company."
     },
     {
       "name": "Ehime Railway",
       "price": 40,
       "revenue": 10,
       "hex": "C4",
-      "description": "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company.",
-      "sym": "ER",
-      "abilities": [
-        {
-          "type": "blocks_hexes",
-          "hexes": ["C4"]
-        },
-        {
-          "type": "tile_lay",
-          "hexes": ["C4"],
-          "tiles": ["12", "13", "14", "15", "205", "206"],
-          "when": "sold",
-          "owner_type": "corporation"
-        }
-      ]
+      "description": "When this company is sold to a corporation, the selling player may immediately place a green tile on Ohzu (C4), in addition to any tile which it may lay during the same operating round. This does not close the company."
     },
     {
       "name": "Sumitomo Mines Railway",
       "price": 50,
       "revenue": 15,
       "icon": "mountain",
-      "description": "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company.",
-      "abilities": [
-        {
-          "type": "ignore_terrain",
-          "terrain": "mountain",
-          "owner_type": "corporation"
-        }
-      ]
+      "description": "Owning corporation may ignore building cost for mountain hexes which do not also contain rivers. This does not close the company."
     },
     {
       "name": "Dougo Railway",
       "price": 60,
       "revenue": 15,
       "company": "IR",
-      "description": "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering.",
-      "abilities": [
-        {
-          "type": "exchange",
-          "corporation": "IR",
-          "owner_type": "player"
-        }
-      ]
+      "description": "Owning player may exchange this private company for a 10% share of Iyo Railway from the initial offering."
     },
     {
       "name": "South Iyo Railway",
@@ -620,19 +548,7 @@
       "minPlayers": 4,
       "icon": "boat",
       "iconColor": "violet",
-      "description": "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50.",
-      "abilities": [
-        {
-          "type": "never_closes",
-          "owner_type": "player"
-        },
-        {
-          "type": "revenue_change",
-          "revenue": 50,
-          "when": "5",
-          "owner_type": "player"
-        }
-      ]
+      "description": "Does not close while owned by a player. If owned by a player when the first 5-train is purchased it may no longer be sold to a public company and the revenue is increased to 50."
     }
   ],
   "tiles": {

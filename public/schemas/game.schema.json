@@ -373,14 +373,6 @@
           "type": "integer",
           "minimum": 0
         },
-        "discount": {
-          "description": "The price of this train when traded in for each of the listed trains, by the name of the train traded in.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "number",
-            "minimum": 0
-          }
-        },
         "upgrade": {
           "description": "Cost of this train when bought as an upgrade, shown under the price",
           "oneOf": [
@@ -1230,15 +1222,6 @@
           "type": "string",
           "enum": ["horizontal", "vertical"]
         },
-        "capitalization": {
-          "description": "Full cap is the default and doesn't need to be specified.",
-          "type": "string",
-          "enum": ["full", "incremental"]
-        },
-        "mustSellInBlocks": {
-          "description": "Shares must be sold in blocks, shown on the charter.",
-          "type": "boolean"
-        },
         "marketTokens": {
           "type": "integer",
           "minimum": 0
@@ -1434,11 +1417,6 @@
     },
     "certLimit": {
       "$ref": "#/definitions/certLimit"
-    },
-    "floatPercent": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 100
     },
     "tokenTypes": {
       "type": "object",
@@ -1656,10 +1634,6 @@
             "description": "A second name of the company. The companyNames config chooses whether the charter and the share cards print the name, the alias, or both.",
             "type": "string"
           },
-          "subName": {
-            "description": "A second line under the name of the charter.",
-            "type": "string"
-          },
           "shareType": {
             "description": "The name of a share type of the game.",
             "type": "string"
@@ -1856,39 +1830,6 @@
         "additionalProperties": false
       }
     },
-    "pools": {
-      "type": "array",
-      "description": "Notes about the pools of the game. Kept for reference, they are not printed.",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "notes": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "note": {
-                  "type": "string"
-                },
-                "color": {
-                  "type": "string"
-                },
-                "icon": {
-                  "type": "string"
-                }
-              },
-              "required": ["note"],
-              "additionalProperties": false
-            }
-          }
-        },
-        "required": ["name"],
-        "additionalProperties": false
-      }
-    },
     "privates": {
       "type": "array",
       "items": {
@@ -1942,9 +1883,6 @@
               "label": "name"
             }
           },
-          "image": {
-            "type": "string"
-          },
           "icon": {
             "type": "string"
           },
@@ -1968,22 +1906,6 @@
           "variant": {
             "type": "string"
           },
-          "sym": {
-            "type": "string"
-          },
-          "abilities": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "description": "An ability of the private. Kept for reference, it is not printed.",
-              "properties": {
-                "type": {
-                  "type": "string"
-                }
-              },
-              "required": ["type"]
-            }
-          },
           "bid": {
             "type": "number",
             "minimum": 0
@@ -2002,10 +1924,6 @@
           "priceFormat": {
             "description": "Format string for the price, where the first # is replaced by the number, e.g. #G. Overrides the game currency and the currency config. Not used when price is text.",
             "$ref": "#/definitions/valueFormat"
-          },
-          "debt": {
-            "type": "number",
-            "minimum": 0
           },
           "revenue": {
             "oneOf": [
@@ -2359,17 +2277,6 @@
         ]
       }
     },
-    "upgrades": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "minItems": 1,
-        "uniqueItems": true
-      }
-    },
     "wip": {
       "type": "boolean"
     },
@@ -2383,7 +2290,10 @@
         "formats": {
           "type": "array",
           "description": "The files to export, like --format. pdf, png, svg (the map, market, par, revenue, tiles and tokens, for vector graphics software) and b18 (a Board18 box). Defaults to pdf.",
-          "items": { "type": "string", "enum": ["pdf", "png", "svg", "b18"] },
+          "items": {
+            "type": "string",
+            "enum": ["pdf", "png", "svg", "b18"]
+          },
           "minItems": 1,
           "uniqueItems": true
         },
