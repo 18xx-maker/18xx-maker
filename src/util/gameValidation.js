@@ -160,6 +160,15 @@ export const REMOVED = [
   ]),
 ];
 
+// The same for a file of tiles, whose tiles are at the top
+export const TILES_REMOVED = [
+  [["**"], TILE_FIELDS],
+  [
+    ["**", "tokens", "*"],
+    ["text", "textColor"],
+  ],
+];
+
 const isObject = (node) =>
   node !== null && typeof node === "object" && !Array.isArray(node);
 
@@ -194,8 +203,8 @@ const objectsAt = (data, pattern, path = []) => {
 };
 
 // The pointers (#/trains/2/discount) of the removed fields a game still has
-export const removedPointers = (data) =>
-  REMOVED.flatMap(([parent, fields]) =>
+export const removedPointers = (data, table = REMOVED) =>
+  table.flatMap(([parent, fields]) =>
     objectsAt(data, parent).flatMap(([path, object]) =>
       fields
         .filter((field) => Object.hasOwn(object, field))
@@ -219,32 +228,55 @@ const issue = (code, pointer, params = {}, severity = ERROR) => ({
 
 const ADDITIONAL = "no-additional-properties-error";
 
-// The alternatives of a oneOf/anyOf list their errors together. A field that
-// only some of them reject is allowed by another one, so it is not a mistake.
-// A field every alternative rejects is reported once.
-const alternativeErrors = (errors, count) => {
+const isRemoved = (e, removed) =>
+  e.code === ADDITIONAL && removed.has(e.data.pointer);
+
+// The alternatives of a oneOf/anyOf list their errors together. A removed
+// field has its own warning: an alternative that only rejects removed fields
+// fits, so there is no error. A field that only some of the others reject is
+// allowed by another one, so it is not a mistake, and one every alternative
+// rejects is reported once. When that leaves nothing, every alternative has
+// its own mistake: report them all.
+const alternativeErrors = (errors, count, removed) => {
+  const groups = Map.groupBy(errors, (e) => e.data.schema);
+  if (
+    [...groups.values()].some((group) =>
+      group.every((e) => isRemoved(e, removed)),
+    )
+  ) {
+    return [];
+  }
+
+  const rest = errors.filter((e) => !isRemoved(e, removed));
   const rejected = new Map();
-  for (const e of errors) {
+  for (const e of rest) {
     if (e.code === ADDITIONAL) {
       rejected.set(e.data.pointer, (rejected.get(e.data.pointer) ?? 0) + 1);
     }
   }
 
   const seen = new Set();
-  return errors.filter((e) => {
-    if (e.code !== ADDITIONAL) return true;
-    if (rejected.get(e.data.pointer) < count || seen.has(e.data.pointer)) {
-      return false;
-    }
-    seen.add(e.data.pointer);
-    return true;
-  });
+  const unique = (list) =>
+    list.filter((e) => {
+      if (e.code !== ADDITIONAL) return true;
+      if (seen.has(e.data.pointer)) return false;
+      seen.add(e.data.pointer);
+      return true;
+    });
+  const agreed = unique(
+    rest.filter(
+      (e) => e.code !== ADDITIONAL || rejected.get(e.data.pointer) >= count,
+    ),
+  );
+  if (agreed.length) return agreed;
+  seen.clear();
+  return unique(rest);
 };
 
 // Errors of a oneOf/anyOf are the errors of its alternatives. Show the ones
 // below the value itself, since the alternatives that do not fit at all only
-// say it is not the other type.
-export const leaves = (error) => {
+// say it is not the other type. The pointers in removed are removed fields.
+export const leaves = (error, removed = new Set()) => {
   const nested = error.data?.errors;
   if (!nested?.length) return [error];
   const deeper = nested.filter((e) => e.data?.pointer !== error.data.pointer);
@@ -257,10 +289,10 @@ export const leaves = (error) => {
     ).length;
   const shown = deeper.length
     ? count > 1
-      ? alternativeErrors(deeper, count)
+      ? alternativeErrors(deeper, count, removed)
       : deeper
     : [error];
-  return shown.flatMap((e) => (e === error ? [e] : leaves(e)));
+  return shown.flatMap((e) => (e === error ? [e] : leaves(e, removed)));
 };
 
 const translate = (error) => {
@@ -339,12 +371,13 @@ export const validateGame = async (game) => {
     issue("deprecated", pointer, { key: "removed" }, WARNING),
   );
   const gone = new Set(removed.map((e) => e.pointer));
+  const removedSet = new Set(removedPointers(data));
 
   // A removed field is not an unknown field, whether the schema allows it
   // (the companies) or not
   const errors = validator
     .validate(data)
-    .errors.flatMap(leaves)
+    .errors.flatMap((e) => leaves(e, removedSet))
     .map(translate)
     .filter((e) => !gone.has(e.pointer));
 

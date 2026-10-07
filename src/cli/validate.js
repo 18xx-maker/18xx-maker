@@ -17,7 +17,11 @@ import {
 } from "ramda";
 
 import { loadJSON, loadSchema } from "#cli/util";
-import { leaves, removedPointers } from "../util/gameValidation.js";
+import {
+  TILES_REMOVED,
+  leaves,
+  removedPointers,
+} from "../util/gameValidation.js";
 import { UNVALIDATED_GAMES } from "../util/testGames.js";
 
 // Load Defs
@@ -101,16 +105,20 @@ let validate = (json, file, schemaId) => {
   const { errors } = compiledSchema(id).validate(json);
 
   // A game that still has a removed field is valid, the field is a warning
-  const removed = id === gameSchema.$id ? removedPointers(json) : [];
-  const onlyRemoved =
-    removed.length > 0 &&
-    errors
-      .flatMap(leaves)
-      .every(
-        (e) =>
-          e.code === "no-additional-properties-error" &&
-          removed.includes(e.data.pointer),
-      );
+  const removed =
+    id === gameSchema.$id
+      ? removedPointers(json)
+      : id === tilesSchema.$id
+        ? removedPointers(json, TILES_REMOVED)
+        : [];
+  const gone = new Set(removed);
+  const isRemoved = (e) =>
+    e.code === "no-additional-properties-error" && gone.has(e.data.pointer);
+  // What is left of the errors once the removed fields are told apart
+  const real = removed.length
+    ? errors.flatMap((e) => leaves(e, gone)).filter((e) => !isRemoved(e))
+    : errors;
+  const onlyRemoved = removed.length > 0 && real.length === 0;
   const warnings = removed.map(
     (pointer) => `${pointer} is a removed field, it is ignored`,
   );
@@ -119,7 +127,7 @@ let validate = (json, file, schemaId) => {
     valid: errors.length === 0 || onlyRemoved,
     id,
     file,
-    validationErrors: onlyRemoved ? [] : errors,
+    validationErrors: real,
     warnings,
   };
 };

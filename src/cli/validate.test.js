@@ -1292,6 +1292,41 @@ describe("the removed fields of a game", () => {
     expect(lines.join("\n")).toContain("marekt");
   });
 
+  it("fails for a real error in a token next to a removed field", () => {
+    const { code, lines } = run(
+      withGame({
+        trains: [{ name: "5", color: "gray", quantity: 1, discount: { 4: 1 } }],
+        tiles: {
+          1: { color: "yellow", tokens: [{ company: "A", label: "x" }] },
+        },
+      }),
+    );
+    expect(code).toBe(1);
+    expect(lines.join("\n")).toContain("label");
+  });
+
+  it("does not list a removed field as an error too", () => {
+    const { code, lines } = run(withGame({ pools: [], stock: { marekt: 10 } }));
+    expect(code).toBe(1);
+    expect(lines.filter((l) => l.includes("#/pools"))).toEqual([
+      "warning #/pools is a removed field, it is ignored",
+    ]);
+  });
+
+  it("warns for the removed fields of a file of tiles", () => {
+    const file = writeTmp(
+      "tiles.json",
+      JSON.stringify({
+        1: { color: "yellow", broken: true, tokens: [{ label: "A" }] },
+      }),
+    );
+    const { code, lines } = run(file);
+    expect(code).toBe(0);
+    expect(lines.filter((l) => l.startsWith("warning"))).toEqual([
+      "warning #/1/broken is a removed field, it is ignored",
+    ]);
+  });
+
   it("does not hit a field of the same name elsewhere", () => {
     expect(run(withGame({ players: [{ number: 3, pools: 1 }] })).code).toBe(1);
   });

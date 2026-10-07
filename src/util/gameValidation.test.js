@@ -314,7 +314,7 @@ describe("gameValidation", () => {
         );
         const errors = compiled
           .validate({ info: { title: "x" }, ...game })
-          .errors.flatMap(leaves);
+          .errors.flatMap((e) => leaves(e));
         expect(
           errors.some((e) => readablePointer(e.data.pointer) === pointer),
         ).toBe(true);
@@ -376,6 +376,19 @@ describe("gameValidation", () => {
           params: { field: "bogus" },
         },
       ]);
+    });
+
+    it("still reports a company token with an unknown field", async () => {
+      const bad = { color: "yellow", tokens: [{ company: "A", label: "x" }] };
+      for (const extra of [{}, { bgFill: "red" }]) {
+        const issues = await validateGame({
+          info: { title: "x" },
+          tiles: { 1: { ...bad, tokens: [{ ...bad.tokens[0], ...extra }] } },
+        });
+        expect(
+          issues.filter((i) => i.severity === "error").map((i) => i.pointer),
+        ).toContain("tiles[1].tokens[0].label");
+      }
     });
 
     it("keeps the errors before the removed fields", async () => {
