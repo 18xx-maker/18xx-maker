@@ -49,6 +49,9 @@ needs the fonts to show it the way it was designed. The fonts of 18xx Maker are
 comment at the top of every file lists the fonts of its text. A program without
 the font shows the text in another font, which can change its width.
 
+Text that uses a font you set with the `fonts` setting of the [config](/docs/config) is written with that font family. System fonts are not
+embedded in the file, so install them on the computer that opens it.
+
 To share a file with someone who does not have the fonts, or to send it to a
 print shop, convert the text to paths first: _Path > Object to Path_ in
 Inkscape, _Type > Create Outlines_ in Illustrator. The text can not be edited

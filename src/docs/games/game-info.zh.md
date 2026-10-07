@@ -1,6 +1,6 @@
 # 游戏信息与规则
 
-这些是游戏文件中描述游戏玩法的字段,以及每个字段会用于哪个页面或文件。只改变外观的字段(字体、大小、标题位置)在[游戏模式](https://18xx-maker.com/schemas/game.schema.json)的 `info` 下,这里不再重复。阶段与火车见[阶段与火车](/docs/games/trains)。
+这些是游戏文件中描述游戏玩法的字段,以及每个字段会用于哪个页面或文件。只改变外观的字段(字体、大小、标题位置)在[游戏模式](https://18xx-maker.com/schemas/game.schema.json)的 `info` 下,这里不再重复。整个游戏的字体可通过[配置](/docs/config)的 `fonts` 设置在一处指定,这里的字体字段仍然优先。阶段与火车见[阶段与火车](/docs/games/trains)。
 
 ## 信息
 

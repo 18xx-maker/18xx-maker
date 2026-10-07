@@ -30,7 +30,7 @@ export const normalize = (html) => {
 
 // Render a game page and return the normalized print markup (the page's
 // testid element and everything in it) to compare with a snapshot
-export const printMarkup = async (slug, path, suffix) => {
+export const printMarkup = async (slug, path, suffix, state) => {
   // Print output is what is locked down, so render with the print media
   // type like a real print does (the screen shows the pan and zoom editor)
   const { matchMedia } = window;
@@ -39,7 +39,7 @@ export const printMarkup = async (slug, path, suffix) => {
       ? { matches: true, addEventListener() {}, removeEventListener() {} }
       : matchMedia.call(window, query);
   try {
-    renderApp(`/games/${slug}/${path}`);
+    renderApp(`/games/${slug}/${path}`, state);
     const element = await screen.findByTestId(`game-${slug}${suffix}`);
     const html = normalize(element.outerHTML);
     return html;

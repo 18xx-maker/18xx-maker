@@ -15,6 +15,28 @@ const diceToNumbers = (value) =>
     }),
   );
 
+// The font sizes in `fonts.roles` are numbers, a URL parameter is a string. A
+// size that is not a number is dropped (the text keeps its own size).
+const fontSizesToNumbers = (fonts) => {
+  const roles = Object.fromEntries(
+    Object.entries(fonts.roles ?? {}).map(([name, role]) => {
+      if (role === null || typeof role !== "object" || !("size" in role)) {
+        return [name, role];
+      }
+      const { size, ...rest } = role;
+      const number = size === "" ? NaN : Number(size);
+      // The schema wants a size above 0
+      return [
+        name,
+        Number.isFinite(number) && number > 0
+          ? { ...rest, size: number }
+          : rest,
+      ];
+    }),
+  );
+  return fonts.roles ? { ...fonts, roles } : fonts;
+};
+
 // The config values in URL parameters: ?config.cards.layout=die becomes
 // { cards: { layout: "die" } }. search is a query string or URLSearchParams.
 export const searchToConfig = (search = "") => {
@@ -38,6 +60,13 @@ export const searchToConfig = (search = "") => {
     searchConfig = assocPath(
       ["cards", "dice"],
       diceToNumbers(searchConfig.cards.dice),
+      searchConfig,
+    );
+  }
+  if (searchConfig.fonts) {
+    searchConfig = assoc(
+      "fonts",
+      fontSizesToNumbers(searchConfig.fonts),
       searchConfig,
     );
   }

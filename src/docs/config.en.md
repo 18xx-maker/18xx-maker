@@ -50,6 +50,44 @@ and a description in the panel, so this is only an overview.
 | Currency             | how money is written for each kind of amount                                                      |
 | Data                 | reset, copy, download and import your config, and allow a game's own config                       |
 
+## Fonts
+
+The `fonts` setting gives the font of a kind of text in one place. It is not a
+control in the panel yet: set it in your `config.json`, in the JSON you import
+in the Data section, in `?config.fonts...` parameters, or in the `config` of a
+game file.
+
+```json
+{
+  "fonts": {
+    "families": { "fancy": "Georgia, serif" },
+    "roles": {
+      "body": { "family": "fancy" },
+      "title": { "weight": "normal", "style": "italic" },
+      "card": { "weight": "bold" }
+    }
+  }
+}
+```
+
+- A **role** is a kind of text: `body`, `title`, `label`, `revenue`, `token`,
+  `price` and `card`. It sets a `family`, a `size` (a number, in the units of
+  the page), a `weight` (`normal`, `bold` or a number) and a `style` (`normal`,
+  `italic` or `oblique`). Every setting is optional. A role starts from the
+  `body` role, and a setting that is not set keeps the default of the text.
+- A `family` is a name from `families`, one of the built in `display`, `serif`
+  and `sans-serif`, or any CSS font family. System fonts are not embedded in
+  exports, see [SVG](/docs/output/svg).
+- Today the `title` role sets the names of cities, towns and off-board areas
+  and the free-standing hex names, and the `card` role sets the family, weight and style of the text of the
+  private company cards. The other roles are for the text that moves over to
+  them next.
+- The font fields of a tile element or of a game file (such as
+  `info.nameFontSize`) still win over a role, so no game changes by itself.
+- The parts of `fonts` combine through the layers above: a game's own
+  `fonts.roles.title.weight` and your `fonts.roles.title.size` both apply, and
+  the game wins when both set the same one (when _Allow game config_ is on).
+
 ## Deep links
 
 A section has a name in the address, so you can link to it:

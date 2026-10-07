@@ -65,6 +65,21 @@ describe("18Test duplex cards", () => {
   });
 });
 
+// The config of the game only applies when the user allows it: the fonts
+// of 18Test (the title role on the names, the card role on the privates)
+describe("18Test game config fonts", () => {
+  expected.push("18Test/map-fonts.html", "18Test/cards-fonts.html");
+
+  it.each(["map", "cards"])("%s output is unchanged", async (page) => {
+    const html = await printMarkup("18Test", page, `-${page}`, {
+      config: { allowGameConfig: true },
+    });
+    await expect(html).toMatchFileSnapshot(
+      `./__snapshots__/18Test/${page}-fonts.html`,
+    );
+  });
+});
+
 // vitest never reports snapshot files that no test writes anymore (a removed
 // game or page), so check for them here
 describe("snapshot files", () => {

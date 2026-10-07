@@ -16,6 +16,7 @@ import ColorContext from "@/context/ColorContext";
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
+import { resolveFontRole } from "@/util/fonts";
 import { getMapHex } from "@/util/map";
 
 const Private = (props) => {
@@ -94,6 +95,9 @@ const Private = (props) => {
   const game = useGame();
   const { config } = useConfig();
   const style = config.privates.style;
+  // The card role gives the family, weight and style of every field, the size
+  // stays with the field. A field of the game beats the role.
+  const card = resolveFontRole(config.fonts, "card");
 
   const px2pt = 0.75;
   const in2pt = 72;
@@ -111,9 +115,9 @@ const Private = (props) => {
   let idFont = getFontProps(
     props,
     idFS,
-    idFontWeight,
-    idFontFamily,
-    idFontStyle,
+    idFontWeight ?? card.fontWeight,
+    idFontFamily ?? card.fontFamily,
+    idFontStyle ?? card.fontStyle,
   );
   let idLineHeight = idFS + lineHeightAdd;
   idColor = multiDefaultTo("black", idColor, fontColor);
@@ -123,9 +127,9 @@ const Private = (props) => {
   let nameFont = getFontProps(
     props,
     nameFS,
-    nameFontWeight,
-    nameFontFamily,
-    nameFontStyle,
+    nameFontWeight ?? card.fontWeight,
+    nameFontFamily ?? card.fontFamily,
+    nameFontStyle ?? card.fontStyle,
   );
   let nameLineHeight = nameFS + lineHeightAdd;
   nameColor = multiDefaultTo("black", nameColor, fontColor);
@@ -135,9 +139,9 @@ const Private = (props) => {
   let descFont = getFontProps(
     props,
     descFS,
-    descFontWeight,
-    descFontFamily,
-    descFontStyle,
+    descFontWeight ?? card.fontWeight,
+    descFontFamily ?? card.fontFamily,
+    descFontStyle ?? card.fontStyle,
   );
   let descLineHeight = descFS + lineHeightAdd;
   descColor = multiDefaultTo("black", descColor, fontColor);
@@ -147,9 +151,9 @@ const Private = (props) => {
   let noteFont = getFontProps(
     props,
     noteFS,
-    noteFontWeight,
-    noteFontFamily,
-    noteFontStyle,
+    noteFontWeight ?? card.fontWeight,
+    noteFontFamily ?? card.fontFamily,
+    noteFontStyle ?? card.fontStyle,
   );
   let noteLineHeight = noteFS + lineHeightAdd;
   noteColor = multiDefaultTo("black", noteColor, fontColor);
@@ -159,9 +163,9 @@ const Private = (props) => {
   let revenueFont = getFontProps(
     props,
     revenueFS,
-    revenueFontWeight,
-    revenueFontFamily,
-    revenueFontStyle,
+    revenueFontWeight ?? card.fontWeight,
+    revenueFontFamily ?? card.fontFamily,
+    revenueFontStyle ?? card.fontStyle,
   );
   let revenueLineHeight = revenueFS + lineHeightAdd;
   revenueColor = multiDefaultTo("black", revenueColor, fontColor);
@@ -173,9 +177,9 @@ const Private = (props) => {
   let bidFont = getFontProps(
     props,
     bidFS,
-    bidFontWeight,
-    bidFontFamily,
-    bidFontStyle,
+    bidFontWeight ?? card.fontWeight,
+    bidFontFamily ?? card.fontFamily,
+    bidFontStyle ?? card.fontStyle,
   );
   let bidLineHeight = bidFS + lineHeightAdd;
   bidColor = multiDefaultTo("black", bidColor, fontColor);
@@ -185,9 +189,9 @@ const Private = (props) => {
   let priceFont = getFontProps(
     props,
     priceFS,
-    priceFontWeight,
-    priceFontFamily,
-    priceFontStyle,
+    priceFontWeight ?? card.fontWeight,
+    priceFontFamily ?? card.fontFamily,
+    priceFontStyle ?? card.fontStyle,
   );
   let priceLineHeight = priceFS + lineHeightAdd;
   priceColor = multiDefaultTo("black", priceColor, fontColor);
@@ -197,9 +201,9 @@ const Private = (props) => {
   let variantFont = getFontProps(
     props,
     variantFS,
-    variantFontWeight,
-    variantFontFamily,
-    variantFontStyle,
+    variantFontWeight ?? card.fontWeight,
+    variantFontFamily ?? card.fontFamily,
+    variantFontStyle ?? card.fontStyle,
   );
   let variantLineHeight = variantFS + lineHeightAdd;
   variantColor = multiDefaultTo("black", variantColor, fontColor);
@@ -209,9 +213,9 @@ const Private = (props) => {
   let playersFont = getFontProps(
     props,
     playersFS,
-    playersFontWeight,
-    playersFontFamily,
-    playersFontStyle,
+    playersFontWeight ?? card.fontWeight,
+    playersFontFamily ?? card.fontFamily,
+    playersFontStyle ?? card.fontStyle,
   );
   let playersLineHeight = playersFS + lineHeightAdd;
   playersColor = multiDefaultTo("black", playersColor, fontColor);

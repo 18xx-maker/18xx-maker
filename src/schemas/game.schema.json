@@ -2370,7 +2370,8 @@
           "plainMapCompanies",
           "tileCompanies",
           "straightCityNames",
-          "font"
+          "font",
+          "fonts"
         ]
       }
     },

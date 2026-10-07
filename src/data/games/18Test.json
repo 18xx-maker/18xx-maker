@@ -1133,6 +1133,23 @@
   "config": {
     "export": {
       "allLayouts": true
+    },
+    "fonts": {
+      "families": {
+        "fancy": "Georgia, serif"
+      },
+      "roles": {
+        "body": {
+          "family": "fancy"
+        },
+        "title": {
+          "weight": "normal",
+          "style": "italic"
+        },
+        "card": {
+          "weight": "bold"
+        }
+      }
     }
   }
 }

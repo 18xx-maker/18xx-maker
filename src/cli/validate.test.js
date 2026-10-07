@@ -500,6 +500,18 @@ describe("validate", () => {
       expect(lines.some((l) => l.includes(key))).toBe(true);
     });
 
+    const fonts = {
+      families: { fancy: "Georgia, serif" },
+      roles: {
+        body: { family: "fancy", size: 11, weight: 400, style: "oblique" },
+        title: { weight: "bold" },
+      },
+    };
+
+    it("accepts fonts", () => {
+      expect(run(withConfig({ fonts })).code).toBe(0);
+    });
+
     it("has the keys of the config schema, but the two of the user", () => {
       const read = (name) =>
         JSON.parse(fs.readFileSync(src(`schemas/${name}.schema.json`), "utf8"));
@@ -507,6 +519,35 @@ describe("validate", () => {
         (key) => !["printScale", "allowGameConfig"].includes(key),
       );
       expect(read("game").properties.config.propertyNames.enum).toEqual(keys);
+    });
+  });
+
+  describe("the fonts of the config", () => {
+    const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
+    const withFonts = (fonts) =>
+      writeTmp("config.json", JSON.stringify({ ...defaults, fonts }));
+
+    it("accepts roles and families", () => {
+      expect(
+        run(
+          withFonts({
+            families: { fancy: "Georgia, serif" },
+            roles: { card: { family: "fancy", size: 9.5, weight: "bold" } },
+          }),
+        ).code,
+      ).toBe(0);
+    });
+
+    it.each([
+      [{ roles: { nothing: {} } }, "nothing"],
+      [{ roles: { title: { style: "regular" } } }, "style"],
+      [{ roles: { title: { size: "14" } } }, "size"],
+      [{ roles: { title: { size: 0 } } }, "size"],
+      [{ extra: 1 }, "extra"],
+    ])("rejects %j", (fonts, key) => {
+      const { code, lines } = run(withFonts(fonts));
+      expect(code).toBe(1);
+      expect(lines.some((l) => l.includes(key))).toBe(true);
     });
   });
 

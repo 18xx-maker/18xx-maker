@@ -125,6 +125,27 @@ describe("getFontProps", () => {
       fontWeight: "normal",
     });
   });
+
+  it("lets an argument that is null or undefined replace a default", () => {
+    // A text then has no value for it: print output depends on this
+    expect(getFontProps({}, 10, undefined, null, undefined)).toStrictEqual({
+      fontFamily: null,
+      fontSize: 10,
+      fontStyle: undefined,
+      fontWeight: undefined,
+    });
+  });
+
+  it("lets a font prop that is undefined replace an argument", () => {
+    expect(
+      getFontProps({ fontSize: undefined }, 10, "bold", "serif", "italic"),
+    ).toStrictEqual({
+      fontFamily: "serif",
+      fontSize: undefined,
+      fontStyle: "italic",
+      fontWeight: "bold",
+    });
+  });
 });
 
 describe("multiDefaultTo", () => {
