@@ -30,6 +30,17 @@ const kindOf = (card) => {
   return "other";
 };
 
+// Where a card is on the paper, from the left edge of the paper as seen from
+// the front. The sheet of backs is flipped on its long edge.
+const place = (page, card, flipped = false) => {
+  const p = page.getBoundingClientRect();
+  const c = card.getBoundingClientRect();
+  return {
+    left: flipped ? p.right - c.right : c.left - p.left,
+    top: Math.round(c.top - p.top),
+  };
+};
+
 const isBack = (page) => page.classList.contains("cards--back");
 
 // The cards are two per row on the paper of the test
@@ -62,19 +73,56 @@ describe("duplex", () => {
     expect(pairs).toHaveLength(2);
 
     pairs.forEach(([front, back]) => {
-      const fronts = slotsOf(front).map(kindOf);
-      const backs = slotsOf(back).map(kindOf);
+      const fronts = slotsOf(front);
+      const backs = slotsOf(back);
       expect(backs).toHaveLength(fronts.length);
-      fronts.forEach((kind, slot) => {
-        const row = Math.floor(slot / PER_ROW);
-        const column = slot % PER_ROW;
-        const behind = backs[row * PER_ROW + (PER_ROW - 1 - column)];
+      fronts.forEach((card) => {
+        const behind = backs.find((other) => {
+          const [a, b] = [place(front, card), place(back, other, true)];
+          return a.top === b.top && a.left === b.left;
+        });
         // A train has its back behind it, the others nothing
-        expect(behind).toBe(
+        const kind = kindOf(card);
+        expect(kindOf(behind)).toBe(
           kind === "none" || kind === "other" ? "blank" : kind,
         );
       });
     });
+  });
+
+  it("puts every back at the physical place of its front, seen through the paper", async () => {
+    const pages = pagesOf(await showCards("&config.cards.duplex=long"));
+    const front = pages.find((page) => !isBack(page) && slotsOf(page).length);
+    const back = pages.find(isBack);
+
+    // The paper has more room left over than a card
+    const slot = front.querySelector(".cutlines").getBoundingClientRect();
+    const leftover = front.getBoundingClientRect().width - PER_ROW * slot.width;
+    expect(leftover).toBeGreaterThan(100);
+
+    slotsOf(front).forEach((card, i) => {
+      const behind = slotsOf(back).find(
+        (other) =>
+          Math.abs(place(back, other, true).left - place(front, card).left) <
+            0.5 && place(back, other).top === place(front, card).top,
+      );
+      expect(behind, `card ${i}`).toBeDefined();
+    });
+  });
+
+  it("keeps the backs of separate sheets in the order of the fronts", async () => {
+    const pages = pagesOf(await showCards("&config.cards.duplex=separate"));
+    const back = pages.find(isBack);
+    expect(back).not.toHaveClass("cards--flip");
+    console.log(
+      back.getBoundingClientRect().left,
+      pages.indexOf(back),
+      [...back.children]
+        .map((c) => JSON.stringify(c.getBoundingClientRect()))
+        .join(" | "),
+    );
+    // And not forced to portrait: letter fits 3 per row in landscape
+    expect(slotsOf(pages[0]).length).toBeGreaterThan(8);
   });
 
   it("keeps a back for every copy of a train and a blank for a train without one", async () => {
@@ -109,26 +157,24 @@ describe("duplex", () => {
     const root = await showCards("&config.cards.duplex=separate");
     const pages = pagesOf(root);
     const flags = pages.map((page) => (isBack(page) ? "back" : "front"));
-    expect(flags).toEqual([...Array(7).fill("front"), "back", "back"]);
+    // Letter fits 9 in landscape, separate does not force portrait
+    expect(flags).toEqual([...Array(6).fill("front"), "back"]);
 
     // Not mirrored: the backs follow the order of the trains
     const backs = pages
       .filter(isBack)
       .flatMap((page) => slotsOf(page).map(kindOf));
-    expect(backs).toEqual(
-      [
-        ...Array(6).fill("blank"),
-        "2",
-        "2",
-        "2",
-        "2",
-        "3+1",
-        "3+1",
-        "3+1",
-        "blank",
-        ...Array(8).fill("blank"),
-      ].slice(0, backs.length),
-    );
+    expect(backs).toEqual([
+      "blank",
+      "blank",
+      "2",
+      "2",
+      "2",
+      "2",
+      "3+1",
+      "3+1",
+      "3+1",
+    ]);
     expect(backs.filter((kind) => kind === "2")).toHaveLength(4);
   });
 

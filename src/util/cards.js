@@ -218,19 +218,22 @@ const splitRows = (nodes, perRow) => {
 };
 
 // The slots of a page of backs for a sheet flipped on its long edge: every
-// row is padded to a full row with empty slots and reversed, so the card in
-// column j of the front lies behind column perRow - 1 - j of the back.
-export const mirrorRows = (nodes, perRow) =>
-  splitRows(nodes, perRow).flatMap((row) =>
-    [...row, ...Array(perRow - row.length).fill(null)].reverse(),
-  );
+// row is padded to a full row with empty slots at its end. The page of backs
+// floats its cards to the right (`.cards--back`), which puts the card in
+// column j of the front behind column perRow - 1 - j of the back, and keeps
+// the columns at the same place on the paper once it is flipped.
+export const padRows = (nodes, perRow) =>
+  splitRows(nodes, perRow).flatMap((row) => [
+    ...row,
+    ...Array(perRow - row.length).fill(null),
+  ]);
 
 // The pages of cards with backs, in print order, as { index, slots, back }.
 // `fronts` and `backs` are the cards in the same order, a card without a back
 // has `null` in `backs`. A page of backs has `null` for an empty slot and is
 // left out when it has no back at all; `index` is the page of fronts it
 // belongs to.
-//   long:     front, back, front, back ... (backs mirrored, flip on long edge)
+//   long:     front, back, front, back ... (backs right aligned, flip on long edge)
 //   separate: all the fronts, then all the backs in the same order
 export const duplexPages = (fronts, backs, { perPage, perRow, mode }) => {
   const frontPages = splitEvery(perPage, fronts).map((slots, index) => ({
@@ -243,7 +246,7 @@ export const duplexPages = (fronts, backs, { perPage, perRow, mode }) => {
       ? [
           {
             index,
-            slots: mode === "long" ? mirrorRows(slots, perRow) : slots,
+            slots: mode === "long" ? padRows(slots, perRow) : slots,
             back: true,
           },
         ]

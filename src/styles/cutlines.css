@@ -78,3 +78,9 @@
 .cards--dtgDie .cutlines > div::after {
   border: 0;
 }
+
+/* A page of backs flipped on its long edge: its cards start on the right, so
+   the columns of the backs land behind the columns of the fronts */
+.cards--flip > .cutlines {
+  float: right;
+}

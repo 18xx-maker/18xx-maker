@@ -144,7 +144,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     const data = getCardData(
       layout.cards,
       layout.paper,
-      duplex === "off" ? undefined : "portrait",
+      duplex === "long" ? "portrait" : undefined,
     );
     // The back of every card of the group, in the same order as the cards
     const groupBacks = backs || nodes.map(() => null);
@@ -224,7 +224,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
             data,
             slots.map((slot, i) => slot || blank(`blank-${i}`)),
             `${keyPrefix}${index}-back`,
-            `${className} cards--back`,
+            `${className} cards--back${duplex === "long" ? " cards--flip" : ""}`,
           )
         : pageFor(data, slots, `${keyPrefix}${index}`, className),
     );

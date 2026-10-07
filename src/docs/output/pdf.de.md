@@ -152,17 +152,19 @@ Zugkarten können eine Rückseite haben: gib einem Zug in der Spieldatei ein
 im Teil _Karten_ der Konfiguration. `off` (Standard) druckt keine Rückseiten,
 `long` druckt nach jeder Seite mit Vorderseiten eine Seite mit Rückseiten, und
 `separate` druckt erst alle Vorderseiten und dann alle Rückseiten in derselben
-Reihenfolge, zum Wenden der Blätter von Hand.
+Reihenfolge, nicht gespiegelt auf eigenen Blättern, zum Ausschneiden und
+Aufkleben der Rückseiten auf die Vorderseiten, nicht zum erneuten Einlegen der
+Blätter in den Drucker.
 
 Verwende `long` mit dem Drucker im Duplexmodus, Wenden an der langen Kante: Die
-Spalten der Rückseiten werden gespiegelt, sodass jede Rückseite hinter ihrer
+Rückseiten sind rechtsbündig, sodass jede Rückseite hinter ihrer
 Vorderseite landet. Eine Karte ohne Rückseite lässt einen leeren Platz, und eine
 Seite ohne jede Rückseite entfällt. Drucke mit 100 % Skalierung und denselben
 Schnittlinien und Rändern auf beiden Seiten, ein Drucker, der die Seite
 zwischen den Seiten verschiebt, wird nicht ausgeglichen.
 
-Duplex benötigt das freie Kartenlayout, die Stanzlayouts ignorieren es, und die
-Seiten stehen im Hochformat. Die Markierungen einer Rückseitenseite liegen auf
+Duplex benötigt das freie Kartenlayout, die Stanzlayouts ignorieren es, und `long` druckt
+im Hochformat. Die Markierungen einer Rückseitenseite liegen auf
 der anderen Seite. Es ist eine Einstellung deines Druckers, daher kann sie nicht
 in einer Spieldatei gesetzt werden, und der PDF-Export der Karten folgt ihr
 ebenfalls. Der PNG-Export der Karten bleibt bei den Vorderseiten.

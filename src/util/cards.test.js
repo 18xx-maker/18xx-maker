@@ -3,7 +3,7 @@ import {
   duplexMode,
   duplexPages,
   getCardData,
-  mirrorRows,
+  padRows,
   resolveCardLayout,
   typeCardConfig,
 } from "@/util/cards";
@@ -301,40 +301,35 @@ describe("duplexMode", () => {
   });
 });
 
-describe("mirrorRows", () => {
-  it("reverses every row of a full page", () => {
-    expect(mirrorRows(["1", "2", "3", "4", "5", "6"], 3)).toEqual([
-      "3",
-      "2",
+describe("padRows", () => {
+  it("keeps a full page as it is", () => {
+    expect(padRows(["1", "2", "3", "4", "5", "6"], 3)).toEqual([
       "1",
-      "6",
-      "5",
+      "2",
+      "3",
       "4",
+      "5",
+      "6",
     ]);
   });
 
-  it("pads a partial row so the cards stay behind their fronts", () => {
-    expect(mirrorRows(["1", "2", "3", "4", "5"], 3)).toEqual([
-      "3",
-      "2",
+  it("pads a partial row at its end", () => {
+    expect(padRows(["1", "2", "3", "4", "5"], 3)).toEqual([
       "1",
-      null,
-      "5",
+      "2",
+      "3",
       "4",
+      "5",
+      null,
     ]);
   });
 
   it("pads a partial page of one row", () => {
-    expect(mirrorRows(["1"], 3)).toEqual([null, null, "1"]);
+    expect(padRows(["1"], 3)).toEqual(["1", null, null]);
   });
 
-  it("keeps empty slots where they are mirrored to", () => {
-    expect(mirrorRows(["1", null, "3"], 3)).toEqual(["3", null, "1"]);
-  });
-
-  it("does nothing with one card per row", () => {
-    expect(mirrorRows(["1"], 1)).toEqual(["1"]);
-    expect(mirrorRows(["1", "2"], 1)).toEqual(["1", "2"]);
+  it("keeps empty slots where they are", () => {
+    expect(padRows(["1", null, "3"], 3)).toEqual(["1", null, "3"]);
   });
 });
 
@@ -342,14 +337,14 @@ describe("duplexPages", () => {
   const fronts = ["a", "b", "c", "d", "e"];
   const backs = ["A", "B", "C", null, "E"];
 
-  it("follows every page of fronts with its mirrored backs", () => {
+  it("follows every page of fronts with its backs", () => {
     expect(
       duplexPages(fronts, backs, { perPage: 4, perRow: 2, mode: "long" }),
     ).toEqual([
       { index: 0, slots: ["a", "b", "c", "d"], back: false },
-      { index: 0, slots: ["B", "A", null, "C"], back: true },
+      { index: 0, slots: ["A", "B", "C", null], back: true },
       { index: 1, slots: ["e"], back: false },
-      { index: 1, slots: [null, "E"], back: true },
+      { index: 1, slots: ["E", null], back: true },
     ]);
   });
 
