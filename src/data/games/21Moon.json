@@ -4,7 +4,7 @@
     "designer": "Jonas Jones",
     "background": "gray",
     "orientation": "horizontal",
-    "titleSize": 100,
+    "titleFontSize": 100,
     "titleX": 0,
     "titleY": -80,
     "currency": "#c"

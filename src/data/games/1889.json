@@ -7,7 +7,7 @@
     "orientation": "horizontal",
     "titleX": 40,
     "titleY": 880,
-    "titleSize": 100,
+    "titleFontSize": 100,
     "currency": "¥#"
   },
   "links": {

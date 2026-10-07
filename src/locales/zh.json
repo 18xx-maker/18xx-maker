@@ -196,7 +196,10 @@
     "invalidLimit": "请输入至少为 1 的整数、∞,或一位数字除以一位数字,如 3/4。",
     "onePerLine": "每行一项。单独一行保存为文本,多行保存为列表。",
     "reference": {
-      "from": { "trains": "列车", "companies": "公司" },
+      "from": {
+        "trains": "列车",
+        "companies": "公司"
+      },
       "unknown": "不在本游戏的{{collection}}中:{{value}}。",
       "noMatches": "没有匹配项。按 Enter 使用“{{value}}”。",
       "remove": "删除 {{name}}"
@@ -415,7 +418,10 @@
     "deprecated-generic": "此字段已弃用。",
     "deprecations": {
       "removed": "此字段已被移除并被忽略。请删除它,详见文档中已移除的字段。",
-      "exports_paginated": "此字段已弃用并被忽略。请删除它,分页 PDF 会自动导出。"
+      "exports_paginated": "此字段已弃用并被忽略。请删除它,分页 PDF 会自动导出。",
+      "info_titleSize": "仍然有效。请将“titleSize”重命名为“titleFontSize”。",
+      "info_subtitleSize": "仍然有效。请将“subtitleSize”重命名为“subtitleFontSize”。",
+      "info_designerSize": "仍然有效。请将“designerSize”重命名为“designerFontSize”。"
     }
   },
   "prototype": {

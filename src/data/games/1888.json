@@ -7,7 +7,7 @@
     "currency": "$#",
     "titleX": 110,
     "titleY": 700,
-    "titleSize": 60
+    "titleFontSize": 60
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/306259/1888",

@@ -9,8 +9,8 @@
     "extraStationTokens": 3,
     "titleX": 10,
     "titleY": 650,
-    "titleSize": 40,
-    "subtitleSize": 12,
+    "titleFontSize": 40,
+    "subtitleFontSize": 12,
     "extraTotalHeight": 60,
     "currency": "$#"
   },

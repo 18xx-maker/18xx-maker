@@ -5,7 +5,7 @@
     "designer": "Brennan Sheremeto",
     "publisher": "self",
     "background": "PGER_orange",
-    "titleSize": 90,
+    "titleFontSize": 90,
     "marketTokens": 2,
     "extraStationTokens": 7,
     "titleY": -110,

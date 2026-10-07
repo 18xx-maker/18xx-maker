@@ -196,7 +196,10 @@
     "invalidLimit": "Gib eine ganze Zahl ab 1, ∞ oder einen Bruch aus zwei Ziffern wie 3/4 ein.",
     "onePerLine": "Eine pro Zeile. Eine einzelne Zeile wird als Text gespeichert, mehrere als Liste.",
     "reference": {
-      "from": { "trains": "Züge", "companies": "Gesellschaften" },
+      "from": {
+        "trains": "Züge",
+        "companies": "Gesellschaften"
+      },
       "unknown": "Nicht bei den {{collection}} dieses Spiels: {{value}}.",
       "noMatches": "Keine Treffer. Enter übernimmt \"{{value}}\".",
       "remove": "{{name}} entfernen"
@@ -415,7 +418,10 @@
     "deprecated-generic": "Dieses Feld ist veraltet.",
     "deprecations": {
       "removed": "Dieses Feld wurde entfernt und wird ignoriert. Entferne es, siehe die entfernten Felder in der Dokumentation.",
-      "exports_paginated": "Dieses Feld ist veraltet und wird ignoriert. Entferne es, die paginierten PDFs werden automatisch exportiert."
+      "exports_paginated": "Dieses Feld ist veraltet und wird ignoriert. Entferne es, die paginierten PDFs werden automatisch exportiert.",
+      "info_titleSize": "Funktioniert weiterhin. Benenne „titleSize“ in „titleFontSize“ um.",
+      "info_subtitleSize": "Funktioniert weiterhin. Benenne „subtitleSize“ in „subtitleFontSize“ um.",
+      "info_designerSize": "Funktioniert weiterhin. Benenne „designerSize“ in „designerFontSize“ um."
     }
   },
   "prototype": {

@@ -12,6 +12,10 @@ import {
 } from "@/util/gameValidation";
 
 import { brokenGame, validGame } from "@tests/support/brokenGame.js";
+import {
+  deprecatedGame,
+  deprecatedKeys,
+} from "@tests/support/deprecatedGame.js";
 
 describe("gameValidation", () => {
   it.each(Object.keys(games).filter((id) => id !== "18Broken"))(
@@ -37,6 +41,34 @@ describe("gameValidation", () => {
     for (const issue of removed) {
       expect(issue).toMatchObject({ severity: "warning", code: "deprecated" });
     }
+  });
+
+  it("warns once for each renamed field that keeps its old name", async () => {
+    const issues = await validateGame(deprecatedGame());
+    expect(
+      issues.map((issue) => [issue.pointer, issue.params.key]).sort(),
+    ).toEqual(
+      Object.entries(deprecatedKeys)
+        .map(([pointer, key]) => [pointer, key])
+        .sort(),
+    );
+    for (const issue of issues) {
+      expect(issue).toMatchObject({ severity: "warning", code: "deprecated" });
+    }
+  });
+
+  it("does not warn when a game uses the new names", async () => {
+    const game = deprecatedGame();
+    game.info = {
+      ...game.info,
+      titleFontSize: 100,
+      subtitleFontSize: 30,
+      designerFontSize: 20,
+    };
+    for (const key of ["titleSize", "subtitleSize", "designerSize"]) {
+      delete game.info[key];
+    }
+    expect(await validateGame(game)).toEqual([]);
   });
 
   it("ignores the meta data the app adds", async () => {
@@ -192,7 +224,12 @@ describe("gameValidation", () => {
 
     it("has no deprecated property without a message", async () => {
       const schema = (await import("@/schemas/game.schema.json")).default;
-      expect(deprecatedPaths(schema)).toEqual([["exports", "paginated"]]);
+      expect(deprecatedPaths(schema).map((path) => path.join("."))).toEqual([
+        "info.titleSize",
+        "info.subtitleSize",
+        "info.designerSize",
+        "exports.paginated",
+      ]);
     });
   });
 

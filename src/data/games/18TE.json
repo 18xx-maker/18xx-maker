@@ -7,9 +7,9 @@
     "background": "green",
     "currency": "#ℳ",
     "orientation": "horizontal",
-    "titleSize": 85,
-    "subtitleSize": 26,
-    "designerSize": 16,
+    "titleFontSize": 85,
+    "subtitleFontSize": 26,
+    "designerFontSize": 16,
     "titleX": 600,
     "titleY": -100
   },

@@ -1200,14 +1200,35 @@
           "minimum": -360,
           "maximum": 360
         },
+        "titleFontSize": {
+          "type": "number",
+          "description": "地图上标题的字号。默认值为 200。"
+        },
         "titleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "已弃用，请使用 titleFontSize。",
+          "deprecationMessage": "已弃用，请使用 titleFontSize。"
+        },
+        "subtitleFontSize": {
+          "type": "number",
+          "description": "地图上副标题的字号。默认值为 30。"
         },
         "subtitleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "已弃用，请使用 subtitleFontSize。",
+          "deprecationMessage": "已弃用，请使用 subtitleFontSize。"
+        },
+        "designerFontSize": {
+          "type": "number",
+          "description": "地图上设计者的字号。默认值为 20。"
         },
         "designerSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "已弃用，请使用 designerFontSize。",
+          "deprecationMessage": "已弃用，请使用 designerFontSize。"
         },
         "titleFontFamily": {
           "type": "string"

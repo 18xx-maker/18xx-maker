@@ -1200,14 +1200,35 @@
           "minimum": -360,
           "maximum": 360
         },
+        "titleFontSize": {
+          "type": "number",
+          "description": "schema.game.info.titleFontSize"
+        },
         "titleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "schema.game.info.titleSize",
+          "deprecationMessage": "schema.game.info.titleSize.deprecated"
+        },
+        "subtitleFontSize": {
+          "type": "number",
+          "description": "schema.game.info.subtitleFontSize"
         },
         "subtitleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "schema.game.info.subtitleSize",
+          "deprecationMessage": "schema.game.info.subtitleSize.deprecated"
+        },
+        "designerFontSize": {
+          "type": "number",
+          "description": "schema.game.info.designerFontSize"
         },
         "designerSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "schema.game.info.designerSize",
+          "deprecationMessage": "schema.game.info.designerSize.deprecated"
         },
         "titleFontFamily": {
           "type": "string"

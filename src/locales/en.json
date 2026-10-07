@@ -196,7 +196,10 @@
     "invalidLimit": "Enter a whole number of at least 1, ∞, or one digit over one digit, like 3/4.",
     "onePerLine": "One per line. A single line is saved as text, more lines as a list.",
     "reference": {
-      "from": { "trains": "trains", "companies": "companies" },
+      "from": {
+        "trains": "trains",
+        "companies": "companies"
+      },
       "unknown": "Not in the {{collection}} of this game: {{value}}.",
       "noMatches": "No matches. Enter uses \"{{value}}\".",
       "remove": "Remove {{name}}"
@@ -415,7 +418,10 @@
     "deprecated-generic": "This field is deprecated.",
     "deprecations": {
       "removed": "This field was removed and is ignored. Delete it, see the removed fields in the docs.",
-      "exports_paginated": "This field is deprecated and ignored. Remove it, the paginated pdfs are exported automatically."
+      "exports_paginated": "This field is deprecated and ignored. Remove it, the paginated pdfs are exported automatically.",
+      "info_titleSize": "Still works. Rename \"titleSize\" to \"titleFontSize\".",
+      "info_subtitleSize": "Still works. Rename \"subtitleSize\" to \"subtitleFontSize\".",
+      "info_designerSize": "Still works. Rename \"designerSize\" to \"designerFontSize\"."
     }
   },
   "prototype": {
