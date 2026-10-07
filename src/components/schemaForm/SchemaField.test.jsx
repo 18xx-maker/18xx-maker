@@ -231,6 +231,7 @@ const ListForm = ({ initial, issues = [], root = listRoot, ...props }) => {
   const [game, setGame] = useState(initial);
   const latest = useRef(game);
   latest.current = game;
+  current = game;
   const change = (fn) => {
     latest.current = fn(latest.current);
     setGame(latest.current);
@@ -258,6 +259,20 @@ const ListForm = ({ initial, issues = [], root = listRoot, ...props }) => {
       />
     </SchemaFormContext.Provider>
   );
+};
+
+const noteRoot = {
+  type: "object",
+  properties: {
+    trains: {
+      type: "array",
+      items: {
+        type: "object",
+        required: ["note"],
+        properties: { note: { type: "string" }, color: { type: "string" } },
+      },
+    },
+  },
 };
 
 const toggle = (name) => screen.getByRole("button", { name });
@@ -311,6 +326,27 @@ describe("a list of cards", () => {
     await user.click(screen.getByRole("button", { name: "Undo" }));
     expect(toggle("B")).toHaveAttribute("aria-expanded", "true");
     expect(toggle("A")).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("adds an item with the text it requires when the items have no name", async () => {
+    const user = userEvent.setup();
+    render(<ListForm root={noteRoot} initial={{ trains: [{ note: "a" }] }} />);
+
+    await user.click(screen.getByRole("button", { name: "Add train" }));
+    expect(current).toEqual({ trains: [{ note: "a" }, { note: "" }] });
+
+    await user.click(
+      screen.getAllByRole("button", { name: /^Duplicate train / })[0],
+    );
+    expect(current.trains).toHaveLength(3);
+    current.trains.forEach((item) => expect(item).not.toHaveProperty("name"));
+
+    for (let i = 0; i < 2; i++) {
+      await user.click(
+        screen.getAllByRole("button", { name: /^Remove train / })[0],
+      );
+    }
+    expect(current.trains).toHaveLength(1);
   });
 
   it("takes defaults from a function of the items and a hook for copies", async () => {
@@ -516,12 +552,13 @@ const fieldRoot = {
       type: "array",
       items: { type: "string", enum: ["pdf", "png", "svg"] },
     },
-    upgrades: {
+    tokenTypes: {
       type: "object",
       additionalProperties: { type: "array", items: { type: "string" } },
     },
+    mixed: { oneOf: [{ type: "object" }, { type: "boolean" }] },
   },
-  required: ["upgrades"],
+  required: ["tokenTypes"],
 };
 
 let current;
@@ -841,9 +878,27 @@ describe("a record field", () => {
     expect(current).toEqual({ colors: { a: "1" } });
     unmount();
 
-    render(<FieldForm initial={{ upgrades: { a: ["x"] } }} field="upgrades" />);
-    await user.click(screen.getByRole("button", { name: "Remove upgrade a" }));
-    expect(current).toEqual({ upgrades: {} });
+    render(
+      <FieldForm initial={{ tokenTypes: { a: ["x"] } }} field="tokenTypes" />,
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Remove token type a" }),
+    );
+    expect(current).toEqual({ tokenTypes: {} });
+  });
+
+  it("keeps the value of a field edited as JSON while the text is not JSON", async () => {
+    const user = userEvent.setup();
+    render(<FieldForm initial={{ mixed: { a: 1 } }} field="mixed" />);
+    const field = screen.getByRole("textbox", { name: "Mixed" });
+    expect(field.tagName).toBe("TEXTAREA");
+
+    await user.clear(field);
+    await user.click(field);
+    await user.paste("[{");
+    await user.tab();
+    expect(await screen.findByText("Enter valid JSON.")).toBeVisible();
+    expect(current).toEqual({ mixed: { a: 1 } });
   });
 
   it("shows the problems of a row on its value", () => {

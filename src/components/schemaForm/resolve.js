@@ -7,14 +7,13 @@ import tilesDefs from "@/schemas/tiles.defs.json";
 export const GAME_INFO_KEYS = ["info", "links", "prototype", "wip"];
 
 // The lists of the rounds tab, in the order of the tab
-export const ROUND_KEYS = ["rounds", "turns", "pools", "number_cards"];
+export const ROUND_KEYS = ["rounds", "turns", "number_cards"];
 
 // The record of the colors tab
 export const COLOR_KEYS = ["colors"];
 
-// The keys of the output tab: the chart range, the export defaults and the
-// upgrades of the tiles by name
-export const OUTPUT_KEYS = ["revenue", "exports", "upgrades"];
+// The keys of the output tab: the chart range and the export defaults
+export const OUTPUT_KEYS = ["revenue", "exports"];
 
 // Properties the schema keeps for old files but the form never shows (they
 // stay in the game untouched): the deprecated and ignored exports.paginated
@@ -44,10 +43,8 @@ export const PRIMARY_KEYS = [
   "note",
 ];
 
-// The fields of a turn and of a pool of the rounds tab, none is under "more
-// fields"
+// The fields of a turn of the rounds tab, none is under "more fields"
 export const TURN_PRIMARY_KEYS = ["name", "steps", "ordered", "optional"];
-export const POOL_PRIMARY_KEYS = ["name", "notes"];
 
 // The same for a token of the game, a token of a token type and a share of a
 // share type: the rest is under "more fields"
@@ -72,7 +69,7 @@ export const PHASE_PRIMARY_KEYS = [
 
 // The game-wide values of the players tab; the players table itself is
 // "players"
-export const PLAYER_KEYS = ["bank", "capital", "certLimit", "floatPercent"];
+export const PLAYER_KEYS = ["bank", "capital", "certLimit"];
 
 // The fields of a player count shown first: the bank is under "more fields"
 export const PLAYER_PRIMARY_KEYS = ["number", "capital", "certLimit"];
@@ -88,10 +85,6 @@ const isLongText = (key, keys) =>
   key === "description"
     ? LONG_DESCRIPTION_SECTIONS.includes(keys[0])
     : LONG_TEXT_KEYS.includes(key);
-
-// Keys edited as JSON whatever their schema: a list of objects that is not
-// one form (the abilities of a private, each has its own type and keys)
-export const JSON_KEYS = ["abilities"];
 
 // The schema documents a $ref can point into besides the root, by file name
 const DOCUMENTS = { "tiles.defs.json": tilesDefs };
@@ -280,7 +273,6 @@ const isTuple = (node, item) =>
 export const kindOf = (schema, key, root, keys = []) => {
   const node = resolveSchema(schema, root);
   if (!node || typeof node !== "object" || node.$ref) return "json";
-  if (JSON_KEYS.includes(key)) return "json";
   if (Array.isArray(node.enum)) {
     return node.enum.every((value) => typeof value === "string")
       ? "enum"

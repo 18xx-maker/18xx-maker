@@ -8,8 +8,8 @@ import {
 import schema from "@/schemas/game.schema.json";
 
 // The players table (a card for each player count, titled "3 players" and
-// identified by its number) and the bank, capital, certificate limit and
-// float percent of the game, generated from the game schema
+// identified by its number) and the bank, capital and certificate limit of the
+// game, generated from the game schema
 const PlayersForm = ({ game }) => (
   <SchemaFormProvider game={game}>
     <div className="flex flex-col gap-4">

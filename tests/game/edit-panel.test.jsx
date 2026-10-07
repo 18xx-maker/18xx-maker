@@ -1109,7 +1109,7 @@ describe("edit panel privates", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("More fields shows the other fields, the token has an editor and abilities are JSON", async () => {
+  it("More fields shows the other fields and the token has an editor", async () => {
     const { user } = open(privatesRoute);
     await ready();
     await user.click(
@@ -1122,8 +1122,6 @@ describe("edit panel privates", () => {
       "TEXTAREA",
     );
     expect(card.getByRole("button", { name: "Edit token" })).toBeVisible();
-    const abilities = card.getByRole("textbox", { name: "Abilities" });
-    expect(abilities.tagName).toBe("TEXTAREA");
     // No nested list: the only Add button is the one of the privates
     expect(screen.getAllByRole("button", { name: /^Add / })).toHaveLength(1);
   });
@@ -1192,27 +1190,6 @@ describe("edit panel privates", () => {
     await user.clear(revenue);
     await user.type(revenue, "{Enter}");
     expect("revenue" in privates(store)[0]).toBe(false);
-  });
-
-  it("invalid abilities JSON keeps the game and shows the problem", async () => {
-    const abilities = [{ type: "x" }];
-    const { user, store } = open(
-      privatesRoute,
-      withPrivates([{ name: "A", abilities }]),
-    );
-    await ready();
-    await user.click(
-      within(cards()[0]).getByRole("button", { name: "More fields" }),
-    );
-    const field = within(cards()[0]).getByRole("textbox", {
-      name: "Abilities",
-    });
-    await user.clear(field);
-    await user.click(field);
-    await user.paste("[{");
-    await user.tab();
-    expect(await screen.findByText("Enter valid JSON.")).toBeVisible();
-    expect(privates(store)[0].abilities).toEqual(abilities);
   });
 
   it("adds a private named to not clash", async () => {
@@ -2794,7 +2771,7 @@ describe("edit panel players", () => {
     expect(router.state.location.search).toBe("?edit=true&editSection=players");
   });
 
-  it("edits the bank, the capital, the cert limit and the float percent", async () => {
+  it("edits the bank, the capital and the cert limit", async () => {
     const { user, store } = open(playersRoute);
     await ready();
     const panelScope = screen.getByTestId("edit-panel");
@@ -2823,26 +2800,19 @@ describe("edit panel players", () => {
     await user.clear(limit);
     await user.type(limit, "20{Enter}");
     expect(store.getState().game.certLimit).toBe(20);
-
-    const float = spin(panelScope, /^Float Percent$/);
-    await user.type(float, "60{Enter}");
-    expect(store.getState().game.floatPercent).toBe(60);
   });
 
-  it("reports an out of range float percent and a bank that is not allowed", async () => {
+  it("reports a bank that is not allowed", async () => {
     const { user, store } = open(playersRoute);
     await ready();
     const panelScope = screen.getByTestId("edit-panel");
-    await user.type(spin(panelScope, /^Float Percent$/), "150{Enter}");
     await user.type(box(panelScope, /^Bank$/), "abc{Enter}");
     await settled();
     await waitFor(() => {
       const pointers = selectGameProblems(store.getState(), "internal:abc").map(
         (issue) => issue.pointer,
       );
-      expect(pointers).toEqual(
-        expect.arrayContaining(["floatPercent", "bank"]),
-      );
+      expect(pointers).toEqual(expect.arrayContaining(["bank"]));
     });
   });
 
@@ -2952,7 +2922,7 @@ describe("edit panel rounds", () => {
   const ready = () => screen.findByRole("button", { name: "Add round" });
   const game = () => opened.getState().game;
 
-  it("is a tab, with a card for each round, turn and pool", async () => {
+  it("is a tab, with a card for each round and turn", async () => {
     open(roundsRoute);
     await ready();
     const tabs = screen.getAllByRole("tab");
@@ -2961,12 +2931,9 @@ describe("edit panel rounds", () => {
     expect(tab).toHaveAttribute("aria-selected", "true");
     expect(tabs[tabs.indexOf(tab) + 1]).toHaveAccessibleName("Companies");
     expect(cards().length).toBeGreaterThanOrEqual(
-      games["18Test"].rounds.length +
-        games["18Test"].turns.length +
-        games["18Test"].pools.length,
+      games["18Test"].rounds.length + games["18Test"].turns.length,
     );
     expect(screen.getByRole("button", { name: "Add turn" })).toBeVisible();
-    expect(screen.getByRole("button", { name: "Add pool" })).toBeVisible();
   });
 
   it("selects by click", async () => {
@@ -3007,34 +2974,23 @@ describe("edit panel rounds", () => {
     open(roundsRoute);
     await ready();
     const scope = within(screen.getByTestId("edit-panel"));
-    ["Rounds", "Turns", "Pools", "Notes"].forEach((name) =>
+    ["Rounds", "Turns"].forEach((name) =>
       expect(scope.getAllByRole("heading", { name })[0]).toBeVisible(),
     );
     expect(scope.getByRole("textbox", { name: "Number cards" })).toBeVisible();
   });
 
-  it("adds a note to a pool with a text and no name, and removes it", async () => {
-    const { user } = open(roundsRoute);
+  it("keeps the removed fields of the game when a round is added", async () => {
+    const pools = [{ name: "Bank", notes: [{ note: "Pays" }] }];
+    const { user } = open(roundsRoute, {
+      ...structuredClone(games["18Test"]),
+      pools,
+      floatPercent: 50,
+    });
     await ready();
-    const pool = () => game().pools[0];
-    const count = pool().notes.length;
-    await user.click(screen.getByRole("button", { name: "Add note" }));
-    expect(pool().notes).toHaveLength(count + 1);
-    expect(pool().notes[count]).toEqual({ note: "" });
-
-    await user.click(
-      screen.getAllByRole("button", { name: /^Duplicate note / })[0],
-    );
-    expect(pool().notes).toHaveLength(count + 2);
-    pool().notes.forEach((note) => expect(note).not.toHaveProperty("name"));
-
-    await user.click(
-      screen.getAllByRole("button", { name: /^Remove note / })[0],
-    );
-    await user.click(
-      screen.getAllByRole("button", { name: /^Remove note / })[0],
-    );
-    expect(pool().notes).toHaveLength(count);
+    await user.click(screen.getByRole("button", { name: "Add round" }));
+    expect(game().pools).toEqual(pools);
+    expect(game().floatPercent).toBe(50);
   });
 
   it("edits a turn: its steps, ordered and optional steps", async () => {
@@ -3351,16 +3307,15 @@ describe("edit panel colors", () => {
 
 describe("edit panel output", () => {
   const outputRoute = `${route}?edit=true&editSection=output`;
-  const ready = () => screen.findByRole("button", { name: "Add upgrade" });
+  const ready = () => screen.findByRole("spinbutton", { name: "Max" });
   const game = () => opened.getState().game;
   const base = () => structuredClone(games["18Test"]);
 
-  it("is a tab, with the revenue, exports and upgrades", async () => {
+  it("is a tab, with the revenue and exports", async () => {
     open(outputRoute, {
       ...base(),
       revenue: { min: 10, max: 200, perRow: 15 },
       exports: { formats: ["pdf", "svg"], layouts: "all", paginated: true },
-      upgrades: { yellow: ["a", "b"] },
     });
     await ready();
     const tabs = screen.getAllByRole("tab");
@@ -3371,10 +3326,6 @@ describe("edit panel output", () => {
     expect(screen.getByRole("spinbutton", { name: "Max" })).toHaveValue(200);
     expect(screen.getByRole("checkbox", { name: "pdf" })).toBeChecked();
     expect(screen.getByRole("checkbox", { name: "png" })).not.toBeChecked();
-    expect(
-      screen.getByRole("textbox", { name: "Name of yellow" }),
-    ).toBeVisible();
-    expect(screen.getByRole("textbox", { name: "Yellow" })).toHaveValue("a\nb");
     // The deprecated option is not shown
     expect(screen.queryByText("Paginated")).not.toBeInTheDocument();
     expect(screen.queryByText(/paginated/i)).not.toBeInTheDocument();
@@ -3442,27 +3393,6 @@ describe("edit panel output", () => {
     await user.type(max, "250");
     await user.tab();
     expect(game().revenue).toEqual({ max: 250 });
-  });
-
-  it("adds, edits and removes an upgrade", async () => {
-    const { user } = open(outputRoute, { ...base(), upgrades: undefined });
-    await ready();
-    await user.click(screen.getByRole("button", { name: "Add upgrade" }));
-    expect(game().upgrades).toEqual({ new: [] });
-    const name = screen.getByRole("textbox", { name: "Name of new" });
-    await user.clear(name);
-    await user.type(name, "green");
-    await user.tab();
-    const tiles = screen.getByRole("textbox", { name: "Green" });
-    await user.type(tiles, "x{Enter}y");
-    await user.tab();
-    expect(game().upgrades).toEqual({ green: ["x", "y"] });
-    await user.click(
-      screen.getByRole("button", { name: "Remove upgrade green" }),
-    );
-    expect(game().upgrades ?? {}).toEqual({});
-    await user.click(screen.getByRole("button", { name: "Undo" }));
-    expect(game().upgrades).toEqual({ green: ["x", "y"] });
   });
 });
 
