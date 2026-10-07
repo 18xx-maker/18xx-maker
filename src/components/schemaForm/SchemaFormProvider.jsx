@@ -3,6 +3,8 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 
 import { equals } from "ramda";
 
+import { TooltipProvider } from "@/components/ui/tooltip";
+
 import { SchemaFormContext } from "@/components/schemaForm/SchemaField";
 import {
   clearValue,
@@ -80,7 +82,7 @@ const SchemaFormProvider = ({ game, children }) => {
 
   return (
     <SchemaFormContext.Provider value={context}>
-      {children}
+      <TooltipProvider delayDuration={200}>{children}</TooltipProvider>
     </SchemaFormContext.Provider>
   );
 };

@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useRef, useState } from "react";
 
+import { TooltipProvider } from "@/components/ui/tooltip";
+
 import SchemaField, {
   SchemaFormContext,
 } from "@/components/schemaForm/SchemaField";
@@ -55,7 +57,9 @@ const Form = ({ initial, section = "trains", keys = [section], onGame }) => {
         move: (keys, from, to) => change((g) => moveItem(g, keys, from, to)),
       }}
     >
-      <SchemaField keys={keys} schema={schemaAt(root, keys)} defaults={{}} />
+      <TooltipProvider>
+        <SchemaField keys={keys} schema={schemaAt(root, keys)} defaults={{}} />
+      </TooltipProvider>
     </SchemaFormContext.Provider>
   );
 };

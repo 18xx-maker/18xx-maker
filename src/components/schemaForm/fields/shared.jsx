@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
@@ -108,27 +107,32 @@ const DeprecatedNote = ({ id, keys, onRemove }) => {
 const InfoButton = ({ label, description }) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
+  // Radix closes the tooltip on pointer down, and the click that follows
+  // would open it again: a pointer click toggles from the state it found
+  const wasOpen = useRef(false);
 
   return (
-    <TooltipProvider delayDuration={200}>
-      <Tooltip open={open} onOpenChange={setOpen}>
-        <TooltipTrigger asChild>
-          <button
-            type="button"
-            aria-label={t("editPanel.about", { name: label })}
-            className="ml-1 inline-flex align-middle text-muted-foreground hover:text-foreground"
-            onClick={(event) => {
-              // Radix closes the tooltip on click, a toggle is wanted
-              event.preventDefault();
-              setOpen((was) => !was);
-            }}
-          >
-            <Info className="size-3.5" aria-hidden="true" />
-          </button>
-        </TooltipTrigger>
-        <TooltipContent className="max-w-64">{description}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip open={open} onOpenChange={setOpen}>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          aria-label={t("editPanel.about", { name: label })}
+          className="inline-flex text-muted-foreground hover:text-foreground"
+          onPointerDown={() => {
+            wasOpen.current = open;
+          }}
+          onClick={(event) => {
+            // Radix closes the tooltip on click, a toggle is wanted
+            event.preventDefault();
+            // A click without a pointer down (the keyboard) toggles the state
+            setOpen(event.detail === 0 ? !open : !wasOpen.current);
+          }}
+        >
+          <Info className="size-3.5" aria-hidden="true" />
+        </button>
+      </TooltipTrigger>
+      <TooltipContent className="max-w-64">{description}</TooltipContent>
+    </Tooltip>
   );
 };
 
@@ -148,20 +152,22 @@ export const FieldShell = ({
 
   return (
     <div className="flex flex-col gap-1">
-      <Label htmlFor={id} id={`${id}-label`}>
-        {label}
-        {required && (
-          <span className="text-destructive" aria-hidden="true">
-            {" *"}
-          </span>
-        )}
-        {deprecated && (
-          <span className="ml-2 rounded-md border border-warning-text px-1.5 py-0.5 text-xs font-normal text-warning-text">
-            {t("problems.deprecated")}
-          </span>
-        )}
+      <div className="flex items-center gap-1">
+        <Label htmlFor={id} id={`${id}-label`}>
+          {label}
+          {required && (
+            <span className="text-destructive" aria-hidden="true">
+              {" *"}
+            </span>
+          )}
+          {deprecated && (
+            <span className="ml-2 rounded-md border border-warning-text px-1.5 py-0.5 text-xs font-normal text-warning-text">
+              {t("problems.deprecated")}
+            </span>
+          )}
+        </Label>
         {description && <InfoButton label={label} description={description} />}
-      </Label>
+      </div>
       {children}
       {description && (
         <p id={`${id}-help`} className="sr-only">
