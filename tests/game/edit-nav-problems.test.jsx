@@ -48,15 +48,25 @@ describe("edit panel tabs with problems", () => {
     expect(tab("Colors")).toHaveAccessibleName("Colors");
   });
 
-  it("has no dot while the check runs again (unknown)", async () => {
+  it("has no dot while the result is of another game (unknown)", async () => {
     const { store } = await open();
     await set(store, [issue("trains[0].name")]);
     expect(screen.getByTestId("edit-problem-trains")).toBeInTheDocument();
 
-    // A check of another game: the result of this one is not known
     await act(() => store.dispatch(createGameProblemsRunning("Other")));
     expect(screen.queryByTestId("edit-problem-trains")).not.toBeInTheDocument();
     expect(tab("Trains")).toHaveAccessibleName("Trains");
+  });
+
+  it("has no hex dot while the check of this game runs again", async () => {
+    const { store } = await open("/games/18Test/map?edit=true&hex=A11");
+    await set(store, [issue("map.hexes[0].color")]);
+    expect(tab("Hex")).toHaveAccessibleName("Hex 1 problem");
+
+    // The indexes of the old result may not fit the groups any more
+    await act(() => store.dispatch(createGameProblemsRunning("18Test")));
+    expect(screen.queryByTestId("edit-problem-hex")).not.toBeInTheDocument();
+    expect(tab("Hex")).toHaveAccessibleName("Hex");
   });
 
   it("leaves out a deprecated note and a check that failed", async () => {

@@ -200,10 +200,7 @@
     "invalidLimit": "Enter a whole number of at least 1, ∞, or one digit over one digit, like 3/4.",
     "onePerLine": "One per line. A single line is saved as text, more lines as a list.",
     "reference": {
-      "from": {
-        "trains": "trains",
-        "companies": "companies"
-      },
+      "from": { "trains": "trains", "companies": "companies" },
       "unknown": "Not in the {{collection}} of this game: {{value}}.",
       "noMatches": "No matches. Enter uses \"{{value}}\".",
       "remove": "Remove {{name}}"

@@ -15,12 +15,7 @@ import {
 import { useSelectedHex } from "@/hooks/useSelectedHex";
 import { selectGameProblems } from "@/state";
 import { cn } from "@/util/cn";
-import {
-  findGroup,
-  groupPrefix,
-  localHexes,
-  rerootPointer,
-} from "@/util/hexEdit";
+import { findGroup, groupIssues, localHexes } from "@/util/hexEdit";
 import { useIntParam } from "@/util/query";
 
 export const tabId = (section) => `edit-tab-${section}`;
@@ -115,15 +110,18 @@ const EditNav = ({ game, groups, section, setSection }) => {
   const issues = useSelector((state) =>
     selectGameProblems(state, game.meta.slug),
   );
+  const checked = useSelector(
+    (state) => state.gameProblems.status !== "running",
+  );
   const [variation] = useIntParam("variation", 0);
   const { hex } = useSelectedHex();
 
   // The problems of the group selected on the map, for the hex tab
   const index = hex ? findGroup(localHexes(game, variation), hex) : -1;
-  const prefix = index < 0 ? null : groupPrefix(game, variation, index);
-  const hexIssues = (issues ?? []).filter(
-    (issue) => prefix !== null && rerootPointer(issue.pointer, prefix) !== null,
-  );
+  // While the check runs the indexes of the problems may be stale: unknown
+  const hexIssues = checked
+    ? groupIssues(game, variation, index, issues ?? [])
+    : [];
 
   useEffect(() => {
     if (!pendingFocus) return;
@@ -189,7 +187,7 @@ const EditNav = ({ game, groups, section, setSection }) => {
                     <span
                       aria-hidden="true"
                       data-testid={`edit-problem-${item.section}`}
-                      className="ml-1.5 inline-block size-2 rounded-full bg-destructive align-middle"
+                      className="inline-block size-2 rounded-full bg-destructive align-middle"
                     />
                     <span className="sr-only">
                       {t("editPanel.nav.problems", { count: problems })}

@@ -57,6 +57,18 @@ beforeEach(async () => {
 });
 
 describe("edit panel", () => {
+  it("says under the changes button that changes stay in memory", async () => {
+    open(`${route}?edit=true`);
+    await panel();
+    const note = screen.getByText(
+      "Changes stay in memory until you save them on the Changes page.",
+    );
+    expect(
+      screen.getByRole("link", { name: "Review and save changes" }),
+    ).toBeVisible();
+    expect(note).toBeVisible();
+  });
+
   it("opens with the toolbar toggle and closes with its button", async () => {
     const { user, router } = open(route);
     await screen.findByTestId("game-internal:abc-map");

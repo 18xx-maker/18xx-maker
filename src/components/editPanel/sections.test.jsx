@@ -42,12 +42,11 @@ describe("edit sections", () => {
 
   it("maps every top level key of the game to a tab", () => {
     // A problem in a key without a tab would show on no tab
-    const mapped = [...Object.values(SECTION_KEYS).flat(), "map"];
+    // "map" problems show only for the selected group, on the hex tab
+    const mapped = Object.values(SECTION_KEYS).flat();
     for (const key of Object.keys(schema.properties)) {
-      expect([key, [...mapped, ...UNTABBED_KEYS].includes(key)]).toEqual([
-        key,
-        true,
-      ]);
+      if (key === "map") continue;
+      expect([...mapped, ...UNTABBED_KEYS]).toContain(key);
     }
   });
 
