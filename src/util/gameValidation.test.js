@@ -54,6 +54,18 @@ describe("gameValidation", () => {
     });
   });
 
+  it.each(renames)(
+    "lists $old in 18Broken as deprecated",
+    async ({ old, key }) => {
+      const issues = await validateGame(games["18Broken"]);
+      expect(
+        issues.find(
+          (issue) => issue.pointer === old && issue.code === "deprecated",
+        ),
+      ).toMatchObject({ severity: "warning", params: { key } });
+    },
+  );
+
   it("warns only about the old names", async () => {
     const issues = await validateGame(deprecatedGame());
     expect(issues.map((issue) => issue.pointer).sort()).toEqual(

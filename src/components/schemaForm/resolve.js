@@ -26,6 +26,11 @@ export const isHidden = (keys) =>
       hidden.every((key, index) => key === keys[index]),
   );
 
+// A deprecated field without a value is not offered: the form shows the old
+// name only while a game still has it
+export const isUnsetDeprecated = (keys, schema, root, game) =>
+  !!resolveAllOf(schema, root).deprecated && valueAt(keys, game) === undefined;
+
 // The lists of the tokens tab, in the order of the tab
 export const TOKEN_KEYS = ["tokens", "tokenTypes", "shareTypes"];
 
