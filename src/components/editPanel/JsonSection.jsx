@@ -1,4 +1,4 @@
-import { Component, Suspense, lazy, useMemo, useState } from "react";
+import { Component, Suspense, lazy, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
@@ -30,18 +30,23 @@ const Failed = ({ retry }) => {
 };
 
 const load = () => lazy(() => import("@/components/editPanel/JsonEditor"));
+// Mounts share one component: a new one per mount would suspend every time the
+// editor starts over. A retry replaces it, so a failed load does not stay
+// failed for every later mount.
+let shared = load();
 
 // lens: the part of the game to edit, the whole game without one (JsonEditor)
 const JsonSection = ({ game, lens }) => {
   const [attempt, setAttempt] = useState(0);
-  // A new lazy component per attempt: the failed one stays failed
-  const Editor = useMemo(load, [attempt]);
+  const [Editor, setEditor] = useState(() => shared);
+  const retry = () => {
+    shared = load();
+    setEditor(() => shared);
+    setAttempt((n) => n + 1);
+  };
 
   return (
-    <Boundary
-      key={attempt}
-      fallback={<Failed retry={() => setAttempt((n) => n + 1)} />}
-    >
+    <Boundary key={attempt} fallback={<Failed retry={retry} />}>
       <Suspense fallback={null}>
         <Editor game={game} lens={lens} />
       </Suspense>
