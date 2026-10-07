@@ -257,8 +257,8 @@ describe("run", () => {
         reveal: true,
         jobs: [
           job("a.pdf"),
-          // Writing outside of the folder is refused by the sink
-          job("../evil.pdf"),
+          // A folder where a file already is can not be written
+          job("a.pdf/x.pdf"),
           job("c.pdf"),
         ],
       }),
@@ -268,14 +268,23 @@ describe("run", () => {
     expect(files()).toEqual(["a.pdf", "c.pdf"]);
     expect(result.done).toBe(2);
     expect(result.failed).toEqual([
-      { path: "../evil.pdf", message: expect.stringContaining("outside of") },
+      { path: "a.pdf/x.pdf", message: expect.any(String) },
     ]);
     expect(ui.alert).toHaveBeenCalledWith(
       "Export Failed",
-      expect.stringContaining("1 of 3 files failed, ../evil.pdf"),
+      expect.stringContaining("1 of 3 files failed, a.pdf/x.pdf"),
       "error",
     );
     expect(show).toHaveBeenCalled();
+  });
+
+  it("refuses a request with a file outside of the folder, writing nothing", async () => {
+    const { service, ui } = setup();
+
+    await expect(
+      service.run(1, request({ jobs: [job("a.pdf"), job("../evil.pdf")] }), ui),
+    ).rejects.toThrow("a file is not valid");
+    expect(fs.readdirSync(tmp)).toEqual([]);
   });
 
   it("fails a document whose page has nothing to show, and replaces its window", async () => {
@@ -472,6 +481,29 @@ describe("validateRequest", () => {
     bad({ jobs: [job("a.pdf", "gif")] }, "a file is not valid");
     bad({ jobs: [job("a.pdf", "pdf", "https://example.com/")] }, "not valid");
     bad({ jobs: [{ ...job("a.pdf"), path: 4 }] }, "not valid");
+  });
+
+  it("refuses a file name that leaves the output folder", () => {
+    expect.hasAssertions();
+    for (const name of [
+      "../x.pdf",
+      "a/../../x.pdf",
+      "..\\x.pdf",
+      "a\\..\\x.pdf",
+      "/etc/x.pdf",
+      "\\x.pdf",
+      "C:\\x.pdf",
+      "c:x.pdf",
+      "a\0.pdf",
+      "",
+    ]) {
+      bad({ jobs: [job(name)] }, "a file is not valid");
+    }
+    for (const name of ["..foo.pdf", "a/..b/c.png", "a..b.pdf"]) {
+      expect(() =>
+        validateRequest(request({ jobs: [job(name)] })),
+      ).not.toThrow();
+    }
   });
 
   it("wants one file for a single export and a whole Board 18 box", () => {

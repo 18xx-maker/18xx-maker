@@ -116,4 +116,25 @@ describe("createPool", () => {
     await closing;
     expect(slot.close).toHaveBeenCalledTimes(1);
   });
+
+  it("survives a slot whose close throws or returns nothing", async () => {
+    let finish;
+    const slot = {
+      close: vi.fn(() => {
+        throw new TypeError("gone");
+      }),
+    };
+    const pool = createPool({
+      open: () => new Promise((resolve) => (finish = () => resolve(slot))),
+      size: 1,
+    });
+
+    const acquired = pool.acquire();
+    const closing = pool.close();
+    finish();
+
+    await expect(acquired).rejects.toThrow("pool is closed");
+    await closing;
+    expect(slot.close).toHaveBeenCalledTimes(1);
+  });
 });

@@ -35,7 +35,7 @@ const FORMATS = ["pdf", "png", "svg", "b18"];
 const SAVE_TITLES = { pdf: "Save PDF", svg: "Save SVG" };
 
 // A name in the output folder: relative, and not going up from it
-const plainName = (name) =>
+export const plainName = (name) =>
   typeof name === "string" &&
   name !== "" &&
   !name.includes("\0") &&
@@ -65,7 +65,7 @@ export const validateRequest = (request) => {
   for (const job of jobs) {
     if (
       !FORMATS.includes(job.format) ||
-      typeof job.path !== "string" ||
+      !plainName(job.path) ||
       typeof job.doc?.route !== "string" ||
       !job.doc.route.startsWith("/games/")
     ) {
