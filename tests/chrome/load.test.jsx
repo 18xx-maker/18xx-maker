@@ -21,6 +21,7 @@ vi.mock("@/util/storage/idb", async (importOriginal) => ({
   deleteGame: vi.fn(),
   loadSummaries: vi.fn(),
   openFilePicker: vi.fn(),
+  createGameFile: vi.fn(),
 }));
 vi.mock("@/util/storage/opfs", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -46,8 +47,11 @@ const summary = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  // The app only calls window.api in the app, a test of it sets one
+  delete window.api;
   // Browsers without the file system access api: the file input flow
   Object.assign(caps, { electron: false, system: false, internal: true });
+  caps.apis = { ...caps.apis, save_file_picker: false };
   opfs.loadSummaries.mockResolvedValue({ "internal:abc": summary });
   idb.loadSummaries.mockResolvedValue({});
 });
@@ -124,6 +128,127 @@ describe("load games page", () => {
       expect(store.getState().loadedGame?.slug).toBe("system:xyz"),
     );
     expect(idb.loadSummaries).toHaveBeenCalled();
+  });
+
+  it("creates a new game in the origin private file system", async () => {
+    opfs.saveGameFile.mockResolvedValue("internal:abc");
+    opfs.loadGame.mockResolvedValue(internalGame);
+    const { user, router } = renderApp("/games/");
+    await screen.findByText("Saved Game");
+
+    await user.click(screen.getByRole("button", { name: "New Game" }));
+
+    const text = opfs.saveGameFile.mock.calls[0][0];
+    expect(JSON.parse(text).info.title).toBe("New Game");
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/internal:abc/map"),
+    );
+  });
+
+  it("creates a new game with the save picker when there is one", async () => {
+    caps.system = true;
+    caps.apis.save_file_picker = true;
+    idb.createGameFile.mockResolvedValue("system:xyz");
+    idb.loadGame.mockResolvedValue({
+      ...games["18Test"],
+      meta: { id: "xyz", type: "system", slug: "system:xyz" },
+    });
+    const { user, router } = renderApp("/games/");
+    await screen.findByText("Shikoku 1889");
+
+    await user.click(screen.getByRole("button", { name: "New Game" }));
+
+    expect(idb.createGameFile).toHaveBeenCalledWith(
+      expect.stringContaining('"title": "New Game"'),
+      "new-game.json",
+    );
+    expect(opfs.saveGameFile).not.toHaveBeenCalled();
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/system:xyz/map"),
+    );
+  });
+
+  it("uses the origin private file system when there is no save picker", async () => {
+    caps.system = true;
+    opfs.saveGameFile.mockResolvedValue("internal:abc");
+    opfs.loadGame.mockResolvedValue(internalGame);
+    const { user, router } = renderApp("/games/");
+    await screen.findByText("Shikoku 1889");
+
+    await user.click(screen.getByRole("button", { name: "New Game" }));
+
+    expect(idb.createGameFile).not.toHaveBeenCalled();
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/internal:abc/map"),
+    );
+  });
+
+  it("stays on the page when the save picker is cancelled", async () => {
+    caps.system = true;
+    caps.apis.save_file_picker = true;
+    idb.createGameFile.mockResolvedValue(undefined);
+    const { user, router } = renderApp("/games/");
+    await screen.findByText("Shikoku 1889");
+
+    await user.click(screen.getByRole("button", { name: "New Game" }));
+
+    await waitFor(() => expect(idb.createGameFile).toHaveBeenCalled());
+    expect(router.state.location.pathname).toBe("/games/");
+  });
+
+  it("alerts when creating the game fails", async () => {
+    opfs.saveGameFile.mockRejectedValue(new Error("disk full"));
+    const { user, router } = renderApp("/games/");
+    await screen.findByText("Saved Game");
+
+    await user.click(screen.getByRole("button", { name: "New Game" }));
+
+    expect(await screen.findByText("disk full")).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/games/");
+  });
+
+  it("hides the new game button without any storage", async () => {
+    caps.internal = false;
+    renderApp("/games/");
+    await screen.findByText("Shikoku 1889");
+    expect(
+      screen.queryByRole("button", { name: "New Game" }),
+    ).not.toBeInTheDocument();
+  });
+
+  describe("in the app", () => {
+    it("asks the main process, not the picker", async () => {
+      Object.assign(caps, { electron: true, system: false, internal: false });
+      const noop = vi.fn();
+      window.api = {
+        onAlert: noop,
+        onProgress: noop,
+        onRedirect: noop,
+        onGame: noop,
+        onUpdate: noop,
+        onDownloadProgress: noop,
+        off: noop,
+        addRecent: noop,
+        loadPlatformAndVersions: () => ({ platform: "darwin", versions: {} }),
+        loadSummaries: vi.fn().mockResolvedValue({ electron: {} }),
+        newGame: vi.fn().mockResolvedValue("electron:new"),
+        loadGame: vi.fn().mockResolvedValue({
+          ...games["18Test"],
+          meta: { id: "new", type: "electron", slug: "electron:new" },
+        }),
+      };
+      const { user, router } = renderApp("/games/");
+      await screen.findByText("Shikoku 1889");
+
+      await user.click(screen.getByRole("button", { name: "New Game" }));
+
+      expect(window.api.newGame).toHaveBeenCalledWith("New Game");
+      expect(idb.createGameFile).not.toHaveBeenCalled();
+      expect(opfs.saveGameFile).not.toHaveBeenCalled();
+      await waitFor(() =>
+        expect(router.state.location.pathname).toBe("/games/electron:new/map"),
+      );
+    });
   });
 
   it("links each game to its info page and marks its type", async () => {

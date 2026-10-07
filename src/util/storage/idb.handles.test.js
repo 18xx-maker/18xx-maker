@@ -3,6 +3,7 @@ import "@tests/support/windowStub.js";
 import { validate } from "uuid";
 
 import {
+  createGameFile,
   deleteGame,
   loadGame,
   loadSummaries,
@@ -388,5 +389,69 @@ describe("openFilePicker", () => {
       throw new DOMException("not allowed", "SecurityError");
     };
     await expect(openFilePicker()).rejects.toThrow("not allowed");
+  });
+});
+
+describe("createGameFile", () => {
+  afterEach(() => {
+    delete window.showSaveFilePicker;
+  });
+
+  // A handle that records what is written and in which order
+  const saveHandle = (calls, { failWrite = false } = {}) => {
+    let text = "";
+    return {
+      ...fileHandle(game),
+      createWritable: vi.fn(async () => ({
+        write: vi.fn(async (data) => {
+          calls.push("write");
+          if (failWrite) throw new Error("disk full");
+          text = data;
+        }),
+        close: vi.fn(async () => calls.push("close")),
+        abort: vi.fn(async () => calls.push("abort")),
+      })),
+      getFile: vi.fn(async () => {
+        calls.push("getFile");
+        return { text: async () => text };
+      }),
+    };
+  };
+
+  it("writes the file before it remembers the handle", async () => {
+    const calls = [];
+    const text = JSON.stringify(game);
+    window.showSaveFilePicker = vi.fn(async () => saveHandle(calls));
+
+    const slug = await createGameFile(text, "new-game.json");
+
+    expect(slug).toMatch(/^system:/);
+    expect(calls).toEqual(["write", "close", "getFile"]);
+    expect(window.showSaveFilePicker).toHaveBeenCalledWith(
+      expect.objectContaining({
+        suggestedName: "new-game.json",
+        excludeAcceptAllOption: true,
+        id: "18xx-maker-games",
+      }),
+    );
+    expect(Object.keys(await loadSummaries())).toEqual([slug]);
+  });
+
+  it("ignores the picker being cancelled", async () => {
+    window.showSaveFilePicker = async () => {
+      throw new DOMException("cancelled", "AbortError");
+    };
+    expect(await createGameFile("{}", "a.json")).toBeUndefined();
+    expect(idb.databases).toEqual({});
+  });
+
+  it("aborts a failed write and remembers nothing", async () => {
+    const calls = [];
+    window.showSaveFilePicker = async () =>
+      saveHandle(calls, { failWrite: true });
+
+    await expect(createGameFile("{}", "a.json")).rejects.toThrow("disk full");
+    expect(calls).toEqual(["write", "abort"]);
+    expect(idb.databases).toEqual({});
   });
 });

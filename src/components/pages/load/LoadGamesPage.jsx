@@ -18,7 +18,7 @@ import {
   values,
 } from "ramda";
 
-import { FolderOpen } from "lucide-react";
+import { FolderOpen, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -28,6 +28,7 @@ import GameRow from "@/components/pages/load/GameRow";
 import { publishers } from "@/data";
 import { createAlert, loadSummaries } from "@/state";
 import capability from "@/util/capability";
+import { newGameFilename, newGameJson } from "@/util/newGame";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
 import { isTestGame } from "@/util/testGames";
@@ -148,41 +149,81 @@ const LoadGamesPage = () => {
     }
   };
 
+  // Where the new game is saved depends on what the browser can do. The
+  // picker has to open straight from the click (a user gesture), so the
+  // storage call is the first thing the handler does.
+  const canCreate =
+    capability.electron ||
+    (capability.system && capability.apis.save_file_picker) ||
+    capability.internal;
+
+  const newGame = () => {
+    const title = t("game.new");
+    let created;
+
+    if (capability.electron) {
+      created = window.api.newGame(title);
+    } else if (capability.system && capability.apis.save_file_picker) {
+      created = idb.createGameFile(
+        newGameJson(title),
+        `${newGameFilename(title)}.json`,
+      );
+    } else {
+      created = opfs.saveGameFile(newGameJson(title));
+    }
+
+    return created
+      .then((slug) => slug && navigate(`/games/${slug}/map`))
+      .catch((e) =>
+        dispatch(createAlert(t("alerts.error"), e.message, "error")),
+      );
+  };
+
   return (
     <div className="p-4" data-testid="games">
       <h1 className="text-4xl font-extrabold">{t("games.title")}</h1>
       <p className="leading-7 my-4 text-wrap">{t("games.description")}</p>
-      {(capability.electron || capability.system) && (
-        <Button variant="outline" onClick={openGame}>
-          <FolderOpen />
-          {t("game.open")}
-        </Button>
-      )}
-      {!capability.electron && !capability.system && capability.internal && (
-        <Button variant="outline" asChild>
-          <label className="cursor-pointer">
+      <div className="flex flex-wrap gap-2">
+        {canCreate && (
+          // primary-foreground is the purple accent of links, too faint on the
+          // primary background
+          <Button className="text-background" onClick={newGame}>
+            <Plus />
+            {t("game.new")}
+          </Button>
+        )}
+        {(capability.electron || capability.system) && (
+          <Button variant="outline" onClick={openGame}>
             <FolderOpen />
             {t("game.open")}
-            <input
-              style={{
-                bottom: 0,
-                clip: "rect(0 0 0 0)",
-                clipPath: "inset(50%)",
-                height: 1,
-                left: 0,
-                overflow: "hidden",
-                position: "absolute",
-                whiteSpace: "nowrap",
-                width: 1,
-              }}
-              type="file"
-              aria-label={t("game.open")}
-              onChange={openGame}
-              multiple
-            />
-          </label>
-        </Button>
-      )}
+          </Button>
+        )}
+        {!capability.electron && !capability.system && capability.internal && (
+          <Button variant="outline" asChild>
+            <label className="cursor-pointer">
+              <FolderOpen />
+              {t("game.open")}
+              <input
+                style={{
+                  bottom: 0,
+                  clip: "rect(0 0 0 0)",
+                  clipPath: "inset(50%)",
+                  height: 1,
+                  left: 0,
+                  overflow: "hidden",
+                  position: "absolute",
+                  whiteSpace: "nowrap",
+                  width: 1,
+                }}
+                type="file"
+                aria-label={t("game.open")}
+                onChange={openGame}
+                multiple
+              />
+            </label>
+          </Button>
+        )}
+      </div>
       <GameFilters
         publisher={publisher}
         setPublisher={setPublisher}

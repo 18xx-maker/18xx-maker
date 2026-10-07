@@ -124,3 +124,34 @@ test("the open file button opens a file chooser (input flow)", async ({
   await page.locator("label", { hasText: "Open File" }).click();
   await chooser;
 });
+
+// Browsers without a save picker keep the new game in the origin private file
+// system, so both pickers are removed before the app starts
+test("creates a new game, opens it on the map, lists it and forgets it (input flow)", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    delete window.showOpenFilePicker;
+    delete window.showSaveFilePicker;
+  });
+  await page.goto("/games/");
+
+  await page.getByRole("button", { name: "New Game" }).click();
+
+  await expect(page).toHaveURL(/\/games\/internal:[^/]+\/map$/);
+  const url = page.url();
+  await page.goto(`${url}?edit=true`);
+  // The 4 by 4 block of hexes of the template
+  for (const row of "ABCD") {
+    const first = "AC".includes(row) ? 1 : 2;
+    for (const column of [0, 2, 4, 6].map((n) => n + first)) {
+      await expect(
+        page.locator(`[data-coord="${row}${column}"]`),
+      ).toBeVisible();
+    }
+  }
+
+  await page.goto("/games/");
+  await expect(page.getByRole("link", { name: "New Game" })).toBeVisible();
+  await forget(page, url);
+});

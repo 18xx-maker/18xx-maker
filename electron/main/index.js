@@ -1,6 +1,6 @@
 import os from "node:os";
 
-import { app, ipcMain } from "electron";
+import { app, dialog, ipcMain } from "electron";
 import updater from "electron-updater";
 
 import { objOf } from "ramda";
@@ -17,6 +17,7 @@ import {
 import { registerExport } from "./export.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
 import { setMenu } from "./menu.js";
+import { createNewGame } from "./newGame.js";
 import { createSaveGame } from "./saveFile.js";
 import { send } from "./util.js";
 import { stopWatching, watch } from "./watch.js";
@@ -123,6 +124,20 @@ ipcMain.handle("loadGame", (event, id) => {
 });
 
 ipcMain.handle("openGame", openGame);
+
+ipcMain.handle(
+  "newGame",
+  createNewGame({
+    isMain: (event) => fromMainWindow(event, getMainWindow(), startBaseUrl),
+    showSaveDialog: (options) =>
+      dialog.showSaveDialog(getMainWindow(), options),
+    saveGamePath,
+    slugOfPath: (path) =>
+      Object.values(getConfig().summaries).find(
+        (summary) => summary.path === path,
+      )?.slug,
+  }),
+);
 
 ipcMain.handle(
   "saveGame",
