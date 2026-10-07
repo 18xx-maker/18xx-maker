@@ -86,8 +86,8 @@ fest. Sie ist noch kein Bedienelement im Fenster: Lege sie in deiner
 - Eine `family` ist ein Name aus `families`, eine der eingebauten `display`,
   `serif` und `sans-serif` oder eine beliebige CSS-Schriftfamilie. Systemschriften
   werden nicht in Exporte eingebettet, siehe [SVG](/docs/output/svg).
-- Derzeit legt die Rolle `title` die Namen von Städten, Orten und
-  Off-Board-Bereichen fest, und die Rolle `card` Schriftfamilie, Schriftstärke
+- Derzeit legt die Rolle `title` die Namen von Städten, Orten,
+  Off-Board-Bereichen und die frei stehenden Hexnamen fest, und die Rolle `card` Schriftfamilie, Schriftstärke
   und Schriftstil des Textes der Karten der privaten Gesellschaften. Die
   anderen Rollen sind für den Text, der als Nächstes umgestellt wird.
 - Die Schriftfelder eines Kachelelements oder einer Spieldatei (wie

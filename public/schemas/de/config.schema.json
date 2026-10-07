@@ -92,7 +92,7 @@
     },
     "fonts": {
       "type": "object",
-      "description": "Die zentralen Schrifteinstellungen. Rollen (title, label, revenue, token, price, card) legen die Schrift einer Art von Text an einer Stelle fest, statt an jedem Element. Eine Schrifteinstellung eines Elements oder eines Spielfelds hat Vorrang vor der Rolle. Derzeit legt die Rolle title die Namen von Städten, Orten und Off-Board-Bereichen fest, und die Rolle card Schriftfamilie, Schriftstärke und Schriftstil des Textes der Karten der privaten Gesellschaften.",
+      "description": "Die zentralen Schrifteinstellungen. Rollen (title, label, revenue, token, price, card) legen die Schrift einer Art von Text an einer Stelle fest, statt an jedem Element. Eine Schrifteinstellung eines Elements oder eines Spielfelds hat Vorrang vor der Rolle. Derzeit legt die Rolle title die Namen von Städten, Orten, Off-Board-Bereichen und die frei stehenden Hexnamen fest, und die Rolle card Schriftfamilie, Schriftstärke und Schriftstil des Textes der Karten der privaten Gesellschaften.",
       "properties": {
         "families": {
           "type": "object",

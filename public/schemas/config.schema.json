@@ -92,7 +92,7 @@
     },
     "fonts": {
       "type": "object",
-      "description": "The central font settings. Roles (title, label, revenue, token, price, card) give the font of a kind of text in one place, instead of on every element. A font setting of an element or of a game field wins over its role. Today the title role sets the names of cities, towns and off-board areas, and the card role sets the font family, weight and style of the text of the private company cards.",
+      "description": "The central font settings. Roles (title, label, revenue, token, price, card) give the font of a kind of text in one place, instead of on every element. A font setting of an element or of a game field wins over its role. Today the title role sets the names of cities, towns and off-board areas and the free-standing hex names, and the card role sets the font family, weight and style of the text of the private company cards.",
       "properties": {
         "families": {
           "type": "object",

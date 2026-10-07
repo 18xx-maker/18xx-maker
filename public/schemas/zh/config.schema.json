@@ -92,7 +92,7 @@
     },
     "fonts": {
       "type": "object",
-      "description": "集中的字体设置。角色（title、label、revenue、token、price、card）在一处设置某类文字的字体，而不是在每个元素上设置。元素或游戏字段自己的字体设置优先于角色。目前 title 角色设置城市、小镇和场外区域的名称，card 角色设置私有公司卡文字的字体族、粗细和样式。",
+      "description": "集中的字体设置。角色（title、label、revenue、token、price、card）在一处设置某类文字的字体，而不是在每个元素上设置。元素或游戏字段自己的字体设置优先于角色。目前 title 角色设置城市、小镇和场外区域的名称以及独立的六边形名称，card 角色设置私有公司卡文字的字体族、粗细和样式。",
       "properties": {
         "families": {
           "type": "object",

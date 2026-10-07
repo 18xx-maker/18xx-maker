@@ -94,10 +94,17 @@ describe("fonts in the config layers", () => {
   it("reads the sizes of URL parameters as numbers", () => {
     expect(
       searchToConfig(
-        "?config.fonts.roles.title.size=14&config.fonts.roles.card.size=x&config.fonts.roles.card.weight=bold",
+        "?config.fonts.roles.title.size=14&config.fonts.roles.card.size=x&config.fonts.roles.card.weight=bold&config.fonts.roles.label.size=0&config.fonts.roles.label.style=italic&config.fonts.roles.token.size=-3&config.fonts.roles.token.weight=bold",
       ),
     ).toEqual({
-      fonts: { roles: { title: { size: 14 }, card: { weight: "bold" } } },
+      fonts: {
+        roles: {
+          title: { size: 14 },
+          card: { weight: "bold" },
+          label: { style: "italic" },
+          token: { weight: "bold" },
+        },
+      },
     });
   });
 });

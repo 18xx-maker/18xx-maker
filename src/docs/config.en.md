@@ -78,8 +78,8 @@ game file.
 - A `family` is a name from `families`, one of the built in `display`, `serif`
   and `sans-serif`, or any CSS font family. System fonts are not embedded in
   exports, see [SVG](/docs/output/svg).
-- Today the `title` role sets the names of cities, towns and off-board areas,
-  and the `card` role sets the family, weight and style of the text of the
+- Today the `title` role sets the names of cities, towns and off-board areas
+  and the free-standing hex names, and the `card` role sets the family, weight and style of the text of the
   private company cards. The other roles are for the text that moves over to
   them next.
 - The font fields of a tile element or of a game file (such as

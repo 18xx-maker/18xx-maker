@@ -5,7 +5,7 @@ which page or file each one feeds. Fields that only change how something looks
 (fonts, sizes, positions of the title) are in the
 [game schema](https://18xx-maker.com/schemas/game.schema.json) under `info` and
 are not repeated here. The fonts of a whole game are set in one place with the
-`fonts` setting of the [config panel](/docs/config), which the font fields here
+`fonts` setting of the [config](/docs/config), which the font fields here
 still override. Phases and trains are in
 [Phases and Trains](/docs/games/trains).
 

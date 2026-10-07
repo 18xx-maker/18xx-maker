@@ -269,7 +269,7 @@
   "schema.config.fonts.role.size": "The font size in units, the same as the fontSize of a tile element.",
   "schema.config.fonts.role.weight": "The font weight: normal, bold or a number from 1 to 1000.",
   "schema.config.fonts.role.style": "The font style: normal, italic or oblique.",
-  "schema.config.fonts": "The central font settings. Roles (title, label, revenue, token, price, card) give the font of a kind of text in one place, instead of on every element. A font setting of an element or of a game field wins over its role. Today the title role sets the names of cities, towns and off-board areas, and the card role sets the font family, weight and style of the text of the private company cards.",
+  "schema.config.fonts": "The central font settings. Roles (title, label, revenue, token, price, card) give the font of a kind of text in one place, instead of on every element. A font setting of an element or of a game field wins over its role. Today the title role sets the names of cities, towns and off-board areas and the free-standing hex names, and the card role sets the font family, weight and style of the text of the private company cards.",
   "schema.config.fonts.families": "Names for font families, which a role can use as its family. Each name maps to a CSS font family list, and extends the built-in display, serif and sans-serif.",
   "schema.config.fonts.roles": "The fonts by role. The body role is the base that every other role inherits from.",
   "schema.config.companyNames": "What the charters and share cards print as the name of a company. name is the name, alias is the alias of the company (the name when it has none), both is the name with the alias under it.",

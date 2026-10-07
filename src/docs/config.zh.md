@@ -50,7 +50,7 @@
 
 - **角色**是一类文字:`body`、`title`、`label`、`revenue`、`token`、`price` 和 `card`。角色可设置 `family`、`size`(数字,使用页面的单位)、`weight`(`normal`、`bold` 或数字)和 `style`(`normal`、`italic` 或 `oblique`)。每项设置都是可选的。角色以 `body` 角色为起点,未设置的项保留文字自己的默认值。
 - `family` 可以是 `families` 中的名称、内置的 `display`、`serif` 和 `sans-serif`,或任意 CSS 字体族。系统字体不会嵌入导出文件,参见 [SVG](/docs/output/svg)。
-- 目前 `title` 角色设置城市、小镇和场外区域的名称,`card` 角色设置私有公司卡文字的字体族、粗细和样式。其他角色留给接下来迁移的文字。
+- 目前 `title` 角色设置城市、小镇和场外区域的名称以及独立的六边形名称,`card` 角色设置私有公司卡文字的字体族、粗细和样式。其他角色留给接下来迁移的文字。
 - 图块元素或游戏文件的字体字段(如 `info.nameFontSize`)仍然优先于角色,因此不会有游戏自行改变。
 - `fonts` 的各部分通过上面的层级合并:游戏自己的 `fonts.roles.title.weight` 和您的 `fonts.roles.title.size` 都会生效,两者设置同一项时游戏优先(开启“允许游戏配置”时)。
 

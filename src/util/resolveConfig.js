@@ -25,7 +25,13 @@ const fontSizesToNumbers = (fonts) => {
       }
       const { size, ...rest } = role;
       const number = size === "" ? NaN : Number(size);
-      return [name, Number.isFinite(number) ? { ...rest, size: number } : rest];
+      // The schema wants a size above 0
+      return [
+        name,
+        Number.isFinite(number) && number > 0
+          ? { ...rest, size: number }
+          : rest,
+      ];
     }),
   );
   return fonts.roles ? { ...fonts, roles } : fonts;
