@@ -1,9 +1,4 @@
-import {
-  SCHEMA_KEY,
-  localizeSchema,
-  resolveSchemaKeys,
-  schemaKeys,
-} from "@/util/schemaKeys";
+import { SCHEMA_KEY, resolveSchemaKeys, schemaKeys } from "@/util/schemaKeys";
 
 const schema = {
   type: "object",
@@ -76,19 +71,6 @@ describe("resolveSchemaKeys", () => {
     expect(() => resolveSchemaKeys(schema, rest)).toThrow(
       "Unknown schema key schema.test.name",
     );
-  });
-});
-
-describe("localizeSchema", () => {
-  it("uses the text of t", () => {
-    const localized = localizeSchema(schema, (key) => strings[key]);
-    expect(localized.properties.name.description).toBe("A name");
-    expect(localized.properties.old.deprecationMessage).toBe("Do not use");
-  });
-
-  it("keeps a key that t has no text for", () => {
-    const localized = localizeSchema(schema, () => undefined);
-    expect(localized).toEqual(schema);
   });
 });
 

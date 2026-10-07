@@ -255,11 +255,11 @@ by `src/cli/validate.js`). `tiles.defs.json` is **generated**; never edit it.
   text lives in `src/locales/schema.{en,de,zh}.json` (flat files of key to
   text). The keys of `en` are the source; `de` and `zh` keep the same keys and
   placeholders. `compile` fails on a key without text. The UI looks the text up
-  by language (`useSchemaText`); `resolveSchemaKeys` and `localizeSchema`
-  (`src/util/schemaKeys.js`) put it back.
+  by language (`useSchemaText`); `resolveSchemaKeys`
+  (`src/util/schemaKeys.js`) puts it back.
 - `validate.js` registers each schema by `$id`; a new schema file must be
   added to `schemas` in `validate.js`, `determineSchema` (how a data file is
-  matched to it) and the `schemas` list in the `Makefile`.
+  matched to it) and `PUBLISHED` in `src/cli/compile-schemas.js`.
 
 Adding to a schema:
 

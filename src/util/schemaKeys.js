@@ -46,11 +46,3 @@ export const resolveSchemaKeys = (schema, strings) =>
     }
     return strings[key];
   });
-
-// The schema for the UI: the text of every key from t (a function of a key),
-// a key t has no text for stays
-export const localizeSchema = (schema, t) =>
-  mapKeys(schema, (key) => {
-    const text = t(key);
-    return typeof text === "string" && text !== "" ? text : key;
-  });

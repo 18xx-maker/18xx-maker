@@ -12,7 +12,7 @@ src/schemas/tiles.defs.json: src/schemas/fields.schema.json src/schemas/tiles.sr
 
 # The published schemas, with their text in every language, are written
 # together by one command
-public/schemas/game.schema.json: $(wildcard src/schemas/*.json) $(patsubst %,src/locales/schema.%.json,$(locales)) src/schemas/tiles.defs.json
+public/schemas/game.schema.json: $(wildcard src/schemas/*.json) $(patsubst %,src/locales/schema.%.json,$(locales)) src/schemas/tiles.defs.json src/cli/compile-schemas.js src/util/schemaKeys.js
 	@echo "Writing the schemas of $(locales) to public/schemas"
 	@node ./bin/maker.js compile locales
 

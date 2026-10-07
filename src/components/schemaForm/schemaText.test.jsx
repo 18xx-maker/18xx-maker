@@ -14,6 +14,10 @@ vi.mock("@/locales/schema.de.json", () => ({
   default: { "schema.game.exports.layouts": "Deutscher Text" },
 }));
 
+vi.mock("@/locales/schema.zh.json", () => ({
+  default: { "schema.game.exports.layouts": "中文文本" },
+}));
+
 const layouts = "schema.game.exports.layouts";
 const background = "schema.game.exports.background";
 
@@ -25,6 +29,15 @@ describe("the text of a schema description", () => {
   it("is English by default", () => {
     render(<Text value={layouts} />);
     expect(screen.getByText(en[layouts])).toBeInTheDocument();
+  });
+
+  it("follows a switch from one language to the next", async () => {
+    // runs before any other test loads German: the cache is per module
+    render(<Text value={layouts} />);
+    await act(() => i18n.changeLanguage("de"));
+    expect(await screen.findByText("Deutscher Text")).toBeInTheDocument();
+    await act(() => i18n.changeLanguage("zh"));
+    expect(await screen.findByText("中文文本")).toBeInTheDocument();
   });
 
   it("is the text of the language once it is loaded", async () => {
