@@ -127,6 +127,89 @@ export const closest = (field, allowed = []) => {
   return scored[0][0];
 };
 
+// Fields the schema no longer has because they were never used for printing.
+// A game that still has one keeps loading and exporting: it is a warning, not
+// an unknown field. The path is the object that held the field, "*" is any
+// item of a list and "**" any number of levels, so a field of the same name
+// elsewhere is not hit.
+const TILE_FIELDS = [
+  "bgFill",
+  "textBorderWidth",
+  "textBorderColor",
+  "inverseTextColor",
+  "encoding",
+  "broken",
+  "groups",
+];
+
+export const REMOVED = [
+  [[], ["pools", "floatPercent", "upgrades"]],
+  [["info"], ["capitalization", "mustSellInBlocks"]],
+  [["companies", "*"], ["subName"]],
+  [["trains", "*"], ["discount"]],
+  [
+    ["privates", "*"],
+    ["sym", "debt", "abilities", "image"],
+  ],
+  ...["tiles", "map"].flatMap((section) => [
+    [[section, "**"], TILE_FIELDS],
+    [
+      [section, "**", "tokens", "*"],
+      ["text", "textColor"],
+    ],
+  ]),
+];
+
+const isObject = (node) =>
+  node !== null && typeof node === "object" && !Array.isArray(node);
+
+// The objects of the data a path of REMOVED leads to, with their paths
+const objectsAt = (data, pattern, path = []) => {
+  if (pattern.length === 0) return isObject(data) ? [[path, data]] : [];
+  if (data === null || typeof data !== "object") return [];
+
+  const [head, ...rest] = pattern;
+  const children = Object.entries(data).map(([key, child]) => [
+    Array.isArray(data) ? Number(key) : key,
+    child,
+  ]);
+  if (head === "**") {
+    return [
+      ...objectsAt(data, rest, path),
+      ...children.flatMap(([key, child]) =>
+        objectsAt(child, pattern, [...path, key]),
+      ),
+    ];
+  }
+  if (head === "*") {
+    return Array.isArray(data)
+      ? children.flatMap(([key, child]) =>
+          objectsAt(child, rest, [...path, key]),
+        )
+      : [];
+  }
+  return isObject(data) && Object.hasOwn(data, head)
+    ? objectsAt(data[head], rest, [...path, head])
+    : [];
+};
+
+// The pointers (#/trains/2/discount) of the removed fields a game still has
+export const removedPointers = (data) =>
+  REMOVED.flatMap(([parent, fields]) =>
+    objectsAt(data, parent).flatMap(([path, object]) =>
+      fields
+        .filter((field) => Object.hasOwn(object, field))
+        .map(
+          (field) =>
+            `#/${[...path, field]
+              .map((part) =>
+                String(part).replace(/~/g, "~0").replace(/\//g, "~1"),
+              )
+              .join("/")}`,
+        ),
+    ),
+  );
+
 const issue = (code, pointer, params = {}, severity = ERROR) => ({
   severity,
   code,
@@ -134,16 +217,50 @@ const issue = (code, pointer, params = {}, severity = ERROR) => ({
   params,
 });
 
+const ADDITIONAL = "no-additional-properties-error";
+
+// The alternatives of a oneOf/anyOf list their errors together. A field that
+// only some of them reject is allowed by another one, so it is not a mistake.
+// A field every alternative rejects is reported once.
+const alternativeErrors = (errors, count) => {
+  const rejected = new Map();
+  for (const e of errors) {
+    if (e.code === ADDITIONAL) {
+      rejected.set(e.data.pointer, (rejected.get(e.data.pointer) ?? 0) + 1);
+    }
+  }
+
+  const seen = new Set();
+  return errors.filter((e) => {
+    if (e.code !== ADDITIONAL) return true;
+    if (rejected.get(e.data.pointer) < count || seen.has(e.data.pointer)) {
+      return false;
+    }
+    seen.add(e.data.pointer);
+    return true;
+  });
+};
+
 // Errors of a oneOf/anyOf are the errors of its alternatives. Show the ones
 // below the value itself, since the alternatives that do not fit at all only
 // say it is not the other type.
-const leaves = (error) => {
+export const leaves = (error) => {
   const nested = error.data?.errors;
   if (!nested?.length) return [error];
   const deeper = nested.filter((e) => e.data?.pointer !== error.data.pointer);
-  return (deeper.length ? deeper : [error]).flatMap((e) =>
-    e === error ? [e] : leaves(e),
-  );
+  // The alternatives of the type of the value (the others only say, at the
+  // value itself, that it is not their type)
+  const count =
+    (error.data.oneOf ?? error.data.anyOf)?.length -
+    nested.filter(
+      (e) => e.code === "type-error" && e.data?.pointer === error.data.pointer,
+    ).length;
+  const shown = deeper.length
+    ? count > 1
+      ? alternativeErrors(deeper, count)
+      : deeper
+    : [error];
+  return shown.flatMap((e) => (e === error ? [e] : leaves(e)));
 };
 
 const translate = (error) => {
@@ -211,13 +328,25 @@ export const deprecatedIssues = (deprecated, data) =>
     ),
   );
 
-// Every problem of a game: schema errors first, then deprecated fields
+// Every problem of a game: schema errors first, then removed and deprecated
+// fields
 export const validateGame = async (game) => {
   const { compiled: validator, deprecated } = await schema();
   // meta is added by the app, the schema does not allow it
   const data = omit(["meta"], game);
 
-  const errors = validator.validate(data).errors.flatMap(leaves).map(translate);
+  const removed = removedPointers(data).map((pointer) =>
+    issue("deprecated", pointer, { key: "removed" }, WARNING),
+  );
+  const gone = new Set(removed.map((e) => e.pointer));
 
-  return [...errors, ...deprecatedIssues(deprecated, data)];
+  // A removed field is not an unknown field, whether the schema allows it
+  // (the companies) or not
+  const errors = validator
+    .validate(data)
+    .errors.flatMap(leaves)
+    .map(translate)
+    .filter((e) => !gone.has(e.pointer));
+
+  return [...errors, ...removed, ...deprecatedIssues(deprecated, data)];
 };

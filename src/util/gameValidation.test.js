@@ -1,9 +1,12 @@
 import { games } from "@/data";
 import {
+  REMOVED,
   closest,
   deprecatedIssues,
   deprecatedPaths,
+  leaves,
   readablePointer,
+  removedPointers,
   shorten,
   validateGame,
 } from "@/util/gameValidation";
@@ -21,6 +24,19 @@ describe("gameValidation", () => {
   it("finds problems in the 18Broken test game", async () => {
     const issues = await validateGame(games["18Broken"]);
     expect(issues.length).toBeGreaterThan(3);
+  });
+
+  it("lists the removed fields of 18Broken as deprecated warnings", async () => {
+    const issues = await validateGame(games["18Broken"]);
+    const removed = issues.filter((issue) => issue.params.key === "removed");
+    expect(removed.map((issue) => issue.pointer).sort()).toEqual([
+      "companies[0].subName",
+      "floatPercent",
+      "info.capitalization",
+    ]);
+    for (const issue of removed) {
+      expect(issue).toMatchObject({ severity: "warning", code: "deprecated" });
+    }
   });
 
   it("ignores the meta data the app adds", async () => {
@@ -177,6 +193,201 @@ describe("gameValidation", () => {
     it("has no deprecated property without a message", async () => {
       const schema = (await import("@/schemas/game.schema.json")).default;
       expect(deprecatedPaths(schema)).toEqual([["exports", "paginated"]]);
+    });
+  });
+
+  describe("the removed fields", () => {
+    const token = (fields) => ({ tokens: [{ label: "A", ...fields }] });
+    // A game with the field, the pointer of the field and whether the schema
+    // allows it (an open object, like a company, never rejected it)
+    const cases = [
+      ["pools", { pools: [] }, "pools"],
+      ["floatPercent", { floatPercent: 50 }, "floatPercent"],
+      ["upgrades", { upgrades: {} }, "upgrades"],
+      [
+        "info.capitalization",
+        { info: { title: "x", capitalization: "full" } },
+        "info.capitalization",
+      ],
+      [
+        "info.mustSellInBlocks",
+        { info: { title: "x", mustSellInBlocks: true } },
+        "info.mustSellInBlocks",
+      ],
+      [
+        "companies.*.subName",
+        { companies: [{ name: "A", abbrev: "A", color: "red", subName: "x" }] },
+        "companies[0].subName",
+        true,
+      ],
+      [
+        "trains.*.discount",
+        { trains: [{ name: "5", color: "gray", quantity: 1, discount: {} }] },
+        "trains[0].discount",
+      ],
+      ...["sym", "debt", "abilities", "image"].map((field) => [
+        `privates.*.${field}`,
+        { privates: [{ name: "P", [field]: 1 }] },
+        `privates[0].${field}`,
+      ]),
+      ...["tiles", "map"].flatMap((section) => {
+        const place = (fields, path) =>
+          section === "tiles"
+            ? [{ tiles: { D5: fields } }, `tiles.D5${path}`]
+            : [
+                { map: { hexes: [{ hexes: ["A1"], ...fields }] } },
+                `map.hexes[0]${path}`,
+              ];
+        return [
+          ...["encoding", "broken"].map((field) => [
+            `${section}.**.${field}`,
+            ...place({ [field]: true }, `.${field}`),
+          ]),
+          ...["bgFill", "inverseTextColor"].map((field) => [
+            `${section}.**.${field}`,
+            ...place(token({ [field]: "red" }), `.tokens[0].${field}`),
+          ]),
+          ...["text", "textColor"].map((field) => [
+            `${section}.**.tokens.*.${field}`,
+            ...place(token({ [field]: "x" }), `.tokens[0].${field}`),
+          ]),
+          ...["textBorderWidth", "textBorderColor"].map((field) => [
+            `${section}.**.${field}`,
+            ...place(
+              { shapes: [{ shape: "circle", [field]: 1 }] },
+              `.shapes[0].${field}`,
+            ),
+          ]),
+          [
+            `${section}.**.groups`,
+            ...place({ cities: [{ groups: ["a"] }] }, ".cities[0].groups"),
+          ],
+        ];
+      }),
+    ];
+
+    it("has a case for every removed field", () => {
+      const covered = new Set(cases.map(([name]) => name));
+      for (const [parent, fields] of REMOVED) {
+        for (const field of fields) {
+          expect(covered.has([...parent, field].join("."))).toBe(true);
+        }
+      }
+    });
+
+    it.each(cases)(
+      "warns for %s, once and without a suggestion",
+      async (_, game, pointer) => {
+        const issues = await validateGame({ info: { title: "x" }, ...game });
+        expect(
+          issues.filter((issue) =>
+            issue.pointer.endsWith(pointer.split(".").pop()),
+          ),
+        ).toEqual([
+          {
+            severity: "warning",
+            code: "deprecated",
+            pointer,
+            params: { key: "removed" },
+          },
+        ]);
+      },
+    );
+
+    it.each(cases.filter(([, , , open]) => !open))(
+      "is not allowed by the schema any more: %s",
+      async (_, game, pointer) => {
+        // A field the schema still allowed would be reported by nobody
+        const { compiled } = await import("@/schemas/game.schema.json").then(
+          async (game_) => {
+            const [{ compileSchema, draft07 }, tiles] = await Promise.all([
+              import("json-schema-library"),
+              import("@/schemas/tiles.defs.json"),
+            ]);
+            return {
+              compiled: compileSchema(game_.default, {
+                drafts: [draft07],
+                remotes: [tiles.default],
+              }),
+            };
+          },
+        );
+        const errors = compiled
+          .validate({ info: { title: "x" }, ...game })
+          .errors.flatMap(leaves);
+        expect(
+          errors.some((e) => readablePointer(e.data.pointer) === pointer),
+        ).toBe(true);
+      },
+    );
+
+    it("finds the removed fields of the data by their path", () => {
+      expect(
+        removedPointers({
+          trains: [{ discount: 1 }, {}],
+          privates: [{ discount: 1, image: 2 }],
+          tiles: { D5: { broken: true, cities: [{ text: "x" }] } },
+          players: [{ pools: 1 }],
+          pools: [],
+          "a/b": 1,
+        }),
+      ).toEqual([
+        "#/pools",
+        "#/trains/0/discount",
+        "#/privates/0/image",
+        "#/tiles/D5/broken",
+      ]);
+      expect(removedPointers({ trains: "x", tiles: 1 })).toEqual([]);
+    });
+
+    it("reports a token with removed fields once each, without noise", async () => {
+      const issues = await validateGame({
+        info: { title: "x" },
+        tiles: {
+          D5: token({ color: "red", bgFill: "red", inverseTextColor: "x" }),
+        },
+      });
+      expect(issues).toEqual([
+        {
+          severity: "warning",
+          code: "deprecated",
+          pointer: "tiles.D5.tokens[0].bgFill",
+          params: { key: "removed" },
+        },
+        {
+          severity: "warning",
+          code: "deprecated",
+          pointer: "tiles.D5.tokens[0].inverseTextColor",
+          params: { key: "removed" },
+        },
+      ]);
+    });
+
+    it("still reports an unknown field of a token", async () => {
+      const issues = await validateGame({
+        info: { title: "x" },
+        tiles: { D5: token({ bogus: 1 }) },
+      });
+      expect(issues).toEqual([
+        {
+          severity: "error",
+          code: "unknown-field",
+          pointer: "tiles.D5.tokens[0].bogus",
+          params: { field: "bogus" },
+        },
+      ]);
+    });
+
+    it("keeps the errors before the removed fields", async () => {
+      const issues = await validateGame({
+        info: { title: "x" },
+        pools: [],
+        stock: { marekt: 10 },
+      });
+      expect(issues.map((issue) => issue.code)).toEqual([
+        "unknown-field-suggest",
+        "deprecated",
+      ]);
     });
   });
 

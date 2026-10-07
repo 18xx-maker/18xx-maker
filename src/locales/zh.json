@@ -113,7 +113,7 @@
       },
       "rounds": {
         "tab": "回合",
-        "description": "编辑回合、公司卡上的行动、资金池备注和数字卡。"
+        "description": "编辑回合、公司卡上的行动和数字卡。"
       },
       "tokens": {
         "tab": "标记",
@@ -125,7 +125,7 @@
       },
       "output": {
         "tab": "输出",
-        "description": "编辑收益图表的范围、导出默认值和板块升级。"
+        "description": "编辑收益图表的范围和导出默认值。"
       },
       "hex": {
         "tab": "六边格",
@@ -156,22 +156,17 @@
       "players": "玩家",
       "rounds": "回合",
       "turns": "行动",
-      "pools": "资金池",
-      "notes": "备注",
       "tokens": "标记",
       "shares": "股份",
       "legend": "图例项",
       "colors": "颜色",
       "tokenTypes": "标记类型",
       "shareTypes": "股份类型",
-      "upgrades": "升级",
       "entry": "条目"
     },
     "headings": {
       "rounds": "回合",
       "turns": "行动",
-      "pools": "资金池",
-      "notes": "备注",
       "tokens": "标记"
     },
     "titles": {
@@ -418,6 +413,7 @@
     "failed": "无法检查游戏文件。",
     "deprecated-generic": "此字段已弃用。",
     "deprecations": {
+      "removed": "此字段已被移除并被忽略。请删除它,详见文档中已移除的字段。",
       "exports_paginated": "此字段已弃用并被忽略。请删除它,分页 PDF 会自动导出。"
     }
   },

@@ -112,6 +112,11 @@ export const resolveGame = async (name) => {
     throw new UsageError(`${name} is not a valid game:\n${errors.join("\n")}`);
   }
 
+  // A removed field is ignored: the game exports, with a warning
+  for (const warning of result.warnings ?? []) {
+    console.warn(`${name}: ${warning}`);
+  }
+
   return {
     id: path.basename(name, path.extname(name)),
     game: loadJSON(name),

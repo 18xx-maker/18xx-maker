@@ -621,6 +621,38 @@ describe("game files", () => {
     expect(chromium.launch).not.toHaveBeenCalled();
   });
 
+  it("exports a game that still has removed fields, with a warning", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const base = JSON.parse(
+      fs.readFileSync(path.join(cwd, "src/data/games/18Test.json"), "utf-8"),
+    );
+    const file = gameFile("old.json", {
+      pools: [{ name: "Bank" }],
+      trains: base.trains.map((train, i) =>
+        i === 0 ? { ...train, discount: { 4: 300 } } : train,
+      ),
+    });
+
+    await exportCommand(file, { docs: "map" });
+
+    expect(files(path.join(tmp, "render/old"))).toEqual([
+      "18test-map-paginated.pdf",
+      "18test-map.pdf",
+    ]);
+    expect(warn.mock.calls.map(([line]) => line)).toEqual([
+      `${file}: #/pools is a removed field, it is ignored`,
+      `${file}: #/trains/0/discount is a removed field, it is ignored`,
+    ]);
+  });
+
+  it("still does not export a removed field next to a real mistake", async () => {
+    const file = gameFile("bad.json", { pools: [], info: { title: 5 } });
+
+    await expect(exportCommand(file, {})).rejects.toThrow(
+      /bad.json is not a valid game:\n#\/info\/title/,
+    );
+  });
+
   it("does not export what is not json", async () => {
     fs.writeFileSync("broken.json", "{");
 

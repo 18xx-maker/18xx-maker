@@ -17,6 +17,7 @@ import {
 } from "ramda";
 
 import { loadJSON, loadSchema } from "#cli/util";
+import { leaves, removedPointers } from "../util/gameValidation.js";
 import { UNVALIDATED_GAMES } from "../util/testGames.js";
 
 // Load Defs
@@ -97,13 +98,29 @@ const compiledSchema = (id) => {
 let validate = (json, file, schemaId) => {
   const id = schemaId || determineSchema(json);
 
-  const { errors: validationErrors } = compiledSchema(id).validate(json);
+  const { errors } = compiledSchema(id).validate(json);
+
+  // A game that still has a removed field is valid, the field is a warning
+  const removed = id === gameSchema.$id ? removedPointers(json) : [];
+  const onlyRemoved =
+    removed.length > 0 &&
+    errors
+      .flatMap(leaves)
+      .every(
+        (e) =>
+          e.code === "no-additional-properties-error" &&
+          removed.includes(e.data.pointer),
+      );
+  const warnings = removed.map(
+    (pointer) => `${pointer} is a removed field, it is ignored`,
+  );
 
   return {
-    valid: validationErrors.length === 0,
+    valid: errors.length === 0 || onlyRemoved,
     id,
     file,
-    validationErrors,
+    validationErrors: onlyRemoved ? [] : errors,
+    warnings,
   };
 };
 
@@ -188,6 +205,7 @@ const displayResult = ({
   skipped,
   error,
   validationErrors,
+  warnings = [],
   file,
   id,
 }) => {
@@ -223,6 +241,9 @@ const displayResult = ({
     process.stdout.write(`\n${output}\n\n`);
   }
 
+  warnings.forEach((warning) => {
+    process.stdout.write(`${chalk.yellow("warning")} ${warning}\n`);
+  });
   displayErrors(validationErrors);
 
   return valid;

@@ -113,7 +113,7 @@
       },
       "rounds": {
         "tab": "Rounds",
-        "description": "Edit the rounds, the charter turns, the pool notes and the number cards."
+        "description": "Edit the rounds, the charter turns and the number cards."
       },
       "tokens": {
         "tab": "Tokens",
@@ -125,7 +125,7 @@
       },
       "output": {
         "tab": "Output",
-        "description": "Edit the revenue chart range, the export defaults and the tile upgrades."
+        "description": "Edit the revenue chart range and the export defaults."
       },
       "hex": {
         "tab": "Hex",
@@ -156,22 +156,17 @@
       "players": "player",
       "rounds": "round",
       "turns": "turn",
-      "pools": "pool",
-      "notes": "note",
       "tokens": "token",
       "shares": "share",
       "legend": "legend entry",
       "colors": "color",
       "tokenTypes": "token type",
       "shareTypes": "share type",
-      "upgrades": "upgrade",
       "entry": "entry"
     },
     "headings": {
       "rounds": "Rounds",
       "turns": "Turns",
-      "pools": "Pools",
-      "notes": "Notes",
       "tokens": "Tokens"
     },
     "titles": {
@@ -418,6 +413,7 @@
     "failed": "The game file could not be checked.",
     "deprecated-generic": "This field is deprecated.",
     "deprecations": {
+      "removed": "This field was removed and is ignored. Delete it, see the removed fields in the docs.",
       "exports_paginated": "This field is deprecated and ignored. Remove it, the paginated pdfs are exported automatically."
     }
   },
