@@ -1,5 +1,12 @@
 import defaults from "@/defaults.json";
-import { getCardData, resolveCardLayout, typeCardConfig } from "@/util/cards";
+import {
+  duplexMode,
+  duplexPages,
+  getCardData,
+  mirrorRows,
+  resolveCardLayout,
+  typeCardConfig,
+} from "@/util/cards";
 
 const { cards, paper } = defaults;
 
@@ -280,5 +287,119 @@ describe("getCardData orientation", () => {
       perPage: 1,
     });
     expect(getCardData(big, paper).layout.landscape).toBe(false);
+  });
+});
+
+describe("duplexMode", () => {
+  it("is only on for the free layout with a mode", () => {
+    expect(duplexMode({ layout: "free", duplex: "long" })).toBe("long");
+    expect(duplexMode({ layout: "free", duplex: "separate" })).toBe("separate");
+    expect(duplexMode({ layout: "free", duplex: "off" })).toBe("off");
+    expect(duplexMode({ layout: "free" })).toBe("off");
+    expect(duplexMode({ layout: "miniEuroDie", duplex: "long" })).toBe("off");
+    expect(duplexMode({ layout: "dtgDie", duplex: "separate" })).toBe("off");
+  });
+});
+
+describe("mirrorRows", () => {
+  it("reverses every row of a full page", () => {
+    expect(mirrorRows(["1", "2", "3", "4", "5", "6"], 3)).toEqual([
+      "3",
+      "2",
+      "1",
+      "6",
+      "5",
+      "4",
+    ]);
+  });
+
+  it("pads a partial row so the cards stay behind their fronts", () => {
+    expect(mirrorRows(["1", "2", "3", "4", "5"], 3)).toEqual([
+      "3",
+      "2",
+      "1",
+      null,
+      "5",
+      "4",
+    ]);
+  });
+
+  it("pads a partial page of one row", () => {
+    expect(mirrorRows(["1"], 3)).toEqual([null, null, "1"]);
+  });
+
+  it("keeps empty slots where they are mirrored to", () => {
+    expect(mirrorRows(["1", null, "3"], 3)).toEqual(["3", null, "1"]);
+  });
+
+  it("does nothing with one card per row", () => {
+    expect(mirrorRows(["1"], 1)).toEqual(["1"]);
+    expect(mirrorRows(["1", "2"], 1)).toEqual(["1", "2"]);
+  });
+});
+
+describe("duplexPages", () => {
+  const fronts = ["a", "b", "c", "d", "e"];
+  const backs = ["A", "B", "C", null, "E"];
+
+  it("follows every page of fronts with its mirrored backs", () => {
+    expect(
+      duplexPages(fronts, backs, { perPage: 4, perRow: 2, mode: "long" }),
+    ).toEqual([
+      { index: 0, slots: ["a", "b", "c", "d"], back: false },
+      { index: 0, slots: ["B", "A", null, "C"], back: true },
+      { index: 1, slots: ["e"], back: false },
+      { index: 1, slots: [null, "E"], back: true },
+    ]);
+  });
+
+  it("prints all the backs after all the fronts, not mirrored", () => {
+    expect(
+      duplexPages(fronts, backs, { perPage: 4, perRow: 2, mode: "separate" }),
+    ).toEqual([
+      { index: 0, slots: ["a", "b", "c", "d"], back: false },
+      { index: 1, slots: ["e"], back: false },
+      { index: 0, slots: ["A", "B", "C", null], back: true },
+      { index: 1, slots: ["E"], back: true },
+    ]);
+  });
+
+  it("leaves out a page of backs without any back", () => {
+    const none = [null, null, null, null, "E"];
+    expect(
+      duplexPages(fronts, none, { perPage: 4, perRow: 2, mode: "long" }).map(
+        ({ index, back }) => [index, back],
+      ),
+    ).toEqual([
+      [0, false],
+      [1, false],
+      [1, true],
+    ]);
+    expect(
+      duplexPages(fronts, none, {
+        perPage: 4,
+        perRow: 2,
+        mode: "separate",
+      }).map(({ index, back }) => [index, back]),
+    ).toEqual([
+      [0, false],
+      [1, false],
+      [1, true],
+    ]);
+  });
+
+  it("does not mirror a page of one card", () => {
+    expect(
+      duplexPages(["a", "b"], ["A", "B"], {
+        perPage: 1,
+        perRow: 1,
+        mode: "long",
+      }),
+    ).toEqual([
+      { index: 0, slots: ["a"], back: false },
+      { index: 0, slots: ["A"], back: true },
+      { index: 1, slots: ["b"], back: false },
+      { index: 1, slots: ["B"], back: true },
+    ]);
   });
 });

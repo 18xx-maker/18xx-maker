@@ -548,6 +548,57 @@ describe("validate", () => {
     });
   });
 
+  describe("the duplex of a config", () => {
+    const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
+    const withDuplex = (duplex) =>
+      writeTmp(
+        "config.json",
+        JSON.stringify({ ...defaults, cards: { ...defaults.cards, duplex } }),
+      );
+
+    it.each(["off", "separate", "long"])("accepts %s", (value) => {
+      expect(run(withDuplex(value)).code).toBe(0);
+    });
+
+    it.each(["short", true, 1])("rejects %j", (value) => {
+      const { code, lines } = run(withDuplex(value));
+      expect(code).toBe(1);
+      expect(lines.some((l) => l.startsWith("#/cards/duplex"))).toBe(true);
+    });
+  });
+
+  describe("the back of a train", () => {
+    const withBack = (back) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          trains: [
+            { name: "2", color: "white", price: 100, quantity: 2, back },
+          ],
+        }),
+      );
+
+    it.each([
+      ["empty", {}],
+      ["a title", { title: "Two" }],
+      [
+        "everything",
+        { title: "2", text: "Rusts", color: "white", backgroundColor: "red" },
+      ],
+    ])("accepts %s", (_, back) => {
+      expect(run(withBack(back)).code).toBe(0);
+    });
+
+    it.each([
+      ["a string", "Two"],
+      ["an unknown field", { title: "2", image: "2T" }],
+      ["a number title", { title: 2 }],
+    ])("rejects %s", (_, back) => {
+      expect(run(withBack(back)).code).toBe(1);
+    });
+  });
+
   describe("the die sizes of a config", () => {
     const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
     const withDice = (dice) =>

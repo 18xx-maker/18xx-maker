@@ -469,6 +469,29 @@
         "permanentColor": {
           "description": "Color of the text of a permanent train.",
           "type": "string"
+        },
+        "back": {
+          "description": "The back of the train card, printed behind the front when the cards duplex config is on (it needs the free cards layout). All copies of the train share it.",
+          "type": "object",
+          "properties": {
+            "title": {
+              "description": "Large text on the back, the name of the train by default.",
+              "type": "string"
+            },
+            "text": {
+              "description": "Smaller text under the title.",
+              "type": "string"
+            },
+            "color": {
+              "description": "Color of the text.",
+              "type": "string"
+            },
+            "backgroundColor": {
+              "description": "Background color of the back.",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": ["name", "color"],
