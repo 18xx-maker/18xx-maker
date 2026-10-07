@@ -5,7 +5,13 @@ import { v4 as uuidv4 } from "uuid";
 
 import { assoc, assocPath } from "ramda";
 
-import { getConfig, info, updateConfig, updateSummaries } from "./config.js";
+import {
+  getConfig,
+  info,
+  summaryOfPath,
+  updateConfig,
+  updateSummaries,
+} from "./config.js";
 import { getMainWindow } from "./window.js";
 
 export const TYPE = "electron";
@@ -16,34 +22,35 @@ const meta = (id) => ({
   slug: slug(id),
 });
 
-export const loadGame = (id) => {
-  const config = getConfig();
-  const summary = config.summaries[id];
+export const loadGame = (id) =>
+  new Promise((resolve) => {
+    const summary = getConfig().summaries[id];
+    if (!summary) throw new Error(`Electron game ${id} not found`);
 
-  return new Promise((resolve) => {
     const json = fs.readFileSync(summary.path);
     const game = assoc("meta", meta(id), JSON.parse(json));
     updateSummaries(game);
     resolve(game);
   });
-};
 
-export const saveGamePath = (path) => {
-  return new Promise((resolve) => {
-    const id = uuidv4();
+// A file is one game: a path that is already a game keeps its id and slug, and
+// only has its summary refreshed
+export const saveGamePath = (path) =>
+  new Promise((resolve) => {
+    const existing = summaryOfPath(path);
+    const id = existing?.id ?? uuidv4();
     const json = fs.readFileSync(path);
     const game = assoc("meta", meta(id), JSON.parse(json));
     const summary = {
       ...info(game),
       ...game.meta,
-      path,
+      path: existing?.path ?? path,
     };
 
     updateConfig(assocPath(["summaries", summary.id], summary));
 
     resolve(summary.slug);
   });
-};
 
 export const openGame = () => {
   return dialog

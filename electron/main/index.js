@@ -13,15 +13,25 @@ import {
   deleteGame,
   getConfig,
   getSummaries,
+  getSummary,
+  slugOfPath,
 } from "./config.js";
 import { registerExport } from "./export.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
+import { assertGamePath, guardHandle, guardOn, guardSync } from "./guard.js";
+import { createLoadGame } from "./loadGame.js";
 import { setMenu } from "./menu.js";
 import { createNewGame } from "./newGame.js";
 import { createSaveGame, createSaveGameAs } from "./saveFile.js";
 import { send } from "./util.js";
 import { stopWatching, watch } from "./watch.js";
 import { createWindow, getMainWindow, startBaseUrl } from "./window.js";
+
+// Only the main window may use the channels of the app
+const isMain = (event) => fromMainWindow(event, getMainWindow(), startBaseUrl);
+const handle = (channel, handler) =>
+  ipcMain.handle(channel, guardHandle(isMain, handler));
+const on = (channel, handler) => ipcMain.on(channel, guardOn(isMain, handler));
 
 const { autoUpdater } = updater;
 autoUpdater.autoDownload = false;
@@ -59,13 +69,17 @@ app.on("ready", () => {
   });
 
   mainWindow.on("ready-to-show", () =>
-    autoUpdater.checkForUpdates().then((result) => {
-      if (!result) {
-        send("update", { checking: false, available: false, dev: true });
-      }
+    autoUpdater
+      .checkForUpdates()
+      .then((result) => {
+        if (!result) {
+          send("update", { checking: false, available: false, dev: true });
+        }
 
-      return result;
-    }),
+        return result;
+      })
+      // The updater reports its errors as events
+      .catch((e) => console.error("Unable to check for updates:", e)),
   );
 });
 app.on("activate", createWindow);
@@ -75,15 +89,23 @@ app.on("window-all-closed", () => {
   }
 });
 
-ipcMain.on("checkForUpdates", () => autoUpdater.checkForUpdates());
-ipcMain.on("downloadUpdate", () => autoUpdater.downloadUpdate());
-ipcMain.on("deleteGame", (event, id) => {
+on("checkForUpdates", () =>
+  autoUpdater
+    .checkForUpdates()
+    .catch((e) => console.error("Unable to check for updates:", e)),
+);
+on("downloadUpdate", () =>
+  autoUpdater
+    .downloadUpdate()
+    .catch((e) => console.error("Unable to download the update:", e)),
+);
+on("deleteGame", (event, id) => {
   stopWatching(id);
   deleteGame(id);
   setMenu();
 });
 
-ipcMain.handle("saveGamePath", (event, path) => saveGamePath(path));
+handle("saveGamePath", (event, path) => saveGamePath(assertGamePath(path)));
 
 const getPlatformAndVersions = () => ({
   platform: os.platform(),
@@ -94,10 +116,13 @@ const getPlatformAndVersions = () => ({
     system: process.getSystemVersion(),
   },
 });
-ipcMain.on("loadPlatformAndVersions", (event) => {
-  event.returnValue = getPlatformAndVersions();
-});
-ipcMain.handle("loadConfig", () =>
+ipcMain.on(
+  "loadPlatformAndVersions",
+  guardSync(isMain, (event) => {
+    event.returnValue = getPlatformAndVersions();
+  }),
+);
+handle("loadConfig", () =>
   Promise.resolve({
     config: getConfig(),
     path: CONFIG_FILE,
@@ -105,34 +130,24 @@ ipcMain.handle("loadConfig", () =>
   }),
 );
 
-ipcMain.handle("loadSummaries", () =>
-  Promise.resolve(objOf(TYPE, getSummaries())),
+handle("loadSummaries", () => Promise.resolve(objOf(TYPE, getSummaries())));
+handle(
+  "loadGame",
+  createLoadGame({
+    summaryOf: getSummary,
+    loadGame,
+    watch,
+    stopWatching,
+    deleteGame,
+  }),
 );
-ipcMain.handle("loadGame", (event, id) => {
-  let config = getConfig();
-  let summary = config.summaries[id];
 
-  if (!summary) {
-    return Promise.reject(new Error(`Electron game ${id} not found`));
-  }
-
-  watch(id);
-  return loadGame(id).catch((e) => {
-    deleteGame(id);
-    throw e;
-  });
-});
-
-ipcMain.handle("openGame", openGame);
-
-const slugOfPath = (path) =>
-  Object.values(getConfig().summaries).find((summary) => summary.path === path)
-    ?.slug;
+handle("openGame", () => openGame());
 
 ipcMain.handle(
   "newGame",
   createNewGame({
-    isMain: (event) => fromMainWindow(event, getMainWindow(), startBaseUrl),
+    isMain,
     showSaveDialog: (options) =>
       dialog.showSaveDialog(getMainWindow(), options),
     saveGamePath,
@@ -143,7 +158,7 @@ ipcMain.handle(
 ipcMain.handle(
   "saveGameAs",
   createSaveGameAs({
-    isMain: (event) => fromMainWindow(event, getMainWindow(), startBaseUrl),
+    isMain,
     showSaveDialog: (options) =>
       dialog.showSaveDialog(getMainWindow(), options),
     saveGamePath,
@@ -154,13 +169,13 @@ ipcMain.handle(
 ipcMain.handle(
   "saveGame",
   createSaveGame({
-    isMain: (event) => fromMainWindow(event, getMainWindow(), startBaseUrl),
+    isMain,
     summaryOf: (id) => getConfig().summaries[id],
     afterSave: (id) => watch(id),
   }),
 );
 
-ipcMain.on(
+on(
   "addRecent",
   createAddRecent({
     isCapture: (sender) => exportOf(sender) !== undefined,

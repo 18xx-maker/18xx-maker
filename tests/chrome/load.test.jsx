@@ -251,6 +251,70 @@ describe("load games page", () => {
     });
   });
 
+  describe("a game of the app that can not be loaded", () => {
+    const electronSummary = {
+      title: "Broken Game",
+      publisher: "self",
+      id: "abc",
+      type: "electron",
+      slug: "electron:abc",
+    };
+    const noop = vi.fn();
+    const setupApp = (summaries) => {
+      Object.assign(caps, { electron: true, system: false, internal: false });
+      const error = Object.assign(new Error("not valid"), { code: "invalid" });
+      window.api = {
+        onAlert: noop,
+        onProgress: noop,
+        onRedirect: noop,
+        onGame: noop,
+        onUpdate: noop,
+        onDownloadProgress: noop,
+        off: noop,
+        addRecent: noop,
+        loadPlatformAndVersions: () => ({ platform: "darwin", versions: {} }),
+        loadSummaries: vi.fn(async () => ({ electron: summaries.current })),
+        loadGame: vi.fn().mockRejectedValue(error),
+        deleteGame: vi.fn(() => {
+          summaries.current = {};
+        }),
+      };
+    };
+
+    it("says why in the language of the page and stays in the library", async () => {
+      setupApp({ current: { "electron:abc": electronSummary } });
+      const { user, router } = renderApp("/games/");
+      await user.click(
+        await screen.findByRole("link", { name: "Broken Game" }),
+      );
+
+      expect(
+        await screen.findByText("The file of this game is not valid JSON"),
+      ).toBeInTheDocument();
+      await waitFor(() =>
+        expect(router.state.location.pathname).toBe("/games/"),
+      );
+      expect(screen.getByRole("link", { name: "Broken Game" })).toBeVisible();
+    });
+
+    it("can still be forgotten from the library", async () => {
+      const summaries = { current: { "electron:abc": electronSummary } };
+      setupApp(summaries);
+      const { user, store } = renderApp("/games/");
+      await screen.findByRole("link", { name: "Broken Game" });
+
+      await user.click(screen.getByRole("button", { name: "Forget" }));
+
+      expect(window.api.deleteGame).toHaveBeenCalledWith("abc");
+      await waitFor(() =>
+        expect(
+          screen.queryByRole("link", { name: "Broken Game" }),
+        ).not.toBeInTheDocument(),
+      );
+      expect(store.getState().summaries.electron).toEqual({});
+    });
+  });
+
   it("links each game to its info page and marks its type", async () => {
     renderApp("/games/");
     const saved = await screen.findByRole("link", { name: "Saved Game" });

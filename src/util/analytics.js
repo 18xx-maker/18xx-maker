@@ -63,7 +63,7 @@ export const gatherPageviewData = (location) => {
 
 // The capture window of an export has none of the app's calls
 const app = capability.electron && !getRenderInput();
-const system = app ? window.api.loadPlatformAndVersions() : {};
+const system = (app && window.api.loadPlatformAndVersions()) || {};
 const props = app
   ? {
       interface: source,
