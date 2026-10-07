@@ -96,6 +96,10 @@
       "enum": ["name", "alias", "both"],
       "description": "Was die Gesellschaftskarten und Anteilskarten als Namen einer Gesellschaft drucken. name ist der Name, alias ist der Alias der Gesellschaft (der Name, wenn sie keinen hat), both ist der Name mit dem Alias darunter."
     },
+    "allowGameConfig": {
+      "type": "boolean",
+      "description": "Erlaubt einer Spieldatei, die Konfiguration zu ändern. Wenn aktiv, wird die Konfiguration des Spiels (der Schlüssel config einer Spieldatei) über deine Einstellungen, die URL und die Standardwerte der App gelegt. Wenn aus, wird sie ignoriert. Spiele können diese Einstellung nicht setzen. Exporte und die Kommandozeile verwenden sie genauso."
+    },
     "printScale": {
       "type": "number",
       "minimum": 50,

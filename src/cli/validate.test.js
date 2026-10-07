@@ -441,6 +441,57 @@ describe("validate", () => {
     });
   });
 
+  describe("the config of a game", () => {
+    const withConfig = (config) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({ info: { title: "Game" }, config }),
+      );
+
+    it.each([
+      { paper: { margins: 0.25 } },
+      { cards: { layout: "die" }, theme: "x" },
+      {},
+    ])("accepts %j", (config) => {
+      expect(run(withConfig(config)).code).toBe(0);
+    });
+
+    it.each([
+      [{ printScale: 110 }, "printScale"],
+      [{ allowGameConfig: true }, "allowGameConfig"],
+      [{ nothing: 1 }, "nothing"],
+    ])("rejects %j", (config, key) => {
+      const { code, lines } = run(withConfig(config));
+      expect(code).toBe(1);
+      expect(lines.some((l) => l.includes(key))).toBe(true);
+    });
+
+    it("has the keys of the config schema, but the two of the user", () => {
+      const read = (name) =>
+        JSON.parse(fs.readFileSync(src(`schemas/${name}.schema.json`), "utf8"));
+      const keys = Object.keys(read("config").properties).filter(
+        (key) => !["printScale", "allowGameConfig"].includes(key),
+      );
+      expect(read("game").properties.config.propertyNames.enum).toEqual(keys);
+    });
+  });
+
+  describe("the allow game config setting", () => {
+    const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
+    const withAllow = (allowGameConfig) =>
+      writeTmp("config.json", JSON.stringify({ ...defaults, allowGameConfig }));
+
+    it.each([true, false])("accepts %j", (value) => {
+      expect(run(withAllow(value)).code).toBe(0);
+    });
+
+    it.each(["true", 1])("rejects %j", (value) => {
+      const { code, lines } = run(withAllow(value));
+      expect(code).toBe(1);
+      expect(lines.some((l) => l.startsWith("#/allowGameConfig"))).toBe(true);
+    });
+  });
+
   describe("half hexes and a trimmed map", () => {
     const withMap = (map) =>
       writeTmp("game.json", JSON.stringify({ info: { title: "Game" }, map }));

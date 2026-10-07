@@ -1382,7 +1382,15 @@
       "importTitle": "Import",
       "importDescription": "Paste the contents of a config.json file here, or drop the file anywhere on the page. The imported settings replace your current custom settings.",
       "importPlaceholder": "Paste config.json here",
+      "allowGameConfig": {
+        "label": "Allow game config",
+        "description": "Some games come with their own config settings, for example a card layout. When on, those settings are applied on top of your own while you view that game. When off, they are ignored. A game cannot change the print scale or this setting."
+      },
       "importButton": "Import Config"
+    },
+    "gameConfigIgnored": {
+      "label": "This game has config settings that are off",
+      "tooltip": "This game has its own config settings, but they are off. Click to change this setting."
     },
     "toggle": "Config",
     "close": "Close Config",

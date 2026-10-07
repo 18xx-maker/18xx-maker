@@ -38,7 +38,7 @@ export const SECTION_KEYS = {
 };
 
 // The game keys no form edits: they have a tab only in the JSON editor
-export const UNTABBED_KEYS = ["groups", "tiles"];
+export const UNTABBED_KEYS = ["groups", "tiles", "config"];
 
 // How many problems a section has. A deprecated field is a note, not a
 // problem. No result yet (unknown) is no problem.

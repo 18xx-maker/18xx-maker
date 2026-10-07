@@ -63,6 +63,17 @@ describe("planExport", () => {
 
     expect(paths(request)).toContain("pdf/18test-cards-free.pdf");
   });
+
+  it("follows the config of the game only when the user allows it", () => {
+    const options = { formats: ["pdf"], docs: ["cards"] };
+
+    expect(paths(planExport(game, layers(), options))).not.toContain(
+      "pdf/18test-cards-free.pdf",
+    );
+    expect(
+      paths(planExport(game, layers({ allowGameConfig: true }), options)),
+    ).toContain("pdf/18test-cards-free.pdf");
+  });
 });
 
 // The renderer plans, the main process checks and runs: what is planned must be

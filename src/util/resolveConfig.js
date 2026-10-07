@@ -1,4 +1,4 @@
-import { assoc, assocPath, defaultTo, dissoc, mergeDeepRight } from "ramda";
+import { assoc, assocPath, defaultTo, mergeDeepRight, omit } from "ramda";
 
 import { parsePrintScale } from "./index.js";
 
@@ -45,11 +45,20 @@ export const searchToConfig = (search = "") => {
   return searchConfig;
 };
 
+// A config without any value: {} or {cards:{}} is not an override
+const hasValues = (value) =>
+  value !== null && typeof value === "object"
+    ? Object.values(value).some(hasValues)
+    : value !== undefined;
+
 // Every layer of the config, lowest to highest: the defaults, the user's
 // config.json, the config stored by the app, URL parameters and finally the
-// game's own config. The print scale is a setting of the printer, not of the
-// game: the game's config never sets it. In render mode (the exports) it is
-// always 100, an export has a fixed size.
+// game's own config. The game's config only applies when the user allows it
+// (allowGameConfig, read from the defaults, user and stored layers: never the
+// URL, so the page, the exports and the CLI agree). The print scale is a
+// setting of the printer, not of the game: the game's config never sets it,
+// nor the allowGameConfig setting. In render mode (the exports) the print
+// scale is always 100, an export has a fixed size.
 export const resolveConfig = ({
   defaults = {},
   user = {},
@@ -59,11 +68,18 @@ export const resolveConfig = ({
   render = false,
 } = {}) => {
   const searchConfig = searchToConfig(search);
-  const game = dissoc("printScale", defaultTo({}, gameConfig));
-  const preSearch = mergeDeepRight(mergeDeepRight(defaults, user), stored);
-  const preGame = mergeDeepRight(preSearch, searchConfig);
+  const game = omit(
+    ["printScale", "allowGameConfig"],
+    defaultTo({}, gameConfig),
+  );
+  const userLayerConfig = mergeDeepRight(
+    mergeDeepRight(defaults, user),
+    stored,
+  );
+  const preGame = mergeDeepRight(userLayerConfig, searchConfig);
+  const gameConfigAllowed = userLayerConfig.allowGameConfig === true;
 
-  const merged = mergeDeepRight(preGame, game);
+  const merged = gameConfigAllowed ? mergeDeepRight(preGame, game) : preGame;
   const config =
     render || merged.printScale !== undefined
       ? assoc(
@@ -73,5 +89,12 @@ export const resolveConfig = ({
         )
       : merged;
 
-  return { config, searchConfig, gameConfig: game };
+  return {
+    config,
+    searchConfig,
+    gameConfig: game,
+    gameConfigAllowed,
+    gameConfigIgnored: !gameConfigAllowed && hasValues(game),
+    userLayerConfig,
+  };
 };

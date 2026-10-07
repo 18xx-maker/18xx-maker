@@ -1382,7 +1382,15 @@
       "importTitle": "Importieren",
       "importDescription": "Füge hier den Inhalt einer config.json-Datei ein oder lege die Datei irgendwo auf der Seite ab. Die importierten Einstellungen ersetzen deine aktuellen eigenen Einstellungen.",
       "importPlaceholder": "config.json hier einfügen",
+      "allowGameConfig": {
+        "label": "Spiel-Konfiguration erlauben",
+        "description": "Manche Spiele bringen eigene Konfigurationseinstellungen mit, zum Beispiel ein Kartenlayout. Wenn aktiv, werden diese Einstellungen beim Ansehen des Spiels über deine eigenen gelegt. Wenn aus, werden sie ignoriert. Ein Spiel kann weder die Druckskalierung noch diese Einstellung ändern."
+      },
       "importButton": "Konfiguration importieren"
+    },
+    "gameConfigIgnored": {
+      "label": "Dieses Spiel hat Konfigurationseinstellungen, die aus sind",
+      "tooltip": "Dieses Spiel hat eigene Konfigurationseinstellungen, sie sind aber aus. Klicken, um diese Einstellung zu ändern."
     },
     "toggle": "Konfiguration",
     "close": "Konfiguration schließen",

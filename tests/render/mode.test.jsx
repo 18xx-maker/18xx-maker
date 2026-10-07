@@ -134,12 +134,22 @@ describe("render mode config", () => {
     );
   });
 
-  it("has the config of the game over URL parameters", async () => {
+  it("has the config of the game over URL parameters when allowed", async () => {
     const { width } = await paper({
+      config: { allowGameConfig: true },
       search: "?config.paper.width=222",
       game: { ...games["18Test"], config: { paper: { width: 333 } } },
     });
 
     expect(width).toBe(333);
+  });
+
+  it("ignores the config of the game unless allowed", async () => {
+    const { width } = await paper({
+      search: "?config.paper.width=222",
+      game: { ...games["18Test"], config: { paper: { width: 333 } } },
+    });
+
+    expect(width).toBe(222);
   });
 });

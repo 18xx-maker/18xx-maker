@@ -30,7 +30,7 @@ const Input = ({
   large = false,
   fallback,
 }) => {
-  const { config, setConfig } = useConfig();
+  const { config, userLayerConfig, setConfig } = useConfig();
   const { isValidByInputName } = useValidation();
   const value = path(split(".", name), config) ?? fallback;
 
@@ -40,12 +40,12 @@ const Input = ({
   let valuePath = getPath(name);
   let update = (value) => {
     if (value !== undefined) {
-      setConfig(assocPath(valuePath, value, config));
+      setConfig(assocPath(valuePath, value, userLayerConfig));
       return;
     }
 
     // Unset the value, and the objects that are left empty by it
-    let next = dissocPath(valuePath, config);
+    let next = dissocPath(valuePath, userLayerConfig);
     for (
       let parent = init(valuePath);
       parent.length > 1 && isEmpty(path(parent, next));

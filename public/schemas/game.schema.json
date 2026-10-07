@@ -2283,6 +2283,40 @@
     "prototype": {
       "type": "boolean"
     },
+    "config": {
+      "type": "object",
+      "description": "The config settings of this game, applied on top of the user's config only when the user turns on the allowGameConfig setting. A partial config: only the settings to change. The printScale and allowGameConfig settings cannot be set by a game.",
+      "propertyNames": {
+        "enum": [
+          "theme",
+          "companiesTheme",
+          "companyNames",
+          "paper",
+          "currency",
+          "stock",
+          "cutlines",
+          "cutlinesOffset",
+          "bleed",
+          "margin",
+          "export",
+          "cards",
+          "privates",
+          "trains",
+          "charters",
+          "tokens",
+          "coords",
+          "tiles",
+          "companySvgLogos",
+          "overrideCompanies",
+          "overrideSelection",
+          "maps",
+          "plainMapCompanies",
+          "tileCompanies",
+          "straightCityNames",
+          "font"
+        ]
+      }
+    },
     "exports": {
       "type": "object",
       "description": "The options of an export (maker export, and the export options of the app) for this game. They are the defaults of the game: the flags of maker export, the user's config and the choices made in the export options panel come on top of them.",

@@ -10,6 +10,7 @@
   "bleed": 12.5,
   "margin": 25,
   "printScale": 100,
+  "allowGameConfig": false,
   "paper": {
     "width": 850,
     "height": 1100,

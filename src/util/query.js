@@ -147,6 +147,18 @@ export const togglePanelSearch = (search, panel) => {
   return searchString(params);
 };
 
+// The config panel on a section (the edit panel closes, it excludes the config)
+export const openConfigSearch = (search, section) => {
+  const params = new URLSearchParams(search);
+  params.delete("lines");
+  params.delete("hex");
+  params.delete("edit");
+  params.delete("editSection");
+  params.set("config", true);
+  params.set("section", section);
+  return searchString(params);
+};
+
 // The edit panel on a section: closed it opens on the section, open on
 // another section it goes to the section, open on the section it closes
 export const openEditSearch = (search, section) => {

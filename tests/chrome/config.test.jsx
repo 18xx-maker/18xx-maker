@@ -307,6 +307,64 @@ describe("config drawer", () => {
     await waitFor(() => expect(store.getState().config).toEqual({}));
   });
 
+  it("has the allow game config setting first in the data section", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/map?config=true&section=data",
+    );
+    const box = await screen.findByRole("checkbox", {
+      name: "Allow game config",
+    });
+    expect(box).not.toBeChecked();
+
+    await user.click(box);
+    await waitFor(() =>
+      expect(store.getState().config).toEqual({ allowGameConfig: true }),
+    );
+    expect(box).toBeChecked();
+  });
+
+  it("stores only the edited option, not the values of the game", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/charters?config=true&section=charters",
+      { config: { allowGameConfig: true } },
+    );
+    await screen.findByRole("button", { name: "Close Config" });
+
+    await user.click(screen.getByRole("combobox", { name: "Charter Layout" }));
+    await user.click(await screen.findByRole("option", { name: "3x1" }));
+    await waitFor(() =>
+      expect(store.getState().config).toEqual({
+        allowGameConfig: true,
+        charters: { layout: "3x1" },
+      }),
+    );
+  });
+
+  it("does not store the url config when another option is edited", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/map?config=true&section=export&config.margin=99",
+    );
+    await user.click(
+      await screen.findByRole("checkbox", {
+        name: "Export all layout options",
+      }),
+    );
+    await waitFor(() =>
+      expect(store.getState().config).toEqual({ export: { allLayouts: true } }),
+    );
+  });
+
+  it("shows the config of the user in the data section, not the game's", async () => {
+    renderApp("/games/18Test/map?config=true&section=data", {
+      config: { allowGameConfig: true },
+    });
+    await screen.findByRole("checkbox", { name: "Allow game config" });
+    await waitFor(() =>
+      expect(document.body).toHaveTextContent(/"allowGameConfig"/),
+    );
+    expect(document.body).not.toHaveTextContent(/allLayouts/);
+  });
+
   it("search params override stored config without being stored", async () => {
     const { store } = renderApp(
       "/games/18Test/charters?config=true&section=charters&config.charters.layout=3x1",

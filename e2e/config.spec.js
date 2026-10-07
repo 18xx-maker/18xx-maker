@@ -63,3 +63,28 @@ test("the config drawer opens and closes, reflected in the url", async ({
   await page.getByRole("button", { name: "Close Config" }).click();
   await expect(page).not.toHaveURL(/config=true/);
 });
+
+test("the toolbar warns about a game config that is off until it is allowed", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/map");
+  const icon = page.getByTestId("game-config-ignored");
+  await expect(icon).toBeVisible();
+
+  // The icon has no accessibility violations
+  const { default: AxeBuilder } = await import("@axe-core/playwright");
+  const results = await new AxeBuilder({ page })
+    .include('[data-testid="game-config-ignored"]')
+    .analyze();
+  expect(results.violations).toEqual([]);
+
+  await icon.click();
+  await expect(page).toHaveURL(/section=data/);
+  await page.getByRole("checkbox", { name: "Allow game config" }).click();
+  await expect(icon).toHaveCount(0);
+
+  // Only the setting is stored, not the config of the game
+  await expect
+    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("config"))))
+    .toEqual({ allowGameConfig: true });
+});

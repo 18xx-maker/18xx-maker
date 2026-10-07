@@ -15,7 +15,13 @@ import {
 const game = (slug, config) => ({ meta: { slug }, config });
 
 describe("config selector", () => {
-  const defaults = { a: "default", b: "default", c: "default", d: "default" };
+  const defaults = {
+    a: "default",
+    b: "default",
+    c: "default",
+    d: "default",
+    allowGameConfig: true,
+  };
   const user = { b: "user", c: "user", d: "user" };
   const select = createConfigSelector(defaults, user);
 
@@ -34,9 +40,22 @@ describe("config selector", () => {
       c: "stored",
       d: "game",
       e: "game",
+      allowGameConfig: true,
     });
     expect(searchConfig).toEqual({ d: "search", e: "search" });
     expect(gameConfig).toEqual({ e: "game", d: "game" });
+  });
+
+  it("ignores the game config unless the user allows it", () => {
+    const g = game("system:x", { e: "game" });
+    const off = createConfigSelector({ ...defaults, allowGameConfig: false });
+    const ignored = off({ config: {} }, "", g);
+    expect(ignored.config.e).toBeUndefined();
+    expect(ignored.gameConfigIgnored).toBe(true);
+
+    const stored = off({ config: { allowGameConfig: true } }, "", g);
+    expect(stored.config.e).toBe("game");
+    expect(stored.gameConfigIgnored).toBe(false);
   });
 
   it("lets search override stored and stored override user", () => {
@@ -58,6 +77,9 @@ describe("config selector", () => {
       config: { a: 1 },
       searchConfig: {},
       gameConfig: {},
+      gameConfigAllowed: false,
+      gameConfigIgnored: false,
+      userLayerConfig: { a: 1 },
     });
   });
 

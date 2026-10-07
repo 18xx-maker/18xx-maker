@@ -2283,6 +2283,40 @@
     "prototype": {
       "type": "boolean"
     },
+    "config": {
+      "type": "object",
+      "description": "Die Konfigurationseinstellungen dieses Spiels, die nur über die Konfiguration des Nutzers gelegt werden, wenn der Nutzer die Einstellung allowGameConfig einschaltet. Eine Teilkonfiguration: nur die zu ändernden Einstellungen. Die Einstellungen printScale und allowGameConfig kann ein Spiel nicht setzen.",
+      "propertyNames": {
+        "enum": [
+          "theme",
+          "companiesTheme",
+          "companyNames",
+          "paper",
+          "currency",
+          "stock",
+          "cutlines",
+          "cutlinesOffset",
+          "bleed",
+          "margin",
+          "export",
+          "cards",
+          "privates",
+          "trains",
+          "charters",
+          "tokens",
+          "coords",
+          "tiles",
+          "companySvgLogos",
+          "overrideCompanies",
+          "overrideSelection",
+          "maps",
+          "plainMapCompanies",
+          "tileCompanies",
+          "straightCityNames",
+          "font"
+        ]
+      }
+    },
     "exports": {
       "type": "object",
       "description": "Die Optionen eines Exports (maker export und die Exportoptionen der App) für dieses Spiel. Sie sind die Standardwerte des Spiels: die Flags von maker export, die Konfiguration des Nutzers und die Auswahl im Exportoptionen-Panel kommen darüber.",

@@ -52,7 +52,7 @@ export const getSchema = (name) => path(getSchemaPath(name), schema);
 const Config = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { config, resetConfig, importConfig } = useConfig();
+  const { userLayerConfig, resetConfig, importConfig } = useConfig();
   const [importText, setImportText] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -145,11 +145,11 @@ const Config = () => {
               {t("config.data.file")}
             </p>,
             <Code key="config-diff" language="json" className="w-full border">
-              {JSON.stringify(diff(defaultConfig, config), null, 2)}
+              {JSON.stringify(diff(defaultConfig, userLayerConfig), null, 2)}
             </Code>,
             <File
               key="config-file"
-              data={diff(defaultConfig, config)}
+              data={diff(defaultConfig, userLayerConfig)}
               filename="config.json"
               className="my-5"
             />,

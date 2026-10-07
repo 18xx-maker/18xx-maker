@@ -163,12 +163,21 @@ describe("print", () => {
     expect(files).toContain("18Full/18test-cards-custom-cards.pdf");
   });
 
-  it("uses the layouts of the game's own config", async () => {
+  it("uses the layouts of the game's own config when allowed", async () => {
     addGame("18Full");
+    mocks.customConfig.allowGameConfig = true;
     loadGame.mockReturnValue(game({ config: { cards: { layout: "dtgDie" } } }));
 
     const files = await printed("18Full", {});
     expect(files).toContain("18Full/18test-cards-dtgDie.pdf");
+  });
+
+  it("ignores the game's own config unless allowed", async () => {
+    addGame("18Full");
+    loadGame.mockReturnValue(game({ config: { cards: { layout: "dtgDie" } } }));
+
+    const files = await printed("18Full", {});
+    expect(files).not.toContain("18Full/18test-cards-dtgDie.pdf");
   });
 
   it("prints every game json file with --all", async () => {

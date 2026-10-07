@@ -2283,6 +2283,40 @@
     "prototype": {
       "type": "boolean"
     },
+    "config": {
+      "type": "object",
+      "description": "此游戏的配置设置,仅当用户开启 allowGameConfig 设置时才会覆盖用户的配置。这是部分配置:只包含要更改的设置。游戏无法设置 printScale 和 allowGameConfig。",
+      "propertyNames": {
+        "enum": [
+          "theme",
+          "companiesTheme",
+          "companyNames",
+          "paper",
+          "currency",
+          "stock",
+          "cutlines",
+          "cutlinesOffset",
+          "bleed",
+          "margin",
+          "export",
+          "cards",
+          "privates",
+          "trains",
+          "charters",
+          "tokens",
+          "coords",
+          "tiles",
+          "companySvgLogos",
+          "overrideCompanies",
+          "overrideSelection",
+          "maps",
+          "plainMapCompanies",
+          "tileCompanies",
+          "straightCityNames",
+          "font"
+        ]
+      }
+    },
     "exports": {
       "type": "object",
       "description": "此游戏的导出选项(maker export 以及应用的导出选项)。它们是游戏的默认值:maker export 的参数、用户配置和导出选项面板中的选择会覆盖它们。",
