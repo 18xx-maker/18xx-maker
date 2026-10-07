@@ -24,9 +24,10 @@ import Group from "@/components/nav/sidebar/Group";
 import HistoryItem from "@/components/nav/sidebar/HistoryItem";
 import Item from "@/components/nav/sidebar/Item";
 import ProblemsItem from "@/components/nav/sidebar/ProblemsItem";
+import SaveAsItem from "@/components/nav/sidebar/SaveAsItem";
 import UpdateItem from "@/components/nav/sidebar/UpdateItem";
 
-import { useLoadedGame } from "@/hooks";
+import { useLoadedGame, useSaveAs } from "@/hooks";
 import { selectGameProblems } from "@/state";
 import {
   selectGameChangedFields,
@@ -42,6 +43,8 @@ const AppSidebar = (props) => {
   const update = useSelector(prop("update"));
   // The export menu needs the game itself, not only its entry in the store
   const resolved = useSelector((state) => selectGameForSlug(state, game?.slug));
+
+  const saveAs = useSaveAs(resolved);
 
   const issues = useSelector((state) => selectGameProblems(state, game?.slug));
   // A check that could not run is not a problem of the game
@@ -73,6 +76,9 @@ const AppSidebar = (props) => {
             />,
             capability.electron && resolved && <ExportItem key="game-export" />,
             resolved && <DownloadItem key="game-download" game={resolved} />,
+            saveAs.available && (
+              <SaveAsItem key="game-save-as" onClick={saveAs.start} />
+            ),
             resolved && changedFields.length > 0 && (
               <ChangesItem
                 key="game-changes"
@@ -118,44 +124,47 @@ const AppSidebar = (props) => {
     }, items);
   };
   return (
-    <Sidebar {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <div>
-                <img
-                  src={`${import.meta.env.BASE_URL}logo.png`}
-                  alt=""
-                  className="size-8"
-                />
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">18xx Maker</span>
-                  <span className="">
-                    <a
-                      target="_blank"
-                      rel="noreferrer"
-                      href={`https://github.com/18xx-maker/18xx-maker/releases/tag/v${version}`}
-                    >
-                      {version}
-                    </a>
-                  </span>
+    <>
+      <Sidebar {...props}>
+        <SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton size="lg" asChild>
+                <div>
+                  <img
+                    src={`${import.meta.env.BASE_URL}logo.png`}
+                    alt=""
+                    className="size-8"
+                  />
+                  <div className="flex flex-col gap-0.5 leading-none">
+                    <span className="font-semibold">18xx Maker</span>
+                    <span className="">
+                      <a
+                        target="_blank"
+                        rel="noreferrer"
+                        href={`https://github.com/18xx-maker/18xx-maker/releases/tag/v${version}`}
+                      >
+                        {version}
+                      </a>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>{renderItems(mainMenu)}</SidebarContent>
-      <SidebarFooter>
-        <SidebarMenu>
-          {update && update.available && (
-            <UpdateItem version={update.info?.version} />
-          )}
-          <Item to="/settings" label={t("settings.title")} icon={Settings} />
-        </SidebarMenu>
-      </SidebarFooter>
-    </Sidebar>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarHeader>
+        <SidebarContent>{renderItems(mainMenu)}</SidebarContent>
+        <SidebarFooter>
+          <SidebarMenu>
+            {update && update.available && (
+              <UpdateItem version={update.info?.version} />
+            )}
+            <Item to="/settings" label={t("settings.title")} icon={Settings} />
+          </SidebarMenu>
+        </SidebarFooter>
+      </Sidebar>
+      {saveAs.dialog}
+    </>
   );
 };
 

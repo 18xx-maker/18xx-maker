@@ -169,6 +169,21 @@ const pages = [
     ready: (page) => page.getByRole("grid", { name: "Stock market cells" }),
     select: /^Row 1, column 7:/,
   })),
+  // The dialog of Save as, in the private file system (no file pickers)
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `save as dialog (${colorScheme})`,
+    url: "/games/18Test",
+    colorScheme,
+    init: () => {
+      delete window.showOpenFilePicker;
+      delete window.showSaveFilePicker;
+    },
+    ready: (page) => page.getByRole("button", { name: "Save as..." }),
+    before: async (page) => {
+      await page.getByRole("button", { name: "Save as..." }).click();
+      await expect(page.getByRole("dialog", { name: "Save as" })).toBeVisible();
+    },
+  })),
   {
     name: "settings",
     url: "/settings",
@@ -197,11 +212,13 @@ for (const {
   open,
   more,
   before,
+  init,
 } of pages) {
   test(`no serious or critical accessibility violations: ${name}`, async ({
     page,
   }) => {
     if (colorScheme) await page.emulateMedia({ colorScheme });
+    if (init) await page.addInitScript(init);
     await page.goto(url);
     await expect(ready(page)).toBeVisible();
     if (before) await before(page);

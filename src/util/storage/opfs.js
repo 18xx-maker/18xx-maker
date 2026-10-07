@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { assoc, indexBy, prop } from "ramda";
 
+import { NAME_EXISTS, NAME_INVALID, sanitizeFilename } from "@/util/filename";
 import { info, loadFile } from "@/util/loading";
 
 export const TYPE = "internal";
@@ -128,4 +129,47 @@ export const overwriteGame = async (id, text) => {
   const dir = await getGamesDirectory();
   await dir.getFileHandle(name(id));
   await writeGameFile(name(id), text);
+};
+
+const saveAsError = (code, message) =>
+  Object.assign(new Error(message), { code });
+
+// The ids of the games in the private file system
+const listIds = async () => {
+  const dir = await getGamesDirectory();
+  const ids = [];
+  for await (const handle of dir.values()) {
+    ids.push(handle.name.replace(/\.json$/, ""));
+  }
+  return ids;
+};
+
+// Whether a name is taken, and the id it would replace. Names are compared
+// without case, as a case-insensitive file system would.
+const findId = async (id) => {
+  const wanted = id.toLowerCase();
+  if (!wanted) return undefined;
+  return (await listIds()).find(
+    (existing) => existing.toLowerCase() === wanted,
+  );
+};
+
+export const findGame = (typed) =>
+  findId(sanitizeFilename(typed, { urlSafe: true }));
+
+// Writes the text as a new game named by the user and gives its slug. The
+// sanitized name is the id, so it is safe in a URL. A name that is taken is an
+// error (code "exists") unless overwrite is set, which replaces that game.
+export const saveGameAs = async (typed, text, { overwrite = false } = {}) => {
+  const id = sanitizeFilename(typed, { urlSafe: true });
+  if (!id) throw saveAsError(NAME_INVALID, "Invalid file name");
+
+  const existing = await findId(id);
+  if (existing !== undefined && !overwrite) {
+    throw saveAsError(NAME_EXISTS, `${existing} already exists`);
+  }
+
+  const target = existing ?? id;
+  await writeGameFile(name(target), text);
+  return slug(target);
 };

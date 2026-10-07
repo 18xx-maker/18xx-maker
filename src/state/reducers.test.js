@@ -41,6 +41,8 @@ import {
   createSetSummaries,
   createUpdate,
   errorsReducer,
+  gameHistoryReducer,
+  gameOriginalReducer,
   gameReducer,
   loadedGameReducer,
   settingsReducer,
@@ -238,18 +240,49 @@ describe("loadedGameReducer", () => {
     expect(loadedGameReducer({ id: "a" }, createSetGame(null))).toBeFalsy();
   });
 
-  it("DELETE_GAME clears when ids match", () => {
+  it("DELETE_GAME clears when slugs match", () => {
     expect(
-      loadedGameReducer({ id: "a" }, createDeleteGame("system:a")),
+      loadedGameReducer(
+        { id: "a", slug: "system:a" },
+        createDeleteGame("system:a"),
+      ),
     ).toBeFalsy();
   });
 
   it("DELETE_GAME keeps the state otherwise", () => {
-    const state = frozen({ id: "a" });
+    const state = frozen({ id: "a", slug: "system:a" });
     expect(loadedGameReducer(state, createDeleteGame("system:b"))).toBe(state);
     expect(
       loadedGameReducer(undefined, createDeleteGame("system:b")),
     ).toBeFalsy();
+  });
+});
+
+// An id in the private file system can be the id of a bundled game
+describe("games of different types with the same id", () => {
+  const bundled = game("1889", "bundled");
+  const internal = game("1889", "internal");
+  const forget = createDeleteGame("internal:1889");
+
+  it("forgetting one keeps the other open", () => {
+    const state = frozen(bundled);
+    expect(gameReducer(state, forget)).toBe(state);
+    expect(gameOriginalReducer(state, forget)).toBe(state);
+    const loaded = frozen({ id: "1889", slug: "1889" });
+    expect(loadedGameReducer(loaded, forget)).toBe(loaded);
+    const history = frozen([{ savedAt: 1, game: bundled }]);
+    expect(gameHistoryReducer(history, forget)).toBe(history);
+  });
+
+  it("forgetting the open one clears it", () => {
+    expect(gameReducer(frozen(internal), forget)).toBeFalsy();
+    expect(gameOriginalReducer(frozen(internal), forget)).toBeFalsy();
+    expect(
+      loadedGameReducer(frozen({ id: "1889", slug: "internal:1889" }), forget),
+    ).toBeFalsy();
+    expect(
+      gameHistoryReducer(frozen([{ savedAt: 1, game: internal }]), forget),
+    ).toEqual([]);
   });
 });
 

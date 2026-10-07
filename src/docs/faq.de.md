@@ -2,7 +2,7 @@
 
 ## Wo werden meine Spiele gespeichert?
 
-Ein mitgeliefertes Spiel ist Teil von 18xx Maker. Ein Spiel, das du öffnest,
+Ein mitgeliefertes Spiel ist Teil von 18xx Maker; mit „Speichern unter...“ im Spielmenü speicherst du eine Kopie davon als dein eigenes Spiel. Ein Spiel, das du öffnest,
 wird nirgendwo anders hin kopiert: Die App und unterstützende Browser merken
 sich, wo die Datei liegt, andere Browser behalten eine private Kopie. Wenn du
 ein Spiel von der Seite [Spiele laden](/games) entfernst, wird deine Datei nie

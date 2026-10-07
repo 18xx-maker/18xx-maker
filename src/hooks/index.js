@@ -7,3 +7,4 @@ export * from "@/hooks/useEditor";
 export * from "@/hooks/usePrint";
 export * from "@/hooks/useSettings";
 export * from "@/hooks/useEditPanel";
+export * from "@/hooks/useSaveAs";

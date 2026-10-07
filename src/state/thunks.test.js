@@ -10,19 +10,25 @@ import {
   loadGame,
   loadSummaries,
   refreshGame,
+  saveGameAs,
 } from "@/state";
 import capability from "@/util/capability";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
 
+vi.mock("react-i18next", () => ({
+  getI18n: () => ({ t: (key) => key }),
+}));
 vi.mock("@/util/storage/idb", () => ({
   TYPE: "system",
+  createGameFile: vi.fn(),
   loadGame: vi.fn(),
   deleteGame: vi.fn(),
   loadSummaries: vi.fn(),
 }));
 vi.mock("@/util/storage/opfs", () => ({
   TYPE: "internal",
+  saveGameAs: vi.fn(),
   loadGame: vi.fn(),
   deleteGame: vi.fn(),
   loadSummaries: vi.fn(),
@@ -315,5 +321,108 @@ describe("loadSummaries", () => {
     await loadSummaries()(dispatch);
     expect(opfs.loadSummaries).not.toHaveBeenCalled();
     expect(types()).toEqual([createSetSummaries({ e: 1 })]);
+  });
+});
+
+describe("saveGameAs", () => {
+  const bundled = () => ({ ...game("bundled", "1889"), map: { edited: true } });
+  const dialog = { title: "Save as", filter: "Game" };
+  const run = (options = {}) =>
+    saveGameAs({ name: "My Game", dialog, ...options })(dispatch, getState);
+
+  beforeEach(() => {
+    state = { game: bundled() };
+  });
+
+  it("writes the private file system copy and gives its slug", async () => {
+    opfs.saveGameAs.mockResolvedValue("internal:my-game");
+
+    expect(await run()).toBe("internal:my-game");
+
+    expect(opfs.saveGameAs).toHaveBeenCalledWith(
+      "My Game",
+      expect.stringContaining('"edited": true'),
+      { overwrite: false },
+    );
+    expect(JSON.parse(opfs.saveGameAs.mock.calls[0][1]).meta).toBeUndefined();
+    // Only an alert: the page of the new game loads it
+    expect(types().map((action) => action.type)).not.toContain("SET_GAME");
+    expect(types()[0].alert.type).toBe("success");
+  });
+
+  it("passes overwrite on", async () => {
+    opfs.saveGameAs.mockResolvedValue("internal:my-game");
+    await run({ overwrite: true });
+    expect(opfs.saveGameAs.mock.calls[0][2]).toEqual({ overwrite: true });
+  });
+
+  it("rethrows a name that is taken or not usable and alerts nothing", async () => {
+    for (const code of ["exists", "invalid"]) {
+      opfs.saveGameAs.mockRejectedValue(
+        Object.assign(new Error("x"), { code }),
+      );
+      await expect(run()).rejects.toMatchObject({ code });
+    }
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+
+  it("uses the file picker with a file name", async () => {
+    Object.assign(capability, {
+      system: true,
+      apis: { save_file_picker: true },
+    });
+    idb.createGameFile.mockResolvedValue("system:abc");
+
+    expect(await run({ name: "My Game" })).toBe("system:abc");
+
+    expect(idb.createGameFile).toHaveBeenCalledWith(
+      expect.any(String),
+      "My Game.json",
+    );
+    expect(opfs.saveGameAs).not.toHaveBeenCalled();
+  });
+
+  it("asks the Electron app with the translated labels", async () => {
+    Object.assign(capability, { electron: true });
+    window.api = { saveGameAs: vi.fn(async () => "electron:abc") };
+
+    expect(await run()).toBe("electron:abc");
+
+    expect(window.api.saveGameAs).toHaveBeenCalledWith(
+      "My Game",
+      expect.any(String),
+      "Save as",
+      "Game",
+    );
+  });
+
+  it("does nothing when the dialog is cancelled", async () => {
+    Object.assign(capability, { electron: true });
+    window.api = { saveGameAs: vi.fn(async () => undefined) };
+
+    expect(await run()).toBeUndefined();
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+
+  it("alerts a failure and gives no slug", async () => {
+    opfs.saveGameAs.mockRejectedValue(new Error("disk full"));
+
+    expect(await run()).toBeUndefined();
+
+    expect(types()).toHaveLength(1);
+    expect(types()[0].alert).toMatchObject({
+      type: "error",
+      message: "disk full",
+    });
+  });
+
+  it("does nothing for a game that has a file or without a place to save", async () => {
+    state = { game: game("internal", "abc") };
+    expect(await run()).toBeUndefined();
+    state = { game: bundled() };
+    Object.assign(capability, { internal: false, system: false });
+    expect(await run()).toBeUndefined();
+    expect(opfs.saveGameAs).not.toHaveBeenCalled();
+    expect(dispatch).not.toHaveBeenCalled();
   });
 });

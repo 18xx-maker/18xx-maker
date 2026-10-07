@@ -6,9 +6,10 @@ import { games } from "@/data";
 import { createAlert } from "@/state/alerts";
 import { selectGameChanged } from "@/state/selectors";
 import { parseSlug } from "@/util";
-import { canSaveGame } from "@/util/canSaveGame";
+import { canSaveGame, saveAsBackend } from "@/util/canSaveGame";
 import capability from "@/util/capability";
 import { gameText } from "@/util/download";
+import { NAME_EXISTS, NAME_INVALID, sanitizeFilename } from "@/util/filename";
 import { BUNDLED, ELECTRON, getGameSummary } from "@/util/loading.js";
 import { getRenderInput } from "@/util/renderInput";
 import * as idb from "@/util/storage/idb";
@@ -351,6 +352,56 @@ export const saveGame =
     }
   };
 
+// Saves a copy of a game that has no file (a bundled game) as a new game and
+// gives its slug, or undefined when the user cancels or it fails (with an
+// alert). It only writes and registers the file: the page of the new game
+// loads it, so the edits of the bundled game stay where they are. `name` is
+// the file name the user typed (or the suggestion for a save dialog, which
+// has its own). A name that is taken or not usable is rethrown, the dialog
+// shows it.
+export const saveGameAs =
+  ({ name, overwrite = false, dialog = {} }) =>
+  async (dispatch, getState) => {
+    const { game } = getState();
+    const backend = saveAsBackend(game?.meta.type);
+    if (!backend) return undefined;
+
+    const text = gameText(game);
+    try {
+      // The picker and the dialog need the click that saved, so nothing is
+      // awaited before them
+      const slug =
+        backend === "electron"
+          ? await window.api.saveGameAs(
+              name,
+              text,
+              dialog.title ?? "",
+              dialog.filter ?? "",
+            )
+          : backend === "picker"
+            ? await idb.createGameFile(
+                text,
+                `${sanitizeFilename(name) || "game"}.json`,
+              )
+            : await opfs.saveGameAs(name, text, { overwrite });
+
+      if (slug) {
+        dispatch(
+          createAlert(
+            t("saveAs.saved"),
+            t("saveAs.savedMessage", { title: game.info.title }),
+            "success",
+          ),
+        );
+      }
+      return slug;
+    } catch (e) {
+      if (e.code === NAME_EXISTS || e.code === NAME_INVALID) throw e;
+      dispatch(createAlert(t("saveAs.failed"), e.message, "error"));
+      return undefined;
+    }
+  };
+
 export const gameReducer = (state = undefined, action) => {
   switch (action.type) {
     case SET_GAME:
@@ -363,7 +414,7 @@ export const gameReducer = (state = undefined, action) => {
         ? { ...action.game, meta: state.meta }
         : state;
     case DELETE_GAME:
-      if (state && state.meta.id === action.meta.id) {
+      if (state && state.meta.slug === action.meta.slug) {
         return undefined;
       }
       return state;
@@ -380,7 +431,7 @@ export const gameOriginalReducer = (state = undefined, action) => {
     case GAME_SAVED:
       return { ...action.game };
     case DELETE_GAME:
-      return state && state.meta.id === action.meta.id ? undefined : state;
+      return state && state.meta.slug === action.meta.slug ? undefined : state;
     default:
       return state;
   }
@@ -396,7 +447,7 @@ export const gameHistoryReducer = (state = [], action) => {
     case GAME_SAVED:
       return [{ savedAt: action.savedAt, game: action.previous }, ...state];
     case DELETE_GAME:
-      return state[0]?.game.meta.id === action.meta.id ? [] : state;
+      return state[0]?.game.meta.slug === action.meta.slug ? [] : state;
     default:
       return state;
   }
@@ -416,7 +467,7 @@ export const loadedGameReducer = (state = undefined, action) => {
   }
 
   if (action.type === DELETE_GAME) {
-    if (state && state.id === action.meta.id) {
+    if (state && state.slug === action.meta.slug) {
       return undefined;
     }
   }

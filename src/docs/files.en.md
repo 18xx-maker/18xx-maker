@@ -10,7 +10,9 @@ page. Some examples are [Shikoku 1889](/games/1889/map) and [The Old Prince
 1871](/games/TheOldPrince1871/map). These games are always listed on the [Load
 Games](/games) page. You can download the json to see how the games are built
 using the "Download" (on the web) or "Save" (in the app) button on the game's
-info page.
+info page. To keep a copy you can edit and save, use "Save as..." in the game
+menu (or on the Changes page): it asks for a file name, saves a copy of the game
+as it is now, and opens that copy. The bundled game itself never changes.
 
 To check a game file for mistakes, run `pnpm maker validate my-game.json` (it
 checks the file against the game schema, see [JSON schemas](/docs/games/schemas)).
@@ -334,7 +336,7 @@ content as the Download button, so the first save may reformat the file.
 "Revert to saved" drops the changes. Saving works for games in the app, for
 games opened from your file system in a supporting browser (the browser asks
 for permission to write), and for games in the browser's private file system.
-Bundled games can only be downloaded. If the file changed outside 18xx Maker
+Bundled games cannot be saved over, they have no file: use "Save as..." to save a copy, or Download. If the file changed outside 18xx Maker
 since it was loaded, nothing is written until you choose to reload it (losing
 your changes) or to overwrite it.
 

@@ -2,7 +2,7 @@
 
 ## Where are my games saved?
 
-A bundled game is part of 18xx Maker. A game you open is not copied anywhere
+A bundled game is part of 18xx Maker; "Save as..." in the game menu saves a copy of it as a game of your own. A game you open is not copied anywhere
 else: the app and supporting browsers remember where the file is, other
 browsers keep a private copy. Removing a game from the [Load Games](/games)
 page never deletes your file. See [Files](/docs/files).

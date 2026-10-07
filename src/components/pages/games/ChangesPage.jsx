@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 
-import { useGame } from "@/hooks";
+import { useGame, useSaveAs } from "@/hooks";
 import { CONFLICT, SAVED, reloadGame, revertGame, saveGame } from "@/state";
 import { selectGameChanged, selectGameOriginal } from "@/state/selectors";
 import { canSaveGame } from "@/util/canSaveGame";
@@ -20,6 +20,7 @@ const ChangesPage = () => {
   const changed = useSelector(selectGameChanged);
   const [conflict, setConflict] = useState(false);
   const [saving, setSaving] = useState(false);
+  const saveAs = useSaveAs(game);
 
   const save = async (force) => {
     setSaving(true);
@@ -46,6 +47,9 @@ const ChangesPage = () => {
               <Button disabled={saving} onClick={() => save(false)}>
                 {t("changes.save")}
               </Button>
+            )}
+            {saveAs.available && (
+              <Button onClick={saveAs.start}>{t("saveAs.nav")}</Button>
             )}
             <Button variant="outline" onClick={() => dispatch(revertGame())}>
               {t("changes.revert")}
@@ -74,6 +78,7 @@ const ChangesPage = () => {
           <Suspense fallback={null}>
             <DiffView original={original} edited={game} />
           </Suspense>
+          {saveAs.dialog}
         </>
       )}
     </div>

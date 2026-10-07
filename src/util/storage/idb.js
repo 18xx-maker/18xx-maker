@@ -166,6 +166,22 @@ export const loadGame = (id) =>
     .then(assoc("meta", meta(id)))
     .then(updateSummary);
 
+// The id of the registered game that is the same file as the handle
+const registeredId = async (handle) => {
+  if (typeof handle.isSameEntry !== "function") return undefined;
+
+  const summaries = await op(GAME_FILE_STORE, (store) => store.getAll());
+  for (const summary of summaries) {
+    if (
+      summary.handle &&
+      (await handle.isSameEntry(summary.handle).catch(() => false))
+    ) {
+      return summary.id;
+    }
+  }
+  return undefined;
+};
+
 export const saveGameHandle = (handle) => {
   const store_name =
     handle.kind === "directory" ? GAME_DIRECTORY_STORE : GAME_FILE_STORE;
@@ -177,7 +193,17 @@ export const saveGameHandle = (handle) => {
     .catch(() => {
       throw new Error("File was not a valid 18xx-maker game");
     })
-    .then(assoc("meta", meta(uuidv4())))
+    .then(async (game) =>
+      assoc(
+        "meta",
+        meta(
+          handle.kind === "directory"
+            ? uuidv4()
+            : ((await registeredId(handle)) ?? uuidv4()),
+        ),
+        game,
+      ),
+    )
     .then((game) => {
       return op(
         store_name,

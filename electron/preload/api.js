@@ -39,6 +39,11 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
     // was loaded: a file that changed since is not overwritten (conflict).
     saveGame: (id, text, expected) =>
       ipcRenderer.invoke("saveGame", id, text, expected),
+    // Saves a copy of a game that has no file (text, with the labels of the
+    // save dialog) where the user chooses and gives its slug, or undefined
+    // when the dialog is cancelled
+    saveGameAs: (name, text, title, filterName) =>
+      ipcRenderer.invoke("saveGameAs", name, text, title, filterName),
     loadSummaries: () => ipcRenderer.invoke("loadSummaries"),
     openGame: () =>
       ipcRenderer
