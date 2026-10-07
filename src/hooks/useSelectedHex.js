@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { useLocation, useNavigate } from "react-router";
 
+import { useLocation, useNavigate } from "@/router";
 import { COORD_PATTERN } from "@/util/hexEdit";
 import { clearHexSearch, selectHexSearch } from "@/util/query";
 

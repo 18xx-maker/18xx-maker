@@ -91,6 +91,19 @@ export const useNavigate = () => {
   );
 };
 
+// Decoded params. A splat that matched nothing is an empty string, as in
+// react-router (the "*" of "/games/x" in "/games/:slug/*").
+const decodeParams = (params, pattern = "") =>
+  Object.fromEntries(
+    Object.entries({
+      ...params,
+      ...(pattern.endsWith("/*?") ? { "*": params["*"] ?? "" } : {}),
+    }).map(([key, value]) => [
+      key,
+      value === undefined ? value : safeDecode(value),
+    ]),
+  );
+
 // The match of a pattern with the location (null for none) as
 // { params, pathname }, like react-router had it. A trailing /* matches the
 // path without a rest too.
@@ -100,37 +113,17 @@ export const useMatch = (pattern) => {
   const pathname = raw || "/";
 
   return useMemo(() => {
-    const [matches, params] = matchRoute(
-      router.parser,
-      optionalSplat(pattern),
-      pathname,
-    );
+    const optional = optionalSplat(pattern);
+    const [matches, params] = matchRoute(router.parser, optional, pathname);
     if (!matches) return null;
-    return {
-      params: Object.fromEntries(
-        Object.entries(params).map(([key, value]) => [
-          key,
-          value === undefined ? value : safeDecode(value),
-        ]),
-      ),
-      pathname,
-    };
+    return { params: decodeParams(params, optional), pathname };
   }, [router.parser, pattern, pathname]);
 };
 
 // The params of the route, decoded
 export const useParams = () => {
   const params = useWouterParams();
-  return useMemo(
-    () =>
-      Object.fromEntries(
-        Object.entries(params).map(([key, value]) => [
-          key,
-          value === undefined ? value : safeDecode(value),
-        ]),
-      ),
-    [params],
-  );
+  return useMemo(() => decodeParams(params), [params]);
 };
 
 // to is a url or { pathname, search, hash }

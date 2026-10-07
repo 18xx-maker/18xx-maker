@@ -1,8 +1,7 @@
-import { Navigate } from "react-router";
-
 import Editor from "@/components/editor/Editor";
 import Map from "@/components/map/Map";
 
+import { Redirect } from "@/router";
 import { scalePageSize } from "@/util";
 import { getMapData } from "@/util/map";
 
@@ -12,7 +11,7 @@ const MapSingle = ({ game, config, variation }) => {
 
   // Do redirects if we need or do not need a variation in the url
   if (!game.map) {
-    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
   }
 
   // Get map data

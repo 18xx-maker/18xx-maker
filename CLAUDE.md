@@ -50,9 +50,11 @@ Layout (projects are defined in `test.projects` in `vitest.config.js`):
   needs a real DOM is a component test.
 - `component` (real Chromium via `@vitest/browser` + Playwright):
   `tests/**/*.test.jsx` and `src/**/*.test.jsx`. Component tests do not use jsdom: it
-  disagrees with Node on `Request`/`AbortSignal`, which react-router needs.
+  disagrees with Node on `Request`/`AbortSignal`.
   Setup is `tests/support/setup.js`; render with `renderApp` from `tests/support/helpers.jsx`
-  (real store + memory router built from `rootRoutes`).
+  (real store + the app's routes on the memory router of
+  `tests/support/memoryRouter.jsx`, which exposes `router.state.location`,
+  `router.state.historyAction` and `router.navigate`).
 - `e2e/*.spec.js`: Playwright on `vite preview` of `dist/site` (port 4318).
   Rebuild after any code change, specs never see the dev server.
 
@@ -159,6 +161,12 @@ Design checklist for tokens and icons:
 - Held back on purpose: `vite` 7 (electron-vite 5 caps at 7),
   `svgo` 3 (4 rewrites every data SVG), `playwright` pinned (the pinned
   Chromium must be installed).
+- Routing is wouter, behind one module: only `src/router` imports it. The app
+  reads `{ pathname, search, hash }` from `useLocation` and navigates with
+  `useNavigate` (a url, `{ search }` or a number of entries). In Electron the
+  location is the hash of the page (`#/games/x/map?print=true`, an anchor is a
+  second `#`). Patterns are in `routePatterns` (`src/routes.jsx`), a splat is
+  optional (`/games/:slug/*?`).
 - Redux state uses hand-rolled `combineReducers`/`composeReducers`/`reducePath`
   (`src/state/helpers.js`). A move to `createSlice` must keep the root state
   contract test and persisted fixture passing.

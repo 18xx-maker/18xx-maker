@@ -274,7 +274,7 @@
     "react-i18next": "^17.0.15",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.3.0",
-    "react-router": "^8.4.0",
+    "regexparam": "^3.0.0",
     "remark-flexible-containers": "^1.5.8",
     "remark-gemoji": "^8.0.0",
     "remark-gfm": "^4.0.1",

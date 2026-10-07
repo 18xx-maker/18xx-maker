@@ -1,8 +1,7 @@
-import { Navigate } from "react-router";
-
 import Map from "@/components/map/Map";
 import Paginate from "@/components/page/Paginate";
 
+import { Redirect } from "@/router";
 import { getMapData } from "@/util/map";
 
 const MapPaginated = ({ game, config, variation }) => {
@@ -10,7 +9,7 @@ const MapPaginated = ({ game, config, variation }) => {
   const hexWidth = config.tiles.mapWidth;
 
   if (!game.map) {
-    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let data = getMapData(game, coords, hexWidth, variation);

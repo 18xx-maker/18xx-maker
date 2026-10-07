@@ -1,5 +1,3 @@
-import { Navigate } from "react-router";
-
 import { addIndex, ascend, keys, map, sortWith } from "ramda";
 
 import Tile from "@/components/Tile";
@@ -9,6 +7,7 @@ import Svg from "@/components/svg/Svg";
 import ColorContext from "@/context/ColorContext";
 import { tiles } from "@/data";
 import { useGame } from "@/hooks";
+import { Redirect } from "@/router";
 import { getTile } from "@/util";
 
 const getCol = (tile) => {
@@ -28,7 +27,7 @@ const TileManifestPage = () => {
   const game = useGame();
 
   if (!game.tiles) {
-    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let ids = sortWith(

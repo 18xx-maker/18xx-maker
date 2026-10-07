@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router";
 
 import {
   chain,
@@ -36,6 +35,7 @@ import Code from "@/components/docs/Code";
 
 import defaultConfig from "@/defaults.json";
 import { useConfig } from "@/hooks";
+import { useLocation, useNavigate } from "@/router";
 import schema from "@/schemas/config.schema.json";
 import { createAlert } from "@/state";
 import { diff } from "@/util/diff";

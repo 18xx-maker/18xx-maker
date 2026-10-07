@@ -1,12 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { render, within } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { RouterProvider, createMemoryRouter } from "react-router";
 
 import Svg from "@/components/svg/Svg";
 
 import { games } from "@/data";
+import { Route } from "@/router";
+import { optionalSplat } from "@/router/url";
 import { initialState, rootReducer } from "@/state";
+
+import {
+  RouterProvider,
+  createMemoryRouter,
+} from "@tests/support/memoryRouter.jsx";
 
 // Renders print elements on a game route (so useGame returns `game`) with
 // the real store and config hooks. `search` drives config through the url
@@ -31,13 +37,14 @@ export const mountElement = async (
       }),
     preloadedState: { ...initialState, config, game },
   });
-  const router = createMemoryRouter(
-    [{ path, element: <div data-testid="root">{element}</div> }],
-    { initialEntries: [`${url}${search}`] },
-  );
+  const router = createMemoryRouter([`${url}${search}`]);
   const result = render(
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+        <Route path={optionalSplat(path)}>
+          <div data-testid="root">{element}</div>
+        </Route>
+      </RouterProvider>
     </Provider>,
   );
   return {

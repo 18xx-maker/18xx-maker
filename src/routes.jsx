@@ -1,7 +1,5 @@
-import { Navigate } from "react-router";
-
 import Root from "@/components/Root";
-import RouteError from "@/components/RouteError";
+import RouteErrorBoundary from "@/components/RouteErrorBoundary";
 import App from "@/components/pages/App";
 import DocsPage from "@/components/pages/DocsPage";
 import ElementsPage from "@/components/pages/ElementsPage";
@@ -36,64 +34,97 @@ import B18TokensPage from "@/components/pages/games/b18/B18TokensPage";
 // Games Routes
 import LoadGamesPage from "@/components/pages/load/LoadGamesPage";
 
+import { Redirect, Route, Switch } from "@/router";
 import capability from "@/util/capability";
 
-export const rootRoutes = [
-  {
-    path: "*",
-    element: <Root />,
-    errorElement: <RouteError />,
-    children: [
-      { index: true, element: <HomePage /> },
-      {
-        path: "app",
-        element: capability.electron ? <App /> : <Navigate to="/" />,
-      },
-      {
-        path: "elements/*",
-        element: <ElementsPage />,
-        children: [
-          { index: true, element: <AtomsPage /> },
-          { path: "tiles", element: <AllTilesPage /> },
-          { path: "logos", element: <LogosPage /> },
-          { path: "positioning", element: <PositioningPage /> },
-        ],
-      },
-      {
-        path: "games/*",
-        children: [
-          { index: true, element: <LoadGamesPage /> },
-          {
-            path: ":slug/*",
-            element: <GamePage />,
-            children: [
-              { index: true, element: <InfoPage /> },
-              { path: "b18/map", element: <B18MapPage /> },
-              { path: "b18/tiles/:color", element: <B18TilesPage /> },
-              { path: "b18/tokens", element: <B18TokensPage /> },
-              { path: "background", element: <BackgroundPage /> },
-              { path: "cards", element: <CardsPage /> },
-              { path: "cards/:type/:index", element: <CardPage /> },
-              { path: "changes", element: <ChangesPage /> },
-              { path: "charters", element: <ChartersPage /> },
-              { path: "charters/:index", element: <CharterPage /> },
-              { path: "history", element: <HistoryPage /> },
-              { path: "map", element: <MapPage /> },
-              { path: "market", element: <MarketPage /> },
-              { path: "par", element: <ParPage /> },
-              { path: "problems", element: <ProblemsPage /> },
-              { path: "revenue", element: <RevenuePage /> },
-              { path: "tile-manifest", element: <TileManifestPage /> },
-              { path: "tiles", element: <TilesPage /> },
-              { path: "tiles/:id", element: <TilePage /> },
-              { path: "tokens", element: <TokensPage /> },
-              { path: "tokens/:index", element: <TokenPage /> },
-            ],
-          },
-        ],
-      },
-      { path: "docs/*", element: <DocsPage /> },
-      { path: "settings", element: <SettingsPage /> },
-    ],
-  },
+// Every page by its path pattern, in the order they are matched. The
+// patterns are the single source of truth: the routes below are made from
+// them, and the tests list them. A :slug is a game; the layouts (the elements
+// and game pages) wrap the pages of their group.
+const topPages = {
+  "/": <HomePage />,
+  "/app": capability.electron ? <App /> : <Redirect to="/" />,
+  "/settings": <SettingsPage />,
+};
+
+const elementsPages = {
+  "/elements": <AtomsPage />,
+  "/elements/tiles": <AllTilesPage />,
+  "/elements/logos": <LogosPage />,
+  "/elements/positioning": <PositioningPage />,
+};
+
+const gamePages = {
+  "/games/:slug": <InfoPage />,
+  "/games/:slug/b18/map": <B18MapPage />,
+  "/games/:slug/b18/tiles/:color": <B18TilesPage />,
+  "/games/:slug/b18/tokens": <B18TokensPage />,
+  "/games/:slug/background": <BackgroundPage />,
+  "/games/:slug/cards": <CardsPage />,
+  "/games/:slug/cards/:type/:index": <CardPage />,
+  "/games/:slug/changes": <ChangesPage />,
+  "/games/:slug/charters": <ChartersPage />,
+  "/games/:slug/charters/:index": <CharterPage />,
+  "/games/:slug/history": <HistoryPage />,
+  "/games/:slug/map": <MapPage />,
+  "/games/:slug/market": <MarketPage />,
+  "/games/:slug/par": <ParPage />,
+  "/games/:slug/problems": <ProblemsPage />,
+  "/games/:slug/revenue": <RevenuePage />,
+  "/games/:slug/tile-manifest": <TileManifestPage />,
+  "/games/:slug/tiles": <TilesPage />,
+  "/games/:slug/tiles/:id": <TilePage />,
+  "/games/:slug/tokens": <TokensPage />,
+  "/games/:slug/tokens/:index": <TokenPage />,
+};
+
+// Every page as a path pattern (the docs are one page for every path under
+// /docs), in the order the pages are listed in
+export const routePatterns = [
+  ...Object.keys(topPages),
+  ...Object.keys(elementsPages),
+  "/games",
+  ...Object.keys(gamePages),
+  "/docs",
 ];
+
+const pages = (list) => (
+  <Switch>
+    {Object.entries(list).map(([path, element]) => (
+      <Route key={path} path={path}>
+        {element}
+      </Route>
+    ))}
+  </Switch>
+);
+
+// What a page of a group has around it. An unknown path in a group is the
+// layout with no page, and an unknown path outside of them is Root with no
+// page.
+const AppRoutes = () => (
+  <RouteErrorBoundary>
+    <Root>
+      <Switch>
+        {Object.entries(topPages).map(([path, element]) => (
+          <Route key={path} path={path}>
+            {element}
+          </Route>
+        ))}
+        <Route path="/elements/*?">
+          <ElementsPage>{pages(elementsPages)}</ElementsPage>
+        </Route>
+        <Route path="/games">
+          <LoadGamesPage />
+        </Route>
+        <Route path="/games/:slug/*?">
+          <GamePage>{pages(gamePages)}</GamePage>
+        </Route>
+        <Route path="/docs/*?">
+          <DocsPage />
+        </Route>
+      </Switch>
+    </Root>
+  </RouteErrorBoundary>
+);
+
+export default AppRoutes;

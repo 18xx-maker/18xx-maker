@@ -223,6 +223,14 @@ describe("with the memory router", () => {
     expect(match.params.slug).toBe("internal:abc");
   });
 
+  it("has an empty rest for a splat that matched nothing", () => {
+    renderAt("/games/18Test");
+    expect(screen.getByTestId("p")).toHaveTextContent('"*":""');
+    expect(
+      JSON.parse(screen.getByTestId("p").textContent).match.params["*"],
+    ).toBe("");
+  });
+
   it("matches a slug with a colon and nothing after it", () => {
     renderAt("/games/internal:abc");
     expect(screen.getByTestId("p")).toHaveTextContent('"slug":"internal:abc"');

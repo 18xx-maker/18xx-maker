@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { Suspense, lazy, useEffect } from "react";
-import { useLocation, useMatch } from "react-router";
 
 import Toolbar from "@/components/Toolbar";
 import Config from "@/components/config/Config";
@@ -8,6 +7,7 @@ import RenderBoundary from "@/components/page/RenderBoundary";
 
 import { useConfig, useGame } from "@/hooks";
 import { useEditPanel } from "@/hooks/useEditPanel";
+import { useLocation, useMatch } from "@/router";
 import { parsePrintScale } from "@/util";
 import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";

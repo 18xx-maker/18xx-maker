@@ -1,6 +1,5 @@
-import { useMatch } from "react-router";
-
 import { useGame } from "@/hooks/game";
+import { useMatch } from "@/router";
 
 export const useEditor = () => {
   const game = useGame();

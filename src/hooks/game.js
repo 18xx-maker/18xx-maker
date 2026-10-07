@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { useMatch } from "react-router";
 
 import { prop } from "ramda";
 
+import { useMatch } from "@/router";
 import { selectGame } from "@/state/selectors";
 
 export const useLoadedGame = () => useSelector(prop("loadedGame"));

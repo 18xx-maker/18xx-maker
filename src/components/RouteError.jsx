@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouteError } from "react-router";
 
 import { Button } from "@/components/ui/button";
 
@@ -11,9 +10,8 @@ import { createResetConfig } from "@/state";
 
 // Shown when a page fails to render. A config that cannot be laid out is the
 // usual cause, so offer the saved config to keep before resetting it
-const RouteError = () => {
+const RouteError = ({ error }) => {
   const { t } = useTranslation();
-  const error = useRouteError();
   const dispatch = useDispatch();
   const storedConfig = useSelector((state) => state.config);
 
@@ -30,7 +28,7 @@ const RouteError = () => {
       <h1 className="text-3xl font-bold">{t("routeError.title")}</h1>
       <p>{t("routeError.description")}</p>
       <pre className="whitespace-pre-wrap text-sm">
-        {String(error?.message || error?.statusText || error)}
+        {String(error?.message || error)}
       </pre>
       <h2 className="text-xl">{t("routeError.config")}</h2>
       <Code language="json" className="w-full border">

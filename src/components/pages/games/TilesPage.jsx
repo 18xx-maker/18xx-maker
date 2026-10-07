@@ -1,8 +1,7 @@
-import { Navigate } from "react-router";
-
 import HtmlEditor from "@/components/editor/HtmlEditor";
 
 import { useConfig, useGame } from "@/hooks";
+import { Redirect } from "@/router";
 
 import "@/components/pages/games/Tiles.css";
 
@@ -123,7 +122,7 @@ const TilesPage = () => {
   const { layout, width: hexWidth, gaps, cutBorder } = config.tiles;
 
   if (!game.tiles) {
-    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let c = getTileSheetContext(layout, paper, hexWidth);

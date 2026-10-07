@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useMatch } from "react-router";
 
 import { Printer } from "lucide-react";
 
@@ -8,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import KeyLabel from "@/components/KeyLabel";
 
 import { useGame } from "@/hooks";
+import { useMatch } from "@/router";
 import { useBooleanParam } from "@/util/query";
 
 const PrintButton = () => {

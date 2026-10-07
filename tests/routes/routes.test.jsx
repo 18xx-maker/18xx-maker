@@ -37,3 +37,20 @@ describe("routes", () => {
     },
   );
 });
+
+describe("unknown paths", () => {
+  it("render Root with no page", async () => {
+    renderApp("/nothing/here");
+    // The sidebar button is Root's, there is no page and no error
+    expect(
+      await screen.findByRole("button", { name: "Toggle Sidebar" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId("route-error")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("home")).not.toBeInTheDocument();
+  });
+
+  it("match a trailing slash", async () => {
+    renderApp("/games/18Test/map/");
+    expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
+  });
+});

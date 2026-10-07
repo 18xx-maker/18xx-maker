@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useMatch, useNavigate } from "react-router";
 
 import { compose } from "ramda";
 
@@ -22,6 +21,7 @@ import SetSvgColors from "@/components/svg/SetSvgColors";
 import { ThemeProvider } from "@/context/ThemeProvider";
 import { useBindings, useConfig, useEditor } from "@/hooks";
 import { detectedLanguage } from "@/locales/language";
+import { useMatch, useNavigate } from "@/router";
 import {
   createAlert,
   createDownloadPercent,
@@ -38,7 +38,7 @@ import { getRenderInput } from "@/util/renderInput";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
 
-const Root = () => {
+const Root = ({ children }) => {
   const { t, i18n } = useTranslation();
   // Render mode has no chrome, only the page
   const render = !!getRenderInput();
@@ -206,13 +206,13 @@ body {
       <ThemeProvider delayDuration={500}>
         <ScrollToTop>
           {inEditor || render ? (
-            <Outlet />
+            children
           ) : (
             <SidebarProvider>
               <AppSidebar />
               <SidebarInset className="w-full h-screen overflow-auto">
                 <Header />
-                <Outlet />
+                {children}
               </SidebarInset>
             </SidebarProvider>
           )}

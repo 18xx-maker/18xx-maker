@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { useLocation, useMatch } from "react-router";
 
 import { assoc, chain, pick, prop, reduce } from "ramda";
 
@@ -11,6 +10,8 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { mainMenu } from "@/components/nav";
 import HeaderGame from "@/components/nav/HeaderGame";
 import HeaderTitle from "@/components/nav/HeaderTitle";
+
+import { useLocation, useMatch } from "@/router";
 
 const collectPages = chain((item) => {
   if (item.sep) {

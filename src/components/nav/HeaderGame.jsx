@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
 
 import { ArrowBigRight, TrainTrack } from "lucide-react";
 
@@ -7,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 import { useGame } from "@/hooks";
+import { Link } from "@/router";
 import { firstSection } from "@/util/gameNav";
 
 const HeaderTitle = () => {

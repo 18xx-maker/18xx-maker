@@ -2,7 +2,6 @@ import { unfoldAll } from "@codemirror/language";
 import { EditorView } from "@codemirror/view";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { RouterProvider, createMemoryRouter } from "react-router";
 import { page as browser } from "vitest/browser";
 
 import { sections as configSections } from "@/components/config";
@@ -11,6 +10,10 @@ import games from "@/data/games";
 import { useBooleanParam, useStringParam } from "@/util/query";
 
 import { renderApp } from "@tests/support/helpers.jsx";
+import {
+  RouterProvider,
+  createMemoryRouter,
+} from "@tests/support/memoryRouter.jsx";
 
 // Deep links: the lines param of the JSON editor and the other parts of the
 // url (section, panels, tabs, filters)
@@ -548,10 +551,12 @@ describe("deep links", () => {
       );
     };
     const user = userEvent.setup();
-    const probe = createMemoryRouter([{ path: "*", element: <Probe /> }], {
-      initialEntries: ["/?lines=1-4,15"],
-    });
-    render(<RouterProvider router={probe} />);
+    const probe = createMemoryRouter(["/?lines=1-4,15"]);
+    render(
+      <RouterProvider router={probe}>
+        <Probe />
+      </RouterProvider>,
+    );
     await user.click(screen.getByRole("button", { name: "toggle" }));
     expect(probe.state.location.search).toBe("?lines=1-4,15&print=true");
     await user.click(screen.getByRole("button", { name: "string" }));

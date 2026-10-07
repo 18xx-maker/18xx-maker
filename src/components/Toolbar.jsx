@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useMatch, useNavigate } from "react-router";
 
 import { addIndex, find, is, map, propEq } from "ramda";
 
@@ -44,6 +43,7 @@ import PrintButton from "@/components/page/PrintButton";
 
 import { useConfig, useGame } from "@/hooks";
 import { useEditPanel } from "@/hooks/useEditPanel";
+import { Link, useLocation, useMatch, useNavigate } from "@/router";
 import { refreshGame } from "@/state";
 import { selectGameChanged } from "@/state/selectors";
 import { trackEvent } from "@/util/analytics";

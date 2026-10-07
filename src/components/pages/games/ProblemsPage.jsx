@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
 
 import { Badge } from "@/components/ui/badge";
 
@@ -9,6 +8,7 @@ import { getDraft } from "@/components/editPanel/draftStore";
 import { issueText } from "@/components/schemaForm/issueText";
 
 import { useGame } from "@/hooks";
+import { Link } from "@/router";
 import { selectGameProblems } from "@/state";
 import { gameText } from "@/util/download";
 import { firstSection } from "@/util/gameNav";

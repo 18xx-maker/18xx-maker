@@ -1,5 +1,3 @@
-import { Navigate } from "react-router";
-
 import {
   addIndex,
   chain,
@@ -20,6 +18,7 @@ import PageSetup from "@/components/page/PageSetup";
 import Svg from "@/components/svg/Svg";
 
 import { useConfig, useGame } from "@/hooks";
+import { Redirect } from "@/router";
 import { getCharterData, layoutPaper } from "@/util";
 import {
   compileCompanies,
@@ -38,7 +37,7 @@ const ChartersPage = () => {
   const game = useGame();
 
   if (!game.companies) {
-    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let gameCompanies = overrideCompanies(

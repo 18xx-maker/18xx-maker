@@ -1,14 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { RouterProvider, createMemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
-import RouteError from "@/components/RouteError";
+import RouteErrorBoundary from "@/components/RouteErrorBoundary";
 
+import { Route, Switch } from "@/router";
 import { initialState, rootReducer } from "@/state";
 
 import { allowConsole } from "@tests/support/console.js";
+import {
+  RouterProvider,
+  createMemoryRouter,
+} from "@tests/support/memoryRouter.jsx";
 
 const Broken = () => {
   throw new Error("cards do not fit");
@@ -19,15 +23,22 @@ const renderBroken = (config = {}) => {
     reducer: rootReducer,
     preloadedState: { ...initialState, config },
   });
-  const router = createMemoryRouter([
-    { path: "/", element: <Broken />, errorElement: <RouteError /> },
-  ]);
+  const router = createMemoryRouter(["/broken"]);
   render(
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+        <RouteErrorBoundary>
+          <Switch>
+            <Route path="/broken">
+              <Broken />
+            </Route>
+            <Route path="/fine">fine page</Route>
+          </Switch>
+        </RouteErrorBoundary>
+      </RouterProvider>
     </Provider>,
   );
-  return store;
+  return { store, router };
 };
 
 describe("RouteError", () => {
@@ -41,5 +52,15 @@ describe("RouteError", () => {
     expect(
       screen.getByRole("button", { name: "Reset settings to defaults" }),
     ).toBeInTheDocument();
+  });
+
+  it("clears the error when the location changes", async () => {
+    allowConsole(/cards do not fit/);
+    const { router } = renderBroken();
+
+    expect(await screen.findByTestId("route-error")).toBeInTheDocument();
+    await act(async () => router.navigate("/fine"));
+    expect(screen.queryByTestId("route-error")).not.toBeInTheDocument();
+    expect(screen.getByText("fine page")).toBeInTheDocument();
   });
 });

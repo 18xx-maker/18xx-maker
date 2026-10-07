@@ -1,5 +1,3 @@
-import { Link, useMatch } from "react-router";
-
 import {
   SidebarMenuBadge,
   SidebarMenuButton,
@@ -8,6 +6,8 @@ import {
 } from "@/components/ui/sidebar";
 
 import KeyLabel from "@/components/KeyLabel";
+
+import { Link, useMatch } from "@/router";
 
 const Item = ({ to, label, icon, shortcut, append, badge }) => {
   const { toggleSidebar, isMobile } = useSidebar();

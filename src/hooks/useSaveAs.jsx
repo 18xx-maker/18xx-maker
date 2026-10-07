@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router";
 
 import SaveAsDialog from "@/components/pages/games/SaveAsDialog";
 
+import { useLocation, useNavigate } from "@/router";
 import { saveGameAs } from "@/state";
 import { titleToFilename } from "@/util";
 import { saveAsBackend } from "@/util/canSaveGame";

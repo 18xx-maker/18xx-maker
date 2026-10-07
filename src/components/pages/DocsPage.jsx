@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router";
 
 import { isEmpty } from "ramda";
 
 import DocsPager from "@/components/docs/DocsPager";
 import DocsToc from "@/components/docs/DocsToc";
 import Markdown from "@/components/docs/Markdown";
+
+import { useLocation } from "@/router";
 
 const mds = import.meta.glob("../../docs/**/*.md", {
   eager: true,

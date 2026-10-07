@@ -1,7 +1,5 @@
-import { Outlet } from "react-router";
-
-const ElementsPage = () => {
-  return <Outlet />;
+const ElementsPage = ({ children }) => {
+  return <>{children}</>;
 };
 
 export default ElementsPage;

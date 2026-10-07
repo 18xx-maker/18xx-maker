@@ -37,7 +37,6 @@ import { tags } from "@lezer/highlight";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useStore } from "react-redux";
-import { Link } from "react-router";
 
 import { Button } from "@/components/ui/button";
 
@@ -56,6 +55,7 @@ import {
 } from "@/components/editPanel/lineSelection";
 import { issueText } from "@/components/schemaForm/issueText";
 
+import { Link } from "@/router";
 import { editGame, selectGameProblems } from "@/state";
 import { selectEditorKeys } from "@/state/selectors";
 import {

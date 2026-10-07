@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { createElement } from "react";
-import { MemoryRouter, useLocation } from "react-router";
 
+import { useLocation } from "@/router";
 import {
   useBooleanParam,
   useIntParam,
@@ -9,6 +9,8 @@ import {
   useRangeParam,
   useStringParam,
 } from "@/util/query";
+
+import { MemoryRouter } from "@tests/support/memoryRouter.jsx";
 
 // Renders a query hook at a url and also returns the current search string
 const atUrl = (useHook, search = "") => {

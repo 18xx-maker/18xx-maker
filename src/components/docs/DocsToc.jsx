@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
+
+import { Link } from "@/router";
 
 // The "On this page" column of a docs page: a link for each heading, with the
 // section being read highlighted.

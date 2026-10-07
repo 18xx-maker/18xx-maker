@@ -1,5 +1,3 @@
-import { Navigate } from "react-router";
-
 import { addIndex, chain, is, map, splitEvery } from "ramda";
 
 import Editor, { useEditing } from "@/components/editor/Editor";
@@ -10,6 +8,7 @@ import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
+import { Redirect } from "@/router";
 import { layoutPaper, unitsToCss } from "@/util";
 import {
   compileCompanies,
@@ -275,7 +274,7 @@ const TokensPage = () => {
   const game = useGame();
 
   if (!game.companies && !game.tokens) {
-    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
   }
 
   const { overrideCompanies: override, overrideSelection: selection } = config;

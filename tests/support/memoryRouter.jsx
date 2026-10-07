@@ -58,10 +58,11 @@ export const createMemoryRouter = (
     hashListeners.forEach((listener) => listener());
   };
 
+  // Resolves once the location is set, so a test can await it (in act)
   const navigate = (to, { replace = false } = {}) => {
     if (typeof to === "number") {
       const next = at + to;
-      if (next < 0 || next >= stack.length) return;
+      if (next < 0 || next >= stack.length) return Promise.resolve();
       at = next;
       action = "POP";
     } else {
@@ -76,6 +77,7 @@ export const createMemoryRouter = (
       }
     }
     sync();
+    return Promise.resolve();
   };
 
   const subscribeHash = (listener) => {
@@ -83,24 +85,28 @@ export const createMemoryRouter = (
     return () => hashListeners.delete(listener);
   };
 
+  // The app navigates through the router object, so a test can spy on it
+  const appNavigate = (to, options) => router.navigate(to, options);
+
   const useLocation = () => {
     const [pathname] = memory.hook();
-    return [pathname, navigate];
+    return [pathname, appNavigate];
   };
   useLocation.searchHook = memory.searchHook;
   const useHash = () =>
     useSyncExternalStore(subscribeHash, () => current().hash);
   useLocation.useHash = useHash;
   // The router module goes back and forward through this
-  useLocation.go = navigate;
+  useLocation.go = appNavigate;
 
-  return {
+  const router = {
     hook: useLocation,
     navigate,
     get state() {
       return { location: current(), historyAction: action };
     },
   };
+  return router;
 };
 
 // Provides a router made with createMemoryRouter

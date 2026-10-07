@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router";
 
 import { map } from "ramda";
 
 import Hex from "@/components/Hex";
 import Code from "@/components/docs/Code";
 import Svg from "@/components/svg/Svg";
+
+import { Link, useLocation } from "@/router";
 
 const city = { cities: [{}] };
 const centerTown = { centerTowns: [{}] };

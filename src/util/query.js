@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
-import { useLocation, useNavigate } from "react-router";
 
 import { equals, map, split } from "ramda";
 
+import { useLocation, useNavigate } from "@/router";
 import { formatLines, parseLines } from "@/util/lineSpec";
 
 // The search string of params with commas as they are: a comma is legal in a

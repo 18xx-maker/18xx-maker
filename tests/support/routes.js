@@ -1,28 +1,22 @@
-import { matchRoutes } from "react-router";
+import { parse } from "regexparam";
+import { matchRoute } from "wouter";
 
-import { rootRoutes } from "@/routes";
+import { routePatterns as patterns } from "@/routes";
 
-// Every leaf route in rootRoutes as a full path pattern, e.g.
-// "/games/:slug/tiles/:id". Layout routes (those with children) are not
-// leaves; their index route stands for them.
-export const routePatterns = (routes = rootRoutes, parent = "") =>
-  routes.flatMap((route) => {
-    const path = route.index
-      ? parent
-      : `${parent}/${route.path}`.replace(/\/\*$/, "").replace(/\/+/g, "/");
-    return route.children ? routePatterns(route.children, path) : [path || "/"];
-  });
+// Every page in the router as a full path pattern, e.g.
+// "/games/:slug/tiles/:id" (the pattern list of the routes)
+export const routePatterns = () => [...patterns];
 
-// The full path pattern of the leaf route a URL matches, e.g.
+// The docs are one page for every path under /docs
+const matchable = (pattern) => (pattern === "/docs" ? "/docs/*?" : pattern);
+
+// The full path pattern of the page a URL shows, e.g.
 // "/games/:slug/tiles/:id"
-export const matchedPattern = (url, routes = rootRoutes) => {
-  const matches = matchRoutes(routes, url.split("?")[0]);
+export const matchedPattern = (url) => {
+  const path = url.split("?")[0].split("#")[0];
   return (
-    matches.reduce((parent, { route }) => {
-      const path = route.index
-        ? parent
-        : `${parent}/${route.path}`.replace(/\/\*$/, "").replace(/\/+/g, "/");
-      return path;
-    }, "") || "/"
+    patterns.find(
+      (pattern) => matchRoute(parse, matchable(pattern), path)[0],
+    ) ?? "/"
   );
 };
