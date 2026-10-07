@@ -57,3 +57,11 @@ export const cardCompanyTrains = (companies, charters, gameTrains = []) =>
       ? companyTrains(company, gameTrains)
       : [],
   );
+
+// Every train a card can refer to for its rust and obsolete notes: the game's
+// trains, the company trains on cards and the named full backs.
+export const referencedTrains = (gameTrains = [], cardTrains = []) => [
+  ...gameTrains,
+  ...cardTrains,
+  ...gameTrains.map((t) => t.back).filter((b) => b && b.name),
+];

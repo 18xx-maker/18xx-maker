@@ -580,3 +580,12 @@ describe("company trains on cards", () => {
     expect(await screen.findByText("S")).toBeInTheDocument();
   });
 });
+
+describe("Card page", () => {
+  it("names a back-only train in the rust note of a single card", async () => {
+    // 18Test's 3+1 rusts on the 5D, a train that only exists as a full back
+    renderApp("/games/18Test/cards/train/1");
+    const page = await screen.findByTestId("game-18Test-card");
+    expect(within(page).getByText(/5D/)).toBeInTheDocument();
+  });
+});

@@ -22,7 +22,10 @@ import {
   overrideCompanies,
 } from "@/util/companies/companies";
 import { companyNames } from "@/util/companies/companyNames";
-import { cardCompanyTrains } from "@/util/companies/companyTrains";
+import {
+  cardCompanyTrains,
+  referencedTrains,
+} from "@/util/companies/companyTrains";
 
 const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   const { config } = useConfig();
@@ -83,11 +86,7 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     }, shares);
   }, companies);
   // Every train a card can refer to, the back trains with a name included
-  const allTrains = [
-    ...(game.trains || []),
-    ...ownTrains,
-    ...(game.trains || []).map((t) => t.back).filter((b) => b && b.name),
-  ];
+  const allTrains = referencedTrains(game.trains, ownTrains);
   let trainNodes = addIndex(map)(
     (train, index) => (
       <Train
