@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { userInfo } from "node:os";
 import path from "node:path";
 
@@ -17,6 +17,7 @@ import {
   UsageError,
   customConfig,
   loadGame,
+  loadJSON,
   setup,
   startServer,
 } from "#cli/util";
@@ -113,7 +114,7 @@ export const resolveGame = async (name) => {
 
   return {
     id: path.basename(name, path.extname(name)),
-    game: JSON.parse(readFileSync(name, "utf-8")),
+    game: loadJSON(name),
   };
 };
 
@@ -123,7 +124,7 @@ export const loadConfigFile = (file) => {
   if (!existsSync(file)) throw new UsageError(`${file} not found`);
   let config;
   try {
-    config = JSON.parse(readFileSync(file, "utf-8"));
+    config = loadJSON(file);
   } catch (error) {
     throw new UsageError(`${file} is not valid JSON: ${error.message}`);
   }

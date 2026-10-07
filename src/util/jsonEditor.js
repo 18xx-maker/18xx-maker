@@ -29,7 +29,7 @@ export const parseGameText = (text) => {
   }
 };
 
-const isObject = (value) =>
+export const isObject = (value) =>
   value !== null && typeof value === "object" && !Array.isArray(value);
 
 // What keeps a parsed value from being the game the pages render: the part

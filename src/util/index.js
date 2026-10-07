@@ -37,8 +37,9 @@ import {
   zipObj,
 } from "ramda";
 
-export const titleToFilename = (title) =>
-  title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+import { titleToFilename } from "./titleFilename.js";
+
+export { titleToFilename };
 
 export const parseSlug = compose(
   ifElse(
@@ -111,14 +112,9 @@ export const linear = curry((percent, p1, p2) => [
 
 export const midpoint = linear(0.5);
 
-export const pointsToString = compose(join(" "), map(join(",")));
-
 export const inchesToCss = (inches) => `${inches}in`;
-export const mmToCss = (inches) => `${inches}mm`;
-export const inchesToMm = (inches) => inches * 25.4;
 export const unitsToInches = (units) => units / 100.0;
 export const unitsToCss = compose(inchesToCss, unitsToInches);
-export const unitsToCssMm = compose(mmToCss, inchesToMm, unitsToInches);
 
 // The print scale is a percentage that corrects for printers that print a bit
 // too big or too small. The range matches `printScale` in the config schema.

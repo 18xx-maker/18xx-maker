@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { usePrefersDark } from "@/hooks/usePrefersDark";
@@ -30,13 +30,4 @@ export const ThemeProvider = ({ children, ...props }) => {
       {children}
     </ThemeProviderContext.Provider>
   );
-};
-
-export const useTheme = () => {
-  const context = useContext(ThemeProviderContext);
-
-  if (context === undefined)
-    throw new Error("useTheme must be used within a ThemeProvider");
-
-  return context;
 };
