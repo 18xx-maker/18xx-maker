@@ -5,7 +5,15 @@ import { stripVTControlCharacters } from "node:util";
 
 import { compileSchema, draft07 } from "json-schema-library";
 
+import { omit } from "ramda";
+
 import validate from "#cli/validate";
+
+import {
+  deprecatedGame,
+  renamedGame,
+  renames,
+} from "@tests/support/deprecatedGame.js";
 
 const root = path.join(import.meta.dirname, "../..");
 const src = (file) => path.join(root, "src", file);
@@ -364,6 +372,46 @@ describe("validate", () => {
       expect(code).toBe(1);
       const line = lines.find((l) => l.startsWith(pointer));
       expect(line).toMatch(message);
+    });
+  });
+
+  describe("a renamed field of a game", () => {
+    const withMeta = (game) => omit(["meta"], game);
+
+    it("validates under its old name", () => {
+      const file = writeTmp(
+        "old.json",
+        JSON.stringify(withMeta(deprecatedGame())),
+      );
+      expect(run(file).code).toBe(0);
+    });
+
+    it("validates under its new name", () => {
+      const file = writeTmp(
+        "new.json",
+        JSON.stringify(withMeta(renamedGame())),
+      );
+      expect(run(file).code).toBe(0);
+    });
+
+    it("validates with both names", () => {
+      const both = withMeta(deprecatedGame());
+      const current = withMeta(renamedGame());
+      const merged = {
+        ...both,
+        info: { ...both.info, ...current.info },
+        phases: [
+          {
+            ...both.phases[0],
+            ...current.phases[0],
+            events: { ...both.phases[0].events, ...current.phases[0].events },
+          },
+        ],
+        trains: [{ ...both.trains[0], ...current.trains[0] }],
+        numberCards: current.numberCards,
+      };
+      expect(renames.every((r) => r.old && r.now)).toBe(true);
+      expect(run(writeTmp("both.json", JSON.stringify(merged))).code).toBe(0);
     });
   });
 

@@ -7,6 +7,7 @@ import theme from "@/schemas/theme.schema.json";
 import tilesDefs from "@/schemas/tiles.defs.json";
 import tiles from "@/schemas/tiles.schema.json";
 import tilesSrc from "@/schemas/tiles.src.json";
+import { deprecatedIssues, deprecatedPaths } from "@/util/gameValidation";
 import { schemaKeys } from "@/util/schemaKeys";
 import de from "./de.json";
 import en from "./en.json";
@@ -115,4 +116,36 @@ describe("translated docs", () => {
       .filter((file) => !(file in docs));
     expect(missing).toEqual([]);
   });
+});
+
+// The note of a deprecated field in the form (DeprecatedNote) and the problem
+// of the game file (deprecatedIssues) look the message up by the same key
+describe.each([
+  ["en", en],
+  ["de", de],
+  ["zh", zh],
+])("%s deprecation messages", (_, locale) => {
+  const paths = deprecatedPaths(game);
+
+  it("finds the deprecated fields of the game schema", () => {
+    expect(paths.length).toBeGreaterThan(0);
+  });
+
+  it.each(paths.map((path) => [path.join("."), path]))(
+    "has a message for %s, under the key of the form and of the problem",
+    (_, path) => {
+      // The form has the index of a list item, the schema has "*"
+      const formKey = path
+        .map((part) => (part === "*" ? 0 : part))
+        .filter((part) => typeof part !== "number")
+        .join("_");
+      const data = path.reduceRight(
+        (inner, part) => (part === "*" ? [inner] : { [part]: inner }),
+        1,
+      );
+      const problems = deprecatedIssues([path], data);
+      expect(problems.map((problem) => problem.params.key)).toEqual([formKey]);
+      expect(locale.problems.deprecations[formKey]).toEqual(expect.any(String));
+    },
+  );
 });
