@@ -571,6 +571,7 @@ describe("editing the group as JSON", () => {
     const v = await editor("C11");
 
     await type({ color: "plain", hexes: ["C13", "C11"] });
+    await waitFor(() => expect(params(router).hex).toBe("C13"));
     await type({ color: "plain", hexes: ["C15", "C11"] });
     await waitFor(() => expect(params(router).hex).toBe("C15"));
     expect(await editor("C15")).toBe(v);
