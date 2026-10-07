@@ -51,12 +51,69 @@
     },
     "font": {
       "type": "object",
+      "deprecated": true,
+      "description": "schema.config.font",
       "properties": {
         "size": { "type": "string" },
         "weight": { "type": "string", "enum": ["normal", "bold"] },
         "family": { "type": "string" }
       },
       "additionalProperties": { "$ref": "#/definitions/font" }
+    },
+    "fontRole": {
+      "type": "object",
+      "description": "schema.config.fonts.role",
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1,
+          "description": "schema.config.fonts.role.family"
+        },
+        "size": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "schema.config.fonts.role.size"
+        },
+        "weight": {
+          "description": "schema.config.fonts.role.weight",
+          "oneOf": [
+            { "type": "string", "enum": ["normal", "bold"] },
+            { "type": "number", "minimum": 1, "maximum": 1000 }
+          ]
+        },
+        "style": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"],
+          "description": "schema.config.fonts.role.style"
+        }
+      },
+      "additionalProperties": false
+    },
+    "fonts": {
+      "type": "object",
+      "description": "schema.config.fonts",
+      "properties": {
+        "families": {
+          "type": "object",
+          "description": "schema.config.fonts.families",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "roles": {
+          "type": "object",
+          "description": "schema.config.fonts.roles",
+          "properties": {
+            "body": { "$ref": "#/definitions/fontRole" },
+            "title": { "$ref": "#/definitions/fontRole" },
+            "label": { "$ref": "#/definitions/fontRole" },
+            "revenue": { "$ref": "#/definitions/fontRole" },
+            "token": { "$ref": "#/definitions/fontRole" },
+            "price": { "$ref": "#/definitions/fontRole" },
+            "card": { "$ref": "#/definitions/fontRole" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     },
     "dimension": {
       "type": "integer",
@@ -382,7 +439,8 @@
     "plainMapCompanies": { "type": "boolean" },
     "tileCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
-    "font": { "$ref": "#/definitions/font" }
+    "font": { "$ref": "#/definitions/font" },
+    "fonts": { "$ref": "#/definitions/fonts" }
   },
   "required": [
     "bleed",

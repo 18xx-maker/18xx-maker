@@ -51,12 +51,69 @@
     },
     "font": {
       "type": "object",
+      "deprecated": true,
+      "description": "Deprecated and not used by the print pages. Use fonts instead.",
       "properties": {
         "size": { "type": "string" },
         "weight": { "type": "string", "enum": ["normal", "bold"] },
         "family": { "type": "string" }
       },
       "additionalProperties": { "$ref": "#/definitions/font" }
+    },
+    "fontRole": {
+      "type": "object",
+      "description": "The font of one role: family, size, weight and style. A setting that is not set is inherited from the body role, and then from the component's own default.",
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The font family: the name of a family from fonts.families, one of the built-in display, serif and sans-serif, or a CSS font family. System fonts are not embedded in exports."
+        },
+        "size": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "The font size in units, the same as the fontSize of a tile element."
+        },
+        "weight": {
+          "description": "The font weight: normal, bold or a number from 1 to 1000.",
+          "oneOf": [
+            { "type": "string", "enum": ["normal", "bold"] },
+            { "type": "number", "minimum": 1, "maximum": 1000 }
+          ]
+        },
+        "style": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"],
+          "description": "The font style: normal, italic or oblique."
+        }
+      },
+      "additionalProperties": false
+    },
+    "fonts": {
+      "type": "object",
+      "description": "The central font settings. Roles (title, label, revenue, token, price, card) give the font of a kind of text in one place, instead of on every element. A font setting of an element or of a game field wins over its role. Today the title role sets the names of cities, towns and off-board areas, and the card role sets the text of the private company cards.",
+      "properties": {
+        "families": {
+          "type": "object",
+          "description": "Names for font families, which a role can use as its family. Each name maps to a CSS font family list, and extends the built-in display, serif and sans-serif.",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "roles": {
+          "type": "object",
+          "description": "The fonts by role. The body role is the base that every other role inherits from.",
+          "properties": {
+            "body": { "$ref": "#/definitions/fontRole" },
+            "title": { "$ref": "#/definitions/fontRole" },
+            "label": { "$ref": "#/definitions/fontRole" },
+            "revenue": { "$ref": "#/definitions/fontRole" },
+            "token": { "$ref": "#/definitions/fontRole" },
+            "price": { "$ref": "#/definitions/fontRole" },
+            "card": { "$ref": "#/definitions/fontRole" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     },
     "dimension": {
       "type": "integer",
@@ -382,7 +439,8 @@
     "plainMapCompanies": { "type": "boolean" },
     "tileCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
-    "font": { "$ref": "#/definitions/font" }
+    "font": { "$ref": "#/definitions/font" },
+    "fonts": { "$ref": "#/definitions/fonts" }
   },
   "required": [
     "bleed",

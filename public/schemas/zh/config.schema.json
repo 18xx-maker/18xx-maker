@@ -51,12 +51,69 @@
     },
     "font": {
       "type": "object",
+      "deprecated": true,
+      "description": "已弃用，打印页面不使用。请改用 fonts。",
       "properties": {
         "size": { "type": "string" },
         "weight": { "type": "string", "enum": ["normal", "bold"] },
         "family": { "type": "string" }
       },
       "additionalProperties": { "$ref": "#/definitions/font" }
+    },
+    "fontRole": {
+      "type": "object",
+      "description": "一个角色的字体：字体族、大小、粗细和样式。未设置的项从 body 角色继承，然后使用组件自己的默认值。",
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1,
+          "description": "字体族：fonts.families 中的名称、内置的 display、serif 和 sans-serif 之一，或 CSS 字体族。系统字体不会嵌入导出文件。"
+        },
+        "size": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "字体大小，单位为 units，与图块元素的 fontSize 相同。"
+        },
+        "weight": {
+          "description": "字体粗细：normal、bold 或 1 到 1000 的数字。",
+          "oneOf": [
+            { "type": "string", "enum": ["normal", "bold"] },
+            { "type": "number", "minimum": 1, "maximum": 1000 }
+          ]
+        },
+        "style": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"],
+          "description": "字体样式：normal、italic 或 oblique。"
+        }
+      },
+      "additionalProperties": false
+    },
+    "fonts": {
+      "type": "object",
+      "description": "集中的字体设置。角色（title、label、revenue、token、price、card）在一处设置某类文字的字体，而不是在每个元素上设置。元素或游戏字段自己的字体设置优先于角色。目前 title 角色设置城市、小镇和场外区域的名称，card 角色设置私有公司卡的文字。",
+      "properties": {
+        "families": {
+          "type": "object",
+          "description": "字体族的名称，角色可将其用作 family。每个名称对应一个 CSS 字体族列表，并扩展内置的 display、serif 和 sans-serif。",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "roles": {
+          "type": "object",
+          "description": "按角色设置字体。body 角色是其他所有角色继承的基础。",
+          "properties": {
+            "body": { "$ref": "#/definitions/fontRole" },
+            "title": { "$ref": "#/definitions/fontRole" },
+            "label": { "$ref": "#/definitions/fontRole" },
+            "revenue": { "$ref": "#/definitions/fontRole" },
+            "token": { "$ref": "#/definitions/fontRole" },
+            "price": { "$ref": "#/definitions/fontRole" },
+            "card": { "$ref": "#/definitions/fontRole" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     },
     "dimension": {
       "type": "integer",
@@ -382,7 +439,8 @@
     "plainMapCompanies": { "type": "boolean" },
     "tileCompanies": { "type": "boolean" },
     "straightCityNames": { "type": "boolean" },
-    "font": { "$ref": "#/definitions/font" }
+    "font": { "$ref": "#/definitions/font" },
+    "fonts": { "$ref": "#/definitions/fonts" }
   },
   "required": [
     "bleed",
