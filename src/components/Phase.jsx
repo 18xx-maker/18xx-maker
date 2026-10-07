@@ -151,7 +151,7 @@ const Phase = ({ phases, trains, minor, company }) => {
       let quantities = R.map(
         (t) => (
           <li key={t.name}>
-            {t.quantityLabel ?? t.quantity_label ?? t.quantity}
+            {t.quantityLabel ?? (t.quantity_label || t.quantity)}
           </li>
         ),
         phaseTrains,

@@ -109,8 +109,8 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
       ) : null,
     trains,
   );
-  let numberColors = game.numberCards ??
-    game.number_cards ?? [game.info.background];
+  let numberColors =
+    game.numberCards ?? (game.number_cards || [game.info.background]);
   let numberNodes = addIndex(map)(
     (color, ci) =>
       map(

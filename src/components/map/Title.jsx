@@ -11,21 +11,21 @@ const Title = ({ game, variation, hexWidth }) => {
   let titleFont = game.info.titleFontFamily || "display";
   let titleWeight = game.info.titleFontWeight || "bold";
   let titleSize =
-    (game.info.titleFontSize ?? game.info.titleSize ?? 200) * scale;
+    (game.info.titleFontSize ?? (game.info.titleSize || 200)) * scale;
 
   let subtitleFont =
     game.info.subtitleFontFamily || game.info.titleFontFamily || "display";
   let subtitleWeight =
     game.info.subtitleFontWeight || game.info.titleFontWeight || "bold";
   let subtitleSize =
-    (game.info.subtitleFontSize ?? game.info.subtitleSize ?? 30) * scale;
+    (game.info.subtitleFontSize ?? (game.info.subtitleSize || 30)) * scale;
 
   let designerFont =
     game.info.designerFontFamily || game.info.titleFontFamily || "display";
   let designerWeight =
     game.info.designerFontWeight || game.info.titleFontWeight || "bold";
   let designerSize =
-    (game.info.designerFontSize ?? game.info.designerSize ?? 20) * scale;
+    (game.info.designerFontSize ?? (game.info.designerSize || 20)) * scale;
 
   let mapName = null;
   variation = variation || 0;

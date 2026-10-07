@@ -50,13 +50,20 @@ describe("renamed info font sizes", () => {
     ["titleSize", "titleFontSize", 0],
     ["subtitleSize", "subtitleFontSize", 1],
     ["designerSize", "designerFontSize", 2],
-  ])("%s and %s accept 0", async (old, current, index) => {
-    const base = { subtitle: "Sub", designer: "Des" };
-    expect((await sizes({ ...base, [current]: 0 }))[index]).toBe("0");
-    expect((await sizes({ ...base, [old]: 0 }))[index]).toBe("0");
-    // A 0 of the new name does not fall through to the old name
-    expect((await sizes({ ...base, [old]: 9, [current]: 0 }))[index]).toBe("0");
-  });
+  ])(
+    "%s falls to the default for 0, %s accepts 0",
+    async (old, current, index) => {
+      const base = { subtitle: "Sub", designer: "Des" };
+      const defaults = await sizes(base);
+      // The old name falls to the default for 0, as before the rename
+      expect(await sizes({ ...base, [old]: 0 })).toEqual(defaults);
+      expect((await sizes({ ...base, [current]: 0 }))[index]).toBe("0");
+      // A 0 of the new name does not fall through to the old name
+      expect((await sizes({ ...base, [old]: 9, [current]: 0 }))[index]).toBe(
+        "0",
+      );
+    },
+  );
 });
 
 const notes = async (phase) => {
@@ -123,6 +130,14 @@ describe("renamed train field", () => {
       "5+",
     );
     expect(await quantities({ quantity: 6 })).toContain("6");
+  });
+
+  it("an empty quantity_label falls to the quantity, an empty quantityLabel does not", async () => {
+    expect(await quantities({ quantity: 6, quantity_label: "" })).toContain(
+      "6",
+    );
+    const cells = await quantities({ quantity: 6, quantityLabel: "" });
+    expect(cells).not.toContain("6");
   });
 
   it("quantityLabel wins over quantity_label", async () => {
