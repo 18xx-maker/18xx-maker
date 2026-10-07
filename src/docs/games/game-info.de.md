@@ -124,6 +124,35 @@ nicht gedruckt.
 Hinweis hinzu, damit Leute, die ein unfertiges Spiel öffnen, Bescheid wissen.
 Keines von beiden ändert eine andere Ausgabe.
 
+## Gruppen
+
+`groups` ist eine Liste von Gruppen von Gesellschaften. Jede wird als kleines
+Zeichen gezeichnet, das ihre Mitglieder kennzeichnet: auf den Karten der
+Privatgesellschaften, auf den Gesellschaftskarten und auf der Präsidentenaktie
+einer Gesellschaft. Gesellschaften und Privatgesellschaften treten einer Gruppe
+über die ID in ihrem Feld `group` bei. Gesellschaften und Privatgesellschaften
+ohne Gruppe oder mit unbekannter ID werden wie bisher gedruckt.
+
+Eine Gruppe hat eine `id` und optional einen `name` (er wird nicht gedruckt, er
+beschriftet die Gruppe bei der Auswahl im Editor), eine `shape` (`circle`,
+`diamond`, `ellipse`, `hexagon`, `square` oder `triangle`, standardmäßig
+`circle`), eine `color` und `borderColor` sowie einen `text` mit `textColor`.
+Ohne `color` ist das Zeichen nur ein Umriss, und die Textfarbe ist standardmäßig
+eine, die sich von der `color` abhebt. Die Liste `groups` wird nur als JSON
+bearbeitet. Welche Aktie die Präsidentenaktie ist, legt `president` an der Aktie
+fest, siehe [Aktien- und Token-Typen](/docs/games/types#die-präsidentenaktie):
+
+```json
+{
+  "groups": [
+    { "id": "east", "name": "Eastern", "shape": "square", "color": "blue" },
+    { "id": "west", "shape": "diamond", "color": "black", "text": "W" }
+  ],
+  "companies": [{ "name": "Blue Railroad", "abbrev": "BLU", "group": "east" }],
+  "privates": [{ "name": "Mail Contract", "group": "west" }]
+}
+```
+
 ## Welches Feld was speist
 
 | Feld                                      | Verwendet von                                           |
@@ -136,6 +165,7 @@ Keines von beiden ändert eine andere Ausgabe.
 | `players`                                 | Infoseite (Spielerbereich), Privatgesellschaften, Karte |
 | `bank`, `capital`, `certLimit`            | Spielertabelle auf der Karte                            |
 | `turns`                                   | Gesellschaftskarten                                     |
+| `groups`                                  | Privatkarten, Gesellschaftskarten, Präsidentenaktien    |
 | `rounds`                                  | Rundenanzeige auf der Karte und dem Aktienmarkt         |
 | `phases`                                  | Phasentabelle auf den Gesellschaftskarten               |
 | `wip`, `prototype`                        | Infoseite                                               |

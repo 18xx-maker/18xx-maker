@@ -140,6 +140,8 @@ describe("Charter", () => {
   const company = {
     ...games["18Test"].companies.find((c) => c.abbrev === "BRR"),
     capital: 500,
+    // These tests pin the layout of a charter without a mark
+    group: undefined,
   };
   const props = {
     name: "Blue Railroad",

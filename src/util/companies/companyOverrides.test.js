@@ -36,6 +36,12 @@ describe("applyCompanyOverrides", () => {
     expect(result[2]).toBe(companies[2]);
   });
 
+  it("keeps the group of the game company", () => {
+    const grouped = [{ name: "A", abbrev: "A", group: "g" }];
+
+    expect(applyCompanyOverrides(overrides, grouped, "set")[0].group).toBe("g");
+  });
+
   it("takes the alias from the override, not the game company", () => {
     const aliased = [{ name: "A", abbrev: "A", alias: "Own Alias" }];
     const result = applyCompanyOverrides(overrides, aliased, "set");

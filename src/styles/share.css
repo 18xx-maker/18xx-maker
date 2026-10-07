@@ -196,3 +196,20 @@
   font-style: italic;
   font-family: sans-serif;
 }
+
+/* The mark of the group of the president's share, in the top right corner
+   where the variant and the label do not reach */
+.share__group {
+  position: absolute;
+  top: 0.0625in;
+  right: 0.0625in;
+  width: 0.3in;
+  height: 0.3in;
+}
+
+/* Room for the mark, on both sides so the text stays centered */
+.share--group .share__name,
+.share--group .share__subtext {
+  padding-left: 0.4in;
+  padding-right: 0.4in;
+}

@@ -121,10 +121,9 @@
 
 .private__group {
   float: right;
-  line-height: 0.22in;
-  font-size: 0.18in;
-  margin: 0.125in 0.125in 0 0;
-  padding: var(--card-padding);
+  width: 0.3in;
+  height: 0.3in;
+  margin: -0.04in 0 0 0.0625in;
 }
 
 .private__variant {

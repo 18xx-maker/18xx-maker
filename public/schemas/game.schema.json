@@ -560,6 +560,10 @@
             "description": "How many tokens to draw on the share.",
             "type": "number",
             "minimum": 0
+          },
+          "president": {
+            "description": "Marks this as the president's share. It is the only share that prints the group mark of its company.",
+            "type": "boolean"
           }
         },
         "required": ["quantity"]
@@ -1399,6 +1403,54 @@
         "$ref": "#/definitions/shares"
       }
     },
+    "groups": {
+      "description": "Groups of companies, each drawn as a small mark on the private cards, charters and president's shares of its members. A company or private joins a group with its group field.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "description": "The id companies and privates use to join the group.",
+            "type": "string"
+          },
+          "name": {
+            "description": "A name for the group. It is not printed; it labels the group in the editor.",
+            "type": "string"
+          },
+          "shape": {
+            "description": "The shape of the mark.",
+            "type": "string",
+            "enum": [
+              "circle",
+              "diamond",
+              "ellipse",
+              "hexagon",
+              "square",
+              "triangle"
+            ],
+            "default": "circle"
+          },
+          "color": {
+            "description": "Fill color of the mark. Without a color the mark is an outline only.",
+            "type": "string"
+          },
+          "borderColor": {
+            "description": "Color of the outline of the mark.",
+            "type": "string"
+          },
+          "text": {
+            "description": "A short text drawn on the mark.",
+            "type": "string"
+          },
+          "textColor": {
+            "description": "Color of the text. By default a color that contrasts with the fill.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
     "companies": {
       "type": "array",
       "items": {
@@ -1416,6 +1468,15 @@
           "variant": {
             "description": "A variant label printed on the charter, for a company that has more than one version.",
             "type": "string"
+          },
+          "group": {
+            "description": "The id of a group of the game, drawn as its mark on its charter and president's share.",
+            "type": "string",
+            "x-ref": {
+              "from": "groups",
+              "key": "id",
+              "label": "name"
+            }
           },
           "shares": {
             "oneOf": [
@@ -1780,6 +1841,15 @@
         "properties": {
           "name": {
             "type": "string"
+          },
+          "group": {
+            "description": "The id of a group of the game, drawn as its mark on its private card.",
+            "type": "string",
+            "x-ref": {
+              "from": "groups",
+              "key": "id",
+              "label": "name"
+            }
           },
           "note": {
             "type": "string"

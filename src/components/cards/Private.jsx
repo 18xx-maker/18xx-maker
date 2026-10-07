@@ -6,6 +6,7 @@ import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import Hex from "@/components/Hex";
 import Tile from "@/components/Tile";
+import GroupMark from "@/components/atoms/GroupMark";
 import Icon from "@/components/atoms/Icon";
 import Svg from "@/components/svg/Svg";
 import GameCompanyToken from "@/components/tokens/GameCompanyToken";
@@ -82,6 +83,7 @@ const Private = (props) => {
     icon,
     iconColor,
     iconSize,
+    group,
     hex,
     tile,
     token,
@@ -354,6 +356,7 @@ const Private = (props) => {
                       ...nameFont,
                     }}
                   >
+                    <GroupMark group={group} className="private__group" />
                     {id && (
                       <div
                         className="private__id"

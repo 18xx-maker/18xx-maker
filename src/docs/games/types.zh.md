@@ -74,6 +74,8 @@
 
 第一个贷款格位于最右列,贷款格从上到下填满该列,然后继续填左边的一列。放不下的贷款格会被截掉,因此小公司和半宽公司执照上请少放一些。
 
+带有[分组](/docs/games/game-info#分组)的公司牌会把标记打印在表头、标记旁边,因此它不会占用贷款格。
+
 ## 名称下方的标记
 
 标记很多的公司可以设置 `tokensBelow`,把标记格印在公司名称下方的一行,而不是名称右侧,
@@ -118,4 +120,18 @@
 
 ```json
 { "name": "Baltimore & Ohio Railroad", "abbrev": "B&O", "alias": "B&O" }
+```
+
+## 总裁股票
+
+股票可以设置 `president: true`,把它标记为所属公司的总裁股票。这张股票会在卡片右上角打印其公司所属[分组](/docs/games/game-info#分组)的标记,其他股票不打印标记。只有带该标志的股票会被标记,不会自动替您选择,并且在股票类型和单个公司的股票中都有效:
+
+```json
+{
+  "quantity": 1,
+  "label": "President's Certificate",
+  "percent": 20,
+  "shares": 2,
+  "president": true
+}
 ```

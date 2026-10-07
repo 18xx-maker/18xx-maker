@@ -99,6 +99,8 @@ Zeichenkette oder `null` lässt das Feld ohne Beschriftung:
 
 Der erste Kredit steht in der rechten Spalte, und die Kredite füllen sie von oben nach unten und gehen dann in der Spalte links davon weiter. Kredite, die nicht passen, werden abgeschnitten; halte die Anzahl bei Minors und Gesellschaftskarten halber Breite daher klein.
 
+Eine Gesellschaftskarte mit einer [Gruppe](/docs/games/game-info#gruppen) druckt ihr Zeichen im Kopf neben den Token, sodass es nie ein Kreditfeld belegt.
+
 ## Token unter dem Namen
 
 Eine Gesellschaft mit vielen Tokens kann `tokensBelow` setzen, um ihre Tokenfelder
@@ -160,4 +162,23 @@ Gesellschaft:
 
 ```json
 { "name": "Baltimore & Ohio Railroad", "abbrev": "B&O", "alias": "B&O" }
+```
+
+## Die Präsidentenaktie
+
+Eine Aktie kann `president: true` setzen, um sie als Präsidentenaktie ihrer
+Gesellschaft zu kennzeichnen. Diese Aktie druckt das Zeichen der
+[Gruppe](/docs/games/game-info#gruppen) ihrer Gesellschaft in der oberen rechten
+Ecke der Karte. Die anderen Aktien drucken kein Zeichen. Nur Aktien mit dem Flag
+werden markiert, es wird keine für dich ausgewählt, und es funktioniert in
+Aktientypen und in den Aktien einer einzelnen Gesellschaft:
+
+```json
+{
+  "quantity": 1,
+  "label": "President's Certificate",
+  "percent": 20,
+  "shares": 2,
+  "president": true
+}
 ```

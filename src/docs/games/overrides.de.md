@@ -17,6 +17,9 @@ der Spieldatei und in der Ersetzungsdatei definiert sind. Wenn die Spieldatei
 mehr Gesellschaften enthält als die Ersetzungsdatei, bleiben die übrigen in
 ihrem Standardzustand.
 
+Das `group` einer Spielgesellschaft bleibt beim Ersetzen erhalten, sodass die
+Zeichen der Gruppen weiterhin gedruckt werden.
+
 ## Beispiele
 
 Hier findest du die Listen der aktuell [definierten

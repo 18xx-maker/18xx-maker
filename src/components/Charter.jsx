@@ -5,6 +5,7 @@ import { addIndex, chain, is, map } from "ramda";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import Phase from "@/components/Phase";
+import GroupMark, { useGroup } from "@/components/atoms/GroupMark";
 import Train from "@/components/cards/Train";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
@@ -17,6 +18,9 @@ import { companyTrains } from "@/util/companies/companyTrains";
 import { getSingleCardData } from "@/util/sizes";
 
 const MIN_CARD_SCALE = 0.2;
+
+// The room the mark of a group takes in the header, next to the tokens
+const GROUP_ROOM = 50;
 
 const Charter = ({
   name,
@@ -37,6 +41,7 @@ const Charter = ({
   halfWidth,
 }) => {
   const { config } = useConfig();
+  const hasGroup = !!useGroup(company.group);
   const charterStyle = config.charters.style;
   const showPhaseChart = config.charters.showPhaseChart;
   const showTurnOrder = config.charters.showTurnOrder;
@@ -241,8 +246,14 @@ const Charter = ({
                     color: t(c(charterStyle === "color" ? color : "white")),
                     paddingRight:
                       halfWidth || tokensBelow
-                        ? null
-                        : unitsToCss(12.5 + 65 * tokens.length),
+                        ? hasGroup
+                          ? unitsToCss(GROUP_ROOM)
+                          : null
+                        : unitsToCss(
+                            12.5 +
+                              65 * tokens.length +
+                              (hasGroup ? GROUP_ROOM : 0),
+                          ),
                   }}
                   className={`charter__name${tokensBelow ? " charter__name--tokens-below" : ""}`}
                 >
@@ -403,6 +414,17 @@ const Charter = ({
                     )}
                   </div>
                 )}
+                <GroupMark
+                  group={company.group}
+                  className="charter__group"
+                  style={{
+                    right: unitsToCss(
+                      halfWidth || tokensBelow
+                        ? 12.5
+                        : 12.5 + 65 * tokens.length,
+                    ),
+                  }}
+                />
                 {variant && <div className="charter__variant">{variant}</div>}
                 {company.banner && (
                   <div

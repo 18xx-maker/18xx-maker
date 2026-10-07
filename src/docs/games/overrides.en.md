@@ -16,6 +16,9 @@ Companies will override 1 for 1 in the order that they are defined in the game
 file and in the overrides file. If the game file has more companies than the
 overrides files, they will be left in their default state.
 
+The `group` of a game company stays when it is overridden, so the marks of
+groups still print.
+
 ## Examples
 
 You can check out the lists of currently [defined

@@ -81,6 +81,10 @@ graphics are drawn in the top right corner of the card and the text goes around
 them. With the `small` style they are in a row at the start of the description.
 When there are several, each gets part of the width of the row.
 
+The `group` of a private is the id of one of the game's
+[groups](/docs/games/game-info#groups). Its mark is drawn in the top right
+corner of the name row, next to the `id`, and is not one of the graphics above.
+
 `iconSize` scales all of the graphics of the card. It is a multiplier of the
 default size, so `1.25` is a quarter bigger and `0.75` a quarter smaller. With
 the `small` style the width stays inside the row, so several graphics still fit.

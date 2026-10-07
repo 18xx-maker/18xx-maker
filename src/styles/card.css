@@ -58,6 +58,17 @@
   font-family: sans-serif;
 }
 
+.charter__group {
+  position: absolute;
+  top: 0.3in;
+  width: 0.4in;
+  height: 0.4in;
+}
+
+.charter--minor .charter__group {
+  top: 0.2375in;
+}
+
 .charter--banner .charter__variant {
   bottom: var(--banner-h);
 }

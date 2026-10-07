@@ -2,6 +2,7 @@ import { min } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+import GroupMark, { useGroup } from "@/components/atoms/GroupMark";
 import CompanyToken from "@/components/tokens/CompanyToken";
 
 import ColorContext from "@/context/ColorContext";
@@ -44,10 +45,13 @@ const LeftShare = ({
   tokenCount,
   blackBand,
   variant,
+  president,
   fontFamily,
   fontWeight,
   fontStyle,
 }) => {
+  const group = useGroup(company?.group);
+  const marked = !!(president && group);
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
   fontFamily = multiDefaultTo("display", fontFamily);
   fontWeight = multiDefaultTo("bold", fontWeight);
@@ -100,7 +104,9 @@ const LeftShare = ({
 
   return (
     <div className="cutlines">
-      <div className={`card share share--${shareStyle || "left"}`}>
+      <div
+        className={`card share share--${shareStyle || "left"}${marked ? " share--group" : ""}`}
+      >
         <Color context="map">
           {(c) => (
             <div
@@ -160,6 +166,9 @@ const LeftShare = ({
                 </div>
                 <ShareLabel label={label} labelColor={labelColor} />
                 {variant && <div className="share__variant">{variant}</div>}
+                {president && (
+                  <GroupMark group={company?.group} className="share__group" />
+                )}
               </div>
             </div>
           )}
@@ -182,7 +191,10 @@ const CenterShare = ({
   backgroundColor,
   labelColor,
   variant,
+  president,
 }) => {
+  const group = useGroup(company?.group);
+  const marked = !!(president && group);
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
   let tokens = [];
@@ -208,7 +220,9 @@ const CenterShare = ({
 
   return (
     <div className="cutlines">
-      <div className="card share share--center">
+      <div
+        className={`card share share--center${marked ? " share--group" : ""}`}
+      >
         <Color context="map">
           {(c) => (
             <div
@@ -244,6 +258,9 @@ const CenterShare = ({
                 </div>
                 <ShareLabel label={label} labelColor={labelColor} />
                 {variant && <div className="share__variant">{variant}</div>}
+                {president && (
+                  <GroupMark group={company?.group} className="share__group" />
+                )}
               </div>
             </div>
           )}
