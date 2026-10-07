@@ -99,6 +99,11 @@ describe("gameValidation", () => {
     ]);
   });
 
+  it("reports an unknown setting of the config of the game once", async () => {
+    const issues = await validateGame({ ...validGame(), config: { fnts: {} } });
+    expect(issues.map((issue) => issue.pointer)).toEqual(["config.fnts"]);
+  });
+
   it("ignores the meta data the app adds", async () => {
     expect(await validateGame(validGame())).toEqual([]);
   });

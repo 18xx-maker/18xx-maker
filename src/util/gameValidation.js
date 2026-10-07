@@ -397,6 +397,15 @@ export const validateGame = async (game) => {
   const errors = validator
     .validate(data)
     .errors.flatMap((e) => leaves(e, removedSet))
+    // The config schema names the unknown settings of an object config
+    .filter(
+      (e) =>
+        !(
+          e.code === "invalid-property-name-error" &&
+          e.data?.pointer === "#/config" &&
+          isObject(data.config)
+        ),
+    )
     .map(translate)
     .filter((e) => !gone.has(e.pointer));
 

@@ -579,6 +579,13 @@ describe("fonts section", () => {
     );
   });
 
+  it("shows a valid weight that is not in the list", async () => {
+    renderApp(route, {
+      config: { fonts: { roles: { body: { weight: 450 } } } },
+    });
+    expect(await field("Body font", "Weight")).toHaveTextContent("450");
+  });
+
   it("shows what a role falls back to", async () => {
     renderApp(route, {
       config: { fonts: { roles: { body: { family: "serif", size: 9 } } } },

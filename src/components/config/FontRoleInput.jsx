@@ -165,6 +165,8 @@ const FontRoleInput = ({ role, fields, label, description }) => {
   ];
   const listId = `fonts-${role}-families`;
 
+  const current = value("weight");
+
   const control = {
     family: (
       <>
@@ -203,7 +205,11 @@ const FontRoleInput = ({ role, fields, label, description }) => {
         clearLabel={t("config.fonts.clear", { field: fieldLabel("weight") })}
         value={value("weight")}
         placeholder={inherited("weight")?.toString()}
-        options={WEIGHTS}
+        options={
+          current === undefined || WEIGHTS.includes(String(current))
+            ? WEIGHTS
+            : [...WEIGHTS, String(current)]
+        }
         error={error("weight")}
         onChange={(next) => update("weight", toWeight(next))}
         onClear={() => update("weight", undefined)}
