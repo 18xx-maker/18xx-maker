@@ -326,8 +326,10 @@ export const ListStatus = ({ message, warning }) => (
 // that is not left yet is passed on first (a click on a button does not
 // always move the focus out of it), and the game is read after that.
 const FRESH_CARD = { open: true, more: false };
-const EMPTY = [];
 const CLOSED_CARD = { open: false, more: false };
+
+// A stable default for the panel state of a list, so it does not change per render
+const EMPTY = [];
 
 // primary are the fields shown first, the others are under more fields.
 // titleKey is the field that names an item and idKey the one that identifies

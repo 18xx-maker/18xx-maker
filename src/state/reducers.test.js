@@ -503,6 +503,25 @@ describe("uiReducer", () => {
     expect(selectPanelState({}, "none")).toBeUndefined();
   });
 
+  it("forgets the state of the edit panel when the game is replaced", () => {
+    const state = frozen({
+      exportMenuOpen: true,
+      exportSheetOpen: false,
+      panel: { "group:legend": true },
+    });
+    expect(uiReducer(state, createSetGame(game()))).toEqual({
+      ...state,
+      panel: {},
+    });
+    expect(uiReducer(state, createDeleteGame("system:a"))).toEqual({
+      ...state,
+      panel: {},
+    });
+    expect(uiReducer(state, createSetGame(game(), { keepEdits: true }))).toBe(
+      state,
+    );
+  });
+
   it("ignores other actions", () => {
     const state = frozen({ exportMenuOpen: true, exportSheetOpen: false });
     expect(uiReducer(state, clearAlert())).toBe(state);

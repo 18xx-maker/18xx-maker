@@ -1,3 +1,5 @@
+import { DELETE_GAME, SET_GAME } from "@/state/game";
+
 // Transient interface state. Never persisted: it starts closed on every load.
 export const SET_EXPORT_MENU_OPEN = "SET_EXPORT_MENU_OPEN";
 export const SET_EXPORT_SHEET_OPEN = "SET_EXPORT_SHEET_OPEN";
@@ -38,6 +40,12 @@ export const uiReducer = (state = UI_DEFAULT, action) => {
         ...state,
         panel: { ...state.panel, [action.key]: action.value },
       };
+    // What is open belongs to the game that was edited. A reload that keeps the
+    // edits keeps it too.
+    case SET_GAME:
+      return action.keepEdits ? state : { ...state, panel: {} };
+    case DELETE_GAME:
+      return { ...state, panel: {} };
     default:
       return state;
   }
