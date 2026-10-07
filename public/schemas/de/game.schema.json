@@ -79,7 +79,7 @@
           "$ref": "#/definitions/roundTracker"
         },
         "movement": {
-          "description": "Draw the legend of how the share price moves (stock.movement) on the map, x and y in map units from the top left corner. The map page does not grow for the legend, so leave room for it on the map. A market placed on the map draws its own legend when stock.display.movement is set, so set only one of the two.",
+          "description": "Zeichnet die Legende, wie sich der Aktienkurs bewegt (stock.movement), auf die Karte, x und y in Karteneinheiten von der linken oberen Ecke. Die Kartenseite wächst nicht für die Legende, lass also Platz dafür auf der Karte. Ein auf der Karte platzierter Markt zeichnet seine eigene Legende, wenn stock.display.movement gesetzt ist, setze daher nur eines von beiden.",
           "$ref": "#/definitions/movement"
         },
         "market": {
@@ -108,12 +108,12 @@
               "exclusiveMinimum": 0
             },
             "rowHeight": {
-              "description": "Height of a row of the players table.",
+              "description": "Höhe einer Zeile der Spielertabelle.",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "fontSize": {
-              "description": "Font size of the players table.",
+              "description": "Schriftgröße der Spielertabelle.",
               "type": "number",
               "exclusiveMinimum": 0
             }
@@ -142,7 +142,7 @@
                 "type": "string"
               },
               "circle": {
-                "description": "Radius of a circle behind the text.",
+                "description": "Radius eines Kreises hinter dem Text.",
                 "type": "number"
               },
               "color": {
@@ -200,7 +200,7 @@
                 "type": "number"
               },
               "border": {
-                "description": "false draws no border.",
+                "description": "false zeichnet keinen Rand.",
                 "type": "boolean"
               },
               "borderWidth": {
@@ -246,7 +246,7 @@
                 "type": "number"
               },
               "border": {
-                "description": "false draws no border.",
+                "description": "false zeichnet keinen Rand.",
                 "type": "boolean"
               },
               "borderWidth": {
@@ -271,7 +271,7 @@
       "oneOf": [
         {
           "type": "string",
-          "description": "The name of a train of the game.",
+          "description": "Der Name eines Zugs des Spiels.",
           "x-ref": {
             "from": "trains",
             "key": "name"
@@ -279,14 +279,14 @@
         },
         {
           "type": "object",
-          "description": "A train by its name and which one of them, like the 3rd 5.",
+          "description": "Ein Zug mit seinem Namen und welcher davon, wie die 3. 5.",
           "properties": {
             "on": {
-              "description": "The name of the train.",
+              "description": "Der Name des Zugs.",
               "type": "string"
             },
             "index": {
-              "description": "Which train of that name, 2 is the second.",
+              "description": "Welcher Zug dieses Namens, 2 ist der zweite.",
               "type": "integer",
               "minimum": 2
             }
@@ -297,7 +297,7 @@
       ]
     },
     "valueFormat": {
-      "description": "A format string that must contain a # character, which is replaced by the number.",
+      "description": "Ein Formatstring, der ein #-Zeichen enthalten muss, das durch die Zahl ersetzt wird.",
       "type": "string",
       "pattern": "^(.*)#(.*)$"
     },
@@ -319,7 +319,7 @@
           ]
         },
         "priceFormat": {
-          "description": "Format string for the price, where the first # is replaced by the number, e.g. #G or # credits. Overrides the game currency and the currency config. Not used when price is text.",
+          "description": "Formatstring für den Preis, wobei das erste # durch die Zahl ersetzt wird, z. B. #G oder # credits. Überschreibt die Spielwährung und die Konfiguration currency. Wird nicht verwendet, wenn price ein Text ist.",
           "$ref": "#/definitions/valueFormat"
         },
         "color": {
@@ -351,7 +351,7 @@
           "minimum": 0
         },
         "discount": {
-          "description": "The price of this train when traded in for each of the listed trains, by the name of the train traded in.",
+          "description": "Der Preis dieses Zugs, wenn er für jeden der aufgeführten Züge in Zahlung gegeben wird, nach dem Namen des in Zahlung gegebenen Zugs.",
           "type": "object",
           "additionalProperties": {
             "type": "number",
@@ -359,7 +359,7 @@
           }
         },
         "upgrade": {
-          "description": "Cost of this train when bought as an upgrade, shown under the price",
+          "description": "Kosten dieses Zugs, wenn er als Upgrade gekauft wird, unter dem Preis angezeigt",
           "oneOf": [
             {
               "type": "number",
@@ -371,11 +371,11 @@
           ]
         },
         "upgradeFormat": {
-          "description": "Format string for the upgrade cost, where the first # is replaced by the number, e.g. +#. The arrow stays.",
+          "description": "Formatstring für die Upgrade-Kosten, wobei das erste # durch die Zahl ersetzt wird, z. B. +#. Der Pfeil bleibt.",
           "$ref": "#/definitions/valueFormat"
         },
         "tradeIn": {
-          "description": "Value of this train when traded in, shown in parentheses under the price",
+          "description": "Wert dieses Zugs, wenn er in Zahlung gegeben wird, in Klammern unter dem Preis angezeigt",
           "oneOf": [
             {
               "type": "number",
@@ -387,7 +387,7 @@
           ]
         },
         "tradeInFormat": {
-          "description": "Format string for the trade-in value, where the first # is replaced by the number, e.g. -# trade. The parentheses stay.",
+          "description": "Formatstring für den Wert bei Inzahlungnahme, wobei das erste # durch die Zahl ersetzt wird, z. B. -# trade. Die Klammern bleiben.",
           "$ref": "#/definitions/valueFormat"
         },
         "description": {
@@ -415,89 +415,89 @@
           "type": "integer"
         },
         "nameFontSize": {
-          "description": "Font size of the name.",
+          "description": "Schriftgröße des Namens.",
           "type": "number"
         },
         "nameFontFamily": {
-          "description": "Font family of the name.",
+          "description": "Schriftfamilie des Namens.",
           "type": "string"
         },
         "priceFontSize": {
-          "description": "Font size of the price.",
+          "description": "Schriftgröße des Preises.",
           "type": "number"
         },
         "priceFontFamily": {
-          "description": "Font family of the price.",
+          "description": "Schriftfamilie des Preises.",
           "type": "string"
         },
         "longevityFontSize": {
-          "description": "Font size of the rust, phase and obsolete texts.",
+          "description": "Schriftgröße der Texte zu rust, phase und obsolete.",
           "type": "number"
         },
         "longevityFontFamily": {
-          "description": "Font family of the rust, phase and obsolete texts.",
+          "description": "Schriftfamilie der Texte zu rust, phase und obsolete.",
           "type": "string"
         },
         "backgroundColor": {
-          "description": "Background color of the train card.",
+          "description": "Hintergrundfarbe der Zugkarte.",
           "type": "string"
         },
         "imagePaddingTop": {
-          "description": "Space above the image.",
+          "description": "Abstand über dem Bild.",
           "type": "number"
         },
         "imageWidth": {
-          "description": "Width of the image.",
+          "description": "Breite des Bildes.",
           "type": "number"
         },
         "phasedText": {
-          "description": "Replaces the text before the phased by event.",
+          "description": "Ersetzt den Text vor dem Ereignis phased by.",
           "type": "string"
         },
         "obsoletedText": {
-          "description": "Replaces the text before the obsolete event.",
+          "description": "Ersetzt den Text vor dem Ereignis obsolete.",
           "type": "string"
         },
         "rustedText": {
-          "description": "Replaces the text before the rust event.",
+          "description": "Ersetzt den Text vor dem Ereignis rust.",
           "type": "string"
         },
         "permanentText": {
-          "description": "Replaces the text of a permanent train.",
+          "description": "Ersetzt den Text eines permanenten Zugs.",
           "type": "string"
         },
         "permanentColor": {
-          "description": "Color of the text of a permanent train.",
+          "description": "Farbe des Textes eines permanenten Zugs.",
           "type": "string"
         },
         "back": {
-          "description": "The back of the train card, printed behind the front when the cards duplex config is on (it needs the free cards layout). All copies of the train share it. Either a title and text on a colored background, or (with a name) a full train that prints like a normal train card with its own values.",
+          "description": "Die Rückseite der Zugkarte, die hinter der Vorderseite gedruckt wird, wenn die Konfiguration cards duplex aktiv ist (sie braucht das freie Kartenlayout). Alle Exemplare des Zugs teilen sie. Entweder ein Titel und Text auf farbigem Hintergrund oder (mit einem Namen) ein vollständiger Zug, der wie eine normale Zugkarte mit eigenen Werten gedruckt wird.",
           "anyOf": [
             {
-              "description": "A plain back with a title and text on a colored background.",
+              "description": "Eine einfache Rückseite mit Titel und Text auf farbigem Hintergrund.",
               "type": "object",
               "properties": {
                 "title": {
-                  "description": "Large text on the back, the name of the train by default.",
+                  "description": "Großer Text auf der Rückseite, standardmäßig der Name des Zugs.",
                   "type": "string"
                 },
                 "text": {
-                  "description": "Smaller text under the title.",
+                  "description": "Kleinerer Text unter dem Titel.",
                   "type": "string"
                 },
                 "color": {
-                  "description": "Color of the text.",
+                  "description": "Farbe des Textes.",
                   "type": "string"
                 },
                 "backgroundColor": {
-                  "description": "Background color of the back.",
+                  "description": "Hintergrundfarbe der Rückseite.",
                   "type": "string"
                 }
               },
               "additionalProperties": false
             },
             {
-              "description": "A full train definition, printed as a normal train card. Its own back and quantity are ignored.",
+              "description": "Eine vollständige Zugdefinition, die als normale Zugkarte gedruckt wird. Ihre eigene Rückseite und Anzahl werden ignoriert.",
               "$ref": "#/definitions/train"
             }
           ]
@@ -507,7 +507,7 @@
       "additionalProperties": false
     },
     "companyTrain": {
-      "description": "A train of a company: the name of a game train, { name, quantity } for copies of a game train, or a full train. A format override such as priceFormat needs a full train definition (with a color and a price); { name, priceFormat } alone is not valid.",
+      "description": "Ein Zug einer Gesellschaft: der Name eines Spielzugs, { name, quantity } für Exemplare eines Spielzugs oder ein vollständiger Zug. Eine Format-Überschreibung wie priceFormat braucht eine vollständige Zugdefinition (mit color und price); { name, priceFormat } allein ist nicht gültig.",
       "anyOf": [
         {
           "type": "string"
@@ -573,28 +573,28 @@
             "type": "string"
           },
           "subtext": {
-            "description": "Text under the name of the company.",
+            "description": "Text unter dem Namen der Gesellschaft.",
             "type": "string"
           },
           "color": {
-            "description": "Color of the share band.",
+            "description": "Farbe des Anteilsbandes.",
             "type": "string"
           },
           "backgroundColor": {
-            "description": "Background color of the share.",
+            "description": "Hintergrundfarbe des Anteils.",
             "type": "string"
           },
           "labelColor": {
-            "description": "Color of the label.",
+            "description": "Farbe der Beschriftung.",
             "type": "string"
           },
           "tokenCount": {
-            "description": "How many tokens to draw on the share.",
+            "description": "Wie viele Token auf den Anteil gezeichnet werden.",
             "type": "number",
             "minimum": 0
           },
           "president": {
-            "description": "Marks this as the president's share. It is the only share that prints the group mark of its company.",
+            "description": "Markiert diesen als Präsidentenanteil. Er ist der einzige Anteil, der das Gruppenzeichen seiner Gesellschaft druckt.",
             "type": "boolean"
           }
         },
@@ -619,10 +619,10 @@
     },
     "charterToken": {
       "type": "object",
-      "description": "A token space on a charter, with more than a cost.",
+      "description": "Ein Tokenfeld auf einer Gesellschaftskarte (charter), mit mehr als nur Kosten.",
       "properties": {
         "cost": {
-          "description": "The label under the token space, like the plain string or number entry.",
+          "description": "Die Beschriftung unter dem Tokenfeld, wie beim einfachen String- oder Zahleneintrag.",
           "oneOf": [
             {
               "type": "string"
@@ -634,7 +634,7 @@
         },
         "start": {
           "type": "boolean",
-          "description": "The company starts with a token in this space. Color charters show the logo in it instead of an empty circle, carth charters show an empty circle instead of the logo. false is the same as leaving it out."
+          "description": "Die Gesellschaft startet mit einem Token auf diesem Feld. Color-Gesellschaftskarten zeigen darin das Logo statt eines leeren Kreises, carth-Gesellschaftskarten zeigen einen leeren Kreis statt des Logos. false ist dasselbe wie es wegzulassen."
         }
       },
       "additionalProperties": false
@@ -644,7 +644,7 @@
     },
     "gameTokens": {
       "type": "array",
-      "description": "The tokens of the game that print on the token sheet. A string or a number is a white token with that label.",
+      "description": "Die Token des Spiels, die auf dem Tokenbogen gedruckt werden. Ein String oder eine Zahl ist ein weißer Token mit dieser Beschriftung.",
       "items": {
         "oneOf": [
           {
@@ -661,10 +661,10 @@
     },
     "cellObject": {
       "type": "object",
-      "description": "A cell of the stock market, par chart or revenue chart.",
+      "description": "Eine Zelle des Aktienmarkts, der Par-Tabelle oder der Einnahmentabelle.",
       "properties": {
         "value": {
-          "description": "The price shown in the cell, formatted with the market currency.",
+          "description": "Der in der Zelle angezeigte Preis, formatiert mit der Marktwährung.",
           "oneOf": [
             {
               "type": "string"
@@ -675,7 +675,7 @@
           ]
         },
         "label": {
-          "description": "Text shown instead of a value.",
+          "description": "Text, der statt eines Werts angezeigt wird.",
           "oneOf": [
             {
               "type": "string"
@@ -686,19 +686,19 @@
           ]
         },
         "subLabel": {
-          "description": "A second text, at the opposite corner of the cell.",
+          "description": "Ein zweiter Text, an der gegenüberliegenden Ecke der Zelle.",
           "type": "string"
         },
         "color": {
-          "description": "Background color of the cell.",
+          "description": "Hintergrundfarbe der Zelle.",
           "type": "string"
         },
         "labelColor": {
-          "description": "Color of the texts, defaults to a readable color.",
+          "description": "Farbe der Texte, standardmäßig eine gut lesbare Farbe.",
           "type": "string"
         },
         "arrow": {
-          "description": "The arrow or arrows drawn in the corners of the cell.",
+          "description": "Der Pfeil oder die Pfeile, die in die Ecken der Zelle gezeichnet werden.",
           "oneOf": [
             {
               "type": "string",
@@ -714,46 +714,46 @@
           ]
         },
         "arrowColor": {
-          "description": "Color of the arrows.",
+          "description": "Farbe der Pfeile.",
           "type": "string"
         },
         "legend": {
-          "description": "Index in the stock legend, the cell takes the color of that legend entry.",
+          "description": "Index in der Aktienlegende, die Zelle übernimmt die Farbe dieses Legendeneintrags.",
           "type": "integer",
           "minimum": 0
         },
         "par": {
-          "description": "The cell is a par value, it takes the color of the par chart.",
+          "description": "Die Zelle ist ein Par-Wert und übernimmt die Farbe der Par-Tabelle.",
           "type": "boolean"
         },
         "bottom": {
-          "description": "Draw the cell below the other cells.",
+          "description": "Zeichnet die Zelle unter den anderen Zellen.",
           "type": "boolean"
         },
         "underline": {
-          "description": "Underline the text of the cell.",
+          "description": "Unterstreicht den Text der Zelle.",
           "type": "boolean"
         },
         "rotated": {
-          "description": "Rotate the label.",
+          "description": "Dreht die Beschriftung.",
           "type": "boolean"
         },
         "subRotated": {
-          "description": "Rotate the sub label.",
+          "description": "Dreht die Unterbeschriftung.",
           "type": "boolean"
         },
         "width": {
-          "description": "Width of the cell, in cells.",
+          "description": "Breite der Zelle, in Zellen.",
           "type": "number",
           "exclusiveMinimum": 0
         },
         "height": {
-          "description": "Height of the cell, in cells.",
+          "description": "Höhe der Zelle, in Zellen.",
           "type": "number",
           "exclusiveMinimum": 0
         },
         "companies": {
-          "description": "Companies shown as bars in the cell: an abbreviation, or an abbreviation with the row of the bar.",
+          "description": "Gesellschaften, die als Balken in der Zelle angezeigt werden: eine Abkürzung oder eine Abkürzung mit der Zeile des Balkens.",
           "type": "array",
           "items": {
             "oneOf": [
@@ -783,7 +783,7 @@
           }
         },
         "tokens": {
-          "description": "Tokens drawn in the cell. A company is a company token, otherwise a token with x and y positions.",
+          "description": "In der Zelle gezeichnete Token. Eine Gesellschaft ist ein Gesellschaftstoken, sonst ein Token mit x- und y-Positionen.",
           "type": "array",
           "items": {
             "type": "object"
@@ -792,7 +792,7 @@
       }
     },
     "cell": {
-      "description": "A cell of a market: nothing, a price, a label or an object.",
+      "description": "Eine Zelle eines Markts: nichts, ein Preis, eine Beschriftung oder ein Objekt.",
       "oneOf": [
         {
           "type": "null"
@@ -810,7 +810,7 @@
     },
     "cellRows": {
       "type": "array",
-      "description": "Rows of cells, or a single cell for a row of one.",
+      "description": "Zeilen von Zellen oder eine einzelne Zelle für eine Zeile mit einer Zelle.",
       "items": {
         "oneOf": [
           {
@@ -827,7 +827,7 @@
     },
     "movement": {
       "type": "object",
-      "description": "Where to draw the share price movement legend.",
+      "description": "Wo die Legende der Aktienkursbewegung gezeichnet wird.",
       "properties": {
         "x": {
           "type": "number"
@@ -841,7 +841,7 @@
     },
     "roundTracker": {
       "type": "object",
-      "description": "Where to draw the round tracker, in cells of the market.",
+      "description": "Wo der Rundenzähler gezeichnet wird, in Zellen des Markts.",
       "properties": {
         "x": {
           "type": "number"
@@ -863,46 +863,46 @@
     },
     "stock": {
       "type": "object",
-      "description": "The stock market, and the par and revenue charts.",
+      "description": "Der Aktienmarkt sowie die Par- und Einnahmentabellen.",
       "properties": {
         "type": {
-          "description": "The layout of the market: 2D is a grid, 1D a single row, 1Diag a zigzag row. Always set it, a market without a type is empty.",
+          "description": "Das Layout des Markts: 2D ist ein Raster, 1D eine einzelne Zeile, 1Diag eine Zickzackzeile. Setze es immer, ein Markt ohne type ist leer.",
           "type": "string",
           "enum": ["1D", "2D", "1Diag"]
         },
         "title": {
-          "description": "false starts the market at the top, without space for the title.",
+          "description": "false beginnt den Markt oben, ohne Platz für den Titel.",
           "type": "boolean",
           "const": false
         },
         "market": {
-          "description": "The cells: rows of cells for a 2D market, a row of cells for the others.",
+          "description": "Die Zellen: Zeilen von Zellen für einen 2D-Markt, eine Zeile von Zellen für die anderen.",
           "$ref": "#/definitions/cellRows"
         },
         "par": {
-          "description": "The par chart.",
+          "description": "Die Par-Tabelle.",
           "type": "object",
           "properties": {
             "values": {
-              "description": "The par values, rows of cells.",
+              "description": "Die Par-Werte, Zeilen von Zellen.",
               "$ref": "#/definitions/cellRows"
             },
             "color": {
-              "description": "Background color of the par cells.",
+              "description": "Hintergrundfarbe der Par-Zellen.",
               "type": "string"
             },
             "width": {
-              "description": "Width of a par cell, in cells.",
+              "description": "Breite einer Par-Zelle, in Zellen.",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "height": {
-              "description": "Height of a par cell, in cells.",
+              "description": "Höhe einer Par-Zelle, in Zellen.",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "title": {
-              "description": "false hides the title above the par chart.",
+              "description": "false blendet den Titel über der Par-Tabelle aus.",
               "type": "boolean",
               "const": false
             }
@@ -910,7 +910,7 @@
           "additionalProperties": false
         },
         "cell": {
-          "description": "The size and color every market cell starts with.",
+          "description": "Die Größe und Farbe, mit der jede Marktzelle beginnt.",
           "type": "object",
           "properties": {
             "width": {
@@ -928,11 +928,11 @@
           "additionalProperties": false
         },
         "display": {
-          "description": "Where the parts of the market are drawn.",
+          "description": "Wo die Teile des Markts gezeichnet werden.",
           "type": "object",
           "properties": {
             "par": {
-              "description": "Draw the par chart on the market, at x and y cells from the corner.",
+              "description": "Zeichnet die Par-Tabelle auf den Markt, x und y Zellen von der Ecke entfernt.",
               "type": "object",
               "properties": {
                 "x": {
@@ -946,7 +946,7 @@
               "additionalProperties": false
             },
             "legend": {
-              "description": "Where the legend goes on a 2D market, or a 1Diag market.",
+              "description": "Wo die Legende bei einem 2D-Markt oder einem 1Diag-Markt steht.",
               "type": "object",
               "properties": {
                 "x": {
@@ -973,28 +973,28 @@
               "$ref": "#/definitions/roundTracker"
             },
             "movement": {
-              "description": "Draw the legend of how the share price moves (stock.movement) on the market, x and y in cells from the corner. On a 1D market a column is as many cells tall as the column setting. A market placed on a map draws its own legend, so do not also set map.movement.",
+              "description": "Zeichnet die Legende, wie sich der Aktienkurs bewegt (stock.movement), auf den Markt, x und y in Zellen von der Ecke. Bei einem 1D-Markt ist eine Spalte so viele Zellen hoch wie die Einstellung column. Ein auf einer Karte platzierter Markt zeichnet seine eigene Legende, setze daher nicht zusätzlich map.movement.",
               "$ref": "#/definitions/movement"
             },
             "extraTotalHeight": {
-              "description": "Extra height of the page, in units.",
+              "description": "Zusätzliche Höhe der Seite, in Einheiten.",
               "type": "number"
             },
             "extraTotalWidth": {
-              "description": "Extra width of the page, in units.",
+              "description": "Zusätzliche Breite der Seite, in Einheiten.",
               "type": "number"
             }
           },
           "additionalProperties": false
         },
         "ledges": {
-          "description": "Lines drawn over the market, from corner to corner of cells.",
+          "description": "Linien, die über den Markt gezeichnet werden, von Zellecke zu Zellecke.",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "coords": {
-                "description": "The corners of the line, each as the x and y of a cell corner, like 6 0.",
+                "description": "Die Ecken der Linie, jeweils als x und y einer Zellecke, wie 6 0.",
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1009,14 +1009,14 @@
                 "type": "number"
               },
               "border": {
-                "description": "Draw a border around the line.",
+                "description": "Zeichnet einen Rand um die Linie.",
                 "type": "boolean"
               },
               "borderWidth": {
                 "type": "number"
               },
               "dashed": {
-                "description": "Draw a dashed line.",
+                "description": "Zeichnet eine gestrichelte Linie.",
                 "type": "boolean"
               },
               "dashArray": {
@@ -1030,7 +1030,7 @@
                 ]
               },
               "offset": {
-                "description": "Offset of the dashes.",
+                "description": "Versatz der Striche.",
                 "type": "number"
               }
             },
@@ -1039,7 +1039,7 @@
           }
         },
         "legend": {
-          "description": "The legend of the colors of the market.",
+          "description": "Die Legende der Farben des Markts.",
           "type": "array",
           "items": {
             "type": "object",
@@ -1080,7 +1080,7 @@
                 ]
               },
               "icon": {
-                "description": "Not drawn at the moment.",
+                "description": "Wird derzeit nicht gezeichnet.",
                 "type": "string"
               }
             },
@@ -1089,7 +1089,7 @@
           }
         },
         "movement": {
-          "description": "How the share price moves, by direction (up, down, left and right are drawn as arrows, any other key as a line of text). Printed as a legend where stock.display.movement or map.movement place it.",
+          "description": "Wie sich der Aktienkurs bewegt, nach Richtung (up, down, left und right werden als Pfeile gezeichnet, jeder andere Schlüssel als Textzeile). Wird als Legende gedruckt, wo stock.display.movement oder map.movement sie platzieren.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -1099,7 +1099,7 @@
           }
         },
         "limits": {
-          "description": "Ranges of share prices, like the allowed par values. Kept for reference, it is not printed.",
+          "description": "Bereiche von Aktienkursen, wie die erlaubten Par-Werte. Nur zur Referenz, wird nicht gedruckt.",
           "type": "array",
           "items": {
             "type": "object",
@@ -1138,7 +1138,7 @@
     },
     "mapCoord": {
       "type": "string",
-      "description": "A place on the map: a hex and a point (A1p1), a side (A1s1), an angle and percent (A1a30p0.5), or an offset from the middle (A1x10y-5).",
+      "description": "Ein Ort auf der Karte: ein Hex und ein Punkt (A1p1), eine Seite (A1s1), ein Winkel und Prozent (A1a30p0.5) oder ein Versatz von der Mitte (A1x10y-5).",
       "pattern": "^[A-Z]+[0-9]+(p[0-9.-]+|s[0-9.-]+|a[0-9.-]+(p[0-9.-]+)?|x[0-9.-]+y[0-9.-]+)$"
     }
   },
@@ -1164,7 +1164,7 @@
         },
         "publisher": {
           "type": "string",
-          "description": "Id of the publisher (see src/data/publishers), shown on the game info page and in the game list"
+          "description": "Id des Verlags (siehe src/data/publishers), wird auf der Spielinfoseite und in der Spieleliste angezeigt"
         },
         "extraTotalHeight": {
           "type": "number",
@@ -1208,12 +1208,12 @@
           "enum": ["horizontal", "vertical"]
         },
         "capitalization": {
-          "description": "Full cap is the default and doesn't need to be specified.",
+          "description": "Full cap ist der Standard und muss nicht angegeben werden.",
           "type": "string",
           "enum": ["full", "incremental"]
         },
         "mustSellInBlocks": {
-          "description": "Shares must be sold in blocks, shown on the charter.",
+          "description": "Anteile müssen in Blöcken verkauft werden, wird auf der Gesellschaftskarte angezeigt.",
           "type": "boolean"
         },
         "marketTokens": {
@@ -1225,16 +1225,16 @@
           "minimum": 1
         },
         "currency": {
-          "description": "The currency format string must contain a # character",
+          "description": "Der Formatstring der Währung muss ein #-Zeichen enthalten",
           "type": "string",
           "pattern": "^(.*)#(.*)$"
         },
         "valueFontFamily": {
-          "description": "Font family of the values on the map.",
+          "description": "Schriftfamilie der Werte auf der Karte.",
           "type": "string"
         },
         "valueFontWeight": {
-          "description": "Font weight of the values on the map.",
+          "description": "Schriftstärke der Werte auf der Karte.",
           "oneOf": [
             {
               "type": "string"
@@ -1245,11 +1245,11 @@
           ]
         },
         "nameFontFamily": {
-          "description": "Font family of the names on the map.",
+          "description": "Schriftfamilie der Namen auf der Karte.",
           "type": "string"
         },
         "nameFontWeight": {
-          "description": "Font weight of the names on the map.",
+          "description": "Schriftstärke der Namen auf der Karte.",
           "oneOf": [
             {
               "type": "string"
@@ -1260,11 +1260,11 @@
           ]
         },
         "companyFontFamily": {
-          "description": "Font family of the companies.",
+          "description": "Schriftfamilie der Gesellschaften.",
           "type": "string"
         },
         "companyFontWeight": {
-          "description": "Font weight of the companies.",
+          "description": "Schriftstärke der Gesellschaften.",
           "oneOf": [
             {
               "type": "string"
@@ -1275,23 +1275,23 @@
           ]
         },
         "valueFontSize": {
-          "description": "Font size of the values on the map.",
+          "description": "Schriftgröße der Werte auf der Karte.",
           "type": "number"
         },
         "nameFontSize": {
-          "description": "Font size of the names on the map.",
+          "description": "Schriftgröße der Namen auf der Karte.",
           "type": "number"
         },
         "companyFontSize": {
-          "description": "Font size of the companies.",
+          "description": "Schriftgröße der Gesellschaften.",
           "type": "number"
         },
         "companyFontStyle": {
-          "description": "Font style of the companies.",
+          "description": "Schriftstil der Gesellschaften.",
           "type": "string"
         },
         "titleFontWeight": {
-          "description": "Font weight of the title on the map.",
+          "description": "Schriftstärke des Titels auf der Karte.",
           "oneOf": [
             {
               "type": "string"
@@ -1302,7 +1302,7 @@
           ]
         },
         "subtitleFontWeight": {
-          "description": "Font weight of the subtitle on the map.",
+          "description": "Schriftstärke des Untertitels auf der Karte.",
           "oneOf": [
             {
               "type": "string"
@@ -1313,7 +1313,7 @@
           ]
         },
         "designerFontWeight": {
-          "description": "Font weight of the designer on the map.",
+          "description": "Schriftstärke des Designers auf der Karte.",
           "oneOf": [
             {
               "type": "string"
@@ -1324,47 +1324,47 @@
           ]
         },
         "borderWidth": {
-          "description": "Width of the border of track, cities and towns.",
+          "description": "Breite des Rands von Gleisen, Städten und Orten.",
           "type": "number"
         },
         "trackWidth": {
-          "description": "Width of the track.",
+          "description": "Breite des Gleises.",
           "type": "number"
         },
         "trackColor": {
-          "description": "Color of the track, match uses the color of the hex.",
+          "description": "Farbe des Gleises, match verwendet die Farbe des Hex.",
           "type": "string"
         },
         "trackBorderColor": {
-          "description": "Color of the border of the track, match uses the color of the hex.",
+          "description": "Farbe des Gleisrands, match verwendet die Farbe des Hex.",
           "type": "string"
         },
         "trackGauge": {
-          "description": "Gauge of all the track: narrow, dashed, line or dual.",
+          "description": "Spurweite aller Gleise: narrow, dashed, line oder dual.",
           "type": "string"
         },
         "trackGaugeColor": {
-          "description": "Color of the gauge lines, match uses the color of the hex.",
+          "description": "Farbe der Spurweitenlinien, match verwendet die Farbe des Hex.",
           "type": "string"
         },
         "cityWidth": {
-          "description": "Width of the cities.",
+          "description": "Breite der Städte.",
           "type": "number"
         },
         "townWidth": {
-          "description": "Width of the towns.",
+          "description": "Breite der Orte.",
           "type": "number"
         },
         "townBorderWidth": {
-          "description": "Width of the border of towns.",
+          "description": "Breite des Rands von Orten.",
           "type": "number"
         },
         "transparent": {
-          "description": "Draw the hexes of the map without a background.",
+          "description": "Zeichnet die Hexfelder der Karte ohne Hintergrund.",
           "type": "boolean"
         },
         "mapCoordinates": {
-          "description": "Where the numbers and letters of the coordinates go.",
+          "description": "Wo die Zahlen und Buchstaben der Koordinaten stehen.",
           "type": "string",
           "enum": [
             "numbersVertical",
@@ -1380,7 +1380,7 @@
     },
     "colors": {
       "type": "object",
-      "description": "Colors of the game by name. A color is a CSS color or another color name, or an object of those by phase.",
+      "description": "Farben des Spiels nach Namen. Eine Farbe ist eine CSS-Farbe oder ein anderer Farbname oder ein Objekt davon nach Phase.",
       "additionalProperties": {
         "$ref": "#/definitions/colorValue"
       }
@@ -1436,22 +1436,22 @@
       }
     },
     "groups": {
-      "description": "Groups of companies, each drawn as a small mark on the private cards, charters and president's shares of its members. A company or private joins a group with its group field.",
+      "description": "Gruppen von Gesellschaften, jede als kleines Zeichen auf den Karten der Privatgesellschaften, den Gesellschaftskarten und den Präsidentenanteilen ihrer Mitglieder gezeichnet. Eine Gesellschaft oder Privatgesellschaft tritt einer Gruppe mit ihrem Feld group bei.",
       "type": "array",
       "items": {
         "type": "object",
         "required": ["id"],
         "properties": {
           "id": {
-            "description": "The id companies and privates use to join the group.",
+            "description": "Die Id, mit der Gesellschaften und Privatgesellschaften der Gruppe beitreten.",
             "type": "string"
           },
           "name": {
-            "description": "A name for the group. It is not printed; it labels the group in the editor.",
+            "description": "Ein Name für die Gruppe. Er wird nicht gedruckt; er beschriftet die Gruppe im Editor.",
             "type": "string"
           },
           "shape": {
-            "description": "The shape of the mark.",
+            "description": "Die Form des Zeichens.",
             "type": "string",
             "enum": [
               "circle",
@@ -1464,19 +1464,19 @@
             "default": "circle"
           },
           "color": {
-            "description": "Fill color of the mark. Without a color the mark is an outline only.",
+            "description": "Füllfarbe des Zeichens. Ohne Farbe ist das Zeichen nur eine Kontur.",
             "type": "string"
           },
           "borderColor": {
-            "description": "Color of the outline of the mark.",
+            "description": "Farbe der Kontur des Zeichens.",
             "type": "string"
           },
           "text": {
-            "description": "A short text drawn on the mark.",
+            "description": "Ein kurzer Text, der auf das Zeichen gezeichnet wird.",
             "type": "string"
           },
           "textColor": {
-            "description": "Color of the text. By default a color that contrasts with the fill.",
+            "description": "Farbe des Textes. Standardmäßig eine Farbe, die sich von der Füllung abhebt.",
             "type": "string"
           }
         },
@@ -1490,19 +1490,19 @@
         "required": ["name", "abbrev"],
         "properties": {
           "name": {
-            "description": "The name of the company, printed on its charter and cards.",
+            "description": "Der Name der Gesellschaft, gedruckt auf ihrer Gesellschaftskarte und ihren Karten.",
             "type": "string"
           },
           "abbrev": {
-            "description": "The short name of the company, such as PRR. It is how the market, the tiles and the map refer to the company, so it should be unique.",
+            "description": "Der Kurzname der Gesellschaft, wie PRR. So beziehen sich der Markt, die Plättchen und die Karte auf die Gesellschaft, daher sollte er eindeutig sein.",
             "type": "string"
           },
           "variant": {
-            "description": "A variant label printed on the charter, for a company that has more than one version.",
+            "description": "Eine Variantenbeschriftung, die auf der Gesellschaftskarte gedruckt wird, für eine Gesellschaft mit mehr als einer Version.",
             "type": "string"
           },
           "group": {
-            "description": "The id of a group of the game, drawn as its mark on its charter and president's share.",
+            "description": "Die Id einer Gruppe des Spiels, als ihr Zeichen auf ihrer Gesellschaftskarte und ihrem Präsidentenanteil gezeichnet.",
             "type": "string",
             "x-ref": {
               "from": "groups",
@@ -1532,14 +1532,14 @@
           },
           "tokensBelow": {
             "type": "boolean",
-            "description": "Print the token slots of the charter in their own row under the company name, smaller so they fit the width, instead of to the right of the name. Use it for companies with many tokens, so they do not squeeze the name. Half width charters ignore it. Defaults to false."
+            "description": "Druckt die Tokenfelder der Gesellschaftskarte in einer eigenen Zeile unter dem Namen der Gesellschaft, kleiner, damit sie in die Breite passen, statt rechts vom Namen. Verwende es für Gesellschaften mit vielen Token, damit sie den Namen nicht quetschen. Gesellschaftskarten mit halber Breite ignorieren es. Standard ist false."
           },
           "banner": {
             "type": "string",
-            "description": "A label printed in a strip along the bottom edge of the charter, in the color of the company, to mark a special charter such as a system. Not translated."
+            "description": "Eine Beschriftung, die in einem Streifen am unteren Rand der Gesellschaftskarte in der Farbe der Gesellschaft gedruckt wird, um eine besondere Gesellschaftskarte wie ein System zu markieren. Wird nicht übersetzt."
           },
           "home": {
-            "description": "The home hex or starting city of the company, printed on the left of the charter subtitle line as \"Home: <home>\". A list is joined with \" / \". Not translated.",
+            "description": "Das Heimat-Hex oder die Startstadt der Gesellschaft, links in der Untertitelzeile der Gesellschaftskarte als \"Home: <home>\" gedruckt. Eine Liste wird mit \" / \" verbunden. Wird nicht übersetzt.",
             "oneOf": [
               {
                 "type": "string"
@@ -1554,34 +1554,34 @@
           },
           "destination": {
             "type": "string",
-            "description": "The destination of the company, printed in the middle of the charter subtitle line as \"Dest: <destination>\". Not translated."
+            "description": "Das Ziel der Gesellschaft, in der Mitte der Untertitelzeile der Gesellschaftskarte als \"Dest: <destination>\" gedruckt. Wird nicht übersetzt."
           },
           "ability": {
             "type": "string",
-            "description": "A special power of the company, printed on the right of the charter subtitle line. Not the same as the unprinted private abilities. Not translated."
+            "description": "Eine Sonderfähigkeit der Gesellschaft, rechts in der Untertitelzeile der Gesellschaftskarte gedruckt. Nicht dasselbe wie die nicht gedruckten Fähigkeiten der Privatgesellschaften. Wird nicht übersetzt."
           },
           "charterSubtitle": {
             "type": "object",
-            "description": "Overrides the slots of the charter subtitle line with your own text. An empty string blanks a slot. Not translated.",
+            "description": "Überschreibt die Felder der Untertitelzeile der Gesellschaftskarte mit deinem eigenen Text. Ein leerer String leert ein Feld. Wird nicht übersetzt.",
             "additionalProperties": false,
             "properties": {
               "left": {
                 "type": "string",
-                "description": "Text for the left slot, instead of \"Home: <home>\"."
+                "description": "Text für das linke Feld, statt \"Home: <home>\"."
               },
               "middle": {
                 "type": "string",
-                "description": "Text for the middle slot, instead of \"Dest: <destination>\"."
+                "description": "Text für das mittlere Feld, statt \"Dest: <destination>\"."
               },
               "right": {
                 "type": "string",
-                "description": "Text for the right slot, instead of the ability."
+                "description": "Text für das rechte Feld, statt der Fähigkeit."
               }
             }
           },
           "loans": {
             "type": "array",
-            "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns that fit the height of the charter (more loans than fit are cut off). Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",
+            "description": "Kreditfelder, die auf der Gesellschaftskarte als leere Quadrate im Hauptteil der Gesellschaftskarte gedruckt werden, rechts unter der Kopfzeile, in Spalten, die zur Höhe der Gesellschaftskarte passen (mehr Kredite, als passen, werden abgeschnitten). Jeder Eintrag ist die Beschriftung unter dem Feld (ein String oder eine Zahl); ein leerer String oder null lässt das Feld ohne Beschriftung.",
             "items": {
               "oneOf": [
                 {
@@ -1597,7 +1597,7 @@
             }
           },
           "trains": {
-            "description": "false hides the trains label on the charter. Otherwise the trains the company owns: the name of a game train, { name, quantity } for several copies of a game train, or a full train (quantity defaults to 1). They print on the charter, or as train cards when the charters trainCards config is cards.",
+            "description": "false blendet die Zugbeschriftung auf der Gesellschaftskarte aus. Sonst die Züge, die die Gesellschaft besitzt: der Name eines Spielzugs, { name, quantity } für mehrere Exemplare eines Spielzugs oder ein vollständiger Zug (quantity ist standardmäßig 1). Sie werden auf der Gesellschaftskarte gedruckt oder als Zugkarten, wenn die Konfiguration trainCards der Gesellschaftskarten cards ist.",
             "oneOf": [
               {
                 "const": false
@@ -1614,66 +1614,66 @@
             "$ref": "#/definitions/token"
           },
           "color": {
-            "description": "The color of the company.",
+            "description": "Die Farbe der Gesellschaft.",
             "type": "string"
           },
           "logo": {
-            "description": "The logo of the company.",
+            "description": "Das Logo der Gesellschaft.",
             "type": "string"
           },
           "minor": {
-            "description": "The company is a minor company.",
+            "description": "Die Gesellschaft ist eine kleine Gesellschaft (minor).",
             "type": "boolean"
           },
           "subtext": {
-            "description": "Text under the name of the company.",
+            "description": "Text unter dem Namen der Gesellschaft.",
             "type": "string"
           },
           "alias": {
-            "description": "A second name of the company. The companyNames config chooses whether the charter and the share cards print the name, the alias, or both.",
+            "description": "Ein zweiter Name der Gesellschaft. Die Konfiguration companyNames wählt, ob die Gesellschaftskarte und die Anteilskarten den Namen, den Alias oder beides drucken.",
             "type": "string"
           },
           "subName": {
-            "description": "A second line under the name of the charter.",
+            "description": "Eine zweite Zeile unter dem Namen der Gesellschaftskarte.",
             "type": "string"
           },
           "shareType": {
-            "description": "The name of a share type of the game.",
+            "description": "Der Name eines Anteilstyps des Spiels.",
             "type": "string"
           },
           "tokenType": {
-            "description": "The name of a token type of the game.",
+            "description": "Der Name eines Token-Typs des Spiels.",
             "type": "string"
           },
           "marketTokens": {
-            "description": "How many market tokens to print.",
+            "description": "Wie viele Markttoken gedruckt werden.",
             "type": "integer",
             "minimum": 0
           },
           "extraStationTokens": {
-            "description": "How many extra station tokens to print.",
+            "description": "Wie viele zusätzliche Bahnhofstoken gedruckt werden.",
             "type": "integer",
             "minimum": 0
           },
           "treasury": {
-            "description": "false hides the treasury on the charter.",
+            "description": "false blendet die Kasse auf der Gesellschaftskarte aus.",
             "type": "boolean",
             "const": false
           },
           "capital": {
-            "description": "The starting capital shown on the charter.",
+            "description": "Das auf der Gesellschaftskarte angezeigte Startkapital.",
             "$ref": "#/definitions/capital"
           },
           "fontFamily": {
-            "description": "Font family of the name.",
+            "description": "Schriftfamilie des Namens.",
             "type": "string"
           },
           "fontSize": {
-            "description": "Font size of the name.",
+            "description": "Schriftgröße des Namens.",
             "type": "number"
           },
           "fontWeight": {
-            "description": "Font weight of the name.",
+            "description": "Schriftstärke des Namens.",
             "oneOf": [
               {
                 "type": "string"
@@ -1684,11 +1684,11 @@
             ]
           },
           "fontStyle": {
-            "description": "Font style of the name.",
+            "description": "Schriftstil des Namens.",
             "type": "string"
           },
           "outlineWidth": {
-            "description": "Width of the outline of the company on its private card.",
+            "description": "Breite der Kontur der Gesellschaft auf ihrer Karte der Privatgesellschaft.",
             "type": "number"
           }
         }
@@ -1782,15 +1782,15 @@
             "type": "boolean"
           },
           "events": {
-            "description": "Events of the phase, an object of boolean fields. close_companies and remove_tokens show on the phase card, other events are ignored.",
+            "description": "Ereignisse der Phase, ein Objekt aus booleschen Feldern. close_companies und remove_tokens werden auf der Phasenkarte angezeigt, andere Ereignisse werden ignoriert.",
             "type": "object",
             "properties": {
               "close_companies": {
-                "description": "The privates close.",
+                "description": "Die Privatgesellschaften werden geschlossen.",
                 "type": "boolean"
               },
               "remove_tokens": {
-                "description": "The tokens of private companies are removed from the map.",
+                "description": "Die Token der Privatgesellschaften werden von der Karte entfernt.",
                 "type": "boolean"
               }
             },
@@ -1835,7 +1835,7 @@
     },
     "pools": {
       "type": "array",
-      "description": "Notes about the pools of the game. Kept for reference, they are not printed.",
+      "description": "Notizen zu den Pools des Spiels. Nur zur Referenz, sie werden nicht gedruckt.",
       "items": {
         "type": "object",
         "properties": {
@@ -1875,7 +1875,7 @@
             "type": "string"
           },
           "group": {
-            "description": "The id of a group of the game, drawn as its mark on its private card.",
+            "description": "Die Id einer Gruppe des Spiels, als ihr Zeichen auf ihrer Karte der Privatgesellschaft gezeichnet.",
             "type": "string",
             "x-ref": {
               "from": "groups",
@@ -1931,7 +1931,7 @@
           "iconSize": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "Size of the icon, token, company, tile or hex graphic of this private, as a multiplier of the default size (0.3in, or the big style size). Defaults to 1. With the small style and several graphics, the width is capped so they share the row."
+            "description": "Größe der Icon-, Token-, Gesellschafts-, Plättchen- oder Hex-Grafik dieser Privatgesellschaft, als Vielfaches der Standardgröße (0.3in oder die Größe des Stils big). Standard ist 1. Beim Stil small und mehreren Grafiken wird die Breite begrenzt, damit sie sich die Zeile teilen."
           },
           "tile": {
             "type": "string"
@@ -1952,7 +1952,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "description": "An ability of the private. Kept for reference, it is not printed.",
+              "description": "Eine Fähigkeit der Privatgesellschaft. Nur zur Referenz, sie wird nicht gedruckt.",
               "properties": {
                 "type": {
                   "type": "string"
@@ -1977,7 +1977,7 @@
             ]
           },
           "priceFormat": {
-            "description": "Format string for the price, where the first # is replaced by the number, e.g. #G. Overrides the game currency and the currency config. Not used when price is text.",
+            "description": "Formatstring für den Preis, wobei das erste # durch die Zahl ersetzt wird, z. B. #G. Überschreibt die Spielwährung und die Konfiguration currency. Wird nicht verwendet, wenn price ein Text ist.",
             "$ref": "#/definitions/valueFormat"
           },
           "debt": {
@@ -2004,15 +2004,15 @@
             ]
           },
           "revenueFormat": {
-            "description": "Format string for the revenue, where the first # is replaced by each number, e.g. #G. Overrides the game currency and the currency config. Not used for text revenue.",
+            "description": "Formatstring für die Einnahmen, wobei das erste # durch jede Zahl ersetzt wird, z. B. #G. Überschreibt die Spielwährung und die Konfiguration currency. Wird bei Text als Einnahmen nicht verwendet.",
             "$ref": "#/definitions/valueFormat"
           },
           "nameFontFamily": {
-            "description": "Font family of the name.",
+            "description": "Schriftfamilie des Namens.",
             "type": "string"
           },
           "nameFontWeight": {
-            "description": "Font weight of the name.",
+            "description": "Schriftstärke des Namens.",
             "oneOf": [
               {
                 "type": "string"
@@ -2023,19 +2023,19 @@
             ]
           },
           "nameFontStyle": {
-            "description": "Font style of the name.",
+            "description": "Schriftstil des Namens.",
             "type": "string"
           },
           "nameColor": {
-            "description": "Color of the name.",
+            "description": "Farbe des Namens.",
             "type": "string"
           },
           "idFontFamily": {
-            "description": "Font family of the id.",
+            "description": "Schriftfamilie der Id.",
             "type": "string"
           },
           "idFontWeight": {
-            "description": "Font weight of the id.",
+            "description": "Schriftstärke der Id.",
             "oneOf": [
               {
                 "type": "string"
@@ -2046,24 +2046,24 @@
             ]
           },
           "idFontStyle": {
-            "description": "Font style of the id.",
+            "description": "Schriftstil der Id.",
             "type": "string"
           },
           "idColor": {
-            "description": "Color of the id.",
+            "description": "Farbe der Id.",
             "type": "string"
           },
           "idFontSize": {
-            "description": "Font size of the id.",
+            "description": "Schriftgröße der Id.",
             "type": "integer",
             "minimum": 1
           },
           "noteFontFamily": {
-            "description": "Font family of the note.",
+            "description": "Schriftfamilie der Notiz.",
             "type": "string"
           },
           "noteFontWeight": {
-            "description": "Font weight of the note.",
+            "description": "Schriftstärke der Notiz.",
             "oneOf": [
               {
                 "type": "string"
@@ -2074,24 +2074,24 @@
             ]
           },
           "noteFontStyle": {
-            "description": "Font style of the note.",
+            "description": "Schriftstil der Notiz.",
             "type": "string"
           },
           "noteColor": {
-            "description": "Color of the note.",
+            "description": "Farbe der Notiz.",
             "type": "string"
           },
           "noteFontSize": {
-            "description": "Font size of the note.",
+            "description": "Schriftgröße der Notiz.",
             "type": "integer",
             "minimum": 1
           },
           "descFontFamily": {
-            "description": "Font family of the description.",
+            "description": "Schriftfamilie der Beschreibung.",
             "type": "string"
           },
           "descFontWeight": {
-            "description": "Font weight of the description.",
+            "description": "Schriftstärke der Beschreibung.",
             "oneOf": [
               {
                 "type": "string"
@@ -2102,19 +2102,19 @@
             ]
           },
           "descFontStyle": {
-            "description": "Font style of the description.",
+            "description": "Schriftstil der Beschreibung.",
             "type": "string"
           },
           "descColor": {
-            "description": "Color of the description.",
+            "description": "Farbe der Beschreibung.",
             "type": "string"
           },
           "priceFontFamily": {
-            "description": "Font family of the price.",
+            "description": "Schriftfamilie des Preises.",
             "type": "string"
           },
           "priceFontWeight": {
-            "description": "Font weight of the price.",
+            "description": "Schriftstärke des Preises.",
             "oneOf": [
               {
                 "type": "string"
@@ -2125,24 +2125,24 @@
             ]
           },
           "priceFontStyle": {
-            "description": "Font style of the price.",
+            "description": "Schriftstil des Preises.",
             "type": "string"
           },
           "priceColor": {
-            "description": "Color of the price.",
+            "description": "Farbe des Preises.",
             "type": "string"
           },
           "priceFontSize": {
-            "description": "Font size of the price.",
+            "description": "Schriftgröße des Preises.",
             "type": "integer",
             "minimum": 1
           },
           "revenueFontFamily": {
-            "description": "Font family of the revenue.",
+            "description": "Schriftfamilie der Einnahmen.",
             "type": "string"
           },
           "revenueFontWeight": {
-            "description": "Font weight of the revenue.",
+            "description": "Schriftstärke der Einnahmen.",
             "oneOf": [
               {
                 "type": "string"
@@ -2153,24 +2153,24 @@
             ]
           },
           "revenueFontStyle": {
-            "description": "Font style of the revenue.",
+            "description": "Schriftstil der Einnahmen.",
             "type": "string"
           },
           "revenueColor": {
-            "description": "Color of the revenue.",
+            "description": "Farbe der Einnahmen.",
             "type": "string"
           },
           "revenueFontSize": {
-            "description": "Font size of the revenue.",
+            "description": "Schriftgröße der Einnahmen.",
             "type": "integer",
             "minimum": 1
           },
           "bidFontFamily": {
-            "description": "Font family of the bid.",
+            "description": "Schriftfamilie des Gebots.",
             "type": "string"
           },
           "bidFontWeight": {
-            "description": "Font weight of the bid.",
+            "description": "Schriftstärke des Gebots.",
             "oneOf": [
               {
                 "type": "string"
@@ -2181,24 +2181,24 @@
             ]
           },
           "bidFontStyle": {
-            "description": "Font style of the bid.",
+            "description": "Schriftstil des Gebots.",
             "type": "string"
           },
           "bidColor": {
-            "description": "Color of the bid.",
+            "description": "Farbe des Gebots.",
             "type": "string"
           },
           "bidFontSize": {
-            "description": "Font size of the bid.",
+            "description": "Schriftgröße des Gebots.",
             "type": "integer",
             "minimum": 1
           },
           "variantFontFamily": {
-            "description": "Font family of the variant.",
+            "description": "Schriftfamilie der Variante.",
             "type": "string"
           },
           "variantFontWeight": {
-            "description": "Font weight of the variant.",
+            "description": "Schriftstärke der Variante.",
             "oneOf": [
               {
                 "type": "string"
@@ -2209,24 +2209,24 @@
             ]
           },
           "variantFontStyle": {
-            "description": "Font style of the variant.",
+            "description": "Schriftstil der Variante.",
             "type": "string"
           },
           "variantColor": {
-            "description": "Color of the variant.",
+            "description": "Farbe der Variante.",
             "type": "string"
           },
           "variantFontSize": {
-            "description": "Font size of the variant.",
+            "description": "Schriftgröße der Variante.",
             "type": "integer",
             "minimum": 1
           },
           "playersFontFamily": {
-            "description": "Font family of the players.",
+            "description": "Schriftfamilie der Spieler.",
             "type": "string"
           },
           "playersFontWeight": {
-            "description": "Font weight of the players.",
+            "description": "Schriftstärke der Spieler.",
             "oneOf": [
               {
                 "type": "string"
@@ -2237,28 +2237,28 @@
             ]
           },
           "playersFontStyle": {
-            "description": "Font style of the players.",
+            "description": "Schriftstil der Spieler.",
             "type": "string"
           },
           "playersColor": {
-            "description": "Color of the players.",
+            "description": "Farbe der Spieler.",
             "type": "string"
           },
           "playersFontSize": {
-            "description": "Font size of the players.",
+            "description": "Schriftgröße der Spieler.",
             "type": "integer",
             "minimum": 1
           },
           "fontColor": {
-            "description": "Color of the text of the card.",
+            "description": "Farbe des Textes der Karte.",
             "type": "string"
           },
           "backgroundColor": {
-            "description": "Background color of the card.",
+            "description": "Hintergrundfarbe der Karte.",
             "type": "string"
           },
           "revenueBackgroundColor": {
-            "description": "Background color of the revenue.",
+            "description": "Hintergrundfarbe der Einnahmen.",
             "type": "string"
           }
         },
@@ -2268,7 +2268,7 @@
     },
     "rounds": {
       "type": "array",
-      "description": "The rounds of the game, in order, for the round tracker.",
+      "description": "Die Runden des Spiels, in Reihenfolge, für den Rundenzähler.",
       "items": {
         "$ref": "tiles.defs.json#/definitions/roundToken"
       }
@@ -2295,7 +2295,7 @@
     },
     "turns": {
       "type": "array",
-      "description": "The turns of the game, printed on the charter.",
+      "description": "Die Spielzüge des Spiels, auf der Gesellschaftskarte gedruckt.",
       "items": {
         "type": "object",
         "properties": {
@@ -2309,7 +2309,7 @@
             }
           },
           "ordered": {
-            "description": "Number the steps.",
+            "description": "Nummeriert die Schritte.",
             "type": "boolean"
           },
           "optional": {
@@ -2355,18 +2355,18 @@
     },
     "exports": {
       "type": "object",
-      "description": "The options of an export (maker export, and the export options of the app) for this game. They are the defaults of the game: the flags of maker export, the user's config and the choices made in the export options panel come on top of them.",
+      "description": "Die Optionen eines Exports (maker export und die Exportoptionen der App) für dieses Spiel. Sie sind die Standardwerte des Spiels: die Flags von maker export, die Konfiguration des Nutzers und die Auswahl im Exportoptionen-Panel kommen darüber.",
       "properties": {
         "formats": {
           "type": "array",
-          "description": "The files to export, like --format. pdf, png, svg (the map, market, par, revenue, tiles and tokens, for vector graphics software) and b18 (a Board18 box). Defaults to pdf.",
+          "description": "Die zu exportierenden Dateien, wie --format. pdf, png, svg (die Karte, der Markt, par, revenue, tiles und tokens, für Vektorgrafik-Software) und b18 (eine Board18-Box). Standard ist pdf.",
           "items": { "type": "string", "enum": ["pdf", "png", "svg", "b18"] },
           "minItems": 1,
           "uniqueItems": true
         },
         "docs": {
           "type": "array",
-          "description": "Only export these pages, like --docs. All pages when left out. Only for pdf, png and svg files.",
+          "description": "Exportiert nur diese Seiten, wie --docs. Alle Seiten, wenn weggelassen. Nur für pdf-, png- und svg-Dateien.",
           "items": {
             "type": "string",
             "enum": [
@@ -2387,33 +2387,33 @@
         },
         "layouts": {
           "type": "string",
-          "description": "all exports a file for every layout of the cards, tiles and tokens, current only the layout of the config, like --layouts. When left out the export.allLayouts setting of the config decides.",
+          "description": "all exportiert eine Datei für jedes Layout der Karten, Plättchen und Token, current nur das Layout der Konfiguration, wie --layouts. Wenn weggelassen, entscheidet die Einstellung export.allLayouts der Konfiguration.",
           "enum": ["all", "current"]
         },
         "paginated": {
           "type": "boolean",
           "deprecated": true,
-          "description": "Deprecated and ignored. The paginated pdfs of the map, market, par and revenue are always exported when the page does not fit on one page of the paper.",
-          "deprecationMessage": "Deprecated and ignored: the paginated pdfs are always exported when the page does not fit on one page."
+          "description": "Veraltet und ignoriert. Die seitenweisen PDFs von Karte, Markt, Par und Einnahmen werden immer exportiert, wenn die Seite nicht auf eine Papierseite passt.",
+          "deprecationMessage": "Veraltet und ignoriert: die seitenweisen PDFs werden immer exportiert, wenn die Seite nicht auf eine Seite passt."
         },
         "background": {
           "type": "string",
-          "description": "The background of the map, market, par, revenue and tile manifest png images, like --background: white or transparent. Every other png image (the background page, cards, charters, tokens and tiles) is always transparent. Board18 boxes, svg and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to white.",
+          "description": "Der Hintergrund der png-Bilder von Karte, Markt, Par, Einnahmen und Plättchenübersicht, wie --background: white oder transparent. Jedes andere png-Bild (die Hintergrundseite, Karten, Gesellschaftskarten, Token und Plättchen) ist immer transparent. Board18-Boxen, svg- und pdf-Dateien sind nicht betroffen: Karte und Markt einer Board18-Box sind immer weiß, ihre Token und Plättchen transparent. Standard ist white.",
           "enum": ["white", "transparent"],
           "default": "white"
         },
         "variation": {
           "type": "integer",
-          "description": "Only export this map variation (0 is the first), like --variation. All variations when left out.",
+          "description": "Exportiert nur diese Kartenvariante (0 ist die erste), wie --variation. Alle Varianten, wenn weggelassen.",
           "minimum": 0
         },
         "png": {
           "type": "object",
-          "description": "Options of the png images.",
+          "description": "Optionen der png-Bilder.",
           "properties": {
             "dpi": {
               "type": "integer",
-              "description": "The resolution of the images in dots per inch, like --dpi. 300 is the size they print at and the highest resolution. Defaults to 300.",
+              "description": "Die Auflösung der Bilder in Punkten pro Zoll, wie --dpi. 300 ist die Größe, in der sie gedruckt werden, und die höchste Auflösung. Standard ist 300.",
               "minimum": 1,
               "maximum": 300
             }
@@ -2422,11 +2422,11 @@
         },
         "cards": {
           "type": "object",
-          "description": "Options of the single card png images.",
+          "description": "Optionen der png-Bilder einzelner Karten.",
           "properties": {
             "bleed": {
               "type": "number",
-              "description": "The bleed around each single card image, in units of 1/100 inch (12.5 is 1/8 inch), like --card-bleed. The image is the card plus the bleed on every side, with the card background filling the bleed, ready for a card printing company. Logos and borders are not extended. The sheets keep the cards.bleed of the config. Defaults to 0, no bleed.",
+              "description": "Der Beschnitt um jedes einzelne Kartenbild, in Einheiten von 1/100 Zoll (12.5 ist 1/8 Zoll), wie --card-bleed. Das Bild ist die Karte plus der Beschnitt auf jeder Seite, wobei der Kartenhintergrund den Beschnitt füllt, bereit für eine Kartendruckerei. Logos und Ränder werden nicht erweitert. Die Bögen behalten das cards.bleed der Konfiguration. Standard ist 0, kein Beschnitt.",
               "minimum": 0,
               "maximum": 50
             }
@@ -2435,16 +2435,16 @@
         },
         "b18": {
           "type": "object",
-          "description": "Options of the Board18 box.",
+          "description": "Optionen der Board18-Box.",
           "properties": {
             "version": {
               "type": "string",
-              "description": "The version of the box, like --b18-version. Defaults to 1.0.",
+              "description": "Die Version der Box, wie --b18-version. Standard ist 1.0.",
               "minLength": 1
             },
             "author": {
               "type": "string",
-              "description": "The author of the box, like --b18-author. Defaults to the b18.author setting of maker config, the designer of the game in the app, or the name of the user.",
+              "description": "Der Autor der Box, wie --b18-author. Standard ist die Einstellung b18.author der maker-Konfiguration, der Designer des Spiels in der App oder der Name des Nutzers.",
               "minLength": 1
             }
           },
@@ -2455,20 +2455,20 @@
     },
     "revenue": {
       "type": "object",
-      "description": "The range of the revenue chart.",
+      "description": "Der Bereich der Einnahmentabelle.",
       "properties": {
         "min": {
-          "description": "The first revenue, 1 by default.",
+          "description": "Die erste Einnahme, standardmäßig 1.",
           "type": "integer",
           "minimum": 1
         },
         "max": {
-          "description": "The last revenue, 100 by default.",
+          "description": "Die letzte Einnahme, standardmäßig 100.",
           "type": "integer",
           "minimum": 1
         },
         "perRow": {
-          "description": "How many revenues in a row, 20 by default.",
+          "description": "Wie viele Einnahmen in einer Zeile stehen, standardmäßig 20.",
           "type": "integer",
           "minimum": 1
         }

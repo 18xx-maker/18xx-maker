@@ -21,7 +21,7 @@
             "type": "string"
           },
           "alias": {
-            "description": "A second name of the company. The companyNames config chooses whether the charter and the share cards print the name, the alias, or both.",
+            "description": "Ein zweiter Name der Gesellschaft. Die Konfiguration companyNames wählt, ob die Gesellschaftskarte und die Anteilskarten den Namen, den Alias oder beides drucken.",
             "type": "string"
           },
           "logo": {

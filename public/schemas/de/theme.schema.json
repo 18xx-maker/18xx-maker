@@ -4,11 +4,11 @@
   "definitions": {
     "color": {
       "type": "string",
-      "description": "A individual hex or rgb encoded color string",
+      "description": "Ein einzelner Hex- oder rgb-kodierter Farbstring",
       "pattern": "(#[0-9a-f]{3}([0-9a-f]{3})?([0-9a-f]{2})?)|(rgb\\([0-9]+,[0-9]+,[0-9]+\\))"
     },
     "themeColor": {
-      "description": "Either a color, or a subgrouping of colors in a certain context",
+      "description": "Entweder eine Farbe oder eine Untergruppierung von Farben in einem bestimmten Kontext",
       "oneOf": [
         {
           "$ref": "#/definitions/color"
