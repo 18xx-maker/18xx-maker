@@ -424,7 +424,9 @@
       "info_designerSize": "仍然有效。请将“designerSize”重命名为“designerFontSize”。",
       "phases_buy_companies": "仍然有效。请将“buy_companies”重命名为“buyCompanies”。",
       "phases_events_close_companies": "仍然有效。请将“close_companies”重命名为“closeCompanies”。",
-      "phases_events_remove_tokens": "仍然有效。请将“remove_tokens”重命名为“removeTokens”。"
+      "phases_events_remove_tokens": "仍然有效。请将“remove_tokens”重命名为“removeTokens”。",
+      "number_cards": "仍然有效。请将“number_cards”重命名为“numberCards”。",
+      "trains_quantity_label": "仍然有效。请将“quantity_label”重命名为“quantityLabel”。"
     }
   },
   "prototype": {

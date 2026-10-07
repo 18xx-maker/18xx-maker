@@ -218,15 +218,23 @@ describe("gameValidation", () => {
 
     it("has no deprecated property without a message", async () => {
       const schema = (await import("@/schemas/game.schema.json")).default;
-      expect(deprecatedPaths(schema).map((path) => path.join("."))).toEqual([
-        "info.titleSize",
-        "info.subtitleSize",
-        "info.designerSize",
-        "phases.*.buy_companies",
-        "phases.*.events.close_companies",
-        "phases.*.events.remove_tokens",
-        "exports.paginated",
-      ]);
+      expect(
+        deprecatedPaths(schema)
+          .map((path) => path.join("."))
+          .sort(),
+      ).toEqual(
+        [
+          "info.titleSize",
+          "info.subtitleSize",
+          "info.designerSize",
+          "phases.*.buy_companies",
+          "phases.*.events.close_companies",
+          "phases.*.events.remove_tokens",
+          "trains.*.quantity_label",
+          "number_cards",
+          "exports.paginated",
+        ].sort(),
+      );
     });
   });
 

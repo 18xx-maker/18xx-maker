@@ -24,7 +24,7 @@ const trains = [
     name: "3",
     color: "green",
     price: 180,
-    quantity_label: "5+",
+    quantityLabel: "5+",
     rust: [{ on: "4" }],
   },
   { name: "4", color: "brown", price: 300, obsolete: "5", phased: ["5"] },

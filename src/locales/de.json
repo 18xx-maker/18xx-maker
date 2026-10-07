@@ -424,7 +424,9 @@
       "info_designerSize": "Funktioniert weiterhin. Benenne „designerSize“ in „designerFontSize“ um.",
       "phases_buy_companies": "Funktioniert weiterhin. Benenne „buy_companies“ in „buyCompanies“ um.",
       "phases_events_close_companies": "Funktioniert weiterhin. Benenne „close_companies“ in „closeCompanies“ um.",
-      "phases_events_remove_tokens": "Funktioniert weiterhin. Benenne „remove_tokens“ in „removeTokens“ um."
+      "phases_events_remove_tokens": "Funktioniert weiterhin. Benenne „remove_tokens“ in „removeTokens“ um.",
+      "number_cards": "Funktioniert weiterhin. Benenne „number_cards“ in „numberCards“ um.",
+      "trains_quantity_label": "Funktioniert weiterhin. Benenne „quantity_label“ in „quantityLabel“ um."
     }
   },
   "prototype": {

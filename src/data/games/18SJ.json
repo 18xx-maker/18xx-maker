@@ -211,7 +211,7 @@
     {
       "name": "2",
       "quantity": 7,
-      "quantity_label": "6+1",
+      "quantityLabel": "6+1",
       "price": 80,
       "color": "yellow",
       "image": "2T",

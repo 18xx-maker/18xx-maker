@@ -39,12 +39,25 @@ export const renames = [
     now: "phases[0].events.removeTokens",
     value: true,
   },
+  {
+    key: "trains_quantity_label",
+    old: "trains[0].quantity_label",
+    now: "trains[0].quantityLabel",
+    value: "5+",
+  },
+  {
+    key: "number_cards",
+    old: "number_cards",
+    now: "numberCards",
+    value: ["red"],
+  },
 ];
 
 const base = () => ({
   info: { title: "Deprecated", subtitle: "s", designer: "d", publisher: "p" },
   meta: { id: "Deprecated", type: "bundled", slug: "Deprecated" },
   phases: [{ name: "2", limit: 4, tiles: "yellow" }],
+  trains: [{ name: "2", price: 80, quantity: 2, color: "yellow" }],
 });
 
 const put = (data, pointer, value) => {

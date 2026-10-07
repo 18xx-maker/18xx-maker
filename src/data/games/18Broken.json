@@ -28,5 +28,15 @@
       "events": { "close_companies": true, "remove_tokens": true }
     }
   ],
+  "trains": [
+    {
+      "name": "2",
+      "price": 80,
+      "quantity": 2,
+      "color": "yellow",
+      "quantity_label": "2+"
+    }
+  ],
+  "number_cards": ["red"],
   "floatPercent": 60
 }

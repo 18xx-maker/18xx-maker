@@ -5,15 +5,15 @@ Ein Spiel ist eine einzige JSON-Datei. Nur `info.title` ist laut
 oberster Ebene ist optional und schaltet die Seiten frei, die ihn verwenden. Das
 Spielmenü eines geladenen Spiels zeigt die Seiten, für die Daten vorhanden sind:
 
-| Schlüssel                            | Freigeschaltete Seiten           |
-| ------------------------------------ | -------------------------------- |
-| `map`                                | Karte                            |
-| `tiles`                              | Plättchen und Plättchenübersicht |
-| `companies`                          | Token und Gesellschaftskarten    |
-| `tokens`                             | Token (ohne Gesellschaften)      |
-| `stock.market`                       | Aktienmarkt                      |
-| `stock.par.values`                   | Par                              |
-| `privates`, `trains`, `number_cards` | die Kartenbögen unter Karten     |
+| Schlüssel                           | Freigeschaltete Seiten           |
+| ----------------------------------- | -------------------------------- |
+| `map`                               | Karte                            |
+| `tiles`                             | Plättchen und Plättchenübersicht |
+| `companies`                         | Token und Gesellschaftskarten    |
+| `tokens`                            | Token (ohne Gesellschaften)      |
+| `stock.market`                      | Aktienmarkt                      |
+| `stock.par.values`                  | Par                              |
+| `privates`, `trains`, `numberCards` | die Kartenbögen unter Karten     |
 
 Die Seiten Karten, Hintergrund und Einnahmen sind immer vorhanden. `info`
 enthält Titel, Designer, Währung und Ähnliches. Wenn du `wip` oder `prototype`

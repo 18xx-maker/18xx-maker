@@ -48,6 +48,8 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
 - **name** _erforderlich_
 - **quantity** _erforderlich_ Entweder eine Zahl oder die Zeichenkette „∞“, die
   die Anzahl der verfügbaren Züge angibt.
+- **quantityLabel** Text für die Spalte Anzahl der Phasentabelle anstelle der
+  Anzahl, etwa `5+`. Der alte Name `quantity_label` funktioniert weiterhin.
 - **color** _erforderlich_ Die Farbe, die für den Titel dieses Zuges angezeigt
   wird.
 - **price** Der Preis dieses Zuges.

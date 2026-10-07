@@ -366,8 +366,15 @@
             }
           ]
         },
+        "quantityLabel": {
+          "type": "string",
+          "description": "Text for the quantity column of the phase chart, instead of the quantity. For example 5+."
+        },
         "quantity_label": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "Deprecated, use quantityLabel.",
+          "deprecationMessage": "Deprecated, use quantityLabel."
         },
         "print": {
           "type": "integer",
@@ -1445,8 +1452,18 @@
         "$ref": "#/definitions/tokens"
       }
     },
+    "numberCards": {
+      "type": "array",
+      "description": "A list of colors. A set of number cards is printed for each color, the numbers go up to the most players of the game. The default is the background color of the game.",
+      "items": {
+        "type": "string"
+      }
+    },
     "number_cards": {
       "type": "array",
+      "deprecated": true,
+      "description": "Deprecated, use numberCards.",
+      "deprecationMessage": "Deprecated, use numberCards.",
       "items": {
         "type": "string"
       }

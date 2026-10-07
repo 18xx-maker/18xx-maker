@@ -41,6 +41,8 @@ needed for programs like [18xx.games](https://www.18xx.games/).
 - **name** _required_
 - **quantity** _required_ Either a number or the string "∞" representing the
   number of available trains.
+- **quantityLabel** Text for the quantity column of the phase chart instead of
+  the quantity, such as `5+`. The old name `quantity_label` still works.
 - **color** _required_ The color to display for this trains title.
 - **price** The cost of this train.
 - **image** The image to use for this train (See schema, code or 18Test file for

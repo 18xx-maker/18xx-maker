@@ -366,8 +366,15 @@
             }
           ]
         },
+        "quantityLabel": {
+          "type": "string",
+          "description": "schema.game.train.quantityLabel"
+        },
         "quantity_label": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "schema.game.train.quantity_label",
+          "deprecationMessage": "schema.game.train.quantity_label.deprecated"
         },
         "print": {
           "type": "integer",
@@ -1445,8 +1452,18 @@
         "$ref": "#/definitions/tokens"
       }
     },
+    "numberCards": {
+      "type": "array",
+      "description": "schema.game.numberCards",
+      "items": {
+        "type": "string"
+      }
+    },
     "number_cards": {
       "type": "array",
+      "deprecated": true,
+      "description": "schema.game.number_cards",
+      "deprecationMessage": "schema.game.number_cards.deprecated",
       "items": {
         "type": "string"
       }

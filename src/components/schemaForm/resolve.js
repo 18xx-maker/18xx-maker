@@ -7,7 +7,7 @@ import tilesDefs from "@/schemas/tiles.defs.json";
 export const GAME_INFO_KEYS = ["info", "links", "prototype", "wip"];
 
 // The lists of the rounds tab, in the order of the tab
-export const ROUND_KEYS = ["rounds", "turns", "number_cards"];
+export const ROUND_KEYS = ["rounds", "turns", "numberCards", "number_cards"];
 
 // The record of the colors tab
 export const COLOR_KEYS = ["colors"];

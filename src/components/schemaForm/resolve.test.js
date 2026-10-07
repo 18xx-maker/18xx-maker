@@ -309,6 +309,7 @@ describe("kindOf", () => {
       "trains.0.priceFormat": "string",
       "trains.0.print": "number",
       "trains.0.quantity": "count",
+      "trains.0.quantityLabel": "string",
       "trains.0.quantity_label": "string",
       "trains.0.rust": "json",
       "trains.0.rustedText": "string",
@@ -1064,9 +1065,11 @@ describe("the kinds of a record, a list of texts and a list of choices", () => {
         schema,
       ),
     ).toBe("json");
-    expect(
-      kindOf(resolveAllOf(schema.properties.number_cards, schema), "x", schema),
-    ).toBe("stringArray");
+    for (const key of ["numberCards", "number_cards"]) {
+      expect(
+        kindOf(resolveAllOf(schema.properties[key], schema), "x", schema),
+      ).toBe("stringArray");
+    }
     // The text or list of texts of a phase stays what it was
     expect(
       kindOf(

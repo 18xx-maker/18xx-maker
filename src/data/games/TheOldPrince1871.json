@@ -18,7 +18,7 @@
   },
   "bank": "∞",
   "tokens": ["Round"],
-  "number_cards": ["mainline", "shortline"],
+  "numberCards": ["mainline", "shortline"],
   "colors": {
     "mainline": "#4d2674",
     "shortline": "#004d95",

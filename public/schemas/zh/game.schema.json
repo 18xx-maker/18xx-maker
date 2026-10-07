@@ -366,8 +366,15 @@
             }
           ]
         },
+        "quantityLabel": {
+          "type": "string",
+          "description": "阶段表中数量列显示的文字,代替数量。例如 5+。"
+        },
         "quantity_label": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "已弃用，请使用 quantityLabel。",
+          "deprecationMessage": "已弃用，请使用 quantityLabel。"
         },
         "print": {
           "type": "integer",
@@ -1445,8 +1452,18 @@
         "$ref": "#/definitions/tokens"
       }
     },
+    "numberCards": {
+      "type": "array",
+      "description": "颜色列表。为每种颜色打印一套数字卡牌,数字最大到游戏的最大玩家人数。默认值为游戏的背景色。",
+      "items": {
+        "type": "string"
+      }
+    },
     "number_cards": {
       "type": "array",
+      "deprecated": true,
+      "description": "已弃用，请使用 numberCards。",
+      "deprecationMessage": "已弃用，请使用 numberCards。",
       "items": {
         "type": "string"
       }

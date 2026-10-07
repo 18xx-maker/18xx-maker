@@ -424,7 +424,9 @@
       "info_designerSize": "Still works. Rename \"designerSize\" to \"designerFontSize\".",
       "phases_buy_companies": "Still works. Rename \"buy_companies\" to \"buyCompanies\".",
       "phases_events_close_companies": "Still works. Rename \"close_companies\" to \"closeCompanies\".",
-      "phases_events_remove_tokens": "Still works. Rename \"remove_tokens\" to \"removeTokens\"."
+      "phases_events_remove_tokens": "Still works. Rename \"remove_tokens\" to \"removeTokens\".",
+      "number_cards": "Still works. Rename \"number_cards\" to \"numberCards\".",
+      "trains_quantity_label": "Still works. Rename \"quantity_label\" to \"quantityLabel\"."
     }
   },
   "prototype": {

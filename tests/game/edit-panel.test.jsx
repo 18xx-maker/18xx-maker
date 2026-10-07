@@ -2977,7 +2977,7 @@ describe("edit panel rounds", () => {
     ["Rounds", "Turns"].forEach((name) =>
       expect(scope.getAllByRole("heading", { name })[0]).toBeVisible(),
     );
-    expect(scope.getByRole("textbox", { name: "Number cards" })).toBeVisible();
+    expect(scope.getByRole("textbox", { name: "Number Cards" })).toBeVisible();
   });
 
   it("keeps the removed fields of the game when a round is added", async () => {
@@ -3025,14 +3025,14 @@ describe("edit panel rounds", () => {
   it("edits the number cards, one color per line", async () => {
     const { user } = open(roundsRoute, {
       ...structuredClone(games["18Test"]),
-      number_cards: ["red", "blue"],
+      numberCards: ["red", "blue"],
     });
     await ready();
-    const area = screen.getByRole("textbox", { name: "Number cards" });
+    const area = screen.getByRole("textbox", { name: "Number Cards" });
     expect(area).toHaveValue("red\nblue");
     await user.type(area, "\ngreen");
     await user.tab();
-    expect(game().number_cards).toEqual(["red", "blue", "green"]);
+    expect(game().numberCards).toEqual(["red", "blue", "green"]);
   });
 });
 

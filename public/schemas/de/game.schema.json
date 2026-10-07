@@ -366,8 +366,15 @@
             }
           ]
         },
+        "quantityLabel": {
+          "type": "string",
+          "description": "Text für die Spalte Anzahl der Phasentabelle anstelle der Anzahl. Zum Beispiel 5+."
+        },
         "quantity_label": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "Veraltet, verwende quantityLabel.",
+          "deprecationMessage": "Veraltet, verwende quantityLabel."
         },
         "print": {
           "type": "integer",
@@ -1445,8 +1452,18 @@
         "$ref": "#/definitions/tokens"
       }
     },
+    "numberCards": {
+      "type": "array",
+      "description": "Eine Liste von Farben. Für jede Farbe wird ein Satz Nummernkarten gedruckt, die Nummern reichen bis zur höchsten Spielerzahl des Spiels. Der Standard ist die Hintergrundfarbe des Spiels.",
+      "items": {
+        "type": "string"
+      }
+    },
     "number_cards": {
       "type": "array",
+      "deprecated": true,
+      "description": "Veraltet, verwende numberCards.",
+      "deprecationMessage": "Veraltet, verwende numberCards.",
       "items": {
         "type": "string"
       }

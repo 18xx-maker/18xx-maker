@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import Phase from "@/components/Phase";
+import Cards from "@/components/cards";
 import Title from "@/components/map/Title";
+
+import { games } from "@/data";
 
 import {
   all,
@@ -97,5 +100,62 @@ describe("renamed phase fields", () => {
           : { [old]: false, [current]: true },
       ),
     ).toBe(note);
+  });
+});
+
+describe("renamed train field", () => {
+  const quantities = async (train) => {
+    const { root } = await mountElement(
+      <Phase
+        minor={false}
+        trains={[{ name: "2", price: 80, ...train }]}
+        phases={[{ name: "2" }]}
+      />,
+    );
+    return all(one(root, "tbody tr"), "td").map((td) => td.textContent);
+  };
+
+  it("quantity_label renders the same as quantityLabel", async () => {
+    expect(await quantities({ quantity: 6, quantity_label: "5+" })).toContain(
+      "5+",
+    );
+    expect(await quantities({ quantity: 6, quantityLabel: "5+" })).toContain(
+      "5+",
+    );
+    expect(await quantities({ quantity: 6 })).toContain("6");
+  });
+
+  it("quantityLabel wins over quantity_label", async () => {
+    const train = { quantity: 6, quantity_label: "old", quantityLabel: "new" };
+    const cells = await quantities(train);
+    expect(cells).toContain("new");
+    expect(cells).not.toContain("old");
+  });
+});
+
+describe("renamed number cards", () => {
+  const numbers = async (fields) => {
+    const { root } = await mountElement(
+      <Cards hidePrivates hideShares hideTrains />,
+      { game: { ...games["18Test"], ...fields } },
+    );
+    return all(root, ".number").map((card) => card.style.backgroundColor);
+  };
+
+  it("number_cards renders the same as numberCards", async () => {
+    const viaNew = await numbers({ numberCards: ["red", "blue"] });
+    expect(viaNew.length).toBeGreaterThan(0);
+    expect(await numbers({ number_cards: ["red", "blue"] })).toEqual(viaNew);
+    expect(new Set(viaNew).size).toBe(2);
+  });
+
+  it("numberCards wins over number_cards, even when it is empty", async () => {
+    const one = await numbers({ numberCards: ["red"] });
+    expect(
+      await numbers({ numberCards: ["red"], number_cards: ["red", "blue"] }),
+    ).toEqual(one);
+    expect(
+      await numbers({ numberCards: [], number_cards: ["red", "blue"] }),
+    ).toEqual([]);
   });
 });

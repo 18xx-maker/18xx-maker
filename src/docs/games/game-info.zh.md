@@ -13,7 +13,7 @@
 | `designer`           | 设计者,显示在信息页和地图上                                                                   |
 | `publisher`          | `src/data/publishers` 中某个出版商的 id:其标志和名称显示在信息页和游戏列表中                  |
 | `currency`           | 金额的写法,用 `#` 表示数字的位置,如 `$#` 或 `#G`。配置页面中的货币选项开启时,价格和收益使用它 |
-| `background`         | 数字卡牌和背景页的颜色。`number_cards`(颜色列表,与 `info` 并列)会为每种颜色打印一套数字卡牌   |
+| `background`         | 数字卡牌和背景页的颜色。`numberCards`(颜色列表,与 `info` 并列)会为每种颜色打印一套数字卡牌    |
 | `marketTokens`       | 每家公司有多少个股市标记,默认为 3                                                             |
 | `extraStationTokens` | 每家公司在其 `tokens` 之外额外有多少个车站标记                                                |
 
@@ -101,7 +101,7 @@
 | `info.title`、`subtitle`、`designer`      | 信息页、地图、背景页                 |
 | `info.publisher`、`links`                 | 信息页、游戏列表                     |
 | `info.currency`                           | 所有价格和收益                       |
-| `info.background`、`number_cards`         | 数字卡牌、背景页                     |
+| `info.background`、`numberCards`          | 数字卡牌、背景页                     |
 | `info.marketTokens`、`extraStationTokens` | 标记页、Board18 盒子                 |
 | `players`                                 | 信息页(玩家人数范围)、私有公司、地图 |
 | `bank`、`capital`、`certLimit`            | 地图上的玩家表                       |
@@ -110,6 +110,21 @@
 | `rounds`                                  | 地图和股市上的回合记录               |
 | `phases`                                  | 公司执照上的阶段表                   |
 | `wip`、`prototype`                        | 信息页                               |
+
+## 已重命名的字段
+
+这些字段有了新名称。仍使用旧名称的游戏会照常加载和导出,问题页面会把旧名称列为已弃用。旧名称永远不会被移除,你可以随时重命名。如果文件中同时有两个名称,则以新名称为准。
+
+| 旧名称                            | 新名称                           |
+| --------------------------------- | -------------------------------- |
+| `info.titleSize`                  | `info.titleFontSize`             |
+| `info.subtitleSize`               | `info.subtitleFontSize`          |
+| `info.designerSize`               | `info.designerFontSize`          |
+| `phases[].buy_companies`          | `phases[].buyCompanies`          |
+| `phases[].events.close_companies` | `phases[].events.closeCompanies` |
+| `phases[].events.remove_tokens`   | `phases[].events.removeTokens`   |
+| `trains[].quantity_label`         | `trains[].quantityLabel`         |
+| `number_cards`                    | `numberCards`                    |
 
 ## 已移除的字段
 

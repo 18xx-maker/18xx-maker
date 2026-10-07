@@ -72,7 +72,7 @@ der Konfiguration.
 
 Alle Karten des Spiels auf Seiten: die Privatgesellschaften, eine Karte für jede
 Aktie jeder Gesellschaft, die Züge und Zahlenkarten von 1 bis zur größten
-Spieleranzahl des Spiels (ihre Farben kommen aus `number_cards`). Größe und
+Spieleranzahl des Spiels (ihre Farben kommen aus `numberCards`). Größe und
 Layout der Karten stehen im Teil _Karten_ der Konfiguration. Zugkarten mit
 einem `back` können doppelseitig gedruckt werden, siehe
 [Doppelseitige Karten](/docs/output/pdf#doppelseitige-karten).
