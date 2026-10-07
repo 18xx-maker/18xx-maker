@@ -256,50 +256,6 @@
       "tiles": "brown"
     }
   ],
-  "pools": [
-    {
-      "name": "Open Market",
-      "notes": [
-        {
-          "color": "orange",
-          "note": "Shares in the market pay dividends to the corporation"
-        },
-        {
-          "color": "brown",
-          "icon": "exclamation",
-          "note": "No more than 50% of a corporation's shares may be in the market at any time"
-        },
-        {
-          "color": "red",
-          "icon": "times",
-          "note": "Shares cannot be sold during the first stock round"
-        }
-      ]
-    },
-    {
-      "name": "State Treasury",
-      "notes": [
-        {
-          "note": "Once per turn, during Stock Round, a player may act on behalf of the State to purchase a share from the treasury of a coompany for which player is Director."
-        },
-        {
-          "note": "If the State owns the majority of a company's sharees, the State is liable for emergency train purchases."
-        },
-        {
-          "note": "1. Contribute all cash in company treasury to State Treasury."
-        },
-        {
-          "note": "2. If funds are insufficient, sell shares from the State Treasury to the Open Market, beginning with the highest-priced shares (usual Market limitation of 50% applies).  Stop executing share sales when there is enough cash to purchase a train."
-        },
-        {
-          "note": "3.  If, in the course of selling shares, the liability shifts from the State to the Director of the company needing a train, stop the share-selling process.  The Director must make up any shortfall with personal cash or by selling shares."
-        },
-        {
-          "note": "Initial Treasury: $600"
-        }
-      ]
-    }
-  ],
   "rounds": [
     {
       "name": "OR3",

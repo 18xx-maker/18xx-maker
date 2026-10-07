@@ -373,14 +373,6 @@
           "type": "integer",
           "minimum": 0
         },
-        "discount": {
-          "description": "Der Preis dieses Zugs, wenn er für jeden der aufgeführten Züge in Zahlung gegeben wird, nach dem Namen des in Zahlung gegebenen Zugs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "number",
-            "minimum": 0
-          }
-        },
         "upgrade": {
           "description": "Kosten dieses Zugs, wenn er als Upgrade gekauft wird, unter dem Preis angezeigt",
           "oneOf": [
@@ -1230,15 +1222,6 @@
           "type": "string",
           "enum": ["horizontal", "vertical"]
         },
-        "capitalization": {
-          "description": "Full cap ist der Standard und muss nicht angegeben werden.",
-          "type": "string",
-          "enum": ["full", "incremental"]
-        },
-        "mustSellInBlocks": {
-          "description": "Anteile müssen in Blöcken verkauft werden, wird auf der Gesellschaftskarte angezeigt.",
-          "type": "boolean"
-        },
         "marketTokens": {
           "type": "integer",
           "minimum": 0
@@ -1434,11 +1417,6 @@
     },
     "certLimit": {
       "$ref": "#/definitions/certLimit"
-    },
-    "floatPercent": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 100
     },
     "tokenTypes": {
       "type": "object",
@@ -1656,10 +1634,6 @@
             "description": "Ein zweiter Name der Gesellschaft. Die Konfiguration companyNames wählt, ob die Gesellschaftskarte und die Anteilskarten den Namen, den Alias oder beides drucken.",
             "type": "string"
           },
-          "subName": {
-            "description": "Eine zweite Zeile unter dem Namen der Gesellschaftskarte.",
-            "type": "string"
-          },
           "shareType": {
             "description": "Der Name eines Anteilstyps des Spiels.",
             "type": "string"
@@ -1856,39 +1830,6 @@
         "additionalProperties": false
       }
     },
-    "pools": {
-      "type": "array",
-      "description": "Notizen zu den Pools des Spiels. Nur zur Referenz, sie werden nicht gedruckt.",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "notes": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "note": {
-                  "type": "string"
-                },
-                "color": {
-                  "type": "string"
-                },
-                "icon": {
-                  "type": "string"
-                }
-              },
-              "required": ["note"],
-              "additionalProperties": false
-            }
-          }
-        },
-        "required": ["name"],
-        "additionalProperties": false
-      }
-    },
     "privates": {
       "type": "array",
       "items": {
@@ -1942,9 +1883,6 @@
               "label": "name"
             }
           },
-          "image": {
-            "type": "string"
-          },
           "icon": {
             "type": "string"
           },
@@ -1968,22 +1906,6 @@
           "variant": {
             "type": "string"
           },
-          "sym": {
-            "type": "string"
-          },
-          "abilities": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "description": "Eine Fähigkeit der Privatgesellschaft. Nur zur Referenz, sie wird nicht gedruckt.",
-              "properties": {
-                "type": {
-                  "type": "string"
-                }
-              },
-              "required": ["type"]
-            }
-          },
           "bid": {
             "type": "number",
             "minimum": 0
@@ -2002,10 +1924,6 @@
           "priceFormat": {
             "description": "Formatstring für den Preis, wobei das erste # durch die Zahl ersetzt wird, z. B. #G. Überschreibt die Spielwährung und die Konfiguration currency. Wird nicht verwendet, wenn price ein Text ist.",
             "$ref": "#/definitions/valueFormat"
-          },
-          "debt": {
-            "type": "number",
-            "minimum": 0
           },
           "revenue": {
             "oneOf": [
@@ -2359,17 +2277,6 @@
         ]
       }
     },
-    "upgrades": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "minItems": 1,
-        "uniqueItems": true
-      }
-    },
     "wip": {
       "type": "boolean"
     },
@@ -2383,7 +2290,10 @@
         "formats": {
           "type": "array",
           "description": "Die zu exportierenden Dateien, wie --format. pdf, png, svg (die Karte, der Markt, par, revenue, tiles und tokens, für Vektorgrafik-Software) und b18 (eine Board18-Box). Standard ist pdf.",
-          "items": { "type": "string", "enum": ["pdf", "png", "svg", "b18"] },
+          "items": {
+            "type": "string",
+            "enum": ["pdf", "png", "svg", "b18"]
+          },
           "minItems": 1,
           "uniqueItems": true
         },

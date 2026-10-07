@@ -373,14 +373,6 @@
           "type": "integer",
           "minimum": 0
         },
-        "discount": {
-          "description": "schema.game.train.discount",
-          "type": "object",
-          "additionalProperties": {
-            "type": "number",
-            "minimum": 0
-          }
-        },
         "upgrade": {
           "description": "schema.game.train.upgrade",
           "oneOf": [
@@ -1230,15 +1222,6 @@
           "type": "string",
           "enum": ["horizontal", "vertical"]
         },
-        "capitalization": {
-          "description": "schema.game.info.capitalization",
-          "type": "string",
-          "enum": ["full", "incremental"]
-        },
-        "mustSellInBlocks": {
-          "description": "schema.game.info.mustSellInBlocks",
-          "type": "boolean"
-        },
         "marketTokens": {
           "type": "integer",
           "minimum": 0
@@ -1434,11 +1417,6 @@
     },
     "certLimit": {
       "$ref": "#/definitions/certLimit"
-    },
-    "floatPercent": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 100
     },
     "tokenTypes": {
       "type": "object",
@@ -1656,10 +1634,6 @@
             "description": "schema.game.companies.items.alias",
             "type": "string"
           },
-          "subName": {
-            "description": "schema.game.companies.items.subName",
-            "type": "string"
-          },
           "shareType": {
             "description": "schema.game.companies.items.shareType",
             "type": "string"
@@ -1856,39 +1830,6 @@
         "additionalProperties": false
       }
     },
-    "pools": {
-      "type": "array",
-      "description": "schema.game.pools",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "notes": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "note": {
-                  "type": "string"
-                },
-                "color": {
-                  "type": "string"
-                },
-                "icon": {
-                  "type": "string"
-                }
-              },
-              "required": ["note"],
-              "additionalProperties": false
-            }
-          }
-        },
-        "required": ["name"],
-        "additionalProperties": false
-      }
-    },
     "privates": {
       "type": "array",
       "items": {
@@ -1942,9 +1883,6 @@
               "label": "name"
             }
           },
-          "image": {
-            "type": "string"
-          },
           "icon": {
             "type": "string"
           },
@@ -1968,22 +1906,6 @@
           "variant": {
             "type": "string"
           },
-          "sym": {
-            "type": "string"
-          },
-          "abilities": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "description": "schema.game.privates.items.abilities.items",
-              "properties": {
-                "type": {
-                  "type": "string"
-                }
-              },
-              "required": ["type"]
-            }
-          },
           "bid": {
             "type": "number",
             "minimum": 0
@@ -2002,10 +1924,6 @@
           "priceFormat": {
             "description": "schema.game.privates.items.priceFormat",
             "$ref": "#/definitions/valueFormat"
-          },
-          "debt": {
-            "type": "number",
-            "minimum": 0
           },
           "revenue": {
             "oneOf": [
@@ -2359,17 +2277,6 @@
         ]
       }
     },
-    "upgrades": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "minItems": 1,
-        "uniqueItems": true
-      }
-    },
     "wip": {
       "type": "boolean"
     },
@@ -2383,7 +2290,10 @@
         "formats": {
           "type": "array",
           "description": "schema.game.exports.formats",
-          "items": { "type": "string", "enum": ["pdf", "png", "svg", "b18"] },
+          "items": {
+            "type": "string",
+            "enum": ["pdf", "png", "svg", "b18"]
+          },
           "minItems": 1,
           "uniqueItems": true
         },

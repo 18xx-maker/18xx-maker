@@ -4,8 +4,8 @@ import { OUTPUT_KEYS } from "@/components/schemaForm/resolve";
 
 import schema from "@/schemas/game.schema.json";
 
-// The revenue chart range, the export defaults and the upgrades by name,
-// generated from the game schema
+// The revenue chart range and the export defaults, generated from the game
+// schema
 const OutputForm = ({ game }) => (
   <SchemaFormProvider game={game}>
     <div className="flex flex-col gap-4">

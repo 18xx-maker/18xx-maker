@@ -90,13 +90,6 @@ default size, so `1.25` is a quarter bigger and `0.75` a quarter smaller. With
 the `small` style the width stays inside the row, so several graphics still fit.
 `18Test.json` has privates of each size to compare.
 
-## Abilities and Other Fields
-
-`abilities` is a list of objects with a `type`. It is kept in the file for
-reference, for example to carry over what the private does in another system,
-and is not printed. `debt`, `sym` and `image` are accepted by the schema but are
-not printed either. Put the rules a player needs in the `description`.
-
 ## Fonts and Colors
 
 Every piece of text has its own font fields, named after the piece. For `name`,

@@ -53,10 +53,8 @@ Pflicht, die anderen sind die Zahlen für diese Spielerzahl:
 - **`certLimit`** ist die höchste Zahl an Zertifikaten, die ein Spieler halten
   darf. Es ist eine Zahl oder ein Text mit Schrägstrichen wie `"20/16/13"` für
   ein Limit, das sich ändert.
-- **`floatPercent`** ist der Prozentsatz einer Gesellschaft, der verkauft sein
-  muss, bevor sie startet, von 0 bis 100.
 
-`bank`, `capital`, `certLimit` und `floatPercent` lassen sich auch einmal für das
+`bank`, `capital` und `certLimit` lassen sich auch einmal für das
 ganze Spiel setzen, neben `info` und `players`, für ein Spiel, in dem sie sich
 nicht mit der Spielerzahl ändern. In der Spielertabelle auf der Karte wird ein
 Wert für das ganze Spiel einmal über alle Spieler hinweg angezeigt, und die
@@ -66,8 +64,7 @@ Die Spielertabelle auf der Karte zeigt `number`, `bank`, `capital` und
 `certLimit`, eine Spalte für jeden Eintrag von `players`. Sie wird dort
 gezeichnet, wo `map.players` es angibt (siehe
 [Plättchen und Felder](/docs/games/tiles)), wenn die Option für die
-Spielertabelle bei den Karten auf der Konfigurationsseite an ist. `floatPercent`
-ist Teil der Datei und des Formulareditors, aber bisher druckt es nichts.
+Spielertabelle bei den Karten auf der Konfigurationsseite an ist.
 
 ## Züge
 
@@ -110,13 +107,6 @@ der Gesellschaftskarten:
 
 `events` ist ein Objekt aus Wahrheitswerten. Jedes andere Ereignis, das du
 hinzufügst, bleibt in der Datei und wird beim Drucken ignoriert.
-
-## Pools
-
-`pools` ist eine Liste von Notizen zu den Pools des Spiels, etwa dem Markt.
-Jeder Pool hat einen `name` und `notes`, und jede Notiz eine `note` mit
-optionaler `color` und `icon`. Sie bleiben zur Referenz in der Datei und werden
-nicht gedruckt.
 
 ## In Arbeit und Prototyp
 
@@ -169,4 +159,21 @@ fest, siehe [Aktien- und Token-Typen](/docs/games/types#die-präsidentenaktie):
 | `rounds`                                  | Rundenanzeige auf der Karte und dem Aktienmarkt         |
 | `phases`                                  | Phasentabelle auf den Gesellschaftskarten               |
 | `wip`, `prototype`                        | Infoseite                                               |
-| `floatPercent`, `pools`                   | Zur Referenz gespeichert, nicht gedruckt                |
+
+## Entfernte Felder
+
+Diese Felder standen im Schema, aber nichts hat sie zum Drucken verwendet, daher
+wurden sie entfernt. Ein Spiel, das noch eines davon enthält, wird weiterhin
+geladen und exportiert: Das Feld wird ignoriert und auf der Seite Probleme als
+veraltet angezeigt. Lösche es aus der Datei.
+
+- `pools`, `floatPercent` und `upgrades` des Spiels.
+- `capitalization` und `mustSellInBlocks` von `info`.
+- `subName` einer Gesellschaft.
+- `discount` eines Zuges.
+- `sym`, `debt`, `abilities` und `image` einer Privatgesellschaft.
+- `broken`, `encoding` und `groups` eines Plättchens und seiner Feldelemente.
+- `bgFill` und `inverseTextColor` eines Tokens (verwende `inverseLabelColor` für
+  die Textfarbe eines inversen Tokens).
+- `text` und `textColor` eines Tokens eines Plättchens.
+- `textBorderWidth` und `textBorderColor` des Textes eines Plättchenelements.

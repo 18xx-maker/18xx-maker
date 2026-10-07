@@ -144,8 +144,7 @@ a warning.
 The Privates tab works the same way for the privates of the game. A card
 shows the name, price, revenue, and company first. The revenue
 is a number or a list written as it prints, like `10/20`; text that is not
-numbers, like `$10/$20`, stays text. The abilities of a private are edited as
-JSON, and the other fields, like the note and description, are under More fields.
+numbers, like `$10/$20`, stays text. The other fields, like the note and description, are under More fields.
 
 The Companies tab works the same way for the companies of the game. Because a
 company has many fields, its card starts closed and shows its color, name and
@@ -200,9 +199,7 @@ for repeats: the problems check reports what the schema does not allow.
 The Rounds tab edits the rounds of the round tracker (a card for each round
 token, with its name and color first and the other token fields under More
 fields), the turns printed on the charter (a name, its steps, whether the steps
-are numbered, and the optional steps), the notes about the pools (a name and a
-list of notes with an optional color and icon, kept for reference and not
-printed) and the colors of the number cards.
+are numbered, and the optional steps) and the colors of the number cards.
 
 The Tokens tab edits the tokens of the token sheet, the token types and the
 share types. A token is a row of text or a number (the label of a white token)
@@ -234,8 +231,7 @@ color that differs by phase is an object, which stays JSON.
 The Output tab edits the range of the revenue chart (the first and last
 revenue and how many are in a row), the export defaults of the game (the
 files to export, the pages, the layouts, the background, the variation and the
-png, card and Board18 options) and the upgrades of the tiles by name: Add
-upgrade adds a name, and its tiles are one per line. The deprecated paginated
+png, card and Board18 options). The deprecated paginated
 export option is not shown and stays in the file.
 
 The Hex tab is only on the map page. Click a hex on the map to pick its group,

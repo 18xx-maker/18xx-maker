@@ -89,7 +89,6 @@ describe("kindOf", () => {
   it.each([
     [{ type: "string" }, "x", "string"],
     [{ type: "string" }, "notes", "text"],
-    [{ type: "array", items: { type: "object" } }, "abilities", "json"],
     [
       {
         oneOf: [
@@ -231,7 +230,6 @@ describe("kindOf", () => {
     expect(kinds).toEqual({
       "info.background": "string",
       "info.borderWidth": "number",
-      "info.capitalization": "enum",
       "info.cityWidth": "number",
       "info.companyFontFamily": "string",
       "info.companyFontSize": "number",
@@ -247,7 +245,6 @@ describe("kindOf", () => {
       "info.extraTotalWidth": "number",
       "info.mapCoordinates": "enum",
       "info.marketTokens": "number",
-      "info.mustSellInBlocks": "boolean",
       "info.nameFontFamily": "string",
       "info.nameFontSize": "number",
       "info.nameFontWeight": "stringOrNumber",
@@ -286,7 +283,6 @@ describe("kindOf", () => {
       "trains.0.backgroundColor": "string",
       "trains.0.color": "string",
       "trains.0.description": "text",
-      "trains.0.discount": "record",
       "trains.0.image": "string",
       "trains.0.imagePaddingTop": "number",
       "trains.0.imageWidth": "number",
@@ -417,12 +413,11 @@ describe("kindOf", () => {
     expect(kinds.revenue).toBe("revenue");
     expect(kinds.company).toBe("string");
     expect(kinds.description).toBe("text");
-    expect(kinds.abilities).toBe("json");
     expect(kinds.iconSize).toBe("number");
     expect(kinds.priceFormat).toBe("string");
   });
 
-  it("lists the private fields that are a JSON textarea", () => {
+  it("has no private field that is a JSON textarea", () => {
     const item = resolveAllOf(schema.properties.privates.items, schema);
     const json = Object.entries(item.properties)
       .filter(
@@ -434,7 +429,7 @@ describe("kindOf", () => {
           ]) === "json",
       )
       .map(([key]) => key);
-    expect(json).toEqual(["abilities"]);
+    expect(json).toEqual([]);
   });
 
   it("reads the phases as an array, the fields of a phase as real fields", () => {
@@ -494,7 +489,6 @@ describe("kindOf", () => {
       bank: "stringOrNumber",
       capital: "stringOrNumber",
       certLimit: "stringOrNumber",
-      floatPercent: "number",
     });
     expect(kindOf(schema.properties.players, "players", schema)).toBe("array");
     const item = resolveAllOf(schema.properties.players.items, schema);
@@ -1032,7 +1026,7 @@ describe("the kinds of a record, a list of texts and a list of choices", () => {
         { definitions: { v: { type: "string" } } },
       ),
     ).toBe("record");
-    ["colors", "tokenTypes", "shareTypes", "upgrades"].forEach((key) =>
+    ["colors", "tokenTypes", "shareTypes"].forEach((key) =>
       expect(
         kindOf(resolveAllOf(schema.properties[key], schema), key, schema),
       ).toBe("record"),
@@ -1209,8 +1203,7 @@ describe("the schema through a record", () => {
     expect(schemaAt(root, ["fixed", "a"]).type).toBe("number");
   });
 
-  it("finds the upgrades and the shares of the real schema", () => {
-    expect(schemaAt(schema, ["upgrades", "x"]).type).toBe("array");
+  it("finds the shares of the real schema", () => {
     expect(schemaAt(schema, ["shareTypes", "x"]).type).toBe("array");
     expect(schemaAt(schema, ["colors", "x"]).oneOf).toBeDefined();
   });
@@ -1275,9 +1268,7 @@ describe("the names of a record", () => {
     expect(
       defaultValue({ oneOf: [{ type: "string" }, { type: "object" }] }),
     ).toBe("");
-    expect(
-      defaultValue(schema.properties.upgrades.additionalProperties),
-    ).toEqual([]);
+    expect(defaultValue(schemaAt(schema, ["shareTypes", "x"]))).toEqual([]);
   });
 
   it("sets and clears a value under any name without touching the prototype", () => {
@@ -1401,7 +1392,7 @@ describe("what a reference stores", () => {
 });
 
 describe("the rounds tab", () => {
-  it("gives the fields of the rounds, turns, pools and number cards a real form", () => {
+  it("gives the fields of the rounds, turns and number cards a real form", () => {
     const unexpected = [];
     const walk = (node, keys) => {
       const resolved = resolveSchema(node, schema);
@@ -1488,7 +1479,7 @@ describe("the colors tab", () => {
 });
 
 describe("the output tab", () => {
-  it("gives the revenue, exports and upgrades a real form", () => {
+  it("gives the revenue and exports a real form", () => {
     const unexpected = [];
     const walk = (node, keys) => {
       const resolved = resolveSchema(node, schema);
@@ -1505,11 +1496,6 @@ describe("the output tab", () => {
     };
     OUTPUT_KEYS.forEach((key) => walk(schema.properties[key], [key]));
     expect(unexpected).toEqual([]);
-    const upgrades = resolveSchema(schema.properties.upgrades, schema);
-    expect(kindOf(upgrades, "upgrades", schema)).toBe("record");
-    expect(
-      kindOf(upgrades.additionalProperties, "name", schema, ["upgrades"]),
-    ).toBe("stringArray");
     const formats = schema.properties.exports.properties.formats;
     expect(kindOf(formats, "formats", schema, ["exports"])).toBe("enumList");
   });

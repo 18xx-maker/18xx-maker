@@ -183,9 +183,6 @@
         "width": {
           "type": "integer",
           "minimum": 1
-        },
-        "bgFill": {
-          "type": "string"
         }
       },
       "required": ["company"],
@@ -202,9 +199,6 @@
           "minLength": 1
         },
         "color": {
-          "type": "string"
-        },
-        "bgFill": {
           "type": "string"
         },
         "iconColor": {
@@ -307,9 +301,6 @@
           "type": "boolean",
           "enum": [true]
         },
-        "inverseTextColor": {
-          "type": "string"
-        },
         "angle": {
           "type": "number",
           "minimum": 0,
@@ -367,12 +358,6 @@
         "rows": {
           "type": "integer",
           "minimum": 1
-        },
-        "groups": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "revenues": {
           "type": "array",
@@ -505,12 +490,6 @@
           "color": {
             "type": "string"
           },
-          "groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "companies": {
             "type": "array",
             "items": {
@@ -562,12 +541,6 @@
           "name": {
             "$ref": "#/definitions/name"
           },
-          "groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "width": {
             "type": "number",
             "exclusiveMinimum": 0
@@ -586,12 +559,6 @@
         "properties": {
           "name": {
             "$ref": "#/definitions/name"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "color": {
             "type": "string"
@@ -849,18 +816,10 @@
           "type": "number",
           "description": "schema.tiles.hex.stripeRotation"
         },
-        "encoding": {
-          "type": "string"
-        },
         "group": {
           "type": "string",
           "pattern": "^[0-9a-z]+$",
           "description": "schema.tiles.hex.group"
-        },
-        "broken": {
-          "type": "boolean",
-          "enum": [true],
-          "description": "schema.tiles.hex.broken"
         },
         "clipPath": {
           "type": "boolean",

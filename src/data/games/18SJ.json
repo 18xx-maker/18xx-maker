@@ -130,7 +130,6 @@
     ],
     "none": [{ "quantity": 0 }]
   },
-  "floatPercent": 60,
   "companies": [
     {
       "name": "Bergslagernas järnvägar AB",
@@ -254,12 +253,7 @@
       "print": 6,
       "price": 1100,
       "color": "gray",
-      "description": "Cost 800 kr when trading in a 4T, 5T or 6T",
-      "discount": {
-        "4": 300,
-        "5": 300,
-        "6": 300
-      }
+      "description": "Cost 800 kr when trading in a 4T, 5T or 6T"
     },
     {
       "name": "E",
@@ -268,12 +262,7 @@
       "price": 1300,
       "color": "gray",
       "description": "Cost 1000 kr when trading in a 4T, 5T or 6T",
-      "available": "6",
-      "discount": {
-        "4": 300,
-        "5": 300,
-        "6": 300
-      }
+      "available": "6"
     }
   ],
   "privates": [
@@ -383,31 +372,6 @@
       "limit": 2,
       "rounds": 3,
       "tiles": "gray"
-    }
-  ],
-  "pools": [
-    {
-      "name": "Market",
-      "notes": [
-        {
-          "color": "orange",
-          "note": "Shares in the IPO or market pay dividends to the bank."
-        },
-        {
-          "color": "orange",
-          "note": "Shares on the corporation's charter pay dividends to the corporation."
-        },
-        {
-          "color": "brown",
-          "icon": "exclamation",
-          "note": "No more than 50% of a corporation's shares may be in the market at any time."
-        },
-        {
-          "color": "red",
-          "icon": "times",
-          "note": "Shares cannot be sold during the first stock round."
-        }
-      ]
     }
   ],
   "rounds": [

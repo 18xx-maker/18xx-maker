@@ -52,7 +52,6 @@ describe("compile-schemas", () => {
 
     expect(defs.cities.items.properties).toMatchObject({
       ...fields.position.properties,
-      ...fields.revenue.properties,
     });
     expect(defs.goods.items.properties).toMatchObject({
       ...fields.text.properties,

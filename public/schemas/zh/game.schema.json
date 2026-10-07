@@ -373,14 +373,6 @@
           "type": "integer",
           "minimum": 0
         },
-        "discount": {
-          "description": "以下列出的各种列车折价换购时此列车的价格,按折价换购的列车名称指定。",
-          "type": "object",
-          "additionalProperties": {
-            "type": "number",
-            "minimum": 0
-          }
-        },
         "upgrade": {
           "description": "此列车作为升级购买时的费用,显示在价格下方",
           "oneOf": [
@@ -1230,15 +1222,6 @@
           "type": "string",
           "enum": ["horizontal", "vertical"]
         },
-        "capitalization": {
-          "description": "Full cap 是默认值,无需指定。",
-          "type": "string",
-          "enum": ["full", "incremental"]
-        },
-        "mustSellInBlocks": {
-          "description": "股份必须成块出售,显示在公司执照上。",
-          "type": "boolean"
-        },
         "marketTokens": {
           "type": "integer",
           "minimum": 0
@@ -1434,11 +1417,6 @@
     },
     "certLimit": {
       "$ref": "#/definitions/certLimit"
-    },
-    "floatPercent": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 100
     },
     "tokenTypes": {
       "type": "object",
@@ -1656,10 +1634,6 @@
             "description": "公司的第二个名称。companyNames 配置决定公司执照和股份卡打印名称、别名还是两者。",
             "type": "string"
           },
-          "subName": {
-            "description": "公司执照名称下方的第二行。",
-            "type": "string"
-          },
           "shareType": {
             "description": "游戏中某种股份类型的名称。",
             "type": "string"
@@ -1856,39 +1830,6 @@
         "additionalProperties": false
       }
     },
-    "pools": {
-      "type": "array",
-      "description": "关于游戏中各个池的备注。仅供参考,不会打印。",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "notes": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "note": {
-                  "type": "string"
-                },
-                "color": {
-                  "type": "string"
-                },
-                "icon": {
-                  "type": "string"
-                }
-              },
-              "required": ["note"],
-              "additionalProperties": false
-            }
-          }
-        },
-        "required": ["name"],
-        "additionalProperties": false
-      }
-    },
     "privates": {
       "type": "array",
       "items": {
@@ -1942,9 +1883,6 @@
               "label": "name"
             }
           },
-          "image": {
-            "type": "string"
-          },
           "icon": {
             "type": "string"
           },
@@ -1968,22 +1906,6 @@
           "variant": {
             "type": "string"
           },
-          "sym": {
-            "type": "string"
-          },
-          "abilities": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "description": "私有公司的一项能力。仅供参考,不会打印。",
-              "properties": {
-                "type": {
-                  "type": "string"
-                }
-              },
-              "required": ["type"]
-            }
-          },
           "bid": {
             "type": "number",
             "minimum": 0
@@ -2002,10 +1924,6 @@
           "priceFormat": {
             "description": "价格的格式字符串,第一个 # 会被数字替换,例如 #G。会覆盖游戏的货币和 currency 配置。价格为文本时不使用。",
             "$ref": "#/definitions/valueFormat"
-          },
-          "debt": {
-            "type": "number",
-            "minimum": 0
           },
           "revenue": {
             "oneOf": [
@@ -2359,17 +2277,6 @@
         ]
       }
     },
-    "upgrades": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "minItems": 1,
-        "uniqueItems": true
-      }
-    },
     "wip": {
       "type": "boolean"
     },
@@ -2383,7 +2290,10 @@
         "formats": {
           "type": "array",
           "description": "要导出的文件,与 --format 相同。pdf、png、svg(地图、股市、发行价、收益、地块和标记,用于矢量图形软件)和 b18(Board18 盒子)。默认为 pdf。",
-          "items": { "type": "string", "enum": ["pdf", "png", "svg", "b18"] },
+          "items": {
+            "type": "string",
+            "enum": ["pdf", "png", "svg", "b18"]
+          },
           "minItems": 1,
           "uniqueItems": true
         },

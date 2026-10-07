@@ -47,7 +47,6 @@ needed for programs like [18xx.games](https://www.18xx.games/).
 - **phase** Set this to `false` if you want this train to not appear on phase charts.
 - **print** This is the number of this train to print. Overrides the `quantity`
   field for printing. Required when quantity is set to "∞".
-- **discount** An object of train names to discount amount.
 - **upgrade** The cost of this train when bought as an upgrade. Shown with an
   arrow under the price.
 - **tradeIn** The value of this train when traded in. Shown in parentheses under
@@ -92,8 +91,8 @@ needed for programs like [18xx.games](https://www.18xx.games/).
 
 Please look at the 18Test file to see examples of most of these fields. The
 following is a **synthetic** example (it validates, but it is not taken from a
-bundled game) that shows `on`, `index`, `rust`, `events`, `notes`, `print`,
-`discount` and `available`:
+bundled game) that shows `on`, `index`, `rust`, `events`, `notes`, `print` and
+`available`:
 
 ```json
 {
@@ -134,9 +133,8 @@ bundled game) that shows `on`, `index`, `rust`, `events`, `notes`, `print`,
       "print": 2,
       "price": 1000,
       "color": "brown",
-      "discount": { "4": 300, "5": 300, "6": 300 },
       "available": "6",
-      "description": "Buy at a discount by trading in a 4, 5 or 6"
+      "description": "Cost 800 when trading in a 4, 5 or 6"
     }
   ]
 }

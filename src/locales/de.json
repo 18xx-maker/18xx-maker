@@ -114,7 +114,7 @@
       },
       "rounds": {
         "tab": "Runden",
-        "description": "Bearbeite die Runden, die Charter-Züge, die Pool-Notizen und die Nummernkarten."
+        "description": "Bearbeite die Runden, die Charter-Züge und die Nummernkarten."
       },
       "tokens": {
         "tab": "Token",
@@ -126,7 +126,7 @@
       },
       "output": {
         "tab": "Ausgabe",
-        "description": "Bearbeite den Bereich der Ertragstabelle, die Export-Voreinstellungen und die Kachel-Upgrades."
+        "description": "Bearbeite den Bereich der Ertragstabelle und die Export-Voreinstellungen."
       },
       "hex": {
         "tab": "Kartenfeld",
@@ -157,22 +157,17 @@
       "players": "Spieler",
       "rounds": "Runde",
       "turns": "Zug",
-      "pools": "Pool",
-      "notes": "Notiz",
       "tokens": "Token",
       "shares": "Aktie",
       "legend": "Legendeneintrag",
       "colors": "Farbe",
       "tokenTypes": "Token-Typ",
       "shareTypes": "Aktientyp",
-      "upgrades": "Upgrade",
       "entry": "Eintrag"
     },
     "headings": {
       "rounds": "Runden",
       "turns": "Züge",
-      "pools": "Pools",
-      "notes": "Notizen",
       "tokens": "Token"
     },
     "titles": {
@@ -419,6 +414,7 @@
     "failed": "Die Spieldatei konnte nicht geprüft werden.",
     "deprecated-generic": "Dieses Feld ist veraltet.",
     "deprecations": {
+      "removed": "Dieses Feld wurde entfernt und wird ignoriert. Entferne es, siehe die entfernten Felder in der Dokumentation.",
       "exports_paginated": "Dieses Feld ist veraltet und wird ignoriert. Entferne es, die paginierten PDFs werden automatisch exportiert."
     }
   },

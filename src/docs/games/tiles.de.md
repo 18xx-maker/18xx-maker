@@ -57,15 +57,10 @@ Die Felder, bei denen es ums Drucken eines Plättchens statt ums Zeichnen geht:
 | `clipPath`       | `false` druckt das Plättchen ohne Beschnittkontur, für Plättchen mit aufwendigen Rändern oder anderen Beschnittproblemen.                                        |
 | `stripeRotation` | Der Winkel der Streifen einer gestreiften Farbe wie `yellow/blue`.                                                                                               |
 | `rotations`      | Nur für [Board18](/docs/output/b18): eine Zahl, um die ersten n Drehungen des Plättchens zu verwenden, oder eine Liste von Drehungen in Grad (Vielfache von 60). |
-| `broken`         | Markiert ein Plättchen als nicht exportbereit.                                                                                                                   |
 
 Die Plättchen werden auf den Plättchenbögen gedruckt (Layout, Breite und
 Abstände stehen in den `tiles`-Optionen auf der Konfigurationsseite) und mit
 ihren Mengen in der Plättchenübersicht aufgelistet.
-
-`upgrades` ist ein Feld des Spiel-Schemas, das eine Plättchen-ID auf eine Liste
-der Plättchen-IDs abbildet, zu denen sie aufgewertet wird. Es wird beim
-Validieren akzeptiert, aber 18xx Maker zeichnet es nirgends.
 
 ## Felder der Karte
 

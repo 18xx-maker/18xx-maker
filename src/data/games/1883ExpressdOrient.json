@@ -1871,7 +1871,6 @@
       }
     ]
   },
-  "floatPercent": 60,
   "players": [
     {
       "number": 2,
@@ -2041,37 +2040,31 @@
   "privates": [
     {
       "name": "Forestry Company",
-      "sym": "1",
       "hex": "A9",
       "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
     },
     {
       "name": "Mining Company",
-      "sym": "2",
       "hex": "A13",
       "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
     },
     {
       "name": "Mining Company",
-      "sym": "3",
       "hex": "B12",
       "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
     },
     {
       "name": "Mining Company",
-      "sym": "4",
       "hex": "E11",
       "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
     },
     {
       "name": "Mining Company",
-      "sym": "5",
       "hex": "E13",
       "description": "The owning company may place a yellow tile on its hexagon for no cost. When connected to the rail network, turn the certificate over: its revenue and face value increase."
     },
     {
       "name": "Franz Joseph I",
-      "sym": "6",
       "description": "Upon purchase in the Initial Stock Round, the owning player receives the President's Certificate of the k. k. Österreichische from the IPO and sets its par value. Closes when the k. k. Österreichische purchases its first train. Cannot be sold to a public company."
     }
   ]

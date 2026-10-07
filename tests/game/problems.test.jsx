@@ -5,6 +5,7 @@ import { page as browser } from "vitest/browser";
 
 import { resetDrafts, setDraft } from "@/components/editPanel/draftStore";
 
+import { games } from "@/data";
 import { createSetGame, validateLoadedGame } from "@/state";
 import { gameText } from "@/util/download";
 
@@ -44,6 +45,37 @@ describe("problems of a game", () => {
     expect(link).toHaveAttribute("href", "/games/Broken/problems");
     expect(link).toHaveAttribute("aria-current", "page");
     expect(link.closest("li")).toHaveTextContent("5");
+  });
+
+  it("lists the removed fields of a game as deprecated, and the game still draws", async () => {
+    const game = {
+      ...structuredClone(games["18Test"]),
+      meta: { id: "Old", type: "bundled", slug: "Old" },
+      pools: [{ name: "Bank" }],
+      floatPercent: 50,
+      companies: [{ name: "A", abbrev: "A", color: "red", subName: "x" }],
+    };
+    const loadedGame = { slug: "Old", title: "Old", id: "Old" };
+    const { store, router } = renderApp("/games/Old/problems", {
+      game,
+      loadedGame,
+    });
+    await check(store);
+
+    const page = await screen.findByTestId("game-Old-problems");
+    expect(page).toHaveTextContent("3 found in");
+    expect(page).toHaveTextContent("pools");
+    expect(page).toHaveTextContent("floatPercent");
+    expect(page).toHaveTextContent("companies[0].subName");
+    expect(within(page).getAllByText("Deprecated")).toHaveLength(3);
+    expect(
+      within(page).getAllByText(/This field was removed and is ignored/),
+    ).toHaveLength(3);
+    expect(within(page).queryByText("Error")).not.toBeInTheDocument();
+    expect(page).not.toHaveTextContent("Unknown field");
+
+    await act(() => router.navigate("/games/Old"));
+    expect(await screen.findByTestId("game-Old")).toBeVisible();
   });
 
   it("links every row to its line of the json editor", async () => {

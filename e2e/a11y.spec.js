@@ -131,11 +131,11 @@ const pages = [
     ready: (page) => page.getByRole("button", { name: "Add color" }),
   })),
   ...["light", "dark"].map((colorScheme) => ({
-    // The revenue range, the export defaults and the upgrades
+    // The revenue range and the export defaults
     name: `edit panel output (${colorScheme})`,
     url: "/games/18Test/map?edit=true&editSection=output",
     colorScheme,
-    ready: (page) => page.getByRole("button", { name: "Add upgrade" }),
+    ready: (page) => page.getByRole("spinbutton", { name: "Max" }),
   })),
   // The Hex tab of the map page: the group picked on the map as JSON, and
   // the hint before one is picked

@@ -1,16 +1,12 @@
 import SchemaField from "@/components/schemaForm/SchemaField";
 import SchemaFormProvider from "@/components/schemaForm/SchemaFormProvider";
-import {
-  POOL_PRIMARY_KEYS,
-  ROUND_KEYS,
-  TURN_PRIMARY_KEYS,
-} from "@/components/schemaForm/resolve";
+import { ROUND_KEYS, TURN_PRIMARY_KEYS } from "@/components/schemaForm/resolve";
 
 import schema from "@/schemas/game.schema.json";
 
-const PRIMARY = { turns: TURN_PRIMARY_KEYS, pools: POOL_PRIMARY_KEYS };
+const PRIMARY = { turns: TURN_PRIMARY_KEYS };
 
-// The rounds, turns, pools and number cards of the game, generated from the
+// The rounds, turns and number cards of the game, generated from the
 // game schema
 const RoundsForm = ({ game }) => (
   <SchemaFormProvider game={game}>

@@ -952,7 +952,6 @@
       }
     ]
   },
-  "floatPercent": 60,
   "players": [
     {
       "number": 2,
@@ -1216,42 +1215,34 @@
   "privates": [
     {
       "name": "Snow Removal Company",
-      "sym": "1",
       "description": "The public company that owns this company may ignore the effects of the Blizzard of '92 event. May be purchased by a company from Phase II."
     },
     {
       "name": "Mountain Construction Company",
-      "sym": "2a",
       "description": "The public company that owns this company may place 1 mountain tile at no cost."
     },
     {
       "name": "Contract Laborers",
-      "sym": "2b",
       "description": "The public company that owns this company may ignore the effects of the Railroad Strike event. May be purchased by a company from Phase II."
     },
     {
       "name": "Land & Title Company",
-      "sym": "3",
       "description": "The public company that owns this company may place 1 station in any unreserved location at no cost. No legal route is required to place the station token."
     },
     {
       "name": "Trading Company",
-      "sym": "4a",
       "description": "The owning player may, during any Stock Round, close this company in exchange for one 10% share of any railroad from the IPO, even to exceed the 60% holding limit. May instead be sold to a public company, when it has no special ability."
     },
     {
       "name": "Bridge Company",
-      "sym": "4b",
       "description": "The owning company may build two bridges without cost."
     },
     {
       "name": "Investment Company",
-      "sym": "5",
       "description": "Upon purchase in the Initial Stock Round, the owning player immediately receives 1 share of any railroad from the IPO."
     },
     {
       "name": "Hubert Hunter, esq.",
-      "sym": "6",
       "description": "Upon purchase in the Initial Stock Round, the owning player receives the President's Certificate of any railroad from the IPO and sets its par value. Closes when the selected railroad purchases its first train. Cannot be sold to a public company."
     }
   ],

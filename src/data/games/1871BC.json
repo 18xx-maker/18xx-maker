@@ -262,7 +262,6 @@
       "name": "Kettle Valley Railway",
       "nameFontSize": 14,
       "price": "$60 + $40 debt",
-      "debt": 80,
       "descFontSize": 10,
       "description": "Starts with $60 in treasury, a 2 train, and a token in Kelowna (C15). Splits revenue evenly with owner."
     },
@@ -331,22 +330,6 @@
       "events": {
         "remove_tokens": true
       }
-    }
-  ],
-  "pools": [
-    {
-      "name": "Stock Market",
-      "notes": [
-        {
-          "color": "orange",
-          "note": "Corporations issue/redeem stock at one value lower/higher"
-        },
-        {
-          "color": "brown",
-          "icon": "exclamation",
-          "note": "Corporations may not issue more stock than the amount held by players, less the number already in the stock market"
-        }
-      ]
     }
   ],
   "rounds": [
