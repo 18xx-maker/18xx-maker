@@ -65,7 +65,7 @@ const put = (data, pointer, value) => {
   keys.slice(0, -1).reduce((node, key, i) => {
     node[key] ??= /^\d+$/.test(keys[i + 1]) ? [] : {};
     return node[key];
-  }, data)[keys.at(-1)] = value;
+  }, data)[keys.at(-1)] = structuredClone(value);
   return data;
 };
 
@@ -76,3 +76,10 @@ export const deprecatedGame = () =>
 // The same game with the new names
 export const renamedGame = () =>
   renames.reduce((game, r) => put(game, r.now, r.value), base());
+
+// The same game with both names of every renamed field
+export const bothGame = () =>
+  renames.reduce(
+    (game, r) => put(put(game, r.old, r.value), r.now, r.value),
+    base(),
+  );

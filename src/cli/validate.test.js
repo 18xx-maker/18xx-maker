@@ -10,9 +10,9 @@ import { omit } from "ramda";
 import validate from "#cli/validate";
 
 import {
+  bothGame,
   deprecatedGame,
   renamedGame,
-  renames,
 } from "@tests/support/deprecatedGame.js";
 
 const root = path.join(import.meta.dirname, "../..");
@@ -395,23 +395,9 @@ describe("validate", () => {
     });
 
     it("validates with both names", () => {
-      const both = withMeta(deprecatedGame());
-      const current = withMeta(renamedGame());
-      const merged = {
-        ...both,
-        info: { ...both.info, ...current.info },
-        phases: [
-          {
-            ...both.phases[0],
-            ...current.phases[0],
-            events: { ...both.phases[0].events, ...current.phases[0].events },
-          },
-        ],
-        trains: [{ ...both.trains[0], ...current.trains[0] }],
-        numberCards: current.numberCards,
-      };
-      expect(renames.every((r) => r.old && r.now)).toBe(true);
-      expect(run(writeTmp("both.json", JSON.stringify(merged))).code).toBe(0);
+      expect(
+        run(writeTmp("both.json", JSON.stringify(withMeta(bothGame())))).code,
+      ).toBe(0);
     });
   });
 
