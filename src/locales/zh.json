@@ -1382,7 +1382,16 @@
       "importTitle": "导入",
       "importDescription": "在此粘贴 config.json 文件的内容,或把文件拖放到页面任意位置。导入的设置将替换你当前的自定义设置。",
       "importPlaceholder": "在此粘贴 config.json",
+      "allowGameConfig": {
+        "label": "允许游戏配置",
+        "description": "有些游戏自带配置设置,例如卡牌布局。开启后,查看该游戏时这些设置会覆盖您自己的设置;关闭时将被忽略。游戏无法更改打印缩放或此设置。"
+      },
       "importButton": "导入配置"
+    },
+    "gameConfigIgnored": {
+      "label": "此游戏的配置设置已关闭",
+      "short": "游戏配置已关闭",
+      "tooltip": "此游戏有自己的配置设置,但目前已关闭。点击更改此设置。"
     },
     "toggle": "配置",
     "close": "关闭配置",

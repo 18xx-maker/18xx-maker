@@ -2283,6 +2283,40 @@
     "prototype": {
       "type": "boolean"
     },
+    "config": {
+      "type": "object",
+      "description": "schema.game.config",
+      "propertyNames": {
+        "enum": [
+          "theme",
+          "companiesTheme",
+          "companyNames",
+          "paper",
+          "currency",
+          "stock",
+          "cutlines",
+          "cutlinesOffset",
+          "bleed",
+          "margin",
+          "export",
+          "cards",
+          "privates",
+          "trains",
+          "charters",
+          "tokens",
+          "coords",
+          "tiles",
+          "companySvgLogos",
+          "overrideCompanies",
+          "overrideSelection",
+          "maps",
+          "plainMapCompanies",
+          "tileCompanies",
+          "straightCityNames",
+          "font"
+        ]
+      }
+    },
     "exports": {
       "type": "object",
       "description": "schema.game.exports",

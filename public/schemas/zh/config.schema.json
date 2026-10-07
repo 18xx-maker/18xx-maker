@@ -96,6 +96,10 @@
       "enum": ["name", "alias", "both"],
       "description": "公司执照和股份卡将什么打印为公司的名称。name 是名称,alias 是公司的别名(没有别名时为名称),both 是名称加其下方的别名。"
     },
+    "allowGameConfig": {
+      "type": "boolean",
+      "description": "允许游戏文件更改配置。开启后,游戏的配置(游戏文件的 config 键)会覆盖您的设置、URL 和应用默认值;关闭时将被忽略。游戏无法设置此项。导出和命令行的处理方式相同。"
+    },
     "printScale": {
       "type": "number",
       "minimum": 50,

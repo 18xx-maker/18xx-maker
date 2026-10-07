@@ -96,6 +96,10 @@
       "enum": ["name", "alias", "both"],
       "description": "schema.config.companyNames"
     },
+    "allowGameConfig": {
+      "type": "boolean",
+      "description": "schema.config.allowGameConfig"
+    },
     "printScale": {
       "type": "number",
       "minimum": 50,

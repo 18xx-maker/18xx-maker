@@ -4,7 +4,14 @@ import { Link, useLocation, useMatch, useNavigate } from "react-router";
 
 import { addIndex, find, is, map, propEq } from "ramda";
 
-import { ArrowBigLeft, Bolt, FileDiff, Pencil, RefreshCw } from "lucide-react";
+import {
+  ArrowBigLeft,
+  Bolt,
+  FileDiff,
+  Pencil,
+  RefreshCw,
+  TriangleAlert,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,19 +31,30 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import KeyLabel from "@/components/KeyLabel";
 import ExportButton from "@/components/export/ExportButton";
 import PrintButton from "@/components/page/PrintButton";
 
-import { useGame } from "@/hooks";
+import { useConfig, useGame } from "@/hooks";
 import { useEditPanel } from "@/hooks/useEditPanel";
 import { refreshGame } from "@/state";
 import { selectGameChanged } from "@/state/selectors";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 import { gameNav } from "@/util/gameNav";
-import { useBooleanParam, useIntParam, useTogglePanel } from "@/util/query";
+import {
+  openConfigSearch,
+  useBooleanParam,
+  useIntParam,
+  useTogglePanel,
+} from "@/util/query";
 
 const Toolbar = () => {
   const { t } = useTranslation();
@@ -54,6 +72,7 @@ const Toolbar = () => {
   const [hideNumbers, toggleNumbers] = useBooleanParam("hideNumbers");
 
   const game = useGame();
+  const { gameConfigIgnored } = useConfig();
   const slug = game.meta.slug;
   const changed = useSelector(selectGameChanged);
 
@@ -100,6 +119,35 @@ const Toolbar = () => {
           <KeyLabel text={t("editPanel.toggle")} shortcut="e" />
         </span>
       </Toggle>
+      {gameConfigIgnored && (
+        <>
+          <Separator orientation="vertical" />
+          <TooltipProvider delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border rounded-sm px-2 h-8 m-0 shrink-0"
+                >
+                  <Link
+                    to={{ search: openConfigSearch(search, "data") }}
+                    data-testid="game-config-ignored"
+                  >
+                    <TriangleAlert className="size-6 text-amber-600 dark:text-amber-400" />
+                    <span className="max-md:sr-only">
+                      {t("config.gameConfigIgnored.short")}
+                    </span>
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                {t("config.gameConfigIgnored.tooltip")}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </>
+      )}
       {!capability.electron && game.meta.type === "system" && (
         <>
           <Separator orientation="vertical" />

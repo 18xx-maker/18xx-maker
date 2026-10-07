@@ -13,8 +13,13 @@ der Werkzeugleiste einer Spielseite oder von jeder Seite aus mit
   im lokalen Speicher deines Browsers gespeichert (die App speichert sie auf
   dieselbe Weise).
 - **Ein Spiel kann eine eigene `config` haben.** Eine Spieldatei kann ein Feld
-  `config` enthalten, das nur für dieses Spiel über deine Einstellungen gelegt
-  wird. Das Fenster zeigt und bearbeitet deine Einstellungen, nicht dieses Feld.
+  `config` mit Einstellungen nur für dieses Spiel enthalten. Es wird nur dann
+  über deine Einstellungen gelegt, wenn _Spiel-Konfiguration erlauben_ aktiv ist
+  (Bereich Daten, standardmäßig aus). Ein Spiel kann weder die Druckskalierung
+  noch diese Einstellung setzen. Hat ein Spiel eine `config`, die ignoriert
+  wird, erscheint in der Werkzeugleiste eine Warnschaltfläche, die den Bereich
+  Daten öffnet. Das Fenster zeigt und bearbeitet deine Einstellungen, nicht
+  dieses Feld.
 - **Nur deine Änderungen werden gespeichert.** Alle anderen Einstellungen folgen
   den Standardwerten, sodass eine neue Version einen Standardwert verbessern
   kann, den du nie angefasst hast.
@@ -28,7 +33,7 @@ eingebauten Standardwerten, der `config.json`, die der Kommandozeile übergeben
 wurde (siehe [Kommandozeile](/docs/output/cli)), dem, was du im Fenster
 einstellst, Parametern der Form `?config.<einstellung>=wert` in der Adresse
 (zum Beispiel `?config.cards.layout=die`) und zuletzt der `config` des Spiels
-selbst.
+selbst (wenn erlaubt).
 
 ## Abschnitte
 
@@ -36,21 +41,21 @@ Das Auswahlmenü oben im Fenster wählt einen Abschnitt. Jede Einstellung hat im
 Fenster eine Bezeichnung und eine Beschreibung, daher ist das hier nur ein
 Überblick.
 
-| Abschnitt                 | Was er ändert                                                                                                       |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Farben und Gesellschaften | das Farbdesign, das Design der Gesellschaften, Namen und Logos der Gesellschaften, Überschreibungen                 |
-| Export                    | ob Exporte für jedes Layout einen Bogen erzeugen                                                                    |
-| Layout                    | Papiergröße und Ränder sowie die Druckskalierung, um einen Drucker zu korrigieren, der zu groß oder zu klein druckt |
-| Token                     | das Layout und die Größen der Token-Bögen                                                                           |
-| Karten                    | was die Karte zeigt (Koordinaten, Markt, Spieler, Rundenanzeige) und wie ihre Seiten geschnitten werden             |
-| Plättchen                 | Plättchen-IDs, Farbenblind-Modus, Layout und Breite der Plättchenbögen                                              |
-| Aktienmarkt               | Zellengröße, Pfeile und was die Marktseite zeigt                                                                    |
-| Gesellschaftskarten       | Stil und Layout der Gesellschaftskarten, Rahmen, Phasentabelle und Zugreihenfolge, Zugkarten                        |
-| Karten                    | Anteils- und Kartenstile, Größen, Beschnitt und Abstand, die Würfelkarten                                           |
-| Privatgesellschaften      | der Stil der Privatgesellschaften                                                                                   |
-| Züge                      | der Stil der Züge und ob sie Bilder zeigen                                                                          |
-| Währung                   | wie Geld für jede Art von Betrag geschrieben wird                                                                   |
-| Daten                     | deine Konfiguration zurücksetzen, kopieren, herunterladen und importieren                                           |
+| Abschnitt                 | Was er ändert                                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Farben und Gesellschaften | das Farbdesign, das Design der Gesellschaften, Namen und Logos der Gesellschaften, Überschreibungen                            |
+| Export                    | ob Exporte für jedes Layout einen Bogen erzeugen                                                                               |
+| Layout                    | Papiergröße und Ränder sowie die Druckskalierung, um einen Drucker zu korrigieren, der zu groß oder zu klein druckt            |
+| Token                     | das Layout und die Größen der Token-Bögen                                                                                      |
+| Karten                    | was die Karte zeigt (Koordinaten, Markt, Spieler, Rundenanzeige) und wie ihre Seiten geschnitten werden                        |
+| Plättchen                 | Plättchen-IDs, Farbenblind-Modus, Layout und Breite der Plättchenbögen                                                         |
+| Aktienmarkt               | Zellengröße, Pfeile und was die Marktseite zeigt                                                                               |
+| Gesellschaftskarten       | Stil und Layout der Gesellschaftskarten, Rahmen, Phasentabelle und Zugreihenfolge, Zugkarten                                   |
+| Karten                    | Anteils- und Kartenstile, Größen, Beschnitt und Abstand, die Würfelkarten                                                      |
+| Privatgesellschaften      | der Stil der Privatgesellschaften                                                                                              |
+| Züge                      | der Stil der Züge und ob sie Bilder zeigen                                                                                     |
+| Währung                   | wie Geld für jede Art von Betrag geschrieben wird                                                                              |
+| Daten                     | deine Konfiguration zurücksetzen, kopieren, herunterladen und importieren sowie die eigene Konfiguration eines Spiels zulassen |
 
 ## Direktlinks
 

@@ -47,18 +47,24 @@ describe("loadGameConfig", () => {
   it("has the config of the user in between", () => {
     const config = loadGameConfig(
       { config: { paper: { width: 3 } } },
-      { paper: { width: 2, height: 4 }, cards: { layout: "dtgDie" } },
+      {
+        paper: { width: 2, height: 4 },
+        cards: { layout: "dtgDie" },
+        allowGameConfig: true,
+      },
     );
 
     expect(config.paper).toMatchObject({ width: 3, height: 4 });
     expect(config.cards.layout).toBe("dtgDie");
   });
 
-  it("has the defaults and the config of the game", () => {
+  it("has the defaults and the config of the game when allowed", () => {
     expect(loadGameConfig({}).paper).toBeDefined();
-    expect(
-      loadGameConfig({ config: { cards: { layout: "dtgDie" } } }).cards.layout,
-    ).toBe("dtgDie");
+    const game = { config: { cards: { layout: "dtgDie" } } };
+    expect(loadGameConfig(game, { allowGameConfig: true }).cards.layout).toBe(
+      "dtgDie",
+    );
+    expect(loadGameConfig(game).cards.layout).not.toBe("dtgDie");
   });
 });
 

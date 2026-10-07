@@ -76,7 +76,8 @@ pnpm maker export <game|path.json> --format pdf,png,svg,b18
 | `-d, --debug`             | serve the site on port 9000 and wait, to look at pages                                                                                                                 |
 
 The `printScale` of a config (the printer correction of the app) is ignored by
-exports: they always use the real size.
+exports: they always use the real size. The `config` of a game file only
+applies when `allowGameConfig` is set in the `--config` file or `src/config.json`.
 
 ### Options in the game file
 

@@ -1129,5 +1129,10 @@
         "hexes": ["B10"]
       }
     ]
+  },
+  "config": {
+    "export": {
+      "allLayouts": true
+    }
   }
 }

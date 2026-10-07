@@ -96,6 +96,10 @@
       "enum": ["name", "alias", "both"],
       "description": "What the charters and share cards print as the name of a company. name is the name, alias is the alias of the company (the name when it has none), both is the name with the alias under it."
     },
+    "allowGameConfig": {
+      "type": "boolean",
+      "description": "Lets a game file change the config. When on, the config of the game (the config key of a game file) is applied on top of your settings, the URL and the app defaults. When off, it is ignored. Games cannot set this setting. Exports and the command line use it the same way."
+    },
     "printScale": {
       "type": "number",
       "minimum": 50,

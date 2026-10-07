@@ -596,5 +596,6 @@ export const sections = [
   },
   {
     section: "data",
+    items: [{ name: "allowGameConfig", root: true }],
   },
 ];

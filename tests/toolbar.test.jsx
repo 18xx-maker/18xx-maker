@@ -97,6 +97,40 @@ describe("toolbar", () => {
   });
 });
 
+describe("game config icon", () => {
+  const icon = () => screen.queryByTestId("game-config-ignored");
+
+  it("shows when the game has a config that is off, and opens the data section", async () => {
+    const { user, router } = renderApp(
+      "/games/18Test/map?edit=true&editSection=json",
+    );
+    await screen.findByTestId("game-18Test-map");
+
+    expect(icon()).toHaveAccessibleName("Game config off");
+    await user.click(icon());
+    await waitFor(() =>
+      expect(router.state.location.search).toContain("section=data"),
+    );
+    expect(router.state.location.search).toContain("config=true");
+    expect(router.state.location.search).not.toContain("edit");
+    expect(
+      await screen.findByRole("checkbox", { name: "Allow game config" }),
+    ).not.toBeChecked();
+  });
+
+  it("is hidden when the game config is allowed", async () => {
+    renderApp("/games/18Test/map", { config: { allowGameConfig: true } });
+    await screen.findByTestId("game-18Test-map");
+    expect(icon()).not.toBeInTheDocument();
+  });
+
+  it("is hidden for a game without a config", async () => {
+    renderApp("/games/Bare/tiles");
+    await screen.findByTestId("game-Bare-tiles");
+    expect(icon()).not.toBeInTheDocument();
+  });
+});
+
 describe("section select", () => {
   it("keeps the query when choosing a section", async () => {
     const { user, router } = renderApp("/games/18Test/map?config=true");

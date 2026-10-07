@@ -30,7 +30,10 @@ describe("resolveConfig", () => {
   });
 
   it("applies user, stored, search and game config in that order", () => {
-    const base = { defaults, user: { cards: { layout: "user" } } };
+    const base = {
+      defaults: { ...defaults, allowGameConfig: true },
+      user: { cards: { layout: "user" } },
+    };
     expect(resolveConfig(base).config.cards.layout).toBe("user");
 
     const stored = { ...base, stored: { cards: { layout: "stored" } } };
@@ -51,6 +54,99 @@ describe("resolveConfig", () => {
     resolveConfig({ defaults, stored, gameConfig: { paper: { size: 10 } } });
     expect(defaults.paper.size).toBe(8);
     expect(stored.paper.size).toBe(9);
+  });
+});
+
+describe("the game config", () => {
+  const defaults = { cards: { layout: "free" }, allowGameConfig: false };
+  const gameConfig = { cards: { layout: "game" } };
+
+  it("is ignored by default, and reported", () => {
+    const result = resolveConfig({ defaults, gameConfig });
+    expect(result.config.cards.layout).toBe("free");
+    expect(result.gameConfigAllowed).toBe(false);
+    expect(result.gameConfigIgnored).toBe(true);
+    expect(result.gameConfig).toEqual(gameConfig);
+  });
+
+  it("applies when the user or the stored config allow it", () => {
+    for (const layers of [
+      { user: { allowGameConfig: true } },
+      { stored: { allowGameConfig: true } },
+    ]) {
+      const result = resolveConfig({ defaults, gameConfig, ...layers });
+      expect(result.config.cards.layout).toBe("game");
+      expect(result.gameConfigAllowed).toBe(true);
+      expect(result.gameConfigIgnored).toBe(false);
+    }
+  });
+
+  it("is not allowed by the url", () => {
+    const result = resolveConfig({
+      defaults,
+      gameConfig,
+      search: "?config.allowGameConfig=true",
+    });
+    expect(result.config.cards.layout).toBe("free");
+    expect(result.gameConfigIgnored).toBe(true);
+    expect(result.config.allowGameConfig).toBe(false);
+  });
+
+  it("cannot set the setting or the print scale", () => {
+    const result = resolveConfig({
+      defaults: { ...defaults, printScale: 100 },
+      user: { allowGameConfig: false },
+      gameConfig: { allowGameConfig: true, printScale: 50 },
+    });
+    expect(result.config.allowGameConfig).toBe(false);
+    expect(result.config.printScale).toBe(100);
+    expect(result.gameConfig).toEqual({});
+    expect(result.gameConfigIgnored).toBe(false);
+  });
+
+  it("is no override without a value", () => {
+    for (const empty of [undefined, {}, { cards: {} }]) {
+      expect(
+        resolveConfig({ defaults, gameConfig: empty }).gameConfigIgnored,
+      ).toBe(false);
+    }
+  });
+
+  it("keeps the print scale at 100 in render mode", () => {
+    const result = resolveConfig({
+      defaults: { ...defaults, allowGameConfig: true, printScale: 120 },
+      gameConfig,
+      render: true,
+    });
+    expect(result.config.printScale).toBe(100);
+    expect(result.config.cards.layout).toBe("game");
+  });
+
+  it("has a user layer without the url and the game", () => {
+    const result = resolveConfig({
+      defaults: { ...defaults, allowGameConfig: true },
+      user: { theme: "user" },
+      stored: { theme: "stored" },
+      search: "?config.cards.layout=search",
+      gameConfig,
+    });
+    expect(result.userLayerConfig).toEqual({
+      cards: { layout: "free" },
+      allowGameConfig: true,
+      theme: "stored",
+    });
+  });
+
+  it("loads 18Test with its own config when allowed", async () => {
+    const { default: test } = await import("@/data/games/18Test.json");
+    expect(test.config).toBeDefined();
+    const config = (allowGameConfig) =>
+      resolveConfig({
+        defaults: { export: { allLayouts: false }, allowGameConfig },
+        gameConfig: test.config,
+      }).config;
+    expect(config(true).export.allLayouts).toBe(true);
+    expect(config(false).export.allLayouts).toBe(false);
   });
 });
 
@@ -76,7 +172,7 @@ describe("the print scale", () => {
   it("is not set by the game", () => {
     const result = resolveConfig({
       defaults,
-      user: { printScale: 105 },
+      user: { printScale: 105, allowGameConfig: true },
       gameConfig: { printScale: 50, cards: { layout: "free" } },
     });
     expect(result.config.printScale).toBe(105);

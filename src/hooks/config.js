@@ -39,9 +39,13 @@ export const useConfig = () => {
   const { validateConfigSchema, checkConfigSchema } = useValidation();
 
   const storedConfig = useSelector((state) => state.config);
-  const { config, searchConfig, gameConfig } = useSelector((state) =>
-    selectConfig(state, location.search, game),
-  );
+  const {
+    config,
+    searchConfig,
+    gameConfig,
+    gameConfigIgnored,
+    userLayerConfig,
+  } = useSelector((state) => selectConfig(state, location.search, game));
 
   const setConfig = useCallback(
     async (config) => {
@@ -96,6 +100,8 @@ export const useConfig = () => {
     userConfig,
     searchConfig,
     gameConfig,
+    gameConfigIgnored,
+    userLayerConfig,
     storedConfig,
   };
 };

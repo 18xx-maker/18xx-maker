@@ -1,5 +1,6 @@
 import {
   clearHexSearch,
+  openConfigSearch,
   openEditSearch,
   searchString,
   selectHexSearch,
@@ -25,6 +26,27 @@ describe("togglePanelSearch", () => {
 
   it("opens the edit panel at its first tab", () => {
     expect(togglePanelSearch("?editSection=trains", "edit")).toBe("edit=true");
+  });
+});
+
+describe("openConfigSearch", () => {
+  it("opens the closed panel on the section", () => {
+    expect(openConfigSearch("", "data")).toBe("config=true&section=data");
+  });
+
+  it("goes to the section when the panel is open on another", () => {
+    expect(openConfigSearch("?config=true&section=tokens", "data")).toBe(
+      "config=true&section=data",
+    );
+  });
+
+  it("closes the edit panel and drops lines and hex, keeps the rest", () => {
+    expect(
+      openConfigSearch(
+        "?edit=true&editSection=hex&hex=A1&lines=1&variation=1&paginated=true",
+        "data",
+      ),
+    ).toBe("variation=1&paginated=true&config=true&section=data");
   });
 });
 
