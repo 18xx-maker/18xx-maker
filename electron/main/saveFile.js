@@ -45,7 +45,7 @@ export const createSaveGame =
   };
 
 export const MAX_LABEL = 200;
-const MAX_TEXT = 100 * 1024 * 1024;
+export const MAX_TEXT = 100 * 1024 * 1024;
 
 // The handler of the saveGameAs channel: a copy of a game that has no file
 // (a bundled game) saved where the user chooses. The page sends the suggested
@@ -58,7 +58,6 @@ export const createSaveGameAs =
     if (!isMain(event)) throw new Error("Saving is not available here");
     if (
       typeof name !== "string" ||
-      name.length > MAX_LABEL ||
       typeof text !== "string" ||
       text.length > MAX_TEXT ||
       typeof title !== "string" ||
@@ -68,10 +67,16 @@ export const createSaveGameAs =
     ) {
       throw new Error("Invalid game to save");
     }
+    // Only a game is saved: nothing is asked of the user for anything else
+    try {
+      JSON.parse(text);
+    } catch (e) {
+      throw new Error("Invalid game to save", { cause: e });
+    }
 
     const { canceled, filePath } = await showSaveDialog({
       title,
-      defaultPath: `${sanitizeFilename(name) || "game"}.json`,
+      defaultPath: `${sanitizeFilename(name.slice(0, MAX_LABEL)) || "game"}.json`,
       properties: ["showOverwriteConfirmation", "createDirectory"],
       filters: [{ name: filterName, extensions: ["json"] }],
     });

@@ -103,6 +103,23 @@ describe("save as in the private file system", () => {
     expect(games["18Test"].info.title).not.toBe("Renamed Game");
   });
 
+  it("continues on the copy's map when saved from another page", async () => {
+    opfs.saveGameAs.mockResolvedValue("internal:18test");
+    opfs.loadGame.mockImplementation(async (id) =>
+      savedCopy("internal", id, opfs.saveGameAs.mock.calls[0][1]),
+    );
+    const { user, router } = renderApp("/games/18Test");
+    await screen.findByTestId("game-18Test");
+    await act(() => router.navigate("/settings"));
+    await openSaveAs(user);
+    const dialog = await screen.findByRole("dialog", { name: "Save as" });
+    await user.click(within(dialog).getByRole("button", { name: "Save" }));
+
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/internal:18test/map"),
+    );
+  });
+
   it("does not save without a usable name", async () => {
     const { user } = renderApp("/games/18Test");
     await screen.findByTestId("game-18Test");

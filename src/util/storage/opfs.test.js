@@ -264,6 +264,16 @@ describe("internal games in OPFS", () => {
       expect(games().size).toBe(1);
     });
 
+    it("does not take another game for a name that is not clean twice", async () => {
+      await saveGameAs("a", '{"a":1}');
+
+      for (const typed of ["a.json.json", "a.json."]) {
+        const slug = await saveGameAs(typed, '{"a":2}', { overwrite: true });
+        expect(slug).not.toBe("internal:a");
+        expect(games().get("a.json")).toBe('{"a":1}');
+      }
+    });
+
     it("finds a game by name without case", async () => {
       await saveGameAs("my-game", "{}");
       const uuid = (await saveGameFile(JSON.stringify(game))).split(":")[1];

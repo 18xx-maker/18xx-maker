@@ -22,7 +22,7 @@ export const useSaveAs = (game) => {
   const available = !!game && saveAsBackend(game.meta.type) !== undefined;
   const suggested = game ? titleToFilename(game.info.title) : "";
 
-  // Continues on the saved copy, on the same page of the game
+  // Continues on the saved copy, on the same page of the game when on one
   const save = async (name, overwrite = false) => {
     const slug = await dispatch(
       saveGameAs({
@@ -36,12 +36,15 @@ export const useSaveAs = (game) => {
     );
     if (slug) {
       setOpen(false);
-      navigate(
-        pathname.replace(/^\/games\/[^/]+/, `/games/${encodeURI(slug)}`),
-        {
+      const game = /^\/games\/[^/]+/;
+      // Elsewhere (settings, docs) the user continues on the copy's map
+      if (game.test(pathname)) {
+        navigate(pathname.replace(game, `/games/${encodeURI(slug)}`), {
           replace: true,
-        },
-      );
+        });
+      } else {
+        navigate(`/games/${encodeURI(slug)}/map`);
+      }
     }
     return slug;
   };

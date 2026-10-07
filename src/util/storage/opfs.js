@@ -146,11 +146,16 @@ const listIds = async () => {
 
 // Whether a name is taken, and the id it would replace. Names are compared
 // without case, as a case-insensitive file system would.
-export const findGame = async (typed) => {
-  const wanted = sanitizeFilename(typed, { urlSafe: true }).toLowerCase();
+const findId = async (id) => {
+  const wanted = id.toLowerCase();
   if (!wanted) return undefined;
-  return (await listIds()).find((id) => id.toLowerCase() === wanted);
+  return (await listIds()).find(
+    (existing) => existing.toLowerCase() === wanted,
+  );
 };
+
+export const findGame = (typed) =>
+  findId(sanitizeFilename(typed, { urlSafe: true }));
 
 // Writes the text as a new game named by the user and gives its slug. The
 // sanitized name is the id, so it is safe in a URL. A name that is taken is an
@@ -159,7 +164,7 @@ export const saveGameAs = async (typed, text, { overwrite = false } = {}) => {
   const id = sanitizeFilename(typed, { urlSafe: true });
   if (!id) throw saveAsError(NAME_INVALID, "Invalid file name");
 
-  const existing = await findGame(id);
+  const existing = await findId(id);
   if (existing !== undefined && !overwrite) {
     throw saveAsError(NAME_EXISTS, `${existing} already exists`);
   }

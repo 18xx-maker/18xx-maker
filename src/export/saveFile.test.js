@@ -1,4 +1,5 @@
 import {
+  MAX_TEXT,
   createSaveGame,
   createSaveGameAs,
   saveGameText,
@@ -208,7 +209,8 @@ describe("the saveGameAs handler", () => {
       ["n", undefined, "t", "f"],
       ["n", "{}", 1, "f"],
       ["n", "{}", "t", null],
-      ["x".repeat(201), "{}", "t", "f"],
+      ["n", "not json", "t", "f"],
+      ["n", " ".repeat(MAX_TEXT + 1), "t", "f"],
       ["n", "{}", "x".repeat(201), "f"],
       ["n", "{}", "t", "x".repeat(201)],
     ];
@@ -216,5 +218,13 @@ describe("the saveGameAs handler", () => {
       await expect(handler({}, ...args)).rejects.toThrow("Invalid");
     }
     expect(showSaveDialog).not.toHaveBeenCalled();
+  });
+
+  it("does not reject a long name, it shortens the suggestion", async () => {
+    const { showSaveDialog, handler } = setup();
+    await handler({}, "x".repeat(500), "{}", "t", "f");
+    expect(showSaveDialog.mock.calls[0][0].defaultPath).toBe(
+      `${"x".repeat(100)}.json`,
+    );
   });
 });
