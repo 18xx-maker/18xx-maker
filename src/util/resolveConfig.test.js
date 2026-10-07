@@ -89,6 +89,7 @@ describe("the game config", () => {
     });
     expect(result.config.cards.layout).toBe("free");
     expect(result.gameConfigIgnored).toBe(true);
+    expect(result.config.allowGameConfig).toBe(false);
   });
 
   it("cannot set the setting or the print scale", () => {

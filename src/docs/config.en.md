@@ -48,7 +48,7 @@ and a description in the panel, so this is only an overview.
 | Privates             | the style of the private companies                                                                |
 | Trains               | the style of the trains and whether they show images                                              |
 | Currency             | how money is written for each kind of amount                                                      |
-| Data                 | reset, copy, download and import your config                                                      |
+| Data                 | reset, copy, download and import your config, and allow a game's own config                       |
 
 ## Deep links
 

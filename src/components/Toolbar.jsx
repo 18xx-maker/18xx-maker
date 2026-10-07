@@ -120,29 +120,33 @@ const Toolbar = () => {
         </span>
       </Toggle>
       {gameConfigIgnored && (
-        <TooltipProvider delayDuration={200}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                asChild
-                variant="outline"
-                size="icon"
-                className="h-8 m-0 shrink-0 text-amber-600 dark:text-amber-400"
-              >
-                <Link
-                  to={{ search: openConfigSearch(search, "data") }}
-                  aria-label={t("config.gameConfigIgnored.label")}
-                  data-testid="game-config-ignored"
+        <>
+          <Separator orientation="vertical" />
+          <TooltipProvider delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border rounded-sm px-2 h-8 m-0 shrink-0"
                 >
-                  <TriangleAlert className="size-6" />
-                </Link>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              {t("config.gameConfigIgnored.tooltip")}
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+                  <Link
+                    to={{ search: openConfigSearch(search, "data") }}
+                    data-testid="game-config-ignored"
+                  >
+                    <TriangleAlert className="size-6 text-amber-600 dark:text-amber-400" />
+                    <span className="max-md:sr-only">
+                      {t("config.gameConfigIgnored.short")}
+                    </span>
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                {t("config.gameConfigIgnored.tooltip")}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </>
       )}
       {!capability.electron && game.meta.type === "system" && (
         <>

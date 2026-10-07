@@ -55,7 +55,7 @@ const hasValues = (value) =>
 // config.json, the config stored by the app, URL parameters and finally the
 // game's own config. The game's config only applies when the user allows it
 // (allowGameConfig, read from the defaults, user and stored layers: never the
-// URL, so the page, the exports and the CLI agree). The print scale is a
+// URL, which also cannot set it, so the page, the exports and the CLI agree). The print scale is a
 // setting of the printer, not of the game: the game's config never sets it,
 // nor the allowGameConfig setting. In render mode (the exports) the print
 // scale is always 100, an export has a fixed size.
@@ -67,7 +67,7 @@ export const resolveConfig = ({
   gameConfig,
   render = false,
 } = {}) => {
-  const searchConfig = searchToConfig(search);
+  const searchConfig = omit(["allowGameConfig"], searchToConfig(search));
   const game = omit(
     ["printScale", "allowGameConfig"],
     defaultTo({}, gameConfig),

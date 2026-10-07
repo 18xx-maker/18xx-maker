@@ -106,9 +106,7 @@ describe("game config icon", () => {
     );
     await screen.findByTestId("game-18Test-map");
 
-    expect(icon()).toHaveAccessibleName(
-      "This game has config settings that are off",
-    );
+    expect(icon()).toHaveAccessibleName("Game config off");
     await user.click(icon());
     await waitFor(() =>
       expect(router.state.location.search).toContain("section=data"),

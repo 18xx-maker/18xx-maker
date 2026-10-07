@@ -1390,6 +1390,7 @@
     },
     "gameConfigIgnored": {
       "label": "Dieses Spiel hat Konfigurationseinstellungen, die aus sind",
+      "short": "Spielkonfig aus",
       "tooltip": "Dieses Spiel hat eigene Konfigurationseinstellungen, sie sind aber aus. Klicken, um diese Einstellung zu ändern."
     },
     "toggle": "Konfiguration",

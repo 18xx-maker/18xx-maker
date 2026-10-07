@@ -1390,6 +1390,7 @@
     },
     "gameConfigIgnored": {
       "label": "This game has config settings that are off",
+      "short": "Game config off",
       "tooltip": "This game has its own config settings, but they are off. Click to change this setting."
     },
     "toggle": "Config",

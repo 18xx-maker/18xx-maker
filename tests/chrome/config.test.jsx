@@ -340,6 +340,15 @@ describe("config drawer", () => {
     );
   });
 
+  it("does not check Allow game config from the url", async () => {
+    renderApp(
+      "/games/18Test/map?config=true&section=data&config.allowGameConfig=true",
+    );
+    expect(
+      await screen.findByRole("checkbox", { name: "Allow game config" }),
+    ).not.toBeChecked();
+  });
+
   it("does not store the url config when another option is edited", async () => {
     const { user, store } = renderApp(
       "/games/18Test/map?config=true&section=export&config.margin=99",
