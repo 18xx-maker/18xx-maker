@@ -154,3 +154,21 @@ of the company:
 ```json
 { "name": "Baltimore & Ohio Railroad", "abbrev": "B&O", "alias": "B&O" }
 ```
+
+## The president's share
+
+A share can set `president: true` to mark it as the president's share of its
+company. That share prints the mark of the [group](/docs/games/game-info#groups)
+of its company, in the top right corner of the card. The other shares print no
+mark. Only shares with the flag are marked, none is picked for you, and it works
+in share types and in the shares of a single company:
+
+```json
+{
+  "quantity": 1,
+  "label": "President's Certificate",
+  "percent": 20,
+  "shares": 2,
+  "president": true
+}
+```

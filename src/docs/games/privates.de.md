@@ -84,6 +84,11 @@ Karte gezeichnet, und der Text läuft um sie herum. Beim Stil `small` stehen sie
 in einer Reihe am Anfang der Beschreibung. Bei mehreren bekommt jede einen Teil
 der Breite der Reihe.
 
+Das `group` einer Privatgesellschaft ist die ID einer der
+[Gruppen](/docs/games/game-info#gruppen) des Spiels. Ihr Zeichen wird in der
+oberen rechten Ecke der Namenszeile neben der `id` gezeichnet und gehört nicht
+zu den obigen Grafiken.
+
 `iconSize` skaliert alle Grafiken der Karte. Es ist ein Faktor der
 Standardgröße: `1.25` ist ein Viertel größer und `0.75` ein Viertel kleiner.
 Beim Stil `small` bleibt die Breite innerhalb der Reihe, sodass auch mehrere

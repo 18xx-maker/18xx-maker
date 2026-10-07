@@ -119,3 +119,17 @@
 ```json
 { "name": "Baltimore & Ohio Railroad", "abbrev": "B&O", "alias": "B&O" }
 ```
+
+## 总裁股票
+
+股票可以设置 `president: true`,把它标记为所属公司的总裁股票。这张股票会在卡片右上角打印其公司所属[分组](/docs/games/game-info#分组)的标记,其他股票不打印标记。只有带该标志的股票会被标记,不会自动替您选择,并且在股票类型和单个公司的股票中都有效:
+
+```json
+{
+  "quantity": 1,
+  "label": "President's Certificate",
+  "percent": 20,
+  "shares": 2,
+  "president": true
+}
+```

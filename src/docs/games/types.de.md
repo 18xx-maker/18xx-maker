@@ -161,3 +161,22 @@ Gesellschaft:
 ```json
 { "name": "Baltimore & Ohio Railroad", "abbrev": "B&O", "alias": "B&O" }
 ```
+
+## Die Präsidentenaktie
+
+Eine Aktie kann `president: true` setzen, um sie als Präsidentenaktie ihrer
+Gesellschaft zu kennzeichnen. Diese Aktie druckt das Zeichen der
+[Gruppe](/docs/games/game-info#gruppen) ihrer Gesellschaft in der oberen rechten
+Ecke der Karte. Die anderen Aktien drucken kein Zeichen. Nur Aktien mit dem Flag
+werden markiert, es wird keine für dich ausgewählt, und es funktioniert in
+Aktientypen und in den Aktien einer einzelnen Gesellschaft:
+
+```json
+{
+  "quantity": 1,
+  "label": "President's Certificate",
+  "percent": 20,
+  "shares": 2,
+  "president": true
+}
+```

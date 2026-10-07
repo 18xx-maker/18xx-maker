@@ -119,19 +119,48 @@ and `icon`. They are kept in the file for reference and are not printed.
 so people who open a game that is not finished know. Neither one changes any
 other output.
 
+## Groups
+
+`groups` is a list of groups of companies. Each one is drawn as a small mark
+that identifies its members: on the private cards, on the charters and on the
+president's share of a company. Companies and privates join a group with the id
+in their `group` field. Companies and privates without a group, or with an
+unknown id, print as before.
+
+A group has an `id` and optionally a `name` (it is not printed, it labels the
+group when you pick one in the editor), a `shape` (`circle`, `diamond`,
+`ellipse`, `hexagon`, `square` or `triangle`, `circle` by default), a `color`
+and `borderColor`, and a `text` with its `textColor`. Without a `color` the mark
+is an outline only, and the text color defaults to one that contrasts with the
+`color`. The `groups` list is edited as JSON only. Which share is the
+president's share is set with `president` on the share, see [Share and Token
+Types](/docs/games/types#the-presidents-share):
+
+```json
+{
+  "groups": [
+    { "id": "east", "name": "Eastern", "shape": "square", "color": "blue" },
+    { "id": "west", "shape": "diamond", "color": "black", "text": "W" }
+  ],
+  "companies": [{ "name": "Blue Railroad", "abbrev": "BLU", "group": "east" }],
+  "privates": [{ "name": "Mail Contract", "group": "west" }]
+}
+```
+
 ## Which Field Feeds What
 
-| Field                                     | Used by                                 |
-| ----------------------------------------- | --------------------------------------- |
-| `info.title`, `subtitle`, `designer`      | Info page, map, background page         |
-| `info.publisher`, `links`                 | Info page, game list                    |
-| `info.currency`                           | Every price and revenue                 |
-| `info.background`, `number_cards`         | Number cards, background page           |
-| `info.marketTokens`, `extraStationTokens` | Tokens page, Board18 box                |
-| `players`                                 | Info page (player range), privates, map |
-| `bank`, `capital`, `certLimit`            | Players table on the map                |
-| `turns`                                   | Charters                                |
-| `rounds`                                  | Round tracker on the map and the market |
-| `phases`                                  | Phase chart on the charters             |
-| `wip`, `prototype`                        | Info page                               |
-| `floatPercent`, `pools`                   | Kept for reference, not printed         |
+| Field                                     | Used by                                   |
+| ----------------------------------------- | ----------------------------------------- |
+| `info.title`, `subtitle`, `designer`      | Info page, map, background page           |
+| `info.publisher`, `links`                 | Info page, game list                      |
+| `info.currency`                           | Every price and revenue                   |
+| `info.background`, `number_cards`         | Number cards, background page             |
+| `info.marketTokens`, `extraStationTokens` | Tokens page, Board18 box                  |
+| `players`                                 | Info page (player range), privates, map   |
+| `bank`, `capital`, `certLimit`            | Players table on the map                  |
+| `turns`                                   | Charters                                  |
+| `groups`                                  | Private cards, charters, president shares |
+| `rounds`                                  | Round tracker on the map and the market   |
+| `phases`                                  | Phase chart on the charters               |
+| `wip`, `prototype`                        | Info page                                 |
+| `floatPercent`, `pools`                   | Kept for reference, not printed           |

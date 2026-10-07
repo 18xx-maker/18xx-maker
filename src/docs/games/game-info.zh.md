@@ -83,6 +83,23 @@
 
 `wip: true` 和 `prototype: true` 各自会在游戏的信息页上添加一条提示,让打开未完成游戏的人知情。两者都不会改变其他任何输出。
 
+## 分组
+
+`groups` 是公司分组的列表。每个分组会绘制为一个小标记,用来标识其成员:出现在私有公司卡、公司执照以及公司的总裁股票上。公司和私有公司通过其 `group` 字段中的 id 加入分组。没有分组或 id 未知的公司和私有公司按原样打印。
+
+分组有一个 `id`,以及可选的 `name`(不会打印,只在编辑器中选择分组时作为标签)、`shape`(`circle`、`diamond`、`ellipse`、`hexagon`、`square` 或 `triangle`,默认为 `circle`)、`color` 和 `borderColor`,以及 `text` 和 `textColor`。没有 `color` 时标记只有轮廓,文字颜色默认为与 `color` 形成对比的颜色。`groups` 列表只能以 JSON 编辑。哪一张股票是总裁股票由股票上的 `president` 设定,见[股票与标记类型](/docs/games/types#总裁股票):
+
+```json
+{
+  "groups": [
+    { "id": "east", "name": "Eastern", "shape": "square", "color": "blue" },
+    { "id": "west", "shape": "diamond", "color": "black", "text": "W" }
+  ],
+  "companies": [{ "name": "Blue Railroad", "abbrev": "BLU", "group": "east" }],
+  "privates": [{ "name": "Mail Contract", "group": "west" }]
+}
+```
+
 ## 各字段的用途
 
 | 字段                                      | 用于                                 |
@@ -95,6 +112,7 @@
 | `players`                                 | 信息页(玩家人数范围)、私有公司、地图 |
 | `bank`、`capital`、`certLimit`            | 地图上的玩家表                       |
 | `turns`                                   | 公司执照                             |
+| `groups`                                  | 私有公司卡、公司执照、总裁股票       |
 | `rounds`                                  | 地图和股市上的回合记录               |
 | `phases`                                  | 公司执照上的阶段表                   |
 | `wip`、`prototype`                        | 信息页                               |
