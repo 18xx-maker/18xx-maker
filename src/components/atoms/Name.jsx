@@ -5,12 +5,14 @@ import { defaultTo } from "ramda";
 import Color from "@/components/Color";
 
 import CityRotateContext from "@/context/CityRotateContext";
-import { useGame } from "@/hooks";
+import { useConfig, useGame } from "@/hooks";
 import { getFontProps, multiDefaultTo } from "@/util";
+import { resolveFontRole } from "@/util/fonts";
 
 const Name = (props) => {
   const id = useId();
   const game = useGame();
+  const { config } = useConfig();
   let {
     name,
     fontSize,
@@ -30,11 +32,24 @@ const Name = (props) => {
     textLength,
   } = props;
 
+  // An own prop or a field of the game beats the title role
+  const role = resolveFontRole(config.fonts, "title");
   let font = getFontProps(
     props,
-    multiDefaultTo(11, fontSize, game.info.nameFontSize),
-    multiDefaultTo("bold", fontWeight, game.info.nameFontWeight),
-    multiDefaultTo("sans-serif", fontFamily, game.info.nameFontFamily),
+    multiDefaultTo(11, fontSize, game.info.nameFontSize, role.fontSize),
+    multiDefaultTo(
+      "bold",
+      fontWeight,
+      game.info.nameFontWeight,
+      role.fontWeight,
+    ),
+    multiDefaultTo(
+      "sans-serif",
+      fontFamily,
+      game.info.nameFontFamily,
+      role.fontFamily,
+    ),
+    role.fontStyle,
   );
 
   let nameNode;
