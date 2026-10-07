@@ -60,6 +60,45 @@ const setup = (game, issues = []) => {
   return { set, clear, view, user: userEvent.setup() };
 };
 
+describe("the help of a field", () => {
+  it("is behind an info button that toggles a tooltip", async () => {
+    const { user } = setup({ players: 3 });
+    const input = screen.getByRole("spinbutton", { name: /Players/ });
+    expect(input).toHaveAccessibleDescription(/How many players\./);
+    const info = screen.getByRole("button", { name: "About Players" });
+    await user.click(info);
+    expect(await screen.findByRole("tooltip")).toHaveTextContent(
+      "How many players.",
+    );
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+    await user.click(info);
+    expect(await screen.findByRole("tooltip")).toBeVisible();
+  });
+
+  it("has no info button without a description", () => {
+    render(
+      <SchemaFormContext.Provider
+        value={{
+          root,
+          game: { exports: { paginated: true } },
+          issues: [],
+          set() {},
+          clear() {},
+        }}
+      >
+        <SchemaField
+          keys={["exports", "paginated"]}
+          schema={root.properties.exports.properties.paginated}
+        />
+      </SchemaFormContext.Provider>,
+    );
+    expect(
+      screen.queryByRole("button", { name: /^About / }),
+    ).not.toBeInTheDocument();
+  });
+});
+
 const revenueRoot = {
   type: "object",
   properties: {

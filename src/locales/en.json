@@ -76,6 +76,7 @@
     "close": "Close the edit panel",
     "changes": "Review and save changes",
     "memoryNote": "Changes stay in memory until you save them on the Changes page.",
+    "about": "About {{name}}",
     "unset": "Not set",
     "true": "Yes",
     "false": "No",

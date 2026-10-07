@@ -8,9 +8,15 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
-import { TriangleAlert } from "lucide-react";
+import { Info, TriangleAlert } from "lucide-react";
 
 import { Label } from "@/components/ui/label";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import { issueText } from "@/components/schemaForm/issueText";
 import {
@@ -97,6 +103,35 @@ const DeprecatedNote = ({ id, keys, onRemove }) => {
   );
 };
 
+// The description of a field behind an info button: a tooltip on hover and
+// focus, and a toggle on click so touch screens get it too
+const InfoButton = ({ label, description }) => {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <TooltipProvider delayDuration={200}>
+      <Tooltip open={open} onOpenChange={setOpen}>
+        <TooltipTrigger asChild>
+          <button
+            type="button"
+            aria-label={t("editPanel.about", { name: label })}
+            className="ml-1 inline-flex align-middle text-muted-foreground hover:text-foreground"
+            onClick={(event) => {
+              // Radix closes the tooltip on click, a toggle is wanted
+              event.preventDefault();
+              setOpen((was) => !was);
+            }}
+          >
+            <Info className="size-3.5" aria-hidden="true" />
+          </button>
+        </TooltipTrigger>
+        <TooltipContent className="max-w-64">{description}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+
 export const FieldShell = ({
   id,
   label,
@@ -125,10 +160,11 @@ export const FieldShell = ({
             {t("problems.deprecated")}
           </span>
         )}
+        {description && <InfoButton label={label} description={description} />}
       </Label>
       {children}
       {description && (
-        <p id={`${id}-help`} className="text-xs text-muted-foreground">
+        <p id={`${id}-help`} className="sr-only">
           {description}
         </p>
       )}

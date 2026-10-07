@@ -76,6 +76,7 @@
     "close": "Bearbeitungspanel schließen",
     "changes": "Änderungen prüfen und speichern",
     "memoryNote": "Änderungen bleiben im Speicher, bis du sie auf der Seite „Änderungen“ speicherst.",
+    "about": "Über {{name}}",
     "unset": "Nicht gesetzt",
     "true": "Ja",
     "false": "Nein",
