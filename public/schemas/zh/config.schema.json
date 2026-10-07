@@ -5,24 +5,24 @@
   "definitions": {
     "cardSize": {
       "type": "object",
-      "description": "The size of one type of card in units. A missing width or height uses cards.width or cards.height.",
+      "description": "一种卡牌的尺寸,以单位计。缺少 width 或 height 时使用 cards.width 或 cards.height。",
       "properties": {
         "width": {
           "type": "number",
           "minimum": 1,
-          "description": "The card width in units."
+          "description": "卡牌宽度,以单位计。"
         },
         "height": {
           "type": "number",
           "minimum": 1,
-          "description": "The card height in units."
+          "description": "卡牌高度,以单位计。"
         }
       },
       "additionalProperties": false
     },
     "cardSizes": {
       "type": "object",
-      "description": "Optional size per type of card, used instead of width and height. A missing width or height uses the one above.",
+      "description": "每种卡牌的可选尺寸,代替 width 和 height 使用。缺少 width 或 height 时使用上面的值。",
       "properties": {
         "private": { "$ref": "#/definitions/cardSize" },
         "share": { "$ref": "#/definitions/cardSize" },
@@ -33,17 +33,17 @@
     },
     "dieCard": {
       "type": "object",
-      "description": "The size of the cards of a die layout in units. The paper, margins, cutlines and bleed of a die layout are fixed.",
+      "description": "模切布局中卡牌的尺寸,以单位计。模切布局的纸张、页边距、裁切线和出血是固定的。",
       "properties": {
         "width": {
           "type": "number",
           "minimum": 1,
-          "description": "The card width in units."
+          "description": "卡牌宽度,以单位计。"
         },
         "height": {
           "type": "number",
           "minimum": 1,
-          "description": "The card height in units."
+          "description": "卡牌高度,以单位计。"
         },
         "sizes": { "$ref": "#/definitions/cardSizes" }
       },
@@ -94,13 +94,13 @@
     "companyNames": {
       "type": "string",
       "enum": ["name", "alias", "both"],
-      "description": "What the charters and share cards print as the name of a company. name is the name, alias is the alias of the company (the name when it has none), both is the name with the alias under it."
+      "description": "公司执照和股份卡将什么打印为公司的名称。name 是名称,alias 是公司的别名(没有别名时为名称),both 是名称加其下方的别名。"
     },
     "printScale": {
       "type": "number",
       "minimum": 50,
       "maximum": 200,
-      "description": "Scales everything that prints, in percent, to correct for a printer that prints too big or too small. 100 is the real size. Paper size and margins stay the same, so the content of a page changes. It is a setting of the user, a game file cannot set it, and exports ignore it."
+      "description": "按百分比缩放所有打印内容,用于校正打印偏大或偏小的打印机。100 为实际尺寸。纸张大小和页边距不变,因此页面内容会改变。这是用户的设置,游戏文件无法设置,导出会忽略它。"
     },
     "paper": {
       "allOf": [
@@ -205,11 +205,11 @@
         "blackBand": { "type": "boolean" },
         "sizes": {
           "$ref": "#/definitions/cardSizes",
-          "description": "Optional size per type of card, used instead of width and height. A missing width or height uses the one above. Ignored by the die layouts, which use the sizes of cards.dice."
+          "description": "每种卡牌的可选尺寸,代替 width 和 height 使用。缺少 width 或 height 时使用上面的值。模切布局会忽略它,它们使用 cards.dice 的尺寸。"
         },
         "dice": {
           "type": "object",
-          "description": "The card sizes of the die layouts, which ignore width, height and sizes above.",
+          "description": "模切布局的卡牌尺寸,会忽略上面的 width、height 和 sizes。",
           "properties": {
             "miniEuroDie": { "$ref": "#/definitions/dieCard" },
             "dtgDie": { "$ref": "#/definitions/dieCard" }
@@ -218,12 +218,12 @@
         },
         "showPins": {
           "type": "boolean",
-          "description": "Draw the pin markers on free layouts too. Fixed layouts (die layouts) always draw them. Free layouts reserve no space for pins, so adjust the pins positions or margins to keep them clear of content."
+          "description": "在自由布局上也绘制定位针标记。固定布局(模切布局)始终绘制。自由布局不为定位针预留空间,因此请调整定位针位置或页边距,使其避开内容。"
         },
         "duplex": {
           "type": "string",
           "enum": ["off", "separate", "long"],
-          "description": "Print the backs of train cards. off prints no backs, separate prints all the fronts and then all the backs in the same order (for flipping the sheets by hand), long prints a sheet of backs after every sheet of fronts, mirrored for a printer set to flip on the long edge. Needs the free cards layout, the die layouts ignore it."
+          "description": "打印列车卡的背面。off 不打印背面,separate 先打印所有正面再按相同顺序打印所有背面(用于手动翻页),long 在每页正面之后打印一页背面,并镜像,适用于设为长边翻转的打印机。需要自由卡牌布局,模切布局会忽略它。"
         },
         "pins": { "$ref": "#/definitions/pins" }
       },
@@ -332,11 +332,11 @@
         "gaps": { "type": "boolean" },
         "cutBorder": {
           "type": "boolean",
-          "description": "Draw a thin black outline at the exact cut size around every tile on the tile sheet, so tiles can be cut out by hand."
+          "description": "在地块页上每个地块周围按精确裁切尺寸绘制一圈细黑色轮廓,以便手工裁剪地块。"
         },
         "showPins": {
           "type": "boolean",
-          "description": "Draw the pin markers on free layouts too. Fixed layouts (die layouts) always draw them. Free layouts reserve no space for pins, so adjust the pins positions or margins to keep them clear of content."
+          "description": "在自由布局上也绘制定位针标记。固定布局(模切布局)始终绘制。自由布局不为定位针预留空间,因此请调整定位针位置或页边距,使其避开内容。"
         },
         "pins": { "$ref": "#/definitions/pins" }
       },

@@ -79,7 +79,7 @@
           "$ref": "#/definitions/roundTracker"
         },
         "movement": {
-          "description": "Draw the legend of how the share price moves (stock.movement) on the map, x and y in map units from the top left corner. The map page does not grow for the legend, so leave room for it on the map. A market placed on the map draws its own legend when stock.display.movement is set, so set only one of the two.",
+          "description": "在地图上绘制股价如何移动(stock.movement)的图例,x 和 y 以地图单位从左上角计算。地图页面不会为图例扩大,因此要在地图上留出空间。放在地图上的股市在设置 stock.display.movement 时会自己绘制图例,所以两者只设置一个。",
           "$ref": "#/definitions/movement"
         },
         "market": {
@@ -108,12 +108,12 @@
               "exclusiveMinimum": 0
             },
             "rowHeight": {
-              "description": "Height of a row of the players table.",
+              "description": "玩家表格每一行的高度。",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "fontSize": {
-              "description": "Font size of the players table.",
+              "description": "玩家表格的字号。",
               "type": "number",
               "exclusiveMinimum": 0
             }
@@ -142,7 +142,7 @@
                 "type": "string"
               },
               "circle": {
-                "description": "Radius of a circle behind the text.",
+                "description": "文字后面圆圈的半径。",
                 "type": "number"
               },
               "color": {
@@ -200,7 +200,7 @@
                 "type": "number"
               },
               "border": {
-                "description": "false draws no border.",
+                "description": "false 表示不画边框。",
                 "type": "boolean"
               },
               "borderWidth": {
@@ -246,7 +246,7 @@
                 "type": "number"
               },
               "border": {
-                "description": "false draws no border.",
+                "description": "false 表示不画边框。",
                 "type": "boolean"
               },
               "borderWidth": {
@@ -271,7 +271,7 @@
       "oneOf": [
         {
           "type": "string",
-          "description": "The name of a train of the game.",
+          "description": "游戏中一种列车的名称。",
           "x-ref": {
             "from": "trains",
             "key": "name"
@@ -279,14 +279,14 @@
         },
         {
           "type": "object",
-          "description": "A train by its name and which one of them, like the 3rd 5.",
+          "description": "按名称及其序号指定的列车,例如第 3 辆 5 列车。",
           "properties": {
             "on": {
-              "description": "The name of the train.",
+              "description": "列车的名称。",
               "type": "string"
             },
             "index": {
-              "description": "Which train of that name, 2 is the second.",
+              "description": "该名称的第几辆列车,2 表示第二辆。",
               "type": "integer",
               "minimum": 2
             }
@@ -297,7 +297,7 @@
       ]
     },
     "valueFormat": {
-      "description": "A format string that must contain a # character, which is replaced by the number.",
+      "description": "必须包含 # 字符的格式字符串,# 会被数字替换。",
       "type": "string",
       "pattern": "^(.*)#(.*)$"
     },
@@ -319,7 +319,7 @@
           ]
         },
         "priceFormat": {
-          "description": "Format string for the price, where the first # is replaced by the number, e.g. #G or # credits. Overrides the game currency and the currency config. Not used when price is text.",
+          "description": "价格的格式字符串,第一个 # 会被数字替换,例如 #G 或 # credits。会覆盖游戏的货币和 currency 配置。价格为文本时不使用。",
           "$ref": "#/definitions/valueFormat"
         },
         "color": {
@@ -351,7 +351,7 @@
           "minimum": 0
         },
         "discount": {
-          "description": "The price of this train when traded in for each of the listed trains, by the name of the train traded in.",
+          "description": "以下列出的各种列车折价换购时此列车的价格,按折价换购的列车名称指定。",
           "type": "object",
           "additionalProperties": {
             "type": "number",
@@ -359,7 +359,7 @@
           }
         },
         "upgrade": {
-          "description": "Cost of this train when bought as an upgrade, shown under the price",
+          "description": "此列车作为升级购买时的费用,显示在价格下方",
           "oneOf": [
             {
               "type": "number",
@@ -371,11 +371,11 @@
           ]
         },
         "upgradeFormat": {
-          "description": "Format string for the upgrade cost, where the first # is replaced by the number, e.g. +#. The arrow stays.",
+          "description": "升级费用的格式字符串,第一个 # 会被数字替换,例如 +#。箭头保持不变。",
           "$ref": "#/definitions/valueFormat"
         },
         "tradeIn": {
-          "description": "Value of this train when traded in, shown in parentheses under the price",
+          "description": "此列车折价换购时的价值,显示在价格下方的括号中",
           "oneOf": [
             {
               "type": "number",
@@ -387,7 +387,7 @@
           ]
         },
         "tradeInFormat": {
-          "description": "Format string for the trade-in value, where the first # is replaced by the number, e.g. -# trade. The parentheses stay.",
+          "description": "折价换购价值的格式字符串,第一个 # 会被数字替换,例如 -# trade。括号保持不变。",
           "$ref": "#/definitions/valueFormat"
         },
         "description": {
@@ -415,89 +415,89 @@
           "type": "integer"
         },
         "nameFontSize": {
-          "description": "Font size of the name.",
+          "description": "名称的字号。",
           "type": "number"
         },
         "nameFontFamily": {
-          "description": "Font family of the name.",
+          "description": "名称的字体。",
           "type": "string"
         },
         "priceFontSize": {
-          "description": "Font size of the price.",
+          "description": "价格的字号。",
           "type": "number"
         },
         "priceFontFamily": {
-          "description": "Font family of the price.",
+          "description": "价格的字体。",
           "type": "string"
         },
         "longevityFontSize": {
-          "description": "Font size of the rust, phase and obsolete texts.",
+          "description": "报废、阶段和淘汰文字的字号。",
           "type": "number"
         },
         "longevityFontFamily": {
-          "description": "Font family of the rust, phase and obsolete texts.",
+          "description": "报废、阶段和淘汰文字的字体。",
           "type": "string"
         },
         "backgroundColor": {
-          "description": "Background color of the train card.",
+          "description": "列车卡的背景颜色。",
           "type": "string"
         },
         "imagePaddingTop": {
-          "description": "Space above the image.",
+          "description": "图片上方的空白。",
           "type": "number"
         },
         "imageWidth": {
-          "description": "Width of the image.",
+          "description": "图片的宽度。",
           "type": "number"
         },
         "phasedText": {
-          "description": "Replaces the text before the phased by event.",
+          "description": "替换 phased by 事件之前的文字。",
           "type": "string"
         },
         "obsoletedText": {
-          "description": "Replaces the text before the obsolete event.",
+          "description": "替换 obsolete 事件之前的文字。",
           "type": "string"
         },
         "rustedText": {
-          "description": "Replaces the text before the rust event.",
+          "description": "替换 rust 事件之前的文字。",
           "type": "string"
         },
         "permanentText": {
-          "description": "Replaces the text of a permanent train.",
+          "description": "替换永久列车的文字。",
           "type": "string"
         },
         "permanentColor": {
-          "description": "Color of the text of a permanent train.",
+          "description": "永久列车文字的颜色。",
           "type": "string"
         },
         "back": {
-          "description": "The back of the train card, printed behind the front when the cards duplex config is on (it needs the free cards layout). All copies of the train share it. Either a title and text on a colored background, or (with a name) a full train that prints like a normal train card with its own values.",
+          "description": "列车卡的背面,在卡牌 duplex 配置开启时打印在正面之后(需要自由卡牌布局)。该列车的所有副本共用同一背面。可以是彩色背景上的标题和文字,或者(带有 name 时)是一个完整的列车,像普通列车卡一样用自己的值打印。",
           "anyOf": [
             {
-              "description": "A plain back with a title and text on a colored background.",
+              "description": "彩色背景上带有标题和文字的简单背面。",
               "type": "object",
               "properties": {
                 "title": {
-                  "description": "Large text on the back, the name of the train by default.",
+                  "description": "背面的大号文字,默认为列车的名称。",
                   "type": "string"
                 },
                 "text": {
-                  "description": "Smaller text under the title.",
+                  "description": "标题下方的较小文字。",
                   "type": "string"
                 },
                 "color": {
-                  "description": "Color of the text.",
+                  "description": "文字的颜色。",
                   "type": "string"
                 },
                 "backgroundColor": {
-                  "description": "Background color of the back.",
+                  "description": "背面的背景颜色。",
                   "type": "string"
                 }
               },
               "additionalProperties": false
             },
             {
-              "description": "A full train definition, printed as a normal train card. Its own back and quantity are ignored.",
+              "description": "完整的列车定义,像普通列车卡一样打印。其自身的 back 和 quantity 会被忽略。",
               "$ref": "#/definitions/train"
             }
           ]
@@ -507,7 +507,7 @@
       "additionalProperties": false
     },
     "companyTrain": {
-      "description": "A train of a company: the name of a game train, { name, quantity } for copies of a game train, or a full train. A format override such as priceFormat needs a full train definition (with a color and a price); { name, priceFormat } alone is not valid.",
+      "description": "公司的一辆列车:游戏列车的名称,{ name, quantity } 表示游戏列车的多个副本,或者一个完整的列车。像 priceFormat 这样的格式覆盖需要完整的列车定义(带有颜色和价格);单独的 { name, priceFormat } 无效。",
       "anyOf": [
         {
           "type": "string"
@@ -573,28 +573,28 @@
             "type": "string"
           },
           "subtext": {
-            "description": "Text under the name of the company.",
+            "description": "公司名称下方的文字。",
             "type": "string"
           },
           "color": {
-            "description": "Color of the share band.",
+            "description": "股份色带的颜色。",
             "type": "string"
           },
           "backgroundColor": {
-            "description": "Background color of the share.",
+            "description": "股份的背景颜色。",
             "type": "string"
           },
           "labelColor": {
-            "description": "Color of the label.",
+            "description": "标签的颜色。",
             "type": "string"
           },
           "tokenCount": {
-            "description": "How many tokens to draw on the share.",
+            "description": "在股份上绘制多少个标记。",
             "type": "number",
             "minimum": 0
           },
           "president": {
-            "description": "Marks this as the president's share. It is the only share that prints the group mark of its company.",
+            "description": "将此标记为总裁股份。它是唯一会打印所属公司组标记的股份。",
             "type": "boolean"
           }
         },
@@ -619,10 +619,10 @@
     },
     "charterToken": {
       "type": "object",
-      "description": "A token space on a charter, with more than a cost.",
+      "description": "公司执照上的一个标记位,不只是费用。",
       "properties": {
         "cost": {
-          "description": "The label under the token space, like the plain string or number entry.",
+          "description": "标记位下方的标签,与纯字符串或数字条目相同。",
           "oneOf": [
             {
               "type": "string"
@@ -634,7 +634,7 @@
         },
         "start": {
           "type": "boolean",
-          "description": "The company starts with a token in this space. Color charters show the logo in it instead of an empty circle, carth charters show an empty circle instead of the logo. false is the same as leaving it out."
+          "description": "公司开局时在此位置放有标记。彩色执照在其中显示标志而不是空圆圈,carth 执照显示空圆圈而不是标志。false 等同于省略。"
         }
       },
       "additionalProperties": false
@@ -644,7 +644,7 @@
     },
     "gameTokens": {
       "type": "array",
-      "description": "The tokens of the game that print on the token sheet. A string or a number is a white token with that label.",
+      "description": "打印在标记页上的游戏标记。字符串或数字表示带有该标签的白色标记。",
       "items": {
         "oneOf": [
           {
@@ -661,10 +661,10 @@
     },
     "cellObject": {
       "type": "object",
-      "description": "A cell of the stock market, par chart or revenue chart.",
+      "description": "股市、发行价表或收益表的一个单元格。",
       "properties": {
         "value": {
-          "description": "The price shown in the cell, formatted with the market currency.",
+          "description": "单元格中显示的价格,按市场货币格式化。",
           "oneOf": [
             {
               "type": "string"
@@ -675,7 +675,7 @@
           ]
         },
         "label": {
-          "description": "Text shown instead of a value.",
+          "description": "代替数值显示的文字。",
           "oneOf": [
             {
               "type": "string"
@@ -686,19 +686,19 @@
           ]
         },
         "subLabel": {
-          "description": "A second text, at the opposite corner of the cell.",
+          "description": "第二段文字,位于单元格的对角。",
           "type": "string"
         },
         "color": {
-          "description": "Background color of the cell.",
+          "description": "单元格的背景颜色。",
           "type": "string"
         },
         "labelColor": {
-          "description": "Color of the texts, defaults to a readable color.",
+          "description": "文字的颜色,默认为易读的颜色。",
           "type": "string"
         },
         "arrow": {
-          "description": "The arrow or arrows drawn in the corners of the cell.",
+          "description": "绘制在单元格角落的一个或多个箭头。",
           "oneOf": [
             {
               "type": "string",
@@ -714,46 +714,46 @@
           ]
         },
         "arrowColor": {
-          "description": "Color of the arrows.",
+          "description": "箭头的颜色。",
           "type": "string"
         },
         "legend": {
-          "description": "Index in the stock legend, the cell takes the color of that legend entry.",
+          "description": "股市图例中的索引,单元格采用该图例项的颜色。",
           "type": "integer",
           "minimum": 0
         },
         "par": {
-          "description": "The cell is a par value, it takes the color of the par chart.",
+          "description": "该单元格是发行价,采用发行价表的颜色。",
           "type": "boolean"
         },
         "bottom": {
-          "description": "Draw the cell below the other cells.",
+          "description": "将单元格绘制在其他单元格下方。",
           "type": "boolean"
         },
         "underline": {
-          "description": "Underline the text of the cell.",
+          "description": "给单元格的文字加下划线。",
           "type": "boolean"
         },
         "rotated": {
-          "description": "Rotate the label.",
+          "description": "旋转标签。",
           "type": "boolean"
         },
         "subRotated": {
-          "description": "Rotate the sub label.",
+          "description": "旋转副标签。",
           "type": "boolean"
         },
         "width": {
-          "description": "Width of the cell, in cells.",
+          "description": "单元格的宽度,以单元格为单位。",
           "type": "number",
           "exclusiveMinimum": 0
         },
         "height": {
-          "description": "Height of the cell, in cells.",
+          "description": "单元格的高度,以单元格为单位。",
           "type": "number",
           "exclusiveMinimum": 0
         },
         "companies": {
-          "description": "Companies shown as bars in the cell: an abbreviation, or an abbreviation with the row of the bar.",
+          "description": "在单元格中以条形显示的公司:缩写,或缩写加条形所在的行。",
           "type": "array",
           "items": {
             "oneOf": [
@@ -783,7 +783,7 @@
           }
         },
         "tokens": {
-          "description": "Tokens drawn in the cell. A company is a company token, otherwise a token with x and y positions.",
+          "description": "在单元格中绘制的标记。公司是公司标记,否则是带有 x 和 y 位置的标记。",
           "type": "array",
           "items": {
             "type": "object"
@@ -792,7 +792,7 @@
       }
     },
     "cell": {
-      "description": "A cell of a market: nothing, a price, a label or an object.",
+      "description": "股市的一个单元格:空、价格、标签或对象。",
       "oneOf": [
         {
           "type": "null"
@@ -810,7 +810,7 @@
     },
     "cellRows": {
       "type": "array",
-      "description": "Rows of cells, or a single cell for a row of one.",
+      "description": "若干行单元格,只有一行时可以用单个单元格。",
       "items": {
         "oneOf": [
           {
@@ -827,7 +827,7 @@
     },
     "movement": {
       "type": "object",
-      "description": "Where to draw the share price movement legend.",
+      "description": "股价移动图例的绘制位置。",
       "properties": {
         "x": {
           "type": "number"
@@ -841,7 +841,7 @@
     },
     "roundTracker": {
       "type": "object",
-      "description": "Where to draw the round tracker, in cells of the market.",
+      "description": "回合记录表的绘制位置,以股市的单元格为单位。",
       "properties": {
         "x": {
           "type": "number"
@@ -863,46 +863,46 @@
     },
     "stock": {
       "type": "object",
-      "description": "The stock market, and the par and revenue charts.",
+      "description": "股市,以及发行价表和收益表。",
       "properties": {
         "type": {
-          "description": "The layout of the market: 2D is a grid, 1D a single row, 1Diag a zigzag row. Always set it, a market without a type is empty.",
+          "description": "股市的布局:2D 为网格,1D 为单行,1Diag 为之字形单行。务必设置,没有 type 的股市是空的。",
           "type": "string",
           "enum": ["1D", "2D", "1Diag"]
         },
         "title": {
-          "description": "false starts the market at the top, without space for the title.",
+          "description": "false 使股市从顶部开始,不为标题留空间。",
           "type": "boolean",
           "const": false
         },
         "market": {
-          "description": "The cells: rows of cells for a 2D market, a row of cells for the others.",
+          "description": "单元格:2D 股市为若干行单元格,其他为一行单元格。",
           "$ref": "#/definitions/cellRows"
         },
         "par": {
-          "description": "The par chart.",
+          "description": "发行价表。",
           "type": "object",
           "properties": {
             "values": {
-              "description": "The par values, rows of cells.",
+              "description": "发行价,若干行单元格。",
               "$ref": "#/definitions/cellRows"
             },
             "color": {
-              "description": "Background color of the par cells.",
+              "description": "发行价单元格的背景颜色。",
               "type": "string"
             },
             "width": {
-              "description": "Width of a par cell, in cells.",
+              "description": "发行价单元格的宽度,以单元格为单位。",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "height": {
-              "description": "Height of a par cell, in cells.",
+              "description": "发行价单元格的高度,以单元格为单位。",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "title": {
-              "description": "false hides the title above the par chart.",
+              "description": "false 隐藏发行价表上方的标题。",
               "type": "boolean",
               "const": false
             }
@@ -910,7 +910,7 @@
           "additionalProperties": false
         },
         "cell": {
-          "description": "The size and color every market cell starts with.",
+          "description": "每个股市单元格起始的尺寸和颜色。",
           "type": "object",
           "properties": {
             "width": {
@@ -928,11 +928,11 @@
           "additionalProperties": false
         },
         "display": {
-          "description": "Where the parts of the market are drawn.",
+          "description": "股市各部分的绘制位置。",
           "type": "object",
           "properties": {
             "par": {
-              "description": "Draw the par chart on the market, at x and y cells from the corner.",
+              "description": "在股市上绘制发行价表,距角落 x 和 y 个单元格。",
               "type": "object",
               "properties": {
                 "x": {
@@ -946,7 +946,7 @@
               "additionalProperties": false
             },
             "legend": {
-              "description": "Where the legend goes on a 2D market, or a 1Diag market.",
+              "description": "图例在 2D 股市或 1Diag 股市上的位置。",
               "type": "object",
               "properties": {
                 "x": {
@@ -973,28 +973,28 @@
               "$ref": "#/definitions/roundTracker"
             },
             "movement": {
-              "description": "Draw the legend of how the share price moves (stock.movement) on the market, x and y in cells from the corner. On a 1D market a column is as many cells tall as the column setting. A market placed on a map draws its own legend, so do not also set map.movement.",
+              "description": "在股市上绘制股价如何移动(stock.movement)的图例,x 和 y 以距角落的单元格为单位。在 1D 股市上,一列的高度为 column 设置的单元格数。放在地图上的股市会自己绘制图例,所以不要同时设置 map.movement。",
               "$ref": "#/definitions/movement"
             },
             "extraTotalHeight": {
-              "description": "Extra height of the page, in units.",
+              "description": "页面额外的高度,以单位计。",
               "type": "number"
             },
             "extraTotalWidth": {
-              "description": "Extra width of the page, in units.",
+              "description": "页面额外的宽度,以单位计。",
               "type": "number"
             }
           },
           "additionalProperties": false
         },
         "ledges": {
-          "description": "Lines drawn over the market, from corner to corner of cells.",
+          "description": "绘制在股市上的线条,从单元格角到角。",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "coords": {
-                "description": "The corners of the line, each as the x and y of a cell corner, like 6 0.",
+                "description": "线条的各个角点,每个是单元格角点的 x 和 y,例如 6 0。",
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1009,14 +1009,14 @@
                 "type": "number"
               },
               "border": {
-                "description": "Draw a border around the line.",
+                "description": "在线条周围绘制边框。",
                 "type": "boolean"
               },
               "borderWidth": {
                 "type": "number"
               },
               "dashed": {
-                "description": "Draw a dashed line.",
+                "description": "绘制虚线。",
                 "type": "boolean"
               },
               "dashArray": {
@@ -1030,7 +1030,7 @@
                 ]
               },
               "offset": {
-                "description": "Offset of the dashes.",
+                "description": "虚线的偏移。",
                 "type": "number"
               }
             },
@@ -1039,7 +1039,7 @@
           }
         },
         "legend": {
-          "description": "The legend of the colors of the market.",
+          "description": "股市颜色的图例。",
           "type": "array",
           "items": {
             "type": "object",
@@ -1080,7 +1080,7 @@
                 ]
               },
               "icon": {
-                "description": "Not drawn at the moment.",
+                "description": "目前不绘制。",
                 "type": "string"
               }
             },
@@ -1089,7 +1089,7 @@
           }
         },
         "movement": {
-          "description": "How the share price moves, by direction (up, down, left and right are drawn as arrows, any other key as a line of text). Printed as a legend where stock.display.movement or map.movement place it.",
+          "description": "股价如何移动,按方向给出(up、down、left 和 right 绘制为箭头,其他键绘制为一行文字)。在 stock.display.movement 或 map.movement 指定的位置作为图例打印。",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -1099,7 +1099,7 @@
           }
         },
         "limits": {
-          "description": "Ranges of share prices, like the allowed par values. Kept for reference, it is not printed.",
+          "description": "股价范围,例如允许的发行价。仅供参考,不会打印。",
           "type": "array",
           "items": {
             "type": "object",
@@ -1138,7 +1138,7 @@
     },
     "mapCoord": {
       "type": "string",
-      "description": "A place on the map: a hex and a point (A1p1), a side (A1s1), an angle and percent (A1a30p0.5), or an offset from the middle (A1x10y-5).",
+      "description": "地图上的一个位置:六边格加点(A1p1)、边(A1s1)、角度加百分比(A1a30p0.5),或距中心的偏移(A1x10y-5)。",
       "pattern": "^[A-Z]+[0-9]+(p[0-9.-]+|s[0-9.-]+|a[0-9.-]+(p[0-9.-]+)?|x[0-9.-]+y[0-9.-]+)$"
     }
   },
@@ -1164,7 +1164,7 @@
         },
         "publisher": {
           "type": "string",
-          "description": "Id of the publisher (see src/data/publishers), shown on the game info page and in the game list"
+          "description": "出版商的 id(见 src/data/publishers),显示在游戏信息页和游戏列表中"
         },
         "extraTotalHeight": {
           "type": "number",
@@ -1208,12 +1208,12 @@
           "enum": ["horizontal", "vertical"]
         },
         "capitalization": {
-          "description": "Full cap is the default and doesn't need to be specified.",
+          "description": "Full cap 是默认值,无需指定。",
           "type": "string",
           "enum": ["full", "incremental"]
         },
         "mustSellInBlocks": {
-          "description": "Shares must be sold in blocks, shown on the charter.",
+          "description": "股份必须成块出售,显示在公司执照上。",
           "type": "boolean"
         },
         "marketTokens": {
@@ -1225,16 +1225,16 @@
           "minimum": 1
         },
         "currency": {
-          "description": "The currency format string must contain a # character",
+          "description": "货币格式字符串必须包含 # 字符",
           "type": "string",
           "pattern": "^(.*)#(.*)$"
         },
         "valueFontFamily": {
-          "description": "Font family of the values on the map.",
+          "description": "地图上数值的字体。",
           "type": "string"
         },
         "valueFontWeight": {
-          "description": "Font weight of the values on the map.",
+          "description": "地图上数值的字重。",
           "oneOf": [
             {
               "type": "string"
@@ -1245,11 +1245,11 @@
           ]
         },
         "nameFontFamily": {
-          "description": "Font family of the names on the map.",
+          "description": "地图上名称的字体。",
           "type": "string"
         },
         "nameFontWeight": {
-          "description": "Font weight of the names on the map.",
+          "description": "地图上名称的字重。",
           "oneOf": [
             {
               "type": "string"
@@ -1260,11 +1260,11 @@
           ]
         },
         "companyFontFamily": {
-          "description": "Font family of the companies.",
+          "description": "公司的字体。",
           "type": "string"
         },
         "companyFontWeight": {
-          "description": "Font weight of the companies.",
+          "description": "公司的字重。",
           "oneOf": [
             {
               "type": "string"
@@ -1275,23 +1275,23 @@
           ]
         },
         "valueFontSize": {
-          "description": "Font size of the values on the map.",
+          "description": "地图上数值的字号。",
           "type": "number"
         },
         "nameFontSize": {
-          "description": "Font size of the names on the map.",
+          "description": "地图上名称的字号。",
           "type": "number"
         },
         "companyFontSize": {
-          "description": "Font size of the companies.",
+          "description": "公司的字号。",
           "type": "number"
         },
         "companyFontStyle": {
-          "description": "Font style of the companies.",
+          "description": "公司的字体样式。",
           "type": "string"
         },
         "titleFontWeight": {
-          "description": "Font weight of the title on the map.",
+          "description": "地图上标题的字重。",
           "oneOf": [
             {
               "type": "string"
@@ -1302,7 +1302,7 @@
           ]
         },
         "subtitleFontWeight": {
-          "description": "Font weight of the subtitle on the map.",
+          "description": "地图上副标题的字重。",
           "oneOf": [
             {
               "type": "string"
@@ -1313,7 +1313,7 @@
           ]
         },
         "designerFontWeight": {
-          "description": "Font weight of the designer on the map.",
+          "description": "地图上设计者的字重。",
           "oneOf": [
             {
               "type": "string"
@@ -1324,47 +1324,47 @@
           ]
         },
         "borderWidth": {
-          "description": "Width of the border of track, cities and towns.",
+          "description": "轨道、城市和小镇边框的宽度。",
           "type": "number"
         },
         "trackWidth": {
-          "description": "Width of the track.",
+          "description": "轨道的宽度。",
           "type": "number"
         },
         "trackColor": {
-          "description": "Color of the track, match uses the color of the hex.",
+          "description": "轨道的颜色,match 使用六边格的颜色。",
           "type": "string"
         },
         "trackBorderColor": {
-          "description": "Color of the border of the track, match uses the color of the hex.",
+          "description": "轨道边框的颜色,match 使用六边格的颜色。",
           "type": "string"
         },
         "trackGauge": {
-          "description": "Gauge of all the track: narrow, dashed, line or dual.",
+          "description": "所有轨道的轨距:narrow、dashed、line 或 dual。",
           "type": "string"
         },
         "trackGaugeColor": {
-          "description": "Color of the gauge lines, match uses the color of the hex.",
+          "description": "轨距线的颜色,match 使用六边格的颜色。",
           "type": "string"
         },
         "cityWidth": {
-          "description": "Width of the cities.",
+          "description": "城市的宽度。",
           "type": "number"
         },
         "townWidth": {
-          "description": "Width of the towns.",
+          "description": "小镇的宽度。",
           "type": "number"
         },
         "townBorderWidth": {
-          "description": "Width of the border of towns.",
+          "description": "小镇边框的宽度。",
           "type": "number"
         },
         "transparent": {
-          "description": "Draw the hexes of the map without a background.",
+          "description": "绘制不带背景的地图六边格。",
           "type": "boolean"
         },
         "mapCoordinates": {
-          "description": "Where the numbers and letters of the coordinates go.",
+          "description": "坐标的数字和字母的位置。",
           "type": "string",
           "enum": [
             "numbersVertical",
@@ -1380,7 +1380,7 @@
     },
     "colors": {
       "type": "object",
-      "description": "Colors of the game by name. A color is a CSS color or another color name, or an object of those by phase.",
+      "description": "游戏中按名称定义的颜色。颜色可以是 CSS 颜色或另一个颜色名称,也可以是按阶段区分的这些颜色的对象。",
       "additionalProperties": {
         "$ref": "#/definitions/colorValue"
       }
@@ -1436,22 +1436,22 @@
       }
     },
     "groups": {
-      "description": "Groups of companies, each drawn as a small mark on the private cards, charters and president's shares of its members. A company or private joins a group with its group field.",
+      "description": "公司组,每个组绘制为其成员的私有公司卡、公司执照和总裁股份上的小标记。公司或私有公司通过其 group 字段加入组。",
       "type": "array",
       "items": {
         "type": "object",
         "required": ["id"],
         "properties": {
           "id": {
-            "description": "The id companies and privates use to join the group.",
+            "description": "公司和私有公司用来加入该组的 id。",
             "type": "string"
           },
           "name": {
-            "description": "A name for the group. It is not printed; it labels the group in the editor.",
+            "description": "组的名称。不会打印,仅在编辑器中标记该组。",
             "type": "string"
           },
           "shape": {
-            "description": "The shape of the mark.",
+            "description": "标记的形状。",
             "type": "string",
             "enum": [
               "circle",
@@ -1464,19 +1464,19 @@
             "default": "circle"
           },
           "color": {
-            "description": "Fill color of the mark. Without a color the mark is an outline only.",
+            "description": "标记的填充颜色。没有颜色时标记只有轮廓。",
             "type": "string"
           },
           "borderColor": {
-            "description": "Color of the outline of the mark.",
+            "description": "标记轮廓的颜色。",
             "type": "string"
           },
           "text": {
-            "description": "A short text drawn on the mark.",
+            "description": "绘制在标记上的简短文字。",
             "type": "string"
           },
           "textColor": {
-            "description": "Color of the text. By default a color that contrasts with the fill.",
+            "description": "文字的颜色。默认为与填充色形成对比的颜色。",
             "type": "string"
           }
         },
@@ -1490,19 +1490,19 @@
         "required": ["name", "abbrev"],
         "properties": {
           "name": {
-            "description": "The name of the company, printed on its charter and cards.",
+            "description": "公司的名称,打印在其公司执照和卡牌上。",
             "type": "string"
           },
           "abbrev": {
-            "description": "The short name of the company, such as PRR. It is how the market, the tiles and the map refer to the company, so it should be unique.",
+            "description": "公司的简称,例如 PRR。股市、地块和地图都用它来指代公司,因此应当唯一。",
             "type": "string"
           },
           "variant": {
-            "description": "A variant label printed on the charter, for a company that has more than one version.",
+            "description": "打印在公司执照上的变体标签,用于有多个版本的公司。",
             "type": "string"
           },
           "group": {
-            "description": "The id of a group of the game, drawn as its mark on its charter and president's share.",
+            "description": "游戏中某个组的 id,作为其标记绘制在公司执照和总裁股份上。",
             "type": "string",
             "x-ref": {
               "from": "groups",
@@ -1532,14 +1532,14 @@
           },
           "tokensBelow": {
             "type": "boolean",
-            "description": "Print the token slots of the charter in their own row under the company name, smaller so they fit the width, instead of to the right of the name. Use it for companies with many tokens, so they do not squeeze the name. Half width charters ignore it. Defaults to false."
+            "description": "将公司执照的标记位打印在公司名称下方单独的一行,缩小以适应宽度,而不是打印在名称右侧。适用于标记很多的公司,避免挤压名称。半宽公司执照会忽略此项。默认为 false。"
           },
           "banner": {
             "type": "string",
-            "description": "A label printed in a strip along the bottom edge of the charter, in the color of the company, to mark a special charter such as a system. Not translated."
+            "description": "打印在公司执照底边条带中的标签,使用公司的颜色,用于标记特殊的公司执照,例如系统。不翻译。"
           },
           "home": {
-            "description": "The home hex or starting city of the company, printed on the left of the charter subtitle line as \"Home: <home>\". A list is joined with \" / \". Not translated.",
+            "description": "公司的主六边格或起始城市,打印在公司执照副标题行的左侧,格式为 \"Home: <home>\"。列表以 \" / \" 连接。不翻译。",
             "oneOf": [
               {
                 "type": "string"
@@ -1554,34 +1554,34 @@
           },
           "destination": {
             "type": "string",
-            "description": "The destination of the company, printed in the middle of the charter subtitle line as \"Dest: <destination>\". Not translated."
+            "description": "公司的目的地,打印在公司执照副标题行的中间,格式为 \"Dest: <destination>\"。不翻译。"
           },
           "ability": {
             "type": "string",
-            "description": "A special power of the company, printed on the right of the charter subtitle line. Not the same as the unprinted private abilities. Not translated."
+            "description": "公司的特殊能力,打印在公司执照副标题行的右侧。与不打印的私有公司能力不同。不翻译。"
           },
           "charterSubtitle": {
             "type": "object",
-            "description": "Overrides the slots of the charter subtitle line with your own text. An empty string blanks a slot. Not translated.",
+            "description": "用你自己的文字覆盖公司执照副标题行的各个位置。空字符串会清空该位置。不翻译。",
             "additionalProperties": false,
             "properties": {
               "left": {
                 "type": "string",
-                "description": "Text for the left slot, instead of \"Home: <home>\"."
+                "description": "左侧位置的文字,代替 \"Home: <home>\"。"
               },
               "middle": {
                 "type": "string",
-                "description": "Text for the middle slot, instead of \"Dest: <destination>\"."
+                "description": "中间位置的文字,代替 \"Dest: <destination>\"。"
               },
               "right": {
                 "type": "string",
-                "description": "Text for the right slot, instead of the ability."
+                "description": "右侧位置的文字,代替能力。"
               }
             }
           },
           "loans": {
             "type": "array",
-            "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns that fit the height of the charter (more loans than fit are cut off). Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",
+            "description": "在公司执照上打印为空方格的贷款位,位于公司执照正文中标题下方的右侧,按适合公司执照高度的列排列(超出的贷款会被截断)。每个条目是该位置下方的标签(字符串或数字);空字符串或 null 表示该位置没有标签。",
             "items": {
               "oneOf": [
                 {
@@ -1597,7 +1597,7 @@
             }
           },
           "trains": {
-            "description": "false hides the trains label on the charter. Otherwise the trains the company owns: the name of a game train, { name, quantity } for several copies of a game train, or a full train (quantity defaults to 1). They print on the charter, or as train cards when the charters trainCards config is cards.",
+            "description": "false 隐藏公司执照上的列车标签。否则是公司拥有的列车:游戏列车的名称,{ name, quantity } 表示游戏列车的多个副本,或者一个完整的列车(quantity 默认为 1)。它们打印在公司执照上,或者在公司执照的 trainCards 配置为 cards 时打印为列车卡。",
             "oneOf": [
               {
                 "const": false
@@ -1614,66 +1614,66 @@
             "$ref": "#/definitions/token"
           },
           "color": {
-            "description": "The color of the company.",
+            "description": "公司的颜色。",
             "type": "string"
           },
           "logo": {
-            "description": "The logo of the company.",
+            "description": "公司的标志。",
             "type": "string"
           },
           "minor": {
-            "description": "The company is a minor company.",
+            "description": "该公司是小公司。",
             "type": "boolean"
           },
           "subtext": {
-            "description": "Text under the name of the company.",
+            "description": "公司名称下方的文字。",
             "type": "string"
           },
           "alias": {
-            "description": "A second name of the company. The companyNames config chooses whether the charter and the share cards print the name, the alias, or both.",
+            "description": "公司的第二个名称。companyNames 配置决定公司执照和股份卡打印名称、别名还是两者。",
             "type": "string"
           },
           "subName": {
-            "description": "A second line under the name of the charter.",
+            "description": "公司执照名称下方的第二行。",
             "type": "string"
           },
           "shareType": {
-            "description": "The name of a share type of the game.",
+            "description": "游戏中某种股份类型的名称。",
             "type": "string"
           },
           "tokenType": {
-            "description": "The name of a token type of the game.",
+            "description": "游戏中某种标记类型的名称。",
             "type": "string"
           },
           "marketTokens": {
-            "description": "How many market tokens to print.",
+            "description": "打印多少个股市标记。",
             "type": "integer",
             "minimum": 0
           },
           "extraStationTokens": {
-            "description": "How many extra station tokens to print.",
+            "description": "打印多少个额外车站标记。",
             "type": "integer",
             "minimum": 0
           },
           "treasury": {
-            "description": "false hides the treasury on the charter.",
+            "description": "false 隐藏公司执照上的资金库。",
             "type": "boolean",
             "const": false
           },
           "capital": {
-            "description": "The starting capital shown on the charter.",
+            "description": "显示在公司执照上的起始资本。",
             "$ref": "#/definitions/capital"
           },
           "fontFamily": {
-            "description": "Font family of the name.",
+            "description": "名称的字体。",
             "type": "string"
           },
           "fontSize": {
-            "description": "Font size of the name.",
+            "description": "名称的字号。",
             "type": "number"
           },
           "fontWeight": {
-            "description": "Font weight of the name.",
+            "description": "名称的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -1684,11 +1684,11 @@
             ]
           },
           "fontStyle": {
-            "description": "Font style of the name.",
+            "description": "名称的字体样式。",
             "type": "string"
           },
           "outlineWidth": {
-            "description": "Width of the outline of the company on its private card.",
+            "description": "公司在其私有公司卡上的轮廓宽度。",
             "type": "number"
           }
         }
@@ -1782,15 +1782,15 @@
             "type": "boolean"
           },
           "events": {
-            "description": "Events of the phase, an object of boolean fields. close_companies and remove_tokens show on the phase card, other events are ignored.",
+            "description": "阶段的事件,一个布尔字段的对象。close_companies 和 remove_tokens 显示在阶段卡上,其他事件会被忽略。",
             "type": "object",
             "properties": {
               "close_companies": {
-                "description": "The privates close.",
+                "description": "私有公司关闭。",
                 "type": "boolean"
               },
               "remove_tokens": {
-                "description": "The tokens of private companies are removed from the map.",
+                "description": "私有公司的标记从地图上移除。",
                 "type": "boolean"
               }
             },
@@ -1835,7 +1835,7 @@
     },
     "pools": {
       "type": "array",
-      "description": "Notes about the pools of the game. Kept for reference, they are not printed.",
+      "description": "关于游戏中各个池的备注。仅供参考,不会打印。",
       "items": {
         "type": "object",
         "properties": {
@@ -1875,7 +1875,7 @@
             "type": "string"
           },
           "group": {
-            "description": "The id of a group of the game, drawn as its mark on its private card.",
+            "description": "游戏中某个组的 id,作为其标记绘制在私有公司卡上。",
             "type": "string",
             "x-ref": {
               "from": "groups",
@@ -1931,7 +1931,7 @@
           "iconSize": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "Size of the icon, token, company, tile or hex graphic of this private, as a multiplier of the default size (0.3in, or the big style size). Defaults to 1. With the small style and several graphics, the width is capped so they share the row."
+            "description": "此私有公司的图标、标记、公司、地块或六边格图形的大小,为默认大小(0.3in,或 big 样式的大小)的倍数。默认为 1。使用 small 样式且有多个图形时,宽度会受限,以便它们共用一行。"
           },
           "tile": {
             "type": "string"
@@ -1952,7 +1952,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "description": "An ability of the private. Kept for reference, it is not printed.",
+              "description": "私有公司的一项能力。仅供参考,不会打印。",
               "properties": {
                 "type": {
                   "type": "string"
@@ -1977,7 +1977,7 @@
             ]
           },
           "priceFormat": {
-            "description": "Format string for the price, where the first # is replaced by the number, e.g. #G. Overrides the game currency and the currency config. Not used when price is text.",
+            "description": "价格的格式字符串,第一个 # 会被数字替换,例如 #G。会覆盖游戏的货币和 currency 配置。价格为文本时不使用。",
             "$ref": "#/definitions/valueFormat"
           },
           "debt": {
@@ -2004,15 +2004,15 @@
             ]
           },
           "revenueFormat": {
-            "description": "Format string for the revenue, where the first # is replaced by each number, e.g. #G. Overrides the game currency and the currency config. Not used for text revenue.",
+            "description": "收益的格式字符串,第一个 # 会被每个数字替换,例如 #G。会覆盖游戏的货币和 currency 配置。文本收益不使用。",
             "$ref": "#/definitions/valueFormat"
           },
           "nameFontFamily": {
-            "description": "Font family of the name.",
+            "description": "名称的字体。",
             "type": "string"
           },
           "nameFontWeight": {
-            "description": "Font weight of the name.",
+            "description": "名称的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2023,19 +2023,19 @@
             ]
           },
           "nameFontStyle": {
-            "description": "Font style of the name.",
+            "description": "名称的字体样式。",
             "type": "string"
           },
           "nameColor": {
-            "description": "Color of the name.",
+            "description": "名称的颜色。",
             "type": "string"
           },
           "idFontFamily": {
-            "description": "Font family of the id.",
+            "description": "id的字体。",
             "type": "string"
           },
           "idFontWeight": {
-            "description": "Font weight of the id.",
+            "description": "id的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2046,24 +2046,24 @@
             ]
           },
           "idFontStyle": {
-            "description": "Font style of the id.",
+            "description": "id的字体样式。",
             "type": "string"
           },
           "idColor": {
-            "description": "Color of the id.",
+            "description": "id的颜色。",
             "type": "string"
           },
           "idFontSize": {
-            "description": "Font size of the id.",
+            "description": "id的字号。",
             "type": "integer",
             "minimum": 1
           },
           "noteFontFamily": {
-            "description": "Font family of the note.",
+            "description": "备注的字体。",
             "type": "string"
           },
           "noteFontWeight": {
-            "description": "Font weight of the note.",
+            "description": "备注的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2074,24 +2074,24 @@
             ]
           },
           "noteFontStyle": {
-            "description": "Font style of the note.",
+            "description": "备注的字体样式。",
             "type": "string"
           },
           "noteColor": {
-            "description": "Color of the note.",
+            "description": "备注的颜色。",
             "type": "string"
           },
           "noteFontSize": {
-            "description": "Font size of the note.",
+            "description": "备注的字号。",
             "type": "integer",
             "minimum": 1
           },
           "descFontFamily": {
-            "description": "Font family of the description.",
+            "description": "描述的字体。",
             "type": "string"
           },
           "descFontWeight": {
-            "description": "Font weight of the description.",
+            "description": "描述的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2102,19 +2102,19 @@
             ]
           },
           "descFontStyle": {
-            "description": "Font style of the description.",
+            "description": "描述的字体样式。",
             "type": "string"
           },
           "descColor": {
-            "description": "Color of the description.",
+            "description": "描述的颜色。",
             "type": "string"
           },
           "priceFontFamily": {
-            "description": "Font family of the price.",
+            "description": "价格的字体。",
             "type": "string"
           },
           "priceFontWeight": {
-            "description": "Font weight of the price.",
+            "description": "价格的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2125,24 +2125,24 @@
             ]
           },
           "priceFontStyle": {
-            "description": "Font style of the price.",
+            "description": "价格的字体样式。",
             "type": "string"
           },
           "priceColor": {
-            "description": "Color of the price.",
+            "description": "价格的颜色。",
             "type": "string"
           },
           "priceFontSize": {
-            "description": "Font size of the price.",
+            "description": "价格的字号。",
             "type": "integer",
             "minimum": 1
           },
           "revenueFontFamily": {
-            "description": "Font family of the revenue.",
+            "description": "收益的字体。",
             "type": "string"
           },
           "revenueFontWeight": {
-            "description": "Font weight of the revenue.",
+            "description": "收益的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2153,24 +2153,24 @@
             ]
           },
           "revenueFontStyle": {
-            "description": "Font style of the revenue.",
+            "description": "收益的字体样式。",
             "type": "string"
           },
           "revenueColor": {
-            "description": "Color of the revenue.",
+            "description": "收益的颜色。",
             "type": "string"
           },
           "revenueFontSize": {
-            "description": "Font size of the revenue.",
+            "description": "收益的字号。",
             "type": "integer",
             "minimum": 1
           },
           "bidFontFamily": {
-            "description": "Font family of the bid.",
+            "description": "出价的字体。",
             "type": "string"
           },
           "bidFontWeight": {
-            "description": "Font weight of the bid.",
+            "description": "出价的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2181,24 +2181,24 @@
             ]
           },
           "bidFontStyle": {
-            "description": "Font style of the bid.",
+            "description": "出价的字体样式。",
             "type": "string"
           },
           "bidColor": {
-            "description": "Color of the bid.",
+            "description": "出价的颜色。",
             "type": "string"
           },
           "bidFontSize": {
-            "description": "Font size of the bid.",
+            "description": "出价的字号。",
             "type": "integer",
             "minimum": 1
           },
           "variantFontFamily": {
-            "description": "Font family of the variant.",
+            "description": "变体的字体。",
             "type": "string"
           },
           "variantFontWeight": {
-            "description": "Font weight of the variant.",
+            "description": "变体的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2209,24 +2209,24 @@
             ]
           },
           "variantFontStyle": {
-            "description": "Font style of the variant.",
+            "description": "变体的字体样式。",
             "type": "string"
           },
           "variantColor": {
-            "description": "Color of the variant.",
+            "description": "变体的颜色。",
             "type": "string"
           },
           "variantFontSize": {
-            "description": "Font size of the variant.",
+            "description": "变体的字号。",
             "type": "integer",
             "minimum": 1
           },
           "playersFontFamily": {
-            "description": "Font family of the players.",
+            "description": "玩家的字体。",
             "type": "string"
           },
           "playersFontWeight": {
-            "description": "Font weight of the players.",
+            "description": "玩家的字重。",
             "oneOf": [
               {
                 "type": "string"
@@ -2237,28 +2237,28 @@
             ]
           },
           "playersFontStyle": {
-            "description": "Font style of the players.",
+            "description": "玩家的字体样式。",
             "type": "string"
           },
           "playersColor": {
-            "description": "Color of the players.",
+            "description": "玩家的颜色。",
             "type": "string"
           },
           "playersFontSize": {
-            "description": "Font size of the players.",
+            "description": "玩家的字号。",
             "type": "integer",
             "minimum": 1
           },
           "fontColor": {
-            "description": "Color of the text of the card.",
+            "description": "卡牌文字的颜色。",
             "type": "string"
           },
           "backgroundColor": {
-            "description": "Background color of the card.",
+            "description": "卡牌的背景颜色。",
             "type": "string"
           },
           "revenueBackgroundColor": {
-            "description": "Background color of the revenue.",
+            "description": "收益的背景颜色。",
             "type": "string"
           }
         },
@@ -2268,7 +2268,7 @@
     },
     "rounds": {
       "type": "array",
-      "description": "The rounds of the game, in order, for the round tracker.",
+      "description": "游戏的各个回合,按顺序,用于回合记录表。",
       "items": {
         "$ref": "tiles.defs.json#/definitions/roundToken"
       }
@@ -2295,7 +2295,7 @@
     },
     "turns": {
       "type": "array",
-      "description": "The turns of the game, printed on the charter.",
+      "description": "游戏的各个行动轮,打印在公司执照上。",
       "items": {
         "type": "object",
         "properties": {
@@ -2309,7 +2309,7 @@
             }
           },
           "ordered": {
-            "description": "Number the steps.",
+            "description": "为步骤编号。",
             "type": "boolean"
           },
           "optional": {
@@ -2355,18 +2355,18 @@
     },
     "exports": {
       "type": "object",
-      "description": "The options of an export (maker export, and the export options of the app) for this game. They are the defaults of the game: the flags of maker export, the user's config and the choices made in the export options panel come on top of them.",
+      "description": "此游戏的导出选项(maker export 以及应用的导出选项)。它们是游戏的默认值:maker export 的参数、用户配置和导出选项面板中的选择会覆盖它们。",
       "properties": {
         "formats": {
           "type": "array",
-          "description": "The files to export, like --format. pdf, png, svg (the map, market, par, revenue, tiles and tokens, for vector graphics software) and b18 (a Board18 box). Defaults to pdf.",
+          "description": "要导出的文件,与 --format 相同。pdf、png、svg(地图、股市、发行价、收益、地块和标记,用于矢量图形软件)和 b18(Board18 盒子)。默认为 pdf。",
           "items": { "type": "string", "enum": ["pdf", "png", "svg", "b18"] },
           "minItems": 1,
           "uniqueItems": true
         },
         "docs": {
           "type": "array",
-          "description": "Only export these pages, like --docs. All pages when left out. Only for pdf, png and svg files.",
+          "description": "只导出这些页面,与 --docs 相同。省略时导出所有页面。仅适用于 pdf、png 和 svg 文件。",
           "items": {
             "type": "string",
             "enum": [
@@ -2387,33 +2387,33 @@
         },
         "layouts": {
           "type": "string",
-          "description": "all exports a file for every layout of the cards, tiles and tokens, current only the layout of the config, like --layouts. When left out the export.allLayouts setting of the config decides.",
+          "description": "all 为卡牌、地块和标记的每种布局导出一个文件,current 只导出配置中的布局,与 --layouts 相同。省略时由配置的 export.allLayouts 设置决定。",
           "enum": ["all", "current"]
         },
         "paginated": {
           "type": "boolean",
           "deprecated": true,
-          "description": "Deprecated and ignored. The paginated pdfs of the map, market, par and revenue are always exported when the page does not fit on one page of the paper.",
-          "deprecationMessage": "Deprecated and ignored: the paginated pdfs are always exported when the page does not fit on one page."
+          "description": "已弃用且被忽略。当页面一张纸放不下时,地图、股市、发行价和收益的分页 pdf 始终会导出。",
+          "deprecationMessage": "已弃用且被忽略:当页面一张纸放不下时,分页 pdf 始终会导出。"
         },
         "background": {
           "type": "string",
-          "description": "The background of the map, market, par, revenue and tile manifest png images, like --background: white or transparent. Every other png image (the background page, cards, charters, tokens and tiles) is always transparent. Board18 boxes, svg and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to white.",
+          "description": "地图、股市、发行价、收益和地块清单 png 图片的背景,与 --background 相同:white 或 transparent。其他所有 png 图片(背景页、卡牌、公司执照、标记和地块)始终透明。Board18 盒子、svg 和 pdf 文件不受影响:Board18 盒子的地图和股市始终为白色,其标记和地块为透明。默认为 white。",
           "enum": ["white", "transparent"],
           "default": "white"
         },
         "variation": {
           "type": "integer",
-          "description": "Only export this map variation (0 is the first), like --variation. All variations when left out.",
+          "description": "只导出这个地图变体(0 为第一个),与 --variation 相同。省略时导出所有变体。",
           "minimum": 0
         },
         "png": {
           "type": "object",
-          "description": "Options of the png images.",
+          "description": "png 图片的选项。",
           "properties": {
             "dpi": {
               "type": "integer",
-              "description": "The resolution of the images in dots per inch, like --dpi. 300 is the size they print at and the highest resolution. Defaults to 300.",
+              "description": "图片的分辨率,单位为每英寸点数,与 --dpi 相同。300 是打印尺寸,也是最高分辨率。默认为 300。",
               "minimum": 1,
               "maximum": 300
             }
@@ -2422,11 +2422,11 @@
         },
         "cards": {
           "type": "object",
-          "description": "Options of the single card png images.",
+          "description": "单张卡牌 png 图片的选项。",
           "properties": {
             "bleed": {
               "type": "number",
-              "description": "The bleed around each single card image, in units of 1/100 inch (12.5 is 1/8 inch), like --card-bleed. The image is the card plus the bleed on every side, with the card background filling the bleed, ready for a card printing company. Logos and borders are not extended. The sheets keep the cards.bleed of the config. Defaults to 0, no bleed.",
+              "description": "每张单独卡牌图片周围的出血,单位为 1/100 英寸(12.5 即 1/8 英寸),与 --card-bleed 相同。图片是卡牌加上四周的出血,卡牌背景会填满出血区域,可直接交给卡牌印刷公司。标志和边框不会延伸。卡牌页保持配置中的 cards.bleed。默认为 0,即无出血。",
               "minimum": 0,
               "maximum": 50
             }
@@ -2435,16 +2435,16 @@
         },
         "b18": {
           "type": "object",
-          "description": "Options of the Board18 box.",
+          "description": "Board18 盒子的选项。",
           "properties": {
             "version": {
               "type": "string",
-              "description": "The version of the box, like --b18-version. Defaults to 1.0.",
+              "description": "盒子的版本,与 --b18-version 相同。默认为 1.0。",
               "minLength": 1
             },
             "author": {
               "type": "string",
-              "description": "The author of the box, like --b18-author. Defaults to the b18.author setting of maker config, the designer of the game in the app, or the name of the user.",
+              "description": "盒子的作者,与 --b18-author 相同。默认为 maker config 的 b18.author 设置、应用中游戏的设计者,或用户的名字。",
               "minLength": 1
             }
           },
@@ -2455,20 +2455,20 @@
     },
     "revenue": {
       "type": "object",
-      "description": "The range of the revenue chart.",
+      "description": "收益表的范围。",
       "properties": {
         "min": {
-          "description": "The first revenue, 1 by default.",
+          "description": "第一个收益,默认为 1。",
           "type": "integer",
           "minimum": 1
         },
         "max": {
-          "description": "The last revenue, 100 by default.",
+          "description": "最后一个收益,默认为 100。",
           "type": "integer",
           "minimum": 1
         },
         "perRow": {
-          "description": "How many revenues in a row, 20 by default.",
+          "description": "每行多少个收益,默认为 20。",
           "type": "integer",
           "minimum": 1
         }

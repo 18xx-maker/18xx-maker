@@ -56,59 +56,59 @@
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -150,59 +150,59 @@
         "fontFamily": { "type": "string" },
         "fontSize": { "type": "integer", "minimum": 4 },
         "hidden": {
-          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
           "type": "boolean",
           "enum": [true]
         },
         "angle": {
-          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotate": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
           "type": "number",
           "minimum": 1,
           "maximum": 6
         },
         "mid": {
-          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
           "type": "string",
           "enum": ["gentle", "sharp", "straight"]
         },
         "align": {
-          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
         "x": {
-          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
           "type": "number"
         },
         "y": {
-          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
           "type": "number"
         },
         "percent": {
-          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
           "type": "number",
           "minimum": 0
         },
         "order": {
-          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
         }
       },
@@ -243,59 +243,59 @@
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -319,59 +319,59 @@
           "reverse": { "type": "boolean", "enum": [true] },
           "radius": { "type": "number", "exclusiveMinimum": 0 },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -388,54 +388,54 @@
         "type": "object",
         "properties": {
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           }
@@ -452,59 +452,59 @@
         "width": { "type": "integer", "minimum": 1 },
         "bgFill": { "type": "string" },
         "hidden": {
-          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
           "type": "boolean",
           "enum": [true]
         },
         "angle": {
-          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotate": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
           "type": "number",
           "minimum": 1,
           "maximum": 6
         },
         "mid": {
-          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
           "type": "string",
           "enum": ["gentle", "sharp", "straight"]
         },
         "align": {
-          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
         "x": {
-          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
           "type": "number"
         },
         "y": {
-          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
           "type": "number"
         },
         "percent": {
-          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
           "type": "number",
           "minimum": 0
         },
         "order": {
-          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
         }
       },
@@ -549,13 +549,13 @@
         "inverse": { "type": "boolean", "enum": [true] },
         "inverseTextColor": { "type": "string" },
         "angle": {
-          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "percent": {
-          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
           "type": "number",
           "minimum": 0
         },
@@ -565,48 +565,48 @@
         "textBorderWidth": { "type": "number", "minimum": 0 },
         "textBorderColor": { "type": "string" },
         "hidden": {
-          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
           "type": "boolean",
           "enum": [true]
         },
         "rotate": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
           "type": "number",
           "minimum": 1,
           "maximum": 6
         },
         "mid": {
-          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
           "type": "string",
           "enum": ["gentle", "sharp", "straight"]
         },
         "align": {
-          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
         "x": {
-          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
           "type": "number"
         },
         "y": {
-          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
           "type": "number"
         },
         "order": {
-          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
         },
         "fontStyle": {
@@ -645,59 +645,59 @@
           "top": { "type": "string" },
           "bottom": { "type": "string" },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -737,59 +737,59 @@
           }
         },
         "hidden": {
-          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
           "type": "boolean",
           "enum": [true]
         },
         "angle": {
-          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotate": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
           "type": "number",
           "minimum": 1,
           "maximum": 6
         },
         "mid": {
-          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
           "type": "string",
           "enum": ["gentle", "sharp", "straight"]
         },
         "align": {
-          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
         "x": {
-          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
           "type": "number"
         },
         "y": {
-          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
           "type": "number"
         },
         "percent": {
-          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
           "type": "number",
           "minimum": 0
         },
         "order": {
-          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
           "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
         }
       },
@@ -808,59 +808,59 @@
           "color": { "type": "string" },
           "bgColor": { "type": "string" },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -907,59 +907,59 @@
             }
           },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -978,59 +978,59 @@
           "name": { "$ref": "#/definitions/name" },
           "color": { "type": "string" },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1052,59 +1052,59 @@
           "width": { "type": "number", "exclusiveMinimum": 0 },
           "color": { "type": "string" },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1124,59 +1124,59 @@
           "groups": { "type": "array", "items": { "type": "string" } },
           "color": { "type": "string" },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1217,59 +1217,59 @@
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1310,59 +1310,59 @@
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1380,59 +1380,59 @@
         "properties": {
           "value": { "type": "string" },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1487,59 +1487,59 @@
           "fontFamily": { "type": "string" },
           "fontSize": { "type": "integer", "minimum": 4 },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1562,59 +1562,59 @@
           },
           "type": { "type": "string" },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1636,59 +1636,59 @@
           "stroke": { "type": "string" },
           "strokeWidth": { "type": "integer", "minimum": 1 },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1754,54 +1754,54 @@
             ]
           },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           }
@@ -1816,59 +1816,59 @@
         "type": "object",
         "properties": {
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1887,59 +1887,59 @@
           "value": { "oneOf": [{ "type": "number" }, { "type": "string" }] },
           "outerBorderColor": { "type": "string" },
           "hidden": {
-            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "description": "true 不绘制该元素。其他元素保持原位置,隐藏的元素仍然参与自动定位。",
             "type": "boolean",
             "enum": [true]
           },
           "angle": {
-            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "description": "相对六边格中心的方向,以屏幕上顺时针的度数计:0 为下,90 为左,180 为上,270 为右。默认为 0。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotate": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotation 相同,且不为 0 的 rotate 优先于 rotation。与 rotation 不同,它也会旋转标签、数值和地形的文字。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "rotation": {
-            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "description": "让元素在自身位置上旋转,以顺时针度数计。与 rotate 相同,但标签、数值和地形的文字保持正立。rotate 和 rotation 只用其中一个。",
             "type": "number",
             "exclusiveMinimum": -360,
             "exclusiveMaximum": 360
           },
           "side": {
-            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "description": "六边格的一条边(1 到 6)。没有 mid 时,它将元素旋转 (side - 1) 个六分之一圈(60 度一步):side 1 不旋转,side 2 为 60 度,且不会移动元素。有 mid 时,它将指定的点移到从该边开始的轨道上。",
             "type": "number",
             "minimum": 1,
             "maximum": 6
           },
           "mid": {
-            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "description": "将元素放在从边 1 开始的某种轨道的中点:straight(中心)、sharp 或 gentle。用 side 选择其他边。明确的 angle 或 percent 会覆盖它,x 和 y 从它开始微调。",
             "type": "string",
             "enum": ["gentle", "sharp", "straight"]
           },
           "align": {
-            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "description": "配合 mid,让元素在该点垂直或平行于轨道。rotate 和 rotation 作为偏移叠加。",
             "type": "string",
             "enum": ["perpendicular", "parallel"]
           },
           "x": {
-            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向右(负数:向左)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "y": {
-            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "description": "将元素向下(负数:向上)移动这么多单位,以屏幕单位从 angle 和 percent 确定的位置算起。不受 angle 或 rotation 旋转影响。默认为 0。",
             "type": "number"
           },
           "percent": {
-            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "description": "沿 angle 向外多远,以 75 个单位的比例表示:0 为中心,1 为地块上六边格边的中点。大于 1 则超出边缘,只有绘制在六边格之外的元素才可见。默认为 0。",
             "type": "number",
             "minimum": 0
           },
           "order": {
-            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "description": "绘制顺序。带有 order 的元素会在地块上所有没有 order 的元素之后绘制(在地块边框的同一侧),值小的先画,因此可以位于通常在其下方的元素之上(城市在数值之上)。负数会让它在所有元素之前绘制,true 则最后绘制。它的位置不变,只改变绘制时机。",
             "oneOf": [
               { "type": "number" },
               { "type": "boolean", "enum": [true] }
@@ -1965,23 +1965,23 @@
         "color": { "type": "string" },
         "stripeRotation": {
           "type": "number",
-          "description": "Override the rotation (in degrees) of the stripes for a striped color such as \"yellow/blue\"."
+          "description": "覆盖条纹颜色(例如 \"yellow/blue\")的条纹旋转角度(以度计)。"
         },
         "encoding": { "type": "string" },
         "group": {
           "type": "string",
           "pattern": "^[0-9a-z]+$",
-          "description": "Tiles are naturually sorted into groups based on color for printing. This overrides that grouping. Useful for tiles with fancy borders or other bleed issues."
+          "description": "地块会按颜色自然分组打印。此项覆盖该分组。适用于带有华丽边框或其他出血问题的地块。"
         },
         "broken": {
           "type": "boolean",
           "enum": [true],
-          "description": "Marks this tile as being broken and not ready for exporting."
+          "description": "将此地块标记为已损坏,不可导出。"
         },
         "clipPath": {
           "type": "boolean",
           "enum": [false],
-          "description": "Remove the special bleed clipPath when printing these tiles. They will always be printed with no bleed."
+          "description": "打印这些地块时移除特殊的出血 clipPath。它们将始终无出血打印。"
         },
         "borders": { "$ref": "#/definitions/borders" },
         "centerTowns": { "$ref": "#/definitions/centerTowns" },
@@ -2023,526 +2023,430 @@
     },
     "token": {
       "type": "object",
-      "description": "A token. The properties are the ones the Token component reads.",
+      "description": "一个标记。其属性是 Token 组件读取的那些。",
       "properties": {
         "logo": {
           "type": "string",
-          "description": "Name of an svg logo to draw on the token."
+          "description": "要绘制在标记上的 svg 标志的名称。"
         },
-        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
-          "description": "Name of an icon to draw on the token."
+          "description": "要绘制在标记上的图标的名称。"
         },
-        "iconWidth": { "type": "number", "description": "Width of the icon." },
-        "iconColor": {
-          "type": "string",
-          "description": "Color of the icon or logo."
-        },
-        "iconY": {
-          "type": "number",
-          "description": "Vertical position of the icon."
-        },
+        "iconWidth": { "type": "number", "description": "图标的宽度。" },
+        "iconColor": { "type": "string", "description": "图标或标志的颜色。" },
+        "iconY": { "type": "number", "description": "图标的垂直位置。" },
         "label": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Text to write on the token."
+          "description": "写在标记上的文字。"
         },
-        "labelColor": {
-          "type": "string",
-          "description": "Color of the label text."
-        },
-        "labelY": {
-          "type": "number",
-          "description": "Override the vertical position of the label."
-        },
+        "labelColor": { "type": "string", "description": "标签文字的颜色。" },
+        "labelY": { "type": "number", "description": "覆盖标签的垂直位置。" },
         "labelStrokeColor": {
           "type": "string",
-          "description": "Color of the stroke around the label."
+          "description": "标签周围描边的颜色。"
         },
         "labelStrokeWidth": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Width of the stroke around the label."
+          "description": "标签周围描边的宽度。"
         },
         "label2": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "A second, smaller line of text shown with the label."
+          "description": "与标签一同显示的第二行较小文字。"
         },
         "label2Position": {
           "type": "string",
           "enum": ["above", "below"],
-          "description": "Whether the second line is above or below the label. Defaults to below."
+          "description": "第二行在标签上方还是下方。默认为下方。"
         },
         "label2Color": {
           "type": "string",
-          "description": "Color of the second line. Defaults to the label color."
+          "description": "第二行的颜色。默认为标签的颜色。"
         },
-        "color": {
-          "type": "string",
-          "description": "Background color of the token."
-        },
-        "fontSize": {
-          "type": "number",
-          "description": "Font size of the label."
-        },
-        "fontFamily": {
-          "type": "string",
-          "description": "Font family of the label."
-        },
+        "color": { "type": "string", "description": "标记的背景颜色。" },
+        "fontSize": { "type": "number", "description": "标签的字号。" },
+        "fontFamily": { "type": "string", "description": "标签的字体。" },
         "width": {
           "type": "number",
-          "description": "Width (radius) of the token, 25 by default."
+          "description": "标记的宽度(半径),默认为 25。"
         },
         "tokenShape": {
           "type": "string",
-          "description": "square draws a square token, anything else a circle."
+          "description": "square 绘制方形标记,其他值绘制圆形。"
         },
         "shapeAngle": {
           "type": "number",
-          "description": "Angle of the shapes, independent of the rotation."
+          "description": "图形的角度,与 rotation 无关。"
         },
-        "rotation": {
-          "type": "number",
-          "description": "Rotation of the token."
-        },
-        "fixed": {
-          "type": "boolean",
-          "description": "Cancels all rotation of the token."
-        },
+        "rotation": { "type": "number", "description": "标记的旋转。" },
+        "fixed": { "type": "boolean", "description": "取消标记的所有旋转。" },
         "destination": {
           "type": "boolean",
-          "description": "A destination token, smaller by default."
+          "description": "目的地标记,默认更小。"
         },
         "reserved": {
           "type": "boolean",
-          "description": "A reserved token, drawn in gray."
+          "description": "预留标记,绘制为灰色。"
         },
         "inverse": {
           "type": "boolean",
-          "description": "Draw the inverse of the token: no logo, only text."
+          "description": "绘制标记的反色版本:没有标志,只有文字。"
         },
         "inverseLabelColor": {
           "type": "string",
-          "description": "Label color of an inverse token."
+          "description": "反色标记的标签颜色。"
         },
         "bleed": {
           "type": "boolean",
-          "description": "Draw bleed around the token for printing."
+          "description": "为打印在标记周围绘制出血。"
         },
         "bar": {
-          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "description": "true 在标签后面绘制白色条,颜色字符串则绘制该颜色的条。",
           "oneOf": [{ "type": "boolean" }, { "type": "string" }]
         },
-        "barHeight": { "type": "number", "description": "Height of the bar." },
-        "barBorderColor": {
-          "type": "string",
-          "description": "Color of the border of the bar."
-        },
-        "outline": { "type": "string", "description": "Color of the outline." },
-        "outlineWidth": {
-          "type": "number",
-          "description": "Width of the outline."
-        },
-        "target": {
-          "type": "string",
-          "description": "Color of a target shape."
-        },
-        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "barHeight": { "type": "number", "description": "条的高度。" },
+        "barBorderColor": { "type": "string", "description": "条边框的颜色。" },
+        "outline": { "type": "string", "description": "轮廓的颜色。" },
+        "outlineWidth": { "type": "number", "description": "轮廓的宽度。" },
+        "target": { "type": "string", "description": "靶形图案的颜色。" },
+        "stripe": { "type": "string", "description": "一条条纹的颜色。" },
         "stripeWidth": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Width of the stripe."
+          "description": "条纹的宽度。"
         },
-        "stripes": { "type": "string", "description": "Color of the stripes." },
-        "stripesWidth": {
-          "type": "number",
-          "description": "Width of the stripes."
-        },
+        "stripes": { "type": "string", "description": "多条条纹的颜色。" },
+        "stripesWidth": { "type": "number", "description": "多条条纹的宽度。" },
         "stripesDistance": {
           "type": "number",
-          "description": "Distance of the stripes from the middle."
+          "description": "条纹距中心的距离。"
         },
         "curvedStripes": {
           "type": "string",
-          "description": "Color of curved stripes."
+          "description": "弧形条纹的颜色。"
         },
         "curvedStripesWidth": {
           "type": "number",
-          "description": "Width of the curved stripes."
+          "description": "弧形条纹的宽度。"
         },
         "curvedStripesDistance": {
           "type": "number",
-          "description": "Distance of the curved stripes from the middle."
+          "description": "弧形条纹距中心的距离。"
         },
-        "spiral": { "type": "string", "description": "Color of a spiral." },
-        "spiralWidth": {
-          "type": "number",
-          "description": "Width of the spiral."
-        },
+        "spiral": { "type": "string", "description": "螺旋的颜色。" },
+        "spiralWidth": { "type": "number", "description": "螺旋的宽度。" },
         "spiralDistance": {
           "type": "number",
-          "description": "Distance between the turns of the spiral."
+          "description": "螺旋各圈之间的距离。"
         },
         "circle": {
-          "description": "Color of a circle in the middle, true for white.",
+          "description": "中间圆圈的颜色,true 为白色。",
           "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
         },
         "circleRadius": {
           "type": "number",
-          "description": "Radius of the circle, 25 is the full token."
+          "description": "圆圈的半径,25 为整个标记。"
         },
         "circleBorderColor": {
           "type": "string",
-          "description": "Border color of the circle."
+          "description": "圆圈的边框颜色。"
         },
         "shield": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a shield, true for white."
+          "description": "盾形的颜色,true 为白色。"
         },
-        "shieldTop": {
-          "type": "string",
-          "description": "Color of the top of the shield."
-        },
+        "shieldTop": { "type": "string", "description": "盾形顶部的颜色。" },
         "shield3": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a three part shield, true for white."
+          "description": "三段盾形的颜色,true 为白色。"
         },
         "shield3TopLeft": {
           "type": "string",
-          "description": "Color of the top left of the three part shield."
+          "description": "三段盾形左上部分的颜色。"
         },
         "shield3TopCenter": {
           "type": "string",
-          "description": "Color of the top center of the three part shield."
+          "description": "三段盾形上中部分的颜色。"
         },
         "shield3TopRight": {
           "type": "string",
-          "description": "Color of the top right of the three part shield."
+          "description": "三段盾形右上部分的颜色。"
         },
         "kiteshield": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a kite shield, true for white."
+          "description": "鸢形盾的颜色,true 为白色。"
         },
         "star5": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a five pointed star, true for white."
+          "description": "五角星的颜色,true 为白色。"
         },
-        "square": {
-          "type": "string",
-          "description": "Color of a square on the token."
-        },
+        "square": { "type": "string", "description": "标记上方块的颜色。" },
         "halves": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors of the halves."
+          "description": "两个半边的两种颜色。"
         },
         "quarters": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 4,
           "maxItems": 4,
-          "description": "Four colors of the quarters."
+          "description": "四个四分之一的四种颜色。"
         },
         "sexies": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors alternating over six parts."
+          "description": "在六个部分上交替的两种颜色。"
         },
         "sunrise": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 3,
           "maxItems": 3,
-          "description": "Three colors of the sunrise."
+          "description": "日出图案的三种颜色。"
         },
         "hexagram": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors of the triangles of the hexagram."
+          "description": "六角星各三角形的两种颜色。"
         }
       },
       "additionalProperties": false
     },
     "gameToken": {
       "type": "object",
-      "description": "A token of the game: how many to print, and the token.",
+      "description": "游戏的一种标记:打印多少个,以及标记本身。",
       "properties": {
         "logo": {
           "type": "string",
-          "description": "Name of an svg logo to draw on the token."
+          "description": "要绘制在标记上的 svg 标志的名称。"
         },
-        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
-          "description": "Name of an icon to draw on the token."
+          "description": "要绘制在标记上的图标的名称。"
         },
-        "iconWidth": { "type": "number", "description": "Width of the icon." },
-        "iconColor": {
-          "type": "string",
-          "description": "Color of the icon or logo."
-        },
-        "iconY": {
-          "type": "number",
-          "description": "Vertical position of the icon."
-        },
+        "iconWidth": { "type": "number", "description": "图标的宽度。" },
+        "iconColor": { "type": "string", "description": "图标或标志的颜色。" },
+        "iconY": { "type": "number", "description": "图标的垂直位置。" },
         "label": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Text to write on the token."
+          "description": "写在标记上的文字。"
         },
-        "labelColor": {
-          "type": "string",
-          "description": "Color of the label text."
-        },
-        "labelY": {
-          "type": "number",
-          "description": "Override the vertical position of the label."
-        },
+        "labelColor": { "type": "string", "description": "标签文字的颜色。" },
+        "labelY": { "type": "number", "description": "覆盖标签的垂直位置。" },
         "labelStrokeColor": {
           "type": "string",
-          "description": "Color of the stroke around the label."
+          "description": "标签周围描边的颜色。"
         },
         "labelStrokeWidth": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Width of the stroke around the label."
+          "description": "标签周围描边的宽度。"
         },
         "label2": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "A second, smaller line of text shown with the label."
+          "description": "与标签一同显示的第二行较小文字。"
         },
         "label2Position": {
           "type": "string",
           "enum": ["above", "below"],
-          "description": "Whether the second line is above or below the label. Defaults to below."
+          "description": "第二行在标签上方还是下方。默认为下方。"
         },
         "label2Color": {
           "type": "string",
-          "description": "Color of the second line. Defaults to the label color."
+          "description": "第二行的颜色。默认为标签的颜色。"
         },
-        "color": {
-          "type": "string",
-          "description": "Background color of the token."
-        },
-        "fontSize": {
-          "type": "number",
-          "description": "Font size of the label."
-        },
-        "fontFamily": {
-          "type": "string",
-          "description": "Font family of the label."
-        },
+        "color": { "type": "string", "description": "标记的背景颜色。" },
+        "fontSize": { "type": "number", "description": "标签的字号。" },
+        "fontFamily": { "type": "string", "description": "标签的字体。" },
         "width": {
           "type": "number",
-          "description": "Width (radius) of the token, 25 by default."
+          "description": "标记的宽度(半径),默认为 25。"
         },
         "tokenShape": {
           "type": "string",
-          "description": "square draws a square token, anything else a circle."
+          "description": "square 绘制方形标记,其他值绘制圆形。"
         },
         "shapeAngle": {
           "type": "number",
-          "description": "Angle of the shapes, independent of the rotation."
+          "description": "图形的角度,与 rotation 无关。"
         },
-        "rotation": {
-          "type": "number",
-          "description": "Rotation of the token."
-        },
-        "fixed": {
-          "type": "boolean",
-          "description": "Cancels all rotation of the token."
-        },
+        "rotation": { "type": "number", "description": "标记的旋转。" },
+        "fixed": { "type": "boolean", "description": "取消标记的所有旋转。" },
         "destination": {
           "type": "boolean",
-          "description": "A destination token, smaller by default."
+          "description": "目的地标记,默认更小。"
         },
         "reserved": {
           "type": "boolean",
-          "description": "A reserved token, drawn in gray."
+          "description": "预留标记,绘制为灰色。"
         },
         "inverse": {
           "type": "boolean",
-          "description": "Draw the inverse of the token: no logo, only text."
+          "description": "绘制标记的反色版本:没有标志,只有文字。"
         },
         "inverseLabelColor": {
           "type": "string",
-          "description": "Label color of an inverse token."
+          "description": "反色标记的标签颜色。"
         },
         "bleed": {
           "type": "boolean",
-          "description": "Draw bleed around the token for printing."
+          "description": "为打印在标记周围绘制出血。"
         },
         "bar": {
-          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "description": "true 在标签后面绘制白色条,颜色字符串则绘制该颜色的条。",
           "oneOf": [{ "type": "boolean" }, { "type": "string" }]
         },
-        "barHeight": { "type": "number", "description": "Height of the bar." },
-        "barBorderColor": {
-          "type": "string",
-          "description": "Color of the border of the bar."
-        },
-        "outline": { "type": "string", "description": "Color of the outline." },
-        "outlineWidth": {
-          "type": "number",
-          "description": "Width of the outline."
-        },
-        "target": {
-          "type": "string",
-          "description": "Color of a target shape."
-        },
-        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "barHeight": { "type": "number", "description": "条的高度。" },
+        "barBorderColor": { "type": "string", "description": "条边框的颜色。" },
+        "outline": { "type": "string", "description": "轮廓的颜色。" },
+        "outlineWidth": { "type": "number", "description": "轮廓的宽度。" },
+        "target": { "type": "string", "description": "靶形图案的颜色。" },
+        "stripe": { "type": "string", "description": "一条条纹的颜色。" },
         "stripeWidth": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Width of the stripe."
+          "description": "条纹的宽度。"
         },
-        "stripes": { "type": "string", "description": "Color of the stripes." },
-        "stripesWidth": {
-          "type": "number",
-          "description": "Width of the stripes."
-        },
+        "stripes": { "type": "string", "description": "多条条纹的颜色。" },
+        "stripesWidth": { "type": "number", "description": "多条条纹的宽度。" },
         "stripesDistance": {
           "type": "number",
-          "description": "Distance of the stripes from the middle."
+          "description": "条纹距中心的距离。"
         },
         "curvedStripes": {
           "type": "string",
-          "description": "Color of curved stripes."
+          "description": "弧形条纹的颜色。"
         },
         "curvedStripesWidth": {
           "type": "number",
-          "description": "Width of the curved stripes."
+          "description": "弧形条纹的宽度。"
         },
         "curvedStripesDistance": {
           "type": "number",
-          "description": "Distance of the curved stripes from the middle."
+          "description": "弧形条纹距中心的距离。"
         },
-        "spiral": { "type": "string", "description": "Color of a spiral." },
-        "spiralWidth": {
-          "type": "number",
-          "description": "Width of the spiral."
-        },
+        "spiral": { "type": "string", "description": "螺旋的颜色。" },
+        "spiralWidth": { "type": "number", "description": "螺旋的宽度。" },
         "spiralDistance": {
           "type": "number",
-          "description": "Distance between the turns of the spiral."
+          "description": "螺旋各圈之间的距离。"
         },
         "circle": {
-          "description": "Color of a circle in the middle, true for white.",
+          "description": "中间圆圈的颜色,true 为白色。",
           "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
         },
         "circleRadius": {
           "type": "number",
-          "description": "Radius of the circle, 25 is the full token."
+          "description": "圆圈的半径,25 为整个标记。"
         },
         "circleBorderColor": {
           "type": "string",
-          "description": "Border color of the circle."
+          "description": "圆圈的边框颜色。"
         },
         "shield": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a shield, true for white."
+          "description": "盾形的颜色,true 为白色。"
         },
-        "shieldTop": {
-          "type": "string",
-          "description": "Color of the top of the shield."
-        },
+        "shieldTop": { "type": "string", "description": "盾形顶部的颜色。" },
         "shield3": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a three part shield, true for white."
+          "description": "三段盾形的颜色,true 为白色。"
         },
         "shield3TopLeft": {
           "type": "string",
-          "description": "Color of the top left of the three part shield."
+          "description": "三段盾形左上部分的颜色。"
         },
         "shield3TopCenter": {
           "type": "string",
-          "description": "Color of the top center of the three part shield."
+          "description": "三段盾形上中部分的颜色。"
         },
         "shield3TopRight": {
           "type": "string",
-          "description": "Color of the top right of the three part shield."
+          "description": "三段盾形右上部分的颜色。"
         },
         "kiteshield": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a kite shield, true for white."
+          "description": "鸢形盾的颜色,true 为白色。"
         },
         "star5": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a five pointed star, true for white."
+          "description": "五角星的颜色,true 为白色。"
         },
-        "square": {
-          "type": "string",
-          "description": "Color of a square on the token."
-        },
+        "square": { "type": "string", "description": "标记上方块的颜色。" },
         "halves": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors of the halves."
+          "description": "两个半边的两种颜色。"
         },
         "quarters": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 4,
           "maxItems": 4,
-          "description": "Four colors of the quarters."
+          "description": "四个四分之一的四种颜色。"
         },
         "sexies": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors alternating over six parts."
+          "description": "在六个部分上交替的两种颜色。"
         },
         "sunrise": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 3,
           "maxItems": 3,
-          "description": "Three colors of the sunrise."
+          "description": "日出图案的三种颜色。"
         },
         "hexagram": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors of the triangles of the hexagram."
+          "description": "六角星各三角形的两种颜色。"
         },
         "quantity": {
-          "description": "How many of this token to print. ∞ needs print, to say how many.",
+          "description": "此标记的打印数量。∞ 需要同时设置 print 来说明数量。",
           "oneOf": [
             { "type": "integer", "minimum": 0 },
             { "type": "string", "enum": ["∞"] }
           ]
         },
         "print": {
-          "description": "How many of this token to print, overrides quantity.",
+          "description": "此标记的打印数量,会覆盖 quantity。",
           "type": "integer",
           "minimum": 0
         }
@@ -2551,267 +2455,213 @@
     },
     "roundToken": {
       "type": "object",
-      "description": "A token on the round tracker: the round and its token.",
+      "description": "回合记录表上的标记:回合及其标记。",
       "properties": {
         "logo": {
           "type": "string",
-          "description": "Name of an svg logo to draw on the token."
+          "description": "要绘制在标记上的 svg 标志的名称。"
         },
-        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
-          "description": "Name of an icon to draw on the token."
+          "description": "要绘制在标记上的图标的名称。"
         },
-        "iconWidth": { "type": "number", "description": "Width of the icon." },
-        "iconColor": {
-          "type": "string",
-          "description": "Color of the icon or logo."
-        },
-        "iconY": {
-          "type": "number",
-          "description": "Vertical position of the icon."
-        },
+        "iconWidth": { "type": "number", "description": "图标的宽度。" },
+        "iconColor": { "type": "string", "description": "图标或标志的颜色。" },
+        "iconY": { "type": "number", "description": "图标的垂直位置。" },
         "label": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Text to write on the token."
+          "description": "写在标记上的文字。"
         },
-        "labelColor": {
-          "type": "string",
-          "description": "Color of the label text."
-        },
-        "labelY": {
-          "type": "number",
-          "description": "Override the vertical position of the label."
-        },
+        "labelColor": { "type": "string", "description": "标签文字的颜色。" },
+        "labelY": { "type": "number", "description": "覆盖标签的垂直位置。" },
         "labelStrokeColor": {
           "type": "string",
-          "description": "Color of the stroke around the label."
+          "description": "标签周围描边的颜色。"
         },
         "labelStrokeWidth": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Width of the stroke around the label."
+          "description": "标签周围描边的宽度。"
         },
         "label2": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "A second, smaller line of text shown with the label."
+          "description": "与标签一同显示的第二行较小文字。"
         },
         "label2Position": {
           "type": "string",
           "enum": ["above", "below"],
-          "description": "Whether the second line is above or below the label. Defaults to below."
+          "description": "第二行在标签上方还是下方。默认为下方。"
         },
         "label2Color": {
           "type": "string",
-          "description": "Color of the second line. Defaults to the label color."
+          "description": "第二行的颜色。默认为标签的颜色。"
         },
-        "color": {
-          "type": "string",
-          "description": "Background color of the token."
-        },
-        "fontSize": {
-          "type": "number",
-          "description": "Font size of the label."
-        },
-        "fontFamily": {
-          "type": "string",
-          "description": "Font family of the label."
-        },
+        "color": { "type": "string", "description": "标记的背景颜色。" },
+        "fontSize": { "type": "number", "description": "标签的字号。" },
+        "fontFamily": { "type": "string", "description": "标签的字体。" },
         "width": {
           "type": "number",
-          "description": "Width (radius) of the token, 25 by default."
+          "description": "标记的宽度(半径),默认为 25。"
         },
         "tokenShape": {
           "type": "string",
-          "description": "square draws a square token, anything else a circle."
+          "description": "square 绘制方形标记,其他值绘制圆形。"
         },
         "shapeAngle": {
           "type": "number",
-          "description": "Angle of the shapes, independent of the rotation."
+          "description": "图形的角度,与 rotation 无关。"
         },
-        "rotation": {
-          "type": "number",
-          "description": "Rotation of the token."
-        },
-        "fixed": {
-          "type": "boolean",
-          "description": "Cancels all rotation of the token."
-        },
+        "rotation": { "type": "number", "description": "标记的旋转。" },
+        "fixed": { "type": "boolean", "description": "取消标记的所有旋转。" },
         "destination": {
           "type": "boolean",
-          "description": "A destination token, smaller by default."
+          "description": "目的地标记,默认更小。"
         },
         "reserved": {
           "type": "boolean",
-          "description": "A reserved token, drawn in gray."
+          "description": "预留标记,绘制为灰色。"
         },
         "inverse": {
           "type": "boolean",
-          "description": "Draw the inverse of the token: no logo, only text."
+          "description": "绘制标记的反色版本:没有标志,只有文字。"
         },
         "inverseLabelColor": {
           "type": "string",
-          "description": "Label color of an inverse token."
+          "description": "反色标记的标签颜色。"
         },
         "bleed": {
           "type": "boolean",
-          "description": "Draw bleed around the token for printing."
+          "description": "为打印在标记周围绘制出血。"
         },
         "bar": {
-          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "description": "true 在标签后面绘制白色条,颜色字符串则绘制该颜色的条。",
           "oneOf": [{ "type": "boolean" }, { "type": "string" }]
         },
-        "barHeight": { "type": "number", "description": "Height of the bar." },
-        "barBorderColor": {
-          "type": "string",
-          "description": "Color of the border of the bar."
-        },
-        "outline": { "type": "string", "description": "Color of the outline." },
-        "outlineWidth": {
-          "type": "number",
-          "description": "Width of the outline."
-        },
-        "target": {
-          "type": "string",
-          "description": "Color of a target shape."
-        },
-        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "barHeight": { "type": "number", "description": "条的高度。" },
+        "barBorderColor": { "type": "string", "description": "条边框的颜色。" },
+        "outline": { "type": "string", "description": "轮廓的颜色。" },
+        "outlineWidth": { "type": "number", "description": "轮廓的宽度。" },
+        "target": { "type": "string", "description": "靶形图案的颜色。" },
+        "stripe": { "type": "string", "description": "一条条纹的颜色。" },
         "stripeWidth": {
           "oneOf": [{ "type": "string" }, { "type": "number" }],
-          "description": "Width of the stripe."
+          "description": "条纹的宽度。"
         },
-        "stripes": { "type": "string", "description": "Color of the stripes." },
-        "stripesWidth": {
-          "type": "number",
-          "description": "Width of the stripes."
-        },
+        "stripes": { "type": "string", "description": "多条条纹的颜色。" },
+        "stripesWidth": { "type": "number", "description": "多条条纹的宽度。" },
         "stripesDistance": {
           "type": "number",
-          "description": "Distance of the stripes from the middle."
+          "description": "条纹距中心的距离。"
         },
         "curvedStripes": {
           "type": "string",
-          "description": "Color of curved stripes."
+          "description": "弧形条纹的颜色。"
         },
         "curvedStripesWidth": {
           "type": "number",
-          "description": "Width of the curved stripes."
+          "description": "弧形条纹的宽度。"
         },
         "curvedStripesDistance": {
           "type": "number",
-          "description": "Distance of the curved stripes from the middle."
+          "description": "弧形条纹距中心的距离。"
         },
-        "spiral": { "type": "string", "description": "Color of a spiral." },
-        "spiralWidth": {
-          "type": "number",
-          "description": "Width of the spiral."
-        },
+        "spiral": { "type": "string", "description": "螺旋的颜色。" },
+        "spiralWidth": { "type": "number", "description": "螺旋的宽度。" },
         "spiralDistance": {
           "type": "number",
-          "description": "Distance between the turns of the spiral."
+          "description": "螺旋各圈之间的距离。"
         },
         "circle": {
-          "description": "Color of a circle in the middle, true for white.",
+          "description": "中间圆圈的颜色,true 为白色。",
           "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
         },
         "circleRadius": {
           "type": "number",
-          "description": "Radius of the circle, 25 is the full token."
+          "description": "圆圈的半径,25 为整个标记。"
         },
         "circleBorderColor": {
           "type": "string",
-          "description": "Border color of the circle."
+          "description": "圆圈的边框颜色。"
         },
         "shield": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a shield, true for white."
+          "description": "盾形的颜色,true 为白色。"
         },
-        "shieldTop": {
-          "type": "string",
-          "description": "Color of the top of the shield."
-        },
+        "shieldTop": { "type": "string", "description": "盾形顶部的颜色。" },
         "shield3": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a three part shield, true for white."
+          "description": "三段盾形的颜色,true 为白色。"
         },
         "shield3TopLeft": {
           "type": "string",
-          "description": "Color of the top left of the three part shield."
+          "description": "三段盾形左上部分的颜色。"
         },
         "shield3TopCenter": {
           "type": "string",
-          "description": "Color of the top center of the three part shield."
+          "description": "三段盾形上中部分的颜色。"
         },
         "shield3TopRight": {
           "type": "string",
-          "description": "Color of the top right of the three part shield."
+          "description": "三段盾形右上部分的颜色。"
         },
         "kiteshield": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a kite shield, true for white."
+          "description": "鸢形盾的颜色,true 为白色。"
         },
         "star5": {
           "oneOf": [
             { "type": "string" },
             { "type": "boolean", "enum": [true] }
           ],
-          "description": "Color of a five pointed star, true for white."
+          "description": "五角星的颜色,true 为白色。"
         },
-        "square": {
-          "type": "string",
-          "description": "Color of a square on the token."
-        },
+        "square": { "type": "string", "description": "标记上方块的颜色。" },
         "halves": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors of the halves."
+          "description": "两个半边的两种颜色。"
         },
         "quarters": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 4,
           "maxItems": 4,
-          "description": "Four colors of the quarters."
+          "description": "四个四分之一的四种颜色。"
         },
         "sexies": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors alternating over six parts."
+          "description": "在六个部分上交替的两种颜色。"
         },
         "sunrise": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 3,
           "maxItems": 3,
-          "description": "Three colors of the sunrise."
+          "description": "日出图案的三种颜色。"
         },
         "hexagram": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors of the triangles of the hexagram."
+          "description": "六角星各三角形的两种颜色。"
         },
-        "name": {
-          "description": "The name of the round, its label.",
-          "type": "string"
-        },
-        "small": {
-          "description": "Draw the round token smaller.",
-          "type": "boolean"
-        }
+        "name": { "description": "回合的名称,即其标签。", "type": "string" },
+        "small": { "description": "将回合标记画得更小。", "type": "boolean" }
       },
       "additionalProperties": false,
       "required": ["name"]
