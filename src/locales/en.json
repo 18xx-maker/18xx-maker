@@ -46,6 +46,21 @@
     "savedMessage": "{{title}} saved to its file",
     "saveFailed": "Could not save the game"
   },
+  "saveAs": {
+    "nav": "Save as...",
+    "title": "Save as",
+    "description": "Save a copy of this game on this device. The bundled game does not change.",
+    "filename": "File name",
+    "save": "Save",
+    "cancel": "Cancel",
+    "invalid": "Enter a file name with letters or numbers.",
+    "exists": "A game with this name already exists. Replace it?",
+    "replace": "Replace",
+    "saved": "Game Saved",
+    "savedMessage": "A copy of {{title}} was saved",
+    "failed": "Could not save the game",
+    "pickerDescription": "18xx-maker Game"
+  },
   "history": {
     "nav": "History",
     "title": "History",

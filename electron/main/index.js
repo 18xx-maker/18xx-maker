@@ -18,7 +18,7 @@ import { registerExport } from "./export.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
 import { setMenu } from "./menu.js";
 import { createNewGame } from "./newGame.js";
-import { createSaveGame } from "./saveFile.js";
+import { createSaveGame, createSaveGameAs } from "./saveFile.js";
 import { send } from "./util.js";
 import { stopWatching, watch } from "./watch.js";
 import { createWindow, getMainWindow, startBaseUrl } from "./window.js";
@@ -125,6 +125,10 @@ ipcMain.handle("loadGame", (event, id) => {
 
 ipcMain.handle("openGame", openGame);
 
+const slugOfPath = (path) =>
+  Object.values(getConfig().summaries).find((summary) => summary.path === path)
+    ?.slug;
+
 ipcMain.handle(
   "newGame",
   createNewGame({
@@ -132,10 +136,18 @@ ipcMain.handle(
     showSaveDialog: (options) =>
       dialog.showSaveDialog(getMainWindow(), options),
     saveGamePath,
-    slugOfPath: (path) =>
-      Object.values(getConfig().summaries).find(
-        (summary) => summary.path === path,
-      )?.slug,
+    slugOfPath,
+  }),
+);
+
+ipcMain.handle(
+  "saveGameAs",
+  createSaveGameAs({
+    isMain: (event) => fromMainWindow(event, getMainWindow(), startBaseUrl),
+    showSaveDialog: (options) =>
+      dialog.showSaveDialog(getMainWindow(), options),
+    saveGamePath,
+    slugOfPath,
   }),
 );
 

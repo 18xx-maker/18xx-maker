@@ -46,6 +46,21 @@
     "savedMessage": "{{title}} wurde in seiner Datei gespeichert",
     "saveFailed": "Das Spiel konnte nicht gespeichert werden"
   },
+  "saveAs": {
+    "nav": "Speichern unter...",
+    "title": "Speichern unter",
+    "description": "Speichere eine Kopie dieses Spiels auf diesem Gerät. Das mitgelieferte Spiel bleibt unverändert.",
+    "filename": "Dateiname",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "invalid": "Gib einen Dateinamen mit Buchstaben oder Zahlen ein.",
+    "exists": "Ein Spiel mit diesem Namen existiert bereits. Ersetzen?",
+    "replace": "Ersetzen",
+    "saved": "Spiel gespeichert",
+    "savedMessage": "Eine Kopie von {{title}} wurde gespeichert",
+    "failed": "Das Spiel konnte nicht gespeichert werden",
+    "pickerDescription": "18xx-maker-Spiel"
+  },
   "history": {
     "nav": "Verlauf",
     "title": "Verlauf",

@@ -46,6 +46,21 @@
     "savedMessage": "{{title}} 已保存到其文件",
     "saveFailed": "无法保存游戏"
   },
+  "saveAs": {
+    "nav": "另存为...",
+    "title": "另存为",
+    "description": "将此游戏的副本保存在此设备上。内置游戏不会改变。",
+    "filename": "文件名",
+    "save": "保存",
+    "cancel": "取消",
+    "invalid": "请输入包含字母或数字的文件名。",
+    "exists": "已存在同名游戏。要替换吗？",
+    "replace": "替换",
+    "saved": "游戏已保存",
+    "savedMessage": "已保存 {{title}} 的副本",
+    "failed": "无法保存游戏",
+    "pickerDescription": "18xx-maker 游戏"
+  },
   "history": {
     "nav": "历史",
     "title": "历史",
