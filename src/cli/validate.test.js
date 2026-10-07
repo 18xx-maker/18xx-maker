@@ -300,6 +300,71 @@ describe("validate", () => {
     });
   });
 
+  describe("the groups of a game", () => {
+    const withGroups = (extra) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          groups: [{ id: "a" }],
+          ...extra,
+        }),
+      );
+
+    it("accepts a minimal group", () => {
+      expect(run(withGroups({})).code).toBe(0);
+    });
+
+    it("accepts a full group", () => {
+      expect(
+        run(
+          withGroups({
+            groups: [
+              {
+                id: "full",
+                name: "Full",
+                shape: "triangle",
+                color: "red",
+                borderColor: "black",
+                text: "F",
+                textColor: "white",
+              },
+            ],
+            companies: [{ name: "A", abbrev: "A", group: "full" }],
+            privates: [{ name: "P", group: "full" }],
+            shareTypes: { default: [{ quantity: 1, president: true }] },
+          }),
+        ).code,
+      ).toBe(0);
+    });
+
+    it.each([
+      [{ groups: [{ shape: "circle" }] }, "#/groups/0", /id/],
+      [{ groups: [{ id: "a", shape: "star" }] }, "#/groups/0/shape", /one of/i],
+      [{ groups: [{ id: "a", size: 3 }] }, "#/groups/0", /size/],
+      [
+        { shareTypes: { default: [{ quantity: 1, president: "yes" }] } },
+        "#/shareTypes/default/0/president",
+        /boolean/i,
+      ],
+      [
+        { companies: [{ name: "A", abbrev: "A", group: 5 }] },
+        "#/companies/0/group",
+        /string/i,
+      ],
+      [
+        { privates: [{ name: "P", group: 5 }] },
+        "#/privates/0/group",
+        /string/i,
+      ],
+    ])("rejects %j", (extra, pointer, message) => {
+      const { code, lines } = run(withGroups(extra));
+      expect(code).toBe(1);
+      const line = lines.find((l) => l.startsWith(pointer));
+      expect(line).toMatch(message);
+    });
+  });
+
   describe("the exports of a game", () => {
     const withExports = (exports) =>
       writeTmp(
