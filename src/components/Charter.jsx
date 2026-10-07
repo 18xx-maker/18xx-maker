@@ -1,16 +1,17 @@
 import { Fragment, useLayoutEffect, useRef } from "react";
 
-import { addIndex, chain, is, map } from "ramda";
+import { addIndex, chain, find, is, map, propEq } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 import Phase from "@/components/Phase";
+import GroupMark from "@/components/atoms/GroupMark";
 import Train from "@/components/cards/Train";
 import CompanyToken from "@/components/tokens/CompanyToken";
 import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
-import { useConfig } from "@/hooks";
+import { useConfig, useGame } from "@/hooks";
 import { multiDefaultTo, unitsToCss } from "@/util";
 import { charterSubtitle } from "@/util/companies/charterSubtitle";
 import { companyTrains } from "@/util/companies/companyTrains";
@@ -37,6 +38,7 @@ const Charter = ({
   halfWidth,
 }) => {
   const { config } = useConfig();
+  const game = useGame();
   const charterStyle = config.charters.style;
   const showPhaseChart = config.charters.showPhaseChart;
   const showTurnOrder = config.charters.showTurnOrder;
@@ -200,6 +202,9 @@ const Charter = ({
     );
   }, turns || []);
 
+  // Whether the group of the company is one the game defines, so it has a mark
+  const hasGroup = !!find(propEq(company.group, "id"), game.groups || []);
+
   // The banner is the color of the header band
   const bandColor =
     charterStyle === "color" ? color : color === "white" ? "black" : color;
@@ -211,7 +216,7 @@ const Charter = ({
           className={`cutlines${minor ? " cutlines--minor" : ""}${halfWidth ? " cutlines--half" : ""}`}
         >
           <div
-            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${loans.length > 0 ? " charter--loans" : ""}${company.banner ? " charter--banner" : ""}${subtitle ? " charter--subtitle" : ""}`}
+            className={`charter ${minor ? "charter--minor " : ""}charter--${charterStyle}${halfWidth ? " charter--half" : ""}${loans.length > 0 ? " charter--loans" : ""}${company.banner ? " charter--banner" : ""}${hasGroup ? " charter--group" : ""}${subtitle ? " charter--subtitle" : ""}`}
           >
             <div
               className="charter__bleed"
@@ -403,6 +408,7 @@ const Charter = ({
                     )}
                   </div>
                 )}
+                <GroupMark group={company.group} className="charter__group" />
                 {variant && <div className="charter__variant">{variant}</div>}
                 {company.banner && (
                   <div

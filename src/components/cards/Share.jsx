@@ -2,6 +2,7 @@ import { min } from "ramda";
 
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
+import GroupMark from "@/components/atoms/GroupMark";
 import CompanyToken from "@/components/tokens/CompanyToken";
 
 import ColorContext from "@/context/ColorContext";
@@ -44,6 +45,7 @@ const LeftShare = ({
   tokenCount,
   blackBand,
   variant,
+  president,
   fontFamily,
   fontWeight,
   fontStyle,
@@ -160,6 +162,9 @@ const LeftShare = ({
                 </div>
                 <ShareLabel label={label} labelColor={labelColor} />
                 {variant && <div className="share__variant">{variant}</div>}
+                {president && (
+                  <GroupMark group={company?.group} className="share__group" />
+                )}
               </div>
             </div>
           )}
@@ -182,6 +187,7 @@ const CenterShare = ({
   backgroundColor,
   labelColor,
   variant,
+  president,
 }) => {
   let count = shares > 1 ? `${shares} Shares` : `${shares} Share`;
 
@@ -244,6 +250,9 @@ const CenterShare = ({
                 </div>
                 <ShareLabel label={label} labelColor={labelColor} />
                 {variant && <div className="share__variant">{variant}</div>}
+                {president && (
+                  <GroupMark group={company?.group} className="share__group" />
+                )}
               </div>
             </div>
           )}

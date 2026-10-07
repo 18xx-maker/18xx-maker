@@ -58,6 +58,27 @@
   font-family: sans-serif;
 }
 
+.charter__group {
+  position: absolute;
+  bottom: 0.1875in;
+  right: 0.0625in;
+  width: 0.35in;
+  height: 0.35in;
+}
+
+.charter--banner .charter__group {
+  bottom: calc(var(--banner-h) + 0.1875in);
+}
+
+/* The mark keeps the loan slots off the bottom right corner */
+.charter--group .charter__loans {
+  bottom: 0.5in;
+}
+
+.charter--group.charter--banner .charter__loans {
+  bottom: calc(var(--banner-h) + 0.5in);
+}
+
 .charter--banner .charter__variant {
   bottom: var(--banner-h);
 }

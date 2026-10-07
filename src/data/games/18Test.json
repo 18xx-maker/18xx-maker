@@ -82,6 +82,7 @@
       {
         "quantity": 1,
         "label": "Minor Certificate",
+        "president": true,
         "percent": 50,
         "shares": 1
       }
@@ -90,6 +91,7 @@
       {
         "quantity": 1,
         "label": "Test Certificate",
+        "president": true,
         "percent": 20,
         "shares": 2
       },
@@ -103,6 +105,19 @@
       }
     ]
   },
+  "groups": [
+    { "id": "orange", "name": "Orange group", "color": "orange" },
+    { "id": "blue", "name": "Blue group", "shape": "square", "color": "blue" },
+    {
+      "id": "dark",
+      "name": "Dark group",
+      "shape": "diamond",
+      "color": "inky",
+      "text": "G"
+    },
+    { "id": "red", "name": "Red group", "shape": "triangle", "color": "red" },
+    { "id": "outline", "name": "Outline group", "shape": "hexagon" }
+  ],
   "companies": [
     {
       "name": "Black Railroad",
@@ -120,6 +135,7 @@
         {
           "quantity": 1,
           "label": "Special 1.5",
+          "president": true,
           "labelColor": "short",
           "tokenCount": 1.5
         }
@@ -141,6 +157,7 @@
     {
       "name": "Blue Railroad",
       "abbrev": "BRR",
+      "group": "orange",
       "alias": "The Great Blue Railroad Company of the North",
       "color": "blue",
       "variant": "blue",
@@ -151,6 +168,7 @@
         {
           "quantity": 1,
           "label": "Special 3.5",
+          "president": true,
           "tokenCount": 3.5
         }
       ]
@@ -158,6 +176,7 @@
     {
       "name": "Navy Railroad",
       "abbrev": "NVRR",
+      "group": "blue",
       "alias": "   ",
       "color": "navy",
       "loans": [50, 50, "", null],
@@ -190,6 +209,7 @@
     {
       "name": "Lime Railroad",
       "abbrev": "LRR",
+      "group": "dark",
       "color": "lime",
       "tokens": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
       "tokensBelow": true,
@@ -234,6 +254,7 @@
     {
       "name": "Violet Railroad",
       "abbrev": "VRR",
+      "group": "dark",
       "color": "violet",
       "minor": true,
       "home": "F6",
@@ -265,6 +286,7 @@
     {
       "name": "White Railroad",
       "abbrev": "WRR",
+      "group": "outline",
       "color": "white",
       "minor": true,
       "banner": "MINOR"
@@ -272,6 +294,7 @@
     {
       "name": "Yellow Railroad",
       "abbrev": "YRR",
+      "group": "red",
       "color": "yellow",
       "minor": true,
       "tokensBelow": true,
@@ -354,6 +377,7 @@
     },
     {
       "name": "Private with a custom tile",
+      "group": "orange",
       "price": 180,
       "revenue": 20,
       "tile": "T1",
@@ -363,6 +387,7 @@
     },
     {
       "name": "Private with Hex and Note",
+      "group": "dark",
       "note": "A Note!",
       "price": 220,
       "revenue": 30,
