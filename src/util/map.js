@@ -162,7 +162,9 @@ const resolveHex = curry((hexes, hex) => {
   return hex;
 });
 
-const topCoord = curry((hexes, hexWidth, x) => {
+// shift: how far the hexes moved up, as the top edge of the map is trimmed. The
+// labels move with them but stay in the margin.
+const topCoord = curry((hexes, hexWidth, shift, x) => {
   let coords = hexesToCoords(hexes);
   let filtered = filter((c) => c[0] === x, coords);
   let minHex = reduce((m, x) => min(m, nth(1, x)), 1000, filtered);
@@ -177,12 +179,15 @@ const topCoord = curry((hexes, hexWidth, x) => {
       hexWidth * HEX_RATIO;
   }
 
-  let y =
-    (x % 2 === 0 ? 10 : 8) + 1.5 * hexWidth * HEX_RATIO * (minHex - 1) - extra;
-  return y;
+  let base = x % 2 === 0 ? 10 : 8;
+  return Math.max(
+    base + 1.5 * hexWidth * HEX_RATIO * (minHex - 1) - extra - shift,
+    base,
+  );
 });
 
-const bottomCoord = curry((hexes, hexWidth, x) => {
+// shift: how far the bottom edge of the page moved up, by trimming either edge
+const bottomCoord = curry((hexes, hexWidth, shift, x) => {
   let coords = hexesToCoords(hexes);
   let filtered = filter((c) => c[0] === x, coords);
   let maxHex = reduce((m, x) => max(m, nth(1, x)), 1, filtered);
@@ -200,22 +205,21 @@ const bottomCoord = curry((hexes, hexWidth, x) => {
   let y =
     (x % 2 === 0 ? -48 : -46) +
     1.5 * hexWidth * HEX_RATIO * (maxHex + 1) +
-    extra;
+    extra -
+    shift;
   return y;
 });
 
-const leftCoord = curry((hexes, hexWidth, y) => {
+const leftCoord = curry((hexes, hexWidth, shift, y) => {
   let filtered = filter((c) => c[1] === y, hexesToCoords(hexes));
   let maxHex = reduce((m, x) => min(m, nth(0, x)), 1000, filtered);
-  let x = 10 + hexWidth * 0.5 * (maxHex - 1);
-  return x;
+  return Math.max(10 + hexWidth * 0.5 * (maxHex - 1) - shift, 10);
 });
 
-const rightCoord = curry((hexes, hexWidth, y) => {
+const rightCoord = curry((hexes, hexWidth, shift, y) => {
   let filtered = filter((c) => c[1] === y, hexesToCoords(hexes));
   let maxHex = reduce((m, x) => max(m, nth(0, x)), 1, filtered);
-  let x = 40 + hexWidth * 0.5 * (maxHex + 1);
-  return x;
+  return 40 + hexWidth * 0.5 * (maxHex + 1) - shift;
 });
 
 // Takes in a string in one of these forms:
@@ -345,6 +349,8 @@ export const getMapHex = (game, hex, variation) => {
   return find((h) => h.hexes.includes(hex), hexes);
 };
 
+const NO_HALVES = [];
+
 const squashRatio = 87 / 86.6025;
 
 export const getMapData = (game, coords, hexWidth, variation) => {
@@ -367,12 +373,33 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let edge = hexWidth * HEX_RATIO;
   let halfHexWidth = 0.5 * hexWidth;
 
+  // Trimmed edges of the map, by the page edge. The rows and columns here are
+  // the ones of the coordinates, which a horizontal map turns on the page.
+  const horizontal = game.info.orientation === "horizontal";
+  // A copied map keeps the trimmed edges of the map it copies, any of them can
+  // be set again (to false to put the half back)
+  const trim = {
+    ...(gameMap.copy !== undefined ? game.map[gameMap.copy].trim : {}),
+    ...gameMap.trim,
+  };
+  const trimmed = {
+    top: !!(horizontal ? trim.left : trim.top),
+    bottom: !!(horizontal ? trim.right : trim.bottom),
+    left: !!(horizontal ? trim.top : trim.left),
+    right: !!(horizontal ? trim.bottom : trim.right),
+  };
+  // Trimming the top or left moves the hexes, any edge makes the map smaller
+  const shiftX = trimmed.left ? halfHexWidth : 0;
+  const shiftY = trimmed.top ? edge : 0;
+  const trimWidth = shiftX + (trimmed.right ? halfHexWidth : 0);
+  const trimHeight = shiftY + (trimmed.bottom ? edge : 0);
+
   let hexX = (x) => {
-    return x * halfHexWidth + coordOffset;
+    return x * halfHexWidth + coordOffset - shiftX;
   };
 
   let hexY = (x, y) => {
-    return (y - 1) * 1.5 * edge + edge + coordOffset;
+    return (y - 1) * 1.5 * edge + edge + coordOffset - shiftY;
   };
 
   // Find all hexes
@@ -412,18 +439,12 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   let maxX = maxMapX(hexes);
   let maxY = maxMapY(hexes);
 
-  let totalWidth = getTotalWidth(
-    maxX,
-    hexWidth,
-    game.info.extraTotalWidth,
-    coordSpace,
-  );
-  let totalHeight = getTotalHeight(
-    maxY,
-    hexWidth,
-    game.info.extraTotalHeight,
-    coordSpace,
-  );
+  let totalWidth =
+    getTotalWidth(maxX, hexWidth, game.info.extraTotalWidth, coordSpace) -
+    trimWidth;
+  let totalHeight =
+    getTotalHeight(maxY, hexWidth, game.info.extraTotalHeight, coordSpace) -
+    trimHeight;
   let b18TotalHeight = totalHeight * squashRatio;
   let printWidth = `${Math.ceil(51.5 + totalWidth) / 100.0}in`;
   let printHeight = `${Math.ceil(51.5 + totalHeight) / 100.0}in`;
@@ -434,7 +455,6 @@ export const getMapData = (game, coords, hexWidth, variation) => {
   // which orientation for the hexes:
   //   default is points up/down
   //   "horizontal" is flats up/down
-  let horizontal = game.info.orientation === "horizontal";
   let mapCoordinates = game.info.mapCoordinates;
 
   let a1Valid = true;
@@ -449,9 +469,24 @@ export const getMapData = (game, coords, hexWidth, variation) => {
     }
   }
 
+  // The halves of the hex at [x, y] that the trimmed edges leave, as page
+  // directions: the outermost row or column is cut through its centers
+  const trimHalves = (x, y) => {
+    const halves = [
+      trimmed.top && y === 1 && (horizontal ? "right" : "bottom"),
+      trimmed.bottom && y === maxY && (horizontal ? "left" : "top"),
+      trimmed.left && x === 1 && (horizontal ? "bottom" : "right"),
+      trimmed.right && x === maxX && (horizontal ? "top" : "left"),
+    ].filter(Boolean);
+    return halves.length > 0 ? halves : NO_HALVES;
+  };
+
   return {
     // Is this map in horizontal layout?
     horizontal,
+
+    // Which halves of the hex at the coordinates stay, by the trimmed edges
+    trimHalves,
 
     // Hex width flat to flat
     hexWidth,
@@ -502,17 +537,17 @@ export const getMapData = (game, coords, hexWidth, variation) => {
 
     // Where to place coordinates
     topCoord: horizontal
-      ? leftCoord(hexes, hexWidth)
-      : topCoord(hexes, hexWidth),
+      ? leftCoord(hexes, hexWidth, shiftX)
+      : topCoord(hexes, hexWidth, shiftY),
     leftCoord: horizontal
-      ? topCoord(hexes, hexWidth)
-      : leftCoord(hexes, hexWidth),
+      ? topCoord(hexes, hexWidth, shiftY)
+      : leftCoord(hexes, hexWidth, shiftX),
     bottomCoord: horizontal
-      ? rightCoord(hexes, hexWidth)
-      : bottomCoord(hexes, hexWidth),
+      ? rightCoord(hexes, hexWidth, trimWidth)
+      : bottomCoord(hexes, hexWidth, trimHeight),
     rightCoord: horizontal
-      ? bottomCoord(hexes, hexWidth)
-      : rightCoord(hexes, hexWidth),
+      ? bottomCoord(hexes, hexWidth, trimHeight)
+      : rightCoord(hexes, hexWidth, trimWidth),
 
     // The resolved map variation
     map: gameMap,

@@ -1024,6 +1024,7 @@
     "DB801": 1
   },
   "map": {
+    "trim": { "bottom": true, "right": true },
     "borders": [
       {
         "color": "white",

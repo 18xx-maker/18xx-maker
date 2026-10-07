@@ -95,7 +95,7 @@ und Linien](/docs/games/borders)), `roundTracker`, `movement`, `market` und
 `players`. Das sind die Teile der Karte, die keine Felder sind, die Details
 stehen im Schema.
 
-### Halbe Felder
+### Halbe Felder und beschnittene Karten
 
 Ein Kartenfeld mit `half` auf `top`, `bottom`, `left` oder `right` zeichnet nur
 diese Hälfte, durch die Mitte geschnitten, mit einem Rand um den gezeichneten
@@ -106,9 +106,20 @@ zweier Seiten, `left` und `right` von Ecke zu Ecke; bei einer Karte mit
 Was über den Rand hinaus gezeichnet wird, etwa seine ID, ein Name oder ein
 Routenbonus, nicht. Plättchen ignorieren `half`.
 
+`trim` an der Karte schneidet eine halbe Reihe oder Spalte von den Rändern der
+Karte ab, für eine Karte, die auf einem anderen Brett weitergeht. Es nimmt
+`top`, `bottom`, `left` und `right`, jeweils `true` oder `false`. Die Seite wird
+um das halbe Feld kleiner, und die Felder an diesem Rand werden als Hälften
+gezeichnet, als hätte jedes ein eigenes `half`. Die Ränder sind die der Seite,
+auch bei einer horizontalen Karte. Hat ein Feld zusätzlich sein eigenes `half`,
+bleibt nur, was beide übrig lassen (zwei Hälften ohne gemeinsamen Teil lassen
+nichts übrig). Ein `removeBorders` an einem Feld wirkt wie zuvor auf den
+gezeichneten Teil.
+
 ```json
 {
   "map": {
+    "trim": { "bottom": true },
     "hexes": [{ "color": "plain", "half": "left", "hexes": ["A1"] }]
   }
 }
@@ -129,6 +140,9 @@ Eintrag kann Folgendes haben:
   fügt ihre eigenen hinzu.
 - **`remove`** ist eine Liste von Koordinaten. Sie nimmt diese Felder aus der
   kopierten Karte heraus. Es wird nur zusammen mit `copy` verwendet.
+- **`trim`** ist unter [Halbe Felder und beschnittene Karten](#halbe-felder-und-beschnittene-karten)
+  beschrieben. Eine Karte mit `copy` behält das `trim` der kopierten Karte und
+  kann einen Rand neu setzen (`false` bringt die Hälfte zurück).
 
 Eine Variante, die die erste Karte mit ein paar Änderungen ist:
 

@@ -334,14 +334,15 @@ describe("getMapData", () => {
     const data = util.getMapData(games["18Test"], "outside", 150);
 
     it("should compute the size of the map", () => {
-      // Hexes run A11 to D16 and the title hex A17: x up to 17, y up to 4
+      // Hexes run A11 to D16 and the title hex A17: x up to 17, y up to 4. The
+      // map trims its bottom and right edges: half a hex row and column less
       expect([data.maxX, data.maxY]).toEqual([17, 4]);
       expect(data.horizontal).toBe(false);
-      expect(data.totalWidth).toBe(1450);
-      expect(data.totalHeight).toBeCloseTo(662.9, 1);
+      expect(data.totalWidth).toBe(1375);
+      expect(data.totalHeight).toBeCloseTo(662.9 - 150 * util.HEX_RATIO, 1);
       expect(data.humanWidth).toBe("15in");
-      expect(data.humanHeight).toBe("8in");
-      expect(data.printWidth).toBe("15.02in");
+      expect(data.humanHeight).toBe("7in");
+      expect(data.printWidth).toBe("14.27in");
     });
 
     it("should place hexes on the grid", () => {
@@ -362,7 +363,7 @@ describe("getMapData", () => {
       const small = util.getMapData(games["18Test"], "outside", 75);
 
       expect(small.scale).toBe(0.5);
-      expect(small.totalWidth).toBe(100 + 37.5 * 18);
+      expect(small.totalWidth).toBe(100 + 37.5 * 17);
     });
   });
 

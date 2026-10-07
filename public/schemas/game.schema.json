@@ -62,6 +62,25 @@
           "type": "boolean",
           "const": false
         },
+        "trim": {
+          "description": "Cut half a row or column of hexes off the edges of the map, by the edge of the page: the page gets smaller by that, and the hexes along the edge are drawn as halves. For maps that continue on another board. A map that copies another keeps its trimmed edges unless it sets the edge again (false puts the half back).",
+          "type": "object",
+          "properties": {
+            "top": {
+              "type": "boolean"
+            },
+            "bottom": {
+              "type": "boolean"
+            },
+            "left": {
+              "type": "boolean"
+            },
+            "right": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
         "remove": {
           "type": "array",
           "items": {

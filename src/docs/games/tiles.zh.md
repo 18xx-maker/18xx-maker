@@ -65,13 +65,16 @@
 
 除了 `hexes`,地图还接受绘制在其上的各项内容的设置:`borders`、`borderTexts` 和 `lines`(参见[地图边界与线条](/docs/games/borders))、`roundTracker`、`movement`、`market` 和 `players`。这些是地图上不属于六边格的部分,详情见模式。
 
-### 半个六边格
+### 半个六边格与裁切地图
 
 地图六边格的 `half` 设为 `top`、`bottom`、`left` 或 `right` 时,只绘制那一半,从中心切开,被绘制的部分四周有边界(切口本身没有)。方向是页面的方向。尖角朝上的地图上,`top` 和 `bottom` 从两条边的中点切过,`left` 和 `right` 从角到角;`"orientation": "horizontal"` 的地图则相反。只有六边格本身被切开:画在边缘之外的内容,如它的编号、名称或路线奖励,不会被切。地块会忽略 `half`。
+
+地图上的 `trim` 从地图边缘切掉半行或半列,用于在另一块板上继续的地图。它接受 `top`、`bottom`、`left` 和 `right`,各为 `true` 或 `false`。页面缩小半个六边格,该边缘上的六边格被画成一半,就像各自有 `half` 一样。边缘是页面的边缘,横向地图也是如此。若六边格自己也有 `half`,只保留两者共同留下的部分(两个没有交集的一半什么也不留)。六边格上的 `removeBorders` 仍对绘制的部分起作用。
 
 ```json
 {
   "map": {
+    "trim": { "bottom": true },
     "hexes": [{ "color": "plain", "half": "left", "hexes": ["A1"] }]
   }
 }
@@ -85,6 +88,7 @@
 - **`title: false`** 让这张地图不显示游戏标题。
 - **`copy`** 是列表中另一张地图的编号。这张地图以那张地图的 `hexes`、`borderTexts`、`borders` 和 `lines` 为起点,再加上自己的内容。
 - **`remove`** 是坐标列表。它把这些六边格从复制来的地图中去掉。只能与 `copy` 一起使用。
+- **`trim`** 见[半个六边格与裁切地图](#半个六边格与裁切地图)。使用 `copy` 的地图保留被复制地图的 `trim`,也可以重新设置某条边(`false` 恢复那一半)。
 
 一个在第一张地图基础上稍作修改的变体:
 

@@ -45,6 +45,7 @@ const Map = ({ name, game, config, variation, interactive = false }) => {
           >
             <Hex
               hex={hex}
+              halves={data.trimHalves(x, y)}
               border={true}
               transparent={game.info.transparent}
               map={true}

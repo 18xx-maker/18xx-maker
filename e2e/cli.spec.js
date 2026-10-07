@@ -85,14 +85,14 @@ test.describe("maker export 18Test", () => {
       height: 3150,
       pixelsPerMeter: 11811,
     });
-    expect(png(path.join(dir, "png/18test-map.png")).width).toBe(4500);
+    expect(png(path.join(dir, "png/18test-map.png")).width).toBe(4275);
 
     // The svg of the map is a standalone file, without a background page
-    // (the map png is 4500 wide with its quarter inch border, 24 CSS pixels
+    // (the map png is 4275 wide with its quarter inch border, 24 CSS pixels
     // on each side)
     const svg = fs.readFileSync(path.join(dir, "svg/18test-map.svg"), "utf-8");
     expect(svg.startsWith("<?xml")).toBe(true);
-    expect(svg).toMatch(/<svg [^>]*width="1392"/);
+    expect(svg).toMatch(/<svg [^>]*width="1320"/);
     expect(svg).not.toMatch(/\sclass=|<style|foreignObject/);
     expect(fs.existsSync(path.join(dir, "svg/18test-background.svg"))).toBe(
       false,

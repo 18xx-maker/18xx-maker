@@ -93,7 +93,7 @@ export const expected = {
     // The map and the market at their size in print, whatever the size of
     // the window they are captured in
     images: {
-      "18test-map.png": { width: 4500, height: 2137 },
+      "18test-map.png": { width: 4275, height: 1878 },
       "18test-market.png": { width: 4168, height: 3115 },
     },
     // The cards, 2.657 by 1.732 inches (255.11 by 166.3 CSS pixels): the
@@ -102,11 +102,11 @@ export const expected = {
   },
   // The svgs of the map, market, tiles and tokens: their size in CSS pixels
   // (1/96 inch), which is the size of the drawing in units (the viewBox of
-  // the map is 1450 by 403.10875, the market 1340 by 985) at 0.96 pixels a
+  // the map is 1375 by 576.3045, the market 1340 by 985) at 0.96 pixels a
   // unit, with no border: it comes from the game, not from the fonts
   svg: {
     sizes: {
-      "18test-map.svg": [1392, 636.391],
+      "18test-map.svg": [1320, 553.252],
       "18test-market.svg": [1286.4, 945.6],
       // A tile is 2 inches, a token with its four sides 2.4 by 0.6
       "18test-tile-1.svg": [192, 192],
@@ -117,7 +117,7 @@ export const expected = {
     zip: "board18-18Test-1.0.zip",
     folder: "board18-18Test-1.0",
     images: {
-      "Map.png": [1000, 478],
+      "Map.png": [950, 420],
       "Market.png": [1336, 995],
       "Tokens.png": [60, 1080],
       "Yellow.png": [1350, 900],
