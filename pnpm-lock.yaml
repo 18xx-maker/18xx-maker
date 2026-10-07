@@ -53,6 +53,9 @@ importers:
       ramda:
         specifier: ^0.32.0
         version: 0.32.0
+      wouter:
+        specifier: ^3.13.0
+        version: 3.13.0(react@19.3.0)
     devDependencies:
       '@axe-core/playwright':
         specifier: ^4.13.0
@@ -5130,6 +5133,10 @@ packages:
     resolution: {integrity: sha512-dYqgNSZbDwkaJ2ceRd9ojCGjBq+mOm9LmtXnAnEGyHhN/5R7iDW2TRw3h+o/jCFxus3P2LfWIIiwowAjANm7IA==}
     engines: {node: '>= 0.4'}
 
+  regexparam@3.0.0:
+    resolution: {integrity: sha512-RSYAtP31mvYLkAHrOlh25pCNQ5hWnT106VukGaaFfuJrZFkGRX5GhUAdPqpSDXxOhA2c4akmRuplv1mRqnBn6Q==}
+    engines: {node: '>=8'}
+
   remark-flexible-containers@1.5.8:
     resolution: {integrity: sha512-tvEE7zZcqVKXf7VMLeSdpjv0HuDST7Ad9nOjX+SgxS/TxjlFst118m/QvOhHWuLP6QmKawN/s0U/cnRkmYOIhg==}
     peerDependencies:
@@ -5943,6 +5950,11 @@ packages:
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
+
+  wouter@3.13.0:
+    resolution: {integrity: sha512-p1RoCuVyxwb3X5jLjDdkwDzlXj+/UGZqZb+806uaJOVEHvNfGkjET0KiQ/CGiDKC90rLsALMgMj4onNVKxgNdQ==}
+    peerDependencies:
+      react: '>=16.8.0'
 
   wrap-ansi@6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}
@@ -11337,6 +11349,8 @@ snapshots:
       gopd: 1.2.0
       set-function-name: 2.0.2
 
+  regexparam@3.0.0: {}
+
   remark-flexible-containers@1.5.8(unified@11.0.5):
     dependencies:
       '@types/mdast': 4.0.4
@@ -12336,6 +12350,12 @@ snapshots:
   why-is-node-running@3.2.1: {}
 
   word-wrap@1.2.5: {}
+
+  wouter@3.13.0(react@19.3.0):
+    dependencies:
+      react: 19.3.0
+      regexparam: 3.0.0
+      use-sync-external-store: 1.7.0(react@19.3.0)
 
   wrap-ansi@6.2.0:
     dependencies:
