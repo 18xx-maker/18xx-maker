@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useRef, useState } from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
+
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 import SchemaField, {
   SchemaFormContext,
@@ -54,11 +56,82 @@ const setup = (game, issues = []) => {
         move() {},
       }}
     >
-      <SchemaField keys={["players"]} schema={root.properties.players} />
+      <TooltipProvider delayDuration={200}>
+        <SchemaField keys={["players"]} schema={root.properties.players} />
+      </TooltipProvider>
     </SchemaFormContext.Provider>,
   );
   return { set, clear, view, user: userEvent.setup() };
 };
+
+describe("the help of a field", () => {
+  it("is behind an info button that toggles a tooltip", async () => {
+    const { user } = setup({ players: 3 });
+    const input = screen.getByRole("spinbutton", { name: "PlayersDeprecated" });
+    expect(input).toHaveAccessibleDescription(/How many players\./);
+    const info = screen.getByRole("button", { name: "About Players" });
+    await user.click(info);
+    expect(await screen.findByRole("tooltip")).toHaveTextContent(
+      "How many players.",
+    );
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+    await user.click(info);
+    expect(await screen.findByRole("tooltip")).toBeVisible();
+  });
+
+  it("closes with a second click", async () => {
+    const { user } = setup({ players: 3 });
+    const info = screen.getByRole("button", { name: "About Players" });
+    await user.click(info);
+    expect(await screen.findByRole("tooltip")).toBeVisible();
+    await user.click(info);
+    await waitFor(() =>
+      expect(screen.queryByRole("tooltip")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("toggles with the keyboard", async () => {
+    const { user } = setup({ players: 3 });
+    await user.tab();
+    const info = screen.getByRole("button", { name: "About Players" });
+    expect(info).toHaveFocus();
+    // Focus shows the tooltip, Enter toggles it
+    expect(await screen.findByRole("tooltip")).toBeVisible();
+    await user.keyboard("{Enter}");
+    await waitFor(() =>
+      expect(screen.queryByRole("tooltip")).not.toBeInTheDocument(),
+    );
+    await user.keyboard("{Enter}");
+    expect(await screen.findByRole("tooltip")).toBeVisible();
+  });
+
+  it("has no info button without a description", () => {
+    render(
+      <SchemaFormContext.Provider
+        value={{
+          root,
+          game: { exports: { paginated: true } },
+          issues: [],
+          set() {},
+          clear() {},
+        }}
+      >
+        <SchemaField
+          keys={["exports", "paginated"]}
+          schema={root.properties.exports.properties.paginated}
+        />
+      </SchemaFormContext.Provider>,
+    );
+    expect(
+      screen.queryByRole("button", { name: /^About / }),
+    ).not.toBeInTheDocument();
+    const combobox = screen.getByRole("combobox");
+    expect(combobox.getAttribute("aria-describedby") ?? "").not.toMatch(
+      /-help/,
+    );
+  });
+});
 
 const revenueRoot = {
   type: "object",
@@ -1005,10 +1078,12 @@ describe("the fields of a token", () => {
               move() {},
             }}
           >
-            <SchemaField
-              keys={["token", field]}
-              schema={token.properties[field]}
-            />
+            <TooltipProvider>
+              <SchemaField
+                keys={["token", field]}
+                schema={token.properties[field]}
+              />
+            </TooltipProvider>
           </SchemaFormContext.Provider>
         </MemoryRouter>
       </Provider>
