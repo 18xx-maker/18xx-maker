@@ -439,6 +439,45 @@ describe("validate", () => {
     });
   });
 
+  describe("half hexes and a trimmed map", () => {
+    const withMap = (map) =>
+      writeTmp("game.json", JSON.stringify({ info: { title: "Game" }, map }));
+
+    it.each(["top", "bottom", "left", "right"])(
+      "accepts the %s half",
+      (half) => {
+        expect(
+          run(withMap({ hexes: [{ color: "plain", half, hexes: ["A1"] }] }))
+            .code,
+        ).toBe(0);
+      },
+    );
+
+    it("accepts a trim of any edges", () => {
+      expect(
+        run(withMap({ trim: { top: true, left: false }, hexes: [] })).code,
+      ).toBe(0);
+    });
+
+    it("rejects an unknown half", () => {
+      const { code, lines } = run(
+        withMap({ hexes: [{ half: "middle", hexes: ["A1"] }] }),
+      );
+      expect(code).toBe(1);
+      expect(lines.find((l) => l.includes("half"))).toMatch(/one of/i);
+    });
+
+    it.each([
+      [true, /object/i],
+      [{ middle: true }, /middle/i],
+      [{ top: "yes" }, /boolean/i],
+    ])("rejects the trim %j", (trim, message) => {
+      const { code, lines } = run(withMap({ trim, hexes: [] }));
+      expect(code).toBe(1);
+      expect(lines.find((l) => l.includes("#/map/trim"))).toMatch(message);
+    });
+  });
+
   describe("the draw order of a tile element", () => {
     const withHex = (hex) =>
       writeTmp(

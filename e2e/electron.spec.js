@@ -124,10 +124,10 @@ test.describe("the app exports 18Test", () => {
       height: 3150,
       pixelsPerMeter: 11811,
     });
-    expect(png(path.join(dir, "png/18test-map.png")).width).toBe(4500);
+    expect(png(path.join(dir, "png/18test-map.png")).width).toBe(4275);
     const svg = fs.readFileSync(path.join(dir, "svg/18test-map.svg"), "utf-8");
     expect(svg.startsWith("<?xml")).toBe(true);
-    expect(svg).toMatch(/<svg [^>]*width="1392"/);
+    expect(svg).toMatch(/<svg [^>]*width="1320"/);
     expect(fs.existsSync(path.join(dir, "svg/18test-background.svg"))).toBe(
       false,
     );

@@ -88,6 +88,34 @@ Besides `hexes` the map takes the settings of the things drawn over it:
 `roundTracker`, `movement`, `market` and `players`. These are the parts of the
 map that are not hexes, see the schema for each.
 
+### Half Hexes and Trimmed Maps
+
+A map hex with `half` set to `top`, `bottom`, `left` or `right` draws only that
+half, cut through its center, with a border around the part that is drawn (the
+cut itself gets none). The directions are those of the page. On a map with
+pointy hexes `top` and `bottom` cut through the middle of two sides, `left` and
+`right` from corner to corner; on a map with `"orientation": "horizontal"` it
+is the other way round. Only the hex is cut: things drawn past its edge, like
+its id, a name or a route bonus, are not. Tiles ignore `half`.
+
+`trim` on the map cuts half a row or column off the edges of the map, for a map
+that goes on on another board. It takes `top`, `bottom`, `left` and `right`,
+each `true` or `false`. The page gets smaller by the half hex, and the hexes
+along that edge are drawn as halves, as if each had a `half` of its own. The
+edges are those of the page, also on a horizontal map. A hex that has its own
+`half` too keeps only what both leave (two halves that share nothing leave
+nothing). A `removeBorders` on a hex works as before on the part that is
+drawn.
+
+```json
+{
+  "map": {
+    "trim": { "bottom": true },
+    "hexes": [{ "color": "plain", "half": "left", "hexes": ["A1"] }]
+  }
+}
+```
+
 ## One Map or Many
 
 `map` can be one object, or a list of objects for a game with several maps or
@@ -101,6 +129,9 @@ chooses which one is shown. Each item can have:
   hexes, `borderTexts`, `borders` and `lines` of that map and adds its own.
 - **`remove`** is a list of coordinates. It takes those hexes out of the copied
   map. It is only used together with `copy`.
+- **`trim`** is described under [Half Hexes and Trimmed Maps](#half-hexes-and-trimmed-maps).
+  A map that uses `copy` keeps the `trim` of the copied map, and sets an edge
+  again (`false` puts the half back).
 
 A variation that is the first map with a few changes:
 
@@ -151,6 +182,7 @@ at the edges of hexes and the borders of the map are in
 | `bridges`, `tunnels`, `tunnelEntrances` | The cost of a bridge or tunnel, and where a tunnel enters                                         |
 | `borders`                               | A colored border on a side of the hex                                                             |
 | `removeBorders`                         | Removes the border drawn on the listed sides of the hex                                           |
+| `half`                                  | Draws only the `top`, `bottom`, `left` or `right` half of a hex of the map                        |
 | `divides`                               | A line that divides the hex                                                                       |
 | `companies`                             | A company label on the hex, such as the home of a company                                         |
 | `tokens`                                | A token placed on the hex                                                                         |

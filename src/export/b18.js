@@ -21,7 +21,7 @@ import {
 } from "ramda";
 
 import * as gutil from "../util/index.js";
-import { getMapData } from "../util/map.js";
+import { getMapData, squashRatio } from "../util/map.js";
 import { getMarketData } from "../util/market.js";
 import { gatherTileColors } from "../util/tiles/tiles.js";
 import { b18Names } from "./names.js";
@@ -160,10 +160,13 @@ export const b18Spec = (
     const mapData = getMapData(game, config.coords, 100, variation);
     json.board = {
       imgLoc: names.imgLoc("Map"),
-      xStart: mapData.horizontal ? 50 : mapData.a1Valid === false ? 0 : 50,
+      xStart:
+        (mapData.horizontal ? 50 : mapData.a1Valid === false ? 0 : 50) -
+        // The image is squashed by the rows, which are across when horizontal
+        mapData.trimShift.x * (mapData.horizontal ? squashRatio : 1),
       orientation: mapData.horizontal ? "F" : "P",
       xStep: mapData.horizontal ? 87 : 50,
-      yStart: 50,
+      yStart: 50 - mapData.trimShift.y * (mapData.horizontal ? 1 : squashRatio),
       yStep: mapData.horizontal ? 50 : 87,
     };
   }

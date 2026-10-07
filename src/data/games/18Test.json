@@ -1024,6 +1024,7 @@
     "DB801": 1
   },
   "map": {
+    "trim": { "bottom": true, "right": true },
     "borders": [
       {
         "color": "white",
@@ -1145,6 +1146,11 @@
       {
         "color": "plain",
         "hexes": ["C11", "C13", "C15", "C17", "D12", "D14", "D16"]
+      },
+      {
+        "color": "plain",
+        "half": "right",
+        "hexes": ["B10"]
       }
     ]
   }

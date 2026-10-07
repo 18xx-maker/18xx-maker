@@ -133,13 +133,13 @@ test.describe("bundled games", () => {
       "true",
     );
     await expect(editor).toContainText('"C11"');
-    await expect(editor).not.toContainText('"B12"');
+    await expect(editor).not.toContainText('"A11"');
 
     // Cmd on macOS, Ctrl elsewhere moves a hex into the group
     const platform = await page.evaluate(() => navigator.platform);
     const modifier = /Mac/.test(platform) ? "Meta" : "Control";
-    await page.locator('[data-coord="B12"]').click({ modifiers: [modifier] });
-    await expect(editor).toContainText('"B12"');
+    await page.locator('[data-coord="A11"]').click({ modifiers: [modifier] });
+    await expect(editor).toContainText('"A11"');
     await expect(page).toHaveURL(/hex=C11$/);
 
     // Escape lets go of the group, the next one closes the panel

@@ -2649,7 +2649,7 @@ export default {
         {
           path: "board18-18Test-1.0/18Test-1.0/Map.png",
           url: "http://localhost:9000/games/18Test/b18/map?print=true",
-          size: { width: 1000, height: 478 },
+          size: { width: 950, height: 420 },
           omitBackground: false,
         },
         {
