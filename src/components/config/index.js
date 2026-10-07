@@ -595,6 +595,24 @@ export const sections = [
     ],
   },
   {
+    section: "fonts",
+    items: [
+      { note: "gameFonts", gameKey: "fonts" },
+      {
+        fontRole: "body",
+        fields: ["family", "size", "weight", "style"],
+      },
+      {
+        fontRole: "title",
+        fields: ["family", "size", "weight", "style"],
+      },
+      {
+        fontRole: "card",
+        fields: ["family", "weight", "style"],
+      },
+    ],
+  },
+  {
     section: "data",
     items: [{ name: "allowGameConfig", root: true }],
   },

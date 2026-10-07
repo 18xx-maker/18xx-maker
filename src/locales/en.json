@@ -132,6 +132,10 @@
         "tab": "Hex",
         "description": "Edit the picked group of hexes as JSON; click a hex on the map to pick its group."
       },
+      "config": {
+        "tab": "Config",
+        "description": "Edit the config of this game as JSON; it is applied when Allow game config is on."
+      },
       "json": {
         "tab": "JSON",
         "description": "Edit the whole game as JSON; the page follows while the JSON is valid."
@@ -206,7 +210,10 @@
     "invalidLimit": "Enter a whole number of at least 1, ∞, or one digit over one digit, like 3/4.",
     "onePerLine": "One per line. A single line is saved as text, more lines as a list.",
     "reference": {
-      "from": { "trains": "trains", "companies": "companies" },
+      "from": {
+        "trains": "trains",
+        "companies": "companies"
+      },
       "unknown": "Not in the {{collection}} of this game: {{value}}.",
       "noMatches": "No matches. Enter uses \"{{value}}\".",
       "remove": "Remove {{name}}"
@@ -361,11 +368,13 @@
   },
   "jsonEditor": {
     "label": "Game JSON",
+    "configLabel": "Game config JSON",
     "valid": "Valid JSON. The game follows what you type.",
     "syntaxError": "Line {{line}}, column {{column}}: syntax error.",
     "notUpdated": "The game was not updated, the page shows the last valid version.",
     "invalid": {
       "root": "The game must be a JSON object.",
+      "config": "The config must be a JSON object.",
       "group": "The group must be a JSON object.",
       "hexes": "The group needs a list of at least one coordinate in \"hexes\", like \"B2\".",
       "info": "The game needs an \"info\" object.",
@@ -1388,6 +1397,30 @@
       "value": {
         "label": "Value",
         "description": "Values on maps and track tiles"
+      }
+    },
+    "fonts": {
+      "title": "Fonts",
+      "gameFonts": "This game sets fonts in its own config, and they win over the settings here.",
+      "field": "{{role}}: {{field}}",
+      "family": "Family",
+      "size": "Size",
+      "weight": "Weight",
+      "style": "Style",
+      "clear": "Clear {{field}}",
+      "roles": {
+        "body": {
+          "label": "Body font",
+          "description": "The font of all text. Every other font starts from it, and a setting left empty keeps the default of the text."
+        },
+        "card": {
+          "label": "Card font",
+          "description": "The text of the private company cards. A card font has no size."
+        },
+        "title": {
+          "label": "Title font",
+          "description": "The names of cities, towns, off-board areas and free-standing hexes."
+        }
       }
     },
     "data": {

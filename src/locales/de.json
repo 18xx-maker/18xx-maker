@@ -132,6 +132,10 @@
         "tab": "Kartenfeld",
         "description": "Bearbeite die gewählte Gruppe von Kartenfeldern als JSON; klicke auf ein Kartenfeld auf der Karte, um seine Gruppe zu wählen."
       },
+      "config": {
+        "tab": "Konfiguration",
+        "description": "Bearbeite die Konfiguration dieses Spiels als JSON; sie gilt, wenn „Spiel-Konfiguration erlauben“ aktiv ist."
+      },
       "json": {
         "tab": "JSON",
         "description": "Bearbeite das ganze Spiel als JSON; die Seite folgt, solange das JSON gültig ist."
@@ -206,7 +210,10 @@
     "invalidLimit": "Gib eine ganze Zahl ab 1, ∞ oder einen Bruch aus zwei Ziffern wie 3/4 ein.",
     "onePerLine": "Eine pro Zeile. Eine einzelne Zeile wird als Text gespeichert, mehrere als Liste.",
     "reference": {
-      "from": { "trains": "Züge", "companies": "Gesellschaften" },
+      "from": {
+        "trains": "Züge",
+        "companies": "Gesellschaften"
+      },
       "unknown": "Nicht bei den {{collection}} dieses Spiels: {{value}}.",
       "noMatches": "Keine Treffer. Enter übernimmt \"{{value}}\".",
       "remove": "{{name}} entfernen"
@@ -361,11 +368,13 @@
   },
   "jsonEditor": {
     "label": "Spiel-JSON",
+    "configLabel": "Spielkonfiguration als JSON",
     "valid": "Gültiges JSON. Das Spiel folgt deiner Eingabe.",
     "syntaxError": "Zeile {{line}}, Spalte {{column}}: Syntaxfehler.",
     "notUpdated": "Das Spiel wurde nicht aktualisiert, die Seite zeigt die letzte gültige Version.",
     "invalid": {
       "root": "Das Spiel muss ein JSON-Objekt sein.",
+      "config": "Die Konfiguration muss ein JSON-Objekt sein.",
       "group": "Die Gruppe muss ein JSON-Objekt sein.",
       "hexes": "Die Gruppe braucht in \"hexes\" eine Liste mit mindestens einer Koordinate, wie \"B2\".",
       "info": "Das Spiel braucht ein \"info\"-Objekt.",
@@ -1388,6 +1397,30 @@
       "value": {
         "label": "Wert",
         "description": "Werte auf Karten und Streckenplättchen"
+      }
+    },
+    "fonts": {
+      "title": "Schriften",
+      "gameFonts": "Dieses Spiel legt Schriften in seiner eigenen Konfiguration fest, sie haben Vorrang vor den Einstellungen hier.",
+      "field": "{{role}}: {{field}}",
+      "family": "Schriftfamilie",
+      "size": "Größe",
+      "weight": "Stärke",
+      "style": "Stil",
+      "clear": "{{field}} zurücksetzen",
+      "roles": {
+        "body": {
+          "label": "Grundschrift",
+          "description": "Die Schrift des gesamten Textes. Jede andere Schrift geht von ihr aus, eine leere Einstellung behält den Standard des Textes."
+        },
+        "card": {
+          "label": "Kartenschrift",
+          "description": "Der Text der Karten der Privatgesellschaften. Eine Kartenschrift hat keine Größe."
+        },
+        "title": {
+          "label": "Titelschrift",
+          "description": "Die Namen von Städten, Orten, Außenfeldern und frei stehenden Kartenfeldern."
+        }
       }
     },
     "data": {

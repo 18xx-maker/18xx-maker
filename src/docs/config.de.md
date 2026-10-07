@@ -55,14 +55,21 @@ Fenster eine Bezeichnung und eine Beschreibung, daher ist das hier nur ein
 | Privatgesellschaften      | der Stil der Privatgesellschaften                                                                                              |
 | Züge                      | der Stil der Züge und ob sie Bilder zeigen                                                                                     |
 | Währung                   | wie Geld für jede Art von Betrag geschrieben wird                                                                              |
+| Schriften                 | Familie, Größe, Stärke und Stil der Grund-, Titel- und Kartenschrift                                                           |
 | Daten                     | deine Konfiguration zurücksetzen, kopieren, herunterladen und importieren sowie die eigene Konfiguration eines Spiels zulassen |
 
 ## Schriften
 
 Die Einstellung `fonts` legt die Schrift einer Art von Text an einer Stelle
-fest. Sie ist noch kein Bedienelement im Fenster: Lege sie in deiner
-`config.json`, im JSON, das du im Bereich Daten importierst, in
-`?config.fonts...`-Parametern oder in der `config` einer Spieldatei fest.
+fest. Der Abschnitt Schriften setzt Familie, Größe, Stärke und Stil der Rollen
+`body`, `title` und `card` (eine Karte hat keine Größe). Ein leeres Feld ist
+nicht gesetzt und zeigt, worauf es zurückfällt, die Grundschrift; gespeichert
+wird nur, was du setzt. Die anderen Rollen und die Namen in `families` legst du
+in deiner `config.json`, im JSON, das du im Bereich Daten importierst, in
+`?config.fonts...`-Parametern oder in der `config` einer Spieldatei fest (der
+Tab Konfiguration des [Bearbeiten-Panels](/docs/files) bearbeitet diese). Legt
+ein Spiel selbst `fonts` fest und ist _Spiel-Konfiguration erlauben_ aktiv,
+weist der Abschnitt darauf hin: Das Spiel hat Vorrang.
 
 ```json
 {
@@ -103,7 +110,7 @@ fest. Sie ist noch kein Bedienelement im Fenster: Lege sie in deiner
 Ein Abschnitt hat einen Namen in der Adresse, sodass du darauf verlinken
 kannst: `?config=true&section=tokens` öffnet das Fenster bei Token. Die Namen
 sind `colors`, `export`, `layout`, `tokens`, `maps`, `tiles`, `stock`
-(Aktienmarkt), `charters`, `cards`, `privates`, `trains`, `currency` und `data`.
+(Aktienmarkt), `charters`, `cards`, `privates`, `trains`, `currency`, `fonts` und `data`.
 Ein unbekannter Name öffnet Farben und Gesellschaften.
 
 ## Konfiguration speichern und teilen

@@ -48,14 +48,20 @@ and a description in the panel, so this is only an overview.
 | Privates             | the style of the private companies                                                                |
 | Trains               | the style of the trains and whether they show images                                              |
 | Currency             | how money is written for each kind of amount                                                      |
+| Fonts                | the family, size, weight and style of the body, title and card fonts                              |
 | Data                 | reset, copy, download and import your config, and allow a game's own config                       |
 
 ## Fonts
 
-The `fonts` setting gives the font of a kind of text in one place. It is not a
-control in the panel yet: set it in your `config.json`, in the JSON you import
+The `fonts` setting gives the font of a kind of text in one place. The Fonts
+section sets the family, size, weight and style of the `body`, `title` and
+`card` roles (a card has no size). An empty field is not set and shows what it
+falls back to, the body font, and only what you set is stored. The other roles
+and the `families` names are set in your `config.json`, in the JSON you import
 in the Data section, in `?config.fonts...` parameters, or in the `config` of a
-game file.
+game file (the Config tab of the [edit panel](/docs/files)
+edits that one). When a game sets `fonts` itself and _Allow game config_ is on,
+the section says so: the game wins.
 
 ```json
 {
@@ -93,7 +99,7 @@ game file.
 A section has a name in the address, so you can link to it:
 `?config=true&section=tokens` opens the panel on Tokens. The names are `colors`,
 `export`, `layout`, `tokens`, `maps`, `tiles`, `stock` (Market), `charters`,
-`cards`, `privates`, `trains`, `currency` and `data`. An unknown name opens
+`cards`, `privates`, `trains`, `currency`, `fonts` and `data`. An unknown name opens
 Colors and Companies.
 
 ## Saving and sharing your config
