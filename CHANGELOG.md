@@ -1,5 +1,77 @@
 # Changelog
 
+## [1.0.0-beta.132](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.131...v1.0.0-beta.132) (2026-10-07)
+
+
+### :tada: Features
+
+* **cards:** add company groups with identifying marks ([#986](https://github.com/18xx-maker/18xx-maker/issues/986)) ([35066e0](https://github.com/18xx-maker/18xx-maker/commit/35066e02cb65c5f19d6e573ab7866d9776b7c0a5))
+* **cards:** add double-sided train cards ([#988](https://github.com/18xx-maker/18xx-maker/issues/988)) ([954732c](https://github.com/18xx-maker/18xx-maker/commit/954732c0c9c9bb15ecc7c9ff1ef92463cbd6a736))
+* **cards:** add icon size to privates ([#920](https://github.com/18xx-maker/18xx-maker/issues/920)) ([3582b7c](https://github.com/18xx-maker/18xx-maker/commit/3582b7c3234349268cdba577f913e3763b2b7703))
+* **charter:** add banner to mark special charters ([#932](https://github.com/18xx-maker/18xx-maker/issues/932)) ([080005a](https://github.com/18xx-maker/18xx-maker/commit/080005a9caf682597a322744bec53a1f144ca733))
+* **charter:** add charter subtitle line ([#936](https://github.com/18xx-maker/18xx-maker/issues/936)) ([6fe95bd](https://github.com/18xx-maker/18xx-maker/commit/6fe95bd4ab6d012a7af58fbc55b2210ec9921e70))
+* **config:** add company alias and company names option ([#928](https://github.com/18xx-maker/18xx-maker/issues/928)) ([89befda](https://github.com/18xx-maker/18xx-maker/commit/89befda78f241ab6e1d70ced62920ab38db55d13))
+* **config:** add print scale and die card sizes ([#913](https://github.com/18xx-maker/18xx-maker/issues/913)) ([9576357](https://github.com/18xx-maker/18xx-maker/commit/9576357f251a8fda30eb6d7b4f1a792587b9fa55))
+* **data:** add 18xx maker publisher ([#907](https://github.com/18xx-maker/18xx-maker/issues/907)) ([8e3b688](https://github.com/18xx-maker/18xx-maker/commit/8e3b6882437cdfad48dc68134a98d258f7827f51))
+* **map:** add half hexes and map trim ([#994](https://github.com/18xx-maker/18xx-maker/issues/994)) ([8a134cf](https://github.com/18xx-maker/18xx-maker/commit/8a134cfa6c0f9e108d216ce7a367c2b8864b9f49))
+* **market:** print the stock movement legend ([#911](https://github.com/18xx-maker/18xx-maker/issues/911)) ([6aac859](https://github.com/18xx-maker/18xx-maker/commit/6aac8597a3d93ccd6aee743a674d7607b7c44b45))
+* **schemas:** localize schema descriptions ([#993](https://github.com/18xx-maker/18xx-maker/issues/993)) ([07a003e](https://github.com/18xx-maker/18xx-maker/commit/07a003e0696358e997eaf2307037f3732ea05749))
+* **tiles:** add named mid positions and align ([#919](https://github.com/18xx-maker/18xx-maker/issues/919)) ([a63f874](https://github.com/18xx-maker/18xx-maker/commit/a63f874dcc9b6f795328dc94718f07a14ee96d96))
+* **trains:** add format strings for train and private values ([#912](https://github.com/18xx-maker/18xx-maker/issues/912)) ([81a150e](https://github.com/18xx-maker/18xx-maker/commit/81a150e763b85e52432905dd4eae7aee81746f1f))
+* **ui:** add a colors tab to the edit panel ([#969](https://github.com/18xx-maker/18xx-maker/issues/969)) ([7e0457d](https://github.com/18xx-maker/18xx-maker/commit/7e0457dbffbed9a91180aaf95684c2f515a49151))
+* **ui:** add a companies tab to the edit panel ([#946](https://github.com/18xx-maker/18xx-maker/issues/946)) ([2f57848](https://github.com/18xx-maker/18xx-maker/commit/2f57848d71e7ef2293eedbed5df06742773a0cdf))
+* **ui:** add a hex editor to the map ([#975](https://github.com/18xx-maker/18xx-maker/issues/975)) ([c00b30a](https://github.com/18xx-maker/18xx-maker/commit/c00b30afc69d39482ad72766f36634c15dc20d6a))
+* **ui:** add a json editor to the edit panel ([#930](https://github.com/18xx-maker/18xx-maker/issues/930)) ([9bbd08a](https://github.com/18xx-maker/18xx-maker/commit/9bbd08a3e8fe83b3eeebee77c1cd9785f71d875d))
+* **ui:** add a market section to the edit panel ([#931](https://github.com/18xx-maker/18xx-maker/issues/931)) ([5987089](https://github.com/18xx-maker/18xx-maker/commit/5987089c7a00b22dd6488d800b6d16df88d1ee55))
+* **ui:** add a new game button to load games ([#982](https://github.com/18xx-maker/18xx-maker/issues/982)) ([98d9c19](https://github.com/18xx-maker/18xx-maker/commit/98d9c1914769a61a1b55982386d8960c37562fc3))
+* **ui:** add a phases tab to the edit panel ([#943](https://github.com/18xx-maker/18xx-maker/issues/943)) ([0f99697](https://github.com/18xx-maker/18xx-maker/commit/0f99697d101427f5cb5e8f8c1a8dcb6f3f6f10c0))
+* **ui:** add a players tab to the edit panel ([#948](https://github.com/18xx-maker/18xx-maker/issues/948)) ([9e32e24](https://github.com/18xx-maker/18xx-maker/commit/9e32e245441c3c5f761d8beee72ddbd5f551729c))
+* **ui:** add a privates tab to the edit panel ([#938](https://github.com/18xx-maker/18xx-maker/issues/938)) ([1ae89b3](https://github.com/18xx-maker/18xx-maker/commit/1ae89b3ef512113cf8e67472817d380be5538ecf))
+* **ui:** add a rounds tab to the edit panel ([#961](https://github.com/18xx-maker/18xx-maker/issues/961)) ([bc76a66](https://github.com/18xx-maker/18xx-maker/commit/bc76a66a8c0e01de40cccf6f63bcd0a9cdd51fd0))
+* **ui:** add a token editor dialog ([#974](https://github.com/18xx-maker/18xx-maker/issues/974)) ([e7114bc](https://github.com/18xx-maker/18xx-maker/commit/e7114bc44e78456a4c9f21120e14f35c6d7670a2))
+* **ui:** add a tokens tab to the edit panel ([#966](https://github.com/18xx-maker/18xx-maker/issues/966)) ([03f0ce1](https://github.com/18xx-maker/18xx-maker/commit/03f0ce106442a13b428a80481acd25928b3d8979))
+* **ui:** add a trains section to the edit panel ([#926](https://github.com/18xx-maker/18xx-maker/issues/926)) ([dd3696b](https://github.com/18xx-maker/18xx-maker/commit/dd3696befb15da24bedb77c82441e85d01ee6a60))
+* **ui:** add an edit panel for the game info ([#908](https://github.com/18xx-maker/18xx-maker/issues/908)) ([1ffab90](https://github.com/18xx-maker/18xx-maker/commit/1ffab90d9a1be500701cb42df66d727c8a754dae))
+* **ui:** add an output tab to the edit panel ([#972](https://github.com/18xx-maker/18xx-maker/issues/972)) ([ccf7ae2](https://github.com/18xx-maker/18xx-maker/commit/ccf7ae28b41f38ef9f9a86446e2aea0d7fc26fac))
+* **ui:** add emacs and vim key modes to the json editor ([#964](https://github.com/18xx-maker/18xx-maker/issues/964)) ([1c4cf58](https://github.com/18xx-maker/18xx-maker/commit/1c4cf58d56aa9f640792bdd48a53bd9afdf1efb9))
+* **ui:** add next problem button to the json editor ([#950](https://github.com/18xx-maker/18xx-maker/issues/950)) ([1145bfc](https://github.com/18xx-maker/18xx-maker/commit/1145bfcd1bdad2f00ac4ef8c0ffb24f519d99560))
+* **ui:** add record, string list and enum list fields to the form engine ([#957](https://github.com/18xx-maker/18xx-maker/issues/957)) ([274e485](https://github.com/18xx-maker/18xx-maker/commit/274e4856f8d20e974875dd441483e44cd34fffb5))
+* **ui:** add reference pickers to the edit panel ([#960](https://github.com/18xx-maker/18xx-maker/issues/960)) ([1baf4cb](https://github.com/18xx-maker/18xx-maker/commit/1baf4cbb694c7505fb4c5959a576a337231833cc))
+* **ui:** add save as for bundled games ([#985](https://github.com/18xx-maker/18xx-maker/issues/985)) ([0ec06e5](https://github.com/18xx-maker/18xx-maker/commit/0ec06e5db5017c39f5fbb662b2ba4098e974086e))
+* **ui:** group edit panel sections and pin a json switch ([#979](https://github.com/18xx-maker/18xx-maker/issues/979)) ([43260c2](https://github.com/18xx-maker/18xx-maker/commit/43260c291c2f8f3da4041de92d536b770e673027))
+* **ui:** link problems to the json editor line ([#942](https://github.com/18xx-maker/18xx-maker/issues/942)) ([3793d0c](https://github.com/18xx-maker/18xx-maker/commit/3793d0cee1ae189dac631b37cbb54b779b3cbec6))
+* **ui:** open the json editor with j on any page ([#941](https://github.com/18xx-maker/18xx-maker/issues/941)) ([e5aac16](https://github.com/18xx-maker/18xx-maker/commit/e5aac16d0e4f6e07246440114683eb5722036bc2))
+* **ui:** reorder edit tabs and put export above download ([#978](https://github.com/18xx-maker/18xx-maker/issues/978)) ([831964e](https://github.com/18xx-maker/18xx-maker/commit/831964e7df0cd684d0a93ffbc44e7adec9e2303e))
+* **ui:** select lines of the json editor with a link ([#940](https://github.com/18xx-maker/18xx-maker/issues/940)) ([a9e70a5](https://github.com/18xx-maker/18xx-maker/commit/a9e70a533274b9e78296ee7ee7f58f6f485da13b))
+* **ui:** show move directions while a hex group is selected ([#981](https://github.com/18xx-maker/18xx-maker/issues/981)) ([75a9aba](https://github.com/18xx-maker/18xx-maker/commit/75a9abadce3fffd77f676ec0de9cf9edfb3ad09f))
+* **ui:** trim edit panel chrome ([#1001](https://github.com/18xx-maker/18xx-maker/issues/1001)) ([2cde730](https://github.com/18xx-maker/18xx-maker/commit/2cde730934577de30002d7db806aafd0b1baabbe))
+
+
+### :bug: Bug Fixes
+
+* harden electron, export and storage code and remove dead code ([#987](https://github.com/18xx-maker/18xx-maker/issues/987)) ([3595d7a](https://github.com/18xx-maker/18xx-maker/commit/3595d7a1daab80a50a957a797aac705f34bf4b27))
+* **ui:** keep a left gutter for heading anchors in docs ([#962](https://github.com/18xx-maker/18xx-maker/issues/962)) ([0f61955](https://github.com/18xx-maker/18xx-maker/commit/0f619552e6d0824b9206b8d87b0d0450c4aff7af))
+* **ui:** keep config and edit panes open when switching sections ([#965](https://github.com/18xx-maker/18xx-maker/issues/965)) ([025464b](https://github.com/18xx-maker/18xx-maker/commit/025464b96ba7e29a26143706599331dbbde1dc06))
+* **ui:** use the body font for element descriptions ([#925](https://github.com/18xx-maker/18xx-maker/issues/925)) ([9993ca1](https://github.com/18xx-maker/18xx-maker/commit/9993ca14ee887341f73c417dca7ba0fb4ae933e0))
+* **ui:** validate the restored game at startup ([#947](https://github.com/18xx-maker/18xx-maker/issues/947)) ([565c951](https://github.com/18xx-maker/18xx-maker/commit/565c951d11393b9bdb46094b9f601e0cdc3b8746))
+
+
+### :book: Documentation
+
+* add missing documentation pages ([#958](https://github.com/18xx-maker/18xx-maker/issues/958)) ([fdfd006](https://github.com/18xx-maker/18xx-maker/commit/fdfd006d222a8ff0cab84d6e47dd268634becfe4))
+* rewrite the positioning docs and examples page in teaching order ([#929](https://github.com/18xx-maker/18xx-maker/issues/929)) ([9700347](https://github.com/18xx-maker/18xx-maker/commit/9700347a5db9892e4855b28da8e30ecde4ebf5ca))
+
+
+### :hammer_and_wrench: Code Refactoring
+
+* **ui:** split root.css into topic files ([#927](https://github.com/18xx-maker/18xx-maker/issues/927)) ([764290d](https://github.com/18xx-maker/18xx-maker/commit/764290d1fcb688e5cdbfe14ee344842e23d9aca7))
+* **ui:** split SchemaField into per-kind files ([#1000](https://github.com/18xx-maker/18xx-maker/issues/1000)) ([4bd9f83](https://github.com/18xx-maker/18xx-maker/commit/4bd9f83d39bd80b37ed133d0d0e63263299f4c2a))
+
+
+### :traffic_light: Tests
+
+* **edit:** fix flaky edit panel tests ([#984](https://github.com/18xx-maker/18xx-maker/issues/984)) ([144217e](https://github.com/18xx-maker/18xx-maker/commit/144217e8ea552ae140de82c0b5d66f3b7f142894))
+
 ## [1.0.0-beta.131](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.130...v1.0.0-beta.131) (2026-10-05)
 
 
