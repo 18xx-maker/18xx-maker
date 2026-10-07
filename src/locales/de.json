@@ -1243,6 +1243,11 @@
         "label": "Pins im freien Layout anzeigen",
         "description": "Zeichnet die Pin-Markierungen auch in freien Layouts. Feste Die-Layouts zeichnen sie immer. Freie Layouts reservieren keinen Platz für Pins, verschiebe daher die Pins oder passe die Ränder an, damit sie nicht über Inhalten liegen."
       },
+      "duplex": {
+        "label": "Rückseiten der Zugkarten drucken",
+        "description": "Druckt die Rückseiten von Zugkarten, die in der Spieldatei eine Rückseite haben. Off druckt keine Rückseiten, separate druckt erst alle Vorderseiten und dann alle Rückseiten in derselben Reihenfolge (zum Wenden der Blätter von Hand), long druckt nach jedem Blatt mit Vorderseiten ein Blatt mit Rückseiten für einen Drucker im Duplexmodus, Wenden an der langen Kante. Benötigt das freie Kartenlayout und druckt auf Hochformatseiten."
+      },
+      "duplexDieNote": "**Doppelseitige Karten benötigen das freie Layout.** Die Stanzlayouts ignorieren die Duplex-Option, wähle das freie Layout, um die Rückseiten von Zugkarten zu drucken.",
       "sizes": "**Breite, Höhe, Schnittlinien, Beschnitt, Innenabstand und DTG-Innenabstand** sind in der von dir gewählten Einheit angegeben. Schnittlinien sind die Schnittmarken um jede Karte, der Beschnitt gibt an, wie weit die Kartenfarbe über die Schnittkante hinausreicht, der Innenabstand hält Text und Symbole vom Kartenrand fern, und der DTG-Innenabstand gilt nur für das DTG-Stanzlayout. Änderungen werden übernommen, wenn du das Feld verlässt oder die Eingabetaste drückst.",
       "typeSizes": {
         "private": {

@@ -516,6 +516,14 @@ export const sections = [
         name: "showPins",
       },
       {
+        name: "duplex",
+        fallback: "off",
+      },
+      {
+        note: "duplexDieNote",
+        dieOnly: true,
+      },
+      {
         pins: true,
       },
     ],

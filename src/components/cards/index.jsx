@@ -5,12 +5,18 @@ import Number from "@/components/cards/Number";
 import Private from "@/components/cards/Private";
 import Share from "@/components/cards/Share";
 import Train from "@/components/cards/Train";
+import TrainBack from "@/components/cards/TrainBack";
 import PageSetup from "@/components/page/PageSetup";
 import Svg from "@/components/svg/Svg";
 
 import { useConfig, useGame } from "@/hooks";
 import { fillArray, maxPlayers, unitsToCss } from "@/util";
-import { getCardData, resolveCardLayout } from "@/util/cards";
+import {
+  duplexMode,
+  duplexPages,
+  getCardData,
+  resolveCardLayout,
+} from "@/util/cards";
 import {
   compileCompanies,
   overrideCompanies,
@@ -86,6 +92,14 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     ),
     trains,
   );
+  // The back of every train card, null for a train without one
+  let trainBackNodes = addIndex(map)(
+    (train, index) =>
+      train.back ? (
+        <TrainBack train={train} key={`train-back-${train.name}-${index}`} />
+      ) : null,
+    trains,
+  );
   let numberColors = game.number_cards || [game.info.background];
   let numberNodes = addIndex(map)(
     (color, ci) =>
@@ -114,22 +128,35 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
   const types = [
     ["private", privateNodes],
     ["share", shareNodes],
-    ["train", trainNodes],
+    ["train", trainNodes, trainBackNodes],
     ["number", hideNumbers || !numbers.length ? [] : unnest(numberNodes)],
   ].filter(([, nodes]) => nodes.length);
 
+  // Backs are printed when asked for and some train has one. The sheets of
+  // backs are flipped on their long edge, which needs portrait pages.
+  const duplex = trainBackNodes.some(Boolean)
+    ? duplexMode(config.cards)
+    : "off";
+
   // Types of the same size share pages, in the order each size first appears
-  const groups = types.reduce((groups, [type, nodes]) => {
+  const groups = types.reduce((groups, [type, nodes, backs]) => {
     const layout = layoutFor(type);
-    const data = getCardData(layout.cards, layout.paper);
+    const data = getCardData(
+      layout.cards,
+      layout.paper,
+      duplex === "off" ? undefined : "portrait",
+    );
+    // The back of every card of the group, in the same order as the cards
+    const groupBacks = backs || nodes.map(() => null);
     const same = groups.find(
       (group) =>
         group.data.width === data.width && group.data.height === data.height,
     );
     if (same) {
       same.nodes = [...same.nodes, ...nodes];
+      same.backs = [...same.backs, ...groupBacks];
     } else {
-      groups.push({ type, layout, data, nodes });
+      groups.push({ type, layout, data, nodes, backs: groupBacks });
     }
     return groups;
   }, []);
@@ -150,30 +177,58 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
     );
   }
 
-  const pagesFor = (data, nodes, keyPrefix, className) =>
-    addIndex(map)(
-      (cardNodes, i) => (
-        <div
-          className={`cards cards--${config.cards.layout}${className}`}
-          key={`${keyPrefix}${i}`}
-          style={{
-            width: data.css.printableWidth,
-            height: data.css.printableHeight,
-            ...(data.layout.perPage === 1
-              ? {
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "safe center",
-                }
-              : {}),
-          }}
-        >
-          {cardNodes}
-          {pins}
-        </div>
-      ),
-      splitEvery(data.layout.perPage, nodes),
+  const pageFor = (data, slots, key, className) => (
+    <div
+      className={`cards cards--${config.cards.layout}${className}`}
+      key={key}
+      style={{
+        width: data.css.printableWidth,
+        height: data.css.printableHeight,
+        ...(data.layout.perPage === 1
+          ? {
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "safe center",
+            }
+          : {}),
+      }}
+    >
+      {slots}
+      {pins}
+    </div>
+  );
+
+  // The slot of a card without a back: the size of a card, nothing drawn
+  const blank = (key) => (
+    <div className="cutlines cutlines--blank" key={key}>
+      <div className="card card--blank" />
+    </div>
+  );
+
+  const pagesFor = (data, nodes, keyPrefix, className, backs) => {
+    if (duplex === "off") {
+      return addIndex(map)(
+        (cardNodes, i) =>
+          pageFor(data, cardNodes, `${keyPrefix}${i}`, className),
+        splitEvery(data.layout.perPage, nodes),
+      );
+    }
+
+    return duplexPages(nodes, backs, {
+      perPage: data.layout.perPage,
+      perRow: data.layout.perRow,
+      mode: duplex,
+    }).map(({ index, slots, back }) =>
+      back
+        ? pageFor(
+            data,
+            slots.map((slot, i) => slot || blank(`blank-${i}`)),
+            `${keyPrefix}${index}-back`,
+            `${className} cards--back`,
+          )
+        : pageFor(data, slots, `${keyPrefix}${index}`, className),
     );
+  };
 
   let pageNodes;
   if (grouped) {
@@ -196,11 +251,24 @@ const Cards = ({ hidePrivates, hideShares, hideTrains, hideNumbers }) => {
           group.nodes,
           `cards-group-${i}-page-`,
           ` cards-group-${i}`,
+          group.backs,
         ),
       groups,
     );
   } else {
-    pageNodes = pagesFor(data, cardNodes, "cards-page-", "");
+    pageNodes = pagesFor(
+      data,
+      cardNodes,
+      "cards-page-",
+      "",
+      // The back of every card of cardNodes, the numbers have none
+      [
+        ...privateNodes.map(() => null),
+        ...shareNodes.map(() => null),
+        ...trainBackNodes,
+        ...numberNodes.map(() => null),
+      ],
+    );
   }
 
   // The rules that depend on the size of the card. Each size group scopes them

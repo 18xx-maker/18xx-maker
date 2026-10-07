@@ -175,3 +175,26 @@
   padding-top: 0.2em;
   white-space: nowrap;
 }
+
+.train-back__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125in;
+  padding: var(--card-padding);
+  text-align: center;
+  overflow: hidden;
+}
+
+.train-back__title {
+  font-size: 0.5in;
+  font-weight: bold;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.train-back__text {
+  font-size: 0.1875in;
+  line-height: 1.1;
+}

@@ -72,3 +72,26 @@
 .charter--banner .charter__variant {
   bottom: var(--banner-h);
 }
+
+/* The empty slots of a page of backs: the size of a card, nothing drawn */
+.cutlines--blank::before,
+.cutlines--blank::after,
+.cutlines--blank > div::before,
+.cutlines--blank > div::after {
+  display: none;
+}
+
+.card--blank {
+  background-color: transparent;
+}
+
+/* The pins of a page of backs are on the other side, behind the front pins */
+.cards--back > svg {
+  left: 0;
+  right: auto;
+}
+
+.cards--miniEuroDie.cards--back > svg {
+  left: 0.21506in;
+  right: auto;
+}

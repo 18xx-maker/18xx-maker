@@ -1243,6 +1243,11 @@
         "label": "Show Pins on Free Layout",
         "description": "Draws the pin markers on free layouts too. Fixed die layouts always draw them. Free layouts reserve no space for pins, so move the pins or adjust margins to keep them clear of content."
       },
+      "duplex": {
+        "label": "Print Train Card Backs",
+        "description": "Prints the backs of train cards that have a back in the game file. Off prints no backs, separate prints all the fronts and then all the backs in the same order (for flipping the sheets by hand), long prints a sheet of backs after every sheet of fronts for a printer set to double-sided, flip on the long edge. Needs the free cards layout and prints on portrait pages."
+      },
+      "duplexDieNote": "**Double-sided cards need the free layout.** The die layouts ignore the duplex option, pick the free layout to print the backs of train cards.",
       "sizes": "**Width, height, cutlines, bleed, padding and DTG padding** are in the units you choose. Cutlines are the cut marks drawn around each card, bleed is how far the card color extends past the cut edge, padding keeps text and icons away from the card edge, and DTG padding only applies to the DTG die layout. Edits apply when you leave a field or press Enter.",
       "typeSizes": {
         "private": {
