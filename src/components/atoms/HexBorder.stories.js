@@ -10,6 +10,7 @@ export default {
   args: {
     border: true,
     removeBorders: [],
+    halves: [],
   },
   argTypes: {
     border: { control: "boolean" },
@@ -17,6 +18,10 @@ export default {
     removeBorders: {
       control: { type: "check" },
       options: [1, 2, 3, 4, 5, 6],
+    },
+    halves: {
+      control: { type: "check" },
+      options: ["top", "bottom", "left", "right"],
     },
   },
 };
@@ -29,4 +34,12 @@ export const RemovedSides = {
 
 export const NoBorder = {
   args: { border: false },
+};
+
+export const TopHalf = {
+  args: { halves: ["top"] },
+};
+
+export const LeftHalf = {
+  args: { halves: ["left"] },
 };

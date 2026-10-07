@@ -65,6 +65,18 @@
 
 除了 `hexes`,地图还接受绘制在其上的各项内容的设置:`borders`、`borderTexts` 和 `lines`(参见[地图边界与线条](/docs/games/borders))、`roundTracker`、`movement`、`market` 和 `players`。这些是地图上不属于六边格的部分,详情见模式。
 
+### 半个六边格
+
+地图六边格的 `half` 设为 `top`、`bottom`、`left` 或 `right` 时,只绘制那一半,从中心切开,被绘制的部分四周有边界(切口本身没有)。方向是页面的方向。尖角朝上的地图上,`top` 和 `bottom` 从两条边的中点切过,`left` 和 `right` 从角到角;`"orientation": "horizontal"` 的地图则相反。只有六边格本身被切开:画在边缘之外的内容,如它的编号、名称或路线奖励,不会被切。地块会忽略 `half`。
+
+```json
+{
+  "map": {
+    "hexes": [{ "color": "plain", "half": "left", "hexes": ["A1"] }]
+  }
+}
+```
+
 ## 一张或多张地图
 
 `map` 可以是一个对象,也可以是对象列表,用于有多张地图或地图变体的游戏。列表从 0 开始编号,工具栏中的地图选择器决定显示哪一张。每一项可以有:
@@ -99,30 +111,31 @@
 
 六边格上的这些字段会在其上绘制内容。每一个都接受一个列表。它们可以用同样的方式[定位](/docs/games/positioning)(使用 `angle`、`percent`、`mid`、`side` 等),默认情况下 18xx Maker 会替您放置。六边格边缘的边界和地图的边界参见[地图边界与线条](/docs/games/borders)。[基础元素](/elements/atoms)页面为每一种都绘制了示例。
 
-| 元素                                    | 绘制的内容                                                     |
-| --------------------------------------- | -------------------------------------------------------------- |
-| `track`                                 | 六边格各边之间的轨道:`sharp`、`gentle`、`straight` 等,轨距可选 |
-| `cities`                                | 城市,带有大小,以及以它为主场的公司                             |
-| `towns`                                 | 小镇(小圆点)                                                   |
-| `centerTowns`                           | 一段轨道中间的小镇                                             |
-| `mediumCities`                          | 大小介于小镇和城市之间的城市                                   |
-| `boomtowns`                             | 繁荣镇                                                         |
-| `offBoardRevenue`                       | 图外六边格的收益框,每个阶段一个数值                            |
-| `values`                                | 一个数字,例如城市的收益                                        |
-| `names`                                 | 地名                                                           |
-| `labels`                                | 一个字母或简短文字,如 `NY`                                     |
-| `icons`                                 | 来自 `src/data/icons` 的图标                                   |
-| `shapes`                                | 简单的形状,可带文字                                            |
-| `terrain`                               | 山脉或水域等地形,带有费用                                      |
-| `bridges`、`tunnels`、`tunnelEntrances` | 桥梁或隧道的费用,以及隧道的入口                                |
-| `borders`                               | 六边格某一边上的彩色边界                                       |
-| `removeBorders`                         | 去掉六边格所列各边上绘制的边界                                 |
-| `divides`                               | 把六边格分开的一条线                                           |
-| `companies`                             | 六边格上的公司标签,例如公司的主场                              |
-| `tokens`                                | 放在六边格上的标记                                             |
-| `goods`                                 | 货物标记                                                       |
-| `industries`                            | 带有上下两个数值的产业标记                                     |
-| `routeBonuses`                          | 路线奖励数值                                                   |
+| 元素                                    | 绘制的内容                                                                 |
+| --------------------------------------- | -------------------------------------------------------------------------- |
+| `track`                                 | 六边格各边之间的轨道:`sharp`、`gentle`、`straight` 等,轨距可选             |
+| `cities`                                | 城市,带有大小,以及以它为主场的公司                                         |
+| `towns`                                 | 小镇(小圆点)                                                               |
+| `centerTowns`                           | 一段轨道中间的小镇                                                         |
+| `mediumCities`                          | 大小介于小镇和城市之间的城市                                               |
+| `boomtowns`                             | 繁荣镇                                                                     |
+| `offBoardRevenue`                       | 图外六边格的收益框,每个阶段一个数值                                        |
+| `values`                                | 一个数字,例如城市的收益                                                    |
+| `names`                                 | 地名                                                                       |
+| `labels`                                | 一个字母或简短文字,如 `NY`                                                 |
+| `icons`                                 | 来自 `src/data/icons` 的图标                                               |
+| `shapes`                                | 简单的形状,可带文字                                                        |
+| `terrain`                               | 山脉或水域等地形,带有费用                                                  |
+| `bridges`、`tunnels`、`tunnelEntrances` | 桥梁或隧道的费用,以及隧道的入口                                            |
+| `borders`                               | 六边格某一边上的彩色边界                                                   |
+| `removeBorders`                         | 去掉六边格所列各边上绘制的边界                                             |
+| `half`                                  | 只绘制地图六边格的上半(`top`)、下半(`bottom`)、左半(`left`)或右半(`right`) |
+| `divides`                               | 把六边格分开的一条线                                                       |
+| `companies`                             | 六边格上的公司标签,例如公司的主场                                          |
+| `tokens`                                | 放在六边格上的标记                                                         |
+| `goods`                                 | 货物标记                                                                   |
+| `industries`                            | 带有上下两个数值的产业标记                                                 |
+| `routeBonuses`                          | 路线奖励数值                                                               |
 
 表中描述不够清楚的字段,在模式中都有说明,每个字段在那里都有描述。
 

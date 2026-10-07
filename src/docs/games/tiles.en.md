@@ -88,6 +88,24 @@ Besides `hexes` the map takes the settings of the things drawn over it:
 `roundTracker`, `movement`, `market` and `players`. These are the parts of the
 map that are not hexes, see the schema for each.
 
+### Half Hexes
+
+A map hex with `half` set to `top`, `bottom`, `left` or `right` draws only that
+half, cut through its center, with a border around the part that is drawn (the
+cut itself gets none). The directions are those of the page. On a map with
+pointy hexes `top` and `bottom` cut through the middle of two sides, `left` and
+`right` from corner to corner; on a map with `"orientation": "horizontal"` it
+is the other way round. Only the hex is cut: things drawn past its edge, like
+its id, a name or a route bonus, are not. Tiles ignore `half`.
+
+```json
+{
+  "map": {
+    "hexes": [{ "color": "plain", "half": "left", "hexes": ["A1"] }]
+  }
+}
+```
+
 ## One Map or Many
 
 `map` can be one object, or a list of objects for a game with several maps or
@@ -151,6 +169,7 @@ at the edges of hexes and the borders of the map are in
 | `bridges`, `tunnels`, `tunnelEntrances` | The cost of a bridge or tunnel, and where a tunnel enters                                         |
 | `borders`                               | A colored border on a side of the hex                                                             |
 | `removeBorders`                         | Removes the border drawn on the listed sides of the hex                                           |
+| `half`                                  | Draws only the `top`, `bottom`, `left` or `right` half of a hex of the map                        |
 | `divides`                               | A line that divides the hex                                                                       |
 | `companies`                             | A company label on the hex, such as the home of a company                                         |
 | `tokens`                                | A token placed on the hex                                                                         |

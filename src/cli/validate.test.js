@@ -439,6 +439,29 @@ describe("validate", () => {
     });
   });
 
+  describe("half hexes", () => {
+    const withMap = (map) =>
+      writeTmp("game.json", JSON.stringify({ info: { title: "Game" }, map }));
+
+    it.each(["top", "bottom", "left", "right"])(
+      "accepts the %s half",
+      (half) => {
+        expect(
+          run(withMap({ hexes: [{ color: "plain", half, hexes: ["A1"] }] }))
+            .code,
+        ).toBe(0);
+      },
+    );
+
+    it("rejects an unknown half", () => {
+      const { code, lines } = run(
+        withMap({ hexes: [{ half: "middle", hexes: ["A1"] }] }),
+      );
+      expect(code).toBe(1);
+      expect(lines.find((l) => l.includes("half"))).toMatch(/one of/i);
+    });
+  });
+
   describe("the draw order of a tile element", () => {
     const withHex = (hex) =>
       writeTmp(

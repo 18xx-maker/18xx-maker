@@ -99,7 +99,18 @@ const makeBorder = (track) => (
   </Position>
 );
 
-const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
+// halves: more halves of the hex to keep, on top of hex.half. The map passes the
+// ones its trimmed edges leave.
+const HexTile = ({
+  hex,
+  id,
+  clipPath,
+  border,
+  transparent,
+  map,
+  opacity,
+  halves: extraHalves,
+}) => {
   const rotation = useOrientation();
   const { config } = useConfig();
   const seamId = useId();
@@ -345,15 +356,19 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
   );
 
   // A removed border leaves a gap between the clipped fills of two hexes, so
-  // clip that side to the true edge plus overlap instead
-  const seamClip = !clipPath && hex.removeBorders?.length > 0;
+  // clip that side to the true edge plus overlap instead. A half is clipped the
+  // same way. A clipPath of the caller wins over both, so a hex that gets one is
+  // drawn whole
+  const halves = [hex.half, ...(extraHalves || [])].filter(Boolean);
+  const seamClip =
+    !clipPath && (hex.removeBorders?.length > 0 || halves.length > 0);
   const clipId = seamClip ? `hexSeamClip${seamId.replace(/:/g, "")}` : clipPath;
 
   return (
     <g>
       {seamClip && (
         <clipPath id={clipId}>
-          <polygon points={hexClip(hex.removeBorders)} />
+          <polygon points={hexClip(hex.removeBorders, halves, rotation)} />
         </clipPath>
       )}
       <PhaseContext.Provider value={hex.color || "plain"}>
@@ -402,6 +417,7 @@ const HexTile = ({ hex, id, clipPath, border, transparent, map, opacity }) => {
             removeBorders={hex.removeBorders}
             border={border}
             map={map}
+            halves={clipPath ? [] : halves}
           />
           {outsideCityBorders}
 
