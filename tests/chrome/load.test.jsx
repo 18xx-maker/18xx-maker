@@ -315,6 +315,14 @@ describe("load games page", () => {
     });
   });
 
+  it("does not offer forgetting an internal game, its only copy", async () => {
+    renderApp("/games/");
+    await screen.findByRole("link", { name: "Saved Game" });
+    expect(
+      screen.queryByRole("button", { name: "Forget" }),
+    ).not.toBeInTheDocument();
+  });
+
   it("links each game to its info page and marks its type", async () => {
     renderApp("/games/");
     const saved = await screen.findByRole("link", { name: "Saved Game" });

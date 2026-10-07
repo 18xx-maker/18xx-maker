@@ -83,13 +83,12 @@ const writeInWorker = (filename, buffer) =>
           const dir = await root.getDirectoryHandle("games", { create: true });
           // Write a temp file (not .json, so never listed) and move it over
           // the game: a failed write never leaves half a game. Without
-          // move() write in place.
+          // move(), or when it fails, write in place.
           const atomic =
             typeof FileSystemFileHandle !== "undefined" &&
             typeof FileSystemFileHandle.prototype.move === "function";
           const target = atomic ? filename + ".tmp" : filename;
-          const handle = await dir.getFileHandle(target, { create: true });
-          try {
+          const writeTo = async (handle) => {
             const access = await handle.createSyncAccessHandle();
             try {
               access.truncate(0);
@@ -98,7 +97,19 @@ const writeInWorker = (filename, buffer) =>
             } finally {
               access.close();
             }
-            if (atomic) await handle.move(dir, filename);
+          };
+          const handle = await dir.getFileHandle(target, { create: true });
+          try {
+            await writeTo(handle);
+            if (atomic) {
+              try {
+                await handle.move(dir, filename);
+              } catch {
+                // The game is untouched by a move that failed
+                await writeTo(await dir.getFileHandle(filename, { create: true }));
+                await dir.removeEntry(target).catch(() => {});
+              }
+            }
           } catch (e) {
             if (atomic) await dir.removeEntry(target).catch(() => {});
             throw e;

@@ -152,6 +152,8 @@ test("creates a new game, opens it on the map, lists it and forgets it (input fl
   }
 
   await page.goto("/games/");
-  await expect(page.getByRole("link", { name: "New Game" })).toBeVisible();
+  await expect(
+    page.getByTestId("games").getByRole("link", { name: "New Game" }),
+  ).toBeVisible();
   await forget(page, url);
 });

@@ -64,8 +64,9 @@ const GameRow = ({ game }) => {
           </div>
         )}
         <GameType type={game.type} className="mt-2" />
-        {/* A game that can not be loaded can not open its page to forget it */}
-        {game.type !== "bundled" && (
+        {/* A game that can not be loaded can not open its page to forget it.
+            An internal game is the only copy, so it is only deleted from its page */}
+        {(game.type === "electron" || game.type === "system") && (
           <Button
             variant="outline"
             size="sm"

@@ -170,7 +170,7 @@ ipcMain.handle(
   "saveGame",
   createSaveGame({
     isMain,
-    summaryOf: (id) => getConfig().summaries[id],
+    summaryOf: getSummary,
     afterSave: (id) => watch(id),
   }),
 );

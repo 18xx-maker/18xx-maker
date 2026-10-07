@@ -112,7 +112,7 @@ describe("updateConfig", () => {
     expect(fs.readdirSync(dir)).toEqual(["config.json"]);
   });
 
-  it("removes its temporary file when the write fails", async () => {
+  it("keeps the config as it is when the temporary write fails", async () => {
     const config = await load(EMPTY);
     const write = fs.writeFileSync;
     vi.spyOn(fs, "writeFileSync").mockImplementation((target, ...rest) => {
@@ -123,9 +123,21 @@ describe("updateConfig", () => {
       return write(target, ...rest);
     });
     config.getConfig();
-    config.addRecent("T", "electron:x");
+    expect(() => config.addRecent("T", "electron:x")).toThrow("disk full");
     expect(fs.readdirSync(dir)).toEqual(["config.json"]);
-    expect(JSON.parse(fs.readFileSync(file, "utf8")).recents).toHaveLength(1);
+    expect(fs.readFileSync(file, "utf8")).toBe(EMPTY);
+  });
+});
+
+describe("getSummary", () => {
+  it("finds only games of the config, not inherited keys", async () => {
+    const config = await load(
+      JSON.stringify({ summaries: { [ID]: summary(ID) }, recents: [] }),
+    );
+    expect(config.getSummary(ID).id).toBe(ID);
+    expect(config.getSummary("constructor")).toBeUndefined();
+    expect(config.getSummary("__proto__")).toBeUndefined();
+    expect(config.getSummary("toString")).toBeUndefined();
   });
 });
 

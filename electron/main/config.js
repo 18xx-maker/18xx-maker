@@ -21,7 +21,6 @@ import {
   mergeDeepRight,
   nth,
   over,
-  path,
   pick,
   prop,
   propEq,
@@ -185,12 +184,23 @@ const writeConfigFile = (text) => {
   const tmp = `${CONFIG_FILE}.${process.pid}.tmp`;
   try {
     fs.writeFileSync(tmp, text);
+  } catch (e) {
+    // A failed temporary write says nothing about the config file: it is
+    // kept as it is, never truncated by an in-place write that would fail too
+    try {
+      fs.unlinkSync(tmp);
+    } catch {
+      // Never created
+    }
+    throw e;
+  }
+  try {
     fs.renameSync(tmp, CONFIG_FILE);
   } catch {
     try {
       fs.unlinkSync(tmp);
     } catch {
-      // Never written, or already renamed
+      // Already gone
     }
     fs.writeFileSync(CONFIG_FILE, text);
   }
@@ -239,7 +249,11 @@ export const summaryOfPath = (file) =>
 export const slugOfPath = (file) => summaryOfPath(file)?.slug;
 
 export const getSummaries = () => prop(SUMMARIES, getConfig());
-export const getSummary = (id) => path([SUMMARIES, id], getConfig());
+// Only an own key is a game: an id like "constructor" is not
+export const getSummary = (id) =>
+  Object.hasOwn(getConfig().summaries, id)
+    ? getConfig().summaries[id]
+    : undefined;
 export const updateSummaries = (game) =>
   updateConfig(
     assocPath(

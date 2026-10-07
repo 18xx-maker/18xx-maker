@@ -135,7 +135,7 @@ describe("internal games in OPFS", () => {
 
   describe("the write in the worker", () => {
     // Runs the worker source against a fake private file system
-    const runWorker = async ({ move }) => {
+    const runWorker = async ({ move, moveFails = false }) => {
       storage.directories.games = new Map([
         ["g.json", "old"],
         ["fail.json", "old"],
@@ -156,6 +156,7 @@ describe("internal games in OPFS", () => {
         }),
         ...(move && {
           move: async (dir, to) => {
+            if (moveFails) throw new Error("not allowed");
             files.set(to, files.get(name));
             files.delete(name);
             log.push(`move ${name} ${to}`);
@@ -231,6 +232,14 @@ describe("internal games in OPFS", () => {
 
       expect(files.has("fail.json.tmp")).toBe(false);
       expect(files.get("fail.json")).toBe("old");
+    });
+
+    it("writes in place when the move fails", async () => {
+      const { files } = await runWorker({ move: true, moveFails: true });
+      await overwriteGame("g", "text");
+
+      expect(files.get("g.json")).toBe("new");
+      expect(files.has("g.json.tmp")).toBe(false);
     });
 
     it("writes in place without move", async () => {

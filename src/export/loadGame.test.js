@@ -47,7 +47,6 @@ describe("the loadGame channel", () => {
     await expect(handler({}, "abc")).rejects.toThrow("game-load:missing");
     expect(deps.stopWatching).toHaveBeenCalledWith("abc");
     expect(deps.deleteGame).toHaveBeenCalledWith("abc");
-    expect(deps.watch).not.toHaveBeenCalled();
   });
 
   it("keeps a game whose file is not valid or can not be read", async () => {
@@ -69,6 +68,9 @@ describe("the loadGame channel", () => {
     );
     for (const { deps } of [invalid, locked]) {
       expect(deps.deleteGame).not.toHaveBeenCalled();
+      expect(deps.stopWatching).not.toHaveBeenCalled();
+      // Still watched, so fixing the file shows up
+      expect(deps.watch).toHaveBeenCalledWith("abc");
     }
   });
 });

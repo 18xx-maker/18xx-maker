@@ -19,10 +19,11 @@ export const createLoadGame =
       throw new Error(`Electron game ${id} not found`);
     }
 
+    // Watched before the load: a file that is not valid yet is watched too, so
+    // fixing it shows up
+    watch(id);
     try {
-      const game = await loadGame(id);
-      watch(id);
-      return game;
+      return await loadGame(id);
     } catch (e) {
       const code = loadErrorCode(e);
       // Only a file that is gone is forgotten: a game that is locked or not
