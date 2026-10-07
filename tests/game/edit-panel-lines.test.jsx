@@ -311,8 +311,11 @@ describe("lines of the json editor", () => {
     // is inside act, or React warns about an update outside of it
     await act(() => new Promise((resolve) => setTimeout(resolve, 100)));
     // The click made one change of the lines, the url did not make another
+    // (the linter also dispatches diagnostics, which are an array too)
+    const isLines = (value) =>
+      Array.isArray(value) && value.length > 0 && value.every(Array.isArray);
     const changes = spy.mock.calls.filter(([spec]) =>
-      [spec?.effects].flat(2).some((effect) => Array.isArray(effect?.value)),
+      [spec?.effects].flat(2).some((effect) => isLines(effect?.value)),
     );
     expect(changes).toHaveLength(1);
   });
