@@ -274,3 +274,14 @@ export const groupPrefix = (game, variation, index) =>
   Array.isArray(game.map)
     ? `map[${variation}].hexes[${index}]`
     : `map.hexes[${index}]`;
+
+// The problems of the game that are in the group at the index, with their
+// pointers into the group
+export const groupIssues = (game, variation, index, issues) => {
+  if (index < 0) return [];
+  const prefix = groupPrefix(game, variation, index);
+  return issues.flatMap((issue) => {
+    const pointer = rerootPointer(issue.pointer, prefix);
+    return pointer === null ? [] : [{ ...issue, pointer }];
+  });
+};

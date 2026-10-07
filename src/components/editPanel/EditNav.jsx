@@ -1,10 +1,56 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
+import {
+  COLOR_KEYS,
+  GAME_INFO_KEYS,
+  OUTPUT_KEYS,
+  PLAYER_KEYS,
+  ROUND_KEYS,
+  TOKEN_KEYS,
+  issuesFor,
+} from "@/components/schemaForm/resolve";
+
+import { useSelectedHex } from "@/hooks/useSelectedHex";
+import { selectGameProblems } from "@/state";
 import { cn } from "@/util/cn";
+import { findGroup, groupIssues, localHexes } from "@/util/hexEdit";
+import { useIntParam } from "@/util/query";
 
 export const tabId = (section) => `edit-tab-${section}`;
 export const panelId = (section) => `edit-tabpanel-${section}`;
+
+// The top level keys of the game each form section edits, for the problem dot
+// of its tab. The hex section is the selected group of the map instead.
+export const SECTION_KEYS = {
+  info: GAME_INFO_KEYS,
+  players: [...PLAYER_KEYS, "players"],
+  phases: ["phases"],
+  rounds: ROUND_KEYS,
+  companies: ["companies"],
+  privates: ["privates"],
+  tokens: TOKEN_KEYS,
+  trains: ["trains"],
+  market: ["stock"],
+  colors: COLOR_KEYS,
+  output: OUTPUT_KEYS,
+};
+
+// The game keys no form edits: they have a tab only in the JSON editor
+export const UNTABBED_KEYS = ["groups", "tiles"];
+
+// How many problems a section has. A deprecated field is a note, not a
+// problem. No result yet (unknown) is no problem.
+export const sectionProblems = (section, issues, hexIssues) => {
+  const keys = SECTION_KEYS[section];
+  const found = keys
+    ? keys.flatMap((key) => issuesFor(issues, [key]))
+    : section === "hex"
+      ? hexIssues
+      : [];
+  return found.filter((issue) => issue.code !== "deprecated").length;
+};
 
 // A tab to focus once the chips are mounted (from the JSON editor they are not
 // there yet): EditNav takes it after its commit
@@ -58,9 +104,24 @@ export const EditSwitch = ({ json, formSection, setSection }) => {
 // (the arrow keys go through all of them). [ and ] switch between
 // them (bindings.js), the arrow keys, Home and End move between them when a
 // chip has the focus.
-const EditNav = ({ groups, section, setSection }) => {
+const EditNav = ({ game, groups, section, setSection }) => {
   const { t } = useTranslation();
   const sections = groups.flatMap((g) => g.sections);
+  const issues = useSelector((state) =>
+    selectGameProblems(state, game.meta.slug),
+  );
+  const checked = useSelector(
+    (state) => state.gameProblems.status !== "running",
+  );
+  const [variation] = useIntParam("variation", 0);
+  const { hex } = useSelectedHex();
+
+  // The problems of the group selected on the map, for the hex tab
+  const index = hex ? findGroup(localHexes(game, variation), hex) : -1;
+  // While the check runs the indexes of the problems may be stale: unknown
+  const hexIssues = checked
+    ? groupIssues(game, variation, index, issues ?? [])
+    : [];
 
   useEffect(() => {
     if (!pendingFocus) return;
@@ -102,6 +163,7 @@ const EditNav = ({ groups, section, setSection }) => {
           </span>
           {items.map((item) => {
             const selected = item.section === section;
+            const problems = sectionProblems(item.section, issues, hexIssues);
             return (
               <button
                 key={item.section}
@@ -119,6 +181,19 @@ const EditNav = ({ groups, section, setSection }) => {
                 )}
               >
                 {t(`editPanel.sections.${item.section}.tab`)}
+                {problems > 0 && (
+                  <>
+                    {" "}
+                    <span
+                      aria-hidden="true"
+                      data-testid={`edit-problem-${item.section}`}
+                      className="inline-block size-2 rounded-full bg-destructive align-middle"
+                    />
+                    <span className="sr-only">
+                      {t("editPanel.nav.problems", { count: problems })}
+                    </span>
+                  </>
+                )}
               </button>
             );
           })}

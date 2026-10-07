@@ -96,6 +96,17 @@ afterEach(() => {
 });
 
 describe("json editor", () => {
+  it("says under the changes button that changes stay in memory", async () => {
+    const { user } = open(`${route}?edit=true`);
+    await user.click(await screen.findByRole("button", { name: "JSON" }));
+    await view();
+    expect(
+      screen.getByText(
+        "Changes stay in memory until you save them on the Changes page.",
+      ),
+    ).toBeVisible();
+  });
+
   it("shows the game file as text on its tab and in the url", async () => {
     const { user, router } = open(`${route}?edit=true`);
     const tab = await screen.findByRole("button", { name: "JSON" });

@@ -11,14 +11,13 @@ import {
   anchorOf,
   findGroup,
   groupInvalid,
-  groupPrefix,
+  groupIssues,
   inheritedGroup,
   isRemoved,
   localHexes,
   moveKey,
   newGroup,
   replaceGroup,
-  rerootPointer,
   setLocalHexes,
   variationMap,
 } from "@/util/hexEdit";
@@ -92,13 +91,8 @@ const HexSection = ({ game }) => {
       },
       // The problems of this group, once the check is of the game as it is
       issues: (issues, done) => {
-        const index = at(store.getState().game);
-        if (!done || index < 0) return [];
-        const prefix = groupPrefix(game, variation, index);
-        return issues.flatMap((issue) => {
-          const pointer = rerootPointer(issue.pointer, prefix);
-          return pointer === null ? [] : [{ ...issue, pointer }];
-        });
+        if (!done) return [];
+        return groupIssues(game, variation, at(store.getState().game), issues);
       },
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

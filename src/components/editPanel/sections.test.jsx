@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { SECTION_KEYS, UNTABBED_KEYS } from "@/components/editPanel/EditNav";
 import {
   DEFAULT_EDIT_SECTION,
   editGroups,
@@ -11,6 +12,7 @@ import {
 import de from "@/locales/de.json";
 import en from "@/locales/en.json";
 import zh from "@/locales/zh.json";
+import schema from "@/schemas/game.schema.json";
 
 const locales = { en, de, zh };
 const locale = (lang) => locales[lang].editPanel;
@@ -36,6 +38,28 @@ describe("edit sections", () => {
     const extra = { section: "extra", Form: () => null };
     const other = groupSections([...formSections, extra]).at(-1);
     expect(other).toEqual({ group: "other", sections: [extra] });
+  });
+
+  it("maps every top level key of the game to a tab", () => {
+    // A problem in a key without a tab would show on no tab
+    // "map" problems show only for the selected group, on the hex tab
+    const mapped = Object.values(SECTION_KEYS).flat();
+    for (const key of Object.keys(schema.properties)) {
+      if (key === "map") continue;
+      expect([...mapped, ...UNTABBED_KEYS]).toContain(key);
+    }
+  });
+
+  it("has a dot source for every form section", () => {
+    for (const { section } of formSections) {
+      expect([section, section === "hex" || section in SECTION_KEYS]).toEqual([
+        section,
+        true,
+      ]);
+    }
+    for (const section of Object.keys(SECTION_KEYS)) {
+      expect(formSections.map((s) => s.section)).toContain(section);
+    }
   });
 
   it.each(["en", "de", "zh"])("has the strings in %s", (lang) => {

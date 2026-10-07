@@ -76,6 +76,7 @@ const EditPanel = () => {
         </div>
         {!json && (
           <EditNav
+            game={game}
             groups={groups}
             section={editSection}
             setSection={setEditSection}
@@ -101,11 +102,16 @@ const EditPanel = () => {
           </p>
           <Form game={game} />
         </div>
-        <Button asChild variant="outline" className="self-start">
-          <Link to={`/games/${game.meta.slug}/changes`}>
-            {t("editPanel.changes")}
-          </Link>
-        </Button>
+        <div className="flex flex-col items-start gap-1">
+          <Button asChild variant="outline">
+            <Link to={`/games/${game.meta.slug}/changes`}>
+              {t("editPanel.changes")}
+            </Link>
+          </Button>
+          <p className="text-xs text-muted-foreground">
+            {t("editPanel.memoryNote")}
+          </p>
+        </div>
       </div>
     </div>
   );
