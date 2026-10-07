@@ -291,4 +291,17 @@ describe("getParData", () => {
     expect(data.totalWidth).toBe(420);
     expect(data.totalHeight).toBe(2 * 170 + 50);
   });
+
+  it("should tolerate a stock without par or par values", () => {
+    for (const stock of [{}, { par: {} }, { title: false, par: {} }]) {
+      const data = getParData(stock, config);
+
+      expect(data.values).toEqual([]);
+      expect(data.rows).toBe(0);
+      expect(data.columns).toBe(1);
+      expect(data.par).toEqual({});
+    }
+    expect(getParData({}, config).totalHeight).toBe(50);
+    expect(getParData({ title: false }, config).totalHeight).toBe(0);
+  });
 });

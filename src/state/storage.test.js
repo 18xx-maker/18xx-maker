@@ -118,5 +118,29 @@ describe("storage", () => {
       expect(localStorage.removeItem).toHaveBeenLastCalledWith("bar");
       expect(localStorage.setItem).toHaveBeenLastCalledWith("foo", '"2"');
     });
+
+    it("keeps going and logs once when local storage throws on write", () => {
+      storage.init("foo");
+      const subscribe = vi.fn();
+      const getState = vi.fn();
+      const localStorage = {
+        removeItem: vi.fn(),
+        setItem: vi.fn(() => {
+          throw new Error("quota");
+        }),
+      };
+      vi.stubGlobal("localStorage", localStorage);
+      const error = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      storage.listen({ subscribe, getState });
+      const callback = subscribe.mock.calls[0][0];
+      getState.mockReturnValueOnce({ foo: "1" });
+      expect(() => callback()).not.toThrow();
+      getState.mockReturnValueOnce({ foo: "2" });
+      expect(() => callback()).not.toThrow();
+
+      expect(localStorage.setItem).toHaveBeenCalledTimes(2);
+      expect(error).toHaveBeenCalledOnce();
+    });
   });
 });

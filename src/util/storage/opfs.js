@@ -22,23 +22,24 @@ const getGamesDirectory = () =>
 export const deleteGame = (id) =>
   getGamesDirectory().then((dir) => dir.removeEntry(name(id)));
 
+const isGameFile = (filename) => filename.endsWith(".json");
+
+// A file that cannot be read or parsed is left alone: the failure may be
+// temporary (storage under pressure, a write in progress) and the file may be
+// the only copy of a game. Only an explicit delete removes it.
 export const loadSummaries = async () => {
   const dir = await getGamesDirectory();
 
   const summaries = [];
   for await (const handle of dir.values()) {
-    const file = await handle.getFile();
-    const id = file.name.replace(/\.json$/, "");
+    if (!isGameFile(handle.name)) continue;
 
+    const id = handle.name.replace(/\.json$/, "");
     try {
-      const game = await loadFile(file);
-      const summary = {
-        ...info(game),
-        ...meta(id),
-      };
-      summaries.push(summary);
+      const game = await loadFile(await handle.getFile());
+      summaries.push({ ...info(game), ...meta(id) });
     } catch {
-      await deleteGame(id);
+      // Unreadable, not listed
     }
   }
 
@@ -52,10 +53,13 @@ export const loadGame = async (id) => {
     const file = await handle.getFile();
     const game = await loadFile(file);
     return assoc("meta", meta(id), game);
-  } catch {
-    // The file may not exist at all, that must not hide the real error
-    await deleteGame(id).catch(() => {});
-    throw new Error("File was not a valid 18xx-maker game");
+  } catch (e) {
+    // Only a missing or malformed file is "not a valid game", any other error
+    // (a read failure) is reported as it is. Nothing is deleted.
+    if (e?.name === "SyntaxError" || e?.name === "NotFoundError") {
+      throw new Error("File was not a valid 18xx-maker game", { cause: e });
+    }
+    throw e;
   }
 };
 
@@ -77,12 +81,28 @@ const writeInWorker = (filename, buffer) =>
         try {
           const root = await navigator.storage.getDirectory();
           const dir = await root.getDirectoryHandle("games", { create: true });
-          const handle = await dir.getFileHandle(filename, { create: true });
-          const access = await handle.createSyncAccessHandle();
-          access.truncate(0);
-          access.write(new Uint8Array(buffer), { at: 0 });
-          access.flush();
-          access.close();
+          // Write a temp file (not .json, so never listed) and move it over
+          // the game: a failed write never leaves half a game. Without
+          // move() write in place.
+          const atomic =
+            typeof FileSystemFileHandle !== "undefined" &&
+            typeof FileSystemFileHandle.prototype.move === "function";
+          const target = atomic ? filename + ".tmp" : filename;
+          const handle = await dir.getFileHandle(target, { create: true });
+          try {
+            const access = await handle.createSyncAccessHandle();
+            try {
+              access.truncate(0);
+              access.write(new Uint8Array(buffer), { at: 0 });
+              access.flush();
+            } finally {
+              access.close();
+            }
+            if (atomic) await handle.move(dir, filename);
+          } catch (e) {
+            if (atomic) await dir.removeEntry(target).catch(() => {});
+            throw e;
+          }
           postMessage(null);
         } catch (e) {
           postMessage(String(e));
@@ -139,6 +159,7 @@ const listIds = async () => {
   const dir = await getGamesDirectory();
   const ids = [];
   for await (const handle of dir.values()) {
+    if (!isGameFile(handle.name)) continue;
     ids.push(handle.name.replace(/\.json$/, ""));
   }
   return ids;

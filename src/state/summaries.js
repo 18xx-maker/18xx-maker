@@ -1,4 +1,4 @@
-import { assocPath, dissocPath, zipObj } from "ramda";
+import { assocPath, dissocPath } from "ramda";
 
 import { DELETE_GAME, SET_GAME } from "@/state/game";
 import capability from "@/util/capability";
@@ -13,16 +13,36 @@ export const createSetSummaries = (summaries) => ({
   summaries,
 });
 
+const logged = new Set();
+
+// One store failing must not hide the other, and the games already in state
+// stay: a failed store is left out of the update.
+const settle = (key, load) =>
+  Promise.resolve()
+    .then(load)
+    .then((summaries) => ({ [key]: summaries }))
+    .catch((e) => {
+      if (!logged.has(key)) {
+        logged.add(key);
+        console.error(`Could not load the ${key} games`, e);
+      }
+      return {};
+    });
+
 export const loadSummaries = () => (dispatch) => {
   if (capability.electron) {
     return window.api.loadSummaries().then(createSetSummaries).then(dispatch);
   }
 
   return Promise.all([
-    capability.internal ? opfs.loadSummaries() : undefined,
-    capability.system ? idb.loadSummaries() : undefined,
+    capability.internal
+      ? settle("internal", opfs.loadSummaries)
+      : { internal: undefined },
+    capability.system
+      ? settle("system", idb.loadSummaries)
+      : { system: undefined },
   ])
-    .then(zipObj(["internal", "system"]))
+    .then((parts) => Object.assign({}, ...parts))
     .then(createSetSummaries)
     .then(dispatch);
 };

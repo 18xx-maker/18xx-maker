@@ -213,6 +213,22 @@ describe("electron root", () => {
     expect(router.state.location.pathname).toBe("/");
   });
 
+  it("alerts when opening a game through the main process fails", async () => {
+    api.openGame.mockRejectedValue(new Error("Could not open"));
+    const { router, store, user } = renderApp("/games");
+
+    await user.click(await screen.findByRole("button", { name: "Open File" }));
+
+    await waitFor(() =>
+      expect(store.getState().alert).toMatchObject({
+        title: "Error",
+        message: "Could not open",
+        type: "error",
+      }),
+    );
+    expect(router.state.location.pathname).toBe("/games");
+  });
+
   it("ignores drops without files", () => {
     renderApp("/");
 

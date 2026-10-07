@@ -314,6 +314,22 @@ describe("loadSummaries", () => {
     ]);
   });
 
+  it("keeps the other store when one fails and logs it once", async () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    opfs.loadSummaries.mockRejectedValue(new Error("opfs down"));
+    idb.loadSummaries.mockResolvedValue({ b: 2 });
+
+    await loadSummaries()(dispatch);
+    await loadSummaries()(dispatch);
+
+    expect(types()).toEqual([
+      createSetSummaries({ system: { b: 2 } }),
+      createSetSummaries({ system: { b: 2 } }),
+    ]);
+    expect(error).toHaveBeenCalledOnce();
+    error.mockRestore();
+  });
+
   it("uses window.api on electron and returns the promise", async () => {
     capability.electron = true;
     window.api = { loadSummaries: vi.fn().mockResolvedValue({ e: 1 }) };

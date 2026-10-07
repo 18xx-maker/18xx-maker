@@ -296,18 +296,19 @@ export const getParData = (stock, config) => {
     stock: { cell, par },
   } = config;
 
-  let values = (stock.par && stock.par.values) || [];
+  let parSection = stock.par || {};
+  let values = parSection.values || [];
 
-  let width = (stock.par.width || par) * cell.width;
-  let height = (stock.par.height || 1) * cell.height;
-  let rows = length(stock.par.values);
-  let columns = getMaxLength(stock.par.values) || 1;
+  let width = (parSection.width || par) * cell.width;
+  let height = (parSection.height || 1) * cell.height;
+  let rows = length(values);
+  let columns = getMaxLength(values) || 1;
   let totalWidth = width * columns;
   let totalHeight = height * rows + (stock.title === false ? 0 : 50);
 
   return {
     values,
-    par: stock.par || {},
+    par: parSection,
     legend: stock.legend || [],
 
     rows,
