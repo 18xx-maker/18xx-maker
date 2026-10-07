@@ -126,7 +126,9 @@
   margin: -0.04in 0 0 0.0625in;
 }
 
-.private__variant {
+.private__variant,
+.share__variant,
+.train__variant {
   position: absolute;
   bottom: 0;
   right: 0;

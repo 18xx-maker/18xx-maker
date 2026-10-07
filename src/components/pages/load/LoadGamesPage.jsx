@@ -127,26 +127,22 @@ const LoadGamesPage = () => {
   const openGame = (event) => {
     event.preventDefault();
 
+    let opened;
     if (capability.electron) {
-      return window.api
-        .openGame()
-        .then((slug) => slug && navigate(`/games/${slug}/map`));
+      opened = window.api.openGame();
+    } else if (capability.system) {
+      opened = idb.openFilePicker();
+    } else if (capability.internal) {
+      opened = opfs.saveGameFile(event.target.files[0]);
+    } else {
+      return;
     }
 
-    if (capability.system) {
-      return idb
-        .openFilePicker()
-        .then((slug) => slug && navigate(`/games/${slug}/map`));
-    }
-
-    if (capability.internal) {
-      return opfs
-        .saveGameFile(event.target.files[0])
-        .then((slug) => slug && navigate(`/games/${slug}/map`))
-        .catch((e) =>
-          dispatch(createAlert(t("alerts.error"), e.message, "error")),
-        );
-    }
+    return opened
+      .then((slug) => slug && navigate(`/games/${slug}/map`))
+      .catch((e) =>
+        dispatch(createAlert(t("alerts.error"), e.message, "error")),
+      );
   };
 
   // Where the new game is saved depends on what the browser can do. The

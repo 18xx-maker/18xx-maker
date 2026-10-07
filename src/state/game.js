@@ -145,7 +145,12 @@ export const loadGame =
           );
         }
 
-        return resolve(window.api.loadGame(id));
+        return resolve(
+          window.api.loadGame(id).catch((e) => {
+            // The main process says what went wrong, the text is the page's
+            throw LOAD_ERRORS[e.code] ? new Error(t(LOAD_ERRORS[e.code])) : e;
+          }),
+        );
       }
       return reject(new Error(`Unknown game type ${type}`));
     })
@@ -246,6 +251,13 @@ export const deleteGame = (slug, title) => (dispatch) => {
 export const sameFile = (a, b) => equals(omit(["meta"], a), omit(["meta"], b));
 
 const t = (key, vars) => getI18n().t(key, vars);
+
+// What the app's main process says went wrong loading a game file
+const LOAD_ERRORS = {
+  missing: "alerts.gameMissing",
+  invalid: "alerts.gameInvalid",
+  unreadable: "alerts.gameUnreadable",
+};
 
 const readGame = (type, id) =>
   type === idb.TYPE

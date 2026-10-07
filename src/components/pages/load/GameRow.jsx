@@ -1,12 +1,17 @@
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router";
+
+import { Button } from "@/components/ui/button";
 
 import GameType from "@/components/pages/load/GameType";
 
 import { publishers } from "@/data";
+import { deleteGame } from "@/state";
 
 const GameRow = ({ game }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   let imageNode = null;
 
   if (game.publisher && publishers[game.publisher]) {
@@ -59,6 +64,20 @@ const GameRow = ({ game }) => {
           </div>
         )}
         <GameType type={game.type} className="mt-2" />
+        {/* A game that can not be loaded can not open its page to forget it.
+            An internal game is the only copy, so it is only deleted from its page */}
+        {(game.type === "electron" || game.type === "system") && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-2"
+            onClick={() =>
+              dispatch(deleteGame(game.slug, game.title)).catch(() => undefined)
+            }
+          >
+            {t("game.type.system.forget")}
+          </Button>
+        )}
       </div>
       {imageNode}
     </div>

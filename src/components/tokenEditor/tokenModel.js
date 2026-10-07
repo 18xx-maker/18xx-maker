@@ -2,10 +2,9 @@ import { isEmpty } from "ramda";
 
 import { resolveAllOf } from "@/components/schemaForm/resolve";
 
-// What the token editor does with the value of a token, without a component.
+import { isObject } from "@/util/jsonEditor";
 
-const isObject = (value) =>
-  value !== null && typeof value === "object" && !Array.isArray(value);
+// What the token editor does with the value of a token, without a component.
 
 // Whether a value says nothing: no value, empty text, nothing in a list or
 // object. A list of only empty texts says nothing either (a list of colors

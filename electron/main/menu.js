@@ -11,7 +11,9 @@ const isMac = process.platform === "darwin";
 const redirect = (route) => send("redirect", route);
 
 const openGameAndRedirect = () =>
-  openGame().then((slug) => slug && redirect(`/games/${slug}/map`));
+  openGame()
+    .then((slug) => slug && redirect(`/games/${slug}/map`))
+    .catch((e) => send("alert", "Error", e.message, "error"));
 
 export const setMenu = () => {
   const recents = map(

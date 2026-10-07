@@ -28,11 +28,19 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
           console.error(e);
           throw new Error("File was not a valid 18xx-maker game");
         }),
+    // A failure carries a code (missing, invalid, unreadable) from the main
+    // process, which the page shows translated
     loadGame: (id) =>
       ipcRenderer.invoke("loadGame", id).catch((e) => {
         console.error(e);
-        throw new Error(
-          `Electron game ${id} not found or was not a valid 18xx-maker game`,
+        const code = /game-load:(missing|invalid|unreadable)/.exec(
+          e?.message,
+        )?.[1];
+        throw Object.assign(
+          new Error(
+            `Electron game ${id} not found or was not a valid 18xx-maker game`,
+          ),
+          code && { code },
         );
       }),
     // Writes the game text over the game's file. `expected` is the game as it

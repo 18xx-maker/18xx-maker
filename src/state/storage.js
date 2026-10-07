@@ -30,6 +30,7 @@ const initialState = () => {
 };
 
 let current;
+let writeFailed = false;
 const listen = (store) => {
   store.subscribe(() => {
     let previous = current;
@@ -37,10 +38,18 @@ const listen = (store) => {
 
     forEach((key) => {
       if (!previous || previous[key] !== current[key]) {
-        if (current[key] === undefined) {
-          window.localStorage.removeItem(key);
-        } else {
-          window.localStorage.setItem(key, JSON.stringify(current[key]));
+        try {
+          if (current[key] === undefined) {
+            window.localStorage.removeItem(key);
+          } else {
+            window.localStorage.setItem(key, JSON.stringify(current[key]));
+          }
+        } catch (e) {
+          // Full, blocked or private: the state stays in memory
+          if (!writeFailed) {
+            writeFailed = true;
+            console.error(e);
+          }
         }
       }
     }, keys);

@@ -184,19 +184,6 @@
   padding: calc(var(--card-padding) / 2) var(--card-padding);
 }
 
-.share__variant {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 0.125in;
-  line-height: 1;
-  padding-right: var(--card-padding);
-  font-weight: normal;
-  font-size: 0.5em;
-  font-style: italic;
-  font-family: sans-serif;
-}
-
 /* The mark of the group of the president's share, in the top right corner
    where the variant and the label do not reach */
 .share__group {

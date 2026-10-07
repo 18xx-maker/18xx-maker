@@ -133,6 +133,125 @@ describe("internal games in OPFS", () => {
     );
   });
 
+  describe("the write in the worker", () => {
+    // Runs the worker source against a fake private file system
+    const runWorker = async ({ move, moveFails = false }) => {
+      storage.directories.games = new Map([
+        ["g.json", "old"],
+        ["fail.json", "old"],
+      ]);
+      const files = new Map(storage.directories.games);
+      const log = [];
+      const handle = (name) => ({
+        createSyncAccessHandle: async () => ({
+          truncate: () => {},
+          write: () => {
+            if (name === "fail.json.tmp" || name === "fail.json") {
+              throw new Error("quota");
+            }
+            files.set(name, "new");
+          },
+          flush: () => {},
+          close: () => {},
+        }),
+        ...(move && {
+          move: async (dir, to) => {
+            if (moveFails) throw new Error("not allowed");
+            files.set(to, files.get(name));
+            files.delete(name);
+            log.push(`move ${name} ${to}`);
+          },
+        }),
+      });
+      const dir = {
+        getFileHandle: async (name) => {
+          if (!files.has(name)) files.set(name, "");
+          return handle(name);
+        },
+        removeEntry: async (name) => files.delete(name),
+      };
+      let source;
+      URL.createObjectURL = vi.fn((blob) => {
+        source = blob;
+        return "blob:x";
+      });
+      URL.revokeObjectURL = vi.fn();
+      class FakeWorker {
+        async postMessage(data) {
+          const text = await source.text();
+          const messages = [];
+          const factory = new Function(
+            "navigator",
+            "postMessage",
+            "FileSystemFileHandle",
+            `let onmessage; ${text}; return onmessage;`,
+          );
+          const onmessage = factory(
+            {
+              storage: {
+                getDirectory: async () => ({
+                  getDirectoryHandle: async () => dir,
+                }),
+              },
+            },
+            (m) => messages.push(m),
+            { prototype: move ? { move() {} } : {} },
+          );
+          await onmessage({ data });
+          this.onmessage({ data: messages[0] });
+        }
+        terminate() {}
+      }
+      vi.stubGlobal("Worker", FakeWorker);
+      const noWritable = storage.root.getDirectoryHandle;
+      storage.root.getDirectoryHandle = async (...args) => {
+        const d = await noWritable(...args);
+        const getFileHandle = d.getFileHandle;
+        d.getFileHandle = async (...a) => {
+          const h = await getFileHandle(...a);
+          delete h.createWritable;
+          return h;
+        };
+        return d;
+      };
+      return { files, log };
+    };
+
+    it("writes a temp file and moves it over the game", async () => {
+      const { files, log } = await runWorker({ move: true });
+      await overwriteGame("g", "text");
+
+      expect(log).toEqual(["move g.json.tmp g.json"]);
+      expect(files.get("g.json")).toBe("new");
+      expect(files.has("g.json.tmp")).toBe(false);
+    });
+
+    it("removes the temp file and keeps the game when the write fails", async () => {
+      const { files } = await runWorker({ move: true });
+      await expect(overwriteGame("fail", "text")).rejects.toThrow("quota");
+
+      expect(files.has("fail.json.tmp")).toBe(false);
+      expect(files.get("fail.json")).toBe("old");
+    });
+
+    it("writes in place when the move fails", async () => {
+      const { files } = await runWorker({ move: true, moveFails: true });
+      await overwriteGame("g", "text");
+
+      expect(files.get("g.json")).toBe("new");
+      expect(files.has("g.json.tmp")).toBe(false);
+    });
+
+    it("writes in place without move", async () => {
+      const { files, log } = await runWorker({ move: false });
+      await overwriteGame("g", "text");
+
+      expect(log).toEqual([]);
+      expect(files.get("g.json")).toBe("new");
+      expect(files.has("g.json.tmp")).toBe(false);
+    });
+  });
+
   it("lists summaries of saved games by slug", async () => {
     const slug = await saveGameFile(JSON.stringify(game));
     const id = slug.split(":")[1];
@@ -148,12 +267,48 @@ describe("internal games in OPFS", () => {
     });
   });
 
-  it("removes files that aren't games when listing", async () => {
+  it("keeps files that aren't games on disk when listing", async () => {
     const slug = await saveGameFile(JSON.stringify(game));
     games().set("broken.json", "{");
 
     expect(Object.keys(await loadSummaries())).toEqual([slug]);
-    expect(games().has("broken.json")).toBe(false);
+    expect(games().has("broken.json")).toBe(true);
+  });
+
+  it("keeps a game that fails to read when listing", async () => {
+    const slug = await saveGameFile(JSON.stringify(game));
+    const dir = await (
+      await storage.getDirectory()
+    ).getDirectoryHandle("games");
+    const values = dir.values;
+    storage.root.getDirectoryHandle = async () => ({
+      ...dir,
+      values: async function* () {
+        for await (const handle of values()) {
+          yield handle.name === "flaky.json"
+            ? {
+                name: "flaky.json",
+                getFile: async () => {
+                  throw new DOMException("busy", "NotReadableError");
+                },
+              }
+            : handle;
+        }
+      },
+    });
+    games().set("flaky.json", JSON.stringify(game));
+
+    expect(Object.keys(await loadSummaries())).toEqual([slug]);
+    expect(games().has("flaky.json")).toBe(true);
+  });
+
+  it("ignores temp files when listing", async () => {
+    const slug = await saveGameFile(JSON.stringify(game));
+    games().set("x.json.tmp", JSON.stringify(game));
+
+    expect(Object.keys(await loadSummaries())).toEqual([slug]);
+    expect(await findGame("x.json")).toBeUndefined();
+    expect(await findGame("x")).toBeUndefined();
   });
 
   it("loads a saved game with its meta data", async () => {
@@ -166,13 +321,30 @@ describe("internal games in OPFS", () => {
     });
   });
 
-  it("removes a saved game that isn't valid when loading it", async () => {
+  it("keeps a saved game that isn't valid when loading it", async () => {
     storage.directories.games = new Map([["bad.json", "not json"]]);
 
     await expect(loadGame("bad")).rejects.toThrow(
       "File was not a valid 18xx-maker game",
     );
-    expect(games().has("bad.json")).toBe(false);
+    expect(games().has("bad.json")).toBe(true);
+  });
+
+  it("reports a read failure as it is and keeps the game", async () => {
+    storage.directories.games = new Map([["bad.json", "{}"]]);
+    const original = storage.root.getDirectoryHandle;
+    storage.root.getDirectoryHandle = async (...args) => {
+      const dir = await original(...args);
+      dir.getFileHandle = async () => ({
+        getFile: async () => {
+          throw new DOMException("busy", "NotReadableError");
+        },
+      });
+      return dir;
+    };
+
+    await expect(loadGame("bad")).rejects.toThrow("busy");
+    expect(games().has("bad.json")).toBe(true);
   });
 
   it("reports an invalid game when the file does not exist", async () => {

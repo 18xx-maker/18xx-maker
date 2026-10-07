@@ -62,18 +62,16 @@ export const setup = () => {
   }
 };
 
-export const defaultConfig = JSON.parse(
-  fs.readFileSync(path.join(import.meta.dirname, "../defaults.json"), "utf-8"),
+export const loadJSON = (file) => JSON.parse(fs.readFileSync(file));
+
+export const defaultConfig = loadJSON(
+  path.join(import.meta.dirname, "../defaults.json"),
 );
 
 export let customConfig = {};
 if (fs.existsSync(path.join(import.meta.dirname, "../config.json"))) {
-  customConfig = JSON.parse(
-    fs.readFileSync(path.join(import.meta.dirname, "../config.json"), "utf-8"),
-  );
+  customConfig = loadJSON(path.join(import.meta.dirname, "../config.json"));
 }
-
-export const loadJSON = (file) => JSON.parse(fs.readFileSync(file));
 
 export const loadGame = (game) => {
   try {

@@ -58,18 +58,3 @@ export const createWindow = () => {
 
   return mainWindow;
 };
-
-// A hidden window to capture a page. A transparent window has no frame.
-export const captureWindow = ({ transparent = false } = {}) => {
-  return new BrowserWindow({
-    ...(transparent && { transparent, frame: false }),
-    x: 0,
-    y: 0,
-    enableLargerThanScreen: true,
-    show: false,
-    webPreferences: {
-      preload: join(import.meta.dirname, "../preload/preload.cjs"),
-      transparent: true,
-    },
-  });
-};

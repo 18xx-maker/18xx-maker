@@ -37,7 +37,9 @@ export const createPool = ({ open, size, recycleAfter = 25 }) => {
           (slot) => {
             opening--;
             if (closed) {
-              slot.close().catch(() => {});
+              Promise.resolve()
+                .then(() => slot.close())
+                .catch(() => {});
               waiter.reject(new Error("The pool is closed"));
               return;
             }

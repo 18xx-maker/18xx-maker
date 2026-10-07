@@ -8,7 +8,12 @@ import { safeName } from "./names.js";
 export const insideFolder = (root, relPath) => {
   const file = path.resolve(root, relPath);
   const relative = path.relative(root, file);
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
+  // A first segment that is only "..", not a name that starts with dots
+  if (
+    relative === ".." ||
+    relative.startsWith(`..${path.sep}`) ||
+    path.isAbsolute(relative)
+  ) {
     throw new Error(`${relPath} is outside of ${root}`);
   }
   return file;

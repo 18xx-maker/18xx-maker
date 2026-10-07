@@ -50,6 +50,25 @@ describe("the preload api", () => {
     expect(ipc.invoke).toHaveBeenCalledWith("newGame", "My Game");
   });
 
+  it("tells the page why a game did not load, by a code", async () => {
+    const ipc = fakeIpc();
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    const api = createApi({ ipcRenderer: ipc, webUtils: {}, argv: [] });
+
+    ipc.invoke.mockRejectedValueOnce(
+      new Error(
+        "Error invoking remote method 'loadGame': Error: game-load:invalid",
+      ),
+    );
+    await expect(api.loadGame("abc")).rejects.toMatchObject({
+      code: "invalid",
+    });
+    ipc.invoke.mockRejectedValueOnce(new Error("something else"));
+    const other = await api.loadGame("abc").catch((e) => e);
+    expect(other.code).toBeUndefined();
+    expect(other.message).toContain("abc");
+  });
+
   it("gives a capture window only the input of its export", () => {
     const ipc = fakeIpc();
     const api = createApi({

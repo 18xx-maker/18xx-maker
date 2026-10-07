@@ -1,6 +1,8 @@
 // A new game file: the title and a 4 by 4 block of plain hexes to start the map
-// from. Plain ES module with no imports, the app and the Electron main process
-// both use it (#util/newGame).
+// from. Plain ES module whose only import is the import-free title module, the
+// app and the Electron main process both use it (#util/newGame).
+import { titleToFilename } from "./titleFilename.js";
+
 const HEXES = [
   "A1",
   "A3",
@@ -31,6 +33,6 @@ export const newGameJson = (title) =>
 // The suggested file name for a title: its lowercase letters and digits, or
 // "new-game" for a title with none (a Chinese title would give "-")
 export const newGameFilename = (title) => {
-  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const slug = titleToFilename(title);
   return /[a-z0-9]/.test(slug) ? slug : "new-game";
 };

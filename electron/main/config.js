@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 
 import { app } from "electron";
 import { v4 as uuidv4, validate } from "uuid";
@@ -21,7 +21,6 @@ import {
   mergeDeepRight,
   nth,
   over,
-  path,
   pick,
   prop,
   propEq,
@@ -139,31 +138,80 @@ const readConfig = () =>
     ),
   );
 
+// Where a config that could not be read is kept, once: the first copy is the
+// one worth keeping, a later reset must not overwrite it
+const backup = () => {
+  const bak = `${CONFIG_FILE}.bak`;
+  try {
+    if (!fs.existsSync(bak)) fs.copyFileSync(CONFIG_FILE, bak);
+  } catch (backupError) {
+    console.error("Unable to back up invalid config:", backupError);
+  }
+};
+
+// Loading runs when the main process starts, so it never throws: a file that
+// can not be read is backed up and replaced by the default, and one that can
+// not be written is kept in memory
 export const loadConfig = () => {
+  let cleaned;
   try {
     config = readConfig();
-    return updateConfig(cleanConfig);
+    cleaned = cleanConfig(config);
   } catch (e) {
     // The config file is unreadable or in a state we can't clean. Back it up
     // and start over rather than leaving the app unusable.
     console.error("Resetting invalid config:", e);
-    try {
-      fs.copyFileSync(CONFIG_FILE, `${CONFIG_FILE}.bak`);
-    } catch (backupError) {
-      console.error("Unable to back up invalid config:", backupError);
-    }
+    backup();
     config = null;
-    return updateConfig(() => DEFAULT_CONFIG);
+    cleaned = DEFAULT_CONFIG;
+  }
+
+  try {
+    return updateConfig(() => cleaned);
+  } catch (e) {
+    console.error("Unable to write config:", e);
+    return config;
   }
 };
 
 export const getConfig = () => config || loadConfig();
+
+// The file is replaced whole: written beside it and renamed over it, so that
+// a crash never leaves half a config. Where that is not possible (a rename over
+// a file that is open on Windows, a folder that can not be written) it is
+// written in place.
+const writeConfigFile = (text) => {
+  const tmp = `${CONFIG_FILE}.${process.pid}.tmp`;
+  try {
+    fs.writeFileSync(tmp, text);
+  } catch (e) {
+    // A failed temporary write says nothing about the config file: it is
+    // kept as it is, never truncated by an in-place write that would fail too
+    try {
+      fs.unlinkSync(tmp);
+    } catch {
+      // Never created
+    }
+    throw e;
+  }
+  try {
+    fs.renameSync(tmp, CONFIG_FILE);
+  } catch {
+    try {
+      fs.unlinkSync(tmp);
+    } catch {
+      // Already gone
+    }
+    fs.writeFileSync(CONFIG_FILE, text);
+  }
+};
+
 export const updateConfig = (op) => {
   let newConfig = op(config);
 
   if (!equals(newConfig, config)) {
     config = newConfig;
-    fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2));
+    writeConfigFile(JSON.stringify(config, null, 2));
   }
 
   return config;
@@ -185,8 +233,27 @@ export const deleteGame = (id) =>
       recents: reject(propEq(`electron:${id}`, "slug"), config.recents),
     };
   });
+// A path is the same one however it is written (and in any case on Windows)
+export const samePath = (a, b) => {
+  const [x, y] = [resolve(a), resolve(b)];
+  return process.platform === "win32"
+    ? x.toLowerCase() === y.toLowerCase()
+    : x === y;
+};
+export const summaryOfPath = (file) =>
+  Object.values(getConfig().summaries).find(
+    (summary) =>
+      typeof summary.path === "string" && samePath(summary.path, file),
+  );
+// The summary and slug of the game that has its file at path, if there is one
+export const slugOfPath = (file) => summaryOfPath(file)?.slug;
+
 export const getSummaries = () => prop(SUMMARIES, getConfig());
-export const getSummary = (id) => path([SUMMARIES, id], getConfig());
+// Only an own key is a game: an id like "constructor" is not
+export const getSummary = (id) =>
+  Object.hasOwn(getConfig().summaries, id)
+    ? getConfig().summaries[id]
+    : undefined;
 export const updateSummaries = (game) =>
   updateConfig(
     assocPath(
