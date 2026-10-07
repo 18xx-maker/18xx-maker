@@ -300,6 +300,36 @@ git status public/schemas src/schemas   # generated files show up in the diff
 Runtime consumers of a schema change (UI forms, docs, export options) are
 listed under "Exporting" and "Translations" when the field is user facing.
 
+### Renaming a field
+
+An old name is never removed and a stored game is never rewritten, so a rename
+is an alias. Pick the one name, the same as the equivalent fields (`...FontSize`,
+camelCase), then:
+
+1. In `game.schema.json` add the new property with a full description and keep
+   the old one with `"deprecated": true`, a description that starts with
+   "Deprecated, use X." and a `deprecationMessage`. The text is in
+   `src/locales/schema.<lang>.json` (the schema holds keys). Run `make`.
+2. Read it inline as `new ?? old ?? default` (never `||`: 0 and false are
+   values, and the new name wins when a game has both).
+3. Add `problems.deprecations.<key>` ("still works, rename X to Y") to `en`,
+   `de` and `zh`. The key is what `SchemaField` derives and what
+   `deprecatedIssues` returns: the keys of the old path joined by `_`, list
+   items dropped (`info_titleSize`, `phases_events_close_companies`). The
+   locale test fails for a missing key.
+4. Put the old name in `src/data/games/18Broken.json` and in `renames` of
+   `tests/support/deprecatedGame.js` (not in `tests/support/brokenGame.js`,
+   its counts are hardcoded), use the new name in `18Test.json` and migrate the
+   other bundled games, stories and tests. Add a render test that the old name
+   draws the same as the new one, that the new one wins and that 0 is a value
+   (`tests/coverage/renamed-fields.test.jsx`).
+5. Update the docs (the renamed fields table in `game-info`, and the page of
+   the field) in all three languages. Snapshots must not change.
+
+Known limit: `deprecatedPaths` follows `$ref`, `items` and `allOf` of the game
+schema only, so `deprecated` on a field of a tile or hex (`tiles.defs.json`
+refs) is ignored until it follows those refs.
+
 ## Translations
 
 UI strings live in `src/locales/<lang>.json` (`en` is the source) and the docs
