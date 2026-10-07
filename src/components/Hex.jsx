@@ -359,7 +359,9 @@ const HexTile = ({
   // clip that side to the true edge plus overlap instead. A half is clipped the
   // same way. A clipPath of the caller wins over both, so a hex that gets one is
   // drawn whole
-  const halves = [hex.half, ...(extraHalves || [])].filter(Boolean);
+  const halves = [map ? hex.half : undefined, ...(extraHalves || [])].filter(
+    Boolean,
+  );
   const seamClip =
     !clipPath && (hex.removeBorders?.length > 0 || halves.length > 0);
   const clipId = seamClip ? `hexSeamClip${seamId.replace(/:/g, "")}` : clipPath;

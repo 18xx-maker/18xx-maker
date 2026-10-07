@@ -1,12 +1,18 @@
 import { screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import Hex from "@/components/Hex";
+
 import { renderApp } from "../support/helpers";
+import { drawSvg } from "../support/render";
 
 /* eslint-disable testing-library/no-node-access */
 const viewBox = (el) => el.querySelector("svg").getAttribute("viewBox");
 
 // 18Test trims the bottom and right of its map, and its B10 is a right half
+// 13.75 by 5.76 inches on letter paper: two pages across, one down
+const PAGES = 2;
+
 describe("map trim and half", () => {
   it("makes the map page smaller by the trimmed edges", async () => {
     renderApp("/games/18Test/map?print=true");
@@ -38,6 +44,21 @@ describe("map trim and half", () => {
   it("splits the trimmed map over the pages like its size", async () => {
     renderApp("/games/18Test/map?paginated=true");
     const map = await screen.findByTestId("game-18Test-map-paginated");
-    expect(map.querySelectorAll(".paginated__page").length).toBeGreaterThan(0);
+    expect(map.querySelectorAll(".paginated__page").length).toBe(PAGES);
+  });
+
+  it("draws a half on the map only, tiles ignore it", async () => {
+    const hex = { color: "plain", half: "top" };
+    const onMap = await drawSvg(<Hex hex={hex} map border />);
+    expect(onMap.querySelectorAll("clipPath[id^='hexSeamClip']")).toHaveLength(
+      1,
+    );
+    const onTile = await drawSvg(<Hex hex={hex} border />);
+    expect(onTile.querySelectorAll("clipPath[id^='hexSeamClip']")).toHaveLength(
+      0,
+    );
+    expect(
+      onTile.querySelectorAll("clipPath[id^='hexBorderClip']"),
+    ).toHaveLength(0);
   });
 });

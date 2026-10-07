@@ -67,15 +67,19 @@
           "type": "object",
           "properties": {
             "top": {
+              "description": "Cut half a hex off the top of the page.",
               "type": "boolean"
             },
             "bottom": {
+              "description": "Cut half a hex off the bottom of the page.",
               "type": "boolean"
             },
             "left": {
+              "description": "Cut half a hex off the left of the page.",
               "type": "boolean"
             },
             "right": {
+              "description": "Cut half a hex off the right of the page.",
               "type": "boolean"
             }
           },

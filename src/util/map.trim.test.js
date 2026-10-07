@@ -71,28 +71,74 @@ describe("getMapData trim", () => {
   });
 
   describe("coordinates", () => {
-    it("keep the top labels in the margin and move the bottom ones up", () => {
+    const BIG = ["A1", "A3", "A5", "B2", "B4", "C1", "C3", "C5"];
+    const big = (trim, orientation) =>
+      getMapData(
+        {
+          info: { orientation },
+          map: { trim, hexes: [{ hexes: BIG }] },
+        },
+        "edge",
+        W,
+      );
+
+    it("keep the top labels in the margin", () => {
       const top = trimmed({ top: true });
       expect(top.topCoord(1)).toBe(base().topCoord(1));
       // A column that starts lower moves with the hexes, but not off the page
       expect(top.topCoord(2)).toBeGreaterThanOrEqual(10);
-      const bottom = trimmed({ bottom: true });
-      expect(bottom.bottomCoord(1)).toBeCloseTo(base().bottomCoord(1) - E);
-      expect(bottom.topCoord(1)).toBe(base().topCoord(1));
+      expect(trimmed({ bottom: true }).topCoord(1)).toBe(base().topCoord(1));
     });
 
-    it("follow the left and right edges", () => {
-      expect(trimmed({ left: true }).leftCoord(1)).toBe(10);
-      expect(trimmed({ right: true }).rightCoord(1)).toBeCloseTo(
-        base().rightCoord(1) - H,
+    it("keep the bottom labels with the hexes, on the page", () => {
+      // The hexes move up by the top trim only, the bottom label follows them
+      const top = big({ top: true });
+      expect(top.bottomCoord(2)).toBeCloseTo(
+        Math.min(big().bottomCoord(2) - E, top.totalHeight - 10),
       );
+      expect(top.bottomCoord(2)).toBeCloseTo(big().bottomCoord(2) - E);
+      // A trimmed bottom does not move the hexes of a column that is not cut
+      const bottom = big({ bottom: true });
+      expect(bottom.bottomCoord(2)).toBeCloseTo(
+        Math.min(big().bottomCoord(2), bottom.totalHeight - 10),
+      );
+      expect(bottom.bottomCoord(1)).toBeLessThanOrEqual(
+        bottom.totalHeight - 10,
+      );
+    });
+
+    it("keep the right labels with the hexes, on the page", () => {
+      const left = big({ left: true });
+      expect(left.rightCoord(2)).toBeCloseTo(big().rightCoord(2) - H);
+      const right = big({ right: true });
+      expect(right.rightCoord(2)).toBeCloseTo(
+        Math.min(big().rightCoord(2), right.totalWidth - 10),
+      );
+      expect(right.rightCoord(1)).toBeLessThanOrEqual(right.totalWidth - 10);
+      expect(trimmed({ left: true }).leftCoord(1)).toBe(10);
     });
 
     it("swap with the axes on a horizontal map", () => {
-      const data = trimmed({ top: true, bottom: true }, "horizontal");
-      expect(data.bottomCoord(1)).toBeCloseTo(
-        base("horizontal").bottomCoord(1) - 2 * H,
+      const data = big({ top: true, bottom: true, right: true }, "horizontal");
+      const plain = big(undefined, "horizontal");
+      // The top of the page is the first column: the labels at the bottom
+      // follow the hexes, which moved by it, and stay on the page
+      expect(data.bottomCoord(2)).toBeCloseTo(
+        Math.min(plain.bottomCoord(2) - H, data.totalHeight - 10),
       );
+      expect(data.rightCoord(2)).toBeCloseTo(
+        Math.min(plain.rightCoord(2), data.totalWidth - 10),
+      );
+    });
+
+    it("do not change for a map that is not trimmed", () => {
+      // A hex in column 0 puts the left label before the page
+      const plain = getMapData(
+        { info: {}, map: { hexes: [{ hexes: ["A0", "B1"] }] } },
+        "edge",
+        W,
+      );
+      expect(plain.leftCoord(1)).toBe(10 + H * (0 - 1));
     });
   });
 
@@ -122,6 +168,30 @@ describe("getMapData trim", () => {
       const data = trimmed({ top: true, left: true }, "horizontal");
       expect(data.trimHalves(1, 2)).toEqual(["bottom"]);
       expect(data.trimHalves(2, 1)).toEqual(["right"]);
+    });
+  });
+
+  describe("a map that starts at a later row and column", () => {
+    const late = (trim) =>
+      getMapData(
+        { info: {}, map: { trim, hexes: [{ hexes: ["B4", "C5"] }] } },
+        "edge",
+        W,
+      );
+
+    it("cuts the first row and column of the hexes", () => {
+      const data = late({ top: true, left: true });
+      expect(data.trimHalves(4, 2)).toEqual(["bottom", "right"]);
+      expect(data.trimHalves(5, 3)).toEqual([]);
+    });
+
+    it("moves the hexes to the cut", () => {
+      const plain = late({});
+      const data = late({ top: true, left: true });
+      expect(data.hexY(4, 2)).toBeCloseTo(data.coordOffset);
+      expect(data.hexX(4, 2)).toBeCloseTo(data.coordOffset + 4 * H - 4 * H);
+      expect(data.totalHeight).toBeCloseTo(plain.totalHeight - (1.5 * E + E));
+      expect(data.totalWidth).toBeCloseTo(plain.totalWidth - 4 * H);
     });
   });
 

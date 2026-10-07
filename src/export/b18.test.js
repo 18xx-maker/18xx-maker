@@ -10,6 +10,40 @@ const spec = (changes = {}, extra = {}) => {
   return b18Spec(game, loadGameConfig(game), data, { ...options, ...extra });
 };
 
+describe("b18Spec grid of a trimmed map", () => {
+  const board = (trim, orientation) => {
+    const game = {
+      ...loadGame("18Test"),
+      info: { ...loadGame("18Test").info, orientation },
+      map: { trim, hexes: [{ color: "plain", hexes: ["A1", "B2"] }] },
+    };
+    return b18Spec(game, loadGameConfig(game), data, options).json.board;
+  };
+  const squash = 87 / 86.6025;
+
+  it("starts where the hexes start, not at the trimmed edge", () => {
+    const plain = board({});
+    expect(board({ top: true }).yStart).toBeCloseTo(
+      plain.yStart - 57.735 * squash,
+    );
+    expect(board({ left: true }).xStart).toBeCloseTo(plain.xStart - 50);
+    expect(board({ bottom: true, right: true })).toMatchObject({
+      xStart: plain.xStart,
+      yStart: plain.yStart,
+    });
+  });
+
+  it("follows the page edges of a horizontal map", () => {
+    const plain = board({}, "horizontal");
+    expect(board({ top: true }, "horizontal").yStart).toBeCloseTo(
+      plain.yStart - 50,
+    );
+    expect(board({ left: true }, "horizontal").xStart).toBeCloseTo(
+      plain.xStart - 57.735 * squash,
+    );
+  });
+});
+
 describe("b18Spec", () => {
   it("names the box and its files after the id and version", () => {
     const { names, images, json } = spec();
