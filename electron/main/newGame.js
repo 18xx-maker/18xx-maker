@@ -1,7 +1,6 @@
 import nodeFs from "node:fs";
 
-import { titleToFilename } from "#util/index";
-import { newGameJson } from "#util/newGame";
+import { newGameFilename, newGameJson } from "#util/newGame";
 
 export const MAX_TITLE = 200;
 
@@ -21,13 +20,23 @@ export const createNewGame =
     const name = title.trim() || "New Game";
     const { canceled, filePath } = await showSaveDialog({
       title: "Save new game",
-      defaultPath: `${titleToFilename(name)}.json`,
+      defaultPath: `${newGameFilename(name)}.json`,
+      properties: ["showOverwriteConfirmation", "createDirectory"],
       filters: [{ name: "18xx-maker Game", extensions: ["json"] }],
     });
     if (canceled || !filePath) return undefined;
 
-    const path = /\.json$/i.test(filePath) ? filePath : `${filePath}.json`;
-    fs.writeFileSync(path, newGameJson(name));
+    // The dialog confirms an overwrite of the name the user typed, not of the
+    // name with .json added, so that one is never overwritten
+    const typed = /\.json$/i.test(filePath);
+    const path = typed ? filePath : `${filePath}.json`;
+    try {
+      fs.writeFileSync(path, newGameJson(name), typed ? {} : { flag: "wx" });
+    } catch (e) {
+      if (e?.code === "EEXIST")
+        throw new Error(`${path} already exists`, { cause: e });
+      throw e;
+    }
 
     return slugOfPath(path) ?? (await saveGamePath(path));
   };

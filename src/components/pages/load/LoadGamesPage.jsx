@@ -27,9 +27,8 @@ import GameRow from "@/components/pages/load/GameRow";
 
 import { publishers } from "@/data";
 import { createAlert, loadSummaries } from "@/state";
-import { titleToFilename } from "@/util";
 import capability from "@/util/capability";
-import { newGameJson } from "@/util/newGame";
+import { newGameFilename, newGameJson } from "@/util/newGame";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
 import { isTestGame } from "@/util/testGames";
@@ -167,7 +166,7 @@ const LoadGamesPage = () => {
     } else if (capability.system && capability.apis.save_file_picker) {
       created = idb.createGameFile(
         newGameJson(title),
-        `${titleToFilename(title)}.json`,
+        `${newGameFilename(title)}.json`,
       );
     } else {
       created = opfs.saveGameFile(newGameJson(title));

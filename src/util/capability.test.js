@@ -1,6 +1,7 @@
 import "@tests/support/windowStub.js";
 
 afterEach(() => {
+  delete window.showOpenFilePicker;
   delete window.showSaveFilePicker;
   vi.resetModules();
 });
@@ -16,6 +17,5 @@ describe("capability", () => {
     window.showSaveFilePicker = () => {};
     const capability = await load();
     expect(capability.apis.save_file_picker).toBe(true);
-    delete window.showOpenFilePicker;
   });
 });

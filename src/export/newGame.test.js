@@ -1,10 +1,13 @@
 import { createNewGame } from "../../electron/main/newGame.js";
 
-const setup = ({ isMain = true, dialog = {}, known } = {}) => {
+const setup = ({ isMain = true, dialog = {}, known, existing = [] } = {}) => {
   const files = {};
   const calls = [];
   const fs = {
-    writeFileSync: vi.fn((path, text) => {
+    writeFileSync: vi.fn((path, text, options) => {
+      if (options?.flag === "wx" && existing.includes(path)) {
+        throw Object.assign(new Error("exists"), { code: "EEXIST" });
+      }
       calls.push("write");
       files[path] = text;
     }),
@@ -40,6 +43,7 @@ describe("the newGame handler", () => {
     expect(showSaveDialog).toHaveBeenCalledWith(
       expect.objectContaining({
         defaultPath: "my-game.json",
+        properties: ["showOverwriteConfirmation", "createDirectory"],
         filters: [{ name: "18xx-maker Game", extensions: ["json"] }],
       }),
     );
@@ -61,6 +65,29 @@ describe("the newGame handler", () => {
     await handler({}, "My Game");
     expect(saveGamePath).toHaveBeenCalledWith("/games/other.json");
     expect(files["/games/other.json"]).toBeDefined();
+  });
+
+  it("does not overwrite a game when it added the json extension", async () => {
+    const { files, fs, saveGamePath, handler } = setup({
+      dialog: { filePath: "/x/a" },
+      existing: ["/x/a.json"],
+    });
+    await expect(handler({}, "My Game")).rejects.toThrow("already exists");
+    expect(files["/x/a.json"]).toBeUndefined();
+    expect(fs.writeFileSync.mock.calls[0][2]).toEqual({ flag: "wx" });
+    expect(saveGamePath).not.toHaveBeenCalled();
+  });
+
+  it("writes plainly when the dialog path already has the extension", async () => {
+    const { fs, handler } = setup({ existing: ["/games/my-game.json"] });
+    await handler({}, "My Game");
+    expect(fs.writeFileSync.mock.calls[0][2]?.flag).toBeUndefined();
+  });
+
+  it("suggests new-game.json for a title without latin letters", async () => {
+    const { showSaveDialog, handler } = setup();
+    await handler({}, "新建游戏");
+    expect(showSaveDialog.mock.calls[0][0].defaultPath).toBe("new-game.json");
   });
 
   it("reuses the slug of a file that is already a game", async () => {

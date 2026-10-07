@@ -27,3 +27,10 @@ export const newGameJson = (title) =>
     null,
     2,
   );
+
+// The suggested file name for a title: its lowercase letters and digits, or
+// "new-game" for a title with none (a Chinese title would give "-")
+export const newGameFilename = (title) => {
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return /[a-z0-9]/.test(slug) ? slug : "new-game";
+};

@@ -1,5 +1,5 @@
 import { validateGame } from "@/util/gameValidation";
-import { newGameJson } from "#util/newGame";
+import { newGameFilename, newGameJson } from "#util/newGame";
 
 describe("newGameJson", () => {
   const game = JSON.parse(newGameJson("My Game"));
@@ -17,5 +17,15 @@ describe("newGameJson", () => {
 
   it("is a valid game", async () => {
     expect(await validateGame(game)).toEqual([]);
+  });
+});
+
+describe("newGameFilename", () => {
+  it("slugs a latin title", () => {
+    expect(newGameFilename("My Game")).toBe("my-game");
+  });
+
+  it("falls back for a title without latin letters or digits", () => {
+    expect(newGameFilename("新建游戏")).toBe("new-game");
   });
 });
