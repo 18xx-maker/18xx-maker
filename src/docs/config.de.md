@@ -57,6 +57,47 @@ Fenster eine Bezeichnung und eine Beschreibung, daher ist das hier nur ein
 | Währung                   | wie Geld für jede Art von Betrag geschrieben wird                                                                              |
 | Daten                     | deine Konfiguration zurücksetzen, kopieren, herunterladen und importieren sowie die eigene Konfiguration eines Spiels zulassen |
 
+## Schriften
+
+Die Einstellung `fonts` legt die Schrift einer Art von Text an einer Stelle
+fest. Sie ist noch kein Bedienelement im Fenster: Lege sie in deiner
+`config.json`, im JSON, das du im Bereich Daten importierst, in
+`?config.fonts...`-Parametern oder in der `config` einer Spieldatei fest.
+
+```json
+{
+  "fonts": {
+    "families": { "fancy": "Georgia, serif" },
+    "roles": {
+      "body": { "family": "fancy" },
+      "title": { "weight": "normal", "style": "italic" },
+      "card": { "weight": "bold" }
+    }
+  }
+}
+```
+
+- Eine **Rolle** ist eine Art von Text: `body`, `title`, `label`, `revenue`,
+  `token`, `price` und `card`. Sie legt eine `family` fest, eine `size` (eine
+  Zahl, in den Einheiten der Seite), eine `weight` (`normal`, `bold` oder eine
+  Zahl) und einen `style` (`normal`, `italic` oder `oblique`). Jede Einstellung
+  ist optional. Eine Rolle beginnt mit der Rolle `body`, und eine nicht gesetzte
+  Einstellung behält den Standard des Textes.
+- Eine `family` ist ein Name aus `families`, eine der eingebauten `display`,
+  `serif` und `sans-serif` oder eine beliebige CSS-Schriftfamilie. Systemschriften
+  werden nicht in Exporte eingebettet, siehe [SVG](/docs/output/svg).
+- Derzeit legt die Rolle `title` die Namen von Städten, Orten und
+  Off-Board-Bereichen fest, und die Rolle `card` Schriftfamilie, Schriftstärke
+  und Schriftstil des Textes der Karten der privaten Gesellschaften. Die
+  anderen Rollen sind für den Text, der als Nächstes umgestellt wird.
+- Die Schriftfelder eines Kachelelements oder einer Spieldatei (wie
+  `info.nameFontSize`) haben weiterhin Vorrang vor einer Rolle, daher ändert
+  sich kein Spiel von selbst.
+- Die Teile von `fonts` werden über die obigen Stufen kombiniert: das
+  `fonts.roles.title.weight` eines Spiels und dein `fonts.roles.title.size`
+  gelten beide, und das Spiel gewinnt, wenn beide dasselbe festlegen (wenn
+  _Spiel-Konfiguration erlauben_ aktiv ist).
+
 ## Direktlinks
 
 Ein Abschnitt hat einen Namen in der Adresse, sodass du darauf verlinken

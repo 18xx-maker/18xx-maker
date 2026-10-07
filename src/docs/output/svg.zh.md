@@ -26,6 +26,8 @@ SVG 文件是矢量图形:您可以在 Inkscape、Illustrator 或 Affinity Desig
 
 文字保留为文字,因此您仍然可以修改它。这意味着程序需要安装这些字体才能按设计显示。18xx Maker 的字体是 [Bitter](https://fonts.google.com/specimen/Bitter)(标题和数字)、[Yrsa](https://fonts.google.com/specimen/Yrsa) 和 [Lato](https://fonts.google.com/specimen/Lato):请安装您用到的字体。每个文件顶部的注释列出了其文字所用的字体。没有该字体的程序会用其他字体显示文字,宽度可能会改变。
 
+使用[配置面板](/docs/config)的 `fonts` 设置所指定字体的文字,会以该字体族写入文件。系统字体不会嵌入文件,请在打开文件的电脑上安装它们。
+
 若要把文件分享给没有这些字体的人,或发送给印刷厂,请先把文字转换为路径:Inkscape 中为_路径 > 对象转为路径_,Illustrator 中为_文字 > 创建轮廓_。转换后文字将无法再编辑。
 
 ## 命令行

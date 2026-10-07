@@ -4,7 +4,9 @@ Das sind die Felder einer Spieldatei, die beschreiben, wie das Spiel gespielt
 wird, und welche Seite oder Datei jedes davon speist. Felder, die nur das
 Aussehen ändern (Schriften, Größen, Position des Titels), stehen im
 [Spiel-Schema](https://18xx-maker.com/schemas/game.schema.json) unter `info` und
-werden hier nicht wiederholt. Phasen und Züge stehen unter
+werden hier nicht wiederholt. Die Schriften eines ganzen Spiels legst du an einer
+Stelle mit der Einstellung `fonts` der [Konfiguration](/docs/config) fest; die
+Schriftfelder hier haben weiterhin Vorrang. Phasen und Züge stehen unter
 [Phasen und Züge](/docs/games/trains).
 
 ## Info

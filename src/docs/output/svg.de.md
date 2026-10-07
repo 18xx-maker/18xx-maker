@@ -53,6 +53,11 @@ verwendest. Ein Kommentar am Anfang jeder Datei listet die Schriften ihres
 Textes auf. Ein Programm ohne die Schrift zeigt den Text in einer anderen
 Schrift, was seine Breite ändern kann.
 
+Text, der eine mit der Einstellung `fonts` der [Konfiguration](/docs/config)
+festgelegte Schrift verwendet, wird mit dieser Schriftfamilie geschrieben.
+Systemschriften werden nicht in die Datei eingebettet, installiere sie also auf
+dem Computer, der sie öffnet.
+
 Um eine Datei an jemanden ohne die Schriften weiterzugeben oder an eine
 Druckerei zu schicken, wandle den Text zuerst in Pfade um: _Pfad > Objekt in
 Pfad umwandeln_ in Inkscape, _Schrift > In Pfade umwandeln_ in Illustrator.
