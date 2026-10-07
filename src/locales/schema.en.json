@@ -226,6 +226,7 @@
   "schema.game.exports.docs": "Only export these pages, like --docs. All pages when left out. Only for pdf, png and svg files.",
   "schema.game.exports.layouts": "all exports a file for every layout of the cards, tiles and tokens, current only the layout of the config, like --layouts. When left out the export.allLayouts setting of the config decides.",
   "schema.game.exports.paginated": "Deprecated and ignored. The paginated pdfs of the map, market, par and revenue are always exported when the page does not fit on one page of the paper.",
+  "schema.game.exports.paginated.deprecated": "Deprecated and ignored: the paginated pdfs are always exported when the page does not fit on one page.",
   "schema.game.exports.background": "The background of the map, market, par, revenue and tile manifest png images, like --background: white or transparent. Every other png image (the background page, cards, charters, tokens and tiles) is always transparent. Board18 boxes, svg and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to white.",
   "schema.game.exports.variation": "Only export this map variation (0 is the first), like --variation. All variations when left out.",
   "schema.game.exports.png": "Options of the png images.",

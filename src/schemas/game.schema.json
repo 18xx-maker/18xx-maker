@@ -2416,7 +2416,8 @@
         "paginated": {
           "type": "boolean",
           "deprecated": true,
-          "description": "schema.game.exports.paginated"
+          "description": "schema.game.exports.paginated",
+          "deprecationMessage": "schema.game.exports.paginated.deprecated"
         },
         "background": {
           "type": "string",

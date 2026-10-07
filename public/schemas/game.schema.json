@@ -2416,7 +2416,8 @@
         "paginated": {
           "type": "boolean",
           "deprecated": true,
-          "description": "Deprecated and ignored. The paginated pdfs of the map, market, par and revenue are always exported when the page does not fit on one page of the paper."
+          "description": "Deprecated and ignored. The paginated pdfs of the map, market, par and revenue are always exported when the page does not fit on one page of the paper.",
+          "deprecationMessage": "Deprecated and ignored: the paginated pdfs are always exported when the page does not fit on one page."
         },
         "background": {
           "type": "string",

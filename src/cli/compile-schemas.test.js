@@ -141,6 +141,23 @@ describe("the text of the source schemas", () => {
       [],
     );
   });
+
+  it.each(sources)("%s has a notice for every deprecated field", (file) => {
+    const found = [];
+    const walk = (node) => {
+      if (Array.isArray(node)) node.forEach(walk);
+      else if (node && typeof node === "object") {
+        if (node.deprecated === true) found.push(node.deprecationMessage);
+        Object.values(node).forEach(walk);
+      }
+    };
+    walk(readSchema(file));
+    for (const key of found) {
+      expect(key).toBeDefined();
+      expect(strings.en).toHaveProperty([key]);
+      expect(key).toMatch(/\.deprecated$/);
+    }
+  });
 });
 
 describe.each(LANGUAGES)("the schemas in %s", (language) => {
@@ -157,6 +174,20 @@ describe.each(LANGUAGES)("the schemas in %s", (language) => {
   it.each(PUBLISHED)("%s has no key left", (file) => {
     const schema = JSON.parse(read(path.join(folder(language), file)));
     expect(schemaKeys(schema)).toEqual([]);
+  });
+
+  it("has the notice of a deprecated field as its deprecationMessage", () => {
+    const game = JSON.parse(
+      read(path.join(folder(language), "game.schema.json")),
+    );
+    const { paginated } = game.properties.exports.properties;
+    expect(paginated.deprecationMessage).toBe(
+      strings[language]["schema.game.exports.paginated.deprecated"],
+    );
+    // The description keeps the whole text
+    expect(paginated.description).toBe(
+      strings[language]["schema.game.exports.paginated"],
+    );
   });
 
   it("points the game schema at the tile definitions of the language", () => {
