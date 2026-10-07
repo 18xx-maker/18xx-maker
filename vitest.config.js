@@ -69,7 +69,7 @@ export default defineConfig({
       },
       {
         // Integration tests run in a real browser (a DOM emulation and Node
-        // disagree on Request/AbortSignal, which react-router needs)
+        // disagree on Request/AbortSignal)
         ...shared,
         // Imported on demand by the app, pre-bundle them so that Vite does
         // not find them mid test and reload the page
@@ -93,6 +93,9 @@ export default defineConfig({
             "shiki/langs/json.mjs",
             "shiki/themes/github-dark-default.mjs",
             "shiki/themes/github-light.mjs",
+            "wouter",
+            "wouter/memory-location",
+            "wouter/use-browser-location",
           ],
         },
         test: {
