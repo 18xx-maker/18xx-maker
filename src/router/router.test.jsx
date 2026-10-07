@@ -225,10 +225,35 @@ describe("with the memory router", () => {
 
   it("has an empty rest for a splat that matched nothing", () => {
     renderAt("/games/18Test");
-    expect(screen.getByTestId("p")).toHaveTextContent('"*":""');
-    expect(
-      JSON.parse(screen.getByTestId("p").textContent).match.params["*"],
-    ).toBe("");
+    const { match } = JSON.parse(screen.getByTestId("p").textContent);
+    expect(match.params["*"]).toBe("");
+  });
+
+  it("decodes a param once", () => {
+    renderAt("/games/x/tiles/A%2541");
+    const { params } = JSON.parse(screen.getByTestId("p").textContent);
+    expect(params["*"]).toBe("tiles/A%41");
+  });
+
+  it("matches a literal pattern against the decoded path", () => {
+    const Literal = ({ pattern }) => (
+      <span data-testid="m">{JSON.stringify(useMatch(pattern))}</span>
+    );
+    const { unmount } = render(
+      <MemoryRouter initialEntries={["/games/internal:My%20Game"]}>
+        <Literal pattern="/games/internal:My Game" />
+      </MemoryRouter>,
+    );
+    expect(JSON.parse(screen.getByTestId("m").textContent).pathname).toBe(
+      "/games/internal:My%20Game",
+    );
+    unmount();
+    render(
+      <MemoryRouter initialEntries={["/games/a(1)%5Bb%5D"]}>
+        <Literal pattern="/games/a(1)[b]" />
+      </MemoryRouter>,
+    );
+    expect(JSON.parse(screen.getByTestId("m").textContent)).not.toBeNull();
   });
 
   it("matches a slug with a colon and nothing after it", () => {

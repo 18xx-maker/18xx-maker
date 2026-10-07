@@ -1,13 +1,15 @@
 import { screen } from "@testing-library/react";
 
+import { routePatterns } from "@/routes";
+
 import { renderApp } from "@tests/support/helpers.jsx";
-import { matchedPattern, routePatterns } from "@tests/support/routes.js";
+import { matchedPattern } from "@tests/support/routes.js";
 import { docs, docsUrl, routes, visitedUrls } from "@tests/support/smoke.js";
 
 describe("route table", () => {
   it("has a smoke test URL for every route", () => {
     const visited = new Set(visitedUrls().map((url) => matchedPattern(url)));
-    expect([...visited].sort()).toEqual(routePatterns().sort());
+    expect([...visited].sort()).toEqual([...routePatterns].sort());
   });
 });
 

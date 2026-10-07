@@ -53,3 +53,29 @@ export const safeDecode = (value) => {
     return value;
   }
 };
+
+// The path with every segment decoded, but a %2F stays: it is not a slash
+// between segments (like react-router's decodePath)
+export const decodePath = (path) =>
+  path
+    .split("/")
+    .map((segment) => safeDecode(segment).replace(/\//g, "%2F"))
+    .join("/");
+
+// A pattern for matching: regex characters of the static segments are literal
+// (a slug can hold parentheses), params (":x") and splats ("*") stay
+export const escapePattern = (pattern) =>
+  pattern
+    .split("/")
+    .map((segment) =>
+      /^[:*]/.test(segment)
+        ? segment
+        : segment.replace(/[\\.*+^${}|()[\]]/g, "\\$&"),
+    )
+    .join("/");
+
+// The reserved characters decodeURI leaves encoded, decoded: wouter's path
+// is already decodeURI'd, so decoding it all again would decode a "%2541"
+// (a literal "%41") to "A"
+export const decodeReserved = (value) =>
+  value.replace(/%(?:2[346BCF]|3[ABDF]|40)/gi, safeDecode);

@@ -78,7 +78,7 @@ Conventions:
   fix it or add it to the snapshots. `e2e/fixtures/e2e-game.json` is the same
   for the CLI: it keeps removed fields (`pools`, `discount`) so exports of
   games that still have them are covered; `pnpm validate` does not read it.
-- Every route in `rootRoutes` needs a smoke test entry (`tests/support/routes.js`,
+- Every route in `routePatterns` (`src/routes.jsx`, made from what `AppRoutes` renders) needs a smoke test entry (`tests/support/routes.js`,
   `tests/support/smoke.js`).
 - CI enforces a 95% statement floor on `src/state/**`. The state layer is
   pinned by `src/state/*.test.js` (reducers, thunks, root state contract,

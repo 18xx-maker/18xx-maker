@@ -78,15 +78,27 @@ const gamePages = {
   "/games/:slug/tokens/:index": <TokenPage />,
 };
 
-// Every page as a path pattern (the docs are one page for every path under
-// /docs), in the order the pages are listed in
-export const routePatterns = [
-  ...Object.keys(topPages),
-  ...Object.keys(elementsPages),
-  "/games",
-  ...Object.keys(gamePages),
-  "/docs",
+// Every top-level route, in the order they are matched: AppRoutes renders
+// this table and routePatterns is made from it. A route with a layout wraps
+// its pages (an unknown path in a group is the layout with no page, and an
+// unknown path outside of them is Root with no page). The docs are one page
+// for every path under /docs.
+const topRoutes = [
+  ...Object.entries(topPages).map(([path, element]) => ({ path, element })),
+  {
+    path: "/elements/*?",
+    layout: ElementsPage,
+    pages: elementsPages,
+  },
+  { path: "/games", element: <LoadGamesPage /> },
+  { path: "/games/:slug/*?", layout: GamePage, pages: gamePages },
+  { path: "/docs/*?", element: <DocsPage /> },
 ];
+
+// Every page as a path pattern, in the order the pages are listed in
+export const routePatterns = topRoutes.flatMap(({ path, pages }) =>
+  pages ? Object.keys(pages) : [path],
+);
 
 const pages = (list) => (
   <Switch>
@@ -98,30 +110,15 @@ const pages = (list) => (
   </Switch>
 );
 
-// What a page of a group has around it. An unknown path in a group is the
-// layout with no page, and an unknown path outside of them is Root with no
-// page.
 const AppRoutes = () => (
   <RouteErrorBoundary>
     <Root>
       <Switch>
-        {Object.entries(topPages).map(([path, element]) => (
+        {topRoutes.map(({ path, element, layout: Layout, pages: list }) => (
           <Route key={path} path={path}>
-            {element}
+            {Layout ? <Layout>{pages(list)}</Layout> : element}
           </Route>
         ))}
-        <Route path="/elements/*?">
-          <ElementsPage>{pages(elementsPages)}</ElementsPage>
-        </Route>
-        <Route path="/games">
-          <LoadGamesPage />
-        </Route>
-        <Route path="/games/:slug/*?">
-          <GamePage>{pages(gamePages)}</GamePage>
-        </Route>
-        <Route path="/docs/*?">
-          <DocsPage />
-        </Route>
       </Switch>
     </Root>
   </RouteErrorBoundary>

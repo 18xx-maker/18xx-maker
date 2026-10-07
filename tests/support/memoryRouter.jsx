@@ -2,40 +2,18 @@ import { useState, useSyncExternalStore } from "react";
 import { Router } from "wouter";
 import { memoryLocation } from "wouter/memory-location";
 
+import { parsePath, resolveTo } from "@/router/url";
+
 // A memory router for tests, built on wouter's memoryLocation. It keeps the
 // history stack itself so a test can go back and forward, and exposes the
 // state the tests read: router.state.location.{pathname,search,hash} (search
 // and hash with their "?" and "#") and router.state.historyAction (PUSH,
 // REPLACE or POP, as the last navigation made it).
 
+// The parts of a url, with "/" for no pathname
 const split = (url) => {
-  let rest = url;
-  let hash = "";
-  const h = rest.indexOf("#");
-  if (h >= 0) {
-    hash = rest.slice(h);
-    rest = rest.slice(0, h);
-  }
-  let search = "";
-  const q = rest.indexOf("?");
-  if (q >= 0) {
-    search = rest.slice(q);
-    rest = rest.slice(0, q);
-  }
-  return {
-    pathname: rest || "/",
-    search: search === "?" ? "" : search,
-    hash: hash === "#" ? "" : hash,
-  };
-};
-
-// "/x?a=1" or { pathname, search, hash } (what is missing is the current
-// pathname, an empty search and an empty hash, as in a link) to a url
-const toUrl = (to, current) => {
-  if (typeof to === "string") return to;
-  const search = to.search ? to.search.replace(/^\??/, "?") : "";
-  const hash = to.hash ? to.hash.replace(/^#?/, "#") : "";
-  return `${to.pathname ?? current.pathname}${search}${hash}`;
+  const parts = parsePath(url);
+  return { ...parts, pathname: parts.pathname || "/" };
 };
 
 export const createMemoryRouter = (
@@ -66,7 +44,7 @@ export const createMemoryRouter = (
       at = next;
       action = "POP";
     } else {
-      const url = toUrl(to, current());
+      const url = resolveTo(to, current());
       if (replace) {
         stack[at] = url;
         action = "REPLACE";

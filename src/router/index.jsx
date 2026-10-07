@@ -1,4 +1,4 @@
-// The only module that imports wouter. The app asks for a location the way
+// The only module outside src/router that imports wouter. The app asks for a location the way
 // react-router had it: { pathname, search, hash } with the "?" and "#", a
 // navigate that takes a url, an object or a number of entries, and params
 // that are decoded. A url is "/path?search#hash" in both modes: with the
@@ -25,9 +25,11 @@ import { useLocationProperty } from "wouter/use-browser-location";
 
 import { useHashLocation } from "@/router/hash";
 import {
+  decodePath,
+  decodeReserved,
+  escapePattern,
   optionalSplat,
   resolveTo,
-  safeDecode,
   withHash,
   withSearch,
 } from "@/router/url";
@@ -91,22 +93,26 @@ export const useNavigate = () => {
   );
 };
 
-// Decoded params. A splat that matched nothing is an empty string, as in
-// react-router (the "*" of "/games/x" in "/games/:slug/*").
-const decodeParams = (params, pattern = "") =>
+// Params with a splat that matched nothing as an empty string, as in
+// react-router (the "*" of "/games/x" in "/games/:slug/*"), decoded by
+// decode
+const withParams = (params, pattern, decode) =>
   Object.fromEntries(
     Object.entries({
       ...params,
       ...(pattern.endsWith("/*?") ? { "*": params["*"] ?? "" } : {}),
     }).map(([key, value]) => [
       key,
-      value === undefined ? value : safeDecode(value),
+      value === undefined ? value : decode(value),
     ]),
   );
 
+// A %2F stays a slash in a value, the path was decoded around it
+const decodeSlash = (value) => value.replace(/%2F/gi, "/");
+
 // The match of a pattern with the location (null for none) as
-// { params, pathname }, like react-router had it. A trailing /* matches the
-// path without a rest too.
+// { params, pathname }, like react-router had it. The pattern is matched with
+// the decoded path, and a trailing /* matches the path without a rest too.
 export const useMatch = (pattern) => {
   const router = useRouter();
   const [raw] = router.hook(router);
@@ -114,16 +120,20 @@ export const useMatch = (pattern) => {
 
   return useMemo(() => {
     const optional = optionalSplat(pattern);
-    const [matches, params] = matchRoute(router.parser, optional, pathname);
+    const [matches, params] = matchRoute(
+      router.parser,
+      escapePattern(optional),
+      decodePath(pathname),
+    );
     if (!matches) return null;
-    return { params: decodeParams(params, optional), pathname };
+    return { params: withParams(params, optional, decodeSlash), pathname };
   }, [router.parser, pattern, pathname]);
 };
 
-// The params of the route, decoded
+// The params of the route, decoded. wouter matched the path decodeURI'd.
 export const useParams = () => {
   const params = useWouterParams();
-  return useMemo(() => decodeParams(params), [params]);
+  return useMemo(() => withParams(params, "", decodeReserved), [params]);
 };
 
 // to is a url or { pathname, search, hash }
