@@ -330,5 +330,11 @@
   "schema.tiles.token.quarters": "四个四分之一的四种颜色。",
   "schema.tiles.token.sexies": "在六个部分上交替的两种颜色。",
   "schema.tiles.token.sunrise": "日出图案的三种颜色。",
-  "schema.tiles.token.hexagram": "六角星各三角形的两种颜色。"
+  "schema.tiles.token.hexagram": "六角星各三角形的两种颜色。",
+  "schema.game.map.trim": "沿页面边缘裁掉地图边缘半行或半列的六边形:页面相应变小,边缘的六边形只绘制一半。用于延续到另一块板上的地图。复制其他地图的地图会保留其被裁掉的边缘,除非重新设置该边(false 会恢复这一半)。",
+  "schema.game.map.trim.top": "在页面顶部裁掉半个六边形。",
+  "schema.game.map.trim.bottom": "在页面底部裁掉半个六边形。",
+  "schema.game.map.trim.left": "在页面左侧裁掉半个六边形。",
+  "schema.game.map.trim.right": "在页面右侧裁掉半个六边形。",
+  "schema.tiles.hex.half": "只绘制六边形的这一半,从中心切开,已绘制部分的四周都有边框。仅用于地图六边形:板块会忽略它。绘制在六边形之外的内容,如其编号或奖励,不会被裁掉。切线经过的边在切线处结束,切线处没有边框。"
 }

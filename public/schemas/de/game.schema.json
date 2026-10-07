@@ -62,6 +62,29 @@
           "type": "boolean",
           "const": false
         },
+        "trim": {
+          "description": "Schneidet eine halbe Reihe oder Spalte Felder an den Rändern der Karte ab, bis zum Seitenrand: Die Seite wird um so viel kleiner, und die Felder am Rand werden als Hälften gezeichnet. Für Karten, die auf einem anderen Brett weitergehen. Eine Karte, die eine andere kopiert, behält deren abgeschnittene Ränder, außer sie setzt den Rand erneut (false bringt die Hälfte zurück).",
+          "type": "object",
+          "properties": {
+            "top": {
+              "description": "Schneidet ein halbes Feld am oberen Seitenrand ab.",
+              "type": "boolean"
+            },
+            "bottom": {
+              "description": "Schneidet ein halbes Feld am unteren Seitenrand ab.",
+              "type": "boolean"
+            },
+            "left": {
+              "description": "Schneidet ein halbes Feld am linken Seitenrand ab.",
+              "type": "boolean"
+            },
+            "right": {
+              "description": "Schneidet ein halbes Feld am rechten Seitenrand ab.",
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
         "remove": {
           "type": "array",
           "items": {

@@ -330,5 +330,11 @@
   "schema.tiles.token.quarters": "Four colors of the quarters.",
   "schema.tiles.token.sexies": "Two colors alternating over six parts.",
   "schema.tiles.token.sunrise": "Three colors of the sunrise.",
-  "schema.tiles.token.hexagram": "Two colors of the triangles of the hexagram."
+  "schema.tiles.token.hexagram": "Two colors of the triangles of the hexagram.",
+  "schema.game.map.trim": "Cut half a row or column of hexes off the edges of the map, by the edge of the page: the page gets smaller by that, and the hexes along the edge are drawn as halves. For maps that continue on another board. A map that copies another keeps its trimmed edges unless it sets the edge again (false puts the half back).",
+  "schema.game.map.trim.top": "Cut half a hex off the top of the page.",
+  "schema.game.map.trim.bottom": "Cut half a hex off the bottom of the page.",
+  "schema.game.map.trim.left": "Cut half a hex off the left of the page.",
+  "schema.game.map.trim.right": "Cut half a hex off the right of the page.",
+  "schema.tiles.hex.half": "Draw only this half of the hex, cut through its center, with a border all around the part that is drawn. Used on map hexes only: tiles ignore it. Things drawn outside the hex, like its id or a bonus, are not cut. The sides the cut passes through stop at the cut, which gets no border."
 }

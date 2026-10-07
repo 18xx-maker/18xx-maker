@@ -1991,6 +1991,11 @@
         "companies": { "$ref": "#/definitions/companies" },
         "divides": { "$ref": "#/definitions/divides" },
         "goods": { "$ref": "#/definitions/goods" },
+        "half": {
+          "description": "只绘制六边形的这一半,从中心切开,已绘制部分的四周都有边框。仅用于地图六边形:板块会忽略它。绘制在六边形之外的内容,如其编号或奖励,不会被裁掉。切线经过的边在切线处结束,切线处没有边框。",
+          "type": "string",
+          "enum": ["top", "bottom", "left", "right"]
+        },
         "icons": { "$ref": "#/definitions/icons" },
         "industries": { "$ref": "#/definitions/industries" },
         "labels": { "$ref": "#/definitions/labels" },

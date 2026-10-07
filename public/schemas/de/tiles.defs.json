@@ -1991,6 +1991,11 @@
         "companies": { "$ref": "#/definitions/companies" },
         "divides": { "$ref": "#/definitions/divides" },
         "goods": { "$ref": "#/definitions/goods" },
+        "half": {
+          "description": "Zeichnet nur diese Hälfte des Feldes, durch die Mitte geschnitten, mit einem Rand rund um den gezeichneten Teil. Nur für Kartenfelder: Plättchen ignorieren es. Was außerhalb des Feldes gezeichnet wird, etwa seine ID oder ein Bonus, wird nicht abgeschnitten. Die Seiten, durch die der Schnitt verläuft, enden am Schnitt, der keinen Rand erhält.",
+          "type": "string",
+          "enum": ["top", "bottom", "left", "right"]
+        },
         "icons": { "$ref": "#/definitions/icons" },
         "industries": { "$ref": "#/definitions/industries" },
         "labels": { "$ref": "#/definitions/labels" },

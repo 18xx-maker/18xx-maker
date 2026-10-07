@@ -892,7 +892,7 @@
           "$ref": "#/definitions/goods"
         },
         "half": {
-          "description": "Draw only this half of the hex, cut through its center, with a border all around the part that is drawn. Used on map hexes only: tiles ignore it. Things drawn outside the hex, like its id or a bonus, are not cut. The sides the cut passes through stop at the cut, which gets no border.",
+          "description": "schema.tiles.hex.half",
           "type": "string",
           "enum": ["top", "bottom", "left", "right"]
         },

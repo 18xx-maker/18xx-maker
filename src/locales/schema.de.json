@@ -330,5 +330,11 @@
   "schema.tiles.token.quarters": "Vier Farben der Viertel.",
   "schema.tiles.token.sexies": "Zwei Farben, die sich über sechs Teile abwechseln.",
   "schema.tiles.token.sunrise": "Drei Farben des Sonnenaufgangs.",
-  "schema.tiles.token.hexagram": "Zwei Farben der Dreiecke des Hexagramms."
+  "schema.tiles.token.hexagram": "Zwei Farben der Dreiecke des Hexagramms.",
+  "schema.game.map.trim": "Schneidet eine halbe Reihe oder Spalte Felder an den Rändern der Karte ab, bis zum Seitenrand: Die Seite wird um so viel kleiner, und die Felder am Rand werden als Hälften gezeichnet. Für Karten, die auf einem anderen Brett weitergehen. Eine Karte, die eine andere kopiert, behält deren abgeschnittene Ränder, außer sie setzt den Rand erneut (false bringt die Hälfte zurück).",
+  "schema.game.map.trim.top": "Schneidet ein halbes Feld am oberen Seitenrand ab.",
+  "schema.game.map.trim.bottom": "Schneidet ein halbes Feld am unteren Seitenrand ab.",
+  "schema.game.map.trim.left": "Schneidet ein halbes Feld am linken Seitenrand ab.",
+  "schema.game.map.trim.right": "Schneidet ein halbes Feld am rechten Seitenrand ab.",
+  "schema.tiles.hex.half": "Zeichnet nur diese Hälfte des Feldes, durch die Mitte geschnitten, mit einem Rand rund um den gezeichneten Teil. Nur für Kartenfelder: Plättchen ignorieren es. Was außerhalb des Feldes gezeichnet wird, etwa seine ID oder ein Bonus, wird nicht abgeschnitten. Die Seiten, durch die der Schnitt verläuft, enden am Schnitt, der keinen Rand erhält."
 }
