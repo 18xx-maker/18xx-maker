@@ -847,7 +847,7 @@
         },
         "stripeRotation": {
           "type": "number",
-          "description": "Override the rotation (in degrees) of the stripes for a striped color such as \"yellow/blue\"."
+          "description": "schema.tiles.hex.stripeRotation"
         },
         "encoding": {
           "type": "string"
@@ -855,17 +855,17 @@
         "group": {
           "type": "string",
           "pattern": "^[0-9a-z]+$",
-          "description": "Tiles are naturually sorted into groups based on color for printing. This overrides that grouping. Useful for tiles with fancy borders or other bleed issues."
+          "description": "schema.tiles.hex.group"
         },
         "broken": {
           "type": "boolean",
           "enum": [true],
-          "description": "Marks this tile as being broken and not ready for exporting."
+          "description": "schema.tiles.hex.broken"
         },
         "clipPath": {
           "type": "boolean",
           "enum": [false],
-          "description": "Remove the special bleed clipPath when printing these tiles. They will always be printed with no bleed."
+          "description": "schema.tiles.hex.clipPath"
         },
         "borders": {
           "$ref": "#/definitions/borders"
@@ -972,31 +972,31 @@
     },
     "token": {
       "type": "object",
-      "description": "A token. The properties are the ones the Token component reads.",
+      "description": "schema.tiles.token",
       "properties": {
         "logo": {
           "type": "string",
-          "description": "Name of an svg logo to draw on the token."
+          "description": "schema.tiles.token.logo"
         },
         "logoWidth": {
           "type": "number",
-          "description": "Width of the logo."
+          "description": "schema.tiles.token.logoWidth"
         },
         "icon": {
           "type": "string",
-          "description": "Name of an icon to draw on the token."
+          "description": "schema.tiles.token.icon"
         },
         "iconWidth": {
           "type": "number",
-          "description": "Width of the icon."
+          "description": "schema.tiles.token.iconWidth"
         },
         "iconColor": {
           "type": "string",
-          "description": "Color of the icon or logo."
+          "description": "schema.tiles.token.iconColor"
         },
         "iconY": {
           "type": "number",
-          "description": "Vertical position of the icon."
+          "description": "schema.tiles.token.iconY"
         },
         "label": {
           "oneOf": [
@@ -1007,19 +1007,19 @@
               "type": "number"
             }
           ],
-          "description": "Text to write on the token."
+          "description": "schema.tiles.token.label"
         },
         "labelColor": {
           "type": "string",
-          "description": "Color of the label text."
+          "description": "schema.tiles.token.labelColor"
         },
         "labelY": {
           "type": "number",
-          "description": "Override the vertical position of the label."
+          "description": "schema.tiles.token.labelY"
         },
         "labelStrokeColor": {
           "type": "string",
-          "description": "Color of the stroke around the label."
+          "description": "schema.tiles.token.labelStrokeColor"
         },
         "labelStrokeWidth": {
           "oneOf": [
@@ -1030,7 +1030,7 @@
               "type": "number"
             }
           ],
-          "description": "Width of the stroke around the label."
+          "description": "schema.tiles.token.labelStrokeWidth"
         },
         "label2": {
           "oneOf": [
@@ -1041,71 +1041,71 @@
               "type": "number"
             }
           ],
-          "description": "A second, smaller line of text shown with the label."
+          "description": "schema.tiles.token.label2"
         },
         "label2Position": {
           "type": "string",
           "enum": ["above", "below"],
-          "description": "Whether the second line is above or below the label. Defaults to below."
+          "description": "schema.tiles.token.label2Position"
         },
         "label2Color": {
           "type": "string",
-          "description": "Color of the second line. Defaults to the label color."
+          "description": "schema.tiles.token.label2Color"
         },
         "color": {
           "type": "string",
-          "description": "Background color of the token."
+          "description": "schema.tiles.token.color"
         },
         "fontSize": {
           "type": "number",
-          "description": "Font size of the label."
+          "description": "schema.tiles.token.fontSize"
         },
         "fontFamily": {
           "type": "string",
-          "description": "Font family of the label."
+          "description": "schema.tiles.token.fontFamily"
         },
         "width": {
           "type": "number",
-          "description": "Width (radius) of the token, 25 by default."
+          "description": "schema.tiles.token.width"
         },
         "tokenShape": {
           "type": "string",
-          "description": "square draws a square token, anything else a circle."
+          "description": "schema.tiles.token.tokenShape"
         },
         "shapeAngle": {
           "type": "number",
-          "description": "Angle of the shapes, independent of the rotation."
+          "description": "schema.tiles.token.shapeAngle"
         },
         "rotation": {
           "type": "number",
-          "description": "Rotation of the token."
+          "description": "schema.tiles.token.rotation"
         },
         "fixed": {
           "type": "boolean",
-          "description": "Cancels all rotation of the token."
+          "description": "schema.tiles.token.fixed"
         },
         "destination": {
           "type": "boolean",
-          "description": "A destination token, smaller by default."
+          "description": "schema.tiles.token.destination"
         },
         "reserved": {
           "type": "boolean",
-          "description": "A reserved token, drawn in gray."
+          "description": "schema.tiles.token.reserved"
         },
         "inverse": {
           "type": "boolean",
-          "description": "Draw the inverse of the token: no logo, only text."
+          "description": "schema.tiles.token.inverse"
         },
         "inverseLabelColor": {
           "type": "string",
-          "description": "Label color of an inverse token."
+          "description": "schema.tiles.token.inverseLabelColor"
         },
         "bleed": {
           "type": "boolean",
-          "description": "Draw bleed around the token for printing."
+          "description": "schema.tiles.token.bleed"
         },
         "bar": {
-          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "description": "schema.tiles.token.bar",
           "oneOf": [
             {
               "type": "boolean"
@@ -1117,27 +1117,27 @@
         },
         "barHeight": {
           "type": "number",
-          "description": "Height of the bar."
+          "description": "schema.tiles.token.barHeight"
         },
         "barBorderColor": {
           "type": "string",
-          "description": "Color of the border of the bar."
+          "description": "schema.tiles.token.barBorderColor"
         },
         "outline": {
           "type": "string",
-          "description": "Color of the outline."
+          "description": "schema.tiles.token.outline"
         },
         "outlineWidth": {
           "type": "number",
-          "description": "Width of the outline."
+          "description": "schema.tiles.token.outlineWidth"
         },
         "target": {
           "type": "string",
-          "description": "Color of a target shape."
+          "description": "schema.tiles.token.target"
         },
         "stripe": {
           "type": "string",
-          "description": "Color of a stripe."
+          "description": "schema.tiles.token.stripe"
         },
         "stripeWidth": {
           "oneOf": [
@@ -1148,46 +1148,46 @@
               "type": "number"
             }
           ],
-          "description": "Width of the stripe."
+          "description": "schema.tiles.token.stripeWidth"
         },
         "stripes": {
           "type": "string",
-          "description": "Color of the stripes."
+          "description": "schema.tiles.token.stripes"
         },
         "stripesWidth": {
           "type": "number",
-          "description": "Width of the stripes."
+          "description": "schema.tiles.token.stripesWidth"
         },
         "stripesDistance": {
           "type": "number",
-          "description": "Distance of the stripes from the middle."
+          "description": "schema.tiles.token.stripesDistance"
         },
         "curvedStripes": {
           "type": "string",
-          "description": "Color of curved stripes."
+          "description": "schema.tiles.token.curvedStripes"
         },
         "curvedStripesWidth": {
           "type": "number",
-          "description": "Width of the curved stripes."
+          "description": "schema.tiles.token.curvedStripesWidth"
         },
         "curvedStripesDistance": {
           "type": "number",
-          "description": "Distance of the curved stripes from the middle."
+          "description": "schema.tiles.token.curvedStripesDistance"
         },
         "spiral": {
           "type": "string",
-          "description": "Color of a spiral."
+          "description": "schema.tiles.token.spiral"
         },
         "spiralWidth": {
           "type": "number",
-          "description": "Width of the spiral."
+          "description": "schema.tiles.token.spiralWidth"
         },
         "spiralDistance": {
           "type": "number",
-          "description": "Distance between the turns of the spiral."
+          "description": "schema.tiles.token.spiralDistance"
         },
         "circle": {
-          "description": "Color of a circle in the middle, true for white.",
+          "description": "schema.tiles.token.circle",
           "oneOf": [
             {
               "type": "string"
@@ -1200,11 +1200,11 @@
         },
         "circleRadius": {
           "type": "number",
-          "description": "Radius of the circle, 25 is the full token."
+          "description": "schema.tiles.token.circleRadius"
         },
         "circleBorderColor": {
           "type": "string",
-          "description": "Border color of the circle."
+          "description": "schema.tiles.token.circleBorderColor"
         },
         "shield": {
           "oneOf": [
@@ -1216,11 +1216,11 @@
               "enum": [true]
             }
           ],
-          "description": "Color of a shield, true for white."
+          "description": "schema.tiles.token.shield"
         },
         "shieldTop": {
           "type": "string",
-          "description": "Color of the top of the shield."
+          "description": "schema.tiles.token.shieldTop"
         },
         "shield3": {
           "oneOf": [
@@ -1232,19 +1232,19 @@
               "enum": [true]
             }
           ],
-          "description": "Color of a three part shield, true for white."
+          "description": "schema.tiles.token.shield3"
         },
         "shield3TopLeft": {
           "type": "string",
-          "description": "Color of the top left of the three part shield."
+          "description": "schema.tiles.token.shield3TopLeft"
         },
         "shield3TopCenter": {
           "type": "string",
-          "description": "Color of the top center of the three part shield."
+          "description": "schema.tiles.token.shield3TopCenter"
         },
         "shield3TopRight": {
           "type": "string",
-          "description": "Color of the top right of the three part shield."
+          "description": "schema.tiles.token.shield3TopRight"
         },
         "kiteshield": {
           "oneOf": [
@@ -1256,7 +1256,7 @@
               "enum": [true]
             }
           ],
-          "description": "Color of a kite shield, true for white."
+          "description": "schema.tiles.token.kiteshield"
         },
         "star5": {
           "oneOf": [
@@ -1268,11 +1268,11 @@
               "enum": [true]
             }
           ],
-          "description": "Color of a five pointed star, true for white."
+          "description": "schema.tiles.token.star5"
         },
         "square": {
           "type": "string",
-          "description": "Color of a square on the token."
+          "description": "schema.tiles.token.square"
         },
         "halves": {
           "type": "array",
@@ -1281,7 +1281,7 @@
           },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors of the halves."
+          "description": "schema.tiles.token.halves"
         },
         "quarters": {
           "type": "array",
@@ -1290,7 +1290,7 @@
           },
           "minItems": 4,
           "maxItems": 4,
-          "description": "Four colors of the quarters."
+          "description": "schema.tiles.token.quarters"
         },
         "sexies": {
           "type": "array",
@@ -1299,7 +1299,7 @@
           },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors alternating over six parts."
+          "description": "schema.tiles.token.sexies"
         },
         "sunrise": {
           "type": "array",
@@ -1308,7 +1308,7 @@
           },
           "minItems": 3,
           "maxItems": 3,
-          "description": "Three colors of the sunrise."
+          "description": "schema.tiles.token.sunrise"
         },
         "hexagram": {
           "type": "array",
@@ -1317,7 +1317,7 @@
           },
           "minItems": 2,
           "maxItems": 2,
-          "description": "Two colors of the triangles of the hexagram."
+          "description": "schema.tiles.token.hexagram"
         }
       },
       "additionalProperties": false

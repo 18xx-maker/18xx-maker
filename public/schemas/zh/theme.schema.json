@@ -1,14 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://18xx-maker.com/schemas/theme.schema.json",
+  "$id": "https://18xx-maker.com/schemas/zh/theme.schema.json",
   "definitions": {
     "color": {
       "type": "string",
-      "description": "schema.theme.color",
+      "description": "A individual hex or rgb encoded color string",
       "pattern": "(#[0-9a-f]{3}([0-9a-f]{3})?([0-9a-f]{2})?)|(rgb\\([0-9]+,[0-9]+,[0-9]+\\))"
     },
     "themeColor": {
-      "description": "schema.theme.themeColor",
+      "description": "Either a color, or a subgrouping of colors in a certain context",
       "oneOf": [
         {
           "$ref": "#/definitions/color"

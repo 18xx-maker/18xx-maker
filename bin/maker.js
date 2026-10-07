@@ -2,7 +2,7 @@
 import { CommanderError, program } from "commander";
 
 import b18 from "#cli/b18";
-import compile from "#cli/compile-schemas";
+import compile, { localize } from "#cli/compile-schemas";
 import config from "#cli/config";
 import exportCommand from "#cli/exportCommand";
 import print from "#cli/print";
@@ -42,6 +42,10 @@ const compileCommand = program
   .command("compile")
   .description("compile 18xx Maker assets");
 compileCommand.command("schemas", { isDefault: true }).action(compile);
+compileCommand
+  .command("locales")
+  .description("write the schemas with their text in every language")
+  .action(localize);
 
 program
   .command("validate")

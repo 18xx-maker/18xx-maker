@@ -1,7 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import compile from "#cli/compile-schemas";
+import compile, {
+  LANGUAGES,
+  PUBLISHED,
+  localizeSchemaFile,
+} from "#cli/compile-schemas";
+import { SCHEMA_KEY, schemaKeys } from "../util/schemaKeys.js";
 
 // Never overwrite the real generated schema
 vi.mock("node:fs", async (importOriginal) => {
@@ -83,5 +88,105 @@ describe("compile-schemas", () => {
 
   it("matches the committed tiles.defs.json", () => {
     expect(JSON.parse(written)).toEqual(readSchema("tiles.defs.json"));
+  });
+});
+
+const read = (file) => fs.readFileSync(file, "utf-8");
+const locales = path.join(import.meta.dirname, "../locales");
+const published = path.join(import.meta.dirname, "../../public/schemas");
+const strings = Object.fromEntries(
+  LANGUAGES.map((language) => [
+    language,
+    JSON.parse(read(path.join(locales, `schema.${language}.json`))),
+  ]),
+);
+const folder = (language) =>
+  language === "en" ? published : path.join(published, language);
+
+// Every description of a schema, wherever the schema keeps one
+const descriptions = (node, found = []) => {
+  if (Array.isArray(node)) node.forEach((part) => descriptions(part, found));
+  else if (node && typeof node === "object") {
+    for (const [name, value] of Object.entries(node)) {
+      if (["default", "examples", "const", "enum"].includes(name)) continue;
+      if (name === "description" && typeof value === "string") {
+        found.push(value);
+      } else {
+        descriptions(value, found);
+      }
+    }
+  }
+  return found;
+};
+
+describe("the text of the source schemas", () => {
+  const sources = [
+    "companies.schema.json",
+    "config.schema.json",
+    "fields.schema.json",
+    "game.schema.json",
+    "publishers.schema.json",
+    "theme.schema.json",
+    "tiles.schema.json",
+    "tiles.src.json",
+    "tiles.defs.json",
+  ];
+
+  it.each(sources)("%s has only keys of schema.en.json", (file) => {
+    const schema = readSchema(file);
+    expect(
+      descriptions(schema).filter((text) => !SCHEMA_KEY.test(text)),
+    ).toEqual([]);
+    expect(schemaKeys(schema).filter((key) => !(key in strings.en))).toEqual(
+      [],
+    );
+  });
+});
+
+describe.each(LANGUAGES)("the schemas in %s", (language) => {
+  it.each(PUBLISHED)("compiles %s to the committed file", async (file) => {
+    const compiled = await localizeSchemaFile(
+      read(path.join(schemas, file)),
+      strings[language],
+      language,
+      file === "tiles.defs.json",
+    );
+    expect(compiled).toBe(read(path.join(folder(language), file)));
+  });
+
+  it.each(PUBLISHED)("%s has no key left", (file) => {
+    const schema = JSON.parse(read(path.join(folder(language), file)));
+    expect(schemaKeys(schema)).toEqual([]);
+  });
+
+  it("points the game schema at the tile definitions of the language", () => {
+    const text = read(path.join(folder(language), "game.schema.json"));
+    const game = JSON.parse(text);
+    const defs = JSON.parse(
+      read(path.join(folder(language), "tiles.defs.json")),
+    );
+    const ref = text.match(
+      /"\$ref": "(tiles\.defs\.json)#\/definitions\/hex"/,
+    )[1];
+    expect(game.$id).toBe(
+      `https://18xx-maker.com/schemas/${language === "en" ? "" : `${language}/`}game.schema.json`,
+    );
+    expect(new URL(ref, game.$id).href).toBe(defs.$id);
+  });
+});
+
+describe("localizeSchemaFile", () => {
+  it("fails on a key without text", async () => {
+    const raw = '{ "description": "schema.game.nope" }';
+    await expect(localizeSchemaFile(raw, {}, "en", false)).rejects.toThrow(
+      "Unknown schema key schema.game.nope",
+    );
+  });
+
+  it("keeps the layout of the source", async () => {
+    const raw = '{\n  "a": { "description": "schema.x" }\n}\n';
+    expect(
+      await localizeSchemaFile(raw, { "schema.x": "Text" }, "en", false),
+    ).toBe('{\n  "a": { "description": "Text" }\n}\n');
   });
 });

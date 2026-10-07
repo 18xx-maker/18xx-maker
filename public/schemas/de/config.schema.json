@@ -1,28 +1,28 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://18xx-maker.com/schemas/config.schema.json",
+  "$id": "https://18xx-maker.com/schemas/de/config.schema.json",
 
   "definitions": {
     "cardSize": {
       "type": "object",
-      "description": "schema.config.cardSize",
+      "description": "The size of one type of card in units. A missing width or height uses cards.width or cards.height.",
       "properties": {
         "width": {
           "type": "number",
           "minimum": 1,
-          "description": "schema.config.cardSize.width"
+          "description": "The card width in units."
         },
         "height": {
           "type": "number",
           "minimum": 1,
-          "description": "schema.config.cardSize.height"
+          "description": "The card height in units."
         }
       },
       "additionalProperties": false
     },
     "cardSizes": {
       "type": "object",
-      "description": "schema.config.cardSizes",
+      "description": "Optional size per type of card, used instead of width and height. A missing width or height uses the one above.",
       "properties": {
         "private": { "$ref": "#/definitions/cardSize" },
         "share": { "$ref": "#/definitions/cardSize" },
@@ -33,17 +33,17 @@
     },
     "dieCard": {
       "type": "object",
-      "description": "schema.config.dieCard",
+      "description": "The size of the cards of a die layout in units. The paper, margins, cutlines and bleed of a die layout are fixed.",
       "properties": {
         "width": {
           "type": "number",
           "minimum": 1,
-          "description": "schema.config.cardSize.width"
+          "description": "The card width in units."
         },
         "height": {
           "type": "number",
           "minimum": 1,
-          "description": "schema.config.cardSize.height"
+          "description": "The card height in units."
         },
         "sizes": { "$ref": "#/definitions/cardSizes" }
       },
@@ -94,13 +94,13 @@
     "companyNames": {
       "type": "string",
       "enum": ["name", "alias", "both"],
-      "description": "schema.config.companyNames"
+      "description": "What the charters and share cards print as the name of a company. name is the name, alias is the alias of the company (the name when it has none), both is the name with the alias under it."
     },
     "printScale": {
       "type": "number",
       "minimum": 50,
       "maximum": 200,
-      "description": "schema.config.printScale"
+      "description": "Scales everything that prints, in percent, to correct for a printer that prints too big or too small. 100 is the real size. Paper size and margins stay the same, so the content of a page changes. It is a setting of the user, a game file cannot set it, and exports ignore it."
     },
     "paper": {
       "allOf": [
@@ -205,11 +205,11 @@
         "blackBand": { "type": "boolean" },
         "sizes": {
           "$ref": "#/definitions/cardSizes",
-          "description": "schema.config.cards.sizes"
+          "description": "Optional size per type of card, used instead of width and height. A missing width or height uses the one above. Ignored by the die layouts, which use the sizes of cards.dice."
         },
         "dice": {
           "type": "object",
-          "description": "schema.config.cards.dice",
+          "description": "The card sizes of the die layouts, which ignore width, height and sizes above.",
           "properties": {
             "miniEuroDie": { "$ref": "#/definitions/dieCard" },
             "dtgDie": { "$ref": "#/definitions/dieCard" }
@@ -218,12 +218,12 @@
         },
         "showPins": {
           "type": "boolean",
-          "description": "schema.config.cards.showPins"
+          "description": "Draw the pin markers on free layouts too. Fixed layouts (die layouts) always draw them. Free layouts reserve no space for pins, so adjust the pins positions or margins to keep them clear of content."
         },
         "duplex": {
           "type": "string",
           "enum": ["off", "separate", "long"],
-          "description": "schema.config.cards.duplex"
+          "description": "Print the backs of train cards. off prints no backs, separate prints all the fronts and then all the backs in the same order (for flipping the sheets by hand), long prints a sheet of backs after every sheet of fronts, mirrored for a printer set to flip on the long edge. Needs the free cards layout, the die layouts ignore it."
         },
         "pins": { "$ref": "#/definitions/pins" }
       },
@@ -332,11 +332,11 @@
         "gaps": { "type": "boolean" },
         "cutBorder": {
           "type": "boolean",
-          "description": "schema.config.tiles.cutBorder"
+          "description": "Draw a thin black outline at the exact cut size around every tile on the tile sheet, so tiles can be cut out by hand."
         },
         "showPins": {
           "type": "boolean",
-          "description": "schema.config.cards.showPins"
+          "description": "Draw the pin markers on free layouts too. Fixed layouts (die layouts) always draw them. Free layouts reserve no space for pins, so adjust the pins positions or margins to keep them clear of content."
         },
         "pins": { "$ref": "#/definitions/pins" }
       },

@@ -19,6 +19,7 @@ import {
   issuesFor,
   valueAt,
 } from "@/components/schemaForm/resolve";
+import { useSchemaText } from "@/components/schemaForm/schemaText";
 
 // What the fields need of the form: the root schema, the game, its problems
 // and how to set and clear the value of a path, and insert, remove and move the
@@ -164,6 +165,7 @@ const describedBy = (id, description, errors, deprecated) =>
 export const useField = (keys, schema) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
+  const text = useSchemaText();
   const id = useId();
   const [local, setLocal] = useState(null);
 
@@ -199,7 +201,7 @@ export const useField = (keys, schema) => {
     clear,
     setLocal,
     label: humanize(keys[keys.length - 1]),
-    description: schema.description,
+    description: text(schema.description),
     keys,
     deprecated,
     hasValue: value !== undefined,

@@ -5,7 +5,9 @@ import { path as getIn } from "ramda";
 
 import { resolveAllOf } from "@/components/schemaForm/resolve";
 
+import en from "@/locales/schema.en.json";
 import schema from "@/schemas/game.schema.json";
+import { resolveSchemaKeys } from "@/util/schemaKeys";
 import { refOptions, refPaths } from "@/util/schemaRefs";
 
 const ref = { from: "companies", key: "abbrev", label: "name" };
@@ -149,6 +151,6 @@ describe("the x-ref annotations of the game schema", () => {
       path.join(import.meta.dirname, "../../public/schemas/game.schema.json"),
       "utf8",
     );
-    expect(JSON.parse(published)).toEqual(schema);
+    expect(JSON.parse(published)).toEqual(resolveSchemaKeys(schema, en));
   });
 });

@@ -1,11 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
+import { isDeepStrictEqual } from "node:util";
 
 import { format } from "prettier";
 
 import { assocPath, forEach, forEachObjIndexed, keys } from "ramda";
 
-import { loadSchema } from "#cli/util";
+import { loadJSON, loadSchema } from "#cli/util";
+import { resolveSchemaKeys } from "../util/schemaKeys.js";
 
 const command = () => {
   const fields = loadSchema("fields.schema.json");
@@ -101,17 +103,16 @@ const command = () => {
   });
   tiles = assocPath(
     ["definitions", "gameToken"],
-    withProperties("A token of the game: how many to print, and the token.", {
+    withProperties("schema.tiles.gameToken", {
       quantity: {
-        description:
-          "How many of this token to print. ∞ needs print, to say how many.",
+        description: "schema.tiles.gameToken.quantity",
         oneOf: [
           { type: "integer", minimum: 0 },
           { type: "string", enum: ["∞"] },
         ],
       },
       print: {
-        description: "How many of this token to print, overrides quantity.",
+        description: "schema.tiles.gameToken.print",
         type: "integer",
         minimum: 0,
       },
@@ -121,14 +122,14 @@ const command = () => {
   tiles = assocPath(
     ["definitions", "roundToken"],
     withProperties(
-      "A token on the round tracker: the round and its token.",
+      "schema.tiles.roundToken",
       {
         name: {
-          description: "The name of the round, its label.",
+          description: "schema.tiles.roundToken.name",
           type: "string",
         },
         small: {
-          description: "Draw the round token smaller.",
+          description: "schema.tiles.roundToken.small",
           type: "boolean",
         },
       },
@@ -146,3 +147,70 @@ const command = () => {
   });
 };
 export default command;
+
+export const LANGUAGES = ["en", "de", "zh"];
+export const PUBLISHED = [
+  "companies.schema.json",
+  "config.schema.json",
+  "game.schema.json",
+  "publishers.schema.json",
+  "theme.schema.json",
+  "tiles.schema.json",
+  "tiles.defs.json",
+];
+
+const srcDir = path.join(import.meta.dirname, "../schemas");
+const localesDir = path.join(import.meta.dirname, "../locales");
+const publicDir = path.join(import.meta.dirname, "../../public/schemas");
+
+const ID = /("\$id":\s*"https:\/\/18xx-maker\.com\/schemas\/)/;
+
+// The text of a schema file in a language. The ids of a language other than
+// English point into its folder (the relative refs follow). Throws on a key
+// without text.
+//
+// The generated tile definitions are laid out by prettier from compact json,
+// so the text moves their line breaks: they are compiled again from the
+// resolved schema. The other files keep the layout of their source, the keys
+// are replaced in the text.
+export const localizeSchemaFile = async (raw, strings, language, generated) => {
+  const resolved = resolveSchemaKeys(JSON.parse(raw), strings);
+  const folder = language === "en" ? "$1" : `$1${language}/`;
+  if (generated) {
+    return format(JSON.stringify(resolved).replace(ID, folder), {
+      filepath: "schema.json",
+    });
+  }
+  const text = raw.replace(
+    /("(?:description|deprecationMessage)": )"(schema\.[\w.-]+)"/g,
+    (_, name, key) => `${name}${JSON.stringify(strings[key])}`,
+  );
+  // A key the replacement missed would leak into the published file
+  if (!isDeepStrictEqual(JSON.parse(text), resolved)) {
+    throw new Error("A schema key was not replaced");
+  }
+  return format(text.replace(ID, folder), { filepath: "schema.json" });
+};
+
+// Every published schema in every language, English where it always was and
+// the other languages in a folder of their own
+export const localize = async () => {
+  for (const language of LANGUAGES) {
+    const strings = loadJSON(path.join(localesDir, `schema.${language}.json`));
+    const folder =
+      language === "en" ? publicDir : path.join(publicDir, language);
+    fs.mkdirSync(folder, { recursive: true });
+    for (const file of PUBLISHED) {
+      const raw = fs.readFileSync(path.join(srcDir, file), "utf-8");
+      fs.writeFileSync(
+        path.join(folder, file),
+        await localizeSchemaFile(
+          raw,
+          strings,
+          language,
+          file === "tiles.defs.json",
+        ),
+      );
+    }
+  }
+};

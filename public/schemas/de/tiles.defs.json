@@ -1,0 +1,2823 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://18xx-maker.com/schemas/de/tiles.defs.json",
+  "definitions": {
+    "side": { "type": "integer", "minimum": 1, "maximum": 6 },
+    "rotation": {
+      "type": "integer",
+      "multipleOf": 60,
+      "minimum": 0,
+      "maximum": 300
+    },
+    "removeBorders": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": { "type": "number", "minimum": 1, "maximum": 6 }
+        },
+        { "type": "boolean", "enum": [true] }
+      ]
+    },
+    "borders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "side": { "$ref": "#/definitions/side" },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "color": { "type": "string" },
+          "width": { "type": "number" }
+        },
+        "additionalProperties": false,
+        "required": ["color"]
+      }
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": { "type": "string" },
+          "size": { "type": "number" },
+          "color": { "type": "string" },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": ["label"],
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "straight": { "type": "boolean", "enum": [true] },
+        "color": { "type": "string" },
+        "bgColor": { "type": "string" },
+        "offset": {
+          "type": "number",
+          "default": 50,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "fontStyle": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"]
+        },
+        "fontWeight": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["normal", "bold", "bolder", "lighter"]
+            },
+            { "type": "number" }
+          ]
+        },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "integer", "minimum": 4 },
+        "hidden": {
+          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name"],
+      "dependencies": { "align": ["mid"] }
+    },
+    "names": { "type": "array", "items": { "$ref": "#/definitions/name" } },
+    "goods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "text": { "type": "string" },
+          "textColor": { "type": "string" },
+          "textBorderWidth": { "type": "number", "minimum": 0 },
+          "textBorderColor": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "color": { "type": "string" },
+          "label": { "type": "string" },
+          "left": { "type": "number" },
+          "right": { "type": "number" },
+          "bottom": { "type": "boolean", "enum": [true] },
+          "reverse": { "type": "boolean", "enum": [true] },
+          "radius": { "type": "number", "exclusiveMinimum": 0 },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "divides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "companyToken": {
+      "type": "object",
+      "properties": {
+        "company": { "type": "string" },
+        "destination": { "type": "boolean", "enum": [true] },
+        "width": { "type": "integer", "minimum": 1 },
+        "bgFill": { "type": "string" },
+        "hidden": {
+          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "required": ["company"],
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "genericToken": {
+      "type": "object",
+      "properties": {
+        "logo": { "type": "string" },
+        "label": { "type": "string", "minLength": 1 },
+        "color": { "type": "string" },
+        "bgFill": { "type": "string" },
+        "iconColor": { "type": "string" },
+        "outline": { "type": "string" },
+        "outlineWidth": { "type": "integer", "minimum": 1 },
+        "circle": { "type": "string" },
+        "shield": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "shield3": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "kiteshield": {
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "shieldTop": { "type": "string" },
+        "shield3TopLeft": { "type": "string" },
+        "shield3TopCenter": { "type": "string" },
+        "shield3TopRight": { "type": "string" },
+        "square": { "type": "string" },
+        "spiral": { "type": "string" },
+        "target": { "type": "string" },
+        "stripe": { "type": "string" },
+        "stripes": { "type": "string" },
+        "curvedStripes": { "type": "string" },
+        "halves": { "type": "array", "items": { "type": "string" } },
+        "quarters": { "type": "array", "items": { "type": "string" } },
+        "destination": { "type": "boolean", "enum": [true] },
+        "reserved": { "type": "boolean", "enum": [true] },
+        "inverse": { "type": "boolean", "enum": [true] },
+        "inverseTextColor": { "type": "string" },
+        "angle": {
+          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "percent": {
+          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "type": "number",
+          "minimum": 0
+        },
+        "width": { "type": "integer", "minimum": 1 },
+        "text": { "type": "string" },
+        "textColor": { "type": "string" },
+        "textBorderWidth": { "type": "number", "minimum": 0 },
+        "textBorderColor": { "type": "string" },
+        "hidden": {
+          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "rotate": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        },
+        "fontStyle": {
+          "type": "string",
+          "enum": ["normal", "italic", "oblique"]
+        },
+        "fontWeight": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["normal", "bold", "bolder", "lighter"]
+            },
+            { "type": "number" }
+          ]
+        },
+        "fontFamily": { "type": "string" },
+        "fontSize": { "type": "integer", "minimum": 4 }
+      },
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/companyToken" },
+          { "$ref": "#/definitions/genericToken" }
+        ]
+      }
+    },
+    "industries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "top": { "type": "string" },
+          "bottom": { "type": "string" },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "offBoardRevenue": {
+      "type": "object",
+      "properties": {
+        "name": { "$ref": "#/definitions/name" },
+        "reverse": { "type": "boolean", "enum": [true] },
+        "rows": { "type": "integer", "minimum": 1 },
+        "groups": { "type": "array", "items": { "type": "string" } },
+        "revenues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": { "type": "string" },
+              "value": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "revenue": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "cost": { "oneOf": [{ "type": "string" }, { "type": "number" }] },
+              "phase": {
+                "oneOf": [{ "type": "string" }, { "type": "number" }]
+              },
+              "phaseColor": { "type": "string" },
+              "textColor": { "type": "string" }
+            }
+          }
+        },
+        "hidden": {
+          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "type": "boolean",
+          "enum": [true]
+        },
+        "angle": {
+          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotate": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "rotation": {
+          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "type": "number",
+          "exclusiveMinimum": -360,
+          "exclusiveMaximum": 360
+        },
+        "side": {
+          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "mid": {
+          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "type": "string",
+          "enum": ["gentle", "sharp", "straight"]
+        },
+        "align": {
+          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "type": "string",
+          "enum": ["perpendicular", "parallel"]
+        },
+        "x": {
+          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "y": {
+          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "type": "number"
+        },
+        "percent": {
+          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "type": "number",
+          "minimum": 0
+        },
+        "order": {
+          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "oneOf": [{ "type": "number" }, { "type": "boolean", "enum": [true] }]
+        }
+      },
+      "additionalProperties": false,
+      "dependencies": { "align": ["mid"] }
+    },
+    "boomtowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "city": { "type": "boolean", "enum": [true] },
+          "dashed": { "type": "boolean", "enum": [false] },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "bgColor": { "type": "string" },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          },
+          "groups": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "cities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "oneOf": [
+              { "type": "integer", "minimum": 1, "maximum": 6, "default": 1 },
+              { "type": "string", "enum": ["2Y", "1S1Y", "2S1Y", "3Ferry"] }
+            ]
+          },
+          "width": { "type": "integer", "minimum": 1 },
+          "extend": { "type": "string", "enum": ["left", "right"] },
+          "pass": { "type": "boolean", "enum": [true] },
+          "outside": { "type": "boolean", "enum": [true] },
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "companies": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": { "type": "string" },
+                    "color": { "type": "string" }
+                  }
+                },
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            }
+          },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "mediumCities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          },
+          "groups": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "centerTowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "width": { "type": "number", "exclusiveMinimum": 0 },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "towns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "groups": { "type": "array", "items": { "type": "string" } },
+          "color": { "type": "string" },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "bridges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "tunnels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "textColor": { "type": "string" },
+          "cost": { "type": "number" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "routeBonuses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "shapes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "background": { "type": "boolean", "enum": [true] },
+          "type": {
+            "type": "string",
+            "enum": [
+              "circle",
+              "diamond",
+              "ellipse",
+              "hexagon",
+              "square",
+              "triangle"
+            ]
+          },
+          "text": { "type": "string" },
+          "textColor": { "type": "string" },
+          "textBorderWidth": { "type": "number", "minimum": 0 },
+          "textBorderColor": { "type": "string" },
+          "color": { "type": "string" },
+          "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+          "borderColor": { "type": "string" },
+          "borderWidth": { "type": "number", "minimum": 0 },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "dashed": { "type": "boolean", "enum": [true] },
+          "fontStyle": {
+            "type": "string",
+            "enum": ["normal", "italic", "oblique"]
+          },
+          "fontWeight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": ["normal", "bold", "bolder", "lighter"]
+              },
+              { "type": "number" }
+            ]
+          },
+          "fontFamily": { "type": "string" },
+          "fontSize": { "type": "integer", "minimum": 4 },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "terrain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cost": { "type": "number" },
+          "size": {
+            "type": "string",
+            "enum": ["tiny", "small", "medium", "large"]
+          },
+          "type": { "type": "string" },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "icons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "noCircle": { "type": "boolean" },
+          "type": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "stroke": { "type": "string" },
+          "strokeWidth": { "type": "integer", "minimum": 1 },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "track": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sides": {
+            "type": "array",
+            "items": { "type": "number", "minimum": 1, "maximum": 6 }
+          },
+          "width": { "type": "integer", "minimum": 1 },
+          "color": { "type": "string" },
+          "borderColor": { "type": "string" },
+          "gaugeColor": { "type": "string" },
+          "revenue": { "type": "integer", "minimum": 0 },
+          "gauge": {
+            "type": "string",
+            "enum": ["narrow", "dual", "dashed", "line"]
+          },
+          "offset": { "type": "number" },
+          "cross": {
+            "type": "string",
+            "enum": ["over", "under", "top", "bottom"]
+          },
+          "path": { "type": "string" },
+          "start": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "end": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom",
+              "mid",
+              "sharp",
+              "gentle",
+              "straight",
+              "bent",
+              "offboard",
+              "stub",
+              "stop",
+              "straightStop",
+              "gentleStop",
+              "gentleStopRev",
+              "sharpStop",
+              "sharpStopRev",
+              "city"
+            ]
+          },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "tunnelEntrances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "oneOf": [{ "type": "number" }, { "type": "string" }] },
+          "outerBorderColor": { "type": "string" },
+          "hidden": {
+            "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "angle": {
+            "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotate": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "rotation": {
+            "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+            "type": "number",
+            "exclusiveMinimum": -360,
+            "exclusiveMaximum": 360
+          },
+          "side": {
+            "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+            "type": "number",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "mid": {
+            "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+            "type": "string",
+            "enum": ["gentle", "sharp", "straight"]
+          },
+          "align": {
+            "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+            "type": "string",
+            "enum": ["perpendicular", "parallel"]
+          },
+          "x": {
+            "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+            "type": "number"
+          },
+          "percent": {
+            "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+            "type": "number",
+            "minimum": 0
+          },
+          "order": {
+            "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+            "oneOf": [
+              { "type": "number" },
+              { "type": "boolean", "enum": [true] }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": ["value"],
+        "dependencies": { "align": ["mid"] }
+      }
+    },
+    "hex": {
+      "type": "object",
+      "properties": {
+        "print": { "type": "integer", "minimum": 0 },
+        "quantity": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "tile": { "type": "string" },
+        "color": { "type": "string" },
+        "stripeRotation": {
+          "type": "number",
+          "description": "Override the rotation (in degrees) of the stripes for a striped color such as \"yellow/blue\"."
+        },
+        "encoding": { "type": "string" },
+        "group": {
+          "type": "string",
+          "pattern": "^[0-9a-z]+$",
+          "description": "Tiles are naturually sorted into groups based on color for printing. This overrides that grouping. Useful for tiles with fancy borders or other bleed issues."
+        },
+        "broken": {
+          "type": "boolean",
+          "enum": [true],
+          "description": "Marks this tile as being broken and not ready for exporting."
+        },
+        "clipPath": {
+          "type": "boolean",
+          "enum": [false],
+          "description": "Remove the special bleed clipPath when printing these tiles. They will always be printed with no bleed."
+        },
+        "borders": { "$ref": "#/definitions/borders" },
+        "centerTowns": { "$ref": "#/definitions/centerTowns" },
+        "cities": { "$ref": "#/definitions/cities" },
+        "boomtowns": { "$ref": "#/definitions/boomtowns" },
+        "mediumCities": { "$ref": "#/definitions/mediumCities" },
+        "companies": { "$ref": "#/definitions/companies" },
+        "divides": { "$ref": "#/definitions/divides" },
+        "goods": { "$ref": "#/definitions/goods" },
+        "icons": { "$ref": "#/definitions/icons" },
+        "industries": { "$ref": "#/definitions/industries" },
+        "labels": { "$ref": "#/definitions/labels" },
+        "names": { "$ref": "#/definitions/names" },
+        "offBoardRevenue": { "$ref": "#/definitions/offBoardRevenue" },
+        "removeBorders": { "$ref": "#/definitions/removeBorders" },
+        "rotation": { "$ref": "#/definitions/rotation" },
+        "rotations": {
+          "oneOf": [
+            { "$ref": "#/definitions/side" },
+            { "type": "array", "items": { "$ref": "#/definitions/rotation" } }
+          ]
+        },
+        "bridges": { "$ref": "#/definitions/bridges" },
+        "tunnels": { "$ref": "#/definitions/tunnels" },
+        "routeBonuses": { "$ref": "#/definitions/routeBonuses" },
+        "shapes": { "$ref": "#/definitions/shapes" },
+        "terrain": { "$ref": "#/definitions/terrain" },
+        "tokens": { "$ref": "#/definitions/tokens" },
+        "towns": { "$ref": "#/definitions/towns" },
+        "track": { "$ref": "#/definitions/track" },
+        "tunnelEntrances": { "$ref": "#/definitions/tunnelEntrances" },
+        "values": { "$ref": "#/definitions/values" },
+        "hexes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[A-Z]+[0-9]+$" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "token": {
+      "type": "object",
+      "description": "A token. The properties are the ones the Token component reads.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name of an svg logo to draw on the token."
+        },
+        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "icon": {
+          "type": "string",
+          "description": "Name of an icon to draw on the token."
+        },
+        "iconWidth": { "type": "number", "description": "Width of the icon." },
+        "iconColor": {
+          "type": "string",
+          "description": "Color of the icon or logo."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertical position of the icon."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text to write on the token."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Color of the label text."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Override the vertical position of the label."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Color of the stroke around the label."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stroke around the label."
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "A second, smaller line of text shown with the label."
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "Whether the second line is above or below the label. Defaults to below."
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "Color of the second line. Defaults to the label color."
+        },
+        "color": {
+          "type": "string",
+          "description": "Background color of the token."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Font size of the label."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Font family of the label."
+        },
+        "width": {
+          "type": "number",
+          "description": "Width (radius) of the token, 25 by default."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square draws a square token, anything else a circle."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Angle of the shapes, independent of the rotation."
+        },
+        "rotation": {
+          "type": "number",
+          "description": "Rotation of the token."
+        },
+        "fixed": {
+          "type": "boolean",
+          "description": "Cancels all rotation of the token."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "A destination token, smaller by default."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "A reserved token, drawn in gray."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Draw the inverse of the token: no logo, only text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Label color of an inverse token."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Draw bleed around the token for printing."
+        },
+        "bar": {
+          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Height of the bar." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Color of the border of the bar."
+        },
+        "outline": { "type": "string", "description": "Color of the outline." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Width of the outline."
+        },
+        "target": {
+          "type": "string",
+          "description": "Color of a target shape."
+        },
+        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stripe."
+        },
+        "stripes": { "type": "string", "description": "Color of the stripes." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Width of the stripes."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Distance of the stripes from the middle."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Color of curved stripes."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Width of the curved stripes."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Distance of the curved stripes from the middle."
+        },
+        "spiral": { "type": "string", "description": "Color of a spiral." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Width of the spiral."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Distance between the turns of the spiral."
+        },
+        "circle": {
+          "description": "Color of a circle in the middle, true for white.",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius of the circle, 25 is the full token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Border color of the circle."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a shield, true for white."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Color of the top of the shield."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a three part shield, true for white."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Color of the top left of the three part shield."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Color of the top center of the three part shield."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Color of the top right of the three part shield."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a kite shield, true for white."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a five pointed star, true for white."
+        },
+        "square": {
+          "type": "string",
+          "description": "Color of a square on the token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the halves."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Four colors of the quarters."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors alternating over six parts."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Three colors of the sunrise."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the triangles of the hexagram."
+        }
+      },
+      "additionalProperties": false
+    },
+    "gameToken": {
+      "type": "object",
+      "description": "A token of the game: how many to print, and the token.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name of an svg logo to draw on the token."
+        },
+        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "icon": {
+          "type": "string",
+          "description": "Name of an icon to draw on the token."
+        },
+        "iconWidth": { "type": "number", "description": "Width of the icon." },
+        "iconColor": {
+          "type": "string",
+          "description": "Color of the icon or logo."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertical position of the icon."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text to write on the token."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Color of the label text."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Override the vertical position of the label."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Color of the stroke around the label."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stroke around the label."
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "A second, smaller line of text shown with the label."
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "Whether the second line is above or below the label. Defaults to below."
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "Color of the second line. Defaults to the label color."
+        },
+        "color": {
+          "type": "string",
+          "description": "Background color of the token."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Font size of the label."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Font family of the label."
+        },
+        "width": {
+          "type": "number",
+          "description": "Width (radius) of the token, 25 by default."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square draws a square token, anything else a circle."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Angle of the shapes, independent of the rotation."
+        },
+        "rotation": {
+          "type": "number",
+          "description": "Rotation of the token."
+        },
+        "fixed": {
+          "type": "boolean",
+          "description": "Cancels all rotation of the token."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "A destination token, smaller by default."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "A reserved token, drawn in gray."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Draw the inverse of the token: no logo, only text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Label color of an inverse token."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Draw bleed around the token for printing."
+        },
+        "bar": {
+          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Height of the bar." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Color of the border of the bar."
+        },
+        "outline": { "type": "string", "description": "Color of the outline." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Width of the outline."
+        },
+        "target": {
+          "type": "string",
+          "description": "Color of a target shape."
+        },
+        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stripe."
+        },
+        "stripes": { "type": "string", "description": "Color of the stripes." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Width of the stripes."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Distance of the stripes from the middle."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Color of curved stripes."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Width of the curved stripes."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Distance of the curved stripes from the middle."
+        },
+        "spiral": { "type": "string", "description": "Color of a spiral." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Width of the spiral."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Distance between the turns of the spiral."
+        },
+        "circle": {
+          "description": "Color of a circle in the middle, true for white.",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius of the circle, 25 is the full token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Border color of the circle."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a shield, true for white."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Color of the top of the shield."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a three part shield, true for white."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Color of the top left of the three part shield."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Color of the top center of the three part shield."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Color of the top right of the three part shield."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a kite shield, true for white."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a five pointed star, true for white."
+        },
+        "square": {
+          "type": "string",
+          "description": "Color of a square on the token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the halves."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Four colors of the quarters."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors alternating over six parts."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Three colors of the sunrise."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the triangles of the hexagram."
+        },
+        "quantity": {
+          "description": "How many of this token to print. ∞ needs print, to say how many.",
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "string", "enum": ["∞"] }
+          ]
+        },
+        "print": {
+          "description": "How many of this token to print, overrides quantity.",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "roundToken": {
+      "type": "object",
+      "description": "A token on the round tracker: the round and its token.",
+      "properties": {
+        "logo": {
+          "type": "string",
+          "description": "Name of an svg logo to draw on the token."
+        },
+        "logoWidth": { "type": "number", "description": "Width of the logo." },
+        "icon": {
+          "type": "string",
+          "description": "Name of an icon to draw on the token."
+        },
+        "iconWidth": { "type": "number", "description": "Width of the icon." },
+        "iconColor": {
+          "type": "string",
+          "description": "Color of the icon or logo."
+        },
+        "iconY": {
+          "type": "number",
+          "description": "Vertical position of the icon."
+        },
+        "label": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Text to write on the token."
+        },
+        "labelColor": {
+          "type": "string",
+          "description": "Color of the label text."
+        },
+        "labelY": {
+          "type": "number",
+          "description": "Override the vertical position of the label."
+        },
+        "labelStrokeColor": {
+          "type": "string",
+          "description": "Color of the stroke around the label."
+        },
+        "labelStrokeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stroke around the label."
+        },
+        "label2": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "A second, smaller line of text shown with the label."
+        },
+        "label2Position": {
+          "type": "string",
+          "enum": ["above", "below"],
+          "description": "Whether the second line is above or below the label. Defaults to below."
+        },
+        "label2Color": {
+          "type": "string",
+          "description": "Color of the second line. Defaults to the label color."
+        },
+        "color": {
+          "type": "string",
+          "description": "Background color of the token."
+        },
+        "fontSize": {
+          "type": "number",
+          "description": "Font size of the label."
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Font family of the label."
+        },
+        "width": {
+          "type": "number",
+          "description": "Width (radius) of the token, 25 by default."
+        },
+        "tokenShape": {
+          "type": "string",
+          "description": "square draws a square token, anything else a circle."
+        },
+        "shapeAngle": {
+          "type": "number",
+          "description": "Angle of the shapes, independent of the rotation."
+        },
+        "rotation": {
+          "type": "number",
+          "description": "Rotation of the token."
+        },
+        "fixed": {
+          "type": "boolean",
+          "description": "Cancels all rotation of the token."
+        },
+        "destination": {
+          "type": "boolean",
+          "description": "A destination token, smaller by default."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "A reserved token, drawn in gray."
+        },
+        "inverse": {
+          "type": "boolean",
+          "description": "Draw the inverse of the token: no logo, only text."
+        },
+        "inverseLabelColor": {
+          "type": "string",
+          "description": "Label color of an inverse token."
+        },
+        "bleed": {
+          "type": "boolean",
+          "description": "Draw bleed around the token for printing."
+        },
+        "bar": {
+          "description": "true draws a white bar behind the label, a color string draws a bar of that color.",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "barHeight": { "type": "number", "description": "Height of the bar." },
+        "barBorderColor": {
+          "type": "string",
+          "description": "Color of the border of the bar."
+        },
+        "outline": { "type": "string", "description": "Color of the outline." },
+        "outlineWidth": {
+          "type": "number",
+          "description": "Width of the outline."
+        },
+        "target": {
+          "type": "string",
+          "description": "Color of a target shape."
+        },
+        "stripe": { "type": "string", "description": "Color of a stripe." },
+        "stripeWidth": {
+          "oneOf": [{ "type": "string" }, { "type": "number" }],
+          "description": "Width of the stripe."
+        },
+        "stripes": { "type": "string", "description": "Color of the stripes." },
+        "stripesWidth": {
+          "type": "number",
+          "description": "Width of the stripes."
+        },
+        "stripesDistance": {
+          "type": "number",
+          "description": "Distance of the stripes from the middle."
+        },
+        "curvedStripes": {
+          "type": "string",
+          "description": "Color of curved stripes."
+        },
+        "curvedStripesWidth": {
+          "type": "number",
+          "description": "Width of the curved stripes."
+        },
+        "curvedStripesDistance": {
+          "type": "number",
+          "description": "Distance of the curved stripes from the middle."
+        },
+        "spiral": { "type": "string", "description": "Color of a spiral." },
+        "spiralWidth": {
+          "type": "number",
+          "description": "Width of the spiral."
+        },
+        "spiralDistance": {
+          "type": "number",
+          "description": "Distance between the turns of the spiral."
+        },
+        "circle": {
+          "description": "Color of a circle in the middle, true for white.",
+          "oneOf": [{ "type": "string" }, { "type": "boolean", "enum": [true] }]
+        },
+        "circleRadius": {
+          "type": "number",
+          "description": "Radius of the circle, 25 is the full token."
+        },
+        "circleBorderColor": {
+          "type": "string",
+          "description": "Border color of the circle."
+        },
+        "shield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a shield, true for white."
+        },
+        "shieldTop": {
+          "type": "string",
+          "description": "Color of the top of the shield."
+        },
+        "shield3": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a three part shield, true for white."
+        },
+        "shield3TopLeft": {
+          "type": "string",
+          "description": "Color of the top left of the three part shield."
+        },
+        "shield3TopCenter": {
+          "type": "string",
+          "description": "Color of the top center of the three part shield."
+        },
+        "shield3TopRight": {
+          "type": "string",
+          "description": "Color of the top right of the three part shield."
+        },
+        "kiteshield": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a kite shield, true for white."
+        },
+        "star5": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "boolean", "enum": [true] }
+          ],
+          "description": "Color of a five pointed star, true for white."
+        },
+        "square": {
+          "type": "string",
+          "description": "Color of a square on the token."
+        },
+        "halves": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the halves."
+        },
+        "quarters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Four colors of the quarters."
+        },
+        "sexies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors alternating over six parts."
+        },
+        "sunrise": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3,
+          "maxItems": 3,
+          "description": "Three colors of the sunrise."
+        },
+        "hexagram": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "Two colors of the triangles of the hexagram."
+        },
+        "name": {
+          "description": "The name of the round, its label.",
+          "type": "string"
+        },
+        "small": {
+          "description": "Draw the round token smaller.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name"]
+    }
+  },
+  "type": "object",
+  "propertyNames": { "pattern": "^[0-9a-zA-Z]+(\\|[0-9a-zA-Z]+)?$" },
+  "additionalProperties": { "$ref": "#/definitions/hex" }
+}

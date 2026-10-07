@@ -12,6 +12,7 @@ import SchemaField, {
 } from "@/components/schemaForm/SchemaField";
 import { issueText } from "@/components/schemaForm/issueText";
 import { issuesFor } from "@/components/schemaForm/resolve";
+import { useSchemaText } from "@/components/schemaForm/schemaText";
 
 import schema from "@/schemas/game.schema.json";
 import {
@@ -29,6 +30,7 @@ const ARROWS = ["up", "down", "left", "right"];
 // The arrow of a cell: a direction is a string, several are a list
 const ArrowField = ({ keys, value, onChange }) => {
   const { t } = useTranslation();
+  const text = useSchemaText();
   const id = useId();
   const chosen = value === undefined ? [] : [value].flat();
 
@@ -66,7 +68,7 @@ const ArrowField = ({ keys, value, onChange }) => {
         ))}
       </div>
       <p className="text-xs text-muted-foreground">
-        {fields.arrow.description}
+        {text(fields.arrow.description)}
       </p>
     </div>
   );

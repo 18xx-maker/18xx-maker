@@ -6,7 +6,7 @@
       "type": "object",
       "properties": {
         "order": {
-          "description": "Draw order. An element with order is drawn after all elements of the tile that have none (on the same side of the tile border), lowest value first, so it can sit on top of things it normally sits under (a city over a value). A negative number draws it before all of them, and true draws it last. Its position does not change, only when it is drawn.",
+          "description": "schema.fields.order.order",
           "oneOf": [
             {
               "type": "number"
@@ -111,54 +111,54 @@
       "type": "object",
       "properties": {
         "hidden": {
-          "description": "true does not draw the element. The other elements keep their positions, and a hidden element still counts for auto positioning.",
+          "description": "schema.fields.position.hidden",
           "type": "boolean",
           "enum": [true]
         },
         "angle": {
-          "description": "Direction from the center of the hex, in degrees clockwise on the screen: 0 is down, 90 is left, 180 is up, 270 is right. Default 0.",
+          "description": "schema.fields.position.angle",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotate": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotation, and a rotate that is not 0 wins over rotation. Unlike rotation it also turns the text of labels, values and terrain.",
+          "description": "schema.fields.position.rotate",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "rotation": {
-          "description": "Turns the element on its own spot, in degrees clockwise. The same as rotate, but the text of labels, values and terrain stays upright. Use only one of rotate and rotation.",
+          "description": "schema.fields.position.rotation",
           "type": "number",
           "exclusiveMinimum": -360,
           "exclusiveMaximum": 360
         },
         "side": {
-          "description": "A hex side (1 to 6). Without mid it turns the element by (side - 1) sixths of a turn (60 degree steps): side 1 is unturned, side 2 is 60 degrees, and it does not move the element. With mid it moves the named point to the track that starts on that side.",
+          "description": "schema.fields.position.side",
           "type": "number",
           "minimum": 1,
           "maximum": 6
         },
         "mid": {
-          "description": "Put the element on the midpoint of a track type that starts on side 1: straight (the center), sharp or gentle. Use side to pick another side. An explicit angle or percent overrides it, and x and y nudge from it.",
+          "description": "schema.fields.position.mid",
           "type": "string",
           "enum": ["gentle", "sharp", "straight"]
         },
         "align": {
-          "description": "With mid, turn the element to sit perpendicular or parallel to the track at that point. rotate and rotation are added as an offset.",
+          "description": "schema.fields.position.align",
           "type": "string",
           "enum": ["perpendicular", "parallel"]
         },
         "x": {
-          "description": "Moves the element right (negative: left) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "schema.fields.position.x",
           "type": "number"
         },
         "y": {
-          "description": "Moves the element down (negative: up) by this many units, in screen units from where angle and percent put it. Not turned by angle or rotation. Default 0.",
+          "description": "schema.fields.position.y",
           "type": "number"
         },
         "percent": {
-          "description": "How far out along angle, as a fraction of 75 units: 0 is the center and 1 is the middle of a hex edge on a tile. Above 1 is past the edge, where only elements drawn outside the hex are visible. Default 0.",
+          "description": "schema.fields.position.percent",
           "type": "number",
           "minimum": 0
         }

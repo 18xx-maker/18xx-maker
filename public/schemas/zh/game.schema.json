@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://18xx-maker.com/schemas/game.schema.json",
+  "$id": "https://18xx-maker.com/schemas/zh/game.schema.json",
   "definitions": {
     "numberOrSlash": {
       "oneOf": [
@@ -62,29 +62,6 @@
           "type": "boolean",
           "const": false
         },
-        "trim": {
-          "description": "Cut half a row or column of hexes off the edges of the map, by the edge of the page: the page gets smaller by that, and the hexes along the edge are drawn as halves. For maps that continue on another board. A map that copies another keeps its trimmed edges unless it sets the edge again (false puts the half back).",
-          "type": "object",
-          "properties": {
-            "top": {
-              "description": "Cut half a hex off the top of the page.",
-              "type": "boolean"
-            },
-            "bottom": {
-              "description": "Cut half a hex off the bottom of the page.",
-              "type": "boolean"
-            },
-            "left": {
-              "description": "Cut half a hex off the left of the page.",
-              "type": "boolean"
-            },
-            "right": {
-              "description": "Cut half a hex off the right of the page.",
-              "type": "boolean"
-            }
-          },
-          "additionalProperties": false
-        },
         "remove": {
           "type": "array",
           "items": {
@@ -102,7 +79,7 @@
           "$ref": "#/definitions/roundTracker"
         },
         "movement": {
-          "description": "schema.game.map.movement",
+          "description": "Draw the legend of how the share price moves (stock.movement) on the map, x and y in map units from the top left corner. The map page does not grow for the legend, so leave room for it on the map. A market placed on the map draws its own legend when stock.display.movement is set, so set only one of the two.",
           "$ref": "#/definitions/movement"
         },
         "market": {
@@ -131,12 +108,12 @@
               "exclusiveMinimum": 0
             },
             "rowHeight": {
-              "description": "schema.game.map.players.rowHeight",
+              "description": "Height of a row of the players table.",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "fontSize": {
-              "description": "schema.game.map.players.fontSize",
+              "description": "Font size of the players table.",
               "type": "number",
               "exclusiveMinimum": 0
             }
@@ -165,7 +142,7 @@
                 "type": "string"
               },
               "circle": {
-                "description": "schema.game.map.borderTexts.items.circle",
+                "description": "Radius of a circle behind the text.",
                 "type": "number"
               },
               "color": {
@@ -223,7 +200,7 @@
                 "type": "number"
               },
               "border": {
-                "description": "schema.game.map.borders.items.border",
+                "description": "false draws no border.",
                 "type": "boolean"
               },
               "borderWidth": {
@@ -269,7 +246,7 @@
                 "type": "number"
               },
               "border": {
-                "description": "schema.game.map.borders.items.border",
+                "description": "false draws no border.",
                 "type": "boolean"
               },
               "borderWidth": {
@@ -294,7 +271,7 @@
       "oneOf": [
         {
           "type": "string",
-          "description": "schema.game.trainItem.oneOf.0",
+          "description": "The name of a train of the game.",
           "x-ref": {
             "from": "trains",
             "key": "name"
@@ -302,14 +279,14 @@
         },
         {
           "type": "object",
-          "description": "schema.game.trainItem.oneOf.1",
+          "description": "A train by its name and which one of them, like the 3rd 5.",
           "properties": {
             "on": {
-              "description": "schema.game.trainItem.oneOf.1.on",
+              "description": "The name of the train.",
               "type": "string"
             },
             "index": {
-              "description": "schema.game.trainItem.oneOf.1.index",
+              "description": "Which train of that name, 2 is the second.",
               "type": "integer",
               "minimum": 2
             }
@@ -320,7 +297,7 @@
       ]
     },
     "valueFormat": {
-      "description": "schema.game.valueFormat",
+      "description": "A format string that must contain a # character, which is replaced by the number.",
       "type": "string",
       "pattern": "^(.*)#(.*)$"
     },
@@ -342,7 +319,7 @@
           ]
         },
         "priceFormat": {
-          "description": "schema.game.train.priceFormat",
+          "description": "Format string for the price, where the first # is replaced by the number, e.g. #G or # credits. Overrides the game currency and the currency config. Not used when price is text.",
           "$ref": "#/definitions/valueFormat"
         },
         "color": {
@@ -374,7 +351,7 @@
           "minimum": 0
         },
         "discount": {
-          "description": "schema.game.train.discount",
+          "description": "The price of this train when traded in for each of the listed trains, by the name of the train traded in.",
           "type": "object",
           "additionalProperties": {
             "type": "number",
@@ -382,7 +359,7 @@
           }
         },
         "upgrade": {
-          "description": "schema.game.train.upgrade",
+          "description": "Cost of this train when bought as an upgrade, shown under the price",
           "oneOf": [
             {
               "type": "number",
@@ -394,11 +371,11 @@
           ]
         },
         "upgradeFormat": {
-          "description": "schema.game.train.upgradeFormat",
+          "description": "Format string for the upgrade cost, where the first # is replaced by the number, e.g. +#. The arrow stays.",
           "$ref": "#/definitions/valueFormat"
         },
         "tradeIn": {
-          "description": "schema.game.train.tradeIn",
+          "description": "Value of this train when traded in, shown in parentheses under the price",
           "oneOf": [
             {
               "type": "number",
@@ -410,7 +387,7 @@
           ]
         },
         "tradeInFormat": {
-          "description": "schema.game.train.tradeInFormat",
+          "description": "Format string for the trade-in value, where the first # is replaced by the number, e.g. -# trade. The parentheses stay.",
           "$ref": "#/definitions/valueFormat"
         },
         "description": {
@@ -438,89 +415,89 @@
           "type": "integer"
         },
         "nameFontSize": {
-          "description": "schema.game.train.nameFontSize",
+          "description": "Font size of the name.",
           "type": "number"
         },
         "nameFontFamily": {
-          "description": "schema.game.train.nameFontFamily",
+          "description": "Font family of the name.",
           "type": "string"
         },
         "priceFontSize": {
-          "description": "schema.game.train.priceFontSize",
+          "description": "Font size of the price.",
           "type": "number"
         },
         "priceFontFamily": {
-          "description": "schema.game.train.priceFontFamily",
+          "description": "Font family of the price.",
           "type": "string"
         },
         "longevityFontSize": {
-          "description": "schema.game.train.longevityFontSize",
+          "description": "Font size of the rust, phase and obsolete texts.",
           "type": "number"
         },
         "longevityFontFamily": {
-          "description": "schema.game.train.longevityFontFamily",
+          "description": "Font family of the rust, phase and obsolete texts.",
           "type": "string"
         },
         "backgroundColor": {
-          "description": "schema.game.train.backgroundColor",
+          "description": "Background color of the train card.",
           "type": "string"
         },
         "imagePaddingTop": {
-          "description": "schema.game.train.imagePaddingTop",
+          "description": "Space above the image.",
           "type": "number"
         },
         "imageWidth": {
-          "description": "schema.game.train.imageWidth",
+          "description": "Width of the image.",
           "type": "number"
         },
         "phasedText": {
-          "description": "schema.game.train.phasedText",
+          "description": "Replaces the text before the phased by event.",
           "type": "string"
         },
         "obsoletedText": {
-          "description": "schema.game.train.obsoletedText",
+          "description": "Replaces the text before the obsolete event.",
           "type": "string"
         },
         "rustedText": {
-          "description": "schema.game.train.rustedText",
+          "description": "Replaces the text before the rust event.",
           "type": "string"
         },
         "permanentText": {
-          "description": "schema.game.train.permanentText",
+          "description": "Replaces the text of a permanent train.",
           "type": "string"
         },
         "permanentColor": {
-          "description": "schema.game.train.permanentColor",
+          "description": "Color of the text of a permanent train.",
           "type": "string"
         },
         "back": {
-          "description": "schema.game.train.back",
+          "description": "The back of the train card, printed behind the front when the cards duplex config is on (it needs the free cards layout). All copies of the train share it. Either a title and text on a colored background, or (with a name) a full train that prints like a normal train card with its own values.",
           "anyOf": [
             {
-              "description": "schema.game.train.back.anyOf.0",
+              "description": "A plain back with a title and text on a colored background.",
               "type": "object",
               "properties": {
                 "title": {
-                  "description": "schema.game.train.back.anyOf.0.title",
+                  "description": "Large text on the back, the name of the train by default.",
                   "type": "string"
                 },
                 "text": {
-                  "description": "schema.game.train.back.anyOf.0.text",
+                  "description": "Smaller text under the title.",
                   "type": "string"
                 },
                 "color": {
-                  "description": "schema.game.train.back.anyOf.0.color",
+                  "description": "Color of the text.",
                   "type": "string"
                 },
                 "backgroundColor": {
-                  "description": "schema.game.train.back.anyOf.0.backgroundColor",
+                  "description": "Background color of the back.",
                   "type": "string"
                 }
               },
               "additionalProperties": false
             },
             {
-              "description": "schema.game.train.back.anyOf.1",
+              "description": "A full train definition, printed as a normal train card. Its own back and quantity are ignored.",
               "$ref": "#/definitions/train"
             }
           ]
@@ -530,7 +507,7 @@
       "additionalProperties": false
     },
     "companyTrain": {
-      "description": "schema.game.companyTrain",
+      "description": "A train of a company: the name of a game train, { name, quantity } for copies of a game train, or a full train. A format override such as priceFormat needs a full train definition (with a color and a price); { name, priceFormat } alone is not valid.",
       "anyOf": [
         {
           "type": "string"
@@ -596,28 +573,28 @@
             "type": "string"
           },
           "subtext": {
-            "description": "schema.game.shares.items.subtext",
+            "description": "Text under the name of the company.",
             "type": "string"
           },
           "color": {
-            "description": "schema.game.shares.items.color",
+            "description": "Color of the share band.",
             "type": "string"
           },
           "backgroundColor": {
-            "description": "schema.game.shares.items.backgroundColor",
+            "description": "Background color of the share.",
             "type": "string"
           },
           "labelColor": {
-            "description": "schema.game.shares.items.labelColor",
+            "description": "Color of the label.",
             "type": "string"
           },
           "tokenCount": {
-            "description": "schema.game.shares.items.tokenCount",
+            "description": "How many tokens to draw on the share.",
             "type": "number",
             "minimum": 0
           },
           "president": {
-            "description": "schema.game.shares.items.president",
+            "description": "Marks this as the president's share. It is the only share that prints the group mark of its company.",
             "type": "boolean"
           }
         },
@@ -642,10 +619,10 @@
     },
     "charterToken": {
       "type": "object",
-      "description": "schema.game.charterToken",
+      "description": "A token space on a charter, with more than a cost.",
       "properties": {
         "cost": {
-          "description": "schema.game.charterToken.cost",
+          "description": "The label under the token space, like the plain string or number entry.",
           "oneOf": [
             {
               "type": "string"
@@ -657,7 +634,7 @@
         },
         "start": {
           "type": "boolean",
-          "description": "schema.game.charterToken.start"
+          "description": "The company starts with a token in this space. Color charters show the logo in it instead of an empty circle, carth charters show an empty circle instead of the logo. false is the same as leaving it out."
         }
       },
       "additionalProperties": false
@@ -667,7 +644,7 @@
     },
     "gameTokens": {
       "type": "array",
-      "description": "schema.game.gameTokens",
+      "description": "The tokens of the game that print on the token sheet. A string or a number is a white token with that label.",
       "items": {
         "oneOf": [
           {
@@ -684,10 +661,10 @@
     },
     "cellObject": {
       "type": "object",
-      "description": "schema.game.cellObject",
+      "description": "A cell of the stock market, par chart or revenue chart.",
       "properties": {
         "value": {
-          "description": "schema.game.cellObject.value",
+          "description": "The price shown in the cell, formatted with the market currency.",
           "oneOf": [
             {
               "type": "string"
@@ -698,7 +675,7 @@
           ]
         },
         "label": {
-          "description": "schema.game.cellObject.label",
+          "description": "Text shown instead of a value.",
           "oneOf": [
             {
               "type": "string"
@@ -709,19 +686,19 @@
           ]
         },
         "subLabel": {
-          "description": "schema.game.cellObject.subLabel",
+          "description": "A second text, at the opposite corner of the cell.",
           "type": "string"
         },
         "color": {
-          "description": "schema.game.cellObject.color",
+          "description": "Background color of the cell.",
           "type": "string"
         },
         "labelColor": {
-          "description": "schema.game.cellObject.labelColor",
+          "description": "Color of the texts, defaults to a readable color.",
           "type": "string"
         },
         "arrow": {
-          "description": "schema.game.cellObject.arrow",
+          "description": "The arrow or arrows drawn in the corners of the cell.",
           "oneOf": [
             {
               "type": "string",
@@ -737,46 +714,46 @@
           ]
         },
         "arrowColor": {
-          "description": "schema.game.cellObject.arrowColor",
+          "description": "Color of the arrows.",
           "type": "string"
         },
         "legend": {
-          "description": "schema.game.cellObject.legend",
+          "description": "Index in the stock legend, the cell takes the color of that legend entry.",
           "type": "integer",
           "minimum": 0
         },
         "par": {
-          "description": "schema.game.cellObject.par",
+          "description": "The cell is a par value, it takes the color of the par chart.",
           "type": "boolean"
         },
         "bottom": {
-          "description": "schema.game.cellObject.bottom",
+          "description": "Draw the cell below the other cells.",
           "type": "boolean"
         },
         "underline": {
-          "description": "schema.game.cellObject.underline",
+          "description": "Underline the text of the cell.",
           "type": "boolean"
         },
         "rotated": {
-          "description": "schema.game.cellObject.rotated",
+          "description": "Rotate the label.",
           "type": "boolean"
         },
         "subRotated": {
-          "description": "schema.game.cellObject.subRotated",
+          "description": "Rotate the sub label.",
           "type": "boolean"
         },
         "width": {
-          "description": "schema.game.cellObject.width",
+          "description": "Width of the cell, in cells.",
           "type": "number",
           "exclusiveMinimum": 0
         },
         "height": {
-          "description": "schema.game.cellObject.height",
+          "description": "Height of the cell, in cells.",
           "type": "number",
           "exclusiveMinimum": 0
         },
         "companies": {
-          "description": "schema.game.cellObject.companies",
+          "description": "Companies shown as bars in the cell: an abbreviation, or an abbreviation with the row of the bar.",
           "type": "array",
           "items": {
             "oneOf": [
@@ -806,7 +783,7 @@
           }
         },
         "tokens": {
-          "description": "schema.game.cellObject.tokens",
+          "description": "Tokens drawn in the cell. A company is a company token, otherwise a token with x and y positions.",
           "type": "array",
           "items": {
             "type": "object"
@@ -815,7 +792,7 @@
       }
     },
     "cell": {
-      "description": "schema.game.cell",
+      "description": "A cell of a market: nothing, a price, a label or an object.",
       "oneOf": [
         {
           "type": "null"
@@ -833,7 +810,7 @@
     },
     "cellRows": {
       "type": "array",
-      "description": "schema.game.cellRows",
+      "description": "Rows of cells, or a single cell for a row of one.",
       "items": {
         "oneOf": [
           {
@@ -850,7 +827,7 @@
     },
     "movement": {
       "type": "object",
-      "description": "schema.game.movement",
+      "description": "Where to draw the share price movement legend.",
       "properties": {
         "x": {
           "type": "number"
@@ -864,7 +841,7 @@
     },
     "roundTracker": {
       "type": "object",
-      "description": "schema.game.roundTracker",
+      "description": "Where to draw the round tracker, in cells of the market.",
       "properties": {
         "x": {
           "type": "number"
@@ -886,46 +863,46 @@
     },
     "stock": {
       "type": "object",
-      "description": "schema.game.stock",
+      "description": "The stock market, and the par and revenue charts.",
       "properties": {
         "type": {
-          "description": "schema.game.stock.type",
+          "description": "The layout of the market: 2D is a grid, 1D a single row, 1Diag a zigzag row. Always set it, a market without a type is empty.",
           "type": "string",
           "enum": ["1D", "2D", "1Diag"]
         },
         "title": {
-          "description": "schema.game.stock.title",
+          "description": "false starts the market at the top, without space for the title.",
           "type": "boolean",
           "const": false
         },
         "market": {
-          "description": "schema.game.stock.market",
+          "description": "The cells: rows of cells for a 2D market, a row of cells for the others.",
           "$ref": "#/definitions/cellRows"
         },
         "par": {
-          "description": "schema.game.stock.par",
+          "description": "The par chart.",
           "type": "object",
           "properties": {
             "values": {
-              "description": "schema.game.stock.par.values",
+              "description": "The par values, rows of cells.",
               "$ref": "#/definitions/cellRows"
             },
             "color": {
-              "description": "schema.game.stock.par.color",
+              "description": "Background color of the par cells.",
               "type": "string"
             },
             "width": {
-              "description": "schema.game.stock.par.width",
+              "description": "Width of a par cell, in cells.",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "height": {
-              "description": "schema.game.stock.par.height",
+              "description": "Height of a par cell, in cells.",
               "type": "number",
               "exclusiveMinimum": 0
             },
             "title": {
-              "description": "schema.game.stock.par.title",
+              "description": "false hides the title above the par chart.",
               "type": "boolean",
               "const": false
             }
@@ -933,7 +910,7 @@
           "additionalProperties": false
         },
         "cell": {
-          "description": "schema.game.stock.cell",
+          "description": "The size and color every market cell starts with.",
           "type": "object",
           "properties": {
             "width": {
@@ -951,11 +928,11 @@
           "additionalProperties": false
         },
         "display": {
-          "description": "schema.game.stock.display",
+          "description": "Where the parts of the market are drawn.",
           "type": "object",
           "properties": {
             "par": {
-              "description": "schema.game.stock.display.par",
+              "description": "Draw the par chart on the market, at x and y cells from the corner.",
               "type": "object",
               "properties": {
                 "x": {
@@ -969,7 +946,7 @@
               "additionalProperties": false
             },
             "legend": {
-              "description": "schema.game.stock.display.legend",
+              "description": "Where the legend goes on a 2D market, or a 1Diag market.",
               "type": "object",
               "properties": {
                 "x": {
@@ -996,28 +973,28 @@
               "$ref": "#/definitions/roundTracker"
             },
             "movement": {
-              "description": "schema.game.stock.display.movement",
+              "description": "Draw the legend of how the share price moves (stock.movement) on the market, x and y in cells from the corner. On a 1D market a column is as many cells tall as the column setting. A market placed on a map draws its own legend, so do not also set map.movement.",
               "$ref": "#/definitions/movement"
             },
             "extraTotalHeight": {
-              "description": "schema.game.stock.display.extraTotalHeight",
+              "description": "Extra height of the page, in units.",
               "type": "number"
             },
             "extraTotalWidth": {
-              "description": "schema.game.stock.display.extraTotalWidth",
+              "description": "Extra width of the page, in units.",
               "type": "number"
             }
           },
           "additionalProperties": false
         },
         "ledges": {
-          "description": "schema.game.stock.ledges",
+          "description": "Lines drawn over the market, from corner to corner of cells.",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "coords": {
-                "description": "schema.game.stock.ledges.items.coords",
+                "description": "The corners of the line, each as the x and y of a cell corner, like 6 0.",
                 "type": "array",
                 "items": {
                   "type": "string",
@@ -1032,14 +1009,14 @@
                 "type": "number"
               },
               "border": {
-                "description": "schema.game.stock.ledges.items.border",
+                "description": "Draw a border around the line.",
                 "type": "boolean"
               },
               "borderWidth": {
                 "type": "number"
               },
               "dashed": {
-                "description": "schema.game.stock.ledges.items.dashed",
+                "description": "Draw a dashed line.",
                 "type": "boolean"
               },
               "dashArray": {
@@ -1053,7 +1030,7 @@
                 ]
               },
               "offset": {
-                "description": "schema.game.stock.ledges.items.offset",
+                "description": "Offset of the dashes.",
                 "type": "number"
               }
             },
@@ -1062,7 +1039,7 @@
           }
         },
         "legend": {
-          "description": "schema.game.stock.legend",
+          "description": "The legend of the colors of the market.",
           "type": "array",
           "items": {
             "type": "object",
@@ -1103,7 +1080,7 @@
                 ]
               },
               "icon": {
-                "description": "schema.game.stock.legend.items.icon",
+                "description": "Not drawn at the moment.",
                 "type": "string"
               }
             },
@@ -1112,7 +1089,7 @@
           }
         },
         "movement": {
-          "description": "schema.game.stock.movement",
+          "description": "How the share price moves, by direction (up, down, left and right are drawn as arrows, any other key as a line of text). Printed as a legend where stock.display.movement or map.movement place it.",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -1122,7 +1099,7 @@
           }
         },
         "limits": {
-          "description": "schema.game.stock.limits",
+          "description": "Ranges of share prices, like the allowed par values. Kept for reference, it is not printed.",
           "type": "array",
           "items": {
             "type": "object",
@@ -1161,7 +1138,7 @@
     },
     "mapCoord": {
       "type": "string",
-      "description": "schema.game.mapCoord",
+      "description": "A place on the map: a hex and a point (A1p1), a side (A1s1), an angle and percent (A1a30p0.5), or an offset from the middle (A1x10y-5).",
       "pattern": "^[A-Z]+[0-9]+(p[0-9.-]+|s[0-9.-]+|a[0-9.-]+(p[0-9.-]+)?|x[0-9.-]+y[0-9.-]+)$"
     }
   },
@@ -1187,7 +1164,7 @@
         },
         "publisher": {
           "type": "string",
-          "description": "schema.game.info.publisher"
+          "description": "Id of the publisher (see src/data/publishers), shown on the game info page and in the game list"
         },
         "extraTotalHeight": {
           "type": "number",
@@ -1231,12 +1208,12 @@
           "enum": ["horizontal", "vertical"]
         },
         "capitalization": {
-          "description": "schema.game.info.capitalization",
+          "description": "Full cap is the default and doesn't need to be specified.",
           "type": "string",
           "enum": ["full", "incremental"]
         },
         "mustSellInBlocks": {
-          "description": "schema.game.info.mustSellInBlocks",
+          "description": "Shares must be sold in blocks, shown on the charter.",
           "type": "boolean"
         },
         "marketTokens": {
@@ -1248,16 +1225,16 @@
           "minimum": 1
         },
         "currency": {
-          "description": "schema.game.info.currency",
+          "description": "The currency format string must contain a # character",
           "type": "string",
           "pattern": "^(.*)#(.*)$"
         },
         "valueFontFamily": {
-          "description": "schema.game.info.valueFontFamily",
+          "description": "Font family of the values on the map.",
           "type": "string"
         },
         "valueFontWeight": {
-          "description": "schema.game.info.valueFontWeight",
+          "description": "Font weight of the values on the map.",
           "oneOf": [
             {
               "type": "string"
@@ -1268,11 +1245,11 @@
           ]
         },
         "nameFontFamily": {
-          "description": "schema.game.info.nameFontFamily",
+          "description": "Font family of the names on the map.",
           "type": "string"
         },
         "nameFontWeight": {
-          "description": "schema.game.info.nameFontWeight",
+          "description": "Font weight of the names on the map.",
           "oneOf": [
             {
               "type": "string"
@@ -1283,11 +1260,11 @@
           ]
         },
         "companyFontFamily": {
-          "description": "schema.game.info.companyFontFamily",
+          "description": "Font family of the companies.",
           "type": "string"
         },
         "companyFontWeight": {
-          "description": "schema.game.info.companyFontWeight",
+          "description": "Font weight of the companies.",
           "oneOf": [
             {
               "type": "string"
@@ -1298,23 +1275,23 @@
           ]
         },
         "valueFontSize": {
-          "description": "schema.game.info.valueFontSize",
+          "description": "Font size of the values on the map.",
           "type": "number"
         },
         "nameFontSize": {
-          "description": "schema.game.info.nameFontSize",
+          "description": "Font size of the names on the map.",
           "type": "number"
         },
         "companyFontSize": {
-          "description": "schema.game.info.companyFontSize",
+          "description": "Font size of the companies.",
           "type": "number"
         },
         "companyFontStyle": {
-          "description": "schema.game.info.companyFontStyle",
+          "description": "Font style of the companies.",
           "type": "string"
         },
         "titleFontWeight": {
-          "description": "schema.game.info.titleFontWeight",
+          "description": "Font weight of the title on the map.",
           "oneOf": [
             {
               "type": "string"
@@ -1325,7 +1302,7 @@
           ]
         },
         "subtitleFontWeight": {
-          "description": "schema.game.info.subtitleFontWeight",
+          "description": "Font weight of the subtitle on the map.",
           "oneOf": [
             {
               "type": "string"
@@ -1336,7 +1313,7 @@
           ]
         },
         "designerFontWeight": {
-          "description": "schema.game.info.designerFontWeight",
+          "description": "Font weight of the designer on the map.",
           "oneOf": [
             {
               "type": "string"
@@ -1347,47 +1324,47 @@
           ]
         },
         "borderWidth": {
-          "description": "schema.game.info.borderWidth",
+          "description": "Width of the border of track, cities and towns.",
           "type": "number"
         },
         "trackWidth": {
-          "description": "schema.game.info.trackWidth",
+          "description": "Width of the track.",
           "type": "number"
         },
         "trackColor": {
-          "description": "schema.game.info.trackColor",
+          "description": "Color of the track, match uses the color of the hex.",
           "type": "string"
         },
         "trackBorderColor": {
-          "description": "schema.game.info.trackBorderColor",
+          "description": "Color of the border of the track, match uses the color of the hex.",
           "type": "string"
         },
         "trackGauge": {
-          "description": "schema.game.info.trackGauge",
+          "description": "Gauge of all the track: narrow, dashed, line or dual.",
           "type": "string"
         },
         "trackGaugeColor": {
-          "description": "schema.game.info.trackGaugeColor",
+          "description": "Color of the gauge lines, match uses the color of the hex.",
           "type": "string"
         },
         "cityWidth": {
-          "description": "schema.game.info.cityWidth",
+          "description": "Width of the cities.",
           "type": "number"
         },
         "townWidth": {
-          "description": "schema.game.info.townWidth",
+          "description": "Width of the towns.",
           "type": "number"
         },
         "townBorderWidth": {
-          "description": "schema.game.info.townBorderWidth",
+          "description": "Width of the border of towns.",
           "type": "number"
         },
         "transparent": {
-          "description": "schema.game.info.transparent",
+          "description": "Draw the hexes of the map without a background.",
           "type": "boolean"
         },
         "mapCoordinates": {
-          "description": "schema.game.info.mapCoordinates",
+          "description": "Where the numbers and letters of the coordinates go.",
           "type": "string",
           "enum": [
             "numbersVertical",
@@ -1403,7 +1380,7 @@
     },
     "colors": {
       "type": "object",
-      "description": "schema.game.colors",
+      "description": "Colors of the game by name. A color is a CSS color or another color name, or an object of those by phase.",
       "additionalProperties": {
         "$ref": "#/definitions/colorValue"
       }
@@ -1459,22 +1436,22 @@
       }
     },
     "groups": {
-      "description": "schema.game.groups",
+      "description": "Groups of companies, each drawn as a small mark on the private cards, charters and president's shares of its members. A company or private joins a group with its group field.",
       "type": "array",
       "items": {
         "type": "object",
         "required": ["id"],
         "properties": {
           "id": {
-            "description": "schema.game.groups.items.id",
+            "description": "The id companies and privates use to join the group.",
             "type": "string"
           },
           "name": {
-            "description": "schema.game.groups.items.name",
+            "description": "A name for the group. It is not printed; it labels the group in the editor.",
             "type": "string"
           },
           "shape": {
-            "description": "schema.game.groups.items.shape",
+            "description": "The shape of the mark.",
             "type": "string",
             "enum": [
               "circle",
@@ -1487,19 +1464,19 @@
             "default": "circle"
           },
           "color": {
-            "description": "schema.game.groups.items.color",
+            "description": "Fill color of the mark. Without a color the mark is an outline only.",
             "type": "string"
           },
           "borderColor": {
-            "description": "schema.game.groups.items.borderColor",
+            "description": "Color of the outline of the mark.",
             "type": "string"
           },
           "text": {
-            "description": "schema.game.groups.items.text",
+            "description": "A short text drawn on the mark.",
             "type": "string"
           },
           "textColor": {
-            "description": "schema.game.groups.items.textColor",
+            "description": "Color of the text. By default a color that contrasts with the fill.",
             "type": "string"
           }
         },
@@ -1513,19 +1490,19 @@
         "required": ["name", "abbrev"],
         "properties": {
           "name": {
-            "description": "schema.game.companies.items.name",
+            "description": "The name of the company, printed on its charter and cards.",
             "type": "string"
           },
           "abbrev": {
-            "description": "schema.game.companies.items.abbrev",
+            "description": "The short name of the company, such as PRR. It is how the market, the tiles and the map refer to the company, so it should be unique.",
             "type": "string"
           },
           "variant": {
-            "description": "schema.game.companies.items.variant",
+            "description": "A variant label printed on the charter, for a company that has more than one version.",
             "type": "string"
           },
           "group": {
-            "description": "schema.game.companies.items.group",
+            "description": "The id of a group of the game, drawn as its mark on its charter and president's share.",
             "type": "string",
             "x-ref": {
               "from": "groups",
@@ -1555,14 +1532,14 @@
           },
           "tokensBelow": {
             "type": "boolean",
-            "description": "schema.game.companies.items.tokensBelow"
+            "description": "Print the token slots of the charter in their own row under the company name, smaller so they fit the width, instead of to the right of the name. Use it for companies with many tokens, so they do not squeeze the name. Half width charters ignore it. Defaults to false."
           },
           "banner": {
             "type": "string",
-            "description": "schema.game.companies.items.banner"
+            "description": "A label printed in a strip along the bottom edge of the charter, in the color of the company, to mark a special charter such as a system. Not translated."
           },
           "home": {
-            "description": "schema.game.companies.items.home",
+            "description": "The home hex or starting city of the company, printed on the left of the charter subtitle line as \"Home: <home>\". A list is joined with \" / \". Not translated.",
             "oneOf": [
               {
                 "type": "string"
@@ -1577,34 +1554,34 @@
           },
           "destination": {
             "type": "string",
-            "description": "schema.game.companies.items.destination"
+            "description": "The destination of the company, printed in the middle of the charter subtitle line as \"Dest: <destination>\". Not translated."
           },
           "ability": {
             "type": "string",
-            "description": "schema.game.companies.items.ability"
+            "description": "A special power of the company, printed on the right of the charter subtitle line. Not the same as the unprinted private abilities. Not translated."
           },
           "charterSubtitle": {
             "type": "object",
-            "description": "schema.game.companies.items.charterSubtitle",
+            "description": "Overrides the slots of the charter subtitle line with your own text. An empty string blanks a slot. Not translated.",
             "additionalProperties": false,
             "properties": {
               "left": {
                 "type": "string",
-                "description": "schema.game.companies.items.charterSubtitle.left"
+                "description": "Text for the left slot, instead of \"Home: <home>\"."
               },
               "middle": {
                 "type": "string",
-                "description": "schema.game.companies.items.charterSubtitle.middle"
+                "description": "Text for the middle slot, instead of \"Dest: <destination>\"."
               },
               "right": {
                 "type": "string",
-                "description": "schema.game.companies.items.charterSubtitle.right"
+                "description": "Text for the right slot, instead of the ability."
               }
             }
           },
           "loans": {
             "type": "array",
-            "description": "schema.game.companies.items.loans",
+            "description": "Loan slots printed on the charter as empty squares in the body of the charter, on the right below the header, in columns that fit the height of the charter (more loans than fit are cut off). Each entry is the label under the slot (a string or a number); an empty string or null leaves the slot without a label.",
             "items": {
               "oneOf": [
                 {
@@ -1620,7 +1597,7 @@
             }
           },
           "trains": {
-            "description": "schema.game.companies.items.trains",
+            "description": "false hides the trains label on the charter. Otherwise the trains the company owns: the name of a game train, { name, quantity } for several copies of a game train, or a full train (quantity defaults to 1). They print on the charter, or as train cards when the charters trainCards config is cards.",
             "oneOf": [
               {
                 "const": false
@@ -1637,66 +1614,66 @@
             "$ref": "#/definitions/token"
           },
           "color": {
-            "description": "schema.game.companies.items.color",
+            "description": "The color of the company.",
             "type": "string"
           },
           "logo": {
-            "description": "schema.game.companies.items.logo",
+            "description": "The logo of the company.",
             "type": "string"
           },
           "minor": {
-            "description": "schema.game.companies.items.minor",
+            "description": "The company is a minor company.",
             "type": "boolean"
           },
           "subtext": {
-            "description": "schema.game.shares.items.subtext",
+            "description": "Text under the name of the company.",
             "type": "string"
           },
           "alias": {
-            "description": "schema.game.companies.items.alias",
+            "description": "A second name of the company. The companyNames config chooses whether the charter and the share cards print the name, the alias, or both.",
             "type": "string"
           },
           "subName": {
-            "description": "schema.game.companies.items.subName",
+            "description": "A second line under the name of the charter.",
             "type": "string"
           },
           "shareType": {
-            "description": "schema.game.companies.items.shareType",
+            "description": "The name of a share type of the game.",
             "type": "string"
           },
           "tokenType": {
-            "description": "schema.game.companies.items.tokenType",
+            "description": "The name of a token type of the game.",
             "type": "string"
           },
           "marketTokens": {
-            "description": "schema.game.companies.items.marketTokens",
+            "description": "How many market tokens to print.",
             "type": "integer",
             "minimum": 0
           },
           "extraStationTokens": {
-            "description": "schema.game.companies.items.extraStationTokens",
+            "description": "How many extra station tokens to print.",
             "type": "integer",
             "minimum": 0
           },
           "treasury": {
-            "description": "schema.game.companies.items.treasury",
+            "description": "false hides the treasury on the charter.",
             "type": "boolean",
             "const": false
           },
           "capital": {
-            "description": "schema.game.companies.items.capital",
+            "description": "The starting capital shown on the charter.",
             "$ref": "#/definitions/capital"
           },
           "fontFamily": {
-            "description": "schema.game.train.nameFontFamily",
+            "description": "Font family of the name.",
             "type": "string"
           },
           "fontSize": {
-            "description": "schema.game.train.nameFontSize",
+            "description": "Font size of the name.",
             "type": "number"
           },
           "fontWeight": {
-            "description": "schema.game.companies.items.fontWeight",
+            "description": "Font weight of the name.",
             "oneOf": [
               {
                 "type": "string"
@@ -1707,11 +1684,11 @@
             ]
           },
           "fontStyle": {
-            "description": "schema.game.companies.items.fontStyle",
+            "description": "Font style of the name.",
             "type": "string"
           },
           "outlineWidth": {
-            "description": "schema.game.companies.items.outlineWidth",
+            "description": "Width of the outline of the company on its private card.",
             "type": "number"
           }
         }
@@ -1805,15 +1782,15 @@
             "type": "boolean"
           },
           "events": {
-            "description": "schema.game.phases.items.events",
+            "description": "Events of the phase, an object of boolean fields. close_companies and remove_tokens show on the phase card, other events are ignored.",
             "type": "object",
             "properties": {
               "close_companies": {
-                "description": "schema.game.phases.items.events.close_companies",
+                "description": "The privates close.",
                 "type": "boolean"
               },
               "remove_tokens": {
-                "description": "schema.game.phases.items.events.remove_tokens",
+                "description": "The tokens of private companies are removed from the map.",
                 "type": "boolean"
               }
             },
@@ -1858,7 +1835,7 @@
     },
     "pools": {
       "type": "array",
-      "description": "schema.game.pools",
+      "description": "Notes about the pools of the game. Kept for reference, they are not printed.",
       "items": {
         "type": "object",
         "properties": {
@@ -1898,7 +1875,7 @@
             "type": "string"
           },
           "group": {
-            "description": "schema.game.privates.items.group",
+            "description": "The id of a group of the game, drawn as its mark on its private card.",
             "type": "string",
             "x-ref": {
               "from": "groups",
@@ -1954,7 +1931,7 @@
           "iconSize": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "schema.game.privates.items.iconSize"
+            "description": "Size of the icon, token, company, tile or hex graphic of this private, as a multiplier of the default size (0.3in, or the big style size). Defaults to 1. With the small style and several graphics, the width is capped so they share the row."
           },
           "tile": {
             "type": "string"
@@ -1975,7 +1952,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "description": "schema.game.privates.items.abilities.items",
+              "description": "An ability of the private. Kept for reference, it is not printed.",
               "properties": {
                 "type": {
                   "type": "string"
@@ -2000,7 +1977,7 @@
             ]
           },
           "priceFormat": {
-            "description": "schema.game.privates.items.priceFormat",
+            "description": "Format string for the price, where the first # is replaced by the number, e.g. #G. Overrides the game currency and the currency config. Not used when price is text.",
             "$ref": "#/definitions/valueFormat"
           },
           "debt": {
@@ -2027,15 +2004,15 @@
             ]
           },
           "revenueFormat": {
-            "description": "schema.game.privates.items.revenueFormat",
+            "description": "Format string for the revenue, where the first # is replaced by each number, e.g. #G. Overrides the game currency and the currency config. Not used for text revenue.",
             "$ref": "#/definitions/valueFormat"
           },
           "nameFontFamily": {
-            "description": "schema.game.train.nameFontFamily",
+            "description": "Font family of the name.",
             "type": "string"
           },
           "nameFontWeight": {
-            "description": "schema.game.companies.items.fontWeight",
+            "description": "Font weight of the name.",
             "oneOf": [
               {
                 "type": "string"
@@ -2046,19 +2023,19 @@
             ]
           },
           "nameFontStyle": {
-            "description": "schema.game.companies.items.fontStyle",
+            "description": "Font style of the name.",
             "type": "string"
           },
           "nameColor": {
-            "description": "schema.game.privates.items.nameColor",
+            "description": "Color of the name.",
             "type": "string"
           },
           "idFontFamily": {
-            "description": "schema.game.privates.items.idFontFamily",
+            "description": "Font family of the id.",
             "type": "string"
           },
           "idFontWeight": {
-            "description": "schema.game.privates.items.idFontWeight",
+            "description": "Font weight of the id.",
             "oneOf": [
               {
                 "type": "string"
@@ -2069,24 +2046,24 @@
             ]
           },
           "idFontStyle": {
-            "description": "schema.game.privates.items.idFontStyle",
+            "description": "Font style of the id.",
             "type": "string"
           },
           "idColor": {
-            "description": "schema.game.privates.items.idColor",
+            "description": "Color of the id.",
             "type": "string"
           },
           "idFontSize": {
-            "description": "schema.game.privates.items.idFontSize",
+            "description": "Font size of the id.",
             "type": "integer",
             "minimum": 1
           },
           "noteFontFamily": {
-            "description": "schema.game.privates.items.noteFontFamily",
+            "description": "Font family of the note.",
             "type": "string"
           },
           "noteFontWeight": {
-            "description": "schema.game.privates.items.noteFontWeight",
+            "description": "Font weight of the note.",
             "oneOf": [
               {
                 "type": "string"
@@ -2097,24 +2074,24 @@
             ]
           },
           "noteFontStyle": {
-            "description": "schema.game.privates.items.noteFontStyle",
+            "description": "Font style of the note.",
             "type": "string"
           },
           "noteColor": {
-            "description": "schema.game.privates.items.noteColor",
+            "description": "Color of the note.",
             "type": "string"
           },
           "noteFontSize": {
-            "description": "schema.game.privates.items.noteFontSize",
+            "description": "Font size of the note.",
             "type": "integer",
             "minimum": 1
           },
           "descFontFamily": {
-            "description": "schema.game.privates.items.descFontFamily",
+            "description": "Font family of the description.",
             "type": "string"
           },
           "descFontWeight": {
-            "description": "schema.game.privates.items.descFontWeight",
+            "description": "Font weight of the description.",
             "oneOf": [
               {
                 "type": "string"
@@ -2125,19 +2102,19 @@
             ]
           },
           "descFontStyle": {
-            "description": "schema.game.privates.items.descFontStyle",
+            "description": "Font style of the description.",
             "type": "string"
           },
           "descColor": {
-            "description": "schema.game.privates.items.descColor",
+            "description": "Color of the description.",
             "type": "string"
           },
           "priceFontFamily": {
-            "description": "schema.game.train.priceFontFamily",
+            "description": "Font family of the price.",
             "type": "string"
           },
           "priceFontWeight": {
-            "description": "schema.game.privates.items.priceFontWeight",
+            "description": "Font weight of the price.",
             "oneOf": [
               {
                 "type": "string"
@@ -2148,24 +2125,24 @@
             ]
           },
           "priceFontStyle": {
-            "description": "schema.game.privates.items.priceFontStyle",
+            "description": "Font style of the price.",
             "type": "string"
           },
           "priceColor": {
-            "description": "schema.game.privates.items.priceColor",
+            "description": "Color of the price.",
             "type": "string"
           },
           "priceFontSize": {
-            "description": "schema.game.train.priceFontSize",
+            "description": "Font size of the price.",
             "type": "integer",
             "minimum": 1
           },
           "revenueFontFamily": {
-            "description": "schema.game.privates.items.revenueFontFamily",
+            "description": "Font family of the revenue.",
             "type": "string"
           },
           "revenueFontWeight": {
-            "description": "schema.game.privates.items.revenueFontWeight",
+            "description": "Font weight of the revenue.",
             "oneOf": [
               {
                 "type": "string"
@@ -2176,24 +2153,24 @@
             ]
           },
           "revenueFontStyle": {
-            "description": "schema.game.privates.items.revenueFontStyle",
+            "description": "Font style of the revenue.",
             "type": "string"
           },
           "revenueColor": {
-            "description": "schema.game.privates.items.revenueColor",
+            "description": "Color of the revenue.",
             "type": "string"
           },
           "revenueFontSize": {
-            "description": "schema.game.privates.items.revenueFontSize",
+            "description": "Font size of the revenue.",
             "type": "integer",
             "minimum": 1
           },
           "bidFontFamily": {
-            "description": "schema.game.privates.items.bidFontFamily",
+            "description": "Font family of the bid.",
             "type": "string"
           },
           "bidFontWeight": {
-            "description": "schema.game.privates.items.bidFontWeight",
+            "description": "Font weight of the bid.",
             "oneOf": [
               {
                 "type": "string"
@@ -2204,24 +2181,24 @@
             ]
           },
           "bidFontStyle": {
-            "description": "schema.game.privates.items.bidFontStyle",
+            "description": "Font style of the bid.",
             "type": "string"
           },
           "bidColor": {
-            "description": "schema.game.privates.items.bidColor",
+            "description": "Color of the bid.",
             "type": "string"
           },
           "bidFontSize": {
-            "description": "schema.game.privates.items.bidFontSize",
+            "description": "Font size of the bid.",
             "type": "integer",
             "minimum": 1
           },
           "variantFontFamily": {
-            "description": "schema.game.privates.items.variantFontFamily",
+            "description": "Font family of the variant.",
             "type": "string"
           },
           "variantFontWeight": {
-            "description": "schema.game.privates.items.variantFontWeight",
+            "description": "Font weight of the variant.",
             "oneOf": [
               {
                 "type": "string"
@@ -2232,24 +2209,24 @@
             ]
           },
           "variantFontStyle": {
-            "description": "schema.game.privates.items.variantFontStyle",
+            "description": "Font style of the variant.",
             "type": "string"
           },
           "variantColor": {
-            "description": "schema.game.privates.items.variantColor",
+            "description": "Color of the variant.",
             "type": "string"
           },
           "variantFontSize": {
-            "description": "schema.game.privates.items.variantFontSize",
+            "description": "Font size of the variant.",
             "type": "integer",
             "minimum": 1
           },
           "playersFontFamily": {
-            "description": "schema.game.privates.items.playersFontFamily",
+            "description": "Font family of the players.",
             "type": "string"
           },
           "playersFontWeight": {
-            "description": "schema.game.privates.items.playersFontWeight",
+            "description": "Font weight of the players.",
             "oneOf": [
               {
                 "type": "string"
@@ -2260,28 +2237,28 @@
             ]
           },
           "playersFontStyle": {
-            "description": "schema.game.privates.items.playersFontStyle",
+            "description": "Font style of the players.",
             "type": "string"
           },
           "playersColor": {
-            "description": "schema.game.privates.items.playersColor",
+            "description": "Color of the players.",
             "type": "string"
           },
           "playersFontSize": {
-            "description": "schema.game.privates.items.playersFontSize",
+            "description": "Font size of the players.",
             "type": "integer",
             "minimum": 1
           },
           "fontColor": {
-            "description": "schema.game.privates.items.fontColor",
+            "description": "Color of the text of the card.",
             "type": "string"
           },
           "backgroundColor": {
-            "description": "schema.game.privates.items.backgroundColor",
+            "description": "Background color of the card.",
             "type": "string"
           },
           "revenueBackgroundColor": {
-            "description": "schema.game.privates.items.revenueBackgroundColor",
+            "description": "Background color of the revenue.",
             "type": "string"
           }
         },
@@ -2291,7 +2268,7 @@
     },
     "rounds": {
       "type": "array",
-      "description": "schema.game.rounds",
+      "description": "The rounds of the game, in order, for the round tracker.",
       "items": {
         "$ref": "tiles.defs.json#/definitions/roundToken"
       }
@@ -2318,7 +2295,7 @@
     },
     "turns": {
       "type": "array",
-      "description": "schema.game.turns",
+      "description": "The turns of the game, printed on the charter.",
       "items": {
         "type": "object",
         "properties": {
@@ -2332,7 +2309,7 @@
             }
           },
           "ordered": {
-            "description": "schema.game.turns.items.ordered",
+            "description": "Number the steps.",
             "type": "boolean"
           },
           "optional": {
@@ -2378,18 +2355,18 @@
     },
     "exports": {
       "type": "object",
-      "description": "schema.game.exports",
+      "description": "The options of an export (maker export, and the export options of the app) for this game. They are the defaults of the game: the flags of maker export, the user's config and the choices made in the export options panel come on top of them.",
       "properties": {
         "formats": {
           "type": "array",
-          "description": "schema.game.exports.formats",
+          "description": "The files to export, like --format. pdf, png, svg (the map, market, par, revenue, tiles and tokens, for vector graphics software) and b18 (a Board18 box). Defaults to pdf.",
           "items": { "type": "string", "enum": ["pdf", "png", "svg", "b18"] },
           "minItems": 1,
           "uniqueItems": true
         },
         "docs": {
           "type": "array",
-          "description": "schema.game.exports.docs",
+          "description": "Only export these pages, like --docs. All pages when left out. Only for pdf, png and svg files.",
           "items": {
             "type": "string",
             "enum": [
@@ -2410,32 +2387,32 @@
         },
         "layouts": {
           "type": "string",
-          "description": "schema.game.exports.layouts",
+          "description": "all exports a file for every layout of the cards, tiles and tokens, current only the layout of the config, like --layouts. When left out the export.allLayouts setting of the config decides.",
           "enum": ["all", "current"]
         },
         "paginated": {
           "type": "boolean",
           "deprecated": true,
-          "description": "schema.game.exports.paginated"
+          "description": "Deprecated and ignored. The paginated pdfs of the map, market, par and revenue are always exported when the page does not fit on one page of the paper."
         },
         "background": {
           "type": "string",
-          "description": "schema.game.exports.background",
+          "description": "The background of the map, market, par, revenue and tile manifest png images, like --background: white or transparent. Every other png image (the background page, cards, charters, tokens and tiles) is always transparent. Board18 boxes, svg and pdf files are not affected: the map and market of a Board18 box are always white, its tokens and tiles transparent. Defaults to white.",
           "enum": ["white", "transparent"],
           "default": "white"
         },
         "variation": {
           "type": "integer",
-          "description": "schema.game.exports.variation",
+          "description": "Only export this map variation (0 is the first), like --variation. All variations when left out.",
           "minimum": 0
         },
         "png": {
           "type": "object",
-          "description": "schema.game.exports.png",
+          "description": "Options of the png images.",
           "properties": {
             "dpi": {
               "type": "integer",
-              "description": "schema.game.exports.png.dpi",
+              "description": "The resolution of the images in dots per inch, like --dpi. 300 is the size they print at and the highest resolution. Defaults to 300.",
               "minimum": 1,
               "maximum": 300
             }
@@ -2444,11 +2421,11 @@
         },
         "cards": {
           "type": "object",
-          "description": "schema.game.exports.cards",
+          "description": "Options of the single card png images.",
           "properties": {
             "bleed": {
               "type": "number",
-              "description": "schema.game.exports.cards.bleed",
+              "description": "The bleed around each single card image, in units of 1/100 inch (12.5 is 1/8 inch), like --card-bleed. The image is the card plus the bleed on every side, with the card background filling the bleed, ready for a card printing company. Logos and borders are not extended. The sheets keep the cards.bleed of the config. Defaults to 0, no bleed.",
               "minimum": 0,
               "maximum": 50
             }
@@ -2457,16 +2434,16 @@
         },
         "b18": {
           "type": "object",
-          "description": "schema.game.exports.b18",
+          "description": "Options of the Board18 box.",
           "properties": {
             "version": {
               "type": "string",
-              "description": "schema.game.exports.b18.version",
+              "description": "The version of the box, like --b18-version. Defaults to 1.0.",
               "minLength": 1
             },
             "author": {
               "type": "string",
-              "description": "schema.game.exports.b18.author",
+              "description": "The author of the box, like --b18-author. Defaults to the b18.author setting of maker config, the designer of the game in the app, or the name of the user.",
               "minLength": 1
             }
           },
@@ -2477,20 +2454,20 @@
     },
     "revenue": {
       "type": "object",
-      "description": "schema.game.revenue",
+      "description": "The range of the revenue chart.",
       "properties": {
         "min": {
-          "description": "schema.game.revenue.min",
+          "description": "The first revenue, 1 by default.",
           "type": "integer",
           "minimum": 1
         },
         "max": {
-          "description": "schema.game.revenue.max",
+          "description": "The last revenue, 100 by default.",
           "type": "integer",
           "minimum": 1
         },
         "perRow": {
-          "description": "schema.game.revenue.perRow",
+          "description": "How many revenues in a row, 20 by default.",
           "type": "integer",
           "minimum": 1
         }
