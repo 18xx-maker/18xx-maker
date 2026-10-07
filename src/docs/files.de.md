@@ -154,8 +154,7 @@ bearbeitbar und wird mit einer Warnung angezeigt.
 Der Tab Privatgesellschaften funktioniert genauso für die Privatgesellschaften
 des Spiels. Eine Karte zeigt zuerst Name, Preis, Einkommen, und Gesellschaft. Das Einkommen ist eine Zahl oder eine Liste, so geschrieben,
 wie sie gedruckt wird, etwa `10/20`; Text, der keine Zahlen enthält, etwa
-`$10/$20`, bleibt Text. Die Fähigkeiten einer Privatgesellschaft werden als
-JSON bearbeitet, die übrigen Felder, etwa Notiz und Beschreibung, stehen unter Weitere Felder.
+`$10/$20`, bleibt Text. Die übrigen Felder, etwa Notiz und Beschreibung, stehen unter Weitere Felder.
 
 Der Tab Gesellschaften funktioniert genauso für die Gesellschaften des Spiels.
 Weil eine Gesellschaft viele Felder hat, ist ihre Karte zunächst eingeklappt und
@@ -219,9 +218,8 @@ das Schema nicht erlaubt.
 Der Tab Runden bearbeitet die Runden des Rundenzählers (eine Karte für jedes
 Rundenplättchen, zunächst mit Name und Farbe und den anderen Feldern unter
 Weitere Felder), die auf dem Charter gedruckten Züge (ein Name, seine Schritte,
-ob die Schritte nummeriert sind, und die optionalen Schritte), die Notizen zu
-den Pools (ein Name und eine Liste von Notizen mit optionaler Farbe und Icon,
-nur zur Orientierung und nicht gedruckt) und die Farben der Nummernkarten.
+ob die Schritte nummeriert sind, und die optionalen Schritte) und die Farben
+der Nummernkarten.
 
 Der Tab „Token“ bearbeitet die Token des Token-Bogens, die Token-Typen und die
 Aktientypen. Ein Token ist eine Zeile mit Text oder einer Zahl (das Label eines
@@ -256,9 +254,7 @@ Farbe, die je nach Phase abweicht, ist ein Objekt und bleibt JSON.
 Der Tab „Ausgabe“ bearbeitet den Bereich der Ertragstabelle (den ersten und
 letzten Ertrag und wie viele in einer Zeile stehen), die Export-Voreinstellungen
 des Spiels (die Dateien, die Seiten, die Layouts, den Hintergrund, die Variante
-und die Optionen für PNG, Karten und Board18) und die Upgrades der Kacheln nach
-Name: „Upgrade hinzufügen“ fügt einen Namen hinzu, seine Kacheln stehen je eine
-in einer Zeile. Die veraltete Exportoption paginated wird nicht angezeigt und
+und die Optionen für PNG, Karten und Board18). Die veraltete Exportoption paginated wird nicht angezeigt und
 bleibt in der Datei.
 
 Der Hex-Tab gibt es nur auf der Kartenseite. Klicke auf ein Kartenfeld auf der

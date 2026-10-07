@@ -128,8 +128,7 @@ A company can print one line of small text under its name on the charter, with
 three slots: the home hex or starting city on the left, the destination in the
 middle and a special power on the right. Set `home` (a string or a list, joined
 with " / "), `destination` and `ability` and the slots print as `Home: ...`,
-`Dest: ...` and the ability as written. `ability` is not the same as the
-unprinted private `abilities`. A slot without a value stays empty and the others
+`Dest: ...` and the ability as written. A slot without a value stays empty and the others
 keep their place. To print your own text, set `charterSubtitle` with `left`,
 `middle` or `right`; an empty string blanks a slot. The text is not translated
 and a slot that is too long is cut with an ellipsis. On small headers (minors,

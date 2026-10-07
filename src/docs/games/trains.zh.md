@@ -28,7 +28,6 @@
 - **image** 这辆火车使用的图片(可用图片请参阅模式、代码或 18Test 文件)。
 - **phase** 如果不希望这辆火车出现在阶段表上,请将其设为 `false`。
 - **print** 这辆火车要打印的数量。打印时会覆盖 `quantity` 字段。当 quantity 设为 "∞" 时必填。
-- **discount** 一个对象,将火车名称映射到折扣金额。
 - **upgrade** 该火车作为升级购买时的费用。以箭头形式显示在价格下方。
 - **tradeIn** 该火车折价换购时的价值。以括号形式显示在价格下方。
 - **priceFormat**、**upgradeFormat**、**tradeInFormat** 对应数值的格式字符串,其中第一个 `#` 会被替换为该值:`"#G"` 显示为 `300G`,`"+#"` 显示为 `+200`。它会取代该值的游戏货币和货币配置,当值为文本时将被忽略。箭头和括号保持不变。请保持格式简短,文字不会缩小。公司火车上的格式需要完整的火车定义,包括 `color` 和价格:只写 `{ "name", "priceFormat" }` 是无效的。
@@ -45,7 +44,7 @@
 
 ## 示例
 
-请查看 18Test 文件,了解其中大部分字段的示例。下面是一个**合成**示例(它可以通过校验,但并非取自任何内置游戏),展示了 `on`、`index`、`rust`、`events`、`notes`、`print`、`discount` 和 `available`:
+请查看 18Test 文件,了解其中大部分字段的示例。下面是一个**合成**示例(它可以通过校验,但并非取自任何内置游戏),展示了 `on`、`index`、`rust`、`events`、`notes`、`print` 和 `available`:
 
 ```json
 {
@@ -86,9 +85,8 @@
       "print": 2,
       "price": 1000,
       "color": "brown",
-      "discount": { "4": 300, "5": 300, "6": 300 },
       "available": "6",
-      "description": "Buy at a discount by trading in a 4, 5 or 6"
+      "description": "Cost 800 when trading in a 4, 5 or 6"
     }
   ]
 }

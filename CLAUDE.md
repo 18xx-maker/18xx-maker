@@ -70,6 +70,12 @@ Conventions:
   option, tile element, charter/market/token field, ...), so it renders in the
   print pages and the snapshots cover it. Extend an existing entry where one
   fits; add a new one only when the feature needs it.
+- `src/data/games/18Broken.json` is invalid on purpose (schema errors and
+  removed fields) so the Problems page has something to show. It is exempt
+  from `pnpm validate` (`UNVALIDATED_GAMES` in `src/util/testGames.js`): never
+  fix it or add it to the snapshots. `e2e/fixtures/e2e-game.json` is the same
+  for the CLI: it keeps removed fields (`pools`, `discount`) so exports of
+  games that still have them are covered; `pnpm validate` does not read it.
 - Every route in `rootRoutes` needs a smoke test entry (`tests/support/routes.js`,
   `tests/support/smoke.js`).
 - CI enforces a 95% statement floor on `src/state/**`. The state layer is

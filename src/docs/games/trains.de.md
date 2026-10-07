@@ -54,7 +54,6 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
   erscheinen soll.
 - **print** Die Anzahl dieses Zuges, die gedruckt wird. Überschreibt das Feld
   `quantity` für den Druck. Erforderlich, wenn `quantity` auf „∞“ gesetzt ist.
-- **discount** Ein Objekt, das Zugnamen einem Rabattbetrag zuordnet.
 - **upgrade** Die Kosten dieses Zuges, wenn er als Upgrade gekauft wird. Wird mit
   einem Pfeil unter dem Preis angezeigt.
 - **tradeIn** Der Wert dieses Zuges beim Eintauschen. Wird in Klammern unter dem
@@ -105,7 +104,7 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
 Beispiele für die meisten dieser Felder findest du in der Datei 18Test. Das
 folgende Beispiel ist **synthetisch** (es validiert, stammt aber nicht aus einem
 mitgelieferten Spiel) und zeigt `on`, `index`, `rust`, `events`, `notes`,
-`print`, `discount` und `available`:
+`print` und `available`:
 
 ```json
 {
@@ -146,9 +145,8 @@ mitgelieferten Spiel) und zeigt `on`, `index`, `rust`, `events`, `notes`,
       "print": 2,
       "price": 1000,
       "color": "brown",
-      "discount": { "4": 300, "5": 300, "6": 300 },
       "available": "6",
-      "description": "Buy at a discount by trading in a 4, 5 or 6"
+      "description": "Cost 800 when trading in a 4, 5 or 6"
     }
   ]
 }

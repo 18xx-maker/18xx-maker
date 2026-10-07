@@ -129,7 +129,8 @@ node scripts/export-golden.mjs 18Test
 # Run all fixing linters
 pnpm fix
 
-# Run schema validation on all data json files:
+# Run schema validation on all data json files (18Broken is skipped, it has
+# schema errors on purpose):
 pnpm validate
 
 # Optimize SVGs
@@ -304,9 +305,7 @@ count of string and number alternatives. A text or a list of texts (the train
 and notes of a phase, exactly `string` and `array` of `string` with no enum or
 pattern) is the `stringList` kind, one entry a line in a textarea
 (`parseList`, `formatList`, `sameList`; one line is saved as a string, so a
-list of one stays a list until it is edited). `abilities` is
-in `JSON_KEYS` and stays a JSON textarea whatever its schema (a nested list
-would lack the required `type` and hide the other keys of an ability), and a
+list of one stays a list until it is edited). A
 `description` is a textarea (`LONG_TEXT_KEYS`). A `revenue` (a `oneOf` of a
 number, a list of numbers and a string) has its own kind: it is typed as `10/20`
 (`parseRevenue`, `formatRevenue`), numbers become a number or a list and any
@@ -317,13 +316,13 @@ through the `cellObject` schema and keeps the shorthand (a number, string or
 null) when a cell needs no more, and the pure edits (rows, columns, type,
 movement) are in `src/util/marketEdit.js`. The market is never deleted, the
 last row or column leaves `market: []`. `PlayersForm` edits `PLAYER_KEYS`
-(`bank`, `capital`, `certLimit`, `floatPercent`) and the `players` table: it
+(`bank`, `capital`, `certLimit`) and the `players` table: it
 passes `PLAYER_PRIMARY_KEYS` as `primary`, `idKey="number"` (a new or copied
 item gets `nextNumber`, the highest number plus one, as a number instead of a
 text name) and `title` (a translation key, `editPanel.titles.players`, counting
 the `titleKey` field: "3 players") to `ArrayField`. A `oneOf` of only strings
-and numbers (`certLimit`) is the `stringOrNumber` kind. `RoundsForm` edits `ROUND_KEYS` (`rounds`, `turns`, `pools`, `number_cards`) and `TokensForm` edits `TOKEN_KEYS` (`tokens`, `tokenTypes`, `shareTypes`). `ColorsForm` edits `COLOR_KEYS` (`colors`): a `color` kind (`colorValue`, text or an object by phase) is `ColorField`, a swatch over a native color input plus text, and the by-phase object is the JSON textarea. `OutputForm` edits `OUTPUT_KEYS` (`revenue`, `exports`, `upgrades`): objects, enum lists, and a record of text lists; `HIDDEN_PATHS` (`exports.paginated`, deprecated) are not shown and stay in the game. A list whose items are text, a number or one object (`mixedItem`, the tokens) is an `array`: a text row (`ScalarRow`) or a card each, and a record passes `rows` props (`itemKey`, `primary`) to the field of each of its rows. All forms use
-`SchemaFormProvider`. A field kind without a form (`discount`, other
+and numbers (`certLimit`) is the `stringOrNumber` kind. `RoundsForm` edits `ROUND_KEYS` (`rounds`, `turns`, `number_cards`) and `TokensForm` edits `TOKEN_KEYS` (`tokens`, `tokenTypes`, `shareTypes`). `ColorsForm` edits `COLOR_KEYS` (`colors`): a `color` kind (`colorValue`, text or an object by phase) is `ColorField`, a swatch over a native color input plus text, and the by-phase object is the JSON textarea. `OutputForm` edits `OUTPUT_KEYS` (`revenue`, `exports`): objects, enum lists, and a record of text lists; `HIDDEN_PATHS` (`exports.paginated`, deprecated) are not shown and stay in the game. A list whose items are text, a number or one object (`mixedItem`, the tokens) is an `array`: a text row (`ScalarRow`) or a card each, and a record passes `rows` props (`itemKey`, `primary`) to the field of each of its rows. All forms use
+`SchemaFormProvider`. A field kind without a form (other
 `oneOf`s) falls back to a JSON textarea, and
 `resolve.test.js` fails when a property in scope falls back unexpectedly. A
 property with `"deprecated": true` in the schema stays editable, with a

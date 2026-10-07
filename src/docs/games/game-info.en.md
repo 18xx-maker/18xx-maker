@@ -50,10 +50,8 @@ required, and the others are the numbers for that count:
 - **`capital`** is the starting capital of each player, a number or a text.
 - **`certLimit`** is the most certificates a player may hold. It is a number, or
   a text with slashes such as `"20/16/13"` for a limit that changes.
-- **`floatPercent`** is the percent of a company that must be sold before it
-  floats, from 0 to 100.
 
-`bank`, `capital`, `certLimit` and `floatPercent` can also be set once for the
+`bank`, `capital` and `certLimit` can also be set once for the
 whole game, next to `info` and `players`, for a game where they do not change
 with the number of players. In the players table of the map, a value set for the
 whole game is shown once across all the players and the values in `players` are
@@ -62,8 +60,7 @@ not used for that row.
 The table of players on the map shows `number`, `bank`, `capital` and
 `certLimit`, one column for each entry of `players`. It is drawn where
 `map.players` says (see [Tiles and Hexes](/docs/games/tiles)) when the players
-table option of the maps on the config page is on. `floatPercent` is part of
-the file and the form editor, but nothing prints it yet.
+table option of the maps on the config page is on.
 
 ## Turns
 
@@ -106,12 +103,6 @@ charters:
 
 `events` is an object of booleans. Any other event you add is kept in the file
 and ignored when printing.
-
-## Pools
-
-`pools` is a list of notes about the pools of the game, such as the market. Each
-pool has a `name` and `notes`, and each note a `note`, with an optional `color`
-and `icon`. They are kept in the file for reference and are not printed.
 
 ## Work in Progress and Prototype
 
@@ -163,4 +154,21 @@ Types](/docs/games/types#the-presidents-share):
 | `rounds`                                  | Round tracker on the map and the market   |
 | `phases`                                  | Phase chart on the charters               |
 | `wip`, `prototype`                        | Info page                                 |
-| `floatPercent`, `pools`                   | Kept for reference, not printed           |
+
+## Removed Fields
+
+These fields were in the schema but nothing used them for printing, so they
+were removed. A game that still has one keeps loading and exporting: the field
+is ignored and shows on the Problems page as deprecated. Delete it from the
+file.
+
+- `pools`, `floatPercent` and `upgrades` of the game.
+- `capitalization` and `mustSellInBlocks` of `info`.
+- `subName` of a company.
+- `discount` of a train.
+- `sym`, `debt`, `abilities` and `image` of a private.
+- `broken`, `encoding` and `groups` of a tile and its hex elements.
+- `bgFill` and `inverseTextColor` of a token (use `inverseLabelColor` for the
+  text color of an inverse token).
+- `text` and `textColor` of a token of a tile.
+- `textBorderWidth` and `textBorderColor` of the text of a tile element.

@@ -132,8 +132,7 @@ kleinen Text drucken, mit drei Feldern: das Heimatfeld oder die Startstadt links
 das Ziel in der Mitte und eine Sonderfähigkeit rechts. Setze `home` (ein String
 oder eine Liste, verbunden mit " / "), `destination` und `ability`, und die
 Felder werden als `Home: ...`, `Dest: ...` und die Fähigkeit wie geschrieben
-gedruckt. `ability` ist nicht dasselbe wie die ungedruckten `abilities` einer
-Privatgesellschaft. Ein Feld ohne Wert bleibt leer und die anderen behalten ihren
+gedruckt. Ein Feld ohne Wert bleibt leer und die anderen behalten ihren
 Platz. Für eigenen Text setze `charterSubtitle` mit `left`, `middle` oder
 `right`; ein leerer String leert ein Feld. Der Text wird nicht übersetzt, und ein
 zu langes Feld wird mit einer Ellipse abgeschnitten. Bei kleinen Kopfzeilen

@@ -52,15 +52,10 @@ The fields that are about printing a tile rather than drawing it:
 | `clipPath`       | `false` prints the tile without the bleed outline, for tiles with fancy borders or other bleed issues.                                        |
 | `stripeRotation` | The angle of the stripes of a striped color such as `yellow/blue`.                                                                            |
 | `rotations`      | For [Board18](/docs/output/b18) only: a number to use the first n rotations of the tile, or a list of rotations in degrees (multiples of 60). |
-| `broken`         | Marks a tile as not ready to export.                                                                                                          |
 
 The tiles are printed on the tile sheets (see the `tiles` options on the config
 page for the layout, the width and the gaps) and listed, with their quantities,
 on the tile manifest.
-
-`upgrades` is a field of the game schema that maps a tile id to a list of the
-tile ids it upgrades to. It is accepted when the file is validated but nothing
-in 18xx Maker draws it.
 
 ## Hexes of the Map
 

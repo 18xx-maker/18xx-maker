@@ -38,11 +38,9 @@
 - **`bank`** 是银行中的资金,数字或 `"∞"`。
 - **`capital`** 是每位玩家的起始资金,数字或文字。
 - **`certLimit`** 是玩家最多可持有的证书数。它是数字,或带斜线的文字(如 `"20/16/13"`),用于会变化的上限。
-- **`floatPercent`** 是公司上市前必须售出的百分比,范围 0 到 100。
+  `bank`、`capital` 和 `certLimit` 也可以在整个游戏中只设置一次,与 `info` 和 `players` 并列,适用于不随玩家人数变化的游戏。在地图上的玩家表中,为整个游戏设置的值只显示一次,横跨所有玩家,该行不使用 `players` 中的值。
 
-`bank`、`capital`、`certLimit` 和 `floatPercent` 也可以在整个游戏中只设置一次,与 `info` 和 `players` 并列,适用于不随玩家人数变化的游戏。在地图上的玩家表中,为整个游戏设置的值只显示一次,横跨所有玩家,该行不使用 `players` 中的值。
-
-地图上的玩家表显示 `number`、`bank`、`capital` 和 `certLimit`,`players` 的每一项占一列。当配置页面中地图的玩家表选项开启时,它绘制在 `map.players` 指定的位置(参见[地块与六边格](/docs/games/tiles))。`floatPercent` 是文件和表单编辑器的一部分,但目前没有任何输出会打印它。
+地图上的玩家表显示 `number`、`bank`、`capital` 和 `certLimit`,`players` 的每一项占一列。当配置页面中地图的玩家表选项开启时,它绘制在 `map.players` 指定的位置(参见[地块与六边格](/docs/games/tiles))。
 
 ## 回合流程
 
@@ -74,10 +72,6 @@
 - `events.remove_tokens: true` 打印 `Private tokens removed.`
 
 `events` 是布尔值对象。您添加的其他事件会保留在文件中,打印时会被忽略。
-
-## 池
-
-`pools` 是关于游戏中各个池(如市场)的备注列表。每个池有 `name` 和 `notes`,每条备注有 `note`,以及可选的 `color` 和 `icon`。它们保留在文件中供参考,不会被打印。
 
 ## 制作中与原型
 
@@ -116,4 +110,17 @@
 | `rounds`                                  | 地图和股市上的回合记录               |
 | `phases`                                  | 公司执照上的阶段表                   |
 | `wip`、`prototype`                        | 信息页                               |
-| `floatPercent`、`pools`                   | 仅供参考保留,不打印                  |
+
+## 已移除的字段
+
+这些字段曾在模式中,但没有任何东西用它们来打印,因此已被移除。仍含有这些字段的游戏照常加载和导出:该字段会被忽略,并在“问题”页面中显示为已弃用。请把它从文件中删除。
+
+- 游戏的 `pools`、`floatPercent` 和 `upgrades`。
+- `info` 的 `capitalization` 和 `mustSellInBlocks`。
+- 公司的 `subName`。
+- 火车的 `discount`。
+- 私有公司的 `sym`、`debt`、`abilities` 和 `image`。
+- 地块及其六边格元素的 `broken`、`encoding` 和 `groups`。
+- 标记的 `bgFill` 和 `inverseTextColor`(反色标记的文字颜色请用 `inverseLabelColor`)。
+- 地块上标记的 `text` 和 `textColor`。
+- 地块元素文字的 `textBorderWidth` 和 `textBorderColor`。

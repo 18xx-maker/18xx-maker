@@ -95,14 +95,6 @@ Beim Stil `small` bleibt die Breite innerhalb der Reihe, sodass auch mehrere
 Grafiken noch hineinpassen. `18Test.json` hat Privatgesellschaften jeder Größe
 zum Vergleichen.
 
-## Fähigkeiten und weitere Felder
-
-`abilities` ist eine Liste von Objekten mit einem `type`. Sie bleibt zur
-Referenz in der Datei, zum Beispiel um zu übernehmen, was die
-Privatgesellschaft in einem anderen System bewirkt, und wird nicht gedruckt.
-`debt`, `sym` und `image` werden vom Schema akzeptiert, aber ebenfalls nicht
-gedruckt. Schreib die Regeln, die ein Spieler braucht, in die `description`.
-
 ## Schriften und Farben
 
 Jeder Text hat eigene Schriftfelder, die nach dem Textteil benannt sind. Für
