@@ -7,7 +7,7 @@ import tilesDefs from "@/schemas/tiles.defs.json";
 export const GAME_INFO_KEYS = ["info", "links", "prototype", "wip"];
 
 // The lists of the rounds tab, in the order of the tab
-export const ROUND_KEYS = ["rounds", "turns", "number_cards"];
+export const ROUND_KEYS = ["rounds", "turns", "numberCards", "number_cards"];
 
 // The record of the colors tab
 export const COLOR_KEYS = ["colors"];
@@ -25,6 +25,11 @@ export const isHidden = (keys) =>
       hidden.length === keys.length &&
       hidden.every((key, index) => key === keys[index]),
   );
+
+// A deprecated field without a value is not offered: the form shows the old
+// name only while a game still has it
+export const isUnsetDeprecated = (keys, schema, root, game) =>
+  !!resolveAllOf(schema, root).deprecated && valueAt(keys, game) === undefined;
 
 // The lists of the tokens tab, in the order of the tab
 export const TOKEN_KEYS = ["tokens", "tokenTypes", "shareTypes"];

@@ -7,9 +7,9 @@
     "orientation": "horizontal",
     "titleY": 1700,
     "titleX": 60,
-    "titleSize": 160,
-    "subtitleSize": 80,
-    "designerSize": 60,
+    "titleFontSize": 160,
+    "subtitleFontSize": 80,
+    "designerFontSize": 60,
     "currency": "$#"
   },
   "links": {
@@ -18,7 +18,7 @@
   },
   "bank": "∞",
   "tokens": ["Round"],
-  "number_cards": ["mainline", "shortline"],
+  "numberCards": ["mainline", "shortline"],
   "colors": {
     "mainline": "#4d2674",
     "shortline": "#004d95",

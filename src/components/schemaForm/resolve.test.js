@@ -239,6 +239,7 @@ describe("kindOf", () => {
       "info.designer": "string",
       "info.designerFontFamily": "string",
       "info.designerFontWeight": "stringOrNumber",
+      "info.designerFontSize": "number",
       "info.designerSize": "number",
       "info.extraStationTokens": "number",
       "info.extraTotalHeight": "number",
@@ -254,11 +255,13 @@ describe("kindOf", () => {
       "info.subtitle": "string",
       "info.subtitleFontFamily": "string",
       "info.subtitleFontWeight": "stringOrNumber",
+      "info.subtitleFontSize": "number",
       "info.subtitleSize": "number",
       "info.title": "string",
       "info.titleFontFamily": "string",
       "info.titleFontWeight": "stringOrNumber",
       "info.titleRotate": "number",
+      "info.titleFontSize": "number",
       "info.titleSize": "number",
       "info.titleX": "number",
       "info.titleY": "number",
@@ -306,6 +309,7 @@ describe("kindOf", () => {
       "trains.0.priceFormat": "string",
       "trains.0.print": "number",
       "trains.0.quantity": "count",
+      "trains.0.quantityLabel": "string",
       "trains.0.quantity_label": "string",
       "trains.0.rust": "json",
       "trains.0.rustedText": "string",
@@ -451,6 +455,7 @@ describe("kindOf", () => {
       tiles: "string",
       on: "json",
       notes: "stringList",
+      buyCompanies: "boolean",
       buy_companies: "boolean",
       events: "object",
     });
@@ -462,7 +467,7 @@ describe("kindOf", () => {
       Object.entries(events.properties).map(([key, node]) =>
         kindOf(resolveAllOf(node, schema), key, schema),
       ),
-    ).toEqual(["boolean", "boolean"]);
+    ).toEqual(["boolean", "boolean", "boolean", "boolean"]);
   });
 
   it("lists the phase fields that are a JSON textarea", () => {
@@ -1060,9 +1065,11 @@ describe("the kinds of a record, a list of texts and a list of choices", () => {
         schema,
       ),
     ).toBe("json");
-    expect(
-      kindOf(resolveAllOf(schema.properties.number_cards, schema), "x", schema),
-    ).toBe("stringArray");
+    for (const key of ["numberCards", "number_cards"]) {
+      expect(
+        kindOf(resolveAllOf(schema.properties[key], schema), "x", schema),
+      ).toBe("stringArray");
+    }
     // The text or list of texts of a phase stays what it was
     expect(
       kindOf(

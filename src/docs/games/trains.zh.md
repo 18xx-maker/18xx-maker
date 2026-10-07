@@ -15,14 +15,15 @@
 - **on** 哪种火车触发该阶段开始,即购买该火车时该阶段开始。可以是单个火车名称,也可以是火车名称的数组。也可以是单个(或数组)对象,其中每个对象有一个 `on` 字段(火车名称)和一个
   `index` 字段,用于指定由第几辆火车触发该阶段。
 - **notes** 该阶段的备注,字符串或字符串数组。部分备注会由其他字段自动添加,此字段用于自定义备注。
-- **buy_companies** 布尔值,表示在该阶段中是否可以购买私有公司。
+- **buyCompanies** 布尔值,表示在该阶段中是否可以购买私有公司。旧名称 `buy_companies` 仍然有效。
 - **events** 一个由布尔字段组成的对象,表示该阶段触发时会发生的其他事件(例如私有公司关闭或标记被移除)。这些事件的具体格式与 [18xx.games](https://18xx.games)
-  上游戏的实现相关。
+  上游戏的实现相关。`closeCompanies` 和 `removeTokens` 原名为 `close_companies` 和 `remove_tokens`,旧名称仍然有效。
 
 ## 火车字段
 
 - **name** _必填_
 - **quantity** _必填_ 可用火车的数量,可以是数字,也可以是字符串 "∞"。
+- **quantityLabel** 阶段表中数量列显示的文字,代替数量,例如 `5+`。旧名称 `quantity_label` 仍然有效。
 - **color** _必填_ 显示这辆火车标题时使用的颜色。
 - **price** 这辆火车的价格。
 - **image** 这辆火车使用的图片(可用图片请参阅模式、代码或 18Test 文件)。
@@ -56,7 +57,7 @@
       "rounds": 2,
       "tiles": "green",
       "on": "3",
-      "buy_companies": true,
+      "buyCompanies": true,
       "notes": "Privates may be bought"
     },
     {
@@ -65,7 +66,7 @@
       "rounds": 3,
       "tiles": "brown",
       "on": { "on": "5", "index": 2 },
-      "events": { "close_companies": true }
+      "events": { "closeCompanies": true }
     },
     { "name": "D", "limit": 2, "tiles": "brown", "on": ["6", "D"] }
   ],

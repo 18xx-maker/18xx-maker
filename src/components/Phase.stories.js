@@ -5,9 +5,9 @@ import { phase } from "@/stories/frames";
 // The phases and trains of 1889
 const phases = [
   { name: "2", limit: 4, tiles: "yellow" },
-  { name: "3", limit: 4, tiles: "green", buy_companies: true },
-  { name: "4", limit: 3, tiles: "green", buy_companies: true },
-  { name: "5", limit: 2, tiles: "brown", events: { close_companies: true } },
+  { name: "3", limit: 4, tiles: "green", buyCompanies: true },
+  { name: "4", limit: 3, tiles: "green", buyCompanies: true },
+  { name: "5", limit: 2, tiles: "brown", events: { closeCompanies: true } },
   { name: "6", limit: 2, tiles: "brown", notes: "D Trains available" },
   { name: "D", limit: 2, tiles: "brown" },
 ];

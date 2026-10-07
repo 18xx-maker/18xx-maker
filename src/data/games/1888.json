@@ -7,7 +7,7 @@
     "currency": "$#",
     "titleX": 110,
     "titleY": 700,
-    "titleSize": 60
+    "titleFontSize": 60
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/306259/1888",
@@ -1079,7 +1079,7 @@
       "limit": 4,
       "rounds": 2,
       "tiles": "green",
-      "buy_companies": true
+      "buyCompanies": true
     },
     {
       "name": "IV",
@@ -1087,7 +1087,7 @@
       "limit": 3,
       "rounds": 2,
       "tiles": "green",
-      "buy_companies": true
+      "buyCompanies": true
     },
     {
       "name": "V",
@@ -1096,7 +1096,7 @@
       "rounds": 3,
       "tiles": "brown",
       "events": {
-        "close_companies": true
+        "closeCompanies": true
       }
     },
     {

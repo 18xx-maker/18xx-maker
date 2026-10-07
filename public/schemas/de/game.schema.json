@@ -366,8 +366,15 @@
             }
           ]
         },
+        "quantityLabel": {
+          "type": "string",
+          "description": "Text für die Spalte Anzahl der Phasentabelle anstelle der Anzahl. Zum Beispiel 5+."
+        },
         "quantity_label": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "Veraltet, verwende quantityLabel.",
+          "deprecationMessage": "Veraltet, verwende quantityLabel."
         },
         "print": {
           "type": "integer",
@@ -1200,14 +1207,35 @@
           "minimum": -360,
           "maximum": 360
         },
+        "titleFontSize": {
+          "type": "number",
+          "description": "Schriftgröße des Titels auf der Karte. Der Standard ist 200."
+        },
         "titleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "Veraltet, verwende titleFontSize.",
+          "deprecationMessage": "Veraltet, verwende titleFontSize."
+        },
+        "subtitleFontSize": {
+          "type": "number",
+          "description": "Schriftgröße des Untertitels auf der Karte. Der Standard ist 30."
         },
         "subtitleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "Veraltet, verwende subtitleFontSize.",
+          "deprecationMessage": "Veraltet, verwende subtitleFontSize."
+        },
+        "designerFontSize": {
+          "type": "number",
+          "description": "Schriftgröße des Designers auf der Karte. Der Standard ist 20."
         },
         "designerSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "Veraltet, verwende designerFontSize.",
+          "deprecationMessage": "Veraltet, verwende designerFontSize."
         },
         "titleFontFamily": {
           "type": "string"
@@ -1424,8 +1452,18 @@
         "$ref": "#/definitions/tokens"
       }
     },
+    "numberCards": {
+      "type": "array",
+      "description": "Eine Liste von Farben. Für jede Farbe wird ein Satz Nummernkarten gedruckt, die Nummern reichen bis zur höchsten Spielerzahl des Spiels. Der Standard ist die Hintergrundfarbe des Spiels.",
+      "items": {
+        "type": "string"
+      }
+    },
     "number_cards": {
       "type": "array",
+      "deprecated": true,
+      "description": "Veraltet, verwende numberCards.",
+      "deprecationMessage": "Veraltet, verwende numberCards.",
       "items": {
         "type": "string"
       }
@@ -1775,20 +1813,39 @@
               }
             ]
           },
+          "buyCompanies": {
+            "type": "boolean",
+            "description": "Privatgesellschaften können in dieser Phase gekauft werden. Die Phasenkarte vermerkt es."
+          },
           "buy_companies": {
-            "type": "boolean"
+            "type": "boolean",
+            "deprecated": true,
+            "description": "Veraltet, verwende buyCompanies.",
+            "deprecationMessage": "Veraltet, verwende buyCompanies."
           },
           "events": {
-            "description": "Ereignisse der Phase, ein Objekt aus booleschen Feldern. close_companies und remove_tokens werden auf der Phasenkarte angezeigt, andere Ereignisse werden ignoriert.",
+            "description": "Ereignisse der Phase, ein Objekt aus booleschen Feldern. closeCompanies und removeTokens werden auf der Phasenkarte angezeigt, andere Ereignisse werden ignoriert.",
             "type": "object",
             "properties": {
-              "close_companies": {
+              "closeCompanies": {
                 "description": "Die Privatgesellschaften werden geschlossen.",
                 "type": "boolean"
               },
-              "remove_tokens": {
+              "close_companies": {
+                "description": "Veraltet, verwende closeCompanies.",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "Veraltet, verwende closeCompanies."
+              },
+              "removeTokens": {
                 "description": "Die Token der Privatgesellschaften werden von der Karte entfernt.",
                 "type": "boolean"
+              },
+              "remove_tokens": {
+                "description": "Veraltet, verwende removeTokens.",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "Veraltet, verwende removeTokens."
               }
             },
             "additionalProperties": {

@@ -18,7 +18,7 @@ are not repeated here. Phases and trains are in
 | `designer`           | The designer, on the Info page and the map                                                                                                                   |
 | `publisher`          | The id of a publisher from `src/data/publishers`: its logo and name on the Info page and in the game list                                                    |
 | `currency`           | How money is written, with a `#` where the number goes, such as `$#` or `#G`. Prices and revenues use it when the currency options on the config page are on |
-| `background`         | The color of the number cards and of the background page. `number_cards` (a list of colors, next to `info`) prints a set of number cards for each color      |
+| `background`         | The color of the number cards and of the background page. `numberCards` (a list of colors, next to `info`) prints a set of number cards for each color       |
 | `marketTokens`       | How many market tokens each company gets, 3 by default                                                                                                       |
 | `extraStationTokens` | How many extra station tokens each company gets, on top of the ones in its `tokens`                                                                          |
 
@@ -97,9 +97,9 @@ also in the statistics of the Info page.
 fields put a sentence in the notes of the phase on the phase chart of the
 charters:
 
-- `buy_companies: true` prints `Private companies may be purchased.`
-- `events.close_companies: true` prints `Private companies close.`
-- `events.remove_tokens: true` prints `Private tokens removed.`
+- `buyCompanies: true` prints `Private companies may be purchased.`
+- `events.closeCompanies: true` prints `Private companies close.`
+- `events.removeTokens: true` prints `Private tokens removed.`
 
 `events` is an object of booleans. Any other event you add is kept in the file
 and ignored when printing.
@@ -145,7 +145,7 @@ Types](/docs/games/types#the-presidents-share):
 | `info.title`, `subtitle`, `designer`      | Info page, map, background page           |
 | `info.publisher`, `links`                 | Info page, game list                      |
 | `info.currency`                           | Every price and revenue                   |
-| `info.background`, `number_cards`         | Number cards, background page             |
+| `info.background`, `numberCards`          | Number cards, background page             |
 | `info.marketTokens`, `extraStationTokens` | Tokens page, Board18 box                  |
 | `players`                                 | Info page (player range), privates, map   |
 | `bank`, `capital`, `certLimit`            | Players table on the map                  |
@@ -154,6 +154,24 @@ Types](/docs/games/types#the-presidents-share):
 | `rounds`                                  | Round tracker on the map and the market   |
 | `phases`                                  | Phase chart on the charters               |
 | `wip`, `prototype`                        | Info page                                 |
+
+## Renamed Fields
+
+These fields have a new name. A game that still has the old name keeps loading
+and exporting exactly as before, and shows the old name on the Problems page as
+deprecated. The old names are never removed, rename them when you like. If a
+file has both names, the new one is used.
+
+| Old name                          | New name                         |
+| --------------------------------- | -------------------------------- |
+| `info.titleSize`                  | `info.titleFontSize`             |
+| `info.subtitleSize`               | `info.subtitleFontSize`          |
+| `info.designerSize`               | `info.designerFontSize`          |
+| `phases[].buy_companies`          | `phases[].buyCompanies`          |
+| `phases[].events.close_companies` | `phases[].events.closeCompanies` |
+| `phases[].events.remove_tokens`   | `phases[].events.removeTokens`   |
+| `trains[].quantity_label`         | `trains[].quantityLabel`         |
+| `number_cards`                    | `numberCards`                    |
 
 ## Removed Fields
 

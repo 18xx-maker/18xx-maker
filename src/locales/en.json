@@ -425,7 +425,15 @@
     "deprecated-generic": "This field is deprecated.",
     "deprecations": {
       "removed": "This field was removed and is ignored. Delete it, see the removed fields in the docs.",
-      "exports_paginated": "This field is deprecated and ignored. Remove it, the paginated pdfs are exported automatically."
+      "exports_paginated": "This field is deprecated and ignored. Remove it, the paginated pdfs are exported automatically.",
+      "info_titleSize": "Still works. Rename \"titleSize\" to \"titleFontSize\".",
+      "info_subtitleSize": "Still works. Rename \"subtitleSize\" to \"subtitleFontSize\".",
+      "info_designerSize": "Still works. Rename \"designerSize\" to \"designerFontSize\".",
+      "phases_buy_companies": "Still works. Rename \"buy_companies\" to \"buyCompanies\".",
+      "phases_events_close_companies": "Still works. Rename \"close_companies\" to \"closeCompanies\".",
+      "phases_events_remove_tokens": "Still works. Rename \"remove_tokens\" to \"removeTokens\".",
+      "number_cards": "Still works. Rename \"number_cards\" to \"numberCards\".",
+      "trains_quantity_label": "Still works. Rename \"quantity_label\" to \"quantityLabel\"."
     }
   },
   "prototype": {

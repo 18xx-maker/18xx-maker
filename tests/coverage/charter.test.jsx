@@ -24,7 +24,7 @@ const trains = [
     name: "3",
     color: "green",
     price: 180,
-    quantity_label: "5+",
+    quantityLabel: "5+",
     rust: [{ on: "4" }],
   },
   { name: "4", color: "brown", price: 300, obsolete: "5", phased: ["5"] },
@@ -43,8 +43,8 @@ describe("Phase", () => {
         trains={trains}
         phases={[
           { name: "2", tiles: "yellow", notes: "Start", limit: 4 },
-          { name: "3", train: ["3", "E"], buy_companies: true },
-          { name: "4", events: { close_companies: true, remove_tokens: true } },
+          { name: "3", train: ["3", "E"], buyCompanies: true },
+          { name: "4", events: { closeCompanies: true, removeTokens: true } },
           { name: "5", notes: ["One", "Two"] },
           { name: "M", minor: true },
         ]}

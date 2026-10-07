@@ -4,7 +4,12 @@ import { useTranslation } from "react-i18next";
 import SchemaField from "@/components/schemaForm/SchemaField";
 import { SchemaFormContext } from "@/components/schemaForm/fields/shared";
 import { issueText } from "@/components/schemaForm/issueText";
-import { humanize, isHidden, issuesFor } from "@/components/schemaForm/resolve";
+import {
+  humanize,
+  isHidden,
+  isUnsetDeprecated,
+  issuesFor,
+} from "@/components/schemaForm/resolve";
 import { useSchemaText } from "@/components/schemaForm/schemaText";
 
 export const ObjectField = ({ keys, schema }) => {
@@ -29,7 +34,11 @@ export const ObjectField = ({ keys, schema }) => {
         </p>
       ))}
       {Object.entries(schema.properties)
-        .filter(([key]) => !isHidden([...keys, key]))
+        .filter(
+          ([key, child]) =>
+            !isHidden([...keys, key]) &&
+            !isUnsetDeprecated([...keys, key], child, form.root, form.game),
+        )
         .map(([key, child]) => (
           <SchemaField key={key} keys={[...keys, key]} schema={child} />
         ))}

@@ -18,7 +18,7 @@ werden hier nicht wiederholt. Phasen und Züge stehen unter
 | `designer`           | Der Designer, auf der Infoseite und der Karte                                                                                                                                          |
 | `publisher`          | Die ID eines Verlags aus `src/data/publishers`: sein Logo und Name auf der Infoseite und in der Spieleliste                                                                            |
 | `currency`           | Wie Geld geschrieben wird, mit einem `#` an der Stelle der Zahl, etwa `$#` oder `#G`. Preise und Einnahmen verwenden es, wenn die Währungsoptionen auf der Konfigurationsseite an sind |
-| `background`         | Die Farbe der Nummernkarten und der Hintergrundseite. `number_cards` (eine Liste von Farben, neben `info`) druckt für jede Farbe einen Satz Nummernkarten                              |
+| `background`         | Die Farbe der Nummernkarten und der Hintergrundseite. `numberCards` (eine Liste von Farben, neben `info`) druckt für jede Farbe einen Satz Nummernkarten                               |
 | `marketTokens`       | Wie viele Marktmarker jede Gesellschaft bekommt, standardmäßig 3                                                                                                                       |
 | `extraStationTokens` | Wie viele zusätzliche Stationstoken jede Gesellschaft bekommt, zusätzlich zu denen in ihren `tokens`                                                                                   |
 
@@ -101,9 +101,9 @@ Anzahl der Runden steht auch in der Statistik der Infoseite.
 seiner Felder setzen einen Satz in die Notizen der Phase in der Phasentabelle
 der Gesellschaftskarten:
 
-- `buy_companies: true` druckt `Private companies may be purchased.`
-- `events.close_companies: true` druckt `Private companies close.`
-- `events.remove_tokens: true` druckt `Private tokens removed.`
+- `buyCompanies: true` druckt `Private companies may be purchased.`
+- `events.closeCompanies: true` druckt `Private companies close.`
+- `events.removeTokens: true` druckt `Private tokens removed.`
 
 `events` ist ein Objekt aus Wahrheitswerten. Jedes andere Ereignis, das du
 hinzufügst, bleibt in der Datei und wird beim Drucken ignoriert.
@@ -150,7 +150,7 @@ fest, siehe [Aktien- und Token-Typen](/docs/games/types#die-präsidentenaktie):
 | `info.title`, `subtitle`, `designer`      | Infoseite, Karte, Hintergrundseite                      |
 | `info.publisher`, `links`                 | Infoseite, Spieleliste                                  |
 | `info.currency`                           | Jeder Preis und jede Einnahme                           |
-| `info.background`, `number_cards`         | Nummernkarten, Hintergrundseite                         |
+| `info.background`, `numberCards`          | Nummernkarten, Hintergrundseite                         |
 | `info.marketTokens`, `extraStationTokens` | Tokenseite, Board18-Box                                 |
 | `players`                                 | Infoseite (Spielerbereich), Privatgesellschaften, Karte |
 | `bank`, `capital`, `certLimit`            | Spielertabelle auf der Karte                            |
@@ -159,6 +159,25 @@ fest, siehe [Aktien- und Token-Typen](/docs/games/types#die-präsidentenaktie):
 | `rounds`                                  | Rundenanzeige auf der Karte und dem Aktienmarkt         |
 | `phases`                                  | Phasentabelle auf den Gesellschaftskarten               |
 | `wip`, `prototype`                        | Infoseite                                               |
+
+## Umbenannte Felder
+
+Diese Felder haben einen neuen Namen. Ein Spiel mit dem alten Namen wird
+weiterhin geladen und exportiert, genau wie vorher, und der alte Name erscheint
+auf der Seite Probleme als veraltet. Die alten Namen werden nie entfernt,
+benenne sie um, wann du möchtest. Stehen beide Namen in einer Datei, gilt der
+neue.
+
+| Alter Name                        | Neuer Name                       |
+| --------------------------------- | -------------------------------- |
+| `info.titleSize`                  | `info.titleFontSize`             |
+| `info.subtitleSize`               | `info.subtitleFontSize`          |
+| `info.designerSize`               | `info.designerFontSize`          |
+| `phases[].buy_companies`          | `phases[].buyCompanies`          |
+| `phases[].events.close_companies` | `phases[].events.closeCompanies` |
+| `phases[].events.remove_tokens`   | `phases[].events.removeTokens`   |
+| `trains[].quantity_label`         | `trains[].quantityLabel`         |
+| `number_cards`                    | `numberCards`                    |
 
 ## Entfernte Felder
 

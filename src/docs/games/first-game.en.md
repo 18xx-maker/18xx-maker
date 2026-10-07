@@ -5,15 +5,15 @@ schema](/docs/games/schemas); every other top level key is optional, and each
 one switches on the pages that use it. The game menu of a loaded game shows the
 pages it has data for:
 
-| Key                                  | Pages it enables           |
-| ------------------------------------ | -------------------------- |
-| `map`                                | Map                        |
-| `tiles`                              | Tiles and Tile Manifest    |
-| `companies`                          | Tokens and Charters        |
-| `tokens`                             | Tokens (without companies) |
-| `stock.market`                       | Market                     |
-| `stock.par.values`                   | Par                        |
-| `privates`, `trains`, `number_cards` | the card sheets on Cards   |
+| Key                                 | Pages it enables           |
+| ----------------------------------- | -------------------------- |
+| `map`                               | Map                        |
+| `tiles`                             | Tiles and Tile Manifest    |
+| `companies`                         | Tokens and Charters        |
+| `tokens`                            | Tokens (without companies) |
+| `stock.market`                      | Market                     |
+| `stock.par.values`                  | Par                        |
+| `privates`, `trains`, `numberCards` | the card sheets on Cards   |
 
 The Cards, Background and Revenue pages are always there. `info` holds the
 title, designer, currency and similar. Setting `wip` or `prototype` to `true`

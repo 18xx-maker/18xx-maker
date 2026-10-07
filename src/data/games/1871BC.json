@@ -5,7 +5,7 @@
     "designer": "Brennan Sheremeto",
     "publisher": "self",
     "background": "PGER_orange",
-    "titleSize": 90,
+    "titleFontSize": 90,
     "marketTokens": 2,
     "extraStationTokens": 7,
     "titleY": -110,
@@ -319,7 +319,7 @@
       "limit": 3,
       "tiles": "brown",
       "events": {
-        "close_companies": true
+        "closeCompanies": true
       }
     },
     {
@@ -328,7 +328,7 @@
       "limit": 2,
       "tiles": "gray",
       "events": {
-        "remove_tokens": true
+        "removeTokens": true
       }
     }
   ],

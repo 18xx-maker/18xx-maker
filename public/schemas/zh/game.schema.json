@@ -366,8 +366,15 @@
             }
           ]
         },
+        "quantityLabel": {
+          "type": "string",
+          "description": "阶段表中数量列显示的文字,代替数量。例如 5+。"
+        },
         "quantity_label": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "已弃用，请使用 quantityLabel。",
+          "deprecationMessage": "已弃用，请使用 quantityLabel。"
         },
         "print": {
           "type": "integer",
@@ -1200,14 +1207,35 @@
           "minimum": -360,
           "maximum": 360
         },
+        "titleFontSize": {
+          "type": "number",
+          "description": "地图上标题的字号。默认值为 200。"
+        },
         "titleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "已弃用，请使用 titleFontSize。",
+          "deprecationMessage": "已弃用，请使用 titleFontSize。"
+        },
+        "subtitleFontSize": {
+          "type": "number",
+          "description": "地图上副标题的字号。默认值为 30。"
         },
         "subtitleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "已弃用，请使用 subtitleFontSize。",
+          "deprecationMessage": "已弃用，请使用 subtitleFontSize。"
+        },
+        "designerFontSize": {
+          "type": "number",
+          "description": "地图上设计者的字号。默认值为 20。"
         },
         "designerSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "已弃用，请使用 designerFontSize。",
+          "deprecationMessage": "已弃用，请使用 designerFontSize。"
         },
         "titleFontFamily": {
           "type": "string"
@@ -1424,8 +1452,18 @@
         "$ref": "#/definitions/tokens"
       }
     },
+    "numberCards": {
+      "type": "array",
+      "description": "颜色列表。为每种颜色打印一套数字卡牌,数字最大到游戏的最大玩家人数。默认值为游戏的背景色。",
+      "items": {
+        "type": "string"
+      }
+    },
     "number_cards": {
       "type": "array",
+      "deprecated": true,
+      "description": "已弃用，请使用 numberCards。",
+      "deprecationMessage": "已弃用，请使用 numberCards。",
       "items": {
         "type": "string"
       }
@@ -1775,20 +1813,39 @@
               }
             ]
           },
+          "buyCompanies": {
+            "type": "boolean",
+            "description": "在此阶段可以购买私有公司。阶段卡上会注明。"
+          },
           "buy_companies": {
-            "type": "boolean"
+            "type": "boolean",
+            "deprecated": true,
+            "description": "已弃用，请使用 buyCompanies。",
+            "deprecationMessage": "已弃用，请使用 buyCompanies。"
           },
           "events": {
-            "description": "阶段的事件,一个布尔字段的对象。close_companies 和 remove_tokens 显示在阶段卡上,其他事件会被忽略。",
+            "description": "阶段的事件,一个布尔字段的对象。closeCompanies 和 removeTokens 显示在阶段卡上,其他事件会被忽略。",
             "type": "object",
             "properties": {
-              "close_companies": {
+              "closeCompanies": {
                 "description": "私有公司关闭。",
                 "type": "boolean"
               },
-              "remove_tokens": {
+              "close_companies": {
+                "description": "已弃用，请使用 closeCompanies。",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "已弃用，请使用 closeCompanies。"
+              },
+              "removeTokens": {
                 "description": "私有公司的标记从地图上移除。",
                 "type": "boolean"
+              },
+              "remove_tokens": {
+                "description": "已弃用，请使用 removeTokens。",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "已弃用，请使用 removeTokens。"
               }
             },
             "additionalProperties": {

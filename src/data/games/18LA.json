@@ -9,8 +9,8 @@
     "extraStationTokens": 3,
     "titleX": 10,
     "titleY": 650,
-    "titleSize": 40,
-    "subtitleSize": 12,
+    "titleFontSize": 40,
+    "subtitleFontSize": 12,
     "extraTotalHeight": 60,
     "currency": "$#"
   },
@@ -386,7 +386,7 @@
       "limit": 3,
       "tiles": "brown",
       "events": {
-        "close_companies": true
+        "closeCompanies": true
       }
     },
     {
@@ -395,7 +395,7 @@
       "limit": 2,
       "tiles": "gray",
       "events": {
-        "remove_tokens": true
+        "removeTokens": true
       }
     }
   ],

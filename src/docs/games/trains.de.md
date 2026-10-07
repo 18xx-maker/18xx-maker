@@ -32,19 +32,24 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
 - **notes** Eine Zeichenkette oder ein Array von Zeichenketten mit Hinweisen zu
   dieser Phase. Einige Hinweise werden aus anderen Feldern ergänzt, dieses Feld
   ist für eigene gedacht.
-- **buy_companies** Ein boolescher Wert, der festlegt, ob Privatgesellschaften
-  in dieser Phase gekauft werden dürfen.
+- **buyCompanies** Ein boolescher Wert, der festlegt, ob Privatgesellschaften
+  in dieser Phase gekauft werden dürfen. Der alte Name `buy_companies`
+  funktioniert weiterhin.
 - **events** Ein Objekt voller boolescher Felder, die festlegen, dass beim
   Auslösen dieser Phase weitere Ereignisse eintreten (etwa das Schließen von
   Privatgesellschaften oder das Entfernen von Token). Das genaue Format dieser
   Ereignisse ist an die Umsetzung der Spiele auf
-  [18xx.games](https://18xx.games) gebunden.
+  [18xx.games](https://18xx.games) gebunden. `closeCompanies` und `removeTokens`
+  hießen `close_companies` und `remove_tokens`, die alten Namen funktionieren
+  weiterhin.
 
 ## Zugfelder
 
 - **name** _erforderlich_
 - **quantity** _erforderlich_ Entweder eine Zahl oder die Zeichenkette „∞“, die
   die Anzahl der verfügbaren Züge angibt.
+- **quantityLabel** Text für die Spalte Anzahl der Phasentabelle anstelle der
+  Anzahl, etwa `5+`. Der alte Name `quantity_label` funktioniert weiterhin.
 - **color** _erforderlich_ Die Farbe, die für den Titel dieses Zuges angezeigt
   wird.
 - **price** Der Preis dieses Zuges.
@@ -116,7 +121,7 @@ mitgelieferten Spiel) und zeigt `on`, `index`, `rust`, `events`, `notes`,
       "rounds": 2,
       "tiles": "green",
       "on": "3",
-      "buy_companies": true,
+      "buyCompanies": true,
       "notes": "Privates may be bought"
     },
     {
@@ -125,7 +130,7 @@ mitgelieferten Spiel) und zeigt `on`, `index`, `rust`, `events`, `notes`,
       "rounds": 3,
       "tiles": "brown",
       "on": { "on": "5", "index": 2 },
-      "events": { "close_companies": true }
+      "events": { "closeCompanies": true }
     },
     { "name": "D", "limit": 2, "tiles": "brown", "on": ["6", "D"] }
   ],

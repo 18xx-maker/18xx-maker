@@ -5,14 +5,13 @@ draft-07.
 
 ## Usage
 
-One of the main ways we use schemas is for deprecating features. When changing a
-feature we'll commonly make the old syntax not validate. That way it becomes
-obvious where the uses of the old feature exist. Then on the next release of a
-major (breaking) version number we'll remove the code that supports the old way.
-
-In this way game files will continue to work but won't validate. Hopefully users
-can fix their files and then eventually upgrade to the next major version easily
-as long as their game files validate.
+One of the main ways we use schemas is for deprecating features. When we rename
+a field the schema has both names: the new one, and the old one marked
+`"deprecated": true` with a description that says which name to use. A game
+file that still has the old name keeps loading, printing and exporting exactly
+as before, and the Problems page lists the old name as deprecated, with the
+new name to use. An old name is never removed, so your game files keep working
+in every release. If both names are in a file the new one is used.
 
 ## Current Schemas
 
@@ -50,7 +49,7 @@ background. If something is wrong a Problems entry appears in the game menu, wit
 is, what is wrong and how to fix it: unknown fields (a typo, or a field that was
 renamed or removed), values of the wrong type, values that are not allowed, and
 required fields that are missing. Fields that are deprecated are listed too, they
-still work but will be removed in a future version. The page only reports, your
+still work, and the page says which name to use instead. The page only reports, your
 file is never changed.
 Each row that points into the file links to the JSON editor of the edit panel, at the line of the problem.
 

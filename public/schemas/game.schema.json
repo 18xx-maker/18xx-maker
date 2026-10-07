@@ -366,8 +366,15 @@
             }
           ]
         },
+        "quantityLabel": {
+          "type": "string",
+          "description": "Text for the quantity column of the phase chart, instead of the quantity. For example 5+."
+        },
         "quantity_label": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "Deprecated, use quantityLabel.",
+          "deprecationMessage": "Deprecated, use quantityLabel."
         },
         "print": {
           "type": "integer",
@@ -1200,14 +1207,35 @@
           "minimum": -360,
           "maximum": 360
         },
+        "titleFontSize": {
+          "type": "number",
+          "description": "Font size of the title on the map. The default is 200."
+        },
         "titleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "Deprecated, use titleFontSize.",
+          "deprecationMessage": "Deprecated, use titleFontSize."
+        },
+        "subtitleFontSize": {
+          "type": "number",
+          "description": "Font size of the subtitle on the map. The default is 30."
         },
         "subtitleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "Deprecated, use subtitleFontSize.",
+          "deprecationMessage": "Deprecated, use subtitleFontSize."
+        },
+        "designerFontSize": {
+          "type": "number",
+          "description": "Font size of the designer on the map. The default is 20."
         },
         "designerSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "Deprecated, use designerFontSize.",
+          "deprecationMessage": "Deprecated, use designerFontSize."
         },
         "titleFontFamily": {
           "type": "string"
@@ -1424,8 +1452,18 @@
         "$ref": "#/definitions/tokens"
       }
     },
+    "numberCards": {
+      "type": "array",
+      "description": "A list of colors. A set of number cards is printed for each color, the numbers go up to the most players of the game. The default is the background color of the game.",
+      "items": {
+        "type": "string"
+      }
+    },
     "number_cards": {
       "type": "array",
+      "deprecated": true,
+      "description": "Deprecated, use numberCards.",
+      "deprecationMessage": "Deprecated, use numberCards.",
       "items": {
         "type": "string"
       }
@@ -1775,20 +1813,39 @@
               }
             ]
           },
+          "buyCompanies": {
+            "type": "boolean",
+            "description": "Privates may be purchased in this phase. The phase card notes it."
+          },
           "buy_companies": {
-            "type": "boolean"
+            "type": "boolean",
+            "deprecated": true,
+            "description": "Deprecated, use buyCompanies.",
+            "deprecationMessage": "Deprecated, use buyCompanies."
           },
           "events": {
-            "description": "Events of the phase, an object of boolean fields. close_companies and remove_tokens show on the phase card, other events are ignored.",
+            "description": "Events of the phase, an object of boolean fields. closeCompanies and removeTokens show on the phase card, other events are ignored.",
             "type": "object",
             "properties": {
-              "close_companies": {
+              "closeCompanies": {
                 "description": "The privates close.",
                 "type": "boolean"
               },
-              "remove_tokens": {
+              "close_companies": {
+                "description": "Deprecated, use closeCompanies.",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "Deprecated, use closeCompanies."
+              },
+              "removeTokens": {
                 "description": "The tokens of private companies are removed from the map.",
                 "type": "boolean"
+              },
+              "remove_tokens": {
+                "description": "Deprecated, use removeTokens.",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "Deprecated, use removeTokens."
               }
             },
             "additionalProperties": {

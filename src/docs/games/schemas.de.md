@@ -6,14 +6,13 @@ definiert.
 ## Verwendung
 
 Schemas nutzen wir vor allem, um Funktionen als veraltet zu kennzeichnen. Wenn
-wir eine Funktion ändern, sorgen wir meist dafür, dass die alte Syntax nicht
-mehr validiert. So wird sofort sichtbar, wo die alte Funktion noch verwendet
-wird. Mit der nächsten Hauptversion (mit inkompatiblen Änderungen) entfernen wir
-dann den Code, der die alte Variante unterstützt.
-
-Auf diese Weise funktionieren Spieldateien weiter, validieren aber nicht mehr.
-Idealerweise können Nutzer ihre Dateien korrigieren und anschließend problemlos
-auf die nächste Hauptversion umsteigen, solange ihre Spieldateien validieren.
+wir ein Feld umbenennen, kennt das Schema beide Namen: den neuen und den alten,
+der mit `"deprecated": true` markiert ist und in dessen Beschreibung steht,
+welchen Namen du verwenden sollst. Eine Spieldatei mit dem alten Namen wird
+weiterhin geladen, gedruckt und exportiert, genau wie vorher, und die Seite
+Probleme listet den alten Namen als veraltet auf, mit dem neuen Namen. Ein alter
+Name wird nie entfernt, deine Spieldateien funktionieren also in jeder Version.
+Stehen beide Namen in einer Datei, gilt der neue.
 
 ## Aktuelle Schemas
 
@@ -53,8 +52,8 @@ Probleme mit der Anzahl der Probleme. Er öffnet eine Liste, die zeigt, wo jedes
 Problem liegt, was falsch ist und wie es sich beheben lässt: unbekannte Felder
 (ein Tippfehler oder ein Feld, das umbenannt oder entfernt wurde), Werte des
 falschen Typs, nicht erlaubte Werte und fehlende Pflichtfelder. Veraltete Felder
-werden ebenfalls aufgeführt, sie funktionieren noch, werden aber in einer
-zukünftigen Version entfernt. Die Seite meldet nur, deine Datei wird nie
+werden ebenfalls aufgeführt, sie funktionieren weiterhin, und die Seite nennt den
+Namen, der stattdessen zu verwenden ist. Die Seite meldet nur, deine Datei wird nie
 verändert. Jede Zeile, die auf eine Stelle der Datei zeigt, verlinkt auf den JSON-Editor im Bearbeitungspanel, an der
 Zeile des Problems.
 

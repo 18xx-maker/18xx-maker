@@ -12,6 +12,11 @@ import {
 } from "@/util/gameValidation";
 
 import { brokenGame, validGame } from "@tests/support/brokenGame.js";
+import {
+  deprecatedGame,
+  renamedGame,
+  renames,
+} from "@tests/support/deprecatedGame.js";
 
 describe("gameValidation", () => {
   it.each(Object.keys(games).filter((id) => id !== "18Broken"))(
@@ -37,6 +42,39 @@ describe("gameValidation", () => {
     for (const issue of removed) {
       expect(issue).toMatchObject({ severity: "warning", code: "deprecated" });
     }
+  });
+
+  it.each(renames)("warns about $old", async ({ old, key }) => {
+    const issues = await validateGame(deprecatedGame());
+    expect(issues.find((issue) => issue.pointer === old)).toEqual({
+      severity: "warning",
+      code: "deprecated",
+      pointer: old,
+      params: { key },
+    });
+  });
+
+  it.each(renames)(
+    "lists $old in 18Broken as deprecated",
+    async ({ old, key }) => {
+      const issues = await validateGame(games["18Broken"]);
+      expect(
+        issues.find(
+          (issue) => issue.pointer === old && issue.code === "deprecated",
+        ),
+      ).toMatchObject({ severity: "warning", params: { key } });
+    },
+  );
+
+  it("warns only about the old names", async () => {
+    const issues = await validateGame(deprecatedGame());
+    expect(issues.map((issue) => issue.pointer).sort()).toEqual(
+      renames.map((r) => r.old).sort(),
+    );
+  });
+
+  it("does not warn when a game uses the new names", async () => {
+    expect(await validateGame(renamedGame())).toEqual([]);
   });
 
   it("ignores the meta data the app adds", async () => {
@@ -192,7 +230,23 @@ describe("gameValidation", () => {
 
     it("has no deprecated property without a message", async () => {
       const schema = (await import("@/schemas/game.schema.json")).default;
-      expect(deprecatedPaths(schema)).toEqual([["exports", "paginated"]]);
+      expect(
+        deprecatedPaths(schema)
+          .map((path) => path.join("."))
+          .sort(),
+      ).toEqual(
+        [
+          "info.titleSize",
+          "info.subtitleSize",
+          "info.designerSize",
+          "phases.*.buy_companies",
+          "phases.*.events.close_companies",
+          "phases.*.events.remove_tokens",
+          "trains.*.quantity_label",
+          "number_cards",
+          "exports.paginated",
+        ].sort(),
+      );
     });
   });
 

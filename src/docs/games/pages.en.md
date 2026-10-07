@@ -69,7 +69,7 @@ border and the pins are in the _Tiles_ part of the config.
 
 All the cards of the game on pages: the privates, a card for each share of every
 company, the trains and number cards from 1 to the largest player count of the game (their colors
-come from `number_cards`). The size and layout of the cards are in the _Cards_ part of the
+come from `numberCards`). The size and layout of the cards are in the _Cards_ part of the
 config. Train cards with a `back` can be printed double-sided, see
 [Double-sided Cards](/docs/output/pdf#double-sided-cards).
 

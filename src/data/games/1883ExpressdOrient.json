@@ -7,7 +7,7 @@
     "currency": "K #",
     "titleX": 20,
     "titleY": 815,
-    "titleSize": 70
+    "titleFontSize": 70
   },
   "links": {
     "bgg": "https://boardgamegeek.com/boardgame/306260/1883-express-dorient",
@@ -2002,7 +2002,7 @@
       "limit": 4,
       "rounds": 2,
       "tiles": "green",
-      "buy_companies": true
+      "buyCompanies": true
     },
     {
       "name": "4",
@@ -2010,7 +2010,7 @@
       "limit": 3,
       "rounds": 2,
       "tiles": "green",
-      "buy_companies": true
+      "buyCompanies": true
     },
     {
       "name": "5",
@@ -2019,7 +2019,7 @@
       "rounds": 3,
       "tiles": "brown",
       "events": {
-        "close_companies": true
+        "closeCompanies": true
       }
     },
     {

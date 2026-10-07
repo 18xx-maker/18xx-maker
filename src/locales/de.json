@@ -425,7 +425,15 @@
     "deprecated-generic": "Dieses Feld ist veraltet.",
     "deprecations": {
       "removed": "Dieses Feld wurde entfernt und wird ignoriert. Entferne es, siehe die entfernten Felder in der Dokumentation.",
-      "exports_paginated": "Dieses Feld ist veraltet und wird ignoriert. Entferne es, die paginierten PDFs werden automatisch exportiert."
+      "exports_paginated": "Dieses Feld ist veraltet und wird ignoriert. Entferne es, die paginierten PDFs werden automatisch exportiert.",
+      "info_titleSize": "Funktioniert weiterhin. Benenne „titleSize“ in „titleFontSize“ um.",
+      "info_subtitleSize": "Funktioniert weiterhin. Benenne „subtitleSize“ in „subtitleFontSize“ um.",
+      "info_designerSize": "Funktioniert weiterhin. Benenne „designerSize“ in „designerFontSize“ um.",
+      "phases_buy_companies": "Funktioniert weiterhin. Benenne „buy_companies“ in „buyCompanies“ um.",
+      "phases_events_close_companies": "Funktioniert weiterhin. Benenne „close_companies“ in „closeCompanies“ um.",
+      "phases_events_remove_tokens": "Funktioniert weiterhin. Benenne „remove_tokens“ in „removeTokens“ um.",
+      "number_cards": "Funktioniert weiterhin. Benenne „number_cards“ in „numberCards“ um.",
+      "trains_quantity_label": "Funktioniert weiterhin. Benenne „quantity_label“ in „quantityLabel“ um."
     }
   },
   "prototype": {

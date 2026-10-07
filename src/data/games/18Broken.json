@@ -4,7 +4,10 @@
     "subtitle": "18xx-Maker Schema Errors Test File",
     "designer": "Christopher Giroir",
     "publisher": "18xx-maker",
-    "capitalization": "incremental"
+    "capitalization": "incremental",
+    "titleSize": 100,
+    "subtitleSize": 30,
+    "designerSize": 20
   },
   "exports": { "paginated": true, "png": { "dpi": "300" }, "layouts": "some" },
   "stock": { "marekt": 10 },
@@ -16,5 +19,24 @@
       "colour": "red"
     }
   ],
+  "phases": [
+    {
+      "name": "2",
+      "limit": 4,
+      "tiles": "yellow",
+      "buy_companies": true,
+      "events": { "close_companies": true, "remove_tokens": true }
+    }
+  ],
+  "trains": [
+    {
+      "name": "2",
+      "price": 80,
+      "quantity": 2,
+      "color": "yellow",
+      "quantity_label": "2+"
+    }
+  ],
+  "number_cards": ["red"],
   "floatPercent": 60
 }

@@ -366,8 +366,15 @@
             }
           ]
         },
+        "quantityLabel": {
+          "type": "string",
+          "description": "schema.game.train.quantityLabel"
+        },
         "quantity_label": {
-          "type": "string"
+          "type": "string",
+          "deprecated": true,
+          "description": "schema.game.train.quantity_label",
+          "deprecationMessage": "schema.game.train.quantity_label.deprecated"
         },
         "print": {
           "type": "integer",
@@ -1200,14 +1207,35 @@
           "minimum": -360,
           "maximum": 360
         },
+        "titleFontSize": {
+          "type": "number",
+          "description": "schema.game.info.titleFontSize"
+        },
         "titleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "schema.game.info.titleSize",
+          "deprecationMessage": "schema.game.info.titleSize.deprecated"
+        },
+        "subtitleFontSize": {
+          "type": "number",
+          "description": "schema.game.info.subtitleFontSize"
         },
         "subtitleSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "schema.game.info.subtitleSize",
+          "deprecationMessage": "schema.game.info.subtitleSize.deprecated"
+        },
+        "designerFontSize": {
+          "type": "number",
+          "description": "schema.game.info.designerFontSize"
         },
         "designerSize": {
-          "type": "number"
+          "type": "number",
+          "deprecated": true,
+          "description": "schema.game.info.designerSize",
+          "deprecationMessage": "schema.game.info.designerSize.deprecated"
         },
         "titleFontFamily": {
           "type": "string"
@@ -1424,8 +1452,18 @@
         "$ref": "#/definitions/tokens"
       }
     },
+    "numberCards": {
+      "type": "array",
+      "description": "schema.game.numberCards",
+      "items": {
+        "type": "string"
+      }
+    },
     "number_cards": {
       "type": "array",
+      "deprecated": true,
+      "description": "schema.game.number_cards",
+      "deprecationMessage": "schema.game.number_cards.deprecated",
       "items": {
         "type": "string"
       }
@@ -1775,20 +1813,39 @@
               }
             ]
           },
+          "buyCompanies": {
+            "type": "boolean",
+            "description": "schema.game.phases.items.buyCompanies"
+          },
           "buy_companies": {
-            "type": "boolean"
+            "type": "boolean",
+            "deprecated": true,
+            "description": "schema.game.phases.items.buy_companies",
+            "deprecationMessage": "schema.game.phases.items.buy_companies.deprecated"
           },
           "events": {
             "description": "schema.game.phases.items.events",
             "type": "object",
             "properties": {
+              "closeCompanies": {
+                "description": "schema.game.phases.items.events.closeCompanies",
+                "type": "boolean"
+              },
               "close_companies": {
                 "description": "schema.game.phases.items.events.close_companies",
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "schema.game.phases.items.events.close_companies.deprecated"
+              },
+              "removeTokens": {
+                "description": "schema.game.phases.items.events.removeTokens",
                 "type": "boolean"
               },
               "remove_tokens": {
                 "description": "schema.game.phases.items.events.remove_tokens",
-                "type": "boolean"
+                "type": "boolean",
+                "deprecated": true,
+                "deprecationMessage": "schema.game.phases.items.events.remove_tokens.deprecated"
               }
             },
             "additionalProperties": {
