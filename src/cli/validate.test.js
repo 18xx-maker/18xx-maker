@@ -3,6 +3,8 @@ import os from "node:os";
 import path from "node:path";
 import { stripVTControlCharacters } from "node:util";
 
+import { compileSchema, draft07 } from "json-schema-library";
+
 import validate from "#cli/validate";
 
 const root = path.join(import.meta.dirname, "../..");
@@ -1287,5 +1289,31 @@ describe("validate", () => {
       expect(code).toBe(1);
       expect(lines.join("\n")).toContain(message);
     });
+  });
+});
+
+// The schemas of the source hold keys for text, the published copies the text
+// of a language: a game is valid against both
+describe("the localized schemas", () => {
+  const read = (file) => JSON.parse(fs.readFileSync(file, "utf-8"));
+  const game = read(src("data/games/18Test.json"));
+  const bad = { ...game, players: "three" };
+
+  const check = (folder, data) => {
+    const schema = compileSchema(read(path.join(folder, "game.schema.json")), {
+      drafts: [draft07],
+      remotes: [read(path.join(folder, "tiles.defs.json"))],
+    });
+    return schema.validate(data).errors;
+  };
+
+  it.each([
+    ["the source", src("schemas")],
+    ["en", path.join(root, "public/schemas")],
+    ["de", path.join(root, "public/schemas/de")],
+    ["zh", path.join(root, "public/schemas/zh")],
+  ])("validates a game with the schema of %s", (_, folder) => {
+    expect(check(folder, game)).toEqual([]);
+    expect(check(folder, bad)).not.toEqual([]);
   });
 });

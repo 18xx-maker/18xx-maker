@@ -200,7 +200,8 @@ There are also a few goals for [make](https://www.gnu.org/software/make/) that
 are helpful.
 
 ```shell
-# Compile the json schemas
+# Compile the json schemas: the tile definitions, and the schemas of
+# public/schemas with their text in English, German and Chinese
 # This is run automatically for you on git commit hooks
 make
 
@@ -387,8 +388,8 @@ dialog as `exportFolder` in its `config.json` and opens the dialog there again
 The export options are resolved in `src/export/options.js` (plain JS, used by
 `maker export` and by `planExport` in `src/util/exportPlan.js`, which also gives
 the export options panel its starting values). A new option goes in the `exports`
-schema (with a description, and copy `src/schemas/game.schema.json` to
-`public/schemas/`), `cleanOptions`, the CLI flags (without a commander default,
+schema (with a description, a key of `schema.<lang>.json` in all three locale
+files, and run `make` to publish it in `public/schemas/`), `cleanOptions`, the CLI flags (without a commander default,
 or the flag would always hide the game file, and a boolean also a `--no-` flag
 so that the game file can be turned off), the panel (a control that starts from
 `exportDefaults`, and that can say "not set" over the game file, like every
