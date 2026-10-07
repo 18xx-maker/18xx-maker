@@ -236,19 +236,20 @@ test.describe("the app exports 18Test", () => {
     expect(options.defaultPath).toBe("18test.json");
     expect(options.title).toBe("Save as");
 
-    // The copy is a game of the app and one of the recents
+    // The copy is a game of the app and one of the recents. An unpackaged app
+    // keeps its config next to the build, not in its user data, so the game is
+    // forgotten again.
     const slug = new URL(window.url()).hash.slice("#/games/".length);
-    const config = path.join(out, "user-data", "config.json");
+    const config = () =>
+      window.evaluate(() => window.api.loadConfig().then((r) => r.config));
     await expect
-      .poll(() =>
-        JSON.parse(fs.readFileSync(config, "utf-8")).recents.map(
-          (recent) => recent.slug,
-        ),
-      )
+      .poll(async () => (await config()).recents.map((recent) => recent.slug))
       .toContain(slug);
-    expect(
-      Object.values(JSON.parse(fs.readFileSync(config, "utf-8")).summaries),
-    ).toEqual([expect.objectContaining({ slug, path: file })]);
+    const summary = Object.values((await config()).summaries).find(
+      (summary) => summary.slug === slug,
+    );
+    expect(summary.path).toBe(file);
+    await window.evaluate((id) => window.api.deleteGame(id), summary.id);
   });
 
   test("opens the JSON editor with the j key", async () => {
