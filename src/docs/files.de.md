@@ -139,6 +139,8 @@ Eingabetaste drückst, und ein geleertes Feld wird aus dem Spiel entfernt (der
 Titel kann nicht entfernt werden). Probleme mit einem Wert, etwa eine Währung
 ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel (zum JSON-Editor siehe unten).
 
+Über dem Formular steht ein Suchfeld, um ein Feld des geöffneten Bereichs über seinen Namen zu finden (`/` setzt den Fokus darauf). Enter springt zum nächsten Treffer, öffnet die Karte, in der er liegt, scrollt zum Feld und setzt den Fokus darauf; Umschalt+Enter geht zurück und Esc leert den Text. In den Tabs Züge, Privatgesellschaften und Gesellschaften grenzt ein Filterfeld über den Karten diese auf die ein, deren Name, Kürzel, Titel oder Notiz den eingegebenen Text enthält. Das Filtern blendet Karten nur aus und ändert das Spiel nicht; Hinzufügen eines Eintrags leert den Filter.
+
 Das Panel hat für jeden Teil des Spiels, den es bearbeitet, einen Bereich, als Chips unter den Gruppen „Spiel“, „Ausstattung“ und „Aussehen und Ausgabe“. Der Schalter Formulare | JSON in der Kopfzeile wechselt zwischen diesen Formularen und dem JSON-Editor (unten); Formulare führt zurück zum zuletzt geöffneten Formular. Mit `[` und `]` wechselst du zwischen den Formularbereichen (aus dem JSON-Editor gehen sie zum letzten Formular; die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
 lassen das Panel geöffnet). Ein roter Punkt auf einem Chip markiert einen
 Bereich mit Problemen; sein Label nennt die Anzahl. Änderungen bleiben im

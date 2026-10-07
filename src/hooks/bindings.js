@@ -69,6 +69,7 @@ export const useBindings = () => {
     formSection,
     editSection,
     setEditSection,
+    json: editJson,
   } = edit;
   useDropStaleLines(edit);
   useDropStaleHex(edit);
@@ -259,6 +260,16 @@ export const useBindings = () => {
           return;
         }
 
+        // The search of the open edit panel (not in the JSON editor)
+        if (event.key === "/" && editOpen && !editJson) {
+          const search = document.querySelector("[data-field-search]");
+          if (search) {
+            event.preventDefault();
+            search.focus();
+          }
+          return;
+        }
+
         if (event.key === "e") {
           // The sections with an edit toggle open the panel, the others go back
           if (canEdit) toggleEdit();
@@ -370,6 +381,7 @@ export const useBindings = () => {
       formSections,
       formSection,
       editSection,
+      editJson,
       setEditSection,
       selectedHex,
       clearHex,

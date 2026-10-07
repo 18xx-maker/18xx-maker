@@ -126,6 +126,8 @@ emptying a field removes it from the game (the title cannot be removed).
 Problems with a value, like a currency without a `#`, are shown below its field.
 Escape closes the panel (see below for the JSON editor).
 
+Above the form is a search box to find a field of the open section by its name (`/` focuses it). Enter goes to the next match, opening the card it is in, and scrolls to the field and focuses it; Shift+Enter goes back and Escape clears the text. On the Trains, Privates and Companies tabs a filter box above the cards narrows them to the ones whose name, abbreviation, title or note has the text you type. Filtering only hides cards, it does not change the game, and adding an item clears it.
+
 The panel has a section for each part of the game it edits, shown as chips under
 the group names "Game", "Equipment" and "Look and output". The Forms | JSON switch in
 the header goes between these forms and the JSON editor (below), and Forms goes

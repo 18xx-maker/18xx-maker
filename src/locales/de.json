@@ -174,6 +174,16 @@
       "players_one": "{{count}} Spieler",
       "players_other": "{{count}} Spieler"
     },
+    "search": {
+      "label": "Feld suchen",
+      "none": "Kein Feld passt",
+      "found": "{{field}}, Treffer {{index}} von {{count}}"
+    },
+    "filter": {
+      "label": "{{item}} filtern",
+      "none": "Kein Treffer",
+      "shown": "{{shown}} von {{count}} angezeigt"
+    },
     "emptyList": "Noch nichts vorhanden.",
     "add": "{{item}} hinzufügen",
     "addWithOptions": "{{item}} mit Optionen hinzufügen",
@@ -1499,6 +1509,10 @@
       "edit": {
         "use": "Das geladene Spiel im ersten Abschnitt bearbeiten",
         "notes": "Auf einer Spiel-Bearbeitungsseite wird das Bearbeitungspanel geöffnet oder geschlossen. Sonst zurück zur Spielseite"
+      },
+      "find": {
+        "use": "Ein Feld im geöffneten Bearbeitungspanel suchen",
+        "notes": "Setzt den Fokus auf das Suchfeld über dem Formular (nicht im JSON-Editor). Enter springt zum nächsten Treffer und öffnet die Karte, in der er liegt, Umschalt+Enter zum vorherigen, Esc leert den Text"
       },
       "json": {
         "use": "Das ganze Spiel als JSON bearbeiten",

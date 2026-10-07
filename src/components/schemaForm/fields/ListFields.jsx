@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Copy,
   Plus,
+  Search,
   Trash2,
   TriangleAlert,
 } from "lucide-react";
@@ -325,6 +326,8 @@ export const ListStatus = ({ message, warning }) => (
 // drafts follow the game), what is open on a card follows the item. A field
 // that is not left yet is passed on first (a click on a button does not
 // always move the focus out of it), and the game is read after that.
+// The fields of an item the filter reads, beside its title
+const FILTER_KEYS = ["name", "abbrev", "title", "note", "train"];
 const FRESH_CARD = { open: true, more: false };
 const CLOSED_CARD = { open: false, more: false };
 
@@ -362,6 +365,7 @@ export const ArrayField = ({
   itemKey,
   titleKeys,
   itemAction,
+  filterable,
 }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
@@ -373,6 +377,8 @@ export const ArrayField = ({
     notes;
   // What is open on each card, by index
   const [ui, setUi] = usePanelState(`cards:${keys.join("/")}`, EMPTY);
+  // The text the items shown are narrowed to
+  const [filter, setFilter] = useState("");
 
   const items = valueAt(keys, form.game) ?? [];
   // Items that are text, a number or an object (a token of the game) are a
@@ -420,6 +426,17 @@ export const ArrayField = ({
       null) ||
     [value?.train].flat().filter(Boolean).join(", ") ||
     `#${index + 1}`;
+  // The items that have the filter text in a name, abbreviation, title or note,
+  // by index: the cards keep their place, their state and their numbers
+  const wanted = filter.trim().toLowerCase();
+  const shown = (value, index) =>
+    !wanted ||
+    [titleOf(value, index), ...FILTER_KEYS.map((key) => value?.[key])].some(
+      (field) =>
+        ["string", "number"].includes(typeof field) &&
+        String(field).toLowerCase().includes(wanted),
+    );
+  const matching = items.filter(shown).length;
   const initial = startCollapsed ? CLOSED_CARD : FRESH_CARD;
   const uiOf = (index) => ui[index] ?? initial;
   // The same change of the cards as of the items
@@ -461,6 +478,8 @@ export const ArrayField = ({
           };
     setRemoved(null);
     setWarning("");
+    // A new item may not match the filter and would not be seen
+    setFilter("");
     form.insert(keys, before.length, created);
     changeUi((cards) => cards.toSpliced(before.length, 0, FRESH_CARD));
     setMessage(
@@ -555,6 +574,42 @@ export const ArrayField = ({
           )}
         </div>
       )}
+      {filterable && items.length > 1 && (
+        <div className="flex flex-col gap-1">
+          <div className="relative">
+            <Search
+              className="pointer-events-none absolute left-2.5 top-2.5 size-4 text-muted-foreground"
+              aria-hidden="true"
+            />
+            <Input
+              type="search"
+              className="pl-8"
+              data-list-filter
+              value={filter}
+              placeholder={t("editPanel.filter.label", { item })}
+              aria-label={t("editPanel.filter.label", { item })}
+              onChange={(event) => setFilter(event.target.value)}
+              onKeyDown={(event) => {
+                // The first Escape clears the text, the next one closes the panel
+                if (event.key === "Escape" && filter) {
+                  event.preventDefault();
+                  setFilter("");
+                }
+              }}
+            />
+          </div>
+          {wanted && (
+            <p aria-live="polite" className="text-xs text-muted-foreground">
+              {matching === 0
+                ? t("editPanel.filter.none")
+                : t("editPanel.filter.shown", {
+                    shown: matching,
+                    count: items.length,
+                  })}
+            </p>
+          )}
+        </div>
+      )}
       {items.length === 0 ? (
         <p className="text-sm text-muted-foreground">
           {t("editPanel.emptyList")}
@@ -562,7 +617,8 @@ export const ArrayField = ({
       ) : (
         <ul className="flex flex-col gap-3">
           {items.map((value, index) =>
-            typeof value !== "object" || value === null ? (
+            !shown(value, index) ? null : typeof value !== "object" ||
+              value === null ? (
               <ScalarRow
                 key={index}
                 keys={[...keys, index]}
