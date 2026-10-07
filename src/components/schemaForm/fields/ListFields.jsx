@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Copy,
   Plus,
+  Search,
   Trash2,
   TriangleAlert,
 } from "lucide-react";
@@ -331,6 +332,10 @@ const CLOSED_CARD = { open: false, more: false };
 // A stable default for the panel state of a list, so it does not change per render
 const EMPTY = [];
 
+// The fields of an item the filter reads, beside its title (which has the
+// train of a phase without a name)
+const FILTER_KEYS = ["name", "abbrev", "title", "note"];
+
 // primary are the fields shown first, the others are under more fields.
 // titleKey is the field that names an item and idKey the one that identifies
 // it (a number for the players); with title (a translation key) a card is
@@ -362,6 +367,7 @@ export const ArrayField = ({
   itemKey,
   titleKeys,
   itemAction,
+  filterable,
 }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
@@ -373,6 +379,8 @@ export const ArrayField = ({
     notes;
   // What is open on each card, by index
   const [ui, setUi] = usePanelState(`cards:${keys.join("/")}`, EMPTY);
+  // The text the items shown are narrowed to
+  const [filter, setFilter] = useState("");
 
   const items = valueAt(keys, form.game) ?? [];
   // Items that are text, a number or an object (a token of the game) are a
@@ -420,6 +428,17 @@ export const ArrayField = ({
       null) ||
     [value?.train].flat().filter(Boolean).join(", ") ||
     `#${index + 1}`;
+  // The items that have the filter text in a name, abbreviation, title or note,
+  // by index: the cards keep their place, their state and their numbers
+  const wanted = filter.trim().toLowerCase();
+  const shown = (value, index) =>
+    !wanted ||
+    [titleOf(value, index), ...FILTER_KEYS.map((key) => value?.[key])].some(
+      (field) =>
+        ["string", "number"].includes(typeof field) &&
+        String(field).toLowerCase().includes(wanted),
+    );
+  const matching = items.filter(shown).length;
   const initial = startCollapsed ? CLOSED_CARD : FRESH_CARD;
   const uiOf = (index) => ui[index] ?? initial;
   // The same change of the cards as of the items
@@ -461,6 +480,8 @@ export const ArrayField = ({
           };
     setRemoved(null);
     setWarning("");
+    // A new item may not match the filter and would not be seen
+    setFilter("");
     form.insert(keys, before.length, created);
     changeUi((cards) => cards.toSpliced(before.length, 0, FRESH_CARD));
     setMessage(
@@ -491,12 +512,15 @@ export const ArrayField = ({
     }
     setRemoved(null);
     setWarning("");
+    // A copy may not match the filter and would not be seen
+    setFilter("");
     form.insert(keys, index + 1, copy);
     setWarning(onChange?.("insert", index + 1, index + 1) ?? "");
     changeUi((cards) => cards.toSpliced(index + 1, 0, FRESH_CARD));
     setMessage(
       t("editPanel.duplicated", { item, title: titleOf(copy, index + 1) }),
     );
+    focus.current = { index: index + 1, action: "title" };
   };
 
   const remove = (index) => {
@@ -555,6 +579,42 @@ export const ArrayField = ({
           )}
         </div>
       )}
+      {filterable && (items.length > 1 || filter) && (
+        <div className="flex flex-col gap-1">
+          <div className="relative">
+            <Search
+              className="pointer-events-none absolute left-2.5 top-2.5 size-4 text-muted-foreground"
+              aria-hidden="true"
+            />
+            <Input
+              type="search"
+              className="pl-8"
+              data-list-filter
+              value={filter}
+              placeholder={t("editPanel.filter.label", { item })}
+              aria-label={t("editPanel.filter.label", { item })}
+              onChange={(event) => setFilter(event.target.value)}
+              onKeyDown={(event) => {
+                // The first Escape clears the text, the next one closes the panel
+                if (event.key === "Escape" && filter) {
+                  event.preventDefault();
+                  setFilter("");
+                }
+              }}
+            />
+          </div>
+          {wanted && (
+            <p aria-live="polite" className="text-xs text-muted-foreground">
+              {matching === 0
+                ? t("editPanel.filter.none")
+                : t("editPanel.filter.shown", {
+                    shown: matching,
+                    count: items.length,
+                  })}
+            </p>
+          )}
+        </div>
+      )}
       {items.length === 0 ? (
         <p className="text-sm text-muted-foreground">
           {t("editPanel.emptyList")}
@@ -562,7 +622,8 @@ export const ArrayField = ({
       ) : (
         <ul className="flex flex-col gap-3">
           {items.map((value, index) =>
-            typeof value !== "object" || value === null ? (
+            !shown(value, index) ? null : typeof value !== "object" ||
+              value === null ? (
               <ScalarRow
                 key={index}
                 keys={[...keys, index]}

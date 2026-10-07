@@ -174,6 +174,16 @@
       "players_one": "{{count}} player",
       "players_other": "{{count}} players"
     },
+    "search": {
+      "label": "Find a field",
+      "none": "No field matches",
+      "found": "{{field}}, match {{index}} of {{count}}"
+    },
+    "filter": {
+      "label": "Filter {{item}}",
+      "none": "No match",
+      "shown": "Showing {{shown}} of {{count}}"
+    },
     "emptyList": "Nothing here yet.",
     "add": "Add {{item}}",
     "addWithOptions": "Add {{item}} with options",
@@ -1499,6 +1509,10 @@
       "edit": {
         "use": "Edit the loaded game at its first section",
         "notes": "On a game edit page, opens or closes the edit panel. Elsewhere: goes back to the game page"
+      },
+      "find": {
+        "use": "Find a field in the open edit panel",
+        "notes": "Focuses the search box above the form (not in the JSON editor). Enter goes to the next match and opens the card it is in, Shift+Enter to the previous one, Esc clears the text"
       },
       "json": {
         "use": "Edit the whole game as JSON",

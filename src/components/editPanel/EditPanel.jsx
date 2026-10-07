@@ -10,6 +10,7 @@ import EditNav, {
   panelId,
   tabId,
 } from "@/components/editPanel/EditNav";
+import FieldSearch from "@/components/editPanel/FieldSearch";
 
 import { useGame } from "@/hooks/game";
 import { useEditPanel } from "@/hooks/useEditPanel";
@@ -81,6 +82,9 @@ const EditPanel = () => {
             section={editSection}
             setSection={setEditSection}
           />
+        )}
+        {!json && (
+          <FieldSearch key={editSection} panel={panelId(editSection)} />
         )}
       </div>
       <div className="flex-1 overflow-y-auto overscroll-contain p-4 flex flex-col gap-4">

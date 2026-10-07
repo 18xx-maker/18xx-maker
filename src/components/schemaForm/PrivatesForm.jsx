@@ -11,6 +11,7 @@ const PrivatesForm = ({ game }) => (
       keys={["privates"]}
       schema={schema.properties.privates}
       defaults={{}}
+      filterable
     />
   </SchemaFormProvider>
 );

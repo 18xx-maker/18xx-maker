@@ -61,6 +61,7 @@ const CompaniesForm = ({ game }) => (
       defaults={defaults}
       primary={COMPANY_PRIMARY_KEYS}
       startCollapsed
+      filterable
       summary={summary}
       copyOf={copyOf}
     />

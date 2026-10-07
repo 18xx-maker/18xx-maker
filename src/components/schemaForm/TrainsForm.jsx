@@ -13,6 +13,7 @@ const TrainsForm = ({ game }) => (
       keys={["trains"]}
       schema={schema.properties.trains}
       defaults={defaults}
+      filterable
     />
   </SchemaFormProvider>
 );
