@@ -52,7 +52,8 @@
     "font": {
       "type": "object",
       "deprecated": true,
-      "description": "Deprecated and not used by the print pages. Use fonts instead.",
+      "description": "The default font settings. No print page uses them.",
+      "deprecationMessage": "Deprecated, use fonts.",
       "properties": {
         "size": { "type": "string" },
         "weight": { "type": "string", "enum": ["normal", "bold"] },

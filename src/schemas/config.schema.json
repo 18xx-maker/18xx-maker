@@ -53,6 +53,7 @@
       "type": "object",
       "deprecated": true,
       "description": "schema.config.font",
+      "deprecationMessage": "schema.config.font.deprecated",
       "properties": {
         "size": { "type": "string" },
         "weight": { "type": "string", "enum": ["normal", "bold"] },

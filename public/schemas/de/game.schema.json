@@ -2373,11 +2373,6 @@
           "font",
           "fonts"
         ]
-      },
-      "properties": {
-        "fonts": {
-          "$ref": "https://18xx-maker.com/schemas/config.schema.json#/definitions/fonts"
-        }
       }
     },
     "exports": {

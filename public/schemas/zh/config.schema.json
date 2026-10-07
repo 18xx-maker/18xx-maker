@@ -52,7 +52,8 @@
     "font": {
       "type": "object",
       "deprecated": true,
-      "description": "已弃用，打印页面不使用。请改用 fonts。",
+      "description": "默认字体设置。没有打印页面使用它们。",
+      "deprecationMessage": "已弃用，请使用 fonts。",
       "properties": {
         "size": { "type": "string" },
         "weight": { "type": "string", "enum": ["normal", "bold"] },

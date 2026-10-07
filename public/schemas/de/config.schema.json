@@ -52,7 +52,8 @@
     "font": {
       "type": "object",
       "deprecated": true,
-      "description": "Veraltet und wird von den Druckseiten nicht verwendet. Verwende stattdessen fonts.",
+      "description": "Die Standard-Schrifteinstellungen. Keine Druckseite verwendet sie.",
+      "deprecationMessage": "Veraltet, verwende fonts.",
       "properties": {
         "size": { "type": "string" },
         "weight": { "type": "string", "enum": ["normal", "bold"] },
