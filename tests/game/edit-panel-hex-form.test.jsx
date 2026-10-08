@@ -380,6 +380,176 @@ describe("direct manipulation and undo", () => {
   });
 });
 
+describe("the inspectors of the other elements", () => {
+  const withElements = () => {
+    const source = structuredClone(games["18Test"]);
+    const group = source.map.hexes.find((g) => g.hexes.includes("C11"));
+    Object.assign(group, {
+      values: [{ value: 20 }],
+      names: [{ name: "Port" }],
+      icons: [{ type: "port" }],
+      terrain: [{ type: "mountain", cost: 60 }],
+      shapes: [{ type: "circle" }],
+      goods: [{ text: "G" }],
+      industries: [{ top: "Coal" }],
+      companies: [{ label: "B&O" }],
+      bridges: [{ cost: 20 }],
+      tunnels: [{ cost: 40 }],
+      tunnelEntrances: [{ side: 2 }],
+      routeBonuses: [{ value: "+10" }],
+      divides: [{ side: 4 }],
+      tokens: ["T"],
+    });
+    return source;
+  };
+  const listed = (id) =>
+    within(screen.getByRole("list", { name: "Elements of the hex" }))
+      .getAllByRole("button", { pressed: false })
+      .find((button) => button.closest("li").dataset.element === id);
+
+  it.each([
+    ["values", "Value"],
+    ["names", "Name"],
+    ["icons", "Icon"],
+    ["terrain", "Terrain"],
+    ["shapes", "Shape"],
+    ["goods", "Good"],
+    ["industries", "Industry"],
+    ["companies", "Company"],
+    ["bridges", "Bridge"],
+    ["tunnels", "Tunnel"],
+    ["tunnelEntrances", "Tunnel entrance"],
+    ["routeBonuses", "Route bonus"],
+    ["divides", "Divide"],
+    ["tokens", "Token"],
+  ])("opens the inspector of %s", async (key, name) => {
+    const { user } = open(`${route}&hex=C11`, withElements());
+    await form();
+    await user.click(listed(`${key}:0`));
+    const inspector = await screen.findByTestId("hex-inspector");
+    expect(inspector).toHaveAccessibleName(`Fields of ${name}`);
+    // The main fields are in view, not behind More fields
+    expect(
+      inspector.querySelectorAll(
+        "input:not([hidden]), textarea, [role=combobox], [role=group]",
+      ).length,
+    ).toBeGreaterThan(0);
+  });
+
+  it("adds an icon from the list of elements and picks it", async () => {
+    const { user } = open(`${route}&hex=C11`);
+    await form();
+    await user.click(screen.getByRole("combobox", { name: "Add an element" }));
+    await user.click(await screen.findByRole("option", { name: "Icon" }));
+    await waitFor(() =>
+      expect(groupOf("C11").icons).toEqual([{ type: "flag" }]),
+    );
+    expect(await screen.findByTestId("hex-inspector")).toHaveAccessibleName(
+      "Fields of Icon",
+    );
+  });
+
+  it("picks the icon of an icon from the library and keeps one it does not know", async () => {
+    const source = withElements();
+    const { user } = open(`${route}&hex=C11`, source);
+    await form();
+    await user.click(listed("icons:0"));
+    const inspector = await screen.findByTestId("hex-inspector");
+    await user.click(
+      within(inspector).getByRole("combobox", { name: /type/i }),
+    );
+    await user.click(await screen.findByRole("option", { name: "flag" }));
+    await waitFor(() =>
+      expect(groupOf("C11").icons).toEqual([{ type: "flag" }]),
+    );
+  });
+
+  it("shows the type of a piece of terrain and sets its cost", async () => {
+    const { user } = open(`${route}&hex=C11`, withElements());
+    await form();
+    await user.click(listed("terrain:0"));
+    const inspector = await screen.findByTestId("hex-inspector");
+    expect(
+      within(inspector).getByRole("combobox", { name: /type/i }),
+    ).toHaveTextContent("mountain");
+    const cost = within(inspector).getByRole("spinbutton", { name: /cost/i });
+    await user.clear(cost);
+    await user.type(cost, "80");
+    await user.tab();
+    await waitFor(() => expect(groupOf("C11").terrain[0].cost).toBe(80));
+    expect(groupOf("C11").terrain[0].type).toBe("mountain");
+  });
+
+  it("picks the side of a divide on the drawing of the hex", async () => {
+    const { user } = open(`${route}&hex=C11`, withElements());
+    await form();
+    await user.click(listed("divides:0"));
+    const inspector = await screen.findByTestId("hex-inspector");
+    const picker = within(inspector).getByRole("group", {
+      name: "Side of the divide",
+    });
+    await user.click(within(picker).getByRole("button", { name: "Side 5" }));
+    await waitFor(() => expect(groupOf("C11").divides).toEqual([{ side: 5 }]));
+  });
+
+  it("picks the side of a tunnel entrance", async () => {
+    const { user } = open(`${route}&hex=C11`, withElements());
+    await form();
+    await user.click(listed("tunnelEntrances:0"));
+    const picker = within(await screen.findByTestId("hex-inspector")).getByRole(
+      "group",
+      { name: "Side of the tunnel entrance" },
+    );
+    await user.click(within(picker).getByRole("button", { name: "Side 1" }));
+    await waitFor(() =>
+      expect(groupOf("C11").tunnelEntrances).toEqual([{ side: 1 }]),
+    );
+  });
+});
+
+describe("splitting a group", () => {
+  it("gives the hex a group of its own, so that changes are for it only", async () => {
+    const { user } = open(`${route}&hex=C11`);
+    await form();
+    expect(groupOf("C11").hexes).toHaveLength(7);
+
+    await user.click(screen.getByRole("button", { name: "Edit C11 only" }));
+    await waitFor(() => expect(groupOf("C11").hexes).toEqual(["C11"]));
+    // The others are still a group, and the note is gone
+    expect(hexes().some((group) => group.hexes.length === 6)).toBe(true);
+    await waitFor(() =>
+      expect(screen.queryByText(/apply to all/)).not.toBeInTheDocument(),
+    );
+    expect(
+      screen.queryByRole("button", { name: /only$/ }),
+    ).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("combobox", { name: "Color" }));
+    await user.click(await screen.findByRole("option", { name: "red" }));
+    await waitFor(() => expect(groupOf("C11").color).toBe("red"));
+    expect(groupOf("C13").color).not.toBe("red");
+  });
+
+  it("is one step of the history of the game, not of the editor", async () => {
+    const { user } = open(`${route}&hex=C11`);
+    await form();
+    await user.click(screen.getByRole("button", { name: "Edit C11 only" }));
+    await waitFor(() => expect(groupOf("C11").hexes).toEqual(["C11"]));
+    expect(screen.getByRole("button", { name: /^Undo/ })).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
+  });
+
+  it("is not offered for a group of one hex", async () => {
+    open(`${route}&hex=B12`);
+    await form();
+    expect(
+      screen.queryByRole("button", { name: /only$/ }),
+    ).not.toBeInTheDocument();
+  });
+});
+
 describe("the JSON view", () => {
   const editor = () =>
     waitFor(() => {

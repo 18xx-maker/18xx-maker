@@ -428,6 +428,7 @@
       "blocked": "JSON 目前无效，表单无法显示。请先修正 JSON 或撤销你的更改。"
     },
     "appliesTo": "此处的更改适用于该组的全部 {{count}} 个六边格。",
+    "split": "仅编辑 {{coord}}",
     "alsoIn": "{{coord}} 还在 {{groups}} 组中。显示的是绘制在最上层的组。",
     "override": "在此覆盖",
     "form": {
@@ -460,6 +461,8 @@
       "sideN": "第 {{side}} 边",
       "trackSides": "轨道的边",
       "borderSide": "边界所在的边",
+      "divideSide": "分隔线所在的边",
+      "tunnelEntranceSide": "隧道入口所在的边",
       "asJson": "以 JSON 显示",
       "unknownKeys": "此元素有表单不认识的属性。它们保持原样；可在此编辑。",
       "hex": "六边格",

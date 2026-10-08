@@ -428,6 +428,7 @@
       "blocked": "Das JSON ist noch nicht gültig, deshalb kann das Formular es nicht anzeigen. Korrigiere zuerst das JSON oder mache deine Änderung rückgängig."
     },
     "appliesTo": "Änderungen hier gelten für alle {{count}} Kartenfelder dieser Gruppe.",
+    "split": "Nur {{coord}} bearbeiten",
     "alsoIn": "{{coord}} ist auch in den Gruppen {{groups}}. Angezeigt wird die Gruppe, die oben gezeichnet wird.",
     "override": "Hier überschreiben",
     "form": {
@@ -460,6 +461,8 @@
       "sideN": "Seite {{side}}",
       "trackSides": "Seiten des Gleises",
       "borderSide": "Seite der Grenze",
+      "divideSide": "Seite der Trennlinie",
+      "tunnelEntranceSide": "Seite des Tunneleingangs",
       "asJson": "Als JSON",
       "unknownKeys": "Dieses Element hat Eigenschaften, die das Formular nicht kennt. Sie bleiben unverändert; bearbeite sie hier.",
       "hex": "Kartenfeld",

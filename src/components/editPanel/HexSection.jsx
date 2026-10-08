@@ -17,6 +17,7 @@ import {
   moveKey,
   newGroup,
   setLocalHexes,
+  splitHex,
   variationMap,
 } from "@/util/hexEdit";
 
@@ -61,7 +62,8 @@ const ViewToggle = ({ view, onChange }) => {
 const HexSection = ({ game }) => {
   const { t } = useTranslation();
   const store = useStore();
-  const { current, generation, lens, variation, slug } = useHexGroup(game);
+  const { current, generation, lens, variation, slug, restart } =
+    useHexGroup(game);
   // An unsent JSON draft (kept when the tab or the panel was left) opens the
   // JSON view again
   const hasDraft = useSyncExternalStore(subscribeDrafts, () =>
@@ -135,6 +137,14 @@ const HexSection = ({ game }) => {
   const orientation = game.info?.orientation === "horizontal" ? 0 : 90;
   const form = view === "form" && !removed;
 
+  // The hex gets a group of its own, so that changes are for this hex only
+  const split = () => {
+    const result = splitHex(store.getState().game, variation, current);
+    if (!result.game) return;
+    store.dispatch(editGame(() => result.game));
+    restart();
+  };
+
   const choose = (next) => {
     if (next === "json") {
       setRefused(null);
@@ -168,9 +178,18 @@ const HexSection = ({ game }) => {
             {t("hexEditor.moveHint", { key: moveKey() })}
           </p>
           {count > 1 && (
-            <p role="note" className="text-sm text-warning-text">
-              {t("hexEditor.appliesTo", { count })}
-            </p>
+            <div className="flex flex-col items-start gap-1">
+              <p role="note" className="text-sm text-warning-text">
+                {t("hexEditor.appliesTo", { count })}
+              </p>
+              <button
+                type="button"
+                className="rounded-md border px-3 py-1 text-sm hover:bg-accent focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+                onClick={split}
+              >
+                {t("hexEditor.split", { coord: current })}
+              </button>
+            </div>
           )}
           {others.length > 0 && (
             <p role="note" className="text-sm text-muted-foreground">

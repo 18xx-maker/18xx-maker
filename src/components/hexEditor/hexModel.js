@@ -55,8 +55,18 @@ export const NEW_ELEMENT = {
   labels: { label: "A" },
   values: { value: 10 },
   names: { name: "Name" },
+  icons: { type: "flag" },
   terrain: { type: "mountain" },
+  shapes: { type: "circle" },
+  goods: { text: "G" },
+  industries: { top: "Coal" },
+  companies: { label: "A" },
+  bridges: { cost: 20 },
+  tunnels: { cost: 20 },
+  tunnelEntrances: { side: 1 },
   borders: { side: 1, color: "red" },
+  routeBonuses: { value: "+10" },
+  divides: { side: 1 },
   offBoardRevenue: { revenues: [{ color: "yellow", value: 20 }] },
 };
 

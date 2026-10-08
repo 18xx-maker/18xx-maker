@@ -102,3 +102,26 @@ test("drags an element and undoes the drag", async ({ page }) => {
   await expect(json).toContainText('"cities"');
   await expect(json).not.toContainText('"x"');
 });
+
+test("adds an icon and a divide, then splits the hex off its group", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/map?edit=true&editSection=hex&hex=C11");
+  await expect(page.getByTestId("hex-editor")).toBeVisible();
+  await expect(panel(page)).toContainText("all 7 hexes");
+
+  // An element with an inspector of its own
+  await page.getByRole("combobox", { name: "Add an element" }).click();
+  await page.getByRole("option", { name: "Divide" }).click();
+  const inspector = page.getByTestId("hex-inspector");
+  await inspector.getByRole("button", { name: "Side 3" }).click();
+
+  // Changes are for this hex only after the split
+  await page.getByRole("button", { name: "Edit C11 only" }).click();
+  await expect(panel(page)).not.toContainText("all 7 hexes");
+  await page.locator("label", { hasText: "JSON" }).click();
+  const json = page.getByRole("textbox", { name: "Hex group JSON" });
+  await expect(json).toContainText('"divides"');
+  await expect(json).toContainText('"C11"');
+  await expect(json).not.toContainText('"C13"');
+});
