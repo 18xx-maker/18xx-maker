@@ -1,4 +1,4 @@
-import { screen, waitFor, within } from "@testing-library/react";
+import { act, screen, waitFor, within } from "@testing-library/react";
 
 import { omit } from "ramda";
 
@@ -117,6 +117,34 @@ describe("adding", () => {
     expect(opened.getState().game).toBe(before);
   });
 
+  it("empties the add field once the tile is added", async () => {
+    const { user } = open(route);
+    await list();
+    const field = screen.getByRole("textbox", { name: "New tile id" });
+    await user.type(field, "57{Enter}");
+    await waitFor(() => expect(tiles()["57"]).toBe(1));
+    expect(field).toHaveValue("");
+    await user.type(field, "57{Enter}");
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "already exists",
+    );
+    expect(field).toHaveValue("57");
+  });
+
+  it("drops the error of a tile when another is picked", async () => {
+    const { user } = open(`${route}&tile=T1`);
+    const section = await editor();
+    const id = within(section).getByRole("textbox", { name: "Tile id" });
+    await user.clear(id);
+    await user.type(id, "B2{Enter}");
+    expect(await within(section).findByRole("alert")).toHaveTextContent(
+      "already exists",
+    );
+    await user.click(tile("B1"));
+    expect(await editor()).toHaveAccessibleName("Tile B1");
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  });
+
   it("offers the first tile of a game that has none", async () => {
     const { user } = open(route, (game) => omit(["tiles"], game));
     expect(await screen.findByText(/has no tiles yet/)).toBeVisible();
@@ -225,6 +253,30 @@ describe("the shapes of an entry", () => {
     await waitFor(() => expect(tiles()["1"]).toBe(4));
   });
 
+  it("keeps the quantity when it is cleared and then another field is set", async () => {
+    const { user } = open(`${route}&tile=1`, (game) => ({
+      ...game,
+      tiles: { ...game.tiles, 1: 3 },
+    }));
+    const section = await editor();
+    const quantity = within(section).getByRole("textbox", { name: "Quantity" });
+    // An integer cannot be empty: the store refuses and the form starts again
+    await user.clear(quantity);
+    await user.tab();
+    expect(tiles()["1"]).toBe(3);
+    await waitFor(() =>
+      expect(
+        within(section).getByRole("textbox", { name: "Quantity" }),
+      ).toHaveValue("3"),
+    );
+    const group = within(section).getByRole("textbox", { name: "Group" });
+    await user.type(group, "spare");
+    await user.tab();
+    await waitFor(() =>
+      expect(tiles()["1"]).toEqual({ quantity: 3, group: "spare" }),
+    );
+  });
+
   it("makes a quantity an object when the change needs one", async () => {
     const { user } = open(`${route}&tile=1`);
     const section = await editor();
@@ -294,5 +346,30 @@ describe("the shapes of an entry", () => {
     await waitFor(() => expect(tiles().B1.quantity).toBe(6));
     // The rest of the tile is as it was
     expect(tiles().B1.track).toEqual(games["18Test"].tiles.B1.track);
+  });
+});
+
+describe("a variant of an override", () => {
+  it("is drawn on the manifest after Duplicate", async () => {
+    const { user, router } = open(`${route}&tile=63`);
+    await user.click(
+      within(await editor()).getByRole("button", { name: "Copy tile" }),
+    );
+    const copy = Object.keys(tiles()).find((key) => key.startsWith("63|"));
+    expect(copy).toBeDefined();
+    await act(() => router.navigate("/games/internal:abc/tile-manifest"));
+    const page = await screen.findByTestId("game-internal:abc-tile-manifest");
+    /* eslint-disable testing-library/no-node-access */
+    const drawn = [...page.querySelectorAll(".TileManifest--Tile")].find(
+      (item) =>
+        item.querySelector(".TileManifest--Id")?.textContent ===
+        `${copy.split("|")[0]} (${copy.split("|")[1]})`,
+    );
+    expect(drawn).toBeDefined();
+    // The copy is drawn as the tile it copies (its track), not as a bare id
+    expect(drawn.querySelector(".TileManifest--Image svg").innerHTML).toContain(
+      'stroke-width="16"',
+    );
+    /* eslint-enable testing-library/no-node-access */
   });
 });

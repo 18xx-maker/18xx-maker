@@ -45,7 +45,15 @@ const detail = (entry) => {
 
 // A form of one text field and one button: Enter sends it. The field is a
 // draft until then; the error is the one of the last try.
-const IdForm = ({ label, button, initial = "", onSubmit, icon, error }) => {
+const IdForm = ({
+  label,
+  button,
+  initial = "",
+  onSubmit,
+  icon,
+  error,
+  clearOnDone,
+}) => {
   const [text, setText] = useState(initial);
   const id = useId();
   return (
@@ -53,7 +61,7 @@ const IdForm = ({ label, button, initial = "", onSubmit, icon, error }) => {
       className="flex flex-col gap-1"
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit(text);
+        if (onSubmit(text) && clearOnDone) setText("");
       }}
     >
       <label htmlFor={id} className="text-sm font-medium">
@@ -93,6 +101,9 @@ const TilesSection = ({ game }) => {
   const { tile, select, clear } = useSelectedTile();
   const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
+  // Bumped when the store refuses what the editor wrote, so the editor starts
+  // again from the store instead of keeping a draft that is not in the game
+  const [resync, setResync] = useState(0);
   const slug = game.meta.slug;
   const allIssues = useSelector((state) => selectGameProblems(state, slug));
   const checked = useSelector(
@@ -101,6 +112,13 @@ const TilesSection = ({ game }) => {
 
   const ids = tileIds(game);
   const id = hasTile(game, tile) ? tile : "";
+
+  // An error belongs to the tile it came from
+  const [errorsFor, setErrorsFor] = useState(id);
+  if (errorsFor !== id) {
+    setErrorsFor(id);
+    setErrors({});
+  }
   const entry = id ? game.tiles[id] : undefined;
   const shape = id ? tileShape(entry) : undefined;
 
@@ -136,6 +154,7 @@ const TilesSection = ({ game }) => {
       (r) => t("editPanel.tiles.added", { id: r.id }),
     );
     if (result) select(result.id);
+    return !!result;
   };
 
   const rename = (text) => {
@@ -174,7 +193,15 @@ const TilesSection = ({ game }) => {
     );
 
   // The fields of the editor go to the entry as it is now, in its own shape
-  const write = (next) =>
+  const write = (next) => {
+    const current = store.getState().game;
+    if (
+      hasTile(current, id) &&
+      writeTile(current.tiles[id], next) === current.tiles[id]
+    ) {
+      setResync((n) => n + 1);
+      return;
+    }
     store.dispatch(
       editGame((latest) => {
         if (!hasTile(latest, id)) return latest;
@@ -184,6 +211,7 @@ const TilesSection = ({ game }) => {
           : setTile(latest, id, written);
       }),
     );
+  };
 
   const used = id ? privatesUsing(game, id).length : 0;
   const preview = id ? effectiveTile(game, id, library) : undefined;
@@ -196,6 +224,7 @@ const TilesSection = ({ game }) => {
         button={t("editPanel.tiles.add")}
         icon={<Plus />}
         onSubmit={add}
+        clearOnDone
         error={errors.add}
       />
       <p role="status" aria-live="polite" className="sr-only">
@@ -300,7 +329,7 @@ const TilesSection = ({ game }) => {
             </p>
           )}
           <LazyHexEditor
-            key={`${slug}:${id}`}
+            key={`${slug}:${id}:${resync}`}
             value={shape === "definition" ? entry : tileFields(entry)}
             onChange={write}
             orientation={orientation}

@@ -316,7 +316,8 @@ Spiel und bearbeitest dieses. Ändert sich nur die Anzahl einer einfachen Anzahl
 bleibt sie eine einfache Zahl, und es wird kein Feld ergänzt, das du nicht
 geändert hast. Plättchen kopieren fügt eine Kopie hinter dem Plättchen ein,
 Plättchen entfernen nimmt es weg (beim letzten entfällt `tiles`), und
-_Umbenennen_ gibt ihm eine andere ID an derselben Stelle und in den
+_Umbenennen_ gibt ihm eine andere ID (die Reihenfolge der Liste bleibt erhalten, nur IDs, die
+ganze Zahlen sind, stehen immer zuerst) und in den
 Privatgesellschaften, die es zeichnen. Ein Plättchen aus der Bibliothek kann nur
 den Teil seiner ID nach dem `|` ändern, weil die ID dazu dient, das
 Bibliotheksplättchen zu finden: Passe es zuerst an, um es frei umzubenennen.

@@ -320,3 +320,26 @@ describe("the 18Test game", () => {
     expect(renameTile(fixtureGame, "B1", "B2")).toEqual({ error: "exists" });
   });
 });
+
+describe("renameTile order", () => {
+  it("keeps the order, except that ids that are whole numbers come first", () => {
+    const g = {
+      tiles: {
+        B1: { color: "red" },
+        T1: { color: "red" },
+        T2: { color: "red" },
+      },
+    };
+    expect(Object.keys(renameTile(g, "T1", "T9").game.tiles)).toEqual([
+      "B1",
+      "T9",
+      "T2",
+    ]);
+    // An object puts integer keys first: the tile does not stay in the middle
+    expect(Object.keys(renameTile(g, "T1", "12").game.tiles)).toEqual([
+      "12",
+      "B1",
+      "T2",
+    ]);
+  });
+});

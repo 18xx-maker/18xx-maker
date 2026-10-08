@@ -177,7 +177,8 @@ export const customizeTile = (game, id, library) => {
   };
 };
 
-// Renames a tile: its key in `tiles` (in the same place), and the privates that
+// Renames a tile: its key in `tiles` (in the same place, except that an id that
+// is a whole number sorts first, as the keys of an object do), and the privates that
 // draw it. The alias entries of other tiles name generic tiles of the library,
 // never an entry of the game, and the map has no tile ids, so there is nothing
 // else to follow. { error } instead of a game when:

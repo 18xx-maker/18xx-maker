@@ -532,7 +532,8 @@ entries have four shapes (a quantity, an alias with `tile`, an override without
 rules are in `src/util/tileEdit.js`: `writeTile` keeps the shape of an entry (an
 integer stays one while only the quantity changes), `customizeTile` is the only
 way a library tile (`@/data` tiles, never edited in place) becomes a definition,
-and `renameTile` renames the key in place and the `tile` of the privates that
+and `renameTile` renames the key (the order is kept, except that ids that are whole
+numbers sort first, as in any JS object) and the `tile` of the privates that
 draw it. Aliases name library tiles and the map has no tile ids, so there is
 nothing else to rewrite. The selected tile is `?tile=<id>` (`useSelectedTile`, the
 id is URL-encoded because of `|`). The editor is `HexEditor` with `tile` (the

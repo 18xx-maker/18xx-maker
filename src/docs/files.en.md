@@ -283,7 +283,8 @@ Press _Customize_ to copy the library tile into the game as a tile of your own
 and edit that. Changing the quantity of a quantity keeps it a plain number, and
 no field is added that you did not change. Copy tile adds a copy after the tile,
 Remove tile takes it away (the last one removes `tiles`), and _Rename_ gives it
-another id in the same place and in the privates that draw it. A tile drawn from
+another id (the order of the list is kept, except that ids that are whole
+numbers always come first) and in the privates that draw it. A tile drawn from
 the library can only change the part of its id after the `|`, because the id is
 how the library tile is found: customize it first to rename it freely. Tiles are
 not on the map, so the map is not changed by any of this.
