@@ -3,6 +3,7 @@ import { useState } from "react";
 import HexEditor from "@/components/hexEditor/HexEditor";
 import SidePicker from "@/components/hexEditor/SidePicker";
 
+import { tiles } from "@/data";
 import { useGame } from "@/hooks";
 
 // The clip paths normally live in the Root component's svg
@@ -17,7 +18,7 @@ const Clip = () => (
 );
 
 // The editor is controlled: the story keeps the hex
-const Editor = ({ start, orientation }) => {
+const Editor = ({ start, orientation, ...rest }) => {
   const game = useGame();
   const [value, setValue] = useState(start);
   return (
@@ -28,6 +29,7 @@ const Editor = ({ start, orientation }) => {
         onChange={setValue}
         orientation={orientation}
         game={game}
+        {...rest}
       />
     </div>
   );
@@ -59,6 +61,18 @@ const GROUPS = {
     removeBorders: [1],
     hexes: ["A11"],
   },
+  // A tile of the game, with the fields of its printing
+  tile: {
+    quantity: 2,
+    print: 3,
+    color: "green",
+    track: [
+      { side: 1, type: "gentle" },
+      { side: 3, type: "gentle" },
+    ],
+    cities: [{ size: 1 }],
+    values: [{ value: 40, x: 0, y: 0 }],
+  },
   // A hex with nothing on it
   empty: { color: "plain", hexes: ["C11", "C13", "C15"] },
 };
@@ -78,6 +92,22 @@ export default {
 export const Map = { args: { orientation: 90 } };
 
 export const Offboard = { args: { start: GROUPS.offboard } };
+
+// A tile of the game (the Tiles tab): drawn as the tile sheets draw it, with
+// its quantity, print and group, and without the fields only the map uses
+export const Tile = { args: { start: GROUPS.tile, tile: true } };
+
+// A tile drawn from the library (an alias here): only its printing is edited,
+// the tile itself is never changed
+export const LibraryTile = {
+  args: {
+    start: { tile: "57", quantity: 2 },
+    tile: true,
+    library: true,
+    alias: true,
+    preview: tiles["57"],
+  },
+};
 
 // Nothing drawn yet: the list says how to start
 export const Empty = { args: { start: GROUPS.empty } };

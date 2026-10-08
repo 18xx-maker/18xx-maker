@@ -19,9 +19,11 @@ export const hexSchema = () =>
 // How the editor handles each property of a hex:
 //   "elements"  a list of elements (or one element) in the element list,
 //   "control"   a control of its own above the elements,
-//   "managed"   the map decides it (the hexes of the group).
-// A property of a tile only (it does nothing for a hex of the map) is in
-// RAW_JSON, and stays in the JSON view.
+//   "managed"   the map decides it (the hexes of the group),
+//   "tile"      a field of a tile about its printing, in the form of the Tiles
+//               tab only (TILE_FIELDS).
+// A property of a tile only (it does nothing for a hex of the map) that has no
+// field is in RAW_JSON, and stays in the JSON view.
 export const FORM_KINDS = {
   ...Object.fromEntries(ELEMENT_KEYS.map((key) => [key, "elements"])),
   color: "control",
@@ -29,17 +31,15 @@ export const FORM_KINDS = {
   stripeRotation: "control",
   removeBorders: "control",
   hexes: "managed",
+  quantity: "tile",
+  print: "tile",
+  group: "tile",
 };
 
-export const RAW_JSON = [
-  "print",
-  "quantity",
-  "tile",
-  "group",
-  "clipPath",
-  "rotation",
-  "rotations",
-];
+// The fields of a tile about printing it, in this order
+export const TILE_FIELDS = ["quantity", "print", "group"];
+
+export const RAW_JSON = ["tile", "clipPath", "rotation", "rotations"];
 
 // The elements whose list holds items of more than one shape (a token is text,
 // a number or one of several objects): they have no fields in the form, only
