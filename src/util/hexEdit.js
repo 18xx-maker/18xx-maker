@@ -229,6 +229,34 @@ export const moveHex = (game, variation, selected, coord) => {
   };
 };
 
+// A group of one hex made from a group of several: the hex leaves the group
+// and gets a copy of it, right after it so that the drawing order of the groups
+// stays. The result is the new game, or why nothing happened: "single" (the
+// group has only this hex), "inherited" (the group is the one of a copied
+// variation) or "invalid".
+export const splitHex = (game, variation, coord) => {
+  if (!COORD_PATTERN.test(coord)) return { blocked: "invalid" };
+  const hexes = localHexes(game, variation);
+  const index = findGroup(hexes, coord);
+  if (index < 0) {
+    return {
+      blocked: inheritedGroup(game, variation, coord) ? "inherited" : "invalid",
+    };
+  }
+  const group = hexes[index];
+  if (new Set(names(group)).size < 2) return { blocked: "single" };
+  const entry = group.hexes.find((c) => coordName(c) === coord);
+  const split = { ...structuredClone(group), hexes: [entry] };
+  return {
+    game: setLocalHexes(game, variation, [
+      ...hexes.slice(0, index),
+      strip(group, coord),
+      split,
+      ...hexes.slice(index + 1),
+    ]),
+  };
+};
+
 // Whether a click moves hexes between groups: Cmd on macOS, Ctrl elsewhere (a
 // Ctrl click on macOS opens the context menu)
 const onMac = () =>

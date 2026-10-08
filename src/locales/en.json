@@ -428,6 +428,8 @@
       "blocked": "The JSON is not valid yet, so the form cannot show it. Fix the JSON or undo your change first."
     },
     "appliesTo": "Changes here apply to all {{count}} hexes of this group.",
+    "split": "Edit {{coord}} only",
+    "splitPick": "Hex to edit alone",
     "alsoIn": "{{coord}} is also in the groups {{groups}}. The group shown is the one drawn on top.",
     "override": "Override here",
     "form": {
@@ -460,6 +462,8 @@
       "sideN": "Side {{side}}",
       "trackSides": "Sides of the track",
       "borderSide": "Side of the border",
+      "divideSide": "Side of the divide",
+      "tunnelEntranceSide": "Side of the tunnel entrance",
       "asJson": "As JSON",
       "unknownKeys": "This element has properties that the form does not know. They stay as they are; edit them here.",
       "hex": "Hex",
@@ -757,6 +761,10 @@
       "tiles": {
         "title": "Tiles and Hexes",
         "description": "Describe tiles and place them on the map"
+      },
+      "hexEditor": {
+        "title": "Hex Editor",
+        "description": "Draw hexes and tiles and edit what is on them"
       },
       "privates": {
         "title": "Private Companies",

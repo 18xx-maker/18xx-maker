@@ -5,7 +5,9 @@ die die Spieler legen, und `map` ist das Spielbrett, auf das sie gelegt werden.
 Beide verwenden dieselbe Felddefinition. Alles auf dieser Seite über den Inhalt
 eines Feldes (`color`, `track`, `cities`, ...) gilt also für beide. Die Felder
 stehen im [Spiel-Schema](https://18xx-maker.com/schemas/game.schema.json) und im
-[Plättchen-Schema](https://18xx-maker.com/schemas/tiles.schema.json).
+[Plättchen-Schema](https://18xx-maker.com/schemas/tiles.schema.json). Das
+Bearbeitungsfenster kann Felder und Plättchen für dich zeichnen und bearbeiten,
+siehe den [Hex-Editor](/docs/games/hex-editor).
 
 ## Plättchen
 

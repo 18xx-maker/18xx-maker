@@ -38,7 +38,7 @@ describe("docs previous and next", () => {
     );
     expect(within(nav).getByRole("link", { name: /Next/ })).toHaveAttribute(
       "href",
-      "/docs/games/privates",
+      "/docs/games/hex-editor",
     );
   });
 

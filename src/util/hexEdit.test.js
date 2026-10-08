@@ -364,6 +364,83 @@ describe("moveHex", () => {
   });
 });
 
+describe("splitHex", () => {
+  const game = (hexes, extra = {}) => ({ map: { hexes, ...extra } });
+
+  it("gives the hex a group of its own right after its group", () => {
+    const start = game([
+      { color: "plain", track: [{ side: 1 }], hexes: ["A1", "B2", "C3"] },
+      { color: "red", hexes: ["D4"] },
+    ]);
+    const result = edit.splitHex(start, 0, "B2");
+    expect(edit.localHexes(result.game, 0)).toEqual([
+      { color: "plain", track: [{ side: 1 }], hexes: ["A1", "C3"] },
+      { color: "plain", track: [{ side: 1 }], hexes: ["B2"] },
+      { color: "red", hexes: ["D4"] },
+    ]);
+    // A copy, not the same list
+    const [, split] = edit.localHexes(result.game, 0);
+    expect(split.track).not.toBe(edit.localHexes(start, 0)[0].track);
+    expect(edit.findGroup(edit.localHexes(result.game, 0), "B2")).toBe(1);
+  });
+
+  it("keeps the key order and the form of a coordinate", () => {
+    const start = game([{ hexes: [[3, 2], "A1"], color: "plain", z: 1 }]);
+    const result = edit.splitHex(start, 0, "B3");
+    expect(edit.localHexes(result.game, 0)).toEqual([
+      { hexes: ["A1"], color: "plain", z: 1 },
+      { hexes: [[3, 2]], color: "plain", z: 1 },
+    ]);
+    expect(Object.keys(edit.localHexes(result.game, 0)[1])).toEqual([
+      "hexes",
+      "color",
+      "z",
+    ]);
+  });
+
+  it("splits a variation of a list of maps", () => {
+    const start = {
+      map: [
+        { hexes: [{ color: "plain", hexes: ["A1"] }] },
+        { hexes: [{ color: "red", hexes: ["A1", "C1"] }] },
+      ],
+    };
+    const result = edit.splitHex(start, 1, "C1");
+    expect(result.game.map[0]).toBe(start.map[0]);
+    expect(result.game.map[1].hexes).toHaveLength(2);
+  });
+
+  it("takes the group drawn on top of a hex in two groups", () => {
+    const start = game([
+      { color: "plain", hexes: ["A1", "B2"] },
+      { color: "red", hexes: ["B2", "C3"] },
+    ]);
+    const result = edit.splitHex(start, 0, "B2");
+    expect(edit.localHexes(result.game, 0)).toEqual([
+      { color: "plain", hexes: ["A1", "B2"] },
+      { color: "red", hexes: ["C3"] },
+      { color: "red", hexes: ["B2"] },
+    ]);
+  });
+
+  it("does nothing for a group of one hex, a missing hex or a copied one", () => {
+    const one = game([{ color: "plain", hexes: ["A1"] }]);
+    expect(edit.splitHex(one, 0, "A1")).toEqual({ blocked: "single" });
+    expect(edit.splitHex(one, 0, "Z9")).toEqual({ blocked: "invalid" });
+    expect(edit.splitHex(one, 0, "nope")).toEqual({ blocked: "invalid" });
+    // A coordinate listed twice is one hex
+    const twice = game([{ color: "plain", hexes: ["A1", "A1"] }]);
+    expect(edit.splitHex(twice, 0, "A1")).toEqual({ blocked: "single" });
+    const copy = {
+      map: [
+        { hexes: [{ color: "plain", hexes: ["A1", "B2"] }] },
+        { copy: 0, hexes: [] },
+      ],
+    };
+    expect(edit.splitHex(copy, 1, "A1")).toEqual({ blocked: "inherited" });
+  });
+});
+
 describe("selectionFor", () => {
   it("is the anchor of the group, or the position when no group has it", () => {
     const game = { map: { hexes: [{ hexes: ["A1", "B2"] }] } };

@@ -297,7 +297,7 @@ ist; die gedruckten und exportierten Karten ändern sich nicht. Eine Kartenvaria
 die eine andere kopiert, zeigt die kopierten Kartenfelder an: Ändere
 sie in der Variante, aus der sie stammen, oder drücke _Hier überschreiben_, um
 das Kartenfeld in dieser Variante zu kopieren und die Kopie zu bearbeiten. Die Kantenschaltflächen und die Listen des
-Formulars lassen sich per Tastatur bedienen.
+Formulars lassen sich per Tastatur bedienen. Jedes Element hat eigene Felder, und die Schaltfläche _Nur C11 bearbeiten_ (mit der Koordinate des Kartenfelds) gibt einem Kartenfeld einer Gruppe mit mehreren eine eigene Kopie der Gruppe, sodass Änderungen nur für dieses Kartenfeld gelten. Siehe den [Hex-Editor](/docs/games/hex-editor).
 
 Den Tab Plättchen gibt es auf jeder Seite (von einer anderen Seite wechselt er zur Plättchenseite), er bearbeitet die `tiles`
 des Spiels. Er listet die Plättchen in der Reihenfolge der Datei. Gib eine ID ein

@@ -51,6 +51,20 @@ describe("the hex schema and the form", () => {
     }
   });
 
+  it("has an inspector of its own for every element but the tokens", () => {
+    const missing = ELEMENT_KEYS.filter(
+      (key) => !JSON_ONLY.includes(key) && !INSPECTORS[key],
+    );
+    expect(missing).toEqual([]);
+  });
+
+  it("can add every element that has fields", () => {
+    const missing = ELEMENT_KEYS.filter(
+      (key) => !JSON_ONLY.includes(key) && !NEW_ELEMENT[key],
+    );
+    expect(missing).toEqual([]);
+  });
+
   it("has inspectors only for elements", () => {
     for (const key of Object.keys(INSPECTORS)) {
       expect(ELEMENT_KEYS).toContain(key);

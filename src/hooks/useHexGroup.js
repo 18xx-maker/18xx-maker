@@ -92,5 +92,12 @@ export const useHexGroup = (game) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [generation, slug, variation]);
 
-  return { current, generation, lens, variation, slug };
+  // Starts the editor over (a change made outside of it), for the group of
+  // another hex when one is given
+  const restart = (next = current) => {
+    setSync((was) => ({ ...was, generation: was.generation + 1, own: next }));
+    if (next !== urlAnchor.current) selectRef.current(next);
+  };
+
+  return { current, generation, lens, variation, slug, restart };
 };

@@ -18,6 +18,7 @@ import {
   Layers,
   LayoutDashboard,
   MonitorDown,
+  MousePointerClick,
   Package,
   Palette,
   Scissors,
@@ -192,6 +193,11 @@ export const mainMenu = [
         icon: Hexagon,
         label: "docs.games.tiles.title",
         to: "/docs/games/tiles",
+      },
+      {
+        icon: MousePointerClick,
+        label: "docs.games.hexEditor.title",
+        to: "/docs/games/hex-editor",
       },
       {
         icon: HandCoins,
