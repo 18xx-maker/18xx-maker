@@ -26,7 +26,8 @@ Exports are written to a folder you choose, as described in
 The app has a native menu:
 
 - **File**: _Open_ (`Ctrl+O`, `Cmd+O` on macOS) opens a game file, _Open
-  Recents_ lists the games you opened before, and _Quit_.
+  Recents_ lists the games you opened before, _Save_ (`Ctrl+S`, `Cmd+S` on
+  macOS) saves the game you are editing, and _Quit_.
 - **Edit**: the usual cut, copy and paste commands.
 - **View**: reload, developer tools, _App Info_ (`Ctrl+U`), zoom and full
   screen.

@@ -28,8 +28,9 @@ Ordner geschrieben, den du auswählst, wie unter
 Die App hat ein natives Menü:
 
 - **Datei**: _Öffnen_ (`Strg+O`, `Cmd+O` auf macOS) öffnet eine Spieldatei,
-  _Zuletzt geöffnet_ listet die Spiele auf, die du zuvor geöffnet hast, und
-  _Beenden_.
+  _Zuletzt geöffnet_ listet die Spiele auf, die du zuvor geöffnet hast,
+  _Speichern_ (`Strg+S`, `Cmd+S` auf macOS) speichert das Spiel, das du
+  bearbeitest, und _Beenden_.
 - **Bearbeiten**: die üblichen Befehle zum Ausschneiden, Kopieren und Einfügen.
 - **Ansicht**: Neu laden, Entwicklerwerkzeuge, _App-Informationen_ (`Strg+U`),
   Zoom und Vollbild.

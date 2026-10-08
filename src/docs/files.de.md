@@ -379,7 +379,10 @@ Windows und Linux. In Emacs und Vim funktionieren unter macOS auch die normalen
 Tasten; auf anderen Systemen gehört Strg dem Modus. Kopieren, Einfügen,
 Rückgängig und Alles auswählen behalten in Normal ihre üblichen Tasten. In Vim
 verlässt Escape den Editor nur, wenn Vim im Normalmodus ist und kein Befehl
-aussteht. Die Suche hat in Emacs und Vim eigene Tasten.
+aussteht. Die Suche hat in Emacs und Vim eigene Tasten. In Normal speichert `Mod-s`
+zusätzlich das Spiel (siehe unten), nachdem es das Spiel aus dem Text
+aktualisiert hat; in Emacs und Vim tut das auf macOS nur Cmd+S, da Strg+S
+anderswo zum Modus gehört.
 
 | Aktion                                 | Normal                       | Emacs        | Vim        |
 | -------------------------------------- | ---------------------------- | ------------ | ---------- |
@@ -418,6 +421,14 @@ auf oberster Ebene. Er öffnet eine Seite mit einem hervorgehobenen Diff des
 Spiels gegenüber der Datei, wie sie geladen oder zuletzt gespeichert wurde. Der
 Diff vergleicht das Spiel als JSON mit 2 Leerzeichen, daher werden Unterschiede,
 die nur Leerraum betreffen, nicht angezeigt.
+
+Die Werkzeugleiste hat eine Schaltfläche „Speichern“, solange das Spiel
+Änderungen hat, und `Strg+S` oder `Cmd+S` speichert von jeder Seite des Spiels
+aus, auch aus einem Feld, sodass der Browser nicht anbietet, die Seite zu
+speichern. In der App gibt es außerdem Datei, Speichern. Bei einem
+mitgelieferten Spiel starten sie stattdessen „Speichern unter...“. Wurde die
+Datei außerhalb von 18xx Maker geändert, öffnet sich die Seite Änderungen, auf
+der du sie neu laden oder überschreiben kannst.
 
 Auf der Seite Änderungen schreibt "Speichern" das Spiel in seine Datei, mit
 demselben Inhalt wie die Schaltfläche Herunterladen, daher kann das erste
