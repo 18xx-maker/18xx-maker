@@ -307,7 +307,22 @@
     "map": {
       "hideTitle": "Hide the title of the map",
       "copy": "Copy of",
-      "inherited": "The hexes, borders, lines and border texts of map variation {{variation}} are copied into this one, and so is its trim (each edge can be set again here)."
+      "inherited": "The hexes, borders, lines and border texts of map variation {{variation}} are copied into this one, and so is its trim (each edge can be set again here).",
+      "move": {
+        "legend": "Move map",
+        "up": "Move map up",
+        "down": "Move map down",
+        "left": "Move map left",
+        "right": "Move map right",
+        "hint": "Moves every hex, border, line and text of all map variations, and the companies and privates that name a hex, by one row or column. Positions in pixels (the round tracker, movement, market and players) stay. Moving right or down grows a map that is not trimmed.",
+        "unchanged_one": "{{count}} coordinate was left as it is: a reference that would leave the map or a token label.",
+        "unchanged_other": "{{count}} coordinates were left as they are: references that would leave the map or token labels.",
+        "empty": "The map has no coordinates to move.",
+        "blocked": {
+          "row": "A map hex is already in the first row (A).",
+          "column": "A map hex is already in the first column (1)."
+        }
+      }
     },
     "tiles": {
       "list": "Tiles of the game",

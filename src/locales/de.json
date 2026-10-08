@@ -307,7 +307,22 @@
     "map": {
       "hideTitle": "Titel der Karte ausblenden",
       "copy": "Kopie von",
-      "inherited": "Die Kartenfelder, Grenzen, Linien und Grenztexte der Kartenvariante {{variation}} werden in diese übernommen, ebenso ihr Zuschnitt (jede Kante kann hier neu gesetzt werden)."
+      "inherited": "Die Kartenfelder, Grenzen, Linien und Grenztexte der Kartenvariante {{variation}} werden in diese übernommen, ebenso ihr Zuschnitt (jede Kante kann hier neu gesetzt werden).",
+      "move": {
+        "legend": "Karte verschieben",
+        "up": "Karte nach oben verschieben",
+        "down": "Karte nach unten verschieben",
+        "left": "Karte nach links verschieben",
+        "right": "Karte nach rechts verschieben",
+        "hint": "Verschiebt alle Kartenfelder, Grenzen, Linien und Texte aller Kartenvarianten sowie die Gesellschaften und Privatgesellschaften, die ein Kartenfeld nennen, um eine Reihe oder Spalte. Positionen in Pixeln (Rundenanzeige, Bewegung, Markt und Spieler) bleiben. Nach rechts oder unten vergrößert sich eine Karte ohne Zuschnitt.",
+        "unchanged_one": "{{count}} Koordinate blieb unverändert: ein Verweis, der die Karte verlassen würde, oder eine Token-Beschriftung.",
+        "unchanged_other": "{{count}} Koordinaten blieben unverändert: Verweise, die die Karte verlassen würden, oder Token-Beschriftungen.",
+        "empty": "Die Karte hat keine Koordinaten zum Verschieben.",
+        "blocked": {
+          "row": "Ein Kartenfeld liegt schon in der ersten Reihe (A).",
+          "column": "Ein Kartenfeld liegt schon in der ersten Spalte (1)."
+        }
+      }
     },
     "tiles": {
       "list": "Plättchen des Spiels",

@@ -245,6 +245,8 @@ texts, a card each with its coordinates one per line. The borders, lines, border
 texts and trim of a copied variation are those of the variation it copies plus
 its own. The hexes themselves are the Hex tab's.
 
+The Map tab starts with four arrow buttons, Move map, that move the whole game by one row or column: every hex, border, line and border text of all map variations and the `home`, `destination` and `hex` of companies and privates that name a hex. Up and down change the letter and left and right the number (the other way round on a horizontal map). A button is disabled when a hex, a removed hex, a border, a line or a border text is already in the first row (A) or the first column (1); a reference that would leave the map stays as it is, and so does a token label that looks like a coordinate. Positions in pixels (the round tracker, movement, market and players) are not moved. Moving right or down makes a map that is not trimmed bigger, and a trimmed edge keeps its trim. Moving by one changes which hexes point up (`a1Valid`), which the Board18 export follows. The move is one step in the list of changes, so Revert undoes it.
+
 The Hex tab is on every page too (it goes to the map). Click a hex on the map to pick its group,
 the entry of `map.hexes` that lists it: the tab then shows only that group, as a
 form by default and as JSON with the Form and JSON switch, and the hexes of the

@@ -24,6 +24,15 @@ export const clearDraft = (slug) => {
   if (had) notify();
   return had;
 };
+// Clears every draft whose key starts with the prefix
+export const clearDrafts = (prefix) => {
+  let had = false;
+  [...drafts.keys()].forEach((key) => {
+    if (key.startsWith(prefix)) had = drafts.delete(key) || had;
+  });
+  if (had) notify();
+  return had;
+};
 export const resetDrafts = () => {
   drafts.clear();
   notify();

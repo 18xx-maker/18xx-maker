@@ -474,6 +474,8 @@ it inside lists (`trains[2].players`). Edits go through `editGame`, so the
 Changes page, problems check and unsaved-edit handling work unchanged. Labels
 and help text are the schema keys and descriptions, in English only.
 
+The Map tab starts with `MapMover` (four arrow buttons): `shiftGame` in `src/util/mapShift.js` moves every map coordinate and the hex references of the game in one `editGame` (map fields decide whether a direction is blocked; pixel overlays stay), then the selected `?hex=` follows and the hex JSON drafts are cleared with `clearDrafts`.
+
 A string (or list of strings) that names something else in the game has a
 combobox. The schema says so with an annotation next to the type, ignored by
 validation: `"x-ref": { "from": "companies", "key": "abbrev", "label": "name" }`

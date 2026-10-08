@@ -269,6 +269,8 @@ jeweils eine Karte mit den Koordinaten, eine pro Zeile. Grenzen, Linien,
 Grenztexte und Zuschnitt einer kopierten Variante sind die der kopierten
 Variante plus ihre eigenen. Die Kartenfelder selbst gehören zum Hex-Tab.
 
+Der Karten-Tab beginnt mit vier Pfeiltasten, „Karte verschieben“, die das ganze Spiel um eine Reihe oder Spalte verschieben: jedes Kartenfeld, jede Grenze, Linie und jeden Grenztext aller Kartenvarianten sowie `home`, `destination` und `hex` von Gesellschaften und Privatgesellschaften, die ein Kartenfeld nennen. Hoch und runter ändern den Buchstaben, links und rechts die Zahl (bei einer horizontalen Karte umgekehrt). Eine Taste ist deaktiviert, wenn ein Kartenfeld, ein entferntes Kartenfeld, eine Grenze, eine Linie oder ein Grenztext schon in der ersten Reihe (A) oder der ersten Spalte (1) liegt; ein Verweis, der die Karte verlassen würde, bleibt unverändert, ebenso eine Token-Beschriftung, die wie eine Koordinate aussieht. Positionen in Pixeln (Rundenanzeige, Bewegung, Markt und Spieler) werden nicht verschoben. Nach rechts oder unten wird eine Karte ohne Zuschnitt größer, und eine zugeschnittene Kante behält ihren Zuschnitt. Eine Verschiebung um eins ändert, welche Kartenfelder nach oben zeigen (`a1Valid`), dem der Board18-Export folgt. Das Verschieben ist ein Schritt in der Liste der Änderungen, „Zurücksetzen“ macht es rückgängig.
+
 Den Hex-Tab gibt es ebenfalls auf jeder Seite (er wechselt zur Karte). Klicke auf ein Kartenfeld auf der
 Karte, um seine Gruppe zu wählen, den Eintrag von `map.hexes`, der es auflistet:
 Der Tab zeigt dann nur diese Gruppe, standardmäßig als Formular und mit dem
