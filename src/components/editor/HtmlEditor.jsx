@@ -145,23 +145,32 @@ const PanZoom = ({ page, count, children }) => {
 
   // An element asks to be panned into view with a "reveal" event (a tile that
   // was just added, possibly on a page far from the view). Centered when it is
-  // not wholly in the window below the toolbar, the zoom stays.
+  // not wholly in the window below the toolbar and left of the edit panel, the zoom stays.
   useEffect(() => {
     const el = container.current;
     const onReveal = (event) => {
       const box = event.target.getBoundingClientRect();
       const area = el.getBoundingClientRect();
       const top = area.top + Math.min(TOOLBAR_INSET, area.height / 4);
+      // The edit panel covers the right side, the view ends where it starts
+      // (below md it covers everything, then there is no side to keep clear)
+      let right = area.right;
+      const panel = document
+        .querySelector("[data-edit-panel]")
+        ?.getBoundingClientRect();
+      if (panel && panel.width > 0 && panel.left > area.left) {
+        right = Math.min(right, panel.left);
+      }
       if (
         box.left >= area.left &&
-        box.right <= area.right &&
+        box.right <= right &&
         box.top >= top &&
         box.bottom <= area.bottom
       ) {
         return;
       }
       touched.current = true;
-      const dx = (area.left + area.right) / 2 - (box.left + box.right) / 2;
+      const dx = (area.left + right) / 2 - (box.left + box.right) / 2;
       const dy = (top + area.bottom) / 2 - (box.top + box.bottom) / 2;
       setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
     };

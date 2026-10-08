@@ -131,14 +131,50 @@ test("a click on a tile of the sheet picks it, the dashed cell adds one", async 
   await expect(page.getByTestId("tile-selected")).toHaveCount(1);
 });
 
+// Whether the element is wholly in the view: in the window and left of the
+// edit panel
+const clear = (locator) =>
+  locator.evaluate((el) => {
+    const box = el.getBoundingClientRect();
+    const panel = document
+      .querySelector("[data-edit-panel]")
+      .getBoundingClientRect();
+    return (
+      box.left >= 0 &&
+      box.top >= 0 &&
+      box.bottom <= window.innerHeight &&
+      box.right <= Math.min(window.innerWidth, panel.left)
+    );
+  });
+
 test("an empty space of the sheet adds a tile and pans it into view", async ({
   page,
 }) => {
   await page.goto("/games/18Test/tiles?edit=true&editSection=json");
   await expect(page.getByTestId("game-18Test-tiles")).toBeVisible();
 
+  await expect(panel(page)).toBeVisible();
+
+  // Drag the sheet until the cell for the new tile is under the edit panel
+  const next = page.locator("[data-next]");
+  // (the panel is wider on this tab than on the Tiles tab it switches to)
+  const dx = await next.evaluate((el) => {
+    const box = el.getBoundingClientRect();
+    return window.innerWidth - 100 - (box.left + box.right) / 2;
+  });
+  const from = Math.max(10, 10 - dx);
+  await page.mouse.move(from, 100);
+  await page.mouse.down();
+  await page.mouse.move(from + dx / 2, 100, { steps: 5 });
+  await page.mouse.move(from + dx, 100, { steps: 5 });
+  await page.mouse.up();
+  expect(await clear(next)).toBe(false);
+  await expect(next).toBeInViewport();
+
   await tap(page.locator("[data-empty]").last());
   await expect(page).toHaveURL(/tile=T2/);
   await expect(page.getByTestId("tile-editor")).toBeVisible();
-  await expect(page.locator('[data-tile="T2"]').first()).toBeInViewport();
+  const added = page.locator('[data-tile="T2"]').first();
+  await expect(added).toBeVisible();
+  await expect.poll(() => clear(added)).toBe(true);
 });

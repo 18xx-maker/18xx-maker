@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { act, render } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { describe, expect, it, vi } from "vitest";
 
@@ -276,6 +276,121 @@ describe("HtmlEditor", () => {
     expect(top).toBeGreaterThanOrEqual(TOOLBAR_INSET - 0.5);
     expect(sheets[1].bottom).toBeLessThan(box.bottom);
     expect(top - TOOLBAR_INSET).toBeCloseTo(bottom, 0);
+  });
+
+  describe("reveal", () => {
+    // A target placed in the content, a panel over the right 40% of the view
+    const open = (left, top) => {
+      const panel = document.createElement("div");
+      panel.setAttribute("data-edit-panel", "");
+      document.body.append(panel);
+      const store = configureStore({
+        reducer: rootReducer,
+        preloadedState: initialState,
+      });
+      const { container } = render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <HtmlEditor>
+              <div style={{ width: 400, height: 300, position: "relative" }}>
+                <div
+                  data-testid="target"
+                  style={{
+                    position: "absolute",
+                    left,
+                    top,
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              </div>
+            </HtmlEditor>
+          </MemoryRouter>
+        </Provider>,
+      );
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const editor = container.querySelector("#editor");
+      const area = editor.getBoundingClientRect();
+      Object.assign(panel.style, {
+        position: "fixed",
+        top: 0,
+        bottom: 0,
+        right: 0,
+        width: `${area.width * 0.4}px`,
+      });
+      const target = screen.getByTestId("target");
+      return {
+        editor,
+        target,
+        panel,
+        reveal: () =>
+          act(() => {
+            target.dispatchEvent(new Event("reveal", { bubbles: true }));
+          }),
+        transform: () => editor.firstElementChild.style.transform,
+        ok: () => {
+          const box = target.getBoundingClientRect();
+          const a = editor.getBoundingClientRect();
+          const p = panel.getBoundingClientRect();
+          return (
+            box.left >= a.left &&
+            box.right <= p.left &&
+            box.top >= a.top &&
+            box.bottom <= a.bottom
+          );
+        },
+      };
+    };
+    afterEach(() => {
+      document
+        // eslint-disable-next-line testing-library/no-node-access
+        .querySelectorAll("[data-edit-panel]")
+        .forEach((el) => el.remove());
+    });
+
+    it("pans a target outside the window into view", () => {
+      const view = open(-5000, 100);
+      const before = view.transform();
+      expect(view.ok()).toBe(false);
+      view.reveal();
+      expect(view.transform()).not.toBe(before);
+      expect(view.ok()).toBe(true);
+    });
+
+    it("leaves a target in view where it is", () => {
+      const view = open(10, 100);
+      view.reveal();
+      expect(view.ok()).toBe(true);
+      const before = view.transform();
+      view.reveal();
+      expect(view.transform()).toBe(before);
+    });
+
+    it("pans a target under the edit panel clear of it", () => {
+      const view = open(10, 100);
+      const p = view.panel.getBoundingClientRect();
+      // Drag the content so the target sits under the panel
+      const target = view.target.getBoundingClientRect();
+      const x = target.left;
+      fire(view.editor, "pointerdown", {
+        clientX: x,
+        clientY: 200,
+        buttons: 1,
+      });
+      fire(view.editor, "pointermove", {
+        clientX: p.left + 20,
+        clientY: 200,
+        buttons: 1,
+      });
+      fire(view.editor, "pointerup", {
+        clientX: p.left + 20,
+        clientY: 200,
+        buttons: 0,
+      });
+      expect(view.target.getBoundingClientRect().left).toBeGreaterThan(p.left);
+      view.reveal();
+      expect(view.ok()).toBe(true);
+    });
   });
 
   it("renders the children untouched when printing", () => {

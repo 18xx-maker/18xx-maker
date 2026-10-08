@@ -159,13 +159,38 @@ describe("tile sheet overlay", () => {
     const before = Object.keys(tiles()).length;
 
     const revealed = [];
-    document.addEventListener("reveal", (event) =>
-      revealed.push(event.target.dataset.tile),
-    );
+    const onReveal = (event) => revealed.push(event.target.dataset.tile);
+    document.addEventListener("reveal", onReveal);
     tap(empty[empty.length - 1]);
     await waitFor(() => expect(params(router).tile).toBe("T2"));
     expect(Object.keys(tiles())).toHaveLength(before + 1);
-    await waitFor(() => expect(revealed).toEqual(["T2"]));
+    try {
+      await waitFor(() => expect(revealed).toEqual(["T2"]));
+    } finally {
+      document.removeEventListener("reveal", onReveal);
+    }
+  });
+
+  it("adds a tile from an empty cell of a page that is not the last", async () => {
+    const first = open(editRoute, (game) => ({ ...game, tiles: { 1: 200 } }));
+    await screen.findAllByTestId("tiles-overlay");
+    const perPage = pages()[0].querySelectorAll("[data-tile]").length;
+    first.unmount();
+
+    const { router } = open(editRoute, (game) => ({
+      ...game,
+      tiles: { 1: 3, 14: perPage },
+    }));
+    await screen.findAllByTestId("tiles-overlay");
+    // The green tiles start after a gap and run on to a second page
+    expect(pages()).toHaveLength(2);
+    const empty = pages()[0].querySelectorAll("[data-empty]");
+    expect(empty.length).toBeGreaterThan(0);
+    const before = Object.keys(tiles()).length;
+
+    tap(empty[0]);
+    await waitFor(() => expect(params(router).tile).toBe("T1"));
+    expect(Object.keys(tiles())).toHaveLength(before + 1);
   });
 
   it("shows the hover outline on an empty cell", async () => {
@@ -210,6 +235,11 @@ describe("tile sheet overlay", () => {
     expect(pages()[0].querySelector("[data-next]")).toBeNull();
     expect(pages()[1].querySelector("[data-next]")).toBeTruthy();
     expect(pages()[1].querySelectorAll("[data-tile]")).toHaveLength(0);
+    // Every other position of the new page is free, the first has none
+    expect(pages()[0].querySelectorAll("[data-empty]")).toHaveLength(0);
+    expect(pages()[1].querySelectorAll("[data-empty]")).toHaveLength(
+      perPage - 1,
+    );
     // It is no page of the print
     expect(pages()[1]).not.toHaveTextContent("page");
     expect(pages()[0]).toHaveTextContent("page 1 of 1");
