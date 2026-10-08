@@ -1,7 +1,7 @@
+import { randomUUID } from "node:crypto";
 import fs from "node:fs";
 
 import { dialog } from "electron";
-import { v4 as uuidv4 } from "uuid";
 
 import { assoc, assocPath } from "ramda";
 
@@ -38,7 +38,7 @@ export const loadGame = (id) =>
 export const saveGamePath = (path) =>
   new Promise((resolve) => {
     const existing = summaryOfPath(path);
-    const id = existing?.id ?? uuidv4();
+    const id = existing?.id ?? randomUUID();
     const json = fs.readFileSync(path);
     const game = assoc("meta", meta(id), JSON.parse(json));
     const summary = {

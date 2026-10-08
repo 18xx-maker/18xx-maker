@@ -1,5 +1,3 @@
-import { validate } from "uuid";
-
 import {
   deleteGame,
   findGame,
@@ -10,6 +8,7 @@ import {
   saveGameAs,
   saveGameFile,
 } from "@/util/storage/opfs";
+import { isUUID } from "#util/uuid";
 
 // An in-memory origin private file system with a single directory level
 const createStorage = () => {
@@ -93,7 +92,7 @@ describe("internal games in OPFS", () => {
 
     const [type, id] = slug.split(":");
     expect(type).toBe("internal");
-    expect(validate(id)).toBe(true);
+    expect(isUUID(id)).toBe(true);
     expect([...games().keys()]).toEqual([`${id}.json`]);
     expect(storage.root.getDirectoryHandle).toHaveBeenCalledWith("games", {
       create: true,

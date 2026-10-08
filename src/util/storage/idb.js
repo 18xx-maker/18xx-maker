@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { assoc, compose, indexBy, map, omit, prop } from "ramda";
 
 import { getGameSummary, loadFile } from "@/util/loading";
@@ -20,7 +18,7 @@ export const migrateSummary = (summary) => {
   if (!summary.version) {
     // Unversioned summary, this means prior to our first migration. We need to
     // generate a UUID as the id and then remove the slug and add a version
-    const id = uuidv4();
+    const id = crypto.randomUUID();
     return compose(
       (summary) => assoc("id", id, summary),
       assoc("version", 1),
@@ -198,8 +196,8 @@ export const saveGameHandle = (handle) => {
         "meta",
         meta(
           handle.kind === "directory"
-            ? uuidv4()
-            : ((await registeredId(handle)) ?? uuidv4()),
+            ? crypto.randomUUID()
+            : ((await registeredId(handle)) ?? crypto.randomUUID()),
         ),
         game,
       ),
