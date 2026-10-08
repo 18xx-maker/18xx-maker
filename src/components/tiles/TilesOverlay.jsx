@@ -44,9 +44,7 @@ const Tap = () => {
       return;
     }
     const current = store.getState().game;
-    if (!current.tiles) return;
     const result = addTile(current, nextTileId(current, library), library);
-    if (result.error) return;
     store.dispatch(
       editGame((latest) => (latest === current ? result.game : latest)),
     );
@@ -130,6 +128,7 @@ const Active = ({ cells, next, c }) => {
         <Cell c={c} index={next}>
           <polygon
             data-next=""
+            onPointerEnter={() => setHover(null)}
             data-testid="tile-next"
             points={POINTS}
             fill="transparent"

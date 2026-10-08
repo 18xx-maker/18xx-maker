@@ -123,7 +123,7 @@ test("a click on a tile of the sheet picks it, the dashed cell adds one", async 
   await expect(page.getByTestId("tile-editor")).toBeVisible();
   await expect(page.getByTestId("tile-selected")).toHaveCount(1);
 
-  // T1 and T2 are tiles of the game already
+  // 18Test has T1 (plus 26|T2), so the next free id is T2
   await page.getByRole("button", { name: /^T1 / }).waitFor();
   await tap(page.locator("[data-next]"));
   await expect(tile(page, "T2")).toBeVisible();

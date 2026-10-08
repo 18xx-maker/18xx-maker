@@ -151,6 +151,19 @@ describe("tile sheet overlay", () => {
     expect(tiles().T2).toEqual({ color: "yellow", quantity: 1 });
   });
 
+  it("clears the hover outline of the last tile on the next cell", async () => {
+    open(editRoute);
+    await screen.findAllByTestId("tiles-overlay");
+    const last = targets().at(-1);
+    fireEvent.pointerEnter(last);
+    await screen.findByTestId("tile-hover");
+
+    fireEvent.pointerEnter(next());
+    await waitFor(() =>
+      expect(screen.queryByTestId("tile-hover")).not.toBeInTheDocument(),
+    );
+  });
+
   it("adds no cell to a game without tiles", async () => {
     open(editRoute, (game) => omit(["tiles"], game));
     await screen.findByTestId("game-internal:abc-tiles");
@@ -164,7 +177,10 @@ describe("tile sheet overlay", () => {
     expect(perPage).toBeGreaterThan(1);
     first.unmount();
 
-    open(editRoute, (game) => ({ ...game, tiles: { 1: perPage } }));
+    const second = open(editRoute, (game) => ({
+      ...game,
+      tiles: { 1: perPage },
+    }));
     await screen.findAllByTestId("tiles-overlay");
     expect(pages()).toHaveLength(2);
     expect(pages()[0].querySelector("[data-next]")).toBeNull();
@@ -173,6 +189,16 @@ describe("tile sheet overlay", () => {
     // It is no page of the print
     expect(pages()[1]).not.toHaveTextContent("page");
     expect(pages()[0]).toHaveTextContent("page 1 of 1");
+    second.unmount();
+
+    // The extra page is only for the editor, never for the print
+    open(`${editRoute}&print=true`, (game) => ({
+      ...game,
+      tiles: { 1: perPage },
+    }));
+    await screen.findByTestId("game-internal:abc-tiles");
+    expect(pages()).toHaveLength(1);
+    expect(next()).toBeNull();
   });
 
   it("works on a page after the tiles of the first page changed", async () => {
