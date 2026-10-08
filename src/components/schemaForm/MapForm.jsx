@@ -76,8 +76,9 @@ const CopyField = ({ keys, variation }) => {
   const form = useContext(SchemaFormContext);
   const maps = form.game.map;
   const current = valueAt(keys, form.game);
-  const options = maps.flatMap((_, index) =>
-    index === variation ? [] : [index],
+  // A variation that itself copies cannot be copied: only one level is followed
+  const options = maps.flatMap((other, index) =>
+    index === variation || other.copy !== undefined ? [] : [index],
   );
   if (current !== undefined && !options.includes(current))
     options.push(current);
@@ -88,7 +89,9 @@ const CopyField = ({ keys, variation }) => {
       schema={mapSchema.copy}
       options={options}
       label={t("editPanel.map.copy")}
-      labelOf={(index) => maps[index]?.name ?? index + 1}
+      labelOf={(index) =>
+        maps[index]?.name || t("export.variationNumber", { n: index + 1 })
+      }
     />
   );
 };
@@ -100,6 +103,7 @@ const MapFields = ({ variation }) => {
   const array = Array.isArray(game.map);
   const base = array ? ["map", variation] : ["map"];
   const copy = valueAt([...base, "copy"], game);
+  const remove = valueAt([...base, "remove"], game);
   const source = array && copy !== undefined ? game.map[copy] : undefined;
   const root = issuesFor(issues, base, false);
 
@@ -113,7 +117,8 @@ const MapFields = ({ variation }) => {
       {source && (
         <p role="note" className="text-sm">
           {t("editPanel.map.inherited", {
-            variation: source.name ?? copy + 1,
+            variation:
+              source.name || t("export.variationNumber", { n: copy + 1 }),
           })}
         </p>
       )}
@@ -124,7 +129,8 @@ const MapFields = ({ variation }) => {
             <CopyField key={key} keys={keys} variation={variation} />
           ) : null;
         }
-        if (key === "remove" && copy === undefined) return null;
+        if (key === "remove" && copy === undefined && remove === undefined)
+          return null;
         if (key === "title") return <HideTitle key={key} keys={keys} />;
         return (
           <SchemaField

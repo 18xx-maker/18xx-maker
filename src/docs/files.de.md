@@ -259,7 +259,7 @@ des Spiels (die Dateien, die Seiten, die Layouts, den Hintergrund, die Variante
 und die Optionen für PNG, Karten und Board18). Die veraltete Exportoption paginated wird nicht angezeigt und
 bleibt in der Datei.
 
-Der Tab „Karte“ gibt es nur auf der Kartenseite und bearbeitet alles an der
+Den Tab „Karte“ gibt es nur auf der Kartenseite und bearbeitet alles an der
 gewählten Kartenvariante (`?variation=`) außer ihren Kartenfeldern: den Namen,
 welche Variante sie kopiert (bei einer Liste von Varianten; die kopierten
 Kartenfelder lassen sich per Koordinate entfernen, eine pro Zeile), ob der Titel

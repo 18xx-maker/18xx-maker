@@ -129,6 +129,33 @@ describe("edit panel map tab", () => {
     ).not.toBeInTheDocument();
   });
 
+  it("labels unnamed variations by number and skips copies as sources", async () => {
+    const maps = [
+      { hexes: [{ color: "plain", hexes: ["A1"] }] },
+      { name: "", copy: 0, hexes: [{ color: "plain", hexes: ["C3"] }] },
+      { name: "Third", hexes: [{ color: "plain", hexes: ["D4"] }] },
+      { copy: 0, hexes: [{ color: "plain", hexes: ["E5"] }] },
+    ];
+    const { user } = open(`${route}&variation=2`, maps);
+    const copy = await screen.findByRole("combobox", { name: "Copy of" });
+    await user.click(copy);
+    const options = await screen.findAllByRole("option");
+    expect(options.map((option) => option.textContent)).toEqual([
+      "Not set",
+      "Variation 1",
+    ]);
+  });
+
+  it("shows remove while it has a value, even without a copy", async () => {
+    const maps = variations();
+    maps[1] = { ...maps[1], remove: ["A1"] };
+    delete maps[1].copy;
+    open(`${route}&variation=1`, maps);
+    expect(
+      await screen.findByRole("textbox", { name: "Remove" }),
+    ).toBeVisible();
+  });
+
   it("removes copied hexes one coordinate a line", async () => {
     const { user } = open(`${route}&variation=1`, variations());
     const remove = await screen.findByRole("textbox", { name: "Remove" });
