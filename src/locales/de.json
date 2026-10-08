@@ -978,6 +978,9 @@
   },
   "game": {
     "info": "Spielinformationen",
+    "preview": {
+      "open": "Karte öffnen"
+    },
     "sections": "Spielbereich",
     "stats": {
       "map": "Karte",

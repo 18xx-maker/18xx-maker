@@ -99,6 +99,7 @@ const knownConsole = {
         slug,
         {
           "b18/map": patterns,
+          info: patterns,
           map: patterns,
           "map?paginated=true": patterns,
         },

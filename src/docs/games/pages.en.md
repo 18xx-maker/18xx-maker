@@ -9,7 +9,7 @@ each page draws its part of the game the way it prints. The address of a game is
 
 | Page          | Address         | Shows                                                                                | Needs in the game file  |
 | ------------- | --------------- | ------------------------------------------------------------------------------------ | ----------------------- |
-| Info          | (the game)      | Title, designer, publisher, links, player count and statistics of the game           | `info`                  |
+| Info          | (the game)      | Title, designer, publisher, links, player count, a map preview and statistics        | `info`                  |
 | Map           | `map`           | The map, one variation at a time                                                     | `map`                   |
 | Market        | `market`        | The [stock market](/docs/games/market), with the par chart, legend and round tracker | `stock.market`          |
 | Tokens        | `tokens`        | Sheets of company tokens and the tokens of the game                                  | `companies` or `tokens` |
@@ -28,7 +28,8 @@ address sends you back to the Info page.
 
 The page you land on when you open a game. It shows the title, the designer, the
 publisher and the links of the game (license, where to buy it, BoardGameGeek and
-the rules), and a note when the game is a prototype or work in progress. The
+the rules), and a note when the game is a prototype or work in progress. A preview of
+the first map variation links to the [Map](#map) page. The
 statistics list the tiles by color and gauge, the size of the map, the number of
 companies, privates, trains, phases and rounds. The buttons start editing the game
 at its first section, download the game file, reload it from its file (in the

@@ -29,7 +29,7 @@ const pages = [
   {
     name: "game info",
     url: "/games/1889",
-    ready: (page) => page.getByTestId("game-1889"),
+    ready: (page) => page.getByTestId("game-map-preview-svg"),
   },
   {
     name: "game map",

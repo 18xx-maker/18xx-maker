@@ -978,6 +978,9 @@
   },
   "game": {
     "info": "游戏信息",
+    "preview": {
+      "open": "打开地图"
+    },
     "sections": "游戏部分",
     "stats": {
       "map": "地图",
