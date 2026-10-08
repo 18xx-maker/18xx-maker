@@ -274,7 +274,7 @@ lists the tiles in the order of the file. Type an id and press Add tile to add
 one: an id of a tile that 18xx Maker already knows is added as it is (a
 quantity of 1), any other id starts a tile of your own that you then draw. Pick a
 tile in the list to edit it (the address keeps it as `tile`, for example
-`?tile=26%257CT2` for `26|T2`). On the tile sheets you can also click a tile to pick it (every copy of it is outlined), and click the dashed + cell after the last tile to add a new tile (`T1`, `T2`, ...) and pick it; this only works while the edit panel is open, the printed sheets do not change. A tile of your own is edited like a hex of the map,
+`?tile=26%257CT2` for `26|T2`). On the tile sheets you can also click a tile to pick it (every copy of it is outlined), and click the dashed + cell after the last tile, or any other empty space of the sheet, to add a new tile (`T1`, `T2`, ...) and pick it; this only works while the edit panel is open, the printed sheets do not change. A tile of your own is edited like a hex of the map,
 drawn as the tile sheets draw it, with its quantity, print and group. A tile
 that is drawn from the library, a plain quantity, an alias of another tile or a
 partial change of a library tile, shows the tile as it is drawn and only its

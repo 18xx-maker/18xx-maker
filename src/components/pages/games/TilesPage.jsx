@@ -122,6 +122,16 @@ const pageTiles = (perPage, pages, tiles) => {
 const cellsOf = (page) =>
   page.flatMap((hex, index) => (hex ? [{ id: hex.id, index }] : []));
 
+// The free positions of a page of `perPage`, but the one after the last tile
+// (the dashed cell) when `skipNext` says so
+const emptyOf = (page, perPage, skipNext) => {
+  const free = [];
+  for (let i = 0; i < perPage; i++) {
+    if (!page[i] && !(skipNext && i === page.length)) free.push(i);
+  }
+  return free;
+};
+
 const TilesPage = () => {
   const { config } = useConfig();
   const game = useGame();
@@ -369,6 +379,11 @@ const TilesPage = () => {
         )
       : null;
 
+    const next =
+      pageIndex === pagedTiles.length - 1 && page.length < c.perPage
+        ? page.length
+        : null;
+
     return (
       <div className="TileSheet--Page" key={`page-${pageIndex}`}>
         <Page
@@ -385,11 +400,8 @@ const TilesPage = () => {
           <TilesOverlay
             c={c}
             cells={cellsOf(page)}
-            next={
-              pageIndex === pagedTiles.length - 1 && page.length < c.perPage
-                ? page.length
-                : null
-            }
+            empty={emptyOf(page, c.perPage, next !== null)}
+            next={next}
           />
         </Svg>
       </div>
@@ -407,7 +419,12 @@ const TilesPage = () => {
         <Svg style={svgStyle} viewBox={`${viewBoxStr}`}>
           <Cutlines />
           {pins}
-          <TilesOverlay c={c} cells={[]} next={0} />
+          <TilesOverlay
+            c={c}
+            cells={[]}
+            empty={emptyOf([], c.perPage, true)}
+            next={0}
+          />
         </Svg>
       </div>,
     );

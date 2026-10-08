@@ -25,10 +25,25 @@ export const useTilesEditing = () => {
   return editing && open;
 };
 
+// Asks the pan and zoom view to bring the tile into view, once the sheet has
+// drawn it (a few frames: the store update is rendered asynchronously)
+const reveal = (id, tries = 30) => {
+  const el = [...document.querySelectorAll("[data-tile]")].find(
+    (node) => node.dataset.tile === id,
+  );
+  if (el) {
+    el.dispatchEvent(new CustomEvent("reveal", { bubbles: true }));
+  } else if (tries > 0) {
+    requestAnimationFrame(() => reveal(id, tries - 1));
+  }
+};
+
 // What a tap on the tile sheets does, once per tiles page (the pages of the
 // sheet come and go as the game changes, this stays): a tap on a tile selects
-// it on the Tiles tab (see useSelectedTile), a tap on the cell after the last
-// tile adds a new tile and selects it. The pan and zoom view hands the taps
+// it on the Tiles tab (see useSelectedTile), a tap on any empty cell of the
+// sheet adds a new tile and selects it. The sheet sorts the tiles, so the new
+// tile lands after the last one whichever cell was tapped; it is panned into
+// view once it is drawn. The pan and zoom view hands the taps
 // over through TapContext (the pointer is captured, no click reaches the
 // cells).
 const Tap = () => {
@@ -37,7 +52,7 @@ const Tap = () => {
   const { select } = useSelectedTile();
 
   const onTap = (target) => {
-    const cell = target?.closest?.("[data-tile],[data-next]");
+    const cell = target?.closest?.("[data-tile],[data-next],[data-empty]");
     if (!cell) return;
     if (cell.dataset.tile !== undefined) {
       select(cell.dataset.tile);
@@ -49,6 +64,7 @@ const Tap = () => {
       editGame((latest) => (latest === current ? result.game : latest)),
     );
     select(result.id);
+    reveal(result.id);
   };
   const latest = useRef(onTap);
   latest.current = onTap;
@@ -74,7 +90,7 @@ const Cell = ({ c, index, children, ...props }) => (
   </g>
 );
 
-const Active = ({ cells, next, c }) => {
+const Active = ({ cells, empty = [], next, c }) => {
   const { tile: selected } = useSelectedTile();
   const [hover, setHover] = useState(null);
   // One user unit of the page, in the units of a tile
@@ -124,6 +140,30 @@ const Active = ({ cells, next, c }) => {
           />
         </Cell>
       ))}
+      {empty.map((index) => (
+        <Cell key={`empty-${index}`} c={c} index={index}>
+          {hover === `empty-${index}` && (
+            <polygon
+              data-testid="tile-hover"
+              points={POINTS}
+              fill={ACCENT}
+              fillOpacity={0.1}
+              stroke={ACCENT}
+              strokeOpacity={0.6}
+              strokeWidth={3 * k}
+              strokeLinejoin="round"
+              pointerEvents="none"
+            />
+          )}
+          <polygon
+            data-empty=""
+            points={POINTS}
+            fill="transparent"
+            style={{ cursor: "pointer" }}
+            onPointerEnter={() => setHover(`empty-${index}`)}
+          />
+        </Cell>
+      ))}
       {next !== null && (
         <Cell c={c} index={next}>
           <polygon
@@ -154,7 +194,8 @@ const Active = ({ cells, next, c }) => {
 // The layer of one page of the tile sheet: a target on every printed tile with
 // the outline of the selected tile (every copy of it) and of the tile under
 // the pointer, and a dashed "+" cell at the position `next` for a new tile.
-// `cells` are { id, index } for the tiles of the page. Drawn last in the svg
+// `cells` are { id, index } for the tiles of the page, `empty` the other
+// positions of the page (each adds a tile too). Drawn last in the svg
 // of the page, in the units of the sheet.
 const TilesOverlay = (props) =>
   useTilesEditing() ? <Active {...props} /> : null;

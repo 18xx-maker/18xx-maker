@@ -151,6 +151,30 @@ describe("tile sheet overlay", () => {
     expect(tiles().T2).toEqual({ color: "yellow", quantity: 1 });
   });
 
+  it("adds a tile from any empty cell of the sheet and reveals it", async () => {
+    const { router } = open(editRoute);
+    await screen.findAllByTestId("tiles-overlay");
+    const empty = document.querySelectorAll("[data-empty]");
+    expect(empty.length).toBeGreaterThan(0);
+    const before = Object.keys(tiles()).length;
+
+    const revealed = [];
+    document.addEventListener("reveal", (event) =>
+      revealed.push(event.target.dataset.tile),
+    );
+    tap(empty[empty.length - 1]);
+    await waitFor(() => expect(params(router).tile).toBe("T2"));
+    expect(Object.keys(tiles())).toHaveLength(before + 1);
+    await waitFor(() => expect(revealed).toEqual(["T2"]));
+  });
+
+  it("shows the hover outline on an empty cell", async () => {
+    open(editRoute);
+    await screen.findAllByTestId("tiles-overlay");
+    fireEvent.pointerEnter(document.querySelector("[data-empty]"));
+    expect(await screen.findByTestId("tile-hover")).toBeInTheDocument();
+  });
+
   it("clears the hover outline of the last tile on the next cell", async () => {
     open(editRoute);
     await screen.findAllByTestId("tiles-overlay");

@@ -130,3 +130,15 @@ test("a click on a tile of the sheet picks it, the dashed cell adds one", async 
   await expect(page).toHaveURL(/tile=T2/);
   await expect(page.getByTestId("tile-selected")).toHaveCount(1);
 });
+
+test("an empty space of the sheet adds a tile and pans it into view", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/tiles?edit=true&editSection=json");
+  await expect(page.getByTestId("game-18Test-tiles")).toBeVisible();
+
+  await tap(page.locator("[data-empty]").last());
+  await expect(page).toHaveURL(/tile=T2/);
+  await expect(page.getByTestId("tile-editor")).toBeVisible();
+  await expect(page.locator('[data-tile="T2"]').first()).toBeInViewport();
+});
