@@ -28,13 +28,12 @@ const EditPanel = () => {
     formSection,
     json,
     problems,
+    pinned,
     editSection,
     setEditSection,
   } = useEditPanel();
   const { hex, clear } = useSelectedHex();
-  const { Form, wide, pinned } = sections.find(
-    (s) => s.section === editSection,
-  );
+  const { Form, wide } = sections.find((s) => s.section === editSection);
 
   // Escape closes the panel from anywhere inside it. An open select closes
   // itself first, it has already claimed the key. A selected hex is cleared
@@ -60,9 +59,11 @@ const EditPanel = () => {
       )}
     >
       <div className="flex flex-col gap-3 p-4 border-b">
-        <div className="flex flex-row flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <h1 className="text-2xl font-bold">{t("editPanel.title")}</h1>
-          <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row items-center justify-between gap-x-3">
+          <h1 className="min-w-0 truncate text-2xl font-bold">
+            {t("editPanel.title")}
+          </h1>
+          <div className="flex flex-row shrink-0 items-center gap-2">
             <EditSwitch
               slug={game.meta.slug}
               json={json}

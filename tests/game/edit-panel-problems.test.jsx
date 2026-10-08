@@ -105,6 +105,8 @@ describe("edit panel problems tab", () => {
     expect(
       await screen.findByRole("region", { name: "JSON" }),
     ).toBeInTheDocument();
+    // The editor loads in a chunk: let it finish inside the test
+    await screen.findByTestId("json-editor");
     expect(screen.getByTestId("edit-switch-json")).toHaveAttribute(
       "aria-pressed",
       "true",
@@ -258,6 +260,20 @@ describe("edit panel problems tab", () => {
       );
       const chip = screen.getByRole("tab", { name: "Trains" });
       await waitFor(() => expect(chip).toHaveFocus());
+    });
+
+    it("goes to the JSON tab with j", async () => {
+      const { user, router } = await open();
+      await user.keyboard("j");
+      await waitFor(() =>
+        expect(router.state.location.search).toBe(
+          "?edit=true&editSection=json",
+        ),
+      );
+      expect(
+        await screen.findByRole("region", { name: "JSON" }),
+      ).toBeInTheDocument();
+      await screen.findByTestId("json-editor");
     });
 
     it("closes the panel with Escape", async () => {

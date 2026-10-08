@@ -97,7 +97,7 @@ export const EditSwitch = ({
       data-testid={testId}
       onClick={onClick}
       className={cn(
-        "rounded-sm px-3 py-1 text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
+        "rounded-sm px-2.5 py-1 text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
         active && "bg-background shadow-sm",
       )}
     >
