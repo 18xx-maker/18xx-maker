@@ -429,6 +429,7 @@
     },
     "appliesTo": "Changes here apply to all {{count}} hexes of this group.",
     "split": "Edit {{coord}} only",
+    "splitPick": "Hex to edit alone",
     "alsoIn": "{{coord}} is also in the groups {{groups}}. The group shown is the one drawn on top.",
     "override": "Override here",
     "form": {

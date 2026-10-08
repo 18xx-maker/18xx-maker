@@ -94,15 +94,15 @@ Die zwei Schaltflächen unter der Zeichnung sowie Strg oder Cmd+Z und Strg oder
 Cmd+Umschalt+Z (auch Strg oder Cmd+Y) machen Änderungen im Editor rückgängig und
 stellen sie wieder her. Ein Ziehen ist ein Schritt. Die Tastenkürzel gelten
 nicht, solange der Fokus in einem Feld ist, wo die Tasten dem Feld gehören. Der
-Verlauf beginnt für jedes Kartenfeld neu und auch, wenn du zur JSON-Ansicht
-wechselst und zurückkehrst.
+Verlauf beginnt für jedes Kartenfeld neu, wenn du zur JSON-Ansicht wechselst
+und zurückkehrst und wenn du ein Kartenfeld aus seiner Gruppe löst (siehe unten).
 
 ## Ein Kartenfeld einer Gruppe ändern
 
 Eine Gruppe der Karte ist eine Liste von Koordinaten mit einer gemeinsamen
 Definition. Eine Änderung im Hex-Tab gilt daher für alle, und ein Hinweis nennt
-die Anzahl. Die Schaltfläche _Nur C11 bearbeiten_ (mit der Koordinate des
-Kartenfelds) nimmt das Kartenfeld aus der Gruppe und gibt ihm eine eigene Kopie
+die Anzahl. Wähle das Kartenfeld in der Liste neben der Schaltfläche und drücke _Nur C11
+bearbeiten_ (mit seiner Koordinate): Das Kartenfeld verlässt die Gruppe und bekommt eine eigene Kopie
 der Gruppe, direkt hinter dem Original, damit die Zeichenreihenfolge der Gruppen
 erhalten bleibt. Danach gelten deine Änderungen nur für dieses Kartenfeld. Um
 ein Kartenfeld wieder in eine Gruppe zu legen, klicke mit Cmd (Strg unter

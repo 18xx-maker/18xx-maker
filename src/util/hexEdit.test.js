@@ -428,6 +428,9 @@ describe("splitHex", () => {
     expect(edit.splitHex(one, 0, "A1")).toEqual({ blocked: "single" });
     expect(edit.splitHex(one, 0, "Z9")).toEqual({ blocked: "invalid" });
     expect(edit.splitHex(one, 0, "nope")).toEqual({ blocked: "invalid" });
+    // A coordinate listed twice is one hex
+    const twice = game([{ color: "plain", hexes: ["A1", "A1"] }]);
+    expect(edit.splitHex(twice, 0, "A1")).toEqual({ blocked: "single" });
     const copy = {
       map: [
         { hexes: [{ color: "plain", hexes: ["A1", "B2"] }] },

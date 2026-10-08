@@ -2,6 +2,8 @@
 import { EditorView } from "@codemirror/view";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
+import { getDraft, setDraft } from "@/components/editPanel/draftStore";
+
 import games from "@/data/games";
 import { editGame } from "@/state";
 
@@ -528,6 +530,41 @@ describe("splitting a group", () => {
     await user.click(await screen.findByRole("option", { name: "red" }));
     await waitFor(() => expect(groupOf("C11").color).toBe("red"));
     expect(groupOf("C13").color).not.toBe("red");
+  });
+
+  it("splits off the hex that is picked in the list, not the first of the group", async () => {
+    const { user } = open(`${route}&hex=C11`);
+    await form();
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: "Hex to edit alone" }),
+      "C13",
+    );
+    await user.click(screen.getByRole("button", { name: "Edit C13 only" }));
+    await waitFor(() => expect(groupOf("C13").hexes).toEqual(["C13"]));
+    expect(groupOf("C11").hexes).toHaveLength(6);
+    // The editor follows the hex, so a change is for C13 only
+    await waitFor(() =>
+      expect(screen.queryByText(/apply to all/)).not.toBeInTheDocument(),
+    );
+    await user.click(screen.getByRole("combobox", { name: "Color" }));
+    await user.click(await screen.findByRole("option", { name: "red" }));
+    await waitFor(() => expect(groupOf("C13").color).toBe("red"));
+    expect(groupOf("C11").color).not.toBe("red");
+  });
+
+  it("drops a JSON draft of the group as it was", async () => {
+    const { user } = open(`${route}&hex=C11`);
+    await form();
+    const key = "internal:abc#hex:0:C11";
+    setDraft(key, "{", null);
+    expect(getDraft(key)).toBeTruthy();
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: "Hex to edit alone" }),
+      "C13",
+    );
+    await user.click(screen.getByRole("button", { name: "Edit C13 only" }));
+    await waitFor(() => expect(groupOf("C13").hexes).toEqual(["C13"]));
+    expect(getDraft(key)).toBeUndefined();
   });
 
   it("is one step of the history of the game, not of the editor", async () => {

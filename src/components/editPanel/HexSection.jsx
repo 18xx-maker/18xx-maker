@@ -3,12 +3,17 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useStore } from "react-redux";
 
 import JsonSection from "@/components/editPanel/JsonSection";
-import { getDraft, subscribeDrafts } from "@/components/editPanel/draftStore";
+import {
+  clearDraft,
+  getDraft,
+  subscribeDrafts,
+} from "@/components/editPanel/draftStore";
 import LazyHexEditor from "@/components/hexEditor/LazyHexEditor";
 
 import { useHexGroup } from "@/hooks/useHexGroup";
 import { editGame, selectGameProblems } from "@/state";
 import {
+  coordName,
   findGroup,
   findGroups,
   inheritedGroup,
@@ -74,6 +79,9 @@ const HexSection = ({ game }) => {
   );
   // The generation in which a switch to the form was refused
   const [refused, setRefused] = useState(null);
+  // The hex of the group the split button takes out (the selected one unless
+  // another is picked)
+  const [chosen, setChosen] = useState(null);
   const allIssues = useSelector((state) => selectGameProblems(state, slug));
   const checked = useSelector(
     (state) => state.gameProblems.status !== "running",
@@ -138,11 +146,16 @@ const HexSection = ({ game }) => {
   const form = view === "form" && !removed;
 
   // The hex gets a group of its own, so that changes are for this hex only
-  const split = () => {
-    const result = splitHex(store.getState().game, variation, current);
+  const coords = [...new Set((group.hexes ?? []).map(coordName))];
+  const target = coords.includes(chosen) ? chosen : current;
+  const split = (coord) => {
+    const result = splitHex(store.getState().game, variation, coord);
     if (!result.game) return;
+    // A draft of the JSON view is of the group as it was
+    clearDraft(lens.draftKey);
+    clearDraft(`${slug}#hex:${variation}:${coord}`);
     store.dispatch(editGame(() => result.game));
-    restart();
+    restart(coord);
   };
 
   const choose = (next) => {
@@ -182,13 +195,27 @@ const HexSection = ({ game }) => {
               <p role="note" className="text-sm text-warning-text">
                 {t("hexEditor.appliesTo", { count })}
               </p>
-              <button
-                type="button"
-                className="rounded-md border px-3 py-1 text-sm hover:bg-accent focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
-                onClick={split}
-              >
-                {t("hexEditor.split", { coord: current })}
-              </button>
+              <div className="flex flex-row flex-wrap items-center gap-2">
+                <select
+                  aria-label={t("hexEditor.splitPick")}
+                  className="rounded-md border bg-transparent px-2 py-1 text-sm focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+                  value={target}
+                  onChange={(event) => setChosen(event.target.value)}
+                >
+                  {coords.map((coord) => (
+                    <option key={coord} value={coord}>
+                      {coord}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  className="rounded-md border px-3 py-1 text-sm hover:bg-accent focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring"
+                  onClick={() => split(target)}
+                >
+                  {t("hexEditor.split", { coord: target })}
+                </button>
+              </div>
             </div>
           )}
           {others.length > 0 && (

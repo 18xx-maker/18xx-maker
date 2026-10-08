@@ -83,14 +83,16 @@ dragged: use their drawing in the inspector.
 The two buttons under the drawing, Ctrl or Cmd+Z and Ctrl or Cmd+Shift+Z
 (also Ctrl or Cmd+Y) undo and redo changes made in the editor. A drag is one
 step. The shortcuts do not work while the focus is in a field, where the keys
-are the field's own, and the history starts over for each hex and when you
-leave the editor for the JSON view and come back.
+are the field's own, and the history starts over for each hex, when you
+leave the editor for the JSON view and come back, and when you split a hex off
+its group (see below).
 
 ## Changing One Hex of a Group
 
 A group of the map is a list of coordinates that share one definition, so a
-change in the Hex tab applies to all of them, and a note says how many. The
-button _Edit C11 only_ (with the coordinate of the hex) takes the hex out of
+change in the Hex tab applies to all of them, and a note says how many. Pick the
+hex in the list next to the button, then press _Edit C11 only_ (with its
+coordinate) to take the hex out of
 the group and gives it a copy of the group of its own, right after the original
 so that the drawing order of the groups stays. After that your changes are for
 that hex only. To put a hex back in a group, Cmd-click (Ctrl on Windows and

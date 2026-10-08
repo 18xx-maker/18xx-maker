@@ -429,6 +429,7 @@
     },
     "appliesTo": "Änderungen hier gelten für alle {{count}} Kartenfelder dieser Gruppe.",
     "split": "Nur {{coord}} bearbeiten",
+    "splitPick": "Kartenfeld, das allein bearbeitet wird",
     "alsoIn": "{{coord}} ist auch in den Gruppen {{groups}}. Angezeigt wird die Gruppe, die oben gezeichnet wird.",
     "override": "Hier überschreiben",
     "form": {

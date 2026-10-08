@@ -429,6 +429,7 @@
     },
     "appliesTo": "此处的更改适用于该组的全部 {{count}} 个六边格。",
     "split": "仅编辑 {{coord}}",
+    "splitPick": "单独编辑的六边格",
     "alsoIn": "{{coord}} 还在 {{groups}} 组中。显示的是绘制在最上层的组。",
     "override": "在此覆盖",
     "form": {

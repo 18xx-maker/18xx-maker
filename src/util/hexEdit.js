@@ -244,7 +244,7 @@ export const splitHex = (game, variation, coord) => {
     };
   }
   const group = hexes[index];
-  if (names(group).length < 2) return { blocked: "single" };
+  if (new Set(names(group)).size < 2) return { blocked: "single" };
   const entry = group.hexes.find((c) => coordName(c) === coord);
   const split = { ...structuredClone(group), hexes: [entry] };
   return {
