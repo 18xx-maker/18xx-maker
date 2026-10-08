@@ -93,7 +93,7 @@ describe("CountInput", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it("clears with onClear, but not while infinity is on", async () => {
+  it("clears with onClear when emptied", async () => {
     const { user, onClear } = setup();
     await user.clear(input());
     await user.tab();
@@ -105,6 +105,15 @@ describe("CountInput", () => {
     unmount();
     expect(onClear).not.toHaveBeenCalled();
     expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("does not save an invalid number when removed", async () => {
+    const { user, onChange, onInvalid, unmount } = setup();
+    await user.clear(input());
+    await user.type(input(), "0");
+    unmount();
+    expect(onChange).not.toHaveBeenCalled();
+    expect(onInvalid).toHaveBeenLastCalledWith(true);
   });
 
   it("saves a typed number when removed", async () => {

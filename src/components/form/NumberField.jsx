@@ -77,11 +77,7 @@ const NumberField = ({
       onInput={(event) => {
         dirty.current = true;
         badInput.current = event.target.validity.badInput;
-        if (
-          commitOnStep &&
-          event.nativeEvent.inputType === undefined &&
-          !badInput.current
-        ) {
+        if (commitOnStep && !event.nativeEvent.inputType && !badInput.current) {
           commit(event.target.value);
         }
       }}
