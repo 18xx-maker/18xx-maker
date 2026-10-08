@@ -85,7 +85,11 @@ const marks = () =>
 const editor = (anchor) =>
   waitFor(() => {
     const host = screen.queryByTestId("json-editor");
-    if (!host) throw new Error("no editor host yet");
+    if (!host) {
+      // The tab starts on the form: these tests are of the JSON view
+      screen.queryByRole("radio", { name: "JSON" })?.click();
+      throw new Error("no editor host yet");
+    }
     if (
       anchor !== undefined &&
       host.closest("[data-anchor]")?.getAttribute("data-anchor") !== anchor

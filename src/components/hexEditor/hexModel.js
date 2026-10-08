@@ -39,6 +39,25 @@ export const SINGLE_KEYS = ["offBoardRevenue"];
 
 export const ELEMENT_KEYS = [...LIST_KEYS, ...SINGLE_KEYS];
 
+// What an element the editor adds starts with: a valid element the map can
+// draw, with the properties the schema asks for and nothing more
+export const NEW_ELEMENT = {
+  track: { side: 1, type: "straight" },
+  cities: {},
+  mediumCities: {},
+  towns: {},
+  centerTowns: {},
+  boomtowns: {},
+  labels: { label: "A" },
+  values: { value: 10 },
+  names: { name: "Name" },
+  terrain: { type: "mountain" },
+  borders: { side: 1, color: "red" },
+  offBoardRevenue: { revenues: [{ color: "yellow", value: 20 }] },
+};
+
+export const ADDABLE_KEYS = Object.keys(NEW_ELEMENT);
+
 export const isSingle = (key) => SINGLE_KEYS.includes(key);
 
 const isObject = (value) =>
