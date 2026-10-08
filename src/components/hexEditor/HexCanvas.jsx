@@ -101,12 +101,18 @@ const HexCanvas = ({
   const scale = () => svg.current?.getScreenCTM?.()?.a || 1;
 
   const down = (event, item) => {
+    dragged.current = false;
     if (event.button !== 0 || !onDrag || !DRAGGABLE_KEYS.includes(item.key)) {
       return;
     }
     press.current = { ...item, x: event.clientX, y: event.clientY, on: false };
-    dragged.current = false;
-    event.currentTarget.setPointerCapture?.(event.pointerId);
+    // The focus stays in the editor, so its keys (undo) work after a drag
+    svg.current?.focus({ preventScroll: true });
+    try {
+      event.currentTarget.setPointerCapture?.(event.pointerId);
+    } catch {
+      // A pointer that is gone cannot be captured; the drag still works
+    }
   };
 
   const move = (event) => {
@@ -128,17 +134,22 @@ const HexCanvas = ({
   const up = (event) => {
     const p = press.current;
     press.current = null;
-    event.currentTarget.releasePointerCapture?.(event.pointerId);
+    try {
+      event.currentTarget.releasePointerCapture?.(event.pointerId);
+    } catch {
+      // Already released
+    }
     if (p?.on) onDragEnd?.({ key: p.key, index: p.index });
   };
 
   return (
     <svg
       ref={svg}
+      tabIndex={-1}
       viewBox="-100 -100 200 200"
       role="group"
       aria-label={t("hexEditor.form.canvas")}
-      className="size-full max-h-72 touch-manipulation"
+      className="size-full max-h-72 touch-manipulation focus:outline-hidden"
       data-testid="hex-canvas"
       data-pending={pending ?? undefined}
     >
@@ -147,7 +158,7 @@ const HexCanvas = ({
       </CanvasBoundary>
       <g data-testid="hex-canvas-elements" aria-hidden="true">
         {elements.map(({ key, index, element }) => {
-          const at = elementPoint(key, element, index, orientation);
+          const at = elementPoint(key, element, index, orientation, value);
           const on = selected?.key === key && selected?.index === index;
           return (
             <circle
@@ -164,7 +175,10 @@ const HexCanvas = ({
               onPointerDown={(event) => down(event, { key, index })}
               onPointerMove={move}
               onPointerUp={up}
-              onPointerCancel={up}
+              onPointerCancel={(event) => {
+                up(event);
+                dragged.current = false;
+              }}
               onClick={() => {
                 // A drag ends in a click on the element: it is not a pick
                 if (dragged.current) dragged.current = false;

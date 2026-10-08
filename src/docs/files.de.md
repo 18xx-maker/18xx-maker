@@ -277,7 +277,7 @@ Karte umrandet. Das Formular zeichnet das Kartenfeld wie die Karte, mit einer
 Schaltfläche an jeder Kante: Klicke auf zwei Kanten, um das Gleis dazwischen zu
 zeichnen, wähle ein Element aus der Liste oder der Zeichnung, um seine
 Eigenschaften zu bearbeiten, und füge Elemente hinzu, kopiere, verschiebe oder
-entferne sie. Ziehe eine Stadt, einen Ort, ein Label oder ein anderes Element, um es zu verschieben (sein `x` und `y`), und mache Änderungen mit den Schaltflächen oder Strg bzw. Cmd+Z und Strg bzw. Cmd+Umschalt+Z rückgängig oder wiederhole sie; ein Ziehen ist ein Schritt, und der Verlauf beginnt für jedes Feld neu. Das Formular schreibt nur, was du änderst. Die JSON-Ansicht lässt
+entferne sie. Ziehe eine Stadt, einen Ort, ein Label oder ein anderes Element, um es zu verschieben (sein `x` und `y`), und mache Änderungen mit den Schaltflächen oder Strg bzw. Cmd+Z und Strg bzw. Cmd+Umschalt+Z rückgängig oder wiederhole sie; ein Ziehen ist ein Schritt, und der Verlauf beginnt für jedes Feld und beim Wechsel zur JSON-Ansicht und zurück neu. Die Tastenkürzel gelten nicht, solange der Fokus in einem Feld liegt. Das Formular schreibt nur, was du änderst. Die JSON-Ansicht lässt
 sich nicht verlassen, solange ihr Text ungültig ist. Ein Hinweis zeigt an, wenn
 eine Änderung für mehrere Kartenfelder der Gruppe gilt oder wenn eine andere
 Gruppe das Kartenfeld ebenfalls auflistet. Auch leere Positionen lassen sich wählen, ebenso die Reihe und die

@@ -28,7 +28,7 @@ const positionNames = [
   "y",
 ];
 
-const hasPositioning = (element) => {
+export const hasPositioning = (element) => {
   return any(
     identity,
     map((name) => {
@@ -120,7 +120,7 @@ const autoPositionTerrain = (d, i, hex) => {
   };
 };
 
-const autoPosition = (d, i, hex, type) => {
+export const autoPosition = (d, i, hex, type) => {
   switch (type) {
     case "icon":
       return autoPositionIcon(d, i, hex);

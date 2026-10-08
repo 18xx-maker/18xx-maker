@@ -251,7 +251,7 @@ form by default and as JSON with the Form and JSON switch, and the hexes of the
 group are outlined on the map. The form draws the hex as the map does with a
 button on each edge: click two edges to draw the track between them, pick an
 element from the list or the drawing to edit its fields, and add, copy, move or
-remove elements. Drag a city, town, label or other element to move it (its `x` and `y`), and undo or redo changes with the buttons or Ctrl or Cmd+Z and Ctrl or Cmd+Shift+Z; a drag is one step, and the history starts over for each hex. The form writes only what you change. The JSON view cannot be
+remove elements. Drag a city, town, label or other element to move it (its `x` and `y`), and undo or redo changes with the buttons or Ctrl or Cmd+Z and Ctrl or Cmd+Shift+Z; a drag is one step, and the history starts over for each hex and when you switch to the JSON view and back. The shortcuts do not apply while the focus is in a field. The form writes only what you change. The JSON view cannot be
 left while its text is not valid. A note tells when a change applies to several
 hexes of the group or when another group also lists the hex. Empty positions can be picked too, and so can
 the row and the column just past the map. The page follows the text while it is

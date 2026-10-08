@@ -1,8 +1,9 @@
 /* eslint-disable testing-library/no-node-access */
 import { EditorView } from "@codemirror/view";
-import { screen, waitFor, within } from "@testing-library/react";
+import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 
 import games from "@/data/games";
+import { editGame } from "@/state";
 
 import { allowConsole } from "@tests/support/console.js";
 import { renderApp } from "@tests/support/helpers.jsx";
@@ -304,6 +305,78 @@ describe("direct manipulation and undo", () => {
     await waitFor(() => expect(groupOf("C11").color).not.toBe("red"));
     await user.keyboard("{Control>}y{/Control}");
     await waitFor(() => expect(groupOf("C11").color).toBe("red"));
+  });
+  it("undoes with the keys right after a drag", async () => {
+    const { user } = open(`${route}&hex=B12`);
+    await form();
+    const before = structuredClone(groupOf("B12").cities[0]);
+    await dragBy(user, "cities:0", 40, 20);
+    await waitFor(() => expect(groupOf("B12").cities[0].x).toBeGreaterThan(0));
+    await user.keyboard("{Control>}z{/Control}");
+    await waitFor(() => expect(groupOf("B12").cities[0]).toEqual(before));
+  });
+
+  it("keeps the hexes of the group the map changed when it undoes", async () => {
+    const { user } = open(`${route}&hex=C11`);
+    await form();
+    await user.click(screen.getByRole("combobox", { name: "Color" }));
+    await user.click(await screen.findByRole("option", { name: "red" }));
+    await waitFor(() => expect(groupOf("C11").color).toBe("red"));
+    // What a Cmd-click on the map does: another hex joins the group
+    const hexesBefore = groupOf("C11").hexes;
+    opened.dispatch(
+      editGame((game) => ({
+        ...game,
+        map: {
+          ...game.map,
+          hexes: game.map.hexes.map((group) =>
+            group.hexes.includes("C11")
+              ? { ...group, hexes: [...group.hexes, "Z99"] }
+              : group,
+          ),
+        },
+      })),
+    );
+    await waitFor(() => expect(groupOf("C11").hexes).toContain("Z99"));
+    await user.click(screen.getByRole("button", { name: /^Undo/ }));
+    await waitFor(() => expect(groupOf("C11").color).not.toBe("red"));
+    expect(groupOf("C11").hexes).toEqual([...hexesBefore, "Z99"]);
+    await user.click(screen.getByRole("button", { name: /^Redo/ }));
+    await waitFor(() => expect(groupOf("C11").color).toBe("red"));
+    expect(groupOf("C11").hexes).toEqual([...hexesBefore, "Z99"]);
+  });
+
+  it("picks an element after a drag that was cancelled", async () => {
+    const { user } = open(`${route}&hex=C11`);
+    await form();
+    await user.click(edge(1));
+    await user.click(edge(4, /end the track/));
+    await user.click(screen.getByRole("combobox", { name: "Add an element" }));
+    await user.click(await screen.findByRole("option", { name: "City" }));
+    await waitFor(() => expect(groupOf("C11").cities).toHaveLength(1));
+
+    const city = circle("cities:0");
+    const box = city.getBoundingClientRect();
+    const at = {
+      clientX: box.x + 3,
+      clientY: box.y + 3,
+      pointerId: 1,
+      button: 0,
+    };
+    fireEvent.pointerDown(city, at);
+    fireEvent.pointerMove(city, { ...at, clientX: at.clientX + 30 });
+    fireEvent.pointerCancel(city, at);
+
+    // The track cannot be dragged, so its press does not reset anything: a
+    // click on it must still pick it
+    await user.click(screen.getByRole("button", { name: /^City/ }));
+    await waitFor(() =>
+      expect(screen.queryByTestId("hex-inspector")).not.toBeInTheDocument(),
+    );
+    await user.click(circle("track:0"));
+    expect(await screen.findByTestId("hex-inspector")).toHaveAccessibleName(
+      "Fields of Track",
+    );
   });
 });
 

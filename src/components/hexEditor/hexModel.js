@@ -1,5 +1,7 @@
 import { equals, omit } from "ramda";
 
+import { autoPosition, hasPositioning } from "@/components/Position";
+
 import { sidesFromTrack } from "@/util/tiles/track";
 
 // What the hex editor does with a hex (a group of the map or a tile), without
@@ -309,17 +311,51 @@ export const DRAGGABLE_KEYS = [
 
 const tenth = (n) => Math.round(n * 10) / 10;
 
-// The hex with an element moved by (dx, dy) in the frame of the hex: its x and
-// y change by the same, whatever else places it (a side, an angle and a percent
-// add to x and y). Written to a tenth. A move of nothing gives the same hex.
+// The kinds of element the map places by itself when they have no position,
+// as Position.jsx names them
+const AUTO_TYPE = {
+  icons: "icon",
+  labels: "label",
+  terrain: "terrain",
+  values: "value",
+};
+
+// The element as the map places it: with its automatic angle and percent when
+// it has no position of its own
+const placed = (hex, key, element, index) => {
+  const type = AUTO_TYPE[key];
+  if (!type || !isObject(element) || hasPositioning(element)) return element;
+  return autoPosition(element, index, hex, type);
+};
+
+// Elements that share the center are spread a little so each can be picked
+const spreadOf = (item, index) => {
+  const percent = typeof item.percent === "number" ? item.percent : 0;
+  if (percent !== 0 || item.x || item.y) return { x: 0, y: 0 };
+  return { x: (index % 3) * 14 - 14, y: Math.floor(index / 3) * 14 };
+};
+
+// The hex with an element moved by (dx, dy) in the frame of the hex, from
+// where the editor shows it: its x and y change by the same, whatever else
+// places it (a side, an angle and a percent add to x and y). An element the
+// map places by itself is given the place it has. Written to a tenth. A move
+// of nothing gives the same hex.
 export const dragElement = (hex, key, index, dx, dy) => {
   const element = elementAt(hex, key, index);
   if (!DRAGGABLE_KEYS.includes(key) || element === undefined) return hex;
-  const item = isObject(element) ? element : {};
-  const x = tenth((typeof item.x === "number" ? item.x : 0) + dx);
-  const y = tenth((typeof item.y === "number" ? item.y : 0) + dy);
-  const moved = setElementKey(hex, key, index, "x", x || undefined);
-  return setElementKey(moved, key, index, "y", y || undefined);
+  const start = placed(hex, key, element, index);
+  const item = isObject(start) ? start : {};
+  const spread = spreadOf(item, index);
+  const x = tenth((typeof item.x === "number" ? item.x : 0) + spread.x + dx);
+  const y = tenth((typeof item.y === "number" ? item.y : 0) + spread.y + dy);
+  let next = hex;
+  for (const field of ["angle", "percent"]) {
+    if (start !== element && start[field] !== undefined) {
+      next = setElementKey(next, key, index, field, start[field]);
+    }
+  }
+  next = setElementKey(next, key, index, "x", x || undefined);
+  return setElementKey(next, key, index, "y", y || undefined);
 };
 
 // Geometry, in the frame of a hex 150 across the flats, centered on 0
@@ -335,8 +371,15 @@ export const sidePoint = (side, orientation = 0, distance = 75) => {
 // by x and y, an angle and a percent of the way to the edge, or a side. The
 // automatic places of labels and values (and of the icons and terrain that
 // share a hex with a city) are not repeated here, the center stands for them.
-export const elementPoint = (key, element, index, orientation = 0) => {
-  const item = isObject(element) ? element : {};
+export const elementPoint = (
+  key,
+  element,
+  index,
+  orientation = 0,
+  hex = undefined,
+) => {
+  const given = isObject(element) ? element : {};
+  const item = hex ? placed(hex, key, given, index) : given;
   if (key === "track") {
     const ends = trackEnds(item);
     if (ends.length === 0) return { x: 0, y: 0 };
@@ -364,10 +407,8 @@ export const elementPoint = (key, element, index, orientation = 0) => {
   const t = 75 * percent;
   const radians = (angle * Math.PI) / 180;
   const point = { x: x - t * Math.sin(radians), y: y + t * Math.cos(radians) };
-  // Elements that share the center are spread a little so each can be picked
-  if (percent === 0 && !x && !y) {
-    point.x += (index % 3) * 14 - 14;
-    point.y += Math.floor(index / 3) * 14;
-  }
+  const spread = spreadOf(item, index);
+  point.x += spread.x;
+  point.y += spread.y;
   return point;
 };

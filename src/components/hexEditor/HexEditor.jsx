@@ -32,6 +32,8 @@ import SchemaField, {
   SchemaFormContext,
 } from "@/components/schemaForm/SchemaField";
 
+import { moveKey } from "@/util/hexEdit";
+
 // The colors of a hex of the map
 export const HEX_COLORS = [
   "plain",
@@ -196,8 +198,8 @@ const HexEditor = ({ value, onChange, orientation = 0, game, issues }) => {
                 variant="ghost"
                 size="icon"
                 className="size-7 aria-disabled:opacity-50"
-                aria-label={t("hexEditor.form.undo")}
-                title={t("hexEditor.form.undo")}
+                aria-label={t("hexEditor.form.undo", { key: moveKey() })}
+                title={t("hexEditor.form.undo", { key: moveKey() })}
                 aria-disabled={!form.history.canUndo}
                 onClick={undo}
               >
@@ -208,8 +210,8 @@ const HexEditor = ({ value, onChange, orientation = 0, game, issues }) => {
                 variant="ghost"
                 size="icon"
                 className="size-7 aria-disabled:opacity-50"
-                aria-label={t("hexEditor.form.redo")}
-                title={t("hexEditor.form.redo")}
+                aria-label={t("hexEditor.form.redo", { key: moveKey() })}
+                title={t("hexEditor.form.redo", { key: moveKey() })}
                 aria-disabled={!form.history.canRedo}
                 onClick={redo}
               >

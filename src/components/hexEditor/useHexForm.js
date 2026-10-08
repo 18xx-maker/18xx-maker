@@ -69,7 +69,12 @@ export const useHexForm = ({ value, onChange, game, issues }) => {
       const result = fn(history.current, latest.current);
       if (!result) return false;
       history.current = result.history;
-      put(result.value);
+      // The hexes of the group are the map's (a click on the map changes
+      // them), a step back only changes what the form edits
+      const kept = latest.current;
+      put(
+        "hexes" in kept ? { ...result.value, hexes: kept.hexes } : result.value,
+      );
       return true;
     };
     const edit = (fn) => apply(fn({ hex: latest.current }).hex);
