@@ -73,3 +73,16 @@ test("adds a tile and loads the editor only when a tile of your own shows", asyn
   expect(requested.filter((url) => /HexEditor/.test(url))).not.toEqual([]);
   await expect(tile(page, "Z9")).toBeVisible();
 });
+
+test("the Tiles tab is on every page and goes to the tiles page", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/market?edit=true");
+  await page.getByRole("tab", { name: "Tiles" }).click();
+  await expect(page).toHaveURL(/\/games\/18Test\/tiles\?/);
+  await expect(page.getByTestId("game-18Test-tiles")).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Tiles" })).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+});
