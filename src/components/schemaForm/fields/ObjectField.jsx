@@ -12,7 +12,9 @@ import {
 } from "@/components/schemaForm/resolve";
 import { useSchemaText } from "@/components/schemaForm/schemaText";
 
-export const ObjectField = ({ keys, schema }) => {
+// legend is the translation key of the title, when the name of the field is not
+// it (the market position of a map reads as the Market tab)
+export const ObjectField = ({ keys, schema, legend }) => {
   const form = useContext(SchemaFormContext);
   const { t } = useTranslation();
   const text = useSchemaText();
@@ -21,7 +23,7 @@ export const ObjectField = ({ keys, schema }) => {
   return (
     <fieldset className="flex flex-col gap-4 rounded-md border p-3">
       <legend className="px-1 text-sm font-semibold">
-        {humanize(keys[keys.length - 1])}
+        {legend ? t(legend) : humanize(keys[keys.length - 1])}
       </legend>
       {schema.description && (
         <p className="-mt-2 text-xs text-muted-foreground">

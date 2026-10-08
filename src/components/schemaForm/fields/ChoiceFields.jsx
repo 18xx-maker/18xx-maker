@@ -75,12 +75,13 @@ export const ChoiceField = ({
   schema,
   options,
   labelOf = (value) => value,
+  label,
 }) => {
   const { t } = useTranslation();
   const field = useField(keys, schema);
 
   return (
-    <FieldShell {...field}>
+    <FieldShell {...field} label={label ?? field.label}>
       <Select
         value={field.value === undefined ? UNSET : String(field.value)}
         onValueChange={(next) => {

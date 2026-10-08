@@ -285,3 +285,13 @@ export const groupIssues = (game, variation, index, issues) => {
     return pointer === null ? [] : [{ ...issue, pointer }];
   });
 };
+
+// The pointer of the variation in the problems of the game
+export const variationPrefix = (game, variation) =>
+  Array.isArray(game.map) ? `map[${variation}]` : "map";
+
+// Whether a problem is in the variation at the prefix but not in its hexes
+export const inVariation = (pointer = "", prefix) => {
+  const rest = rerootPointer(pointer, prefix);
+  return rest !== null && !/^hexes(\.|\[|$)/.test(rest);
+};

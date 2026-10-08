@@ -1,8 +1,10 @@
 import ReferenceField from "@/components/schemaForm/ReferenceField";
 import { JsonField } from "@/components/schemaForm/SchemaField";
+import { StringArrayField } from "@/components/schemaForm/fields/StringFields";
 import {
   isReferenceValue,
   referenceOf,
+  resolveAllOf,
   valueAt,
 } from "@/components/schemaForm/resolve";
 import { TokenEditField } from "@/components/tokenEditor/TokenEditButton";
@@ -51,6 +53,19 @@ export const overrides = [
       ) : (
         <TokenEditField {...props} source={tokenSource} />
       ),
+  },
+  {
+    // The coordinates of a map (the hexes a variation removes, the points of a
+    // border or a line): a list of texts the schema checks with a pattern, a
+    // line each
+    match: (node, keys, { root }) => {
+      if (keys[0] !== "map" || node.type !== "array") return undefined;
+      if (!["coords", "remove"].includes(keys[keys.length - 1])) {
+        return undefined;
+      }
+      return resolveAllOf(node.items, root)?.type === "string" ? {} : undefined;
+    },
+    render: (props) => <StringArrayField {...props} />,
   },
 ];
 

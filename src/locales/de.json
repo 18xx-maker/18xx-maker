@@ -128,6 +128,10 @@
         "tab": "Ausgabe",
         "description": "Bearbeite den Bereich der Ertragstabelle und die Export-Voreinstellungen."
       },
+      "map": {
+        "tab": "Karte",
+        "description": "Bearbeite, was eine Kartenvariante außer ihren Kartenfeldern hat: Name, Zuschnitt, Anzeigen sowie die Grenzen, Linien und Texte auf der Karte."
+      },
       "hex": {
         "tab": "Kartenfeld",
         "description": "Bearbeite die gewählte Gruppe von Kartenfeldern als JSON; klicke auf ein Kartenfeld auf der Karte, um seine Gruppe zu wählen."
@@ -167,12 +171,20 @@
       "colors": "Farbe",
       "tokenTypes": "Token-Typ",
       "shareTypes": "Aktientyp",
-      "entry": "Eintrag"
+      "entry": "Eintrag",
+      "borders": "Grenze",
+      "lines": "Linie",
+      "borderTexts": "Grenztext"
     },
     "headings": {
       "rounds": "Runden",
       "turns": "Züge",
-      "tokens": "Token"
+      "tokens": "Token",
+      "borders": "Grenzen",
+      "lines": "Linien",
+      "borderTexts": "Grenztexte",
+      "mapMarket": "Position des Marktes",
+      "mapPlayers": "Position der Spieler"
     },
     "titles": {
       "players_one": "{{count}} Spieler",
@@ -283,6 +295,11 @@
         "left": "Links",
         "right": "Rechts"
       }
+    },
+    "map": {
+      "hideTitle": "Titel der Karte ausblenden",
+      "copy": "Kopie von",
+      "inherited": "Die Kartenfelder, Grenzen, Linien und Grenztexte der Kartenvariante {{variation}} werden in diese übernommen, ebenso ihr Zuschnitt (jede Kante kann hier neu gesetzt werden)."
     },
     "onePerLineList": "Eine pro Zeile. Wird immer als Liste gespeichert, auch bei einer einzelnen Zeile.",
     "record": {

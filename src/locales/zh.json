@@ -128,6 +128,10 @@
         "tab": "输出",
         "description": "编辑收益图表的范围和导出默认值。"
       },
+      "map": {
+        "tab": "地图",
+        "description": "编辑地图变体除六边格之外的内容:名称、裁切、追踪器,以及绘制在地图上的边界、线条和文字。"
+      },
       "hex": {
         "tab": "六边格",
         "description": "以 JSON 编辑选中的六边格组;点击地图上的六边格即可选中它所在的组。"
@@ -167,12 +171,20 @@
       "colors": "颜色",
       "tokenTypes": "标记类型",
       "shareTypes": "股份类型",
-      "entry": "条目"
+      "entry": "条目",
+      "borders": "边界",
+      "lines": "线条",
+      "borderTexts": "边界文字"
     },
     "headings": {
       "rounds": "回合",
       "turns": "行动",
-      "tokens": "标记"
+      "tokens": "标记",
+      "borders": "边界",
+      "lines": "线条",
+      "borderTexts": "边界文字",
+      "mapMarket": "市场位置",
+      "mapPlayers": "玩家位置"
     },
     "titles": {
       "players_one": "{{count}} 名玩家",
@@ -283,6 +295,11 @@
         "left": "左",
         "right": "右"
       }
+    },
+    "map": {
+      "hideTitle": "隐藏地图标题",
+      "copy": "复制自",
+      "inherited": "地图变体 {{variation}} 的六边格、边界、线条和边界文字会复制到此变体,其裁切也一并复制(每条边可在此重新设置)。"
     },
     "onePerLineList": "每行一项。始终保存为列表,即使只有一行。",
     "record": {

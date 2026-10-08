@@ -7,6 +7,7 @@ import {
   editSections,
   formSections,
   groupSections,
+  sectionsFor,
 } from "@/components/editPanel/sections";
 
 import de from "@/locales/de.json";
@@ -42,7 +43,8 @@ describe("edit sections", () => {
 
   it("maps every top level key of the game to a tab", () => {
     // A problem in a key without a tab would show on no tab
-    // "map" problems show only for the selected group, on the hex tab
+    // "map" problems show only for the selected variation (map tab) or group
+    // (hex tab)
     const mapped = Object.values(SECTION_KEYS).flat();
     for (const key of Object.keys(schema.properties)) {
       if (key === "map") continue;
@@ -60,13 +62,36 @@ describe("edit sections", () => {
 
   it("has a dot source for every form section", () => {
     for (const { section } of formSections) {
-      expect([section, section === "hex" || section in SECTION_KEYS]).toEqual([
+      expect([
         section,
-        true,
-      ]);
+        section === "hex" || section === "map" || section in SECTION_KEYS,
+      ]).toEqual([section, true]);
     }
     for (const section of Object.keys(SECTION_KEYS)) {
       expect(formSections.map((s) => s.section)).toContain(section);
+    }
+  });
+
+  it("has the map tab before the hex tab, for the map page only", () => {
+    const ids = editSections.map((s) => s.section);
+    expect(ids.indexOf("map")).toBe(ids.indexOf("hex") - 1);
+    const map = editSections.find((s) => s.section === "map");
+    expect([map.group, map.page]).toEqual(["output", "map"]);
+    expect(sectionsFor("map").map((s) => s.section)).toContain("map");
+    expect(sectionsFor("market").map((s) => s.section)).not.toContain("map");
+  });
+
+  it.each(["en", "de", "zh"])("has the map form strings in %s", (lang) => {
+    const strings = locale(lang);
+    for (const key of ["borders", "lines", "borderTexts"]) {
+      expect(strings.items[key]).toBeTruthy();
+      expect(strings.headings[key]).toBeTruthy();
+    }
+    for (const key of ["mapMarket", "mapPlayers"]) {
+      expect(strings.headings[key]).toBeTruthy();
+    }
+    for (const key of ["hideTitle", "copy", "inherited"]) {
+      expect(strings.map[key]).toBeTruthy();
     }
   });
 

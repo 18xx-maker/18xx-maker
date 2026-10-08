@@ -94,4 +94,19 @@ describe("edit panel tabs with problems", () => {
     await set(store, [issue("map.hexes[1].color")]);
     expect(tab("Hex")).toHaveAccessibleName("Hex");
   });
+
+  it("marks the map tab for the issues of the selected variation, not its hexes", async () => {
+    const { store } = await open("/games/18Test/map?edit=true");
+    await set(store, [
+      issue("map.trim.top"),
+      issue("map.borders[0].coords"),
+      issue("map.hexes[0].color"),
+      issue("trains[0].name"),
+    ]);
+    expect(tab("Map")).toHaveAccessibleName("Map 2 problems");
+    expect(screen.getByTestId("edit-problem-map")).toBeInTheDocument();
+
+    await set(store, [issue("map.hexes[1].color")]);
+    expect(tab("Map")).toHaveAccessibleName("Map");
+  });
 });

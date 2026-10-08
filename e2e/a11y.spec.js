@@ -137,6 +137,13 @@ const pages = [
     colorScheme,
     ready: (page) => page.getByRole("spinbutton", { name: "Max" }),
   })),
+  // The Map tab of the map page: the variation besides its hexes
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `edit panel map (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=map",
+    colorScheme,
+    ready: (page) => page.getByRole("group", { name: "Trim" }),
+  })),
   // The Hex tab of the map page: the group picked on the map as JSON, and
   // the hint before one is picked
   ...["light", "dark"].map((colorScheme) => ({

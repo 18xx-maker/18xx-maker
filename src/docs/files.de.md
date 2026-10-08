@@ -259,6 +259,16 @@ des Spiels (die Dateien, die Seiten, die Layouts, den Hintergrund, die Variante
 und die Optionen für PNG, Karten und Board18). Die veraltete Exportoption paginated wird nicht angezeigt und
 bleibt in der Datei.
 
+Der Tab „Karte“ gibt es nur auf der Kartenseite und bearbeitet alles an der
+gewählten Kartenvariante (`?variation=`) außer ihren Kartenfeldern: den Namen,
+welche Variante sie kopiert (bei einer Liste von Varianten; die kopierten
+Kartenfelder lassen sich per Koordinate entfernen, eine pro Zeile), ob der Titel
+ausgeblendet wird, die abgeschnittenen Kanten, den Rundenzähler, die Bewegung,
+die Positionen von Markt und Spielern sowie die Grenzen, Linien und Grenztexte,
+jeweils eine Karte mit den Koordinaten, eine pro Zeile. Grenzen, Linien,
+Grenztexte und Zuschnitt einer kopierten Variante sind die der kopierten
+Variante plus ihre eigenen. Die Kartenfelder selbst gehören zum Hex-Tab.
+
 Der Hex-Tab gibt es nur auf der Kartenseite. Klicke auf ein Kartenfeld auf der
 Karte, um seine Gruppe zu wählen, den Eintrag von `map.hexes`, der es auflistet:
 Der Tab zeigt dann nur diese Gruppe als JSON (ihre Farbe, ihre Koordinaten und

@@ -128,6 +128,10 @@
         "tab": "Output",
         "description": "Edit the revenue chart range and the export defaults."
       },
+      "map": {
+        "tab": "Map",
+        "description": "Edit what a map variation has besides its hexes: its name, trim, trackers and the borders, lines and texts drawn on it."
+      },
       "hex": {
         "tab": "Hex",
         "description": "Edit the picked group of hexes as JSON; click a hex on the map to pick its group."
@@ -167,12 +171,20 @@
       "colors": "color",
       "tokenTypes": "token type",
       "shareTypes": "share type",
-      "entry": "entry"
+      "entry": "entry",
+      "borders": "border",
+      "lines": "line",
+      "borderTexts": "border text"
     },
     "headings": {
       "rounds": "Rounds",
       "turns": "Turns",
-      "tokens": "Tokens"
+      "tokens": "Tokens",
+      "borders": "Borders",
+      "lines": "Lines",
+      "borderTexts": "Border texts",
+      "mapMarket": "Market position",
+      "mapPlayers": "Players position"
     },
     "titles": {
       "players_one": "{{count}} player",
@@ -283,6 +295,11 @@
         "left": "Left",
         "right": "Right"
       }
+    },
+    "map": {
+      "hideTitle": "Hide the title of the map",
+      "copy": "Copy of",
+      "inherited": "The hexes, borders, lines and border texts of map variation {{variation}} are copied into this one, and so is its trim (each edge can be set again here)."
     },
     "onePerLineList": "One per line. Always saved as a list, even for a single line.",
     "record": {
