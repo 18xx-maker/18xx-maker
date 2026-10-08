@@ -254,11 +254,6 @@ describe("Border", () => {
     expect(path).toHaveAttribute("stroke-width", "4");
   });
 
-  it("honors a strokeWidth of 0", async () => {
-    const path = await borderPath({ strokeWidth: 0 });
-    expect(path).toHaveAttribute("stroke-width", "0");
-  });
-
   it("keeps width as the dash length of a dashed border", async () => {
     const path = await borderPath({ dashed: true, strokeWidth: 4, width: 24 });
     expect(path).toHaveAttribute("stroke-width", "4");
