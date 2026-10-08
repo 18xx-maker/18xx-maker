@@ -296,6 +296,7 @@
   "schema.tiles.hex.stripeRotation": "覆盖条纹颜色(例如 \"yellow/blue\")的条纹旋转角度(以度计)。",
   "schema.tiles.hex.group": "地块会按颜色自然分组打印。此项覆盖该分组。适用于带有华丽边框或其他出血问题的地块。",
   "schema.tiles.hex.clipPath": "打印这些地块时移除特殊的出血 clipPath。它们将始终无出血打印。",
+  "schema.tiles.borders.strokeWidth": "边界线的粗细。默认为 10。width 只是虚线边界的线段长度;请让线段比粗细更长。",
   "schema.tiles.token": "一个标记。其属性是 Token 组件读取的那些。",
   "schema.tiles.token.logo": "要绘制在标记上的 svg 标志的名称。",
   "schema.tiles.token.logoWidth": "标志的宽度。",

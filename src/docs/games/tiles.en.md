@@ -175,7 +175,7 @@ at the edges of hexes and the borders of the map are in
 | `shapes`                                | Plain shapes, with optional text                                                                  |
 | `terrain`                               | Terrain such as mountains or water, with its cost                                                 |
 | `bridges`, `tunnels`, `tunnelEntrances` | The cost of a bridge or tunnel, and where a tunnel enters                                         |
-| `borders`                               | A colored border on a side of the hex                                                             |
+| `borders`                               | A colored border on a side of the hex, `strokeWidth` sets its thickness                           |
 | `removeBorders`                         | Removes the border drawn on the listed sides of the hex                                           |
 | `half`                                  | Draws only the `top`, `bottom`, `left` or `right` half of a hex of the map                        |
 | `divides`                               | A line that divides the hex                                                                       |

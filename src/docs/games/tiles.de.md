@@ -187,7 +187,7 @@ Karte stehen unter [Kartenränder und Linien](/docs/games/borders). Die Seite
 | `shapes`                                | Einfache Formen, optional mit Text                                                                                |
 | `terrain`                               | Gelände wie Berge oder Wasser mit seinen Kosten                                                                   |
 | `bridges`, `tunnels`, `tunnelEntrances` | Die Kosten einer Brücke oder eines Tunnels und wo ein Tunnel beginnt                                              |
-| `borders`                               | Ein farbiger Rand an einer Seite des Feldes                                                                       |
+| `borders`                               | Ein farbiger Rand an einer Seite des Feldes, `strokeWidth` legt die Dicke fest                                    |
 | `removeBorders`                         | Entfernt den Rand, der an den angegebenen Seiten des Feldes gezeichnet wird                                       |
 | `half`                                  | Zeichnet nur die obere (`top`), untere (`bottom`), linke (`left`) oder rechte (`right`) Hälfte eines Kartenfeldes |
 | `divides`                               | Eine Linie, die das Feld teilt                                                                                    |

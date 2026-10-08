@@ -401,6 +401,33 @@ describe("validate", () => {
     });
   });
 
+  describe("tile border strokeWidth", () => {
+    const withBorder = (border) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({
+          info: { title: "Game" },
+          tiles: {
+            1: { color: "yellow", borders: [{ color: "blue", ...border }] },
+          },
+        }),
+      );
+
+    it("accepts a positive strokeWidth", () => {
+      expect(run(withBorder({ strokeWidth: 4 })).code).toBe(0);
+    });
+
+    it("accepts a strokeWidth on a dashed border", () => {
+      expect(
+        run(withBorder({ dashed: true, strokeWidth: 4, width: 24 })).code,
+      ).toBe(0);
+    });
+
+    it.each([["4"], [0], [-3]])("rejects strokeWidth %j", (strokeWidth) => {
+      expect(run(withBorder({ strokeWidth })).code).not.toBe(0);
+    });
+  });
+
   describe("the exports of a game", () => {
     const withExports = (exports) =>
       writeTmp(

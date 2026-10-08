@@ -26,7 +26,12 @@
           "side": { "$ref": "#/definitions/side" },
           "dashed": { "type": "boolean", "enum": [true] },
           "color": { "type": "string" },
-          "width": { "type": "number" }
+          "width": { "type": "number" },
+          "strokeWidth": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "How thick the border line is. Defaults to 10. width is only the dash length of a dashed border; keep the dashes longer than the thickness."
+          }
         },
         "additionalProperties": false,
         "required": ["color"]

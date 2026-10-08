@@ -296,6 +296,7 @@
   "schema.tiles.hex.stripeRotation": "Override the rotation (in degrees) of the stripes for a striped color such as \"yellow/blue\".",
   "schema.tiles.hex.group": "Tiles are naturually sorted into groups based on color for printing. This overrides that grouping. Useful for tiles with fancy borders or other bleed issues.",
   "schema.tiles.hex.clipPath": "Remove the special bleed clipPath when printing these tiles. They will always be printed with no bleed.",
+  "schema.tiles.borders.strokeWidth": "How thick the border line is. Defaults to 10. width is only the dash length of a dashed border; keep the dashes longer than the thickness.",
   "schema.tiles.token": "A token. The properties are the ones the Token component reads.",
   "schema.tiles.token.logo": "Name of an svg logo to draw on the token.",
   "schema.tiles.token.logoWidth": "Width of the logo.",

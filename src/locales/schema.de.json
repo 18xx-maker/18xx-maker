@@ -296,6 +296,7 @@
   "schema.tiles.hex.stripeRotation": "Überschreibt die Drehung (in Grad) der Streifen für eine gestreifte Farbe wie \"yellow/blue\".",
   "schema.tiles.hex.group": "Plättchen werden zum Drucken natürlich nach Farbe in Gruppen sortiert. Das überschreibt diese Gruppierung. Nützlich für Plättchen mit aufwendigen Rändern oder anderen Beschnittproblemen.",
   "schema.tiles.hex.clipPath": "Entfernt den speziellen Beschnitt-clipPath beim Drucken dieser Plättchen. Sie werden immer ohne Beschnitt gedruckt.",
+  "schema.tiles.borders.strokeWidth": "Wie dick die Randlinie ist. Standard ist 10. width ist nur die Strichlänge eines gestrichelten Rands; halte die Striche länger als die Dicke.",
   "schema.tiles.token": "Ein Token. Die Eigenschaften sind die, die die Token-Komponente liest.",
   "schema.tiles.token.logo": "Name eines svg-Logos, das auf den Token gezeichnet wird.",
   "schema.tiles.token.logoWidth": "Breite des Logos.",

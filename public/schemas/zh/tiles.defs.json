@@ -26,7 +26,12 @@
           "side": { "$ref": "#/definitions/side" },
           "dashed": { "type": "boolean", "enum": [true] },
           "color": { "type": "string" },
-          "width": { "type": "number" }
+          "width": { "type": "number" },
+          "strokeWidth": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "边界线的粗细。默认为 10。width 只是虚线边界的线段长度;请让线段比粗细更长。"
+          }
         },
         "additionalProperties": false,
         "required": ["color"]

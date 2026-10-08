@@ -89,3 +89,19 @@ then setting `borderWidth` doesn't really matter. If you set `dashed` to `true`
 you can set an `offset` that helps you position the dashes to be pretty, and
 `dashArray` to set the dash length. `dashArray` only works on `borders`, not on
 `lines`.
+
+## Tile borders
+
+The `borders` of a tile draw a colored line along one `side` of the hex. Set
+`strokeWidth` for the thickness of the line (the default is 10). The `width` of
+a tile border is only the dash length of a `dashed` border, so keep the dashes
+longer than the thickness.
+
+```json
+{
+  "borders": [
+    { "side": 1, "color": "blue", "strokeWidth": 4 },
+    { "side": 2, "color": "red", "dashed": true, "strokeWidth": 4, "width": 24 }
+  ]
+}
+```

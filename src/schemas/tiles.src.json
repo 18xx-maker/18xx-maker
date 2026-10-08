@@ -46,6 +46,11 @@
           },
           "width": {
             "type": "number"
+          },
+          "strokeWidth": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "schema.tiles.borders.strokeWidth"
           }
         },
         "additionalProperties": false,
