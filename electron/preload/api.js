@@ -88,6 +88,9 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
     onRedirect: (callback) =>
       ipcRenderer.on("redirect", (_event, path) => callback(path)),
 
+    // File > Save
+    onSave: (callback) => ipcRenderer.on("save", () => callback()),
+
     onGame: (callback) =>
       ipcRenderer.on("game", (_event, game) => callback(game)),
 

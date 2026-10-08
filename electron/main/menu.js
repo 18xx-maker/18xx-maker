@@ -55,6 +55,12 @@ export const setMenu = () => {
           label: "Open Recents",
           submenu: recents,
         },
+        {
+          label: "Save",
+          id: "save",
+          accelerator: "CmdOrCtrl+S",
+          click: () => send("save"),
+        },
         { type: "separator" },
         { role: "quit" },
       ],
