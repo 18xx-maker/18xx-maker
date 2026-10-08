@@ -1,6 +1,7 @@
 import ConfigSection from "@/components/editPanel/ConfigSection";
 import HexSection from "@/components/editPanel/HexSection";
 import JsonSection from "@/components/editPanel/JsonSection";
+import TilesSection from "@/components/editPanel/TilesSection";
 import ColorsForm from "@/components/schemaForm/ColorsForm";
 import CompaniesForm from "@/components/schemaForm/CompaniesForm";
 import GameInfoForm from "@/components/schemaForm/GameInfoForm";
@@ -22,7 +23,7 @@ export const editGroups = ["game", "equipment", "output"];
 // here and its editPanel.sections.<section> strings. A wide section gets more
 // of the screen (the JSON editor). The section names are in links
 // (?edit=true&editSection=json): renaming one breaks them. A section with a
-// page is only for that page of the game (the map and hex tabs are for the map).
+// page is only for that page of the game (the map and hex tabs are for the map, the tiles tab for the tiles).
 export const editSections = [
   { section: "info", group: "game", Form: GameInfoForm },
   { section: "players", group: "game", Form: PlayersForm },
@@ -32,6 +33,7 @@ export const editSections = [
   { section: "privates", group: "equipment", Form: PrivatesForm },
   { section: "tokens", group: "equipment", Form: TokensForm },
   { section: "trains", group: "equipment", Form: TrainsForm },
+  { section: "tiles", group: "equipment", Form: TilesSection, page: "tiles" },
   { section: "map", group: "output", Form: MapForm, page: "map" },
   { section: "hex", group: "output", Form: HexSection, page: "map" },
   { section: "market", group: "output", Form: MarketForm },

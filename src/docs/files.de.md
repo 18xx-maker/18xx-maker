@@ -299,6 +299,29 @@ sie in der Variante, aus der sie stammen, oder drücke _Hier überschreiben_, um
 das Kartenfeld in dieser Variante zu kopieren und die Kopie zu bearbeiten. Die Kantenschaltflächen und die Listen des
 Formulars lassen sich per Tastatur bedienen.
 
+Der Tab Plättchen gibt es nur auf der Plättchenseite, er bearbeitet die `tiles`
+des Spiels. Er listet die Plättchen in der Reihenfolge der Datei. Gib eine ID ein
+und drücke Plättchen hinzufügen, um eines hinzuzufügen: Die ID eines Plättchens,
+das 18xx Maker schon kennt, wird unverändert übernommen (Anzahl 1), jede andere ID
+beginnt ein eigenes Plättchen, das du dann zeichnest. Wähle ein Plättchen in der
+Liste, um es zu bearbeiten (die Adresse behält es als `tile`, zum Beispiel
+`?tile=26%257CT2` für `26|T2`). Ein eigenes Plättchen wird wie ein Kartenfeld der
+Karte bearbeitet, gezeichnet wie auf den Plättchenbögen, mit Anzahl, Druck und
+Gruppe. Ein Plättchen, das aus der Bibliothek gezeichnet wird, also eine einfache
+Anzahl, ein Alias eines anderen Plättchens oder eine teilweise Änderung eines
+Bibliotheksplättchens, wird so gezeigt, wie es gezeichnet wird, und nur Anzahl,
+Druck und Gruppe lassen sich ändern; die Bibliothek selbst wird nie bearbeitet.
+Mit _Anpassen_ kopierst du das Bibliotheksplättchen als eigenes Plättchen ins
+Spiel und bearbeitest dieses. Ändert sich nur die Anzahl einer einfachen Anzahl,
+bleibt sie eine einfache Zahl, und es wird kein Feld ergänzt, das du nicht
+geändert hast. Plättchen kopieren fügt eine Kopie hinter dem Plättchen ein,
+Plättchen entfernen nimmt es weg (beim letzten entfällt `tiles`), und
+_Umbenennen_ gibt ihm eine andere ID an derselben Stelle und in den
+Privatgesellschaften, die es zeichnen. Ein Plättchen aus der Bibliothek kann nur
+den Teil seiner ID nach dem `|` ändern, weil die ID dazu dient, das
+Bibliotheksplättchen zu finden: Passe es zuerst an, um es frei umzubenennen.
+Plättchen stehen nicht auf der Karte, deshalb ändert nichts davon die Karte.
+
 Der Tab Konfiguration bearbeitet die `config` des Spiels als JSON, die
 Einstellungen, die für dieses Spiel gelten, wenn im [Konfigurationsfenster](/docs/config)
 _Spiel-Konfiguration erlauben_ aktiv ist. Sie ist ein Objekt wie

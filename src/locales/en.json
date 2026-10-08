@@ -92,6 +92,10 @@
         "tab": "Trains",
         "description": "Edit the trains of the game, one card for each."
       },
+      "tiles": {
+        "tab": "Tiles",
+        "description": "Add, copy, rename and remove the tiles of the game, and edit the one you pick. A tile of the library is drawn as it is until you customize it."
+      },
       "privates": {
         "tab": "Privates",
         "description": "Edit the privates of the game, one card for each."
@@ -304,6 +308,41 @@
       "copy": "Copy of",
       "inherited": "The hexes, borders, lines and border texts of map variation {{variation}} are copied into this one, and so is its trim (each edge can be set again here)."
     },
+    "tiles": {
+      "list": "Tiles of the game",
+      "addLabel": "New tile id",
+      "add": "Add tile",
+      "empty": "This game has no tiles yet. Add one by its id: a tile of the library is added as it is, any other id starts a tile of your own.",
+      "hint": "Pick a tile to edit it.",
+      "tile": "Tile {{id}}",
+      "shapes": {
+        "quantity": "library tile",
+        "alias": "alias of {{tile}}",
+        "override": "library tile with changes",
+        "definition": "your own tile"
+      },
+      "idLabel": "Tile id",
+      "rename": "Rename",
+      "duplicate": "Copy tile",
+      "customize": "Customize",
+      "remove": "Remove tile",
+      "usedBy_one": "{{count}} private draws this tile; renaming it renames the tile there too.",
+      "usedBy_other": "{{count}} privates draw this tile; renaming it renames the tile there too.",
+      "fromLibrary": "This tile is drawn from the library, which is never edited. Change how many there are here, or customize it to copy it into the game and edit it.",
+      "noLibrary": "No tile of the library has the id {{id}}, so there is nothing to draw. Rename it, or remove it.",
+      "added": "Added tile {{id}}.",
+      "renamed": "Renamed tile {{from}} to {{to}}.",
+      "duplicated": "Copied tile {{id}} as {{copy}}.",
+      "removed": "Removed tile {{id}}.",
+      "customized": "Tile {{id}} is now your own tile.",
+      "errors": {
+        "empty": "Enter a tile id.",
+        "exists": "A tile with this id already exists.",
+        "missing": "This tile is gone.",
+        "library": "A tile of the library is drawn by its id, so only the part after | can change. Customize it to give it another id.",
+        "definition": "This tile is already your own."
+      }
+    },
     "onePerLineList": "One per line. Always saved as a list, even for a single line.",
     "record": {
       "name": "Name of {{name}}",
@@ -451,6 +490,9 @@
         "divides": "Divide",
         "offBoardRevenue": "Offboard revenue"
       }
+    },
+    "tile": {
+      "printing": "Printing"
     }
   },
   "jsonEditor": {

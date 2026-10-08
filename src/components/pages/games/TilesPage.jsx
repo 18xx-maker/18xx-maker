@@ -1,7 +1,6 @@
 import HtmlEditor from "@/components/editor/HtmlEditor";
 
 import { useConfig, useGame } from "@/hooks";
-import { Redirect } from "@/router";
 
 import "@/components/pages/games/Tiles.css";
 
@@ -121,8 +120,10 @@ const TilesPage = () => {
   const paper = layoutPaper(config.paper, config.printScale);
   const { layout, width: hexWidth, gaps, cutBorder } = config.tiles;
 
+  // A game without tiles has a page with nothing on it, where the edit panel
+  // adds the first one (not the editor: it cannot fit an empty page)
   if (!game.tiles) {
-    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
+    return <div data-testid={`game-${game.meta.slug}-tiles`} />;
   }
 
   let c = getTileSheetContext(layout, paper, hexWidth);

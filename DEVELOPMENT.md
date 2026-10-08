@@ -525,6 +525,20 @@ pointer, so it gives `onTap(downTarget, upEvent)` for a press that did not move
 and `SvgEditor` hands it to the overlay through `TapContext`. The pure rules
 (cells, groups, Cmd or Ctrl click, copied variations) are in `src/util/hexEdit.js`.
 
+The `tiles` section (`TilesSection.jsx`, only on the tiles page, which a game
+without `tiles` also has so its first tile can be added) edits `game.tiles`, whose
+entries have four shapes (a quantity, an alias with `tile`, an override without
+`color`, a definition with `color`; the order is the one of `getTile`). The pure
+rules are in `src/util/tileEdit.js`: `writeTile` keeps the shape of an entry (an
+integer stays one while only the quantity changes), `customizeTile` is the only
+way a library tile (`@/data` tiles, never edited in place) becomes a definition,
+and `renameTile` renames the key in place and the `tile` of the privates that
+draw it. Aliases name library tiles and the map has no tile ids, so there is
+nothing else to rewrite. The selected tile is `?tile=<id>` (`useSelectedTile`, the
+id is URL-encoded because of `|`). The editor is `HexEditor` with `tile` (the
+printing fields quantity, print and group, no `half`), or with `library` for an
+entry drawn from the library (the drawing and the printing fields only).
+
 The files of the CLI and the app have the same layout: `<folder>/<game id>/<format>/<file>`
 (`formatFolder` in `src/export/names.js`, `gameFolder` in `src/export/sink.js`; the
 Board 18 box is in `<game id>` itself). The app saves the folder of the folder

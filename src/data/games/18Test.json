@@ -924,7 +924,7 @@
     "1": 1,
     "2": { "tile": "57", "quantity": 2 },
     "26|T2": 1,
-    "63": 1,
+    "63": { "quantity": 1, "group": "spare" },
     "T1": {
       "quantity": 1,
       "color": "offboard",

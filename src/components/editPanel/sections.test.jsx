@@ -81,6 +81,27 @@ describe("edit sections", () => {
     expect(sectionsFor("market").map((s) => s.section)).not.toContain("map");
   });
 
+  it("has the tiles tab after the trains, for the tiles page only", () => {
+    const ids = editSections.map((s) => s.section);
+    expect(ids.indexOf("tiles")).toBe(ids.indexOf("trains") + 1);
+    const tiles = editSections.find((s) => s.section === "tiles");
+    expect([tiles.group, tiles.page]).toEqual(["equipment", "tiles"]);
+    expect(SECTION_KEYS.tiles).toEqual(["tiles"]);
+    expect(UNTABBED_KEYS).not.toContain("tiles");
+    expect(sectionsFor("tiles").map((s) => s.section)).toContain("tiles");
+    expect(sectionsFor("map").map((s) => s.section)).not.toContain("tiles");
+  });
+
+  it.each(["en", "de", "zh"])("has the tiles form strings in %s", (lang) => {
+    const strings = locale(lang).tiles;
+    for (const key of ["list", "add", "rename", "customize", "usedBy_other"]) {
+      expect(strings[key]).toBeTruthy();
+    }
+    for (const key of ["empty", "exists", "library"]) {
+      expect(strings.errors[key]).toBeTruthy();
+    }
+  });
+
   it.each(["en", "de", "zh"])("has the map form strings in %s", (lang) => {
     const strings = locale(lang);
     for (const key of ["borders", "lines", "borderTexts"]) {
