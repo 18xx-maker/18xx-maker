@@ -117,6 +117,16 @@ export const addTile = (game, id, library) => {
   };
 };
 
+// The id of a tile added from the tile sheet: the first of T1, T2, ... that no
+// tile of the game and no tile of the library has. Not a whole number, which
+// would sort first in the JSON.
+export const nextTileId = (game, library) => {
+  for (let n = 1; ; n++) {
+    const id = `T${n}`;
+    if (!hasTile(game, id) && !libraryTile(library, id)) return id;
+  }
+};
+
 // An id for a copy that no tile has: a variant of the generic tile ("63|2")
 // for an entry that is drawn from the library, else a name of its own
 const copyId = (game, id, shape) => {

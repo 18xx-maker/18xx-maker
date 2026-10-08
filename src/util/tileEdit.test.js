@@ -8,6 +8,7 @@ import {
   duplicateTile,
   effectiveTile,
   hasTile,
+  nextTileId,
   privatesUsing,
   removeTile,
   renameTile,
@@ -341,5 +342,13 @@ describe("renameTile order", () => {
       "B1",
       "T2",
     ]);
+  });
+});
+
+describe("nextTileId", () => {
+  it("is the first of T1, T2, ... that the game and the library do not have", () => {
+    expect(nextTileId({}, library)).toBe("T1");
+    expect(nextTileId({ tiles: { T1: 1, T3: 1 } }, library)).toBe("T2");
+    expect(nextTileId({ tiles: { T1: 1 } }, { ...library, T2: {} })).toBe("T3");
   });
 });

@@ -8,6 +8,7 @@ import {
 
 import { useEditing } from "@/components/editor/Editor";
 
+import TapContext from "@/context/TapContext";
 import { TOOLBAR_INSET, usePanZoom } from "@/hooks/usePanZoom";
 
 const MIN_SCALE = 0.02;
@@ -89,6 +90,8 @@ const PanZoom = ({ page, count, children }) => {
   // Whether the view was moved since it was fitted, a late layout change
   // (fonts, a resize) refits an untouched view only
   const touched = useRef(false);
+  // What the content does with a tap (TilesOverlay)
+  const tap = useRef(null);
 
   const current = useRef(view);
   current.current = view;
@@ -141,6 +144,7 @@ const PanZoom = ({ page, count, children }) => {
   }, [page, count]);
 
   usePanZoom(container, {
+    onTap: (target, event) => tap.current?.(target, event),
     onPan: (dx, dy) => {
       touched.current = true;
       setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
@@ -181,7 +185,7 @@ const PanZoom = ({ page, count, children }) => {
           transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
         }}
       >
-        {children}
+        <TapContext.Provider value={tap}>{children}</TapContext.Provider>
       </div>
     </div>
   );

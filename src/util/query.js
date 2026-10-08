@@ -189,6 +189,16 @@ export const selectHexSearch = (search, coord) => {
   return searchString(params);
 };
 
+// The tile selected on the sheet is shown on the Tiles tab of the edit panel
+// (?tile=26%7CT2: the id is encoded like useStringParam writes it)
+export const selectTileSearch = (search, id) => {
+  const params = new URLSearchParams(search);
+  params.set("editSection", "tiles");
+  params.set("tile", encodeURIComponent(id));
+  params.delete("lines");
+  return searchString(params);
+};
+
 export const clearHexSearch = (search) => {
   const params = new URLSearchParams(search);
   params.delete("hex");
