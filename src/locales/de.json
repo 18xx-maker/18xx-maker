@@ -92,6 +92,10 @@
         "tab": "Züge",
         "description": "Bearbeite die Züge des Spiels, je eine Karte pro Zug."
       },
+      "tiles": {
+        "tab": "Plättchen",
+        "description": "Füge die Plättchen des Spiels hinzu, kopiere, benenne und entferne sie und bearbeite das gewählte. Ein Plättchen der Bibliothek wird unverändert gezeichnet, bis du es anpasst."
+      },
       "privates": {
         "tab": "Privatgesellschaften",
         "description": "Bearbeite die Privatgesellschaften des Spiels, je eine Karte pro Privatgesellschaft."
@@ -304,6 +308,41 @@
       "copy": "Kopie von",
       "inherited": "Die Kartenfelder, Grenzen, Linien und Grenztexte der Kartenvariante {{variation}} werden in diese übernommen, ebenso ihr Zuschnitt (jede Kante kann hier neu gesetzt werden)."
     },
+    "tiles": {
+      "list": "Plättchen des Spiels",
+      "addLabel": "Neue Plättchen-ID",
+      "add": "Plättchen hinzufügen",
+      "empty": "Dieses Spiel hat noch keine Plättchen. Füge eines mit seiner ID hinzu: Ein Plättchen der Bibliothek wird unverändert übernommen, jede andere ID beginnt ein eigenes Plättchen.",
+      "hint": "Wähle ein Plättchen, um es zu bearbeiten.",
+      "tile": "Plättchen {{id}}",
+      "shapes": {
+        "quantity": "Bibliotheksplättchen",
+        "alias": "Alias von {{tile}}",
+        "override": "Bibliotheksplättchen mit Änderungen",
+        "definition": "eigenes Plättchen"
+      },
+      "idLabel": "Plättchen-ID",
+      "rename": "Umbenennen",
+      "duplicate": "Plättchen kopieren",
+      "customize": "Anpassen",
+      "remove": "Plättchen entfernen",
+      "usedBy_one": "{{count}} Privatgesellschaft zeichnet dieses Plättchen; beim Umbenennen wird es dort mit umbenannt.",
+      "usedBy_other": "{{count}} Privatgesellschaften zeichnen dieses Plättchen; beim Umbenennen wird es dort mit umbenannt.",
+      "fromLibrary": "Dieses Plättchen wird aus der Bibliothek gezeichnet, die nie verändert wird. Ändere hier die Anzahl oder passe es an, um es ins Spiel zu kopieren und zu bearbeiten.",
+      "noLibrary": "Kein Plättchen der Bibliothek hat die ID {{id}}, also gibt es nichts zu zeichnen. Benenne es um oder entferne es.",
+      "added": "Plättchen {{id}} hinzugefügt.",
+      "renamed": "Plättchen {{from}} in {{to}} umbenannt.",
+      "duplicated": "Plättchen {{id}} als {{copy}} kopiert.",
+      "removed": "Plättchen {{id}} entfernt.",
+      "customized": "Plättchen {{id}} ist jetzt ein eigenes Plättchen.",
+      "errors": {
+        "empty": "Gib eine Plättchen-ID ein.",
+        "exists": "Ein Plättchen mit dieser ID gibt es schon.",
+        "missing": "Dieses Plättchen gibt es nicht mehr.",
+        "library": "Ein Plättchen der Bibliothek wird über seine ID gezeichnet, deshalb kann sich nur der Teil nach | ändern. Passe es an, um ihm eine andere ID zu geben.",
+        "definition": "Dieses Plättchen ist schon dein eigenes."
+      }
+    },
     "onePerLineList": "Eine pro Zeile. Wird immer als Liste gespeichert, auch bei einer einzelnen Zeile.",
     "record": {
       "name": "Name von {{name}}",
@@ -451,6 +490,9 @@
         "divides": "Trennlinie",
         "offBoardRevenue": "Einnahmen des Randfelds"
       }
+    },
+    "tile": {
+      "printing": "Druck"
     }
   },
   "jsonEditor": {

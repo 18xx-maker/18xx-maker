@@ -7,7 +7,6 @@ import {
   editSections,
   formSections,
   groupSections,
-  sectionsFor,
 } from "@/components/editPanel/sections";
 
 import de from "@/locales/de.json";
@@ -72,13 +71,31 @@ describe("edit sections", () => {
     }
   });
 
-  it("has the map tab before the hex tab, for the map page only", () => {
+  it("has the map tab before the hex tab, belonging to the map page", () => {
     const ids = editSections.map((s) => s.section);
     expect(ids.indexOf("map")).toBe(ids.indexOf("hex") - 1);
     const map = editSections.find((s) => s.section === "map");
     expect([map.group, map.page]).toEqual(["output", "map"]);
-    expect(sectionsFor("map").map((s) => s.section)).toContain("map");
-    expect(sectionsFor("market").map((s) => s.section)).not.toContain("map");
+    expect(editSections.find((s) => s.section === "hex").page).toBe("map");
+  });
+
+  it("has the tiles tab after the trains, belonging to the tiles page", () => {
+    const ids = editSections.map((s) => s.section);
+    expect(ids.indexOf("tiles")).toBe(ids.indexOf("trains") + 1);
+    const tiles = editSections.find((s) => s.section === "tiles");
+    expect([tiles.group, tiles.page]).toEqual(["equipment", "tiles"]);
+    expect(SECTION_KEYS.tiles).toEqual(["tiles"]);
+    expect(UNTABBED_KEYS).not.toContain("tiles");
+  });
+
+  it.each(["en", "de", "zh"])("has the tiles form strings in %s", (lang) => {
+    const strings = locale(lang).tiles;
+    for (const key of ["list", "add", "rename", "customize", "usedBy_other"]) {
+      expect(strings[key]).toBeTruthy();
+    }
+    for (const key of ["empty", "exists", "library"]) {
+      expect(strings.errors[key]).toBeTruthy();
+    }
   });
 
   it.each(["en", "de", "zh"])("has the map form strings in %s", (lang) => {

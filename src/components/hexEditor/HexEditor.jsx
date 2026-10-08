@@ -9,6 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import ElementList from "@/components/hexEditor/ElementList";
 import HexCanvas from "@/components/hexEditor/HexCanvas";
 import SidePicker from "@/components/hexEditor/SidePicker";
+import TileFieldset from "@/components/hexEditor/TileFieldset";
 import { historyKey } from "@/components/hexEditor/hexHistory";
 import {
   NEW_ELEMENT,
@@ -55,8 +56,24 @@ export const HEX_COLORS = [
 // with the change made. Nothing else is written (no defaults, the keys it does
 // not know stay as they are). game is the game, for the fields that name things
 // in it; orientation the turn of the hexes of the map (90 for vertical hexes);
-// issues the problems of the hex, with pointers into it.
-const HexEditor = ({ value, onChange, orientation = 0, game, issues }) => {
+// issues the problems of the hex, with pointers into it. With tile it edits a
+// tile of the game instead of a hex of the map: it is drawn as the tile sheets
+// draw it, has the fields of its printing (quantity, print, group) and not the
+// ones only a hex of the map has (half). With library the value is only the
+// fields of an entry that is drawn from a tile of the library (a quantity, an
+// alias, an override): preview is that tile, drawn and not edited, and alias
+// shows the tile it is an alias of as a field.
+const HexEditor = ({
+  value,
+  onChange,
+  orientation = 0,
+  game,
+  issues,
+  tile = false,
+  library = false,
+  preview,
+  alias = false,
+}) => {
   const { t } = useTranslation();
   const form = useHexForm({ value, onChange, game, issues });
   const [picked, setPicked] = useState(null);
@@ -180,7 +197,9 @@ const HexEditor = ({ value, onChange, orientation = 0, game, issues }) => {
           <div className="flex flex-col items-center gap-1">
             <div className="w-full max-w-64">
               <HexCanvas
-                value={value}
+                value={library ? (preview ?? {}) : value}
+                tile={tile}
+                readOnly={library}
                 orientation={orientation}
                 selected={selected}
                 onSelect={setPicked}
@@ -219,82 +238,100 @@ const HexEditor = ({ value, onChange, orientation = 0, game, issues }) => {
               </Button>
             </div>
             <p className="min-h-4 text-xs text-muted-foreground">
-              {pending === null
-                ? t("hexEditor.form.canvasHint")
-                : t("hexEditor.form.pendingStatus", { side: pending })}
+              {library
+                ? ""
+                : pending === null
+                  ? t("hexEditor.form.canvasHint")
+                  : t("hexEditor.form.pendingStatus", { side: pending })}
             </p>
             <p role="status" aria-live="polite" className="sr-only">
               {status}
             </p>
           </div>
 
-          <ElementList
-            hex={value}
-            selected={selected}
-            onSelect={setPicked}
-            onAdd={add}
-            onMove={move}
-            onDuplicate={duplicate}
-            onRemove={remove}
-          />
-
-          {Inspector && (
-            <section
-              className="flex flex-col gap-3 rounded-md border p-3"
-              aria-label={t("hexEditor.form.inspector", {
-                name: nameOf(selected.key, selected.index),
-              })}
-              data-testid="hex-inspector"
-            >
-              <h3 className="text-sm font-semibold">
-                {nameOf(selected.key, selected.index)}
-              </h3>
-              <Inspector
-                key={`${selected.key}:${selected.index}`}
-                elementKey={selected.key}
-                index={selected.index}
-                element={elementAt(value, selected.key, selected.index)}
-                orientation={orientation}
+          {library ? (
+            <TileFieldset alias={alias} />
+          ) : (
+            <>
+              <ElementList
+                hex={value}
+                selected={selected}
+                onSelect={setPicked}
+                onAdd={add}
+                onMove={move}
+                onDuplicate={duplicate}
+                onRemove={remove}
               />
-            </section>
+
+              {Inspector && (
+                <section
+                  className="flex flex-col gap-3 rounded-md border p-3"
+                  aria-label={t("hexEditor.form.inspector", {
+                    name: nameOf(selected.key, selected.index),
+                  })}
+                  data-testid="hex-inspector"
+                >
+                  <h3 className="text-sm font-semibold">
+                    {nameOf(selected.key, selected.index)}
+                  </h3>
+                  <Inspector
+                    key={`${selected.key}:${selected.index}`}
+                    elementKey={selected.key}
+                    index={selected.index}
+                    element={elementAt(value, selected.key, selected.index)}
+                    orientation={orientation}
+                  />
+                </section>
+              )}
+
+              <fieldset className="flex flex-col gap-4 rounded-md border p-3">
+                <legend className="px-1 text-sm font-semibold">
+                  {t("hexEditor.form.hex")}
+                </legend>
+                <ChoiceField
+                  keys={["hex", "color"]}
+                  schema={colorSchema}
+                  options={colors}
+                  label={t("hexEditor.form.color")}
+                />
+                {!tile && (
+                  <SchemaField
+                    keys={["hex", "half"]}
+                    schema={HEX_PROPERTIES.half}
+                  />
+                )}
+                <SchemaField
+                  keys={["hex", "stripeRotation"]}
+                  schema={HEX_PROPERTIES.stripeRotation}
+                />
+                <div className="flex flex-col gap-1">
+                  <span className="text-sm font-medium">
+                    {t("hexEditor.form.removeBorders")}
+                  </span>
+                  <SidePicker
+                    label={t("hexEditor.form.removeBorders")}
+                    sideLabel={(side) => t("hexEditor.form.sideN", { side })}
+                    value={removedSides(value)}
+                    orientation={orientation}
+                    onChange={(sides) => {
+                      const side = [
+                        ...sides.filter(
+                          (s) => !removedSides(value).includes(s),
+                        ),
+                        ...removedSides(value).filter(
+                          (s) => !sides.includes(s),
+                        ),
+                      ][0];
+                      if (side !== undefined) {
+                        hexChange((hex) => toggleRemovedBorder(hex, side));
+                      }
+                    }}
+                  />
+                </div>
+              </fieldset>
+              {tile && <TileFieldset />}
+            </>
           )}
-
-          <fieldset className="flex flex-col gap-4 rounded-md border p-3">
-            <legend className="px-1 text-sm font-semibold">
-              {t("hexEditor.form.hex")}
-            </legend>
-            <ChoiceField
-              keys={["hex", "color"]}
-              schema={colorSchema}
-              options={colors}
-              label={t("hexEditor.form.color")}
-            />
-            <SchemaField keys={["hex", "half"]} schema={HEX_PROPERTIES.half} />
-            <SchemaField
-              keys={["hex", "stripeRotation"]}
-              schema={HEX_PROPERTIES.stripeRotation}
-            />
-            <div className="flex flex-col gap-1">
-              <span className="text-sm font-medium">
-                {t("hexEditor.form.removeBorders")}
-              </span>
-              <SidePicker
-                label={t("hexEditor.form.removeBorders")}
-                sideLabel={(side) => t("hexEditor.form.sideN", { side })}
-                value={removedSides(value)}
-                orientation={orientation}
-                onChange={(sides) => {
-                  const side = [
-                    ...sides.filter((s) => !removedSides(value).includes(s)),
-                    ...removedSides(value).filter((s) => !sides.includes(s)),
-                  ][0];
-                  if (side !== undefined) {
-                    hexChange((hex) => toggleRemovedBorder(hex, side));
-                  }
-                }}
-              />
-            </div>
-          </fieldset>
         </div>
       </TooltipProvider>
     </SchemaFormContext.Provider>

@@ -23,4 +23,11 @@ describe("gameNav", () => {
     expect(firstSection(game)).toBe("map");
     expect(firstSection({ ...game, map: undefined })).toBe("market");
   });
+
+  it("keeps the tiles page for a game without tiles, to add the first one", () => {
+    const tiles = gameNav.find(({ section }) => section === "tiles");
+    expect(tiles.disabled?.({})).toBeFalsy();
+    const manifest = gameNav.find(({ section }) => section === "tile-manifest");
+    expect(manifest.disabled({})).toBe(true);
+  });
 });

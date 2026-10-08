@@ -13,6 +13,7 @@ describe("edit panel sections", () => {
       "privates",
       "tokens",
       "trains",
+      "tiles",
       "map",
       "hex",
       "market",

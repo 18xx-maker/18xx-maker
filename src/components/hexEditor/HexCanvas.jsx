@@ -65,10 +65,10 @@ class CanvasBoundary extends Component {
 
 // The hex as the map draws it: the Hex of the print output, in the contexts
 // the map gives it (the orientation of the map, the colors of the map).
-const Drawing = memo(({ value, orientation }) => (
+const Drawing = memo(({ value, orientation, tile }) => (
   <OrientationContext.Provider value={orientation}>
-    <ColorContext.Provider value="map">
-      <Hex hex={value} border={true} map={true} />
+    <ColorContext.Provider value={tile ? "tile" : "map"}>
+      <Hex hex={value} border={true} map={!tile} />
     </ColorContext.Provider>
   </OrientationContext.Provider>
 ));
@@ -77,9 +77,13 @@ Drawing.displayName = "Drawing";
 // The hex being edited, drawn by the real Hex, with a layer above it for the
 // pointer: a button on each edge (a click on one and then another draws the
 // track between them) and a target on each element, that picks it. The layer
-// is only for the editor, the hex is drawn without it everywhere else.
+// is only for the editor, the hex is drawn without it everywhere else. A tile
+// is drawn as the tile sheets draw it; with readOnly there is only the drawing
+// (a tile of the library, which is not edited).
 const HexCanvas = ({
   value,
+  tile = false,
+  readOnly = false,
   orientation = 0,
   selected,
   onSelect,
@@ -154,64 +158,68 @@ const HexCanvas = ({
       data-pending={pending ?? undefined}
     >
       <CanvasBoundary value={value} message={t("hexEditor.form.canvasFailed")}>
-        <Drawing value={value} orientation={orientation} />
+        <Drawing value={value} orientation={orientation} tile={tile} />
       </CanvasBoundary>
-      <g data-testid="hex-canvas-elements" aria-hidden="true">
-        {elements.map(({ key, index, element }) => {
-          const at = elementPoint(key, element, index, orientation, value);
-          const on = selected?.key === key && selected?.index === index;
-          return (
-            <circle
-              key={`${key}-${index}`}
-              data-element={`${key}:${index}`}
-              cx={at.x}
-              cy={at.y}
-              r={9}
-              fill={on ? ACCENT : "transparent"}
-              fillOpacity={0.2}
-              stroke={on ? ACCENT : "transparent"}
-              strokeWidth={on ? 3 : 0}
-              className={`${DRAGGABLE_KEYS.includes(key) ? "cursor-grab" : "cursor-pointer"} touch-none hover:stroke-primary hover:[stroke-width:2px]`}
-              onPointerDown={(event) => down(event, { key, index })}
-              onPointerMove={move}
-              onPointerUp={up}
-              onPointerCancel={(event) => {
-                up(event);
-                dragged.current = false;
-              }}
-              onClick={() => {
-                // A drag ends in a click on the element: it is not a pick
-                if (dragged.current) dragged.current = false;
-                else onSelect({ key, index });
-              }}
-            >
-              <title>{elementLabel(key, index)}</title>
-            </circle>
-          );
-        })}
-      </g>
-      <g data-testid="hex-canvas-edges">
-        {SIDES.map((side) => (
-          <SideHandle
-            key={side}
-            side={side}
-            orientation={orientation}
-            pressed={pending === side}
-            label={t(
-              pending === null
-                ? "hexEditor.form.edge"
-                : pending === side
-                  ? "hexEditor.form.edgeCancel"
-                  : "hexEditor.form.edgeTo",
-              { side, from: pending },
-            )}
-            onPress={onEdge}
-            distance={66}
-            size={9}
-            hit={20}
-          />
-        ))}
-      </g>
+      {!readOnly && (
+        <>
+          <g data-testid="hex-canvas-elements" aria-hidden="true">
+            {elements.map(({ key, index, element }) => {
+              const at = elementPoint(key, element, index, orientation, value);
+              const on = selected?.key === key && selected?.index === index;
+              return (
+                <circle
+                  key={`${key}-${index}`}
+                  data-element={`${key}:${index}`}
+                  cx={at.x}
+                  cy={at.y}
+                  r={9}
+                  fill={on ? ACCENT : "transparent"}
+                  fillOpacity={0.2}
+                  stroke={on ? ACCENT : "transparent"}
+                  strokeWidth={on ? 3 : 0}
+                  className={`${DRAGGABLE_KEYS.includes(key) ? "cursor-grab" : "cursor-pointer"} touch-none hover:stroke-primary hover:[stroke-width:2px]`}
+                  onPointerDown={(event) => down(event, { key, index })}
+                  onPointerMove={move}
+                  onPointerUp={up}
+                  onPointerCancel={(event) => {
+                    up(event);
+                    dragged.current = false;
+                  }}
+                  onClick={() => {
+                    // A drag ends in a click on the element: it is not a pick
+                    if (dragged.current) dragged.current = false;
+                    else onSelect({ key, index });
+                  }}
+                >
+                  <title>{elementLabel(key, index)}</title>
+                </circle>
+              );
+            })}
+          </g>
+          <g data-testid="hex-canvas-edges">
+            {SIDES.map((side) => (
+              <SideHandle
+                key={side}
+                side={side}
+                orientation={orientation}
+                pressed={pending === side}
+                label={t(
+                  pending === null
+                    ? "hexEditor.form.edge"
+                    : pending === side
+                      ? "hexEditor.form.edgeCancel"
+                      : "hexEditor.form.edgeTo",
+                  { side, from: pending },
+                )}
+                onPress={onEdge}
+                distance={66}
+                size={9}
+                hit={20}
+              />
+            ))}
+          </g>
+        </>
+      )}
     </svg>
   );
 };

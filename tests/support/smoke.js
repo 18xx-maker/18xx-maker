@@ -35,7 +35,8 @@ export const parts = [
   page("revenue", "-revenue"),
   page("revenue?paginated=true", "-revenue-paginated"),
   page("tile-manifest", "-tile-manifest", (g) => !!g.tiles),
-  page("tiles", "-tiles", (g) => !!g.tiles),
+  // A game without tiles has an empty page, where the first tile is added
+  page("tiles", "-tiles"),
   page("tokens", "-tokens", (g) => !!g.companies || !!g.tokens),
 ];
 

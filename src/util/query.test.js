@@ -118,3 +118,16 @@ describe("the selected hex", () => {
     expect(openEditSearch(search, "hex")).toBe("variation=1");
   });
 });
+
+describe("the selected tile", () => {
+  it("is dropped with the other selections", () => {
+    const search = "?edit=true&editSection=tiles&tile=26%257CT2&variation=1";
+    expect(togglePanelSearch(search, "edit")).toBe("variation=1");
+    expect(openConfigSearch(search, "data")).toBe(
+      "variation=1&config=true&section=data",
+    );
+    expect(openEditSearch(search, "json")).toBe(
+      "edit=true&editSection=json&variation=1",
+    );
+  });
+});

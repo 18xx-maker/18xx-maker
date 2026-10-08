@@ -137,6 +137,20 @@ const pages = [
     colorScheme,
     ready: (page) => page.getByRole("spinbutton", { name: "Max" }),
   })),
+  // The Tiles tab of the tiles page: the list, and the editor of a tile of the
+  // game and of a tile drawn from the library
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `edit panel tiles (${colorScheme})`,
+    url: "/games/18Test/tiles?edit=true&editSection=tiles&tile=B1",
+    colorScheme,
+    ready: (page) => page.getByTestId("hex-editor"),
+  })),
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `edit panel tiles from the library (${colorScheme})`,
+    url: "/games/18Test/tiles?edit=true&editSection=tiles&tile=2",
+    colorScheme,
+    ready: (page) => page.getByTestId("hex-editor"),
+  })),
   // The Map tab of the map page: the variation besides its hexes
   ...["light", "dark"].map((colorScheme) => ({
     name: `edit panel map (${colorScheme})`,

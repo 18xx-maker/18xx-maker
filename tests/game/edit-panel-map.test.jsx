@@ -188,7 +188,7 @@ describe("edit panel map tab", () => {
     expect(map()).not.toHaveProperty("title");
   });
 
-  it("is a tab of the map page only", async () => {
+  it("is a tab of every page, selected on the map", async () => {
     open(route, variations());
     expect(await screen.findByRole("tab", { name: "Map" })).toHaveAttribute(
       "aria-selected",
@@ -197,9 +197,9 @@ describe("edit panel map tab", () => {
     expect(screen.getByRole("tab", { name: "Hex" })).toBeVisible();
   });
 
-  it("is not a tab of another page", async () => {
+  it("is a tab of every page", async () => {
     open("/games/internal:abc/tokens?edit=true", variations());
     await screen.findByTestId("edit-panel");
-    expect(screen.queryByRole("tab", { name: "Map" })).not.toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "Map" })).toBeVisible();
   });
 });

@@ -589,6 +589,7 @@ describe("edit panel tabs", () => {
       "Privates",
       "Tokens",
       "Trains",
+      "Tiles",
     ]);
     expect(names(byName("Look and output"))).toEqual([
       "Map",
@@ -654,9 +655,16 @@ describe("edit panel tabs", () => {
       ),
     );
     await user.keyboard("]");
+    // The Tiles tab belongs to the tiles page: the key goes there
+    await waitFor(() =>
+      expect(router.state.location.search).toBe("?edit=true&editSection=tiles"),
+    );
+    expect(router.state.location.pathname).toMatch(/\/tiles$/);
+    await user.keyboard("]");
     await waitFor(() =>
       expect(router.state.location.search).toBe("?edit=true&editSection=map"),
     );
+    expect(router.state.location.pathname).toMatch(/\/map$/);
     // Wrapping never lands on JSON
     await user.click(screen.getByRole("tab", { name: "Config" }));
     await user.keyboard("]");

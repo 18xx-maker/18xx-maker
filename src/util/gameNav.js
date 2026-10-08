@@ -20,8 +20,8 @@ export const gameNav = [
   },
   {
     key: "4",
+    // Always there: a game without tiles gets its first one on this page
     section: "tiles",
-    disabled: (game) => !game.tiles,
   },
   {
     key: "5",
