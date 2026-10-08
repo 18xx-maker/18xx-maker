@@ -978,6 +978,9 @@
   },
   "game": {
     "info": "Game Info",
+    "preview": {
+      "open": "Open the map"
+    },
     "sections": "Game Section",
     "stats": {
       "map": "Map",

@@ -7,19 +7,19 @@ einer Seite hängt ihren Namen an, zum Beispiel `/games/18Test/map`.
 
 ## Die Seiten
 
-| Seite               | Adresse         | Zeigt                                                                            | Braucht in der Spieldatei |
-| ------------------- | --------------- | -------------------------------------------------------------------------------- | ------------------------- |
-| Spielinformationen  | (das Spiel)     | Titel, Autor, Verlag, Links, Spieleranzahl und Statistik des Spiels              | `info`                    |
-| Karte               | `map`           | Die Karte, eine Variante nach der anderen                                        | `map`                     |
-| Aktienmarkt         | `market`        | Den [Aktienmarkt](/docs/games/market) mit Par-Tabelle, Legende und Rundenanzeige | `stock.market`            |
-| Token               | `tokens`        | Bögen mit den Token der Gesellschaften und den Token des Spiels                  | `companies` oder `tokens` |
-| Plättchen           | `tiles`         | Bögen mit jedem Plättchen, das gedruckt wird, in der jeweiligen Anzahl           | `tiles`                   |
-| Karten              | `cards`         | Privatgesellschaften, Aktien, Züge und Zahlenkarten                              |                           |
-| Gesellschaftskarten | `charters`      | Eine Gesellschaftskarte für jede Gesellschaft                                    | `companies`               |
-| Par                 | `par`           | Die [Par-Tabelle](/docs/games/market#par-tabelle) für sich                       | `stock.par.values`        |
-| Einnahmen           | `revenue`       | Die [Einnahmentabelle](/docs/games/market#einnahmentabelle)                      |                           |
-| Plättchenübersicht  | `tile-manifest` | Eine Liste der Plättchen mit Nummer und Anzahl                                   | `tiles`                   |
-| Hintergrund         | `background`    | Eine Seite mit dem Spieltitel, der sich auf der Hintergrundfarbe wiederholt      |                           |
+| Seite               | Adresse         | Zeigt                                                                                    | Braucht in der Spieldatei |
+| ------------------- | --------------- | ---------------------------------------------------------------------------------------- | ------------------------- |
+| Spielinformationen  | (das Spiel)     | Titel, Autor, Verlag, Links, Spieleranzahl, eine Kartenvorschau und Statistik des Spiels | `info`                    |
+| Karte               | `map`           | Die Karte, eine Variante nach der anderen                                                | `map`                     |
+| Aktienmarkt         | `market`        | Den [Aktienmarkt](/docs/games/market) mit Par-Tabelle, Legende und Rundenanzeige         | `stock.market`            |
+| Token               | `tokens`        | Bögen mit den Token der Gesellschaften und den Token des Spiels                          | `companies` oder `tokens` |
+| Plättchen           | `tiles`         | Bögen mit jedem Plättchen, das gedruckt wird, in der jeweiligen Anzahl                   | `tiles`                   |
+| Karten              | `cards`         | Privatgesellschaften, Aktien, Züge und Zahlenkarten                                      |                           |
+| Gesellschaftskarten | `charters`      | Eine Gesellschaftskarte für jede Gesellschaft                                            | `companies`               |
+| Par                 | `par`           | Die [Par-Tabelle](/docs/games/market#par-tabelle) für sich                               | `stock.par.values`        |
+| Einnahmen           | `revenue`       | Die [Einnahmentabelle](/docs/games/market#einnahmentabelle)                              |                           |
+| Plättchenübersicht  | `tile-manifest` | Eine Liste der Plättchen mit Nummer und Anzahl                                           | `tiles`                   |
+| Hintergrund         | `background`    | Eine Seite mit dem Spieltitel, der sich auf der Hintergrundfarbe wiederholt              |                           |
 
 Eine Seite, für die das Spiel keine Daten hat, ist im Seitenmenü ausgegraut, und
 ihre Adresse leitet dich zurück zur Spielinformationen-Seite.
@@ -28,7 +28,8 @@ ihre Adresse leitet dich zurück zur Spielinformationen-Seite.
 
 Die Seite, auf der du landest, wenn du ein Spiel öffnest. Sie zeigt Titel,
 Autor, Verlag und die Links des Spiels (Lizenz, Bezugsquelle, BoardGameGeek und
-Regeln) sowie einen Hinweis, wenn das Spiel ein Prototyp oder in Arbeit ist. Die
+Regeln) sowie einen Hinweis, wenn das Spiel ein Prototyp oder in Arbeit ist. Eine
+Vorschau der ersten Kartenvariante verweist auf die Seite [Karte](#karte). Die
 Statistik listet die Plättchen nach Farbe und Spurweite, die Größe der Karte und
 die Anzahl der Gesellschaften, Privatgesellschaften, Züge, Phasen und Runden auf.
 Mit den Schaltflächen bearbeitest du das Spiel ab seinem ersten Abschnitt, lädst

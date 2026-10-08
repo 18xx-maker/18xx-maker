@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import File from "@/components/File";
 import KeyLabel from "@/components/KeyLabel";
 import GameStats from "@/components/pages/games/GameStats";
+import MapPreview from "@/components/pages/games/MapPreview";
 
 import { publishers } from "@/data";
 import { useGame } from "@/hooks";
@@ -190,6 +191,7 @@ const InfoPage = () => {
           </Button>
         )}
       </div>
+      <MapPreview />
       <GameStats />
       <div className="flex flex-row gap-4 mt-4 mb-4">
         <TypeIcon />
