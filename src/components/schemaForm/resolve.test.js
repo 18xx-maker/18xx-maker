@@ -5,6 +5,7 @@ import {
   COMPANY_PRIMARY_KEYS,
   GAME_INFO_KEYS,
   HIDDEN_PATHS,
+  MAP_KEYS,
   OUTPUT_KEYS,
   PHASE_PRIMARY_KEYS,
   PLAYER_KEYS,
@@ -1564,5 +1565,58 @@ describe("the output tab", () => {
       expect(kind("labelStrokeWidth")).toBe("stringOrNumber");
       expect(kind("label")).toBe("stringOrNumber");
     });
+  });
+});
+
+describe("the map tab", () => {
+  const mapSchema = schema.definitions.map;
+  const kind = (...keys) => {
+    const node = schemaAt(schema, keys);
+    return kindOf(node, keys[keys.length - 1], schema, keys);
+  };
+
+  it("lists every key of a map variation but the hexes", () => {
+    expect([...MAP_KEYS].sort()).toEqual(
+      Object.keys(mapSchema.properties)
+        .filter((key) => key !== "hexes")
+        .sort(),
+    );
+  });
+
+  it("pins the kind of every field of a variation", () => {
+    expect(
+      Object.fromEntries(MAP_KEYS.map((key) => [key, kind("map", 1, key)])),
+    ).toEqual({
+      name: "string",
+      copy: "number",
+      remove: "json",
+      title: "boolean",
+      trim: "object",
+      roundTracker: "object",
+      movement: "object",
+      market: "object",
+      players: "object",
+      borders: "array",
+      lines: "array",
+      borderTexts: "array",
+    });
+    // The same through an object map
+    expect(kind("map", "trim")).toBe("object");
+    expect(kind("map", 0, "borders", 0, "coords")).toBe("json");
+    expect(kind("map", 0, "borderTexts", 0, "coord")).toBe("string");
+  });
+
+  it("finds the schema of a field through the oneOf of the map", () => {
+    expect(schemaAt(schema, ["map", 1, "trim", "top"]).type).toBe("boolean");
+    expect(schemaAt(schema, ["map", "trim", "top"]).type).toBe("boolean");
+    expect(isRequired(schema, ["map", 1, "hexes"])).toBe(true);
+    expect(isRequired(schema, ["map", 1, "trim"])).toBe(false);
+  });
+
+  it("sets a field of the second variation and leaves the first", () => {
+    const game = { map: [{ hexes: ["A1"] }, { hexes: ["B2"] }] };
+    const next = setValue(game, ["map", 1, "trim"], { top: true });
+    expect(next.map[1]).toEqual({ hexes: ["B2"], trim: { top: true } });
+    expect(next.map[0]).toBe(game.map[0]);
   });
 });

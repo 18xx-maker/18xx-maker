@@ -79,6 +79,27 @@ export const PLAYER_KEYS = ["bank", "capital", "certLimit"];
 // The fields of a player count shown first: the bank is under "more fields"
 export const PLAYER_PRIMARY_KEYS = ["number", "capital", "certLimit"];
 
+// The keys of a map variation the Map tab edits: all of them but the hexes,
+// which the map editor and the Hex tab own (in the order of the tab)
+export const MAP_KEYS = [
+  "name",
+  "copy",
+  "remove",
+  "title",
+  "trim",
+  "roundTracker",
+  "movement",
+  "market",
+  "players",
+  "borders",
+  "lines",
+  "borderTexts",
+];
+
+// The fields of a border, a line and a border text shown first on its card
+export const BORDER_PRIMARY_KEYS = ["coords", "color", "width"];
+export const BORDER_TEXT_PRIMARY_KEYS = ["coord", "label", "cost"];
+
 // Strings that are long text, shown in a textarea
 export const LONG_TEXT_KEYS = ["notes", "description"];
 

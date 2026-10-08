@@ -469,3 +469,21 @@ describe("rerootPointer", () => {
     expect(edit.groupPrefix({ map: [{}, {}] }, 1, 3)).toBe("map[1].hexes[3]");
   });
 });
+
+describe("inVariation", () => {
+  it("takes what is in the variation but not its hexes", () => {
+    const list = { map: [{}, {}] };
+    expect(edit.variationPrefix(list, 1)).toBe("map[1]");
+    expect(edit.variationPrefix({ map: {} }, 0)).toBe("map");
+    expect(edit.inVariation("map[1].trim.top", "map[1]")).toBe(true);
+    expect(edit.inVariation("map[1]", "map[1]")).toBe(true);
+    expect(edit.inVariation("map[1].borders[0]", "map[1]")).toBe(true);
+    expect(edit.inVariation("map[1].hexes[0].color", "map[1]")).toBe(false);
+    expect(edit.inVariation("map[1].hexes", "map[1]")).toBe(false);
+    expect(edit.inVariation("map[10].trim", "map[1]")).toBe(false);
+    expect(edit.inVariation("map[0].trim", "map[1]")).toBe(false);
+    expect(edit.inVariation("map.trim", "map")).toBe(true);
+    expect(edit.inVariation("map.hexes[3]", "map")).toBe(false);
+    expect(edit.inVariation("trains[0]", "map")).toBe(false);
+  });
+});

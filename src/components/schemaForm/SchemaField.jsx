@@ -79,7 +79,7 @@ const SchemaField = ({ keys, schema, ...rest }) => {
     case "count":
       return <CountField {...props} />;
     case "object":
-      return <ObjectField {...props} />;
+      return <ObjectField {...props} {...rest} />;
     case "record":
       return <RecordField {...props} {...rest} />;
     case "stringArray":

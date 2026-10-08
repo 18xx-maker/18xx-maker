@@ -15,14 +15,21 @@ import {
 import { useSelectedHex } from "@/hooks/useSelectedHex";
 import { selectGameProblems } from "@/state";
 import { cn } from "@/util/cn";
-import { findGroup, groupIssues, localHexes } from "@/util/hexEdit";
+import {
+  findGroup,
+  groupIssues,
+  inVariation,
+  localHexes,
+  variationPrefix,
+} from "@/util/hexEdit";
 import { useIntParam } from "@/util/query";
 
 export const tabId = (section) => `edit-tab-${section}`;
 export const panelId = (section) => `edit-tabpanel-${section}`;
 
 // The top level keys of the game each form section edits, for the problem dot
-// of its tab. The hex section is the selected group of the map instead.
+// of its tab. The map section is the selected variation of the map and the hex
+// section the selected group of the map instead.
 export const SECTION_KEYS = {
   info: GAME_INFO_KEYS,
   players: [...PLAYER_KEYS, "players"],
@@ -43,13 +50,15 @@ export const UNTABBED_KEYS = ["groups", "tiles"];
 
 // How many problems a section has. A deprecated field is a note, not a
 // problem. No result yet (unknown) is no problem.
-export const sectionProblems = (section, issues, hexIssues) => {
+export const sectionProblems = (section, issues, hexIssues, mapIssues) => {
   const keys = SECTION_KEYS[section];
   const found = keys
     ? keys.flatMap((key) => issuesFor(issues, [key]))
     : section === "hex"
       ? hexIssues
-      : [];
+      : section === "map"
+        ? mapIssues
+        : [];
   return found.filter((issue) => issue.code !== "deprecated").length;
 };
 
@@ -124,6 +133,13 @@ const EditNav = ({ game, groups, section, setSection }) => {
     ? groupIssues(game, variation, index, issues ?? [])
     : [];
 
+  // The problems of the selected variation besides its hexes, for the map tab
+  const mapIssues = checked
+    ? (issues ?? []).filter((issue) =>
+        inVariation(issue.pointer, variationPrefix(game, variation)),
+      )
+    : [];
+
   useEffect(() => {
     if (!pendingFocus) return;
     document.getElementById(tabId(pendingFocus))?.focus();
@@ -164,7 +180,12 @@ const EditNav = ({ game, groups, section, setSection }) => {
           </span>
           {items.map((item) => {
             const selected = item.section === section;
-            const problems = sectionProblems(item.section, issues, hexIssues);
+            const problems = sectionProblems(
+              item.section,
+              issues,
+              hexIssues,
+              mapIssues,
+            );
             return (
               <button
                 key={item.section}

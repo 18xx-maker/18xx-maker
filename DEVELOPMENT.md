@@ -508,6 +508,10 @@ range of the text. Schema problems come from the problems check
 next one (`nextDiagnostic`). `RenderBoundary` keeps the panel usable
 when the page cannot draw an edited game.
 
+The `map` section (`MapForm.jsx`, also only on the map page) is a schema form for everything
+of the selected `?variation=` but its hexes (`MAP_KEYS` in `resolve.js`); its problem dot counts
+the issues under that variation (`inVariation`) except the hexes.
+
 The `hex` section (`HexSection.jsx`, only on the map page: an entry of
 `editSections` with a `page` is filtered by `sectionsFor`) edits one group of
 `map.hexes` as JSON in the same `JsonEditor`, which takes a `lens` (`gameLens`

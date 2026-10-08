@@ -236,6 +236,15 @@ files to export, the pages, the layouts, the background, the variation and the
 png, card and Board18 options). The deprecated paginated
 export option is not shown and stays in the file.
 
+The Map tab is only on the map page and edits everything of the selected map
+variation (`?variation=`) except its hexes: the name, which variation it copies
+(for a list of variations; the copied hexes can be removed by coordinate, one per
+line), whether the title is hidden, the trimmed edges, the round tracker, the
+movement, the market and players positions, and the borders, lines and border
+texts, a card each with its coordinates one per line. The borders, lines, border
+texts and trim of a copied variation are those of the variation it copies plus
+its own. The hexes themselves are the Hex tab's.
+
 The Hex tab is only on the map page. Click a hex on the map to pick its group,
 the entry of `map.hexes` that lists it: the tab then shows only that group as
 JSON (its color, its coordinates and what is drawn on it) and the hexes of the
