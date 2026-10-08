@@ -78,6 +78,27 @@ describe("the tabs of other pages", () => {
     ).toBeVisible();
   });
 
+  it("skip the tabs of a page the game has not", async () => {
+    open("/games/internal:abc/tokens?edit=true", (game) => omit(["map"], game));
+    expect(await screen.findByRole("tab", { name: "Tiles" })).toBeVisible();
+    expect(screen.queryByRole("tab", { name: "Map" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("tab", { name: "Hex" })).not.toBeInTheDocument();
+  });
+
+  it("are not where Forms goes back to from another page", async () => {
+    const { router, user } = open(route);
+    await list();
+    await act(() =>
+      router.navigate("/games/internal:abc/market?edit=true&editSection=json"),
+    );
+    await user.click(await screen.findByRole("button", { name: "Forms" }));
+    expect(await screen.findByRole("tab", { name: "Game" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+    expect(router.state.location.pathname).toBe("/games/internal:abc/market");
+  });
+
   it("go to the page from the Map tab link of another page too", async () => {
     const { router, user } = open(route);
     await user.click(await screen.findByRole("tab", { name: "Map" }));

@@ -8,6 +8,7 @@ import {
   groupSections,
 } from "@/components/editPanel/sections";
 
+import { useGame } from "@/hooks/game";
 import { getLastForm, resetLastForm, setLastForm } from "@/hooks/lastForm";
 import { useEditor } from "@/hooks/useEditor";
 import { useLocation, useMatch, useNavigate } from "@/router";
@@ -26,6 +27,7 @@ import { getRenderInput } from "@/util/renderInput";
 // ones with an edit toggle. The print page of an export has none, nor has render mode.
 export const useEditPanel = () => {
   const editor = useEditor();
+  const game = useGame();
   const match = useMatch("/games/:slug/:section/*");
   const [print] = useBooleanParam("print");
   const [open, toggle] = useTogglePanel("edit");
@@ -34,9 +36,13 @@ export const useEditPanel = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const slug = match?.params.slug;
-  // All the sections on every page, the forms in the order of their groups. An
-  // unknown one in the url is the first form.
-  const sections = editSections;
+  // The sections on every page but the ones of a page the game has not (a
+  // game without a map has no Map or Hex tab), the forms in the order of their
+  // groups. An unknown one in the url is the first form.
+  const sections = editSections.filter((s) => {
+    const item = s.page && find(propEq(s.page, "section"), gameNav);
+    return !(item && game && item.disabled?.(game));
+  });
   const groups = groupSections(sections.filter((s) => !s.pinned));
   const forms = groups.flatMap((g) => g.sections);
   const editSection = sections.some((s) => s.section === param)
@@ -78,10 +84,13 @@ export const useEditPanel = () => {
   // Closing the panel forgets the form
   if (available && !open) resetLastForm();
   else if (available && !json) setLastForm(editSection);
-  // The form Forms goes back to: the last one, unless the page has no such one
-  const formSection = forms.some((s) => s.section === getLastForm())
-    ? getLastForm()
-    : forms[0].section;
+  // The form Forms goes back to: the last one, unless it belongs to another
+  // page (Forms never changes the page) or the game has no such one
+  const last = forms.find((s) => s.section === getLastForm());
+  const formSection =
+    last && (!last.page || last.page === section)
+      ? last.section
+      : forms[0].section;
 
   return {
     available,

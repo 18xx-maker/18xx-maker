@@ -188,7 +188,7 @@ describe("edit panel map tab", () => {
     expect(map()).not.toHaveProperty("title");
   });
 
-  it("is a tab of the map page only", async () => {
+  it("is a tab of every page, selected on the map", async () => {
     open(route, variations());
     expect(await screen.findByRole("tab", { name: "Map" })).toHaveAttribute(
       "aria-selected",
