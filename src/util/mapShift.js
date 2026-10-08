@@ -84,7 +84,7 @@ export const shiftBounds = (game) => {
 // Only the map fields decide: the references stay when they cannot move
 export const canShift = (game, dx, dy) => {
   const { minX, minY, any } = shiftBounds(game);
-  return any && minX + dx >= 1 && minY + dy >= 1;
+  return any && (dx >= 0 || minX + dx >= 1) && (dy >= 0 || minY + dy >= 1);
 };
 
 const mapOver = (list, fn) => (Array.isArray(list) ? list.map(fn) : list);
@@ -149,9 +149,10 @@ const apply = (game, dx, dy) => {
           : ref(company.home);
       if (company.destination !== undefined)
         out.destination = ref(company.destination);
-      (company.tokens ?? []).forEach((token) => {
-        if (typeof token === "string" && COORD_PATTERN.test(token)) left += 1;
-      });
+      if (Array.isArray(company.tokens))
+        company.tokens.forEach((token) => {
+          if (typeof token === "string" && COORD_PATTERN.test(token)) left += 1;
+        });
       return out;
     });
   return { game: next, left };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useStore } from "react-redux";
 
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
 
@@ -33,9 +33,11 @@ const DIRECTIONS = [
 const MapMover = ({ game }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const store = useStore();
   const navigate = useNavigate();
   const { search } = useLocation();
-  const [left, setLeft] = useState(0);
+  // The note belongs to the game the move produced
+  const [moved, setMoved] = useState({ left: 0, game: null });
   const horizontal = game.info?.orientation === "horizontal";
   const { any } = shiftBounds(game);
 
@@ -44,8 +46,9 @@ const MapMover = ({ game }) => {
     if (!canShift(game, dx, dy)) return;
     const params = new URLSearchParams(search);
     const hex = params.get("hex") || "";
-    setLeft(countLeft(game, dx, dy));
+    const count = countLeft(game, dx, dy);
     dispatch(editGame((latest) => shiftGame(latest, dx, dy)));
+    setMoved({ left: count, game: store.getState().game });
     // A draft of a hex group is of the group as it was
     clearDrafts(`${game.meta.slug}#hex:`);
     if (COORD_PATTERN.test(hex)) {
@@ -98,9 +101,9 @@ const MapMover = ({ game }) => {
       <p className="text-xs text-muted-foreground">
         {t("editPanel.map.move.hint")}
       </p>
-      {left > 0 && (
+      {moved.game === game && moved.left > 0 && (
         <p role="note" className="text-xs text-muted-foreground">
-          {t("editPanel.map.move.unchanged", { count: left })}
+          {t("editPanel.map.move.unchanged", { count: moved.left })}
         </p>
       )}
     </div>

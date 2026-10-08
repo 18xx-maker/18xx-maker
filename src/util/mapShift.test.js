@@ -200,6 +200,15 @@ describe("blocking", () => {
     ).toBe(false);
   });
 
+  it("only checks the axis being moved", () => {
+    const column0 = small({ hexes: [{ hexes: [[0, 3]] }] });
+    expect(canShift(column0, 0, -1)).toBe(true);
+    expect(canShift(column0, -1, 0)).toBe(false);
+    const row0 = small({ hexes: [{ hexes: [[3, 0]] }] });
+    expect(canShift(row0, -1, 0)).toBe(true);
+    expect(canShift(row0, 0, -1)).toBe(false);
+  });
+
   it("disables everything when no field holds a coordinate", () => {
     const game = small({ hexes: [] });
     [
@@ -225,6 +234,15 @@ describe("references left alone", () => {
     expect(moved.companies[0].home).toEqual(["A2", "B2"]);
     expect(moved.companies[0].destination).toBe("B1");
     expect(countLeft(game, -1, -1)).toBe(3);
+  });
+
+  it("ignores tokens that are not a list", () => {
+    const game = small(
+      { hexes: [{ hexes: ["C3"] }] },
+      { companies: [{ name: "C", tokens: "four" }] },
+    );
+    expect(shiftGame(game, 1, 1).companies[0].tokens).toBe("four");
+    expect(countLeft(game, 1, 1)).toBe(0);
   });
 
   it("counts token labels that look like coordinates", () => {

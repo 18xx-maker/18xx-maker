@@ -1,9 +1,10 @@
-import { screen, waitFor, within } from "@testing-library/react";
+import { act, screen, waitFor, within } from "@testing-library/react";
 import { page as browser } from "vitest/browser";
 
 import { getDraft, setDraft } from "@/components/editPanel/draftStore";
 
 import games from "@/data/games";
+import { revertGame } from "@/state/game";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
@@ -145,5 +146,20 @@ describe("map move buttons", () => {
     expect(game().map.trim).toEqual({ bottom: true, right: true });
     await user.click(await button("Move map right"));
     expect(game().map.trim).toEqual({ bottom: true, right: true });
+  });
+
+  it("drops the note about unchanged coordinates after a revert", async () => {
+    const { user } = open(route, {
+      ...games["18Test"],
+      map: { hexes: [{ color: "plain", hexes: ["B2"] }] },
+      privates: [{ name: "P", hex: "A1" }],
+      companies: [],
+    });
+    await user.click(await button("Move map up"));
+    expect(await screen.findByRole("note")).toHaveTextContent(/left as/);
+    await act(() => opened.dispatch(revertGame()));
+    await waitFor(() =>
+      expect(screen.queryByRole("note")).not.toBeInTheDocument(),
+    );
   });
 });
