@@ -481,9 +481,16 @@ describe("json editor", () => {
     await waitFor(() => expect(diagnosticCount(v.state)).toBeGreaterThan(0), {
       timeout: 5000,
     });
-    expect(
-      screen.getByRole("link", { name: "See all problems" }),
-    ).toBeVisible();
+    const link = screen.getByRole("link", { name: "See all problems" });
+    expect(link).toBeVisible();
+    expect(link).toHaveAttribute(
+      "href",
+      expect.stringContaining("editSection=problems"),
+    );
+    expect(link).not.toHaveAttribute(
+      "href",
+      expect.stringContaining("/problems"),
+    );
   });
 
   describe("next problem", () => {

@@ -55,7 +55,7 @@ import {
 } from "@/components/editPanel/lineSelection";
 import { issueText } from "@/components/schemaForm/issueText";
 
-import { Link } from "@/router";
+import { Link, useLocation } from "@/router";
 import { editGame, selectGameProblems } from "@/state";
 import { selectEditorKeys } from "@/state/selectors";
 import {
@@ -70,7 +70,7 @@ import {
   pointerToRange,
 } from "@/util/jsonEditor";
 import { sameLines } from "@/util/lineSpec";
-import { useLinesParam } from "@/util/query";
+import { openEditSearch, useLinesParam } from "@/util/query";
 
 // The text of the editor changed because the game did, not because of typing
 const external = Annotation.define();
@@ -225,6 +225,7 @@ const JsonEditor = ({ game, lens: given }) => {
   modeExtension.current ??= modeKeys("normal");
   const modeRequest = useRef(0);
   const [keysFailed, setKeysFailed] = useState(false);
+  const { search } = useLocation();
   const [lines, setLines] = useLinesParam();
   const linesRef = useRef(lines);
   const setLinesRef = useRef(setLines);
@@ -618,7 +619,10 @@ const JsonEditor = ({ game, lens: given }) => {
       {valid && issues?.length > 0 && (
         <p className="text-sm">
           {t("jsonEditor.problems", { count: issues.length })}{" "}
-          <Link className="underline" to={`/games/${slug}/problems`}>
+          <Link
+            className="underline"
+            to={{ search: openEditSearch(search, "problems") }}
+          >
             {t("jsonEditor.problemsLink")}
           </Link>
         </p>

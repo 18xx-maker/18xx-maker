@@ -27,11 +27,14 @@ const EditPanel = () => {
     groups,
     formSection,
     json,
+    problems,
     editSection,
     setEditSection,
   } = useEditPanel();
   const { hex, clear } = useSelectedHex();
-  const { Form, wide } = sections.find((s) => s.section === editSection);
+  const { Form, wide, pinned } = sections.find(
+    (s) => s.section === editSection,
+  );
 
   // Escape closes the panel from anywhere inside it. An open select closes
   // itself first, it has already claimed the key. A selected hex is cleared
@@ -61,7 +64,9 @@ const EditPanel = () => {
           <h1 className="text-2xl font-bold">{t("editPanel.title")}</h1>
           <div className="flex flex-row items-center gap-2">
             <EditSwitch
+              slug={game.meta.slug}
               json={json}
+              problems={problems}
               formSection={formSection}
               setSection={setEditSection}
             />
@@ -75,7 +80,7 @@ const EditPanel = () => {
             </Button>
           </div>
         </div>
-        {!json && (
+        {!pinned && (
           <EditNav
             game={game}
             groups={groups}
@@ -83,16 +88,16 @@ const EditPanel = () => {
             setSection={setEditSection}
           />
         )}
-        {!json && (
+        {!pinned && (
           <FieldSearch key={editSection} panel={panelId(editSection)} />
         )}
       </div>
       <div className="flex-1 overflow-y-auto overscroll-contain p-4 flex flex-col gap-4">
         <div
-          {...(json
+          {...(pinned
             ? {
                 role: "region",
-                "aria-label": t("editPanel.sections.json.tab"),
+                "aria-label": t(`editPanel.sections.${editSection}.tab`),
               }
             : {
                 role: "tabpanel",

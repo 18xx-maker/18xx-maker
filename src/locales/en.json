@@ -147,6 +147,10 @@
       "json": {
         "tab": "JSON",
         "description": "Edit the whole game as JSON; the page follows while the JSON is valid."
+      },
+      "problems": {
+        "tab": "Problems",
+        "description": "The problems of the whole game. Click one to see its line in the JSON editor."
       }
     },
     "groups": {
