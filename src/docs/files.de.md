@@ -305,7 +305,7 @@ und drücke Plättchen hinzufügen, um eines hinzuzufügen: Die ID eines Plättc
 das 18xx Maker schon kennt, wird unverändert übernommen (Anzahl 1), jede andere ID
 beginnt ein eigenes Plättchen, das du dann zeichnest. Wähle ein Plättchen in der
 Liste, um es zu bearbeiten (die Adresse behält es als `tile`, zum Beispiel
-`?tile=26%257CT2` für `26|T2`). Ein eigenes Plättchen wird wie ein Kartenfeld der
+`?tile=26%257CT2` für `26|T2`). Auf den Plättchenbögen kannst du ein Plättchen auch anklicken, um es zu wählen (alle Kopien davon werden umrandet), und die gestrichelte +-Zelle nach dem letzten Plättchen anklicken, um ein neues Plättchen (`T1`, `T2`, ...) hinzuzufügen und zu wählen; das gilt nur bei geöffnetem Bearbeitungsbereich, die gedruckten Bögen ändern sich nicht. Ein eigenes Plättchen wird wie ein Kartenfeld der
 Karte bearbeitet, gezeichnet wie auf den Plättchenbögen, mit Anzahl, Druck und
 Gruppe. Ein Plättchen, das aus der Bibliothek gezeichnet wird, also eine einfache
 Anzahl, ein Alias eines anderen Plättchens oder eine teilweise Änderung eines

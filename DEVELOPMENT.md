@@ -537,7 +537,7 @@ and `renameTile` renames the key (the order is kept, except that ids that are wh
 numbers sort first, as in any JS object) and the `tile` of the privates that
 draw it. Aliases name library tiles and the map has no tile ids, so there is
 nothing else to rewrite. The selected tile is `?tile=<id>` (`useSelectedTile`, the
-id is URL-encoded because of `|`). The editor is `HexEditor` with `tile` (the
+id is URL-encoded because of `|`). On the tile sheets, `TilesOverlay` (only with the edit panel open, like `HexOverlay` for the map) draws a transparent target on every printed tile and a dashed "+" cell after the last tile (a page of its own in the editor when the last page is full). `HtmlEditor` hands a tap to it through `TapContext` (`TilesTap`, once per tiles page): a tap on a tile selects it (`selectTileSearch`), a tap on the cell adds `nextTileId` (`T1`, `T2`, ...) with `addTile` and selects it. The editor is `HexEditor` with `tile` (the
 printing fields quantity, print and group, no `half`), or with `library` for an
 entry drawn from the library (the drawing and the printing fields only).
 

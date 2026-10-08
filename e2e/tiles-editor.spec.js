@@ -86,3 +86,47 @@ test("the Tiles tab is on every page and goes to the tiles page", async ({
     "true",
   );
 });
+
+// The page of the sheet is fitted to the window and the panel covers a part of
+// it, so the clicks are on the dispatched events of the elements themselves
+const tap = (locator) =>
+  locator.evaluate((el) => {
+    const view = document.getElementById("editor");
+    const box = el.getBoundingClientRect();
+    const at = {
+      clientX: box.x + box.width / 2,
+      clientY: box.y + box.height / 2,
+    };
+    const pointer = {
+      pointerId: 3,
+      button: 0,
+      buttons: 1,
+      bubbles: true,
+      ...at,
+    };
+    el.dispatchEvent(new PointerEvent("pointerdown", pointer));
+    view.dispatchEvent(
+      new PointerEvent("pointerup", { ...pointer, buttons: 0 }),
+    );
+  });
+
+test("a click on a tile of the sheet picks it, the dashed cell adds one", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/tiles?edit=true&editSection=json&lines=1-2");
+  await expect(page.getByTestId("game-18Test-tiles")).toBeVisible();
+
+  await tap(page.locator('[data-tile="63"]').first());
+  await expect(page).toHaveURL(/editSection=tiles/);
+  await expect(page).toHaveURL(/tile=63/);
+  await expect(page).not.toHaveURL(/lines=/);
+  await expect(page.getByTestId("tile-editor")).toBeVisible();
+  await expect(page.getByTestId("tile-selected")).toHaveCount(1);
+
+  // T1 and T2 are tiles of the game already
+  await page.getByRole("button", { name: /^T1 / }).waitFor();
+  await tap(page.locator("[data-next]"));
+  await expect(tile(page, "T2")).toBeVisible();
+  await expect(page).toHaveURL(/tile=T2/);
+  await expect(page.getByTestId("tile-selected")).toHaveCount(1);
+});
