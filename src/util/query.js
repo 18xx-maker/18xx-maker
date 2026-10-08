@@ -130,9 +130,10 @@ export const useStringParam = (key, initial) => {
 export const togglePanelSearch = (search, panel) => {
   const params = new URLSearchParams(search);
   // The selected lines belong to the JSON tab of the edit panel, the
-  // selected hex to the map
+  // selected hex to the map, the selected tile to the Tiles tab
   params.delete("lines");
   params.delete("hex");
+  params.delete("tile");
 
   if (params.has(panel)) {
     params.delete(panel);
@@ -152,6 +153,7 @@ export const openConfigSearch = (search, section) => {
   const params = new URLSearchParams(search);
   params.delete("lines");
   params.delete("hex");
+  params.delete("tile");
   params.delete("edit");
   params.delete("editSection");
   params.set("config", true);
@@ -172,6 +174,7 @@ export const openEditSearch = (search, section) => {
   );
   next.delete("lines");
   next.delete("hex");
+  next.delete("tile");
   next.set("editSection", encodeURIComponent(section));
   return searchString(next);
 };
