@@ -225,6 +225,88 @@ describe("the form", () => {
   });
 });
 
+describe("direct manipulation and undo", () => {
+  const circle = (id) =>
+    screen
+      .getByTestId("hex-canvas-elements")
+      .querySelector(`[data-element="${id}"]`);
+  const dragBy = async (user, id, dx, dy) => {
+    const box = circle(id).getBoundingClientRect();
+    const x = box.x + box.width / 2;
+    const y = box.y + box.height / 2;
+    await user.pointer([
+      {
+        keys: "[MouseLeft>]",
+        target: circle(id),
+        coords: { clientX: x, clientY: y },
+      },
+      { coords: { clientX: x + dx / 2, clientY: y + dy / 2 } },
+      { coords: { clientX: x + dx, clientY: y + dy } },
+      { keys: "[/MouseLeft]", coords: { clientX: x + dx, clientY: y + dy } },
+    ]);
+  };
+
+  it("drags an element to a new x and y, as one step", async () => {
+    const { user } = open(`${route}&hex=B12`);
+    await form();
+    const before = structuredClone(groupOf("B12").cities[0]);
+
+    await dragBy(user, "cities:0", 40, 20);
+    await waitFor(() => expect(groupOf("B12").cities[0].x).toBeGreaterThan(0));
+    const moved = groupOf("B12").cities[0];
+    expect(moved.y).toBeGreaterThan(0);
+    expect(screen.getByRole("status")).toHaveTextContent("Moved City");
+    // It is picked, and the whole drag undoes in one step
+    expect(await screen.findByTestId("hex-inspector")).toHaveAccessibleName(
+      "Fields of City",
+    );
+    await user.click(screen.getByRole("button", { name: /^Undo/ }));
+    await waitFor(() => expect(groupOf("B12").cities[0]).toEqual(before));
+  });
+
+  it("does not move or record a press without movement", async () => {
+    const { user } = open(`${route}&hex=B12`);
+    await form();
+    const before = opened.getState().game;
+    await user.click(circle("cities:0"));
+    expect(await screen.findByTestId("hex-inspector")).toBeVisible();
+    expect(opened.getState().game).toBe(before);
+    expect(screen.getByRole("button", { name: /^Undo/ })).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
+  });
+
+  it("undoes and redoes with the buttons and the keys", async () => {
+    const { user } = open(`${route}&hex=C11`);
+    await form();
+    const undo = screen.getByRole("button", { name: /^Undo/ });
+    const redo = screen.getByRole("button", { name: /^Redo/ });
+    expect(undo).toHaveAttribute("aria-disabled", "true");
+    expect(redo).toHaveAttribute("aria-disabled", "true");
+
+    await user.click(screen.getByRole("combobox", { name: "Color" }));
+    await user.click(await screen.findByRole("option", { name: "red" }));
+    await waitFor(() => expect(groupOf("C11").color).toBe("red"));
+    await user.click(undo);
+    await waitFor(() => expect(groupOf("C11").color).not.toBe("red"));
+    expect(redo).toHaveAttribute("aria-disabled", "false");
+    await user.click(redo);
+    await waitFor(() => expect(groupOf("C11").color).toBe("red"));
+
+    // The keys act when the focus is in the editor, and not in a field
+    undo.focus();
+    await user.keyboard("{Control>}z{/Control}");
+    await waitFor(() => expect(groupOf("C11").color).not.toBe("red"));
+    await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
+    await waitFor(() => expect(groupOf("C11").color).toBe("red"));
+    await user.keyboard("{Control>}z{/Control}");
+    await waitFor(() => expect(groupOf("C11").color).not.toBe("red"));
+    await user.keyboard("{Control>}y{/Control}");
+    await waitFor(() => expect(groupOf("C11").color).toBe("red"));
+  });
+});
+
 describe("the JSON view", () => {
   const editor = () =>
     waitFor(() => {

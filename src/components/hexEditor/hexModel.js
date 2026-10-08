@@ -288,6 +288,40 @@ export const rotateHex = (hex, steps) => {
   return equals(result, hex) ? hex : result;
 };
 
+// The elements that sit by x and y, and so can be dragged
+export const DRAGGABLE_KEYS = [
+  "cities",
+  "mediumCities",
+  "towns",
+  "centerTowns",
+  "boomtowns",
+  "labels",
+  "values",
+  "names",
+  "icons",
+  "terrain",
+  "shapes",
+  "goods",
+  "industries",
+  "companies",
+  "offBoardRevenue",
+];
+
+const tenth = (n) => Math.round(n * 10) / 10;
+
+// The hex with an element moved by (dx, dy) in the frame of the hex: its x and
+// y change by the same, whatever else places it (a side, an angle and a percent
+// add to x and y). Written to a tenth. A move of nothing gives the same hex.
+export const dragElement = (hex, key, index, dx, dy) => {
+  const element = elementAt(hex, key, index);
+  if (!DRAGGABLE_KEYS.includes(key) || element === undefined) return hex;
+  const item = isObject(element) ? element : {};
+  const x = tenth((typeof item.x === "number" ? item.x : 0) + dx);
+  const y = tenth((typeof item.y === "number" ? item.y : 0) + dy);
+  const moved = setElementKey(hex, key, index, "x", x || undefined);
+  return setElementKey(moved, key, index, "y", y || undefined);
+};
+
 // Geometry, in the frame of a hex 150 across the flats, centered on 0
 
 // The point at a distance from the center towards a side. The hex turns by the

@@ -1,7 +1,13 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { equals } from "ramda";
 
+import {
+  emptyHistory,
+  record,
+  redo as redoStep,
+  undo as undoStep,
+} from "@/components/hexEditor/hexHistory";
 import { HEX_ROOT } from "@/components/hexEditor/hexSchema";
 import { SchemaFormContext } from "@/components/schemaForm/SchemaField";
 import {
@@ -37,17 +43,55 @@ export const useHexForm = ({ value, onChange, game, issues }) => {
   const change = useRef(onChange);
   change.current = onChange;
 
+  // The steps to undo and redo: they start empty with the editor, which
+  // starts over for another hex. A batch (a drag) is one step: its first
+  // change records the hex it started from, the others do not.
+  const history = useRef(emptyHistory());
+  const batch = useRef("off");
+  const [, refresh] = useState(0);
+
   return useMemo(() => {
     const read = () => ({ ...game, hex: latest.current });
-    const apply = (next) => {
-      if (next === undefined || equals(next, latest.current)) return;
+    const put = (next) => {
       latest.current = next;
       change.current(next);
+      refresh((n) => n + 1);
+    };
+    const apply = (next) => {
+      if (next === undefined || equals(next, latest.current)) return;
+      if (batch.current !== "open") {
+        history.current = record(history.current, latest.current);
+        if (batch.current === "fresh") batch.current = "open";
+      }
+      put(next);
+    };
+    const step = (fn) => {
+      const result = fn(history.current, latest.current);
+      if (!result) return false;
+      history.current = result.history;
+      put(result.value);
+      return true;
     };
     const edit = (fn) => apply(fn({ hex: latest.current }).hex);
 
     return {
       root: HEX_ROOT,
+      history: {
+        get canUndo() {
+          return history.current.past.length > 0;
+        },
+        get canRedo() {
+          return history.current.future.length > 0;
+        },
+        undo: () => step(undoStep),
+        redo: () => step(redoStep),
+        begin: () => {
+          batch.current = "fresh";
+        },
+        end: () => {
+          batch.current = "off";
+        },
+      },
       game: { ...game, hex: value },
       issues: rooted(issues),
       latest: read,

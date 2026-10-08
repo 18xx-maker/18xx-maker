@@ -1,9 +1,10 @@
-import { Component, memo } from "react";
+import { Component, memo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import Hex from "@/components/Hex";
 import { SideHandle } from "@/components/hexEditor/SidePicker";
 import {
+  DRAGGABLE_KEYS,
   SIDES,
   elementPoint,
   elementsOf,
@@ -13,6 +14,10 @@ import ColorContext from "@/context/ColorContext";
 import OrientationContext from "@/context/OrientationContext";
 
 const ACCENT = "#2563eb";
+
+// The pointer has to move this far (in pixels of the screen) before a press
+// on an element is a drag and not a click
+const DRAG_START = 4;
 
 // A key that changes when the value does, so a boundary tries again
 const keyOf = (value) => {
@@ -81,12 +86,55 @@ const HexCanvas = ({
   pending = null,
   onEdge,
   elementLabel,
+  onDragStart,
+  onDrag,
+  onDragEnd,
 }) => {
   const { t } = useTranslation();
   const elements = elementsOf(value);
+  const svg = useRef(null);
+  // The press on an element: where it started (screen) and whether it moved
+  const press = useRef(null);
+  const dragged = useRef(false);
+
+  // Pixels of the screen to units of the drawing
+  const scale = () => svg.current?.getScreenCTM?.()?.a || 1;
+
+  const down = (event, item) => {
+    if (event.button !== 0 || !onDrag || !DRAGGABLE_KEYS.includes(item.key)) {
+      return;
+    }
+    press.current = { ...item, x: event.clientX, y: event.clientY, on: false };
+    dragged.current = false;
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const move = (event) => {
+    const p = press.current;
+    if (!p) return;
+    const dx = event.clientX - p.x;
+    const dy = event.clientY - p.y;
+    if (!p.on) {
+      if (Math.hypot(dx, dy) < DRAG_START) return;
+      p.on = true;
+      dragged.current = true;
+      onSelect({ key: p.key, index: p.index });
+      onDragStart?.({ key: p.key, index: p.index });
+    }
+    const k = scale();
+    onDrag({ key: p.key, index: p.index }, dx / k, dy / k);
+  };
+
+  const up = (event) => {
+    const p = press.current;
+    press.current = null;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
+    if (p?.on) onDragEnd?.({ key: p.key, index: p.index });
+  };
 
   return (
     <svg
+      ref={svg}
       viewBox="-100 -100 200 200"
       role="group"
       aria-label={t("hexEditor.form.canvas")}
@@ -112,8 +160,16 @@ const HexCanvas = ({
               fillOpacity={0.2}
               stroke={on ? ACCENT : "transparent"}
               strokeWidth={on ? 3 : 0}
-              className="cursor-pointer hover:stroke-primary hover:[stroke-width:2px]"
-              onClick={() => onSelect({ key, index })}
+              className={`${DRAGGABLE_KEYS.includes(key) ? "cursor-grab" : "cursor-pointer"} touch-none hover:stroke-primary hover:[stroke-width:2px]`}
+              onPointerDown={(event) => down(event, { key, index })}
+              onPointerMove={move}
+              onPointerUp={up}
+              onPointerCancel={up}
+              onClick={() => {
+                // A drag ends in a click on the element: it is not a pick
+                if (dragged.current) dragged.current = false;
+                else onSelect({ key, index });
+              }}
             >
               <title>{elementLabel(key, index)}</title>
             </circle>
