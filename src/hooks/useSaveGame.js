@@ -1,15 +1,16 @@
-import { useCallback, useRef, useSyncExternalStore } from "react";
-import { useSelector, useStore } from "react-redux";
+import { useCallback, useMemo, useRef, useSyncExternalStore } from "react";
+import { shallowEqual, useSelector, useStore } from "react-redux";
 
 import { useSaveAs } from "@/hooks/useSaveAs";
 import { useNavigate } from "@/router";
 import { CONFLICT, saveGame } from "@/state";
-import { selectGameChanged, selectGameState } from "@/state/selectors";
+import { selectGameChanged, selectGameOriginal } from "@/state/selectors";
 import { canSaveGame } from "@/util/canSaveGame";
 
 // What every way of saving (toolbar, Cmd/Ctrl+S, the File menu, the Changes
 // page) shares: a save in flight, which ignores a second request, and the slug
-// of the game whose file changed outside the app, which the Changes page
+// of the game whose file changed outside the app (and the original it was
+// found against: a refresh or a reload makes it stale), which the Changes page
 // offers to reload or overwrite.
 let shared = { saving: false, conflict: undefined };
 const listeners = new Set();
@@ -37,7 +38,27 @@ export const clearSaveConflict = () => update({ conflict: undefined });
 export const useSaveGame = () => {
   const store = useStore();
   const navigate = useNavigate();
-  const game = useSelector(selectGameState);
+  // Only what is rendered, so an edit does not render the caller
+  const parts = useSelector(
+    (s) =>
+      s.game
+        ? {
+            type: s.game.meta.type,
+            slug: s.game.meta.slug,
+            title: s.game.info.title,
+          }
+        : undefined,
+    shallowEqual,
+  );
+  const game = useMemo(
+    () =>
+      parts && {
+        meta: { type: parts.type, slug: parts.slug },
+        info: { title: parts.title },
+      },
+    [parts],
+  );
+  const original = useSelector(selectGameOriginal);
   const state = useSyncExternalStore(subscribe, () => shared);
   const saveAs = useSaveAs(game);
 
@@ -67,7 +88,12 @@ export const useSaveGame = () => {
 
         const result = await store.dispatch(saveGame({ force }));
         if (result === CONFLICT) {
-          update({ conflict: edited.meta.slug });
+          update({
+            conflict: {
+              slug: edited.meta.slug,
+              original: current.gameOriginal,
+            },
+          });
           if (redirect) {
             latest.current.navigate(`/games/${edited.meta.slug}/changes`);
           }
@@ -92,7 +118,10 @@ export const useSaveGame = () => {
   return {
     save,
     saving: state.saving,
-    conflict: !!game && state.conflict === game.meta.slug,
+    conflict:
+      !!game &&
+      state.conflict?.slug === game.meta.slug &&
+      state.conflict.original === original,
     // Saves the file, or a copy of a game that has no file
     available: !!game && (canSaveGame(game.meta.type) || saveAs.available),
     saveAs: !!game && !canSaveGame(game.meta.type) && saveAs.available,

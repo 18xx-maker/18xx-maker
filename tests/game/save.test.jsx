@@ -10,7 +10,7 @@ import { page as browser, userEvent as realUser } from "vitest/browser";
 
 import games from "@/data/games";
 import { clearSaveConflict } from "@/hooks";
-import { editGame } from "@/state";
+import { createSetExportSheetOpen, createSetGame, editGame } from "@/state";
 import capability from "@/util/capability";
 import * as opfs from "@/util/storage/opfs";
 
@@ -67,6 +67,7 @@ const original = { ...capability, apis: { ...capability.apis } };
 beforeEach(async () => {
   await browser.viewport(1280, 900);
   vi.resetAllMocks();
+  delete window.api;
   opfs.peekGame.mockResolvedValue(internal());
   opfs.loadSummaries.mockResolvedValue({});
   clearSaveConflict();
@@ -75,6 +76,30 @@ beforeEach(async () => {
 afterEach(() => {
   Object.assign(capability, original);
 });
+
+// The app's File menu: Save calls back what the page registered with onSave
+const openInApp = (route, extra) => {
+  Object.assign(capability, { electron: true });
+  const noop = vi.fn();
+  let menuSave;
+  window.api = {
+    onAlert: noop,
+    onProgress: noop,
+    onRedirect: noop,
+    onSave: (callback) => {
+      menuSave = callback;
+    },
+    onGame: noop,
+    onUpdate: noop,
+    onDownloadProgress: noop,
+    off: noop,
+    loadPlatformAndVersions: () => ({ platform: "darwin", versions: {} }),
+    addRecent: vi.fn(),
+    loadSummaries: vi.fn(async () => ({ electron: {} })),
+  };
+  const view = open(route, extra);
+  return { ...view, menuSave: () => act(() => menuSave()) };
+};
 
 describe("the toolbar save button", () => {
   it("is there only while the game has changes, and saves", async () => {
@@ -195,6 +220,53 @@ describe("Cmd and Ctrl + S", () => {
     expect(saved()).toBe(0);
   });
 
+  it("does not save while the export sheet is open", async () => {
+    const { store } = open("/games/internal:abc/map");
+    await screen.findByTestId("game-internal:abc-map");
+    await rename(store, "Renamed Game");
+    act(() => store.dispatch(createSetExportSheetOpen(true)));
+
+    expect(press(document.body, { metaKey: true })).toBe(true);
+    await act(() => new Promise((r) => setTimeout(r, 100)));
+    expect(saved()).toBe(0);
+  });
+
+  it("in the Vim editor keeps the page and the menu from saving", async () => {
+    const { store } = open("/games/internal:abc/map", {
+      settings: { editorKeys: "vim" },
+    });
+    await screen.findByTestId("game-internal:abc-map");
+    await rename(store, "Renamed Game");
+    const editor = document.createElement("div");
+    editor.className = "cm-editor";
+    document.body.append(editor);
+
+    // Kept from the menu accelerator
+    expect(press(editor, { ctrlKey: true })).toBe(true);
+    await act(() => new Promise((r) => setTimeout(r, 100)));
+    expect(saved()).toBe(0);
+    editor.remove();
+  });
+
+  it("takes the key of a layout without a Latin s", async () => {
+    const { store } = open("/games/internal:abc/map");
+    await screen.findByTestId("game-internal:abc-map");
+    await rename(store, "Renamed Game");
+
+    expect(
+      press(document.body, { metaKey: true, key: "ы", code: "KeyS" }),
+    ).toBe(true);
+    await waitFor(() => expect(saved()).toBe(1));
+  });
+
+  it("leaves a Latin letter on the S key of another layout alone", async () => {
+    open("/games/internal:abc/map");
+    await screen.findByTestId("game-internal:abc-map");
+    expect(
+      press(document.body, { metaKey: true, key: "o", code: "KeyS" }),
+    ).toBe(false);
+  });
+
   it("is listed in the shortcuts", async () => {
     const { user } = open("/games/internal:abc/map");
     await screen.findByTestId("game-internal:abc-map");
@@ -274,7 +346,8 @@ describe("Cmd and Ctrl + S", () => {
       editor.className = "cm-editor";
       document.body.append(editor);
 
-      expect(press(editor, { ctrlKey: true })).toBe(false);
+      // Kept from the menu accelerator, but not saved
+      expect(press(editor, { ctrlKey: true })).toBe(true);
       await act(() => new Promise((r) => setTimeout(r, 100)));
       expect(saved()).toBe(0);
 
@@ -318,5 +391,87 @@ describe("Cmd and Ctrl + S", () => {
     } finally {
       globalThis.IS_REACT_ACT_ENVIRONMENT = true;
     }
+  });
+});
+
+describe("the File menu save", () => {
+  it("saves a changed game of a game page", async () => {
+    const { store, menuSave } = openInApp("/games/internal:abc/map");
+    await screen.findByTestId("game-internal:abc-map");
+    await rename(store, "Renamed Game");
+
+    await menuSave();
+    await waitFor(() => expect(saved()).toBe(1));
+  });
+
+  it("does nothing outside of a game page", async () => {
+    const { store, menuSave } = openInApp("/docs");
+    await rename(store, "Renamed Game");
+
+    await menuSave();
+    await act(() => new Promise((r) => setTimeout(r, 100)));
+    expect(saved()).toBe(0);
+  });
+
+  it("does nothing while a dialog is open", async () => {
+    const { store, user, menuSave } = openInApp("/games/internal:abc/map");
+    await screen.findByTestId("game-internal:abc-map");
+    await rename(store, "Renamed Game");
+
+    await user.keyboard("?");
+    await screen.findByTestId("shortcuts");
+    await menuSave();
+    await act(() => new Promise((r) => setTimeout(r, 100)));
+    expect(saved()).toBe(0);
+  });
+
+  it("does nothing while the export sheet is open", async () => {
+    const { store, menuSave } = openInApp("/games/internal:abc/map");
+    await screen.findByTestId("game-internal:abc-map");
+    await rename(store, "Renamed Game");
+    act(() => store.dispatch(createSetExportSheetOpen(true)));
+
+    await menuSave();
+    await act(() => new Promise((r) => setTimeout(r, 100)));
+    expect(saved()).toBe(0);
+  });
+
+  it("does nothing in the print view", async () => {
+    const { store, menuSave } = openInApp("/games/internal:abc/map?print=true");
+    await screen.findByTestId("game-internal:abc-map");
+    await rename(store, "Renamed Game");
+
+    await menuSave();
+    await act(() => new Promise((r) => setTimeout(r, 100)));
+    expect(saved()).toBe(0);
+  });
+});
+
+describe("the conflict", () => {
+  const conflicted = async () => {
+    const changed = internal();
+    changed.info.title = "Changed elsewhere";
+    opfs.peekGame.mockResolvedValue(changed);
+    const view = open("/games/internal:abc/changes");
+    await screen.findByTestId("game-internal:abc-changes");
+    await rename(view.store, "Renamed Game");
+    press(document.body, { ctrlKey: true });
+    await screen.findByTestId("changes-conflict");
+    return { ...view, changed };
+  };
+
+  it("goes with Revert", async () => {
+    const { store, user } = await conflicted();
+    await user.click(screen.getByRole("button", { name: /Revert/ }));
+    await rename(store, "Renamed Again");
+    expect(await screen.findByRole("button", { name: "Save" })).toBeVisible();
+    expect(screen.queryByTestId("changes-conflict")).not.toBeInTheDocument();
+  });
+
+  it("goes when the file is refreshed", async () => {
+    const { store, changed } = await conflicted();
+    act(() => store.dispatch(createSetGame(changed, { keepEdits: true })));
+    expect(screen.queryByTestId("changes-conflict")).not.toBeInTheDocument();
+    expect(store.getState().game.info.title).toBe("Renamed Game");
   });
 });
