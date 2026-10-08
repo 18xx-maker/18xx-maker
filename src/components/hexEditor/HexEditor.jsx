@@ -9,8 +9,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import ElementList from "@/components/hexEditor/ElementList";
 import HexCanvas from "@/components/hexEditor/HexCanvas";
 import SidePicker from "@/components/hexEditor/SidePicker";
-import { historyKey } from "@/components/hexEditor/hexHistory";
 import TileFieldset from "@/components/hexEditor/TileFieldset";
+import { historyKey } from "@/components/hexEditor/hexHistory";
 import {
   NEW_ELEMENT,
   addElement,
