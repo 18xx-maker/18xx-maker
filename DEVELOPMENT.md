@@ -164,17 +164,21 @@ pnpm build:sb
 figures are rendered (before minification) sizes. The table below is what users
 download, minified, per package, from source-map attribution of the site
 build (`dist/site` only; the Electron renderer has no `manualChunks` and was not
-measured), with gzip and brotli of the attributed bytes. Peripheral packages
+measured), with gzip and brotli of the attributed bytes. Those are computed on
+each package's slice compressed on its own, so they are upper bounds and do not
+add up to a chunk's real compressed size (the whole `CodeHighlighted` chunk
+gzips to 56.3 kB, against 61.3 kB in the table). Peripheral packages
 are grouped with their owner (uri-js and fast-copy with json-schema-library,
 oniguruma-to-es and @shikijs/* with shiki, the lezer packages, style-mod and
 w3c-keyname with CodeMirror). 1 kB is 1000 bytes. Measured on 2026-10-07 at
 commit `735b4d43`. Chunks are named by role, since file hashes change on every
-build.
+build. The json-schema-library chunk is also named `index-<hash>.js`; the
+entry is the one referenced by the module script in `index.html`.
 
 | Library                                                         | Chunk                                  | Loaded                                      | Raw kB | gzip kB | brotli kB |
 | --------------------------------------------------------------- | -------------------------------------- | ------------------------------------------- | -----: | ------: | --------: |
 | shiki (core, json and bash grammars, 2 themes, JS regex engine) | `CodeHighlighted` (2.8 kB in `vendor`) | Lazy: first `Code` block, and the diff view |  213.3 |    61.3 |      54.6 |
-| json-schema-library (with uri-js, fast-copy, ...)               | its own async chunk                    | Lazy: game and config validation            |  120.3 |    32.8 |      28.1 |
+| json-schema-library (with uri-js, fast-copy, ...)               | its own async chunk                    | Async at startup on every page              |  120.3 |    32.8 |      28.1 |
 | tinycolor2                                                      | `vendor`                               | Initial                                     |   15.5 |     5.4 |       4.7 |
 | CodeMirror in the entry chunk                                   | entry (`index`)                        | Initial (unintended, see below)             |  318.3 |   106.9 |      95.1 |
 | CodeMirror JSON editor                                          | `JsonEditor`                           | Lazy: JSON section of the edit panel        |   54.8 |    19.4 |      17.6 |
@@ -200,8 +204,11 @@ Go or no-go on the options in issue 1021:
   kB gzip. highlight.js or Prism would save perhaps 20 to 35 kB gzip but lose
   the dual-theme token model (`--shiki-light` and `--shiki-dark`), change the
   docs and diff view output, and need a CSS rewrite.
-- ajv instead of json-schema-library is a no-go. The lazy chunk is 33 kB gzip
-  and ajv would save little (the ajv runtime is roughly 35 kB gzip, an
+- ajv instead of json-schema-library is a no-go. The chunk is 33 kB gzip. It is
+  split off the entry, but `src/hooks/validation.js` calls
+  `import("json-schema-library")` at module top level and `@/hooks` is
+  imported by core components, so every visitor fetches it at startup (async,
+  not modulepreloaded). Ajv would save little (the ajv runtime is roughly 35 kB gzip, an
   estimate that was not measured). `src/util/gameValidation.js` maps
   json-schema-library error codes and nested `data.errors` to localized issues,
   so a migration rewrites it and its tests for no meaningful gain.
