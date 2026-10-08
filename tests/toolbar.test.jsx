@@ -157,6 +157,6 @@ describe("edit link", () => {
     renderApp("/games/Bare");
     const page = await screen.findByTestId("game-Bare");
     const link = within(page).getByRole("link", { name: "Edit Game" });
-    expect(link).not.toHaveAttribute("href", "/games/Bare/map");
+    expect(link).toHaveAttribute("href", "/games/Bare/tokens");
   });
 });

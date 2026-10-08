@@ -164,6 +164,32 @@ describe("app sidebar", () => {
     expect(router.state.location.pathname).toBe("/");
   });
 
+  it("opens the first section the game has data for from Edit Game", async () => {
+    const { user } = renderApp("/games/Bare");
+    expect(await screen.findByTestId("game-Bare")).toBeInTheDocument();
+
+    await user.click(trigger());
+    const nav = await sidebar();
+    await waitFor(() =>
+      expect(
+        within(nav).getByRole("link", { name: "Edit Game" }),
+      ).toHaveAttribute("href", "/games/Bare/tokens"),
+    );
+  });
+
+  it("opens the map from Edit Game when the game has one", async () => {
+    const { user } = renderApp("/games/18Test");
+    expect(await screen.findByTestId("game-18Test")).toBeInTheDocument();
+
+    await user.click(trigger());
+    const nav = await sidebar();
+    await waitFor(() =>
+      expect(
+        within(nav).getByRole("link", { name: "Edit Game" }),
+      ).toHaveAttribute("href", "/games/18Test/map"),
+    );
+  });
+
   it("has no game links without a loaded game", async () => {
     const { user } = renderApp("/");
     await user.click(trigger());
