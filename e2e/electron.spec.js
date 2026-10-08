@@ -252,6 +252,69 @@ test.describe("the app exports 18Test", () => {
     await window.evaluate((id) => window.api.deleteGame(id), summary.id);
   });
 
+  test("saves the game from the File menu and from the key, once each", async () => {
+    app = await launch();
+    const file = path.join(out, "save-copy.json");
+    await app.evaluate(({ dialog }, filePath) => {
+      dialog.showSaveDialog = async () => ({ canceled: false, filePath });
+      // The writes to the file, however the save was asked for
+      const fs = process.mainModule.require("node:fs");
+      const write = fs.writeFileSync;
+      globalThis.writes = [];
+      fs.writeFileSync = (target, ...rest) => {
+        if (target === filePath) globalThis.writes.push(target);
+        return write(target, ...rest);
+      };
+    }, file);
+
+    const window = await show(app, "#/games/18Test");
+    await window.getByRole("button", { name: "Save as..." }).click();
+    await expect(window).toHaveURL((url) =>
+      url.hash.startsWith("#/games/electron:"),
+    );
+    const writes = () => app.evaluate(() => globalThis.writes.length);
+    expect(await writes()).toBe(1);
+    const slug = new URL(window.url()).hash.slice("#/games/".length);
+
+    const edit = async (text) => {
+      const editor = window.getByRole("textbox", { name: "Game JSON" });
+      await editor.click();
+      await window.keyboard.press("ControlOrMeta+Home");
+      await window.keyboard.press("ArrowRight");
+      await window.keyboard.type(text);
+      await expect(window.getByTestId("toolbar-save")).toBeVisible();
+    };
+
+    await window.evaluate((to) => {
+      window.location.hash = to;
+    }, `#/games/${slug}/map`);
+    await expect(window.getByRole("button", { name: "Export" })).toBeVisible();
+    await window.keyboard.press("j");
+
+    // The File menu item
+    await edit('"menuEdit": 1,');
+    await app.evaluate(({ Menu }) =>
+      Menu.getApplicationMenu().getMenuItemById("save").click(),
+    );
+    await expect(window.getByTestId("toolbar-save")).toHaveCount(0);
+    expect(await writes()).toBe(2);
+    expect(fs.readFileSync(file, "utf-8")).toContain("menuEdit");
+
+    // The key
+    await edit('"keyEdit": 2,');
+    await window.keyboard.press("ControlOrMeta+s");
+    await expect(window.getByTestId("toolbar-save")).toHaveCount(0);
+    expect(await writes()).toBe(3);
+    expect(fs.readFileSync(file, "utf-8")).toContain("keyEdit");
+
+    const config = () =>
+      window.evaluate(() => window.api.loadConfig().then((r) => r.config));
+    const summary = Object.values((await config()).summaries).find(
+      (summary) => summary.slug === slug,
+    );
+    await window.evaluate((id) => window.api.deleteGame(id), summary.id);
+  });
+
   test("opens the JSON editor with the j key", async () => {
     app = await launch();
 
