@@ -556,14 +556,15 @@ const dissocSafe = (keys, object) => {
 export const setValue = (game, keys, value) => assocSafe(keys, value, game);
 
 // Removes the key, and the objects this left empty (an object that was
-// already empty stays, and the info is never removed)
-export const clearValue = (game, keys) => {
+// already empty stays, and the info is never removed). The objects at or above
+// the floor (a number of keys) are kept even when emptied.
+export const clearValue = (game, keys, floor = 0) => {
   if (valueAt(keys, game) === undefined) return game;
 
   let next = dissocSafe(keys, game);
   for (
     let parent = init(keys);
-    parent.length > 0 &&
+    parent.length > floor &&
     !equals(parent, ["info"]) &&
     !isEmpty(valueAt(parent, game)) &&
     isEmpty(valueAt(parent, next));

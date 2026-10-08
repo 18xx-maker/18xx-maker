@@ -265,8 +265,9 @@ Escape lets go of the group. The address keeps it as `hex`, the first
 coordinate of the group (`?edit=true&editSection=hex&hex=C11`). Picking hexes
 works on the pan and zoom map on screen while the panel is open, and the
 printed and exported maps do not change. A map variation that copies another
-shows the hexes it copies read only: change them in the variation they come
-from. The edge buttons and the lists of the form work from the keyboard.
+shows the hexes it copies as JSON you can read: change them in the variation
+they come from, or press _Override here_ to make a copy of the hex in this
+variation and edit that. The edge buttons and the lists of the form work from the keyboard.
 
 The Config tab edits the `config` of the game as JSON, the settings that are
 applied for this game when _Allow game config_ is on in the [config

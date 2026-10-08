@@ -1,4 +1,6 @@
-import { equals } from "ramda";
+import { equals, omit } from "ramda";
+
+import { sidesFromTrack } from "@/util/tiles/track";
 
 // What the hex editor does with a hex (a group of the map or a tile), without
 // a component. Every change gives a new hex and leaves the one it was given
@@ -189,17 +191,12 @@ export const normalizeSide = (side) => ((((side - 1) % 6) + 6) % 6) + 1;
 
 export const rotateSide = (side, steps) => normalizeSide(side + steps);
 
-// How far from its side a track ends, in sides
-const STEP = { straight: 3, sharp: 1, gentle: 2 };
-
 // The sides a track touches: its side, and the one it turns to when its type
 // is a curve or a straight (a stub or an offboard track ends inside the hex)
-export const trackEnds = (track) => {
-  const side = Number(track?.side);
-  if (!Number.isInteger(side) || side < 1 || side > 6) return [];
-  const step = STEP[track.type];
-  return step ? [side, rotateSide(side, step)] : [side];
-};
+export const trackEnds = (track) =>
+  sidesFromTrack(track).filter(
+    (side) => Number.isInteger(side) && side >= 1 && side <= 6,
+  );
 
 // The side and type of the track that joins two sides, or null for the same
 // side. A curve turns the same way from its side: the one that joins 5 to 4
@@ -217,7 +214,12 @@ export const trackBetween = (a, b) => {
 // The track with the sides it touches changed: two sides make the track that
 // joins them, one side moves the start of the track
 export const setTrackEnds = (track, ends) => {
-  const object = isObject(track) ? track : {};
+  const given = isObject(track) ? track : {};
+  if (given.type === "custom" && ends.length === 1) {
+    return { ...given, sides: [...ends] };
+  }
+  // A custom track lists its sides: they are stale when the type changes
+  const object = given.type === "custom" ? omit(["sides"], given) : given;
   if (ends.length >= 2) {
     const joined = trackBetween(ends[0], ends[1]);
     return joined ? { ...object, ...joined } : object;

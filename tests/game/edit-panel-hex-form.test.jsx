@@ -155,6 +155,31 @@ describe("the form", () => {
     expect(Object.keys(groupOf("C11"))).toEqual(["color", "hexes", "labels"]);
   });
 
+  it("keeps a town when its last field is cleared", async () => {
+    const source = structuredClone(games["18Test"]);
+    const group = source.map.hexes.find((g) => g.hexes.includes("C11"));
+    group.towns = [{ angle: 90 }];
+    const { user } = open(`${route}&hex=C11`, source);
+    await form();
+    await user.click(
+      screen
+        .getByTestId("hex-canvas-elements")
+        .querySelector('[data-element="towns:0"]'),
+    );
+    const inspector = await screen.findByTestId("hex-inspector");
+    await user.click(
+      within(inspector).getByRole("button", { name: "More fields" }),
+    );
+    const field = await within(inspector).findByDisplayValue("90");
+    await user.clear(field);
+    await user.tab();
+    await waitFor(() =>
+      expect(groupOf("C11").towns?.[0]?.angle).toBeUndefined(),
+    );
+    // The town stays, as an empty element, and so does the list
+    expect(groupOf("C11").towns).toEqual([{}]);
+  });
+
   it("removes an element, and the list with its last one", async () => {
     const { user } = open(`${route}&hex=B14`);
     await form();
@@ -262,6 +287,10 @@ describe("the JSON view", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "The JSON is not valid yet",
     );
+    const alertGone = () =>
+      waitFor(() =>
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument(),
+      );
     expect(screen.getByRole("radio", { name: "JSON" })).toBeChecked();
     expect(screen.queryByTestId("hex-editor")).not.toBeInTheDocument();
     expect(opened.getState().game).toBe(before);
@@ -271,8 +300,29 @@ describe("the JSON view", () => {
     await waitFor(() =>
       expect(screen.getByRole("status")).toHaveTextContent("Valid JSON"),
     );
+    await alertGone();
     await user.click(screen.getByRole("radio", { name: "Form" }));
     await form();
+  });
+
+  it("keeps an invalid JSON draft when the tab is left and come back to", async () => {
+    const { user } = open(`${route}&hex=B12`);
+    await form();
+    await user.click(screen.getByRole("radio", { name: "JSON" }));
+    const view = await editor();
+    view.dispatch({ changes: { from: 0, to: 0, insert: "{" } });
+    await waitFor(() =>
+      expect(screen.getByRole("status")).toHaveTextContent("syntax error"),
+    );
+    const text = view.state.doc.toString();
+
+    await user.click(screen.getByRole("tab", { name: "Trains" }));
+    await waitFor(() =>
+      expect(screen.queryByTestId("json-editor")).not.toBeInTheDocument(),
+    );
+    await user.click(screen.getByRole("tab", { name: "Hex" }));
+    expect(await screen.findByRole("radio", { name: "JSON" })).toBeChecked();
+    expect((await editor()).state.doc.toString()).toBe(text);
   });
 });
 

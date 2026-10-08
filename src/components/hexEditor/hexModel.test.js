@@ -194,11 +194,23 @@ describe("sides", () => {
     expect(trackEnds({ side: 6, type: "gentle" })).toEqual([6, 2]);
     expect(trackEnds({ side: 3, type: "offboard" })).toEqual([3]);
     expect(trackEnds({ side: 3 })).toEqual([3]);
-    expect(trackEnds({})).toEqual([]);
+    expect(trackEnds({})).toEqual([1]);
+    expect(trackEnds({ type: "straight" })).toEqual([1, 4]);
+    expect(trackEnds({ side: 5, type: "bent" })).toEqual([5, 2]);
+    expect(trackEnds({ type: "custom", sides: [2, 6, 9] })).toEqual([2, 6]);
     expect(trackEnds(undefined)).toEqual([]);
     expect(trackEnds({ side: 9 })).toEqual([]);
     expect(touchesSide({ side: 1, type: "straight" }, 4)).toBe(true);
     expect(touchesSide({ side: 1 }, 4)).toBe(false);
+  });
+
+  it("does not leave stale sides on a custom track that is changed", () => {
+    const custom = { type: "custom", sides: [2, 5] };
+    expect(setTrackEnds(custom, [1, 4])).toEqual({
+      side: 1,
+      type: "straight",
+    });
+    expect(setTrackEnds(custom, [3])).toEqual({ type: "custom", sides: [3] });
   });
 
   it("makes the track that joins two sides, from either", () => {
@@ -324,7 +336,8 @@ describe("geometry", () => {
     const track = elementPoint("track", { side: 1, type: "straight" }, 0);
     expect(track.x).toBeCloseTo(0, 3);
     expect(track.y).toBeCloseTo(0, 3);
-    expect(elementPoint("track", {}, 0)).toEqual({ x: 0, y: 0 });
+    // A track without a side starts on side 1, as the map draws it
+    expect(elementPoint("track", {}, 0)).toEqual({ x: 0, y: 38 });
     expect(elementPoint("cities", undefined, 4).y).toBe(14);
   });
 });

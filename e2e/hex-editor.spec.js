@@ -46,7 +46,7 @@ test("keeps the form away while the JSON is not valid", async ({ page }) => {
   await page.locator("label", { hasText: "JSON" }).click();
   const json = page.getByRole("textbox", { name: "Hex group JSON" });
   await json.click();
-  await page.keyboard.press("Control+End");
+  await page.keyboard.press("ControlOrMeta+End");
   await page.keyboard.type("{");
   await expect(page.getByRole("status")).toContainText("syntax error");
 
@@ -55,7 +55,7 @@ test("keeps the form away while the JSON is not valid", async ({ page }) => {
   await expect(page.getByTestId("hex-editor")).toHaveCount(0);
 
   await json.click();
-  await page.keyboard.press("Control+End");
+  await page.keyboard.press("ControlOrMeta+End");
   await page.keyboard.press("Backspace");
   await expect(page.getByRole("status")).toContainText("Valid JSON");
   await page.locator("label", { hasText: "Form" }).click();

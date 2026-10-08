@@ -294,8 +294,9 @@ Adresse behält sie als `hex`, die erste Koordinate der Gruppe
 (`?edit=true&editSection=hex&hex=C11`). Das Wählen von Kartenfeldern funktioniert
 auf der Karte mit Schwenken und Zoomen am Bildschirm, solange das Panel offen
 ist; die gedruckten und exportierten Karten ändern sich nicht. Eine Kartenvariante,
-die eine andere kopiert, zeigt die kopierten Kartenfelder schreibgeschützt: Ändere
-sie in der Variante, aus der sie stammen. Die Kantenschaltflächen und die Listen des
+die eine andere kopiert, zeigt die kopierten Kartenfelder an: Ändere
+sie in der Variante, aus der sie stammen, oder drücke _Hier überschreiben_, um
+das Kartenfeld in dieser Variante zu kopieren und die Kopie zu bearbeiten. Die Kantenschaltflächen und die Listen des
 Formulars lassen sich per Tastatur bedienen.
 
 Der Tab Konfiguration bearbeitet die `config` des Spiels als JSON, die

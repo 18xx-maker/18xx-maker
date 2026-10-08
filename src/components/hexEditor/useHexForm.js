@@ -58,7 +58,12 @@ export const useHexForm = ({ value, onChange, game, issues }) => {
         ),
       clear: (keys) => {
         if (isRequired(HEX_ROOT, keys)) return false;
-        edit((g) => clearValue(g, keys));
+        // An element that loses its last field stays, as {}: only what is
+        // below the element is pruned
+        edit((g) => {
+          const list = Array.isArray(g.hex?.[keys[1]]);
+          return clearValue(g, keys, list ? 3 : 2);
+        });
       },
       insert: (keys, index, item) =>
         edit((g) => insertAt(g, keys, index, item)),

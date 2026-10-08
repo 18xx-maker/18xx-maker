@@ -375,7 +375,7 @@
     "moveHint": "{{key}}-Klick auf ein anderes Kartenfeld fügt es dieser Gruppe hinzu, ein Klick auf ein Kartenfeld der Gruppe entfernt es. Drücke Escape außerhalb des Editors, um die Gruppe loszulassen.",
     "pending": "{{coord}} hat noch kein Kartenfeld. Die Gruppe unten wird zur Karte hinzugefügt, sobald du sie änderst.",
     "removed": "Diese Kartenvariante entfernt {{coord}}, ein Kartenfeld dort wird nicht angezeigt.",
-    "inherited": "Dieses Kartenfeld wird aus der Kartenvariante {{variation}} kopiert und kann nur dort geändert werden.",
+    "inherited": "Dieses Kartenfeld wird aus der Kartenvariante {{variation}} kopiert. Ändere es dort oder überschreibe es hier.",
     "blocked": {
       "title": "Kartenfeld nicht verschoben",
       "last": "Das letzte Kartenfeld der Karte bleibt.",

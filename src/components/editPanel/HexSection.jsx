@@ -1,9 +1,9 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useStore } from "react-redux";
 
 import JsonSection from "@/components/editPanel/JsonSection";
-import { clearDraft, getDraft } from "@/components/editPanel/draftStore";
+import { getDraft, subscribeDrafts } from "@/components/editPanel/draftStore";
 import LazyHexEditor from "@/components/hexEditor/LazyHexEditor";
 
 import { useHexGroup } from "@/hooks/useHexGroup";
@@ -62,7 +62,14 @@ const HexSection = ({ game }) => {
   const { t } = useTranslation();
   const store = useStore();
   const { current, generation, lens, variation, slug } = useHexGroup(game);
-  const [view, setView] = useState("form");
+  // An unsent JSON draft (kept when the tab or the panel was left) opens the
+  // JSON view again
+  const hasDraft = useSyncExternalStore(subscribeDrafts, () =>
+    Boolean(getDraft(lens.draftKey)),
+  );
+  const [view, setView] = useState(() =>
+    getDraft(lens.draftKey) ? "json" : "form",
+  );
   // The generation in which a switch to the form was refused
   const [refused, setRefused] = useState(null);
   const allIssues = useSelector((state) => selectGameProblems(state, slug));
@@ -130,8 +137,6 @@ const HexSection = ({ game }) => {
 
   const choose = (next) => {
     if (next === "json") {
-      // The JSON starts over from the group the form made
-      clearDraft(lens.draftKey);
       setRefused(null);
       setView("json");
     } else if (getDraft(lens.draftKey)) {
@@ -154,7 +159,7 @@ const HexSection = ({ game }) => {
       {!removed && (
         <>
           <ViewToggle view={view} onChange={choose} />
-          {refused === generation && view === "json" && (
+          {refused === generation && view === "json" && hasDraft && (
             <p role="alert" className="text-sm text-destructive">
               {t("hexEditor.view.blocked")}
             </p>
