@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.0.0-beta.133](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.132...v1.0.0-beta.133) (2026-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **schema:** remove unused fields ([#1005](https://github.com/18xx-maker/18xx-maker/issues/1005))
+
+### :tada: Features
+
+* **config:** add central font roles ([#1012](https://github.com/18xx-maker/18xx-maker/issues/1012)) ([c115ec9](https://github.com/18xx-maker/18xx-maker/commit/c115ec986418d3b1478fafe134368e164f3fd80a))
+* **config:** add setting to apply a game's own config ([#1008](https://github.com/18xx-maker/18xx-maker/issues/1008)) ([b70e3e4](https://github.com/18xx-maker/18xx-maker/commit/b70e3e4951ec96c9b5a86a8ece4861d0f245be55))
+* **ui:** add field search and list filter to the edit panel ([#1009](https://github.com/18xx-maker/18xx-maker/issues/1009)) ([508bed3](https://github.com/18xx-maker/18xx-maker/commit/508bed394b82e84011374883fb30ef2c53015522))
+* **ui:** add fonts to config panel ([#1015](https://github.com/18xx-maker/18xx-maker/issues/1015)) ([dd3c12a](https://github.com/18xx-maker/18xx-maker/commit/dd3c12a1bb528e6f645ece40d6025f2ac7ca9113))
+* **ui:** keep edit panel open state across tabs ([#1006](https://github.com/18xx-maker/18xx-maker/issues/1006)) ([b6d984e](https://github.com/18xx-maker/18xx-maker/commit/b6d984e6c71c3a902f24bc9ca8fa094870f336ab))
+* **ui:** show field help in an info tooltip ([#1004](https://github.com/18xx-maker/18xx-maker/issues/1004)) ([c0aefb2](https://github.com/18xx-maker/18xx-maker/commit/c0aefb2d202ca2e116a9340140af502ae22147fc))
+
+
+### :bug: Bug Fixes
+
+* **ui:** keep edit panel hex editor in step with the anchor ([#1014](https://github.com/18xx-maker/18xx-maker/issues/1014)) ([03132c9](https://github.com/18xx-maker/18xx-maker/commit/03132c96da458bcc905a2f09927bb37907742b86))
+
+
+### :broom: Chores
+
+* **deps:** drop uuid for crypto.randomUUID ([#1023](https://github.com/18xx-maker/18xx-maker/issues/1023)) ([5838692](https://github.com/18xx-maker/18xx-maker/commit/5838692003959471c142ae2a296939c354485460))
+* **deps:** replace npm-run-all with npm-run-all2 ([#1024](https://github.com/18xx-maker/18xx-maker/issues/1024)) ([024ae27](https://github.com/18xx-maker/18xx-maker/commit/024ae27ddd42e7aca330f950c9cd07ead4be7abb))
+
+
+### :book: Documentation
+
+* report bundle size of shiki, json-schema-library, tinycolor2 and codemirror ([#1022](https://github.com/18xx-maker/18xx-maker/issues/1022)) ([68e8364](https://github.com/18xx-maker/18xx-maker/commit/68e8364e32faff2b9ac1e6f3f1a19d9d0ebe780b))
+
+
+### :hammer_and_wrench: Code Refactoring
+
+* **router:** replace react-router with wouter ([#1017](https://github.com/18xx-maker/18xx-maker/issues/1017)) ([735b4d4](https://github.com/18xx-maker/18xx-maker/commit/735b4d432434e825b8dbaf9f50f4feb06769f2da))
+* **schema:** remove unused fields ([#1005](https://github.com/18xx-maker/18xx-maker/issues/1005)) ([c960734](https://github.com/18xx-maker/18xx-maker/commit/c960734d9761a8ea0f5d157e64c7192c4bb6fad5))
+* **schema:** rename inconsistent field names ([#1010](https://github.com/18xx-maker/18xx-maker/issues/1010)) ([4473bcd](https://github.com/18xx-maker/18xx-maker/commit/4473bcd6d08694a780fa7682df82a4fa0c70ab97))
+
 ## [1.0.0-beta.132](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.131...v1.0.0-beta.132) (2026-10-07)
 
 
