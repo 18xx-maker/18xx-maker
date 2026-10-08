@@ -13,6 +13,7 @@ import {
 import { ArrayField } from "@/components/schemaForm/fields/ListFields";
 import {
   CountField,
+  CountValueField,
   NumberValueField,
 } from "@/components/schemaForm/fields/NumberFields";
 import { ObjectField } from "@/components/schemaForm/fields/ObjectField";
@@ -77,7 +78,7 @@ const SchemaField = ({ keys, schema, ...rest }) => {
     case "revenue":
       return <RevenueField {...props} />;
     case "count":
-      return <CountField {...props} />;
+      return <CountValueField {...props} />;
     case "object":
       return <ObjectField {...props} {...rest} />;
     case "record":

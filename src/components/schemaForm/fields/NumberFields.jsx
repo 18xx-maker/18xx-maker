@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 
+import CountInput from "@/components/form/CountInput";
 import NumberField from "@/components/form/NumberField";
 import {
   FORMAT,
@@ -49,6 +50,36 @@ export const CountField = ({
         onChange={(event) => draft.change(event.target.value)}
         onBlur={draft.commit}
         onKeyDown={(event) => event.key === "Enter" && draft.commit()}
+      />
+    </FieldShell>
+  );
+};
+
+// A count whose only text is "∞" has a toggle for it; any other list of text
+// (a toggle cannot choose among several) stays a text field
+export const CountValueField = ({ keys, schema }) => {
+  const text = schema.oneOf.find((a) => a.type === "string");
+  const number = schema.oneOf.find((a) => a.type !== "string");
+  if (text?.enum?.length !== 1 || text.enum[0] !== "∞") {
+    return <CountField keys={keys} schema={schema} />;
+  }
+  return <CountInputField keys={keys} schema={schema} min={number?.minimum} />;
+};
+
+const CountInputField = ({ keys, schema, min = 1 }) => {
+  const field = useField(keys, schema);
+
+  return (
+    <FieldShell {...field}>
+      <CountInput
+        {...field.aria()}
+        value={field.value}
+        min={min}
+        onChange={field.set}
+        onClear={field.clear}
+        onInvalid={(invalid) =>
+          field.setLocal(invalid ? "editPanel.invalidCount" : null)
+        }
       />
     </FieldShell>
   );

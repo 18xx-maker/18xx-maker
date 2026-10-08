@@ -223,6 +223,7 @@
     "duplicated": "{{item}} als {{title}} dupliziert",
     "restored": "{{item}} {{title}} wiederhergestellt",
     "invalidCount": "Gib eine ganze Zahl ab 1 oder ∞ ein.",
+    "infinity": "Unendlich",
     "invalidLimit": "Gib eine ganze Zahl ab 1, ∞ oder einen Bruch aus zwei Ziffern wie 3/4 ein.",
     "onePerLine": "Eine pro Zeile. Eine einzelne Zeile wird als Text gespeichert, mehrere als Liste.",
     "reference": {

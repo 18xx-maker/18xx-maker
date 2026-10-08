@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { userEvent as realUser } from "vitest/browser";
 
@@ -96,5 +96,25 @@ describe("NumberField", () => {
       unmount();
       expect(onChange).toHaveBeenCalledTimes(flush ? 1 : 0);
     }
+  });
+
+  it("passes on a step at once with commitOnStep, not typed digits", async () => {
+    const { user, onChange } = setup({ commitOnStep: true, step: 1 });
+    const input = screen.getByRole("spinbutton");
+    input.focus();
+    await act(() => realUser.keyboard("{ArrowUp}"));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenLastCalledWith(2);
+
+    await user.clear(input);
+    await user.type(input, "9");
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not pass on a step without commitOnStep", async () => {
+    const { onChange } = setup({ step: 1 });
+    screen.getByRole("spinbutton").focus();
+    await act(() => realUser.keyboard("{ArrowUp}"));
+    expect(onChange).not.toHaveBeenCalled();
   });
 });

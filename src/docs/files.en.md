@@ -281,7 +281,8 @@ partial change of a library tile, shows the tile as it is drawn and only its
 quantity, print and group can be changed; the library itself is never edited.
 Press _Customize_ to copy the library tile into the game as a tile of your own
 and edit that. Changing the quantity of a quantity keeps it a plain number, and
-no field is added that you did not change. Copy tile adds a copy after the tile,
+no field is added that you did not change. The quantity is a number field with
+arrows and an _Infinity_ toggle. Copy tile adds a copy after the tile,
 Remove tile takes it away (the last one removes `tiles`), and _Rename_ gives it
 another id (the order of the list is kept, except that ids that are whole
 numbers always come first) and in the privates that draw it. A tile drawn from

@@ -314,7 +314,8 @@ Druck und Gruppe lassen sich ändern; die Bibliothek selbst wird nie bearbeitet.
 Mit _Anpassen_ kopierst du das Bibliotheksplättchen als eigenes Plättchen ins
 Spiel und bearbeitest dieses. Ändert sich nur die Anzahl einer einfachen Anzahl,
 bleibt sie eine einfache Zahl, und es wird kein Feld ergänzt, das du nicht
-geändert hast. Plättchen kopieren fügt eine Kopie hinter dem Plättchen ein,
+geändert hast. Die Anzahl ist ein Zahlenfeld mit Pfeilen und einem Schalter
+_Unendlich_. Plättchen kopieren fügt eine Kopie hinter dem Plättchen ein,
 Plättchen entfernen nimmt es weg (beim letzten entfällt `tiles`), und
 _Umbenennen_ gibt ihm eine andere ID (die Reihenfolge der Liste bleibt erhalten, nur IDs, die
 ganze Zahlen sind, stehen immer zuerst) und in den

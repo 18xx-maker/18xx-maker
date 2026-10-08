@@ -11,13 +11,16 @@ const format = (value) =>
 // Opt-in, for fields that can be empty: onClear is called when the text is
 // emptied (it returns false to refuse), onInvalid(true) when the text is not a
 // number (the text then stays, else it goes back to the value) and flush
-// passes on what is typed when the field is removed.
+// passes on what is typed when the field is removed. commitOnStep also passes
+// on a number at once when the browser steps it (arrow keys, spinner buttons),
+// which is an input event without an inputType.
 const NumberField = ({
   value,
   onChange,
   onClear,
   onInvalid,
   flush = false,
+  commitOnStep = false,
   ...pass
 }) => {
   const [text, setText] = useState(format(value));
@@ -31,16 +34,16 @@ const NumberField = ({
     );
   }, [value]);
 
-  const commit = () => {
+  const commit = (next = text) => {
     dirty.current = false;
-    const number = Number(text);
+    const number = Number(next);
 
-    if (text.trim() !== "" && Number.isFinite(number)) {
+    if (next.trim() !== "" && Number.isFinite(number)) {
       onInvalid?.(false);
       if (number !== value) {
         onChange(number);
       }
-    } else if (text.trim() === "" && onClear && !badInput.current) {
+    } else if (next.trim() === "" && onClear && !badInput.current) {
       onInvalid?.(false);
       if (value !== undefined && onClear() === false) {
         setText(format(value));
@@ -74,8 +77,15 @@ const NumberField = ({
       onInput={(event) => {
         dirty.current = true;
         badInput.current = event.target.validity.badInput;
+        if (
+          commitOnStep &&
+          event.nativeEvent.inputType === undefined &&
+          !badInput.current
+        ) {
+          commit(event.target.value);
+        }
       }}
-      onBlur={commit}
+      onBlur={() => commit()}
       onKeyDown={(event) => event.key === "Enter" && commit()}
       {...pass}
     />

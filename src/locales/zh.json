@@ -223,6 +223,7 @@
     "duplicated": "已将{{item}}复制为 {{title}}",
     "restored": "已恢复{{item}} {{title}}",
     "invalidCount": "请输入至少为 1 的整数,或 ∞。",
+    "infinity": "无限",
     "invalidLimit": "请输入至少为 1 的整数、∞,或一位数字除以一位数字,如 3/4。",
     "onePerLine": "每行一项。单独一行保存为文本,多行保存为列表。",
     "reference": {
