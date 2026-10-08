@@ -8,6 +8,7 @@ import {
 
 import { useEditing } from "@/components/editor/Editor";
 
+import TapContext from "@/context/TapContext";
 import { TOOLBAR_INSET, usePanZoom } from "@/hooks/usePanZoom";
 
 const MIN_SCALE = 0.02;
@@ -89,6 +90,8 @@ const PanZoom = ({ page, count, children }) => {
   // Whether the view was moved since it was fitted, a late layout change
   // (fonts, a resize) refits an untouched view only
   const touched = useRef(false);
+  // What the content does with a tap (TilesOverlay)
+  const tap = useRef(null);
 
   const current = useRef(view);
   current.current = view;
@@ -140,7 +143,43 @@ const PanZoom = ({ page, count, children }) => {
     };
   }, [page, count]);
 
+  // An element asks to be panned into view with a "reveal" event (a tile that
+  // was just added, possibly on a page far from the view). Centered when it is
+  // not wholly in the window below the toolbar and left of the edit panel, the zoom stays.
+  useEffect(() => {
+    const el = container.current;
+    const onReveal = (event) => {
+      const box = event.target.getBoundingClientRect();
+      const area = el.getBoundingClientRect();
+      const top = area.top + Math.min(TOOLBAR_INSET, area.height / 4);
+      // The edit panel covers the right side, the view ends where it starts
+      // (below md it covers everything, then there is no side to keep clear)
+      let right = area.right;
+      const panel = document
+        .querySelector("[data-edit-panel]")
+        ?.getBoundingClientRect();
+      if (panel && panel.width > 0 && panel.left > area.left) {
+        right = Math.min(right, panel.left);
+      }
+      if (
+        box.left >= area.left &&
+        box.right <= right &&
+        box.top >= top &&
+        box.bottom <= area.bottom
+      ) {
+        return;
+      }
+      touched.current = true;
+      const dx = (area.left + right) / 2 - (box.left + box.right) / 2;
+      const dy = (top + area.bottom) / 2 - (box.top + box.bottom) / 2;
+      setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
+    };
+    el.addEventListener("reveal", onReveal);
+    return () => el.removeEventListener("reveal", onReveal);
+  }, []);
+
   usePanZoom(container, {
+    onTap: (target, event) => tap.current?.(target, event),
     onPan: (dx, dy) => {
       touched.current = true;
       setView((v) => ({ ...v, x: v.x + dx, y: v.y + dy }));
@@ -181,7 +220,7 @@ const PanZoom = ({ page, count, children }) => {
           transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
         }}
       >
-        {children}
+        <TapContext.Provider value={tap}>{children}</TapContext.Provider>
       </div>
     </div>
   );

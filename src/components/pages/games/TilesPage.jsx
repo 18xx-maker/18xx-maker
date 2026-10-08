@@ -32,6 +32,10 @@ import Pins from "@/components/Pins";
 import Page from "@/components/page/Page";
 import PageSetup from "@/components/page/PageSetup";
 import Svg from "@/components/svg/Svg";
+import TilesOverlay, {
+  TilesTap,
+  useTilesEditing,
+} from "@/components/tiles/TilesOverlay";
 
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
@@ -114,9 +118,24 @@ const pageTiles = (perPage, pages, tiles) => {
   return pageTiles(perPage, append(current, pages), rest);
 };
 
+// The id and position of every tile on a page
+const cellsOf = (page) =>
+  page.flatMap((hex, index) => (hex ? [{ id: hex.id, index }] : []));
+
+// The free positions of a page of `perPage`, but the one after the last tile
+// (the dashed cell) when `skipNext` says so
+const emptyOf = (page, perPage, skipNext) => {
+  const free = [];
+  for (let i = 0; i < perPage; i++) {
+    if (!page[i] && !(skipNext && i === page.length)) free.push(i);
+  }
+  return free;
+};
+
 const TilesPage = () => {
   const { config } = useConfig();
   const game = useGame();
+  const editing = useTilesEditing();
   const paper = layoutPaper(config.paper, config.printScale);
   const { layout, width: hexWidth, gaps, cutBorder } = config.tiles;
 
@@ -226,6 +245,25 @@ const TilesPage = () => {
       ),
     );
   }
+
+  let widthIn, viewBoxStr;
+  if (layout === "smallDie") {
+    widthIn = (c.pageWidth + 20) * 0.01;
+    viewBoxStr = "-10 0 " + (c.pageWidth + 20) + " " + c.pageHeight;
+  } else {
+    widthIn = c.pageWidth * 0.01;
+    viewBoxStr = "0 0 " + c.pageWidth + " " + c.pageHeight;
+  }
+
+  let pins =
+    layout === "die" || layout === "smallDie" || config.tiles.showPins ? (
+      <Pins config={config.tiles.pins} />
+    ) : null;
+
+  const svgStyle = {
+    width: `${widthIn}in`,
+    height: `${c.pageHeight * 0.01}in`,
+  };
 
   // Offset tiles get a bleed clip cut flat toward the neighbors they have
   const offsetClips = {};
@@ -341,19 +379,10 @@ const TilesPage = () => {
         )
       : null;
 
-    let widthIn, viewBoxStr;
-    if (layout === "smallDie") {
-      widthIn = (c.pageWidth + 20) * 0.01;
-      viewBoxStr = "-10 0 " + (c.pageWidth + 20) + " " + c.pageHeight;
-    } else {
-      widthIn = c.pageWidth * 0.01;
-      viewBoxStr = "0 0 " + c.pageWidth + " " + c.pageHeight;
-    }
-
-    let pins =
-      layout === "die" || layout === "smallDie" || config.tiles.showPins ? (
-        <Pins config={config.tiles.pins} />
-      ) : null;
+    const next =
+      pageIndex === pagedTiles.length - 1 && page.length < c.perPage
+        ? page.length
+        : null;
 
     return (
       <div className="TileSheet--Page" key={`page-${pageIndex}`}>
@@ -363,21 +392,43 @@ const TilesPage = () => {
           current={pageIndex + 1}
           total={pagedTiles.length}
         />
-        <Svg
-          style={{
-            width: `${widthIn}in`,
-            height: `${c.pageHeight * 0.01}in`,
-          }}
-          viewBox={`${viewBoxStr}`}
-        >
+        <Svg style={svgStyle} viewBox={`${viewBoxStr}`}>
           <Cutlines />
           {pins}
           {tileNodes}
           {borderNodes}
+          <TilesOverlay
+            c={c}
+            cells={cellsOf(page)}
+            empty={emptyOf(page, c.perPage, next !== null)}
+            next={next}
+          />
         </Svg>
       </div>
     );
   }, pagedTiles);
+
+  // In the editor a full last page (or none) gets a page of its own for the
+  // cell that adds a tile. It is no page of the print: no footer, no count.
+  const lastFull =
+    pagedTiles.length === 0 ||
+    pagedTiles[pagedTiles.length - 1].length >= c.perPage;
+  if (editing && lastFull) {
+    pageNodes.push(
+      <div className="TileSheet--Page" key="page-add">
+        <Svg style={svgStyle} viewBox={`${viewBoxStr}`}>
+          <Cutlines />
+          {pins}
+          <TilesOverlay
+            c={c}
+            cells={[]}
+            empty={emptyOf([], c.perPage, true)}
+            next={0}
+          />
+        </Svg>
+      </div>,
+    );
+  }
 
   return (
     <HtmlEditor page=".TileSheet--Page">
@@ -409,6 +460,7 @@ const TilesPage = () => {
             </svg>
           )}
           {pageNodes}
+          <TilesTap />
           <PageSetup paper={config.paper} landscape={false} />
         </div>
       </ColorContext.Provider>

@@ -4,6 +4,7 @@ import {
   openEditSearch,
   searchString,
   selectHexSearch,
+  selectTileSearch,
   togglePanelSearch,
 } from "@/util/query";
 
@@ -128,6 +129,20 @@ describe("the selected tile", () => {
     );
     expect(openEditSearch(search, "json")).toBe(
       "edit=true&editSection=json&variation=1",
+    );
+  });
+});
+
+describe("selecting a tile on the sheet", () => {
+  it("is selected on the tiles tab and drops the lines of the json tab", () => {
+    expect(selectTileSearch("?edit=true&editSection=json&lines=3", "T1")).toBe(
+      "edit=true&editSection=tiles&tile=T1",
+    );
+  });
+
+  it("is encoded once, as the Tiles tab writes it", () => {
+    expect(selectTileSearch("?edit=true&tile=57", "26|T2")).toBe(
+      "edit=true&tile=26%257CT2&editSection=tiles",
     );
   });
 });

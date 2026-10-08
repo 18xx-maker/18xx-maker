@@ -86,3 +86,95 @@ test("the Tiles tab is on every page and goes to the tiles page", async ({
     "true",
   );
 });
+
+// The page of the sheet is fitted to the window and the panel covers a part of
+// it, so the clicks are on the dispatched events of the elements themselves
+const tap = (locator) =>
+  locator.evaluate((el) => {
+    const view = document.getElementById("editor");
+    const box = el.getBoundingClientRect();
+    const at = {
+      clientX: box.x + box.width / 2,
+      clientY: box.y + box.height / 2,
+    };
+    const pointer = {
+      pointerId: 3,
+      button: 0,
+      buttons: 1,
+      bubbles: true,
+      ...at,
+    };
+    el.dispatchEvent(new PointerEvent("pointerdown", pointer));
+    view.dispatchEvent(
+      new PointerEvent("pointerup", { ...pointer, buttons: 0 }),
+    );
+  });
+
+test("a click on a tile of the sheet picks it, the dashed cell adds one", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/tiles?edit=true&editSection=json&lines=1-2");
+  await expect(page.getByTestId("game-18Test-tiles")).toBeVisible();
+
+  await tap(page.locator('[data-tile="63"]').first());
+  await expect(page).toHaveURL(/editSection=tiles/);
+  await expect(page).toHaveURL(/tile=63/);
+  await expect(page).not.toHaveURL(/lines=/);
+  await expect(page.getByTestId("tile-editor")).toBeVisible();
+  await expect(page.getByTestId("tile-selected")).toHaveCount(1);
+
+  // 18Test has T1 (plus 26|T2), so the next free id is T2
+  await page.getByRole("button", { name: /^T1 / }).waitFor();
+  await tap(page.locator("[data-next]"));
+  await expect(tile(page, "T2")).toBeVisible();
+  await expect(page).toHaveURL(/tile=T2/);
+  await expect(page.getByTestId("tile-selected")).toHaveCount(1);
+});
+
+// Whether the element is wholly in the view: in the window and left of the
+// edit panel
+const clear = (locator) =>
+  locator.evaluate((el) => {
+    const box = el.getBoundingClientRect();
+    const panel = document
+      .querySelector("[data-edit-panel]")
+      .getBoundingClientRect();
+    return (
+      box.left >= 0 &&
+      box.top >= 0 &&
+      box.bottom <= window.innerHeight &&
+      box.right <= Math.min(window.innerWidth, panel.left)
+    );
+  });
+
+test("an empty space of the sheet adds a tile and pans it into view", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/tiles?edit=true&editSection=json");
+  await expect(page.getByTestId("game-18Test-tiles")).toBeVisible();
+
+  await expect(panel(page)).toBeVisible();
+
+  // Drag the sheet until the cell for the new tile is under the edit panel
+  const next = page.locator("[data-next]");
+  // (the panel is wider on this tab than on the Tiles tab it switches to)
+  const dx = await next.evaluate((el) => {
+    const box = el.getBoundingClientRect();
+    return window.innerWidth - 100 - (box.left + box.right) / 2;
+  });
+  const from = Math.max(10, 10 - dx);
+  await page.mouse.move(from, 100);
+  await page.mouse.down();
+  await page.mouse.move(from + dx / 2, 100, { steps: 5 });
+  await page.mouse.move(from + dx, 100, { steps: 5 });
+  await page.mouse.up();
+  expect(await clear(next)).toBe(false);
+  await expect(next).toBeInViewport();
+
+  await tap(page.locator("[data-empty]").last());
+  await expect(page).toHaveURL(/tile=T2/);
+  await expect(page.getByTestId("tile-editor")).toBeVisible();
+  const added = page.locator('[data-tile="T2"]').first();
+  await expect(added).toBeVisible();
+  await expect.poll(() => clear(added)).toBe(true);
+});
