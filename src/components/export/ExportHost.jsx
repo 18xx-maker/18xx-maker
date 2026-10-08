@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
 
 import { Box, FileImage, FileText, Settings2, Shapes } from "lucide-react";
 
@@ -17,6 +16,7 @@ import KeyLabel from "@/components/KeyLabel";
 import ExportOptions from "@/components/export/ExportOptions";
 
 import { useConfig, useLoadedGame } from "@/hooks";
+import { useLocation } from "@/router";
 import {
   createAlert,
   createSetExportMenuOpen,

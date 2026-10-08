@@ -1,27 +1,23 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { createBrowserRouter, createHashRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
 
-import { rootRoutes } from "@/routes";
+import { Router } from "@/router";
+import AppRoutes from "@/routes";
 import { store } from "@/state";
 import capability from "@/util/capability";
 
 import "@/locales/i18n";
 import "@/styles/index.css";
 
-// Test to see if we're running in electron or not. If so use a hash router
-// since it's based on files
-const createRouter = capability.electron
-  ? createHashRouter
-  : createBrowserRouter;
-const router = createRouter(rootRoutes);
-
+// Test to see if we're running in electron or not. If so use the hash for the
+// location since the pages are files
 const App = () => (
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <Router hash={capability.electron}>
+        <AppRoutes />
+      </Router>
     </Provider>
   </StrictMode>
 );

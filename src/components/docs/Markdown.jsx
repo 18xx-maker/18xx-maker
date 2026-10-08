@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { Children, createElement } from "react";
 import { useTranslation } from "react-i18next";
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router";
 import remarkFlexibleContainers from "remark-flexible-containers";
 import remarkGemoji from "remark-gemoji";
 import remarkGfm from "remark-gfm";
@@ -13,6 +12,7 @@ import { dissoc, startsWith } from "ramda";
 import Shortcuts from "@/components/Shortcuts";
 import Code from "@/components/docs/Code";
 
+import { Link } from "@/router";
 import capability from "@/util/capability";
 import { cn } from "@/util/cn";
 import rehypeHeadingIds from "@/util/headingIds";

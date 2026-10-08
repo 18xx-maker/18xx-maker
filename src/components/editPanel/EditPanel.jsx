@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
 
 import { X } from "lucide-react";
 
@@ -15,6 +14,7 @@ import FieldSearch from "@/components/editPanel/FieldSearch";
 import { useGame } from "@/hooks/game";
 import { useEditPanel } from "@/hooks/useEditPanel";
 import { useSelectedHex } from "@/hooks/useSelectedHex";
+import { Link } from "@/router";
 import { cn } from "@/util/cn";
 
 // The forms for parts of the game beside the live render of the section

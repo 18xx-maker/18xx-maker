@@ -1,5 +1,3 @@
-import { Navigate } from "react-router";
-
 import { assocPath, is, isNil } from "ramda";
 
 import Map from "@/components/map/Map";
@@ -7,6 +5,7 @@ import Svg from "@/components/svg/Svg";
 
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig, useGame } from "@/hooks";
+import { Redirect } from "@/router";
 import { getMapData } from "@/util/map";
 import { useIntParam } from "@/util/query";
 
@@ -17,7 +16,7 @@ const B18MapPage = () => {
   const [variation, setVariation] = useIntParam("variation", 0);
 
   if (!game.map) {
-    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
   }
 
   if (is(Array, game.map) && isNil(variation)) {

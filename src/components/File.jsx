@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router";
 
 import { Download } from "lucide-react";
 
@@ -8,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import KeyLabel from "@/components/KeyLabel";
 
+import { useLocation } from "@/router";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";
 

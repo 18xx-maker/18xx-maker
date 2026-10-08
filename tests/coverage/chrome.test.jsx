@@ -6,7 +6,6 @@ import {
   waitFor,
   within,
 } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
 import { page } from "vitest/browser";
 
 import { filter, values } from "ramda";
@@ -17,6 +16,7 @@ import { games, tiles } from "@/data";
 import { mergeKnownTiles } from "@/util/tiles/tiles";
 
 import { renderApp } from "@tests/support/helpers.jsx";
+import { MemoryRouter } from "@tests/support/memoryRouter.jsx";
 
 // The map svg has no role to query by
 const editorSvg = () =>

@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
 
 import { mergeDeepRight } from "ramda";
 
 import { useGame, useValidation } from "@/hooks";
+import { useLocation } from "@/router";
 import { createAlert, createResetConfig, createSetConfig } from "@/state";
 import { createConfigSelector } from "@/state/selectors";
 import { diff } from "@/util/diff";

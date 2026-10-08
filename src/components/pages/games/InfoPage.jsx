@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router";
 
 import {
   ArrowBigRight,
@@ -24,6 +23,7 @@ import GameStats from "@/components/pages/games/GameStats";
 
 import { publishers } from "@/data";
 import { useGame } from "@/hooks";
+import { Link, useNavigate } from "@/router";
 import { deleteGame, refreshGame } from "@/state";
 import { trackEvent } from "@/util/analytics";
 import capability from "@/util/capability";

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useMatch, useNavigate } from "react-router";
 
 import Viewport from "@/components/page/Viewport";
 
 import { useEditor } from "@/hooks";
+import { useMatch, useNavigate } from "@/router";
 import { loadGame } from "@/state";
 import { selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";
@@ -18,7 +18,7 @@ const addRecent = (game) => {
   return game;
 };
 
-const GamePage = () => {
+const GamePage = ({ children }) => {
   const match = useMatch("/games/:slug/*");
   const game = useSelector((state) =>
     selectGameForSlug(state, match.params.slug),
@@ -42,14 +42,10 @@ const GamePage = () => {
   }
 
   if (inEditor) {
-    return (
-      <Viewport>
-        <Outlet />
-      </Viewport>
-    );
+    return <Viewport>{children}</Viewport>;
   }
 
-  return <Outlet />;
+  return children;
 };
 
 export default GamePage;

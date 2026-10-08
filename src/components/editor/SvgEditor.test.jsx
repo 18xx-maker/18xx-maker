@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import { act, render } from "@testing-library/react";
 import { useContext, useEffect } from "react";
 import { Provider } from "react-redux";
-import { MemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 
 import SvgEditor from "@/components/editor/SvgEditor";
@@ -10,6 +9,8 @@ import SvgEditor from "@/components/editor/SvgEditor";
 import TapContext from "@/context/TapContext";
 import { TOOLBAR_INSET } from "@/hooks/usePanZoom";
 import { initialState, rootReducer } from "@/state";
+
+import { MemoryRouter } from "@tests/support/memoryRouter.jsx";
 
 const fire = (el, type, init) =>
   act(() => {

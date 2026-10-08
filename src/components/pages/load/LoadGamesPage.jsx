@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 
 import {
   any,
@@ -26,6 +25,7 @@ import GameFilters from "@/components/pages/load/GameFilters";
 import GameRow from "@/components/pages/load/GameRow";
 
 import { publishers } from "@/data";
+import { useNavigate } from "@/router";
 import { createAlert, loadSummaries } from "@/state";
 import capability from "@/util/capability";
 import { newGameFilename, newGameJson } from "@/util/newGame";

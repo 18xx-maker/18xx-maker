@@ -1,5 +1,3 @@
-import { useParams } from "react-router";
-
 import { addIndex, compose, concat, is, map, propEq, reject } from "ramda";
 
 import HtmlEditor from "@/components/editor/HtmlEditor";
@@ -9,6 +7,7 @@ import Token from "@/components/tokens/Token";
 
 import ColorContext from "@/context/ColorContext";
 import { useConfig, useGame } from "@/hooks";
+import { useParams } from "@/router";
 import {
   compileCompanies,
   overrideCompanies,

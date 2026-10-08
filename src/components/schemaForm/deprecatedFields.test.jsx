@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { MemoryRouter } from "react-router";
+
+import { MemoryRouter } from "@tests/support/memoryRouter.jsx";
 
 // SchemaField first: the forms import each other in a cycle
 import "@/components/schemaForm/SchemaField";

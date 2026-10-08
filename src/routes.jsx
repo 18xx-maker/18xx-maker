@@ -1,7 +1,5 @@
-import { Navigate } from "react-router";
-
 import Root from "@/components/Root";
-import RouteError from "@/components/RouteError";
+import RouteErrorBoundary from "@/components/RouteErrorBoundary";
 import App from "@/components/pages/App";
 import DocsPage from "@/components/pages/DocsPage";
 import ElementsPage from "@/components/pages/ElementsPage";
@@ -36,64 +34,94 @@ import B18TokensPage from "@/components/pages/games/b18/B18TokensPage";
 // Games Routes
 import LoadGamesPage from "@/components/pages/load/LoadGamesPage";
 
+import { Redirect, Route, Switch } from "@/router";
 import capability from "@/util/capability";
 
-export const rootRoutes = [
+// Every page by its path pattern, in the order they are matched. The
+// patterns are the single source of truth: the routes below are made from
+// them, and the tests list them. A :slug is a game; the layouts (the elements
+// and game pages) wrap the pages of their group.
+const topPages = {
+  "/": <HomePage />,
+  "/app": capability.electron ? <App /> : <Redirect to="/" />,
+  "/settings": <SettingsPage />,
+};
+
+const elementsPages = {
+  "/elements": <AtomsPage />,
+  "/elements/tiles": <AllTilesPage />,
+  "/elements/logos": <LogosPage />,
+  "/elements/positioning": <PositioningPage />,
+};
+
+const gamePages = {
+  "/games/:slug": <InfoPage />,
+  "/games/:slug/b18/map": <B18MapPage />,
+  "/games/:slug/b18/tiles/:color": <B18TilesPage />,
+  "/games/:slug/b18/tokens": <B18TokensPage />,
+  "/games/:slug/background": <BackgroundPage />,
+  "/games/:slug/cards": <CardsPage />,
+  "/games/:slug/cards/:type/:index": <CardPage />,
+  "/games/:slug/changes": <ChangesPage />,
+  "/games/:slug/charters": <ChartersPage />,
+  "/games/:slug/charters/:index": <CharterPage />,
+  "/games/:slug/history": <HistoryPage />,
+  "/games/:slug/map": <MapPage />,
+  "/games/:slug/market": <MarketPage />,
+  "/games/:slug/par": <ParPage />,
+  "/games/:slug/problems": <ProblemsPage />,
+  "/games/:slug/revenue": <RevenuePage />,
+  "/games/:slug/tile-manifest": <TileManifestPage />,
+  "/games/:slug/tiles": <TilesPage />,
+  "/games/:slug/tiles/:id": <TilePage />,
+  "/games/:slug/tokens": <TokensPage />,
+  "/games/:slug/tokens/:index": <TokenPage />,
+};
+
+// Every top-level route, in the order they are matched: AppRoutes renders
+// this table and routePatterns is made from it. A route with a layout wraps
+// its pages (an unknown path in a group is the layout with no page, and an
+// unknown path outside of them is Root with no page). The docs are one page
+// for every path under /docs.
+const topRoutes = [
+  ...Object.entries(topPages).map(([path, element]) => ({ path, element })),
   {
-    path: "*",
-    element: <Root />,
-    errorElement: <RouteError />,
-    children: [
-      { index: true, element: <HomePage /> },
-      {
-        path: "app",
-        element: capability.electron ? <App /> : <Navigate to="/" />,
-      },
-      {
-        path: "elements/*",
-        element: <ElementsPage />,
-        children: [
-          { index: true, element: <AtomsPage /> },
-          { path: "tiles", element: <AllTilesPage /> },
-          { path: "logos", element: <LogosPage /> },
-          { path: "positioning", element: <PositioningPage /> },
-        ],
-      },
-      {
-        path: "games/*",
-        children: [
-          { index: true, element: <LoadGamesPage /> },
-          {
-            path: ":slug/*",
-            element: <GamePage />,
-            children: [
-              { index: true, element: <InfoPage /> },
-              { path: "b18/map", element: <B18MapPage /> },
-              { path: "b18/tiles/:color", element: <B18TilesPage /> },
-              { path: "b18/tokens", element: <B18TokensPage /> },
-              { path: "background", element: <BackgroundPage /> },
-              { path: "cards", element: <CardsPage /> },
-              { path: "cards/:type/:index", element: <CardPage /> },
-              { path: "changes", element: <ChangesPage /> },
-              { path: "charters", element: <ChartersPage /> },
-              { path: "charters/:index", element: <CharterPage /> },
-              { path: "history", element: <HistoryPage /> },
-              { path: "map", element: <MapPage /> },
-              { path: "market", element: <MarketPage /> },
-              { path: "par", element: <ParPage /> },
-              { path: "problems", element: <ProblemsPage /> },
-              { path: "revenue", element: <RevenuePage /> },
-              { path: "tile-manifest", element: <TileManifestPage /> },
-              { path: "tiles", element: <TilesPage /> },
-              { path: "tiles/:id", element: <TilePage /> },
-              { path: "tokens", element: <TokensPage /> },
-              { path: "tokens/:index", element: <TokenPage /> },
-            ],
-          },
-        ],
-      },
-      { path: "docs/*", element: <DocsPage /> },
-      { path: "settings", element: <SettingsPage /> },
-    ],
+    path: "/elements/*?",
+    layout: ElementsPage,
+    pages: elementsPages,
   },
+  { path: "/games", element: <LoadGamesPage /> },
+  { path: "/games/:slug/*?", layout: GamePage, pages: gamePages },
+  { path: "/docs/*?", element: <DocsPage /> },
 ];
+
+// Every page as a path pattern, in the order the pages are listed in
+export const routePatterns = topRoutes.flatMap(({ path, pages }) =>
+  pages ? Object.keys(pages) : [path],
+);
+
+const pages = (list) => (
+  <Switch>
+    {Object.entries(list).map(([path, element]) => (
+      <Route key={path} path={path}>
+        {element}
+      </Route>
+    ))}
+  </Switch>
+);
+
+const AppRoutes = () => (
+  <RouteErrorBoundary>
+    <Root>
+      <Switch>
+        {topRoutes.map(({ path, element, layout: Layout, pages: list }) => (
+          <Route key={path} path={path}>
+            {Layout ? <Layout>{pages(list)}</Layout> : element}
+          </Route>
+        ))}
+      </Switch>
+    </Root>
+  </RouteErrorBoundary>
+);
+
+export default AppRoutes;

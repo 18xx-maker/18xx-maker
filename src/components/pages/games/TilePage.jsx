@@ -1,5 +1,3 @@
-import { Navigate, useParams } from "react-router";
-
 import Hex from "@/components/Hex";
 import HtmlEditor from "@/components/editor/HtmlEditor";
 import Svg from "@/components/svg/Svg";
@@ -7,6 +5,7 @@ import Svg from "@/components/svg/Svg";
 import ColorContext from "@/context/ColorContext";
 import { tiles as tileDefs } from "@/data";
 import { useConfig, useGame } from "@/hooks";
+import { Redirect, useParams } from "@/router";
 import { getTile } from "@/util";
 import { getTileScale } from "@/util/sizes";
 
@@ -17,7 +16,7 @@ const TilePage = () => {
   const { width: hexWidth } = config.tiles;
 
   if (!game.tiles) {
-    return <Navigate to={`/games/${game.meta.slug}/`} replace />;
+    return <Redirect to={`/games/${game.meta.slug}/`} replace />;
   }
 
   let tile = getTile(tileDefs, game.tiles, id);

@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { act, render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 
 import HtmlEditor from "@/components/editor/HtmlEditor";
 
 import { TOOLBAR_INSET } from "@/hooks/usePanZoom";
 import { initialState, rootReducer } from "@/state";
+
+import { MemoryRouter } from "@tests/support/memoryRouter.jsx";
 
 const fire = (el, type, init) =>
   act(() => {

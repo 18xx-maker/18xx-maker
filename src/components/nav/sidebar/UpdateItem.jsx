@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
 
 import { Download } from "lucide-react";
 
@@ -8,6 +7,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+
+import { Link } from "@/router";
 
 const UpdateItem = ({ version }) => {
   const { t } = useTranslation();

@@ -3,7 +3,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useRef, useState } from "react";
 import { Provider } from "react-redux";
-import { MemoryRouter } from "react-router";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -22,6 +21,8 @@ import {
 
 import gameSchema from "@/schemas/game.schema.json";
 import { initialState, rootReducer } from "@/state";
+
+import { MemoryRouter } from "@tests/support/memoryRouter.jsx";
 
 // A schema with a deprecated field: no field of the real game schema is
 // deprecated for the panel yet

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useMatch } from "react-router";
 
 import { useGame } from "@/hooks";
+import { useMatch } from "@/router";
 
 // Tells the caller of render mode (document.body.dataset.renderState) when the
 // page is done. "ready": the game is in the store on one of its pages, the

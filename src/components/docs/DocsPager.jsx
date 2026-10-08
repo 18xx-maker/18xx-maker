@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router";
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { docsPages } from "@/components/nav";
+
+import { Link, useLocation } from "@/router";
 
 const PagerLink = ({ page, label, children }) => {
   const { t } = useTranslation();

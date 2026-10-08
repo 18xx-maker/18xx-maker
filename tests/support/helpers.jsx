@@ -3,11 +3,15 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Fragment, StrictMode } from "react";
 import { Provider } from "react-redux";
-import { RouterProvider, createMemoryRouter } from "react-router";
 
 import games from "@/data/games";
-import { rootRoutes } from "@/routes";
+import AppRoutes from "@/routes";
 import { initialState, rootReducer } from "@/state";
+
+import {
+  RouterProvider,
+  createMemoryRouter,
+} from "@tests/support/memoryRouter.jsx";
 
 // strict wraps the app in StrictMode, which runs effects twice on mount
 export const renderApp = (route = "/", state = {}, { strict = false } = {}) => {
@@ -24,10 +28,7 @@ export const renderApp = (route = "/", state = {}, { strict = false } = {}) => {
 
   const Wrapper = strict ? StrictMode : Fragment;
 
-  const router = createMemoryRouter(rootRoutes, {
-    initialEntries: ["/", route],
-    initialIndex: 1,
-  });
+  const router = createMemoryRouter(["/", route], 1);
 
   return {
     router,
@@ -36,7 +37,9 @@ export const renderApp = (route = "/", state = {}, { strict = false } = {}) => {
     ...render(
       <Wrapper>
         <Provider store={store}>
-          <RouterProvider router={router} />
+          <RouterProvider router={router}>
+            <AppRoutes />
+          </RouterProvider>
         </Provider>
       </Wrapper>,
     ),

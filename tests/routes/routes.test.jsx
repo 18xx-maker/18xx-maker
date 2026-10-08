@@ -1,13 +1,15 @@
 import { screen } from "@testing-library/react";
 
+import { routePatterns } from "@/routes";
+
 import { renderApp } from "@tests/support/helpers.jsx";
-import { matchedPattern, routePatterns } from "@tests/support/routes.js";
+import { matchedPattern } from "@tests/support/routes.js";
 import { docs, docsUrl, routes, visitedUrls } from "@tests/support/smoke.js";
 
 describe("route table", () => {
   it("has a smoke test URL for every route", () => {
     const visited = new Set(visitedUrls().map((url) => matchedPattern(url)));
-    expect([...visited].sort()).toEqual(routePatterns().sort());
+    expect([...visited].sort()).toEqual([...routePatterns].sort());
   });
 });
 
@@ -36,4 +38,21 @@ describe("routes", () => {
       expect(page).toHaveTextContent(/\S/);
     },
   );
+});
+
+describe("unknown paths", () => {
+  it("render Root with no page", async () => {
+    renderApp("/nothing/here");
+    // The sidebar button is Root's, there is no page and no error
+    expect(
+      await screen.findByRole("button", { name: "Toggle Sidebar" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId("route-error")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("home")).not.toBeInTheDocument();
+  });
+
+  it("match a trailing slash", async () => {
+    renderApp("/games/18Test/map/");
+    expect(await screen.findByTestId("game-18Test-map")).toBeInTheDocument();
+  });
 });

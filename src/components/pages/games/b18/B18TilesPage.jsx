@@ -1,5 +1,3 @@
-import { useParams } from "react-router";
-
 import { compose, filter, is, keys, map, propEq, take, uniq } from "ramda";
 
 import Tile from "@/components/Tile";
@@ -9,6 +7,7 @@ import ColorContext from "@/context/ColorContext";
 import RotateContext from "@/context/RotateContext";
 import { tiles as tileDefs } from "@/data";
 import { useGame } from "@/hooks";
+import { useParams } from "@/router";
 import { getTile } from "@/util";
 
 const ROTATIONS = [0, 60, 120, 180, 240, 300];

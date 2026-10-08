@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useMemo } from "react";
 import { Provider } from "react-redux";
-import { MemoryRouter } from "react-router";
 
 import { keys, map, sortBy } from "ramda";
 
@@ -11,6 +10,8 @@ import { companyThemes, games, mapThemes } from "@/data";
 import { initialState, rootReducer } from "@/state";
 
 import "@/styles/index.css";
+
+import { MemoryRouter } from "../tests/support/memoryRouter.jsx";
 
 const createItems = (themes) =>
   map(

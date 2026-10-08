@@ -1,5 +1,3 @@
-import { useLocation, useParams } from "react-router";
-
 import { assoc, flatten, map } from "ramda";
 
 import Number from "@/components/cards/Number";
@@ -9,6 +7,7 @@ import Train from "@/components/cards/Train";
 
 import { MAX_CARD_BLEED } from "@/export/options.js";
 import { useConfig, useGame } from "@/hooks";
+import { useLocation, useParams } from "@/router";
 import {
   compileCompanies,
   overrideCompanies,

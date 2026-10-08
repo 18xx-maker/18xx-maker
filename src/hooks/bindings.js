@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useMatch, useNavigate } from "react-router";
 
 import { find, propEq } from "ramda";
 
@@ -19,6 +18,7 @@ import {
   useEditPanel,
 } from "@/hooks/useEditPanel";
 import { useSelectedHex } from "@/hooks/useSelectedHex";
+import { useLocation, useMatch, useNavigate } from "@/router";
 import { createAlert, createSetExportMenuOpen, refreshGame } from "@/state";
 import { selectExportSheetOpen, selectGameForSlug } from "@/state/selectors";
 import capability from "@/util/capability";

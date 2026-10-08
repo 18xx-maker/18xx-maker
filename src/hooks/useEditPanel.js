@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef } from "react";
-import { useLocation, useMatch, useNavigate } from "react-router";
 
 import { find, propEq } from "ramda";
 
@@ -11,6 +10,7 @@ import {
 
 import { getLastForm, resetLastForm, setLastForm } from "@/hooks/lastForm";
 import { useEditor } from "@/hooks/useEditor";
+import { useLocation, useMatch, useNavigate } from "@/router";
 import { gameNav } from "@/util/gameNav";
 import { COORD_PATTERN } from "@/util/hexEdit";
 import {

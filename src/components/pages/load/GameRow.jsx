@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router";
 
 import { Button } from "@/components/ui/button";
 
 import GameType from "@/components/pages/load/GameType";
 
 import { publishers } from "@/data";
+import { Link } from "@/router";
 import { deleteGame } from "@/state";
 
 const GameRow = ({ game }) => {

@@ -1,6 +1,5 @@
 import { Component, useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router";
 
 import {
   filter,
@@ -35,6 +34,7 @@ import Svg from "@/components/svg/Svg";
 
 import { tiles } from "@/data";
 import useKnownGames from "@/hooks/useKnownGames";
+import { useLocation, useNavigate } from "@/router";
 import { useIntParam, useRangeParam, useStringParam } from "@/util/query";
 import { gamesOfEntry, mergeKnownTiles, tileUsage } from "@/util/tiles/tiles";
 
