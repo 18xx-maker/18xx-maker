@@ -128,7 +128,7 @@
 | `shapes`                                | 简单的形状,可带文字                                                        |
 | `terrain`                               | 山脉或水域等地形,带有费用                                                  |
 | `bridges`、`tunnels`、`tunnelEntrances` | 桥梁或隧道的费用,以及隧道的入口                                            |
-| `borders`                               | 六边格某一边上的彩色边界                                                   |
+| `borders`                               | 六边格某一边上的彩色边界,`strokeWidth` 设置粗细                            |
 | `removeBorders`                         | 去掉六边格所列各边上绘制的边界                                             |
 | `half`                                  | 只绘制地图六边格的上半(`top`)、下半(`bottom`)、左半(`left`)或右半(`right`) |
 | `divides`                               | 把六边格分开的一条线                                                       |

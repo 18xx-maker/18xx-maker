@@ -26,7 +26,12 @@
           "side": { "$ref": "#/definitions/side" },
           "dashed": { "type": "boolean", "enum": [true] },
           "color": { "type": "string" },
-          "width": { "type": "number" }
+          "width": { "type": "number" },
+          "strokeWidth": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "schema.tiles.borders.strokeWidth"
+          }
         },
         "additionalProperties": false,
         "required": ["color"]

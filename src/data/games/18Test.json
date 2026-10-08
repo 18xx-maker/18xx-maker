@@ -953,9 +953,16 @@
       "values": [{ "value": 30, "x": 0, "y": 0 }],
       "labels": [{ "label": "O", "order": -1 }],
       "borders": [
-        { "side": 4, "color": "blue", "width": 15 },
-        { "side": 5, "color": "blue", "width": 15 },
-        { "side": 6, "color": "blue", "width": 15 }
+        { "side": 4, "color": "blue", "strokeWidth": 4 },
+        { "side": 5, "color": "blue" },
+        { "side": 6, "color": "blue", "strokeWidth": 20 },
+        {
+          "side": 3,
+          "color": "red",
+          "dashed": true,
+          "strokeWidth": 4,
+          "width": 24
+        }
       ]
     },
     "B3": {

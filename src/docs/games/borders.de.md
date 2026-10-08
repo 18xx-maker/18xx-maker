@@ -91,3 +91,19 @@ standardmäßig `width` plus 4). Wenn du `border` auf `false` setzt, spielt
 einen `offset` angeben, mit dem du die Striche hübsch ausrichtest, und mit
 `dashArray` die Strichlänge festlegen. `dashArray` funktioniert nur bei
 `borders`, nicht bei `lines`.
+
+## Plättchenränder
+
+Die `borders` eines Plättchens zeichnen eine farbige Linie entlang einer `side`
+des Feldes. Mit `strokeWidth` legst du die Dicke der Linie fest (Standard ist
+10). Die `width` eines Plättchenrands ist nur die Strichlänge eines
+gestrichelten (`dashed`) Rands, halte die Striche also länger als die Dicke.
+
+```json
+{
+  "borders": [
+    { "side": 1, "color": "blue", "strokeWidth": 4 },
+    { "side": 2, "color": "red", "dashed": true, "strokeWidth": 4, "width": 24 }
+  ]
+}
+```

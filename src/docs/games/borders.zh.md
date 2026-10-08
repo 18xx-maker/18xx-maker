@@ -76,3 +76,16 @@
 ```
 
 这里的 `width` 和 `borderWidth` 就是默认值(`borderWidth` 默认为 `width` 加 4)。如果把 `border` 设为 `false`,那么设置 `borderWidth` 就没有实际意义了。如果把 `dashed` 设为 `true`,可以设置 `offset` 来调整虚线的位置使其更美观,并用 `dashArray` 设置虚线的长度。`dashArray` 只对 `borders` 有效,对 `lines` 无效。
+
+## 地块边界
+
+地块的 `borders` 沿六边格的某一条边(`side`)绘制一条彩色线。用 `strokeWidth` 设置线的粗细(默认为 10)。地块边界的 `width` 只是 `dashed` 虚线边界的线段长度,所以请让线段比粗细更长。
+
+```json
+{
+  "borders": [
+    { "side": 1, "color": "blue", "strokeWidth": 4 },
+    { "side": 2, "color": "red", "dashed": true, "strokeWidth": 4, "width": 24 }
+  ]
+}
+```

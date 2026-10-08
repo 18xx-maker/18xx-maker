@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import Boomtown from "@/components/atoms/Boomtown";
+import Border from "@/components/atoms/Border";
 import CenterTown from "@/components/atoms/CenterTown";
 import City from "@/components/atoms/City";
 import Id from "@/components/atoms/Id";
@@ -233,6 +234,35 @@ describe("Track", () => {
     expect(track).toHaveAttribute("stroke", "none");
     expect(gauge).toHaveAttribute("fill", gmt.white);
     expect(gauge).toHaveAttribute("stroke", "none");
+  });
+});
+
+describe("Border", () => {
+  const borderPath = async (props) => {
+    const svg = await drawSvg(<Border color="blue" {...props} />);
+    return one(svg, "path");
+  };
+
+  it("draws a stroke of 10 by default", async () => {
+    const path = await borderPath({});
+    expect(path).toHaveAttribute("stroke-width", "10");
+    expect(path).toHaveAttribute("stroke-dasharray", "none");
+  });
+
+  it("takes the thickness from strokeWidth", async () => {
+    const path = await borderPath({ strokeWidth: 4 });
+    expect(path).toHaveAttribute("stroke-width", "4");
+  });
+
+  it("honors a strokeWidth of 0", async () => {
+    const path = await borderPath({ strokeWidth: 0 });
+    expect(path).toHaveAttribute("stroke-width", "0");
+  });
+
+  it("keeps width as the dash length of a dashed border", async () => {
+    const path = await borderPath({ dashed: true, strokeWidth: 4, width: 24 });
+    expect(path).toHaveAttribute("stroke-width", "4");
+    expect(path).toHaveAttribute("stroke-dasharray", "24");
   });
 });
 

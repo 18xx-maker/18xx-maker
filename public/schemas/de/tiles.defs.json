@@ -26,7 +26,12 @@
           "side": { "$ref": "#/definitions/side" },
           "dashed": { "type": "boolean", "enum": [true] },
           "color": { "type": "string" },
-          "width": { "type": "number" }
+          "width": { "type": "number" },
+          "strokeWidth": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Wie dick die Randlinie ist. Standard ist 10. width ist nur die Strichlänge eines gestrichelten Rands; halte die Striche länger als die Dicke."
+          }
         },
         "additionalProperties": false,
         "required": ["color"]

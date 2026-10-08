@@ -4,7 +4,7 @@ import { useOrientation } from "@/context/OrientationContext";
 
 const edge = 150 * 0.57735;
 
-const Border = ({ color, dashed, offset, width }) => {
+const Border = ({ color, dashed, offset, strokeWidth, width }) => {
   const rotation = useOrientation();
 
   let strokeDashArray = "none";
@@ -22,7 +22,7 @@ const Border = ({ color, dashed, offset, width }) => {
           d={`m ${0.5 * edge} 75 L ${-0.5 * edge} 75`}
           fill="none"
           stroke={c(color)}
-          strokeWidth="10"
+          strokeWidth={strokeWidth ?? 10}
           strokeDasharray={strokeDashArray}
           strokeDashoffset={strokeDashOffset}
           strokeLinecap="round"
