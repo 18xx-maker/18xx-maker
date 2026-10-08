@@ -35,6 +35,7 @@ import {
   selectGameHistory,
 } from "@/state/selectors";
 import capability from "@/util/capability";
+import { firstSection } from "@/util/gameNav";
 import version from "@/util/version";
 
 const AppSidebar = (props) => {
@@ -69,7 +70,7 @@ const AppSidebar = (props) => {
             />,
             <Item
               key="game-editor"
-              to={`/games/${game.slug}/map`}
+              to={`/games/${game.slug}/${resolved ? firstSection(resolved) : "map"}`}
               icon={ArrowBigRight}
               label={t("nav.edit")}
               shortcut="e"
