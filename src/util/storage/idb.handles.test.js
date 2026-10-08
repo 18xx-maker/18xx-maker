@@ -1,7 +1,5 @@
 import "@tests/support/windowStub.js";
 
-import { validate } from "uuid";
-
 import {
   createGameFile,
   deleteGame,
@@ -13,6 +11,7 @@ import {
   saveGameHandle,
   writeGame,
 } from "@/util/storage/idb";
+import { isUUID } from "#util/uuid";
 
 // A small in-memory IndexedDB that answers requests asynchronously like the
 // real one
@@ -123,7 +122,7 @@ describe("system games in IndexedDB", () => {
 
     const [type, id] = slug.split(":");
     expect(type).toBe("system");
-    expect(validate(id)).toBe(true);
+    expect(isUUID(id)).toBe(true);
 
     expect(records("game_file_handles").get(id).handle).toBe(handle);
     expect(await loadSummaries()).toEqual({
@@ -337,7 +336,7 @@ describe("system games in IndexedDB", () => {
     );
 
     const migrated = records("game_file_handles").get("old");
-    expect(validate(migrated.id)).toBe(true);
+    expect(isUUID(migrated.id)).toBe(true);
     expect(migrated.slug).toBe(`system:${migrated.id}`);
     expect(migrated.title).toBe("18Old");
   });

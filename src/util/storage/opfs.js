@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { assoc, indexBy, prop } from "ramda";
 
 import { NAME_EXISTS, NAME_INVALID, sanitizeFilename } from "@/util/filename";
@@ -149,7 +147,7 @@ const writeGameFile = async (filename, file) => {
 };
 
 export const saveGameFile = async (file) => {
-  const id = uuidv4();
+  const id = crypto.randomUUID();
   await writeGameFile(`${id}.json`, file);
   return slug(id);
 };

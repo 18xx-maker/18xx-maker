@@ -1,8 +1,8 @@
+import { randomUUID } from "node:crypto";
 import fs from "node:fs";
 import { join, resolve } from "node:path";
 
 import { app } from "electron";
-import { v4 as uuidv4, validate } from "uuid";
 
 import {
   apply,
@@ -28,6 +28,7 @@ import {
   toPairs,
 } from "ramda";
 
+import { isUUID } from "#util/uuid";
 import { isDev } from "./dev.js";
 
 export const SUMMARIES = "summaries";
@@ -76,14 +77,14 @@ const convertToUUID = (config) => {
 
   const summaries = {};
   forEach((oldId) => {
-    if (validate(oldId)) {
+    if (isUUID(oldId)) {
       // Already good!
       summaries[oldId] = config.summaries[oldId];
       return;
     }
 
     // Needs a new id
-    const id = uuidv4();
+    const id = randomUUID();
     summaries[id] = {
       ...config.summaries[oldId],
       id,
