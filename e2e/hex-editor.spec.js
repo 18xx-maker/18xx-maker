@@ -125,3 +125,19 @@ test("adds an icon and a divide, then splits the hex off its group", async ({
   await expect(json).toContainText('"C11"');
   await expect(json).not.toContainText('"C13"');
 });
+
+test("moves the map and the selected hex with the arrow buttons", async ({
+  page,
+}) => {
+  await page.goto("/games/18Test/map?edit=true&editSection=map&hex=B12");
+  const group = page.getByRole("group", { name: "Move map" });
+  await expect(group).toBeVisible();
+  await expect(
+    group.getByRole("button", { name: "Move map up" }),
+  ).toBeDisabled();
+  await group.getByRole("button", { name: "Move map down" }).click();
+  await expect(page).toHaveURL(/hex=C12/);
+  await expect(
+    group.getByRole("button", { name: "Move map up" }),
+  ).toBeEnabled();
+});

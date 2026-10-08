@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
+import MapMover from "@/components/schemaForm/MapMover";
 import SchemaField, {
   ChoiceField,
   FieldShell,
@@ -154,7 +155,10 @@ const MapForm = ({ game }) => {
 
   return (
     <SchemaFormProvider game={game}>
-      <MapFields key={variation} variation={variation} />
+      <div className="flex flex-col gap-4">
+        <MapMover game={game} />
+        <MapFields key={variation} variation={variation} />
+      </div>
     </SchemaFormProvider>
   );
 };
