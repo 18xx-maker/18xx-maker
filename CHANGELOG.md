@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.0-beta.134](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.133...v1.0.0-beta.134) (2026-10-08)
+
+
+### :tada: Features
+
+* **editor:** add map move buttons ([#1049](https://github.com/18xx-maker/18xx-maker/issues/1049)) ([e064732](https://github.com/18xx-maker/18xx-maker/commit/e0647327e7595b994a3c399d2f45ee67b2d47ad1))
+* **tiles:** add border stroke width ([#1028](https://github.com/18xx-maker/18xx-maker/issues/1028)) ([f22e1a7](https://github.com/18xx-maker/18xx-maker/commit/f22e1a7ea27a4135009ec74780e8d2610b62cd36))
+* **tiles:** select and add tiles by clicking the tile sheet ([#1045](https://github.com/18xx-maker/18xx-maker/issues/1045)) ([1bc8c54](https://github.com/18xx-maker/18xx-maker/commit/1bc8c54d8fa50cc7a42e4e78c37c6c666f408164))
+* **ui:** add a form to the hex tab ([#1038](https://github.com/18xx-maker/18xx-maker/issues/1038)) ([1f0f6f3](https://github.com/18xx-maker/18xx-maker/commit/1f0f6f3f90f655e2f8320515bd750f8226c46f71))
+* **ui:** add a problems tab to the edit panel ([#1048](https://github.com/18xx-maker/18xx-maker/issues/1048)) ([052c7d4](https://github.com/18xx-maker/18xx-maker/commit/052c7d40f5da2edf6065e4cddef4b75a6acd6007))
+* **ui:** add a tiles tab to the edit panel ([#1040](https://github.com/18xx-maker/18xx-maker/issues/1040)) ([553082e](https://github.com/18xx-maker/18xx-maker/commit/553082e49b77a6061e1cffa9fbd257ce6b107740))
+* **ui:** add drag and undo to the hex editor ([#1039](https://github.com/18xx-maker/18xx-maker/issues/1039)) ([c486713](https://github.com/18xx-maker/18xx-maker/commit/c4867131a12259cfa124d9cd1291dbdcacc5e14e))
+* **ui:** add infinity toggle and number arrows to quantity input ([#1047](https://github.com/18xx-maker/18xx-maker/issues/1047)) ([c625ba8](https://github.com/18xx-maker/18xx-maker/commit/c625ba8e3f95729f038025853789076ecbf9ffdc))
+* **ui:** add map tab to the edit panel ([#1029](https://github.com/18xx-maker/18xx-maker/issues/1029)) ([7818e44](https://github.com/18xx-maker/18xx-maker/commit/7818e44c054c60e1165d2dab2ee599fe180905bf))
+* **ui:** add remaining hex inspectors and split a hex off its group ([#1043](https://github.com/18xx-maker/18xx-maker/issues/1043)) ([34e76b2](https://github.com/18xx-maker/18xx-maker/commit/34e76b22bd1814bc2e725c50b14f6f639d672ced))
+
+
+### :hammer_and_wrench: Code Refactoring
+
+* **ui:** extract useHexGroup hook from hex section ([#1036](https://github.com/18xx-maker/18xx-maker/issues/1036)) ([86151d3](https://github.com/18xx-maker/18xx-maker/commit/86151d31e77a5944282032ff0fece97b1761dc18))
+
 ## [1.0.0-beta.133](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.132...v1.0.0-beta.133) (2026-10-08)
 
 
