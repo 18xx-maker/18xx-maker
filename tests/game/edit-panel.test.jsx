@@ -2143,6 +2143,12 @@ describe("edit panel market", () => {
   it("warns about a legend number and a par without a chart, outside the problems", async () => {
     const { user, store } = open(marketRoute);
     await grid();
+    // The first check may not have started yet (status idle): wait for its result
+    await waitFor(() =>
+      expect(
+        selectGameProblems(store.getState(), "internal:abc"),
+      ).toBeDefined(),
+    );
     await settled();
     const before = selectGameProblems(store.getState(), "internal:abc");
     act(() =>
@@ -2510,26 +2516,33 @@ describe("edit panel companies", () => {
     expect(toggleOf(0)).toHaveAccessibleName("Night Railroad BLRR");
   });
 
-  it("opens each company and leaves the game byte for byte as it was", async () => {
-    const { user, store } = open(companiesRoute);
-    await ready();
-    const before = JSON.stringify(companies(store));
-    for (let i = 0; i < cards().length; i++) {
-      await user.click(toggleOf(i));
-      await user.click(
-        within(cards()[i]).getByRole("button", { name: "More fields" }),
-      );
-    }
-    // Focus and leave every field: nothing was typed, so nothing changes
-    for (const box of within(screen.getByTestId("edit-panel")).getAllByRole(
-      "textbox",
-    )) {
-      box.focus();
-      box.blur();
-    }
-    expect(JSON.stringify(companies(store))).toBe(before);
-    expect(selectGameChanged(store.getState())).toBe(false);
-  });
+  // Heavy on purpose: it opens all 20 cards and every card renders all its
+  // fields, so each click re-renders more (4 s on a laptop, 30 s on a loaded
+  // CI runner). The default 30 s limit made it flaky; 120 s leaves room.
+  it(
+    "opens each company and leaves the game byte for byte as it was",
+    { timeout: 120_000 },
+    async () => {
+      const { user, store } = open(companiesRoute);
+      await ready();
+      const before = JSON.stringify(companies(store));
+      for (let i = 0; i < cards().length; i++) {
+        await user.click(toggleOf(i));
+        await user.click(
+          within(cards()[i]).getByRole("button", { name: "More fields" }),
+        );
+      }
+      // Focus and leave every field: nothing was typed, so nothing changes
+      for (const box of within(screen.getByTestId("edit-panel")).getAllByRole(
+        "textbox",
+      )) {
+        box.focus();
+        box.blur();
+      }
+      expect(JSON.stringify(companies(store))).toBe(before);
+      expect(selectGameChanged(store.getState())).toBe(false);
+    },
+  );
 
   it("invalid JSON in a complex field shows a problem and keeps the game", async () => {
     const { user, store } = open(companiesRoute);
