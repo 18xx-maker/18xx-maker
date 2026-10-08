@@ -8,3 +8,4 @@ export * from "@/hooks/usePrint";
 export * from "@/hooks/useSettings";
 export * from "@/hooks/useEditPanel";
 export * from "@/hooks/useSaveAs";
+export * from "@/hooks/useSaveGame";

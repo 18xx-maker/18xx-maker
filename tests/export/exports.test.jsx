@@ -56,6 +56,7 @@ beforeEach(async () => {
     onGame: vi.fn(),
     onProgress: vi.fn(),
     onRedirect: vi.fn(),
+    onSave: vi.fn(),
     onUpdate: vi.fn(),
   });
 });

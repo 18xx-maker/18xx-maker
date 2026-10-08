@@ -33,6 +33,7 @@ const shortcuts = [
   { id: "print", keys: ["p"] },
   { id: "paginate", keys: ["n"] },
   { id: "download", keys: ["d"] },
+  { id: "save", keys: ["Ctrl+S", "Cmd+S"] },
   { id: "export", keys: ["x"] },
   { id: "app", keys: ["u"] },
 ];
