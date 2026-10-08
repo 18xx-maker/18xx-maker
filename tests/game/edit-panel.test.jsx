@@ -2143,6 +2143,12 @@ describe("edit panel market", () => {
   it("warns about a legend number and a par without a chart, outside the problems", async () => {
     const { user, store } = open(marketRoute);
     await grid();
+    // The first check may not have started yet (status idle): wait for its result
+    await waitFor(() =>
+      expect(
+        selectGameProblems(store.getState(), "internal:abc"),
+      ).toBeDefined(),
+    );
     await settled();
     const before = selectGameProblems(store.getState(), "internal:abc");
     act(() =>
