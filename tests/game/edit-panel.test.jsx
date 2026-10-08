@@ -591,6 +591,7 @@ describe("edit panel tabs", () => {
       "Trains",
     ]);
     expect(names(byName("Look and output"))).toEqual([
+      "Map",
       "Hex",
       "Market",
       "Colors",
@@ -654,7 +655,7 @@ describe("edit panel tabs", () => {
     );
     await user.keyboard("]");
     await waitFor(() =>
-      expect(router.state.location.search).toBe("?edit=true&editSection=hex"),
+      expect(router.state.location.search).toBe("?edit=true&editSection=map"),
     );
     // Wrapping never lands on JSON
     await user.click(screen.getByRole("tab", { name: "Config" }));
