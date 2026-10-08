@@ -51,7 +51,7 @@ renamed or removed), values of the wrong type, values that are not allowed, and
 required fields that are missing. Fields that are deprecated are listed too, they
 still work, and the page says which name to use instead. The page only reports, your
 file is never changed.
-Each row that points into the file links to the JSON editor of the edit panel, at the line of the problem.
+Each row that points into the file links to the JSON editor of the edit panel, at the line of the problem. The same list is the Problems tab of the edit panel, where a row opens the JSON editor on its line without leaving the page.
 
 ## Validation
 
