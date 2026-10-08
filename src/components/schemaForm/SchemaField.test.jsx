@@ -1278,3 +1278,65 @@ describe("the fields of a token", () => {
     });
   });
 });
+
+describe("a count", () => {
+  const countOf = (alternative) => ({
+    type: "object",
+    properties: {
+      quantity: {
+        oneOf: [{ type: "integer", minimum: 1 }, alternative],
+      },
+      limit: {
+        oneOf: [
+          { type: "integer", minimum: 1 },
+          { type: "string", enum: ["∞"] },
+          { type: "string", pattern: "^[1-9]/[1-9]$" },
+        ],
+      },
+    },
+  });
+
+  const show = (alternative, field = "quantity") => {
+    const schema = countOf(alternative);
+    return render(
+      <SchemaFormContext.Provider
+        value={{
+          root: schema,
+          game: { quantity: 3, limit: 3 },
+          issues: [],
+          set() {},
+          clear() {},
+          insert() {},
+          remove() {},
+          move() {},
+        }}
+      >
+        <TooltipProvider delayDuration={200}>
+          <SchemaField keys={[field]} schema={schema.properties[field]} />
+        </TooltipProvider>
+      </SchemaFormContext.Provider>,
+    );
+  };
+
+  it("has an infinity toggle when the only text is the infinity sign", () => {
+    show({ type: "string", enum: ["∞"] });
+    expect(screen.getByRole("spinbutton")).toHaveValue(3);
+    expect(screen.getByRole("button", { name: "Infinity" })).toBeVisible();
+  });
+
+  it("stays a text field when the text can be something else", () => {
+    show({ type: "string", enum: ["∞", "X"] });
+    expect(screen.getByRole("textbox")).toHaveValue("3");
+    expect(
+      screen.queryByRole("button", { name: "Infinity" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("keeps the text field for the limit of a phase", () => {
+    show({ type: "string", enum: ["∞"] }, "limit");
+    expect(screen.getByRole("textbox")).toHaveValue("3");
+    expect(
+      screen.queryByRole("button", { name: "Infinity" }),
+    ).not.toBeInTheDocument();
+  });
+});

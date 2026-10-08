@@ -762,16 +762,21 @@ describe("edit panel trains", () => {
     expect(cards()).toHaveLength(4);
     const first = within(cards()[0]);
     expect(first.getByRole("textbox", { name: "Name" })).toHaveValue("2");
-    expect(first.getByRole("textbox", { name: "Quantity" })).toHaveValue("4");
+    expect(first.getByRole("spinbutton", { name: "Quantity" })).toHaveValue(4);
     expect(first.getByRole("textbox", { name: "Price" })).toHaveValue("80");
     expect(first.getByRole("textbox", { name: "Color" })).toHaveValue("yellow");
     // The rest is behind More fields
     expect(
       first.queryByRole("textbox", { name: "Description" }),
     ).not.toBeInTheDocument();
+    const infinite = within(cards()[3]);
     expect(
-      within(cards()[3]).getByRole("textbox", { name: "Quantity" }),
-    ).toHaveValue("∞");
+      infinite.getByRole("spinbutton", { name: "Quantity" }),
+    ).toBeDisabled();
+    expect(infinite.getByRole("button", { name: "Infinity" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
   });
 
   it("More fields shows the other fields of a train", async () => {
@@ -797,16 +802,20 @@ describe("edit panel trains", () => {
     expect(trains(store)[1].price).toBe(200);
     expect(trains(store)[0].price).toBe(80);
 
-    // Quantity is a whole number or the infinity sign
-    const quantity = within(cards()[1]).getByRole("textbox", {
+    // Quantity is a whole number or the infinity toggle
+    const quantity = within(cards()[1]).getByRole("spinbutton", {
       name: "Quantity",
     });
-    await user.clear(quantity);
-    await user.type(quantity, "∞{Enter}");
+    const toggle = within(cards()[1]).getByRole("button", { name: "Infinity" });
+    await user.click(toggle);
     expect(trains(store)[1].quantity).toBe("∞");
+    expect(quantity).toBeDisabled();
+    await user.click(toggle);
+    expect(trains(store)[1].quantity).toBe(3);
+    expect(quantity).toHaveValue(3);
     await user.clear(quantity);
     await user.type(quantity, "0{Enter}");
-    expect(trains(store)[1].quantity).toBe("∞");
+    expect(trains(store)[1].quantity).toBe(3);
     expect(await screen.findByText(/whole number of at least 1/)).toBeVisible();
     await user.clear(quantity);
     await user.type(quantity, "5{Enter}");
@@ -2751,7 +2760,9 @@ describe("edit panel companies", () => {
     expect(toggleOf(0)).toHaveAttribute("aria-expanded", "true");
     expect(toggleOf(0)).toHaveAccessibleName("2");
     expect(text(0, "Name")).toHaveValue("2");
-    expect(text(0, "Quantity")).toBeVisible();
+    expect(
+      within(cards()[0]).getByRole("spinbutton", { name: "Quantity" }),
+    ).toBeVisible();
     expect(
       within(cards()[0]).queryByRole("textbox", { name: "Abbrev" }),
     ).not.toBeInTheDocument();

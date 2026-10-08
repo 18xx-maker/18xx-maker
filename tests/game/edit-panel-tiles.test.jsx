@@ -1,4 +1,5 @@
 import { act, screen, waitFor, within } from "@testing-library/react";
+import { userEvent as realUser } from "vitest/browser";
 
 import { omit } from "ramda";
 
@@ -310,11 +311,48 @@ describe("the shapes of an entry", () => {
     expect(screen.queryByTestId("hex-inspector")).not.toBeInTheDocument();
     // A library tile is only drawn
     expect(within(section).getByText(/never edited/)).toBeVisible();
-    const quantity = within(section).getByRole("textbox", { name: "Quantity" });
+    const quantity = within(section).getByRole("spinbutton", {
+      name: "Quantity",
+    });
     await user.clear(quantity);
     await user.type(quantity, "4");
     await user.tab();
     await waitFor(() => expect(tiles()["1"]).toBe(4));
+  });
+
+  it("steps the quantity with the arrow keys and saves each step", async () => {
+    open(`${route}&tile=1`);
+    const section = await editor();
+    const quantity = within(section).getByRole("spinbutton", {
+      name: "Quantity",
+    });
+    quantity.focus();
+    await act(() => realUser.keyboard("{ArrowUp}"));
+    await waitFor(() => expect(tiles()["1"]).toBe(2));
+    await act(() => realUser.keyboard("{ArrowUp}"));
+    await waitFor(() => expect(tiles()["1"]).toBe(3));
+    await act(() => realUser.keyboard("{ArrowDown}"));
+    await waitFor(() => expect(tiles()["1"]).toBe(2));
+  });
+
+  it("makes the quantity infinite with the toggle and gets the number back", async () => {
+    const { user } = open(`${route}&tile=1`, (game) => ({
+      ...game,
+      tiles: { ...game.tiles, 1: 3 },
+    }));
+    const section = await editor();
+    const toggle = within(section).getByRole("button", { name: "Infinity" });
+    await user.click(toggle);
+    await waitFor(() => expect(tiles()["1"]).toEqual({ quantity: "∞" }));
+    const quantity = within(section).getByRole("spinbutton", {
+      name: "Quantity",
+    });
+    expect(quantity).toBeDisabled();
+    expect(toggle).toHaveAttribute("aria-pressed", "true");
+    await user.click(toggle);
+    await waitFor(() => expect(tiles()["1"]).toEqual({ quantity: 3 }));
+    expect(quantity).toBeEnabled();
+    expect(quantity).toHaveValue(3);
   });
 
   it("keeps the quantity when it is cleared and then another field is set", async () => {
@@ -323,15 +361,17 @@ describe("the shapes of an entry", () => {
       tiles: { ...game.tiles, 1: 3 },
     }));
     const section = await editor();
-    const quantity = within(section).getByRole("textbox", { name: "Quantity" });
+    const quantity = within(section).getByRole("spinbutton", {
+      name: "Quantity",
+    });
     // An integer cannot be empty: the store refuses and the form starts again
     await user.clear(quantity);
     await user.tab();
     expect(tiles()["1"]).toBe(3);
     await waitFor(() =>
       expect(
-        within(section).getByRole("textbox", { name: "Quantity" }),
-      ).toHaveValue("3"),
+        within(section).getByRole("spinbutton", { name: "Quantity" }),
+      ).toHaveValue(3),
     );
     const group = within(section).getByRole("textbox", { name: "Group" });
     await user.type(group, "spare");
@@ -356,7 +396,9 @@ describe("the shapes of an entry", () => {
     const { user } = open(`${route}&tile=2`);
     const section = await editor();
     expect(within(section).getByText("alias of 57")).toBeVisible();
-    const quantity = within(section).getByRole("textbox", { name: "Quantity" });
+    const quantity = within(section).getByRole("spinbutton", {
+      name: "Quantity",
+    });
     await user.clear(quantity);
     await user.type(quantity, "3");
     await user.tab();
@@ -368,7 +410,9 @@ describe("the shapes of an entry", () => {
   it("keeps an override an override", async () => {
     const { user } = open(`${route}&tile=63`);
     const section = await editor();
-    const quantity = within(section).getByRole("textbox", { name: "Quantity" });
+    const quantity = within(section).getByRole("spinbutton", {
+      name: "Quantity",
+    });
     await user.clear(quantity);
     await user.type(quantity, "5");
     await user.tab();
@@ -401,7 +445,7 @@ describe("the shapes of an entry", () => {
     expect(
       within(hexEditor).getByRole("group", { name: "Printing" }),
     ).toBeVisible();
-    const quantity = within(hexEditor).getByRole("textbox", {
+    const quantity = within(hexEditor).getByRole("spinbutton", {
       name: "Quantity",
     });
     await user.clear(quantity);
