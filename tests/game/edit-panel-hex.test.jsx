@@ -348,12 +348,12 @@ describe("selecting a group", () => {
     expect(store.getState().game).toBe(before);
   });
 
-  it("has the tab on the map only, and drops a selection elsewhere", async () => {
+  it("has the tab on every page, and drops a selection off the map", async () => {
     const { router } = open(
       "/games/internal:abc/tokens?edit=true&editSection=hex&hex=C11",
     );
     await screen.findByTestId("edit-panel");
-    expect(screen.queryByRole("tab", { name: "Hex" })).not.toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "Hex" })).toBeVisible();
     await waitFor(() => expect(params(router).hex).toBeUndefined());
   });
 

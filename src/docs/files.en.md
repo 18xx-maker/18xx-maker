@@ -236,7 +236,7 @@ files to export, the pages, the layouts, the background, the variation and the
 png, card and Board18 options). The deprecated paginated
 export option is not shown and stays in the file.
 
-The Map tab is only on the map page and edits everything of the selected map
+The Map tab is on every page (from another page it goes to the map) and edits everything of the selected map
 variation (`?variation=`) except its hexes: the name, which variation it copies
 (for a list of variations; the copied hexes can be removed by coordinate, one per
 line), whether the title is hidden, the trimmed edges, the round tracker, the
@@ -245,7 +245,7 @@ texts, a card each with its coordinates one per line. The borders, lines, border
 texts and trim of a copied variation are those of the variation it copies plus
 its own. The hexes themselves are the Hex tab's.
 
-The Hex tab is only on the map page. Click a hex on the map to pick its group,
+The Hex tab is on every page too (it goes to the map). Click a hex on the map to pick its group,
 the entry of `map.hexes` that lists it: the tab then shows only that group, as a
 form by default and as JSON with the Form and JSON switch, and the hexes of the
 group are outlined on the map. The form draws the hex as the map does with a
@@ -269,7 +269,7 @@ shows the hexes it copies as JSON you can read: change them in the variation
 they come from, or press _Override here_ to make a copy of the hex in this
 variation and edit that. The edge buttons and the lists of the form work from the keyboard.
 
-The Tiles tab is only on the tiles page and edits the `tiles` of the game. It
+The Tiles tab is on every page (from another page it goes to the tiles page) and edits the `tiles` of the game. It
 lists the tiles in the order of the file. Type an id and press Add tile to add
 one: an id of a tile that 18xx Maker already knows is added as it is (a
 quantity of 1), any other id starts a tile of your own that you then draw. Pick a

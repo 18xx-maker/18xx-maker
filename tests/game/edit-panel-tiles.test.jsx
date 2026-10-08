@@ -49,6 +49,49 @@ const tile = (id) =>
   });
 const editor = () => screen.findByTestId("tile-editor");
 
+describe("the tabs of other pages", () => {
+  const tabs = ["Tiles", "Map", "Hex"];
+
+  it("are on every page, and a click goes to the page of the tab", async () => {
+    const { router, user } = open(
+      "/games/internal:abc/market?edit=true&editSection=json&lines=1-2",
+    );
+    await user.click(await screen.findByRole("button", { name: "Forms" }));
+    for (const name of tabs) {
+      expect(await screen.findByRole("tab", { name })).toBeVisible();
+    }
+    await user.click(screen.getByRole("tab", { name: "Tiles" }));
+    await screen.findByRole("list", { name: "Tiles of the game" });
+    const { pathname, search } = router.state.location;
+    expect(pathname).toBe("/games/internal:abc/tiles");
+    const params = new URLSearchParams(search);
+    expect(params.get("edit")).toBe("true");
+    expect(decodeURIComponent(params.get("editSection"))).toBe("tiles");
+    expect(params.has("lines")).toBe(false);
+
+    await user.click(screen.getByRole("tab", { name: "Hex" }));
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/internal:abc/map"),
+    );
+    expect(
+      screen.getByRole("tab", { name: "Hex", selected: true }),
+    ).toBeVisible();
+  });
+
+  it("go to the page from the Map tab link of another page too", async () => {
+    const { router, user } = open(route);
+    await user.click(await screen.findByRole("tab", { name: "Map" }));
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/internal:abc/map"),
+    );
+  });
+
+  it("show their form for a link on another page", async () => {
+    open("/games/internal:abc/market?edit=true&editSection=tiles");
+    expect(await list()).toBeVisible();
+  });
+});
+
 describe("the tiles list", () => {
   it("lists the tiles of the game, in the order of the game", async () => {
     open(route);

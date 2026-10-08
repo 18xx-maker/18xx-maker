@@ -259,7 +259,7 @@ des Spiels (die Dateien, die Seiten, die Layouts, den Hintergrund, die Variante
 und die Optionen für PNG, Karten und Board18). Die veraltete Exportoption paginated wird nicht angezeigt und
 bleibt in der Datei.
 
-Den Tab „Karte“ gibt es nur auf der Kartenseite und bearbeitet alles an der
+Den Tab „Karte“ gibt es auf jeder Seite (von einer anderen Seite wechselt er zur Karte) und bearbeitet alles an der
 gewählten Kartenvariante (`?variation=`) außer ihren Kartenfeldern: den Namen,
 welche Variante sie kopiert (bei einer Liste von Varianten; die kopierten
 Kartenfelder lassen sich per Koordinate entfernen, eine pro Zeile), ob der Titel
@@ -269,7 +269,7 @@ jeweils eine Karte mit den Koordinaten, eine pro Zeile. Grenzen, Linien,
 Grenztexte und Zuschnitt einer kopierten Variante sind die der kopierten
 Variante plus ihre eigenen. Die Kartenfelder selbst gehören zum Hex-Tab.
 
-Der Hex-Tab gibt es nur auf der Kartenseite. Klicke auf ein Kartenfeld auf der
+Den Hex-Tab gibt es ebenfalls auf jeder Seite (er wechselt zur Karte). Klicke auf ein Kartenfeld auf der
 Karte, um seine Gruppe zu wählen, den Eintrag von `map.hexes`, der es auflistet:
 Der Tab zeigt dann nur diese Gruppe, standardmäßig als Formular und mit dem
 Schalter Formular/JSON als JSON, und die Kartenfelder der Gruppe sind auf der
@@ -299,7 +299,7 @@ sie in der Variante, aus der sie stammen, oder drücke _Hier überschreiben_, um
 das Kartenfeld in dieser Variante zu kopieren und die Kopie zu bearbeiten. Die Kantenschaltflächen und die Listen des
 Formulars lassen sich per Tastatur bedienen.
 
-Der Tab Plättchen gibt es nur auf der Plättchenseite, er bearbeitet die `tiles`
+Den Tab Plättchen gibt es auf jeder Seite (von einer anderen Seite wechselt er zur Plättchenseite), er bearbeitet die `tiles`
 des Spiels. Er listet die Plättchen in der Reihenfolge der Datei. Gib eine ID ein
 und drücke Plättchen hinzufügen, um eines hinzuzufügen: Die ID eines Plättchens,
 das 18xx Maker schon kennt, wird unverändert übernommen (Anzahl 1), jede andere ID

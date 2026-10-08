@@ -4,8 +4,8 @@ import { find, propEq } from "ramda";
 
 import {
   DEFAULT_EDIT_SECTION,
+  editSections,
   groupSections,
-  sectionsFor,
 } from "@/components/editPanel/sections";
 
 import { getLastForm, resetLastForm, setLastForm } from "@/hooks/lastForm";
@@ -31,9 +31,12 @@ export const useEditPanel = () => {
   const [open, toggle] = useTogglePanel("edit");
   const [param, setParam] = useStringParam("editSection", DEFAULT_EDIT_SECTION);
   const section = match?.params.section;
-  // The sections of the page, the forms in the order of their groups. An
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const slug = match?.params.slug;
+  // All the sections on every page, the forms in the order of their groups. An
   // unknown one in the url is the first form.
-  const sections = sectionsFor(section);
+  const sections = editSections;
   const groups = groupSections(sections.filter((s) => !s.pinned));
   const forms = groups.flatMap((g) => g.sections);
   const editSection = sections.some((s) => s.section === param)
@@ -42,13 +45,27 @@ export const useEditPanel = () => {
   const json = editSection === "json";
 
   // The selected lines belong to the JSON editor: leaving it drops them
-  // (the section already shown stays as it is, lines and history included)
+  // (the section already shown stays as it is, lines and history included).
+  // A section of another page (tiles, map, hex) goes to that page, with the
+  // panel open on it and the selected hex and tile dropped.
   const setEditSection = useCallback(
     (next) => {
+      const page = editSections.find((s) => s.section === next)?.page;
+      if (page && page !== section && slug) {
+        const params = new URLSearchParams(search);
+        ["lines", "hex", "tile"].forEach((name) => params.delete(name));
+        params.set("edit", true);
+        params.set("editSection", encodeURIComponent(next));
+        navigate({
+          pathname: `/games/${slug}/${page}`,
+          search: searchString(params),
+        });
+        return;
+      }
       if (next === editSection) return;
       setParam(next, { drop: ["lines"] });
     },
-    [setParam, editSection],
+    [setParam, editSection, section, slug, search, navigate],
   );
 
   const available =
