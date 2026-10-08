@@ -69,7 +69,7 @@ export const useBindings = () => {
     formSection,
     editSection,
     setEditSection,
-    json: editJson,
+    pinned: editPinned,
   } = edit;
   useDropStaleLines(edit);
   useDropStaleHex(edit);
@@ -156,9 +156,11 @@ export const useBindings = () => {
               document.getElementById(panelId(editSection))?.contains(active);
             setEditSection(next);
             if (inside) {
-              // The chips are not there in the JSON editor: after the commit
-              if (editSection === "json") focusTabAfterRender(next);
-              else document.getElementById(tabId(next))?.focus();
+              // The chips are not there in the JSON editor or the problems: after
+              // the commit
+              if (editPinned) {
+                focusTabAfterRender(next);
+              } else document.getElementById(tabId(next))?.focus();
             }
           } else if (params.has("config")) {
             let current = params.get("section") || "colors";
@@ -260,8 +262,8 @@ export const useBindings = () => {
           return;
         }
 
-        // The search of the open edit panel (not in the JSON editor)
-        if (event.key === "/" && editOpen && !editJson) {
+        // The search of the open edit panel (not in the JSON editor or the problems)
+        if (event.key === "/" && editOpen && !editPinned) {
           const search = document.querySelector("[data-field-search]");
           if (search) {
             event.preventDefault();
@@ -381,7 +383,7 @@ export const useBindings = () => {
       formSections,
       formSection,
       editSection,
-      editJson,
+      editPinned,
       setEditSection,
       selectedHex,
       clearHex,

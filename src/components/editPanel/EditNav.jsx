@@ -70,22 +70,51 @@ export const focusTabAfterRender = (section) => {
   pendingFocus = section;
 };
 
-// The Forms | JSON switch of the edit panel header. JSON is a mode of its own
-// (a wide code editor), the forms are the chips of EditNav.
-export const EditSwitch = ({ json, formSection, setSection }) => {
+// The Forms | JSON | Problems switch of the edit panel header. JSON (a wide
+// code editor) and Problems (the list of the problems page) are modes of
+// their own, the forms are the chips of EditNav. Problems has a dot when the
+// game has problems (a deprecated field is a note, a failed check no
+// result); none while the check runs.
+export const EditSwitch = ({
+  slug,
+  json,
+  problems,
+  formSection,
+  setSection,
+}) => {
   const { t } = useTranslation();
-  const item = (active, label, onClick, testId) => (
+  const count = useSelector((state) =>
+    state.gameProblems.status === "running"
+      ? 0
+      : (selectGameProblems(state, slug) ?? []).filter(
+          (issue) => issue.code !== "deprecated" && issue.code !== "failed",
+        ).length,
+  );
+  const item = (active, label, onClick, testId, dot = 0) => (
     <button
       type="button"
       aria-pressed={active}
       data-testid={testId}
       onClick={onClick}
       className={cn(
-        "rounded-sm px-3 py-1 text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
+        "rounded-sm px-2.5 py-1 text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring",
         active && "bg-background shadow-sm",
       )}
     >
       {label}
+      {dot > 0 && (
+        <>
+          {" "}
+          <span
+            aria-hidden="true"
+            data-testid="edit-switch-problem"
+            className="inline-block size-2 rounded-full bg-destructive align-middle"
+          />
+          <span className="sr-only">
+            {t("editPanel.nav.problems", { count: dot })}
+          </span>
+        </>
+      )}
     </button>
   );
 
@@ -96,7 +125,7 @@ export const EditSwitch = ({ json, formSection, setSection }) => {
       className="inline-flex rounded-md bg-muted p-1 text-foreground"
     >
       {item(
-        !json,
+        !json && !problems,
         t("editPanel.nav.forms"),
         () => setSection(formSection),
         "edit-switch-forms",
@@ -106,6 +135,13 @@ export const EditSwitch = ({ json, formSection, setSection }) => {
         t("editPanel.sections.json.tab"),
         () => setSection("json"),
         "edit-switch-json",
+      )}
+      {item(
+        problems,
+        t("editPanel.sections.problems.tab"),
+        () => setSection("problems"),
+        "edit-switch-problems",
+        count,
       )}
     </div>
   );

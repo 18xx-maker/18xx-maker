@@ -141,7 +141,7 @@ ohne `#`, werden unter dem Feld angezeigt. Escape schließt das Panel (zum JSON-
 
 Über dem Formular steht ein Suchfeld, um ein Feld des geöffneten Bereichs über seinen Namen zu finden (`/` setzt den Fokus darauf). Die Eingabetaste springt zum nächsten Treffer, öffnet die Karte, in der er liegt, scrollt zum Feld und markiert es, wobei der Fokus im Suchfeld bleibt und die Eingabetaste zum nächsten Treffer weitergeht; Umschalt+Eingabetaste geht zurück, Alt+Eingabetaste setzt den Fokus auf das Feld des aktuellen Treffers und Escape leert den Text. Die Suche schaut nicht in den geschlossenen Bereich „Weitere Felder“ einer Karte. In den Tabs Züge, Privatgesellschaften und Gesellschaften grenzt ein Filterfeld über den Karten diese auf die ein, deren Name, Kürzel, Titel oder Notiz den eingegebenen Text enthält. Das Filtern blendet Karten nur aus und ändert das Spiel nicht; Hinzufügen eines Eintrags leert den Filter.
 
-Das Panel hat für jeden Teil des Spiels, den es bearbeitet, einen Bereich, als Chips unter den Gruppen „Spiel“, „Ausstattung“ und „Aussehen und Ausgabe“. Der Schalter Formulare | JSON in der Kopfzeile wechselt zwischen diesen Formularen und dem JSON-Editor (unten); Formulare führt zurück zum zuletzt geöffneten Formular. Mit `[` und `]` wechselst du zwischen den Formularbereichen (aus dem JSON-Editor gehen sie zum letzten Formular; die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
+Das Panel hat für jeden Teil des Spiels, den es bearbeitet, einen Bereich, als Chips unter den Gruppen „Spiel“, „Ausstattung“ und „Aussehen und Ausgabe“. Der Schalter Formulare | JSON | Probleme in der Kopfzeile wechselt zwischen diesen Formularen, dem JSON-Editor (unten) und der Liste der Probleme des Spiels; Formulare führt zurück zum zuletzt geöffneten Formular. Ein roter Punkt auf Probleme bedeutet, dass das Spiel Probleme hat. Ein Klick auf ein Problem dort öffnet den JSON-Editor an dessen Zeile. Mit `[` und `]` wechselst du zwischen den Formularbereichen (aus dem JSON-Editor und den Problemen gehen sie zum letzten Formular; die Zifferntasten wechseln zu einem anderen Abschnitt des Spiels und
 lassen das Panel geöffnet). Ein roter Punkt auf einem Chip markiert einen
 Bereich mit Problemen; sein Label nennt die Anzahl. Änderungen bleiben im
 Speicher, bis du sie über die Schaltfläche Änderungen prüfen und speichern unter
@@ -350,7 +350,7 @@ Zeile und Spalte angezeigt. Die Meldung des Parsers ist nur auf Englisch. Dein
 unfertiger Text bleibt beim Wechseln des Tabs oder Schließen des Panels
 erhalten, bis du ihn verwirfst oder die Seite neu lädst. Probleme im Spiel
 selbst (ein unbekanntes Feld, ein falscher Typ) warnen nur: Sie sind am Rand
-markiert und auf der [Problemseite](/docs/games/schemas) aufgelistet, und das
+markiert und im Tab Probleme und auf der [Problemseite](/docs/games/schemas) aufgelistet, und das
 Spiel wird trotzdem aktualisiert.
 
 Formatieren schreibt den Text mit 2 Leerzeichen Einrückung neu. Es ist nur

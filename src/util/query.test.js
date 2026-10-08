@@ -1,5 +1,6 @@
 import {
   clearHexSearch,
+  jsonLineSearch,
   openConfigSearch,
   openEditSearch,
   searchString,
@@ -143,6 +144,26 @@ describe("selecting a tile on the sheet", () => {
   it("is encoded once, as the Tiles tab writes it", () => {
     expect(selectTileSearch("?edit=true&tile=57", "26|T2")).toBe(
       "edit=true&tile=26%257CT2&editSection=tiles",
+    );
+  });
+});
+
+describe("opening a line in the JSON tab", () => {
+  it("sets the section and the line, keeping the rest", () => {
+    expect(
+      jsonLineSearch("?edit=true&editSection=problems&variation=1", 12),
+    ).toBe("edit=true&editSection=json&variation=1&lines=12");
+  });
+
+  it("keeps the hex and tile, and replaces lines already set", () => {
+    expect(
+      jsonLineSearch("?edit=true&hex=C11&tile=26%257CT2&lines=3-4,9", 7),
+    ).toBe("edit=true&hex=C11&tile=26%257CT2&editSection=json&lines=7");
+  });
+
+  it("has no lines without a line", () => {
+    expect(jsonLineSearch("?edit=true&lines=3&editSection=problems")).toBe(
+      "edit=true&editSection=json",
     );
   });
 });

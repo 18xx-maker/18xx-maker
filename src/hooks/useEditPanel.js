@@ -49,6 +49,8 @@ export const useEditPanel = () => {
     ? param
     : forms[0].section;
   const json = editSection === "json";
+  const problems = editSection === "problems";
+  const pinned = !!sections.find((s) => s.section === editSection)?.pinned;
 
   // The selected lines belong to the JSON editor: leaving it drops them
   // (the section already shown stays as it is, lines and history included).
@@ -83,7 +85,7 @@ export const useEditPanel = () => {
 
   // Closing the panel forgets the form
   if (available && !open) resetLastForm();
-  else if (available && !json) setLastForm(editSection);
+  else if (available && !pinned) setLastForm(editSection);
   // The form Forms goes back to: the last one, unless it belongs to another
   // page (Forms never changes the page) or the game has no such one
   const last = forms.find((s) => s.section === getLastForm());
@@ -101,6 +103,8 @@ export const useEditPanel = () => {
     forms,
     formSection,
     json,
+    problems,
+    pinned,
     editSection,
     setEditSection,
   };

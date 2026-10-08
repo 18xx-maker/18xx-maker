@@ -55,7 +55,7 @@ falschen Typs, nicht erlaubte Werte und fehlende Pflichtfelder. Veraltete Felder
 werden ebenfalls aufgeführt, sie funktionieren weiterhin, und die Seite nennt den
 Namen, der stattdessen zu verwenden ist. Die Seite meldet nur, deine Datei wird nie
 verändert. Jede Zeile, die auf eine Stelle der Datei zeigt, verlinkt auf den JSON-Editor im Bearbeitungspanel, an der
-Zeile des Problems.
+Zeile des Problems. Dieselbe Liste ist der Tab Probleme im Bearbeitungspanel, in dem eine Zeile den JSON-Editor an ihrer Zeile öffnet, ohne die Seite zu verlassen.
 
 ## Validierung
 

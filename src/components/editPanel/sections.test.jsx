@@ -23,12 +23,14 @@ describe("edit sections", () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it("puts every form section in a known group, and only JSON is pinned", () => {
+  it("puts every form section in a known group, and only JSON and Problems are pinned", () => {
     for (const s of formSections) expect(editGroups).toContain(s.group);
     expect(editSections.filter((s) => s.pinned).map((s) => s.section)).toEqual([
       "json",
+      "problems",
     ]);
     expect(formSections.map((s) => s.section)).not.toContain("json");
+    expect(formSections.map((s) => s.section)).not.toContain("problems");
     expect(DEFAULT_EDIT_SECTION).toBe(formSections[0].section);
   });
 
@@ -51,7 +53,7 @@ describe("edit sections", () => {
     }
   });
 
-  it("has the config tab before the pinned JSON, wide, with its dot source", () => {
+  it("has the config tab before the pinned JSON and Problems, wide, with its dot source", () => {
     const ids = editSections.map((s) => s.section);
     expect(ids.indexOf("config")).toBe(ids.indexOf("json") - 1);
     expect(editSections.find((s) => s.section === "config").wide).toBe(true);

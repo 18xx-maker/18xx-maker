@@ -147,6 +147,10 @@
       "json": {
         "tab": "JSON",
         "description": "以 JSON 编辑整个游戏;只要 JSON 有效,页面就会随之更新。"
+      },
+      "problems": {
+        "tab": "问题",
+        "description": "整个游戏的问题。点击其中一个,在 JSON 编辑器中查看它所在的行。"
       }
     },
     "groups": {

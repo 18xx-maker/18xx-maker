@@ -199,6 +199,20 @@ export const selectTileSearch = (search, id) => {
   return searchString(params);
 };
 
+// The JSON tab of the edit panel on a line: the problems tab opens a row there.
+// The search stays as it is (variation, hex, tile) with the section and the
+// line changed; no line (a draft, its lines are not the game's) drops it.
+// Like useLinesParam the lines are written by hand, not encoded.
+export const jsonLineSearch = (search, line) => {
+  const params = new URLSearchParams(search);
+  params.delete("lines");
+  params.set("editSection", "json");
+  const spec = line ? formatLines([[line, line]]) : "";
+  return [searchString(params), spec && `lines=${spec}`]
+    .filter(Boolean)
+    .join("&");
+};
+
 export const clearHexSearch = (search) => {
   const params = new URLSearchParams(search);
   params.delete("hex");

@@ -1,6 +1,7 @@
 import ConfigSection from "@/components/editPanel/ConfigSection";
 import HexSection from "@/components/editPanel/HexSection";
 import JsonSection from "@/components/editPanel/JsonSection";
+import ProblemsSection from "@/components/editPanel/ProblemsSection";
 import TilesSection from "@/components/editPanel/TilesSection";
 import ColorsForm from "@/components/schemaForm/ColorsForm";
 import CompaniesForm from "@/components/schemaForm/CompaniesForm";
@@ -21,7 +22,8 @@ export const editGroups = ["game", "equipment", "output"];
 
 // The sections of the edit panel, in order. Adding a section is adding an entry
 // here and its editPanel.sections.<section> strings. A wide section gets more
-// of the screen (the JSON editor). The section names are in links
+// of the screen (the JSON editor). A pinned section is no chip: it is a segment
+// of the Forms | JSON | Problems switch (JSON, Problems). The section names are in links
 // (?edit=true&editSection=json): renaming one breaks them. A section with a
 // page belongs to that page of the game (the map and hex tabs to the map, the
 // tiles tab to the tiles): the tab is on every page, and choosing it from
@@ -43,9 +45,11 @@ export const editSections = [
   { section: "output", group: "output", Form: OutputForm },
   { section: "config", group: "output", Form: ConfigSection, wide: true },
   { section: "json", Form: JsonSection, wide: true, pinned: true },
+  { section: "problems", Form: ProblemsSection, wide: true, pinned: true },
 ];
 
-// The sections with a chip of their own, the forms
+// The sections with a chip of their own, the forms (the pinned ones are
+// segments of the switch)
 export const formSections = editSections.filter((s) => !s.pinned);
 
 // The form sections by group, in the order of editGroups; a section without a

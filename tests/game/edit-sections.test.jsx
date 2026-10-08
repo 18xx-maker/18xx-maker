@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { editSections } from "@/components/editPanel/sections";
 
 describe("edit panel sections", () => {
-  it("are in tab order with the json editor last", () => {
+  it("are in tab order with the pinned json editor and problems last", () => {
     expect(editSections.map((s) => s.section)).toEqual([
       "info",
       "players",
@@ -21,6 +21,7 @@ describe("edit panel sections", () => {
       "output",
       "config",
       "json",
+      "problems",
     ]);
   });
 });

@@ -129,10 +129,12 @@ Escape closes the panel (see below for the JSON editor).
 Above the form is a search box to find a field of the open section by its name (`/` focuses it). Enter goes to the next match, opening the card it is in, and scrolls to the field and marks it, with the focus staying in the search box so Enter goes on to the next one; Shift+Enter goes back, Alt+Enter focuses the field of the current match and Escape clears the text. The search does not look inside the closed "More fields" section of a card. On the Trains, Privates and Companies tabs a filter box above the cards narrows them to the ones whose name, abbreviation, title or note has the text you type. Filtering only hides cards, it does not change the game, and adding an item clears it.
 
 The panel has a section for each part of the game it edits, shown as chips under
-the group names "Game", "Equipment" and "Look and output". The Forms | JSON switch in
-the header goes between these forms and the JSON editor (below), and Forms goes
-back to the form you were on. Press `[` and `]` to switch between the form
-sections (from the JSON editor they go to the last form; the number keys go to
+the group names "Game", "Equipment" and "Look and output". The Forms | JSON | Problems switch in
+the header goes between these forms, the JSON editor (below) and the list of
+problems of the game, and Forms goes back to the form you were on. A red dot on
+Problems means the game has problems. Click a problem there to open the JSON
+editor at its line. Press `[` and `]` to switch between the form
+sections (from the JSON editor or the problems they go to the last form; the number keys go to
 another section of the game and keep the panel open). A red dot on a chip
 marks a section with problems; its label says how many. Changes stay in memory
 until you save them from the Review and save changes button below the form.
@@ -314,8 +316,8 @@ keeps its last valid version, and the problem is shown below the editor with
 its line and column. The parser's own message is only in English. Your
 unfinished text is kept when you switch tabs or close the panel, until you
 discard it or reload the page. Problems with the game itself (an unknown field,
-a wrong type) only warn: they are marked in the margin and listed on the
-[Problems page](/docs/games/schemas), and the game is still updated.
+a wrong type) only warn: they are marked in the margin and listed in the
+Problems tab and on the [Problems page](/docs/games/schemas), and the game is still updated.
 
 Format rewrites the text with an indent of 2 spaces. It is only available while
 the JSON is valid, and warns first when names are used twice in an object or
