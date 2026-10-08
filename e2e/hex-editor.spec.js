@@ -74,3 +74,31 @@ test("only loads the form when the Hex tab shows it", async ({ page }) => {
   await expect(page.getByTestId("hex-editor")).toBeVisible();
   expect(requested.filter((url) => /HexEditor/.test(url))).not.toEqual([]);
 });
+
+test("drags an element and undoes the drag", async ({ page }) => {
+  await page.goto("/games/18Test/map?edit=true&editSection=hex&hex=B12");
+  await expect(page.getByTestId("hex-editor")).toBeVisible();
+  const city = page
+    .getByTestId("hex-canvas-elements")
+    .locator('[data-element="cities:0"]');
+  const box = await city.boundingBox();
+  const x = box.x + box.width / 2;
+  const y = box.y + box.height / 2;
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x + 15, y + 10, { steps: 5 });
+  await page.mouse.up();
+
+  const undo = page.getByTestId("hex-editor").getByRole("button", {
+    name: /^Undo/,
+  });
+  await expect(undo).toHaveAttribute("aria-disabled", "false");
+  await undo.click();
+  await expect(undo).toHaveAttribute("aria-disabled", "true");
+
+  // The JSON view starts over from the group: the drag is gone from it
+  await page.locator("label", { hasText: "JSON" }).click();
+  const json = page.getByRole("textbox", { name: "Hex group JSON" });
+  await expect(json).toContainText('"cities"');
+  await expect(json).not.toContainText('"x"');
+});

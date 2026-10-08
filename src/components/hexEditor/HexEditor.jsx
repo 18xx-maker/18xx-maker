@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Redo2, Undo2 } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 import ElementList from "@/components/hexEditor/ElementList";
 import HexCanvas from "@/components/hexEditor/HexCanvas";
 import SidePicker from "@/components/hexEditor/SidePicker";
+import { historyKey } from "@/components/hexEditor/hexHistory";
 import {
   NEW_ELEMENT,
   addElement,
   addTrack,
   countOf,
+  dragElement,
   duplicateElement,
   elementAt,
   isSingle,
@@ -26,6 +31,8 @@ import SchemaField, {
   ChoiceField,
   SchemaFormContext,
 } from "@/components/schemaForm/SchemaField";
+
+import { moveKey } from "@/util/hexEdit";
 
 // The colors of a hex of the map
 export const HEX_COLORS = [
@@ -104,6 +111,31 @@ const HexEditor = ({ value, onChange, orientation = 0, game, issues }) => {
     }
   };
 
+  // A drag is one step of the history: every move is made from the hex the
+  // drag started with, by how far the pointer is from where it started
+  const dragFrom = useRef(null);
+  const dragStart = () => {
+    dragFrom.current = value;
+    form.history.begin();
+  };
+  const drag = ({ key, index }, dx, dy) => {
+    if (dragFrom.current) {
+      hexChange(() => dragElement(dragFrom.current, key, index, dx, dy));
+    }
+  };
+  const dragEnd = ({ key, index }) => {
+    form.history.end();
+    dragFrom.current = null;
+    setStatus(t("hexEditor.form.moved", { name: nameOf(key, index) }));
+  };
+
+  const undo = () => {
+    if (form.history.undo()) setStatus(t("hexEditor.form.undone"));
+  };
+  const redo = () => {
+    if (form.history.redo()) setStatus(t("hexEditor.form.redone"));
+  };
+
   const duplicate = (key, index) => {
     hexChange((hex) => duplicateElement(hex, key, index));
     setPicked({ key, index: index + 1 });
@@ -124,6 +156,19 @@ const HexEditor = ({ value, onChange, orientation = 0, game, issues }) => {
           className="flex flex-col gap-4"
           data-testid="hex-editor"
           onKeyDown={(event) => {
+            // In a field, the keys are the field's own
+            const step = historyKey(event);
+            if (
+              step &&
+              !event.target.closest?.(
+                "input, textarea, select, [contenteditable]",
+              )
+            ) {
+              event.preventDefault();
+              event.stopPropagation();
+              (step === "undo" ? undo : redo)();
+              return;
+            }
             if (event.key === "Escape" && pending !== null) {
               event.stopPropagation();
               event.nativeEvent.stopImmediatePropagation?.();
@@ -142,7 +187,36 @@ const HexEditor = ({ value, onChange, orientation = 0, game, issues }) => {
                 pending={pending}
                 onEdge={edge}
                 elementLabel={nameOf}
+                onDragStart={dragStart}
+                onDrag={drag}
+                onDragEnd={dragEnd}
               />
+            </div>
+            <div className="flex flex-row gap-1">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="size-7 aria-disabled:opacity-50"
+                aria-label={t("hexEditor.form.undo", { key: moveKey() })}
+                title={t("hexEditor.form.undo", { key: moveKey() })}
+                aria-disabled={!form.history.canUndo}
+                onClick={undo}
+              >
+                <Undo2 />
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="size-7 aria-disabled:opacity-50"
+                aria-label={t("hexEditor.form.redo", { key: moveKey() })}
+                title={t("hexEditor.form.redo", { key: moveKey() })}
+                aria-disabled={!form.history.canRedo}
+                onClick={redo}
+              >
+                <Redo2 />
+              </Button>
             </div>
             <p className="min-h-4 text-xs text-muted-foreground">
               {pending === null

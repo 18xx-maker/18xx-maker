@@ -3,6 +3,7 @@ import {
   addElement,
   addTrack,
   countOf,
+  dragElement,
   duplicateElement,
   elementAt,
   elementPoint,
@@ -410,6 +411,71 @@ describe("a hex the editor opened and closed", () => {
       let next = hex;
       for (let i = 0; i < 6; i++) next = rotateHex(next, 1);
       expect([name, JSON.stringify(next)]).toEqual([name, JSON.stringify(hex)]);
+    }
+  });
+});
+
+describe("dragElement", () => {
+  it("adds the move to x and y, to a tenth", () => {
+    const hex = { cities: [{ x: 5, percent: 0.5 }, {}] };
+    expect(dragElement(hex, "cities", 0, 10.04, -3.26)).toEqual({
+      cities: [{ x: 15, percent: 0.5, y: -3.3 }, {}],
+    });
+    expect(dragElement(hex, "cities", 1, 4, 0).cities[1]).toEqual({ x: 4 });
+    expect(hex.cities[0]).toEqual({ x: 5, percent: 0.5 });
+  });
+
+  it("turns a text element into an object and drops x and y at 0", () => {
+    expect(dragElement({ names: ["A"] }, "names", 0, 0, 8)).toEqual({
+      names: [{ name: "A", x: -14, y: 8 }],
+    });
+    expect(
+      dragElement({ cities: [{ x: 4, y: 2 }] }, "cities", 0, -4, -2),
+    ).toEqual({
+      cities: [{}],
+    });
+  });
+
+  it("gives the same hex for no move, track or a missing element", () => {
+    const hex = {
+      cities: [{ x: 5 }],
+      track: [{ side: 1, type: "straight" }],
+    };
+    expect(dragElement(hex, "cities", 0, 0.01, -0.02)).toBe(hex);
+    expect(dragElement(hex, "track", 0, 5, 5)).toBe(hex);
+    expect(dragElement(hex, "cities", 3, 5, 5)).toBe(hex);
+  });
+
+  it("moves the point of the element by the same", () => {
+    const hex = { labels: [{ label: "A", side: 2 }] };
+    const before = elementPoint("labels", hex.labels[0], 0);
+    const after = elementPoint(
+      "labels",
+      dragElement(hex, "labels", 0, 12, -7).labels[0],
+      0,
+    );
+    expect(after.x - before.x).toBeCloseTo(12);
+    expect(after.y - before.y).toBeCloseTo(-7);
+  });
+
+  it("keeps an element the map places by itself where it is", () => {
+    const hex = { cities: [{}], labels: [{ label: "A" }] };
+    const before = elementPoint("labels", hex.labels[0], 0, 0, hex);
+    const next = dragElement(hex, "labels", 0, 10, 5);
+    expect(next.labels[0]).toMatchObject({ angle: 150, percent: 0.7 });
+    const after = elementPoint("labels", next.labels[0], 0, 0, next);
+    expect(after.x - before.x).toBeCloseTo(10);
+    expect(after.y - before.y).toBeCloseTo(5);
+  });
+
+  it("starts from the point the editor shows for elements at the center", () => {
+    const hex = { cities: [{}, {}, {}] };
+    for (let i = 0; i < 3; i++) {
+      const before = elementPoint("cities", hex.cities[i], i, 0, hex);
+      const next = dragElement(hex, "cities", i, 6, -4);
+      const after = elementPoint("cities", next.cities[i], i, 0, next);
+      expect(after.x - before.x).toBeCloseTo(6, 0);
+      expect(after.y - before.y).toBeCloseTo(-4, 0);
     }
   });
 });
