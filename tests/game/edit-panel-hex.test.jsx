@@ -82,8 +82,18 @@ const marks = () =>
 
 // The editor of the group at an anchor, when given: the host is looked up
 // again on every try, a host found before the editor started over is gone
-const editor = (anchor) =>
-  waitFor(() => {
+const editor = async (anchor) => {
+  // The tab starts on the form: these tests are of the JSON view
+  // (a hex the variation removes has no toggle, only the JSON)
+  const json = await waitFor(() => {
+    const radio = screen.queryByRole("radio", { name: "JSON" });
+    if (!radio && !screen.queryByTestId("json-editor")) {
+      throw new Error("no JSON radio yet");
+    }
+    return radio;
+  });
+  if (json && !json.checked) await realUser.click(json);
+  return waitFor(() => {
     const host = screen.queryByTestId("json-editor");
     if (!host) throw new Error("no editor host yet");
     if (
@@ -96,6 +106,7 @@ const editor = (anchor) =>
     if (!found) throw new Error("no editor yet");
     return found;
   });
+};
 const editorGroup = async () =>
   JSON.parse((await editor()).state.doc.toString());
 

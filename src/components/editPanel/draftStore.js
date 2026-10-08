@@ -3,9 +3,28 @@
 // does not lose it.
 const drafts = new Map();
 
+const listeners = new Set();
+const notify = () => listeners.forEach((listener) => listener());
+
+// For useSyncExternalStore: called when a draft is set or cleared
+export const subscribeDrafts = (listener) => {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+};
+
 // The base is the game the text was written against, to tell when the game
 // changed while the editor was closed
 export const getDraft = (slug) => drafts.get(slug);
-export const setDraft = (slug, text, base) => drafts.set(slug, { text, base });
-export const clearDraft = (slug) => drafts.delete(slug);
-export const resetDrafts = () => drafts.clear();
+export const setDraft = (slug, text, base) => {
+  drafts.set(slug, { text, base });
+  notify();
+};
+export const clearDraft = (slug) => {
+  const had = drafts.delete(slug);
+  if (had) notify();
+  return had;
+};
+export const resetDrafts = () => {
+  drafts.clear();
+  notify();
+};

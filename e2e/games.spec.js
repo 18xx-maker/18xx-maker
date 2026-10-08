@@ -132,6 +132,9 @@ test.describe("bundled games", () => {
       "aria-selected",
       "true",
     );
+    // The tab starts on the form, the group is also its JSON
+    await expect(panel.getByTestId("hex-editor")).toBeVisible();
+    await page.locator("label", { hasText: "JSON" }).click();
     await expect(editor).toContainText('"C11"');
     await expect(editor).not.toContainText('"A11"');
 
