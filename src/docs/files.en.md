@@ -246,9 +246,14 @@ texts and trim of a copied variation are those of the variation it copies plus
 its own. The hexes themselves are the Hex tab's.
 
 The Hex tab is only on the map page. Click a hex on the map to pick its group,
-the entry of `map.hexes` that lists it: the tab then shows only that group as
-JSON (its color, its coordinates and what is drawn on it) and the hexes of the
-group are outlined on the map. Empty positions can be picked too, and so can
+the entry of `map.hexes` that lists it: the tab then shows only that group, as a
+form by default and as JSON with the Form and JSON switch, and the hexes of the
+group are outlined on the map. The form draws the hex as the map does with a
+button on each edge: click two edges to draw the track between them, pick an
+element from the list or the drawing to edit its fields, and add, copy, move or
+remove elements. The form writes only what you change. The JSON view cannot be
+left while its text is not valid. A note tells when a change applies to several
+hexes of the group or when another group also lists the hex. Empty positions can be picked too, and so can
 the row and the column just past the map. The page follows the text while it is
 a valid group, an object with a `hexes` list of at least one coordinate such as
 `B2`; anything else stays a draft and the game keeps its last valid version.
@@ -261,7 +266,7 @@ coordinate of the group (`?edit=true&editSection=hex&hex=C11`). Picking hexes
 works on the pan and zoom map on screen while the panel is open, and the
 printed and exported maps do not change. A map variation that copies another
 shows the hexes it copies read only: change them in the variation they come
-from. The keyboard way to edit a group is the JSON editor (the JSON switch in the panel header).
+from. The edge buttons and the lists of the form work from the keyboard.
 
 The Config tab edits the `config` of the game as JSON, the settings that are
 applied for this game when _Allow game config_ is on in the [config

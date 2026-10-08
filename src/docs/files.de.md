@@ -271,9 +271,16 @@ Variante plus ihre eigenen. Die Kartenfelder selbst gehören zum Hex-Tab.
 
 Der Hex-Tab gibt es nur auf der Kartenseite. Klicke auf ein Kartenfeld auf der
 Karte, um seine Gruppe zu wählen, den Eintrag von `map.hexes`, der es auflistet:
-Der Tab zeigt dann nur diese Gruppe als JSON (ihre Farbe, ihre Koordinaten und
-was darauf gezeichnet wird), und die Kartenfelder der Gruppe sind auf der Karte
-umrandet. Auch leere Positionen lassen sich wählen, ebenso die Reihe und die
+Der Tab zeigt dann nur diese Gruppe, standardmäßig als Formular und mit dem
+Schalter Formular/JSON als JSON, und die Kartenfelder der Gruppe sind auf der
+Karte umrandet. Das Formular zeichnet das Kartenfeld wie die Karte, mit einer
+Schaltfläche an jeder Kante: Klicke auf zwei Kanten, um das Gleis dazwischen zu
+zeichnen, wähle ein Element aus der Liste oder der Zeichnung, um seine
+Eigenschaften zu bearbeiten, und füge Elemente hinzu, kopiere, verschiebe oder
+entferne sie. Das Formular schreibt nur, was du änderst. Die JSON-Ansicht lässt
+sich nicht verlassen, solange ihr Text ungültig ist. Ein Hinweis zeigt an, wenn
+eine Änderung für mehrere Kartenfelder der Gruppe gilt oder wenn eine andere
+Gruppe das Kartenfeld ebenfalls auflistet. Auch leere Positionen lassen sich wählen, ebenso die Reihe und die
 Spalte direkt hinter der Karte. Die Seite folgt dem Text, solange er eine
 gültige Gruppe ist, ein Objekt mit einer Liste `hexes` aus mindestens einer
 Koordinate wie `B2`; alles andere bleibt ein Entwurf, und das Spiel behält seine
@@ -288,8 +295,8 @@ Adresse behält sie als `hex`, die erste Koordinate der Gruppe
 auf der Karte mit Schwenken und Zoomen am Bildschirm, solange das Panel offen
 ist; die gedruckten und exportierten Karten ändern sich nicht. Eine Kartenvariante,
 die eine andere kopiert, zeigt die kopierten Kartenfelder schreibgeschützt: Ändere
-sie in der Variante, aus der sie stammen. Der Weg über die Tastatur ist der
-JSON-Editor (der JSON-Schalter in der Kopfzeile des Panels).
+sie in der Variante, aus der sie stammen. Die Kantenschaltflächen und die Listen des
+Formulars lassen sich per Tastatur bedienen.
 
 Der Tab Konfiguration bearbeitet die `config` des Spiels als JSON, die
 Einstellungen, die für dieses Spiel gelten, wenn im [Konfigurationsfenster](/docs/config)
