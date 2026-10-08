@@ -149,10 +149,151 @@ app and storybook site:
 pnpm preview
 pnpm preview:app
 
+# Treemap of the production bundle
+pnpm bundle
+
 # Build the production site, electron app, or storybook site:
 pnpm build
 pnpm build:app
 pnpm build:sb
+```
+
+### Bundle size
+
+`pnpm bundle` opens an interactive treemap of the site build. Its per-chunk
+figures are rendered (before minification) sizes. The table below is what users
+download, minified, per package, from source-map attribution of the site
+build (`dist/site` only; the Electron renderer has no `manualChunks` and was not
+measured), with gzip and brotli of the attributed bytes. Those are computed on
+each package's slice compressed on its own, so they are upper bounds and do not
+add up to a chunk's real compressed size (the whole `CodeHighlighted` chunk
+gzips to 56.3 kB, against 61.3 kB in the table). Peripheral packages
+are grouped with their owner (uri-js and fast-copy with json-schema-library,
+oniguruma-to-es and @shikijs/* with shiki, the lezer packages, style-mod and
+w3c-keyname with CodeMirror). 1 kB is 1000 bytes. Measured on 2026-10-07 at
+commit `735b4d43`. Chunks are named by role, since file hashes change on every
+build. The json-schema-library chunk is also named `index-<hash>.js`; the
+entry is the one referenced by the module script in `index.html`.
+
+| Library                                                         | Chunk                                  | Loaded                                      | Raw kB | gzip kB | brotli kB |
+| --------------------------------------------------------------- | -------------------------------------- | ------------------------------------------- | -----: | ------: | --------: |
+| shiki (core, json and bash grammars, 2 themes, JS regex engine) | `CodeHighlighted` (2.8 kB in `vendor`) | Lazy: first `Code` block, and the diff view |  213.3 |    61.3 |      54.6 |
+| json-schema-library (with uri-js, fast-copy, ...)               | its own async chunk                    | Async at startup on every page              |  120.3 |    32.8 |      28.1 |
+| tinycolor2                                                      | `vendor`                               | Initial                                     |   15.5 |     5.4 |       4.7 |
+| CodeMirror in the entry chunk                                   | entry (`index`)                        | Initial (unintended, see below)             |  318.3 |   106.9 |      95.1 |
+| CodeMirror JSON editor                                          | `JsonEditor`                           | Lazy: JSON section of the edit panel        |   54.8 |    19.4 |      17.6 |
+| CodeMirror vim                                                  | `editorVim`                            | Lazy: only when vim mode is chosen          |  122.1 |    39.5 |      35.0 |
+| CodeMirror emacs                                                | `editorEmacs`                          | Lazy: only when emacs mode is chosen        |   27.8 |    10.7 |       9.8 |
+
+CodeMirror totals about 523 kB raw, 176 kB gzip and 158 kB brotli across all
+chunks. For scale, whole chunks: entry 1632 kB (498 kB gzip), `vendor` 740 kB
+(242 kB gzip), `data` 674 kB (149 kB gzip) and `logos` 8.9 MB. The entry,
+`vendor`, `logos`, `ramda` and `data` chunks are modulepreloaded on every page,
+so the 107 kB gzip of CodeMirror in the entry chunk is a small saving next to
+them.
+
+The shiki chunk is also imported statically by `DiffView.jsx` (`tokenize` from
+`CodeHighlighted`). `DiffView` is itself lazy (`ChangesPage` and `HistoryPage`),
+so the chunk loads on the changes and history views as well as on the first
+`Code` block.
+
+Go or no-go on the options in issue 1021:
+
+- A lighter highlighter is a no-go. shiki is already fine-grained (`shiki/core`,
+  the JS regex engine, only json and bash, two themes, no WASM) and lazy at 61
+  kB gzip. highlight.js or Prism would save perhaps 20 to 35 kB gzip but lose
+  the dual-theme token model (`--shiki-light` and `--shiki-dark`), change the
+  docs and diff view output, and need a CSS rewrite.
+- ajv instead of json-schema-library is a no-go. The chunk is 33 kB gzip. It is
+  split off the entry, but `src/hooks/validation.js` calls
+  `import("json-schema-library")` at module top level and `@/hooks` is
+  imported by core components, so every visitor fetches it at startup (async,
+  not modulepreloaded). Ajv would save little (the ajv runtime is roughly 35 kB gzip, an
+  estimate that was not measured). `src/util/gameValidation.js` maps
+  json-schema-library error codes and nested `data.errors` to localized issues,
+  so a migration rewrites it and its tests for no meaningful gain.
+- tinycolor2 needs no action at 5.4 kB gzip.
+- CodeMirror is a go on code splitting and a no-go on replacing it, see below.
+
+CodeMirror is meant to be lazy (`manualChunks` leaves it out of `vendor`), but
+`src/util/jsonEditor.js` imports `@codemirror/lang-json` and is imported
+statically, so Rollup places `@codemirror/view` (184 kB raw), `state`,
+`language` and the lezer packages in the entry chunk (`cm-content` and
+`cm-scroller` style strings from `@codemirror/view` are in it). The static
+chains:
+
+- `Toolbar.jsx`, `hooks/useEditPanel.js`, `editPanel/sections.js`,
+  `ConfigSection.jsx` (`configLens`), `util/jsonEditor.js`
+- `schemaForm/overrides.jsx`, `TokenEditButton.jsx`, `tokenEditor/tokenModel.js`
+  (`isObject`), `util/jsonEditor.js`
+- `editPanel/sections.js`, `TokensForm.jsx`, `TokenEditButton.jsx`,
+  `tokenModel.js`, `util/jsonEditor.js`
+
+The dynamic `import("@/util/jsonEditor")` in `ProblemsPage.jsx` cannot split
+anything while those chains exist. A fix (a helper module without
+`jsonLanguage`, or loading `parseTree` on demand) is a separate change.
+
+To reproduce, build with source maps to a scratch folder and run this script
+from the repo root (it needs `@jridgewell/trace-mapping`, which pnpm keeps in
+`node_modules/.pnpm/node_modules`). It prints raw, gzip and brotli kB per
+package for every chunk, which you then group by owner:
+
+```shell
+pnpm exec vite build --sourcemap --outDir /tmp/bundle-sm
+node attribute.mjs /tmp/bundle-sm/assets
+```
+
+```js
+// node attribute.mjs <outDir>/assets   (run from the repo root)
+import fs from "node:fs";
+import { createRequire } from "node:module";
+import path from "node:path";
+import zlib from "node:zlib";
+
+// pnpm does not link transitive packages into node_modules, use its hoisted copy
+const { TraceMap, originalPositionFor } = createRequire(import.meta.url)(
+  path.resolve("node_modules/.pnpm/node_modules/@jridgewell/trace-mapping"),
+);
+
+const dir = process.argv[2];
+const pkgOf = (src) => {
+  const m = src.match(
+    /node_modules\/(?:\.pnpm\/[^/]+\/node_modules\/)?((?:@[^/]+\/)?[^/]+)/,
+  );
+  return m ? m[1] : "(app)";
+};
+for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".js"))) {
+  const code = fs.readFileSync(path.join(dir, f), "utf8");
+  const map = new TraceMap(fs.readFileSync(path.join(dir, f + ".map"), "utf8"));
+  const spans = {}; // package -> minified text attributed to it
+  code.split("\n").forEach((line, l) => {
+    let cur = null,
+      start = 0;
+    const flush = (end) => {
+      if (cur) spans[cur] = (spans[cur] ?? "") + line.slice(start, end);
+    };
+    for (let c = 0; c < line.length; c++) {
+      const o = originalPositionFor(map, { line: l + 1, column: c });
+      const pkg = o.source ? pkgOf(o.source) : cur;
+      if (pkg !== cur) {
+        flush(c);
+        cur = pkg;
+        start = c;
+      }
+    }
+    flush(line.length);
+  });
+  console.log(f);
+  for (const [pkg, text] of Object.entries(spans)) {
+    const b = Buffer.from(text);
+    console.log(
+      pkg.padEnd(40),
+      (b.length / 1000).toFixed(1),
+      (zlib.gzipSync(b).length / 1000).toFixed(1),
+      (zlib.brotliCompressSync(b).length / 1000).toFixed(1),
+    );
+  }
+}
 ```
 
 ### Visual check
