@@ -761,6 +761,10 @@
         "title": "Tiles and Hexes",
         "description": "Describe tiles and place them on the map"
       },
+      "hexEditor": {
+        "title": "Hex Editor",
+        "description": "Draw hexes and tiles and edit what is on them"
+      },
       "privates": {
         "title": "Private Companies",
         "description": "Describe private companies and their cards"

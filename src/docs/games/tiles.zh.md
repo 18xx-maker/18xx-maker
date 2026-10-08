@@ -1,6 +1,6 @@
 # 地块与六边格
 
-游戏文件在两个地方绘制六边格:`tiles` 是玩家铺设的地块,`map` 是铺设地块的棋盘。两者使用同一种六边格定义,所以本页关于六边格内容(`color`、`track`、`cities` 等)的说明对两者都适用。这些字段见[游戏模式](https://18xx-maker.com/schemas/game.schema.json)和[地块模式](https://18xx-maker.com/schemas/tiles.schema.json)。
+游戏文件在两个地方绘制六边格:`tiles` 是玩家铺设的地块,`map` 是铺设地块的棋盘。两者使用同一种六边格定义,所以本页关于六边格内容(`color`、`track`、`cities` 等)的说明对两者都适用。这些字段见[游戏模式](https://18xx-maker.com/schemas/game.schema.json)和[地块模式](https://18xx-maker.com/schemas/tiles.schema.json)。编辑面板可以为你绘制和编辑六边格与地块,见[六边格编辑器](/docs/games/hex-editor)。
 
 ## 地块
 

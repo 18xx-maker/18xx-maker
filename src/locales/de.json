@@ -761,6 +761,10 @@
         "title": "Plättchen und Felder",
         "description": "Plättchen beschreiben und auf der Karte platzieren"
       },
+      "hexEditor": {
+        "title": "Hex-Editor",
+        "description": "Kartenfelder und Plättchen zeichnen und bearbeiten"
+      },
       "privates": {
         "title": "Privatgesellschaften",
         "description": "Privatgesellschaften und ihre Karten beschreiben"

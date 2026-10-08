@@ -267,7 +267,7 @@ works on the pan and zoom map on screen while the panel is open, and the
 printed and exported maps do not change. A map variation that copies another
 shows the hexes it copies as JSON you can read: change them in the variation
 they come from, or press _Override here_ to make a copy of the hex in this
-variation and edit that. The edge buttons and the lists of the form work from the keyboard.
+variation and edit that. The edge buttons and the lists of the form work from the keyboard. Every element has fields of its own, and the button _Edit C11 only_ (with the coordinate of the hex) gives a hex of a group of several a copy of the group to itself, so that changes are for that hex only. See the [Hex Editor](/docs/games/hex-editor).
 
 The Tiles tab is on every page (from another page it goes to the tiles page) and edits the `tiles` of the game. It
 lists the tiles in the order of the file. Type an id and press Add tile to add

@@ -5,7 +5,9 @@ A game file draws hexes in two places: `tiles` are the tiles players lay and
 everything on this page about the content of a hex (`color`, `track`, `cities`,
 ...) works in both. The fields are in the
 [game schema](https://18xx-maker.com/schemas/game.schema.json) and in the
-[tiles schema](https://18xx-maker.com/schemas/tiles.schema.json).
+[tiles schema](https://18xx-maker.com/schemas/tiles.schema.json). The edit
+panel can draw and edit hexes and tiles for you, see the
+[Hex Editor](/docs/games/hex-editor).
 
 ## Tiles
 
