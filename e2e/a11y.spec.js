@@ -144,13 +144,35 @@ const pages = [
     colorScheme,
     ready: (page) => page.getByRole("group", { name: "Trim" }),
   })),
-  // The Hex tab of the map page: the group picked on the map as JSON, and
-  // the hint before one is picked
+  // The Hex tab of the map page: the form of the group picked on the map (a
+  // drawing of the hex with a button on each edge, its elements and the
+  // fields of one), the same group as JSON, and the hint before one is picked
   ...["light", "dark"].map((colorScheme) => ({
-    name: `edit panel hex (${colorScheme})`,
+    name: `edit panel hex form (${colorScheme})`,
+    url: "/games/18Test/map?edit=true&editSection=hex&hex=B12",
+    colorScheme,
+    ready: (page) => page.getByTestId("hex-editor"),
+    before: async (page) => {
+      // A track drawn from the keyboard, then its fields
+      await page.getByRole("button", { name: /^Side 1: start/ }).focus();
+      await page.keyboard.press("Enter");
+      await page.getByRole("button", { name: /^Side 4: end/ }).focus();
+      await page.keyboard.press("Space");
+      await expect(page.getByTestId("hex-inspector")).toBeVisible();
+      await page.getByRole("button", { name: "More fields" }).click();
+    },
+  })),
+  ...["light", "dark"].map((colorScheme) => ({
+    name: `edit panel hex json (${colorScheme})`,
     url: "/games/18Test/map?edit=true&editSection=hex&hex=C11",
     colorScheme,
-    ready: (page) => page.getByRole("textbox", { name: "Hex group JSON" }),
+    ready: (page) => page.getByTestId("hex-editor"),
+    before: async (page) => {
+      await page.locator("label", { hasText: "JSON" }).click();
+      await expect(
+        page.getByRole("textbox", { name: "Hex group JSON" }),
+      ).toBeVisible();
+    },
   })),
   {
     name: "edit panel hex hint",
