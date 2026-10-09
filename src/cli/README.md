@@ -68,12 +68,24 @@ pnpm maker export <game|path.json> --format pdf,png,svg,b18
 | `--config <file>`         | a config file on top of `src/config.json` (the settings to change)                                                                                                     |
 | `--dpi <dpi>`             | resolution of PNGs, 1 to 300 (the default and the highest), SVGs have none                                                                                             |
 | `--card-bleed <units>`    | bleed around each single card PNG in 1/100 inch (12.5 is 1/8 inch), 0 to 50, default 0 (none)                                                                          |
+| `--assets <folder>`       | the folder with the custom images (`icons`, `logos` and `trains` folders), default `<game>.assets` next to the game file                                               |
+| `--no-assets`             | do not use custom images                                                                                                                                               |
 | `-o, --out <folder>`      | the folder that holds the game folders, default `render`                                                                                                               |
 | `-j, --jobs <n>`          | files captured at the same time, default 1                                                                                                                             |
 | `-a, --all`               | every bundled game                                                                                                                                                     |
 | `--b18-version <version>` | the Board 18 version of the box, default `1.0`                                                                                                                         |
 | `--b18-author <author>`   | the Board 18 author, default `b18.author` of `maker config`                                                                                                            |
 | `-d, --debug`             | serve the site on port 9000 and wait, to look at pages                                                                                                                 |
+
+Custom images (SVG icons and logos, PNG train images) used in a game as
+`custom/<name>` are read from the folder `<game>.assets` next to the game file
+(`18Test.json` has `18Test.assets/icons/star.svg`, `logos/crest.svg` and
+`trains/loco.png`; the bundled games use `src/data/games/<id>.assets`). The
+export prints how many images it loaded and a warning for every file it skipped
+(a link, a name outside `[A-Za-z0-9][A-Za-z0-9._-]*` up to 64 characters, a file
+that is no SVG or PNG, one over 512 KB (SVG) or 2 MB (PNG), more than 200 files
+or 10 MB in all). `--assets` must name a folder that exists and is for one game,
+not for `--all`.
 
 The `printScale` of a config (the printer correction of the app) is ignored by
 exports: they always use the real size. The `config` of a game file only

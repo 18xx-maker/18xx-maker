@@ -21,6 +21,7 @@ import {
   setup,
   startServer,
 } from "#cli/util";
+import { loadAssetsFrom } from "#export/assets";
 import { b18Spec } from "#export/b18";
 import { MAX_DPI } from "#export/capture";
 import { documents } from "#export/documents";
@@ -35,6 +36,7 @@ import { renderGame, renderSlug } from "#export/render";
 import { DOCS, selectDocs } from "#export/select";
 import { gameFolder } from "#export/sink";
 import { writeZip } from "#export/zip";
+import { assetsFolder } from "#util/assetNames";
 
 export { DOCS, selectDocs };
 
@@ -94,10 +96,15 @@ const parseCount = (value, name, fallback) => {
 
 // A game to export from what the user typed: the id of a bundled game or the
 // path of a game file. A file is validated against the game schema and its id
-// is its name. Returns { id, game }.
+// is its name. Returns { id, game, file } where file is the game file (whose
+// <name>.assets folder has its custom images).
 export const resolveGame = async (name) => {
   if (!/\.json$/i.test(name) && !/[\\/]/.test(name)) {
-    return { id: name, game: loadGame(name) };
+    return {
+      id: name,
+      game: loadGame(name),
+      file: path.join(import.meta.dirname, `../data/games/${name}.json`),
+    };
   }
 
   if (!existsSync(name)) throw new UsageError(`${name} not found`);
@@ -120,7 +127,25 @@ export const resolveGame = async (name) => {
   return {
     id: path.basename(name, path.extname(name)),
     game: loadJSON(name),
+    file: name,
   };
+};
+
+// The custom images of a game, from the folder next to its file (--assets
+// names another folder, --no-assets turns them off). Prints how many were
+// loaded and every file that was skipped.
+export const loadGameAssets = ({ id, file }, opts = {}) => {
+  if (opts.assets === false) return undefined;
+  const folder =
+    typeof opts.assets === "string" ? opts.assets : assetsFolder(file);
+  const { assets, warnings, count } = loadAssetsFrom(folder);
+  for (const warning of warnings) console.warn(`Warning: ${warning}`);
+  if (count > 0) {
+    console.log(
+      `Assets: ${count} custom image${count === 1 ? "" : "s"} for ${id} from ${folder}`,
+    );
+  }
+  return assets;
 };
 
 // The config of a file given with --config. Like config.json it only has the
@@ -190,6 +215,8 @@ const flagOptions = (opts) => {
 //   out         the folder the folder of the game goes in, with a folder
 //               for each of pdf, png and svg in it
 //   jobs        how many files are captured at the same time
+//   assets      a folder of custom images (icons, logos and trains) instead
+//               of <game>.assets, false (--no-assets) to use none
 //   all         every bundled game
 //   b18Version, b18Author  1.0, the author of the user's config or their name
 //   debug       serve the site and wait
@@ -208,6 +235,12 @@ const command = async (game, opts = {}) => {
 
   if (opts.all && game) {
     throw new UsageError("Use a game or --all, not both");
+  }
+  if (opts.all && typeof opts.assets === "string") {
+    throw new UsageError("--assets is the folder of one game, not for --all");
+  }
+  if (typeof opts.assets === "string" && !existsSync(opts.assets)) {
+    throw new UsageError(`${opts.assets} not found`);
   }
   if (!opts.all && !game) {
     throw new UsageError("Name a game or a game file, or use --all");
@@ -252,11 +285,11 @@ const command = async (game, opts = {}) => {
         `${found.id} has no map variation ${options.variation}`,
       );
     }
-    resolved.push({ ...found, options });
+    resolved.push({ ...found, options, assets: loadGameAssets(found, opts) });
   }
 
   await withBrowser(async ({ browser, baseUrl }) => {
-    for (const { id, game: gameDef, options } of resolved) {
+    for (const { id, game: gameDef, options, assets } of resolved) {
       const { formats, docs, variation } = options;
       let config = loadGameConfig(gameDef, userConfig);
       if (options.layouts) {
@@ -279,6 +312,7 @@ const command = async (game, opts = {}) => {
               id,
               game: renderGame(gameDef, id),
               config: mergeDeepRight(customConfig, userConfig),
+              assets,
             },
           }),
           jobs: list,

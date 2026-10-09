@@ -869,3 +869,97 @@ describe("the exports of a game file", () => {
     ).rejects.toThrow(/#\/exports/);
   });
 });
+
+describe("custom images", () => {
+  const STAR = '<svg viewBox="0 0 10 10"><path d="M0 0h10v10z"/></svg>';
+  // The assets the page is given
+  const given = () => mocks.fake.page.addInitScript.mock.calls[0][1].assets;
+  const folder = (dir, name = "star", svg = STAR) => {
+    fs.mkdirSync(path.join(dir, "icons"), { recursive: true });
+    fs.writeFileSync(path.join(dir, "icons", `${name}.svg`), svg);
+    return dir;
+  };
+
+  it("gives the page the images of a bundled game and says how many", async () => {
+    await exportCommand("18Test", { docs: "map" });
+
+    expect(Object.keys(given().icons)).toEqual(["star"]);
+    expect(Object.keys(given().logos)).toEqual(["crest"]);
+    expect(Object.keys(given().trains)).toEqual(["loco"]);
+    expect(given().trains.loco).toMatch(/^data:image\/png;base64,/);
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringMatching(
+        /^Assets: 3 custom images for 18Test from .*18Test\.assets$/,
+      ),
+    );
+  });
+
+  it("reads <name>.assets next to a game file", async () => {
+    const file = gameFile("mine.json");
+    folder(path.join(tmp, "mine.assets"), "moon");
+
+    await exportCommand(file, { docs: "map" });
+
+    expect(Object.keys(given().icons)).toEqual(["moon"]);
+  });
+
+  it("gives an empty set and says nothing for a game without a folder", async () => {
+    const file = gameFile("plain.json");
+
+    await exportCommand(file, { docs: "map" });
+
+    expect(Object.keys(given().icons)).toEqual([]);
+    expect(console.log).not.toHaveBeenCalledWith(
+      expect.stringMatching(/^Assets:/),
+    );
+  });
+
+  it("takes the folder of --assets instead", async () => {
+    const file = gameFile("mine.json");
+    folder(path.join(tmp, "mine.assets"), "moon");
+    folder(path.join(tmp, "elsewhere"), "sun");
+
+    await exportCommand(file, { docs: "map", assets: "elsewhere" });
+
+    expect(Object.keys(given().icons)).toEqual(["sun"]);
+  });
+
+  it("uses no images with --no-assets", async () => {
+    await exportCommand("18Test", { docs: "map", assets: false });
+
+    expect(given()).toBeUndefined();
+    expect(console.log).not.toHaveBeenCalledWith(
+      expect.stringMatching(/^Assets:/),
+    );
+  });
+
+  it("warns about a file that is not taken and exports the rest", async () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const file = gameFile("mine.json");
+    const dir = folder(path.join(tmp, "mine.assets"));
+    fs.writeFileSync(path.join(dir, "icons", "bad name.svg"), STAR);
+
+    await exportCommand(file, { docs: "map" });
+
+    expect(Object.keys(given().icons)).toEqual(["star"]);
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringMatching(
+        /^Warning: .*bad name\.svg: the name is not usable/,
+      ),
+    );
+  });
+
+  it("does not run with a --assets folder that is not there", async () => {
+    await expect(
+      exportCommand("18Test", { assets: "missing" }),
+    ).rejects.toThrow(/missing not found/);
+    expect(chromium.launch).not.toHaveBeenCalled();
+  });
+
+  it("does not take --assets for every game", async () => {
+    folder(path.join(tmp, "elsewhere"));
+    await expect(
+      exportCommand(undefined, { all: true, assets: "elsewhere" }),
+    ).rejects.toThrow(/--assets is the folder of one game/);
+  });
+});

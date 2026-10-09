@@ -92,6 +92,11 @@ program
     "--card-bleed <units>",
     "the bleed around each single card PNG, in units of 1/100 inch, up to 50 (default: 0, 0 turns it off)",
   )
+  .option(
+    "--assets <folder>",
+    "a folder with icons, logos and trains folders of custom images (default: <game>.assets next to the game file)",
+  )
+  .option("--no-assets", "do not use custom images")
   .option("-o, --out <folder>", "the folder for the game folders", "render")
   .option("-j, --jobs <n>", "how many files to capture at the same time", "1")
   .option("-a, --all", "export all bundled games")
@@ -106,7 +111,7 @@ program
   .option("-d, --debug", "start the static server and then quit")
   .addHelpText(
     "after",
-    '\nEvery option but --config, --out, --jobs, --all and --debug can also be set in the\n`exports` field of the game file, which is what they are when you do not give\nthem. What you give here wins over the game file: --layouts current turns off\n"layouts": "all".',
+    '\nEvery option but --config, --assets, --out, --jobs, --all and --debug can also be set in the\n`exports` field of the game file, which is what they are when you do not give\nthem. What you give here wins over the game file: --layouts current turns off\n"layouts": "all".',
   )
   .action((game, opts) => exportCommand(game, withAuthor(opts)));
 
