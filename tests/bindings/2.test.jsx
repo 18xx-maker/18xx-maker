@@ -185,6 +185,16 @@ describe("shortcuts dialog", () => {
     expect(
       within(dialog).getByText("Navigate to the Home page"),
     ).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Undo the last change to the hex"),
+    ).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Redo the change you undid"),
+    ).toBeInTheDocument();
+    expect(within(dialog).getByText("Ctrl+Shift+Z")).toBeInTheDocument();
+    expect(
+      within(dialog).getByText("Show or hide the sidebar"),
+    ).toBeInTheDocument();
 
     await user.keyboard("h");
     expect(router.state.location.pathname).toBe("/games/18Test/map");

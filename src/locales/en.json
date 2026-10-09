@@ -1770,6 +1770,18 @@
         "use": "Save the game to its file",
         "notes": "Only on the pages of a game with unsaved changes. A bundled game is saved as a copy. In the app also File, Save. In the JSON editor it updates the game from the text first."
       },
+      "undo": {
+        "use": "Undo the last change to the hex",
+        "notes": "Only in the hex editor of the edit panel, and not while typing in a field. Each hex starts its own history. The JSON editor has its own undo."
+      },
+      "redo": {
+        "use": "Redo the change you undid",
+        "notes": "Only in the hex editor of the edit panel, and not while typing in a field. Each hex starts its own history. The JSON editor has its own redo."
+      },
+      "sidebar": {
+        "use": "Show or hide the sidebar",
+        "notes": "On the home page, the docs and the game info, problems, changes and history pages. Not on edit pages."
+      },
       "export": {
         "use": "Open the export menu",
         "notes": "App only. Opens the menu of the loaded game on any page."

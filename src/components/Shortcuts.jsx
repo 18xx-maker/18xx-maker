@@ -10,7 +10,9 @@ import {
 import { keyTable } from "@/components/editPanel/editorKeyTable";
 
 // The one list of keybindings, shown in the ? dialog and in the docs. The keys
-// are handled in src/hooks/bindings.js. Text is under "shortcuts.keys.<id>".
+// are handled in src/hooks/bindings.js, except undo and redo (hexHistory.js,
+// used by the hex editor) and the sidebar toggle (ui/sidebar.jsx). Text is
+// under "shortcuts.keys.<id>".
 const shortcuts = [
   { id: "escape", keys: ["Esc"] },
   { id: "docs", keys: ["m"] },
@@ -34,6 +36,12 @@ const shortcuts = [
   { id: "paginate", keys: ["n"] },
   { id: "download", keys: ["d"] },
   { id: "save", keys: ["Ctrl+S", "Cmd+S"] },
+  { id: "undo", keys: ["Ctrl+Z", "Cmd+Z"] },
+  {
+    id: "redo",
+    keys: ["Ctrl+Shift+Z", "Cmd+Shift+Z", "Ctrl+Y", "Cmd+Y"],
+  },
+  { id: "sidebar", keys: ["Ctrl+B", "Cmd+B"] },
   { id: "export", keys: ["x"] },
   { id: "app", keys: ["u"] },
 ];
