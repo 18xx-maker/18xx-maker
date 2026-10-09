@@ -5,6 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   createSetGame,
   rootReducer,
+  selectAlerts,
   selectGameProblems,
   validateLoadedGame,
 } from "@/state";
@@ -24,6 +25,6 @@ describe("gameProblems when the check fails", () => {
     expect(selectGameProblems(store.getState(), "Valid")).toEqual([
       { severity: "warning", code: "failed", pointer: "", params: {} },
     ]);
-    expect(store.getState().alert.open).toBe(false);
+    expect(selectAlerts(store.getState())).toEqual([]);
   });
 });

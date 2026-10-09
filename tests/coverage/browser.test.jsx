@@ -7,6 +7,7 @@ import {
 import { page } from "vitest/browser";
 
 import { games } from "@/data";
+import { selectLatestAlert } from "@/state";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
 
@@ -138,7 +139,7 @@ describe("dropping a game file", () => {
     drop(transfer);
 
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Error",
         message: "Your browser does not support dropping files",
         type: "error",
@@ -153,7 +154,7 @@ describe("dropping a game file", () => {
     drop({ items: [{ kind: "string" }] });
 
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Error",
         message: "Only files can be dropped here",
         type: "error",
@@ -171,7 +172,7 @@ describe("dropping a game file", () => {
     drop({ files: [new File(["x"], "x.txt")] });
 
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         message: "Not a game",
         type: "error",
       }),
@@ -190,7 +191,7 @@ describe("file system games", () => {
     await waitFor(() => expect(idb.loadGame).toHaveBeenCalledTimes(2));
     expect(idb.loadGame).toHaveBeenLastCalledWith("abc");
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Game Refreshed",
         type: "success",
       }),

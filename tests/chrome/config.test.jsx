@@ -1,5 +1,7 @@
 import { screen, waitFor, within } from "@testing-library/react";
 
+import { selectLatestAlert } from "@/state";
+
 import { renderApp } from "@tests/support/helpers.jsx";
 
 const openDrawer = async (user) => {
@@ -427,7 +429,7 @@ describe("number fields", () => {
           font: { size: "0.2in" },
         }),
       );
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Config Imported",
         type: "success",
       });
@@ -449,7 +451,7 @@ describe("number fields", () => {
       await paste(user, "{nope");
 
       await waitFor(() =>
-        expect(store.getState().alert).toMatchObject({
+        expect(selectLatestAlert(store.getState())).toMatchObject({
           title: "Invalid JSON",
           type: "error",
         }),
@@ -463,7 +465,7 @@ describe("number fields", () => {
       await paste(user, '{"margin": "wide"}');
 
       await waitFor(() =>
-        expect(store.getState().alert).toMatchObject({
+        expect(selectLatestAlert(store.getState())).toMatchObject({
           title: "Invalid Config",
           type: "error",
         }),

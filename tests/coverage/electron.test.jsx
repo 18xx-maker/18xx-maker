@@ -9,7 +9,7 @@ import { page } from "vitest/browser";
 
 import { games } from "@/data";
 import { docPath } from "@/export/names.js";
-import { createUpdate, editGame } from "@/state";
+import { createUpdate, editGame, selectLatestAlert } from "@/state";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
@@ -136,8 +136,7 @@ describe("electron root", () => {
     const { store } = renderApp("/");
 
     act(() => listener("onAlert")("Saved", "All done", "success"));
-    expect(store.getState().alert).toEqual({
-      open: true,
+    expect(selectLatestAlert(store.getState())).toMatchObject({
       title: "Saved",
       message: "All done",
       type: "success",
@@ -145,7 +144,7 @@ describe("electron root", () => {
     expect(await screen.findByText("All done")).toBeInTheDocument();
 
     act(() => listener("onProgress")("Exporting", "map.pdf", 40));
-    expect(store.getState().alert).toMatchObject({
+    expect(selectLatestAlert(store.getState())).toMatchObject({
       title: "Exporting",
       progress: 40,
     });
@@ -158,7 +157,7 @@ describe("electron root", () => {
     act(() => listener("onGame")(games["1889"]));
 
     expect(store.getState().game.meta.slug).toBe("1889");
-    expect(store.getState().alert).toMatchObject({
+    expect(selectLatestAlert(store.getState())).toMatchObject({
       title: "Game Loaded",
       message: "Shikoku 1889 loaded",
       type: "success",
@@ -246,7 +245,7 @@ describe("electron root", () => {
 
     await waitFor(() => expect(api.saveGamePath).toHaveBeenCalledWith(file));
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Error",
         message: "File was not a valid 18xx-maker game",
         type: "error",
@@ -262,7 +261,7 @@ describe("electron root", () => {
     await user.click(await screen.findByRole("button", { name: "Open File" }));
 
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Error",
         message: "Could not open",
         type: "error",
@@ -320,7 +319,7 @@ describe("electron bindings", () => {
     await user.keyboard("o");
 
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Error",
         message: "File was not a valid 18xx-maker game",
         type: "error",
@@ -516,7 +515,7 @@ describe("export button", () => {
     );
 
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Export failed",
         message: "No windows",
         type: "error",

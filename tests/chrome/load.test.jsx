@@ -1,6 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 
 import { games } from "@/data";
+import { selectLatestAlert } from "@/state";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
 
@@ -555,8 +556,7 @@ describe("game info page", () => {
     expect(await screen.findByText("File was not valid")).toBeInTheDocument();
     await waitFor(() => expect(router.state.location.pathname).toBe("/games/"));
     expect(store.getState().game).toBeUndefined();
-    expect(store.getState().alert).toMatchObject({
-      open: true,
+    expect(selectLatestAlert(store.getState())).toMatchObject({
       type: "error",
       message: "File was not valid",
     });

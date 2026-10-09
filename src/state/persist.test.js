@@ -64,7 +64,7 @@ describe("loading persisted state", () => {
     const { preloadedState } = await importStore();
     expect(preloadedState.config).toEqual({});
     expect(preloadedState.loadedGame).toBeFalsy();
-    expect(preloadedState.alert).toEqual({ open: false });
+    expect(preloadedState.alert).toEqual({ items: [], seq: 0 });
     expect(preloadedState.errors).toEqual({});
     expect(Object.keys(preloadedState.summaries)).toEqual(["bundled"]);
   });
@@ -165,11 +165,14 @@ describe("loading persisted state", () => {
   });
 
   it("ignores keys that are not persisted", async () => {
-    window.localStorage.setItem("alert", JSON.stringify({ open: true }));
+    window.localStorage.setItem(
+      "alert",
+      JSON.stringify({ open: true, title: "Old" }),
+    );
     window.localStorage.setItem("errors", JSON.stringify({ a: "b" }));
     window.localStorage.setItem("game", JSON.stringify({ meta: {} }));
     const { preloadedState } = await importStore();
-    expect(preloadedState.alert).toEqual({ open: false });
+    expect(preloadedState.alert).toEqual({ items: [], seq: 0 });
     expect(preloadedState.errors).toEqual({});
     expect(preloadedState.game).toBeFalsy();
   });

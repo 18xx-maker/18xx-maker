@@ -1634,6 +1634,7 @@
     }
   },
   "alerts": {
+    "region": "Notifications",
     "error": "Error",
     "gameLoaded": "Game Loaded",
     "gameLoadedMessage": "{{title}} loaded",
