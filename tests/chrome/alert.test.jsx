@@ -1,6 +1,11 @@
 import { act, fireEvent, screen, within } from "@testing-library/react";
 
-import { createAlert, createProgressAlert, selectAlerts } from "@/state";
+import {
+  clearAlert,
+  createAlert,
+  createProgressAlert,
+  selectAlerts,
+} from "@/state";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
@@ -168,6 +173,49 @@ describe("dismissing", () => {
     fireEvent.keyDown(toast("first text"), { key: "Escape" });
 
     expect(selectAlerts(store.getState()).map((a) => a.title)).toEqual(["B"]);
+  });
+});
+
+describe("leaving", () => {
+  it("is gone shortly after dismissing while progress keeps updating", () => {
+    fakeTimers();
+    const { store } = renderApp("/");
+    send(
+      store,
+      createAlert("Bad", "error text", "error"),
+      createProgressAlert("Exporting", "0", 0),
+    );
+    fireEvent.click(
+      within(toast("error text")).getByRole("button", { name: "Close" }),
+    );
+
+    for (let i = 1; i <= 4; i++) {
+      act(() => vi.advanceTimersByTime(50));
+      send(store, createProgressAlert("Exporting", String(i), i));
+    }
+
+    expect(screen.queryByText("error text")).not.toBeInTheDocument();
+    expect(toasts()).toHaveLength(1);
+  });
+
+  it("holds the closed state at its end", () => {
+    const { store } = renderApp("/");
+    send(store, createAlert("Bad", "error text", "error"));
+    const el = toast("error text");
+    send(store, clearAlert("alert-1"));
+    expect(el).toHaveAttribute("data-state", "closed");
+    expect(el.className).toContain("data-[state=closed]:fill-mode-forwards");
+  });
+
+  it("does not announce progress updates", () => {
+    const { store } = renderApp("/");
+    send(store, createProgressAlert("Exporting", "1/2 - map", 50));
+    expect(screen.getByText("1/2 - map")).toHaveAttribute("aria-live", "off");
+    expect(screen.getByTestId("alert-progress")).toHaveAttribute(
+      "aria-live",
+      "off",
+    );
+    expect(screen.getByText("Exporting")).not.toHaveAttribute("aria-live");
   });
 });
 

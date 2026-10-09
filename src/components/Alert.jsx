@@ -72,7 +72,7 @@ const Toast = ({ alert, leaving, onDismiss }) => {
         "pointer-events-auto relative overflow-hidden rounded-lg border bg-popover text-popover-foreground shadow-lg",
         "py-3 pl-5 pr-10",
         "motion-safe:data-[state=open]:animate-in motion-safe:data-[state=open]:fade-in-0 motion-safe:data-[state=open]:slide-in-from-bottom-2",
-        "motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:fade-out-0 motion-safe:data-[state=closed]:slide-out-to-right-4",
+        "motion-safe:data-[state=closed]:fill-mode-forwards motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:fade-out-0 motion-safe:data-[state=closed]:slide-out-to-right-4",
       )}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -96,12 +96,15 @@ const Toast = ({ alert, leaving, onDismiss }) => {
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold break-words">{alert.title}</p>
           {hasProgress && (
-            <div className="my-2">
+            <div data-testid="alert-progress" className="my-2" aria-live="off">
               <Progress value={alert.progress} />
             </div>
           )}
           {alert.message && (
-            <p className="text-sm text-muted-foreground break-words line-clamp-4">
+            <p
+              aria-live={hasProgress ? "off" : undefined}
+              className="text-sm text-muted-foreground break-words line-clamp-4"
+            >
               {alert.message}
             </p>
           )}
@@ -119,43 +122,62 @@ const Toast = ({ alert, leaving, onDismiss }) => {
   );
 };
 
-// Keeps a removed toast for the length of its exit animation
+// Keeps a removed toast for the length of its exit animation. Each leaving
+// toast has its own timer, so later updates do not extend it.
 const useLeaving = (alerts) => {
   const [shown, setShown] = useState(() =>
     alerts.map((alert) => ({ alert, leaving: false })),
   );
+  const shownRef = useRef(shown);
+  const timers = useRef(new Map());
 
   useEffect(() => {
-    setShown((prev) => {
-      if (
-        prev.length === alerts.length &&
-        prev.every((entry, i) => !entry.leaving && entry.alert === alerts[i])
-      ) {
-        return prev;
-      }
-      const ids = new Set(alerts.map((a) => a.id));
-      const result = alerts.map((alert) => ({ alert, leaving: false }));
-      if (reducedMotion()) return result;
+    const prev = shownRef.current;
+    if (
+      prev.length === alerts.length &&
+      prev.every((entry, i) => !entry.leaving && entry.alert === alerts[i])
+    ) {
+      return;
+    }
+    const ids = new Set(alerts.map((a) => a.id));
+    ids.forEach((id) => {
+      clearTimeout(timers.current.get(id));
+      timers.current.delete(id);
+    });
+    const result = alerts.map((alert) => ({ alert, leaving: false }));
+    if (!reducedMotion()) {
       prev.forEach((entry, index) => {
-        if (!ids.has(entry.alert.id)) {
-          result.splice(Math.min(index, result.length), 0, {
-            alert: entry.alert,
-            leaving: true,
-          });
+        if (ids.has(entry.alert.id)) return;
+        result.splice(Math.min(index, result.length), 0, {
+          alert: entry.alert,
+          leaving: true,
+        });
+        const id = entry.alert.id;
+        if (!entry.leaving || !timers.current.has(id)) {
+          timers.current.set(
+            id,
+            setTimeout(() => {
+              timers.current.delete(id);
+              setShown((cur) => {
+                const next = cur.filter(
+                  (e) => !(e.leaving && e.alert.id === id),
+                );
+                shownRef.current = next;
+                return next;
+              });
+            }, EXIT_MS),
+          );
         }
       });
-      return result;
-    });
+    }
+    shownRef.current = result;
+    setShown(result);
   }, [alerts]);
 
   useEffect(() => {
-    if (!shown.some((entry) => entry.leaving)) return;
-    const timeout = setTimeout(
-      () => setShown((prev) => prev.filter((entry) => !entry.leaving)),
-      EXIT_MS,
-    );
-    return () => clearTimeout(timeout);
-  }, [shown]);
+    const pending = timers.current;
+    return () => pending.forEach(clearTimeout);
+  }, []);
 
   return shown;
 };
