@@ -63,12 +63,14 @@ beforeEach(async () => {
     onAlert: vi.fn(),
     onDownloadProgress: vi.fn(),
     onGame: vi.fn(),
+    onMenu: vi.fn(),
     onProgress: vi.fn(),
     onRedirect: vi.fn(),
     onSave: vi.fn(),
     onUpdate: vi.fn(),
     openGame: vi.fn(),
     saveGamePath: vi.fn(),
+    setLanguage: vi.fn(),
   });
 });
 
@@ -109,6 +111,7 @@ describe("electron root", () => {
     for (const name of [
       "onAlert",
       "onGame",
+      "onMenu",
       "onProgress",
       "onRedirect",
       "onSave",
@@ -121,6 +124,12 @@ describe("electron root", () => {
 
     unmount();
     expect(api.off).toHaveBeenCalledTimes(1);
+  });
+
+  it("tells the main process the language for its menu", () => {
+    renderApp("/", { settings: { language: "de" } });
+
+    expect(api.setLanguage).toHaveBeenCalledWith("de");
   });
 
   it("shows alerts and progress sent by the main process", async () => {
@@ -815,5 +824,191 @@ describe("export button", () => {
     expect(
       jobs.find(({ path }) => path.endsWith("/Tokens.png")).doc.capture,
     ).toMatchObject({ viewport: { w: 60 }, background: false });
+  });
+});
+
+// The commands of the native menu, run as the key they stand for
+describe("electron menu commands", () => {
+  const menu = (key) => act(() => listener("onMenu")(key));
+  const desktopSidebar = () =>
+    // eslint-disable-next-line testing-library/no-node-access
+    document.querySelector("[data-collapsible]");
+
+  it("x opens the export menu on a game page", async () => {
+    const { store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("x");
+
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+    expect(store.getState().ui.exportMenuOpen).toBe(true);
+  });
+
+  it("d downloads the loaded game", async () => {
+    const create = vi
+      .spyOn(URL, "createObjectURL")
+      .mockImplementation(() => "blob:game");
+    vi.spyOn(URL, "revokeObjectURL").mockImplementation(() => {});
+    const click = vi
+      .spyOn(HTMLAnchorElement.prototype, "click")
+      .mockImplementation(() => {});
+    renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("d");
+
+    expect(create).toHaveBeenCalledTimes(1);
+    expect(click).toHaveBeenCalledTimes(1);
+    vi.restoreAllMocks();
+  });
+
+  it("e toggles the edit panel", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("e");
+    await waitFor(() => expect(router.state.location.search).toContain("edit"));
+    await menu("e");
+    await waitFor(() =>
+      expect(router.state.location.search).not.toContain("edit"),
+    );
+  });
+
+  it("/ focuses the field search of the open edit panel", async () => {
+    renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    // Closed: there is no search to focus
+    await menu("/");
+    expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
+
+    await menu("e");
+    const search = await screen.findByRole("searchbox", {
+      name: "Find a field",
+    });
+    await menu("/");
+    expect(search).toHaveFocus();
+  });
+
+  it("n toggles the pagination of a section that has it", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("n");
+    await waitFor(() =>
+      expect(router.state.location.search).toContain("paginated"),
+    );
+    await menu("n");
+    await waitFor(() =>
+      expect(router.state.location.search).not.toContain("paginated"),
+    );
+  });
+
+  it("g goes to the loaded game from another page", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+    await act(() => router.navigate("/"));
+
+    await menu("g");
+
+    expect(router.state.location.pathname).toBe("/games/18Test");
+  });
+
+  it("goes to the sections of the game and cycles them", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("4");
+    expect(router.state.location.pathname).toBe("/games/18Test/tiles");
+
+    await menu("]");
+    expect(router.state.location.pathname).toBe("/games/18Test/cards");
+    await menu("[");
+    expect(router.state.location.pathname).toBe("/games/18Test/tiles");
+  });
+
+  it("opens the JSON editor and toggles the config panel of a game", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("j");
+    expect(router.state.location.search).toContain("json");
+
+    await menu("c");
+    expect(router.state.location.search).toContain("config");
+    await menu("c");
+    expect(router.state.location.search).not.toContain("config");
+  });
+
+  it("does nothing for the config off a game page", async () => {
+    const { router } = renderApp("/");
+
+    await menu("c");
+
+    expect(router.state.location.pathname).toBe("/");
+  });
+
+  it("closes the shortcuts dialog before it runs a command", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("?");
+    expect(await screen.findByRole("dialog")).toBeInTheDocument();
+
+    await menu("h");
+    await waitFor(() => expect(router.state.location.pathname).toBe("/"));
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+
+    await menu("?");
+    await screen.findByRole("dialog");
+    await menu("?");
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("closes the shortcuts dialog before the sidebar and the view keys", async () => {
+    renderApp("/");
+    await menu("?");
+    await screen.findByRole("dialog");
+
+    await menu("mod+b");
+
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+    await waitFor(() =>
+      expect(desktopSidebar()).toHaveAttribute("data-state", "collapsed"),
+    );
+  });
+
+  it("toggles the sidebar", async () => {
+    renderApp("/");
+    expect(desktopSidebar()).toHaveAttribute("data-state", "expanded");
+
+    await menu("mod+b");
+    expect(desktopSidebar()).toHaveAttribute("data-state", "collapsed");
+    await menu("mod+b");
+    expect(desktopSidebar()).toHaveAttribute("data-state", "expanded");
+  });
+
+  it("resets the view with a v without a modifier", async () => {
+    renderApp("/");
+
+    const keys = [];
+    const record = (event) => keys.push(event);
+    document.addEventListener("keydown", record);
+    await menu("v");
+    document.removeEventListener("keydown", record);
+    expect(keys).toHaveLength(1);
+    expect(keys[0]).toMatchObject({
+      key: "v",
+      ctrlKey: false,
+      metaKey: false,
+    });
   });
 });

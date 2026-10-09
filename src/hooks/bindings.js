@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { find, propEq } from "ramda";
@@ -128,7 +128,8 @@ export const useBindings = () => {
         !print &&
         !getRenderInput() &&
         !exportSheetOpen &&
-        !document.querySelector('[role="dialog"]');
+        // The shortcuts dialog of a menu command is still there while it fades
+        (event.afterShortcuts || !document.querySelector('[role="dialog"]'));
 
       // Keys for the game edit page
       if (viewingGame) {
@@ -393,6 +394,50 @@ export const useBindings = () => {
     ],
   );
 
+  // The commands of the native menu (electron/main/menuTemplate.js), run as
+  // the key they stand for. A few have dedicated handling: the config panel is
+  // a game page's (off a game the key is another page), "v" is the reset of
+  // the pan and zoom (usePanZoom, which needs a key without a modifier) and
+  // "mod+b" the sidebar's (ui/sidebar). A future "v" binding here would fire
+  // twice.
+  const run = (command, afterShortcuts = false) => {
+    if (command === "c" && !viewingGame) return;
+
+    // An open shortcuts dialog is closed first, and the command runs once the
+    // page has the closed state
+    if (shortcuts) {
+      setShortcuts(false);
+      if (command !== "?") setTimeout(() => latest.current(command, true), 0);
+      return;
+    }
+
+    if (command === "mod+b") {
+      window.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "b", ctrlKey: true }),
+      );
+      return;
+    }
+    if (command === "v") {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "v" }));
+      return;
+    }
+
+    handleKeyDown({
+      key: command,
+      afterShortcuts,
+      target: document.body,
+      altKey: false,
+      ctrlKey: false,
+      metaKey: false,
+      shiftKey: false,
+      defaultPrevented: false,
+      preventDefault: () => undefined,
+    });
+  };
+  const latest = useRef(run);
+  latest.current = run;
+  const runKey = useCallback((command) => latest.current(command), []);
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
@@ -402,5 +447,5 @@ export const useBindings = () => {
     };
   }, [handleKeyDown]);
 
-  return [shortcuts, setShortcuts];
+  return [shortcuts, setShortcuts, runKey];
 };

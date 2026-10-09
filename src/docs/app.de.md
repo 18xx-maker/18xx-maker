@@ -25,17 +25,32 @@ Ordner geschrieben, den du auswählst, wie unter
 
 ## Menü
 
-Die App hat ein natives Menü:
+Die App hat ein natives Menü. Jedes Tastenkürzel der Seiten hat darin einen
+Eintrag, sodass du sie dort findest. `Strg` ist auf macOS `Cmd`. Die Einträge
+für das geladene Spiel tun nichts, wenn kein Spiel geladen ist.
 
-- **Datei**: _Öffnen_ (`Strg+O`, `Cmd+O` auf macOS) öffnet eine Spieldatei,
-  _Zuletzt geöffnet_ listet die Spiele auf, die du zuvor geöffnet hast,
-  _Speichern_ (`Strg+S`, `Cmd+S` auf macOS) speichert das Spiel, das du
-  bearbeitest, und _Beenden_.
-- **Bearbeiten**: die üblichen Befehle zum Ausschneiden, Kopieren und Einfügen.
+- **Datei**: _Öffnen_ (`Strg+O`) öffnet eine Spieldatei, _Zuletzt geöffnet_
+  listet die Spiele auf, die du zuvor geöffnet hast, _Speichern_ (`Strg+S`)
+  speichert das Spiel, das du bearbeitest, _Exportieren..._ (`Strg+Umschalt+E`)
+  öffnet das Exportmenü, _Spiel herunterladen_ (`Strg+Umschalt+D`) speichert
+  die Spieldatei, und _Beenden_.
+- **Bearbeiten**: die üblichen Befehle zum Rückgängigmachen, Ausschneiden,
+  Kopieren und Einfügen, dann _Spiel bearbeiten_ (`Strg+Umschalt+Y`), _Als JSON
+  bearbeiten_ (`Strg+J`) und _Feld suchen_ (`Strg+Umschalt+T`).
 - **Ansicht**: Neu laden, Entwicklerwerkzeuge, _App-Informationen_ (`Strg+U`),
-  Zoom und Vollbild.
+  _Auf Seiten aufteilen_ (`Strg+Umschalt+P`), _Konfiguration_ (`Strg+Umschalt+C`),
+  _Ansicht zurücksetzen_ (`Strg+Umschalt+V`), _Seitenleiste umschalten_
+  (`Strg+B`), Zoom und Vollbild.
+- **Gehe zu**: _Startseite_ (`Strg+Umschalt+H`), _Spiele laden_ (`Strg+L`),
+  _Aktuelles Spiel_ (`Strg+Umschalt+N`), der vorherige und nächste Abschnitt
+  oder die Seite (`Strg+Bild auf` und `Strg+Bild ab`), die Abschnitte eines
+  Spiels (`Strg+1` bis `Strg+9`, der letzte hat kein Kürzel) und die
+  _Elemente_-Seiten.
 - **Fenster**: die Fensterbefehle deines Systems.
-- **Hilfe**: _Dokumentation_ (`Strg+D`) und _Elemente_ (`Strg+E`).
+- **Hilfe**: _Dokumentation_ (`Strg+D`), _Elemente_ (`Strg+E`) und
+  _Tastenkürzel_.
+
+Das Menü folgt der Sprache der App.
 
 Auf macOS gibt es zusätzlich das nach der App benannte Menü mit Über und
 Beenden. Die Tastenkürzel, die innerhalb der Seiten funktionieren, stehen unter

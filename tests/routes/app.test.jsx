@@ -24,6 +24,8 @@ vi.hoisted(() => {
     onProgress: () => {},
     onRedirect: () => {},
     onSave: () => {},
+    onMenu: () => {},
+    setLanguage: () => {},
     onUpdate: () => {},
   };
 });

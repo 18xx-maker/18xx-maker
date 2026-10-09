@@ -23,16 +23,29 @@ Exports are written to a folder you choose, as described in
 
 ## Menu
 
-The app has a native menu:
+The app has a native menu. Every keyboard shortcut of the pages has an item in
+it, so you can find them there. `Ctrl` is `Cmd` on macOS. The items for the
+loaded game do nothing when no game is loaded.
 
-- **File**: _Open_ (`Ctrl+O`, `Cmd+O` on macOS) opens a game file, _Open
-  Recents_ lists the games you opened before, _Save_ (`Ctrl+S`, `Cmd+S` on
-  macOS) saves the game you are editing, and _Quit_.
-- **Edit**: the usual cut, copy and paste commands.
-- **View**: reload, developer tools, _App Info_ (`Ctrl+U`), zoom and full
-  screen.
+- **File**: _Open_ (`Ctrl+O`) opens a game file, _Open Recents_ lists the games
+  you opened before, _Save_ (`Ctrl+S`) saves the game you are editing,
+  _Export..._ (`Ctrl+Shift+E`) opens the export menu, _Download Game_
+  (`Ctrl+Shift+D`) saves the game file, and _Quit_.
+- **Edit**: the usual undo, cut, copy and paste commands, then _Edit Game_
+  (`Ctrl+Shift+Y`), _Edit as JSON_ (`Ctrl+J`) and _Find Field_
+  (`Ctrl+Shift+T`).
+- **View**: reload, developer tools, _App Information_ (`Ctrl+U`), _Paginate_
+  (`Ctrl+Shift+P`), _Config_ (`Ctrl+Shift+C`), _Reset View_ (`Ctrl+Shift+V`),
+  _Toggle Sidebar_ (`Ctrl+B`), zoom and full screen.
+- **Go**: _Home_ (`Ctrl+Shift+H`), _Load Games_ (`Ctrl+L`), _Current Game_
+  (`Ctrl+Shift+N`), the previous and next section or page (`Ctrl+PageUp` and
+  `Ctrl+PageDown`), the sections of a game (`Ctrl+1` to `Ctrl+9`, the last one
+  has no key) and the _Elements_ pages.
 - **Window**: the window commands of your system.
-- **Help**: _Documentation_ (`Ctrl+D`) and _Elements_ (`Ctrl+E`).
+- **Help**: _Documentation_ (`Ctrl+D`), _Elements_ (`Ctrl+E`) and _Keyboard
+  Shortcuts_.
+
+The menu follows the language of the app.
 
 On macOS there is also the menu named after the app, with About and Quit. The
 shortcuts that work inside the pages are listed under
@@ -40,7 +53,7 @@ shortcuts that work inside the pages are listed under
 
 ## App Info
 
-_App Info_ (in the _View_ menu, or `Ctrl+U`) shows:
+_App Information_ (in the _View_ menu, or `Ctrl+U`) shows:
 
 - the versions of your system, Electron, Chrome and 18xx Maker you are running,
 - the updates (below),

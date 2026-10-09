@@ -56,12 +56,16 @@ const Root = ({ children }) => {
   const saveRef = useRef(saver.save);
   saveRef.current = saver.save;
   const menuSaveRef = useRef(() => undefined);
+  const menuKeyRef = useRef(() => undefined);
 
   // The language setting overrides the system one; without it follow the
   // system
   useEffect(() => {
-    i18n.changeLanguage(language ?? detectedLanguage());
-  }, [i18n, language]);
+    const next = language ?? detectedLanguage();
+    i18n.changeLanguage(next);
+    // The labels of the native menu follow it
+    if (capability.electron && !render) window.api.setLanguage(next);
+  }, [i18n, language, render]);
 
   const getEventFileHandle = (event) => {
     if (event.dataTransfer.items) {
@@ -168,6 +172,7 @@ body {
       window.api.onProgress(compose(dispatch, createProgressAlert));
       window.api.onRedirect(navigate);
       window.api.onSave(() => menuSaveRef.current());
+      window.api.onMenu((key) => menuKeyRef.current(key));
       window.api.onUpdate(compose(dispatch, createUpdate));
       window.api.onDownloadProgress(compose(dispatch, createDownloadPercent));
 
@@ -255,7 +260,8 @@ body {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [render, onGamePage, editorKeys]);
 
-  const [shortcuts, setShortcuts] = useBindings();
+  const [shortcuts, setShortcuts, runKey] = useBindings();
+  menuKeyRef.current = runKey;
   const inEditor = useEditor();
 
   return (

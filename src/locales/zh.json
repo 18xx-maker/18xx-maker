@@ -1658,6 +1658,27 @@
     "nextPage": "转到下一页",
     "morePages": "更多页面"
   },
+  "menu": {
+    "file": "文件",
+    "open": "打开",
+    "openRecents": "打开最近的文件",
+    "save": "保存",
+    "export": "导出...",
+    "download": "下载游戏",
+    "edit": "编辑",
+    "speech": "语音",
+    "editJson": "以 JSON 编辑",
+    "findField": "查找字段",
+    "view": "视图",
+    "resetView": "重置视图",
+    "go": "前往",
+    "currentGame": "当前游戏",
+    "previous": "上一个部分或页面",
+    "next": "下一个部分或页面",
+    "help": "帮助",
+    "docs": "文档",
+    "shortcuts": "快捷键"
+  },
   "shortcuts": {
     "title": "快捷键",
     "description": "在 18xx Maker 中任何地方都可使用的按键",

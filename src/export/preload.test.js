@@ -36,6 +36,20 @@ describe("the preload api", () => {
     expect(callback).toHaveBeenCalledWith();
   });
 
+  it("calls back with the key of a menu item and sends the language", () => {
+    const ipc = fakeIpc();
+    const api = createApi({ ipcRenderer: ipc, webUtils: {}, argv: [] });
+    const callback = vi.fn();
+
+    api.onMenu(callback);
+    expect(ipc.on).toHaveBeenCalledWith("menu", expect.any(Function));
+    ipc.on.mock.calls[0][1]({}, "j");
+    expect(callback).toHaveBeenCalledWith("j");
+
+    api.setLanguage("de");
+    expect(ipc.send).toHaveBeenCalledWith("setLanguage", "de");
+  });
+
   it("asks the main process to save a copy with the labels of its dialog", async () => {
     const ipc = fakeIpc();
     ipc.invoke.mockResolvedValue("electron:abc");
@@ -93,6 +107,8 @@ describe("the preload api", () => {
     expect(api.saveGame).toBeUndefined();
     expect(api.newGame).toBeUndefined();
     expect(api.saveGameAs).toBeUndefined();
+    expect(api.onMenu).toBeUndefined();
+    expect(api.setLanguage).toBeUndefined();
     expect(ipc.sendSync).toHaveBeenCalledWith("getRenderInput", "abc");
   });
 });

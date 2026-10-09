@@ -252,6 +252,41 @@ test.describe("the app exports 18Test", () => {
     await window.evaluate((id) => window.api.deleteGame(id), summary.id);
   });
 
+  test("runs the keyboard shortcuts from the menu", async () => {
+    app = await launch();
+    const click = (id) =>
+      app.evaluate(
+        ({ Menu }, itemId) =>
+          Menu.getApplicationMenu().getMenuItemById(itemId).click(),
+        id,
+      );
+    const window = await show(app, "#/games/18Test/map");
+    await expect(window.getByRole("button", { name: "Export" })).toBeVisible();
+
+    // A key of the app
+    await click("json");
+    await expect(
+      window.getByRole("textbox", { name: "Game JSON" }),
+    ).toBeVisible();
+
+    // A key of the app in a dialog
+    await click("shortcuts");
+    await expect(window.getByRole("dialog")).toBeVisible();
+    await click("current-game");
+    await expect(window).toHaveURL((url) => url.hash === "#/games/18Test");
+    await expect(window.getByRole("dialog")).toHaveCount(0);
+
+    // A page
+    await click("load");
+    await expect(window).toHaveURL((url) => url.hash === "#/games/");
+
+    // The sidebar
+    const sidebar = window.locator("[data-collapsible]");
+    await expect(sidebar).toHaveAttribute("data-state", "expanded");
+    await click("sidebar");
+    await expect(sidebar).toHaveAttribute("data-state", "collapsed");
+  });
+
   test("saves the game from the File menu and from the key, once each", async () => {
     app = await launch();
     const file = path.join(out, "save-copy.json");
