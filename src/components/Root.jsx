@@ -28,6 +28,7 @@ import {
   createAlert,
   createDownloadPercent,
   createProgressAlert,
+  createSetAssets,
   createUpdate,
   loadGame,
   receiveGame,
@@ -39,6 +40,7 @@ import {
   selectLanguage,
 } from "@/state/selectors";
 import { MAX_DROP_FILES } from "@/util/assetNames";
+import { sanitizeAssets } from "@/util/assets";
 import { canAddAssets } from "@/util/canSaveGame";
 import capability from "@/util/capability";
 import { sniffConfigFile } from "@/util/config";
@@ -48,6 +50,7 @@ import {
   isGameDrop,
   makeStore,
 } from "@/util/dropImages";
+import { ELECTRON } from "@/util/loading";
 import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
 import * as idb from "@/util/storage/idb";
@@ -219,6 +222,9 @@ body {
       const onGame = (game) => dispatch(receiveGame(game));
 
       window.api.onAlert(compose(dispatch, createAlert));
+      window.api.onAssets((id, assets) =>
+        dispatch(createSetAssets(`${ELECTRON}:${id}`, sanitizeAssets(assets))),
+      );
       window.api.onGame(onGame);
       window.api.onProgress(compose(dispatch, createProgressAlert));
       window.api.onRedirect(navigate);

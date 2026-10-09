@@ -45,6 +45,7 @@ beforeEach(async () => {
     loadConfig: vi.fn().mockResolvedValue({ config: {}, versions: {} }),
     off: vi.fn(),
     onAlert: vi.fn(),
+    onAssets: vi.fn(),
     onDownloadProgress: vi.fn(),
     onGame: vi.fn(),
     onProgress: vi.fn(),

@@ -315,6 +315,7 @@ describe("save as in the app", () => {
     const noop = vi.fn();
     window.api = {
       onAlert: noop,
+      onAssets: noop,
       onProgress: noop,
       onRedirect: noop,
       onSave: noop,

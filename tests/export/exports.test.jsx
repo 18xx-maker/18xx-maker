@@ -52,6 +52,7 @@ beforeEach(async () => {
     loadSummaries: vi.fn().mockResolvedValue({}),
     off: vi.fn(),
     onAlert: vi.fn(),
+    onAssets: vi.fn(),
     onDownloadProgress: vi.fn(),
     onGame: vi.fn(),
     onProgress: vi.fn(),

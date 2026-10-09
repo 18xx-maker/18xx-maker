@@ -61,6 +61,7 @@ beforeEach(async () => {
     loadSummaries: vi.fn().mockResolvedValue({}),
     off: vi.fn(),
     onAlert: vi.fn(),
+    onAssets: vi.fn(),
     onDownloadProgress: vi.fn(),
     onGame: vi.fn(),
     onMenu: vi.fn(),
@@ -110,6 +111,7 @@ describe("electron root", () => {
 
     for (const name of [
       "onAlert",
+      "onAssets",
       "onGame",
       "onMenu",
       "onProgress",
@@ -162,6 +164,23 @@ describe("electron root", () => {
       message: "Shikoku 1889 loaded",
       type: "success",
     });
+  });
+
+  it("keeps the sanitized images the main process sends for a game", () => {
+    const { store } = renderApp("/");
+
+    act(() =>
+      listener("onAssets")("abc", {
+        icons: {
+          star: '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0h5v5z"/></svg>',
+          bad: 7,
+        },
+      }),
+    );
+
+    const assets = store.getState().assets["electron:abc"];
+    expect(Object.keys(assets.icons)).toEqual(["star"]);
+    expect(assets.logos).toEqual({});
   });
 
   it("follows redirects from the main process", async () => {

@@ -223,6 +223,7 @@ describe("load games page", () => {
       const noop = vi.fn();
       window.api = {
         onAlert: noop,
+        onAssets: noop,
         onProgress: noop,
         onRedirect: noop,
         onSave: noop,
@@ -269,6 +270,7 @@ describe("load games page", () => {
       const error = Object.assign(new Error("not valid"), { code: "invalid" });
       window.api = {
         onAlert: noop,
+        onAssets: noop,
         onProgress: noop,
         onRedirect: noop,
         onSave: noop,

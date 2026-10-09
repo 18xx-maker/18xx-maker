@@ -19,6 +19,7 @@ vi.hoisted(() => {
     loadSummaries: () => Promise.resolve([]),
     off: () => {},
     onAlert: () => {},
+    onAssets: () => {},
     onDownloadProgress: () => {},
     onGame: () => {},
     onProgress: () => {},
