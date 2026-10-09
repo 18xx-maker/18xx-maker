@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.0-beta.137](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.136...v1.0.0-beta.137) (2026-10-09)
+
+
+### :tada: Features
+
+* **images:** add custom icon, logo and train images to games ([#1071](https://github.com/18xx-maker/18xx-maker/issues/1071)) ([6f7e831](https://github.com/18xx-maker/18xx-maker/commit/6f7e831948092ff817f5cff0435b11d23c74c07f))
+* **ui:** redesign notifications as a toast stack ([#1069](https://github.com/18xx-maker/18xx-maker/issues/1069)) ([9523d83](https://github.com/18xx-maker/18xx-maker/commit/9523d832396d67faa87cc2f7b0bb6f0c6e6643ee))
+* **ui:** show a loading state when a game file is dropped ([#1072](https://github.com/18xx-maker/18xx-maker/issues/1072)) ([ff122a2](https://github.com/18xx-maker/18xx-maker/commit/ff122a2eaf887baad7feeed383737d72a9236d61))
+
 ## [1.0.0-beta.136](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.135...v1.0.0-beta.136) (2026-10-09)
 
 
