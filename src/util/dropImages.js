@@ -331,7 +331,7 @@ export const addDroppedImages = async ({
   }
 
   if (!added.length && !failed.length) return null;
-  const message = [...added, ...failed].join("\n");
+  const message = [...failed, ...added].join("\n");
   if (!failed.length)
     return { title: t("assets.added"), message, type: "success" };
   if (!added.length)

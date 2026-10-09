@@ -1,4 +1,5 @@
 import {
+  addDroppedImages,
   captureFiles,
   errorCode,
   freeName,
@@ -91,5 +92,39 @@ describe("captureFiles", () => {
       { file: { name: "x.png" }, directory: false },
     ]);
     expect(captureFiles(undefined)).toEqual([]);
+  });
+});
+
+describe("addDroppedImages", () => {
+  const t = (key, values) => `${key}${values?.id ? ` ${values.id}` : ""}`;
+
+  it("lists what failed before what was added", async () => {
+    const svg = new TextEncoder().encode(
+      '<svg viewBox="0 0 1 1"><path d="M0 0h1v1z"/></svg>',
+    );
+    const files = [
+      {
+        file: {
+          name: "star.svg",
+          size: svg.length,
+          arrayBuffer: async () => svg.buffer,
+        },
+        directory: false,
+      },
+      { file: { name: "notes.txt", size: 3 }, directory: false },
+    ];
+    const result = await addDroppedImages({
+      files,
+      assets: {},
+      ask: async ({ name }) => ({ kind: "icons", name }),
+      store: async () => undefined,
+      t,
+      max: 10,
+    });
+    expect(result.type).toBe("warning");
+    expect(result.message.split("\n")).toEqual([
+      "notes.txt: assets.errors.type",
+      "assets.addedAs.icons custom/star",
+    ]);
   });
 });
