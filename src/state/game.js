@@ -167,7 +167,8 @@ export const loadGame =
         if (quiet) {
           if (!getState().game) {
             await hydrate();
-            dispatch(createSetGame(game));
+            // A game may have been opened while the images were read
+            if (!getState().game) dispatch(createSetGame(game));
           }
           return game;
         }

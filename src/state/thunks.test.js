@@ -87,6 +87,15 @@ describe("loadGame", () => {
     expect(types()).toEqual([]);
   });
 
+  it("a quiet load keeps a game opened while its images were read", async () => {
+    // Reading the images dispatches them; the user opens a game meanwhile
+    dispatch.mockImplementation(() => {
+      state = { game: games["1889"], assets: {} };
+    });
+    await loadGame("bundled:18Test", true)(dispatch, getState);
+    expect(types().map((action) => action.type)).toEqual(["SET_ASSETS"]);
+  });
+
   it("a quiet load fails without an alert", async () => {
     await expect(
       loadGame("bundled:nope", true)(dispatch, getState),
