@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
 import { compose } from "ramda";
 
@@ -9,6 +9,8 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import Alert from "@/components/Alert";
 import Analytics from "@/components/Analytics";
+import DropImageDialog from "@/components/DropImageDialog";
+import DropOverlay from "@/components/DropOverlay";
 import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
 import { ShortcutsDialog } from "@/components/Shortcuts";
@@ -26,6 +28,7 @@ import {
   createAlert,
   createDownloadPercent,
   createProgressAlert,
+  createSetAssets,
   createUpdate,
   loadGame,
   receiveGame,
@@ -36,8 +39,18 @@ import {
   selectGameChanged,
   selectLanguage,
 } from "@/state/selectors";
+import { MAX_DROP_FILES } from "@/util/assetNames";
+import { sanitizeAssets } from "@/util/assets";
+import { canAddAssets } from "@/util/canSaveGame";
 import capability from "@/util/capability";
 import { sniffConfigFile } from "@/util/config";
+import {
+  addDroppedImages,
+  captureFiles,
+  isGameDrop,
+  makeStore,
+} from "@/util/dropImages";
+import { ELECTRON } from "@/util/loading";
 import { useBooleanParam } from "@/util/query";
 import { getRenderInput } from "@/util/renderInput";
 import * as idb from "@/util/storage/idb";
@@ -50,6 +63,7 @@ const Root = ({ children }) => {
   const [print] = useBooleanParam("print");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const store = useStore();
   const language = useSelector(selectLanguage);
   const { importConfig } = useConfig();
   const saver = useSaveGame();
@@ -67,44 +81,31 @@ const Root = ({ children }) => {
     if (capability.electron && !render) window.api.setLanguage(next);
   }, [i18n, language, render]);
 
-  const getEventFileHandle = (event) => {
-    if (event.dataTransfer.items) {
-      if (event.dataTransfer.items[0].kind === "file") {
-        return event.dataTransfer.items[0].getAsFileSystemHandle();
-      }
-    }
-  };
-  const getEventFile = (event) => {
-    if (event.dataTransfer.items) {
-      if (event.dataTransfer.items[0].kind === "file") {
-        return event.dataTransfer.items[0].getAsFile();
-      }
-    }
-
-    return event.dataTransfer.files[0];
-  };
   const dragOverHandler = (event) => {
     event.preventDefault();
   };
   // Everything read from the event happens before any await: a drop's items
   // are gone once the handler returns
   const captureDrop = (event) => {
-    let file;
-    try {
-      file = getEventFile(event);
-    } catch {
-      // Not a file, handled below
+    const files = captureFiles(event.dataTransfer);
+    // The file system handle of a single dropped game
+    let handle;
+    if (files.length <= 1 && !capability.electron && capability.system) {
+      try {
+        handle = Promise.resolve(
+          event.dataTransfer.items?.[0]?.kind === "file"
+            ? event.dataTransfer.items[0].getAsFileSystemHandle()
+            : undefined,
+        );
+        // A config drop never consumes the handle, do not leave a rejection
+        // unhandled
+        handle.catch(() => undefined);
+      } catch {
+        handle = undefined;
+      }
     }
 
-    const handle =
-      !capability.electron && capability.system
-        ? Promise.resolve(getEventFileHandle(event))
-        : undefined;
-    // A config drop never consumes the handle, do not leave a rejection
-    // unhandled
-    handle?.catch(() => undefined);
-
-    return { file, handle };
+    return { files, file: files[0]?.file, handle };
   };
   const fileHandler = ({ file, handle }) => {
     if (handle) {
@@ -127,11 +128,62 @@ const Root = ({ children }) => {
     return Promise.reject(new Error(t("alerts.dropUnsupported")));
   };
 
+  // SVGs are asked about one after another: icon or logo, and the name
+  const [asking, setAsking] = useState(null);
+  const askSvg = (request) =>
+    new Promise((resolve) => setAsking({ request, resolve }));
+  const answerSvg = (answer) => {
+    asking.resolve(answer);
+    setAsking(null);
+  };
+  const dropping = useRef(false);
+
+  const alertError = (message) =>
+    dispatch(createAlert(t("alerts.error"), message, "error"));
+
+  // Images dropped onto the game on screen become its custom images
+  const imagesHandler = async ({ files }) => {
+    const state = store.getState();
+    const { loadedGame, game } = state;
+    if (!loadedGame) return alertError(t("drop.noGame"));
+    if (loadedGame.type === "bundled") return alertError(t("drop.bundled"));
+    if (!canAddAssets(loadedGame.type)) {
+      return alertError(t("alerts.dropUnsupported"));
+    }
+    // The game of the last session is not on screen (yet)
+    if (game?.meta.slug !== loadedGame.slug) {
+      return alertError(t("assets.errors.notfound"));
+    }
+
+    dropping.current = true;
+    try {
+      const result = await addDroppedImages({
+        files,
+        assets: state.assets?.[game.meta.slug],
+        ask: askSvg,
+        store: makeStore(game.meta, dispatch),
+        t,
+        max: MAX_DROP_FILES,
+      });
+      if (result) {
+        dispatch(createAlert(result.title, result.message, result.type));
+      }
+    } catch (e) {
+      alertError(e.message);
+    } finally {
+      dropping.current = false;
+    }
+  };
+
   const dropHandler = (event) => {
     event.preventDefault();
 
-    // Do nothing if this isn't a file drop
+    // Do nothing if this isn't a file drop, in render mode, while a dialog is
+    // open or another drop is still being added
     if (
+      render ||
+      document.querySelector('[role="dialog"]') ||
+      dropping.current ||
       !event.dataTransfer ||
       (event.dataTransfer.items && event.dataTransfer.items.length === 0) ||
       (event.dataTransfer.files && event.dataTransfer.files.length === 0)
@@ -141,6 +193,10 @@ const Root = ({ children }) => {
 
     const dropped = captureDrop(event);
 
+    if (!isGameDrop(dropped.files)) {
+      return imagesHandler(dropped);
+    }
+
     // A config.json applies its settings, anything else is a game
     return sniffConfigFile(dropped.file)
       .then((imported) =>
@@ -148,9 +204,7 @@ const Root = ({ children }) => {
           ? importConfig(imported)
           : fileHandler(dropped).then((slug) => navigate(`/games/${slug}/map`)),
       )
-      .catch((e) =>
-        dispatch(createAlert(t("alerts.error"), e.message, "error")),
-      );
+      .catch((e) => alertError(e.message));
   };
 
   const printCss = print
@@ -168,6 +222,9 @@ body {
       const onGame = (game) => dispatch(receiveGame(game));
 
       window.api.onAlert(compose(dispatch, createAlert));
+      window.api.onAssets((id, assets) =>
+        dispatch(createSetAssets(`${ELECTRON}:${id}`, sanitizeAssets(assets))),
+      );
       window.api.onGame(onGame);
       window.api.onProgress(compose(dispatch, createProgressAlert));
       window.api.onRedirect(navigate);
@@ -330,6 +387,8 @@ body {
           ) : (
             <>
               <Alert />
+              <DropOverlay disabled={print || !!asking} />
+              <DropImageDialog request={asking?.request} onAnswer={answerSvg} />
               <ExportHost />
               <ShortcutsDialog open={shortcuts} onOpenChange={setShortcuts} />
               {saver.dialog}

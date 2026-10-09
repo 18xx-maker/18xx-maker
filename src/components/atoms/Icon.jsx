@@ -2,7 +2,8 @@ import { defaultTo } from "ramda";
 
 import Color from "@/components/Color";
 
-import { icons } from "@/data";
+import { useAssets } from "@/hooks";
+import { resolveAsset } from "@/util/assets";
 
 const Icon = ({
   type,
@@ -13,6 +14,8 @@ const Icon = ({
   strokeColor,
   strokeWidth,
 }) => {
+  const assets = useAssets();
+  const Component = resolveAsset("icons", type, assets);
   let icon;
   let iconWidth = width || "25";
   let iconPos = -1 * (width / 2) || "-12.5";
@@ -21,8 +24,7 @@ const Icon = ({
   strokeColor = defaultTo("black", strokeColor);
   strokeWidth = defaultTo("2", strokeWidth);
 
-  if (icons[type]) {
-    let Component = icons[type];
+  if (Component) {
     icon = (
       <Component
         className={`icon-color-main-${color}`}

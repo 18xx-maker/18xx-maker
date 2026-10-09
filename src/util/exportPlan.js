@@ -13,7 +13,16 @@ import { layoutsOfConfig, resolveExportOptions } from "@/export/options.js";
 import { renderSlug } from "@/export/render.js";
 import { DOCS, docPage, selectDocs } from "@/export/select.js";
 import schema from "@/schemas/config.schema.json";
+import { assetTotals } from "@/util/assetNames";
 import { resolveConfig } from "@/util/resolveConfig";
+
+// The custom images that go with a request: those of a game that is not a file
+// of the app (a bundled or browser game). The main process reads the folder of
+// a file game itself and ignores what the page sends, so nothing is sent.
+const requestAssets = (game, assets) =>
+  assets && game.meta?.type !== "electron" && assetTotals(assets).count > 0
+    ? { assets }
+    : {};
 
 const layouts = (name) => schema.properties[name].properties.layout.enum;
 
@@ -121,7 +130,7 @@ export const exportDefaults = (game, layers) => {
 //   b18        { version, author } of the Board 18 box
 // What is left out is the `exports` of the game, or the default of the app
 // (resolveExportOptions).
-export const planExport = (game, layers, userOptions) => {
+export const planExport = (game, layers, userOptions, assets) => {
   const options = resolveOptions(game, layers, userOptions);
   const { formats, docs, variation } = options;
   let config = baseConfig(layers, game);
@@ -166,6 +175,7 @@ export const planExport = (game, layers, userOptions) => {
     dpi: options.png.dpi,
     background: options.background,
     b18: box,
+    ...requestAssets(game, assets),
   };
 };
 
@@ -173,7 +183,13 @@ export const planExport = (game, layers, userOptions) => {
 // "/games/1889/map?variation=0" (location.pathname and location.search),
 // saved under a name the user chooses. A png is of the .printElement, and
 // takes the background on the pages of BACKGROUND_PAGES only.
-export const planSingle = (game, layers, { pathname, search }, format) => {
+export const planSingle = (
+  game,
+  layers,
+  { pathname, search },
+  format,
+  assets,
+) => {
   const page = pathname.split("/").slice(3).join("/");
   const doc = {
     route: `/games/${renderSlug(game.meta.id)}/${page}`,
@@ -195,5 +211,6 @@ export const planSingle = (game, layers, { pathname, search }, format) => {
       resolveOptions(game, layers),
     ),
     single: true,
+    ...requestAssets(game, assets),
   };
 };

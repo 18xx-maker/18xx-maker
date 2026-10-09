@@ -84,6 +84,7 @@ const openInApp = (route, extra) => {
   let menuSave;
   window.api = {
     onAlert: noop,
+    onAssets: noop,
     onProgress: noop,
     onRedirect: noop,
     onSave: (callback) => {

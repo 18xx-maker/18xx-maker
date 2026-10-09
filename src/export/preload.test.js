@@ -64,6 +64,7 @@ describe("the preload api", () => {
       "{}",
       "Save as",
       "Game",
+      undefined,
     );
   });
 
@@ -109,6 +110,85 @@ describe("the preload api", () => {
     expect(api.saveGameAs).toBeUndefined();
     expect(api.onMenu).toBeUndefined();
     expect(api.setLanguage).toBeUndefined();
+    // Nothing that reads or writes the images of a game
+    expect(api.addAsset).toBeUndefined();
+    expect(api.loadAssets).toBeUndefined();
+    expect(api.onAssets).toBeUndefined();
     expect(ipc.sendSync).toHaveBeenCalledWith("getRenderInput", "abc");
+  });
+
+  it("loads the images of a game and calls back when they change", async () => {
+    const ipc = fakeIpc();
+    ipc.invoke.mockResolvedValue({ icons: {}, logos: {}, trains: {} });
+    const api = createApi({ ipcRenderer: ipc, webUtils: {}, argv: [] });
+    const callback = vi.fn();
+
+    expect(await api.loadAssets("abc")).toEqual({
+      icons: {},
+      logos: {},
+      trains: {},
+    });
+    expect(ipc.invoke).toHaveBeenCalledWith("loadAssets", "abc");
+
+    api.onAssets(callback);
+    expect(ipc.on).toHaveBeenCalledWith("assets", expect.any(Function));
+    ipc.on.mock.calls[0][1]({}, "abc", { icons: { a: "<svg/>" } });
+    expect(callback).toHaveBeenCalledWith("abc", { icons: { a: "<svg/>" } });
+  });
+
+  it("sends the bytes of an image and tells the page why it failed, by a code", async () => {
+    const ipc = fakeIpc();
+    const api = createApi({ ipcRenderer: ipc, webUtils: {}, argv: [] });
+    const bytes = new ArrayBuffer(4);
+
+    ipc.invoke.mockResolvedValueOnce({ kind: "icons", name: "a" });
+    expect(
+      await api.addAsset("abc", "icons", "a", bytes, { replace: true }),
+    ).toEqual({ kind: "icons", name: "a" });
+    expect(ipc.invoke).toHaveBeenCalledWith(
+      "addAsset",
+      "abc",
+      "icons",
+      "a",
+      bytes,
+      {
+        replace: true,
+      },
+    );
+
+    ipc.invoke.mockRejectedValueOnce(
+      new Error(
+        "Error invoking remote method 'addAsset': Error: asset:exists a",
+      ),
+    );
+    await expect(
+      api.addAsset("abc", "icons", "a", bytes),
+    ).rejects.toMatchObject({
+      code: "exists",
+      message: "asset:exists a",
+    });
+    ipc.invoke.mockRejectedValueOnce(new Error("something else"));
+    await expect(
+      api.addAsset("abc", "icons", "a", bytes),
+    ).rejects.toMatchObject({
+      code: "failed",
+      message: "asset:failed something else",
+    });
+  });
+
+  it("gives saveGameAs the images to write next to the copy", async () => {
+    const ipc = fakeIpc();
+    const api = createApi({ ipcRenderer: ipc, webUtils: {}, argv: [] });
+    const assets = { icons: {}, logos: {}, trains: {} };
+
+    await api.saveGameAs("g", "{}", "Save as", "Game", assets);
+    expect(ipc.invoke).toHaveBeenCalledWith(
+      "saveGameAs",
+      "g",
+      "{}",
+      "Save as",
+      "Game",
+      assets,
+    );
   });
 });

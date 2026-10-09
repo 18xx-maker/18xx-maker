@@ -142,6 +142,38 @@ describe("planned requests", () => {
   });
 });
 
+describe("the custom images of a request", () => {
+  const assets = { icons: { star: "<svg/>" }, logos: {}, trains: {} };
+  const empty = { icons: {}, logos: {}, trains: {} };
+  const where = { pathname: "/games/18Test/map", search: "" };
+
+  it("go with the request of a bundled or browser game, and are valid", () => {
+    const request = planExport(game, layers(), { formats: ["svg"] }, assets);
+    expect(request.assets).toBe(assets);
+    expect(() => validateRequest(request)).not.toThrow();
+    expect(structuredClone(request)).toEqual(request);
+    expect(planSingle(game, layers(), where, "png", assets).assets).toBe(
+      assets,
+    );
+  });
+
+  it("are left out when there are none", () => {
+    expect(planExport(game, layers(), {}).assets).toBeUndefined();
+    expect(planExport(game, layers(), {}, empty)).not.toHaveProperty("assets");
+    expect(planSingle(game, layers(), where, "png")).not.toHaveProperty(
+      "assets",
+    );
+  });
+
+  it("are not sent for a game file, the main process reads its folder", () => {
+    const file = { ...game, meta: { ...game.meta, type: "electron" } };
+    expect(planExport(file, layers(), {}, assets)).not.toHaveProperty("assets");
+    expect(planSingle(file, layers(), where, "pdf", assets)).not.toHaveProperty(
+      "assets",
+    );
+  });
+});
+
 describe("planExport with the exports of a game", () => {
   const exporting = (exports) => ({ ...game, exports });
   const formatsOf = (request) => [

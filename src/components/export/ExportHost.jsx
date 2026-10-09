@@ -23,6 +23,7 @@ import {
   createSetExportSheetOpen,
 } from "@/state";
 import {
+  selectAssets,
   selectExportMenuOpen,
   selectExportSheetOpen,
   selectGameForSlug,
@@ -80,6 +81,7 @@ const ExportHost = () => {
   const { defaultConfig, userConfig, storedConfig } = useConfig();
   const layers = { defaultConfig, userConfig, storedConfig };
   const reveal = useSelector(selectOpenExportFolder);
+  const assets = useSelector(selectAssets);
   const menu = useSelector(selectExportMenuOpen);
   const options = useSelector(selectExportSheetOpen);
   const setMenu = (open) => dispatch(createSetExportMenuOpen(open));
@@ -114,7 +116,7 @@ const ExportHost = () => {
 
   const handleAll = (format) => {
     trackEvent("exportGame", location, { media: format });
-    exportFiles(planExport(game, layers, { formats: [format] }));
+    exportFiles(planExport(game, layers, { formats: [format] }, assets));
   };
 
   // Keys inside the open menu, which must not reach the global key bindings

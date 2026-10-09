@@ -430,6 +430,73 @@ describe("run", () => {
   });
 });
 
+describe("custom images", () => {
+  const SVG = "<svg/>";
+  const sent = { icons: { page: SVG }, logos: {}, trains: {} };
+  const folder = { icons: { folder: SVG }, logos: {}, trains: {} };
+
+  it("gives the capture windows the images of the request", async () => {
+    const { service, ui, opened } = setup();
+    await service.run(1, request({ assets: sent }), ui);
+    expect(opened[0].assets).toBe(sent);
+  });
+
+  it("has no images when the request has none", async () => {
+    const { service, ui, opened } = setup();
+    await service.run(1, request(), ui);
+    expect(opened[0].assets).toBeUndefined();
+  });
+
+  it("uses what the main process reads for a game with a folder, not the request's", async () => {
+    const assetsOf = vi.fn(() => folder);
+    const { service, ui, opened } = setup({ assetsOf });
+    const asked = request({ assets: sent });
+
+    await service.run(1, asked, ui);
+
+    expect(assetsOf).toHaveBeenCalledWith(asked);
+    expect(opened[0].assets).toBe(folder);
+  });
+
+  it("does not even check the images a page sent for such a game", async () => {
+    const { service, ui, opened } = setup({ assetsOf: () => folder });
+    await service.run(1, request({ assets: { icons: { "../x": 5 } } }), ui);
+    expect(opened[0].assets).toBe(folder);
+  });
+
+  it("uses the request's for a game that has no folder", async () => {
+    const { service, ui, opened } = setup({ assetsOf: () => undefined });
+    await service.run(1, request({ assets: sent }), ui);
+    expect(opened[0].assets).toBe(sent);
+  });
+
+  it("refuses images over the caps from a page, writing nothing", async () => {
+    const { service, ui, openPool } = setup();
+    await expect(
+      service.run(1, request({ assets: { icons: { "../x": SVG } } }), ui),
+    ).rejects.toThrow("Invalid export: the custom images");
+    expect(openPool).not.toHaveBeenCalled();
+    expect(fs.readdirSync(tmp)).toEqual([]);
+  });
+
+  it("validates the shape of the images", () => {
+    for (const assets of [
+      null,
+      [],
+      "x",
+      { sounds: {} },
+      { icons: { a: 5 } },
+      { icons: { "a b": SVG } },
+      { trains: { a: "data:image/png;base64,@@" } },
+    ]) {
+      expect(() => validateRequest(request({ assets }))).toThrow(
+        "the custom images",
+      );
+    }
+    expect(() => validateRequest(request({ assets: sent }))).not.toThrow();
+  });
+});
+
 describe("validateRequest", () => {
   it("accepts reveal as a boolean only", () => {
     expect(() => validateRequest(request({ reveal: true }))).not.toThrow();

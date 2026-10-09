@@ -39,6 +39,7 @@ export const SECTION_KEYS = {
   privates: ["privates"],
   tokens: TOKEN_KEYS,
   trains: ["trains"],
+  images: [],
   tiles: ["tiles"],
   market: ["stock"],
   colors: COLOR_KEYS,

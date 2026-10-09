@@ -114,6 +114,56 @@ test.describe("maker export 18Test", () => {
     expect(fs.existsSync(`${box}.zip`)).toBe(true);
   });
 
+  test("draws the custom images of the assets folder, unless --no-assets", () => {
+    const crest = "M20 15h60v35c0 22-30 35-30 35S20 72 20 50z";
+    const file = "svg/18test-token-2-LBRR.svg";
+    const args = ["18Test", "--format", "svg", "--docs", "tokens"];
+
+    const withAssets = maker(out, ...args);
+    expect(withAssets.status, withAssets.stderr).toBe(0);
+    expect(withAssets.stdout).toMatch(/Assets: 3 custom images for 18Test/);
+    expect(fs.readFileSync(path.join(out, "18Test", file), "utf-8")).toContain(
+      crest,
+    );
+
+    fs.rmSync(path.join(out, "18Test"), { recursive: true });
+    const without = maker(out, ...args, "--no-assets");
+    expect(without.status, without.stderr).toBe(0);
+    expect(without.stdout).not.toMatch(/Assets:/);
+    expect(
+      fs.readFileSync(path.join(out, "18Test", file), "utf-8"),
+    ).not.toContain(crest);
+  });
+
+  test("takes the assets folder of a game file and of --assets", () => {
+    const game = path.join(out, "mine.json");
+    const games = path.resolve(import.meta.dirname, "../src/data/games");
+    fs.copyFileSync(path.join(games, "18Test.json"), game);
+    const bundled = path.join(games, "18Test.assets");
+    const run = (...extra) =>
+      maker(out, game, "--format", "svg", "--docs", "tokens", ...extra);
+
+    // Nothing next to the file: the images the game uses are missing
+    const none = run();
+    expect(none.status, none.stderr).toBe(0);
+    expect(none.stdout).not.toMatch(/Assets:/);
+
+    const named = run("--assets", bundled);
+    expect(named.status, named.stderr).toBe(0);
+    expect(named.stdout).toMatch(/Assets: 3 custom images for mine from/);
+
+    fs.cpSync(bundled, path.join(out, "mine.assets"), { recursive: true });
+    fs.writeFileSync(path.join(out, "mine.assets/icons/bad name.svg"), "x");
+    const beside = run();
+    expect(beside.status, beside.stderr).toBe(0);
+    expect(beside.stdout).toMatch(/Assets: 3 custom images for mine/);
+    expect(beside.stderr).toMatch(/bad name\.svg: the name is not usable/);
+
+    const missing = run("--assets", path.join(out, "nope"));
+    expect(missing.status).not.toBe(0);
+    expect(missing.stderr).toMatch(/nope not found/);
+  });
+
   test("writes png at a lower dpi", () => {
     const result = maker(
       out,

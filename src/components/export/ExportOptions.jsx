@@ -26,7 +26,7 @@ import { Switch } from "@/components/ui/switch";
 import { MAX_DPI } from "@/export/capture.js";
 import { BACKGROUNDS, MAX_CARD_BLEED } from "@/export/options.js";
 import { createAlert } from "@/state";
-import { selectOpenExportFolder } from "@/state/selectors";
+import { selectAssets, selectOpenExportFolder } from "@/state/selectors";
 import { exportDefaults, exportPages, planExport } from "@/util/exportPlan";
 
 const FORMATS = ["pdf", "png", "svg", "b18"];
@@ -61,6 +61,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const reveal = useSelector(selectOpenExportFolder);
+  const assets = useSelector(selectAssets);
   const pages = exportPages(game, layers);
 
   // The options start as the game's `exports` and the defaults say
@@ -140,7 +141,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
     setRunning(true);
     try {
       const result = await window.api.export({
-        ...planExport(game, layers, options()),
+        ...planExport(game, layers, options(), assets),
         out,
         reveal,
       });

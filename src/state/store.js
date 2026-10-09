@@ -4,6 +4,7 @@ import { map, mergeDeepRight } from "ramda";
 
 import { games } from "@/data";
 import { ALERT_DEFAULT, alertReducer } from "@/state/alerts";
+import { assetsReducer } from "@/state/assets";
 import { configReducer } from "@/state/config";
 import { errorsReducer } from "@/state/errors";
 import {
@@ -19,6 +20,7 @@ import storage from "@/state/storage";
 import { summariesReducer } from "@/state/summaries";
 import { UI_DEFAULT, uiReducer } from "@/state/ui";
 import { updateReducer } from "@/state/update";
+import { sanitizeAssets } from "@/util/assets";
 import { getGameSummary } from "@/util/loading.js";
 import { getRenderInput } from "@/util/renderInput";
 
@@ -36,6 +38,7 @@ export const initialState = {
 export const rootReducer = combineReducers({
   alert: alertReducer,
   loadedGame: loadedGameReducer,
+  assets: assetsReducer,
   update: updateReducer,
   summaries: summariesReducer,
   settings: settingsReducer,
@@ -53,7 +56,14 @@ export const rootReducer = combineReducers({
 // writes local storage, which belongs to the app.
 const createPreloadedState = (render) => {
   if (render) {
-    return initialState;
+    // The images of the given game are in memory only, like the rest
+    const input = getRenderInput();
+    return input?.assets
+      ? {
+          ...initialState,
+          assets: { [input.game.meta.slug]: sanitizeAssets(input.assets) },
+        }
+      : initialState;
   }
 
   storage.init("config", "loadedGame", "settings");

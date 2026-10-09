@@ -53,7 +53,8 @@ export const validateLoadedGame = (game) => async (dispatch, getState) => {
   let issues;
   try {
     const { validateGame } = await import("@/util/gameValidation");
-    issues = await validateGame(game);
+    // The custom images are checked once the game's images were loaded
+    issues = await validateGame(game, getState().assets?.[slug]);
   } catch {
     issues = [{ severity: "warning", code: "failed", pointer: "", params: {} }];
   }

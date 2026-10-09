@@ -1,3 +1,4 @@
+import { assetsProblem } from "./assets.js";
 import { MAX_DPI } from "./capture.js";
 import { BACKGROUNDS } from "./options.js";
 import { createPageCapture } from "./page.js";
@@ -10,17 +11,23 @@ import { gameFolder } from "./sink.js";
 //
 // dialogs     { saveFile({ title, name, format }) -> { out, name } | undefined,
 //                chooseFolder(title) -> folder | undefined }
-// openPool    ({ id, game, config }) -> a pool of capture slots (see
+// openPool    ({ id, game, config, assets }) -> a pool of capture slots (see
 //             createPool) of a game in render mode. Closing it closes them.
 // createSink  (out) -> { write(relPath, bytes) }
 // zip         async (out, names) writes the Board 18 zip
 // show        (out, relPath) shows a file in its folder, called only when the
 //             request asks for it (reveal)
 // concurrency how many files are captured at the same time
+// assetsOf    (request) -> the custom images of the game (see util/assetNames)
+//             for a game whose images the main process reads from its folder,
+//             or undefined for any other. The assets in the request are then
+//             ignored: a page can not name images for a game that has a folder.
+//             Other games may send their images in the request (`assets`),
+//             which are capped in validateRequest.
 // pageOptions dpi limits and timeouts for createPageCapture
 //
 // A request is what the renderer plans (see util/exportPlan):
-//   { id, game, config, jobs, dpi, background?, single?, out?, reveal?, b18?: { names, json } }
+//   { id, game, config, jobs, dpi, background?, single?, out?, reveal?, assets?, b18?: { names, json } }
 // where jobs is [{ doc, format, path }] (see exportJobs), config is the layers
 // below the game's own, and reveal shows the last file in its
 // folder when the export is done, and out is a folder chosen before (otherwise a dialog
@@ -55,6 +62,10 @@ export const validateRequest = (request) => {
   if (single && jobs.length !== 1) throw invalid("one file expected");
   if (!(dpi >= 1 && dpi <= MAX_DPI)) {
     throw invalid(`the resolution must be 1 to ${MAX_DPI} dpi`);
+  }
+  if (request.assets !== undefined) {
+    const problem = assetsProblem(request.assets);
+    if (problem) throw invalid(`the custom images: ${problem}`);
   }
   if (request.reveal !== undefined && typeof request.reveal !== "boolean") {
     throw invalid("reveal must be true or false");
@@ -95,6 +106,7 @@ export const createExportService = ({
   createSink,
   zip,
   show,
+  assetsOf,
   concurrency = 1,
   pageOptions = {},
 }) => {
@@ -121,7 +133,12 @@ export const createExportService = ({
   };
 
   const run = async (owner, request, ui) => {
-    validateRequest(request);
+    // A game with a folder of images gets those, whatever the page sent
+    const own =
+      request && typeof request === "object" ? assetsOf?.(request) : undefined;
+    validateRequest(
+      own === undefined ? request : { ...request, assets: undefined },
+    );
     if (active.has(owner)) throw new Error("An export is already running");
 
     const controller = new AbortController();
@@ -148,6 +165,7 @@ export const createExportService = ({
         id: request.id,
         game: request.game,
         config: request.config,
+        assets: own === undefined ? request.assets : own,
       });
       // Closing the pool closes the windows, and a capture in progress ends
       // at once without waiting for what a closed window would answer

@@ -17,6 +17,7 @@ import {
   getExportFolder,
   setExportFolder,
 } from "./config.js";
+import { folderAssets } from "./folderAssets.js";
 import { getMainWindow, startBaseUrl } from "./window.js";
 
 // How many capture windows are open at once, and how many files a window
@@ -96,6 +97,8 @@ const service = createExportService({
   openPool,
   createSink: createFileSink,
   zip: writeZip,
+  // The images of a game file come from its folder, never from the page
+  assetsOf: folderAssets.ofRequest,
   // Only when the user turned on the setting: the file manager reuses an open
   // window of the folder where the system allows it
   show: (out, relPath) => shell.showItemInFolder(join(out, relPath)),

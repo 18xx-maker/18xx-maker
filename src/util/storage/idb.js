@@ -1,6 +1,15 @@
-import { assoc, compose, indexBy, map, omit, prop } from "ramda";
+import { assoc, indexBy, map, omit, prop } from "ramda";
 
 import { getGameSummary, loadFile } from "@/util/loading";
+import { deleteAssets } from "@/util/storage/assets";
+import {
+  GAME_DIRECTORY_STORE,
+  GAME_FILE_STORE,
+  migrateSummary,
+  openDB,
+} from "@/util/storage/db";
+
+export { migrateSummary };
 
 export const TYPE = "system";
 const slug = (id) => `${TYPE}:${id}`;
@@ -9,78 +18,18 @@ const meta = (id) => ({
   type: TYPE,
   slug: slug(id),
 });
-const GAME_DIRECTORY_STORE = "game_directory_handles";
-const GAME_FILE_STORE = "game_file_handles";
-const NAME = "18xx-maker";
-const VERSION = 2;
-
-export const migrateSummary = (summary) => {
-  if (!summary.version) {
-    // Unversioned summary, this means prior to our first migration. We need to
-    // generate a UUID as the id and then remove the slug and add a version
-    const id = crypto.randomUUID();
-    return compose(
-      (summary) => assoc("id", id, summary),
-      assoc("version", 1),
-      assoc("slug", slug(id)),
-    )(summary);
-  }
-
-  return summary;
-};
-
-const openDB = () => {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(NAME, VERSION);
-
-    request.onerror = () => {
-      reject(request.error);
-    };
-
-    request.onsuccess = () => {
-      resolve(request.result);
-    };
-
-    request.onupgradeneeded = (event) => {
-      const db = request.result;
-
-      if (event.oldVersion === 0) {
-        // New DB
-        db.createObjectStore(GAME_DIRECTORY_STORE, { keyPath: "id" });
-        db.createObjectStore(GAME_FILE_STORE, { keyPath: "id" });
-      }
-
-      if (event.oldVersion === 1) {
-        // Upgrading from 1
-        const store = request.transaction.objectStore(GAME_FILE_STORE);
-        store.openCursor().onsuccess = (event) => {
-          const cursor = event.target.result;
-          if (cursor) {
-            const migrated = migrateSummary(cursor.value);
-            cursor.update(migrated);
-            cursor.continue();
-          } else {
-            // Upgraded from version 1
-          }
-        };
-      }
-    };
-  });
-};
-
 const op = (store_name, op, write = false) => {
-  return openDB().then(
-    (db) =>
-      new Promise((resolve, reject) => {
-        const transaction = db.transaction(
-          [store_name],
-          write ? "readwrite" : "readonly",
-        );
-        const store = transaction.objectStore(store_name);
-        const request = op(store);
-        request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error);
-      }),
+  return openDB().then((db) =>
+    new Promise((resolve, reject) => {
+      const transaction = db.transaction(
+        [store_name],
+        write ? "readwrite" : "readonly",
+      );
+      const store = transaction.objectStore(store_name);
+      const request = op(store);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    }).finally(() => db.close()),
   );
 };
 
@@ -212,7 +161,9 @@ export const saveGameHandle = (handle) => {
 };
 
 export const deleteGame = (id) =>
-  op(GAME_FILE_STORE, (store) => store.delete(id), true);
+  op(GAME_FILE_STORE, (store) => store.delete(id), true).then(() =>
+    deleteAssets(slug(id)),
+  );
 
 const gameHandle = (id) => loadGameSummary(id).then(prop("handle"));
 

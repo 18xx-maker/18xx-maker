@@ -2,9 +2,9 @@ import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 
 import RotateContext from "@/context/RotateContext";
-import { icons } from "@/data";
-import { useGame } from "@/hooks";
+import { useAssets, useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
+import { resolveAsset } from "@/util/assets";
 
 const Terrain = ({
   type,
@@ -17,6 +17,7 @@ const Terrain = ({
   rotation,
 }) => {
   const game = useGame();
+  const assets = useAssets();
   fontSize = multiDefaultTo(15, fontSize, game.info.valueFontSize);
   fontFamily = multiDefaultTo("display", fontFamily, game.info.valueFontFamily);
 
@@ -60,7 +61,7 @@ const Terrain = ({
   }
 
   let icon = null;
-  let Component = icons[type];
+  let Component = resolveAsset("icons", type, assets);
   if (Component) {
     icon = (
       <g transform={`translate(0 ${translate}) scale(${scale})`}>

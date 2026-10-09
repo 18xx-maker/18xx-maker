@@ -48,6 +48,12 @@ describe("render mode state", () => {
     expect(store.getState().loadedGame).toBeFalsy();
   });
 
+  it("has no assets when it is given none", async () => {
+    const { store } = await importState(input);
+
+    expect(store.getState().assets).toEqual({});
+  });
+
   it("writes nothing to local storage", async () => {
     const setItem = vi.spyOn(Storage.prototype, "setItem");
     const removeItem = vi.spyOn(Storage.prototype, "removeItem");

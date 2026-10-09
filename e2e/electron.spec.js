@@ -252,6 +252,123 @@ test.describe("the app exports 18Test", () => {
     await window.evaluate((id) => window.api.deleteGame(id), summary.id);
   });
 
+  test("keeps the custom images of a copy, adds to and exports them from its folder", async () => {
+    app = await launch();
+    const file = path.join(out, "copy.json");
+    const exportTo = path.join(out, "exported");
+    fs.mkdirSync(exportTo);
+    await app.evaluate(
+      ({ dialog }, { filePath, folder }) => {
+        dialog.showSaveDialog = async () => ({ canceled: false, filePath });
+        dialog.showOpenDialog = async () => ({
+          canceled: false,
+          filePaths: [folder],
+        });
+      },
+      { filePath: file, folder: exportTo },
+    );
+
+    const window = await show(app, "#/games/18Test");
+    await window.getByRole("button", { name: "Save as..." }).click();
+    await expect(window).toHaveURL((url) =>
+      url.hash.startsWith("#/games/electron:"),
+    );
+
+    // Save as writes the images of the bundled game next to the copy
+    const assets = path.join(out, "copy.assets");
+    const listing = (...parts) => fs.readdirSync(path.join(assets, ...parts));
+    expect(listing("icons")).toEqual(["star.svg"]);
+    expect(listing("logos")).toEqual(["crest.svg"]);
+    expect(listing("trains")).toEqual(["loco.png"]);
+
+    const slug = new URL(window.url()).hash.slice("#/games/".length);
+    const config = () =>
+      window.evaluate(() => window.api.loadConfig().then((r) => r.config));
+    const summary = Object.values((await config()).summaries).find(
+      (summary) => summary.slug === slug,
+    );
+
+    // The preload reads the folder, and adds an image to it
+    const folder = await window.evaluate(
+      (id) => window.api.loadAssets(id),
+      summary.id,
+    );
+    expect(Object.keys(folder.icons)).toEqual(["star"]);
+    const add = (name, text, options) =>
+      window.evaluate(
+        async ([id, name, text, options]) => {
+          const bytes = new TextEncoder().encode(text);
+          try {
+            return await window.api.addAsset(
+              id,
+              "icons",
+              name,
+              bytes.buffer,
+              options,
+            );
+          } catch (e) {
+            return { error: /^asset:(\w+)/.exec(e.message)?.[1] };
+          }
+        },
+        [summary.id, name, text, options],
+      );
+    const moon = '<svg viewBox="0 0 10 10"><circle r="4"/></svg>';
+    expect(await add("moon", moon)).toMatchObject({
+      kind: "icons",
+      name: "moon",
+      value: moon,
+      replaced: false,
+    });
+    expect(fs.readFileSync(path.join(assets, "icons/moon.svg"), "utf-8")).toBe(
+      moon,
+    );
+    expect(await add("moon", moon)).toEqual({ error: "exists" });
+    expect(await add("Moon", moon, { replace: true })).toMatchObject({
+      name: "moon",
+      replaced: true,
+    });
+    expect(await add("../moon", moon)).toEqual({ error: "name" });
+    expect(await add("evil", "<svg><script/></svg>")).toEqual({
+      error: "content",
+    });
+
+    // An export uses the folder, whatever the page says: the crest is changed
+    // on disk, the page still has the one of the bundled game
+    const crest = fs.readFileSync(
+      path.join(assets, "logos/crest.svg"),
+      "utf-8",
+    );
+    fs.writeFileSync(
+      path.join(assets, "logos/crest.svg"),
+      crest.replace("M20 15h60v35", "M20 16h60v35"),
+    );
+    await window.getByRole("button", { name: "Export" }).click();
+    await window.getByRole("menuitem", { name: "Export options" }).click();
+    const panel = window.getByRole("dialog");
+    await panel.getByRole("checkbox", { name: "PDF documents" }).uncheck();
+    await panel.getByRole("checkbox", { name: "SVG images" }).check();
+    const documents = panel.getByRole("group", { name: "Documents" });
+    for (const box of await documents.getByRole("checkbox").all()) {
+      const label = await box.evaluate((el) => el.nextElementSibling.innerText);
+      if (label !== "Tokens") await box.uncheck();
+    }
+    await panel.getByRole("button", { name: "Choose folder" }).click();
+    await panel.getByRole("button", { name: "Export", exact: true }).click();
+    await expect(window.getByText(/^Exported \d+ files to /)).toBeVisible({
+      timeout: 150_000,
+    });
+
+    const [gameDir] = fs.readdirSync(exportTo);
+    const token = fs.readFileSync(
+      path.join(exportTo, gameDir, "svg/18test-token-2-LBRR.svg"),
+      "utf-8",
+    );
+    expect(token).toContain("M20 16h60v35c0 22-30 35-30 35S20 72 20 50z");
+    expect(token).not.toContain("M20 15h60v35");
+
+    await window.evaluate((id) => window.api.deleteGame(id), summary.id);
+  });
+
   test("runs the keyboard shortcuts from the menu", async () => {
     app = await launch();
     const click = (id) =>

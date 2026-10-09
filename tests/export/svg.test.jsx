@@ -99,6 +99,22 @@ describe("svg export of 18Test", () => {
     });
   }
 
+  it("draws a custom logo of the game inside the file, with its colors written out", async () => {
+    // The token of the second company of 18Test, which has the crest logo
+    const job = planExport(game, layers, { formats: ["svg"] }).jobs.find(
+      ({ doc }) => doc.id === "tokens/1",
+    );
+    const { text, error } = await exportSvg(job);
+
+    expect(error).toBeUndefined();
+    expect(text).toContain("M20 15h60v35");
+    expect(text).not.toMatch(/custom\/|<script|\sclass=|\sstyle=/);
+    const crest = parse(text).querySelector('path[d^="M20 15h60v35"]');
+    // The color-main class took the light blue of the company
+    // eslint-disable-next-line jest-dom/prefer-to-have-attribute -- an element of the parsed file is not an HTMLElement
+    expect(crest.getAttribute("fill")).toBe("rgb(44, 141, 205)");
+  });
+
   it("keeps text as text, in real fonts, and lists them", async () => {
     const { text } = await exportSvg(
       jobs.find(({ doc }) => doc.kind === "map"),

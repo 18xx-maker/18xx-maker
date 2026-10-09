@@ -1,5 +1,7 @@
 import { omit } from "ramda";
 
+import { customName, isCustomId } from "./assetNames.js";
+
 // Checks a game file against the game schema and turns what is wrong into
 // issues the app can show: { severity, code, pointer, params }. The text comes
 // from the locale files (problems.<code>), never from here.
@@ -379,9 +381,74 @@ const configErrors = (validator, config) => {
     .map(translate);
 };
 
+const isString = (value) => typeof value === "string";
+
+// The custom images ("custom/<name>") a game uses, as { kind, id, pointer }:
+// the logo and icon of tokens, the type of icon and terrain elements, the
+// icons of cities and the image of trains
+export const customReferences = (data) => {
+  const found = [];
+  const add = (kind, id, path) => {
+    if (isCustomId(id)) {
+      found.push({
+        kind,
+        id,
+        pointer: `#/${path.map((part) => String(part).replace(/~/g, "~0").replace(/\//g, "~1")).join("/")}`,
+      });
+    }
+  };
+  const types = (value, path) => {
+    const items = Array.isArray(value) ? value : value ? [value] : [];
+    items.forEach((item, index) => {
+      if (isObject(item) && isString(item.type)) {
+        add("icons", item.type, [
+          ...path,
+          ...(Array.isArray(value) ? [index] : []),
+          "type",
+        ]);
+      }
+    });
+  };
+  const visit = (node, path) => {
+    if (Array.isArray(node)) {
+      node.forEach((item, index) => visit(item, [...path, index]));
+      return;
+    }
+    if (!isObject(node)) return;
+    for (const [key, value] of Object.entries(node)) {
+      const here = [...path, key];
+      if (key === "logo" && isString(value)) add("logos", value, here);
+      else if (key === "icon" && isString(value)) add("icons", value, here);
+      else if (key === "image" && isString(value) && path[0] === "trains") {
+        add("trains", value, here);
+      } else if (key === "icons" && isObject(value)) {
+        for (const [num, id] of Object.entries(value)) {
+          if (isString(id)) add("icons", id, [...here, num]);
+        }
+      } else if (key === "icons" || key === "terrain") {
+        types(value, here);
+      }
+      visit(value, here);
+    }
+  };
+  visit(data, []);
+  return found;
+};
+
+// A warning for each custom image the game names that it does not have
+export const assetIssues = (data, assets) =>
+  customReferences(data)
+    .filter(
+      ({ kind, id }) => !Object.hasOwn(assets?.[kind] ?? {}, customName(id)),
+    )
+    .map(({ kind, id, pointer }) =>
+      issue("missing-asset", pointer, { id, kind }, WARNING),
+    );
+
 // Every problem of a game: schema errors first, then removed and deprecated
-// fields
-export const validateGame = async (game) => {
+// fields. `assets` (the custom images of the game, see util/assets) is
+// optional: without it the custom images are not checked.
+export const validateGame = async (game, assets) => {
   const { compiled: validator, config, deprecated } = await schema();
   // meta is added by the app, the schema does not allow it
   const data = omit(["meta"], game);
@@ -414,5 +481,6 @@ export const validateGame = async (game) => {
     ...configErrors(config, data.config),
     ...removed,
     ...deprecatedIssues(deprecated, data),
+    ...(assets === undefined ? [] : assetIssues(data, assets)),
   ];
 };

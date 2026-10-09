@@ -43,6 +43,7 @@ describe("root state contract", () => {
           "items": [],
           "seq": 0,
         },
+        "assets": {},
         "config": {},
         "errors": {},
         "gameHistory": [],
@@ -90,6 +91,7 @@ describe("root state contract", () => {
           "items": [],
           "seq": 1,
         },
+        "assets": {},
         "config": {
           "paper": {
             "width": 595,

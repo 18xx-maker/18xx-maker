@@ -14,6 +14,7 @@ describe("edit panel sections", () => {
       "tokens",
       "trains",
       "tiles",
+      "images",
       "map",
       "hex",
       "market",

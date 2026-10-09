@@ -357,6 +357,26 @@ make clean/render
 The other make goals are all for [Docker
 development](https://github.com/18xx-maker/18xx-maker/blob/main/docker/README.md)
 
+### Dropping files onto the app
+
+`#dropzone` in `src/components/Root.jsx` is the one drop target of the app.
+`captureFiles` (`src/util/dropImages.js`) reads every dropped file before any
+await, and `isGameDrop` routes the drop: exactly one `.json` file is a game or
+a config file (as before), anything else is images.
+
+Images go to the game on screen (`state.loadedGame`), when
+`canAddAssets(type)` (`src/util/canSaveGame.js`) allows it: `electron` through
+`window.api.addAsset` (the folder next to the game file), `internal` and
+`system` through `addGameAsset` (IndexedDB). With no game, a bundled game or in
+render mode nothing is stored and an error alert is shown. An SVG opens
+`DropImageDialog` (icon or logo, name, replace or rename on a clash), a PNG is
+a train image with no dialog. `addDroppedImages` stores the files one at a time
+and builds one alert for the whole drop. `DropOverlay` is the dashed border
+shown while files are dragged over the window.
+
+Tests: `tests/chrome/drop-images.test.jsx` (component project) and
+`src/util/dropImages.test.jsx` (component); the web case in `e2e/drop-images.spec.js`.
+
 ## End To End Tests
 
 `e2e/*.spec.js` are [Playwright](https://playwright.dev) specs that drive the

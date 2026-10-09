@@ -94,6 +94,10 @@
         "tab": "Züge",
         "description": "Bearbeite die Züge des Spiels, je eine Karte pro Zug."
       },
+      "images": {
+        "tab": "Bilder",
+        "description": "Deine eigenen Icons, Logos und Zugbilder. Im Spiel verwendest du eines als custom/<name>."
+      },
       "tiles": {
         "tab": "Plättchen",
         "description": "Füge die Plättchen des Spiels hinzu, kopiere, benenne und entferne sie und bearbeite das gewählte. Ein Plättchen der Bibliothek wird unverändert gezeichnet, bis du es anpasst."
@@ -586,6 +590,7 @@
     "enum": "{{value}} ist hier nicht erlaubt. Verwende eines von: {{values}}.",
     "required": "Das Pflichtfeld \"{{field}}\" fehlt.",
     "generic": "{{message}}",
+    "missing-asset": "Das Spiel hat kein {{kind}}-Bild {{id}}. Füge es im Tab Bilder hinzu oder lege die Datei in den Ordner .assets des Spiels.",
     "failed": "Die Spieldatei konnte nicht geprüft werden.",
     "deprecated-generic": "Dieses Feld ist veraltet.",
     "deprecations": {
@@ -599,6 +604,62 @@
       "phases_events_remove_tokens": "Funktioniert weiterhin. Benenne „remove_tokens“ in „removeTokens“ um.",
       "number_cards": "Funktioniert weiterhin. Benenne „number_cards“ in „numberCards“ um.",
       "trains_quantity_label": "Funktioniert weiterhin. Benenne „quantity_label“ in „quantityLabel“ um."
+    }
+  },
+  "assets": {
+    "kinds": {
+      "icons": "Icons",
+      "logos": "Logos",
+      "trains": "Zugbilder"
+    },
+    "none": "Noch keine.",
+    "add": "Bilder hinzufügen",
+    "svgAs": "SVG-Dateien hinzufügen als",
+    "limits": "SVG-Dateien werden zu Icons oder Logos, PNG-Dateien zu Zugbildern. Bis zu {{files}} Bilder, {{svg}} für ein SVG und {{png}} für ein PNG.",
+    "used_one": "{{count}} Mal im Spiel verwendet",
+    "used_other": "{{count}} Mal im Spiel verwendet",
+    "rename": "{{id}} umbenennen",
+    "renameButton": "Umbenennen",
+    "save": "Speichern",
+    "delete": "{{id}} löschen",
+    "deleteButton": "Löschen",
+    "deleteAnyway": "Trotzdem löschen",
+    "added": "Bilder hinzugefügt",
+    "notAdded": "Einige Bilder wurden nicht hinzugefügt",
+    "failed": "{{name}} wurde nicht geändert",
+    "copyFailed": "Die Bilder konnten nicht kopiert werden",
+    "folderNote": "Die Bilder dieses Spiels sind die Dateien im Ordner .assets neben der Spieldatei, in dessen Ordnern icons, logos und trains.",
+    "readOnlyNote": "Ein mitgeliefertes Spiel kann keine Bilder aufnehmen. Speichere eine Kopie des Spiels, um eigene hinzuzufügen.",
+    "errors": {
+      "kind": "Das ist keine Bildart.",
+      "empty": "Der Name ist leer.",
+      "long": "Der Name ist länger als 64 Zeichen.",
+      "invalid": "Verwende Buchstaben, Ziffern, Punkte, Bindestriche und Unterstriche, beginnend mit einem Buchstaben oder einer Ziffer.",
+      "reserved": "Dieser Name ist unter Windows reserviert.",
+      "size": "Die Datei ist zu groß.",
+      "png": "Das ist kein brauchbares PNG.",
+      "signature": "Das ist keine PNG-Datei.",
+      "header": "Das ist kein brauchbares PNG.",
+      "dimensions": "Das PNG ist größer als 4096 mal 4096 Pixel.",
+      "svg": "Das ist keine brauchbare SVG-Datei.",
+      "type": "Es können nur SVG- und PNG-Dateien hinzugefügt werden.",
+      "exists": "Ein Bild mit diesem Namen existiert.",
+      "missing": "Das Bild existiert nicht.",
+      "count": "Das Spiel hat so viele Bilder, wie es haben kann.",
+      "total": "Die Bilder des Spiels sind zusammen zu groß.",
+      "quota": "Der Browser hat keinen Platz mehr für Bilder.",
+      "unreadable": "Die Datei konnte nicht gelesen werden.",
+      "notfound": "Das Spiel wurde nicht gefunden.",
+      "readonly": "In den Ordner des Spiels kann nicht geschrieben werden.",
+      "directory": "Ordner können nicht abgelegt werden.",
+      "json": "Eine Spieldatei muss einzeln abgelegt werden."
+    },
+    "tooMany": "Von einem Ablegen werden nur die ersten {{max}} Dateien verwendet, {{count}} weitere wurden übersprungen.",
+    "addedSome": "Einige Bilder wurden hinzugefügt",
+    "addedAs": {
+      "icons": "Symbol {{id}}",
+      "logos": "Logo {{id}}",
+      "trains": "Zugbild {{id}}"
     }
   },
   "prototype": {
@@ -804,6 +865,10 @@
       "logos": {
         "title": "Logos",
         "description": "Logos der Eisenbahngesellschaften"
+      },
+      "images": {
+        "title": "Eigene Bilder",
+        "description": "Eigene Symbole, Logos und Zugbilder hinzufügen"
       },
       "overrides": {
         "title": "Gesellschaften austauschen",
@@ -1810,5 +1875,23 @@
         "unfoldAll": "Alles ausklappen"
       }
     }
+  },
+  "drop": {
+    "hint": "Lege eine Spieldatei ab, um sie zu öffnen, oder SVG- und PNG-Bilder, um sie dem Spiel hinzuzufügen",
+    "noGame": "Öffne oder erstelle zuerst ein Spiel und lege die Bilder dann darauf ab.",
+    "bundled": "Mitgelieferte Spiele können keine Bilder aufnehmen. Speichere zuerst eine Kopie des Spiels und lege die Bilder dann darauf ab.",
+    "title": "Bild hinzufügen",
+    "preview": "Vorschau von {{file}}",
+    "progress": "{{index}} von {{total}}",
+    "kind": "Diese SVG ist ein",
+    "icons": "Symbol",
+    "logos": "Logo",
+    "name": "Name",
+    "exists": "{{id}} gibt es bereits als {{kind}}.",
+    "add": "Hinzufügen",
+    "skip": "Überspringen",
+    "cancelAll": "Alle abbrechen",
+    "rename": "Umbenennen",
+    "replace": "Ersetzen"
   }
 }

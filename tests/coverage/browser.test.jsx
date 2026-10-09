@@ -169,7 +169,7 @@ describe("dropping a game file", () => {
     opfs.saveGameFile.mockRejectedValue(new Error("Not a game"));
     const { store } = renderApp("/");
 
-    drop({ files: [new File(["x"], "x.txt")] });
+    drop({ files: [new File(["x"], "x.json")] });
 
     await waitFor(() =>
       expect(selectLatestAlert(store.getState())).toMatchObject({

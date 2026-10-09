@@ -6,9 +6,9 @@ import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
 
 import CityRotateContext from "@/context/CityRotateContext";
 import ColorContext from "@/context/ColorContext";
-import { icons as iconComponents } from "@/data";
-import { useConfig, useGame } from "@/hooks";
+import { useAssets, useConfig, useGame } from "@/hooks";
 import { multiDefaultTo } from "@/util";
+import { resolveAsset } from "@/util/assets";
 
 const cityPaths = {
   cityPath: "M 0 30 A 30 30 0 0 1 0 -30 A 30 30 0 0 1 0 30",
@@ -50,6 +50,7 @@ const City = ({
   strokeWidth,
 }) => {
   const game = useGame();
+  const assets = useAssets();
   const { config } = useConfig();
   const straightCityNames = config.straightCityNames;
   const tileCompanies = config.tileCompanies;
@@ -65,8 +66,8 @@ const City = ({
   let sqrt5 = Math.sqrt(5);
 
   let icon = (num) => {
-    if (icons && icons[num]) {
-      let Component = iconComponents[icons[num]];
+    const Component = icons && resolveAsset("icons", icons[num], assets);
+    if (Component) {
       return (
         <CityRotateContext.Provider value={rotation}>
           <g transform="scale(1.4)">

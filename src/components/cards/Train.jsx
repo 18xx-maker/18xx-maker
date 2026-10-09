@@ -3,8 +3,8 @@ import { defaultTo, find, is, map } from "ramda";
 import Color from "@/components/Color";
 import Currency from "@/components/Currency";
 
-import { trainImages } from "@/data";
-import { useConfig } from "@/hooks";
+import { useAssets, useConfig } from "@/hooks";
+import { resolveAsset } from "@/util/assets";
 
 const ordinal = (num) => {
   switch (num) {
@@ -21,6 +21,7 @@ const ordinal = (num) => {
 
 const Train = ({ train, trains, bare }) => {
   const { config } = useConfig();
+  const assets = useAssets();
 
   let {
     name,
@@ -262,7 +263,7 @@ const Train = ({ train, trains, bare }) => {
                         paddingTop: `${imagePaddingTop}`,
                         width: `${imageWidth}`,
                       }}
-                      src={trainImages[image]}
+                      src={resolveAsset("trains", image, assets)}
                     />
                   </div>
                 )}

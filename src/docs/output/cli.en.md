@@ -76,6 +76,13 @@ game file, so to go against it give the flag another value, for example
 `--all` (every bundled game) and `--debug` (serve the site on port 9000 and
 wait, to look at the pages).
 
+Custom images used in a game as `custom/<name>` are read from the folder
+`<game>.assets` next to the game file. `--assets <folder>` reads them from
+another folder (it must exist, and it is for one game, so not with `--all`) and
+`--no-assets` uses none. The folder has the folders `icons`, `logos` and
+`trains`; files that break the rules (name, type, size, more than 200 files or
+10 MB) are skipped with a warning. See [Custom Images](/docs/games/images).
+
 Exports ignore the print scale of a config: they always have the real size.
 The `config` of a game file only applies when `allowGameConfig` is set in the
 `--config` file or in `src/config.json`.

@@ -65,6 +65,19 @@ describe("alert region", () => {
     expect(toast("error text")).toHaveAttribute("aria-live", "assertive");
   });
 
+  it("shows every line of a multi-line message", () => {
+    const { store } = renderApp("/");
+    const lines = Array.from({ length: 8 }, (_, i) => `line ${i + 1}`);
+    send(store, createAlert("Images", lines.join("\n"), "warning"));
+    const message = within(toast("line 8")).getByText(/line 1/);
+    expect(message).not.toHaveClass("line-clamp-4");
+
+    send(store, createAlert("One", "a single line", "info"));
+    expect(within(toast("a single line")).getByText(/single/)).toHaveClass(
+      "line-clamp-4",
+    );
+  });
+
   it("shows the type, title and message", () => {
     const { store } = renderApp("/");
     send(store, createAlert("Game Loaded", "It worked", "success"));

@@ -349,6 +349,7 @@
           "type": "string"
         },
         "image": {
+          "description": "schema.game.train.image",
           "type": "string"
         },
         "phase": {

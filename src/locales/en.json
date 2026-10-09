@@ -94,6 +94,10 @@
         "tab": "Trains",
         "description": "Edit the trains of the game, one card for each."
       },
+      "images": {
+        "tab": "Images",
+        "description": "Your own icons, logos and train images. Use one in the game as custom/<name>."
+      },
       "tiles": {
         "tab": "Tiles",
         "description": "Add, copy, rename and remove the tiles of the game, and edit the one you pick. A tile of the library is drawn as it is until you customize it."
@@ -586,6 +590,7 @@
     "enum": "{{value}} is not allowed here. Use one of: {{values}}.",
     "required": "Missing the required field \"{{field}}\".",
     "generic": "{{message}}",
+    "missing-asset": "The game has no {{kind}} image {{id}}. Add it in the Images tab, or put the file in the .assets folder of the game.",
     "failed": "The game file could not be checked.",
     "deprecated-generic": "This field is deprecated.",
     "deprecations": {
@@ -599,6 +604,62 @@
       "phases_events_remove_tokens": "Still works. Rename \"remove_tokens\" to \"removeTokens\".",
       "number_cards": "Still works. Rename \"number_cards\" to \"numberCards\".",
       "trains_quantity_label": "Still works. Rename \"quantity_label\" to \"quantityLabel\"."
+    }
+  },
+  "assets": {
+    "kinds": {
+      "icons": "Icons",
+      "logos": "Logos",
+      "trains": "Train images"
+    },
+    "none": "None yet.",
+    "add": "Add images",
+    "svgAs": "Add SVG files as",
+    "limits": "SVG files become icons or logos, PNG files become train images. Up to {{files}} images, {{svg}} for an SVG and {{png}} for a PNG.",
+    "used_one": "Used {{count}} time in the game",
+    "used_other": "Used {{count}} times in the game",
+    "rename": "Rename {{id}}",
+    "renameButton": "Rename",
+    "save": "Save",
+    "delete": "Delete {{id}}",
+    "deleteButton": "Delete",
+    "deleteAnyway": "Delete anyway",
+    "added": "Images added",
+    "notAdded": "Some images were not added",
+    "failed": "{{name}} was not changed",
+    "copyFailed": "The images could not be copied",
+    "folderNote": "The images of this game are the files in the .assets folder next to the game file, in its folders icons, logos and trains.",
+    "readOnlyNote": "A bundled game cannot take images. Save a copy of the game to add your own.",
+    "errors": {
+      "kind": "This is not a kind of image.",
+      "empty": "The name is empty.",
+      "long": "The name is longer than 64 characters.",
+      "invalid": "Use letters, digits, dots, dashes and underscores, starting with a letter or digit.",
+      "reserved": "This name is reserved on Windows.",
+      "size": "The file is too large.",
+      "png": "This is not a usable PNG.",
+      "signature": "This is not a PNG file.",
+      "header": "This is not a usable PNG.",
+      "dimensions": "The PNG is larger than 4096 by 4096 pixels.",
+      "svg": "This is not a usable SVG file.",
+      "type": "Only SVG and PNG files can be added.",
+      "exists": "An image with this name exists.",
+      "missing": "The image does not exist.",
+      "count": "The game has as many images as it can have.",
+      "total": "The images of the game are too large together.",
+      "quota": "The browser has no more room to store images.",
+      "unreadable": "The file could not be read.",
+      "notfound": "The game was not found.",
+      "readonly": "The folder of the game cannot be written.",
+      "directory": "Folders cannot be dropped.",
+      "json": "A game file has to be dropped on its own."
+    },
+    "tooMany": "Only the first {{max}} files of a drop are used, {{count}} more were skipped.",
+    "addedSome": "Some images were added",
+    "addedAs": {
+      "icons": "Icon {{id}}",
+      "logos": "Logo {{id}}",
+      "trains": "Train image {{id}}"
     }
   },
   "prototype": {
@@ -804,6 +865,10 @@
       "logos": {
         "title": "Logos",
         "description": "Train company logos"
+      },
+      "images": {
+        "title": "Custom Images",
+        "description": "Add your own icons, logos and train images"
       },
       "overrides": {
         "title": "Company Overrides",
@@ -1810,5 +1875,23 @@
         "unfoldAll": "Unfold all"
       }
     }
+  },
+  "drop": {
+    "hint": "Drop a game file to open it, or SVG and PNG images to add them to the game",
+    "noGame": "Open or create a game first, then drop images onto it.",
+    "bundled": "Bundled games cannot take images. Save a copy of the game first, then drop the images onto it.",
+    "title": "Add image",
+    "preview": "Preview of {{file}}",
+    "progress": "{{index}} of {{total}}",
+    "kind": "This SVG is a",
+    "icons": "Icon",
+    "logos": "Logo",
+    "name": "Name",
+    "exists": "{{id}} exists already as a {{kind}}.",
+    "add": "Add",
+    "skip": "Skip",
+    "cancelAll": "Cancel all",
+    "rename": "Rename",
+    "replace": "Replace"
   }
 }

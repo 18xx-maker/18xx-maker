@@ -10,15 +10,27 @@ import {
 } from "@/components/schemaForm/SchemaField";
 
 import { icons, logos, publishers } from "@/data";
+import { useAssets } from "@/hooks";
+import { customIds } from "@/util/assets";
 
 export const ASSETS = { icon: icons, logo: logos, publisher: publishers };
+
+const KINDS = { icon: "icons", logo: "logos" };
 
 // The name of an icon, a logo or a publisher: the ones of the app as suggestions, any other
 // name stays as typed (a game can bring its own), with a hint
 const AssetPicker = ({ keys, schema, asset }) => {
   const { t } = useTranslation();
   const field = useField(keys, schema);
-  const names = useMemo(() => Object.keys(ASSETS[asset]).sort(), [asset]);
+  const assets = useAssets();
+  // The custom images of the game come first
+  const names = useMemo(
+    () => [
+      ...(KINDS[asset] ? customIds(KINDS[asset], assets) : []),
+      ...Object.keys(ASSETS[asset]).sort(),
+    ],
+    [asset, assets],
+  );
   const options = useMemo(
     () =>
       names.map((value) => ({

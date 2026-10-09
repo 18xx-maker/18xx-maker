@@ -78,6 +78,14 @@ Konfigurationsdatei, siehe [Konfigurationsfenster](/docs/config)),
 (jedes mitgelieferte Spiel) und `--debug` (die Seite auf Port 9000
 ausliefern und warten, um sich die Seiten anzusehen).
 
+Eigene Bilder, die in einem Spiel als `custom/<name>` verwendet werden, werden
+aus dem Ordner `<game>.assets` neben der Spieldatei gelesen. `--assets <ordner>`
+liest sie aus einem anderen Ordner (er muss existieren und gilt für ein Spiel,
+also nicht mit `--all`), `--no-assets` verwendet keine. Der Ordner enthält die
+Ordner `icons`, `logos` und `trains`; Dateien, die gegen die Regeln verstoßen
+(Name, Typ, Größe, mehr als 200 Dateien oder 10 MB), werden mit einer Warnung
+übersprungen. Siehe [Eigene Bilder](/docs/games/images).
+
 Exporte ignorieren die Druckskalierung einer Konfiguration: Sie haben immer die
 Originalgröße.
 Die `config` einer Spieldatei wird nur angewendet, wenn `allowGameConfig` in der

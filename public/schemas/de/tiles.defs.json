@@ -2015,13 +2015,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
+          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird. \"custom/<name>\" ist ein Logo des Spiels (die Datei <game>.assets/logos/<name>.svg oder eines, das im Editor hinzugefügt wurde)."
         },
         "logoWidth": { "type": "number", "description": "Breite des Logos." },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "Name eines Icons, das auf den Token gezeichnet wird."
+          "description": "Name eines Icons, das auf den Token gezeichnet wird. \"custom/<name>\" ist ein Icon des Spiels (die Datei <game>.assets/icons/<name>.svg oder eines, das im Editor hinzugefügt wurde)."
         },
         "iconWidth": { "type": "number", "description": "Breite des Icons." },
         "iconColor": {
@@ -2272,13 +2272,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
+          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird. \"custom/<name>\" ist ein Logo des Spiels (die Datei <game>.assets/logos/<name>.svg oder eines, das im Editor hinzugefügt wurde)."
         },
         "logoWidth": { "type": "number", "description": "Breite des Logos." },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "Name eines Icons, das auf den Token gezeichnet wird."
+          "description": "Name eines Icons, das auf den Token gezeichnet wird. \"custom/<name>\" ist ein Icon des Spiels (die Datei <game>.assets/icons/<name>.svg oder eines, das im Editor hinzugefügt wurde)."
         },
         "iconWidth": { "type": "number", "description": "Breite des Icons." },
         "iconColor": {
@@ -2541,13 +2541,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
+          "description": "Name eines svg-Logos, das auf den Token gezeichnet wird. \"custom/<name>\" ist ein Logo des Spiels (die Datei <game>.assets/logos/<name>.svg oder eines, das im Editor hinzugefügt wurde)."
         },
         "logoWidth": { "type": "number", "description": "Breite des Logos." },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "Name eines Icons, das auf den Token gezeichnet wird."
+          "description": "Name eines Icons, das auf den Token gezeichnet wird. \"custom/<name>\" ist ein Icon des Spiels (die Datei <game>.assets/icons/<name>.svg oder eines, das im Editor hinzugefügt wurde)."
         },
         "iconWidth": { "type": "number", "description": "Breite des Icons." },
         "iconColor": {

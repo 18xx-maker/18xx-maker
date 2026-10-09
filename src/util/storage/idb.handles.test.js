@@ -1,5 +1,6 @@
 import "@tests/support/windowStub.js";
 
+import { openDB } from "@/util/storage/db";
 import {
   createGameFile,
   deleteGame,
@@ -17,6 +18,7 @@ import { isUUID } from "#util/uuid";
 // real one
 const createIndexedDB = () => {
   const databases = {};
+  const connections = { closed: 0 };
 
   const request = (getResult) => {
     const req = {};
@@ -59,6 +61,9 @@ const createIndexedDB = () => {
   });
 
   const connection = (db) => ({
+    close: vi.fn(() => {
+      connections.closed += 1;
+    }),
     createObjectStore: (name, { keyPath }) => {
       db.stores[name] = { keyPath, records: new Map() };
     },
@@ -70,10 +75,16 @@ const createIndexedDB = () => {
 
   return {
     databases,
+    connections,
+    blocked: false,
     error: null,
     open(name, version) {
       const req = {};
       setTimeout(() => {
+        if (this.blocked) {
+          req.onblocked();
+          return;
+        }
         if (this.error) {
           req.error = this.error;
           req.onerror();
@@ -116,6 +127,23 @@ afterEach(() => {
 });
 
 describe("system games in IndexedDB", () => {
+  it("closes its connection when an operation is done", async () => {
+    await loadSummaries();
+    expect(idb.connections.closed).toBe(1);
+  });
+
+  it("gives up when another tab holds the database", async () => {
+    idb.blocked = true;
+    await expect(loadSummaries()).rejects.toThrow(/another tab/);
+  });
+
+  it("closes a connection when another tab upgrades the database", async () => {
+    const db = await openDB();
+    expect(idb.connections.closed).toBe(0);
+    db.onversionchange();
+    expect(idb.connections.closed).toBe(1);
+  });
+
   it("saves a file handle and lists its summary without the handle", async () => {
     const handle = fileHandle(game);
     const slug = await saveGameHandle(handle);

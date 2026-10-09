@@ -1,5 +1,6 @@
 import ConfigSection from "@/components/editPanel/ConfigSection";
 import HexSection from "@/components/editPanel/HexSection";
+import ImagesSection from "@/components/editPanel/ImagesSection";
 import JsonSection from "@/components/editPanel/JsonSection";
 import ProblemsSection from "@/components/editPanel/ProblemsSection";
 import TilesSection from "@/components/editPanel/TilesSection";
@@ -38,6 +39,7 @@ export const editSections = [
   { section: "tokens", group: "equipment", Form: TokensForm },
   { section: "trains", group: "equipment", Form: TrainsForm },
   { section: "tiles", group: "equipment", Form: TilesSection, page: "tiles" },
+  { section: "images", group: "equipment", Form: ImagesSection },
   { section: "map", group: "output", Form: MapForm, page: "map" },
   { section: "hex", group: "output", Form: HexSection, page: "map" },
   { section: "market", group: "output", Form: MarketForm },

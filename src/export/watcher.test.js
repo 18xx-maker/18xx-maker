@@ -1,3 +1,5 @@
+import path from "node:path";
+
 import { createWatcher } from "../../electron/main/watcher.js";
 
 const setup = ({ exists = true, load } = {}) => {
@@ -119,5 +121,123 @@ describe("createWatcher", () => {
     stopWatching("abc");
     await settle();
     expect(deps.log).toHaveBeenCalledWith(expect.any(Error));
+  });
+
+  describe("the images folder", () => {
+    const withAssets = (extra = {}) => {
+      const loadAssets = vi.fn(async (id) => ({ icons: { [id]: "<svg/>" } }));
+      const onAssets = vi.fn();
+      const result = setup();
+      // setup() builds the watcher from its own deps, so build another one
+      const watchers = [];
+      const chokidar = {
+        watch: vi.fn((file, options) => {
+          const handlers = {};
+          const w = {
+            file,
+            options,
+            handlers,
+            on: (event, fn) => (handlers[event] = fn),
+            close: vi.fn(async () => {}),
+          };
+          watchers.push(w);
+          return w;
+        }),
+      };
+      const deps = {
+        ...result.deps,
+        chokidar,
+        loadAssets,
+        onAssets,
+        debounce: 5,
+        ...extra,
+      };
+      return { ...createWatcher(deps), watchers, deps, loadAssets, onAssets };
+    };
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    it("watches the folder of the game file, not following links", () => {
+      const { watch, watchers } = withAssets();
+      watch("abc");
+      expect(watchers.map((w) => w.file)).toEqual([
+        "/g.json",
+        path.resolve("/"),
+      ]);
+      expect(watchers[1].options).toMatchObject({
+        followSymlinks: false,
+        ignoreInitial: true,
+        depth: 3,
+      });
+    });
+
+    it("only looks at the images folder in it", () => {
+      const { watch, watchers } = withAssets();
+      watch("abc");
+      const { ignored } = watchers[1].options;
+      const sep = path.sep;
+      expect(ignored(path.resolve("/"))).toBe(false);
+      expect(ignored(`${sep}g.assets`)).toBe(false);
+      expect(ignored(`${sep}g.assets${sep}icons${sep}a.svg`)).toBe(false);
+      expect(ignored(`${sep}g.json`)).toBe(true);
+      expect(ignored(`${sep}other.assets`)).toBe(true);
+      expect(ignored(`${sep}g.assets${sep}icons${sep}.tmp`)).toBe(true);
+      expect(ignored(`${sep}g.assets-more${sep}a`)).toBe(true);
+    });
+
+    it("sends the images once after a burst of changes", async () => {
+      const { watch, watchers, loadAssets, onAssets } = withAssets();
+      watch("abc");
+      const on = watchers[1].handlers.all;
+      on("add", "/g.assets/icons/a.svg");
+      on("change", "/g.assets/icons/a.svg");
+      on("add", "/g.assets/icons/b.svg");
+      expect(loadAssets).not.toHaveBeenCalled();
+      await wait(40);
+      expect(loadAssets).toHaveBeenCalledTimes(1);
+      expect(onAssets).toHaveBeenCalledTimes(1);
+      expect(onAssets).toHaveBeenCalledWith("abc", {
+        icons: { abc: "<svg/>" },
+      });
+    });
+
+    it("ignores a change outside the images folder", async () => {
+      const { watch, watchers, loadAssets } = withAssets();
+      watch("abc");
+      watchers[1].handlers.all("change", "/other.txt");
+      await wait(30);
+      expect(loadAssets).not.toHaveBeenCalled();
+    });
+
+    it("sends nothing for a game that is not watched any more", async () => {
+      const { watch, watchers, onAssets } = withAssets();
+      watch("abc");
+      watchers[1].handlers.all("add", "/g.assets/icons/a.svg");
+      watch("def");
+      await wait(40);
+      expect(onAssets).not.toHaveBeenCalled();
+      expect(watchers[1].close).toHaveBeenCalled();
+    });
+
+    it("closes with the file watcher and logs what fails", async () => {
+      const { watch, stopWatching, watchers, deps, loadAssets } = withAssets();
+      loadAssets.mockRejectedValue(new Error("EIO"));
+      watch("abc");
+      watchers[1].handlers.error(new Error("watch"));
+      watchers[1].handlers.all("add", "/g.assets/icons/a.svg");
+      await wait(40);
+      expect(deps.log).toHaveBeenCalledWith(
+        expect.objectContaining({ message: "EIO" }),
+      );
+      stopWatching("abc");
+      await wait(5);
+      expect(watchers[0].close).toHaveBeenCalled();
+      expect(watchers[1].close).toHaveBeenCalled();
+    });
+
+    it("does not watch the folder without loadAssets", () => {
+      const { watch, watchers } = setup();
+      watch("abc");
+      expect(watchers).toHaveLength(1);
+    });
   });
 });

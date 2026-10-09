@@ -94,7 +94,13 @@ describe("the saveGame handler", () => {
 });
 
 describe("the saveGameAs handler", () => {
-  const setup = ({ isMain = true, dialog = {}, known, existing = [] } = {}) => {
+  const setup = ({
+    isMain = true,
+    dialog = {},
+    known,
+    existing = [],
+    writeAssets = vi.fn(),
+  } = {}) => {
     const files = {};
     const calls = [];
     const fs = {
@@ -120,9 +126,18 @@ describe("the saveGameAs handler", () => {
       showSaveDialog,
       saveGamePath,
       slugOfPath: (path) => (path === known?.path ? known.slug : undefined),
+      writeAssets,
       fs,
     });
-    return { files, calls, fs, saveGamePath, showSaveDialog, handler };
+    return {
+      files,
+      calls,
+      fs,
+      saveGamePath,
+      showSaveDialog,
+      handler,
+      writeAssets,
+    };
   };
   const call = (handler, ...args) =>
     handler({}, "my game", "{}", "Save as", "Game", ...args);
@@ -226,5 +241,53 @@ describe("the saveGameAs handler", () => {
     expect(showSaveDialog.mock.calls[0][0].defaultPath).toBe(
       `${"x".repeat(100)}.json`,
     );
+  });
+
+  describe("the images of the game", () => {
+    const assets = { icons: { star: "<svg/>" }, logos: {}, trains: {} };
+
+    it("writes them next to the new file, before registering it", async () => {
+      const { calls, writeAssets, handler } = setup();
+      writeAssets.mockImplementation(() => calls.push("assets"));
+
+      await handler({}, "g", "{}", "t", "f", assets);
+
+      expect(writeAssets).toHaveBeenCalledWith("/games/my-game.json", assets);
+      expect(calls).toEqual(["write", "assets", "saveGamePath"]);
+    });
+
+    it("writes none when the page sends none", async () => {
+      const { writeAssets, handler } = setup();
+      await handler({}, "g", "{}", "t", "f");
+      expect(writeAssets).not.toHaveBeenCalled();
+    });
+
+    it("refuses images that are not an asset map, before asking where", async () => {
+      const { showSaveDialog, writeAssets, handler } = setup();
+      for (const bad of [
+        null,
+        "x",
+        { icons: { "../a": "<svg/>" } },
+        { sounds: {} },
+      ]) {
+        await expect(handler({}, "g", "{}", "t", "f", bad)).rejects.toThrow(
+          "Invalid",
+        );
+      }
+      expect(showSaveDialog).not.toHaveBeenCalled();
+      expect(writeAssets).not.toHaveBeenCalled();
+    });
+
+    it("says the game was saved when its images were not", async () => {
+      const { saveGamePath, handler } = setup({
+        writeAssets: () => {
+          throw new Error("asset:denied");
+        },
+      });
+      await expect(handler({}, "g", "{}", "t", "f", assets)).rejects.toThrow(
+        "Saved /games/my-game.json but not its images",
+      );
+      expect(saveGamePath).not.toHaveBeenCalled();
+    });
   });
 });

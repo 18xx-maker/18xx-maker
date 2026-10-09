@@ -76,6 +76,9 @@ test("only loads the form when the Hex tab shows it", async ({ page }) => {
 });
 
 test("drags an element and undoes the drag", async ({ page }) => {
+  // Tall enough that the edit panel's chips do not push the hex under the
+  // alert of the loaded game
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/games/18Test/map?edit=true&editSection=hex&hex=B12");
   await expect(page.getByTestId("hex-editor")).toBeVisible();
   const city = page

@@ -349,6 +349,7 @@
           "type": "string"
         },
         "image": {
+          "description": "Name des Zugbildes. \"custom/<name>\" ist ein Bild des Spiels (die Datei <game>.assets/trains/<name>.png oder eines, das im Editor hinzugefügt wurde).",
           "type": "string"
         },
         "phase": {
@@ -1659,7 +1660,7 @@
             "type": "string"
           },
           "logo": {
-            "description": "Das Logo der Gesellschaft.",
+            "description": "Das Logo der Gesellschaft. \"custom/<name>\" ist ein Logo des Spiels (die Datei <game>.assets/logos/<name>.svg).",
             "type": "string",
             "x-widget": "logo"
           },
