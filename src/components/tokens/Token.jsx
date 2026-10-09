@@ -6,7 +6,8 @@ import Color from "@/components/Color";
 
 import CityRotateContext from "@/context/CityRotateContext";
 import RotateContext from "@/context/RotateContext";
-import { icons, logos } from "@/data";
+import { useAssets } from "@/hooks";
+import { isCustomId, resolveAsset } from "@/util/assets";
 
 const Token = ({
   logo, // The SVG logo to display on this token.
@@ -88,6 +89,8 @@ const Token = ({
   tokenShape, // main token shape - square or anything else is circle
 }) => {
   const clipId = useId();
+  const assets = useAssets();
+  const LogoComponent = logo ? resolveAsset("logos", logo, assets) : undefined;
 
   // Shapes that move the label from where it would be (labelY replaces it)
   let labelShift = 0;
@@ -141,7 +144,7 @@ const Token = ({
         let tokenFill;
         if (inverse) {
           tokenFill = c("white");
-        } else if (logo && logos[logo]) {
+        } else if (LogoComponent) {
           tokenFill = c(iconColor) || p("white");
         } else {
           tokenFill = c(color) || p("white");
@@ -149,7 +152,7 @@ const Token = ({
 
         // Second line of text. Logo tokens draw no text, so it is skipped.
         const text2 =
-          label2 != null && label2 !== "" && !(logo && logos[logo])
+          label2 != null && label2 !== "" && !LogoComponent
             ? String(label2)
             : null;
         const above = label2Position === "above";
@@ -245,13 +248,13 @@ const Token = ({
           );
         }
 
-        if (inverse && logo && logos[logo]) {
+        if (inverse && LogoComponent) {
           // Draw inversed logos same as reserved
           color = "gray";
-          let Component = logos[logo];
+          let Component = LogoComponent;
           let size = defaultTo(width * 2, logoWidth * scaling);
           let start = (-1 / 2) * size;
-          if (logo.includes("countries")) {
+          if (logo.includes("countries") && !isCustomId(logo)) {
             shapes.push(
               <Component
                 key="logo"
@@ -284,11 +287,11 @@ const Token = ({
             c(inverseLabelColor == null ? color : inverseLabelColor),
           );
           textFill = c(inverseLabelColor == null ? color : inverseLabelColor);
-        } else if (logo && logos[logo]) {
-          let Component = logos[logo];
+        } else if (LogoComponent) {
+          let Component = LogoComponent;
           let size = defaultTo(width * 2, logoWidth * scaling);
           let start = (-1 / 2) * size;
-          if (logo.includes("countries")) {
+          if (logo.includes("countries") && !isCustomId(logo)) {
             shapes.push(
               <Component
                 key="logo"
@@ -871,8 +874,13 @@ const Token = ({
         }
 
         let content = [];
-        if (icon) {
-          let Component = icons[icon];
+        // A custom icon the game does not have is not drawn (a name that no
+        // icon has still fails, as it always did)
+        const IconComponent = icon
+          ? resolveAsset("icons", icon, assets)
+          : undefined;
+        if (icon && (IconComponent || !isCustomId(icon))) {
+          let Component = IconComponent;
 
           let classes = [];
           if (iconColor) {

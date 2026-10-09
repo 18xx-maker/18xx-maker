@@ -597,6 +597,7 @@ describe("edit panel tabs", () => {
       "Tokens",
       "Trains",
       "Tiles",
+      "Images",
     ]);
     expect(names(byName("Look and output"))).toEqual([
       "Map",
@@ -667,6 +668,12 @@ describe("edit panel tabs", () => {
       expect(router.state.location.search).toBe("?edit=true&editSection=tiles"),
     );
     expect(router.state.location.pathname).toMatch(/\/tiles$/);
+    await user.keyboard("]");
+    await waitFor(() =>
+      expect(router.state.location.search).toBe(
+        "?edit=true&editSection=images",
+      ),
+    );
     await user.keyboard("]");
     await waitFor(() =>
       expect(router.state.location.search).toBe("?edit=true&editSection=map"),

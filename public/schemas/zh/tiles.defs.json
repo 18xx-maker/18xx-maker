@@ -2015,13 +2015,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "要绘制在标记上的 svg 标志的名称。"
+          "description": "要绘制在标记上的 svg 标志的名称。\"custom/<name>\" 是游戏自己的标志(文件 <game>.assets/logos/<name>.svg,或在编辑器中添加的标志)。"
         },
         "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "要绘制在标记上的图标的名称。"
+          "description": "要绘制在标记上的图标的名称。\"custom/<name>\" 是游戏自己的图标(文件 <game>.assets/icons/<name>.svg,或在编辑器中添加的图标)。"
         },
         "iconWidth": { "type": "number", "description": "图标的宽度。" },
         "iconColor": { "type": "string", "description": "图标或标志的颜色。" },
@@ -2227,13 +2227,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "要绘制在标记上的 svg 标志的名称。"
+          "description": "要绘制在标记上的 svg 标志的名称。\"custom/<name>\" 是游戏自己的标志(文件 <game>.assets/logos/<name>.svg,或在编辑器中添加的标志)。"
         },
         "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "要绘制在标记上的图标的名称。"
+          "description": "要绘制在标记上的图标的名称。\"custom/<name>\" 是游戏自己的图标(文件 <game>.assets/icons/<name>.svg,或在编辑器中添加的图标)。"
         },
         "iconWidth": { "type": "number", "description": "图标的宽度。" },
         "iconColor": { "type": "string", "description": "图标或标志的颜色。" },
@@ -2451,13 +2451,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "要绘制在标记上的 svg 标志的名称。"
+          "description": "要绘制在标记上的 svg 标志的名称。\"custom/<name>\" 是游戏自己的标志(文件 <game>.assets/logos/<name>.svg,或在编辑器中添加的标志)。"
         },
         "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "要绘制在标记上的图标的名称。"
+          "description": "要绘制在标记上的图标的名称。\"custom/<name>\" 是游戏自己的图标(文件 <game>.assets/icons/<name>.svg,或在编辑器中添加的图标)。"
         },
         "iconWidth": { "type": "number", "description": "图标的宽度。" },
         "iconColor": { "type": "string", "description": "图标或标志的颜色。" },

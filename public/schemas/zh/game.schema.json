@@ -349,6 +349,7 @@
           "type": "string"
         },
         "image": {
+          "description": "列车图片的名称。\"custom/<name>\" 是游戏自己的图片(文件 <game>.assets/trains/<name>.png,或在编辑器中添加的图片)。",
           "type": "string"
         },
         "phase": {
@@ -1659,7 +1660,7 @@
             "type": "string"
           },
           "logo": {
-            "description": "公司的标志。",
+            "description": "公司的标志。\"custom/<name>\" 是游戏自己的标志(文件 <game>.assets/logos/<name>.svg)。",
             "type": "string",
             "x-widget": "logo"
           },

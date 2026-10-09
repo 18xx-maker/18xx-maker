@@ -152,7 +152,8 @@
         "right": "No ability"
       },
       "alias": "Sky Blue Line",
-      "color": "lightBlue"
+      "color": "lightBlue",
+      "logo": "custom/crest"
     },
     {
       "name": "Blue Railroad",
@@ -305,6 +306,7 @@
   "trains": [
     {
       "name": "2",
+      "image": "custom/loco",
       "quantity": 4,
       "price": 80,
       "priceFormat": "#G",
@@ -377,6 +379,7 @@
     },
     {
       "name": "Private with a token",
+      "icon": "custom/star",
       "price": 160,
       "revenue": 15,
       "minPlayers": 3,
@@ -1140,6 +1143,9 @@
   "config": {
     "export": {
       "allLayouts": true
+    },
+    "trains": {
+      "images": true
     },
     "fonts": {
       "families": {

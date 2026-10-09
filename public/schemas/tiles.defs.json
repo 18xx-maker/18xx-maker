@@ -2015,13 +2015,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "Name of an svg logo to draw on the token."
+          "description": "Name of an svg logo to draw on the token. \"custom/<name>\" is a logo of the game (the file <game>.assets/logos/<name>.svg, or one added in the editor)."
         },
         "logoWidth": { "type": "number", "description": "Width of the logo." },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "Name of an icon to draw on the token."
+          "description": "Name of an icon to draw on the token. \"custom/<name>\" is an icon of the game (the file <game>.assets/icons/<name>.svg, or one added in the editor)."
         },
         "iconWidth": { "type": "number", "description": "Width of the icon." },
         "iconColor": {
@@ -2275,13 +2275,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "Name of an svg logo to draw on the token."
+          "description": "Name of an svg logo to draw on the token. \"custom/<name>\" is a logo of the game (the file <game>.assets/logos/<name>.svg, or one added in the editor)."
         },
         "logoWidth": { "type": "number", "description": "Width of the logo." },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "Name of an icon to draw on the token."
+          "description": "Name of an icon to draw on the token. \"custom/<name>\" is an icon of the game (the file <game>.assets/icons/<name>.svg, or one added in the editor)."
         },
         "iconWidth": { "type": "number", "description": "Width of the icon." },
         "iconColor": {
@@ -2547,13 +2547,13 @@
         "logo": {
           "type": "string",
           "x-widget": "logo",
-          "description": "Name of an svg logo to draw on the token."
+          "description": "Name of an svg logo to draw on the token. \"custom/<name>\" is a logo of the game (the file <game>.assets/logos/<name>.svg, or one added in the editor)."
         },
         "logoWidth": { "type": "number", "description": "Width of the logo." },
         "icon": {
           "type": "string",
           "x-widget": "icon",
-          "description": "Name of an icon to draw on the token."
+          "description": "Name of an icon to draw on the token. \"custom/<name>\" is an icon of the game (the file <game>.assets/icons/<name>.svg, or one added in the editor)."
         },
         "iconWidth": { "type": "number", "description": "Width of the icon." },
         "iconColor": {

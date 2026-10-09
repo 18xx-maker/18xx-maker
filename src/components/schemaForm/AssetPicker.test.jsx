@@ -23,9 +23,12 @@ import { initialState, rootReducer } from "@/state";
 
 // The real schema in a form that holds the game in state: the draft is what the
 // options are read from
-const Form = ({ initial, keys, onGame }) => {
+const Form = ({ initial, keys, onGame, state }) => {
   const [store] = useState(() =>
-    configureStore({ reducer: rootReducer, preloadedState: initialState }),
+    configureStore({
+      reducer: rootReducer,
+      preloadedState: { ...initialState, ...state },
+    }),
   );
   const [game, setGame] = useState(initial);
   const latest = useRef(game);
@@ -63,10 +66,15 @@ const Form = ({ initial, keys, onGame }) => {
   );
 };
 
-const setup = (initial, keys) => {
+const setup = (initial, keys, state) => {
   let current;
   const view = render(
-    <Form initial={initial} keys={keys} onGame={(g) => (current = g)} />,
+    <Form
+      initial={initial}
+      keys={keys}
+      state={state}
+      onGame={(g) => (current = g)}
+    />,
   );
   return { ...view, user: userEvent.setup(), game: () => current };
 };
@@ -188,5 +196,57 @@ describe("a field the schema marks with x-widget", () => {
       screen.queryByRole("combobox", { name: /^Icon$/ }),
     ).not.toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: /^Icon$/ })).toHaveValue("5");
+  });
+});
+
+describe("a game with custom images", () => {
+  const withAssets = {
+    game: { meta: { slug: "system:a" } },
+    assets: {
+      "system:a": {
+        icons: { star: "<svg/>", Alpha: "<svg/>" },
+        logos: { crest: "<svg/>" },
+        trains: {},
+      },
+    },
+  };
+
+  it("lists the custom icons first, and does not call one unknown", async () => {
+    const { user, game } = setup(
+      { privates: [{ name: "P", icon: "custom/star" }] },
+      PRIVATE_ICON,
+      withAssets,
+    );
+    const box = screen.getByRole("combobox", { name: /^Icon$/ });
+    expect(box).toHaveValue("custom/star");
+    expect(screen.queryByText(/The app has no/)).not.toBeInTheDocument();
+
+    await user.clear(box);
+    await user.click(box);
+    expect(optionNames().slice(0, 2)).toEqual(["custom/Alpha", "custom/star"]);
+    expect(optionNames()).toContain("boat");
+    await user.click(screen.getByRole("option", { name: "custom/Alpha" }));
+    expect(game().privates[0].icon).toBe("custom/Alpha");
+  });
+
+  it("lists the custom logos first for a company", async () => {
+    const { user } = setup(
+      { companies: [{ name: "A", abbrev: "A" }] },
+      COMPANY_LOGO,
+      withAssets,
+    );
+    await user.click(screen.getByRole("combobox", { name: /^Logo$/ }));
+    expect(optionNames()[0]).toBe("custom/crest");
+  });
+
+  it("hints at a custom image the game does not have", () => {
+    setup(
+      { privates: [{ name: "P", icon: "custom/gone" }] },
+      PRIVATE_ICON,
+      withAssets,
+    );
+    expect(
+      screen.getByText(/The app has no icon named custom\/gone/),
+    ).toBeVisible();
   });
 });

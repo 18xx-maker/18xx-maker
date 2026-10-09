@@ -4,14 +4,18 @@ import { Inspector, keysOf } from "@/components/hexEditor/inspectors/parts";
 import { ChoiceField } from "@/components/schemaForm/SchemaField";
 
 import { icons } from "@/data";
+import { useAssets } from "@/hooks";
+import { customIds } from "@/util/assets";
 
-const ICON_NAMES = Object.keys(icons).sort();
+const BUILT_IN_NAMES = Object.keys(icons).sort();
 
 // An element drawn from an icon of the library (an icon, a piece of terrain):
 // the icon is picked from the list, a name the library does not have stays
 const IconTypeInspector = ({ primary, ...props }) => {
   const { elementKey, index, element } = props;
   const type = element?.type;
+  const assets = useAssets();
+  const ICON_NAMES = [...customIds("icons", assets), ...BUILT_IN_NAMES];
   const options =
     typeof type === "string" && !ICON_NAMES.includes(type)
       ? [...ICON_NAMES, type]
