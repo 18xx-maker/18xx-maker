@@ -648,7 +648,18 @@
       "count": "游戏的图片数量已达上限。",
       "total": "游戏的图片总大小过大。",
       "quota": "浏览器没有更多空间存储图片。",
-      "unreadable": "无法读取该文件。"
+      "unreadable": "无法读取该文件。",
+      "notfound": "未找到该游戏。",
+      "readonly": "无法写入该游戏的文件夹。",
+      "directory": "不能拖放文件夹。",
+      "json": "游戏文件必须单独拖放。"
+    },
+    "tooMany": "一次拖放只使用前 {{max}} 个文件，另外 {{count}} 个已跳过。",
+    "addedSome": "部分图片已添加",
+    "addedAs": {
+      "icons": "图标 {{id}}",
+      "logos": "标志 {{id}}",
+      "trains": "火车图片 {{id}}"
     }
   },
   "prototype": {
@@ -854,6 +865,10 @@
       "logos": {
         "title": "标志",
         "description": "铁路公司标志"
+      },
+      "images": {
+        "title": "自定义图片",
+        "description": "添加你自己的图标、标志和火车图片"
       },
       "overrides": {
         "title": "公司替换",
@@ -1860,5 +1875,23 @@
         "unfoldAll": "全部展开"
       }
     }
+  },
+  "drop": {
+    "hint": "拖放游戏文件以打开，或拖放 SVG 和 PNG 图片以添加到游戏中",
+    "noGame": "请先打开或创建一个游戏，然后再把图片拖放到上面。",
+    "bundled": "内置游戏不能添加图片。请先保存游戏的副本，然后再把图片拖放到上面。",
+    "title": "添加图片",
+    "preview": "{{file}} 的预览",
+    "progress": "第 {{index}} 个，共 {{total}} 个",
+    "kind": "这个 SVG 是",
+    "icons": "图标",
+    "logos": "标志",
+    "name": "名称",
+    "exists": "{{id}} 已作为{{kind}}存在。",
+    "add": "添加",
+    "skip": "跳过",
+    "cancelAll": "全部取消",
+    "rename": "重命名",
+    "replace": "替换"
   }
 }

@@ -10,6 +10,18 @@ export const canSaveGame = (type) =>
     capability.electron &&
     typeof window.api?.saveGame === "function");
 
+// Whether images dropped onto the app can be added to a game of this type:
+// the folder next to the game file in the app (when the main process can write
+// it), the browser storage of the games the web app keeps. Bundled games and
+// render mode cannot.
+export const canAddAssets = (type) =>
+  !getRenderInput() &&
+  ((type === "internal" && capability.internal && capability.apis.idb) ||
+    (type === "system" && capability.system && capability.apis.idb) ||
+    (type === "electron" &&
+      capability.electron &&
+      typeof window.api?.addAsset === "function"));
+
 // Where a bundled game is saved as a new file: "electron" (its save dialog),
 // "picker" (the browser's save file picker) or "internal" (the private file
 // system), in that order. Undefined when it cannot be, and for every game

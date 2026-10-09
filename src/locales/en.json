@@ -648,7 +648,18 @@
       "count": "The game has as many images as it can have.",
       "total": "The images of the game are too large together.",
       "quota": "The browser has no more room to store images.",
-      "unreadable": "The file could not be read."
+      "unreadable": "The file could not be read.",
+      "notfound": "The game was not found.",
+      "readonly": "The folder of the game cannot be written.",
+      "directory": "Folders cannot be dropped.",
+      "json": "A game file has to be dropped on its own."
+    },
+    "tooMany": "Only the first {{max}} files of a drop are used, {{count}} more were skipped.",
+    "addedSome": "Some images were added",
+    "addedAs": {
+      "icons": "Icon {{id}}",
+      "logos": "Logo {{id}}",
+      "trains": "Train image {{id}}"
     }
   },
   "prototype": {
@@ -854,6 +865,10 @@
       "logos": {
         "title": "Logos",
         "description": "Train company logos"
+      },
+      "images": {
+        "title": "Custom Images",
+        "description": "Add your own icons, logos and train images"
       },
       "overrides": {
         "title": "Company Overrides",
@@ -1860,5 +1875,23 @@
         "unfoldAll": "Unfold all"
       }
     }
+  },
+  "drop": {
+    "hint": "Drop a game file to open it, or SVG and PNG images to add them to the game",
+    "noGame": "Open or create a game first, then drop images onto it.",
+    "bundled": "Bundled games cannot take images. Save a copy of the game first, then drop the images onto it.",
+    "title": "Add image",
+    "preview": "Preview of {{file}}",
+    "progress": "{{index}} of {{total}}",
+    "kind": "This SVG is a",
+    "icons": "Icon",
+    "logos": "Logo",
+    "name": "Name",
+    "exists": "{{id}} exists already as a {{kind}}.",
+    "add": "Add",
+    "skip": "Skip",
+    "cancelAll": "Cancel all",
+    "rename": "Rename",
+    "replace": "Replace"
   }
 }

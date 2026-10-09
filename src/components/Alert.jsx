@@ -103,7 +103,7 @@ const Toast = ({ alert, leaving, onDismiss }) => {
           {alert.message && (
             <p
               aria-live={hasProgress ? "off" : undefined}
-              className="text-sm text-muted-foreground break-words line-clamp-4"
+              className="text-sm text-muted-foreground break-words whitespace-pre-line line-clamp-4"
             >
               {alert.message}
             </p>

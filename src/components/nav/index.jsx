@@ -14,6 +14,7 @@ import {
   Hexagon,
   House,
   Image,
+  ImagePlus,
   Info,
   Layers,
   LayoutDashboard,
@@ -218,6 +219,11 @@ export const mainMenu = [
         icon: Shield,
         label: "docs.games.logos.title",
         to: "/docs/games/logos",
+      },
+      {
+        icon: ImagePlus,
+        label: "docs.games.images.title",
+        to: "/docs/games/images",
       },
       {
         icon: Layers,

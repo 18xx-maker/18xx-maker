@@ -238,7 +238,7 @@ describe("electron root", () => {
       new Error("File was not a valid 18xx-maker game"),
     );
     const { router, store } = renderApp("/");
-    const file = new File(["nope"], "game.txt");
+    const file = new File(["nope"], "game.json");
 
     // Without dataTransfer.items the file comes from dataTransfer.files
     drop({ files: [file] });
