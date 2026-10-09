@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
 
-import { prop } from "ramda";
+import { selectAlerts } from "@/state/alerts";
 
-export const useAlert = () => useSelector(prop("alert"));
+export const useAlerts = () => useSelector(selectAlerts);

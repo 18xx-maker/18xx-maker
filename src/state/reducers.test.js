@@ -1,8 +1,10 @@
 import "@tests/support/windowStub.js";
 
 import {
+  ALERT_DEFAULT,
   CLEAR_ALERT,
   DELETE_GAME,
+  DISMISS_ALERT,
   RESET_CONFIG,
   RESET_ERRORS,
   SET_ALERT,
@@ -20,6 +22,7 @@ import {
   SET_SIDEBAR_OPEN,
   SET_SUMMARIES,
   SET_UPDATE,
+  UPDATE_ALERT,
   alertReducer,
   clearAlert,
   configReducer,
@@ -42,14 +45,18 @@ import {
   createSetSidebarOpen,
   createSetSummaries,
   createUpdate,
+  dismissAlert,
   errorsReducer,
   gameHistoryReducer,
   gameOriginalReducer,
   gameReducer,
   loadedGameReducer,
+  selectAlerts,
+  selectLatestAlert,
   settingsReducer,
   summariesReducer,
   uiReducer,
+  updateAlert,
   updateReducer,
 } from "@/state";
 import { selectPanelState } from "@/state/selectors";
@@ -78,6 +85,19 @@ describe("action creators", () => {
       alert: { title: "t", message: "m", progress: 5 },
     });
     expect(clearAlert()).toEqual({ type: CLEAR_ALERT });
+    expect(clearAlert("a")).toEqual({ type: CLEAR_ALERT, id: "a" });
+    expect(createAlert("t", "m", "error", { sticky: false }).alert).toEqual({
+      title: "t",
+      message: "m",
+      type: "error",
+      sticky: false,
+    });
+    expect(updateAlert("a", { message: "n" })).toEqual({
+      type: UPDATE_ALERT,
+      id: "a",
+      alert: { message: "n" },
+    });
+    expect(dismissAlert("a")).toEqual({ type: DISMISS_ALERT, id: "a" });
     expect(createSetConfig({ a: 1 })).toEqual({
       type: SET_CONFIG,
       config: { a: 1 },
@@ -111,7 +131,7 @@ describe("action creators", () => {
 const unknown = { type: "@@unknown" };
 
 describe.each([
-  ["alert", alertReducer, { open: false }],
+  ["alert", alertReducer, { items: [], seq: 0 }],
   ["config", configReducer, {}],
   ["errors", errorsReducer, {}],
   ["summaries", summariesReducer, {}],
@@ -142,33 +162,108 @@ describe.each([
 });
 
 describe("alertReducer", () => {
-  it.each([
-    [
-      "SET_ALERT opens with the alert fields",
-      { open: false },
-      createAlert("T", "M", "success"),
-      { open: true, title: "T", message: "M", type: "success" },
-    ],
-    [
-      "SET_ALERT replaces an earlier alert, leaving no stale fields",
-      { open: true, title: "Old", message: "Old", type: "error" },
-      createProgressAlert("T", "M", 5),
-      { open: true, title: "T", message: "M", progress: 5 },
-    ],
-    [
-      "CLEAR_ALERT closes",
-      { open: true, title: "T", message: "M" },
-      clearAlert(),
-      { open: false },
-    ],
-  ])("%s", (_name, state, action, expected) => {
-    expect(alertReducer(frozen(state), action)).toEqual(expected);
+  const run = (...actions) => actions.reduce(alertReducer, undefined);
+
+  it("adds a toast with an id and the timing of its type", () => {
+    expect(run(createAlert("T", "M", "success")).items).toEqual([
+      {
+        id: "alert-1",
+        title: "T",
+        message: "M",
+        type: "success",
+        sticky: false,
+        duration: 5000,
+      },
+    ]);
+    expect(run(createAlert("T", "M", "warning")).items[0].duration).toBe(8000);
   });
 
-  it("does not mutate the alert in the action", () => {
+  it("makes errors sticky and lets options override the defaults", () => {
+    const [error] = run(createAlert("T", "M", "error")).items;
+    expect(error).toMatchObject({ sticky: true, duration: undefined });
+    const [short] = run(
+      createAlert("T", "M", "error", { sticky: false, duration: 1000 }),
+    ).items;
+    expect(short).toMatchObject({ sticky: false, duration: 1000 });
+  });
+
+  it("keeps one sticky progress toast and updates it in place", () => {
+    const state = run(
+      createAlert("Other", "M", "error"),
+      createProgressAlert("T", "1/2", 50),
+      createProgressAlert("T", "2/2", 100),
+    );
+    expect(state.items.map((i) => i.id)).toEqual(["alert-1", "progress"]);
+    expect(state.items[1]).toMatchObject({
+      type: "info",
+      message: "2/2",
+      progress: 100,
+      sticky: true,
+    });
+  });
+
+  it("removes the progress toast when a result arrives", () => {
+    const state = run(
+      createProgressAlert("T", "1/2", 50),
+      createAlert("Done", "M", "success"),
+    );
+    expect(state.items.map((i) => i.title)).toEqual(["Done"]);
+  });
+
+  it("keeps the newest three toasts", () => {
+    const state = run(
+      ...[1, 2, 3, 4].map((n) => createAlert(`T${n}`, "M", "error")),
+    );
+    expect(state.items.map((i) => i.title)).toEqual(["T2", "T3", "T4"]);
+    const withProgress = run(
+      ...[1, 2, 3].map((n) => createAlert(`T${n}`, "M", "error")),
+      createProgressAlert("P", "M", 1),
+    );
+    expect(withProgress.items.map((i) => i.title)).toEqual(["T2", "T3", "P"]);
+  });
+
+  it("updates, dismisses and clears by id", () => {
+    const state = run(createAlert("A", "M"), createAlert("B", "M"));
+    const updated = alertReducer(
+      state,
+      updateAlert("alert-1", { message: "N", type: "error" }),
+    );
+    expect(updated.items[0]).toMatchObject({
+      message: "N",
+      type: "error",
+      id: "alert-1",
+    });
+    expect(updated.items[1]).toBe(state.items[1]);
+    expect(
+      alertReducer(state, dismissAlert("alert-1")).items.map((i) => i.id),
+    ).toEqual(["alert-2"]);
+    expect(
+      alertReducer(state, clearAlert("alert-2")).items.map((i) => i.id),
+    ).toEqual(["alert-1"]);
+    expect(alertReducer(state, clearAlert()).items).toEqual([]);
+  });
+
+  it("does not reuse an id after a toast is dismissed", () => {
+    const state = run(
+      createAlert("A", "M"),
+      dismissAlert("alert-1"),
+      createAlert("B", "M"),
+    );
+    expect(state.items[0].id).toBe("alert-2");
+  });
+
+  it("does not mutate the action or the state", () => {
     const action = frozen(createAlert("T", "M"));
-    expect(alertReducer(undefined, action).open).toBe(true);
-    expect(action.alert).not.toHaveProperty("open");
+    const state = frozen(run(createAlert("A", "M")));
+    expect(alertReducer(state, action).items).toHaveLength(2);
+    expect(action.alert).not.toHaveProperty("id");
+  });
+
+  it("selects the toasts and the latest one", () => {
+    const state = { alert: run(createAlert("A", "M"), createAlert("B", "M")) };
+    expect(selectAlerts(state)).toHaveLength(2);
+    expect(selectLatestAlert(state).title).toBe("B");
+    expect(selectLatestAlert({ alert: ALERT_DEFAULT })).toBeNull();
   });
 });
 

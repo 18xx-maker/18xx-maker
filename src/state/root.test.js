@@ -40,7 +40,8 @@ describe("root state contract", () => {
     expect(rest).toMatchInlineSnapshot(`
       {
         "alert": {
-          "open": false,
+          "items": [],
+          "seq": 0,
         },
         "config": {},
         "errors": {},
@@ -86,7 +87,8 @@ describe("root state contract", () => {
     expect(state).toMatchInlineSnapshot(`
       {
         "alert": {
-          "open": false,
+          "items": [],
+          "seq": 1,
         },
         "config": {
           "paper": {

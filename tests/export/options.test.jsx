@@ -3,6 +3,7 @@ import axe from "axe-core";
 import { page } from "vitest/browser";
 
 import { DOCS } from "@/export/select.js";
+import { selectLatestAlert } from "@/state";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
@@ -477,7 +478,7 @@ describe("export options", () => {
     await user.click(exportButton(panel));
 
     await waitFor(() =>
-      expect(store.getState().alert).toMatchObject({
+      expect(selectLatestAlert(store.getState())).toMatchObject({
         title: "Export failed",
         message: "No windows",
         type: "error",

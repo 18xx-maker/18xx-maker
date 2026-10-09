@@ -15,6 +15,8 @@ import {
   restoreGame,
   revertGame,
   saveGame,
+  selectAlerts,
+  selectLatestAlert,
 } from "@/state";
 import {
   selectGameChanged,
@@ -267,7 +269,7 @@ describe("saveGame", () => {
     expect(opfs.overwriteGame).toHaveBeenCalledWith("a", text());
     expect(selectGameChanged(state())).toBe(false);
     expect(selectGameHistory(state())).toHaveLength(1);
-    expect(state().alert).toMatchObject({ type: "success" });
+    expect(selectLatestAlert(state())).toMatchObject({ type: "success" });
   });
 
   it("asks for permission first and writes a system game", async () => {
@@ -361,7 +363,7 @@ describe("saveGame", () => {
 
     expect(selectGameChanged(state())).toBe(true);
     expect(selectGameHistory(state())).toEqual([]);
-    expect(state().alert).toMatchObject({
+    expect(selectLatestAlert(state())).toMatchObject({
       type: "error",
       message: "disk full",
     });
@@ -422,7 +424,10 @@ describe("reloadGame", () => {
     store.dispatch(createSetGame(game("internal")));
     opfs.loadGame.mockRejectedValue(new Error("gone"));
     await reloadGame()(store.dispatch, store.getState);
-    expect(state().alert).toMatchObject({ type: "error", message: "gone" });
+    expect(selectLatestAlert(state())).toMatchObject({
+      type: "error",
+      message: "gone",
+    });
 
     store.dispatch(createSetGame(game("bundled")));
     await reloadGame()(store.dispatch, store.getState);
@@ -435,7 +440,7 @@ describe("receiveGame (the file changed outside the app)", () => {
     store.dispatch(createSetGame(game("electron")));
     store.dispatch(receiveGame(game("electron", "a", { m: 1 })));
     expect(state().game.m).toBe(1);
-    expect(state().alert).toMatchObject({ type: "success" });
+    expect(selectLatestAlert(state())).toMatchObject({ type: "success" });
   });
 
   it("ignores the echo of our own save", () => {
@@ -451,7 +456,7 @@ describe("receiveGame (the file changed outside the app)", () => {
 
     store.dispatch(receiveGame(game("electron", "a", { n: 1 })));
 
-    expect(state().alert).toEqual({ open: false });
+    expect(selectAlerts(state())).toEqual([]);
     expect(selectGameHistory(state())).toHaveLength(1);
   });
 
