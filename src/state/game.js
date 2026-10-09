@@ -4,14 +4,17 @@ import { assoc, equals, omit } from "ramda";
 
 import { games } from "@/data";
 import { createAlert } from "@/state/alerts";
+import { hydrateAssets } from "@/state/assets";
 import { selectGameChanged } from "@/state/selectors";
 import { parseSlug } from "@/util";
+import { assetTotals } from "@/util/assetNames";
 import { canSaveGame, saveAsBackend } from "@/util/canSaveGame";
 import capability from "@/util/capability";
 import { gameText } from "@/util/download";
 import { NAME_EXISTS, NAME_INVALID, sanitizeFilename } from "@/util/filename";
 import { BUNDLED, ELECTRON, getGameSummary } from "@/util/loading.js";
 import { getRenderInput } from "@/util/renderInput";
+import * as assetStore from "@/util/storage/assets";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
 
@@ -154,9 +157,18 @@ export const loadGame =
       }
       return reject(new Error(`Unknown game type ${type}`));
     })
-      .then((game) => {
+      .then(async (game) => {
+        // The images of the game come with it (render mode has them already)
+        const hydrate = async () => {
+          if (render && slug === render.game.meta.slug) return;
+          await hydrateAssets(dispatch, getState, game.meta);
+        };
+
         if (quiet) {
-          if (!getState().game) dispatch(createSetGame(game));
+          if (!getState().game) {
+            await hydrate();
+            dispatch(createSetGame(game));
+          }
           return game;
         }
 
@@ -166,6 +178,7 @@ export const loadGame =
           return open;
         }
 
+        await hydrate();
         const typeLabel = type[0].toUpperCase() + type.slice(1);
         dispatch(createSetGame(game));
         dispatch(
@@ -272,7 +285,8 @@ export const reloadGame = () => (dispatch, getState) => {
   if (!game || !canSaveGame(game.meta.type)) return Promise.resolve();
 
   return readGame(game.meta.type, game.meta.id)
-    .then((loaded) => {
+    .then(async (loaded) => {
+      await hydrateAssets(dispatch, getState, loaded.meta);
       dispatch(createSetGame(loaded));
       dispatch(
         createAlert(
@@ -398,13 +412,23 @@ export const saveGameAs =
             : await opfs.saveGameAs(name, text, { overwrite });
 
       if (slug) {
-        dispatch(
-          createAlert(
-            t("saveAs.saved"),
-            t("saveAs.savedMessage", { title: game.info.title }),
-            "success",
-          ),
-        );
+        // The copy keeps the images of the game (the app's main process
+        // copies the folder of a file game)
+        const assets = getState().assets?.[game.meta.slug];
+        const copied =
+          backend === "electron" || !assets || !assetTotals(assets).count
+            ? true
+            : await copyAssetsTo(dispatch, slug, assets);
+        // A failed copy is the alert instead of the saved one
+        if (copied) {
+          dispatch(
+            createAlert(
+              t("saveAs.saved"),
+              t("saveAs.savedMessage", { title: game.info.title }),
+              "success",
+            ),
+          );
+        }
       }
       return slug;
     } catch (e) {
@@ -413,6 +437,21 @@ export const saveGameAs =
       return undefined;
     }
   };
+
+// Stores the images of a game for another slug (save as)
+const copyAssetsTo = async (dispatch, slug, assets) => {
+  try {
+    for (const kind of Object.keys(assets)) {
+      for (const [name, value] of Object.entries(assets[kind])) {
+        await assetStore.putAsset(slug, kind, name, value, { replace: true });
+      }
+    }
+    return true;
+  } catch (e) {
+    dispatch(createAlert(t("assets.copyFailed"), e.message, "error"));
+    return false;
+  }
+};
 
 export const gameReducer = (state = undefined, action) => {
   switch (action.type) {

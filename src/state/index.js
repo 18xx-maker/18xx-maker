@@ -1,4 +1,5 @@
 export * from "@/state/alerts";
+export * from "@/state/assets";
 export * from "@/state/config";
 export * from "@/state/errors";
 export * from "@/state/game";

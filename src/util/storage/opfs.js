@@ -2,6 +2,7 @@ import { assoc, indexBy, prop } from "ramda";
 
 import { NAME_EXISTS, NAME_INVALID, sanitizeFilename } from "@/util/filename";
 import { info, loadFile } from "@/util/loading";
+import { deleteAssets } from "@/util/storage/assets";
 
 export const TYPE = "internal";
 const slug = (id) => `${TYPE}:${id}`;
@@ -18,7 +19,9 @@ const getGamesDirectory = () =>
     .then((root) => root.getDirectoryHandle("games", { create: true }));
 
 export const deleteGame = (id) =>
-  getGamesDirectory().then((dir) => dir.removeEntry(name(id)));
+  getGamesDirectory()
+    .then((dir) => dir.removeEntry(name(id)))
+    .then(() => deleteAssets(slug(id)));
 
 const isGameFile = (filename) => filename.endsWith(".json");
 

@@ -10,6 +10,9 @@ import { resolveConfig } from "@/util/resolveConfig";
 
 export const selectStoredConfig = (state) => state.config;
 
+// The custom images of the game on screen (util/assets), if it has any
+export const selectAssets = (state) => state.assets?.[state.game?.meta?.slug];
+
 // Settings are all optional: no theme means the system one, no sidebarOpen
 // means open, no language means the detected one and no openExportFolder
 // means off

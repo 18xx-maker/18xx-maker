@@ -1,7 +1,10 @@
 import { games } from "@/data";
+import { bundledAssets } from "@/data/gameAssets";
 import {
   REMOVED,
+  assetIssues,
   closest,
+  customReferences,
   deprecatedIssues,
   deprecatedPaths,
   leaves,
@@ -518,6 +521,102 @@ describe("gameValidation", () => {
       expect(closest("ab", ["ac", "ad"])).toBeUndefined();
       expect(closest("x", [])).toBeUndefined();
       expect(closest("x", undefined)).toBeUndefined();
+    });
+  });
+
+  describe("custom images", () => {
+    const game = {
+      tokens: [
+        { icon: "custom/star" },
+        { logo: "custom/crest" },
+        { icon: "boat" },
+      ],
+      companies: [
+        { name: "A", logo: "custom/crest", token: { icon: "custom/gone" } },
+      ],
+      trains: [
+        { name: "2", image: "custom/loco" },
+        { name: "3", image: "3T" },
+      ],
+      map: {
+        hexes: {
+          plain: {
+            icons: [{ type: "custom/star" }, { type: "boat" }],
+            terrain: [{ type: "custom/mud" }],
+            hexes: ["A1"],
+          },
+          city: { color: "plain", icons: { 1: "custom/star" }, hexes: ["A2"] },
+          single: { terrain: { type: "custom/pit" }, hexes: ["A3"] },
+        },
+      },
+      // Not an image reference
+      info: { description: "custom/star", image: "custom/nothing" },
+    };
+
+    it("finds the references with their kind and pointer", () => {
+      expect(
+        customReferences(game).map(({ kind, id, pointer }) => [
+          kind,
+          id,
+          pointer,
+        ]),
+      ).toEqual([
+        ["icons", "custom/star", "#/tokens/0/icon"],
+        ["logos", "custom/crest", "#/tokens/1/logo"],
+        ["logos", "custom/crest", "#/companies/0/logo"],
+        ["icons", "custom/gone", "#/companies/0/token/icon"],
+        ["trains", "custom/loco", "#/trains/0/image"],
+        ["icons", "custom/star", "#/map/hexes/plain/icons/0/type"],
+        ["icons", "custom/mud", "#/map/hexes/plain/terrain/0/type"],
+        ["icons", "custom/star", "#/map/hexes/city/icons/1"],
+        ["icons", "custom/pit", "#/map/hexes/single/terrain/type"],
+      ]);
+    });
+
+    it("warns about the ones the game does not have", () => {
+      const assets = {
+        icons: { star: "x", mud: "x" },
+        logos: { crest: "x" },
+        trains: {},
+      };
+      expect(
+        assetIssues(game, assets).map(({ code, severity, pointer, params }) => [
+          code,
+          severity,
+          pointer,
+          params.id,
+        ]),
+      ).toEqual([
+        ["missing-asset", "warning", "companies[0].token.icon", "custom/gone"],
+        ["missing-asset", "warning", "trains[0].image", "custom/loco"],
+        [
+          "missing-asset",
+          "warning",
+          "map.hexes.single.terrain.type",
+          "custom/pit",
+        ],
+      ]);
+    });
+
+    it("finds an image by its own name only", () => {
+      const assets = { icons: Object.create(null), logos: {}, trains: {} };
+      const data = {
+        tokens: [{ icon: "custom/__proto__" }, { icon: "custom/toString" }],
+      };
+      expect(assetIssues(data, assets)).toHaveLength(2);
+    });
+
+    it("finds no problem in 18Test with its images, and checks them only when given", async () => {
+      expect(
+        await validateGame(games["18Test"], bundledAssets["18Test"]),
+      ).toEqual([]);
+      const issues = await validateGame(games["18Test"], {});
+      expect(issues.map((i) => i.params.id).sort()).toEqual([
+        "custom/crest",
+        "custom/loco",
+        "custom/star",
+      ]);
+      expect(await validateGame(games["18Test"])).toEqual([]);
     });
   });
 });
