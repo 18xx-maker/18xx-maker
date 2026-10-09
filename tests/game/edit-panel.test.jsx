@@ -303,6 +303,13 @@ describe("edit panel fields", () => {
     expect(store.getState().game.info.title).toBe("18Test");
   });
 
+  it("picks the publisher in the info section", async () => {
+    open(route + "?edit=true");
+    expect(
+      await screen.findByRole("combobox", { name: "Publisher" }),
+    ).toBeVisible();
+  });
+
   it("clearing the last link removes the empty object, not the info", async () => {
     const { user, store } = open(`${route}?edit=true`);
     await user.clear(await field("Bgg"));
@@ -1126,6 +1133,18 @@ describe("edit panel privates", () => {
     expect(
       first.queryByRole("textbox", { name: "Description" }),
     ).not.toBeInTheDocument();
+  });
+
+  it("picks the icon of a private from the icons of the app", async () => {
+    const { user } = open(privatesRoute);
+    await ready();
+    const card = within(cards()[0]);
+    let icon = card.queryByRole("combobox", { name: "Icon" });
+    if (!icon) {
+      await user.click(card.getByRole("button", { name: "More fields" }));
+      icon = card.getByRole("combobox", { name: "Icon" });
+    }
+    expect(icon).toBeVisible();
   });
 
   it("More fields shows the other fields and the token has an editor", async () => {

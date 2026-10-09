@@ -96,6 +96,13 @@ describe("a field the schema marks with x-widget", () => {
     expect(game().privates[0].icon).toBe(box.value);
   });
 
+  it("is an icon picker for the icon of a round", () => {
+    setup({ rounds: [{ name: "OR1", icon: "boat" }] }, ["rounds", 0, "icon"]);
+    expect(screen.getByRole("combobox", { name: /^Icon$/ })).toHaveValue(
+      "boat",
+    );
+  });
+
   it("stores the option that is picked as a string", async () => {
     const { user, game } = setup({ privates: [{ name: "P" }] }, PRIVATE_ICON);
     const box = screen.getByRole("combobox", { name: /^Icon$/ });
@@ -161,7 +168,10 @@ describe("a field the schema marks with x-widget", () => {
     const box = screen.getByRole("combobox", { name: /^Publisher$/ });
     await user.click(box);
     expect(optionNames()).toEqual(expect.arrayContaining(["aag", "self"]));
-    await user.click(screen.getByRole("option", { name: "self" }));
+    expect(screen.getByRole("option", { name: /^self/ })).toHaveTextContent(
+      "Self Published",
+    );
+    await user.click(screen.getByRole("option", { name: /^self/ }));
     expect(game().info.publisher).toBe("self");
 
     await user.clear(box);

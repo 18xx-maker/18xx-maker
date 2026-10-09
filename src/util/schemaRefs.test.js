@@ -1,14 +1,22 @@
+import "../../tests/support/windowStub.js";
+
 import fs from "node:fs";
 import path from "node:path";
 
 import { path as getIn } from "ramda";
 
-import { resolveAllOf, resolveSchema } from "@/components/schemaForm/resolve";
+import { ASSETS } from "@/components/schemaForm/AssetPicker";
+import {
+  resolveAllOf,
+  schemaAt,
+  widgetOf,
+} from "@/components/schemaForm/resolve";
 
+import appEn from "@/locales/en.json";
 import en from "@/locales/schema.en.json";
 import schema from "@/schemas/game.schema.json";
 import { resolveSchemaKeys } from "@/util/schemaKeys";
-import { refOptions, refPaths } from "@/util/schemaRefs";
+import { annotatedPaths, refOptions, refPaths } from "@/util/schemaRefs";
 
 const ref = { from: "companies", key: "abbrev", label: "name" };
 
@@ -163,43 +171,24 @@ describe("the x-ref annotations of the game schema", () => {
   });
 });
 
-// Every string the schema marks with x-widget, with the path it is found at
-const widgetLeaves = (node, found = [], keys = [], seen = []) => {
-  if (!node || typeof node !== "object") return found;
-  if (node.$ref) {
-    if (!seen.includes(node.$ref)) {
-      const { $ref, ...rest } = node;
-      widgetLeaves(resolveSchema({ $ref }, schema), found, keys, [
-        ...seen,
-        $ref,
-      ]);
-      widgetLeaves(rest, found, keys, seen);
-    }
-    return found;
-  }
-  if ("x-widget" in node) found.push({ keys, node });
-  for (const part of [...(node.oneOf ?? []), ...(node.anyOf ?? [])]) {
-    widgetLeaves(part, found, keys, seen);
-  }
-  for (const [key, child] of Object.entries(node.properties ?? {})) {
-    widgetLeaves(child, found, [...keys, key], seen);
-  }
-  if (node.items) widgetLeaves(node.items, found, [...keys, "*"], seen);
-  return found;
-};
-
 describe("the x-widget annotations of the schemas", () => {
-  const leaves = widgetLeaves(schema);
+  const leaves = annotatedPaths(schema, "x-widget");
 
   it("has some", () => {
     expect(leaves.length).toBeGreaterThanOrEqual(6);
   });
 
-  it.each(leaves.map((leaf) => [leaf.keys.join("."), leaf]))(
-    "%s is a string with a known picker",
-    (_, { node }) => {
-      expect(node.type).toBe("string");
-      expect(["icon", "logo", "publisher"]).toContain(node["x-widget"]);
+  it.each(leaves.map((leaf) => [leaf.path.join("."), leaf.ref]))(
+    "%s is a string with a known picker and its texts",
+    (keys, widget) => {
+      const node = schemaAt(
+        schema,
+        keys.split(".").map((key) => (key === "*" ? 0 : key)),
+      );
+      // widgetOf only answers for a string
+      expect(widgetOf(node, schema)).toBe(widget);
+      expect(Object.keys(ASSETS)).toContain(widget);
+      expect(appEn.editPanel.tokenEditor.assets[widget]).toBeDefined();
     },
   );
 });

@@ -501,14 +501,14 @@ list otherwise, and an empty value is removed. To annotate a field, add the
 A plain string that names something the app ships has a picker too, with
 `"x-widget": "icon"`, `"logo"` or `"publisher"` on the leaf string schema
 (`privates[].icon`, `stock.legend[].icon`, the `icon` and `logo` of the token
-and of the game tokens, `companies[].logo`, `info.publisher`). Like `x-ref` it
+and of the game tokens, `companies[].logo`, `rounds[].icon` and `rounds[].logo`, `info.publisher`). Like `x-ref` it
 is an annotation that validation ignores, so a name the app does not have stays
 valid. `widgetOf` in `resolve.js` reads it through `$ref` and `oneOf`, and an
 entry of `overrides.jsx` renders `AssetPicker` (the same combobox the token
 editor uses, with the names of `icons`, `logos` or `publishers` in `@/data`) for
 a value that is nothing or a string. It is routed by the annotation, never by the
 field name. A new widget needs a name in `AssetPicker`, an `assets.<name>` text
-in the three locales and an entry in the list that `schemaRefs.test.js` checks.
+in the three locales and an entry in `ASSETS`, which `schemaRefs.test.js` checks.
 
 The `json` section (`JsonSection.jsx` lazy loads `JsonEditor.jsx`, a CodeMirror
 6 editor; its packages have their own chunk in `vite.config.js`) edits the

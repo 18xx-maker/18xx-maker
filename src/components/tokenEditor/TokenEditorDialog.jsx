@@ -25,6 +25,7 @@ import {
   resolveAllOf,
   setValue,
   valueAt,
+  widgetOf,
 } from "@/components/schemaForm/resolve";
 import { englishSchemaText } from "@/components/schemaForm/schemaText";
 import ColorField from "@/components/tokenEditor/ColorField";
@@ -91,8 +92,9 @@ const TokenProp = ({ name, properties }) => {
   const schema = resolveAllOf(node, form.root);
   const keys = [...VIRTUAL, name];
 
-  if (name === "icon" || name === "logo") {
-    return <AssetPicker keys={keys} schema={schema} asset={name} />;
+  const asset = widgetOf(schema, form.root);
+  if (asset) {
+    return <AssetPicker keys={keys} schema={schema} asset={asset} />;
   }
   if (name === "tokenShape") {
     const value = valueAt(keys, form.game);

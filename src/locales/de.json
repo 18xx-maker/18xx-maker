@@ -423,7 +423,7 @@
       "colorAt": "{{name}} {{index}}",
       "noColors": "Keine Farbe heißt \"{{value}}\", der Text wird so verwendet.",
       "noAssets": "Kein {{asset}} heißt \"{{value}}\", der Text wird so verwendet.",
-      "unknownAsset": "Die App hat kein {{asset}} namens {{value}}.",
+      "unknownAsset": "Die App kennt {{value}} nicht als {{asset}}.",
       "assets": {
         "icon": "Symbol",
         "logo": "Logo",
