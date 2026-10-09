@@ -17,6 +17,12 @@ import * as opfs from "@/util/storage/opfs";
 
 import { makePng } from "@tests/support/png.js";
 
+// Real by default; a test makes one write fail
+vi.mock("@/util/storage/assets", async (importOriginal) => {
+  const original = await importOriginal();
+  return { ...original, putAsset: vi.fn(original.putAsset) };
+});
+
 const SVG = '<svg viewBox="0 0 10 10"><path d="M0 0h5v5z"/></svg>';
 
 const newStore = () =>
@@ -146,6 +152,30 @@ describe("save as", () => {
         logos: {},
         trains: {},
       });
+    } finally {
+      await opfs.deleteGame(slug.replace("internal:", ""));
+    }
+  });
+
+  it("alerts that the images could not be copied, not that the game was saved", async () => {
+    const store = newStore();
+    await store.dispatch(loadGame("18Test"));
+    assetStore.putAsset.mockRejectedValueOnce(
+      Object.assign(new Error("full"), { code: "quota" }),
+    );
+
+    const slug = await store.dispatch(
+      saveGameAs({ name: `copy-${crypto.randomUUID()}` }),
+    );
+
+    try {
+      const alerts = store.getState().alert.items;
+      expect(alerts.at(-1)).toMatchObject({
+        type: "error",
+        title: "The images could not be copied",
+        message: "full",
+      });
+      expect(alerts.map((a) => a.title)).not.toContain("Game Saved");
     } finally {
       await opfs.deleteGame(slug.replace("internal:", ""));
     }
