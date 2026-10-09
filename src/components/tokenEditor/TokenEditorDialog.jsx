@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import AssetPicker from "@/components/schemaForm/AssetPicker";
 import SchemaField, {
   ChoiceField,
   JsonField,
@@ -26,7 +27,6 @@ import {
   valueAt,
 } from "@/components/schemaForm/resolve";
 import { englishSchemaText } from "@/components/schemaForm/schemaText";
-import AssetPicker from "@/components/tokenEditor/AssetPicker";
 import ColorField from "@/components/tokenEditor/ColorField";
 import DecorationGroups from "@/components/tokenEditor/DecorationGroups";
 import TokenPreview from "@/components/tokenEditor/TokenPreview";
