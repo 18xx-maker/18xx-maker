@@ -426,7 +426,8 @@
       "unknownAsset": "应用中没有名为 {{value}} 的{{asset}}。",
       "assets": {
         "icon": "图标",
-        "logo": "标志"
+        "logo": "标志",
+        "publisher": "出版商"
       }
     }
   },

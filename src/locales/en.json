@@ -426,7 +426,8 @@
       "unknownAsset": "The app has no {{asset}} named {{value}}.",
       "assets": {
         "icon": "icon",
-        "logo": "logo"
+        "logo": "logo",
+        "publisher": "publisher"
       }
     }
   },

@@ -366,6 +366,14 @@ export const referenceOf = (node, root) => {
   return { ref, mode: single && list ? "either" : single ? "single" : "list" };
 };
 
+// The picker of app data a string field asks for (the schema marks the string
+// with x-widget: "icon", "logo" or "publisher"), also when the string is one of
+// the alternatives of a oneOf; undefined for any other field.
+export const widgetOf = (node, root) =>
+  alternativesOf(node, root).find(
+    (part) => part?.type === "string" && part["x-widget"],
+  )?.["x-widget"];
+
 // Whether the value is what a reference field edits: nothing, a string (not
 // for a list) or a list of strings (not for a string). Anything else (an
 // object, a list with one) stays in the JSON field, so nothing is lost.

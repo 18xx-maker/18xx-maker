@@ -2014,11 +2014,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "Name of an svg logo to draw on the token."
         },
         "logoWidth": { "type": "number", "description": "Width of the logo." },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "Name of an icon to draw on the token."
         },
         "iconWidth": { "type": "number", "description": "Width of the icon." },
@@ -2272,11 +2274,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "Name of an svg logo to draw on the token."
         },
         "logoWidth": { "type": "number", "description": "Width of the logo." },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "Name of an icon to draw on the token."
         },
         "iconWidth": { "type": "number", "description": "Width of the icon." },
@@ -2542,11 +2546,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "Name of an svg logo to draw on the token."
         },
         "logoWidth": { "type": "number", "description": "Width of the logo." },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "Name of an icon to draw on the token."
         },
         "iconWidth": { "type": "number", "description": "Width of the icon." },

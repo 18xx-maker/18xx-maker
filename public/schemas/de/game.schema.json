@@ -1103,7 +1103,8 @@
               },
               "icon": {
                 "description": "Wird derzeit nicht gezeichnet.",
-                "type": "string"
+                "type": "string",
+                "x-widget": "icon"
               }
             },
             "required": ["description"],
@@ -1186,7 +1187,8 @@
         },
         "publisher": {
           "type": "string",
-          "description": "Id des Verlags (siehe src/data/publishers), wird auf der Spielinfoseite und in der Spieleliste angezeigt"
+          "description": "Id des Verlags (siehe src/data/publishers), wird auf der Spielinfoseite und in der Spieleliste angezeigt",
+          "x-widget": "publisher"
         },
         "extraTotalHeight": {
           "type": "number",
@@ -1658,7 +1660,8 @@
           },
           "logo": {
             "description": "Das Logo der Gesellschaft.",
-            "type": "string"
+            "type": "string",
+            "x-widget": "logo"
           },
           "minor": {
             "description": "Die Gesellschaft ist eine kleine Gesellschaft (minor).",
@@ -1766,11 +1769,19 @@
               {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-ref": {
+                    "from": "trains",
+                    "key": "name"
+                  }
                 }
               },
               {
-                "type": "string"
+                "type": "string",
+                "x-ref": {
+                  "from": "trains",
+                  "key": "name"
+                }
               }
             ]
           },
@@ -1941,7 +1952,8 @@
             }
           },
           "icon": {
-            "type": "string"
+            "type": "string",
+            "x-widget": "icon"
           },
           "iconColor": {
             "type": "string"

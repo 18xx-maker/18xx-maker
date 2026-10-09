@@ -232,6 +232,35 @@ describe("a reference field", () => {
     expect(game().privates[0].company).toBe("ABC");
   });
 
+  describe("the train of a phase, a name or a list", () => {
+    const phase = (train) => ({
+      ...trains(),
+      phases: [{ name: "1", limit: 4, tiles: "yellow", train }],
+    });
+    const trainBox = () => screen.getByRole("combobox", { name: /^Train$/ });
+
+    it("lists the trains, stores one name as a string and two as a list", async () => {
+      const { user, game } = setup(phase(), "phases", ["phases", 0, "train"]);
+      await user.click(trainBox());
+      expect(optionNames()).toEqual(["2", "3", "4D"]);
+      await user.click(screen.getByRole("option", { name: /^3/ }));
+      expect(game().phases[0].train).toBe("3");
+
+      await user.type(trainBox(), "5H{Enter}");
+      expect(game().phases[0].train).toEqual(["3", "5H"]);
+      await user.click(screen.getByRole("button", { name: "Remove 3" }));
+      expect(game().phases[0].train).toBe("5H");
+    });
+
+    it("hints at a train the game does not have, for a list too", () => {
+      setup(phase(["2", "9"]), "phases", ["phases", 0, "train"]);
+      expect(
+        screen.getByText(/Not in the trains of this game: 9/),
+      ).toBeVisible();
+      expect(trainBox()).not.toBeInvalid();
+    });
+  });
+
   it("keeps a name twice in the list as two chips, removed one at a time", async () => {
     const { user, game } = setup(trains(["2", "2", "3"]));
     expect(screen.getAllByRole("button", { name: "Remove 2" })).toHaveLength(2);

@@ -426,7 +426,8 @@
       "unknownAsset": "Die App hat kein {{asset}} namens {{value}}.",
       "assets": {
         "icon": "Symbol",
-        "logo": "Logo"
+        "logo": "Logo",
+        "publisher": "Verlag"
       }
     }
   },

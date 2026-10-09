@@ -1103,7 +1103,8 @@
               },
               "icon": {
                 "description": "目前不绘制。",
-                "type": "string"
+                "type": "string",
+                "x-widget": "icon"
               }
             },
             "required": ["description"],
@@ -1186,7 +1187,8 @@
         },
         "publisher": {
           "type": "string",
-          "description": "出版商的 id(见 src/data/publishers),显示在游戏信息页和游戏列表中"
+          "description": "出版商的 id(见 src/data/publishers),显示在游戏信息页和游戏列表中",
+          "x-widget": "publisher"
         },
         "extraTotalHeight": {
           "type": "number",
@@ -1658,7 +1660,8 @@
           },
           "logo": {
             "description": "公司的标志。",
-            "type": "string"
+            "type": "string",
+            "x-widget": "logo"
           },
           "minor": {
             "description": "该公司是小公司。",
@@ -1766,11 +1769,19 @@
               {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-ref": {
+                    "from": "trains",
+                    "key": "name"
+                  }
                 }
               },
               {
-                "type": "string"
+                "type": "string",
+                "x-ref": {
+                  "from": "trains",
+                  "key": "name"
+                }
               }
             ]
           },
@@ -1941,7 +1952,8 @@
             }
           },
           "icon": {
-            "type": "string"
+            "type": "string",
+            "x-widget": "icon"
           },
           "iconColor": {
             "type": "string"

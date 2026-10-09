@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { path as getIn } from "ramda";
 
-import { resolveAllOf } from "@/components/schemaForm/resolve";
+import { resolveAllOf, resolveSchema } from "@/components/schemaForm/resolve";
 
 import en from "@/locales/schema.en.json";
 import schema from "@/schemas/game.schema.json";
@@ -146,6 +146,14 @@ describe("the x-ref annotations of the game schema", () => {
     },
   );
 
+  it("names the train of a phase, as a string and as a list", () => {
+    const train = { from: "trains", key: "name" };
+    const find = (keys) =>
+      paths.find((p) => p.path.join(".") === keys.join("."));
+    expect(find(["phases", "*", "train"])?.ref).toEqual(train);
+    expect(find(["phases", "*", "train", "*"])?.ref).toEqual(train);
+  });
+
   it("is the same in the published schema", () => {
     const published = fs.readFileSync(
       path.join(import.meta.dirname, "../../public/schemas/game.schema.json"),
@@ -153,4 +161,45 @@ describe("the x-ref annotations of the game schema", () => {
     );
     expect(JSON.parse(published)).toEqual(resolveSchemaKeys(schema, en));
   });
+});
+
+// Every string the schema marks with x-widget, with the path it is found at
+const widgetLeaves = (node, found = [], keys = [], seen = []) => {
+  if (!node || typeof node !== "object") return found;
+  if (node.$ref) {
+    if (!seen.includes(node.$ref)) {
+      const { $ref, ...rest } = node;
+      widgetLeaves(resolveSchema({ $ref }, schema), found, keys, [
+        ...seen,
+        $ref,
+      ]);
+      widgetLeaves(rest, found, keys, seen);
+    }
+    return found;
+  }
+  if ("x-widget" in node) found.push({ keys, node });
+  for (const part of [...(node.oneOf ?? []), ...(node.anyOf ?? [])]) {
+    widgetLeaves(part, found, keys, seen);
+  }
+  for (const [key, child] of Object.entries(node.properties ?? {})) {
+    widgetLeaves(child, found, [...keys, key], seen);
+  }
+  if (node.items) widgetLeaves(node.items, found, [...keys, "*"], seen);
+  return found;
+};
+
+describe("the x-widget annotations of the schemas", () => {
+  const leaves = widgetLeaves(schema);
+
+  it("has some", () => {
+    expect(leaves.length).toBeGreaterThanOrEqual(6);
+  });
+
+  it.each(leaves.map((leaf) => [leaf.keys.join("."), leaf]))(
+    "%s is a string with a known picker",
+    (_, { node }) => {
+      expect(node.type).toBe("string");
+      expect(["icon", "logo", "publisher"]).toContain(node["x-widget"]);
+    },
+  );
 });
