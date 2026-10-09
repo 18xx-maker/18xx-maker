@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-beta.136](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.135...v1.0.0-beta.136) (2026-10-09)
+
+
+### :tada: Features
+
+* **ui:** list undo, redo and sidebar keys in keybind help ([#1063](https://github.com/18xx-maker/18xx-maker/issues/1063)) ([0e4904b](https://github.com/18xx-maker/18xx-maker/commit/0e4904b5f8ffa851bb0734f55fb1468c1111d6eb))
+* **ui:** pick train, icon, logo and publisher in the edit panel ([#1065](https://github.com/18xx-maker/18xx-maker/issues/1065)) ([cc6c85c](https://github.com/18xx-maker/18xx-maker/commit/cc6c85c2890f4c033dfdfdb8a31c7d2d3259c399))
+
 ## [1.0.0-beta.135](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.134...v1.0.0-beta.135) (2026-10-09)
 
 
