@@ -15,6 +15,7 @@ import {
   SET_EXPORT_SHEET_OPEN,
   SET_GAME,
   SET_LANGUAGE,
+  SET_LOADING_GAME,
   SET_OPEN_EXPORT_FOLDER,
   SET_PANEL_STATE,
   SET_SETTINGS,
@@ -25,6 +26,7 @@ import {
   clearAlert,
   configReducer,
   createAlert,
+  createClearLoadingGame,
   createDeleteGame,
   createDownloadPercent,
   createProgressAlert,
@@ -37,6 +39,7 @@ import {
   createSetExportSheetOpen,
   createSetGame,
   createSetLanguage,
+  createSetLoadingGame,
   createSetOpenExportFolder,
   createSetPanelState,
   createSetSettings,
@@ -55,7 +58,7 @@ import {
   uiReducer,
   updateReducer,
 } from "@/state";
-import { selectPanelState } from "@/state/selectors";
+import { selectLoadingGame, selectPanelState } from "@/state/selectors";
 
 const game = (id = "a", type = "system", title = "Game A") => ({
   info: { title, subtitle: "sub", designer: "des", publisher: "pub", extra: 1 },
@@ -548,7 +551,39 @@ describe("uiReducer", () => {
     expect(uiReducer(undefined, { type: "@@INIT" })).toEqual({
       exportMenuOpen: false,
       exportSheetOpen: false,
+      loadingGame: null,
       panel: {},
+    });
+  });
+
+  it("tracks the dropped game that is loading, by drop", () => {
+    const set = createSetLoadingGame("a.json", 1);
+    expect(set).toEqual({ type: SET_LOADING_GAME, name: "a.json", id: 1 });
+    const loading = uiReducer(undefined, set);
+    expect(selectLoadingGame({ ui: loading })).toEqual({
+      name: "a.json",
+      id: 1,
+    });
+
+    // A later drop is not cleared by the end of an earlier one
+    const later = uiReducer(frozen(loading), createSetLoadingGame("b.json", 2));
+    const kept = uiReducer(frozen(later), createClearLoadingGame(1));
+    expect(kept).toBe(later);
+    expect(
+      uiReducer(frozen(later), createClearLoadingGame(2)).loadingGame,
+    ).toBe(null);
+    expect(selectLoadingGame({})).toBe(null);
+  });
+
+  it("keeps the loading game when the game is replaced", () => {
+    const state = frozen(uiReducer(undefined, createSetLoadingGame("a", 1)));
+    expect(uiReducer(state, createSetGame(game())).loadingGame).toEqual({
+      name: "a",
+      id: 1,
+    });
+    expect(uiReducer(state, createDeleteGame("system:a")).loadingGame).toEqual({
+      name: "a",
+      id: 1,
     });
   });
 

@@ -1,4 +1,5 @@
 import {
+  act,
   createEvent,
   fireEvent,
   screen,
@@ -7,7 +8,8 @@ import {
 import { page } from "vitest/browser";
 
 import { games } from "@/data";
-import { selectLatestAlert } from "@/state";
+import { editGame, selectLatestAlert } from "@/state";
+import { selectGameChanged } from "@/state/selectors";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
 
@@ -177,6 +179,184 @@ describe("dropping a game file", () => {
         type: "error",
       }),
     );
+  });
+});
+
+// The values of ui.loadingGame a store has had, to tell that nothing showed
+const trackLoading = (store) => {
+  const seen = [];
+  store.subscribe(() => {
+    const loading = store.getState().ui.loadingGame;
+    if (loading) seen.push(loading.name);
+  });
+  return seen;
+};
+
+const deferred = () => {
+  let resolve;
+  let reject;
+  const promise = new Promise((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  return { promise, resolve, reject };
+};
+
+const internalGame = {
+  ...games["18Test"],
+  meta: { id: "abc", type: "internal", slug: "internal:abc" },
+};
+
+describe("loading a dropped game", () => {
+  beforeEach(() => {
+    caps.system = false;
+    opfs.loadGame.mockResolvedValue(internalGame);
+  });
+
+  const dropGame = (name = "game.json") => {
+    const transfer = new DataTransfer();
+    transfer.items.add(new File(["{}"], name, { type: "application/json" }));
+    drop(transfer);
+  };
+
+  it("shows the file while it is saved, then clears and opens the game", async () => {
+    const save = deferred();
+    opfs.saveGameFile.mockReturnValue(save.promise);
+    const { router, store } = renderApp("/docs");
+
+    dropGame("my-game.json");
+
+    const status = await screen.findByRole("status");
+    expect(status).toHaveTextContent("File: my-game.json");
+    expect(status).toHaveAttribute("aria-busy", "true");
+    expect(router.state.location.pathname).toBe("/docs");
+
+    save.resolve("internal:abc");
+
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/internal:abc/map"),
+    );
+    expect(screen.queryByTestId("loading-game")).not.toBeInTheDocument();
+    expect(store.getState().ui.loadingGame).toBeNull();
+    expect(store.getState().game.meta.slug).toBe("internal:abc");
+  });
+
+  it("clears and alerts when the file cannot be saved", async () => {
+    const save = deferred();
+    opfs.saveGameFile.mockReturnValue(save.promise);
+    const { router, store } = renderApp("/docs");
+    dropGame();
+    await screen.findByTestId("loading-game");
+
+    save.reject(new Error("Not a game"));
+
+    await waitFor(() =>
+      expect(selectLatestAlert(store.getState())).toMatchObject({
+        message: "Not a game",
+        type: "error",
+      }),
+    );
+    expect(screen.queryByTestId("loading-game")).not.toBeInTheDocument();
+    expect(store.getState().ui.loadingGame).toBeNull();
+    expect(router.state.location.pathname).toBe("/docs");
+  });
+
+  it("clears and alerts once when the saved game cannot be loaded", async () => {
+    opfs.saveGameFile.mockResolvedValue("internal:abc");
+    opfs.loadGame.mockRejectedValue(new Error("File was not valid"));
+    const { router, store } = renderApp("/docs");
+
+    dropGame();
+
+    await waitFor(() =>
+      expect(selectLatestAlert(store.getState())).toMatchObject({
+        message: "File was not valid",
+        type: "error",
+      }),
+    );
+    await waitFor(() => expect(store.getState().ui.loadingGame).toBeNull());
+    expect(
+      store.getState().alert.items.filter((a) => a.type === "error"),
+    ).toHaveLength(1);
+    expect(router.state.location.pathname).toBe("/docs");
+  });
+
+  it("shows nothing for a config drop", async () => {
+    const { store } = renderApp("/docs");
+    const seen = trackLoading(store);
+    const transfer = new DataTransfer();
+    transfer.items.add(new File(['{"margin": 100}'], "config.json"));
+
+    drop(transfer);
+
+    await waitFor(() =>
+      expect(store.getState().config).toEqual({ margin: 100 }),
+    );
+    expect(seen).toEqual([]);
+  });
+
+  it("shows nothing for a dropped item that is not a file", async () => {
+    caps.system = true;
+    const { store } = renderApp("/docs");
+    const seen = trackLoading(store);
+
+    drop({ items: [{ kind: "string" }] });
+
+    await waitFor(() =>
+      expect(selectLatestAlert(store.getState())).toMatchObject({
+        message: "Only files can be dropped here",
+      }),
+    );
+    expect(seen).toEqual([]);
+  });
+
+  it("follows the latest of two drops in a row", async () => {
+    const first = deferred();
+    const second = deferred();
+    opfs.saveGameFile
+      .mockReturnValueOnce(first.promise)
+      .mockReturnValueOnce(second.promise);
+    const { store } = renderApp("/docs");
+
+    dropGame("one.json");
+    await waitFor(() =>
+      expect(store.getState().ui.loadingGame?.name).toBe("one.json"),
+    );
+    dropGame("two.json");
+    await waitFor(() =>
+      expect(store.getState().ui.loadingGame?.name).toBe("two.json"),
+    );
+
+    // The first finishing does not hide the second
+    first.resolve("internal:abc");
+    await waitFor(() => expect(opfs.loadGame).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(store.getState().game?.meta.slug).toBe("internal:abc"),
+    );
+    expect(store.getState().ui.loadingGame?.name).toBe("two.json");
+    expect(screen.getByTestId("loading-game")).toHaveTextContent("two.json");
+
+    second.resolve("internal:abc");
+    await waitFor(() => expect(store.getState().ui.loadingGame).toBeNull());
+  });
+
+  it("keeps the edits when the open game is dropped again", async () => {
+    opfs.saveGameFile.mockResolvedValue("internal:abc");
+    const { router, store } = renderApp("/games/internal:abc/map");
+    await screen.findByTestId("game-internal:abc-map");
+    act(() => {
+      store.dispatch(
+        editGame((g) => ({ ...g, info: { ...g.info, title: "Renamed" } })),
+      );
+    });
+    expect(selectGameChanged(store.getState())).toBe(true);
+
+    dropGame();
+
+    await waitFor(() => expect(opfs.saveGameFile).toHaveBeenCalled());
+    await waitFor(() => expect(store.getState().ui.loadingGame).toBeNull());
+    expect(store.getState().game.info.title).toBe("Renamed");
+    expect(router.state.location.pathname).toBe("/games/internal:abc/map");
   });
 });
 

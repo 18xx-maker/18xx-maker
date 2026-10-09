@@ -8,10 +8,16 @@ const hasFiles = (event) =>
 
 // A dashed border around the window while files are dragged over it, so it is
 // clear that they can be dropped. Dragging text shows nothing. `disabled`
-// hides it (a dialog is open, render and print modes).
-const DropOverlay = ({ disabled = false }) => {
+// hides it (a dialog is open, render and print modes), `onChange` hears when
+// it shows or hides.
+const DropOverlay = ({ disabled = false, onChange }) => {
   const { t } = useTranslation();
   const [over, setOver] = useState(false);
+
+  // Tells whether it shows
+  useEffect(() => {
+    onChange?.(over && !disabled);
+  }, [over, disabled, onChange]);
 
   useEffect(() => {
     if (disabled) {

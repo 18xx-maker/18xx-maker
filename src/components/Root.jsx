@@ -11,6 +11,7 @@ import Alert from "@/components/Alert";
 import Analytics from "@/components/Analytics";
 import DropImageDialog from "@/components/DropImageDialog";
 import DropOverlay from "@/components/DropOverlay";
+import LoadingOverlay from "@/components/LoadingOverlay";
 import RenderState from "@/components/RenderState";
 import ScrollToTop from "@/components/ScrollToTop";
 import { ShortcutsDialog } from "@/components/Shortcuts";
@@ -26,9 +27,11 @@ import { detectedLanguage } from "@/locales/language";
 import { useMatch, useNavigate } from "@/router";
 import {
   createAlert,
+  createClearLoadingGame,
   createDownloadPercent,
   createProgressAlert,
   createSetAssets,
+  createSetLoadingGame,
   createUpdate,
   loadGame,
   receiveGame,
@@ -52,6 +55,7 @@ import {
 } from "@/util/dropImages";
 import { ELECTRON } from "@/util/loading";
 import { useBooleanParam } from "@/util/query";
+import { addRecent } from "@/util/recent";
 import { getRenderInput } from "@/util/renderInput";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
@@ -137,6 +141,9 @@ const Root = ({ children }) => {
     setAsking(null);
   };
   const dropping = useRef(false);
+  const loadingId = useRef(0);
+  // The loading card gives way to the drop overlay
+  const [dropOver, setDropOver] = useState(false);
 
   const alertError = (message) =>
     dispatch(createAlert(t("alerts.error"), message, "error"));
@@ -200,11 +207,37 @@ const Root = ({ children }) => {
     // A config.json applies its settings, anything else is a game
     return sniffConfigFile(dropped.file)
       .then((imported) =>
-        imported
-          ? importConfig(imported)
-          : fileHandler(dropped).then((slug) => navigate(`/games/${slug}/map`)),
+        imported ? importConfig(imported) : openDroppedGame(dropped),
       )
       .catch((e) => alertError(e.message));
+  };
+
+  // Stores and reads the dropped game, with a loading state meanwhile. Only a
+  // game that is really a file gets one; its errors go to the caller.
+  const openDroppedGame = async (dropped) => {
+    if (!dropped.file) {
+      return fileHandler(dropped).then((slug) =>
+        navigate(`/games/${slug}/map`),
+      );
+    }
+
+    loadingId.current += 1;
+    const id = loadingId.current;
+    dispatch(createSetLoadingGame(dropped.file.name, id));
+    try {
+      const slug = await fileHandler(dropped);
+      // Loading reports its own errors
+      let game;
+      try {
+        game = await dispatch(loadGame(slug));
+      } catch {
+        return;
+      }
+      addRecent(game);
+      navigate(`/games/${slug}/map`);
+    } finally {
+      dispatch(createClearLoadingGame(id));
+    }
   };
 
   const printCss = print
@@ -387,7 +420,11 @@ body {
           ) : (
             <>
               <Alert />
-              <DropOverlay disabled={print || !!asking} />
+              <LoadingOverlay hidden={dropOver} />
+              <DropOverlay
+                disabled={print || !!asking}
+                onChange={setDropOver}
+              />
               <DropImageDialog request={asking?.request} onAnswer={answerSvg} />
               <ExportHost />
               <ShortcutsDialog open={shortcuts} onOpenChange={setShortcuts} />

@@ -1701,6 +1701,8 @@
   "alerts": {
     "region": "Notifications",
     "error": "Error",
+    "loadingGame": "Opening game…",
+    "loadingGameFile": "File: {{name}}",
     "gameLoaded": "Game Loaded",
     "gameLoadedMessage": "{{title}} loaded",
     "dropNotFile": "Only files can be dropped here",

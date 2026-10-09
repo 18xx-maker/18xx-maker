@@ -252,6 +252,65 @@ describe("electron root", () => {
     );
   });
 
+  it("shows the file while the main process saves it, then adds a recent", async () => {
+    let save;
+    api.saveGamePath.mockReturnValue(new Promise((res) => (save = res)));
+    api.loadGame = vi.fn().mockResolvedValue(games["18Test"]);
+    const { router, store } = renderApp("/");
+
+    drop({ files: [new File(["{}"], "my-game.json")] });
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "File: my-game.json",
+    );
+    expect(api.addRecent).not.toHaveBeenCalled();
+
+    save("electron:abc");
+
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/electron:abc/map"),
+    );
+    expect(store.getState().ui.loadingGame).toBeNull();
+    expect(screen.queryByTestId("loading-game")).not.toBeInTheDocument();
+    expect(api.addRecent).toHaveBeenCalledWith(
+      games["18Test"].info.title,
+      games["18Test"].meta.slug,
+    );
+  });
+
+  it("clears the loading state when the main process rejects a file", async () => {
+    api.saveGamePath.mockRejectedValue(new Error("Not a game"));
+    const { store } = renderApp("/");
+
+    drop({ files: [new File(["nope"], "game.json")] });
+
+    await waitFor(() =>
+      expect(selectLatestAlert(store.getState())).toMatchObject({
+        message: "Not a game",
+      }),
+    );
+    expect(store.getState().ui.loadingGame).toBeNull();
+    expect(api.addRecent).not.toHaveBeenCalled();
+  });
+
+  it("clears the loading state and stays when the game cannot be loaded", async () => {
+    api.saveGamePath.mockResolvedValue("electron:abc");
+    api.loadGame = vi.fn().mockRejectedValue(new Error("Unreadable"));
+    const { router, store } = renderApp("/");
+
+    drop({ files: [new File(["{}"], "game.json")] });
+
+    await waitFor(() =>
+      expect(selectLatestAlert(store.getState())).toMatchObject({
+        message: "Unreadable",
+        type: "error",
+      }),
+    );
+    await waitFor(() => expect(store.getState().ui.loadingGame).toBeNull());
+    expect(api.addRecent).not.toHaveBeenCalled();
+    expect(router.state.location.pathname).toBe("/");
+  });
+
   it("alerts when the main process rejects a dropped file", async () => {
     api.saveGamePath.mockRejectedValue(
       new Error("File was not a valid 18xx-maker game"),

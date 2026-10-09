@@ -7,16 +7,7 @@ import { useEditor } from "@/hooks";
 import { useMatch, useNavigate } from "@/router";
 import { loadGame } from "@/state";
 import { selectGameForSlug } from "@/state/selectors";
-import capability from "@/util/capability";
-import { getRenderInput } from "@/util/renderInput";
-
-const addRecent = (game) => {
-  // The capture windows of an export are not games the user opened
-  if (game && capability.electron && !getRenderInput()) {
-    window.api.addRecent(game.info.title, game.meta.slug);
-  }
-  return game;
-};
+import { addRecent } from "@/util/recent";
 
 const GamePage = ({ children }) => {
   const match = useMatch("/games/:slug/*");
