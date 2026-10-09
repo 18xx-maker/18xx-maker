@@ -1,6 +1,4 @@
 export const SET_ALERT = "SET_ALERT";
-export const UPDATE_ALERT = "UPDATE_ALERT";
-export const DISMISS_ALERT = "DISMISS_ALERT";
 export const CLEAR_ALERT = "CLEAR_ALERT";
 
 export const PROGRESS_ID = "progress";
@@ -21,10 +19,6 @@ export const createAlert = (title, message, type = "info", opts) => ({
   alert: { title, message, type, ...opts },
 });
 
-export const updateAlert = (id, alert) => ({ type: UPDATE_ALERT, id, alert });
-
-export const dismissAlert = (id) => ({ type: DISMISS_ALERT, id });
-
 // Without an id, clears every toast
 export const clearAlert = (id) =>
   id === undefined ? { type: CLEAR_ALERT } : { type: CLEAR_ALERT, id };
@@ -44,7 +38,18 @@ const withTiming = (item) => {
   };
 };
 
-const cap = (items) => items.slice(-MAX_ALERTS);
+// Over the cap, the oldest toast that times out goes first so a sticky error
+// is not pushed out by a stream of transient ones. The newest item stays.
+const cap = (items) => {
+  const result = [...items];
+  while (result.length > MAX_ALERTS) {
+    const index = result.findIndex(
+      (item, i) => !item.sticky && i < result.length - 1,
+    );
+    result.splice(index === -1 ? 0 : index, 1);
+  }
+  return result;
+};
 
 const without = (items, id) => items.filter((item) => item.id !== id);
 
@@ -72,17 +77,6 @@ export const alertReducer = (state = ALERT_DEFAULT, action) => {
       const item = withTiming({ ...action.alert, id: `alert-${seq}` });
       return { seq, items: cap([...without(state.items, PROGRESS_ID), item]) };
     }
-    case UPDATE_ALERT:
-      return {
-        ...state,
-        items: state.items.map((item) =>
-          item.id === action.id
-            ? withTiming({ ...item, ...action.alert, id: item.id })
-            : item,
-        ),
-      };
-    case DISMISS_ALERT:
-      return { ...state, items: without(state.items, action.id) };
     case CLEAR_ALERT:
       return action.id === undefined
         ? { ...state, items: [] }

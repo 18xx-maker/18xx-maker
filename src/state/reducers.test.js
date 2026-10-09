@@ -4,7 +4,6 @@ import {
   ALERT_DEFAULT,
   CLEAR_ALERT,
   DELETE_GAME,
-  DISMISS_ALERT,
   RESET_CONFIG,
   RESET_ERRORS,
   SET_ALERT,
@@ -22,7 +21,6 @@ import {
   SET_SIDEBAR_OPEN,
   SET_SUMMARIES,
   SET_UPDATE,
-  UPDATE_ALERT,
   alertReducer,
   clearAlert,
   configReducer,
@@ -45,7 +43,6 @@ import {
   createSetSidebarOpen,
   createSetSummaries,
   createUpdate,
-  dismissAlert,
   errorsReducer,
   gameHistoryReducer,
   gameOriginalReducer,
@@ -56,7 +53,6 @@ import {
   settingsReducer,
   summariesReducer,
   uiReducer,
-  updateAlert,
   updateReducer,
 } from "@/state";
 import { selectPanelState } from "@/state/selectors";
@@ -92,12 +88,6 @@ describe("action creators", () => {
       type: "error",
       sticky: false,
     });
-    expect(updateAlert("a", { message: "n" })).toEqual({
-      type: UPDATE_ALERT,
-      id: "a",
-      alert: { message: "n" },
-    });
-    expect(dismissAlert("a")).toEqual({ type: DISMISS_ALERT, id: "a" });
     expect(createSetConfig({ a: 1 })).toEqual({
       type: SET_CONFIG,
       config: { a: 1 },
@@ -222,31 +212,28 @@ describe("alertReducer", () => {
     expect(withProgress.items.map((i) => i.title)).toEqual(["T2", "T3", "P"]);
   });
 
-  it("updates, dismisses and clears by id", () => {
-    const state = run(createAlert("A", "M"), createAlert("B", "M"));
-    const updated = alertReducer(
-      state,
-      updateAlert("alert-1", { message: "N", type: "error" }),
+  it("drops the oldest transient toast before a sticky one", () => {
+    const state = run(
+      createAlert("E", "M", "error"),
+      createAlert("A", "M", "info"),
+      createAlert("B", "M", "info"),
+      createAlert("C", "M", "info"),
     );
-    expect(updated.items[0]).toMatchObject({
-      message: "N",
-      type: "error",
-      id: "alert-1",
-    });
-    expect(updated.items[1]).toBe(state.items[1]);
-    expect(
-      alertReducer(state, dismissAlert("alert-1")).items.map((i) => i.id),
-    ).toEqual(["alert-2"]);
+    expect(state.items.map((i) => i.title)).toEqual(["E", "B", "C"]);
+  });
+
+  it("clears by id and clears all", () => {
+    const state = run(createAlert("A", "M"), createAlert("B", "M"));
     expect(
       alertReducer(state, clearAlert("alert-2")).items.map((i) => i.id),
     ).toEqual(["alert-1"]);
     expect(alertReducer(state, clearAlert()).items).toEqual([]);
   });
 
-  it("does not reuse an id after a toast is dismissed", () => {
+  it("does not reuse an id after a toast is cleared", () => {
     const state = run(
       createAlert("A", "M"),
-      dismissAlert("alert-1"),
+      clearAlert("alert-1"),
       createAlert("B", "M"),
     );
     expect(state.items[0].id).toBe("alert-2");
