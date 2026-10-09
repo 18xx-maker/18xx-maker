@@ -50,8 +50,27 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
     // Saves a copy of a game that has no file (text, with the labels of the
     // save dialog) where the user chooses and gives its slug, or undefined
     // when the dialog is cancelled
-    saveGameAs: (name, text, title, filterName) =>
-      ipcRenderer.invoke("saveGameAs", name, text, title, filterName),
+    // `assets` (optional) is the asset map of the game, written to the folder
+    // of the copy
+    saveGameAs: (name, text, title, filterName, assets) =>
+      ipcRenderer.invoke("saveGameAs", name, text, title, filterName, assets),
+    // The custom images of a game file, read from its <game>.assets folder
+    // (an asset map, see util/assetNames)
+    loadAssets: (id) => ipcRenderer.invoke("loadAssets", id),
+    // Adds an image to the folder of a game file: kind is icons, logos or
+    // trains, bytes the file as an ArrayBuffer, options { replace }. Resolves
+    // with the stored { kind, name, value, replaced }; a failure has a code
+    // (game, kind, name, size, content, exists, limit, folder, unsafe, denied,
+    // readonly, full, failed) from the main process.
+    addAsset: (id, kind, name, bytes, options) =>
+      ipcRenderer
+        .invoke("addAsset", id, kind, name, bytes, options)
+        .catch((e) => {
+          const code = /asset:([a-z]+)/.exec(e?.message)?.[1];
+          throw Object.assign(new Error(e?.message ?? "asset:failed"), {
+            code: code ?? "failed",
+          });
+        }),
     loadSummaries: () => ipcRenderer.invoke("loadSummaries"),
     openGame: () =>
       ipcRenderer
@@ -96,6 +115,11 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
 
     // File > Save
     onSave: (callback) => ipcRenderer.on("save", () => callback()),
+
+    // The images of the open game file changed outside the app: the id of
+    // the electron game and its asset map (to be sanitized like any other)
+    onAssets: (callback) =>
+      ipcRenderer.on("assets", (_event, id, assets) => callback(id, assets)),
 
     onGame: (callback) =>
       ipcRenderer.on("game", (_event, game) => callback(game)),

@@ -2,6 +2,7 @@ import nodeFs from "node:fs";
 
 import { equals } from "ramda";
 
+import { assetsProblem } from "#export/assets";
 import { sanitizeFilename } from "#util/filename";
 
 // Writes the text of a game over its file, in place: the file keeps its
@@ -50,11 +51,20 @@ export const MAX_TEXT = 100 * 1024 * 1024;
 // The handler of the saveGameAs channel: a copy of a game that has no file
 // (a bundled game) saved where the user chooses. The page sends the suggested
 // name, the text and the (translated) labels of the dialog; the path is only
-// ever the one the save dialog returns, never one from the page. Gives the
-// slug of the new game, or undefined when the dialog is cancelled.
+// ever the one the save dialog returns, never one from the page. The custom
+// images of the game (an asset map, optional) are written to <new game>.assets
+// (writeAssets(path, assets)); they are capped like an export request's. Gives
+// the slug of the new game, or undefined when the dialog is cancelled.
 export const createSaveGameAs =
-  ({ isMain, showSaveDialog, saveGamePath, slugOfPath, fs = nodeFs }) =>
-  async (event, name, text, title, filterName) => {
+  ({
+    isMain,
+    showSaveDialog,
+    saveGamePath,
+    slugOfPath,
+    writeAssets,
+    fs = nodeFs,
+  }) =>
+  async (event, name, text, title, filterName, assets) => {
     if (!isMain(event)) throw new Error("Saving is not available here");
     if (
       typeof name !== "string" ||
@@ -63,7 +73,8 @@ export const createSaveGameAs =
       typeof title !== "string" ||
       title.length > MAX_LABEL ||
       typeof filterName !== "string" ||
-      filterName.length > MAX_LABEL
+      filterName.length > MAX_LABEL ||
+      (assets !== undefined && assetsProblem(assets) !== null)
     ) {
       throw new Error("Invalid game to save");
     }
@@ -92,6 +103,16 @@ export const createSaveGameAs =
       if (e?.code === "EEXIST")
         throw new Error(`${path} already exists`, { cause: e });
       throw e;
+    }
+
+    if (assets !== undefined) {
+      try {
+        writeAssets(path, assets);
+      } catch (e) {
+        throw new Error(`Saved ${path} but not its images: ${e.message}`, {
+          cause: e,
+        });
+      }
     }
 
     return slugOfPath(path) ?? (await saveGamePath(path));

@@ -378,6 +378,12 @@ export const saveGame =
     }
   };
 
+// The images to send with a copy of a game, none when it has none
+const assetsOf = (state, game) => {
+  const assets = state.assets?.[game.meta.slug];
+  return assets && assetTotals(assets).count > 0 ? assets : undefined;
+};
+
 // Saves a copy of a game that has no file (a bundled game) as a new game and
 // gives its slug, or undefined when the user cancels or it fails (with an
 // alert). It only writes and registers the file: the page of the new game
@@ -403,6 +409,7 @@ export const saveGameAs =
               text,
               dialog.title ?? "",
               dialog.filter ?? "",
+              assetsOf(getState(), game),
             )
           : backend === "picker"
             ? await idb.createGameFile(
@@ -413,7 +420,7 @@ export const saveGameAs =
 
       if (slug) {
         // The copy keeps the images of the game (the app's main process
-        // copies the folder of a file game)
+        // writes them next to the file)
         const assets = getState().assets?.[game.meta.slug];
         const copied =
           backend === "electron" || !assets || !assetTotals(assets).count

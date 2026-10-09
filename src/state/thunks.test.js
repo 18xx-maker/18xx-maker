@@ -409,7 +409,28 @@ describe("saveGameAs", () => {
       expect.any(String),
       "Save as",
       "Game",
+      undefined,
     );
+  });
+
+  it("sends the custom images of the game for the main process to write", async () => {
+    Object.assign(capability, { electron: true });
+    window.api = { saveGameAs: vi.fn(async () => "electron:abc") };
+    const star = '<svg viewBox="0 0 1 1"/>';
+    state = {
+      game: bundled(),
+      assets: {
+        "bundled:1889": { icons: { star }, logos: {}, trains: {} },
+      },
+    };
+
+    await run();
+
+    expect(window.api.saveGameAs.mock.calls[0][4]).toEqual({
+      icons: { star },
+      logos: {},
+      trains: {},
+    });
   });
 
   it("does nothing when the dialog is cancelled", async () => {

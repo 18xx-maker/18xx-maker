@@ -171,7 +171,8 @@ describe("loadAssetFolder", () => {
     expect(load().warnings).toEqual([]);
   });
 
-  describe("links", () => {
+  // Creating a link needs a privilege on Windows
+  describe.skipIf(process.platform === "win32")("links", () => {
     const outside = () => {
       const file = path.join(tmp, "outside.svg");
       fs.writeFileSync(file, SVG);

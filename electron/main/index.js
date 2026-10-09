@@ -6,6 +6,7 @@ import updater from "electron-updater";
 import { objOf } from "ramda";
 
 import { createAddRecent, fromMainWindow } from "#export/ipc";
+import { createAddAsset, writeAssetMap } from "./addAsset.js";
 import { exportOf } from "./capture.js";
 import {
   CONFIG_FILE,
@@ -17,6 +18,7 @@ import {
   slugOfPath,
 } from "./config.js";
 import { registerExport } from "./export.js";
+import { folderAssets } from "./folderAssets.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
 import { assertGamePath, guardHandle, guardOn, guardSync } from "./guard.js";
 import { createLoadGame } from "./loadGame.js";
@@ -164,8 +166,14 @@ ipcMain.handle(
       dialog.showSaveDialog(getMainWindow(), options),
     saveGamePath,
     slugOfPath,
+    writeAssets: writeAssetMap,
   }),
 );
+
+// The custom images of a game file (its <game>.assets folder). The page
+// sanitizes them; addAsset is the only thing in the app that writes there.
+handle("loadAssets", folderAssets.handler);
+handle("addAsset", createAddAsset({ summaryOf: getSummary }));
 
 ipcMain.handle(
   "saveGame",
