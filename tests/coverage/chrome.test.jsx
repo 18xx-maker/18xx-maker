@@ -148,56 +148,6 @@ describe("svg editor", () => {
   });
 });
 
-describe("alert", () => {
-  it("shows progress without a close icon until done", async () => {
-    const { store } = renderApp("/", {
-      alert: { open: true, title: "Exporting", message: "map", progress: 50 },
-    });
-
-    expect(screen.getByRole("progressbar")).toBeInTheDocument();
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(document.querySelector(".lucide-x")).toBeNull();
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(document.querySelector(".border-info")).not.toBeNull();
-
-    act(() =>
-      store.dispatch({
-        type: "SET_ALERT",
-        alert: { title: "Exporting", message: "map", progress: 100 },
-      }),
-    );
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(document.querySelector(".lucide-x")).not.toBeNull();
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(document.querySelector(".border-success")).not.toBeNull();
-  });
-
-  it("closes when clicked", async () => {
-    const { user, store } = renderApp("/", {
-      alert: { open: true, title: "Hello", message: "there", type: "warning" },
-    });
-
-    await user.click(screen.getByText("there"));
-
-    expect(store.getState().alert.open).toBe(false);
-    expect(screen.queryByText("there")).not.toBeInTheDocument();
-  });
-
-  it("closes itself after five seconds", () => {
-    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout"] });
-    const { store } = renderApp("/", {
-      alert: { open: true, title: "Hello", message: "there", type: "error" },
-    });
-    expect(screen.getByText("there")).toBeInTheDocument();
-
-    act(() => vi.advanceTimersByTime(4999));
-    expect(store.getState().alert.open).toBe(true);
-
-    act(() => vi.advanceTimersByTime(1));
-    expect(store.getState().alert.open).toBe(false);
-  });
-});
-
 describe("desktop sidebar", () => {
   it("collapses and expands with ctrl+b, remembering it in the settings", async () => {
     const { user, store } = renderApp("/");

@@ -1634,6 +1634,7 @@
     }
   },
   "alerts": {
+    "region": "通知",
     "error": "错误",
     "gameLoaded": "游戏已加载",
     "gameLoadedMessage": "已加载 {{title}}",

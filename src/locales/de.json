@@ -1634,6 +1634,7 @@
     }
   },
   "alerts": {
+    "region": "Benachrichtigungen",
     "error": "Fehler",
     "gameLoaded": "Spiel geladen",
     "gameLoadedMessage": "{{title}} geladen",
