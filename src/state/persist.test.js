@@ -231,9 +231,11 @@ describe("storage.listen", () => {
   });
 
   it("does not persist the transient ui state", async () => {
-    const { createSetExportMenuOpen } = await import("@/state/ui");
+    const { createSetExportMenuOpen, createSetLoadingGame } =
+      await import("@/state/ui");
     const store = await setup();
     store.dispatch(createSetExportMenuOpen(true));
+    store.dispatch(createSetLoadingGame("a.json", 1));
     store.dispatch(createGameProblemsDone("a", []));
 
     expect(window.localStorage.getItem("ui")).toBeNull();

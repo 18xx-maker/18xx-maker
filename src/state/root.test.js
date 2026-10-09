@@ -57,6 +57,7 @@ describe("root state contract", () => {
         "ui": {
           "exportMenuOpen": false,
           "exportSheetOpen": false,
+          "loadingGame": null,
           "panel": {},
         },
       }
@@ -171,6 +172,7 @@ describe("root state contract", () => {
         "ui": {
           "exportMenuOpen": false,
           "exportSheetOpen": false,
+          "loadingGame": null,
           "panel": {},
         },
         "update": {

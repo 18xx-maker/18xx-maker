@@ -6,34 +6,27 @@ import Viewport from "@/components/page/Viewport";
 import { useEditor } from "@/hooks";
 import { useMatch, useNavigate } from "@/router";
 import { loadGame } from "@/state";
-import { selectGameForSlug } from "@/state/selectors";
-import capability from "@/util/capability";
-import { getRenderInput } from "@/util/renderInput";
-
-const addRecent = (game) => {
-  // The capture windows of an export are not games the user opened
-  if (game && capability.electron && !getRenderInput()) {
-    window.api.addRecent(game.info.title, game.meta.slug);
-  }
-  return game;
-};
+import { selectGameForSlug, selectLoadingGame } from "@/state/selectors";
+import { addRecent } from "@/util/recent";
 
 const GamePage = ({ children }) => {
   const match = useMatch("/games/:slug/*");
   const game = useSelector((state) =>
     selectGameForSlug(state, match.params.slug),
   );
+  // A dropped game replaces the game before the route follows
+  const loading = useSelector(selectLoadingGame);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const inEditor = useEditor();
 
   useEffect(() => {
-    if (!game) {
+    if (!game && !loading) {
       dispatch(loadGame(match.params.slug))
         .then(addRecent)
         .catch(() => navigate("/games/"));
     }
-  }, [dispatch, game, navigate, match]);
+  }, [dispatch, game, loading, navigate, match]);
 
   // Wait for the game in the URL, a previously loaded game would otherwise
   // render under the new URL

@@ -401,13 +401,13 @@ describe("dropping without a place for the images", () => {
 
 describe("dropping a game file", () => {
   it("still opens a single .json file as a game", async () => {
-    opfs.saveGameFile.mockResolvedValue("abc");
+    opfs.saveGameFile.mockResolvedValue("18Test");
     const { router } = await renderWithGame();
 
     dropFiles([new File(["{}"], "game.json")]);
 
     await waitFor(() =>
-      expect(router.state.location.pathname).toBe("/games/abc/map"),
+      expect(router.state.location.pathname).toBe("/games/18Test/map"),
     );
   });
 

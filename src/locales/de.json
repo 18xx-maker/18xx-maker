@@ -1701,6 +1701,8 @@
   "alerts": {
     "region": "Benachrichtigungen",
     "error": "Fehler",
+    "loadingGame": "Spiel wird geöffnet…",
+    "loadingGameFile": "Datei: {{name}}",
     "gameLoaded": "Spiel geladen",
     "gameLoadedMessage": "{{title}} geladen",
     "dropNotFile": "Hier können nur Dateien abgelegt werden",

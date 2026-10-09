@@ -176,6 +176,7 @@ describe("export keys", () => {
       expect(store.getState().ui).toEqual({
         exportMenuOpen: false,
         exportSheetOpen: false,
+        loadingGame: null,
         panel: {},
       }),
     );
@@ -204,6 +205,7 @@ describe("export keys", () => {
     expect(store.getState().ui).toEqual({
       exportMenuOpen: false,
       exportSheetOpen: false,
+      loadingGame: null,
       panel: {},
     });
   });

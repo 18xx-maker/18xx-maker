@@ -1701,6 +1701,8 @@
   "alerts": {
     "region": "通知",
     "error": "错误",
+    "loadingGame": "正在打开游戏…",
+    "loadingGameFile": "文件：{{name}}",
     "gameLoaded": "游戏已加载",
     "gameLoadedMessage": "已加载 {{title}}",
     "dropNotFile": "这里只能拖放文件",

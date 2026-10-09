@@ -35,6 +35,7 @@ export const selectEditorKeys = (state) => {
 
 export const selectExportMenuOpen = (state) => !!state.ui?.exportMenuOpen;
 export const selectExportSheetOpen = (state) => !!state.ui?.exportSheetOpen;
+export const selectLoadingGame = (state) => state.ui?.loadingGame ?? null;
 export const selectPanelState = (state, key) => state.ui?.panel?.[key];
 
 // The redux game, whatever the route
