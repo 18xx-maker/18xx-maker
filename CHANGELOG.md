@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.0.0-beta.135](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.134...v1.0.0-beta.135) (2026-10-09)
+
+
+### :tada: Features
+
+* **electron:** add menu items for keyboard shortcuts ([#1058](https://github.com/18xx-maker/18xx-maker/issues/1058)) ([4c8ba6c](https://github.com/18xx-maker/18xx-maker/commit/4c8ba6c73e2df4ecf080e80e23f6b6a242a4174e))
+* **ui:** add map preview to the game info page ([#1055](https://github.com/18xx-maker/18xx-maker/issues/1055)) ([b2a3b90](https://github.com/18xx-maker/18xx-maker/commit/b2a3b90eabeabf5c27fa827a462543750e4d2300))
+* **ui:** add toolbar save button and cmd or ctrl+s ([#1057](https://github.com/18xx-maker/18xx-maker/issues/1057)) ([f0f4e0b](https://github.com/18xx-maker/18xx-maker/commit/f0f4e0b28be71815e7ba2e75713ca4f16cb9e2ec))
+
+
+### :bug: Bug Fixes
+
+* **ui:** open the first available section from the sidebar edit button ([#1054](https://github.com/18xx-maker/18xx-maker/issues/1054)) ([558f24e](https://github.com/18xx-maker/18xx-maker/commit/558f24e163e2dbd670518dd896421141001e9a7b))
+
+
+### :traffic_light: Tests
+
+* **game:** mock automatic validation in edit panel problems test ([#1060](https://github.com/18xx-maker/18xx-maker/issues/1060)) ([66a7cd2](https://github.com/18xx-maker/18xx-maker/commit/66a7cd2663a611ac817c412ee0da1fc691ad69c3))
+
 ## [1.0.0-beta.134](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.133...v1.0.0-beta.134) (2026-10-08)
 
 
