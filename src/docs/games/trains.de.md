@@ -53,8 +53,9 @@ unterstützen, die Programme wie [18xx.games](https://www.18xx.games/) brauchen.
 - **color** _erforderlich_ Die Farbe, die für den Titel dieses Zuges angezeigt
   wird.
 - **price** Der Preis dieses Zuges.
-- **image** Das Bild für diesen Zug (verfügbare Bilder findest du im Schema, im
-  Code oder in der Datei 18Test).
+- **image** Das Bild für diesen Zug (die eingebauten Bilder findest du im
+  Schema, im Code oder in der Datei 18Test) oder `custom/<name>` für ein
+  eigenes PNG ([Eigene Bilder](/docs/games/images)).
 - **phase** Setze dies auf `false`, wenn dieser Zug nicht in Phasentabellen
   erscheinen soll.
 - **print** Die Anzahl dieses Zuges, die gedruckt wird. Überschreibt das Feld

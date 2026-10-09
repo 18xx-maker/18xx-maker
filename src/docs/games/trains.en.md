@@ -46,7 +46,8 @@ needed for programs like [18xx.games](https://www.18xx.games/).
 - **color** _required_ The color to display for this trains title.
 - **price** The cost of this train.
 - **image** The image to use for this train (See schema, code or 18Test file for
-  available images).
+  the built-in images), or `custom/<name>` for one of your own PNG
+  [custom images](/docs/games/images).
 - **phase** Set this to `false` if you want this train to not appear on phase charts.
 - **print** This is the number of this train to print. Overrides the `quantity`
   field for printing. Required when quantity is set to "∞".
