@@ -1,10 +1,24 @@
+import "@tests/support/windowStub.js";
+
+import { defaultKeymap, historyKeymap } from "@codemirror/commands";
+import { foldKeymap } from "@codemirror/language";
+import { lintKeymap } from "@codemirror/lint";
+import { searchKeymap } from "@codemirror/search";
+
+import { keyTable } from "@/components/editPanel/editorKeyTable";
+
+import de from "@/locales/de.json";
+import en from "@/locales/en.json";
+import i18n from "@/locales/i18n";
+import { availableLanguages } from "@/locales/language";
+import zh from "@/locales/zh.json";
 import { gameNav } from "@/util/gameNav";
-import { guardOn } from "../../electron/main/guard.js";
 import {
   buildTemplate,
   createT,
   languages,
   menuLanguage,
+  nextLanguage,
 } from "../../electron/main/menuTemplate.js";
 
 const build = (options = {}) => {
@@ -34,8 +48,54 @@ const click = (id) => {
   return built.send;
 };
 
-// The accelerators of the role items and of the code editor, which the
-// accelerators of the items must not repeat
+// A key as its modifiers and key, whatever the notation: "Mod-Shift-f" of
+// CodeMirror and "CmdOrCtrl+Shift+F" of an accelerator are both "mod+shift+f".
+// Ctrl counts as Mod (Cmd on macOS is Ctrl elsewhere), a key with Alt is
+// dropped: the menu has none.
+const canonical = (key, separator) => {
+  const parts = key.split(separator);
+  const name = parts.pop().toLowerCase() || separator;
+  const modifiers = new Set(
+    parts.map((part) =>
+      ["mod", "ctrl", "cmd", "cmdorctrl", "meta"].includes(part.toLowerCase())
+        ? "mod"
+        : part.toLowerCase(),
+    ),
+  );
+  return modifiers.has("alt")
+    ? undefined
+    : [...[...modifiers].sort(), name].join("+");
+};
+
+// The keys of the JSON editor: its own table and the CodeMirror keymaps it
+// loads (JsonEditor.jsx), which the accelerators of the items must not repeat
+const editorKeys = new Set(
+  [
+    ...Object.values(keyTable.normal).flat(),
+    ...[
+      ...defaultKeymap,
+      ...historyKeymap,
+      ...foldKeymap,
+      ...searchKeymap,
+      ...lintKeymap,
+    ].flatMap(({ key, mac, win, linux }) => [
+      key,
+      // Ctrl on macOS (the Emacs keys) is not the Cmd of an accelerator
+      mac?.includes("Ctrl") ? undefined : mac,
+      win,
+      linux,
+    ]),
+  ]
+    .filter(Boolean)
+    .map((key) => canonical(key, "-"))
+    .filter(Boolean),
+);
+
+// The items that repeat an editor key on purpose or from before the menu: the
+// editor's save is the save of the menu, the others were there already
+const sharedWithEditor = ["CmdOrCtrl+S", "CmdOrCtrl+U", "CmdOrCtrl+D"];
+
+// The accelerators of the role items and of the system
 const reserved = [
   "CmdOrCtrl+R",
   "CmdOrCtrl+Shift+R",
@@ -48,14 +108,13 @@ const reserved = [
   "CmdOrCtrl+Q",
   "CmdOrCtrl+Z",
   "CmdOrCtrl+Shift+Z",
+  "CmdOrCtrl+Y",
   "CmdOrCtrl+X",
   "CmdOrCtrl+C",
   "CmdOrCtrl+V",
   "CmdOrCtrl+A",
-  "CmdOrCtrl+F",
-  "CmdOrCtrl+G",
-  "CmdOrCtrl+[",
-  "CmdOrCtrl+]",
+  "CmdOrCtrl+H",
+  "CmdOrCtrl+Q",
 ];
 
 describe("menuLanguage", () => {
@@ -74,40 +133,67 @@ describe("menuLanguage", () => {
   });
 });
 
-describe("the setLanguage channel", () => {
-  it("is ignored from a window that is not the main one", () => {
-    const apply = vi.fn();
-    const handler = guardOn(
-      (event) => event.main,
-      (event, tag) => apply(menuLanguage(tag)),
-    );
+describe("nextLanguage", () => {
+  it("is the supported language of the tag", () => {
+    expect(nextLanguage("en", "de")).toBe("de");
+    expect(nextLanguage("en", "zh-CN")).toBe("zh");
+  });
 
-    handler({ main: false }, "de");
-    expect(apply).not.toHaveBeenCalled();
-    handler({ main: true }, "de-DE");
-    expect(apply).toHaveBeenCalledWith("de");
+  it("is nothing when the menu is already in it", () => {
+    expect(nextLanguage("de", "de-DE")).toBeUndefined();
+    expect(nextLanguage("en", "en")).toBeUndefined();
+  });
+
+  it("is English for a language the menu does not have", () => {
+    // The language setting back to "System" in a system language without a
+    // translation
+    expect(nextLanguage("de", "fr")).toBe("en");
+    expect(nextLanguage("zh", "")).toBe("en");
+    expect(nextLanguage("en", "fr")).toBeUndefined();
+  });
+
+  it("ignores what is not a string", () => {
+    expect(nextLanguage("de", undefined)).toBeUndefined();
+    expect(nextLanguage("de", null)).toBeUndefined();
+    expect(nextLanguage("de", { toString: () => "en" })).toBeUndefined();
+  });
+
+  it("has the languages of the app", () => {
+    expect([...languages].sort()).toEqual(availableLanguages(i18n).sort());
   });
 });
 
 describe("the menu template", () => {
-  it("has a label for every item in every language", () => {
-    for (const language of languages) {
-      const t = createT(language);
-      const missing = flatten(build({ t, recents: [] }).template).filter(
-        (item) =>
-          item.label !== undefined && /^(menu|nav|game)\./.test(item.label),
-      );
-      expect(missing).toEqual([]);
+  it("has every string it uses in every locale file", () => {
+    // The keys the template asks for, on both platforms
+    const keys = new Set();
+    for (const isMac of [false, true]) {
+      build({
+        isMac,
+        t: (key) => {
+          keys.add(key);
+          return key;
+        },
+      });
     }
-    // And they are not all English
-    expect(createT("de")("menu.file")).not.toBe(createT("en")("menu.file"));
-    expect(createT("zh")("menu.file")).not.toBe(createT("en")("menu.file"));
-    expect(createT("de")("nope")).toBe("nope");
+    expect(keys.size).toBeGreaterThan(30);
+    expect(keys).toContain("elements.tiles.title");
+
+    const lookup = (strings, key) =>
+      key.split(".").reduce((value, part) => value?.[part], strings);
+    for (const [language, strings] of Object.entries({ en, de, zh })) {
+      const missing = [...keys].filter(
+        (key) => typeof lookup(strings, key) !== "string",
+      );
+      expect({ language, missing }).toEqual({ language, missing: [] });
+    }
+    expect(languages.sort()).toEqual(["de", "en", "zh"]);
   });
 
-  it("falls back to English for a missing string", () => {
-    expect(createT("de")("menu.file")).toBeTruthy();
-    expect(createT("xx")("nav.home")).toBe("Home");
+  it("is in the language of the menu", () => {
+    expect(createT("de")("menu.file")).toBe(de.menu.file);
+    expect(createT("zh")("menu.file")).toBe(zh.menu.file);
+    expect(createT("de")("menu.file")).not.toBe(en.menu.file);
   });
 
   it("has unique accelerators that are not bare letters or Ctrl+Alt", () => {
@@ -119,8 +205,14 @@ describe("the menu template", () => {
     for (const accelerator of accelerators) {
       expect(accelerator).toMatch(/^CmdOrCtrl\+/);
       expect(accelerator).not.toMatch(/Alt/);
-      expect(reserved).not.toContain(accelerator);
     }
+    expect(accelerators.filter((a) => reserved.includes(a))).toEqual([]);
+    expect(
+      accelerators.filter(
+        (a) =>
+          !sharedWithEditor.includes(a) && editorKeys.has(canonical(a, "+")),
+      ),
+    ).toEqual([]);
   });
 
   it("shows the sidebar key without registering it", () => {
@@ -192,7 +284,7 @@ describe("the menu template", () => {
     named("1889").click();
     expect(send).toHaveBeenCalledWith("redirect", "/games/1889/map");
     expect(byId("save").accelerator).toBe("CmdOrCtrl+S");
-    expect(named("App Info").accelerator).toBe("CmdOrCtrl+U");
+    expect(named("App Information").accelerator).toBe("CmdOrCtrl+U");
     expect(named("Documentation").accelerator).toBe("CmdOrCtrl+D");
     expect(
       all.filter((item) => item.accelerator === "CmdOrCtrl+E"),

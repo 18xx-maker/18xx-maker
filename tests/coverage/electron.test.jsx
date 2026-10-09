@@ -834,16 +834,86 @@ describe("electron menu commands", () => {
     // eslint-disable-next-line testing-library/no-node-access
     document.querySelector("[data-collapsible]");
 
-  it.for([
-    ["l", "/games/"],
-    ["h", "/"],
-    ["m", "/docs"],
-  ])("%s goes to %s like the key", async ([key, path]) => {
-    const { router } = renderApp(path === "/" ? "/docs" : "/");
+  it("x opens the export menu on a game page", async () => {
+    const { store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
 
-    await menu(key);
+    await menu("x");
 
-    expect(router.state.location.pathname).toBe(path);
+    expect(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    ).toBeInTheDocument();
+    expect(store.getState().ui.exportMenuOpen).toBe(true);
+  });
+
+  it("d downloads the loaded game", async () => {
+    const create = vi
+      .spyOn(URL, "createObjectURL")
+      .mockImplementation(() => "blob:game");
+    vi.spyOn(URL, "revokeObjectURL").mockImplementation(() => {});
+    const click = vi
+      .spyOn(HTMLAnchorElement.prototype, "click")
+      .mockImplementation(() => {});
+    renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("d");
+
+    expect(create).toHaveBeenCalledTimes(1);
+    expect(click).toHaveBeenCalledTimes(1);
+    vi.restoreAllMocks();
+  });
+
+  it("e toggles the edit panel", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("e");
+    await waitFor(() => expect(router.state.location.search).toContain("edit"));
+    await menu("e");
+    await waitFor(() =>
+      expect(router.state.location.search).not.toContain("edit"),
+    );
+  });
+
+  it("/ focuses the field search of the open edit panel", async () => {
+    renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    // Closed: there is no search to focus
+    await menu("/");
+    expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
+
+    await menu("e");
+    const search = await screen.findByRole("searchbox", {
+      name: "Find a field",
+    });
+    await menu("/");
+    expect(search).toHaveFocus();
+  });
+
+  it("n toggles the pagination of a section that has it", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+
+    await menu("n");
+    await waitFor(() =>
+      expect(router.state.location.search).toContain("paginated"),
+    );
+    await menu("n");
+    await waitFor(() =>
+      expect(router.state.location.search).not.toContain("paginated"),
+    );
+  });
+
+  it("g goes to the loaded game from another page", async () => {
+    const { router } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+    await act(() => router.navigate("/"));
+
+    await menu("g");
+
+    expect(router.state.location.pathname).toBe("/games/18Test");
   });
 
   it("goes to the sections of the game and cycles them", async () => {
@@ -898,6 +968,21 @@ describe("electron menu commands", () => {
     await menu("?");
     await waitFor(() =>
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+  });
+
+  it("closes the shortcuts dialog before the sidebar and the view keys", async () => {
+    renderApp("/");
+    await menu("?");
+    await screen.findByRole("dialog");
+
+    await menu("mod+b");
+
+    await waitFor(() =>
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+    );
+    await waitFor(() =>
+      expect(desktopSidebar()).toHaveAttribute("data-state", "collapsed"),
     );
   });
 

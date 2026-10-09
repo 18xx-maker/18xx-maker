@@ -36,13 +36,13 @@ für das geladene Spiel tun nichts, wenn kein Spiel geladen ist.
   die Spieldatei, und _Beenden_.
 - **Bearbeiten**: die üblichen Befehle zum Rückgängigmachen, Ausschneiden,
   Kopieren und Einfügen, dann _Spiel bearbeiten_ (`Strg+Umschalt+Y`), _Als JSON
-  bearbeiten_ (`Strg+J`) und _Feld suchen_ (`Strg+Umschalt+F`).
-- **Ansicht**: Neu laden, Entwicklerwerkzeuge, _App-Info_ (`Strg+U`),
-  _Seitenumbruch_ (`Strg+Umschalt+P`), _Konfiguration_ (`Strg+Umschalt+C`),
+  bearbeiten_ (`Strg+J`) und _Feld suchen_ (`Strg+Umschalt+T`).
+- **Ansicht**: Neu laden, Entwicklerwerkzeuge, _App-Informationen_ (`Strg+U`),
+  _Auf Seiten aufteilen_ (`Strg+Umschalt+P`), _Konfiguration_ (`Strg+Umschalt+C`),
   _Ansicht zurücksetzen_ (`Strg+Umschalt+V`), _Seitenleiste umschalten_
   (`Strg+B`), Zoom und Vollbild.
 - **Gehe zu**: _Startseite_ (`Strg+Umschalt+H`), _Spiele laden_ (`Strg+L`),
-  _Aktuelles Spiel_ (`Strg+Umschalt+K`), der vorherige und nächste Abschnitt
+  _Aktuelles Spiel_ (`Strg+Umschalt+N`), der vorherige und nächste Abschnitt
   oder die Seite (`Strg+Bild auf` und `Strg+Bild ab`), die Abschnitte eines
   Spiels (`Strg+1` bis `Strg+9`, der letzte hat kein Kürzel) und die
   _Elemente_-Seiten.

@@ -8,9 +8,10 @@ import { gameNav } from "@/util/gameNav";
 //
 // A menu item that stands for a key of the app sends it to the page over the
 // "menu" channel (see runKey in src/hooks/bindings.js), the others redirect.
-// Accelerators are never bare letters (the page owns those), never Ctrl+Alt
-// (AltGr on Windows), and none that the code editor binds (Mod-f, Mod-g,
-// Mod-[, Mod-]) or the system reserves.
+// Accelerators are never bare letters (the page owns those), never Alt
+// (Ctrl+Alt is AltGr on Windows), and none that the code editor binds (its
+// key table and the CodeMirror keymaps, see menu.test.js) or the system
+// reserves.
 
 const locales = { en, de, zh };
 
@@ -21,6 +22,16 @@ export const menuLanguage = (tag) => {
   const language =
     typeof tag === "string" ? tag.split(/[-_]/)[0].toLowerCase() : undefined;
   return languages.includes(language) ? language : undefined;
+};
+
+// The language the menu changes to for the tag the page sends: the supported
+// one, English for any other string (the page resolved "System" to a language
+// the menu does not have), nothing for what is not a string. It is undefined
+// when the menu is already in it.
+export const nextLanguage = (current, tag) => {
+  if (typeof tag !== "string") return undefined;
+  const next = menuLanguage(tag) ?? "en";
+  return next === current ? undefined : next;
 };
 
 const lookup = (strings, key) =>
@@ -137,7 +148,7 @@ export const buildTemplate = ({ isMac, appName, recents, t, send, open }) => {
         {
           label: t("menu.findField"),
           id: "find",
-          accelerator: "CmdOrCtrl+Shift+F",
+          accelerator: "CmdOrCtrl+Shift+T",
           click: command("/"),
         },
       ],
@@ -150,19 +161,19 @@ export const buildTemplate = ({ isMac, appName, recents, t, send, open }) => {
         { role: "toggledevtools" },
         { type: "separator" },
         {
-          label: t("menu.appInfo"),
+          label: t("app.title"),
           accelerator: "CmdOrCtrl+U",
           click: () => redirect("/app"),
         },
         { type: "separator" },
         {
-          label: t("menu.paginate"),
+          label: t("game.paginated"),
           id: "paginate",
           accelerator: "CmdOrCtrl+Shift+P",
           click: command("n"),
         },
         {
-          label: t("menu.config"),
+          label: t("config.toggle"),
           id: "config",
           accelerator: "CmdOrCtrl+Shift+C",
           click: command("c"),
@@ -175,7 +186,7 @@ export const buildTemplate = ({ isMac, appName, recents, t, send, open }) => {
         },
         {
           // The page handles Cmd/Ctrl+B itself, the item only shows the key
-          label: t("menu.toggleSidebar"),
+          label: t("ui.toggleSidebar"),
           id: "sidebar",
           accelerator: "CmdOrCtrl+B",
           registerAccelerator: false,
@@ -207,7 +218,7 @@ export const buildTemplate = ({ isMac, appName, recents, t, send, open }) => {
         {
           label: t("menu.currentGame"),
           id: "current-game",
-          accelerator: "CmdOrCtrl+Shift+K",
+          accelerator: "CmdOrCtrl+Shift+N",
           click: command("g"),
         },
         { type: "separator" },

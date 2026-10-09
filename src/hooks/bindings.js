@@ -401,6 +401,16 @@ export const useBindings = () => {
   // "mod+b" the sidebar's (ui/sidebar). A future "v" binding here would fire
   // twice.
   const run = (command, afterShortcuts = false) => {
+    if (command === "c" && !viewingGame) return;
+
+    // An open shortcuts dialog is closed first, and the command runs once the
+    // page has the closed state
+    if (shortcuts) {
+      setShortcuts(false);
+      if (command !== "?") setTimeout(() => latest.current(command, true), 0);
+      return;
+    }
+
     if (command === "mod+b") {
       window.dispatchEvent(
         new KeyboardEvent("keydown", { key: "b", ctrlKey: true }),
@@ -409,15 +419,6 @@ export const useBindings = () => {
     }
     if (command === "v") {
       document.dispatchEvent(new KeyboardEvent("keydown", { key: "v" }));
-      return;
-    }
-    if (command === "c" && !viewingGame) return;
-
-    // An open shortcuts dialog is closed first, and the command runs once the
-    // page has the closed state
-    if (shortcuts) {
-      setShortcuts(false);
-      if (command !== "?") setTimeout(() => latest.current(command, true), 0);
       return;
     }
 

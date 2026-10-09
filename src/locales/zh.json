@@ -1670,18 +1670,14 @@
     "editJson": "以 JSON 编辑",
     "findField": "查找字段",
     "view": "视图",
-    "appInfo": "应用信息",
-    "paginate": "分页",
-    "config": "配置",
     "resetView": "重置视图",
-    "toggleSidebar": "切换侧边栏",
     "go": "前往",
     "currentGame": "当前游戏",
-    "previous": "上一个章节或页面",
-    "next": "下一个章节或页面",
+    "previous": "上一个部分或页面",
+    "next": "下一个部分或页面",
     "help": "帮助",
     "docs": "文档",
-    "shortcuts": "键盘快捷键"
+    "shortcuts": "快捷键"
   },
   "shortcuts": {
     "title": "快捷键",

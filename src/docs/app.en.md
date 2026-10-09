@@ -33,12 +33,12 @@ loaded game do nothing when no game is loaded.
   (`Ctrl+Shift+D`) saves the game file, and _Quit_.
 - **Edit**: the usual undo, cut, copy and paste commands, then _Edit Game_
   (`Ctrl+Shift+Y`), _Edit as JSON_ (`Ctrl+J`) and _Find Field_
-  (`Ctrl+Shift+F`).
-- **View**: reload, developer tools, _App Info_ (`Ctrl+U`), _Paginate_
+  (`Ctrl+Shift+T`).
+- **View**: reload, developer tools, _App Information_ (`Ctrl+U`), _Paginate_
   (`Ctrl+Shift+P`), _Config_ (`Ctrl+Shift+C`), _Reset View_ (`Ctrl+Shift+V`),
   _Toggle Sidebar_ (`Ctrl+B`), zoom and full screen.
 - **Go**: _Home_ (`Ctrl+Shift+H`), _Load Games_ (`Ctrl+L`), _Current Game_
-  (`Ctrl+Shift+K`), the previous and next section or page (`Ctrl+PageUp` and
+  (`Ctrl+Shift+N`), the previous and next section or page (`Ctrl+PageUp` and
   `Ctrl+PageDown`), the sections of a game (`Ctrl+1` to `Ctrl+9`, the last one
   has no key) and the _Elements_ pages.
 - **Window**: the window commands of your system.
@@ -53,7 +53,7 @@ shortcuts that work inside the pages are listed under
 
 ## App Info
 
-_App Info_ (in the _View_ menu, or `Ctrl+U`) shows:
+_App Information_ (in the _View_ menu, or `Ctrl+U`) shows:
 
 - the versions of your system, Electron, Chrome and 18xx Maker you are running,
 - the updates (below),
