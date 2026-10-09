@@ -52,16 +52,32 @@ export const upgrade = (db, transaction, oldVersion) => {
   }
 };
 
+// Opens the database. A connection gives way when another tab upgrades the
+// database (onversionchange), and an open that another tab's older connection
+// holds up (blocked) is an error instead of a wait with no end.
 export const openDB = () => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(NAME, VERSION);
+    let failed = false;
 
     request.onerror = () => {
       reject(request.error);
     };
 
+    request.onblocked = () => {
+      failed = true;
+      reject(new Error("The database is in use by another tab"));
+    };
+
     request.onsuccess = () => {
-      resolve(request.result);
+      const db = request.result;
+      if (failed) {
+        // The open finished after it was given up on
+        db.close();
+        return;
+      }
+      db.onversionchange = () => db.close();
+      resolve(db);
     };
 
     request.onupgradeneeded = (event) => {

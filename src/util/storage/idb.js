@@ -19,18 +19,17 @@ const meta = (id) => ({
   slug: slug(id),
 });
 const op = (store_name, op, write = false) => {
-  return openDB().then(
-    (db) =>
-      new Promise((resolve, reject) => {
-        const transaction = db.transaction(
-          [store_name],
-          write ? "readwrite" : "readonly",
-        );
-        const store = transaction.objectStore(store_name);
-        const request = op(store);
-        request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error);
-      }),
+  return openDB().then((db) =>
+    new Promise((resolve, reject) => {
+      const transaction = db.transaction(
+        [store_name],
+        write ? "readwrite" : "readonly",
+      );
+      const store = transaction.objectStore(store_name);
+      const request = op(store);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    }).finally(() => db.close()),
   );
 };
 
