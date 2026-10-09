@@ -1,114 +1,38 @@
 import { Menu, app } from "electron";
 
-import { map } from "ramda";
-
 import { getRecents } from "./config.js";
 import { openGame } from "./game.js";
+import { buildTemplate, createT, menuLanguage } from "./menuTemplate.js";
 import { send } from "./util.js";
 
 const isMac = process.platform === "darwin";
 
-const redirect = (route) => send("redirect", route);
+// The language of the menu: the app's own setting, sent by the page, else the
+// system's
+let language = menuLanguage(app.getLocale()) ?? "en";
 
 const openGameAndRedirect = () =>
   openGame()
-    .then((slug) => slug && redirect(`/games/${slug}/map`))
+    .then((slug) => slug && send("redirect", `/games/${slug}/map`))
     .catch((e) => send("alert", "Error", e.message, "error"));
 
 export const setMenu = () => {
-  const recents = map(
-    ({ title, slug }) => ({
-      label: title,
-      click: () => redirect(`/games/${slug}/map`),
-    }),
-    getRecents(),
-  );
+  const template = buildTemplate({
+    isMac,
+    appName: app.name,
+    recents: getRecents(),
+    t: createT(language),
+    send,
+    open: openGameAndRedirect,
+  });
 
-  const template = [
-    ...(isMac
-      ? [
-          {
-            label: app.name,
-            submenu: [
-              { role: "about" },
-              { type: "separator" },
-              { role: "services" },
-              { type: "separator" },
-              { role: "hide" },
-              { role: "hideothers" },
-              { role: "unhide" },
-              { type: "separator" },
-              { role: "quit" },
-            ],
-          },
-        ]
-      : []),
-    {
-      label: "&File",
-      submenu: [
-        {
-          label: "Open",
-          accelerator: "CmdOrCtrl+O",
-          click: openGameAndRedirect,
-        },
-        {
-          label: "Open Recents",
-          submenu: recents,
-        },
-        {
-          label: "Save",
-          id: "save",
-          accelerator: "CmdOrCtrl+S",
-          click: () => send("save"),
-        },
-        { type: "separator" },
-        { role: "quit" },
-      ],
-    },
-    {
-      role: "editMenu",
-    },
-    {
-      label: "View",
-      submenu: [
-        { role: "reload" },
-        { role: "forcereload" },
-        { role: "toggledevtools" },
-        { type: "separator" },
-        {
-          label: "App Info",
-          accelerator: "CmdOrCtrl+U",
-          click: () => redirect("/app"),
-        },
-        { type: "separator" },
-        { role: "resetzoom" },
-        { role: "zoomin" },
-        { role: "zoomout" },
-        { type: "separator" },
-        { role: "togglefullscreen" },
-      ],
-    },
-    {
-      role: "windowMenu",
-    },
-    {
-      label: "&Help",
-      role: "help",
-      submenu: [
-        {
-          label: "Documentation",
-          accelerator: "CmdOrCtrl+D",
-          click: () => redirect("/docs"),
-        },
-        {
-          label: "Elements",
-          accelerator: "CmdOrCtrl+E",
-          click: () => redirect("/elements"),
-        },
-      ],
-    },
-  ];
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+};
 
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
+// A language the menu does not have is ignored
+export const setMenuLanguage = (tag) => {
+  const next = menuLanguage(tag);
+  if (!next || next === language) return;
+  language = next;
+  setMenu();
 };

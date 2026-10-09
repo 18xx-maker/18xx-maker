@@ -89,6 +89,8 @@ const openInApp = (route, extra) => {
     onSave: (callback) => {
       menuSave = callback;
     },
+    onMenu: noop,
+    setLanguage: noop,
     onGame: noop,
     onUpdate: noop,
     onDownloadProgress: noop,

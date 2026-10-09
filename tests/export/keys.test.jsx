@@ -35,6 +35,8 @@ beforeEach(async () => {
     onProgress: vi.fn(),
     onRedirect: vi.fn(),
     onSave: vi.fn(),
+    onMenu: vi.fn(),
+    setLanguage: vi.fn(),
     onUpdate: vi.fn(),
   });
 });

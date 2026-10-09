@@ -20,7 +20,7 @@ import { registerExport } from "./export.js";
 import { TYPE, loadGame, openGame, saveGamePath } from "./game.js";
 import { assertGamePath, guardHandle, guardOn, guardSync } from "./guard.js";
 import { createLoadGame } from "./loadGame.js";
-import { setMenu } from "./menu.js";
+import { setMenu, setMenuLanguage } from "./menu.js";
 import { createNewGame } from "./newGame.js";
 import { createSaveGame, createSaveGameAs } from "./saveFile.js";
 import { send } from "./util.js";
@@ -99,6 +99,7 @@ on("downloadUpdate", () =>
     .downloadUpdate()
     .catch((e) => console.error("Unable to download the update:", e)),
 );
+on("setLanguage", (event, tag) => setMenuLanguage(tag));
 on("deleteGame", (event, id) => {
   stopWatching(id);
   deleteGame(id);

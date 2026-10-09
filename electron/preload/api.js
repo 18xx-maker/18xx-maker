@@ -88,6 +88,12 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
     onRedirect: (callback) =>
       ipcRenderer.on("redirect", (_event, path) => callback(path)),
 
+    // The menu items that stand for a key of the app (see runKey)
+    onMenu: (callback) =>
+      ipcRenderer.on("menu", (_event, key) => callback(key)),
+    // The app's language, for the labels of the menu
+    setLanguage: (language) => ipcRenderer.send("setLanguage", language),
+
     // File > Save
     onSave: (callback) => ipcRenderer.on("save", () => callback()),
 
