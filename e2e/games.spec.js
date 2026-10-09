@@ -276,10 +276,17 @@ test.describe("bundled games", () => {
     const train = panel
       .getByRole("listitem")
       .nth(count)
-      .getByRole("textbox", { name: "Train" });
-    await train.fill("4H\n2M");
+      .getByRole("combobox", { name: "Train" });
+    await train.fill("4H");
+    await train.press("Enter");
+    await train.fill("2M");
     await train.blur();
-    await expect(train).toHaveValue("4H\n2M");
+    await expect(
+      panel.getByRole("button", { name: "Remove 4H" }),
+    ).toBeVisible();
+    await expect(
+      panel.getByRole("button", { name: "Remove 2M" }),
+    ).toBeVisible();
 
     await panel.getByRole("button", { name: `Remove phase ${name}` }).click();
     await expect(panel.getByRole("listitem")).toHaveCount(count);

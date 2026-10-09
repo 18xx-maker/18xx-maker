@@ -50,6 +50,7 @@ import {
   schemaAt,
   setValue,
   valueAt,
+  widgetOf,
 } from "./resolve";
 
 describe("resolveSchema", () => {
@@ -1340,6 +1341,13 @@ describe("referenceOf", () => {
     expect(referenceOf(at("phases", 0, "on"), schema)?.mode).toBe("either");
   });
 
+  it("is a string or a list for the train of a phase", () => {
+    expect(referenceOf(at("phases", 0, "train"), schema)).toEqual({
+      ref: train,
+      mode: "either",
+    });
+  });
+
   it("is a list for a list of names, even with objects in it", () => {
     expect(
       referenceOf(at("stock", "market", 0, 0, "companies"), schema),
@@ -1354,8 +1362,45 @@ describe("referenceOf", () => {
   it("is not one for a field of another type", () => {
     expect(referenceOf(at("trains", 0, "price"), schema)).toBeUndefined();
     expect(referenceOf(at("phases", 0, "limit"), schema)).toBeUndefined();
-    expect(referenceOf(at("phases", 0, "train"), schema)).toBeUndefined();
     expect(referenceOf(undefined, schema)).toBeUndefined();
+  });
+});
+
+describe("widgetOf", () => {
+  const at = (...keys) => schemaAt(schema, keys);
+
+  it("names the picker of a string", () => {
+    expect(widgetOf(at("info", "publisher"), schema)).toBe("publisher");
+    expect(widgetOf(at("companies", 0, "logo"), schema)).toBe("logo");
+    expect(widgetOf(at("privates", 0, "icon"), schema)).toBe("icon");
+    expect(widgetOf(at("stock", "legend", 0, "icon"), schema)).toBe("icon");
+  });
+
+  it("follows $ref to the game token", () => {
+    expect(widgetOf(at("tokens", 0, "icon"), schema)).toBe("icon");
+    expect(widgetOf(at("tokens", 0, "logo"), schema)).toBe("logo");
+  });
+
+  it("finds the string among the alternatives of a oneOf", () => {
+    const root = {
+      definitions: { icon: { type: "string", "x-widget": "icon" } },
+    };
+    const node = {
+      oneOf: [
+        { type: "null" },
+        { oneOf: [{ type: "number" }, { $ref: "#/definitions/icon" }] },
+      ],
+    };
+    expect(widgetOf(node, root)).toBe("icon");
+  });
+
+  it("is not one for other fields", () => {
+    expect(widgetOf(at("info", "title"), schema)).toBeUndefined();
+    expect(widgetOf(at("companies", 0, "color"), schema)).toBeUndefined();
+    expect(
+      widgetOf({ type: "number", "x-widget": "icon" }, {}),
+    ).toBeUndefined();
+    expect(widgetOf(undefined, schema)).toBeUndefined();
   });
 });
 

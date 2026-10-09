@@ -2014,11 +2014,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
         },
         "logoWidth": { "type": "number", "description": "Breite des Logos." },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "Name eines Icons, das auf den Token gezeichnet wird."
         },
         "iconWidth": { "type": "number", "description": "Breite des Icons." },
@@ -2269,11 +2271,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
         },
         "logoWidth": { "type": "number", "description": "Breite des Logos." },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "Name eines Icons, das auf den Token gezeichnet wird."
         },
         "iconWidth": { "type": "number", "description": "Breite des Icons." },
@@ -2536,11 +2540,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "Name eines svg-Logos, das auf den Token gezeichnet wird."
         },
         "logoWidth": { "type": "number", "description": "Breite des Logos." },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "Name eines Icons, das auf den Token gezeichnet wird."
         },
         "iconWidth": { "type": "number", "description": "Breite des Icons." },

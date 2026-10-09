@@ -1874,12 +1874,20 @@
       "type": "object",
       "description": "schema.tiles.token",
       "properties": {
-        "logo": { "type": "string", "description": "schema.tiles.token.logo" },
+        "logo": {
+          "type": "string",
+          "x-widget": "logo",
+          "description": "schema.tiles.token.logo"
+        },
         "logoWidth": {
           "type": "number",
           "description": "schema.tiles.token.logoWidth"
         },
-        "icon": { "type": "string", "description": "schema.tiles.token.icon" },
+        "icon": {
+          "type": "string",
+          "x-widget": "icon",
+          "description": "schema.tiles.token.icon"
+        },
         "iconWidth": {
           "type": "number",
           "description": "schema.tiles.token.iconWidth"
@@ -2147,12 +2155,20 @@
       "type": "object",
       "description": "schema.tiles.gameToken",
       "properties": {
-        "logo": { "type": "string", "description": "schema.tiles.token.logo" },
+        "logo": {
+          "type": "string",
+          "x-widget": "logo",
+          "description": "schema.tiles.token.logo"
+        },
         "logoWidth": {
           "type": "number",
           "description": "schema.tiles.token.logoWidth"
         },
-        "icon": { "type": "string", "description": "schema.tiles.token.icon" },
+        "icon": {
+          "type": "string",
+          "x-widget": "icon",
+          "description": "schema.tiles.token.icon"
+        },
         "iconWidth": {
           "type": "number",
           "description": "schema.tiles.token.iconWidth"
@@ -2432,12 +2448,20 @@
       "type": "object",
       "description": "schema.tiles.roundToken",
       "properties": {
-        "logo": { "type": "string", "description": "schema.tiles.token.logo" },
+        "logo": {
+          "type": "string",
+          "x-widget": "logo",
+          "description": "schema.tiles.token.logo"
+        },
         "logoWidth": {
           "type": "number",
           "description": "schema.tiles.token.logoWidth"
         },
-        "icon": { "type": "string", "description": "schema.tiles.token.icon" },
+        "icon": {
+          "type": "string",
+          "x-widget": "icon",
+          "description": "schema.tiles.token.icon"
+        },
         "iconWidth": {
           "type": "number",
           "description": "schema.tiles.token.iconWidth"

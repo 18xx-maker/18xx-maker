@@ -9,17 +9,24 @@ import {
   useField,
 } from "@/components/schemaForm/SchemaField";
 
-import { icons, logos } from "@/data";
+import { icons, logos, publishers } from "@/data";
 
-const ASSETS = { icon: icons, logo: logos };
+export const ASSETS = { icon: icons, logo: logos, publisher: publishers };
 
-// The name of an icon or a logo: the ones of the app as suggestions, any other
+// The name of an icon, a logo or a publisher: the ones of the app as suggestions, any other
 // name stays as typed (a game can bring its own), with a hint
 const AssetPicker = ({ keys, schema, asset }) => {
   const { t } = useTranslation();
   const field = useField(keys, schema);
   const names = useMemo(() => Object.keys(ASSETS[asset]).sort(), [asset]);
-  const options = useMemo(() => names.map((value) => ({ value })), [names]);
+  const options = useMemo(
+    () =>
+      names.map((value) => ({
+        value,
+        ...(asset === "publisher" && { label: publishers[value].name }),
+      })),
+    [names, asset],
+  );
   const draft = useDraft(field.value, (text) =>
     text.trim() === "" ? field.clear() : field.set(text.trim()),
   );

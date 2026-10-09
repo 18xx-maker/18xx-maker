@@ -1,3 +1,4 @@
+import AssetPicker from "@/components/schemaForm/AssetPicker";
 import ReferenceField from "@/components/schemaForm/ReferenceField";
 import { JsonField } from "@/components/schemaForm/SchemaField";
 import { StringArrayField } from "@/components/schemaForm/fields/StringFields";
@@ -6,6 +7,7 @@ import {
   referenceOf,
   resolveAllOf,
   valueAt,
+  widgetOf,
 } from "@/components/schemaForm/resolve";
 import { TokenEditField } from "@/components/tokenEditor/TokenEditButton";
 
@@ -32,6 +34,20 @@ export const overrides = [
         : undefined;
     },
     render: (props) => <ReferenceField {...props} />,
+  },
+  {
+    // A string the schema says is the name of an icon, a logo or a publisher of
+    // the app: a combobox of those names. A value that is not a string stays in
+    // the JSON field.
+    match: (node, keys, { root, game }) => {
+      const asset = widgetOf(node, root);
+      if (!asset) return undefined;
+      const value = valueAt(keys, game);
+      return value === undefined || typeof value === "string"
+        ? { asset }
+        : undefined;
+    },
+    render: (props) => <AssetPicker {...props} />,
   },
   {
     // The token of a company or a private: its drawing and a button that opens

@@ -1,14 +1,22 @@
+import "../../tests/support/windowStub.js";
+
 import fs from "node:fs";
 import path from "node:path";
 
 import { path as getIn } from "ramda";
 
-import { resolveAllOf } from "@/components/schemaForm/resolve";
+import { ASSETS } from "@/components/schemaForm/AssetPicker";
+import {
+  resolveAllOf,
+  schemaAt,
+  widgetOf,
+} from "@/components/schemaForm/resolve";
 
+import appEn from "@/locales/en.json";
 import en from "@/locales/schema.en.json";
 import schema from "@/schemas/game.schema.json";
 import { resolveSchemaKeys } from "@/util/schemaKeys";
-import { refOptions, refPaths } from "@/util/schemaRefs";
+import { annotatedPaths, refOptions, refPaths } from "@/util/schemaRefs";
 
 const ref = { from: "companies", key: "abbrev", label: "name" };
 
@@ -146,6 +154,14 @@ describe("the x-ref annotations of the game schema", () => {
     },
   );
 
+  it("names the train of a phase, as a string and as a list", () => {
+    const train = { from: "trains", key: "name" };
+    const find = (keys) =>
+      paths.find((p) => p.path.join(".") === keys.join("."));
+    expect(find(["phases", "*", "train"])?.ref).toEqual(train);
+    expect(find(["phases", "*", "train", "*"])?.ref).toEqual(train);
+  });
+
   it("is the same in the published schema", () => {
     const published = fs.readFileSync(
       path.join(import.meta.dirname, "../../public/schemas/game.schema.json"),
@@ -153,4 +169,26 @@ describe("the x-ref annotations of the game schema", () => {
     );
     expect(JSON.parse(published)).toEqual(resolveSchemaKeys(schema, en));
   });
+});
+
+describe("the x-widget annotations of the schemas", () => {
+  const leaves = annotatedPaths(schema, "x-widget");
+
+  it("has some", () => {
+    expect(leaves.length).toBeGreaterThanOrEqual(6);
+  });
+
+  it.each(leaves.map((leaf) => [leaf.path.join("."), leaf.ref]))(
+    "%s is a string with a known picker and its texts",
+    (keys, widget) => {
+      const node = schemaAt(
+        schema,
+        keys.split(".").map((key) => (key === "*" ? 0 : key)),
+      );
+      // widgetOf only answers for a string
+      expect(widgetOf(node, schema)).toBe(widget);
+      expect(Object.keys(ASSETS)).toContain(widget);
+      expect(appEn.editPanel.tokenEditor.assets[widget]).toBeDefined();
+    },
+  );
 });

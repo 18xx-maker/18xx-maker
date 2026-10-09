@@ -10,11 +10,12 @@ import { resolveSchema } from "@/components/schemaForm/resolve";
 // next to the name. It is an annotation: validation ignores it, a value that
 // names nothing stays valid.
 
-// The annotated places of a schema, as { path, ref }: a property is its name,
+// The places of a schema that carry the annotation key, as { path, ref }
+// (ref is the value of the annotation): a property is its name,
 // the items of a list "*". A field that is a string or a list of strings gives
 // both its own path and the one of its items. Follows $ref (not into itself),
 // oneOf, anyOf and allOf.
-export const refPaths = (schema, root = schema) => {
+export const annotatedPaths = (schema, key, root = schema) => {
   const found = [];
   const walk = (node, keys, seen) => {
     if (!node || typeof node !== "object") return;
@@ -25,7 +26,7 @@ export const refPaths = (schema, root = schema) => {
       walk(rest, keys, seen);
       return;
     }
-    if (node["x-ref"]) found.push({ path: keys, ref: node["x-ref"] });
+    if (key in node) found.push({ path: keys, ref: node[key] });
     for (const part of [
       ...(node.oneOf ?? []),
       ...(node.anyOf ?? []),
@@ -33,8 +34,8 @@ export const refPaths = (schema, root = schema) => {
     ]) {
       walk(part, keys, seen);
     }
-    for (const [key, child] of Object.entries(node.properties ?? {})) {
-      walk(child, [...keys, key], seen);
+    for (const [name, child] of Object.entries(node.properties ?? {})) {
+      walk(child, [...keys, name], seen);
     }
     if (node.items && !Array.isArray(node.items)) {
       walk(node.items, [...keys, "*"], seen);
@@ -43,6 +44,9 @@ export const refPaths = (schema, root = schema) => {
   walk(schema, [], []);
   return found;
 };
+
+export const refPaths = (schema, root = schema) =>
+  annotatedPaths(schema, "x-ref", root);
 
 // The names the game has for an x-ref: [{ value, label }], without
 // duplicates. A game without the list has none.

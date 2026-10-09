@@ -1103,7 +1103,8 @@
               },
               "icon": {
                 "description": "Not drawn at the moment.",
-                "type": "string"
+                "type": "string",
+                "x-widget": "icon"
               }
             },
             "required": ["description"],
@@ -1186,7 +1187,8 @@
         },
         "publisher": {
           "type": "string",
-          "description": "Id of the publisher (see src/data/publishers), shown on the game info page and in the game list"
+          "description": "Id of the publisher (see src/data/publishers), shown on the game info page and in the game list",
+          "x-widget": "publisher"
         },
         "extraTotalHeight": {
           "type": "number",
@@ -1658,7 +1660,8 @@
           },
           "logo": {
             "description": "The logo of the company.",
-            "type": "string"
+            "type": "string",
+            "x-widget": "logo"
           },
           "minor": {
             "description": "The company is a minor company.",
@@ -1766,11 +1769,19 @@
               {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "x-ref": {
+                    "from": "trains",
+                    "key": "name"
+                  }
                 }
               },
               {
-                "type": "string"
+                "type": "string",
+                "x-ref": {
+                  "from": "trains",
+                  "key": "name"
+                }
               }
             ]
           },
@@ -1941,7 +1952,8 @@
             }
           },
           "icon": {
-            "type": "string"
+            "type": "string",
+            "x-widget": "icon"
           },
           "iconColor": {
             "type": "string"

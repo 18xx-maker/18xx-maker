@@ -303,6 +303,13 @@ describe("edit panel fields", () => {
     expect(store.getState().game.info.title).toBe("18Test");
   });
 
+  it("picks the publisher in the info section", async () => {
+    open(route + "?edit=true");
+    expect(
+      await screen.findByRole("combobox", { name: "Publisher" }),
+    ).toBeVisible();
+  });
+
   it("clearing the last link removes the empty object, not the info", async () => {
     const { user, store } = open(`${route}?edit=true`);
     await user.clear(await field("Bgg"));
@@ -1128,6 +1135,18 @@ describe("edit panel privates", () => {
     ).not.toBeInTheDocument();
   });
 
+  it("picks the icon of a private from the icons of the app", async () => {
+    const { user } = open(privatesRoute);
+    await ready();
+    const card = within(cards()[0]);
+    let icon = card.queryByRole("combobox", { name: "Icon" });
+    if (!icon) {
+      await user.click(card.getByRole("button", { name: "More fields" }));
+      icon = card.getByRole("combobox", { name: "Icon" });
+    }
+    expect(icon).toBeVisible();
+  });
+
   it("More fields shows the other fields and the token has an editor", async () => {
     const { user } = open(privatesRoute);
     await ready();
@@ -1346,6 +1365,8 @@ describe("edit panel phases", () => {
   const ready = () => screen.findByRole("button", { name: "Add phase" });
   const text = (index, name) =>
     within(cards()[index]).getByRole("textbox", { name });
+  const trainBox = (index) =>
+    within(cards()[index]).getByRole("combobox", { name: "Train" });
   const more = (user, index) =>
     user.click(
       within(cards()[index]).getByRole("button", { name: "More fields" }),
@@ -1372,8 +1393,10 @@ describe("edit panel phases", () => {
     expect(text(0, "Name")).toHaveValue("2");
     expect(text(0, "Limit")).toHaveValue("4");
     expect(text(0, "Tiles")).toHaveValue("yellow");
-    expect(text(0, "Train")).toHaveValue("");
-    expect(text(1, "Train")).toHaveValue("3+1");
+    expect(trainBox(0)).toHaveValue("");
+    expect(
+      within(cards()[1]).getByRole("button", { name: "Remove 3+1" }),
+    ).toBeVisible();
     expect(text(4, "Limit")).toHaveValue("3");
     expect(
       within(cards()[0]).getByRole("combobox", { name: "Minor" }),
@@ -1437,36 +1460,44 @@ describe("edit panel phases", () => {
     expect(phases(store)[0].limit).toBe(4);
   });
 
-  it("the train is one text, or a list with a line each, trimmed", async () => {
+  it("the train is one name, or a list of them, picked or typed", async () => {
     const { user, store } = open(phasesRoute);
     await ready();
-    expect(text(1, "Train")).toHaveAccessibleDescription(/One per line/);
+    const remove = (name) =>
+      user.click(
+        within(cards()[1]).getByRole("button", { name: `Remove ${name}` }),
+      );
 
-    await user.clear(text(1, "Train"));
-    await user.type(text(1, "Train"), "  4H {Enter}{Enter}   2M  {Enter}");
-    await user.tab();
-    expect(phases(store)[1].train).toEqual(["4H", "2M"]);
-    expect(text(1, "Train")).toHaveValue("  4H \n\n   2M  \n");
-
-    await user.clear(text(1, "Train"));
-    await user.type(text(1, "Train"), "3H");
-    await user.tab();
-    expect(phases(store)[1].train).toBe("3H");
-
-    await user.clear(text(1, "Train"));
-    await user.tab();
+    await remove("3+1");
     expect("train" in phases(store)[1]).toBe(false);
     expect(phases(store)[1].name).toBe("3");
+
+    // A name of the trains of the game is a suggestion
+    await user.click(trainBox(1));
+    const option = screen.getAllByRole("option")[0];
+    const picked = option.firstChild.textContent;
+    await user.click(option);
+    expect(phases(store)[1].train).toBe(picked);
+
+    // Free text is taken, two names are a list
+    await user.type(trainBox(1), "  2M  {Enter}");
+    expect(phases(store)[1].train).toEqual([picked, "2M"]);
+    await remove(picked);
+    expect(phases(store)[1].train).toBe("2M");
+    await remove("2M");
+    expect("train" in phases(store)[1]).toBe(false);
   });
 
-  it("keeps a list of one line when it is left unchanged", async () => {
+  it("keeps a list of one name when it is left unchanged", async () => {
     const { user, store } = open(
       phasesRoute,
       withPhases([{ name: "2", train: ["4H"], limit: 4, tiles: "yellow" }]),
     );
     await ready();
-    expect(text(0, "Train")).toHaveValue("4H");
-    await user.click(text(0, "Train"));
+    expect(
+      within(cards()[0]).getByRole("button", { name: "Remove 4H" }),
+    ).toBeVisible();
+    await user.click(trainBox(0));
     await user.tab();
     expect(phases(store)[0].train).toEqual(["4H"]);
     expect(selectGameChanged(store.getState())).toBe(false);
@@ -1585,7 +1616,12 @@ describe("edit panel phases", () => {
       within(cards()[1]).getByRole("button", { name: "3H, 3M" }),
     ).toBeVisible();
     expect(button("Remove phase 3H, 3M")).toBeVisible();
-    expect(text(1, "Train")).toHaveValue("3H\n3M");
+    expect(
+      within(cards()[1]).getByRole("button", { name: "Remove 3H" }),
+    ).toBeVisible();
+    expect(
+      within(cards()[1]).getByRole("button", { name: "Remove 3M" }),
+    ).toBeVisible();
   });
 
   it("a phase with neither name nor train is #n", async () => {
@@ -2509,13 +2545,15 @@ describe("edit panel companies", () => {
       within(cards()[14]).getByRole("combobox", { name: /Minor/ }),
     ).toHaveTextContent("Yes");
     expect(
-      within(cards()[14]).queryByRole("textbox", { name: "Logo" }),
+      within(cards()[14]).queryByRole("combobox", { name: "Logo" }),
     ).not.toBeInTheDocument();
 
     await user.click(
       within(cards()[14]).getByRole("button", { name: "More fields" }),
     );
-    expect(text(14, "Logo")).toBeVisible();
+    expect(
+      within(cards()[14]).getByRole("combobox", { name: "Logo" }),
+    ).toBeVisible();
     expect(text(14, "Banner")).toHaveValue("MINOR");
     expect(text(14, "Shares").tagName).toBe("TEXTAREA");
   });

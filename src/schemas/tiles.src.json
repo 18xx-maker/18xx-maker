@@ -940,6 +940,7 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "schema.tiles.token.logo"
         },
         "logoWidth": {
@@ -948,6 +949,7 @@
         },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "schema.tiles.token.icon"
         },
         "iconWidth": {

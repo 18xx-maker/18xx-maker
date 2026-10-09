@@ -2014,11 +2014,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "要绘制在标记上的 svg 标志的名称。"
         },
         "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "要绘制在标记上的图标的名称。"
         },
         "iconWidth": { "type": "number", "description": "图标的宽度。" },
@@ -2224,11 +2226,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "要绘制在标记上的 svg 标志的名称。"
         },
         "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "要绘制在标记上的图标的名称。"
         },
         "iconWidth": { "type": "number", "description": "图标的宽度。" },
@@ -2446,11 +2450,13 @@
       "properties": {
         "logo": {
           "type": "string",
+          "x-widget": "logo",
           "description": "要绘制在标记上的 svg 标志的名称。"
         },
         "logoWidth": { "type": "number", "description": "标志的宽度。" },
         "icon": {
           "type": "string",
+          "x-widget": "icon",
           "description": "要绘制在标记上的图标的名称。"
         },
         "iconWidth": { "type": "number", "description": "图标的宽度。" },

@@ -291,6 +291,38 @@ describe("validate", () => {
     });
   });
 
+  describe("the pickers of a game", () => {
+    const withGame = (game) =>
+      writeTmp(
+        "game.json",
+        JSON.stringify({ info: { title: "Game" }, ...game }),
+      );
+
+    // x-widget is an annotation: a name the app does not have is still valid
+    it("accepts an icon, a logo and a publisher the app does not have", () => {
+      expect(
+        run(
+          withGame({
+            info: { title: "Game", publisher: "nobody" },
+            privates: [{ name: "P", icon: "nope" }],
+            companies: [{ name: "C", abbrev: "C", logo: "nope" }],
+            tokens: [{ logo: "nope", icon: "nope" }],
+            phases: [
+              { train: ["nope", "2"], limit: 4, tiles: "yellow" },
+              { train: "nope", limit: 4, tiles: "yellow" },
+            ],
+          }),
+        ).code,
+      ).toBe(0);
+    });
+
+    it("still rejects a publisher that is not a string", () => {
+      expect(
+        run(withGame({ info: { title: "Game", publisher: 3 } })).code,
+      ).not.toBe(0);
+    });
+  });
+
   describe("iconSize of a private", () => {
     const withPrivate = (iconSize) =>
       writeTmp(

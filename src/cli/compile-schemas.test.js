@@ -85,6 +85,14 @@ describe("compile-schemas", () => {
     expect(roundToken.additionalProperties).toBe(false);
   });
 
+  it("keeps x-widget on the token and the tokens derived from it", () => {
+    const { token, gameToken, roundToken } = JSON.parse(written).definitions;
+    for (const def of [token, gameToken, roundToken]) {
+      expect(def.properties.icon["x-widget"]).toBe("icon");
+      expect(def.properties.logo["x-widget"]).toBe("logo");
+    }
+  });
+
   it("matches the committed tiles.defs.json", () => {
     expect(JSON.parse(written)).toEqual(readSchema("tiles.defs.json"));
   });
