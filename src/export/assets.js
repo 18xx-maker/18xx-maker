@@ -5,8 +5,6 @@ import {
   KINDS,
   KIND_EXTENSION,
   MAX_FILES,
-  MAX_PNG_BYTES,
-  MAX_SVG_BYTES,
   MAX_TOTAL_BYTES,
   PNG_DATA_URI,
   assetBytes,
@@ -15,6 +13,7 @@ import {
   emptyAssets,
   extensionOf,
   findDuplicate,
+  maxBytes,
   nameProblem,
   pngDataUri,
 } from "#util/assetNames";
@@ -168,11 +167,7 @@ export const loadAssetsFrom = (root, { fs = nodeFs } = {}) => {
 
       let bytes;
       try {
-        bytes = readSmallFile(
-          fs,
-          path.join(dir, entry.name),
-          kind === "trains" ? MAX_PNG_BYTES : MAX_SVG_BYTES,
-        );
+        bytes = readSmallFile(fs, path.join(dir, entry.name), maxBytes(kind));
       } catch (e) {
         warn(file, e.code === "ELOOP" ? "links are ignored" : e.message);
         continue;
@@ -226,7 +221,7 @@ export const assetsProblem = (assets) => {
         if (!PNG_DATA_URI.test(value)) return `${kind}/${name}: not a PNG`;
       }
       const size = assetBytes(kind, value);
-      if (size > (kind === "trains" ? MAX_PNG_BYTES : MAX_SVG_BYTES)) {
+      if (size > maxBytes(kind)) {
         return `${kind}/${name}: too big`;
       }
       count += 1;

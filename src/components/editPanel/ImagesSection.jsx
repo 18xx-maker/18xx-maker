@@ -8,29 +8,21 @@ import { Input } from "@/components/ui/input";
 import CustomSvg from "@/components/atoms/CustomSvg";
 
 import { useAssets } from "@/hooks";
-import {
-  addGameAsset,
-  createAlert,
-  removeGameAsset,
-  renameGameAsset,
-} from "@/state";
+import { createAlert, removeGameAsset, renameGameAsset } from "@/state";
 import {
   KINDS,
+  MAX_DROP_FILES,
   MAX_FILES,
   MAX_PNG_BYTES,
   MAX_SVG_BYTES,
-  assetProblem,
+  assetTotals,
   customId,
-  extensionOf,
-  findDuplicate,
   nameProblem,
-  pngDataUri,
-  sanitizeName,
 } from "@/util/assetNames";
+import { addDroppedImages, freeName, makeStore } from "@/util/dropImages";
 import { customReferences } from "@/util/gameValidation";
 import * as idb from "@/util/storage/idb";
 import * as opfs from "@/util/storage/opfs";
-import { sanitizeSvg } from "@/util/svgSanitize";
 
 // The types of game the web app stores images for (IndexedDB, by game slug)
 export const storesImages = (type) => type === idb.TYPE || type === opfs.TYPE;
@@ -52,16 +44,6 @@ const ERROR_CODES = [
 ];
 
 const kb = (bytes) => `${Math.round(bytes / 1024)} KB`;
-
-// The first name of the form name, name-2, name-3 ... that the kind does not
-// have (case aside)
-export const freeName = (names, name) => {
-  let candidate = name;
-  for (let n = 2; findDuplicate(names, candidate); n += 1) {
-    candidate = `${name.slice(0, 60)}-${n}`;
-  }
-  return candidate;
-};
 
 const Preview = ({ kind, name, value }) =>
   kind === "trains" ? (
@@ -187,56 +169,25 @@ const ImagesSection = ({ game }) => {
   const writable = storesImages(type);
   const references = customReferences(game);
 
+  // The same path as a drop: SVGs become the kind chosen next to the button
   const upload = async (files) => {
-    const added = [];
-    const failed = [];
-    // The names of each kind as they will be, so a batch never clashes
-    const names = Object.fromEntries(
-      KINDS.map((kind) => [kind, Object.keys(assets?.[kind] ?? {})]),
-    );
-    for (const file of files) {
-      const extension = extensionOf(file.name);
-      const kind =
-        extension === "svg" ? svgKind : extension === "png" ? "trains" : null;
-      const fail = (reason) =>
-        failed.push(`${file.name}: ${t(`assets.errors.${reason}`)}`);
-      if (!kind) {
-        fail("type");
-        continue;
+    try {
+      const result = await addDroppedImages({
+        files: files.map((file) => ({ file, directory: false })),
+        assets,
+        ask: async ({ name, taken }) => ({
+          kind: svgKind,
+          name: freeName(taken[svgKind], name),
+        }),
+        store: makeStore(game.meta, dispatch),
+        t,
+        max: MAX_DROP_FILES,
+      });
+      if (result) {
+        dispatch(createAlert(result.title, result.message, result.type));
       }
-      if (file.size > (kind === "trains" ? MAX_PNG_BYTES : MAX_SVG_BYTES)) {
-        fail("size");
-        continue;
-      }
-      try {
-        const buffer = new Uint8Array(await file.arrayBuffer());
-        const name = freeName(names[kind], sanitizeName(file.name));
-        const problem = assetProblem(kind, name, buffer);
-        if (problem) {
-          fail(problem);
-          continue;
-        }
-        let value;
-        if (kind === "trains") {
-          value = pngDataUri(buffer);
-        } else {
-          value = new TextDecoder("utf-8", { fatal: true }).decode(buffer);
-          if (!sanitizeSvg(value)) {
-            fail("svg");
-            continue;
-          }
-        }
-        await dispatch(addGameAsset(slug, kind, name, value));
-        names[kind].push(name);
-        added.push(customId(name));
-      } catch (e) {
-        fail(e.code && ERROR_CODES.includes(e.code) ? e.code : "unreadable");
-      }
-    }
-    if (failed.length) {
-      dispatch(createAlert(t("assets.notAdded"), failed.join("\n"), "error"));
-    } else if (added.length) {
-      dispatch(createAlert(t("assets.added"), added.join("\n"), "success"));
+    } catch (e) {
+      dispatch(createAlert(t("alerts.error"), e.message, "error"));
     }
   };
 
@@ -248,12 +199,7 @@ const ImagesSection = ({ game }) => {
             <Button
               variant="outline"
               onClick={() => input.current?.click()}
-              disabled={
-                KINDS.reduce(
-                  (n, k) => n + Object.keys(assets?.[k] ?? {}).length,
-                  0,
-                ) >= MAX_FILES
-              }
+              disabled={assetTotals(assets).count >= MAX_FILES}
             >
               {t("assets.add")}
             </Button>

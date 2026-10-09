@@ -1,6 +1,6 @@
 import { omit } from "ramda";
 
-import { isCustomId } from "./assetNames.js";
+import { customName, isCustomId } from "./assetNames.js";
 
 // Checks a game file against the game schema and turns what is wrong into
 // issues the app can show: { severity, code, pointer, params }. The text comes
@@ -439,8 +439,7 @@ export const customReferences = (data) => {
 export const assetIssues = (data, assets) =>
   customReferences(data)
     .filter(
-      ({ kind, id }) =>
-        !Object.hasOwn(assets?.[kind] ?? {}, id.slice("custom/".length)),
+      ({ kind, id }) => !Object.hasOwn(assets?.[kind] ?? {}, customName(id)),
     )
     .map(({ kind, id, pointer }) =>
       issue("missing-asset", pointer, { id, kind }, WARNING),

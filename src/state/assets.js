@@ -2,6 +2,7 @@ import { dissoc } from "ramda";
 
 import { bundledAssets } from "@/data/gameAssets";
 import { DELETE_GAME } from "@/state/game";
+import { parseSlug } from "@/util";
 import { sanitizeAssets } from "@/util/assets";
 import capability from "@/util/capability";
 import { BUNDLED, ELECTRON } from "@/util/loading";
@@ -56,7 +57,7 @@ export const loadAssets = (meta) => (dispatch, getState) =>
 // refreshes the state. A failure is rethrown with the code of
 // util/storage/assets ("exists", "count", "quota" ...), the caller alerts.
 const write = (slug, fn) => async (dispatch, getState) => {
-  const [type, id] = [slug.split(":")[0], slug.slice(slug.indexOf(":") + 1)];
+  const { type, id } = parseSlug(slug);
   await fn();
   await dispatch(loadAssets({ type, id, slug }));
   return getState().assets?.[slug];

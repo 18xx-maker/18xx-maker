@@ -5,7 +5,6 @@ import {
   pngDataUri,
 } from "@/util/assetNames";
 import {
-  copyAssets,
   deleteAsset,
   deleteAssets,
   listAssets,
@@ -237,17 +236,6 @@ describe("the images of a game in IndexedDB", () => {
     ]);
     await deleteAsset(slug, "icons", "b");
     expect(Object.keys((await listAssets(slug)).icons)).toEqual(["c"]);
-  });
-
-  it("copies the images of a game to another", async () => {
-    const [from, to] = [newSlug(), newSlug()];
-    await putAsset(from, "icons", "star", SVG);
-    await putAsset(from, "trains", "loco", PNG);
-    expect(await copyAssets(from, to)).toBe(2);
-    const copy = await listAssets(to);
-    expect(copy.icons.star).toBe(SVG);
-    expect(copy.trains.loco).toBe(PNG);
-    expect((await listAssets(from)).icons.star).toBe(SVG);
   });
 });
 

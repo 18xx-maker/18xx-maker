@@ -15,7 +15,6 @@
 // Reads give the raw map (see util/assetNames) with null-prototype maps; run it
 // through sanitizeAssets (util/assets) before it is shown or rendered.
 import {
-  KINDS,
   MAX_FILES,
   MAX_TOTAL_BYTES,
   PNG_DATA_URI,
@@ -168,15 +167,3 @@ export const deleteAssets = async (slug) => {
     // Nothing to remove, or no storage to remove it from
   }
 };
-
-// Copies the images of a game to another (save as). The target is not cleared.
-export const copyAssets = (fromSlug, toSlug) =>
-  transact("readwrite", async (store) => {
-    const found = await records(store, fromSlug);
-    for (const record of found) {
-      await request(store.put({ ...record, slug: toSlug }));
-    }
-    return found.length;
-  });
-
-export { KINDS };
