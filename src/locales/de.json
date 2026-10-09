@@ -1770,6 +1770,18 @@
         "use": "Das Spiel in seiner Datei speichern",
         "notes": "Nur auf den Seiten eines Spiels mit ungespeicherten Änderungen. Ein mitgeliefertes Spiel wird als Kopie gespeichert. In der App auch Datei, Speichern. Im JSON-Editor wird das Spiel zuerst aus dem Text aktualisiert."
       },
+      "undo": {
+        "use": "Die letzte Änderung am Kartenfeld rückgängig machen",
+        "notes": "Nur im Kartenfeld-Editor des Bearbeitungsfensters und nicht, während du in ein Feld tippst. Jedes Kartenfeld beginnt einen eigenen Verlauf. Der JSON-Editor hat sein eigenes Rückgängig."
+      },
+      "redo": {
+        "use": "Die rückgängig gemachte Änderung wiederholen",
+        "notes": "Nur im Kartenfeld-Editor des Bearbeitungsfensters und nicht, während du in ein Feld tippst. Jedes Kartenfeld beginnt einen eigenen Verlauf. Der JSON-Editor hat sein eigenes Wiederholen."
+      },
+      "sidebar": {
+        "use": "Die Seitenleiste ein- oder ausblenden",
+        "notes": "Auf der Startseite, in der Dokumentation und auf den Seiten Info, Probleme, Änderungen und Verlauf eines Spiels. Nicht auf Bearbeitungsseiten."
+      },
       "export": {
         "use": "Das Exportmenü öffnen",
         "notes": "Nur in der App. Öffnet auf jeder Seite das Menü des geladenen Spiels."
