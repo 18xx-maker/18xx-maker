@@ -327,17 +327,64 @@ describe("loading a dropped game", () => {
       expect(store.getState().ui.loadingGame?.name).toBe("two.json"),
     );
 
-    // The first finishing does not hide the second
+    // The first finishing neither hides the second nor opens its game
     first.resolve("internal:abc");
-    await waitFor(() => expect(opfs.loadGame).toHaveBeenCalledTimes(1));
-    await waitFor(() =>
-      expect(store.getState().game?.meta.slug).toBe("internal:abc"),
-    );
+    await new Promise((r) => setTimeout(r, 50));
+    expect(opfs.loadGame).not.toHaveBeenCalled();
     expect(store.getState().ui.loadingGame?.name).toBe("two.json");
     expect(screen.getByTestId("loading-game")).toHaveTextContent("two.json");
 
     second.resolve("internal:abc");
     await waitFor(() => expect(store.getState().ui.loadingGame).toBeNull());
+  });
+
+  it("opens a dropped game once from another game's page", async () => {
+    opfs.saveGameFile.mockResolvedValue("internal:abc");
+    const { router, store } = renderApp("/games/18Test/map");
+    await screen.findByTestId("game-18Test-map");
+    const loaded = () =>
+      store.getState().alert.items.filter((a) => a.title === "Game Loaded");
+    const before = loaded().length;
+
+    dropGame();
+
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/internal:abc/map"),
+    );
+    await waitFor(() => expect(store.getState().ui.loadingGame).toBeNull());
+    await screen.findByTestId("game-internal:abc-map");
+    expect(opfs.loadGame).toHaveBeenCalledTimes(1);
+    expect(opfs.loadGame).toHaveBeenCalledWith("abc");
+    expect(loaded()).toHaveLength(before + 1);
+  });
+
+  it("stays on the latest drop when an earlier one finishes last", async () => {
+    const first = deferred();
+    const second = deferred();
+    opfs.saveGameFile
+      .mockReturnValueOnce(first.promise)
+      .mockReturnValueOnce(second.promise);
+    opfs.loadGame.mockImplementation(async (id) => ({
+      ...internalGame,
+      meta: { id, type: "internal", slug: `internal:${id}` },
+    }));
+    const { router, store } = renderApp("/docs");
+
+    dropGame("one.json");
+    await waitFor(() => expect(opfs.saveGameFile).toHaveBeenCalledTimes(1));
+    dropGame("two.json");
+    await waitFor(() => expect(opfs.saveGameFile).toHaveBeenCalledTimes(2));
+
+    second.resolve("internal:two");
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/games/internal:two/map"),
+    );
+    first.resolve("internal:one");
+    await new Promise((r) => setTimeout(r, 50));
+
+    expect(opfs.loadGame).toHaveBeenCalledTimes(1);
+    expect(router.state.location.pathname).toBe("/games/internal:two/map");
+    expect(store.getState().game.meta.slug).toBe("internal:two");
   });
 
   it("keeps the edits when the open game is dropped again", async () => {

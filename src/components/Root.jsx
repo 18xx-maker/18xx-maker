@@ -226,6 +226,8 @@ const Root = ({ children }) => {
     dispatch(createSetLoadingGame(dropped.file.name, id));
     try {
       const slug = await fileHandler(dropped);
+      // A later drop took over
+      if (id !== loadingId.current) return;
       // Loading reports its own errors
       let game;
       try {
@@ -233,6 +235,7 @@ const Root = ({ children }) => {
       } catch {
         return;
       }
+      if (id !== loadingId.current) return;
       addRecent(game);
       navigate(`/games/${slug}/map`);
     } finally {
