@@ -105,6 +105,12 @@ export const expected = {
   // the map is 1375 by 576.3045, the market 1340 by 985) at 0.96 pixels a
   // unit, with no border: it comes from the game, not from the fonts
   svg: {
+    // The custom logo of a token (18Test.assets/logos/crest.svg), drawn in the
+    // file itself, as the capture windows got it from the folder or the request
+    custom: {
+      file: "18test-token-2-LBRR.svg",
+      path: "M20 15h60v35c0 22-30 35-30 35S20 72 20 50z",
+    },
     sizes: {
       "18test-map.svg": [1320, 553.252],
       "18test-market.svg": [1286.4, 945.6],

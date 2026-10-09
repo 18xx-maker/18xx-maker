@@ -163,11 +163,17 @@ describe("the preload api", () => {
     );
     await expect(
       api.addAsset("abc", "icons", "a", bytes),
-    ).rejects.toMatchObject({ code: "exists" });
+    ).rejects.toMatchObject({
+      code: "exists",
+      message: "asset:exists a",
+    });
     ipc.invoke.mockRejectedValueOnce(new Error("something else"));
     await expect(
       api.addAsset("abc", "icons", "a", bytes),
-    ).rejects.toMatchObject({ code: "failed" });
+    ).rejects.toMatchObject({
+      code: "failed",
+      message: "asset:failed something else",
+    });
   });
 
   it("gives saveGameAs the images to write next to the copy", async () => {

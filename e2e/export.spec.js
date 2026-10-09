@@ -141,6 +141,14 @@ const check = {
     expect(names).toEqual(
       expect.arrayContaining(Object.keys(expected.svg.sizes)),
     );
+    // A custom image from the assets of the game is in the file, with its
+    // colors written on the shapes
+    const custom = fs.readFileSync(
+      path.join(dir, expected.svg.custom.file),
+      "utf-8",
+    );
+    expect(custom).toContain(expected.svg.custom.path);
+    expect(custom).not.toMatch(/custom\/crest|color-main/);
     // Only the documents that have one, not the paginated or sheet pages
     expect(names.some((name) => /paginated|cards|charters/.test(name))).toBe(
       false,

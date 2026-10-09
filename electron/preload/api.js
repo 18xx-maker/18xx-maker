@@ -59,17 +59,20 @@ export const createApi = ({ ipcRenderer, webUtils, argv }) => {
     loadAssets: (id) => ipcRenderer.invoke("loadAssets", id),
     // Adds an image to the folder of a game file: kind is icons, logos or
     // trains, bytes the file as an ArrayBuffer, options { replace }. Resolves
-    // with the stored { kind, name, value, replaced }; a failure has a code
-    // (game, kind, name, size, content, exists, limit, folder, unsafe, denied,
-    // readonly, full, failed) from the main process.
+    // with the stored { kind, name, value, replaced }. A failure is an Error
+    // whose message starts with "asset:<code>" (error.code has the code too,
+    // but custom properties of an error do not always cross the context
+    // bridge, so read the message): game, kind, name, size, content, exists,
+    // limit, folder, unsafe, denied, readonly, full, failed.
     addAsset: (id, kind, name, bytes, options) =>
       ipcRenderer
         .invoke("addAsset", id, kind, name, bytes, options)
         .catch((e) => {
-          const code = /asset:([a-z]+)/.exec(e?.message)?.[1];
-          throw Object.assign(new Error(e?.message ?? "asset:failed"), {
-            code: code ?? "failed",
-          });
+          const found = /asset:([a-z]+)([^\n]*)/.exec(e?.message ?? "");
+          throw Object.assign(
+            new Error(found ? found[0] : `asset:failed ${e?.message ?? ""}`),
+            { code: found?.[1] ?? "failed" },
+          );
         }),
     loadSummaries: () => ipcRenderer.invoke("loadSummaries"),
     openGame: () =>
