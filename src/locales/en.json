@@ -44,7 +44,9 @@
     "overwrite": "Overwrite the file",
     "saved": "Game Saved",
     "savedMessage": "{{title}} saved to its file",
-    "saveFailed": "Could not save the game"
+    "saveFailed": "Could not save the game",
+    "saveTooltip": "Save the game to its file (Ctrl or Cmd+S)",
+    "saveAsTooltip": "Save a copy of the game (Ctrl or Cmd+S)"
   },
   "saveAs": {
     "nav": "Save as...",
@@ -1742,6 +1744,10 @@
       "download": {
         "use": "Download the loaded game file",
         "notes": "Saves the game without its meta data. Only if you have a game loaded."
+      },
+      "save": {
+        "use": "Save the game to its file",
+        "notes": "Only on the pages of a game with unsaved changes. A bundled game is saved as a copy. In the app also File, Save. In the JSON editor it updates the game from the text first."
       },
       "export": {
         "use": "Open the export menu",

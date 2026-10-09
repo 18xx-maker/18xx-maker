@@ -342,7 +342,9 @@ macOS and Ctrl on Windows and Linux. In Emacs and Vim the Normal keys also work
 on macOS; elsewhere Ctrl belongs to the mode. Copy, paste, undo and select all
 keep their usual keys in Normal. In Vim, Escape leaves the editor only when
 Vim is in normal mode with no command pending. Search has its own keys in
-Emacs and Vim.
+Emacs and Vim. In Normal, `Mod-s` also saves the game (see below), after it
+updates the game from the text; in Emacs and Vim only Cmd+S does on macOS,
+since Ctrl+S belongs to the mode elsewhere.
 
 | Action                            | Normal                       | Emacs        | Vim        |
 | --------------------------------- | ---------------------------- | ------------ | ---------- |
@@ -379,6 +381,12 @@ menu (and in the toolbar), with the number of top level fields that changed. It
 opens a page with a highlighted diff of the game against the file as it was
 loaded or last saved. The diff compares the game as JSON with 2 spaces, so
 whitespace-only differences in your file are not shown.
+
+The toolbar has a "Save" button while the game has changes, and `Ctrl+S` or
+`Cmd+S` saves from any page of the game, also from a field, so the browser does
+not offer to save the page. In the app there is also File, Save. For a bundled
+game they start "Save as..." instead. If the file changed outside 18xx Maker,
+the Changes page opens to let you reload or overwrite it.
 
 On the Changes page, "Save" writes the game over its file, with the same
 content as the Download button, so the first save may reformat the file.

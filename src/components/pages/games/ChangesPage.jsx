@@ -1,11 +1,11 @@
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@/components/ui/button";
 
-import { useGame, useSaveAs } from "@/hooks";
-import { CONFLICT, SAVED, reloadGame, revertGame, saveGame } from "@/state";
+import { clearSaveConflict, useGame, useSaveAs, useSaveGame } from "@/hooks";
+import { reloadGame, revertGame } from "@/state";
 import { selectGameChanged, selectGameOriginal } from "@/state/selectors";
 import { canSaveGame } from "@/util/canSaveGame";
 
@@ -18,21 +18,16 @@ const ChangesPage = () => {
   const slug = game.meta.slug;
   const original = useSelector(selectGameOriginal);
   const changed = useSelector(selectGameChanged);
-  const [conflict, setConflict] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const { save: saveGame, saving, conflict } = useSaveGame();
   const saveAs = useSaveAs(game);
 
-  const save = async (force) => {
-    setSaving(true);
-    const result = await dispatch(saveGame({ force }));
-    setSaving(false);
-    setConflict(result === CONFLICT);
-    if (result === SAVED) setConflict(false);
-  };
+  // The conflict panel stays until a save works, so one found by the toolbar
+  // or Cmd/Ctrl+S is shown here
+  const save = (force) => saveGame({ force, redirect: false });
 
   const reload = async () => {
     await dispatch(reloadGame());
-    setConflict(false);
+    clearSaveConflict();
   };
 
   return (
@@ -51,7 +46,13 @@ const ChangesPage = () => {
             {saveAs.available && (
               <Button onClick={saveAs.start}>{t("saveAs.nav")}</Button>
             )}
-            <Button variant="outline" onClick={() => dispatch(revertGame())}>
+            <Button
+              variant="outline"
+              onClick={() => {
+                clearSaveConflict();
+                dispatch(revertGame());
+              }}
+            >
               {t("changes.revert")}
             </Button>
           </div>

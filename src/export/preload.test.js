@@ -22,6 +22,18 @@ describe("the preload api", () => {
     expect(api.renderInput).toBeUndefined();
     expect(api.newGame).toBeTypeOf("function");
     expect(api.saveGameAs).toBeTypeOf("function");
+    expect(api.onSave).toBeTypeOf("function");
+  });
+
+  it("calls back when the File menu says to save", () => {
+    const ipc = fakeIpc();
+    const api = createApi({ ipcRenderer: ipc, webUtils: {}, argv: [] });
+    const callback = vi.fn();
+
+    api.onSave(callback);
+    expect(ipc.on).toHaveBeenCalledWith("save", expect.any(Function));
+    ipc.on.mock.calls[0][1]({}, "ignored");
+    expect(callback).toHaveBeenCalledWith();
   });
 
   it("asks the main process to save a copy with the labels of its dialog", async () => {

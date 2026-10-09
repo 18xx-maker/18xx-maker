@@ -44,7 +44,9 @@
     "overwrite": "覆盖文件",
     "saved": "游戏已保存",
     "savedMessage": "{{title}} 已保存到其文件",
-    "saveFailed": "无法保存游戏"
+    "saveFailed": "无法保存游戏",
+    "saveTooltip": "将游戏保存到其文件（Ctrl 或 Cmd+S）",
+    "saveAsTooltip": "保存游戏的副本（Ctrl 或 Cmd+S）"
   },
   "saveAs": {
     "nav": "另存为...",
@@ -1742,6 +1744,10 @@
       "download": {
         "use": "下载已加载游戏的文件",
         "notes": "保存不含元数据的游戏。仅在已加载游戏时可用。"
+      },
+      "save": {
+        "use": "将游戏保存到其文件",
+        "notes": "仅在有未保存更改的游戏页面上可用。内置游戏会保存为副本。在应用中也可使用“文件”菜单的“保存”。在 JSON 编辑器中会先用文本更新游戏。"
       },
       "export": {
         "use": "打开导出菜单",

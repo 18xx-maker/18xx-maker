@@ -9,7 +9,7 @@ import { page } from "vitest/browser";
 
 import { games } from "@/data";
 import { docPath } from "@/export/names.js";
-import { createUpdate } from "@/state";
+import { createUpdate, editGame } from "@/state";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 
@@ -65,6 +65,7 @@ beforeEach(async () => {
     onGame: vi.fn(),
     onProgress: vi.fn(),
     onRedirect: vi.fn(),
+    onSave: vi.fn(),
     onUpdate: vi.fn(),
     openGame: vi.fn(),
     saveGamePath: vi.fn(),
@@ -110,6 +111,7 @@ describe("electron root", () => {
       "onGame",
       "onProgress",
       "onRedirect",
+      "onSave",
       "onUpdate",
       "onDownloadProgress",
     ]) {
@@ -160,6 +162,37 @@ describe("electron root", () => {
     await act(() => listener("onRedirect")("/docs"));
 
     expect(router.state.location.pathname).toBe("/docs");
+  });
+
+  it("saves the edited game when the File menu says so", async () => {
+    const game = {
+      ...structuredClone(games["18Test"]),
+      meta: { id: "abc", type: "electron", slug: "electron:abc" },
+    };
+    api.saveGame = vi.fn().mockResolvedValue({});
+    const { store } = renderApp("/games/electron:abc/map", {
+      game,
+      gameOriginal: structuredClone(game),
+      gameHistory: [],
+      loadedGame: { slug: game.meta.slug, title: game.info.title, id: "abc" },
+    });
+    await screen.findByTestId("game-electron:abc-map");
+
+    // Nothing changed, nothing to write
+    await act(() => listener("onSave")());
+    expect(api.saveGame).not.toHaveBeenCalled();
+
+    act(() =>
+      store.dispatch(
+        editGame((g) => ({ ...g, info: { ...g.info, title: "Renamed" } })),
+      ),
+    );
+    await act(() => listener("onSave")());
+    await waitFor(() => expect(api.saveGame).toHaveBeenCalledTimes(1));
+    expect(JSON.parse(api.saveGame.mock.calls[0][1]).info.title).toBe(
+      "Renamed",
+    );
+    delete api.saveGame;
   });
 
   it("stores update information and download progress", () => {

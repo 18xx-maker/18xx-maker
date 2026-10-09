@@ -317,6 +317,7 @@ describe("save as in the app", () => {
       onAlert: noop,
       onProgress: noop,
       onRedirect: noop,
+      onSave: noop,
       onGame: noop,
       onUpdate: noop,
       onDownloadProgress: noop,

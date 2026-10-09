@@ -9,6 +9,7 @@ import {
   FileDiff,
   Pencil,
   RefreshCw,
+  Save,
   TriangleAlert,
 } from "lucide-react";
 
@@ -41,7 +42,7 @@ import KeyLabel from "@/components/KeyLabel";
 import ExportButton from "@/components/export/ExportButton";
 import PrintButton from "@/components/page/PrintButton";
 
-import { useConfig, useGame } from "@/hooks";
+import { useConfig, useGame, useSaveGame } from "@/hooks";
 import { useEditPanel } from "@/hooks/useEditPanel";
 import { Link, useLocation, useMatch, useNavigate } from "@/router";
 import { refreshGame } from "@/state";
@@ -75,6 +76,7 @@ const Toolbar = () => {
   const { gameConfigIgnored } = useConfig();
   const slug = game.meta.slug;
   const changed = useSelector(selectGameChanged);
+  const saver = useSaveGame();
 
   const match = useMatch("/games/:slug/:section/*");
   const item = find(propEq(match.params.section, "section"), gameNav);
@@ -174,6 +176,32 @@ const Toolbar = () => {
               <span className="max-md:sr-only">{t("changes.nav")}</span>
             </Link>
           </Button>
+          {saver.available && (
+            <TooltipProvider delayDuration={200}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="border rounded-sm px-2 h-8 m-0 shrink-0"
+                    disabled={saver.saving}
+                    onClick={() => saver.save()}
+                    data-testid="toolbar-save"
+                  >
+                    <Save className="size-6" />
+                    <span className="max-md:sr-only">
+                      {saver.saveAs ? t("saveAs.nav") : t("changes.save")}
+                    </span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {saver.saveAs
+                    ? t("changes.saveAsTooltip")
+                    : t("changes.saveTooltip")}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+          {saver.dialog}
         </>
       )}
       <Separator orientation="vertical" />

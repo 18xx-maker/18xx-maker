@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,7 +19,7 @@ import Header from "@/components/nav/Header";
 import SetSvgColors from "@/components/svg/SetSvgColors";
 
 import { ThemeProvider } from "@/context/ThemeProvider";
-import { useBindings, useConfig, useEditor } from "@/hooks";
+import { useBindings, useConfig, useEditor, useSaveGame } from "@/hooks";
 import { detectedLanguage } from "@/locales/language";
 import { useMatch, useNavigate } from "@/router";
 import {
@@ -30,7 +30,12 @@ import {
   loadGame,
   receiveGame,
 } from "@/state";
-import { selectGameChanged, selectLanguage } from "@/state/selectors";
+import {
+  selectEditorKeys,
+  selectExportSheetOpen,
+  selectGameChanged,
+  selectLanguage,
+} from "@/state/selectors";
 import capability from "@/util/capability";
 import { sniffConfigFile } from "@/util/config";
 import { useBooleanParam } from "@/util/query";
@@ -47,6 +52,10 @@ const Root = ({ children }) => {
   const dispatch = useDispatch();
   const language = useSelector(selectLanguage);
   const { importConfig } = useConfig();
+  const saver = useSaveGame();
+  const saveRef = useRef(saver.save);
+  saveRef.current = saver.save;
+  const menuSaveRef = useRef(() => undefined);
 
   // The language setting overrides the system one; without it follow the
   // system
@@ -158,6 +167,7 @@ body {
       window.api.onGame(onGame);
       window.api.onProgress(compose(dispatch, createProgressAlert));
       window.api.onRedirect(navigate);
+      window.api.onSave(() => menuSaveRef.current());
       window.api.onUpdate(compose(dispatch, createUpdate));
       window.api.onDownloadProgress(compose(dispatch, createDownloadPercent));
 
@@ -192,6 +202,58 @@ body {
     // Once, on start
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Cmd/Ctrl+S, and the File menu's Save, save the game of a game page. The
+  // key always belongs to the app there, so the browser does not offer to save
+  // the page; the save itself waits for the game to have changes, and for the
+  // dialogs to be closed. It does not skip a key the JSON editor has used (its
+  // Mod-s applies the text, and the save follows). In the Emacs and Vim modes
+  // Ctrl+S in the editor is the mode's own, and the menu does not fire.
+  const exportSheetOpen = useSelector(selectExportSheetOpen);
+  const editorKeys = useSelector(selectEditorKeys);
+  const maySave = () =>
+    !render &&
+    onGamePage &&
+    !print &&
+    !exportSheetOpen &&
+    !document.querySelector('[role="dialog"]');
+  const mayRef = useRef(maySave);
+  mayRef.current = maySave;
+  const onMenuSave = () => {
+    if (mayRef.current()) saveRef.current();
+  };
+  menuSaveRef.current = onMenuSave;
+  useEffect(() => {
+    if (render || !onGamePage) return;
+    const onKeyDown = (event) => {
+      if (
+        !(event.metaKey || event.ctrlKey) ||
+        event.altKey ||
+        event.shiftKey ||
+        // The key itself, for layouts without a Latin s
+        !(
+          event.key.toLowerCase() === "s" ||
+          (event.code === "KeyS" && !/^[a-z]$/i.test(event.key))
+        )
+      ) {
+        return;
+      }
+      event.preventDefault();
+      if (
+        event.ctrlKey &&
+        !event.metaKey &&
+        editorKeys !== "normal" &&
+        event.target instanceof Element &&
+        event.target.closest(".cm-editor")
+      ) {
+        return;
+      }
+      if (event.repeat) return;
+      mayRef.current() && saveRef.current();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [render, onGamePage, editorKeys]);
 
   const [shortcuts, setShortcuts] = useBindings();
   const inEditor = useEditor();
@@ -264,6 +326,7 @@ body {
               <Alert />
               <ExportHost />
               <ShortcutsDialog open={shortcuts} onOpenChange={setShortcuts} />
+              {saver.dialog}
             </>
           )}
         </ScrollToTop>

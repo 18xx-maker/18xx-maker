@@ -23,6 +23,7 @@ vi.hoisted(() => {
     onGame: () => {},
     onProgress: () => {},
     onRedirect: () => {},
+    onSave: () => {},
     onUpdate: () => {},
   };
 });

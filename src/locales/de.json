@@ -44,7 +44,9 @@
     "overwrite": "Datei überschreiben",
     "saved": "Spiel gespeichert",
     "savedMessage": "{{title}} wurde in seiner Datei gespeichert",
-    "saveFailed": "Das Spiel konnte nicht gespeichert werden"
+    "saveFailed": "Das Spiel konnte nicht gespeichert werden",
+    "saveTooltip": "Das Spiel in seiner Datei speichern (Strg oder Cmd+S)",
+    "saveAsTooltip": "Eine Kopie des Spiels speichern (Strg oder Cmd+S)"
   },
   "saveAs": {
     "nav": "Speichern unter...",
@@ -1742,6 +1744,10 @@
       "download": {
         "use": "Die Datei des geladenen Spiels herunterladen",
         "notes": "Speichert das Spiel ohne Metadaten. Nur wenn ein Spiel geladen ist."
+      },
+      "save": {
+        "use": "Das Spiel in seiner Datei speichern",
+        "notes": "Nur auf den Seiten eines Spiels mit ungespeicherten Änderungen. Ein mitgeliefertes Spiel wird als Kopie gespeichert. In der App auch Datei, Speichern. Im JSON-Editor wird das Spiel zuerst aus dem Text aktualisiert."
       },
       "export": {
         "use": "Das Exportmenü öffnen",
