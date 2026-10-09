@@ -343,6 +343,10 @@ describe("save as in the app", () => {
       expect.stringContaining('"title"'),
       "Save as",
       "18xx-maker Game",
+      // The custom images of 18Test, for the main process to write
+      expect.objectContaining({
+        icons: expect.objectContaining({ star: expect.any(String) }),
+      }),
     );
     await waitFor(() =>
       expect(router.state.location.pathname).toBe("/games/electron:abc"),
