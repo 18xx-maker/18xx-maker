@@ -127,6 +127,12 @@ const useLeaving = (alerts) => {
 
   useEffect(() => {
     setShown((prev) => {
+      if (
+        prev.length === alerts.length &&
+        prev.every((entry, i) => !entry.leaving && entry.alert === alerts[i])
+      ) {
+        return prev;
+      }
       const ids = new Set(alerts.map((a) => a.id));
       const result = alerts.map((alert) => ({ alert, leaving: false }));
       if (reducedMotion()) return result;
