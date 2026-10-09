@@ -13,6 +13,10 @@ import { gameText } from "@/util/download";
 import { brokenGame } from "@tests/support/brokenGame.js";
 import { renderApp } from "@tests/support/helpers.jsx";
 
+// Root's own check starts 500 ms after mount and would overwrite the issues
+// the tests dispatch on a slow runner; open() runs the check itself
+vi.mock("@/components/ValidateGame", () => ({ default: () => null }));
+
 const route = "/games/internal:abc/tokens?edit=true&editSection=problems";
 
 beforeEach(async () => {
@@ -35,7 +39,7 @@ const open = async (game = brokenGame(), url = route) => {
     loadedGame: { slug: "internal:abc", title: game.info.title, id: "abc" },
   });
   await screen.findByTestId("edit-panel");
-  // The app checks the game 500 ms after it settles: run the check directly
+  // The app's own check (ValidateGame) is mocked: run the check directly
   await act(() =>
     view.store.dispatch(validateLoadedGame(view.store.getState().game)),
   );
