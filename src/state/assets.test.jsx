@@ -118,7 +118,10 @@ describe("save as", () => {
         Object.keys(bundledAssets["18Test"].icons),
       );
       expect(copy.trains.loco).toBe(bundledAssets["18Test"].trains.loco);
-      expect(store.getState().alert).toMatchObject({ type: "success" });
+      expect(store.getState().alert.items.at(-1)).toMatchObject({
+        type: "success",
+        title: "Game Saved",
+      });
 
       // Opening the copy shows them
       await store.dispatch(loadGame(slug));

@@ -165,7 +165,7 @@ const parseStyle = (text) => {
   return Object.keys(style).length ? style : undefined;
 };
 
-const cleanAttributes = (element) => {
+const cleanAttributes = (element, state) => {
   const attrs = {};
   for (const { name, value } of Array.from(element.attributes)) {
     if (!ATTRIBUTES.has(name)) continue;
@@ -177,7 +177,12 @@ const cleanAttributes = (element) => {
     }
     if (!safeValue(value)) continue;
     if (name === "id") {
-      if (ID.test(value)) attrs.id = value;
+      // An id is kept once: a second element with it is rendered without
+      // one, so a use can only ever reach the element that was kept
+      if (ID.test(value) && !state.emitted.has(value)) {
+        state.emitted.add(value);
+        attrs.id = value;
+      }
     } else if (name === "class") {
       const classes = value
         .split(/\s+/)
@@ -207,21 +212,7 @@ const walk = (element, state, depth) => {
   }
 
   const tag = element.localName;
-  const attrs = cleanAttributes(element);
-
-  if (tag === "use") {
-    // A use that points nowhere, or at another use (which could expand
-    // exponentially), is dropped
-    const target = attrs.href && state.ids.get(attrs.href.slice(1));
-    if (
-      !target ||
-      target.localName === "use" ||
-      target.querySelector("use") ||
-      ++state.uses > MAX_USES
-    ) {
-      return null;
-    }
-  }
+  const attrs = cleanAttributes(element, state);
 
   const children = [];
   for (const child of Array.from(element.childNodes)) {
@@ -236,6 +227,30 @@ const walk = (element, state, depth) => {
     }
   }
   return { tag, attrs, children };
+};
+
+const hasUse = (node) =>
+  typeof node === "object" &&
+  (node.tag === "use" || node.children.some(hasUse));
+
+const collectIds = (node, ids) => {
+  if (typeof node !== "object") return;
+  if (node.attrs.id) ids.set(node.attrs.id, node);
+  node.children.forEach((child) => collectIds(child, ids));
+};
+
+// A use that points nowhere, or at another use or an element holding one
+// (which could expand exponentially), is dropped. Targets are looked up in
+// the sanitized tree, which is what gets rendered.
+const pruneUses = (node, state) => {
+  if (typeof node !== "object") return node;
+  node.children = node.children.filter((child) => {
+    if (typeof child !== "object" || child.tag !== "use") return true;
+    const target = child.attrs.href && state.ids.get(child.attrs.href.slice(1));
+    return !!target && !hasUse(target) && ++state.uses <= MAX_USES;
+  });
+  node.children.forEach((child) => pruneUses(child, state));
+  return node;
 };
 
 const CACHE_SIZE = 500;
@@ -284,10 +299,10 @@ const parse = (text) => {
     return null;
   }
 
+  const tree = walk(root, { nodes: 0, emitted: new Set() }, 0);
+  if (!tree) return null;
   const ids = new Map();
-  for (const element of Array.from(root.querySelectorAll("[id]"))) {
-    if (!ids.has(element.id)) ids.set(element.id, element);
-  }
-  const tree = walk(root, { nodes: 0, uses: 0, ids }, 0);
-  return tree && tree.children.length ? tree : null;
+  collectIds(tree, ids);
+  pruneUses(tree, { uses: 0, ids });
+  return tree.children.length ? tree : null;
 };

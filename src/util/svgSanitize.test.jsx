@@ -172,6 +172,32 @@ describe("sanitizeSvg", () => {
     expect(uses.map((node) => node.attrs.href)).toEqual(["#p", "#p"]);
   });
 
+  it("is not fooled by repeated ids into nesting uses", () => {
+    const tree = sanitizeSvg(
+      `<svg xmlns="http://www.w3.org/2000/svg"><desc id="L1"/><desc id="L2"/><defs><rect id="L0" width="1" height="1"/><g id="L1"><use href="#L0"/><use href="#L0"/><use href="#L0"/></g><g id="L2"><use href="#L1"/><use href="#L1"/><use href="#L1"/></g></defs><use href="#L2"/></svg>`,
+    );
+    const nodes = flatten(tree);
+    const uses = nodes.filter((node) => node.tag === "use");
+    for (const use of uses) {
+      const target = nodes.find(
+        (node) => node.attrs.id === use.attrs.href.slice(1),
+      );
+      expect(flatten(target).filter((node) => node.tag === "use")).toEqual([]);
+    }
+    expect(uses.map((node) => node.attrs.href)).not.toContain("#L2");
+  });
+
+  it("keeps an id once", () => {
+    const tree = sanitizeSvg(
+      svg(
+        '<rect id="a" width="1" height="1"/><rect id="a" width="2" height="2"/>',
+      ),
+    );
+    expect(flatten(tree).filter((node) => node.attrs.id === "a")).toHaveLength(
+      1,
+    );
+  });
+
   it("refuses a DOCTYPE with an internal subset and entity declarations", () => {
     expect(
       sanitizeSvg(
