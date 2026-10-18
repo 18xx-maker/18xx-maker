@@ -96,8 +96,8 @@ const Train = ({ train, trains, bare }) => {
           <span
             className="train__info"
             style={{
-              backgroundColor: c(eventTrain.color),
-              color: t(c(eventTrain.color)),
+              backgroundColor: c(eventTrain?.color),
+              color: t(c(eventTrain?.color)),
               fontSize: `${longevityFontSizeInch}in`,
               fontFamily: `${longevityFontFamily}`,
             }}
@@ -133,8 +133,8 @@ const Train = ({ train, trains, bare }) => {
           <span
             className="train__info"
             style={{
-              backgroundColor: c(eventTrain.color),
-              color: t(c(eventTrain.color)),
+              backgroundColor: c(eventTrain?.color),
+              color: t(c(eventTrain?.color)),
               fontSize: `${longevityFontSizeInch}in`,
               fontFamily: `${longevityFontFamily}`,
             }}
@@ -170,8 +170,8 @@ const Train = ({ train, trains, bare }) => {
           <span
             className="train__info"
             style={{
-              backgroundColor: c(eventTrain.color),
-              color: t(c(eventTrain.color)),
+              backgroundColor: c(eventTrain?.color),
+              color: t(c(eventTrain?.color)),
               fontSize: `${longevityFontSizeInch}in`,
               fontFamily: `${longevityFontFamily}`,
             }}
