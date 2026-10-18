@@ -142,6 +142,9 @@ describe("ImagesSection", () => {
     );
 
     await waitFor(() => expect(keys(store, "icons")).toEqual([]));
+    await waitFor(() =>
+      expect(screen.queryByText("custom/spare")).not.toBeInTheDocument(),
+    );
   });
 
   it("asks twice before deleting an image the game uses", async () => {
@@ -164,6 +167,9 @@ describe("ImagesSection", () => {
     await waitFor(() => expect(keys(store, "icons")).toEqual([]));
     await waitFor(() =>
       expect(screen.queryByText("Delete anyway")).not.toBeInTheDocument(),
+    );
+    await waitFor(() =>
+      expect(screen.queryByText("custom/star")).not.toBeInTheDocument(),
     );
   });
 
