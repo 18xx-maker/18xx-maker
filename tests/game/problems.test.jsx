@@ -115,6 +115,35 @@ describe("problems of a game", () => {
     ).toHaveLength(5);
   });
 
+  it("lists a train that names a train the game does not have", async () => {
+    const game = {
+      ...validGame(),
+      trains: [{ name: "2", price: 80, rust: "4" }],
+    };
+    const { store } = renderApp("/games/Valid/problems", {
+      game,
+      loadedGame: { slug: "Valid", title: "Valid", id: "Valid" },
+    });
+    await check(store);
+
+    const page = await screen.findByTestId("game-Valid-problems");
+    expect(page).toHaveTextContent("trains[0].rust");
+    expect(page).toHaveTextContent(
+      'Train 2 has "rust" set to the train "4", but the game has no train with that name.',
+    );
+    const lines = gameText(game).split("\n");
+    expect(
+      screen.getByRole("link", {
+        name: "Open trains[0].rust in the JSON editor",
+      }),
+    ).toHaveAttribute(
+      "href",
+      `/games/Valid/tiles?edit=true&editSection=json&lines=${
+        lines.findIndex((line) => line.includes('"rust"')) + 1
+      }`,
+    );
+  });
+
   it("opens the json editor with the line when a row is followed", async () => {
     const game = brokenGame();
     const { store, router } = renderApp("/games/Broken/problems", {

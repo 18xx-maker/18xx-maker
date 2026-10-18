@@ -11,6 +11,7 @@ import {
   readablePointer,
   removedPointers,
   shorten,
+  trainReferenceIssues,
   validateGame,
 } from "@/util/gameValidation";
 
@@ -617,6 +618,101 @@ describe("gameValidation", () => {
         "custom/star",
       ]);
       expect(await validateGame(games["18Test"])).toEqual([]);
+    });
+  });
+
+  describe("train references", () => {
+    const pointers = (trains) =>
+      trainReferenceIssues({ trains }).map((i) => i.pointer);
+
+    it("warns about a name no train has", () => {
+      expect(
+        trainReferenceIssues({
+          trains: [{ name: "2", rust: "4" }, { name: "3" }],
+        }),
+      ).toEqual([
+        {
+          severity: "warning",
+          code: "missing-train",
+          pointer: "trains[0].rust",
+          params: { train: "2", event: "rust", name: "4" },
+        },
+      ]);
+    });
+
+    it("points at the item of a list and at the on of an object", () => {
+      expect(
+        pointers([
+          { name: "2", phased: ["2", "9", { on: "8" }, { on: "2" }] },
+          { name: "3", obsolete: { on: "7" } },
+        ]),
+      ).toEqual([
+        "trains[0].phased[1]",
+        "trains[0].phased[2].on",
+        "trains[1].obsolete.on",
+      ]);
+    });
+
+    it("checks rust, phased and obsolete", () => {
+      const issues = trainReferenceIssues({
+        trains: [{ name: "2", rust: "a", phased: "b", obsolete: "c" }],
+      });
+      expect(issues.map((i) => i.params.event)).toEqual([
+        "rust",
+        "phased",
+        "obsolete",
+      ]);
+    });
+
+    it("compares names as strings and knows the name of a back", () => {
+      expect(
+        pointers([
+          { name: 2, rust: "3" },
+          { name: "3", back: { name: "D" }, phased: ["D", 2] },
+        ]),
+      ).toEqual([]);
+    });
+
+    it("labels a train without a name by its place", () => {
+      expect(
+        trainReferenceIssues({ trains: [{ rust: "x" }] })[0].params.train,
+      ).toBe("#1");
+    });
+
+    it("ignores values that are not names, and games without trains", () => {
+      expect(
+        pointers([
+          { name: "2", rust: [true, null, { on: 5 }, {}], phased: true },
+        ]),
+      ).toEqual(["trains[0].rust[2].on"]);
+      expect(trainReferenceIssues({})).toEqual([]);
+      expect(trainReferenceIssues({ trains: "2" })).toEqual([]);
+      expect(pointers([null, "2", { name: "2", rust: "2" }])).toEqual([]);
+    });
+
+    it("finds the dangling names of 18Broken", async () => {
+      const issues = await validateGame(games["18Broken"]);
+      expect(
+        issues
+          .filter((i) => i.code === "missing-train")
+          .map((i) => [i.severity, i.pointer, i.params.name]),
+      ).toEqual([
+        ["warning", "trains[0].rust", "9"],
+        ["warning", "trains[0].phased[0]", "8"],
+        ["warning", "trains[0].phased[1].on", "7"],
+        ["warning", "trains[0].obsolete", "6"],
+      ]);
+    });
+
+    it("is part of validateGame without the images", async () => {
+      const game = {
+        ...validGame(),
+        trains: [
+          { name: "2", price: 80, quantity: 1, color: "yellow", rust: "4" },
+        ],
+      };
+      const issues = await validateGame(game);
+      expect(issues.map((i) => i.code)).toEqual(["missing-train"]);
     });
   });
 });
