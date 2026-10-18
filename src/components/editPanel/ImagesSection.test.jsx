@@ -161,8 +161,10 @@ describe("ImagesSection", () => {
     await user.click(
       within(row).getByRole("button", { name: "Delete custom/star" }),
     );
-    expect(within(row).queryByText("Delete anyway")).not.toBeInTheDocument();
     await waitFor(() => expect(keys(store, "icons")).toEqual([]));
+    await waitFor(() =>
+      expect(screen.queryByText("Delete anyway")).not.toBeInTheDocument(),
+    );
   });
 
   it("has no controls and says why for a game of the desktop app", async () => {
