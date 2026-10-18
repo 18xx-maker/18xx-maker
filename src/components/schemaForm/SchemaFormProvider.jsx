@@ -18,6 +18,10 @@ import {
 
 import schema from "@/schemas/game.schema.json";
 import { editGame, selectGameProblems } from "@/state";
+import renameTrain from "@/util/renameTrain";
+
+const isTrainName = (keys) =>
+  keys.length === 3 && keys[0] === "trains" && keys[2] === "name";
 
 // What the forms generated from the game schema share: the game, its problems
 // and the ways to change it. Edits go through editGame, saving stays with the
@@ -31,11 +35,20 @@ const SchemaFormProvider = ({ game, children }) => {
 
   const edit = useCallback((fn) => dispatch(editGame(fn)), [dispatch]);
 
+  // Renaming a train also renames what refers to it, in the same edit
   const set = useCallback(
     (keys, value) =>
-      edit((g) =>
-        equals(valueAt(keys, g), value) ? g : setValue(g, keys, value),
-      ),
+      edit((g) => {
+        const before = valueAt(keys, g);
+        if (equals(before, value)) return g;
+        const renamed =
+          isTrainName(keys) &&
+          typeof before === "string" &&
+          typeof value === "string"
+            ? renameTrain(g, keys[1], value)
+            : g;
+        return setValue(renamed, keys, value);
+      }),
     [edit],
   );
 
