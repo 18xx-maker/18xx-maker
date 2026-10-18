@@ -449,6 +449,7 @@ export const assetIssues = (data, assets) =>
 // game does not have. Intentionally a superset of the matching in
 // cards/Train.jsx: names compare as strings (a number 3 names the train "3"),
 // the name of a train back also counts, and every item of a list is checked.
+// Only names in the game's `trains` are known (not inline company trains).
 const TRAIN_EVENTS = ["rust", "phased", "obsolete"];
 
 export const trainReferenceIssues = (data) => {
