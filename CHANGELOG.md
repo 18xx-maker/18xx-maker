@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.0-beta.138](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.137...v1.0.0-beta.138) (2026-10-19)
+
+
+### :tada: Features
+
+* **editor:** update train references when a train is renamed ([#1081](https://github.com/18xx-maker/18xx-maker/issues/1081)) ([21bfb49](https://github.com/18xx-maker/18xx-maker/commit/21bfb491f3eac1daef16924a1a571e3874df4649))
+* **problems:** check rust, phased and obsolete on company train objects ([#1088](https://github.com/18xx-maker/18xx-maker/issues/1088)) ([3819a46](https://github.com/18xx-maker/18xx-maker/commit/3819a460a7ba0702a0d28080065478dd15537b42))
+* **problems:** report dangling train names ([#1082](https://github.com/18xx-maker/18xx-maker/issues/1082)) ([48ead0f](https://github.com/18xx-maker/18xx-maker/commit/48ead0f00927c8f5ba49ad668788ed7617adc308))
+* **problems:** warn when a train index is above the number of trains ([#1085](https://github.com/18xx-maker/18xx-maker/issues/1085)) ([1cd37ef](https://github.com/18xx-maker/18xx-maker/commit/1cd37efc0236d6dc0eebf79034e67eb676c8754a))
+
+
+### :bug: Bug Fixes
+
+* **cards:** tolerate a train event naming a missing train ([#1074](https://github.com/18xx-maker/18xx-maker/issues/1074)) ([1119b32](https://github.com/18xx-maker/18xx-maker/commit/1119b326e7d0a9d61a41248903bc06d7c509d066))
+* **test:** wait for image deletion to finish in ImagesSection tests ([#1080](https://github.com/18xx-maker/18xx-maker/issues/1080)) ([b0e0548](https://github.com/18xx-maker/18xx-maker/commit/b0e05487eb111c342594d6fbe5edd6f902520a19))
+* **validation:** know inline company trains in the dangling train check ([#1086](https://github.com/18xx-maker/18xx-maker/issues/1086)) ([88c760b](https://github.com/18xx-maker/18xx-maker/commit/88c760bb6ba741b25cb1864b71bd37d5a235cf34))
+
 ## [1.0.0-beta.137](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.136...v1.0.0-beta.137) (2026-10-09)
 
 
