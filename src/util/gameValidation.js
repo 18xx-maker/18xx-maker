@@ -450,14 +450,27 @@ export const assetIssues = (data, assets) =>
 // cards/Train.jsx: names compare as strings (a number 3 names the train "3"),
 // the name of a train back also counts, and every item of a list is checked.
 // Only names in the game's `trains` are known (not inline company trains).
+// The object form `{ on, index }` also warns when `index` is above the number
+// of trains of that name (the sum of their `quantity`, a missing one counts 1,
+// "∞" never warns, and an unrecognised quantity skips the check).
 const TRAIN_EVENTS = ["rust", "phased", "obsolete"];
 
 export const trainReferenceIssues = (data) => {
   const trains = Array.isArray(data?.trains) ? data.trains : [];
   const known = new Set();
+  const counts = new Map();
   for (const train of trains) {
     if (!isObject(train)) continue;
     known.add(String(train.name));
+    if (train.name !== undefined && train.name !== null) {
+      const key = String(train.name);
+      const quantity = train.quantity ?? 1;
+      const n = quantity === "∞" ? Infinity : quantity;
+      counts.set(
+        key,
+        Number.isFinite(n) || n === Infinity ? (counts.get(key) ?? 0) + n : NaN,
+      );
+    }
     if (isObject(train.back)) known.add(String(train.back.name));
   }
 
@@ -472,7 +485,26 @@ export const trainReferenceIssues = (data) => {
         const object = isObject(item);
         const name = object ? item.on : item;
         if (typeof name !== "string" && typeof name !== "number") return;
-        if (known.has(String(name))) return;
+        if (known.has(String(name))) {
+          const count = counts.get(String(name));
+          if (object && Number.isInteger(item.index) && item.index > count) {
+            found.push(
+              issue(
+                "bad-train-index",
+                `#/trains/${index}/${event}${Array.isArray(value) ? `/${at}` : ""}/index`,
+                {
+                  train: String(owner),
+                  event,
+                  name: String(name),
+                  index: item.index,
+                  count,
+                },
+                WARNING,
+              ),
+            );
+          }
+          return;
+        }
         found.push(
           issue(
             "missing-train",

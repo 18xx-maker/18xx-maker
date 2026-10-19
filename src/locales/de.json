@@ -592,6 +592,7 @@
     "generic": "{{message}}",
     "missing-asset": "Das Spiel hat kein {{kind}}-Bild {{id}}. Füge es im Tab Bilder hinzu oder lege die Datei in den Ordner .assets des Spiels.",
     "missing-train": "Der Zug {{train}} verweist bei \"{{event}}\" auf den Zug \"{{name}}\", aber das Spiel hat keinen Zug mit diesem Namen. Prüfe den Namen oder füge den Zug hinzu.",
+    "bad-train-index": "Der Zug {{train}} verweist bei \"{{event}}\" auf Zug Nummer {{index}} von \"{{name}}\", aber das Spiel hat nur {{count}} davon. Prüfe den Index oder die Anzahl des Zuges.",
     "failed": "Die Spieldatei konnte nicht geprüft werden.",
     "deprecated-generic": "Dieses Feld ist veraltet.",
     "deprecations": {
