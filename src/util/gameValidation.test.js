@@ -673,6 +673,63 @@ describe("gameValidation", () => {
       ).toEqual([]);
     });
 
+    it("knows the trains of a company", () => {
+      const missing = (companies) =>
+        trainReferenceIssues({
+          trains: [{ name: "2", rust: "S" }],
+          companies,
+        });
+      expect(missing([{ trains: ["S"] }])).toEqual([]);
+      expect(missing([{ trains: [{ name: "S" }] }])).toEqual([]);
+      expect(missing([{ trains: [{ name: "S", price: 50 }] }])).toEqual([]);
+      expect(missing([{ trains: [{ name: "S", quantity: 2 }] }])).toEqual([]);
+      expect(
+        missing([{ trains: [{ name: "X", back: { name: "S" } }] }]),
+      ).toEqual([]);
+      expect(
+        missing([{ trains: [{ name: "X", back: { name: "S", price: 1 } }] }]),
+      ).toEqual([]);
+      const trains = [{ name: "2", rust: 5 }];
+      expect(
+        trainReferenceIssues({
+          trains,
+          companies: [{ trains: [{ name: 5 }] }],
+        }),
+      ).toEqual([]);
+      expect(missing([{ trains: ["T"] }])).toEqual([
+        {
+          severity: "warning",
+          code: "missing-train",
+          pointer: "trains[0].rust",
+          params: { train: "2", event: "rust", name: "S" },
+        },
+      ]);
+    });
+
+    it("adds nothing for a company train without a name", () => {
+      const run = (companies, rust = "undefined") =>
+        trainReferenceIssues({ trains: [{ name: "2", rust }], companies });
+      expect(run([{ trains: [{}] }])).toHaveLength(1);
+      expect(run([{ trains: [{ name: null }] }])).toHaveLength(1);
+      expect(run([{ trains: [{ name: "X", back: "S" }] }], "S")).toHaveLength(
+        1,
+      );
+      expect(run([{ trains: [{ name: "X", back: null }] }], "S")).toHaveLength(
+        1,
+      );
+      expect(run([{ trains: [{ name: "X", back: {} }] }])).toHaveLength(1);
+    });
+
+    it("ignores companies that are not lists of trains", () => {
+      const run = (companies) =>
+        trainReferenceIssues({ trains: [{ name: "2" }], companies });
+      expect(
+        run([null, "A", { trains: false }, { trains: [null, 3] }]),
+      ).toEqual([]);
+      expect(run({ trains: ["S"] })).toEqual([]);
+      expect(run("x")).toEqual([]);
+    });
+
     it("labels a train without a name by its place", () => {
       expect(
         trainReferenceIssues({ trains: [{ rust: "x" }] })[0].params.train,

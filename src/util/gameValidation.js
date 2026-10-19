@@ -449,7 +449,8 @@ export const assetIssues = (data, assets) =>
 // game does not have. Intentionally a superset of the matching in
 // cards/Train.jsx: names compare as strings (a number 3 names the train "3"),
 // the name of a train back also counts, and every item of a list is checked.
-// Only names in the game's `trains` are known (not inline company trains).
+// Names declared by the trains of a company also count (references are
+// checked on the game's `trains` only).
 // The object form `{ on, index }` also warns when `index` is above the number
 // of trains of that name (the sum of their `quantity`, a missing one counts 1,
 // "∞" never warns, and an unrecognised quantity skips the check).
@@ -472,6 +473,21 @@ export const trainReferenceIssues = (data) => {
       );
     }
     if (isObject(train.back)) known.add(String(train.back.name));
+  }
+  if (Array.isArray(data?.companies)) {
+    const add = (name) => {
+      if (name !== undefined && name !== null) known.add(String(name));
+    };
+    for (const company of data.companies) {
+      if (!isObject(company) || !Array.isArray(company.trains)) continue;
+      for (const item of company.trains) {
+        if (typeof item === "string") known.add(item);
+        else if (isObject(item)) {
+          add(item.name);
+          if (isObject(item.back)) add(item.back.name);
+        }
+      }
+    }
   }
 
   const found = [];
