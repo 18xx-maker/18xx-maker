@@ -591,6 +591,7 @@
     "required": "Missing the required field \"{{field}}\".",
     "generic": "{{message}}",
     "missing-asset": "The game has no {{kind}} image {{id}}. Add it in the Images tab, or put the file in the .assets folder of the game.",
+    "missing-train": "Train {{train}} has \"{{event}}\" set to the train \"{{name}}\", but the game has no train with that name. Check the name, or add the train.",
     "failed": "The game file could not be checked.",
     "deprecated-generic": "This field is deprecated.",
     "deprecations": {

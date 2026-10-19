@@ -48,7 +48,7 @@ When you open a game its file is checked against the game schema in the
 background. If something is wrong a Problems entry appears in the game menu, with the number of problems. It opens a list with where each problem
 is, what is wrong and how to fix it: unknown fields (a typo, or a field that was
 renamed or removed), values of the wrong type, values that are not allowed, and
-required fields that are missing. Fields that are deprecated are listed too, they
+required fields that are missing. A train that rusts, phases or obsoletes on a train name the game does not have is listed as a warning. Fields that are deprecated are listed too, they
 still work, and the page says which name to use instead. The page only reports, your
 file is never changed.
 Each row that points into the file links to the JSON editor of the edit panel, at the line of the problem. The same list is the Problems tab of the edit panel, where a row opens the JSON editor on its line without leaving the page.

@@ -445,6 +445,48 @@ export const assetIssues = (data, assets) =>
       issue("missing-asset", pointer, { id, kind }, WARNING),
     );
 
+// A warning for each train that rusts, phases or obsoletes on a train name the
+// game does not have. Intentionally a superset of the matching in
+// cards/Train.jsx: names compare as strings (a number 3 names the train "3"),
+// the name of a train back also counts, and every item of a list is checked.
+// Only names in the game's `trains` are known (not inline company trains).
+const TRAIN_EVENTS = ["rust", "phased", "obsolete"];
+
+export const trainReferenceIssues = (data) => {
+  const trains = Array.isArray(data?.trains) ? data.trains : [];
+  const known = new Set();
+  for (const train of trains) {
+    if (!isObject(train)) continue;
+    known.add(String(train.name));
+    if (isObject(train.back)) known.add(String(train.back.name));
+  }
+
+  const found = [];
+  trains.forEach((train, index) => {
+    if (!isObject(train)) return;
+    const owner = train.name ?? `#${index + 1}`;
+    for (const event of TRAIN_EVENTS) {
+      const value = train[event];
+      const list = Array.isArray(value) ? value : [value];
+      list.forEach((item, at) => {
+        const object = isObject(item);
+        const name = object ? item.on : item;
+        if (typeof name !== "string" && typeof name !== "number") return;
+        if (known.has(String(name))) return;
+        found.push(
+          issue(
+            "missing-train",
+            `#/trains/${index}/${event}${Array.isArray(value) ? `/${at}` : ""}${object ? "/on" : ""}`,
+            { train: String(owner), event, name: String(name) },
+            WARNING,
+          ),
+        );
+      });
+    }
+  });
+  return found;
+};
+
 // Every problem of a game: schema errors first, then removed and deprecated
 // fields. `assets` (the custom images of the game, see util/assets) is
 // optional: without it the custom images are not checked.
@@ -482,5 +524,6 @@ export const validateGame = async (game, assets) => {
     ...removed,
     ...deprecatedIssues(deprecated, data),
     ...(assets === undefined ? [] : assetIssues(data, assets)),
+    ...trainReferenceIssues(data),
   ];
 };
