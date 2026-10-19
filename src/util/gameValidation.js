@@ -449,8 +449,10 @@ export const assetIssues = (data, assets) =>
 // game does not have. Intentionally a superset of the matching in
 // cards/Train.jsx: names compare as strings (a number 3 names the train "3"),
 // the name of a train back also counts, and every item of a list is checked.
-// Names declared by the trains of a company also count (references are
-// checked on the game's `trains` only).
+// Names declared by the trains of a company also count, and the full train
+// objects of a company are checked like the game's `trains` (an index is
+// compared with the game's `trains` only, so a name found only in a company
+// never warns about its index).
 // The object form `{ on, index }` also warns when `index` is above the number
 // of trains of that name (the sum of their `quantity`, a missing one counts 1,
 // "∞" never warns, and an unrecognised quantity skips the check).
@@ -491,9 +493,7 @@ export const trainReferenceIssues = (data) => {
   }
 
   const found = [];
-  trains.forEach((train, index) => {
-    if (!isObject(train)) return;
-    const owner = train.name ?? `#${index + 1}`;
+  const check = (train, base, owner) => {
     for (const event of TRAIN_EVENTS) {
       const value = train[event];
       const list = Array.isArray(value) ? value : [value];
@@ -501,13 +501,14 @@ export const trainReferenceIssues = (data) => {
         const object = isObject(item);
         const name = object ? item.on : item;
         if (typeof name !== "string" && typeof name !== "number") return;
+        const where = `${base}/${event}${Array.isArray(value) ? `/${at}` : ""}`;
         if (known.has(String(name))) {
           const count = counts.get(String(name));
           if (object && Number.isInteger(item.index) && item.index > count) {
             found.push(
               issue(
                 "bad-train-index",
-                `#/trains/${index}/${event}${Array.isArray(value) ? `/${at}` : ""}/index`,
+                `${where}/index`,
                 {
                   train: String(owner),
                   event,
@@ -524,14 +525,32 @@ export const trainReferenceIssues = (data) => {
         found.push(
           issue(
             "missing-train",
-            `#/trains/${index}/${event}${Array.isArray(value) ? `/${at}` : ""}${object ? "/on" : ""}`,
+            `${where}${object ? "/on" : ""}`,
             { train: String(owner), event, name: String(name) },
             WARNING,
           ),
         );
       });
     }
+  };
+  trains.forEach((train, index) => {
+    if (!isObject(train)) return;
+    check(train, `#/trains/${index}`, train.name ?? `#${index + 1}`);
   });
+  if (Array.isArray(data?.companies)) {
+    data.companies.forEach((company, i) => {
+      if (!isObject(company) || !Array.isArray(company.trains)) return;
+      const label = company.name ?? company.abbr ?? `#${i + 1}`;
+      company.trains.forEach((train, j) => {
+        if (!isObject(train)) return;
+        check(
+          train,
+          `#/companies/${i}/trains/${j}`,
+          train.name ?? `#${j + 1} of ${label}`,
+        );
+      });
+    });
+  }
   return found;
 };
 

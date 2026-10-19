@@ -747,6 +747,106 @@ describe("gameValidation", () => {
       expect(pointers([null, "2", { name: "2", rust: "2" }])).toEqual([]);
     });
 
+    describe("company trains", () => {
+      const run = (companies, trains = [{ name: "2", quantity: 2 }]) =>
+        trainReferenceIssues({ trains, companies });
+
+      it("finds no problem for valid references", () => {
+        expect(
+          run([
+            {
+              trains: [
+                "2",
+                { name: "S", rust: "2", phased: ["S", { on: "2", index: 2 }] },
+                { name: "T", obsolete: ["2", "S"] },
+              ],
+            },
+          ]),
+        ).toEqual([]);
+      });
+
+      it("warns with a pointer into the company", () => {
+        const issues = run([
+          {},
+          {
+            name: "Co",
+            trains: [
+              { name: "S", rust: "2" },
+              {
+                name: "T",
+                rust: "x",
+                phased: { on: "y" },
+                obsolete: ["2", "z"],
+              },
+            ],
+          },
+        ]);
+        expect(issues.map((i) => i.pointer)).toEqual([
+          "companies[1].trains[1].rust",
+          "companies[1].trains[1].phased.on",
+          "companies[1].trains[1].obsolete[1]",
+        ]);
+        expect(issues[0]).toEqual({
+          severity: "warning",
+          code: "missing-train",
+          pointer: "companies[1].trains[1].rust",
+          params: { train: "T", event: "rust", name: "x" },
+        });
+      });
+
+      it("warns about an index above the number of game trains", () => {
+        const issues = run([
+          {
+            trains: [
+              {
+                name: "S",
+                phased: [
+                  { on: "2", index: 3 },
+                  { on: "S", index: 9 },
+                ],
+              },
+            ],
+          },
+        ]);
+        expect(issues).toEqual([
+          {
+            severity: "warning",
+            code: "bad-train-index",
+            pointer: "companies[0].trains[0].phased[0].index",
+            params: {
+              train: "S",
+              event: "phased",
+              name: "2",
+              index: 3,
+              count: 2,
+            },
+          },
+        ]);
+      });
+
+      it("labels a train without a name with its company", () => {
+        expect(
+          run([{ abbr: "AB", trains: [{ rust: "x" }] }])[0].params.train,
+        ).toBe("#1 of AB");
+        expect(run([{ trains: [{ rust: "x" }] }])[0].params.train).toBe(
+          "#1 of #1",
+        );
+      });
+
+      it("ignores what is not a train object", () => {
+        expect(
+          run([
+            { trains: [null, 3, "x", false, { name: "S", rust: null }] },
+            { trains: false },
+            null,
+            "A",
+          ]),
+        ).toEqual([]);
+        expect(run(null)).toEqual([]);
+        expect(run("x")).toEqual([]);
+      });
+    });
+
     describe("train index", () => {
       const bad = (trains) =>
         trainReferenceIssues({ trains }).filter(
