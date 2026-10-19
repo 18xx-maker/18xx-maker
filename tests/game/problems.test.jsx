@@ -144,6 +144,37 @@ describe("problems of a game", () => {
     );
   });
 
+  it("lists a train index above the number of trains", async () => {
+    const game = {
+      ...validGame(),
+      trains: [
+        { name: "2", price: 80, quantity: 2, phased: { on: "2", index: 3 } },
+      ],
+    };
+    const { store } = renderApp("/games/Valid/problems", {
+      game,
+      loadedGame: { slug: "Valid", title: "Valid", id: "Valid" },
+    });
+    await check(store);
+
+    const page = await screen.findByTestId("game-Valid-problems");
+    expect(page).toHaveTextContent("trains[0].phased.index");
+    expect(page).toHaveTextContent(
+      'Train 2 has "phased" set to train number 3 of "2", but the game has only 2 of them.',
+    );
+    const lines = gameText(game).split("\n");
+    expect(
+      screen.getByRole("link", {
+        name: "Open trains[0].phased.index in the JSON editor",
+      }),
+    ).toHaveAttribute(
+      "href",
+      `/games/Valid/tiles?edit=true&editSection=json&lines=${
+        lines.findIndex((line) => line.includes('"index"')) + 1
+      }`,
+    );
+  });
+
   it("opens the json editor with the line when a row is followed", async () => {
     const game = brokenGame();
     const { store, router } = renderApp("/games/Broken/problems", {

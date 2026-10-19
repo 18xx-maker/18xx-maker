@@ -592,6 +592,7 @@
     "generic": "{{message}}",
     "missing-asset": "游戏中没有 {{kind}} 图片 {{id}}。请在“图片”标签页添加,或把文件放进游戏的 .assets 文件夹。",
     "missing-train": "列车 {{train}} 的 \"{{event}}\" 指向列车 \"{{name}}\",但游戏中没有这个名称的列车。请检查名称,或添加该列车。",
+    "bad-train-index": "列车 {{train}} 的 \"{{event}}\" 指向 \"{{name}}\" 的第 {{index}} 辆列车,但游戏中这种列车只有 {{count}} 辆。请检查序号,或该列车的数量。",
     "failed": "无法检查游戏文件。",
     "deprecated-generic": "此字段已弃用。",
     "deprecations": {

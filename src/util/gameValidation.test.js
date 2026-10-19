@@ -690,6 +690,142 @@ describe("gameValidation", () => {
       expect(pointers([null, "2", { name: "2", rust: "2" }])).toEqual([]);
     });
 
+    describe("train index", () => {
+      const bad = (trains) =>
+        trainReferenceIssues({ trains }).filter(
+          (i) => i.code === "bad-train-index",
+        );
+
+      it("warns about an index above the number of trains", () => {
+        expect(
+          bad([{ name: "2", quantity: 2, phased: { on: "2", index: 3 } }]),
+        ).toEqual([
+          {
+            severity: "warning",
+            code: "bad-train-index",
+            pointer: "trains[0].phased.index",
+            params: {
+              train: "2",
+              event: "phased",
+              name: "2",
+              index: 3,
+              count: 2,
+            },
+          },
+        ]);
+      });
+
+      it("accepts an index equal to the number of trains", () => {
+        expect(
+          bad([{ name: "2", quantity: 2, rust: { on: "2", index: 2 } }]),
+        ).toEqual([]);
+      });
+
+      it("sums the quantity of trains with the same name", () => {
+        const trains = [
+          { name: "4", quantity: 2 },
+          { name: "4", quantity: 3, rust: { on: "4", index: 5 } },
+        ];
+        expect(bad(trains)).toEqual([]);
+        trains[1].rust.index = 6;
+        expect(bad(trains)[0].params.count).toBe(5);
+      });
+
+      it("counts a missing quantity as 1", () => {
+        expect(bad([{ name: "2", rust: { on: "2", index: 2 } }])).toHaveLength(
+          1,
+        );
+        expect(bad([{ name: "2", rust: { on: "2", index: 1 } }])).toEqual([]);
+      });
+
+      it("never warns for an infinite quantity", () => {
+        expect(
+          bad([{ name: "D", quantity: "∞", rust: { on: "D", index: 99 } }]),
+        ).toEqual([]);
+        expect(
+          bad([
+            { name: "D", quantity: "∞", rust: { on: "D", index: 99 } },
+            { name: "D", quantity: 2 },
+          ]),
+        ).toEqual([]);
+      });
+
+      it("skips a quantity it does not recognise", () => {
+        expect(
+          bad([{ name: "2", quantity: "abc", rust: { on: "2", index: 9 } }]),
+        ).toEqual([]);
+      });
+
+      it("gives only missing-train for a name the game lacks", () => {
+        const issues = trainReferenceIssues({
+          trains: [{ name: "2", rust: { on: "9", index: 5 } }],
+        });
+        expect(issues.map((i) => i.code)).toEqual(["missing-train"]);
+      });
+
+      it("gives nothing for the name of a back only", () => {
+        expect(
+          bad([
+            {
+              name: "3",
+              back: { name: "D" },
+              rust: { on: "D", index: 4 },
+            },
+          ]),
+        ).toEqual([]);
+      });
+
+      it("compares names as strings", () => {
+        expect(
+          bad([{ name: 2, quantity: 2, rust: { on: "2", index: 3 } }]),
+        ).toHaveLength(1);
+        expect(
+          bad([{ name: "2", quantity: 2, rust: { on: 2, index: 3 } }]),
+        ).toHaveLength(1);
+      });
+
+      it("points at the item of a list and checks several objects", () => {
+        expect(
+          bad([
+            {
+              name: "2",
+              quantity: 2,
+              phased: [
+                { on: "2", index: 1 },
+                { on: "2", index: 3 },
+                "2",
+                { on: "2", index: 4 },
+              ],
+            },
+          ]).map((i) => i.pointer),
+        ).toEqual(["trains[0].phased[1].index", "trains[0].phased[3].index"]);
+      });
+
+      it("ignores an index that is not an integer", () => {
+        expect(
+          bad([
+            {
+              name: "2",
+              rust: [
+                { on: "2", index: 1.5 },
+                { on: "2", index: "3" },
+                { on: "2" },
+              ],
+            },
+          ]),
+        ).toEqual([]);
+      });
+    });
+
+    it("finds the bad train index of 18Broken", async () => {
+      const issues = await validateGame(games["18Broken"]);
+      expect(
+        issues
+          .filter((i) => i.code === "bad-train-index")
+          .map((i) => [i.severity, i.pointer, i.params.count]),
+      ).toEqual([["warning", "trains[0].phased[2].index", 2]]);
+    });
+
     it("finds the dangling names of 18Broken", async () => {
       const issues = await validateGame(games["18Broken"]);
       expect(

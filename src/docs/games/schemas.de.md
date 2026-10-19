@@ -51,7 +51,7 @@ geprüft. Stimmt etwas nicht, erscheint im Spielmenü der Eintrag
 Probleme mit der Anzahl der Probleme. Er öffnet eine Liste, die zeigt, wo jedes
 Problem liegt, was falsch ist und wie es sich beheben lässt: unbekannte Felder
 (ein Tippfehler oder ein Feld, das umbenannt oder entfernt wurde), Werte des
-falschen Typs, nicht erlaubte Werte und fehlende Pflichtfelder. Ein Zug, der bei rust, phased oder obsolete einen Zugnamen nennt, den das Spiel nicht hat, wird als Warnung aufgeführt. Veraltete Felder
+falschen Typs, nicht erlaubte Werte und fehlende Pflichtfelder. Ein Zug, der bei rust, phased oder obsolete einen Zugnamen nennt, den das Spiel nicht hat, oder eine höhere Zugnummer verlangt, als das Spiel von diesem Namen hat (`{ "on": "4", "index": 3 }`), wird als Warnung aufgeführt. Veraltete Felder
 werden ebenfalls aufgeführt, sie funktionieren weiterhin, und die Seite nennt den
 Namen, der stattdessen zu verwenden ist. Die Seite meldet nur, deine Datei wird nie
 verändert. Jede Zeile, die auf eine Stelle der Datei zeigt, verlinkt auf den JSON-Editor im Bearbeitungspanel, an der

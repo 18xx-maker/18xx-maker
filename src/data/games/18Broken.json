@@ -36,7 +36,7 @@
       "color": "yellow",
       "quantity_label": "2+",
       "rust": "9",
-      "phased": ["8", { "on": "7", "index": 1 }],
+      "phased": ["8", { "on": "7", "index": 1 }, { "on": "2", "index": 3 }],
       "obsolete": "6"
     }
   ],
