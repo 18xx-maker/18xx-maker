@@ -13,7 +13,8 @@ export const fileName = (game, doc, format) =>
   `${titleToFilename(game.info.title)}-${doc.basename}.${format}`;
 
 // Where a Board 18 box puts its files, relative to the output folder. The box
-// uses the game id (not the title) and the version: board18-<id>-<version>/
+// uses the name from b18Spec (the slugged title) and the version:
+// board18-<name>-<version>/
 export const b18Names = (id, version) => {
   const name = `${id}-${version}`;
   const folder = `board18-${name}`;

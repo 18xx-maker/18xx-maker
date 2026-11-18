@@ -132,21 +132,24 @@ const tileCounts = (game, data) => {
 };
 
 // The Board 18 box of a game: the json file and the images to capture.
-// id is the game's id, which Board 18 uses in the names inside the box.
+// The box and the names inside it use the slugged game title, or the game's
+// id when the title has no letters or digits (a loaded game's id is a uuid).
 export const b18Spec = (
   game,
   config,
   data,
   { id, version, author, slug = id, variation = 0 },
 ) => {
-  const names = b18Names(id, version);
+  const title = gutil.titleToFilename(game.info?.title ?? "");
+  const name = /[a-z0-9]/.test(title) ? title : id;
+  const names = b18Names(name, version);
   const getTile = gutil.getTile(data.tiles, game.tiles || {});
   const images = b18Images(game, config, data, { slug, variation }).map(
     (doc) => ({ ...doc, path: names.image(doc.basename) }),
   );
 
   const json = {
-    bname: id,
+    bname: name,
     version,
     author,
   };
@@ -192,7 +195,7 @@ export const b18Spec = (
   if (game.links) {
     if (game.links.bgg) {
       json.links.push({
-        link_name: `${id} on BGG`,
+        link_name: `${name} on BGG`,
         link_url: game.links.bgg,
       });
     }

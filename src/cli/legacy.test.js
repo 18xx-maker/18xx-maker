@@ -103,7 +103,13 @@ describe("b18 box", () => {
         version: "1.0",
         author: "Pat",
       });
-      const old = legacy.b18[id];
+      // The box is named after the title too
+      const old = JSON.parse(
+        JSON.stringify(legacy.b18[id])
+          .replaceAll(`${id}-1.0`, `${prefix(id)}-1.0`)
+          .replace(`"bname":"${id}"`, `"bname":"${prefix(id)}"`)
+          .replace(`"${id} on BGG"`, `"${prefix(id)} on BGG"`),
+      );
 
       expect(spec.json).toEqual(old.json);
       expect(

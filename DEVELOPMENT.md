@@ -577,7 +577,8 @@ entry drawn from the library (the drawing and the printing fields only).
 
 The files of the CLI and the app have the same layout: `<folder>/<game id>/<format>/<file>`
 (`formatFolder` in `src/export/names.js`, `gameFolder` in `src/export/sink.js`; the
-Board 18 box is in `<game id>` itself). The app saves the folder of the folder
+Board 18 box is in `<game id>` itself, named after the slugged title by
+`b18Spec` in `src/export/b18.js`). The app saves the folder of the folder
 dialog as `exportFolder` in its `config.json` and opens the dialog there again
 (`savedFolder` in `src/export/folder.js`, `electron/main/export.js`).
 

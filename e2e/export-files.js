@@ -120,8 +120,8 @@ export const expected = {
     },
   },
   b18: {
-    zip: "board18-18Test-1.0.zip",
-    folder: "board18-18Test-1.0",
+    zip: "board18-18test-1.0.zip",
+    folder: "board18-18test-1.0",
     images: {
       "Map.png": [950, 420],
       "Market.png": [1336, 995],

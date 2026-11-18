@@ -154,7 +154,7 @@ describe("the map variation of the export options", () => {
     await user.click(within(panel).getByRole("button", { name: /^Export$/ }));
 
     const request = await requested();
-    expect(request.b18.names.json).toContain("18Test");
+    expect(request.b18.names.json).toContain("18test");
     expect(paths(request).length).toBeGreaterThan(0);
   });
 });

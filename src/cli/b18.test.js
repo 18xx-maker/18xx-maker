@@ -31,7 +31,7 @@ vi.mock("#cli/util", async (importOriginal) => {
 });
 
 const cwd = process.cwd();
-const folder = "render/18Test/board18-18Test-1.0";
+const folder = "render/18Test/board18-18test-1.0";
 let tmp;
 
 // The images that were captured: the size of the viewport and if the
@@ -77,26 +77,26 @@ describe("b18", () => {
 
     beforeEach(async () => {
       await b18("18Test", "1.0", "Pat", {});
-      json = JSON.parse(fs.readFileSync(`${folder}/18Test-1.0.json`, "utf-8"));
+      json = JSON.parse(fs.readFileSync(`${folder}/18test-1.0.json`, "utf-8"));
     });
 
     it("writes the box metadata", () => {
-      expect(json).toMatchObject({ bname: "18Test", version: "1.0" });
+      expect(json).toMatchObject({ bname: "18test", version: "1.0" });
       expect(json.author).toBe("Pat");
       expect(json.board).toMatchObject({
-        imgLoc: "images/18Test-1.0/Map.png",
+        imgLoc: "images/18test-1.0/Map.png",
         orientation: "P",
         xStep: 50,
         yStep: 87,
         yStart: 50,
       });
-      expect(json.market.imgLoc).toBe("images/18Test-1.0/Market.png");
+      expect(json.market.imgLoc).toBe("images/18test-1.0/Market.png");
     });
 
     it("links to bgg and the rules", () => {
       expect(json.links).toEqual([
         {
-          link_name: "18Test on BGG",
+          link_name: "18test on BGG",
           link_url: "https://boardgamegeek.com/boardgamefamily/19/18xx",
         },
         {
@@ -115,7 +115,7 @@ describe("b18", () => {
       // with 3 rotations)
       const yellow = tiles.find((tray) => tray.tName === "Yellow Tiles");
       expect(yellow).toMatchObject({
-        imgLoc: "images/18Test-1.0/Yellow.png",
+        imgLoc: "images/18test-1.0/Yellow.png",
         xSize: 100,
         ySize: 116,
       });
@@ -151,10 +151,10 @@ describe("b18", () => {
         "Tokens",
         ...tileTrays.map((tray) => tray.imgLoc.match(/\/(\w+)\.png$/)[1]),
       ];
-      expect(fs.readdirSync(`${folder}/18Test-1.0`).sort()).toEqual(
+      expect(fs.readdirSync(`${folder}/18test-1.0`).sort()).toEqual(
         images.map((image) => `${image}.png`).sort(),
       );
-      expect(fs.readFileSync(`${folder}/18Test-1.0/Map.png`)).toEqual(
+      expect(fs.readFileSync(`${folder}/18test-1.0/Map.png`)).toEqual(
         Buffer.from(PNG),
       );
       const shots = screenshots();
@@ -192,8 +192,8 @@ describe("b18", () => {
       const [out, names] = writeZip.mock.calls[0];
       expect(out.replaceAll("\\", "/")).toBe("render/18Test");
       expect(names).toMatchObject({
-        folder: "board18-18Test-1.0",
-        zip: "board18-18Test-1.0.zip",
+        folder: "board18-18test-1.0",
+        zip: "board18-18test-1.0.zip",
       });
     });
   });
@@ -211,7 +211,7 @@ describe("b18", () => {
 
     await b18("18Test", "1.0", "Pat", {});
     const json = JSON.parse(
-      fs.readFileSync(`${folder}/18Test-1.0.json`, "utf-8"),
+      fs.readFileSync(`${folder}/18test-1.0.json`, "utf-8"),
     );
 
     expect(json.board).toMatchObject({
@@ -283,7 +283,7 @@ describe("b18", () => {
 
     expect(screenshots().length).toBeGreaterThan(3);
     expect(error).toHaveBeenCalledWith(
-      "Failed board18-18Test-1.0/18Test-1.0/Map.png: timeout",
+      "Failed board18-18test-1.0/18test-1.0/Map.png: timeout",
     );
     expect(process.exitCode).toBe(1);
     expect(writeZip).toHaveBeenCalledOnce();
