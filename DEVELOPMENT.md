@@ -429,7 +429,8 @@ Notes:
   entry (the spec fails if an entry no longer applies).
 - `e2e/cli.spec.js` runs `maker export` on 18Test against the built site (it
   serves it on a free port of its own) and checks page counts, PNG sizes and the
-  resolution in the files.
+  resolution in the files. `pnpm test:e2e` skips it (`cli*.spec.js` is ignored
+  in `playwright.config.js`); it runs only under `pnpm test:export`.
 - The vitest projects only include `src/` and `tests/`, so they never pick up
   `e2e/`.
 

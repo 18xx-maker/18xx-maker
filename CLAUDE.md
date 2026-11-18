@@ -13,7 +13,7 @@ Commands (Node >= 24, pnpm; install the browser once with
 pnpm test:run          # all vitest projects, once
 pnpm test:run -u       # also update print output snapshots
 CI=1 pnpm test:run     # reproduce CI (coverage floor, snapshots never written)
-pnpm build && pnpm test:e2e   # Playwright against the built site (dist/site)
+pnpm build && pnpm test:e2e   # Playwright against the built site (dist/site); not the CLI/export specs (pnpm test:export)
 pnpm validate          # schema check of every src/data/**/*.json
 ```
 
