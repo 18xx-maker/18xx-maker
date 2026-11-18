@@ -311,7 +311,8 @@ jobs:
   # and the built app with no mocks. To require them, require the three
   # "Export Linux", "Export Mac" and "Export Windows" checks. They are split in
   # two shards by spec file: export.spec.js compares the app with the CLI, so
-  # it has to stay in one run, cli.spec.js is the other half of the time.
+  # it has to stay in one run, cli.spec.js is the other half of the time and
+  # cli.2.spec.js (the rest of the CLI tests) evens the two out.
   export-linux:
     name: Export Linux Shard ${{ matrix.export.name }}
     needs: pr-body
@@ -323,7 +324,7 @@ jobs:
           - name: 1
             files: cli.spec.js
           - name: 2
-            files: electron.spec.js export.spec.js
+            files: cli.2.spec.js electron.spec.js export.spec.js
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -396,7 +397,7 @@ jobs:
           - name: 1
             files: cli.spec.js
           - name: 2
-            files: electron.spec.js export.spec.js
+            files: cli.2.spec.js electron.spec.js export.spec.js
     steps:
       - name: Checkout
         uses: actions/checkout@v7

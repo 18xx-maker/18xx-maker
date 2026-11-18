@@ -441,10 +441,11 @@ Notes:
   ones are listed per page, by rule and css selector, with reasons in its
   `KNOWN_ISSUES`; fix them and delete the
   entry (the spec fails if an entry no longer applies).
-- `e2e/cli.spec.js` runs `maker export` on 18Test against the built site (it
-  serves it on a free port of its own) and checks page counts, PNG sizes and the
-  resolution in the files. `pnpm test:e2e` skips it (`cli*.spec.js` is ignored
-  in `playwright.config.js`); it runs only under `pnpm test:export`.
+- `e2e/cli.spec.js` and `e2e/cli.2.spec.js` run `maker export` on 18Test
+  against the built site (it serves it on a free port of its own) and check page
+  counts, PNG sizes and the resolution in the files (two files so the export
+  shards of CI take about as long). `pnpm test:e2e` skips them (`cli*.spec.js`
+  is ignored in `playwright.config.js`); they run only under `pnpm test:export`.
 - The vitest projects only include `src/`, `tests/` and the unit tests of
   `scripts/`, so they never pick up `e2e/`.
 
@@ -621,9 +622,10 @@ mocks on Linux, macOS and Windows in the "Export" job of CI (checks "Export
 Linux", "Export Mac", "Export Windows", the ones to require). Each job builds
 the site and the app (`pnpm build`, `pnpm build:app`), then runs
 `pnpm test:export` (`playwright.export.config.js`, no preview server, one
-worker): `e2e/export.spec.js`, `e2e/cli.spec.js` and `e2e/electron.spec.js`.
-In CI it runs in two shards by spec file (`cli.spec.js`, and
-`electron.spec.js` with `export.spec.js`, which compares the app with the CLI).
+worker): `e2e/export.spec.js`, `e2e/cli.spec.js`, `e2e/cli.2.spec.js` and
+`e2e/electron.spec.js`. In CI it runs in two shards by spec file (`cli.spec.js`,
+and `cli.2.spec.js` with `electron.spec.js` and `export.spec.js`, which
+compares the app with the CLI).
 Linux runs it under `xvfb-run`, and the app gets `--no-sandbox` only when `CI`
 is set (the runner has no setuid `chrome-sandbox`). The job is separate from
 the vitest jobs, so it is not part of the coverage merge.

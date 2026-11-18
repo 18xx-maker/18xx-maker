@@ -6,7 +6,12 @@ import { defineConfig } from "@playwright/test";
 // with `pnpm test:export`, in the "Export" job of CI on every OS.
 export default defineConfig({
   testDir: "./e2e",
-  testMatch: ["export.spec.js", "cli.spec.js", "electron.spec.js"],
+  testMatch: [
+    "export.spec.js",
+    "cli.spec.js",
+    "cli.2.spec.js",
+    "electron.spec.js",
+  ],
   outputDir: "./test-results",
   fullyParallel: false,
   workers: 1,
