@@ -14,8 +14,8 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 # Release notes safe runs first (a few seconds, often fails) and every other
 # job waits for it. The Linux jobs (cheap and fast) then start at once. Only the Mac and Windows
-# jobs (10x and 2x minute multipliers) wait for Lint and Build, so a quick
-# failure stops the expensive runners from starting at all. The checks to
+# jobs (10x and 2x minute multipliers) wait for Lint, so a quick failure stops
+# the expensive runners from starting at all. Each of them builds for itself. The checks to
 # require are the aggregate jobs "Linux", "Mac", "Windows" and the three
 # "Export" ones, the sharded jobs behind them have no stable names.
 # A pull request only runs the unit tests on Mac and Windows, the full suite
@@ -188,7 +188,7 @@ jobs:
   # runs on main
   desktop-shards:
     name: ${{ matrix.os.name }} Shard ${{ matrix.shard }}
-    needs: [lint, build]
+    needs: lint
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
@@ -208,6 +208,13 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           version: 9
+      # The workspace is on D: on windows-latest but the pnpm store defaults to
+      # C:, which makes every install copy across drives. setup-node asks
+      # `pnpm store path` for the cache path, so this has to come before it.
+      - name: PNPM Store
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: pnpm config set store-dir D:\pnpm-store --global
       - name: Node
         uses: actions/setup-node@v7
         with:
@@ -381,7 +388,7 @@ jobs:
           retention-days: 7
   export-desktop:
     name: Export ${{ matrix.os.name }} Shard ${{ matrix.export.name }}
-    needs: [lint, build]
+    needs: lint
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
@@ -405,6 +412,13 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           version: 9
+      # The workspace is on D: on windows-latest but the pnpm store defaults to
+      # C:, which makes every install copy across drives. setup-node asks
+      # `pnpm store path` for the cache path, so this has to come before it.
+      - name: PNPM Store
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: pnpm config set store-dir D:\pnpm-store --global
       - name: Node
         uses: actions/setup-node@v7
         with:
