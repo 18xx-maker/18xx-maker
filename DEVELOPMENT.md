@@ -141,6 +141,20 @@ In CI the Linux tests run in three shards whose reports are merged (the coverage
 floor is checked on the merged result). Mac and Windows run only the unit tests
 on pull requests, and the full suite on `main`.
 
+`--shard` splits the test files by their run time in `tests/timings.json`
+(`scripts/durationSequencer.js`, the `sequence.sequencer` of
+`vitest.config.js`), longest first into the shard with the least time, so the
+shards take about as long as each other. A file missing from it counts as the
+median. Refresh it when shards drift apart in CI or after adding, splitting or
+renaming slow test files, preferably from a CI run's JSON report:
+
+```shell
+# Run the whole suite with the JSON reporter and write tests/timings.json
+node scripts/test-timings.mjs
+# Or write it from an existing vitest JSON report
+node scripts/test-timings.mjs report.json
+```
+
 There are the commands to preview and build the production versions of the site,
 app and storybook site:
 
@@ -431,8 +445,8 @@ Notes:
   serves it on a free port of its own) and checks page counts, PNG sizes and the
   resolution in the files. `pnpm test:e2e` skips it (`cli*.spec.js` is ignored
   in `playwright.config.js`); it runs only under `pnpm test:export`.
-- The vitest projects only include `src/` and `tests/`, so they never pick up
-  `e2e/`.
+- The vitest projects only include `src/`, `tests/` and the unit tests of
+  `scripts/`, so they never pick up `e2e/`.
 
 The edit panel (`src/components/editPanel`, toolbar button and `e` key) has a
 tab for each entry of `editSections` in `sections.js` (the current one is

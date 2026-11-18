@@ -5,6 +5,8 @@ import { playwright } from "@vitest/browser-playwright";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
+import DurationSequencer from "./scripts/durationSequencer.js";
+
 const shared = {
   assetsInclude: ["**/*.md"],
   json: {
@@ -63,7 +65,7 @@ export default defineConfig({
         test: {
           ...testShared,
           environment: "node",
-          include: ["src/**/*.test.js"],
+          include: ["src/**/*.test.js", "scripts/**/*.test.js"],
           name: "unit",
         },
       },
@@ -117,5 +119,7 @@ export default defineConfig({
       },
     ],
     reporters: process.env.CI ? ["junit", "default"] : "default",
+    // `--shard` splits the files by their time in tests/timings.json
+    sequence: { sequencer: DurationSequencer },
   },
 });
