@@ -190,8 +190,8 @@ describe("export options", () => {
       dpi: 150,
       out: "/home/me/boxes",
       b18: {
-        names: { zip: "board18-18Test-2.1.zip" },
-        json: { version: "2.1", bname: "18Test", author: "Me" },
+        names: { zip: "board18-18test-2.1.zip" },
+        json: { version: "2.1", bname: "18test", author: "Me" },
       },
     });
     const formats = new Set(request.jobs.map(({ format }) => format));

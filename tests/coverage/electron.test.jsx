@@ -877,17 +877,17 @@ describe("export button", () => {
     const { b18, jobs } = requested();
     // The names that are data, a function could not be sent
     expect(b18.names).toEqual({
-      folder: "board18-18Test-1.0",
-      zip: "board18-18Test-1.0.zip",
-      json: "board18-18Test-1.0/18Test-1.0.json",
+      folder: "board18-18test-1.0",
+      zip: "board18-18test-1.0.zip",
+      json: "board18-18test-1.0/18test-1.0.json",
     });
-    expect(b18.json).toMatchObject({ bname: "18Test", version: "1.0" });
+    expect(b18.json).toMatchObject({ bname: "18test", version: "1.0" });
     expect(() => structuredClone(requested())).not.toThrow();
     expect(jobs.map(({ path }) => path)).toEqual(
       expect.arrayContaining([
-        "board18-18Test-1.0/18Test-1.0/Map.png",
-        "board18-18Test-1.0/18Test-1.0/Market.png",
-        "board18-18Test-1.0/18Test-1.0/Tokens.png",
+        "board18-18test-1.0/18test-1.0/Map.png",
+        "board18-18test-1.0/18test-1.0/Market.png",
+        "board18-18test-1.0/18test-1.0/Tokens.png",
       ]),
     );
     expect(jobs.every(({ format }) => format === "b18")).toBe(true);

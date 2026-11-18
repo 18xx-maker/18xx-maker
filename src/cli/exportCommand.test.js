@@ -222,22 +222,22 @@ describe("export formats", () => {
       b18Author: "Pat",
     });
 
-    expect(files()).toEqual(["board18-18Test-2.1", "board18-18Test-2.1.zip"]);
+    expect(files()).toEqual(["board18-18test-2.1", "board18-18test-2.1.zip"]);
     const json = JSON.parse(
-      fs.readFileSync(out("board18-18Test-2.1/18Test-2.1.json"), "utf-8"),
+      fs.readFileSync(out("board18-18test-2.1/18test-2.1.json"), "utf-8"),
     );
     expect(json).toMatchObject({
-      bname: "18Test",
+      bname: "18test",
       version: "2.1",
       author: "Pat",
     });
-    expect(files(out("board18-18Test-2.1/18Test-2.1"))).toContain("Map.png");
+    expect(files(out("board18-18test-2.1/18test-2.1"))).toContain("Map.png");
   });
 
   it("b18 images keep one pixel per unit, without a resolution", async () => {
     await exportCommand("18Test", { format: "b18" });
 
-    const map = out("board18-18Test-1.0/18Test-1.0/Map.png");
+    const map = out("board18-18test-1.0/18test-1.0/Map.png");
     expect(readPng(new Uint8Array(fs.readFileSync(map))).pixelsPerMeter).toBe(
       null,
     );
@@ -257,8 +257,8 @@ describe("export formats", () => {
     expect(files(out("png"))).toEqual(["18test-map.png"]);
     expect(files(out("svg"))).toEqual(["18test-map.svg"]);
     expect(fs.readdirSync(out()).sort()).toEqual([
-      "board18-18Test-1.0",
-      "board18-18Test-1.0.zip",
+      "board18-18test-1.0",
+      "board18-18test-1.0.zip",
       "pdf",
       "png",
       "svg",
@@ -272,8 +272,8 @@ describe("export formats", () => {
       "18test-map-paginated.pdf",
       "18test-map.pdf",
       "18test-map.png",
-      "board18-18Test-1.0",
-      "board18-18Test-1.0.zip",
+      "board18-18test-1.0",
+      "board18-18test-1.0.zip",
     ]);
   });
 
@@ -689,8 +689,8 @@ describe("the exports of a game file", () => {
 
     expect(boxedFiles()).toEqual([
       "18test-background.png",
-      "board18-boxed-5.0",
-      "board18-boxed-5.0.zip",
+      "board18-18test-5.0",
+      "board18-18test-5.0.zip",
     ]);
     expect(
       readPng(
@@ -698,7 +698,7 @@ describe("the exports of a game file", () => {
       ),
     ).toMatchObject({ pixelsPerMeter: 3780 });
     const json = JSON.parse(
-      fs.readFileSync(boxed("board18-boxed-5.0/boxed-5.0.json"), "utf-8"),
+      fs.readFileSync(boxed("board18-18test-5.0/18test-5.0.json"), "utf-8"),
     );
     expect(json).toMatchObject({ version: "5.0", author: "The File" });
   });
@@ -818,7 +818,7 @@ describe("the exports of a game file", () => {
     await b18(file, undefined, undefined, {});
 
     const json = JSON.parse(
-      fs.readFileSync(boxed("board18-boxed-5.0/boxed-5.0.json"), "utf-8"),
+      fs.readFileSync(boxed("board18-18test-5.0/18test-5.0.json"), "utf-8"),
     );
     expect(json).toMatchObject({ version: "5.0", author: "The File" });
   });
@@ -832,7 +832,7 @@ describe("the exports of a game file", () => {
     await exportCommand(file, { b18Version: "6.0", b18Author: "Flag" });
 
     const json = JSON.parse(
-      fs.readFileSync(boxed("board18-boxed-6.0/boxed-6.0.json"), "utf-8"),
+      fs.readFileSync(boxed("board18-18test-6.0/18test-6.0.json"), "utf-8"),
     );
     expect(json).toMatchObject({ version: "6.0", author: "Flag" });
   });

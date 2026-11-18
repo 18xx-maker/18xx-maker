@@ -111,8 +111,8 @@ test.describe("the app exports 18Test", () => {
     // Each format has its own folder in the folder of the game, like the CLI
     const dir = path.join(out, "18Test");
     expect(fs.readdirSync(dir).sort()).toEqual([
-      "board18-18Test-1.0",
-      "board18-18Test-1.0.zip",
+      "board18-18test-1.0",
+      "board18-18test-1.0.zip",
       "pdf",
       "png",
       "svg",
@@ -132,15 +132,15 @@ test.describe("the app exports 18Test", () => {
       false,
     );
 
-    const box = path.join(dir, "board18-18Test-1.0");
-    expect(png(path.join(box, "18Test-1.0/Tokens.png"))).toEqual({
+    const box = path.join(dir, "board18-18test-1.0");
+    expect(png(path.join(box, "18test-1.0/Tokens.png"))).toEqual({
       width: 60,
       height: 1080,
       pixelsPerMeter: null,
     });
     expect(
-      JSON.parse(fs.readFileSync(path.join(box, "18Test-1.0.json"), "utf-8")),
-    ).toMatchObject({ bname: "18Test", version: "1.0" });
+      JSON.parse(fs.readFileSync(path.join(box, "18test-1.0.json"), "utf-8")),
+    ).toMatchObject({ bname: "18test", version: "1.0" });
     expect(fs.existsSync(`${box}.zip`)).toBe(true);
 
     // The folder is not shown unless the setting is on

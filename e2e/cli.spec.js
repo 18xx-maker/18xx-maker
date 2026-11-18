@@ -70,8 +70,8 @@ test.describe("maker export 18Test", () => {
     // Each format has its own folder in the folder of the game
     const dir = path.join(out, "18Test");
     expect(fs.readdirSync(dir).sort()).toEqual([
-      "board18-18Test-1.0",
-      "board18-18Test-1.0.zip",
+      "board18-18test-1.0",
+      "board18-18test-1.0.zip",
       "pdf",
       "png",
       "svg",
@@ -99,18 +99,18 @@ test.describe("maker export 18Test", () => {
     );
 
     // Board 18 images are one pixel for each unit, without a resolution
-    const box = path.join(dir, "board18-18Test-1.0");
-    expect(fs.readdirSync(path.join(box, "18Test-1.0")).sort()).toEqual(
+    const box = path.join(dir, "board18-18test-1.0");
+    expect(fs.readdirSync(path.join(box, "18test-1.0")).sort()).toEqual(
       expect.arrayContaining(["Map.png", "Market.png", "Tokens.png"]),
     );
-    expect(png(path.join(box, "18Test-1.0/Tokens.png"))).toEqual({
+    expect(png(path.join(box, "18test-1.0/Tokens.png"))).toEqual({
       width: 60,
       height: 1080,
       pixelsPerMeter: null,
     });
     expect(
-      JSON.parse(fs.readFileSync(path.join(box, "18Test-1.0.json"), "utf-8")),
-    ).toMatchObject({ bname: "18Test", version: "1.0" });
+      JSON.parse(fs.readFileSync(path.join(box, "18test-1.0.json"), "utf-8")),
+    ).toMatchObject({ bname: "18test", version: "1.0" });
     expect(fs.existsSync(`${box}.zip`)).toBe(true);
   });
 
@@ -346,10 +346,10 @@ test.describe("maker export 18Test", () => {
       );
       expect(result.status, result.stderr).toBe(0);
 
-      const files = unzip(path.join(out, "18Test/board18-18Test-1.0.zip"));
+      const files = unzip(path.join(out, "18Test/board18-18test-1.0.zip"));
       const corner = (name) => {
         const { channels, pixels } = decodePng(
-          files[`board18-18Test-1.0/18Test-1.0/${name}`],
+          files[`board18-18test-1.0/18test-1.0/${name}`],
         );
         return [...pixels.subarray(0, 3), channels === 4 ? pixels[3] : 255];
       };

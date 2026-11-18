@@ -45,20 +45,43 @@ describe("b18Spec grid of a trimmed map", () => {
 });
 
 describe("b18Spec", () => {
-  it("names the box and its files after the id and version", () => {
+  it("names the box and its files after the title and version", () => {
     const { names, images, json } = spec();
 
-    expect(names.folder).toBe("board18-18Test-1.0");
+    expect(names.folder).toBe("board18-18test-1.0");
     expect(json).toMatchObject({
-      bname: "18Test",
+      bname: "18test",
       version: "1.0",
       author: "Pat",
     });
+    expect(json.links[0].link_name).toBe("18test on BGG");
     expect(images.map((image) => image.path)).toEqual(
       images.map(
-        (image) => `board18-18Test-1.0/18Test-1.0/${image.basename}.png`,
+        (image) => `board18-18test-1.0/18test-1.0/${image.basename}.png`,
       ),
     );
+  });
+
+  const uuid = "0b9c6f3e-2d4a-4c1e-9f7a-5e8d1c2b3a4f";
+
+  it("uses the title, not a uuid id, of a loaded game", () => {
+    const info = { ...loadGame("18Test").info, title: "Shikoku 1889" };
+    const { names, json } = spec({ info }, { id: uuid });
+
+    expect(names.folder).toBe("board18-shikoku-1889-1.0");
+    expect(json.bname).toBe("shikoku-1889");
+  });
+
+  it.each([
+    ["no title", undefined],
+    ["a title without letters or digits", "!!"],
+  ])("falls back to the id with %s", (_, title) => {
+    const info = { ...loadGame("18Test").info, title };
+    const { names, json } = spec({ info }, { id: uuid });
+
+    expect(names.folder).toBe(`board18-${uuid}-1.0`);
+    expect(json.bname).toBe(uuid);
+    expect(json.links[0].link_name).toBe(`${uuid} on BGG`);
   });
 
   it("captures at one pixel per unit in print media", () => {
@@ -128,7 +151,7 @@ describe("b18Spec", () => {
 
   it("makes the tray image paths relative to the box", () => {
     const { json } = spec();
-    expect(json.board.imgLoc).toBe("images/18Test-1.0/Map.png");
-    expect(json.tray[0].imgLoc).toMatch(/^images\/18Test-1\.0\/\w+\.png$/);
+    expect(json.board.imgLoc).toBe("images/18test-1.0/Map.png");
+    expect(json.tray[0].imgLoc).toMatch(/^images\/18test-1\.0\/\w+\.png$/);
   });
 });

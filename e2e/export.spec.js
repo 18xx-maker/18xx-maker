@@ -164,18 +164,18 @@ const check = {
     expect(names.some((name) => name.includes("\\"))).toBe(false);
     expect(names).toEqual(
       expect.arrayContaining([
-        `${folder}/18Test-1.0.json`,
-        ...Object.keys(images).map((name) => `${folder}/18Test-1.0/${name}`),
+        `${folder}/18test-1.0.json`,
+        ...Object.keys(images).map((name) => `${folder}/18test-1.0/${name}`),
       ]),
     );
     expect(names.every((name) => name.startsWith(`${folder}/`))).toBe(true);
     expect(
-      JSON.parse(files[`${folder}/18Test-1.0.json`].toString("utf-8")),
-    ).toMatchObject({ bname: "18Test", version: "1.0" });
+      JSON.parse(files[`${folder}/18test-1.0.json`].toString("utf-8")),
+    ).toMatchObject({ bname: "18test", version: "1.0" });
 
     // Images are one pixel for each unit, without a resolution
     for (const [name, [width, height]] of Object.entries(images)) {
-      const bytes = files[`${folder}/18Test-1.0/${name}`];
+      const bytes = files[`${folder}/18test-1.0/${name}`];
       expect(readPng(new Uint8Array(bytes)), name).toEqual({
         width,
         height,
@@ -184,7 +184,7 @@ const check = {
     }
 
     // The folder next to the zip has the same images
-    expect(fs.existsSync(path.join(dir, folder, "18Test-1.0.json"))).toBe(true);
+    expect(fs.existsSync(path.join(dir, folder, "18test-1.0.json"))).toBe(true);
   },
 };
 
@@ -298,7 +298,7 @@ for (const format of ["pdf", "png", "svg", "b18"]) {
     const game = path.join(dir, "18Test");
     expect(fs.readdirSync(game).sort()).toEqual(
       format === "b18"
-        ? ["board18-18Test-1.0", "board18-18Test-1.0.zip"]
+        ? ["board18-18test-1.0", "board18-18test-1.0.zip"]
         : [format],
     );
     // The setting is off: nothing is shown in the file manager

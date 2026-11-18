@@ -222,8 +222,9 @@ sizing or packaging logic in either surface.
   maps font aliases (`display`) to real families and fails on `foreignObject`.
   It is opt-in, has no dpi or background, and is only on the map, market, par,
   revenue, tiles and tokens.
-- File names are the slugged title (`titleToFilename`); CLI output folders and
-  the b18 box keep the game id.
+- File names are the slugged title (`titleToFilename`), and so is the b18 box
+  (the game id when the title slugs to no letters or digits); CLI output
+  folders keep the game id.
 
 ### Verifying export changes
 
