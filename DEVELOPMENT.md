@@ -146,13 +146,17 @@ on pull requests, and the full suite on `main`.
 `vitest.config.js`), longest first into the shard with the least time, so the
 shards take about as long as each other. A file missing from it counts as the
 median. Refresh it when shards drift apart in CI or after adding, splitting or
-renaming slow test files, preferably from a CI run's JSON report:
+renaming slow test files. CI writes no JSON report (the Linux shards upload
+blob reports, kept for a day), so either run the suite locally, or download the
+shard blob artifacts into one folder and merge them into a JSON report first:
 
 ```shell
 # Run the whole suite with the JSON reporter and write tests/timings.json
 node scripts/test-timings.mjs
-# Or write it from an existing vitest JSON report
+# Or write it from an existing vitest JSON report (the one argument)
 node scripts/test-timings.mjs report.json
+# Make a JSON report from downloaded CI shard blobs (put them in .vitest/blob/)
+pnpm exec vitest --merge-reports --reporter=json --outputFile=report.json
 ```
 
 There are the commands to preview and build the production versions of the site,

@@ -13,9 +13,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 # Release notes safe runs first (a few seconds, often fails) and every other
-# job waits for it. The Linux jobs (cheap and fast) then start at once. Only the Mac and Windows
-# jobs (10x and 2x minute multipliers) wait for Lint, so a quick failure stops
-# the expensive runners from starting at all. Each of them builds for itself. The checks to
+# job waits for it. The Linux jobs (cheap and fast) then start at once. Only
+# the Mac and Windows jobs (10x and 2x minute multipliers) wait for Lint, so a
+# quick failure stops the expensive runners from starting at all. Only their
+# export jobs build (the desktop test shards run vitest only). The checks to
 # require are the aggregate jobs "Linux", "Mac", "Windows" and the three
 # "Export" ones, the sharded jobs behind them have no stable names.
 # A pull request only runs the unit tests on Mac and Windows, the full suite
@@ -314,7 +315,7 @@ jobs:
             playwright-report/
             test-results/
           retention-days: 7
-  # The six real export paths, {CLI, app} x {pdf, png, b18}, on the built site
+  # The eight real export paths, {CLI, app} x {pdf, png, svg, b18}, on the built site
   # and the built app with no mocks. To require them, require the three
   # "Export Linux", "Export Mac" and "Export Windows" checks. They are split in
   # two shards by spec file: export.spec.js compares the app with the CLI, so
