@@ -169,7 +169,7 @@ describe.skipIf(!hasDb)("two player end to end", () => {
     await b.send({
       t: "event",
       seq: 2,
-      event: { type: "token.place", hex: "A11", token: "ABC", x: 0, y: 0 },
+      event: { type: "token.place", hex: "A11", token: "BLRR", x: 0, y: 0 },
     });
     const bSees2 = await b.next("event");
     const aSees2 = await a.next("event");
@@ -178,18 +178,31 @@ describe.skipIf(!hasDb)("two player end to end", () => {
     mb.apply(bSees2);
     expect(ma.state().tokens.A11).toHaveLength(1);
 
-    // B drops off; A undoes B's move meanwhile
-    await b.close();
+    // A undoes B's move while both are connected: both receive it live
     await a.send({ t: "event", seq: 3, event: { type: "undo", target: 2 } });
-    ma.apply(await a.next("event"));
+    const aSees3 = await a.next("event");
+    const bSees3 = await b.next("event");
+    expect(bSees3.event).toMatchObject({ seq: 3, type: "undo", target: 2 });
+    ma.apply(aSees3);
+    mb.apply(bSees3);
     expect(ma.state().tokens.A11).toBeUndefined();
+    expect(mb.state().tokens.A11).toBeUndefined();
+
+    // B drops off; A makes one more move meanwhile
+    await b.close();
+    await a.send({
+      t: "event",
+      seq: 4,
+      event: { type: "note.set", text: "hi" },
+    });
+    ma.apply(await a.next("event"));
 
     // B reconnects with its old lastSeq and gets only what it missed
     const b2 = open();
     await b2.send({ t: "join", token: tokenB, gameId, lastSeq: mb.seq() });
     await b2.next("joined");
     const caught = await b2.next("events");
-    expect(caught.events.map((e) => e.seq)).toEqual([3]);
+    expect(caught.events.map((e) => e.seq)).toEqual([4]);
     mb.apply(caught);
 
     // Every end agrees with the server's log
@@ -199,11 +212,19 @@ describe.skipIf(!hasDb)("two player end to end", () => {
       await c.next("joined");
       return (await c.next("events")).events;
     })();
-    expect(full.map((e) => e.seq)).toEqual([1, 2, 3]);
+    expect(full.map((e) => e.seq)).toEqual([1, 2, 3, 4]);
+    // No duplicated or reordered broadcast reached either mirror
+    expect(ma.log.map((e) => e.seq)).toEqual([1, 2, 3, 4]);
+    expect(mb.log.map((e) => e.seq)).toEqual([1, 2, 3, 4]);
+    // Nothing but presence is left unread on any socket
+    for (const c of [a, b, b2]) {
+      expect(c.pending().filter((m) => m.t !== "presence")).toEqual([]);
+    }
     expect(ma.state()).toEqual(reduce(full));
     expect(mb.state()).toEqual(reduce(full));
     expect(mb.state()).toEqual(ma.state());
     expect(mb.state().tiles.A11).toEqual({ tile: "1", rotation: 2 });
+    expect(mb.state().notes).toBe("hi");
 
     // A user who never joined the game is refused and gets no game data
     const outsider = open();
