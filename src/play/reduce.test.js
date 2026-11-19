@@ -125,17 +125,71 @@ describe("reduce", () => {
     expect(s.tiles.A1).toEqual({ tile: "t1", rotation: 0 });
   });
 
-  it("undo with an unknown or later target is ignored", () => {
-    const s = reduce(
-      log(
-        place("A1", "t1"),
-        { type: "undo", target: 99 },
-        { type: "undo", target: 3 },
-        { type: "undo", target: 4 },
-      ),
-    );
-    expect(s.tiles.A1).toBeDefined();
+  it("undo with an unknown target is ignored", () => {
+    const s = reduce(log(place("A1", "t1"), { type: "undo", target: 99 }));
+    expect(s.tiles).toEqual({ A1: { tile: "t1", rotation: 0 } });
   });
+
+  it("undo with a later target is ignored and the later event applies", () => {
+    const s = reduce(log({ type: "undo", target: 2 }, place("A1", "t1")));
+    expect(s.tiles).toEqual({ A1: { tile: "t1", rotation: 0 } });
+  });
+
+  it("undo targeting its own seq is ignored", () => {
+    const s = reduce(log(place("A1", "t1"), { type: "undo", target: 2 }));
+    expect(s.tiles).toEqual({ A1: { tile: "t1", rotation: 0 } });
+  });
+
+  it("a three deep undo chain alternates", () => {
+    const events = log(
+      place("A1", "t1"),
+      { type: "undo", target: 1 },
+      { type: "undo", target: 2 },
+      { type: "undo", target: 3 },
+    );
+    expect(reduce(events).tiles).toEqual({});
+    expect(reduce(events.slice(0, 3)).tiles).toEqual({
+      A1: { tile: "t1", rotation: 0 },
+    });
+  });
+
+  it.each(["constructor", "__proto__", "toString"])(
+    "id %s is an ordinary key",
+    (id) => {
+      const rotated = reduce(
+        log({ type: "tile.rotate", hex: id, rotation: 1 }),
+      );
+      expect(rotated).toEqual(initialState());
+      const removed = reduce(log({ type: "tile.remove", hex: id }));
+      expect(removed).toEqual(initialState());
+
+      const s = reduce(
+        log(
+          place(id, id, 2),
+          { type: "token.place", hex: id, token: id, x: 1, y: 2 },
+          { type: "market.move", marker: id, cell: { row: 1, col: 2 } },
+          { type: "tray.move", item: id, from: id, to: id },
+          { type: "tray.move", item: id, from: "bank", to: id },
+        ),
+      );
+      const json = JSON.parse(JSON.stringify(s));
+      expect(Object.keys(s.tiles)).toEqual([id]);
+      expect(Object.getPrototypeOf(s.trays)).toBe(Object.prototype);
+      expect(Object.keys(s.trays)).toEqual([id]);
+      expect(s.trays[id]).toEqual([id, id]);
+      expect(Object.keys(s.tokens)).toEqual([id]);
+      expect(Object.keys(s.market)).toEqual([id]);
+      expect(json).toEqual(s);
+      expect(usedTiles(s)).toEqual({ [id]: 1 });
+      const rm = reduce(
+        log(
+          { type: "token.remove", hex: id, token: id, x: 1, y: 2 },
+          { type: "tile.rotate", hex: id, rotation: 1 },
+        ),
+      );
+      expect(rm).toEqual(initialState());
+    },
+  );
 
   it("skips invalid and unknown events", () => {
     const s = reduce([
