@@ -11,6 +11,7 @@ import {
   readablePointer,
   removedPointers,
   shorten,
+  tileColorIssues,
   trainReferenceIssues,
   validateGame,
 } from "@/util/gameValidation";
@@ -618,6 +619,38 @@ describe("gameValidation", () => {
         "custom/star",
       ]);
       expect(await validateGame(games["18Test"])).toEqual([]);
+    });
+  });
+
+  describe("tile colors", () => {
+    it("warns about a tile color the Board18 export uses for its images", () => {
+      expect(
+        tileColorIssues({
+          tiles: {
+            E: { color: "map" },
+            F: { color: "Market" },
+            G: { color: "yellow" },
+            57: 1,
+          },
+        }),
+      ).toEqual([
+        {
+          severity: "warning",
+          code: "reserved-tile-color",
+          pointer: "tiles.E.color",
+          params: { tile: "E", color: "map" },
+        },
+        {
+          severity: "warning",
+          code: "reserved-tile-color",
+          pointer: "tiles.F.color",
+          params: { tile: "F", color: "Market" },
+        },
+      ]);
+    });
+
+    it("finds nothing without tiles", () => {
+      expect(tileColorIssues({})).toEqual([]);
     });
   });
 

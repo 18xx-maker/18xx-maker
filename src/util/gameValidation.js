@@ -554,6 +554,29 @@ export const trainReferenceIssues = (data) => {
   return found;
 };
 
+// The Board18 export names the image of each tile color after the color, in
+// the folder of the map, market and tokens images. A tile with one of these
+// colors would overwrite that image (case does not matter on every file
+// system): the board would show the tile tray instead of the map.
+const B18_RESERVED = ["map", "market", "tokens"];
+
+export const tileColorIssues = (data) =>
+  Object.entries(isObject(data?.tiles) ? data.tiles : {})
+    .filter(
+      ([, tile]) =>
+        isObject(tile) &&
+        isString(tile.color) &&
+        B18_RESERVED.includes(tile.color.replace("/", "_").toLowerCase()),
+    )
+    .map(([id, tile]) =>
+      issue(
+        "reserved-tile-color",
+        `#/tiles/${String(id).replace(/~/g, "~0").replace(/\//g, "~1")}/color`,
+        { tile: id, color: tile.color },
+        WARNING,
+      ),
+    );
+
 // Every problem of a game: schema errors first, then removed and deprecated
 // fields. `assets` (the custom images of the game, see util/assets) is
 // optional: without it the custom images are not checked.
@@ -592,5 +615,6 @@ export const validateGame = async (game, assets) => {
     ...deprecatedIssues(deprecated, data),
     ...(assets === undefined ? [] : assetIssues(data, assets)),
     ...trainReferenceIssues(data),
+    ...tileColorIssues(data),
   ];
 };
