@@ -20,10 +20,10 @@ export const makeTestDb = async () => {
   await admin.query(`create schema ${schema}`);
   await admin.end();
 
-  const pool = new pg.Pool({ connectionString: url });
-  pool.on("connect", (client) =>
-    client.query(`set search_path to ${schema}, public`),
-  );
+  const pool = new pg.Pool({
+    connectionString: url,
+    options: `-c search_path=${schema},public`,
+  });
   await migrate(pool);
 
   return {
