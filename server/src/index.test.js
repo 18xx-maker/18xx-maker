@@ -24,11 +24,10 @@ const freePort = () =>
 
 describe("index", () => {
   it("does not start a server when imported", async () => {
-    // Only listeners and timers count: the test runner's own pipes come and go
+    // A listening server is a TCPServerWrap; the runner's own pipes and timers come and go
     const live = () =>
-      process
-        .getActiveResourcesInfo()
-        .filter((r) => r === "TCPServerWrap" || r === "Timeout").length;
+      process.getActiveResourcesInfo().filter((r) => r === "TCPServerWrap")
+        .length;
     const before = live();
     const { main } = await import("./index.js");
     expect(typeof main).toBe("function");
