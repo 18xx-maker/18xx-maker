@@ -5,10 +5,13 @@ const REQUIRED = [
   "DISCORD_CLIENT_SECRET",
 ];
 
-const int = (value, fallback) => {
+const int = (name, value, fallback) => {
   if (value === undefined || value === "") return fallback;
   const n = Number(value);
-  return Number.isFinite(n) ? n : fallback;
+  if (!Number.isSafeInteger(n) || n < 1) {
+    throw new Error(`${name} must be a positive integer, got "${value}"`);
+  }
+  return n;
 };
 
 export const loadConfig = (env) => {
@@ -20,7 +23,7 @@ export const loadConfig = (env) => {
   }
 
   return {
-    port: int(env.PORT, 8787),
+    port: int("PORT", env.PORT, 8787),
     databaseUrl: env.DATABASE_URL,
     publicUrl: env.PUBLIC_URL,
     allowedOrigins: (env.ALLOWED_ORIGINS || "")
@@ -35,12 +38,16 @@ export const loadConfig = (env) => {
       authBase: env.DISCORD_AUTH_BASE || "https://discord.com/oauth2",
     },
     limits: {
-      gameBytes: int(env.MAX_GAME_BYTES, 2097152),
-      assetBytes: int(env.MAX_ASSET_BYTES, 1048576),
-      gamesPerUser: int(env.MAX_GAMES_PER_USER, 50),
-      eventsPerSecond: int(env.MAX_EVENTS_PER_SECOND, 10),
-      snapshotEvery: int(env.SNAPSHOT_EVERY, 100),
-      joinTimeoutMs: int(env.JOIN_TIMEOUT_MS, 10000),
+      gameBytes: int("MAX_GAME_BYTES", env.MAX_GAME_BYTES, 2097152),
+      assetBytes: int("MAX_ASSET_BYTES", env.MAX_ASSET_BYTES, 1048576),
+      gamesPerUser: int("MAX_GAMES_PER_USER", env.MAX_GAMES_PER_USER, 50),
+      eventsPerSecond: int(
+        "MAX_EVENTS_PER_SECOND",
+        env.MAX_EVENTS_PER_SECOND,
+        10,
+      ),
+      snapshotEvery: int("SNAPSHOT_EVERY", env.SNAPSHOT_EVERY, 100),
+      joinTimeoutMs: int("JOIN_TIMEOUT_MS", env.JOIN_TIMEOUT_MS, 10000),
     },
   };
 };
