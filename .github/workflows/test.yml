@@ -40,6 +40,15 @@ jobs:
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: node scripts/check-pr-body.mjs
+  server-image:
+    name: Server image
+    needs: pr-body
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Build
+        run: docker build -f server/Dockerfile .
   lint:
     name: Lint
     needs: pr-body
