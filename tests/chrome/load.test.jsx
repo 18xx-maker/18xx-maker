@@ -1,4 +1,4 @@
-import { screen, waitFor } from "@testing-library/react";
+import { act, screen, waitFor } from "@testing-library/react";
 
 import { games } from "@/data";
 import { selectLatestAlert } from "@/state";
@@ -562,5 +562,38 @@ describe("game info page", () => {
       type: "error",
       message: "File was not valid",
     });
+  });
+
+  it("drops a game forgotten from its page even when the list loaded before the delete finished", async () => {
+    opfs.loadGame.mockResolvedValue(internalGame);
+    // The store still lists the game until the delete has finished
+    let forgotten = false;
+    // Reading the whole store is slow: the answer is the store as it was
+    // when the read began, and arrives after the delete
+    opfs.loadSummaries.mockImplementation(async () => {
+      const found = forgotten ? {} : { "internal:abc": summary };
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      return found;
+    });
+    opfs.deleteGame.mockImplementation(
+      () =>
+        new Promise((resolve) =>
+          setTimeout(() => {
+            forgotten = true;
+            resolve();
+          }, 100),
+        ),
+    );
+    const { user, store } = renderApp("/games/internal:abc");
+    await screen.findByTestId("game-internal:abc");
+
+    await user.click(screen.getByRole("button", { name: "Forget" }));
+
+    await screen.findByText("Game Forgotten");
+    // Past the slow read, which lands after the delete
+    await waitFor(() => expect(opfs.loadSummaries).toHaveBeenCalled());
+    await act(() => new Promise((resolve) => setTimeout(resolve, 500)));
+    expect(store.getState().summaries.internal).toEqual({});
+    expect(screen.queryByText("Saved Game")).not.toBeInTheDocument();
   });
 });

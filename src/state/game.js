@@ -6,6 +6,7 @@ import { games } from "@/data";
 import { createAlert } from "@/state/alerts";
 import { hydrateAssets } from "@/state/assets";
 import { selectGameChanged } from "@/state/selectors";
+import { loadSummaries } from "@/state/summaries";
 import { parseSlug } from "@/util";
 import { assetTotals } from "@/util/assetNames";
 import { canSaveGame, saveAsBackend } from "@/util/canSaveGame";
@@ -246,6 +247,9 @@ export const deleteGame = (slug, title) => (dispatch) => {
     .then(() => {
       const typeLabel = type[0].toUpperCase() + type.slice(1);
       dispatch(createDeleteGame(slug));
+      // A list read that began before the delete finished can still land
+      // and bring the game back, so read the store again
+      Promise.resolve(dispatch(loadSummaries())).catch(() => undefined);
       dispatch(
         createAlert(
           "Game Forgotten",

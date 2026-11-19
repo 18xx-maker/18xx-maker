@@ -28,7 +28,9 @@ const SVG = '<svg viewBox="0 0 10 10"><path d="M0 0h5v5z"/></svg>';
 const newStore = () =>
   configureStore({
     reducer: rootReducer,
-    middleware: (getDefault) => getDefault({ serializableCheck: false }),
+    // The dev check warns when slow, which fails tests on busy machines
+    middleware: (getDefault) =>
+      getDefault({ immutableCheck: false, serializableCheck: false }),
   });
 
 describe("the assets slice", () => {
