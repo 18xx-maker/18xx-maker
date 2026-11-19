@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0-beta.140](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.139...v1.0.0-beta.140) (2026-11-19)
+
+
+### :bug: Bug Fixes
+
+* **ci:** only flag pr body footer lines followed by trailers ([#1100](https://github.com/18xx-maker/18xx-maker/issues/1100)) ([a95a1be](https://github.com/18xx-maker/18xx-maker/commit/a95a1be5904dfbc8f6517c2969a8b71477f64078))
+* **ci:** only flag pr body lines that release-please reads ([#1098](https://github.com/18xx-maker/18xx-maker/issues/1098)) ([d5db00e](https://github.com/18xx-maker/18xx-maker/commit/d5db00e557541790d2a0f07269b6606458470f14))
+
+
+### :package: Build System
+
+* **deps:** bump the npm_and_yarn group across 1 directory with 4 updates ([#1097](https://github.com/18xx-maker/18xx-maker/issues/1097)) ([eceaa81](https://github.com/18xx-maker/18xx-maker/commit/eceaa81160f6bda9188a01ea96a153a72b024b3f))
+
 ## [1.0.0-beta.139](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.138...v1.0.0-beta.139) (2026-11-19)
 
 
