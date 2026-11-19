@@ -57,6 +57,14 @@ describe.skipIf(!hasDb)("games", () => {
           : JSON.stringify(body),
     });
 
+  const gameCount = async (user) =>
+    (
+      await db.pool.query(
+        "select count(*)::int n from games where owner_id = $1",
+        [user.id],
+      )
+    ).rows[0].n;
+
   const create = async (user, extra = {}) => {
     const res = await call(user, "POST", "/games", { game, ...extra });
     return { res, body: res.status === 201 ? await res.json() : null };
@@ -111,6 +119,7 @@ describe.skipIf(!hasDb)("games", () => {
     });
     expect(res.status).toBe(422);
     expect((await res.json()).errors.length).toBeGreaterThan(0);
+    expect(await gameCount(user)).toBe(0);
   });
 
   it("rejects an oversize game with 413", async () => {
@@ -118,6 +127,7 @@ describe.skipIf(!hasDb)("games", () => {
     const user = await makeUser("Big");
     const res = await call(user, "POST", "/games", { game }, small);
     expect(res.status).toBe(413);
+    expect(await gameCount(user)).toBe(0);
   });
 
   it("caps games per user", async () => {

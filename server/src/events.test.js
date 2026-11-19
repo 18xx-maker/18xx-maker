@@ -70,6 +70,13 @@ describe.skipIf(!hasDb)("events", () => {
     expect(r).toMatchObject({ ok: false, reason: "locked" });
   });
 
+  it("rejects writes to an archived game", async () => {
+    const g = await makeGame("archived");
+    const r = await append(g, 1, note("a"));
+    expect(r).toMatchObject({ ok: false, reason: "locked" });
+    expect(await eventsSince(db.pool, g, 0)).toEqual([]);
+  });
+
   it("rejects an invalid event with a message", async () => {
     const g = await makeGame();
     const r = await append(g, 1, { type: "tile.place" });
