@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.142](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.141...v1.0.0-beta.142) (2026-11-19)
+
+
+### :bug: Bug Fixes
+
+* **ui:** drop a forgotten game from the games list right away ([#1104](https://github.com/18xx-maker/18xx-maker/issues/1104)) ([d8337c8](https://github.com/18xx-maker/18xx-maker/commit/d8337c8c9fb0f7ec383ac159f1867383f8051e35))
+
 ## [1.0.0-beta.141](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.140...v1.0.0-beta.141) (2026-11-19)
 
 
