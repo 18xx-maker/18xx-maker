@@ -82,11 +82,7 @@ export const appendEvent = async (
     );
 
     if (seq % config.limits.snapshotEvery === 0) {
-      const all = (await eventsSince(client, gameId, 0)).map((e) => {
-        const rest = { ...e };
-        delete rest.userId;
-        return rest;
-      });
+      const all = await eventsSince(client, gameId, 0);
       await client.query(
         "insert into snapshots (game_id, seq, state) values ($1, $2, $3)",
         [gameId, seq, JSON.stringify(reduce(all))],

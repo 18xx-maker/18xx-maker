@@ -223,6 +223,17 @@ describe("reduce", () => {
     expect(reduce(events)).toEqual(reduce(events));
   });
 
+  it("events with a userId reduce the same as without", () => {
+    const events = log(
+      place("A1", "t1"),
+      { type: "note.set", text: "hi" },
+      { type: "undo", target: 1 },
+    );
+    const stored = events.map((e) => ({ ...e, userId: "u1" }));
+    expect(reduce(stored)).toEqual(reduce(events));
+    expect(reduce(stored).notes).toBe("hi");
+  });
+
   it("usedTiles counts tiles by id", () => {
     const s = reduce(
       log(place("A1", "t1"), place("A2", "t1"), place("A3", "t2")),
