@@ -1,0 +1,64 @@
+import { loadConfig } from "./config.js";
+
+const required = {
+  DATABASE_URL: "postgres://x",
+  PUBLIC_URL: "https://play.example.com",
+  DISCORD_CLIENT_ID: "id",
+  DISCORD_CLIENT_SECRET: "secret",
+};
+
+describe("loadConfig", () => {
+  it("applies defaults", () => {
+    expect(loadConfig(required)).toEqual({
+      port: 8787,
+      databaseUrl: "postgres://x",
+      publicUrl: "https://play.example.com",
+      allowedOrigins: [],
+      discord: {
+        clientId: "id",
+        clientSecret: "secret",
+        guildId: "",
+        apiBase: "https://discord.com/api",
+        authBase: "https://discord.com/oauth2",
+      },
+      limits: {
+        gameBytes: 2097152,
+        assetBytes: 1048576,
+        gamesPerUser: 50,
+        eventsPerSecond: 10,
+        snapshotEvery: 100,
+      },
+    });
+  });
+
+  it("lists every missing required variable in the error", () => {
+    expect(() => loadConfig({})).toThrow(
+      /DATABASE_URL.*PUBLIC_URL.*DISCORD_CLIENT_ID.*DISCORD_CLIENT_SECRET/s,
+    );
+    expect(() => loadConfig({ ...required, PUBLIC_URL: "" })).toThrow(
+      /PUBLIC_URL/,
+    );
+  });
+
+  it("parses ALLOWED_ORIGINS and numeric limits", () => {
+    const config = loadConfig({
+      ...required,
+      PORT: "9000",
+      ALLOWED_ORIGINS: "https://a.com, https://b.com,,",
+      MAX_GAME_BYTES: "10",
+      MAX_ASSET_BYTES: "20",
+      MAX_GAMES_PER_USER: "3",
+      MAX_EVENTS_PER_SECOND: "4",
+      SNAPSHOT_EVERY: "5",
+    });
+    expect(config.port).toBe(9000);
+    expect(config.allowedOrigins).toEqual(["https://a.com", "https://b.com"]);
+    expect(config.limits).toEqual({
+      gameBytes: 10,
+      assetBytes: 20,
+      gamesPerUser: 3,
+      eventsPerSecond: 4,
+      snapshotEvery: 5,
+    });
+  });
+});

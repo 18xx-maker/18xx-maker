@@ -100,6 +100,20 @@ jobs:
       fail-fast: false
       matrix:
         shard: [1, 2, 3]
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: play
+          POSTGRES_PASSWORD: play
+          POSTGRES_DB: play
+        options: >-
+          --health-cmd "pg_isready -U play"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -140,6 +154,7 @@ jobs:
         run: pnpm exec vitest run --shard=${{ matrix.shard }}/3 --reporter=default --reporter=blob
         env:
           VITEST_SHARD: 1
+          DATABASE_URL: postgres://play:play@localhost:5432/play
       - name: Upload Blob Report
         uses: actions/upload-artifact@v7
         with:
