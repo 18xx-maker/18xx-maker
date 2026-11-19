@@ -28,7 +28,8 @@ server refuses to start without them.
 | `SNAPSHOT_EVERY`        | `100`                        | Event interval of stored snapshots. A client more than five times this behind gets the full log in a `snapshot` frame.       |
 | `JOIN_TIMEOUT_MS`       | `10000`                      | Time a new websocket has to send its `join` frame before it is closed (4001).                                                |
 
-A value that is not a number falls back to the default.
+A numeric variable must be a positive integer, otherwise the server refuses to
+start and names the variable. Unset or empty uses the default.
 
 ## Discord application
 
@@ -77,6 +78,13 @@ curl -s localhost:8787/health   # {"ok":true}
 4. Add a domain pointing at the container port `8787`. The websocket (`/ws`)
    works through the proxy as it is, nothing to configure.
 5. Mount nothing: all state is in Postgres.
+
+Run exactly **one instance**. Rooms, presence and the ordering of broadcasts
+live in the process, so a second replica would miss the broadcasts of the
+first and its players would not see each other's events until they reconnect.
+The container handles `SIGTERM` (and `SIGINT`): it closes the websockets and
+the listener, ends the database pool and exits 0, with a 5 second limit, so
+`docker stop` and redeploys do not wait for a kill.
 
 Backups are the host's job. Back up the Postgres database (games, events,
 assets, sessions); the server keeps nothing else.
