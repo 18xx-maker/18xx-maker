@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0-beta.141](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.140...v1.0.0-beta.141) (2026-11-19)
+
+
+### :tada: Features
+
+* **ui:** warn about tile colors that replace b18 map images ([#1102](https://github.com/18xx-maker/18xx-maker/issues/1102)) ([5ea466b](https://github.com/18xx-maker/18xx-maker/commit/5ea466b4e4eb74a874a352eb1ae72446bc58ce5e))
+
+
+### :bug: Bug Fixes
+
+* **export:** start board 18 tile trays where the tiles are painted ([#1101](https://github.com/18xx-maker/18xx-maker/issues/1101)) ([18ff084](https://github.com/18xx-maker/18xx-maker/commit/18ff0845525ae7108e0d1d52e95a3eae6e8ff3f6))
+
 ## [1.0.0-beta.140](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.139...v1.0.0-beta.140) (2026-11-19)
 
 
