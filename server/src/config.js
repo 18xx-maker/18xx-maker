@@ -40,6 +40,7 @@ export const loadConfig = (env) => {
       gamesPerUser: int(env.MAX_GAMES_PER_USER, 50),
       eventsPerSecond: int(env.MAX_EVENTS_PER_SECOND, 10),
       snapshotEvery: int(env.SNAPSHOT_EVERY, 100),
+      joinTimeoutMs: int(env.JOIN_TIMEOUT_MS, 10000),
     },
   };
 };
