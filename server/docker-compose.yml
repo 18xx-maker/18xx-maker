@@ -14,6 +14,7 @@ services:
       retries: 10
 
   play:
+    restart: unless-stopped
     build:
       context: ..
       dockerfile: server/Dockerfile

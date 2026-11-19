@@ -10,8 +10,12 @@ const MIGRATIONS = path.join(
   "migrations",
 );
 
-export const createPool = (databaseUrl) =>
-  new pg.Pool({ connectionString: databaseUrl });
+export const createPool = (databaseUrl) => {
+  const pool = new pg.Pool({ connectionString: databaseUrl });
+  // An idle client dropped by Postgres emits here; unhandled it kills the process
+  pool.on("error", (err) => console.error("pg pool:", err.message));
+  return pool;
+};
 
 export const migrate = async (pool) => {
   const names = (await fs.readdir(MIGRATIONS))
