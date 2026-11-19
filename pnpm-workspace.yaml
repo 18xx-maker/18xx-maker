@@ -1,5 +1,6 @@
 packages:
   - "."
+  - "server"
 
 allowBuilds:
   "@swc/core": true
