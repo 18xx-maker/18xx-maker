@@ -1,0 +1,292 @@
+import { randomBytes } from "node:crypto";
+
+import { Hono } from "hono";
+
+import { validateGameJson } from "../../src/cli/validate.js";
+import { requireUser } from "./auth.js";
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const ASSET_NAME = /^[\w.-]{1,100}$/;
+const STATUSES = ["active", "locked", "archived"];
+
+const newInviteCode = () => randomBytes(16).toString("base64url");
+
+// Reads the raw body, giving up (null) as soon as it passes the limit
+const readCapped = async (c, limit) => {
+  const declared = Number(c.req.header("content-length"));
+  if (declared > limit) return null;
+
+  const reader = c.req.raw.body?.getReader();
+  if (!reader) return Buffer.alloc(0);
+
+  const chunks = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.length;
+    if (size > limit) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+  return Buffer.concat(chunks);
+};
+
+const seatJson = (row) => ({
+  userId: row.user_id,
+  name: row.name,
+  color: row.color,
+});
+
+export const gameRoutes = ({ pool, config }) => {
+  const app = new Hono();
+  const { limits } = config;
+  const auth = requireUser(pool);
+
+  // Loads the game and the caller's membership; null when not a member
+  const membership = async (id, user) => {
+    if (!UUID.test(id)) return null;
+    const { rows } = await pool.query(
+      `select g.* from games g
+         join seats s on s.game_id = g.id and s.user_id = $2
+        where g.id = $1`,
+      [id, user.id],
+    );
+    return rows[0] || null;
+  };
+
+  // Resolves to a response when the caller may not act as the owner
+  const ownerOnly = async (c) => {
+    const row = await membership(c.req.param("id"), c.get("user"));
+    if (!row) return { fail: c.json({ error: "Not found" }, 404) };
+    if (row.owner_id !== c.get("user").id) {
+      return { fail: c.json({ error: "Forbidden" }, 403) };
+    }
+    return { row };
+  };
+
+  app.post("/games", auth, async (c) => {
+    const user = c.get("user");
+    if (!user.canCreate) return c.json({ error: "Forbidden" }, 403);
+
+    const raw = await readCapped(c, limits.gameBytes);
+    if (!raw) return c.json({ error: "Game too large" }, 413);
+
+    let body;
+    try {
+      body = JSON.parse(raw.toString("utf8"));
+    } catch {
+      return c.json({ error: "Invalid JSON" }, 400);
+    }
+    const { game, config: gameConfig = {}, seatName } = body || {};
+    if (!game || typeof game !== "object" || Array.isArray(game)) {
+      return c.json({ error: "game is required" }, 400);
+    }
+    if (typeof gameConfig !== "object" || Array.isArray(gameConfig)) {
+      return c.json({ error: "config must be an object" }, 400);
+    }
+
+    const result = validateGameJson(game);
+    if (!result.valid) {
+      return c.json({ errors: result.validationErrors }, 422);
+    }
+
+    const { rows: owned } = await pool.query(
+      `select count(*)::int as n from games
+        where owner_id = $1 and status in ('active', 'locked')`,
+      [user.id],
+    );
+    if (owned[0].n >= limits.gamesPerUser) {
+      return c.json({ error: "Too many games" }, 429);
+    }
+
+    const title = game.info?.title || "Untitled";
+    const inviteCode = newInviteCode();
+    const name =
+      typeof seatName === "string" && seatName.trim()
+        ? seatName.trim().slice(0, 50)
+        : user.name;
+
+    const client = await pool.connect();
+    try {
+      await client.query("begin");
+      const { rows } = await client.query(
+        `insert into games (title, owner_id, game_json, config_json, invite_code)
+         values ($1, $2, $3, $4, $5) returning id`,
+        [title, user.id, game, gameConfig, inviteCode],
+      );
+      await client.query(
+        "insert into seats (game_id, user_id, name) values ($1, $2, $3)",
+        [rows[0].id, user.id, name],
+      );
+      await client.query("commit");
+      return c.json({ id: rows[0].id, inviteCode }, 201);
+    } catch (err) {
+      await client.query("rollback");
+      throw err;
+    } finally {
+      client.release();
+    }
+  });
+
+  app.get("/games", auth, async (c) => {
+    const { rows } = await pool.query(
+      `select g.id, g.title, g.status, g.owner_id,
+              coalesce(
+                (select max(e.created_at) from events e where e.game_id = g.id),
+                g.created_at
+              ) as updated_at
+         from games g join seats s on s.game_id = g.id
+        where s.user_id = $1
+        order by updated_at desc`,
+      [c.get("user").id],
+    );
+    return c.json(
+      rows.map((r) => ({
+        id: r.id,
+        title: r.title,
+        status: r.status,
+        ownerId: r.owner_id,
+        updatedAt: r.updated_at,
+      })),
+    );
+  });
+
+  app.get("/games/:id", auth, async (c) => {
+    const user = c.get("user");
+    const row = await membership(c.req.param("id"), user);
+    if (!row) return c.json({ error: "Not found" }, 404);
+
+    const { rows: seats } = await pool.query(
+      "select user_id, name, color from seats where game_id = $1 order by created_at",
+      [row.id],
+    );
+    return c.json({
+      id: row.id,
+      title: row.title,
+      status: row.status,
+      ownerId: row.owner_id,
+      game: row.game_json,
+      config: row.config_json,
+      seats: seats.map(seatJson),
+      ...(row.owner_id === user.id ? { inviteCode: row.invite_code } : {}),
+    });
+  });
+
+  app.patch("/games/:id", auth, async (c) => {
+    const { row, fail } = await ownerOnly(c);
+    if (fail) return fail;
+
+    const body = await c.req.json().catch(() => null);
+    if (!STATUSES.includes(body?.status)) {
+      return c.json({ error: "Invalid status" }, 400);
+    }
+    await pool.query("update games set status = $2 where id = $1", [
+      row.id,
+      body.status,
+    ]);
+    return c.json({ id: row.id, status: body.status });
+  });
+
+  app.delete("/games/:id", auth, async (c) => {
+    const { row, fail } = await ownerOnly(c);
+    if (fail) return fail;
+    await pool.query("delete from games where id = $1", [row.id]);
+    return c.body(null, 204);
+  });
+
+  app.post("/games/:id/invite", auth, async (c) => {
+    const { row, fail } = await ownerOnly(c);
+    if (fail) return fail;
+    const inviteCode = newInviteCode();
+    await pool.query("update games set invite_code = $2 where id = $1", [
+      row.id,
+      inviteCode,
+    ]);
+    return c.json({ inviteCode });
+  });
+
+  app.get("/invites/:code", async (c) => {
+    const { rows } = await pool.query(
+      "select id, title from games where invite_code = $1",
+      [c.req.param("code")],
+    );
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+    return c.json({ gameId: rows[0].id, title: rows[0].title });
+  });
+
+  app.post("/invites/:code/join", auth, async (c) => {
+    const user = c.get("user");
+    const { rows } = await pool.query(
+      "select id, status from games where invite_code = $1",
+      [c.req.param("code")],
+    );
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+    if (rows[0].status !== "active") {
+      return c.json({ error: "Game is not open" }, 410);
+    }
+
+    const body = await c.req.json().catch(() => null);
+    const name = typeof body?.name === "string" ? body.name.trim() : "";
+    if (!name || name.length > 50) {
+      return c.json({ error: "A name is required" }, 400);
+    }
+    const color =
+      typeof body.color === "string" && body.color.length <= 30
+        ? body.color
+        : null;
+
+    await pool.query(
+      `insert into seats (game_id, user_id, name, color)
+       values ($1, $2, $3, $4) on conflict do nothing`,
+      [rows[0].id, user.id, name, color],
+    );
+    const { rows: seat } = await pool.query(
+      "select user_id, name, color from seats where game_id = $1 and user_id = $2",
+      [rows[0].id, user.id],
+    );
+    return c.json(seatJson(seat[0]));
+  });
+
+  app.put("/games/:id/assets/:name", auth, async (c) => {
+    const { row, fail } = await ownerOnly(c);
+    if (fail) return fail;
+
+    const name = c.req.param("name");
+    if (!ASSET_NAME.test(name)) return c.json({ error: "Invalid name" }, 400);
+
+    const data = await readCapped(c, limits.assetBytes);
+    if (!data) return c.json({ error: "Asset too large" }, 413);
+
+    const type = c.req.header("content-type") || "application/octet-stream";
+    await pool.query(
+      `insert into game_assets (game_id, name, content_type, data)
+       values ($1, $2, $3, $4)
+       on conflict (game_id, name) do update
+         set content_type = excluded.content_type, data = excluded.data`,
+      [row.id, name, type, data],
+    );
+    return c.body(null, 204);
+  });
+
+  app.get("/games/:id/assets/:name", auth, async (c) => {
+    const row = await membership(c.req.param("id"), c.get("user"));
+    if (!row) return c.json({ error: "Not found" }, 404);
+
+    const { rows } = await pool.query(
+      "select content_type, data from game_assets where game_id = $1 and name = $2",
+      [row.id, c.req.param("name")],
+    );
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+
+    return c.body(rows[0].data, 200, {
+      "Content-Type": rows[0].content_type,
+      "X-Content-Type-Options": "nosniff",
+      "Content-Disposition": "attachment",
+    });
+  });
+
+  return app;
+};
