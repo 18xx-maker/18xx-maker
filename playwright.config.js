@@ -7,13 +7,14 @@ const PORT = 4318;
 export default defineConfig({
   testDir: "./e2e",
   testMatch: "*.spec.js",
-  // The real export paths run in their own job, with playwright.export.config.js
-  testIgnore: "export.spec.js",
+  // The real export paths and the CLI specs run in their own jobs, with
+  // playwright.export.config.js (pnpm test:export)
+  testIgnore: ["export.spec.js", "cli*.spec.js"],
   outputDir: "./test-results",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : undefined,
+  workers: process.env.CI ? 4 : undefined,
   timeout: 30_000,
   expect: { timeout: 10_000 },
   reporter: [["list"], ["html", { open: "never" }]],

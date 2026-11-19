@@ -141,6 +141,24 @@ In CI the Linux tests run in three shards whose reports are merged (the coverage
 floor is checked on the merged result). Mac and Windows run only the unit tests
 on pull requests, and the full suite on `main`.
 
+`--shard` splits the test files by their run time in `tests/timings.json`
+(`scripts/durationSequencer.js`, the `sequence.sequencer` of
+`vitest.config.js`), longest first into the shard with the least time, so the
+shards take about as long as each other. A file missing from it counts as the
+median. Refresh it when shards drift apart in CI or after adding, splitting or
+renaming slow test files. CI writes no JSON report (the Linux shards upload
+blob reports, kept for a day), so either run the suite locally, or download the
+shard blob artifacts into one folder and merge them into a JSON report first:
+
+```shell
+# Run the whole suite with the JSON reporter and write tests/timings.json
+node scripts/test-timings.mjs
+# Or write it from an existing vitest JSON report (the one argument)
+node scripts/test-timings.mjs report.json
+# Make a JSON report from downloaded CI shard blobs (put them in .vitest/blob/)
+pnpm exec vitest --merge-reports --reporter=json --outputFile=report.json
+```
+
 There are the commands to preview and build the production versions of the site,
 app and storybook site:
 
@@ -427,11 +445,13 @@ Notes:
   ones are listed per page, by rule and css selector, with reasons in its
   `KNOWN_ISSUES`; fix them and delete the
   entry (the spec fails if an entry no longer applies).
-- `e2e/cli.spec.js` runs `maker export` on 18Test against the built site (it
-  serves it on a free port of its own) and checks page counts, PNG sizes and the
-  resolution in the files.
-- The vitest projects only include `src/` and `tests/`, so they never pick up
-  `e2e/`.
+- `e2e/cli.spec.js` and `e2e/cli.2.spec.js` run `maker export` on 18Test
+  against the built site (it serves it on a free port of its own) and check page
+  counts, PNG sizes and the resolution in the files (two files so the export
+  shards of CI take about as long). `pnpm test:e2e` skips them (`cli*.spec.js`
+  is ignored in `playwright.config.js`); they run only under `pnpm test:export`.
+- The vitest projects only include `src/`, `tests/` and the unit tests of
+  `scripts/`, so they never pick up `e2e/`.
 
 The edit panel (`src/components/editPanel`, toolbar button and `e` key) has a
 tab for each entry of `editSections` in `sections.js` (the current one is
@@ -607,9 +627,10 @@ mocks on Linux, macOS and Windows in the "Export" job of CI (checks "Export
 Linux", "Export Mac", "Export Windows", the ones to require). Each job builds
 the site and the app (`pnpm build`, `pnpm build:app`), then runs
 `pnpm test:export` (`playwright.export.config.js`, no preview server, one
-worker): `e2e/export.spec.js`, `e2e/cli.spec.js` and `e2e/electron.spec.js`.
-In CI it runs in two shards by spec file (`cli.spec.js`, and
-`electron.spec.js` with `export.spec.js`, which compares the app with the CLI).
+worker): `e2e/export.spec.js`, `e2e/cli.spec.js`, `e2e/cli.2.spec.js` and
+`e2e/electron.spec.js`. In CI it runs in two shards by spec file (`cli.spec.js`,
+and `cli.2.spec.js` with `electron.spec.js` and `export.spec.js`, which
+compares the app with the CLI).
 Linux runs it under `xvfb-run`, and the app gets `--no-sandbox` only when `CI`
 is set (the runner has no setuid `chrome-sandbox`). The job is separate from
 the vitest jobs, so it is not part of the coverage merge.

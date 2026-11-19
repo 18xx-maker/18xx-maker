@@ -14,6 +14,7 @@ pnpm test:run          # all vitest projects, once
 pnpm test:run -u       # also update print output snapshots
 CI=1 pnpm test:run     # reproduce CI (coverage floor, snapshots never written)
 pnpm build && pnpm test:e2e   # Playwright against the built site (dist/site)
+                              # not the CLI/export specs (pnpm test:export)
 pnpm validate          # schema check of every src/data/**/*.json
 ```
 
@@ -33,9 +34,10 @@ pnpm build:app && pnpm build:sb                      # Electron and Storybook mu
 ```
 
 Also run `E2E_ELECTRON=1 pnpm test:export` (after `pnpm build && pnpm build:app`)
-when touching `electron/`, the preload, render mode or `src/export`. This is
-required before pushing, not optional: unit tests do not catch a changed export
-(a PNG border changed image sizes that `e2e/export-files.js`, `e2e/cli.spec.js`
+when touching `electron/`, the preload, render mode, `src/export` or `src/cli`
+(`pnpm test:e2e` does not run the CLI specs). This is required before pushing,
+not optional: unit tests do not catch a changed export (a PNG border changed
+image sizes that `e2e/export-files.js`, `e2e/cli.spec.js`, `e2e/cli.2.spec.js`
 and `e2e/electron.spec.js` assert, and only CI noticed). An export change that
 alters file sizes or contents updates those expected values in the same
 commit. In the PR description, list which of these suites you ran. CI runs
@@ -234,7 +236,8 @@ sizing or packaging logic in either surface.
   Per-page PDF images need `pdftoppm` (Linux).
 - The eight real export paths, {CLI, app} x {pdf, png, svg, b18}, are
   `e2e/export.spec.js` (`export › cli › pdf` ... `export › app › b18`), run
-  with `e2e/cli.spec.js` and `e2e/electron.spec.js` by `pnpm test:export`. CI
+  with `e2e/cli.spec.js`, `e2e/cli.2.spec.js` and `e2e/electron.spec.js` by
+  `pnpm test:export`. CI
   runs them on Linux, macOS and Windows (the "Export" job, no mocks). Locally:
   `pnpm build && pnpm build:app && E2E_ELECTRON=1 pnpm test:export`. Run after
   any change to `electron/`, the preload, render mode or export code; compiling

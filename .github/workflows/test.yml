@@ -13,9 +13,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 # Release notes safe runs first (a few seconds, often fails) and every other
-# job waits for it. The Linux jobs (cheap and fast) then start at once. Only the Mac and Windows
-# jobs (10x and 2x minute multipliers) wait for Lint and Build, so a quick
-# failure stops the expensive runners from starting at all. The checks to
+# job waits for it. The Linux jobs (cheap and fast) then start at once. Only
+# the Mac and Windows jobs (10x and 2x minute multipliers) wait for Lint, so a
+# quick failure stops the expensive runners from starting at all. Only their
+# export jobs build (the desktop test shards run vitest only). The checks to
 # require are the aggregate jobs "Linux", "Mac", "Windows" and the three
 # "Export" ones, the sharded jobs behind them have no stable names.
 # A pull request only runs the unit tests on Mac and Windows, the full suite
@@ -124,11 +125,12 @@ jobs:
           key: linux-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
       - name: Playwright Install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install chromium --only-shell --with-deps
+        run: pnpm exec playwright install chromium --only-shell
       - name: Playwright Dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        timeout-minutes: 10
         run: |
-          # Only run the slow apt install when the runner image lacks a library
+          # Browser download and system libraries are separate: the ubuntu image
+          # normally has every library, so only go through apt when one is missing
           shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
           if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
             pnpm exec playwright install-deps chromium
@@ -187,7 +189,7 @@ jobs:
   # runs on main
   desktop-shards:
     name: ${{ matrix.os.name }} Shard ${{ matrix.shard }}
-    needs: [lint, build]
+    needs: lint
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
@@ -207,6 +209,13 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           version: 9
+      # The workspace is on D: on windows-latest but the pnpm store defaults to
+      # C:, which makes every install copy across drives. setup-node asks
+      # `pnpm store path` for the cache path, so this has to come before it.
+      - name: PNPM Store
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: pnpm config set store-dir D:\pnpm-store --global
       - name: Node
         uses: actions/setup-node@v7
         with:
@@ -283,11 +292,12 @@ jobs:
           key: linux-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
       - name: Playwright Install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install chromium --only-shell --with-deps
+        run: pnpm exec playwright install chromium --only-shell
       - name: Playwright Dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        timeout-minutes: 10
         run: |
-          # Only run the slow apt install when the runner image lacks a library
+          # Browser download and system libraries are separate: the ubuntu image
+          # normally has every library, so only go through apt when one is missing
           shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
           if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
             pnpm exec playwright install-deps chromium
@@ -305,11 +315,12 @@ jobs:
             playwright-report/
             test-results/
           retention-days: 7
-  # The six real export paths, {CLI, app} x {pdf, png, b18}, on the built site
+  # The eight real export paths, {CLI, app} x {pdf, png, svg, b18}, on the built site
   # and the built app with no mocks. To require them, require the three
   # "Export Linux", "Export Mac" and "Export Windows" checks. They are split in
   # two shards by spec file: export.spec.js compares the app with the CLI, so
-  # it has to stay in one run, cli.spec.js is the other half of the time.
+  # it has to stay in one run, cli.spec.js is the other half of the time and
+  # cli.2.spec.js (the rest of the CLI tests) evens the two out.
   export-linux:
     name: Export Linux Shard ${{ matrix.export.name }}
     needs: pr-body
@@ -321,7 +332,7 @@ jobs:
           - name: 1
             files: cli.spec.js
           - name: 2
-            files: electron.spec.js export.spec.js
+            files: cli.2.spec.js electron.spec.js export.spec.js
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -347,10 +358,11 @@ jobs:
           key: linux-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
       - name: Playwright Install
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpm exec playwright install chromium --only-shell --with-deps
+        run: pnpm exec playwright install chromium --only-shell
       - name: Playwright Dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        timeout-minutes: 10
         run: |
+          # Only go through apt when the runner image lacks a library
           shell=$(find browsers -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)
           if [ -z "$shell" ] || ldd "$shell" | grep -q "not found"; then
             pnpm exec playwright install-deps chromium
@@ -377,7 +389,7 @@ jobs:
           retention-days: 7
   export-desktop:
     name: Export ${{ matrix.os.name }} Shard ${{ matrix.export.name }}
-    needs: [lint, build]
+    needs: lint
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
@@ -393,7 +405,7 @@ jobs:
           - name: 1
             files: cli.spec.js
           - name: 2
-            files: electron.spec.js export.spec.js
+            files: cli.2.spec.js electron.spec.js export.spec.js
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -401,6 +413,13 @@ jobs:
         uses: pnpm/action-setup@v6
         with:
           version: 9
+      # The workspace is on D: on windows-latest but the pnpm store defaults to
+      # C:, which makes every install copy across drives. setup-node asks
+      # `pnpm store path` for the cache path, so this has to come before it.
+      - name: PNPM Store
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: pnpm config set store-dir D:\pnpm-store --global
       - name: Node
         uses: actions/setup-node@v7
         with:

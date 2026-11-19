@@ -1,0 +1,65 @@
+name: Cache
+env:
+  PLAYWRIGHT_BROWSERS_PATH: browsers
+on:
+  schedule:
+    - cron: "0 6 * * 1,4"
+  workflow_dispatch:
+permissions:
+  contents: read
+# GitHub evicts caches that were not used for 7 days. Without this a quiet
+# week means the next run starts cold, and a Playwright cache miss on Linux
+# used to mean a slow apt install. This restores (and so refreshes) the same
+# caches the Test workflow uses, and fills them again on a miss.
+jobs:
+  cache:
+    name: Cache ${{ matrix.os.name }}
+    runs-on: ${{ matrix.os.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - name: Linux
+            slug: linux
+            image: ubuntu-latest
+          - name: Mac
+            slug: mac
+            image: macos-latest
+          - name: Windows
+            slug: windows
+            image: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          version: 9
+      # Same store location as the Test workflow, so the saved cache is the one
+      # those jobs restore
+      - name: PNPM Store
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: pnpm config set store-dir D:\pnpm-store --global
+      - name: Node
+        uses: actions/setup-node@v7
+        with:
+          cache: "pnpm"
+          node-version: 24
+      - name: Dependencies
+        run: pnpm install
+      - name: Playwright Version
+        id: playwright-version
+        shell: bash
+        run: echo "PLAYWRIGHT_VERSION=$(pnpm exec playwright --version | awk '{ print $2 }')" >> $GITHUB_OUTPUT
+      - name: Playwright Cache
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: browsers
+          key: ${{ matrix.os.slug }}-playwright-${{ steps.playwright-version.outputs.PLAYWRIGHT_VERSION }}
+      # The cache only holds the browser, the system libraries are checked by
+      # the Test workflow
+      - name: Playwright Install
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install chromium --only-shell

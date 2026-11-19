@@ -7,7 +7,7 @@ import { expect, test } from "@playwright/test";
 
 import { decodePng } from "../src/export/__fixtures__/png.js";
 import { readPng } from "../src/export/png.js";
-import { OPAQUE, edgeAlpha, edgeColors, unzip } from "./export-files.js";
+import { unzip } from "./export-files.js";
 
 // maker export against the built site (dist/site), for 18Test, in a browser of
 // its own. The sizes and page counts are the golden values of 18Test.
@@ -164,26 +164,6 @@ test.describe("maker export 18Test", () => {
     expect(missing.stderr).toMatch(/nope not found/);
   });
 
-  test("writes png at a lower dpi", () => {
-    const result = maker(
-      out,
-      "18Test",
-      "--format",
-      "png",
-      "--docs",
-      "background",
-      "--dpi",
-      "150",
-    );
-    expect(result.status, result.stderr).toBe(0);
-
-    expect(png(path.join(out, "18Test/png/18test-background.png"))).toEqual({
-      width: 1200,
-      height: 1575,
-      pixelsPerMeter: 5906,
-    });
-  });
-
   test("writes a card at its size in inches", () => {
     fs.writeFileSync(
       path.join(out, "poker.json"),
@@ -239,48 +219,6 @@ test.describe("maker export 18Test", () => {
       },
     );
   });
-
-  // A card is 255.11 by 166.3 CSS pixels, painted 255 by 166: an image of a
-  // pixel more has an edge the card only partly covers, partly transparent
-  for (const [dpi, width, height] of [
-    [96, 255, 166],
-    [300, 796, 518],
-  ]) {
-    // Cards do not take the background: a number card is one color to its
-    // edge, even with --background white (passed at 96 dpi only)
-    test(`writes cards with an opaque edge at ${dpi} dpi`, () => {
-      const result = maker(
-        out,
-        "18Test",
-        "--format",
-        "png",
-        "--docs",
-        "cards",
-        "--dpi",
-        String(dpi),
-        ...(dpi === 96 ? ["--background", "white"] : []),
-      );
-      expect(result.status, result.stderr).toBe(0);
-
-      const dir = path.join(out, "18Test/png");
-      const cards = fs
-        .readdirSync(dir)
-        .filter((name) => name.startsWith("18test-card-"));
-      expect(cards).toHaveLength(48);
-      for (const name of cards) {
-        expect(png(path.join(dir, name)), name).toMatchObject({
-          width,
-          height,
-        });
-        expect(edgeAlpha(path.join(dir, name)), name).toEqual(OPAQUE);
-      }
-      if (dpi === 96) {
-        expect(edgeColors(path.join(dir, "18test-card-number-1.png"))).toEqual([
-          "105,74,152,255",
-        ]);
-      }
-    });
-  }
 
   // The alpha of the top left pixel of the map, a tile and a token
   const corners = async (page, ...flags) => {
@@ -401,13 +339,5 @@ test.describe("maker export 18Test", () => {
     expect(fs.readdirSync(path.join(out, "boxed/pdf"))).toEqual([
       "e2e-fixture-game-background.pdf",
     ]);
-  });
-
-  test("rejects a resolution over 300 dpi", () => {
-    const result = maker(out, "18Test", "--format", "png", "--dpi", "301");
-
-    expect(result.status).toBe(2);
-    expect(result.stderr).toContain("--dpi 301 is too high");
-    expect(fs.readdirSync(out)).toEqual([]);
   });
 });
