@@ -215,8 +215,10 @@ export const b18Spec = (
       type: "tile",
       tName: `${capitalize(color)} Tiles`,
       imgLoc: names.imgLoc(capitalize(color.replace("/", "_"))),
-      xStart: 24,
-      yStart: 24,
+      // The tiles sit in the top left corner of their cells: in print media
+      // the sheet has no margin
+      xStart: 0,
+      yStart: 0,
       xStep: 150,
       yStep: 150,
       xSize: game.info.orientation === "horizontal" ? 116 : 100,

@@ -29,6 +29,21 @@ export const edges = (file) => {
   };
 };
 
+// The box ({ x, y, width, height }) of the pixels that are not transparent in
+// a part of a png (the bytes of the file)
+export const painted = (bytes, part) => {
+  const { width, channels, pixels } = decodePng(bytes);
+  let [left, top, right, bottom] = [Infinity, Infinity, -1, -1];
+  for (let y = part.y; y < part.y + part.height; y++) {
+    for (let x = part.x; x < part.x + part.width; x++) {
+      if (pixels[(y * width + x) * channels + channels - 1] === 0) continue;
+      [left, top] = [Math.min(left, x), Math.min(top, y)];
+      [right, bottom] = [Math.max(right, x), Math.max(bottom, y)];
+    }
+  }
+  return { x: left, y: top, width: right - left + 1, height: bottom - top + 1 };
+};
+
 // The lowest alpha on each edge of a png, 255 when every pixel is opaque
 export const edgeAlpha = (file) =>
   Object.fromEntries(

@@ -136,6 +136,16 @@ describe("b18Spec", () => {
     ]);
   });
 
+  it("starts the tile trays in the corner of the sheet, where the tiles are", () => {
+    const { json } = spec();
+    const tiles = json.tray.filter((tray) => tray.type === "tile");
+
+    expect(tiles.length).toBeGreaterThan(0);
+    for (const tray of tiles) {
+      expect(tray).toMatchObject({ xStart: 0, yStart: 0 });
+    }
+  });
+
   it("captures a variation of the map", () => {
     const map = loadGame("18Test").map;
     const game = { ...loadGame("18Test"), map: [map, map] };
