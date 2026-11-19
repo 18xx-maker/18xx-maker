@@ -2,7 +2,23 @@ import { WebSocket, WebSocketServer } from "ws";
 
 import { initialState } from "../../src/play/reduce.js";
 import { sha256 } from "./auth.js";
-import { appendEvent, eventsSince, lastSeq, loadSnapshot } from "./events.js";
+import { appendEvent, eventsSince, lastSeq } from "./events.js";
+
+// Protocol (JSON text frames on /ws). Client to server:
+//   { t: "join", token, gameId, lastSeq }   once, within limits.joinTimeoutMs
+//   { t: "event", seq, event }
+// Server to client:
+//   { t: "joined", seq, seats, presence } then one catch-up frame:
+//   { t: "events", events }                 the events after lastSeq
+//   { t: "snapshot", seq: 0, state, events } replace the local log: state is
+//     initialState() and events the full log (sent when lastSeq is ahead of the
+//     server or more than snapshotEvery * 5 behind; stored snapshots stay a
+//     server-side optimisation, so an undo of any earlier event still reduces)
+//   { t: "event", event }                   to every socket of the game
+//   { t: "rebase", currentSeq }             to the sender of a stale seq
+//   { t: "presence", users }                on every join and leave
+//   { t: "error", code, message? }
+// Only seat holders may join; others get not_member and close 4003.
 
 // Frames are small JSON messages; ws closes the socket (1009) above this
 export const MAX_FRAME_BYTES = 256 * 1024;
@@ -29,7 +45,9 @@ export const attachHub = (server, { pool, config }) => {
     noServer: true,
     maxPayload: MAX_FRAME_BYTES,
   });
-  // gameId -> { sockets: Set<ws>, queue: Promise } (queue keeps broadcasts in seq order)
+  // gameId -> { sockets: Set<ws>, queue: Promise, pending: number }; the queue
+  // keeps broadcasts in seq order, and a room with pending appends is kept so a
+  // socket that joins meanwhile is in the room the broadcast goes to
   const rooms = new Map();
   const states = new WeakMap();
 
@@ -58,8 +76,9 @@ export const attachHub = (server, { pool, config }) => {
     state.closed = true;
     const room = state.gameId && rooms.get(state.gameId);
     if (!room || !room.sockets.delete(ws)) return;
-    if (room.sockets.size === 0) rooms.delete(state.gameId);
-    else broadcast(room, { t: "presence", users: presence(room) });
+    if (room.sockets.size === 0) {
+      if (room.pending === 0) rooms.delete(state.gameId);
+    } else broadcast(room, { t: "presence", users: presence(room) });
   };
 
   const join = async (ws, state, msg) => {
@@ -82,12 +101,13 @@ export const attachHub = (server, { pool, config }) => {
       error(ws, "bad_token");
       return ws.close(JOIN_FAILED, "bad token");
     }
-    const game = await pool.query("select 1 from games where id = $1", [
-      gameId,
-    ]);
-    if (!game.rows.length) {
-      error(ws, "not_member", "Unknown game");
-      return ws.close(JOIN_FAILED, "unknown game");
+    const seat = await pool.query(
+      "select 1 from seats where game_id = $1 and user_id = $2",
+      [gameId, user.rows[0].user_id],
+    );
+    if (!seat.rows.length) {
+      error(ws, "not_member");
+      return ws.close(JOIN_FAILED, "not a member");
     }
     if (state.closed) return;
 
@@ -96,7 +116,11 @@ export const attachHub = (server, { pool, config }) => {
     state.gameId = gameId;
     state.buffer = [];
     if (!rooms.has(gameId))
-      rooms.set(gameId, { sockets: new Set(), queue: Promise.resolve() });
+      rooms.set(gameId, {
+        sockets: new Set(),
+        queue: Promise.resolve(),
+        pending: 0,
+      });
     const room = rooms.get(gameId);
     room.sockets.add(ws);
 
@@ -105,18 +129,17 @@ export const attachHub = (server, { pool, config }) => {
       "select user_id, name, color from seats where game_id = $1 order by created_at",
       [gameId],
     );
-    let catchUp;
-    if (since > current || current - since > limits.snapshotEvery * 5) {
-      const snap = (await loadSnapshot(pool, gameId)) ?? {
-        seq: 0,
-        state: initialState(),
-      };
-      const events = await eventsSince(pool, gameId, snap.seq);
-      catchUp = { t: "snapshot", seq: snap.seq, state: snap.state, events };
-    } else {
-      catchUp = { t: "events", events: await eventsSince(pool, gameId, since) };
-    }
-    const sent = catchUp.events.reduce((max, e) => Math.max(max, e.seq), 0);
+    const replace =
+      since > current || current - since > limits.snapshotEvery * 5;
+    const events = await eventsSince(pool, gameId, replace ? 0 : since);
+    const catchUp = replace
+      ? { t: "snapshot", seq: 0, state: initialState(), events }
+      : { t: "events", events };
+    // The client holds every event up to here; buffered ones are skipped
+    const covered = events.reduce(
+      (max, e) => Math.max(max, e.seq),
+      replace ? 0 : since,
+    );
 
     send(ws, {
       t: "joined",
@@ -130,7 +153,7 @@ export const attachHub = (server, { pool, config }) => {
     });
     send(ws, catchUp);
     for (const m of state.buffer) {
-      if (m.t !== "event" || m.event.seq > sent) send(ws, m);
+      if (m.t !== "event" || m.event.seq > covered) send(ws, m);
     }
     state.buffer = null;
     broadcast(room, { t: "presence", users: presence(room) });
@@ -151,6 +174,7 @@ export const attachHub = (server, { pool, config }) => {
     const { seq, event: body } = msg;
     const { gameId, userId } = state;
     const room = rooms.get(gameId);
+    room.pending++;
     const run = room.queue.then(async () => {
       const result = await appendEvent(pool, config, {
         gameId,
@@ -171,7 +195,12 @@ export const attachHub = (server, { pool, config }) => {
         error(ws, result.reason, result.message);
       }
     });
-    room.queue = run.catch(() => {});
+    room.queue = run
+      .catch(() => {})
+      .finally(() => {
+        room.pending--;
+        if (room.pending === 0 && room.sockets.size === 0) rooms.delete(gameId);
+      });
     return run;
   };
 
