@@ -1,0 +1,397 @@
+import { createHash, randomBytes } from "node:crypto";
+
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
+
+import { reduce } from "../../src/play/reduce.js";
+import { connect } from "../test/client.js";
+import { hasDb, makeTestDb } from "../test/db.js";
+import { createServer } from "./app.js";
+import { loadConfig } from "./config.js";
+import { appendEvent, eventsSince } from "./events.js";
+
+const note = (text) => ({ type: "note.set", text });
+
+describe.skipIf(!hasDb)("hub", () => {
+  let db;
+  let running = [];
+
+  const configFor = (extra = {}) =>
+    loadConfig({
+      DATABASE_URL: "x",
+      PUBLIC_URL: "http://play.test",
+      DISCORD_CLIENT_ID: "cid",
+      DISCORD_CLIENT_SECRET: "secret",
+      ...extra,
+    });
+
+  // A real server on port 0; clients made through it are closed after the test
+  const start = async (extra = {}) => {
+    const server = createServer({ pool: db.pool, config: configFor(extra) });
+    await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+    const url = `ws://127.0.0.1:${server.address().port}/ws`;
+    const clients = [];
+    const entry = {
+      url,
+      client: () => {
+        const c = connect(url);
+        clients.push(c);
+        return c;
+      },
+      stop: async () => {
+        await Promise.all(clients.map((c) => c.close()));
+        await new Promise((resolve) => server.close(resolve));
+      },
+    };
+    running.push(entry);
+    return entry;
+  };
+
+  const makeUser = async (name) => {
+    const token = randomBytes(16).toString("hex");
+    const { rows } = await db.pool.query(
+      "insert into users (discord_id, name) values ($1, $2) returning id",
+      [randomBytes(8).toString("hex"), name],
+    );
+    await db.pool.query(
+      "insert into sessions (token_hash, user_id) values ($1, $2)",
+      [createHash("sha256").update(token).digest("hex"), rows[0].id],
+    );
+    return { id: rows[0].id, token };
+  };
+
+  const makeGame = async (players, status = "active") => {
+    const { rows } = await db.pool.query(
+      `insert into games (title, owner_id, game_json, invite_code, status)
+       values ('t', $1, '{}', $2, $3) returning id`,
+      [players[0].id, randomBytes(12).toString("hex"), status],
+    );
+    for (const p of players) {
+      await db.pool.query(
+        "insert into seats (game_id, user_id, name) values ($1, $2, 'p')",
+        [rows[0].id, p.id],
+      );
+    }
+    return rows[0].id;
+  };
+
+  const seed = async (gameId, user, count, config = configFor()) => {
+    for (let seq = 1; seq <= count; seq++) {
+      await appendEvent(db.pool, config, {
+        gameId,
+        userId: user.id,
+        seq,
+        event: note(`n${seq}`),
+      });
+    }
+  };
+
+  const join = async (client, user, gameId, lastSeq = 0) => {
+    await client.send({ t: "join", token: user.token, gameId, lastSeq });
+    return client.next("joined");
+  };
+
+  let ann, bob, cat;
+
+  beforeAll(async () => {
+    db = await makeTestDb();
+    ann = await makeUser("Ann");
+    bob = await makeUser("Bob");
+    cat = await makeUser("Cat");
+  });
+
+  afterEach(async () => {
+    await Promise.all(running.map((r) => r.stop()));
+    running = [];
+  });
+
+  afterAll(async () => {
+    await db.close();
+  });
+
+  it("join with a bad token returns bad_token", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    const c = s.client();
+    await c.send({ t: "join", token: "nope", gameId: g, lastSeq: 0 });
+    expect(await c.next("error")).toMatchObject({ code: "bad_token" });
+    expect((await c.closed).code).toBe(4003);
+  });
+
+  it("join returns joined and the full history for lastSeq 0", async () => {
+    const s = await start();
+    const g = await makeGame([ann, bob]);
+    await seed(g, ann, 3);
+    const c = s.client();
+    const joined = await join(c, ann, g);
+    expect(joined.seq).toBe(3);
+    expect(joined.seats.map((x) => x.userId).sort()).toEqual(
+      [ann.id, bob.id].sort(),
+    );
+    expect(joined.presence).toEqual([ann.id]);
+    const { events } = await c.next("events");
+    expect(events).toEqual(await eventsSince(db.pool, g, 0));
+    expect(events.map((e) => e.seq)).toEqual([1, 2, 3]);
+  });
+
+  it("reconnect with lastSeq gets only the missing events", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    await seed(g, ann, 4);
+    const c = s.client();
+    await join(c, ann, g, 2);
+    const { events } = await c.next("events");
+    expect(events.map((e) => e.seq)).toEqual([3, 4]);
+    expect(events[0]).toEqual({
+      seq: 3,
+      userId: ann.id,
+      type: "note.set",
+      text: "n3",
+    });
+  });
+
+  it("lastSeq ahead of the server gets a snapshot, not an error", async () => {
+    const s = await start({ SNAPSHOT_EVERY: "2" });
+    const g = await makeGame([ann]);
+    await seed(g, ann, 3, configFor({ SNAPSHOT_EVERY: "2" }));
+    const c = s.client();
+    const joined = await join(c, ann, g, 10);
+    expect(joined.seq).toBe(3);
+    const snap = await c.next("snapshot");
+    expect(snap.seq).toBe(2);
+    expect(snap.events.map((e) => e.seq)).toEqual([3]);
+    expect(reduce(snap.events, snap.state)).toEqual(
+      reduce(await eventsSince(db.pool, g, 0)),
+    );
+    expect(c.pending().filter((m) => m.t === "error")).toEqual([]);
+  });
+
+  it("lastSeq more than snapshotEvery * 5 behind gets a snapshot", async () => {
+    const s = await start({ SNAPSHOT_EVERY: "1" });
+    const g = await makeGame([ann]);
+    await seed(g, ann, 6, configFor({ SNAPSHOT_EVERY: "1" }));
+    const behind = s.client();
+    await join(behind, ann, g, 0);
+    expect(await behind.next("snapshot")).toMatchObject({ seq: 6, events: [] });
+    const close = s.client();
+    await join(close, ann, g, 1);
+    expect((await close.next("events")).events).toHaveLength(5);
+  });
+
+  it("a snapshot before the first stored snapshot starts from seq 0", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    await seed(g, ann, 1);
+    const c = s.client();
+    await join(c, ann, g, 5);
+    const snap = await c.next("snapshot");
+    expect(snap).toMatchObject({ seq: 0 });
+    expect(reduce(snap.events, snap.state).notes).toBe("n1");
+  });
+
+  it("an event is stored and broadcast to all clients in the game, including the sender", async () => {
+    const s = await start();
+    const g = await makeGame([ann, bob]);
+    const a = s.client();
+    const b = s.client();
+    await join(a, ann, g);
+    await join(b, bob, g);
+    await a.send({ t: "event", seq: 1, event: note("hi") });
+    const expected = { seq: 1, userId: ann.id, type: "note.set", text: "hi" };
+    expect((await a.next("event")).event).toEqual(expected);
+    expect((await b.next("event")).event).toEqual(expected);
+    expect(await eventsSince(db.pool, g, 0)).toEqual([expected]);
+  });
+
+  it("clients of another game receive nothing", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    const other = await makeGame([bob]);
+    const a = s.client();
+    const b = s.client();
+    await join(a, ann, g);
+    await join(b, bob, other);
+    await b.next("events");
+    await a.send({ t: "event", seq: 1, event: note("hi") });
+    await a.next("event");
+    // A round trip on b after a's event proves b had the chance to get it
+    await b.send({ t: "event", seq: 1, event: note("own") });
+    expect((await b.next("event")).event.text).toBe("own");
+    expect(b.pending().filter((m) => m.t === "event")).toEqual([]);
+  });
+
+  it("a stale seq gets rebase with the current seq and nobody else sees the event", async () => {
+    const s = await start();
+    const g = await makeGame([ann, bob]);
+    await seed(g, ann, 2);
+    const a = s.client();
+    const b = s.client();
+    await join(a, ann, g, 2);
+    await join(b, bob, g, 2);
+    await a.send({ t: "event", seq: 2, event: note("late") });
+    expect(await a.next("rebase")).toEqual({ t: "rebase", currentSeq: 2 });
+    await b.send({ t: "event", seq: 3, event: note("next") });
+    expect((await b.next("event")).event.text).toBe("next");
+    expect(b.pending().filter((m) => m.t === "event")).toEqual([]);
+    expect(await eventsSince(db.pool, g, 2)).toHaveLength(1);
+  });
+
+  it("two clients sending the same seq: one event stored, the other gets rebase", async () => {
+    const s = await start();
+    const g = await makeGame([ann, bob]);
+    const a = s.client();
+    const b = s.client();
+    await join(a, ann, g);
+    await join(b, bob, g);
+    await Promise.all([
+      a.send({ t: "event", seq: 1, event: note("a") }),
+      b.send({ t: "event", seq: 1, event: note("b") }),
+    ]);
+    const winner = (await a.next("event")).event;
+    expect((await b.next("event")).event).toEqual(winner);
+    const loser = winner.userId === ann.id ? b : a;
+    expect(await loser.next("rebase")).toEqual({ t: "rebase", currentSeq: 1 });
+    expect(await eventsSince(db.pool, g, 0)).toEqual([winner]);
+  });
+
+  it("a spectator can read but their event gets not_member", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    await seed(g, ann, 1);
+    const c = s.client();
+    const joined = await join(c, cat, g);
+    expect(joined.seq).toBe(1);
+    expect((await c.next("events")).events).toHaveLength(1);
+    await c.send({ t: "event", seq: 2, event: note("x") });
+    expect(await c.next("error")).toMatchObject({ code: "not_member" });
+    expect(await eventsSince(db.pool, g, 1)).toEqual([]);
+  });
+
+  it("a locked game rejects events", async () => {
+    const s = await start();
+    const g = await makeGame([ann], "locked");
+    const c = s.client();
+    await join(c, ann, g);
+    await c.send({ t: "event", seq: 1, event: note("x") });
+    expect(await c.next("error")).toMatchObject({ code: "locked" });
+  });
+
+  it("a game deleted mid-session answers events with an error", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    const c = s.client();
+    await join(c, ann, g);
+    await db.pool.query("delete from games where id = $1", [g]);
+    await c.send({ t: "event", seq: 1, event: note("x") });
+    expect(await c.next("error")).toMatchObject({ code: "not_member" });
+  });
+
+  it("an invalid event gets invalid with a message", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    const c = s.client();
+    await join(c, ann, g);
+    await c.send({ t: "event", seq: 1, event: { type: "tile.place" } });
+    const err = await c.next("error");
+    expect(err.code).toBe("invalid");
+    expect(err.message).toBeTruthy();
+    await c.send({ t: "event", seq: 2 ** 40, event: note("x") });
+    expect(await c.next("error")).toMatchObject({ code: "invalid" });
+  });
+
+  it("presence updates on join and close", async () => {
+    const s = await start();
+    const g = await makeGame([ann, bob]);
+    const a = s.client();
+    await join(a, ann, g);
+    expect((await a.next("presence")).users).toEqual([ann.id]);
+    const b = s.client();
+    const joined = await join(b, bob, g);
+    expect(joined.presence.sort()).toEqual([ann.id, bob.id].sort());
+    expect((await a.next("presence")).users.sort()).toEqual(
+      [ann.id, bob.id].sort(),
+    );
+    await b.close();
+    expect((await a.next("presence")).users).toEqual([ann.id]);
+  });
+
+  it("a socket that never joins is closed with 4001", async () => {
+    const s = await start({ JOIN_TIMEOUT_MS: "50" });
+    const c = s.client();
+    await c.opened;
+    expect((await c.closed).code).toBe(4001);
+  });
+
+  it("a joined socket is not closed by the join timeout", async () => {
+    const s = await start({ JOIN_TIMEOUT_MS: "50" });
+    const g = await makeGame([ann]);
+    const c = s.client();
+    await join(c, ann, g);
+    await new Promise((resolve) => setTimeout(resolve, 120));
+    await c.send({ t: "event", seq: 1, event: note("x") });
+    expect((await c.next("event")).event.seq).toBe(1);
+  });
+
+  it("rate limit drops frames over the limit", async () => {
+    const s = await start({ MAX_EVENTS_PER_SECOND: "2" });
+    const g = await makeGame([ann]);
+    const c = s.client();
+    await join(c, ann, g);
+    for (let seq = 1; seq <= 4; seq++) {
+      await c.send({ t: "event", seq, event: note(`n${seq}`) });
+    }
+    expect(await c.next("error")).toMatchObject({ code: "rate_limited" });
+    expect(await c.next("error")).toMatchObject({ code: "rate_limited" });
+    await c.next("event");
+    await c.next("event");
+    expect(await eventsSince(db.pool, g, 0)).toHaveLength(2);
+  });
+
+  it("malformed frames get invalid and keep the socket open", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    const c = s.client();
+    for (const frame of [
+      "not json",
+      "[]",
+      "null",
+      JSON.stringify({ t: "nope" }),
+      JSON.stringify({ t: "event", seq: 1, event: note("x") }),
+      JSON.stringify({ t: "join", token: 5, gameId: g, lastSeq: 0 }),
+      JSON.stringify({ t: "join", token: ann.token, gameId: "x", lastSeq: 0 }),
+      JSON.stringify({ t: "join", token: ann.token, gameId: g, lastSeq: -1 }),
+    ]) {
+      await c.send(frame);
+      expect(await c.next("error")).toMatchObject({ code: "invalid" });
+    }
+    await join(c, ann, g);
+    await c.send({ t: "join", token: ann.token, gameId: g, lastSeq: 0 });
+    expect(await c.next("error")).toMatchObject({ code: "invalid" });
+  });
+
+  it("an unknown game is refused", async () => {
+    const s = await start();
+    const c = s.client();
+    await c.send({
+      t: "join",
+      token: ann.token,
+      gameId: "00000000-0000-0000-0000-000000000000",
+      lastSeq: 0,
+    });
+    expect(await c.next("error")).toMatchObject({ code: "not_member" });
+    expect((await c.closed).code).toBe(4003);
+  });
+
+  it("an oversize frame closes the socket", async () => {
+    const s = await start();
+    const c = s.client();
+    await c.send("x".repeat(300 * 1024));
+    expect((await c.closed).code).toBe(1009);
+  });
+
+  it("other paths are not upgraded", async () => {
+    const s = await start();
+    const c = connect(s.url.replace("/ws", "/other"));
+    await expect(c.opened).rejects.toThrow();
+    await c.closed;
+  });
+});

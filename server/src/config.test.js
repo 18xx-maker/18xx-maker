@@ -27,6 +27,7 @@ describe("loadConfig", () => {
         gamesPerUser: 50,
         eventsPerSecond: 10,
         snapshotEvery: 100,
+        joinTimeoutMs: 10000,
       },
     });
   });
@@ -50,6 +51,7 @@ describe("loadConfig", () => {
       MAX_GAMES_PER_USER: "3",
       MAX_EVENTS_PER_SECOND: "4",
       SNAPSHOT_EVERY: "5",
+      JOIN_TIMEOUT_MS: "50",
     });
     expect(config.port).toBe(9000);
     expect(config.allowedOrigins).toEqual(["https://a.com", "https://b.com"]);
@@ -59,6 +61,7 @@ describe("loadConfig", () => {
       gamesPerUser: 3,
       eventsPerSecond: 4,
       snapshotEvery: 5,
+      joinTimeoutMs: 50,
     });
   });
 });

@@ -9,7 +9,8 @@ import { Hono } from "hono";
 
 const STATE_TTL_MS = 10 * 60 * 1000;
 
-const sha256 = (value) => createHash("sha256").update(value).digest("hex");
+export const sha256 = (value) =>
+  createHash("sha256").update(value).digest("hex");
 
 const sign = (payload, secret) =>
   createHmac("sha256", secret).update(payload).digest("base64url");
