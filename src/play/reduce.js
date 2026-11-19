@@ -8,6 +8,8 @@ export const initialState = () => ({
   notes: "",
 });
 
+const own = (obj, key) => Object.hasOwn(obj, key);
+
 const sameToken = (a, b) => a.token === b.token && a.x === b.x && a.y === b.y;
 
 function applyEvent(state, e) {
@@ -21,7 +23,7 @@ function applyEvent(state, e) {
         },
       };
     case "tile.rotate":
-      if (!state.tiles[e.hex]) return state;
+      if (!own(state.tiles, e.hex)) return state;
       return {
         ...state,
         tiles: {
@@ -30,7 +32,7 @@ function applyEvent(state, e) {
         },
       };
     case "tile.remove": {
-      if (!state.tiles[e.hex]) return state;
+      if (!own(state.tiles, e.hex)) return state;
       const tiles = { ...state.tiles };
       delete tiles[e.hex];
       return { ...state, tiles };
@@ -41,13 +43,13 @@ function applyEvent(state, e) {
         tokens: {
           ...state.tokens,
           [e.hex]: [
-            ...(state.tokens[e.hex] || []),
+            ...(own(state.tokens, e.hex) ? state.tokens[e.hex] : []),
             { token: e.token, x: e.x, y: e.y },
           ],
         },
       };
     case "token.remove": {
-      const list = state.tokens[e.hex] || [];
+      const list = own(state.tokens, e.hex) ? state.tokens[e.hex] : [];
       const i = list.findIndex((t) => sameToken(t, e));
       if (i < 0) return state;
       return {
@@ -67,12 +69,16 @@ function applyEvent(state, e) {
         },
       };
     case "tray.move": {
-      const trays = { ...state.trays };
-      const from = trays[e.from] || [];
+      const from = own(state.trays, e.from) ? state.trays[e.from] : [];
       const i = from.indexOf(e.item);
-      if (i >= 0) trays[e.from] = [...from.slice(0, i), ...from.slice(i + 1)];
-      trays[e.to] = [...(trays[e.to] || []), e.item];
-      return { ...state, trays };
+      let trays = state.trays;
+      if (i >= 0)
+        trays = {
+          ...trays,
+          [e.from]: [...from.slice(0, i), ...from.slice(i + 1)],
+        };
+      const to = own(trays, e.to) ? trays[e.to] : [];
+      return { ...state, trays: { ...trays, [e.to]: [...to, e.item] } };
     }
     case "note.set":
       return { ...state, notes: e.text };
@@ -107,9 +113,9 @@ export function reduce(events, state = initialState()) {
 }
 
 export function usedTiles(state) {
-  const counts = {};
+  let counts = {};
   for (const { tile } of Object.values(state.tiles)) {
-    counts[tile] = (counts[tile] || 0) + 1;
+    counts = { ...counts, [tile]: (own(counts, tile) ? counts[tile] : 0) + 1 };
   }
   return counts;
 }
