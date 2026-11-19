@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.0-beta.139](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.138...v1.0.0-beta.139) (2026-11-19)
+
+
+### :bug: Bug Fixes
+
+* **export:** name the board 18 box after the game title ([#1095](https://github.com/18xx-maker/18xx-maker/issues/1095)) ([6de5508](https://github.com/18xx-maker/18xx-maker/commit/6de55088c8a12336489cf641a6f327062ac40f12))
+
+
+### :package: Build System
+
+* **deps:** bump vite, xmldom, fast-uri, http-cache-semantics, lodash and tmp ([#1093](https://github.com/18xx-maker/18xx-maker/issues/1093)) ([2044a48](https://github.com/18xx-maker/18xx-maker/commit/2044a4802760416e9fc9a8e4b345e8270b642771))
+
+
+### :octocat: Continuous Integration
+
+* speed up the test workflow without dropping tests ([#1096](https://github.com/18xx-maker/18xx-maker/issues/1096)) ([25285ce](https://github.com/18xx-maker/18xx-maker/commit/25285ceda64c7f1a30f0a77ad5359bc07d2125b6))
+
 ## [1.0.0-beta.138](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.137...v1.0.0-beta.138) (2026-10-19)
 
 
