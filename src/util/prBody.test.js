@@ -22,8 +22,8 @@ describe("findRiskyLines", () => {
   });
 
   it("ignores fenced code, plain prose and similar words", () => {
-    const body = "```shell\npnpm test:run\n```\nThe fix: is not here\nprefix:x";
-    expect(lines(body)).toEqual([4]);
+    const body = "```shell\npnpm test:run\n```\nprefix:x\nThe fix: is not here";
+    expect(lines(body)).toEqual([5]);
     expect(findRiskyLines("a fixed: thing, build-app: x")).toEqual([]);
     expect(findRiskyLines()).toEqual([]);
   });
@@ -45,8 +45,46 @@ describe("findRiskyLines", () => {
     expect(lines("intro\n\n  feat(ui)!: x\n\nlast para")).toEqual([3]);
   });
 
-  it("flags a type anywhere in the last paragraph", () => {
+  it("flags a type anywhere in the last line", () => {
     expect(lines("intro\n\nsome text\nand pnpm test:run here")).toEqual([4]);
+    expect(lines("intro\n\nsee pnpm test:run\nlast line")).toEqual([]);
+  });
+
+  it("passes a type mid-line followed by lines that are not trailers", () => {
+    expect(lines("intro\n\n<li>x fix: thing</li>\n</ul>\n</details>")).toEqual(
+      [],
+    );
+  });
+
+  it("passes the Dependabot changelog shape of 1097", () => {
+    const body = [
+      "Bumps undici from 7.0.0 to 7.0.1.",
+      "<details>",
+      "<summary>Commits</summary>",
+      "<ul>",
+      '<li><a href="https://github.com/x/commit/39f93e1"><code>39f93e1</code></a> fix(fetch): x</li>',
+      "</ul>",
+      "</details>",
+      "<br />",
+    ].join("\n");
+    expect(findRiskyLines(body)).toEqual([]);
+  });
+
+  it("flags a type in the last line before trailers", () => {
+    const body =
+      "intro\n\nsome text\nand pnpm test:run here\n\nSigned-off-by: a <a@b.c>\nCo-Authored-By: b <b@c.d>";
+    expect(lines(body)).toEqual([4]);
+  });
+
+  it("flags a trailer-shaped type as the last line", () => {
+    expect(lines("intro\n\nsome text\nfix: x")).toEqual([4]);
+    expect(lines("intro\n\nsome text\nfix: x\n  more of it")).toEqual([4]);
+  });
+
+  it("ignores plain trailers", () => {
+    expect(lines("intro\n\nFixes #3")).toEqual([]);
+    expect(lines("intro\n\nBREAKING CHANGE: the api moved")).toEqual([]);
+    expect(lines("Fixes #3\nBREAKING CHANGE: x")).toEqual([]);
   });
 
   it("flags the paragraph before trailing trailers", () => {

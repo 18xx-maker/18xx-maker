@@ -418,8 +418,8 @@ imperative description):
   `build` for everything else. Check `release-please-config.json` if the list
   above may be stale.
 - release-please also reads the squash commit body (the PR description): a
-  paragraph that starts with `type: text`, or a `type: text` line in the last
-  paragraph (before any trailers), becomes an extra changelog entry, and
+  paragraph that starts with `type: text`, or such a line at the end of the
+  body, followed only by trailers, becomes an extra changelog entry, and
   GitHub wraps long lines. Never write `build:app`,
   `test:run`, `fix: ...` and the like in prose or code spans; put commands in a
   fenced code block. The `PR body` workflow fails a PR that does this.
