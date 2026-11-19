@@ -170,6 +170,16 @@ validate.file = (file, schemaId) => {
 // Validates a file against the game schema, even if it does not look like one
 export const validateGameFile = (file) => validate.file(file, gameSchema.$id);
 
+// Validates a parsed game against the game schema
+export const validateGameJson = (json) => {
+  const { valid, validationErrors, warnings } = validate(
+    json,
+    undefined,
+    gameSchema.$id,
+  );
+  return { valid, validationErrors, warnings };
+};
+
 const getShortSchemaName = (id) => {
   let draft = id.match(/json-schema\.org/);
   if (draft) {
