@@ -2,7 +2,7 @@ import { createHash, randomBytes } from "node:crypto";
 
 import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
-import { reduce } from "../../src/play/reduce.js";
+import { initialState, reduce } from "../../src/play/reduce.js";
 import { connect } from "../test/client.js";
 import { hasDb, makeTestDb } from "../test/db.js";
 import { createServer } from "./app.js";
@@ -25,8 +25,8 @@ describe.skipIf(!hasDb)("hub", () => {
     });
 
   // A real server on port 0; clients made through it are closed after the test
-  const start = async (extra = {}) => {
-    const server = createServer({ pool: db.pool, config: configFor(extra) });
+  const start = async (extra = {}, pool = db.pool) => {
+    const server = createServer({ pool, config: configFor(extra) });
     await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
     const url = `ws://127.0.0.1:${server.address().port}/ws`;
     const clients = [];
@@ -45,6 +45,42 @@ describe.skipIf(!hasDb)("hub", () => {
     running.push(entry);
     return entry;
   };
+
+  // A pool whose next matching call waits: hold(kind) resolves once the call
+  // is reached, with a function that lets it continue
+  const gatedPool = () => {
+    const gates = [];
+    const wait = async (kind, sql) => {
+      const i = gates.findIndex((g) => g.kind === kind && g.match(sql));
+      if (i < 0) return;
+      const [gate] = gates.splice(i, 1);
+      gate.reached();
+      await gate.released;
+    };
+    return {
+      query: async (sql, params) => {
+        await wait("query", sql);
+        return db.pool.query(sql, params);
+      },
+      connect: async () => {
+        await wait("connect", "");
+        return db.pool.connect();
+      },
+      hold: (kind, match = () => true) => {
+        let release;
+        const released = new Promise((resolve) => (release = resolve));
+        return new Promise((resolve) => {
+          gates.push({
+            kind,
+            match,
+            released,
+            reached: () => resolve(release),
+          });
+        });
+      },
+    };
+  };
+  const isLastSeq = (sql) => sql.includes("max(seq)");
 
   const makeUser = async (name) => {
     const token = randomBytes(16).toString("hex");
@@ -157,11 +193,13 @@ describe.skipIf(!hasDb)("hub", () => {
     const joined = await join(c, ann, g, 10);
     expect(joined.seq).toBe(3);
     const snap = await c.next("snapshot");
-    expect(snap.seq).toBe(2);
-    expect(snap.events.map((e) => e.seq)).toEqual([3]);
-    expect(reduce(snap.events, snap.state)).toEqual(
-      reduce(await eventsSince(db.pool, g, 0)),
-    );
+    expect(snap).toEqual({
+      t: "snapshot",
+      seq: 0,
+      state: initialState(),
+      events: await eventsSince(db.pool, g, 0),
+    });
+    expect(snap.events.map((e) => e.seq)).toEqual([1, 2, 3]);
     expect(c.pending().filter((m) => m.t === "error")).toEqual([]);
   });
 
@@ -171,21 +209,93 @@ describe.skipIf(!hasDb)("hub", () => {
     await seed(g, ann, 6, configFor({ SNAPSHOT_EVERY: "1" }));
     const behind = s.client();
     await join(behind, ann, g, 0);
-    expect(await behind.next("snapshot")).toMatchObject({ seq: 6, events: [] });
+    const snap = await behind.next("snapshot");
+    expect(snap.seq).toBe(0);
+    expect(snap.events.map((e) => e.seq)).toEqual([1, 2, 3, 4, 5, 6]);
     const close = s.client();
     await join(close, ann, g, 1);
     expect((await close.next("events")).events).toHaveLength(5);
   });
 
-  it("a snapshot before the first stored snapshot starts from seq 0", async () => {
-    const s = await start();
+  it("a snapshot frame lets an undo of an event before the stored snapshot reduce", async () => {
+    const config = configFor({ SNAPSHOT_EVERY: "2" });
+    const s = await start({ SNAPSHOT_EVERY: "2" });
     const g = await makeGame([ann]);
-    await seed(g, ann, 1);
+    const append = (seq, event) =>
+      appendEvent(db.pool, config, { gameId: g, userId: ann.id, seq, event });
+    await append(1, { type: "tile.place", hex: "A1", tile: "7", rotation: 0 });
+    await append(2, note("b"));
+    await append(3, { type: "undo", target: 1 });
     const c = s.client();
-    await join(c, ann, g, 5);
+    await join(c, ann, g, 9);
     const snap = await c.next("snapshot");
-    expect(snap).toMatchObject({ seq: 0 });
-    expect(reduce(snap.events, snap.state).notes).toBe("n1");
+    const all = await eventsSince(db.pool, g, 0);
+    expect(reduce(snap.events, snap.state)).toEqual(reduce(all));
+    expect(reduce(snap.events).tiles).toEqual({});
+  });
+
+  it("an event committed while a socket joins is not sent twice", async () => {
+    const pool = gatedPool();
+    const s = await start({}, pool);
+    const g = await makeGame([ann, bob]);
+    await seed(g, ann, 1);
+    const a = s.client();
+    await join(a, ann, g, 1);
+    const b = s.client();
+    const held = pool.hold("query", isLastSeq);
+    // bob already holds seq 2 (say from another tab), so the catch-up is empty
+    await b.send({ t: "join", token: bob.token, gameId: g, lastSeq: 2 });
+    const release = await held;
+    await a.send({ t: "event", seq: 2, event: note("during") });
+    await a.next("event");
+    release();
+    expect((await b.next("joined")).seq).toBe(2);
+    expect((await b.next("events")).events).toEqual([]);
+    await b.send({ t: "event", seq: 3, event: note("after") });
+    expect((await b.next("event")).event.seq).toBe(3);
+  });
+
+  it("the event that writes a stored snapshot during a join is not sent twice", async () => {
+    const config = configFor({ SNAPSHOT_EVERY: "1" });
+    const pool = gatedPool();
+    const s = await start({ SNAPSHOT_EVERY: "1" }, pool);
+    const g = await makeGame([ann, bob]);
+    await seed(g, ann, 5, config);
+    const a = s.client();
+    await join(a, ann, g, 5);
+    const b = s.client();
+    const held = pool.hold("query", isLastSeq);
+    await b.send({ t: "join", token: bob.token, gameId: g, lastSeq: 0 });
+    const release = await held;
+    await a.send({ t: "event", seq: 6, event: note("snap") });
+    await a.next("event");
+    release();
+    const snap = await b.next("snapshot");
+    expect(snap.events.map((e) => e.seq)).toEqual([1, 2, 3, 4, 5, 6]);
+    await b.send({ t: "event", seq: 7, event: note("after") });
+    expect((await b.next("event")).event.seq).toBe(7);
+  });
+
+  it("a socket that joins while the last socket's append is in flight gets its broadcast", async () => {
+    const pool = gatedPool();
+    const s = await start({}, pool);
+    const g = await makeGame([ann, bob]);
+    const a = s.client();
+    await join(a, ann, g);
+    const held = pool.hold("connect");
+    await a.send({ t: "event", seq: 1, event: note("in flight") });
+    const release = await held;
+    await a.close();
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    const b = s.client();
+    // ann has left, so the room is empty while the append is pending
+    expect((await join(b, bob, g)).presence).toEqual([bob.id]);
+    expect((await b.next("events")).events).toEqual([]);
+    release();
+    expect((await b.next("event")).event).toMatchObject({
+      seq: 1,
+      userId: ann.id,
+    });
   });
 
   it("an event is stored and broadcast to all clients in the game, including the sender", async () => {
@@ -253,17 +363,37 @@ describe.skipIf(!hasDb)("hub", () => {
     expect(await eventsSince(db.pool, g, 0)).toEqual([winner]);
   });
 
-  it("a spectator can read but their event gets not_member", async () => {
+  it("a non-member's join is refused with not_member and close 4003 and receives no game data", async () => {
     const s = await start();
     const g = await makeGame([ann]);
     await seed(g, ann, 1);
+    const a = s.client();
+    await join(a, ann, g, 1);
     const c = s.client();
-    const joined = await join(c, cat, g);
-    expect(joined.seq).toBe(1);
-    expect((await c.next("events")).events).toHaveLength(1);
-    await c.send({ t: "event", seq: 2, event: note("x") });
+    await c.send({ t: "join", token: cat.token, gameId: g, lastSeq: 0 });
     expect(await c.next("error")).toMatchObject({ code: "not_member" });
-    expect(await eventsSince(db.pool, g, 1)).toEqual([]);
+    expect((await c.closed).code).toBe(4003);
+    expect(c.pending()).toEqual([]);
+    // ann saw no presence change for cat
+    await a.send({ t: "event", seq: 2, event: note("x") });
+    await a.next("event");
+    expect(
+      a.pending().filter((m) => m.t === "presence" && m.users.length > 1),
+    ).toEqual([]);
+  });
+
+  it("a player whose seat is removed mid-session gets not_member for events", async () => {
+    const s = await start();
+    const g = await makeGame([ann, bob]);
+    const b = s.client();
+    await join(b, bob, g);
+    await db.pool.query(
+      "delete from seats where game_id = $1 and user_id = $2",
+      [g, bob.id],
+    );
+    await b.send({ t: "event", seq: 1, event: note("x") });
+    expect(await b.next("error")).toMatchObject({ code: "not_member" });
+    expect(await eventsSince(db.pool, g, 0)).toEqual([]);
   });
 
   it("a locked game rejects events", async () => {
