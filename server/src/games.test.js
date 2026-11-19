@@ -331,4 +331,47 @@ describe.skipIf(!hasDb)("games", () => {
       (await call(guest, "GET", `/games/${body.id}/assets/none`)).status,
     ).toBe(404);
   });
+
+  it("rejects a null config with 400", async () => {
+    const user = await makeUser("Nul");
+    const res = await call(user, "POST", "/games", { game, config: null });
+    expect(res.status).toBe(400);
+  });
+
+  it("oversize bodies on patch and join return 413", async () => {
+    const owner = await makeUser("O");
+    const guest = await makeUser("G");
+    const { body } = await create(owner);
+    const big = JSON.stringify({ status: "locked", pad: "x".repeat(5000) });
+    expect((await call(owner, "PATCH", `/games/${body.id}`, big)).status).toBe(
+      413,
+    );
+    const bigJoin = JSON.stringify({ name: "Bob", pad: "x".repeat(5000) });
+    expect((await join(guest, body.inviteCode, bigJoin)).status).toBe(413);
+  });
+
+  it("parallel creates cannot exceed the cap", async () => {
+    const capped = makeApp({ MAX_GAMES_PER_USER: "2" });
+    const user = await makeUser("Race");
+    const results = await Promise.all(
+      Array.from({ length: 6 }, () =>
+        call(user, "POST", "/games", { game }, capped),
+      ),
+    );
+    const statuses = results.map((r) => r.status).sort();
+    expect(statuses).toEqual([201, 201, 429, 429, 429, 429]);
+  });
+
+  it("unknown invite codes return 404 on get and join", async () => {
+    const user = await makeUser("U");
+    expect((await call(null, "GET", "/invites/nope")).status).toBe(404);
+    expect((await join(user, "nope")).status).toBe(404);
+  });
+
+  it("a seated member joining a locked game gets 410", async () => {
+    const owner = await makeUser("O");
+    const { body } = await create(owner);
+    await call(owner, "PATCH", `/games/${body.id}`, { status: "locked" });
+    expect((await join(owner, body.inviteCode)).status).toBe(410);
+  });
 });

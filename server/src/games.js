@@ -34,6 +34,19 @@ const readCapped = async (c, limit) => {
   return Buffer.concat(chunks);
 };
 
+const SMALL_BYTES = 4096;
+
+// Small JSON bodies: undefined when too large, null when not valid JSON
+const readSmallJson = async (c) => {
+  const raw = await readCapped(c, SMALL_BYTES);
+  if (!raw) return undefined;
+  try {
+    return JSON.parse(raw.toString("utf8"));
+  } catch {
+    return null;
+  }
+};
+
 const seatJson = (row) => ({
   userId: row.user_id,
   name: row.name,
@@ -84,22 +97,17 @@ export const gameRoutes = ({ pool, config }) => {
     if (!game || typeof game !== "object" || Array.isArray(game)) {
       return c.json({ error: "game is required" }, 400);
     }
-    if (typeof gameConfig !== "object" || Array.isArray(gameConfig)) {
+    if (
+      gameConfig === null ||
+      typeof gameConfig !== "object" ||
+      Array.isArray(gameConfig)
+    ) {
       return c.json({ error: "config must be an object" }, 400);
     }
 
     const result = validateGameJson(game);
     if (!result.valid) {
       return c.json({ errors: result.validationErrors }, 422);
-    }
-
-    const { rows: owned } = await pool.query(
-      `select count(*)::int as n from games
-        where owner_id = $1 and status in ('active', 'locked')`,
-      [user.id],
-    );
-    if (owned[0].n >= limits.gamesPerUser) {
-      return c.json({ error: "Too many games" }, 429);
     }
 
     const title = game.info?.title || "Untitled";
@@ -112,6 +120,19 @@ export const gameRoutes = ({ pool, config }) => {
     const client = await pool.connect();
     try {
       await client.query("begin");
+      // Serialise concurrent creates by one user so the cap cannot be raced
+      await client.query("select 1 from users where id = $1 for update", [
+        user.id,
+      ]);
+      const { rows: owned } = await client.query(
+        `select count(*)::int as n from games
+          where owner_id = $1 and status in ('active', 'locked')`,
+        [user.id],
+      );
+      if (owned[0].n >= limits.gamesPerUser) {
+        await client.query("rollback");
+        return c.json({ error: "Too many games" }, 429);
+      }
       const { rows } = await client.query(
         `insert into games (title, owner_id, game_json, config_json, invite_code)
          values ($1, $2, $3, $4, $5) returning id`,
@@ -179,7 +200,8 @@ export const gameRoutes = ({ pool, config }) => {
     const { row, fail } = await ownerOnly(c);
     if (fail) return fail;
 
-    const body = await c.req.json().catch(() => null);
+    const body = await readSmallJson(c);
+    if (body === undefined) return c.json({ error: "Body too large" }, 413);
     if (!STATUSES.includes(body?.status)) {
       return c.json({ error: "Invalid status" }, 400);
     }
@@ -219,16 +241,10 @@ export const gameRoutes = ({ pool, config }) => {
 
   app.post("/invites/:code/join", auth, async (c) => {
     const user = c.get("user");
-    const { rows } = await pool.query(
-      "select id, status from games where invite_code = $1",
-      [c.req.param("code")],
-    );
-    if (!rows.length) return c.json({ error: "Not found" }, 404);
-    if (rows[0].status !== "active") {
-      return c.json({ error: "Game is not open" }, 410);
-    }
+    const code = c.req.param("code");
 
-    const body = await c.req.json().catch(() => null);
+    const body = await readSmallJson(c);
+    if (body === undefined) return c.json({ error: "Body too large" }, 413);
     const name = typeof body?.name === "string" ? body.name.trim() : "";
     if (!name || name.length > 50) {
       return c.json({ error: "A name is required" }, 400);
@@ -238,15 +254,30 @@ export const gameRoutes = ({ pool, config }) => {
         ? body.color
         : null;
 
-    await pool.query(
+    // One statement, so a lock or delete cannot land between check and insert
+    const { rows: added } = await pool.query(
       `insert into seats (game_id, user_id, name, color)
-       values ($1, $2, $3, $4) on conflict do nothing`,
-      [rows[0].id, user.id, name, color],
+       select g.id, $2, $3, $4 from games g
+        where g.invite_code = $1 and g.status = 'active'
+       on conflict do nothing
+       returning user_id, name, color`,
+      [code, user.id, name, color],
     );
+    if (added.length) return c.json(seatJson(added[0]));
+
+    const { rows } = await pool.query(
+      "select id, status from games where invite_code = $1",
+      [code],
+    );
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+    if (rows[0].status !== "active") {
+      return c.json({ error: "Game is not open" }, 410);
+    }
     const { rows: seat } = await pool.query(
       "select user_id, name, color from seats where game_id = $1 and user_id = $2",
       [rows[0].id, user.id],
     );
+    if (!seat.length) return c.json({ error: "Not found" }, 404);
     return c.json(seatJson(seat[0]));
   });
 
