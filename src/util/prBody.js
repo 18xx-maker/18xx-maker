@@ -1,14 +1,14 @@
 // release-please turns lines of a squash commit body into extra changelog
 // entries in two places: a paragraph that starts with `type(scope)!: text`,
-// and the trailing footer block (a run of `token: value` lines reaching the
-// end of the message, which can start in the middle of the last prose
-// paragraph). GitHub appends trailers like `Co-authored-by:` as a final
-// paragraph, so the footer reaches into the paragraph before them. GitHub also
-// wraps long lines, so a `build:app` or `fix: x` anywhere in a footer line can
-// end up at the start of a line. A type at the start of a line inside an
-// earlier paragraph is ignored (Dependabot changelogs are full of them).
-// Fenced code blocks are left alone, and so are release-please's own changelog
-// bullets (`* **test:** text`), which it does not re-read.
+// and the footer, a `token: value` line that is followed only by other footer
+// lines (trailers like `Co-authored-by:`, blank lines or indented
+// continuations) up to the end of the message. The footer here starts at the
+// last line that is neither a trailer nor indented: GitHub wraps long lines, so
+// a `build:app` or `fix: x` anywhere in that line or the trailers after it can
+// end up at the start of a line. A type at the start of a line before it is
+// ignored (Dependabot changelogs are full of them). Fenced code blocks are left
+// alone, and so are release-please's own changelog bullets (`* **test:**
+// text`), which it does not re-read.
 export const TYPES = [
   "feat",
   "fix",
@@ -33,40 +33,38 @@ const CHANGELOG_BULLET = /^\s*[*-]\s+\*\*[^*]+:\*\*\s/;
 
 const TRAILER = /^(?:[\w-]+(?:\([^)]*\))?!?(?::\s|\s#)|BREAKING CHANGE:)/;
 
-const paragraphs = (body) => {
+const INDENTED = /^\s/;
+
+export const findRiskyLines = (body = "") => {
   let fenced = false;
-  let current = null;
-  const found = [];
+  let first = true;
+  const lines = [];
   body.split(/\r?\n/).forEach((text, i) => {
     if (/^\s*(```|~~~)/.test(text)) {
       fenced = !fenced;
-      current = null;
+      first = true;
       return;
     }
     if (fenced) return;
     if (text.trim() === "") {
-      current = null;
+      first = true;
       return;
     }
-    if (!current) found.push((current = []));
-    current.push({ line: i + 1, text });
+    lines.push({ line: i + 1, text, first });
+    first = false;
   });
-  return found;
-};
-
-export const findRiskyLines = (body = "") => {
-  const paras = paragraphs(body);
-  let end = paras.length;
-  while (end > 0 && paras[end - 1].every(({ text }) => TRAILER.test(text))) {
-    end--;
+  let footer = lines.length - 1;
+  while (
+    footer >= 0 &&
+    (TRAILER.test(lines[footer].text) || INDENTED.test(lines[footer].text))
+  ) {
+    footer--;
   }
-  const footer = new Set(paras.slice(Math.max(0, end - 1)).flat());
-  return paras.flatMap((para) =>
-    para.filter(
-      (l, j) =>
-        !CHANGELOG_BULLET.test(l.text) &&
-        ((j === 0 && STARTS.test(l.text)) ||
-          (footer.has(l) && RISKY.test(l.text))),
-    ),
-  );
+  return lines
+    .filter(
+      ({ text, first }, i) =>
+        !CHANGELOG_BULLET.test(text) &&
+        ((first && STARTS.test(text)) || (i >= footer && RISKY.test(text))),
+    )
+    .map(({ line, text }) => ({ line, text }));
 };
