@@ -267,7 +267,7 @@ jobs:
         run: pnpm exec vitest run --project unit --coverage.enabled=false
       - name: Test
         if: github.event_name != 'pull_request'
-        run: pnpm exec vitest run --shard=${{ matrix.shard }}/2 --coverage.enabled=false
+        run: pnpm exec vitest run --project unit --project component --shard=${{ matrix.shard }}/2 --coverage.enabled=false
   mac:
     name: Mac
     needs: desktop-shards
