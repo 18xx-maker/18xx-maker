@@ -15,3 +15,5 @@ browsers
 .vitest
 junit.xml
 *.log
+.env*
+src/config.json
