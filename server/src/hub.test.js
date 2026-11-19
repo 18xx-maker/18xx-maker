@@ -406,6 +406,29 @@ describe.skipIf(!hasDb)("hub", () => {
     expect(await c.next("error")).toMatchObject({ code: "locked" });
   });
 
+  it("an archived game rejects events", async () => {
+    const s = await start();
+    const g = await makeGame([ann], "archived");
+    const c = s.client();
+    await join(c, ann, g);
+    await c.send({ t: "event", seq: 1, event: note("x") });
+    expect(await c.next("error")).toMatchObject({ code: "locked" });
+    expect(await eventsSince(db.pool, g, 0)).toEqual([]);
+  });
+
+  it("a second join frame on a joined socket is refused", async () => {
+    const s = await start();
+    const g = await makeGame([ann]);
+    const c = s.client();
+    await join(c, ann, g);
+    await c.send({ t: "join", token: ann.token, gameId: g, lastSeq: 0 });
+    expect(await c.next("error")).toEqual({
+      t: "error",
+      code: "invalid",
+      message: "already joined",
+    });
+  });
+
   it("a game deleted mid-session answers events with an error", async () => {
     const s = await start();
     const g = await makeGame([ann]);

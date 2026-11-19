@@ -156,6 +156,32 @@ describe.skipIf(!hasDb)("discord auth", () => {
     }
   });
 
+  it("callback refuses a return origin removed from the allow list since login", async () => {
+    const state = await stateOf();
+    const narrowed = createApp({
+      pool: db.pool,
+      config: loadConfig({
+        DATABASE_URL: "x",
+        PUBLIC_URL: "http://play.test",
+        DISCORD_CLIENT_ID: "cid",
+        DISCORD_CLIENT_SECRET: "secret",
+        DISCORD_GUILD_ID: "g",
+        DISCORD_API_BASE: discord.url,
+        DISCORD_AUTH_BASE: `${discord.url}/oauth2`,
+        ALLOWED_ORIGINS: "http://other.test",
+      }),
+    });
+    const before = (await db.pool.query("select count(*)::int n from sessions"))
+      .rows[0].n;
+    const res = await narrowed.request(
+      `/auth/discord/callback?code=in&state=${encodeURIComponent(state)}`,
+    );
+    expect(res.status).toBe(400);
+    const after = (await db.pool.query("select count(*)::int n from sessions"))
+      .rows[0].n;
+    expect(after).toBe(before);
+  });
+
   it("callback when the Discord token or guilds call fails returns 502 and creates no session", async () => {
     const before = (await db.pool.query("select count(*)::int n from sessions"))
       .rows[0].n;
