@@ -184,6 +184,7 @@ describe("deleteGame", () => {
     expect(mod.deleteGame).toHaveBeenCalledWith("abc");
     expect(types()).toEqual([
       createDeleteGame(slug),
+      expect.any(Function),
       createAlert(
         "Game Forgotten",
         `${label} game My Game forgotten`,
@@ -200,6 +201,7 @@ describe("deleteGame", () => {
     expect(window.api.deleteGame).toHaveBeenCalledWith("abc");
     expect(types()).toEqual([
       createDeleteGame("electron:abc"),
+      expect.any(Function),
       createAlert(
         "Game Forgotten",
         "Electron game My Game forgotten",
