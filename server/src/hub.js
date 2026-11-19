@@ -238,6 +238,8 @@ export const attachHub = (server, { pool, config }) => {
   });
 
   server.on("upgrade", (req, socket, head) => {
+    // Node drops its own listener on upgrade; a reset must not crash the process
+    socket.on("error", () => socket.destroy());
     let pathname;
     try {
       ({ pathname } = new URL(req.url, "http://localhost"));

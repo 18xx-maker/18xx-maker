@@ -1,4 +1,5 @@
 import { createHash, randomBytes } from "node:crypto";
+import net from "node:net";
 
 import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
@@ -523,5 +524,22 @@ describe.skipIf(!hasDb)("hub", () => {
     const c = connect(s.url.replace("/ws", "/other"));
     await expect(c.opened).rejects.toThrow();
     await c.closed;
+  });
+
+  it("survives a client that resets an upgrade to another path", async () => {
+    const s = await start();
+    const port = new URL(s.url).port;
+    for (let i = 0; i < 20; i++) {
+      const socket = net.connect(Number(port), "127.0.0.1");
+      socket.on("error", () => {});
+      await new Promise((resolve) => socket.on("connect", resolve));
+      socket.write(
+        "GET /nope HTTP/1.1\r\nHost: x\r\nConnection: Upgrade\r\nUpgrade: websocket\r\n\r\n",
+      );
+      socket.resetAndDestroy();
+    }
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    const res = await fetch(`http://127.0.0.1:${port}/health`);
+    expect(res.status).toBe(200);
   });
 });
