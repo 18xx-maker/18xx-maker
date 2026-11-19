@@ -151,11 +151,7 @@ describe.skipIf(!hasDb)("events", () => {
     await append(g, 3, note("c"));
     const snap = await loadSnapshot(db.pool, g);
     expect(snap.seq).toBe(3);
-    const log = (await eventsSince(db.pool, g, 0)).map((e) => {
-      const rest = { ...e };
-      delete rest.userId;
-      return rest;
-    });
+    const log = await eventsSince(db.pool, g, 0);
     expect(snap.state).toEqual(reduce(log));
     expect(snap.state).not.toEqual(initialState());
     await append(g, 4, note("d"));

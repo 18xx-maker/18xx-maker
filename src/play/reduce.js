@@ -94,6 +94,7 @@ export function reduce(events, state = initialState()) {
         return false;
       const body = { ...e };
       delete body.seq;
+      delete body.userId;
       return validateEvent(body) === null;
     })
     .sort((a, b) => a.seq - b.seq);
