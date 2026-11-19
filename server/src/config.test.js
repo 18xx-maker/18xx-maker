@@ -64,4 +64,27 @@ describe("loadConfig", () => {
       joinTimeoutMs: 50,
     });
   });
+
+  it.each([
+    ["PORT", "0"],
+    ["PORT", "-1"],
+    ["MAX_GAME_BYTES", "1.5"],
+    ["MAX_ASSET_BYTES", "abc"],
+    ["MAX_GAMES_PER_USER", "-5"],
+    ["MAX_EVENTS_PER_SECOND", "0"],
+    ["SNAPSHOT_EVERY", "0"],
+    ["SNAPSHOT_EVERY", "0.5"],
+    ["JOIN_TIMEOUT_MS", "0"],
+    ["JOIN_TIMEOUT_MS", "1e400"],
+  ])("rejects %s=%s", (name, value) => {
+    expect(() => loadConfig({ ...required, [name]: value })).toThrow(
+      new RegExp(`${name} must be a positive integer`),
+    );
+  });
+
+  it("treats an empty numeric variable as unset", () => {
+    expect(
+      loadConfig({ ...required, SNAPSHOT_EVERY: "" }).limits.snapshotEvery,
+    ).toBe(100);
+  });
 });
