@@ -110,6 +110,12 @@ describe("b18 box", () => {
           .replace(`"bname":"${id}"`, `"bname":"${prefix(id)}"`)
           .replace(`"${id} on BGG"`, `"${prefix(id)} on BGG"`),
       );
+      // The old CLI captured the tile sheets in screen media, where the sheet
+      // had a margin of 24 pixels; the export captures in print media, where
+      // it has none
+      for (const tray of old.json.tray) {
+        if (tray.type === "tile") Object.assign(tray, { xStart: 0, yStart: 0 });
+      }
 
       expect(spec.json).toEqual(old.json);
       expect(

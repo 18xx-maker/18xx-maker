@@ -12,6 +12,7 @@ import {
   edges,
   expected,
   pages,
+  painted,
   png,
   unzip,
 } from "./export-files.js";
@@ -169,9 +170,27 @@ const check = {
       ]),
     );
     expect(names.every((name) => name.startsWith(`${folder}/`))).toBe(true);
+    const json = JSON.parse(
+      files[`${folder}/18test-1.0.json`].toString("utf-8"),
+    );
+    expect(json).toMatchObject({ bname: "18test", version: "1.0" });
+
+    // Board 18 cuts each tile out of its sheet at the start and size of the
+    // tray: the first tile of the sheet is painted in exactly that box
+    const tray = json.tray.find((tray) => tray.imgLoc.endsWith("/Yellow.png"));
     expect(
-      JSON.parse(files[`${folder}/18test-1.0.json`].toString("utf-8")),
-    ).toMatchObject({ bname: "18test", version: "1.0" });
+      painted(files[`${folder}/18test-1.0/Yellow.png`], {
+        x: 0,
+        y: 0,
+        width: tray.xStep,
+        height: tray.yStep,
+      }),
+    ).toEqual({
+      x: tray.xStart,
+      y: tray.yStart,
+      width: tray.xSize,
+      height: tray.ySize,
+    });
 
     // Images are one pixel for each unit, without a resolution
     for (const [name, [width, height]] of Object.entries(images)) {
