@@ -110,7 +110,7 @@ const assetResponse = (c, row) =>
   });
 
 // notifier: the webhook notifier (webhook.js), for the test post of a webhook;
-// sockets: the hub's { closeWatchers }, absent without a websocket hub
+// sockets: the hub's { closeGame, closeWatchers }, absent without a websocket hub
 export const gameRoutes = ({ pool, config, notifier, sockets }) => {
   const app = new Hono();
   const { limits } = config;
@@ -329,6 +329,9 @@ export const gameRoutes = ({ pool, config, notifier, sockets }) => {
     if (fail) return fail;
     await pool.query("delete from games where id = $1", [row.id]);
     notifier.forget(row.id);
+    // Its players and spectators are closed; a join still in flight checks
+    // its seat again once it is in the room
+    sockets?.closeGame(row.id);
     return c.body(null, 204);
   });
 
