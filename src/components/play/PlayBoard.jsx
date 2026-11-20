@@ -274,8 +274,8 @@ const Board = ({ play, owner }) => {
 // to a spectator.
 const PlayBoard = ({ play, owner }) => {
   const value = useMemo(
-    () => ({ game: play.game, config: play.config }),
-    [play.game, play.config],
+    () => ({ game: play.game, config: play.config, assets: play.assets }),
+    [play.game, play.config, play.assets],
   );
   return (
     <GameContext.Provider value={value}>

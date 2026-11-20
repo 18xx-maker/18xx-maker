@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { createApi } from "@/play/client/api";
+import { loadAssets } from "@/play/client/assets";
 import { createSession } from "@/play/client/socket";
 import { undoTarget } from "@/play/history";
 import { reduce } from "@/play/reduce";
@@ -29,6 +30,7 @@ export const usePlayGame = (
   const [failed, setFailed] = useState(null);
   const [snapshot, setSnapshot] = useState(EMPTY);
   const [epoch, setEpoch] = useState(0);
+  const [assets, setAssets] = useState(undefined);
   const session = useRef(null);
   const depsRef = useRef(deps);
   depsRef.current = deps;
@@ -51,6 +53,28 @@ export const usePlayGame = (
       live = false;
     };
   }, [baseUrl, token, gameId, userId, watch]);
+
+  // Its images load after it renders: the board draws placeholders until then.
+  // A changed list (or game) loads again; a late answer for another is dropped.
+  const names = loaded?.assets;
+  const assetKey = Array.isArray(names) ? JSON.stringify(names) : "";
+  useEffect(() => {
+    setAssets(undefined);
+    if (!assetKey) return;
+    let live = true;
+    const list = JSON.parse(assetKey);
+    const { api = createApi({ baseUrl, token }) } = depsRef.current;
+    const fetchAsset =
+      watch !== undefined
+        ? (name) => api.watchAsset(watch, name)
+        : (name) => api.getAsset(gameId, name);
+    loadAssets({ fetchAsset, names: list })
+      .then((map) => live && setAssets(map))
+      .catch(() => {});
+    return () => {
+      live = false;
+    };
+  }, [assetKey, baseUrl, token, gameId, watch]);
 
   // The session follows it. A session that saw the lock stays locked for good,
   // so unlocking (a new epoch) opens a fresh one.
@@ -105,6 +129,7 @@ export const usePlayGame = (
     status,
     game: loaded?.game || null,
     config: loaded?.config || null,
+    assets,
     seats,
     log: snapshot.log,
     state,
