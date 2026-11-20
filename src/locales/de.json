@@ -13,6 +13,7 @@
     "update": "Auf {{version}} aktualisieren",
     "home": "Startseite",
     "load": "Spiele laden",
+    "play": "Spielen",
     "elements": "Elemente",
     "docsStart": "Erste Schritte",
     "docsOutput": "Ausgabe",
@@ -746,6 +747,55 @@
     "playServer": {
       "title": "Spielserver",
       "description": "Die Adresse des Servers für das Online-Spiel, zum Beispiel https://play.example.com. Lass das Feld leer, um das Online-Spiel auszuschalten."
+    }
+  },
+  "play": {
+    "title": "Online spielen",
+    "settings": "Einstellungen",
+    "noServer": "Für das Online-Spiel brauchst du die Adresse eines Spielservers. Trage sie in den Einstellungen ein.",
+    "electron": "Das Online-Spiel gibt es auf der Website.",
+    "signInPrompt": "Melde dich an, um online zu spielen.",
+    "signIn": "Mit Discord anmelden",
+    "signOut": "Abmelden",
+    "signedInAs": "Angemeldet als {{name}}",
+    "loading": "Lädt ...",
+    "error": "Der Spielserver ist nicht erreichbar: {{message}}",
+    "list": {
+      "title": "Deine Spiele",
+      "empty": "Noch keine Spiele.",
+      "status": {
+        "active": "Aktiv",
+        "locked": "Gesperrt",
+        "archived": "Archiviert"
+      }
+    },
+    "create": {
+      "title": "Spiel erstellen",
+      "button": "Spiel erstellen",
+      "creating": "Wird erstellt ...",
+      "name": "Dein Name",
+      "noGame": "Lade zuerst ein Spiel und erstelle dann daraus ein Online-Spiel.",
+      "forbidden": "Du darfst auf diesem Server keine Spiele erstellen. Öffne einen Einladungslink, um einem Spiel beizutreten.",
+      "note": "Jedes Bild darf höchstens {{size}} MB groß sein.",
+      "invalid": "Der Server hat das Spiel abgelehnt:",
+      "failed": "Das Spiel konnte nicht erstellt werden: {{message}}",
+      "uploadFailed": "{{name}} konnte nicht hochgeladen werden: {{message}}"
+    },
+    "join": {
+      "title": "Einem Spiel beitreten",
+      "button": "Spiel beitreten",
+      "joining": "Tritt bei ...",
+      "name": "Dein Name",
+      "color": "Farbe",
+      "closed": "Dieses Spiel ist geschlossen.",
+      "notFound": "Dieser Einladungslink ist ungültig.",
+      "failed": "Der Beitritt ist fehlgeschlagen: {{message}}"
+    },
+    "game": {
+      "denied": "Deine Anmeldung ist abgelaufen.",
+      "locked": "Dieses Spiel ist nicht mehr offen, oder du bist kein Mitspieler.",
+      "back": "Zurück zu deinen Spielen",
+      "open": "Spiel öffnen"
     }
   },
   "app": {

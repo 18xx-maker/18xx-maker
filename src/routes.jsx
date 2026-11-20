@@ -33,6 +33,9 @@ import B18TilesPage from "@/components/pages/games/b18/B18TilesPage";
 import B18TokensPage from "@/components/pages/games/b18/B18TokensPage";
 // Games Routes
 import LoadGamesPage from "@/components/pages/load/LoadGamesPage";
+import PlayGamePage from "@/components/pages/play/PlayGamePage";
+import PlayJoinPage from "@/components/pages/play/PlayJoinPage";
+import PlayPage from "@/components/pages/play/PlayPage";
 
 import { Redirect, Route, Switch } from "@/router";
 import capability from "@/util/capability";
@@ -45,6 +48,9 @@ const topPages = {
   "/": <HomePage />,
   "/app": capability.electron ? <App /> : <Redirect to="/" />,
   "/settings": <SettingsPage />,
+  "/play": <PlayPage />,
+  "/play/join/:code": <PlayJoinPage />,
+  "/play/:id": <PlayGamePage />,
 };
 
 const elementsPages = {

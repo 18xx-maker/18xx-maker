@@ -13,6 +13,7 @@
     "update": "更新到 {{version}}",
     "home": "首页",
     "load": "加载游戏",
+    "play": "在线游戏",
     "elements": "元素",
     "docsStart": "快速入门",
     "docsOutput": "输出",
@@ -746,6 +747,55 @@
     "playServer": {
       "title": "游戏服务器",
       "description": "在线游戏服务器的地址，例如 https://play.example.com。留空则关闭在线游戏。"
+    }
+  },
+  "play": {
+    "title": "在线游戏",
+    "settings": "设置",
+    "noServer": "在线游戏需要游戏服务器的地址，请在设置中填写。",
+    "electron": "在线游戏仅在网站上提供。",
+    "signInPrompt": "登录后即可在线游戏。",
+    "signIn": "使用 Discord 登录",
+    "signOut": "退出登录",
+    "signedInAs": "已登录为 {{name}}",
+    "loading": "加载中...",
+    "error": "无法连接游戏服务器：{{message}}",
+    "list": {
+      "title": "你的游戏",
+      "empty": "还没有游戏。",
+      "status": {
+        "active": "进行中",
+        "locked": "已锁定",
+        "archived": "已归档"
+      }
+    },
+    "create": {
+      "title": "创建游戏",
+      "button": "创建游戏",
+      "creating": "正在创建...",
+      "name": "你的名字",
+      "noGame": "请先加载一个游戏，然后用它创建在线游戏。",
+      "forbidden": "你无权在此服务器上创建游戏。请打开邀请链接加入游戏。",
+      "note": "每张图片最大 {{size}} MB。",
+      "invalid": "服务器拒绝了该游戏：",
+      "failed": "无法创建游戏：{{message}}",
+      "uploadFailed": "无法上传 {{name}}：{{message}}"
+    },
+    "join": {
+      "title": "加入游戏",
+      "button": "加入游戏",
+      "joining": "正在加入...",
+      "name": "你的名字",
+      "color": "颜色",
+      "closed": "该游戏已关闭。",
+      "notFound": "此邀请链接无效。",
+      "failed": "无法加入游戏：{{message}}"
+    },
+    "game": {
+      "denied": "你的登录已过期。",
+      "locked": "该游戏已不再开放，或者你不是其中的玩家。",
+      "back": "返回你的游戏",
+      "open": "打开游戏"
     }
   },
   "app": {

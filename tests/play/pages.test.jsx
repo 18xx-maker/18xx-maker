@@ -1,0 +1,311 @@
+import { screen, waitFor, within } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import { games } from "@/data";
+import { createApi } from "@/play/client/api";
+import { getToken, setToken } from "@/play/client/tokenStore";
+
+import { renderApp } from "@tests/support/helpers.jsx";
+import { BASE, calls, fakeServer } from "@tests/support/playServer.js";
+
+const settings = { playServer: BASE };
+const me = { id: 7, name: "Ann", avatar: null, canCreate: true };
+const game = games["18Test"];
+const slug = game.meta.slug;
+
+beforeEach(() => window.localStorage.clear());
+afterEach(() => vi.unstubAllGlobals());
+
+const signedIn = (extra = {}) => {
+  setToken(BASE, "tok");
+  return fakeServer({
+    "GET /me": [200, me],
+    "GET /games": [200, []],
+    ...extra,
+  });
+};
+
+describe("play without a server", () => {
+  it("explains and links to the settings, with no request", async () => {
+    const fetch = fakeServer({});
+    renderApp("/play");
+    const page = await screen.findByTestId("play");
+    expect(
+      within(page).getByRole("link", { name: "Settings" }),
+    ).toHaveAttribute("href", "/settings");
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it.for([
+    ["/play/join/abc", "play-join"],
+    ["/play/g1", "play-game"],
+  ])("%s renders its page with the explanation", async ([url, id]) => {
+    renderApp(url);
+    const page = await screen.findByTestId(id);
+    expect(within(page).getByRole("link", { name: "Settings" })).toBeVisible();
+  });
+});
+
+describe("login", () => {
+  it("stores the token of the fragment, clears the hash and lists games", async () => {
+    const fetch = fakeServer({
+      "GET /me": [200, me],
+      "GET /games": [200, []],
+    });
+    const { router } = renderApp("/play#token=abc", { settings });
+    await screen.findByText("No games yet.");
+    expect(getToken(BASE)).toBe("abc");
+    expect(router.state.location.hash).toBe("");
+    expect(router.state.historyAction).toBe("REPLACE");
+    expect(fetch.mock.calls[0][1].headers.Authorization).toBe("Bearer abc");
+  });
+
+  it("clears a rejected token and offers the Discord sign in", async () => {
+    setToken(BASE, "old");
+    fakeServer({ "GET /me": [401, { error: "Unauthorized" }] });
+    renderApp("/play", { settings });
+    const link = await screen.findByRole("link", {
+      name: "Sign in with Discord",
+    });
+    expect(link).toHaveAttribute(
+      "href",
+      createApi({ baseUrl: BASE }).loginUrl(`${window.location.origin}/play`),
+    );
+    expect(getToken(BASE)).toBeNull();
+  });
+
+  it("offers the sign in when there is no token, with no /me request", async () => {
+    const fetch = fakeServer({});
+    renderApp("/play", { settings });
+    await screen.findByRole("link", { name: "Sign in with Discord" });
+    expect(calls(fetch, "GET", "/me")).toHaveLength(0);
+  });
+});
+
+describe("game list", () => {
+  it("links each game to its page", async () => {
+    signedIn({
+      "GET /games": [
+        200,
+        [
+          { id: "g1", title: "First", status: "active" },
+          { id: "g2", title: "Second", status: "locked" },
+        ],
+      ],
+    });
+    renderApp("/play", { settings });
+    expect(await screen.findByRole("link", { name: /First/ })).toHaveAttribute(
+      "href",
+      "/play/g1",
+    );
+    expect(screen.getByRole("link", { name: /Second/ })).toHaveAttribute(
+      "href",
+      "/play/g2",
+    );
+  });
+
+  it("shows a message when the server cannot be reached", async () => {
+    setToken(BASE, "tok");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.reject(new Error("down"))),
+    );
+    renderApp("/play", { settings });
+    expect(await screen.findByRole("alert")).toHaveTextContent("down");
+  });
+
+  it("has no create button and a hint without permission", async () => {
+    signedIn({ "GET /me": [200, { ...me, canCreate: false }] });
+    renderApp("/play", { settings, game });
+    await screen.findByText("No games yet.");
+    expect(
+      screen.queryByRole("button", { name: "Create game" }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText(/not allowed to create/)).toBeInTheDocument();
+  });
+});
+
+describe("create game", () => {
+  const state = {
+    settings,
+    game,
+    config: { unit: "mm" },
+    assets: {
+      [slug]: {
+        icons: { star: "<svg xmlns='http://www.w3.org/2000/svg'/>" },
+        logos: {},
+        trains: {},
+      },
+    },
+  };
+
+  it("posts the loaded game, uploads its images and opens it", async () => {
+    const fetch = signedIn({
+      "POST /games": [201, { id: "g9", inviteCode: "inv" }],
+      "PUT /games/g9/assets/icons.star": [200, { ok: true }],
+    });
+    const { user, router } = renderApp("/play", state);
+    await screen.findByText("No games yet.");
+
+    const name = screen.getByLabelText("Your name");
+    expect(name).toHaveValue("Ann");
+    await user.clear(name);
+    await user.type(name, "Bob");
+    await user.click(screen.getByRole("button", { name: "Create game" }));
+
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/play/g9"),
+    );
+    const [, post] = calls(fetch, "POST", "/games")[0];
+    expect(JSON.parse(post.body)).toEqual({
+      game,
+      config: { unit: "mm" },
+      seatName: "Bob",
+    });
+    const [, put] = calls(fetch, "PUT", "/games/g9/assets/icons.star")[0];
+    expect(put.body).toBeInstanceOf(Blob);
+    expect(put.body.type).toBe("image/svg+xml");
+    expect(put.headers.Authorization).toBe("Bearer tok");
+  });
+
+  it("shows the size limit note", async () => {
+    signedIn();
+    renderApp("/play", state);
+    expect(await screen.findByText(/Each image/)).toBeInTheDocument();
+  });
+
+  it("shows the schema errors of a 422 and stays", async () => {
+    signedIn({
+      "POST /games": [
+        422,
+        { errors: [{ message: "bad field", pointer: "#/x" }] },
+      ],
+    });
+    const { user, router } = renderApp("/play", state);
+    await user.click(
+      await screen.findByRole("button", { name: "Create game" }),
+    );
+    expect(await screen.findByText(/bad field/)).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/play");
+  });
+
+  it("shows an upload error", async () => {
+    signedIn({
+      "POST /games": [201, { id: "g9" }],
+      "PUT /games/g9/assets/icons.star": [413, { error: "Asset too large" }],
+    });
+    const { user, router } = renderApp("/play", state);
+    await user.click(
+      await screen.findByRole("button", { name: "Create game" }),
+    );
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      /icons\/star.*Asset too large/,
+    );
+    expect(router.state.location.pathname).toBe("/play");
+  });
+});
+
+describe("join", () => {
+  it("joins with a name and color and opens the game", async () => {
+    const fetch = signedIn({
+      "GET /invites/abc": [200, { gameId: "g3", title: "Spring Game" }],
+      "POST /invites/abc/join": [200, { userId: 7, name: "Bob" }],
+    });
+    const { user, router } = renderApp("/play/join/abc", { settings });
+    expect(await screen.findByText("Spring Game")).toBeInTheDocument();
+    const name = screen.getByLabelText("Your name");
+    await user.clear(name);
+    await user.type(name, "Bob");
+    await user.click(screen.getByRole("button", { name: "Join game" }));
+    await waitFor(() =>
+      expect(router.state.location.pathname).toBe("/play/g3"),
+    );
+    const [, post] = calls(fetch, "POST", "/invites/abc/join")[0];
+    expect(JSON.parse(post.body)).toEqual({
+      name: "Bob",
+      color: expect.stringMatching(/^#[0-9a-f]{6}$/i),
+    });
+  });
+
+  it("sends a signed-out visitor through Discord and back to the join url", async () => {
+    fakeServer({
+      "GET /invites/abc": [200, { gameId: "g3", title: "Spring Game" }],
+    });
+    renderApp("/play/join/abc", { settings });
+    const link = await screen.findByRole("link", {
+      name: "Sign in with Discord",
+    });
+    expect(link).toHaveAttribute(
+      "href",
+      createApi({ baseUrl: BASE }).loginUrl(
+        `${window.location.origin}/play/join/abc`,
+      ),
+    );
+    expect(screen.getByText("Spring Game")).toBeInTheDocument();
+  });
+
+  it("says the game is closed on a 410", async () => {
+    signedIn({
+      "GET /invites/abc": [200, { gameId: "g3", title: "Spring Game" }],
+      "POST /invites/abc/join": [410, { error: "Game is not open" }],
+    });
+    const { user } = renderApp("/play/join/abc", { settings });
+    await user.click(await screen.findByRole("button", { name: "Join game" }));
+    expect(await screen.findByText("This game is closed.")).toBeInTheDocument();
+  });
+
+  it("says the invite is unknown on a 404", async () => {
+    signedIn();
+    renderApp("/play/join/nope", { settings });
+    expect(
+      await screen.findByText(/invite link is not valid/),
+    ).toBeInTheDocument();
+  });
+});
+
+describe("game page", () => {
+  it("renders the game once signed in", async () => {
+    signedIn({
+      "GET /games/g1": [
+        200,
+        { id: "g1", status: "active", game, config: {}, seats: [] },
+      ],
+    });
+    // The websocket is not part of this test
+    vi.stubGlobal(
+      "WebSocket",
+      class {
+        close() {}
+        send() {}
+      },
+    );
+    renderApp("/play/g1", { settings });
+    expect(await screen.findByTestId("play-game")).toBeInTheDocument();
+  });
+
+  it("offers the sign in without a token, and makes no game request", async () => {
+    const fetch = fakeServer({});
+    renderApp("/play/g1", { settings });
+    expect(
+      await screen.findByRole("link", { name: "Sign in with Discord" }),
+    ).toBeInTheDocument();
+    expect(calls(fetch, "GET", "/games/g1")).toHaveLength(0);
+  });
+
+  it("offers the sign in when the game answers 401", async () => {
+    signedIn({ "GET /games/g1": [401, { error: "Unauthorized" }] });
+    renderApp("/play/g1", { settings });
+    expect(
+      await screen.findByRole("link", { name: "Sign in with Discord" }),
+    ).toBeInTheDocument();
+  });
+
+  it.for([403, 410])("shows a locked message on %s", async (status) => {
+    signedIn({ "GET /games/g1": [status, { error: "no" }] });
+    renderApp("/play/g1", { settings });
+    expect(await screen.findByText(/no longer open/)).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Back to your games" }),
+    ).toHaveAttribute("href", "/play");
+  });
+});

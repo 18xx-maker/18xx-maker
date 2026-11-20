@@ -13,6 +13,7 @@
     "update": "Update to {{version}}",
     "home": "Home",
     "load": "Load Games",
+    "play": "Play",
     "elements": "Elements",
     "docsStart": "Getting started",
     "docsOutput": "Output",
@@ -746,6 +747,55 @@
     "playServer": {
       "title": "Play server",
       "description": "The address of the server for online play, for example https://play.example.com. Leave it empty to turn online play off."
+    }
+  },
+  "play": {
+    "title": "Play online",
+    "settings": "Settings",
+    "noServer": "Online play needs the address of a play server. Set it in the settings.",
+    "electron": "Online play is available on the website.",
+    "signInPrompt": "Sign in to play online.",
+    "signIn": "Sign in with Discord",
+    "signOut": "Sign out",
+    "signedInAs": "Signed in as {{name}}",
+    "loading": "Loading...",
+    "error": "Could not reach the play server: {{message}}",
+    "list": {
+      "title": "Your games",
+      "empty": "No games yet.",
+      "status": {
+        "active": "Active",
+        "locked": "Locked",
+        "archived": "Archived"
+      }
+    },
+    "create": {
+      "title": "Create a game",
+      "button": "Create game",
+      "creating": "Creating...",
+      "name": "Your name",
+      "noGame": "Load a game first, then create an online game from it.",
+      "forbidden": "You are not allowed to create games on this server. Open an invite link to join a game.",
+      "note": "Each image must be at most {{size}} MB.",
+      "invalid": "The server rejected the game:",
+      "failed": "Could not create the game: {{message}}",
+      "uploadFailed": "Could not upload {{name}}: {{message}}"
+    },
+    "join": {
+      "title": "Join a game",
+      "button": "Join game",
+      "joining": "Joining...",
+      "name": "Your name",
+      "color": "Color",
+      "closed": "This game is closed.",
+      "notFound": "This invite link is not valid.",
+      "failed": "Could not join the game: {{message}}"
+    },
+    "game": {
+      "denied": "Your sign in has expired.",
+      "locked": "This game is no longer open, or you are not a player in it.",
+      "back": "Back to your games",
+      "open": "Open the game"
     }
   },
   "app": {
