@@ -799,6 +799,44 @@
       "back": "Back to your games",
       "open": "Open the game",
       "missing": "Game not found, or you are not a player in it."
+    },
+    "board": {
+      "map": "Game map",
+      "noMap": "This game has no map.",
+      "panel": "Board tools",
+      "status": {
+        "connecting": "Connecting...",
+        "online": "Online",
+        "offline": "Offline, reconnecting...",
+        "locked": "Read only"
+      },
+      "presence": "Here now: {{names}}",
+      "offMap": "Not on this map: {{hexes}}",
+      "tabs": {
+        "tiles": "Tiles",
+        "tokens": "Tokens"
+      },
+      "tiles": {
+        "hint": "Choose a tile, then click a hex to place it. Click a hex to select it.",
+        "left": "{{count}} left",
+        "noneLeft": "None left",
+        "overSupply": "None left: placing it goes over the supply.",
+        "rotation": "Rotation {{degrees}}°",
+        "rotateLeft": "Rotate left",
+        "rotateRight": "Rotate right",
+        "hex": "Hex {{hex}}: tile {{tile}}",
+        "empty": "Hex {{hex}}: no tile",
+        "rotate": "Rotate tile",
+        "remove": "Remove tile"
+      },
+      "tokens": {
+        "hint": "Choose a company, then click a spot on a hex to place its token. Click a token to select it.",
+        "count": "{{used}} of {{total}} placed",
+        "used": "{{used}} placed",
+        "overSupply": "None left: placing it goes over the tokens of the company.",
+        "selected": "{{token}} on {{hex}}",
+        "remove": "Remove token"
+      }
     }
   },
   "app": {

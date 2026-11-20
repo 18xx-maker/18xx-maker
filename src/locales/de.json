@@ -799,6 +799,44 @@
       "back": "Zurück zu deinen Spielen",
       "open": "Spiel öffnen",
       "missing": "Spiel nicht gefunden, oder du bist kein Mitspieler."
+    },
+    "board": {
+      "map": "Spielkarte",
+      "noMap": "Dieses Spiel hat keine Karte.",
+      "panel": "Werkzeuge des Spielbretts",
+      "status": {
+        "connecting": "Verbinde...",
+        "online": "Online",
+        "offline": "Offline, verbinde neu...",
+        "locked": "Nur lesen"
+      },
+      "presence": "Gerade da: {{names}}",
+      "offMap": "Nicht auf dieser Karte: {{hexes}}",
+      "tabs": {
+        "tiles": "Plättchen",
+        "tokens": "Token"
+      },
+      "tiles": {
+        "hint": "Wähle ein Plättchen und klicke dann auf ein Kartenfeld, um es zu legen. Klicke auf ein Kartenfeld, um es auszuwählen.",
+        "left": "{{count}} übrig",
+        "noneLeft": "Keine übrig",
+        "overSupply": "Keine übrig: Wenn du es legst, gehst du über den Vorrat hinaus.",
+        "rotation": "Drehung {{degrees}}°",
+        "rotateLeft": "Nach links drehen",
+        "rotateRight": "Nach rechts drehen",
+        "hex": "Kartenfeld {{hex}}: Plättchen {{tile}}",
+        "empty": "Kartenfeld {{hex}}: kein Plättchen",
+        "rotate": "Plättchen drehen",
+        "remove": "Plättchen entfernen"
+      },
+      "tokens": {
+        "hint": "Wähle eine Gesellschaft und klicke dann auf eine Stelle eines Kartenfelds, um ihren Token zu legen. Klicke auf einen Token, um ihn auszuwählen.",
+        "count": "{{used}} von {{total}} gelegt",
+        "used": "{{used}} gelegt",
+        "overSupply": "Keine übrig: Wenn du ihn legst, gehst du über die Token der Gesellschaft hinaus.",
+        "selected": "{{token}} auf {{hex}}",
+        "remove": "Token entfernen"
+      }
     }
   },
   "app": {

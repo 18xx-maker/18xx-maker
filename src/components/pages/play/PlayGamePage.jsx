@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 
+import PlayBoard from "@/components/play/PlayBoard";
 import PlayNotice, { BackLink } from "@/components/play/PlayNotice";
 import useApi from "@/components/play/useApi";
 
@@ -39,8 +40,7 @@ const PlayGame = ({ id, play }) => {
     );
   }
   if (game.status === "loading") return <p>{t("play.loading")}</p>;
-  // Replaced by the board
-  return <div />;
+  return <PlayBoard play={game} />;
 };
 
 const PlayGamePage = () => {
