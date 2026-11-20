@@ -43,6 +43,11 @@ Discord fragt, ob der Spielserver deinen Namen und deine Server sehen darf, und
 schickt dich dann zurück zu 18xx Maker. Alle Spieler brauchen ein Discord-Konto,
 auch um einem Spiel beizutreten.
 
+Starte die Anmeldung mit einem normalen Klick im selben Tab: Öffnest du **Mit
+Discord anmelden** in einem neuen Tab oder mit der mittleren Maustaste, endet
+sie mit „Die Anmeldung wurde nicht abgeschlossen, versuche es erneut“. Dann
+melde dich einfach noch einmal an.
+
 Eine Anmeldung gilt so lange, wie der Server es erlaubt (30 Tage, wenn der
 Server nichts anderes festlegt). Danach zeigt das Spielbrett, dass deine
 Anmeldung abgelaufen ist: Melde dich erneut an. **Abmelden** auf der Seite
