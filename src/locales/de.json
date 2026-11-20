@@ -814,7 +814,10 @@
       "offMap": "Nicht auf dieser Karte: {{hexes}}",
       "tabs": {
         "tiles": "Plättchen",
-        "tokens": "Token"
+        "tokens": "Token",
+        "market": "Markt",
+        "trays": "Ablagen",
+        "notes": "Notizen"
       },
       "tiles": {
         "hint": "Wähle ein Plättchen und klicke dann auf ein Kartenfeld, um es zu legen. Klicke auf ein Kartenfeld, um es auszuwählen.",
@@ -836,6 +839,25 @@
         "overSupply": "Keine übrig: Wenn du ihn legst, gehst du über die Token der Gesellschaft hinaus.",
         "selected": "{{token}} auf {{hex}}",
         "remove": "Token entfernen"
+      },
+      "market": {
+        "label": "Aktienmarkt",
+        "none": "Dieses Spiel hat keinen Markt.",
+        "hint": "Wähle eine Gesellschaft und klicke dann auf eine Zelle, um ihren Marker dorthin zu ziehen."
+      },
+      "trays": {
+        "hint": "Jeder Spieler hat eine Ablage, die Bank auch. Neue Dinge kommen aus der Bank.",
+        "bank": "Bank",
+        "empty": "Leer",
+        "move": "{{item}} verschieben",
+        "add": "Aus der Bank hinzufügen",
+        "companies": "Gesellschaften",
+        "tiles": "Plättchen"
+      },
+      "notes": {
+        "label": "Notizen",
+        "hint": "Alle im Spiel sehen diese Notizen. Sie werden gespeichert, wenn du das Feld verlässt.",
+        "tooLong": "Notizen können höchstens {{max}} Zeichen haben, diese haben {{length}}."
       }
     }
   },

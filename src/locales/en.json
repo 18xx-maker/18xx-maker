@@ -814,7 +814,10 @@
       "offMap": "Not on this map: {{hexes}}",
       "tabs": {
         "tiles": "Tiles",
-        "tokens": "Tokens"
+        "tokens": "Tokens",
+        "market": "Market",
+        "trays": "Trays",
+        "notes": "Notes"
       },
       "tiles": {
         "hint": "Choose a tile, then click a hex to place it. Click a hex to select it.",
@@ -836,6 +839,25 @@
         "overSupply": "None left: placing it goes over the tokens of the company.",
         "selected": "{{token}} on {{hex}}",
         "remove": "Remove token"
+      },
+      "market": {
+        "label": "Stock market",
+        "none": "This game has no market.",
+        "hint": "Choose a company, then click a cell to move its marker there."
+      },
+      "trays": {
+        "hint": "Every player has a tray, and so does the bank. New items come from the bank.",
+        "bank": "Bank",
+        "empty": "Empty",
+        "move": "Move {{item}}",
+        "add": "Add from the bank",
+        "companies": "Companies",
+        "tiles": "Tiles"
+      },
+      "notes": {
+        "label": "Notes",
+        "hint": "Everyone in the game sees these notes. They are saved when you leave the field.",
+        "tooLong": "Notes can have at most {{max}} characters, these have {{length}}."
       }
     }
   },

@@ -18,7 +18,7 @@ const CompanyPreviewView = ({ abbrev }) => (
     </ColorContext.Provider>
   </Svg>
 );
-const CompanyPreview = memo(CompanyPreviewView);
+export const CompanyPreview = memo(CompanyPreviewView);
 
 // How many tokens a company has, 0 when the game does not say
 const total = (company) =>

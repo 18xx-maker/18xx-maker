@@ -18,6 +18,7 @@ export const Board = ({
   locked = false,
   send,
   game: g = game,
+  seats = [{ userId: 7, name: "Ann" }],
 }) => {
   const [log, setLog] = useState(() =>
     initial.map((event, i) => ({ seq: i + 1, userId: 7, ...event })),
@@ -27,7 +28,7 @@ export const Board = ({
     status: locked ? "locked" : "online",
     game: g,
     config: {},
-    seats: [{ userId: 7, name: "Ann" }],
+    seats,
     log,
     state,
     presence: [7],

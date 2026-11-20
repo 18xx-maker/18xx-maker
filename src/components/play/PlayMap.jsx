@@ -15,7 +15,7 @@ import { getTile, multiDefaultTo } from "@/util";
 import { outline, toHexLocal } from "@/util/hexEdit";
 import { getMapData, toAlpha, toCoords } from "@/util/map";
 
-const ACCENT = "#2563eb";
+export const ACCENT = "#2563eb";
 const WARN = "#dc2626";
 const CENTER = { hexX: () => 0, hexY: () => 0, scale: 1 };
 
@@ -67,6 +67,18 @@ const TilePlaceholder = ({ id, rotation }) => (
   </g>
 );
 
+// The token of a company of the game, a labeled placeholder for any other
+export const CompanyToken = ({ game, abbrev, width }) =>
+  knownCompany(game, abbrev) ? (
+    <ColorContext.Provider value="companies">
+      <GameMapCompanyToken abbrev={abbrev} width={width} />
+    </ColorContext.Provider>
+  ) : (
+    <g data-placeholder="company">
+      <Token label={abbrev} color="white" labelColor="black" width={width} />
+    </g>
+  );
+
 const PlacedToken = ({ game, hex, index, token, width, selected }) => (
   <g
     data-token={token.token}
@@ -75,20 +87,7 @@ const PlacedToken = ({ game, hex, index, token, width, selected }) => (
     transform={`translate(${token.x} ${token.y})`}
     style={{ cursor: "pointer" }}
   >
-    {knownCompany(game, token.token) ? (
-      <ColorContext.Provider value="companies">
-        <GameMapCompanyToken abbrev={token.token} width={width} />
-      </ColorContext.Provider>
-    ) : (
-      <g data-placeholder="company">
-        <Token
-          label={token.token}
-          color="white"
-          labelColor="black"
-          width={width}
-        />
-      </g>
-    )}
+    <CompanyToken game={game} abbrev={token.token} width={width} />
     {selected && (
       <circle
         data-selected-token={hex}
