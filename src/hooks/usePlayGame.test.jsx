@@ -94,6 +94,23 @@ describe("usePlayGame", () => {
     expect(session.close).toHaveBeenCalledTimes(1);
   });
 
+  it("exposes the owner and invite code, and follows a status change", async () => {
+    const { deps } = setup(
+      {},
+      { game: { ...record, ownerId: 7, inviteCode: "abc" } },
+    );
+    const { result } = renderHook(() => usePlayGame(options, deps));
+    await waitFor(() => expect(result.current.status).toBe("online"));
+    expect(result.current.ownerId).toBe(7);
+    expect(result.current.inviteCode).toBe("abc");
+    expect(result.current.locked).toBe(false);
+    act(() => result.current.setStatus("locked"));
+    expect(result.current.gameStatus).toBe("locked");
+    expect(result.current.locked).toBe(true);
+    act(() => result.current.setStatus("active"));
+    expect(result.current.locked).toBe(false);
+  });
+
   it.each([
     [401, "denied", false],
     [410, "error", true],

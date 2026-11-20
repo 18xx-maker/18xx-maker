@@ -40,7 +40,17 @@ const PlayGame = ({ id, play }) => {
     );
   }
   if (game.status === "loading") return <p>{t("play.loading")}</p>;
-  return <PlayBoard play={game} />;
+  const owner =
+    game.ownerId !== null && String(game.ownerId) === String(play.user.id)
+      ? {
+          api: play.api,
+          gameId: id,
+          status: game.gameStatus,
+          inviteCode: game.inviteCode,
+          onStatus: game.setStatus,
+        }
+      : null;
+  return <PlayBoard play={game} owner={owner} />;
 };
 
 const PlayGamePage = () => {

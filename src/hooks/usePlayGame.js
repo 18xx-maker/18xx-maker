@@ -102,6 +102,13 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     me,
     locked,
     missing: failed?.missing ?? false,
+    gameId: loaded?.id ?? gameId,
+    gameStatus: loaded?.status ?? null,
+    ownerId: loaded?.ownerId ?? null,
+    inviteCode: loaded?.inviteCode ?? null,
+    // The owner changed the status of the game: follow it without a refetch
+    setStatus: (value) =>
+      setLoaded((game) => game && { ...game, status: value }),
     send,
     undo,
     error: failed?.error || snapshot.error || null,
