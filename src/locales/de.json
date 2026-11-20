@@ -901,7 +901,6 @@
         "webhookTitle": "Discord-Benachrichtigungen",
         "webhookBody": "Sende eine Nachricht an einen Discord-Kanal, wenn in diesem Spiel Züge gemacht werden. Es wird eine gebündelte Zeile pro Zug gepostet, mit dem, der gezogen hat, und was sich geändert hat, aber nie der Text von Notizen.",
         "webhookLabel": "Webhook-URL",
-        "webhookPlaceholder": "Füge eine Discord-Webhook-URL ein. Sie wird auf dem Server gespeichert und nie wieder angezeigt.",
         "webhookHint": "Nutze eine URL wie https://discord.com/api/webhooks/123456/token.",
         "webhookOn": "Benachrichtigungen sind an",
         "webhookSave": "Speichern",

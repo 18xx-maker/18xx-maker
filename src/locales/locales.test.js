@@ -102,6 +102,24 @@ describe("the keys of the schemas", () => {
   });
 });
 
+// The owner menu and its dialogs name every key literally
+describe("the keys of the owner menu", () => {
+  const sources = Object.values(
+    import.meta.glob("../{components,play}/**/*.{js,jsx}", {
+      eager: true,
+      import: "default",
+      query: "?raw",
+    }),
+  ).join("\n");
+
+  it("are all used", () => {
+    const unused = flatten(en.play.board.owner, "play.board.owner.")
+      .map(([key]) => key)
+      .filter((key) => !sources.includes(`"${key}"`));
+    expect(unused).toEqual([]);
+  });
+});
+
 describe("translated docs", () => {
   const docs = import.meta.glob(["../docs/**/*.md", "../home/*.md"], {
     eager: true,
