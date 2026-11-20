@@ -1,7 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { loadAssets } from "@/play/client/assets";
-import { MAX_SVG_BYTES, pngDataUri } from "@/util/assetNames";
+import {
+  MAX_FILES,
+  MAX_SVG_BYTES,
+  MAX_TOTAL_BYTES,
+  pngDataUri,
+} from "@/util/assetNames";
 import { sanitizeSvg } from "@/util/svgSanitize";
 
 import { makePng } from "@tests/support/png.js";
@@ -108,14 +113,13 @@ describe("loadAssets", () => {
     expect(assets.icons).toEqual({});
   });
 
-  it("ignores unknown kinds and names with no kind", async () => {
+  it("never requests an unknown kind or an invalid name", async () => {
     const fetchAsset = server({ "fonts.x": svgBlob(), "icons.ok": svgBlob() });
     const assets = await loadAssets({
       fetchAsset,
-      names: ["fonts.x", "nodot", "icons.ok", "icons.bad name"],
+      names: ["fonts.x", "nodot", "icons.ok", "icons.bad name", "icons.", 7],
     });
-    expect(fetchAsset).not.toHaveBeenCalledWith("fonts.x");
-    expect(fetchAsset).not.toHaveBeenCalledWith("nodot");
+    expect(fetchAsset.mock.calls).toEqual([["icons.ok"]]);
     expect(assets.icons).toEqual({ ok: SVG });
     expect(Object.keys(assets)).toEqual(["icons", "logos", "trains"]);
   });
@@ -133,5 +137,48 @@ describe("loadAssets", () => {
       trains: {},
     });
     expect(fetchAsset).not.toHaveBeenCalled();
+  });
+
+  it("requests at most MAX_FILES assets", async () => {
+    const fetchAsset = vi.fn(async () => svgBlob());
+    const names = Array.from({ length: 300 }, (_, i) => `icons.i${i}`);
+    const assets = await loadAssets({ fetchAsset, names });
+    expect(fetchAsset).toHaveBeenCalledTimes(MAX_FILES);
+    expect(Object.keys(assets.icons)).toHaveLength(MAX_FILES);
+  });
+
+  it("stops requesting once the byte budget is spent", async () => {
+    // 500 KiB each: 20 fit in the 10 MiB budget, the 21st does not
+    const size = 500 * 1024;
+    const head =
+      '<svg xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1"/><!--';
+    const big = `${head}${"x".repeat(size - head.length - 9)}--></svg>`;
+    expect(new Blob([big]).size).toBe(size);
+    const fetchAsset = vi.fn(async () => svgBlob(big));
+    const names = Array.from({ length: 60 }, (_, i) => `icons.i${i}`);
+    const assets = await loadAssets({ fetchAsset, names });
+    const kept = Object.keys(assets.icons).length;
+    expect(kept).toBe(Math.floor(MAX_TOTAL_BYTES / size));
+    // The 21st answer stops it; at most the three others in flight follow
+    expect(fetchAsset.mock.calls.length).toBeLessThanOrEqual(kept + 4);
+  });
+
+  it("stops requesting once cancelled", async () => {
+    let cancelled = false;
+    const fetchAsset = vi.fn(async () => {
+      if (fetchAsset.mock.calls.length >= 6) cancelled = true;
+      return svgBlob();
+    });
+    const names = Array.from({ length: 40 }, (_, i) => `icons.i${i}`);
+    await loadAssets({ fetchAsset, names, isCancelled: () => cancelled });
+    expect(fetchAsset.mock.calls.length).toBeLessThanOrEqual(6 + 3);
+  });
+
+  it("drops a PNG served as an icon and an SVG served as a train", async () => {
+    const assets = await loadAssets({
+      fetchAsset: server({ "icons.x": pngBlob(), "trains.x": svgBlob() }),
+      names: ["icons.x", "trains.x"],
+    });
+    expect(assets).toEqual({ icons: {}, logos: {}, trains: {} });
   });
 });

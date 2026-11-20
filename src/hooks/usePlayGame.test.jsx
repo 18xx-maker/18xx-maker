@@ -215,5 +215,54 @@ describe("usePlayGame", () => {
         expect(result.current.assets?.icons).toEqual({ moon: SVG }),
       );
     });
+
+    it("never requests the old game's images for a new game", async () => {
+      const first = { ...record, assets: ["icons.star"] };
+      const second = { ...record, id: "g2", assets: ["icons.moon"] };
+      const { deps } = setup();
+      let answerSecond;
+      deps.api.getGame = vi.fn((id) =>
+        id === "g1"
+          ? Promise.resolve(first)
+          : new Promise((resolve) => {
+              answerSecond = () => resolve(second);
+            }),
+      );
+      deps.api.getAsset = vi.fn(async () => blob());
+      const { result, rerender } = renderHook(
+        ({ gameId }) => usePlayGame({ ...options, gameId }, deps),
+        { initialProps: { gameId: "g1" } },
+      );
+      await waitFor(() => expect(result.current.assets).toBeDefined());
+      rerender({ gameId: "g2" });
+      await act(() => new Promise((resolve) => setTimeout(resolve, 20)));
+      expect(deps.api.getAsset).not.toHaveBeenCalledWith("g2", "icons.star");
+      expect(result.current.assets).toBeUndefined();
+      await act(async () => answerSecond());
+      await waitFor(() =>
+        expect(result.current.assets?.icons).toEqual({ moon: SVG }),
+      );
+      expect(deps.api.getAsset.mock.calls).toEqual([
+        ["g1", "icons.star"],
+        ["g2", "icons.moon"],
+      ]);
+    });
+
+    it("stops requesting images once unmounted", async () => {
+      const names = Array.from({ length: 20 }, (_, i) => `icons.i${i}`);
+      const { deps } = setup({}, { game: { ...record, assets: names } });
+      const answers = [];
+      deps.api.getAsset = vi.fn(
+        () => new Promise((resolve) => answers.push(() => resolve(blob()))),
+      );
+      const { unmount } = renderHook(() => usePlayGame(options, deps));
+      await waitFor(() => expect(answers).toHaveLength(4));
+      unmount();
+      await act(async () => {
+        answers.forEach((answer) => answer());
+        await new Promise((resolve) => setTimeout(resolve, 20));
+      });
+      expect(deps.api.getAsset).toHaveBeenCalledTimes(4);
+    });
   });
 });
