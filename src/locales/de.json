@@ -877,6 +877,7 @@
         "lock": "Spiel sperren",
         "unlock": "Spiel entsperren",
         "archive": "Spiel archivieren",
+        "reopen": "Spiel wieder öffnen",
         "delete": "Spiel löschen",
         "cancel": "Abbrechen",
         "link": "Einladungslink",

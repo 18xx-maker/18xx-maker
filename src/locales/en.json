@@ -877,6 +877,7 @@
         "lock": "Lock game",
         "unlock": "Unlock game",
         "archive": "Archive game",
+        "reopen": "Reopen game",
         "delete": "Delete game",
         "cancel": "Cancel",
         "link": "Invite link",

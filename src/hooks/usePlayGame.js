@@ -22,46 +22,46 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
   const [loaded, setLoaded] = useState(null);
   const [failed, setFailed] = useState(null);
   const [snapshot, setSnapshot] = useState(EMPTY);
+  const [epoch, setEpoch] = useState(0);
   const session = useRef(null);
   const depsRef = useRef(deps);
   depsRef.current = deps;
 
+  // The game loads once over REST
   useEffect(() => {
     let live = true;
-    let close = () => {};
     setLoaded(null);
     setFailed(null);
     setSnapshot(EMPTY);
 
-    const { api = createApi({ baseUrl, token }), createSession: open } =
-      depsRef.current;
-    const create = open || createSession;
-
+    const { api = createApi({ baseUrl, token }) } = depsRef.current;
     api
       .getGame(gameId)
-      .then((game) => {
-        if (!live) return;
-        setLoaded(game);
-        const current = create({ baseUrl, token, gameId, userId });
-        session.current = current;
-        const unsubscribe = current.subscribe((view) => {
-          if (live) setSnapshot(view);
-        });
-        close = () => {
-          unsubscribe();
-          current.close();
-        };
-      })
+      .then((game) => live && setLoaded(game))
       .catch((error) => {
         if (live) setFailed(failure(error));
       });
 
     return () => {
       live = false;
-      session.current = null;
-      close();
     };
   }, [baseUrl, token, gameId, userId]);
+
+  // The session follows it. A session that saw the lock stays locked for good,
+  // so unlocking (a new epoch) opens a fresh one.
+  const open = loaded !== null;
+  useEffect(() => {
+    if (!open) return;
+    const create = depsRef.current.createSession || createSession;
+    const current = create({ baseUrl, token, gameId, userId });
+    session.current = current;
+    const unsubscribe = current.subscribe((view) => setSnapshot(view));
+    return () => {
+      session.current = null;
+      unsubscribe();
+      current.close();
+    };
+  }, [open, epoch, baseUrl, token, gameId, userId]);
 
   const state = useMemo(() => reduce(snapshot.log), [snapshot.log]);
   const locked =
@@ -107,8 +107,10 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     ownerId: loaded?.ownerId ?? null,
     inviteCode: loaded?.inviteCode ?? null,
     // The owner changed the status of the game: follow it without a refetch
-    setStatus: (value) =>
-      setLoaded((game) => game && { ...game, status: value }),
+    setStatus: (value) => {
+      setLoaded((game) => game && { ...game, status: value });
+      if (value === "active") setEpoch((n) => n + 1);
+    },
     send,
     undo,
     error: failed?.error || snapshot.error || null,

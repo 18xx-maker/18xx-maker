@@ -877,6 +877,7 @@
         "lock": "锁定游戏",
         "unlock": "解锁游戏",
         "archive": "归档游戏",
+        "reopen": "重新打开游戏",
         "delete": "删除游戏",
         "cancel": "取消",
         "link": "邀请链接",

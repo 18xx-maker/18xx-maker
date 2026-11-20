@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -8,6 +8,7 @@ import {
   Link2,
   Lock,
   LockOpen,
+  RotateCcw,
   Settings,
   Trash2,
 } from "lucide-react";
@@ -42,8 +43,24 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
   const [shown, setShown] = useState(null);
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState(false);
+  // One request at a time: a repeated click cannot fire an action twice
+  const [pending, setPending] = useState(false);
+  const running = useRef(false);
 
-  const link = (value) => `${window.location.origin}/play/join/${value}`;
+  const once = async (fn) => {
+    if (running.current) return;
+    running.current = true;
+    setPending(true);
+    try {
+      await fn();
+    } finally {
+      running.current = false;
+      setPending(false);
+    }
+  };
+
+  const link = (value) =>
+    `${window.location.origin}/play/join/${encodeURIComponent(value)}`;
   const fail = (error) =>
     dispatch(
       createAlert(t("play.board.owner.failed"), error?.message, "error"),
@@ -58,26 +75,28 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
     }
   };
 
-  const renew = async () => {
-    try {
-      const { inviteCode: next } = await api.newInvite(gameId);
-      setCode(next);
-      setShown(link(next));
-      await copy(next).catch(() => {});
-      setShown(link(next));
-    } catch (error) {
-      fail(error);
-    }
-  };
+  const renew = () =>
+    once(async () => {
+      try {
+        const { inviteCode: next } = await api.newInvite(gameId);
+        setCode(next);
+        setShown(link(next));
+        await copy(next).catch(() => {});
+        setShown(link(next));
+      } catch (error) {
+        fail(error);
+      }
+    });
 
-  const change = async (value) => {
-    try {
-      await api.setStatus(gameId, value);
-      onStatus(value);
-    } catch (error) {
-      fail(error);
-    }
-  };
+  const change = (value) =>
+    once(async () => {
+      try {
+        await api.setStatus(gameId, value);
+        onStatus(value);
+      } catch (error) {
+        fail(error);
+      }
+    });
 
   const remove = async () => {
     setBusy(true);
@@ -119,27 +138,44 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
             <Copy aria-hidden="true" />
             {t("play.board.owner.copy")}
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={renew}>
+          <DropdownMenuItem disabled={pending} onSelect={renew}>
             <Link2 aria-hidden="true" />
             {t("play.board.owner.newInvite")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           {status === "active" && (
-            <DropdownMenuItem onSelect={() => change("locked")}>
+            <DropdownMenuItem
+              disabled={pending}
+              onSelect={() => change("locked")}
+            >
               <Lock aria-hidden="true" />
               {t("play.board.owner.lock")}
             </DropdownMenuItem>
           )}
           {status === "locked" && (
-            <DropdownMenuItem onSelect={() => change("active")}>
+            <DropdownMenuItem
+              disabled={pending}
+              onSelect={() => change("active")}
+            >
               <LockOpen aria-hidden="true" />
               {t("play.board.owner.unlock")}
             </DropdownMenuItem>
           )}
-          {status !== "archived" && (
-            <DropdownMenuItem onSelect={() => change("archived")}>
+          {status !== "archived" ? (
+            <DropdownMenuItem
+              disabled={pending}
+              onSelect={() => change("archived")}
+            >
               <Archive aria-hidden="true" />
               {t("play.board.owner.archive")}
+            </DropdownMenuItem>
+          ) : (
+            <DropdownMenuItem
+              disabled={pending}
+              onSelect={() => change("active")}
+            >
+              <RotateCcw aria-hidden="true" />
+              {t("play.board.owner.reopen")}
             </DropdownMenuItem>
           )}
           <DropdownMenuItem onSelect={() => setConfirming(true)}>
