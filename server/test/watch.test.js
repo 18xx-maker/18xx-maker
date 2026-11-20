@@ -542,6 +542,45 @@ describe.skipIf(!hasDb)("spectator link", () => {
     }
   });
 
+  it("deleting a game closes its players and spectators with 4003", async () => {
+    const s = await start();
+    const g = await makeGame([ann, bob]);
+    const code = await watchLink(s, ann, g.id);
+    const [a, b, spec] = [s.client(), s.client(), s.client()];
+    await joinPlayer(a, ann, g.id);
+    await joinPlayer(b, bob, g.id);
+    expect((await watch(spec, code)).spectator).toBe(true);
+
+    expect((await api(s, ann, "DELETE", `/games/${g.id}`)).status).toBe(204);
+    for (const c of [a, b, spec]) {
+      expect(await c.next("error")).toMatchObject({ code: "not_member" });
+      expect((await c.closed).code).toBe(4003);
+    }
+  });
+
+  it("a player join in flight when the game is deleted is closed", async () => {
+    const pool = gatedPool();
+    const s = await start({}, pool);
+    const g = await makeGame([ann, bob]);
+
+    const held = pool.hold((sql) =>
+      sql.startsWith("select 1 from seats where game_id"),
+    );
+    const b = s.client();
+    await b.send({ t: "join", token: bob.token, gameId: g.id, lastSeq: 0 });
+    const release = await held;
+    const log = vi.spyOn(console, "error");
+    try {
+      expect((await api(s, ann, "DELETE", `/games/${g.id}`)).status).toBe(204);
+      release();
+      expect((await b.closed).code).toBe(4003);
+      expect(b.pending().filter((m) => m.t === "joined")).toEqual([]);
+      expect(log).not.toHaveBeenCalled();
+    } finally {
+      log.mockRestore();
+    }
+  });
+
   it("refuses spectators past MAX_SPECTATORS, players still join", async () => {
     const s = await start({ MAX_SPECTATORS: "2" });
     const g = await makeGame([ann]);

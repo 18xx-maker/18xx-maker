@@ -21,8 +21,8 @@ import { appendEvent, eventsSince, lastSeq } from "./events.js";
 //   { t: "error", code, message? }
 // Only seat holders may join; others get not_member and close 4003. A socket
 // whose session ends (logout, expiry) gets bad_token and close 4003, one of a
-// game that is closed gets not_member and 4003; frames after that are ignored.
-// A spectator is read-only and never in presence: its event frames get
+// game that is deleted gets not_member and 4003 (players and spectators);
+// frames after that are ignored. A spectator is read-only and never in presence: its event frames get
 // not_member. Past limits.spectatorsPerGame a spectator gets
 // too_many_spectators and 4003; rotating or deleting the watch code closes the
 // game's spectators with not_member and 4003.
@@ -146,6 +146,15 @@ export const attachHub = (server, { pool, config, notifier }) => {
     state.buffer = [];
     const room = roomOf(gameId);
     room.sockets.add(ws);
+
+    // In the room now, so closing the game from here on closes this socket;
+    // a delete that committed during the lookup above is caught here
+    const still = await pool.query(
+      "select 1 from seats where game_id = $1 and user_id = $2",
+      [gameId, state.userId],
+    );
+    if (state.closed) return;
+    if (!still.rows.length) return revoke(ws, "not_member");
     return room;
   };
 
