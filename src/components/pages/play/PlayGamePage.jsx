@@ -20,7 +20,7 @@ const PlayGame = ({ id, play }) => {
 
   if (game.status === "denied") {
     return (
-      <PlayNotice status="signedout" signInUrl={play.signInUrl}>
+      <PlayNotice status="signedout" signInProps={play.signInProps}>
         <p>{t("play.game.denied")}</p>
       </PlayNotice>
     );

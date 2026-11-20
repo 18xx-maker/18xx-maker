@@ -38,7 +38,9 @@ export const useApi = () => {
 
   const blocked = capability.electron ? "electron" : server ? null : "noServer";
   const params = new URLSearchParams(hash.slice(1));
-  const hasLogin = params.has("token") || params.has("error");
+  // A login return is token=<value> or error=<value>; a plain #token or
+  // #error anchor is left alone
+  const hasLogin = Boolean(params.get("token") || params.get("error"));
   const fragmentToken = params.get("token");
   const fragmentError = params.get("error");
   const fragmentNonce = params.get("nonce");
@@ -129,6 +131,9 @@ export const useApi = () => {
     : null;
   // The click handler of the link, before the browser goes to Discord
   const signIn = useCallback(() => storeNonce(nonce), [nonce]);
+  // The sign in link's attributes: the url and the click that stores the
+  // nonce always travel together
+  const signInProps = signInUrl ? { href: signInUrl, onClick: signIn } : null;
 
   const signOut = useCallback(async () => {
     try {
@@ -156,6 +161,7 @@ export const useApi = () => {
     error,
     signInUrl,
     signIn,
+    signInProps,
     signOut,
     retry,
   };
