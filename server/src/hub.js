@@ -6,9 +6,10 @@ import { appendEvent, eventsSince, lastSeq } from "./events.js";
 
 // Protocol (JSON text frames on /ws). Client to server:
 //   { t: "join", token, gameId, lastSeq }   once, within limits.joinTimeoutMs
+//   { t: "join", watch, gameId?, lastSeq }  a spectator, by the watch code
 //   { t: "event", seq, event }
 // Server to client:
-//   { t: "joined", seq, seats, presence } then one catch-up frame:
+//   { t: "joined", seq, seats, presence, spectator? } then one catch-up frame:
 //   { t: "events", events }                 the events after lastSeq
 //   { t: "snapshot", seq: 0, state, events } replace the local log: state is
 //     initialState() and events the full log (sent when lastSeq is ahead of the
@@ -21,6 +22,10 @@ import { appendEvent, eventsSince, lastSeq } from "./events.js";
 // Only seat holders may join; others get not_member and close 4003. A socket
 // whose session ends (logout, expiry) gets bad_token and close 4003, one of a
 // game that is closed gets not_member and 4003; frames after that are ignored.
+// A spectator is read-only and never in presence: its event frames get
+// not_member. Past limits.spectatorsPerGame a spectator gets
+// too_many_spectators and 4003; rotating or deleting the watch code closes the
+// game's spectators with not_member and 4003.
 
 // Frames are small JSON messages; ws closes the socket (1009) above this
 export const MAX_FRAME_BYTES = 256 * 1024;
@@ -30,6 +35,8 @@ const MAX_SEQ = 2 ** 31 - 1;
 const JOIN_FAILED = 4003;
 
 const isSeq = (n, min) => Number.isInteger(n) && n >= min && n <= MAX_SEQ;
+const isCode = (code) =>
+  typeof code === "string" && code.length > 0 && code.length <= 64;
 
 const parse = (data, isBinary) => {
   if (isBinary) return null;
@@ -61,8 +68,15 @@ export const attachHub = (server, { pool, config, notifier }) => {
     send(ws, { t: "error", code, ...(message ? { message } : {}) });
 
   const presence = (room) => [
-    ...new Set([...room.sockets].map((ws) => states.get(ws).userId)),
+    ...new Set(
+      [...room.sockets]
+        .map((ws) => states.get(ws))
+        .filter((state) => !state.spectator)
+        .map((state) => state.userId),
+    ),
   ];
+  const spectators = (room) =>
+    [...room.sockets].filter((ws) => states.get(ws).spectator);
 
   const broadcast = (room, msg) => {
     for (const ws of room.sockets) {
@@ -81,7 +95,9 @@ export const attachHub = (server, { pool, config, notifier }) => {
     if (!room || !room.sockets.delete(ws)) return;
     if (room.sockets.size === 0) {
       if (room.pending === 0) rooms.delete(state.gameId);
-    } else broadcast(room, { t: "presence", users: presence(room) });
+    } else if (!state.spectator) {
+      broadcast(room, { t: "presence", users: presence(room) });
+    }
   };
 
   // Ends a socket for good: no frame of it is handled after this
@@ -91,17 +107,24 @@ export const attachHub = (server, { pool, config, notifier }) => {
     ws.close(JOIN_FAILED, code);
   };
 
-  const join = async (ws, state, msg) => {
-    const { token, gameId, lastSeq: since } = msg;
-    if (
-      typeof token !== "string" ||
-      typeof gameId !== "string" ||
-      !UUID.test(gameId) ||
-      !isSeq(since, 0)
-    )
-      return error(ws, "invalid", "join needs token, gameId and lastSeq");
-    if (state.joining) return error(ws, "invalid", "already joined");
-    state.joining = true;
+  const fail = (ws, code, reason) => {
+    error(ws, code);
+    ws.close(JOIN_FAILED, reason);
+  };
+
+  // The room of the game, made on first use
+  const roomOf = (gameId) => {
+    if (!rooms.has(gameId))
+      rooms.set(gameId, {
+        sockets: new Set(),
+        queue: Promise.resolve(),
+        pending: 0,
+      });
+    return rooms.get(gameId);
+  };
+
+  // A player: resolves to the room, or undefined when refused
+  const joinPlayer = async (ws, state, { token, gameId }) => {
     // Set before the lookup, so a logout during the join closes this socket
     state.tokenHash = sha256(token);
 
@@ -109,41 +132,86 @@ export const attachHub = (server, { pool, config, notifier }) => {
       "select user_id from sessions where token_hash = $1 and expires_at > now()",
       [state.tokenHash],
     );
-    if (!user.rows.length) {
-      error(ws, "bad_token");
-      return ws.close(JOIN_FAILED, "bad token");
-    }
+    if (!user.rows.length) return fail(ws, "bad_token", "bad token");
     const seat = await pool.query(
       "select 1 from seats where game_id = $1 and user_id = $2",
       [gameId, user.rows[0].user_id],
     );
-    if (!seat.rows.length) {
-      error(ws, "not_member");
-      return ws.close(JOIN_FAILED, "not a member");
-    }
+    if (!seat.rows.length) return fail(ws, "not_member", "not a member");
     if (state.closed) return;
 
     clearTimeout(state.timer);
     state.userId = user.rows[0].user_id;
     state.gameId = gameId;
     state.buffer = [];
-    if (!rooms.has(gameId))
-      rooms.set(gameId, {
-        sockets: new Set(),
-        queue: Promise.resolve(),
-        pending: 0,
-      });
-    const room = rooms.get(gameId);
+    const room = roomOf(gameId);
+    room.sockets.add(ws);
+    return room;
+  };
+
+  // A spectator: no session, the watch code is the credential
+  const joinSpectator = async (ws, state, { watch, gameId }) => {
+    state.spectator = true;
+    const game = await pool.query(
+      "select id from games where watch_code = $1",
+      [watch],
+    );
+    const id = game.rows[0]?.id;
+    if (!id || (gameId !== undefined && gameId.toLowerCase() !== id))
+      return fail(ws, "not_member", "not a member");
+    if (state.closed) return;
+
+    const room = roomOf(id);
+    if (spectators(room).length >= limits.spectatorsPerGame)
+      return fail(ws, "too_many_spectators", "too many spectators");
+    clearTimeout(state.timer);
+    state.gameId = id;
+    state.buffer = [];
     room.sockets.add(ws);
 
-    const current = await lastSeq(pool, gameId);
+    // In the room now, so a revoke from here on closes this socket; one that
+    // committed during the lookup above is caught by checking the code again
+    const still = await pool.query(
+      "select 1 from games where id = $1 and watch_code = $2",
+      [id, watch],
+    );
+    if (state.closed) return;
+    if (!still.rows.length) return revoke(ws, "not_member");
+    return room;
+  };
+
+  const join = async (ws, state, msg) => {
+    const { token, watch, gameId, lastSeq: since } = msg;
+    const spectator = watch !== undefined;
+    const valid = spectator
+      ? isCode(watch) &&
+        token === undefined &&
+        (gameId === undefined ||
+          (typeof gameId === "string" && UUID.test(gameId)))
+      : typeof token === "string" &&
+        typeof gameId === "string" &&
+        UUID.test(gameId);
+    if (!valid || !isSeq(since, 0))
+      return error(
+        ws,
+        "invalid",
+        "join needs token (or watch), gameId and lastSeq",
+      );
+    if (state.joining) return error(ws, "invalid", "already joined");
+    state.joining = true;
+
+    const room = await (spectator ? joinSpectator : joinPlayer)(ws, state, msg);
+    if (!room) return;
+    const id = state.gameId;
+
+    const current = await lastSeq(pool, id);
     const seats = await pool.query(
       "select user_id, name, color from seats where game_id = $1 order by created_at",
-      [gameId],
+      [id],
     );
     const replace =
       since > current || current - since > limits.snapshotEvery * 5;
-    const events = await eventsSince(pool, gameId, replace ? 0 : since);
+    const events = await eventsSince(pool, id, replace ? 0 : since);
     const catchUp = replace
       ? { t: "snapshot", seq: 0, state: initialState(), events }
       : { t: "events", events };
@@ -162,13 +230,15 @@ export const attachHub = (server, { pool, config, notifier }) => {
         color: r.color,
       })),
       presence: presence(room),
+      ...(spectator ? { spectator: true } : {}),
     });
     send(ws, catchUp);
     for (const m of state.buffer) {
       if (m.t !== "event" || m.event.seq > covered) send(ws, m);
     }
     state.buffer = null;
-    broadcast(room, { t: "presence", users: presence(room) });
+    // A spectator changes no one's presence
+    if (!spectator) broadcast(room, { t: "presence", users: presence(room) });
   };
 
   const event = async (ws, state, msg) => {
@@ -181,6 +251,7 @@ export const attachHub = (server, { pool, config, notifier }) => {
     }
     if (++state.windowCount > limits.eventsPerSecond)
       return error(ws, "rate_limited");
+    if (state.spectator) return error(ws, "not_member");
     if (!isSeq(msg.seq, 1)) return error(ws, "invalid", "seq out of range");
 
     const session = await pool.query(
@@ -235,6 +306,7 @@ export const attachHub = (server, { pool, config, notifier }) => {
       tokenHash: null,
       userId: null,
       gameId: null,
+      spectator: false,
       joining: false,
       closed: false,
       buffer: null,
@@ -296,6 +368,11 @@ export const attachHub = (server, { pool, config, notifier }) => {
     closeGame: (gameId) => {
       const room = rooms.get(gameId);
       for (const ws of room ? [...room.sockets] : []) revoke(ws, "not_member");
+    },
+    // The spectators of this game (its watch code changed or is gone)
+    closeWatchers: (gameId) => {
+      const room = rooms.get(gameId);
+      for (const ws of room ? spectators(room) : []) revoke(ws, "not_member");
     },
   };
 };

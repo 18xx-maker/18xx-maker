@@ -36,6 +36,7 @@ describe("loadConfig", () => {
         sessionTtlDays: 30,
         webhookBatchMs: 5000,
         webhookMaxPerMinute: 10,
+        spectatorsPerGame: 50,
       },
     });
   });
@@ -67,6 +68,7 @@ describe("loadConfig", () => {
       MAX_EVENTS_PER_GAME: "70",
       WEBHOOK_BATCH_MS: "250",
       WEBHOOK_MAX_PER_MINUTE: "3",
+      MAX_SPECTATORS: "6",
     });
     expect(config.port).toBe(9000);
     expect(config.allowedOrigins).toEqual(["https://a.com", "https://b.com"]);
@@ -84,6 +86,7 @@ describe("loadConfig", () => {
       sessionTtlDays: 7,
       webhookBatchMs: 250,
       webhookMaxPerMinute: 3,
+      spectatorsPerGame: 6,
     });
   });
 
@@ -105,6 +108,7 @@ describe("loadConfig", () => {
     ["MAX_EVENTS_PER_GAME", "0"],
     ["WEBHOOK_BATCH_MS", "0"],
     ["WEBHOOK_MAX_PER_MINUTE", "1.5"],
+    ["MAX_SPECTATORS", "0"],
   ])("rejects %s=%s", (name, value) => {
     expect(() => loadConfig({ ...required, [name]: value })).toThrow(
       new RegExp(`${name} must be a positive integer`),

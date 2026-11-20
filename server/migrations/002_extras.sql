@@ -6,3 +6,8 @@ alter table sessions
 -- The Discord webhook a game's move notices go to (null: none). A secret: no
 -- endpoint returns it, the owner only sees whether one is set.
 alter table games add column webhook_url text;
+
+-- The code of a game's read-only spectator link (null: no link). A secret like
+-- the invite code: only the owner sees it, rotating or deleting it closes the
+-- open spectator sockets.
+alter table games add column watch_code text unique;

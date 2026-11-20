@@ -35,6 +35,7 @@ server refuses to start without them.
 | `JOIN_TIMEOUT_MS`        | `10000`                      | Time a new websocket has to send its `join` frame before it is closed (4001).                                                |
 | `WEBHOOK_BATCH_MS`       | `5000`                       | Time the move notices of a game are collected before they go to its Discord webhook as one message.                          |
 | `WEBHOOK_MAX_PER_MINUTE` | `10`                         | Webhook messages per game per minute. Notices past that wait and go out together with the next message.                      |
+| `MAX_SPECTATORS`         | `50`                         | Spectator websockets a game may have at once. The next one gets `too_many_spectators` and is closed with 4003.               |
 
 A numeric variable must be a positive integer, otherwise the server refuses to
 start and names the variable. Unset or empty uses the default.
@@ -109,8 +110,8 @@ assets, sessions); the server keeps nothing else.
 
 ## Protocol
 
-Everything except `/health`, `/auth/discord/*` and `GET /invites/:code` needs
-the header `Authorization: Bearer <token>`. Errors are `{ "error": "..." }`.
+Everything except `/health`, `/auth/discord/*`, `GET /invites/:code` and
+`GET /watch/:code` (with its `/game` and `/assets/:name`) needs the header `Authorization: Bearer <token>`. Errors are `{ "error": "..." }`.
 
 ### Login nonce
 
@@ -131,11 +132,16 @@ being planted into a browser by a crafted link.
 | `POST /auth/logout`                      | user        | Deletes the session of the token and closes its websockets (`bad_token`, 4003). Other sessions of the user stay.                                                                                                                                                                                                                                                                        |
 | `POST /games`                            | `canCreate` | Body `{ game, config?, seatName? }`. The game file is validated (422 with `errors`). Returns 201 `{ id, inviteCode }`.                                                                                                                                                                                                                                                                  |
 | `GET /games`                             | user        | Games the user has a seat in: `[{ id, title, status, ownerId, updatedAt }]`.                                                                                                                                                                                                                                                                                                            |
-| `GET /games/:id`                         | seat holder | `{ id, title, status, ownerId, game, config, seats }`, plus `inviteCode` and `webhookSet` (whether a webhook is set, never its URL) for the owner.                                                                                                                                                                                                                                      |
+| `GET /games/:id`                         | seat holder | `{ id, title, status, ownerId, game, config, seats, assets }` (`assets` is the list of asset names), plus `inviteCode`, `watchCode` (`null` when there is no spectator link) and `webhookSet` (whether a webhook is set, never its URL) for the owner.                                                                                                                                  |
 | `PATCH /games/:id`                       | owner       | Body `{ status?, webhookUrl? }`, at least one. `status` is one of `active`, `locked`, `archived`. A locked game accepts no events and no new seats. Making an archived game active or locked when the owner has `MAX_GAMES_PER_USER` such games is 409. `webhookUrl` sets the Discord webhook for move notices (see below) or clears it (`null`). Returns `{ id, status, webhookSet }`. |
 | `DELETE /games/:id`                      | owner       | Deletes the game and its events (204).                                                                                                                                                                                                                                                                                                                                                  |
 | `POST /games/:id/invite`                 | owner       | New invite code, the old one stops working.                                                                                                                                                                                                                                                                                                                                             |
+| `POST /games/:id/watch`                  | owner       | Creates the spectator link, or a new one: returns `{ watchCode }`, the old code stops working and its open spectator websockets are closed.                                                                                                                                                                                                                                             |
+| `DELETE /games/:id/watch`                | owner       | Removes the spectator link (204) and closes its open spectator websockets.                                                                                                                                                                                                                                                                                                              |
 | `GET /invites/:code`                     | anyone      | `{ gameId, title }`.                                                                                                                                                                                                                                                                                                                                                                    |
+| `GET /watch/:code`                       | anyone      | `{ gameId, title }` of the game with this spectator link, 404 for an unknown code.                                                                                                                                                                                                                                                                                                      |
+| `GET /watch/:code/game`                  | anyone      | `{ id, title, status, game, config, seats, assets }`: what a spectator needs to draw the game, without the owner, the invite code or the webhook. Archived and locked games stay watchable.                                                                                                                                                                                             |
+| `GET /watch/:code/assets/:name`          | anyone      | An asset of that game, as an attachment with `nosniff`. 404 for an unknown code or name.                                                                                                                                                                                                                                                                                                |
 | `POST /invites/:code/join`               | user        | Body `{ name, color? }`. Takes a seat in an `active` game (410 when not open); joining twice returns the existing seat.                                                                                                                                                                                                                                                                 |
 | `PUT /games/:id/assets/:name`            | owner       | Raw body, stored with its `Content-Type`. Name `[\w.-]{1,100}`, limit `MAX_ASSET_BYTES`. Past `MAX_ASSETS_PER_GAME` or `MAX_ASSET_TOTAL_BYTES` it is 413 and nothing is written.                                                                                                                                                                                                        |
 | `GET /games/:id/assets/:name`            | seat holder | The asset, as an attachment with `nosniff`.                                                                                                                                                                                                                                                                                                                                             |
@@ -177,13 +183,22 @@ Client to server:
   `error` frame (`bad_token` or `not_member`) and the socket closes with 4003.
   `lastSeq` is the last event the client holds (0 for none). An expired
   session is `bad_token`.
+- `{ "t": "join", "watch", "gameId"?, "lastSeq" }`: a spectator joins with the
+  watch code instead of a token (no login). An unknown code, or a `gameId`
+  that is not the code's game, is `not_member` and 4003; past
+  `MAX_SPECTATORS` it is `too_many_spectators` and 4003. A spectator gets
+  `joined` (with `"spectator": true`), the catch-up frame, events and
+  presence like a player, but is read-only: every `event` frame it sends is
+  answered with `not_member` (within `MAX_EVENTS_PER_SECOND`) and nothing is
+  stored. It is never listed in `presence`. Rotating or deleting the watch
+  code closes the game's spectators with `not_member` and 4003.
 - `{ "t": "event", "seq", "event" }` where `seq` is the next sequence number
   (the client's last `seq` + 1) and `event` is `{ "type", ...payload }`.
 
 Server to client:
 
-- `{ "t": "joined", "seq", "seats", "presence" }`: the current `seq` of the
-  game, the seats and the user ids online. It is followed by one catch-up
+- `{ "t": "joined", "seq", "seats", "presence", "spectator"? }`: the current
+  `seq` of the game, the seats and the user ids of the players online. It is followed by one catch-up
   frame.
 - `{ "t": "events", "events" }`: the events after `lastSeq`.
 - `{ "t": "snapshot", "seq": 0, "state", "events" }`: **replace your local
@@ -195,7 +210,8 @@ Server to client:
   stale; catch up and send again.
 - `{ "t": "presence", "users" }`: on every join and leave.
 - `{ "t": "error", "code", "message"? }`: `invalid`, `bad_token`,
-  `not_member`, `locked`, `rate_limited` or `server_error`. `invalid` with
+  `not_member`, `locked`, `rate_limited`, `too_many_spectators` or
+  `server_error`. `invalid` with
   the message `game is full` when the game holds `MAX_EVENTS_PER_GAME` events.
 
 A joined socket is closed with `bad_token` and 4003 when its session is logged
