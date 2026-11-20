@@ -17,15 +17,19 @@ const setup = (options = {}) => {
       this.url = url;
       this.sent = [];
       this.closed = false;
+      this.opened = false;
       sockets.push(this);
     }
+    // Like a browser socket: sending while connecting or closed throws
     send(data) {
+      if (!this.opened || this.closed) throw new Error("InvalidStateError");
       this.sent.push(JSON.parse(data));
     }
     close() {
       this.closed = true;
     }
     open() {
+      this.opened = true;
       this.onopen?.();
     }
     receive(msg) {
@@ -202,6 +206,74 @@ describe("play websocket session", () => {
     sock().receive({ t: "event", event: ev(3, "x", "u1") });
     expect(last().log.map((e) => e.text)).toEqual(["a", "other", "x"]);
     expect(last().pending).toBe(0);
+  });
+
+  it("sends nothing between a rebase and its catch-up, in order", () => {
+    const { join, session, sock, last, runTimers } = setup();
+    join({ t: "events", events: [ev(1, "a")] }, 1);
+    session.send(note("x"));
+    sock().receive({ t: "error", code: "rate_limited" });
+    sock().receive({ t: "rebase", currentSeq: 2 });
+    expect(last().status).toBe("connecting");
+    // a send and the rate limit retry while the new socket connects
+    session.send(note("y"));
+    runTimers();
+    sock().open();
+    session.send(note("z"));
+    sock().receive({ t: "joined", seq: 2, seats: [], presence: [] });
+    expect(sock().sent).toEqual([
+      { t: "join", token: "tok", gameId: GAME, lastSeq: 1 },
+    ]);
+    sock().receive({ t: "events", events: [ev(2, "other")] });
+    expect(sock().events()).toEqual([{ t: "event", seq: 3, event: note("x") }]);
+    sock().receive({ t: "event", event: ev(3, "x", "u1") });
+    sock().receive({ t: "event", event: ev(4, "y", "u1") });
+    sock().receive({ t: "event", event: ev(5, "z", "u1") });
+    expect(
+      sock()
+        .events()
+        .map((m) => [m.seq, m.event.text]),
+    ).toEqual([
+      [3, "x"],
+      [4, "y"],
+      [5, "z"],
+    ]);
+    expect(last().pending).toBe(0);
+  });
+
+  it("sends nothing while offline", () => {
+    const { join, session, sock, last } = setup();
+    join();
+    sock().drop();
+    expect(() => session.send(note("x"))).not.toThrow();
+    expect(last().pending).toBe(1);
+  });
+
+  it("matches its echo by userId when given one", () => {
+    const { join, session, sock, last } = setup({ userId: "u1" });
+    join();
+    session.send(note("x"));
+    // another player sent the identical event and won seq 1
+    sock().receive({ t: "event", event: ev(1, "x", "u2") });
+    expect(last().pending).toBe(1);
+    sock().receive({ t: "rebase", currentSeq: 1 });
+    sock().open();
+    sock().receive({ t: "joined", seq: 1, seats: [], presence: [] });
+    sock().receive({ t: "events", events: [] });
+    expect(sock().events()).toEqual([{ t: "event", seq: 2, event: note("x") }]);
+    sock().receive({ t: "event", event: ev(2, "x", "u1") });
+    expect(last().pending).toBe(0);
+    expect(last().log.map((e) => e.userId)).toEqual(["u2", "u1"]);
+  });
+
+  it("settles a dropped send by userId on catch-up", () => {
+    const { join, session, sock, runTimers } = setup({ userId: "u1" });
+    join();
+    session.send(note("x"));
+    sock().drop();
+    runTimers();
+    join({ t: "events", events: [ev(1, "x", "u2")] }, 1);
+    expect(sock().events()).toEqual([{ t: "event", seq: 2, event: note("x") }]);
   });
 
   it("does not take another player's event at the sent seq as its echo", () => {

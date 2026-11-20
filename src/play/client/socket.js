@@ -25,6 +25,7 @@ export const createSession = ({
   WebSocket = globalThis.WebSocket,
   schedule = setTimeout,
   cancel = clearTimeout,
+  userId = null,
 }) => {
   const url = `${baseUrl.replace(/\/+$/, "").replace(/^http/, "ws")}/ws`;
   const listeners = new Set();
@@ -39,6 +40,7 @@ export const createSession = ({
   let sent = null; // seq of queue[0] sent on this socket
   let unsure = null; // seq of queue[0] sent on an earlier socket
   let ws = null;
+  let ready = false; // this socket has joined and caught up
   const timers = new Set();
   let retrying = false;
   let attempt = 0;
@@ -69,16 +71,20 @@ export const createSession = ({
   };
 
   const pump = () => {
-    if (view.status !== "online" || sent !== null || retrying || !queue.length)
-      return;
+    if (!ready || locked || sent !== null || retrying || !queue.length) return;
     sent = lastSeq() + 1;
     ws.send(JSON.stringify({ t: "event", seq: sent, event: queue[0] }));
   };
 
+  // A server event at the seq queue[0] was sent with is ours when it has our
+  // userId (or, without one, the same content)
+  const ours = (event) =>
+    userId ? event.userId === userId : same(queue[0], event);
+
   // queue[0] was accepted when the log holds it at the seq it was sent with
   const settle = (seq) => {
     const held = view.log.find((e) => e.seq === seq);
-    if (held && same(queue[0], held)) queue = queue.slice(1);
+    if (held && ours(held)) queue = queue.slice(1);
   };
 
   const handlers = {
@@ -87,7 +93,7 @@ export const createSession = ({
     snapshot: ({ events }) => caughtUp(merge([], events)),
     event: ({ event }) => {
       const log = merge(view.log, [event]);
-      if (sent === event.seq && same(queue[0], event)) {
+      if (sent === event.seq && ours(event)) {
         queue = queue.slice(1);
         sent = null;
       }
@@ -99,6 +105,7 @@ export const createSession = ({
       // The seq was stale: catch up on a fresh socket and send it again
       sent = null;
       ws.close();
+      update({ status: "connecting" });
       connect();
     },
     error: ({ code, message }) => {
@@ -131,11 +138,13 @@ export const createSession = ({
     if (unsure !== null) settle(unsure);
     unsure = null;
     attempt = 0;
+    ready = true;
     update({ status: locked ? "locked" : "online" });
     pump();
   };
 
   function connect() {
+    ready = false;
     let socket;
     try {
       socket = new WebSocket(url);
@@ -161,6 +170,7 @@ export const createSession = ({
     };
     socket.onclose = ({ code }) => {
       if (ws !== socket || closed) return;
+      ready = false;
       unsure = sent ?? unsure;
       sent = null;
       if (code === DENIED) return update({ status: "denied" });
