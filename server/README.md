@@ -14,32 +14,33 @@ at `/docs/play-server`).
 All settings are environment variables. The first four are required, the
 server refuses to start without them.
 
-| Variable                 | Default                      | Meaning                                                                                                                      |
-| ------------------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`           | required                     | Postgres connection string, for example `postgres://play:play@db:5432/play`.                                                 |
-| `PUBLIC_URL`             | required                     | The public URL of this server, without a trailing slash. Used for the Discord redirect URI.                                  |
-| `DISCORD_CLIENT_ID`      | required                     | Client id of the Discord application.                                                                                        |
-| `DISCORD_CLIENT_SECRET`  | required                     | Client secret of the Discord application. Also signs the login `state`, so changing it ends logins that are in progress.     |
-| `PORT`                   | `8787`                       | Port the server listens on.                                                                                                  |
-| `ALLOWED_ORIGINS`        | empty                        | Comma separated origins of the 18xx Maker sites that may call the API (CORS) and may be the `return` URL of a login.         |
-| `DISCORD_GUILD_ID`       | empty                        | When set, only members of this Discord server may create games. Everybody with an invite link can still join. Empty: anyone. |
-| `DISCORD_API_BASE`       | `https://discord.com/api`    | Discord API base, only changed in tests.                                                                                     |
-| `DISCORD_AUTH_BASE`      | `https://discord.com/oauth2` | Discord authorize base, only changed in tests.                                                                               |
-| `DISCORD_TIMEOUT_MS`     | `10000`                      | Time each Discord request of a login may take, body included. A login that times out fails with 502.                         |
-| `DISCORD_WEBHOOK_ORIGIN` | `https://discord.com`        | Origin a game's webhook URL must start with (`<origin>/api/webhooks/<id>/<token>`), only changed in tests.                   |
-| `SESSION_TTL_DAYS`       | `30`                         | Days a login stays valid. An expired session gets 401 on the API and `bad_token` on the websocket.                           |
-| `MAX_GAME_BYTES`         | `2097152` (2 MiB)            | Largest game file accepted when creating a game.                                                                             |
-| `MAX_ASSET_BYTES`        | `1048576` (1 MiB)            | Largest uploaded asset (image or font) of a game.                                                                            |
-| `MAX_ASSETS_PER_GAME`    | `50`                         | Assets a game may have. Replacing an asset of the same name does not count again.                                            |
-| `MAX_ASSET_TOTAL_BYTES`  | `8388608` (8 MiB)            | Total size of the assets of a game.                                                                                          |
-| `MAX_GAMES_PER_USER`     | `50`                         | Games a user may own that are `active` or `locked` (archived ones do not count, until they are made active or locked again). |
-| `MAX_EVENTS_PER_SECOND`  | `10`                         | Events a websocket may send per second before it gets `rate_limited` errors.                                                 |
-| `MAX_EVENTS_PER_GAME`    | `200000`                     | Events a game may hold. The event after that gets `invalid` ("game is full").                                                |
-| `SNAPSHOT_EVERY`         | `100`                        | Event interval of stored snapshots. A client more than five times this behind gets the full log in a `snapshot` frame.       |
-| `JOIN_TIMEOUT_MS`        | `10000`                      | Time a new websocket has to send its `join` frame before it is closed (4001).                                                |
-| `WEBHOOK_BATCH_MS`       | `5000`                       | Time the move notices of a game are collected before they go to its Discord webhook as one message.                          |
-| `WEBHOOK_MAX_PER_MINUTE` | `10`                         | Webhook messages per game per minute. Notices past that wait and go out together with the next message.                      |
-| `MAX_SPECTATORS`         | `50`                         | Spectator websockets a game may have at once. The next one gets `too_many_spectators` and is closed with 4003.               |
+| Variable                  | Default                      | Meaning                                                                                                                        |
+| ------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `DATABASE_URL`            | required                     | Postgres connection string, for example `postgres://play:play@db:5432/play`.                                                   |
+| `PUBLIC_URL`              | required                     | The public URL of this server, without a trailing slash. Used for the Discord redirect URI.                                    |
+| `DISCORD_CLIENT_ID`       | required                     | Client id of the Discord application.                                                                                          |
+| `DISCORD_CLIENT_SECRET`   | required                     | Client secret of the Discord application. Also signs the login `state`, so changing it ends logins that are in progress.       |
+| `PORT`                    | `8787`                       | Port the server listens on.                                                                                                    |
+| `ALLOWED_ORIGINS`         | empty                        | Comma separated origins of the 18xx Maker sites that may call the API (CORS) and may be the `return` URL of a login.           |
+| `DISCORD_GUILD_ID`        | empty                        | When set, only members of this Discord server may create games. Everybody with an invite link can still join. Empty: anyone.   |
+| `DISCORD_API_BASE`        | `https://discord.com/api`    | Discord API base, only changed in tests.                                                                                       |
+| `DISCORD_AUTH_BASE`       | `https://discord.com/oauth2` | Discord authorize base, only changed in tests.                                                                                 |
+| `DISCORD_TIMEOUT_MS`      | `10000`                      | Time each Discord request of a login may take, body included. A login that times out fails with 502.                           |
+| `DISCORD_WEBHOOK_ORIGIN`  | `https://discord.com`        | Origin a game's webhook URL must start with (`<origin>/api/webhooks/<id>/<token>`), only changed in tests.                     |
+| `SESSION_TTL_DAYS`        | `30`                         | Days a login stays valid. An expired session gets 401 on the API and `bad_token` on the websocket.                             |
+| `MAX_GAME_BYTES`          | `2097152` (2 MiB)            | Largest game file accepted when creating a game.                                                                               |
+| `MAX_ASSET_BYTES`         | `1048576` (1 MiB)            | Largest uploaded asset (image or font) of a game.                                                                              |
+| `MAX_ASSETS_PER_GAME`     | `50`                         | Assets a game may have. Replacing an asset of the same name does not count again.                                              |
+| `MAX_ASSET_TOTAL_BYTES`   | `8388608` (8 MiB)            | Total size of the assets of a game.                                                                                            |
+| `MAX_GAMES_PER_USER`      | `50`                         | Games a user may own that are `active` or `locked` (archived ones do not count, until they are made active or locked again).   |
+| `MAX_EVENTS_PER_SECOND`   | `10`                         | Events a websocket may send per second before it gets `rate_limited` errors.                                                   |
+| `MAX_EVENTS_PER_GAME`     | `200000`                     | Events a game may hold. The event after that gets `invalid` ("game is full").                                                  |
+| `SNAPSHOT_EVERY`          | `100`                        | Event interval of stored snapshots. A client more than five times this behind gets the full log in a `snapshot` frame.         |
+| `JOIN_TIMEOUT_MS`         | `10000`                      | Time a new websocket has to send its `join` frame before it is closed (4001).                                                  |
+| `WEBHOOK_BATCH_MS`        | `5000`                       | Time the move notices of a game are collected before they go to its Discord webhook as one message.                            |
+| `WEBHOOK_MAX_PER_MINUTE`  | `10`                         | Webhook messages per game per minute. Notices past that wait and go out together with the next message.                        |
+| `WEBHOOK_TEST_PER_MINUTE` | `60`                         | Test posts ("Notifications connected") of the whole server per minute. Past that setting a webhook is 429 `Too many requests`. |
+| `MAX_SPECTATORS`          | `50`                         | Spectator websockets a game may have at once. The next one gets `too_many_spectators` and is closed with 4003.                 |
 
 A numeric variable must be a positive integer, otherwise the server refuses to
 start and names the variable. Unset or empty uses the default.
@@ -160,8 +161,11 @@ accepted, anything else is 400 `Invalid webhook URL`. Setting it posts
 does not exist) the PATCH is 400 `Discord rejected the webhook` and nothing is
 written; any other failure of that post is only logged and the webhook is set.
 The test post counts against the game's `WEBHOOK_MAX_PER_MINUTE` like every
-other message: past it the PATCH is 429 `Too many requests`, with no write and
-no call to Discord.
+other message, and also against the owner's own `WEBHOOK_MAX_PER_MINUTE` test
+posts over all their games (so new or deleted games do not add more) and the
+server's `WEBHOOK_TEST_PER_MINUTE`: past any of them the PATCH is 429
+`Too many requests`, with no write and no call to Discord. Deleting a game
+drops its waiting notices.
 
 Every accepted event then becomes one English line ("Alice placed tile 7 on
 A1"; a note change is "Alice updated the notes", never its text). The lines of

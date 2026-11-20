@@ -95,6 +95,11 @@ export const loadConfig = (env) => {
         env.WEBHOOK_MAX_PER_MINUTE,
         10,
       ),
+      webhookTestPerMinute: int(
+        "WEBHOOK_TEST_PER_MINUTE",
+        env.WEBHOOK_TEST_PER_MINUTE,
+        60,
+      ),
       spectatorsPerGame: int("MAX_SPECTATORS", env.MAX_SPECTATORS, 50),
     },
   };
