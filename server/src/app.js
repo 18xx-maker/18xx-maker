@@ -6,7 +6,8 @@ import { authRoutes } from "./auth.js";
 import { gameRoutes } from "./games.js";
 import { attachHub } from "./hub.js";
 
-export const createApp = ({ pool, config }) => {
+// sockets: the hub's { closeToken, closeGame }, absent without a websocket hub
+export const createApp = ({ pool, config, sockets }) => {
   const app = new Hono();
 
   app.use(
@@ -20,7 +21,7 @@ export const createApp = ({ pool, config }) => {
   );
 
   app.get("/health", (c) => c.json({ ok: true }));
-  app.route("/", authRoutes({ pool, config }));
+  app.route("/", authRoutes({ pool, config, sockets }));
   app.route("/", gameRoutes({ pool, config }));
 
   return app;
@@ -28,10 +29,17 @@ export const createApp = ({ pool, config }) => {
 
 // The HTTP server with the websocket hub on /ws; close() also drops the sockets
 export const createServer = ({ pool, config }) => {
+  // The hub needs the server and the app needs the hub: requests only arrive
+  // once the server listens, by then hub is set
+  let hub;
+  const sockets = {
+    closeToken: (tokenHash) => hub.closeToken(tokenHash),
+    closeGame: (gameId) => hub.closeGame(gameId),
+  };
   const server = createAdaptorServer({
-    fetch: createApp({ pool, config }).fetch,
+    fetch: createApp({ pool, config, sockets }).fetch,
   });
-  const hub = attachHub(server, { pool, config });
+  hub = attachHub(server, { pool, config });
   const close = server.close.bind(server);
   server.close = (callback) => {
     hub.close();

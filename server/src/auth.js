@@ -54,8 +54,16 @@ const readState = (state, secret) => {
   }
 };
 
-const discordFetch = async (url, options) => {
-  const res = await fetch(url, options);
+// An OAuth error code from Discord, put in the return fragment; anything that
+// is not a plain code is not reflected
+const OAUTH_ERROR = /^[a-z_]{1,64}$/;
+
+// The timeout covers the response body too
+const discordFetch = async (url, options, timeoutMs) => {
+  const res = await fetch(url, {
+    ...options,
+    signal: AbortSignal.timeout(timeoutMs),
+  });
   if (!res.ok) throw new Error(`Discord responded ${res.status}`);
   return res.json();
 };
@@ -67,7 +75,7 @@ export const requireUser = (pool) => async (c, next) => {
   const { rows } = await pool.query(
     `select u.id, u.name, u.avatar, u.can_create
        from sessions s join users u on u.id = s.user_id
-      where s.token_hash = $1`,
+      where s.token_hash = $1 and s.expires_at > now()`,
     [sha256(match[1])],
   );
   if (!rows.length) return c.json({ error: "Unauthorized" }, 401);
@@ -83,7 +91,8 @@ export const requireUser = (pool) => async (c, next) => {
   return next();
 };
 
-export const authRoutes = ({ pool, config }) => {
+// sockets.closeToken(tokenHash) closes the websockets of a session on logout
+export const authRoutes = ({ pool, config, sockets }) => {
   const app = new Hono();
   const { discord } = config;
   const redirectUri = `${config.publicUrl}/auth/discord/callback`;
@@ -105,12 +114,21 @@ export const authRoutes = ({ pool, config }) => {
     const returned = readState(c.req.query("state"), discord.clientSecret);
     // Re-check the origin: the allow list may have changed since login
     const ret = returned && allowedReturn(returned, config);
+    if (!ret) return c.json({ error: "Invalid state" }, 400);
+    // Discord sends error (access_denied when the user cancels) instead of code
+    const denied = c.req.query("error");
+    if (denied !== undefined) {
+      ret.hash = `error=${OAUTH_ERROR.test(denied) ? denied : "login_failed"}`;
+      return c.redirect(ret.href, 302);
+    }
     const code = c.req.query("code");
-    if (!ret || !code) return c.json({ error: "Invalid state" }, 400);
+    if (!code) return c.json({ error: "Invalid state" }, 400);
+    const fetchDiscord = (url, options) =>
+      discordFetch(url, options, discord.timeoutMs);
 
     let profile, guilds;
     try {
-      const token = await discordFetch(`${discord.apiBase}/oauth2/token`, {
+      const token = await fetchDiscord(`${discord.apiBase}/oauth2/token`, {
         method: "POST",
         headers: { "content-type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
@@ -122,8 +140,8 @@ export const authRoutes = ({ pool, config }) => {
         }),
       });
       const headers = { authorization: `Bearer ${token.access_token}` };
-      profile = await discordFetch(`${discord.apiBase}/users/@me`, { headers });
-      guilds = await discordFetch(`${discord.apiBase}/users/@me/guilds`, {
+      profile = await fetchDiscord(`${discord.apiBase}/users/@me`, { headers });
+      guilds = await fetchDiscord(`${discord.apiBase}/users/@me/guilds`, {
         headers,
       });
       if (!profile?.id || !Array.isArray(guilds)) throw new Error("bad shape");
@@ -148,8 +166,13 @@ export const authRoutes = ({ pool, config }) => {
 
     const sessionToken = randomBytes(32).toString("base64url");
     await pool.query(
-      "insert into sessions (token_hash, user_id) values ($1, $2)",
-      [sha256(sessionToken), rows[0].id],
+      "delete from sessions where user_id = $1 and expires_at <= now()",
+      [rows[0].id],
+    );
+    await pool.query(
+      `insert into sessions (token_hash, user_id, expires_at)
+       values ($1, $2, now() + make_interval(days => $3))`,
+      [sha256(sessionToken), rows[0].id, config.limits.sessionTtlDays],
     );
 
     ret.hash = `token=${sessionToken}`;
@@ -162,6 +185,7 @@ export const authRoutes = ({ pool, config }) => {
     await pool.query("delete from sessions where token_hash = $1", [
       c.get("tokenHash"),
     ]);
+    sockets?.closeToken(c.get("tokenHash"));
     return c.json({ ok: true });
   });
 

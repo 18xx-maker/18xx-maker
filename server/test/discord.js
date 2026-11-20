@@ -1,7 +1,8 @@
 import { createServer } from "node:http";
 
 // A fake Discord API. users: [{ code, id, username, avatar, guilds: [id],
-// failGuilds? }]. The access token for a code is `at-<code>`.
+// failGuilds?, hang? }]. The access token for a code is `at-<code>`. A user
+// with hang gets no answer to the token request, ever.
 export const startFakeDiscord = async ({ users }) => {
   const byToken = (req) => {
     const token = (req.headers.authorization || "").replace(/^Bearer /, "");
@@ -23,6 +24,7 @@ export const startFakeDiscord = async ({ users }) => {
         const code = new URLSearchParams(body).get("code");
         const user = users.find((u) => u.code === code);
         if (!user) return json(res, 400, { error: "invalid_grant" });
+        if (user.hang) return;
         json(res, 200, {
           access_token: `at-${user.code}`,
           token_type: "Bearer",

@@ -12,8 +12,9 @@ if (process.env.CI && !url) {
 
 export const hasDb = Boolean(url);
 
-// A schema per call keeps test files independent of each other
-export const makeTestDb = async () => {
+// A schema per call keeps test files independent of each other; migrate:
+// false leaves it empty
+export const makeTestDb = async ({ migrate: run = true } = {}) => {
   const schema = `t_${randomBytes(6).toString("hex")}`;
 
   const admin = new pg.Pool({ connectionString: url, max: 1 });
@@ -24,7 +25,7 @@ export const makeTestDb = async () => {
     connectionString: url,
     options: `-c search_path=${schema},public`,
   });
-  await migrate(pool);
+  if (run) await migrate(pool);
 
   return {
     pool,
