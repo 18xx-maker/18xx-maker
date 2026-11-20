@@ -4,6 +4,7 @@ import { Hono } from "hono";
 
 import { validateGameJson } from "../../src/cli/validate.js";
 import { requireUser } from "./auth.js";
+import { isWebhookUrl } from "./webhook.js";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const ASSET_NAME = /^[\w.-]{1,100}$/;
@@ -82,7 +83,8 @@ const seatJson = (row) => ({
   color: row.color,
 });
 
-export const gameRoutes = ({ pool, config }) => {
+// notifier: the webhook notifier (webhook.js), for the test post of a webhook
+export const gameRoutes = ({ pool, config, notifier }) => {
   const app = new Hono();
   const { limits } = config;
   const auth = requireUser(pool);
@@ -207,7 +209,10 @@ export const gameRoutes = ({ pool, config }) => {
       game: row.game_json,
       config: row.config_json,
       seats: seats.map(seatJson),
-      ...(row.owner_id === user.id ? { inviteCode: row.invite_code } : {}),
+      // The webhook URL is a secret: never returned, the owner sees if one is set
+      ...(row.owner_id === user.id
+        ? { inviteCode: row.invite_code, webhookSet: row.webhook_url !== null }
+        : {}),
     });
   });
 
@@ -217,12 +222,29 @@ export const gameRoutes = ({ pool, config }) => {
 
     const body = await readSmallJson(c);
     if (body === undefined) return c.json({ error: "Body too large" }, 413);
-    if (!STATUSES.includes(body?.status)) {
+    const has = (key) =>
+      body !== null && typeof body === "object" && Object.hasOwn(body, key);
+    const setStatus = has("status");
+    const setWebhook = has("webhookUrl");
+    if ((setStatus || !setWebhook) && !STATUSES.includes(body?.status)) {
       return c.json({ error: "Invalid status" }, 400);
+    }
+    const webhookUrl = setWebhook ? body.webhookUrl : undefined;
+    if (
+      setWebhook &&
+      webhookUrl !== null &&
+      !isWebhookUrl(webhookUrl, config.discord.webhookOrigin)
+    ) {
+      return c.json({ error: "Invalid webhook URL" }, 400);
+    }
+    // The test post comes first, so a webhook Discord does not know (401/404)
+    // is refused before anything is written
+    if (webhookUrl && !(await notifier.connected(row.id, webhookUrl))) {
+      return c.json({ error: "Discord rejected the webhook" }, 400);
     }
     const user = c.get("user");
     return inTransaction(pool, async (client) => {
-      const count = await lockOwnedCount(client, user.id);
+      const count = setStatus ? await lockOwnedCount(client, user.id) : 0;
       const { rows } = await client.query(
         "select status from games where id = $1 for update",
         [row.id],
@@ -235,6 +257,7 @@ export const gameRoutes = ({ pool, config }) => {
       }
       // Bringing an archived game back counts against the cap like a new one
       if (
+        setStatus &&
         rows[0].status === "archived" &&
         body.status !== "archived" &&
         count >= limits.gamesPerUser
@@ -244,11 +267,26 @@ export const gameRoutes = ({ pool, config }) => {
           response: c.json({ error: "Too many games" }, 409),
         };
       }
-      await client.query("update games set status = $2 where id = $1", [
-        row.id,
-        body.status,
-      ]);
-      return { response: c.json({ id: row.id, status: body.status }) };
+      const { rows: updated } = await client.query(
+        `update games
+            set status = coalesce($2, status),
+                webhook_url = case when $3 then $4 else webhook_url end
+          where id = $1
+          returning status, webhook_url is not null as webhook_set`,
+        [
+          row.id,
+          setStatus ? body.status : null,
+          setWebhook,
+          webhookUrl ?? null,
+        ],
+      );
+      return {
+        response: c.json({
+          id: row.id,
+          status: updated[0].status,
+          webhookSet: updated[0].webhook_set,
+        }),
+      };
     });
   });
 

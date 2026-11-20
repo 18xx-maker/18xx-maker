@@ -3,7 +3,12 @@ import { createServer } from "node:http";
 // A fake Discord API. users: [{ code, id, username, avatar, guilds: [id],
 // failGuilds?, hang? }]. The access token for a code is `at-<code>`. A user
 // with hang gets no answer to the token request, ever.
-export const startFakeDiscord = async ({ users }) => {
+// Webhooks: POST /api/webhooks/:id/:token is recorded in `posts` and answered
+// 204, or as setWebhook(token, { status, delayMs, headers }) says.
+export const startFakeDiscord = async ({ users = [] } = {}) => {
+  const posts = [];
+  const webhooks = new Map();
+
   const byToken = (req) => {
     const token = (req.headers.authorization || "").replace(/^Bearer /, "");
     return users.find((u) => `at-${u.code}` === token);
@@ -16,6 +21,27 @@ export const startFakeDiscord = async ({ users }) => {
 
   const server = createServer((req, res) => {
     const { pathname } = new URL(req.url, "http://localhost");
+
+    const hook = pathname.match(/^\/api\/webhooks\/(\d+)\/([\w-]+)$/);
+    if (req.method === "POST" && hook) {
+      let body = "";
+      req.on("data", (chunk) => (body += chunk));
+      req.on("end", () => {
+        const [, id, token] = hook;
+        posts.push({ id, token, body: JSON.parse(body), at: Date.now() });
+        const {
+          status = 204,
+          delayMs = 0,
+          headers = {},
+        } = webhooks.get(token) || {};
+        setTimeout(() => {
+          if (res.destroyed) return;
+          res.writeHead(status, headers);
+          res.end(status === 204 ? undefined : "{}");
+        }, delayMs);
+      });
+      return;
+    }
 
     if (req.method === "POST" && pathname === "/oauth2/token") {
       let body = "";
@@ -59,6 +85,8 @@ export const startFakeDiscord = async ({ users }) => {
 
   return {
     url: `http://127.0.0.1:${port}`,
+    posts,
+    setWebhook: (token, behavior) => webhooks.set(token, behavior),
     close: () =>
       new Promise((resolve) => {
         server.close(resolve);
