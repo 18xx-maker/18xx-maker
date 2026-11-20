@@ -800,6 +800,44 @@
       "back": "返回你的游戏",
       "open": "打开游戏",
       "missing": "未找到该游戏，或者你不是其中的玩家。"
+    },
+    "board": {
+      "map": "游戏地图",
+      "noMap": "该游戏没有地图。",
+      "panel": "棋盘工具",
+      "status": {
+        "connecting": "正在连接...",
+        "online": "在线",
+        "offline": "离线,正在重新连接...",
+        "locked": "只读"
+      },
+      "presence": "当前在场:{{names}}",
+      "offMap": "不在此地图上:{{hexes}}",
+      "tabs": {
+        "tiles": "地块",
+        "tokens": "标记"
+      },
+      "tiles": {
+        "hint": "选择一个地块,然后点击一个六边格放置它。点击六边格可选中它。",
+        "left": "剩余 {{count}}",
+        "noneLeft": "已无剩余",
+        "overSupply": "已无剩余:放置它会超出供应数量。",
+        "rotation": "旋转 {{degrees}}°",
+        "rotateLeft": "向左旋转",
+        "rotateRight": "向右旋转",
+        "hex": "六边格 {{hex}}:地块 {{tile}}",
+        "empty": "六边格 {{hex}}:没有地块",
+        "rotate": "旋转地块",
+        "remove": "移除地块"
+      },
+      "tokens": {
+        "hint": "选择一个公司,然后点击六边格上的一个位置放置它的标记。点击标记可选中它。",
+        "count": "已放置 {{used}}/{{total}}",
+        "used": "已放置 {{used}}",
+        "overSupply": "已无剩余:放置它会超出该公司的标记数量。",
+        "selected": "{{hex}} 上的 {{token}}",
+        "remove": "移除标记"
+      }
     }
   },
   "app": {
