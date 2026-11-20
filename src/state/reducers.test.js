@@ -531,7 +531,13 @@ describe("settingsReducer", () => {
     expect(settingsReducer(state, createSetPlayServer(undefined))).toEqual({
       theme: "dark",
     });
-    for (const url of ["ftp://x.test", "x.test", "javascript:alert(1)", 1]) {
+    for (const url of [
+      "ftp://x.test",
+      "https://",
+      "x.test",
+      "javascript:alert(1)",
+      1,
+    ]) {
       expect(settingsReducer(state, createSetPlayServer(url))).toBe(state);
     }
   });
