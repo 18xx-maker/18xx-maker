@@ -468,7 +468,7 @@ Notes:
 spectator, each in their own browser context: create, invite, join, a tile
 seen by the other player, undo, lock and unlock, and the spectator link. It
 needs Postgres: with `DATABASE_URL` set, `playwright.config.js` also starts
-`e2e/support/play-server.mjs`, the real play server on port 4319 with a fresh
+`e2e/support/play-server.mjs`, the real play server on 127.0.0.1:4319 with a fresh
 schema (dropped on exit) and the fake Discord of `server/test/discord.js`,
 whose consent page has a "Sign in as Alice" and a "Sign in as Bob" link.
 Without `DATABASE_URL` the spec is skipped. CI runs it in the End to End job,

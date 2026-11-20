@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test";
 // context, against the real play server (e2e/support/play-server.mjs, started
 // by playwright.config.js when DATABASE_URL is set) and its fake Discord.
 
-const SERVER = "http://localhost:4319";
+const SERVER = "http://127.0.0.1:4319";
 
 test.skip(
   !process.env.DATABASE_URL,
