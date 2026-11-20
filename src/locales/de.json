@@ -795,6 +795,12 @@
       "notFound": "Dieser Einladungslink ist ungültig.",
       "failed": "Der Beitritt ist fehlgeschlagen: {{message}}"
     },
+    "watch": {
+      "missing": "Link nicht gefunden",
+      "stopped": "Dieser Zuschauerlink funktioniert nicht mehr.",
+      "full": "Gerade schauen zu viele Leute diesem Spiel zu. Versuche es später erneut.",
+      "back": "Zum Online-Spiel"
+    },
     "game": {
       "denied": "Deine Anmeldung ist abgelaufen.",
       "locked": "Dieses Spiel ist nicht mehr offen, oder du bist kein Mitspieler.",
@@ -870,7 +876,8 @@
       },
       "banner": {
         "offline": "Verbindung wird wiederhergestellt...",
-        "locked": "Dieses Spiel ist gesperrt. Du kannst es ansehen, aber nicht ändern."
+        "locked": "Dieses Spiel ist gesperrt. Du kannst es ansehen, aber nicht ändern.",
+        "watching": "Zuschauen: Du siehst die Züge, sobald die Spieler sie machen, kannst aber nichts ändern."
       },
       "moveError": {
         "message": "Der Server hat einen Zug abgelehnt: {{message}}",
@@ -880,6 +887,9 @@
         "menu": "Menü des Besitzers",
         "copy": "Einladungslink kopieren",
         "newInvite": "Neuer Einladungslink",
+        "watch": "Zuschauerlink",
+        "watchNew": "Neuer Zuschauerlink",
+        "watchStop": "Zuschauerlink beenden",
         "lock": "Spiel sperren",
         "unlock": "Spiel entsperren",
         "archive": "Spiel archivieren",
@@ -898,6 +908,7 @@
         "webhookRemove": "Entfernen",
         "webhookSaved": "Discord-Benachrichtigungen sind an.",
         "webhookRemoved": "Discord-Benachrichtigungen sind aus.",
+        "watchStopped": "Der Zuschauerlink ist beendet.",
         "failed": "Der Spielserver hat das abgelehnt.",
         "deleteBody": "Das Spiel wird für alle gelöscht, mit allen Zügen und Notizen. Das kann nicht rückgängig gemacht werden."
       }

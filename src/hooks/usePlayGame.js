@@ -17,8 +17,14 @@ const failure = (error) => ({
 });
 
 // One online game: loads it once over REST and follows its event log over the
-// websocket session. `deps` (tests only) replaces the api and the session.
-export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
+// websocket session. With `watch` (a spectator link) it needs no token: it
+// loads the game by the code, never sends and is always locked. `deps` (tests
+// only) replaces the api and the session.
+export const usePlayGame = (
+  { baseUrl, token, gameId, userId, watch },
+  deps = {},
+) => {
+  const spectator = watch !== undefined;
   const [loaded, setLoaded] = useState(null);
   const [failed, setFailed] = useState(null);
   const [snapshot, setSnapshot] = useState(EMPTY);
@@ -35,8 +41,7 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     setSnapshot(EMPTY);
 
     const { api = createApi({ baseUrl, token }) } = depsRef.current;
-    api
-      .getGame(gameId)
+    (watch !== undefined ? api.watchGame(watch) : api.getGame(gameId))
       .then((game) => live && setLoaded(game))
       .catch((error) => {
         if (live) setFailed(failure(error));
@@ -45,7 +50,7 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     return () => {
       live = false;
     };
-  }, [baseUrl, token, gameId, userId]);
+  }, [baseUrl, token, gameId, userId, watch]);
 
   // The session follows it. A session that saw the lock stays locked for good,
   // so unlocking (a new epoch) opens a fresh one.
@@ -53,7 +58,11 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
   useEffect(() => {
     if (!open) return;
     const create = depsRef.current.createSession || createSession;
-    const current = create({ baseUrl, token, gameId, userId });
+    const current = create(
+      watch !== undefined
+        ? { baseUrl, watch }
+        : { baseUrl, token, gameId, userId },
+    );
     session.current = current;
     const unsubscribe = current.subscribe((view) => setSnapshot(view));
     return () => {
@@ -61,10 +70,11 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
       unsubscribe();
       current.close();
     };
-  }, [open, epoch, baseUrl, token, gameId, userId]);
+  }, [open, epoch, baseUrl, token, gameId, userId, watch]);
 
   const state = useMemo(() => reduce(snapshot.log), [snapshot.log]);
   const locked =
+    spectator ||
     snapshot.status === "locked" ||
     (failed?.locked ?? false) ||
     loaded?.status === "locked" ||
@@ -101,6 +111,7 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     presence: snapshot.presence,
     me,
     locked,
+    spectator,
     missing: failed?.missing ?? false,
     gameId: loaded?.id ?? gameId,
     gameStatus: loaded?.status ?? null,
@@ -110,6 +121,10 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     setWebhookSet: (value) =>
       setLoaded((game) => game && { ...game, webhookSet: value }),
     inviteCode: loaded?.inviteCode ?? null,
+    watchCode: loaded?.watchCode ?? null,
+    // The owner made or stopped the spectator link: follow it without a refetch
+    setWatchCode: (value) =>
+      setLoaded((game) => game && { ...game, watchCode: value }),
     // The owner changed the status of the game: follow it without a refetch
     setStatus: (value) => {
       setLoaded((game) => game && { ...game, status: value });

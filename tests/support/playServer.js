@@ -28,3 +28,13 @@ export const calls = (fetch, method, path) =>
     ([url, init]) =>
       (init?.method || "GET") === method && String(url) === BASE + path,
   );
+
+// The public routes of a spectator link: its game as GET /watch/:code/game
+// gives it (no owner, invite or webhook) and its title
+export const watchRoutes = (code, record) => {
+  const path = `/watch/${encodeURIComponent(code)}`;
+  return {
+    [`GET ${path}`]: [200, { gameId: record.id, title: record.title }],
+    [`GET ${path}/game`]: [200, record],
+  };
+};

@@ -7,6 +7,9 @@ import { validateEvent } from "../events.js";
 // of them. A dropped socket or a rebase reconnects, catches up from the held
 // seq and then sends the head of the queue again unless the catch-up shows the
 // server already accepted it.
+//
+// With `watch` (a spectator link) it joins with the code instead of a token
+// and a game id, and is read-only: send throws.
 const DENIED = 4003;
 const MAX_DELAY = 15000;
 
@@ -26,6 +29,7 @@ export const createSession = ({
   schedule = setTimeout,
   cancel = clearTimeout,
   userId = null,
+  watch,
 }) => {
   const url = `${baseUrl.replace(/\/+$/, "").replace(/^http/, "ws")}/ws`;
   const listeners = new Set();
@@ -93,7 +97,8 @@ export const createSession = ({
   };
 
   const handlers = {
-    joined: ({ seats, presence }) => update({ seats, presence }),
+    joined: ({ seats, presence, spectator }) =>
+      update({ seats, presence, spectator: Boolean(spectator) }),
     events: ({ events }) => caughtUp(merge(view.log, events)),
     snapshot: ({ events }) => caughtUp(merge([], events)),
     event: ({ event }) => {
@@ -120,7 +125,11 @@ export const createSession = ({
         sent = null;
         return update({ status: "locked", error: code });
       }
-      if (code === "bad_token" || code === "not_member")
+      if (
+        code === "bad_token" ||
+        code === "not_member" ||
+        code === "too_many_spectators"
+      )
         return update({ error: code });
       if (sent === null) return update({ error: message || code });
       sent = null;
@@ -159,9 +168,11 @@ export const createSession = ({
     ws = socket;
     socket.onopen = () => {
       if (ws !== socket || closed) return;
-      socket.send(
-        JSON.stringify({ t: "join", token, gameId, lastSeq: lastSeq() }),
-      );
+      const join =
+        watch !== undefined
+          ? { t: "join", watch, lastSeq: lastSeq() }
+          : { t: "join", token, gameId, lastSeq: lastSeq() };
+      socket.send(JSON.stringify(join));
     };
     socket.onmessage = ({ data }) => {
       if (ws !== socket || closed) return;
@@ -193,6 +204,7 @@ export const createSession = ({
       return () => listeners.delete(listener);
     },
     send: (event) => {
+      if (watch !== undefined) throw new Error("a spectator cannot send");
       const invalid = validateEvent(event);
       if (invalid) throw new Error(invalid);
       if (locked || closed || view.status === "denied") return;

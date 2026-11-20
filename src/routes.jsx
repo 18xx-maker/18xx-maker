@@ -36,6 +36,7 @@ import LoadGamesPage from "@/components/pages/load/LoadGamesPage";
 import PlayGamePage from "@/components/pages/play/PlayGamePage";
 import PlayJoinPage from "@/components/pages/play/PlayJoinPage";
 import PlayPage from "@/components/pages/play/PlayPage";
+import PlayWatchPage from "@/components/pages/play/PlayWatchPage";
 
 import { Redirect, Route, Switch } from "@/router";
 import capability from "@/util/capability";
@@ -50,6 +51,7 @@ const topPages = {
   "/settings": <SettingsPage />,
   "/play": <PlayPage />,
   "/play/join/:code": <PlayJoinPage />,
+  "/play/watch/:code": <PlayWatchPage />,
   "/play/:id": <PlayGamePage />,
 };
 
