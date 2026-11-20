@@ -13,6 +13,7 @@
     "update": "Auf {{version}} aktualisieren",
     "home": "Startseite",
     "load": "Spiele laden",
+    "play": "Spielen",
     "elements": "Elemente",
     "docsStart": "Erste Schritte",
     "docsOutput": "Ausgabe",
@@ -742,6 +743,172 @@
       "emacs": "Emacs",
       "vim": "Vim",
       "description": "Die Tasten des JSON-Editors. Emacs und Vim werden geladen, wenn du sie wählst. Formatieren, Übernehmen, Probleme und Suche haben in jedem Modus eigene Tasten."
+    },
+    "playServer": {
+      "title": "Spielserver",
+      "description": "Die Adresse des Servers für das Online-Spiel, zum Beispiel https://play.example.com. Lass das Feld leer, um das Online-Spiel auszuschalten."
+    }
+  },
+  "play": {
+    "title": "Online spielen",
+    "settings": "Einstellungen",
+    "noServer": "Für das Online-Spiel brauchst du die Adresse eines Spielservers. Trage sie in den Einstellungen ein.",
+    "electron": "Das Online-Spiel gibt es auf der Website.",
+    "signInPrompt": "Melde dich an, um online zu spielen.",
+    "signIn": "Mit Discord anmelden",
+    "signOut": "Abmelden",
+    "signedInAs": "Angemeldet als {{name}}",
+    "loading": "Lädt ...",
+    "retry": "Erneut versuchen",
+    "error": "Der Spielserver ist nicht erreichbar: {{message}}",
+    "list": {
+      "title": "Deine Spiele",
+      "empty": "Noch keine Spiele.",
+      "status": {
+        "active": "Aktiv",
+        "locked": "Gesperrt",
+        "archived": "Archiviert"
+      }
+    },
+    "create": {
+      "title": "Spiel erstellen",
+      "button": "Spiel erstellen",
+      "creating": "Wird erstellt ...",
+      "name": "Dein Name",
+      "noGame": "Lade zuerst ein Spiel und erstelle dann daraus ein Online-Spiel.",
+      "forbidden": "Du darfst auf diesem Server keine Spiele erstellen. Öffne einen Einladungslink, um einem Spiel beizutreten.",
+      "note": "Jedes Bild darf höchstens {{size}} MB groß sein.",
+      "invalid": "Der Server hat das Spiel abgelehnt:",
+      "failed": "Das Spiel konnte nicht erstellt werden: {{message}}",
+      "uploadFailed": "{{name}} konnte nicht hochgeladen werden: {{message}}",
+      "tooLarge": "Jedes Bild darf höchstens {{size}} MB groß sein. Diese sind größer: {{names}}"
+    },
+    "join": {
+      "title": "Einem Spiel beitreten",
+      "button": "Spiel beitreten",
+      "joining": "Tritt bei ...",
+      "name": "Dein Name",
+      "color": "Farbe",
+      "closed": "Dieses Spiel ist geschlossen.",
+      "notFound": "Dieser Einladungslink ist ungültig.",
+      "failed": "Der Beitritt ist fehlgeschlagen: {{message}}"
+    },
+    "game": {
+      "denied": "Deine Anmeldung ist abgelaufen.",
+      "locked": "Dieses Spiel ist nicht mehr offen, oder du bist kein Mitspieler.",
+      "back": "Zurück zu deinen Spielen",
+      "open": "Spiel öffnen",
+      "missing": "Spiel nicht gefunden, oder du bist kein Mitspieler."
+    },
+    "board": {
+      "map": "Spielkarte",
+      "noMap": "Dieses Spiel hat keine Karte.",
+      "panel": "Werkzeuge des Spielbretts",
+      "status": {
+        "connecting": "Verbinde...",
+        "online": "Online",
+        "offline": "Offline, verbinde neu...",
+        "locked": "Nur lesen"
+      },
+      "offMap": "Nicht auf dieser Karte: {{hexes}}",
+      "tabs": {
+        "tiles": "Plättchen",
+        "tokens": "Token",
+        "market": "Markt",
+        "trays": "Ablagen",
+        "notes": "Notizen",
+        "history": "Verlauf"
+      },
+      "tiles": {
+        "hint": "Wähle ein Plättchen und klicke dann auf ein Kartenfeld, um es zu legen. Klicke auf ein Kartenfeld, um es auszuwählen.",
+        "left": "{{count}} übrig",
+        "noneLeft": "Keine übrig",
+        "overSupply": "Keine übrig: Wenn du es legst, gehst du über den Vorrat hinaus.",
+        "rotation": "Drehung {{degrees}}°",
+        "rotateLeft": "Nach links drehen",
+        "rotateRight": "Nach rechts drehen",
+        "hex": "Kartenfeld {{hex}}: Plättchen {{tile}}",
+        "empty": "Kartenfeld {{hex}}: kein Plättchen",
+        "rotate": "Plättchen drehen",
+        "remove": "Plättchen entfernen"
+      },
+      "tokens": {
+        "hint": "Wähle eine Gesellschaft und klicke dann auf eine Stelle eines Kartenfelds, um ihren Token zu legen. Klicke auf einen Token, um ihn auszuwählen.",
+        "count": "{{used}} von {{total}} gelegt",
+        "used": "{{used}} gelegt",
+        "overSupply": "Keine übrig: Wenn du ihn legst, gehst du über die Token der Gesellschaft hinaus.",
+        "selected": "{{token}} auf {{hex}}",
+        "remove": "Token entfernen"
+      },
+      "market": {
+        "label": "Aktienmarkt",
+        "none": "Dieses Spiel hat keinen Markt.",
+        "hint": "Wähle eine Gesellschaft und klicke dann auf eine Zelle, um ihren Marker dorthin zu ziehen."
+      },
+      "trays": {
+        "hint": "Jeder Spieler hat eine Ablage, die Bank auch. Neue Dinge kommen aus der Bank.",
+        "bank": "Bank",
+        "empty": "Leer",
+        "move": "{{item}} verschieben",
+        "add": "Aus der Bank hinzufügen",
+        "companies": "Gesellschaften",
+        "tiles": "Plättchen"
+      },
+      "notes": {
+        "label": "Notizen",
+        "hint": "Alle im Spiel sehen diese Notizen. Sie werden gespeichert, wenn du das Feld verlässt.",
+        "tooLong": "Notizen können höchstens {{max}} Zeichen haben, diese haben {{length}}."
+      },
+      "undo": "Rückgängig",
+      "history": {
+        "label": "Züge",
+        "empty": "Noch keine Züge.",
+        "unknownUser": "ein Spieler",
+        "bank": "die Bank"
+      },
+      "banner": {
+        "offline": "Verbindung wird wiederhergestellt...",
+        "locked": "Dieses Spiel ist gesperrt. Du kannst es ansehen, aber nicht ändern."
+      },
+      "moveError": {
+        "message": "Der Server hat einen Zug abgelehnt: {{message}}",
+        "dismiss": "Ausblenden"
+      },
+      "owner": {
+        "menu": "Menü des Besitzers",
+        "copy": "Einladungslink kopieren",
+        "newInvite": "Neuer Einladungslink",
+        "lock": "Spiel sperren",
+        "unlock": "Spiel entsperren",
+        "archive": "Spiel archivieren",
+        "reopen": "Spiel wieder öffnen",
+        "delete": "Spiel löschen",
+        "cancel": "Abbrechen",
+        "link": "Einladungslink",
+        "failed": "Der Spielserver hat das abgelehnt.",
+        "deleteBody": "Das Spiel wird für alle gelöscht, mit allen Zügen und Notizen. Das kann nicht rückgängig gemacht werden."
+      }
+    },
+    "events": {
+      "tile": {
+        "place": "{{user}} hat {{tile}} auf {{hex}} gelegt",
+        "rotate": "{{user}} hat das Plättchen auf {{hex}} gedreht",
+        "remove": "{{user}} hat das Plättchen auf {{hex}} entfernt"
+      },
+      "token": {
+        "place": "{{user}} hat {{token}} auf {{hex}} gesetzt",
+        "remove": "{{user}} hat {{token}} von {{hex}} entfernt"
+      },
+      "market": {
+        "move": "{{user}} hat {{marker}} in Zeile {{row}}, Spalte {{col}} gesetzt"
+      },
+      "tray": {
+        "move": "{{user}} hat {{item}} von {{from}} nach {{to}} verschoben"
+      },
+      "note": {
+        "set": "{{user}} hat die Notizen geändert"
+      },
+      "undo": "{{user}} hat den Zug von {{owner}} rückgängig gemacht"
     }
   },
   "app": {

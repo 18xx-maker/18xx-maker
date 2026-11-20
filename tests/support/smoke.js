@@ -146,6 +146,9 @@ export const routes = [
   ["/games", "games"],
   ["/app", "home"],
   ["/settings", "settings"],
+  ["/play", "play"],
+  ["/play/join/abc", "play-join"],
+  ["/play/g1", "play-game"],
 ];
 
 export const docs = Object.keys(

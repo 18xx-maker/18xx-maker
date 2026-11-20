@@ -564,3 +564,47 @@ describe("inVariation", () => {
     expect(edit.inVariation("trains[0]", "map")).toBe(false);
   });
 });
+
+describe("outline", () => {
+  const data = { hexX: () => 10, hexY: () => 20, scale: 0.5 };
+
+  it("puts the corners around the center of the hex at its scale", () => {
+    expect(edit.outline(data, 0, { x: 1, y: 1 }).split(" ")[0]).toBe(
+      "-33.30,20.00",
+    );
+  });
+
+  it("turns the corners with the orientation", () => {
+    expect(edit.outline(data, 90, { x: 1, y: 1 }).split(" ")[0]).toBe(
+      "10.00,-23.30",
+    );
+  });
+});
+
+describe("toHexLocal", () => {
+  const data = { hexX: () => 100, hexY: () => 200, scale: 0.5 };
+
+  it("converts a point of the map into the units of the hex around its center", () => {
+    expect(
+      edit.toHexLocal(data, 0, { x: 1, y: 1 }, { x: 110, y: 190 }),
+    ).toEqual({ x: 20, y: -20 });
+  });
+
+  it("keeps the point inside the hex of the orientation", () => {
+    const far = { x: 200, y: 300 };
+    expect(edit.toHexLocal(data, 0, { x: 1, y: 1 }, far)).toEqual({
+      x: 86.6,
+      y: 75,
+    });
+    expect(edit.toHexLocal(data, 90, { x: 1, y: 1 }, far)).toEqual({
+      x: 75,
+      y: 86.6,
+    });
+  });
+
+  it("rounds to a tenth", () => {
+    expect(
+      edit.toHexLocal(data, 0, { x: 1, y: 1 }, { x: 100.123, y: 200.456 }),
+    ).toEqual({ x: 0.2, y: 0.9 });
+  });
+});

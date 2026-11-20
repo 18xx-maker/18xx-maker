@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { assoc, dissoc } from "ramda";
 
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -19,11 +20,13 @@ import {
   createSetEditorKeys,
   createSetLanguage,
   createSetOpenExportFolder,
+  createSetPlayServer,
 } from "@/state";
 import {
   selectEditorKeys,
   selectLanguage,
   selectOpenExportFolder,
+  selectPlayServer,
 } from "@/state/selectors";
 import capability from "@/util/capability";
 
@@ -49,6 +52,8 @@ const SettingsPage = () => {
     dispatch(createSetLanguage(language === "system" ? undefined : language));
 
   const editorKeys = useSelector(selectEditorKeys);
+
+  const playServer = useSelector(selectPlayServer);
 
   const openExportFolder = useSelector(selectOpenExportFolder);
 
@@ -136,6 +141,21 @@ const SettingsPage = () => {
       </div>
       <p className="mt-2 text-sm text-muted-foreground">
         {t("settings.editorKeys.description")}
+      </p>
+      <div className="flex flex-row gap-4 justify-start items-center mt-4 max-w-sm">
+        <Label htmlFor="settings-play-server" className="whitespace-nowrap">
+          {t("settings.playServer.title")}
+        </Label>
+        <Input
+          id="settings-play-server"
+          type="url"
+          placeholder="https://"
+          defaultValue={playServer}
+          onChange={(e) => dispatch(createSetPlayServer(e.target.value))}
+        />
+      </div>
+      <p className="mt-2 text-sm text-muted-foreground">
+        {t("settings.playServer.description")}
       </p>
       {capability.electron && (
         <div className="mt-4 max-w-sm">

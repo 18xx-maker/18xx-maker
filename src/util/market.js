@@ -122,6 +122,44 @@ export const getMovementData = (movement) => {
   };
 };
 
+// Where the cell of a market (data of getMarketData) sits, under the title.
+// A 1D or 1Diag market is one list: its cells are row 0, col the index.
+export const cellPosition = (data, row, col) => {
+  const titleY = data.stock.title === false ? 0 : 50;
+  switch (data.type) {
+    case "1D":
+      return { x: col * data.width, y: titleY };
+    case "1Diag":
+      return {
+        x: col * 0.5 * data.width,
+        y: col % 2 === 0 ? titleY : titleY + data.height,
+      };
+    default:
+      return { x: col * data.width, y: row * data.height + titleY };
+  }
+};
+
+// The cells of a market that exist, with their position and size
+export const marketCells = (data) => {
+  const list = data.type === "1D" || data.type === "1Diag";
+  const rows = list ? [data.market] : data.market;
+  return rows.flatMap((list, row) =>
+    (list || []).flatMap((raw, col) => {
+      const cell = normalizeCell(raw);
+      if (!cell) return [];
+      return [
+        {
+          row,
+          col,
+          ...cellPosition(data, row, col),
+          width: (cell.width || 1) * data.width,
+          height: (cell.height || 1) * data.height,
+        },
+      ];
+    }),
+  );
+};
+
 // Given the stock section of a game and the stock config.json section, compute
 // data that we need.
 export const getMarketData = (stock, config) => {
