@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 
 import HistoryPanel from "@/components/play/HistoryPanel";
 import NotesPanel from "@/components/play/NotesPanel";
+import OwnerMenu from "@/components/play/OwnerMenu";
 import PlayMap, { sameToken } from "@/components/play/PlayMap";
 import PlayMarket, { MarketPanel } from "@/components/play/PlayMarket";
 import Presence from "@/components/play/Presence";
@@ -46,7 +47,7 @@ const Banner = ({ play }) => {
   );
 };
 
-const Board = ({ play }) => {
+const Board = ({ play, owner }) => {
   const { t } = useTranslation();
   const { config } = useConfig();
   const { game, state, locked, send } = play;
@@ -105,16 +106,18 @@ const Board = ({ play }) => {
           {t(`play.board.status.${status}`)}
         </Badge>
         <Presence presence={play.presence} seats={play.seats} />
-        <Button
-          variant="outline"
-          size="sm"
-          className="ml-auto"
-          disabled={!canUndo}
-          onClick={() => play.undo()}
-        >
-          <Undo2 aria-hidden="true" />
-          {t("play.board.undo")}
-        </Button>
+        <div className="ml-auto flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={!canUndo}
+            onClick={() => play.undo()}
+          >
+            <Undo2 aria-hidden="true" />
+            {t("play.board.undo")}
+          </Button>
+          {owner && <OwnerMenu {...owner} />}
+        </div>
       </header>
       <Banner play={play} />
       <div className="flex min-h-0 flex-1 flex-col gap-2 md:flex-row">
@@ -229,8 +232,9 @@ const Board = ({ play }) => {
 };
 
 // The board of an online game: the map with the placed tiles and tokens, the
-// tools to place them and who is here. `play` is what usePlayGame gives.
-const PlayBoard = ({ play }) => {
+// tools to place them and who is here. `play` is what usePlayGame gives;
+// `owner` (props of OwnerMenu) is only given to the owner of the game.
+const PlayBoard = ({ play, owner }) => {
   const value = useMemo(
     () => ({ game: play.game, config: play.config }),
     [play.game, play.config],
@@ -238,7 +242,7 @@ const PlayBoard = ({ play }) => {
   return (
     <GameContext.Provider value={value}>
       <MapOrientation>
-        <Board play={play} />
+        <Board play={play} owner={owner} />
       </MapOrientation>
     </GameContext.Provider>
   );

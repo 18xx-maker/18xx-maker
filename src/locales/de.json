@@ -869,6 +869,19 @@
       "banner": {
         "offline": "Verbindung wird wiederhergestellt...",
         "locked": "Dieses Spiel ist gesperrt. Du kannst es ansehen, aber nicht ändern."
+      },
+      "owner": {
+        "menu": "Menü des Besitzers",
+        "copy": "Einladungslink kopieren",
+        "newInvite": "Neuer Einladungslink",
+        "lock": "Spiel sperren",
+        "unlock": "Spiel entsperren",
+        "archive": "Spiel archivieren",
+        "delete": "Spiel löschen",
+        "cancel": "Abbrechen",
+        "link": "Einladungslink",
+        "failed": "Der Spielserver hat das abgelehnt.",
+        "deleteBody": "Das Spiel wird für alle gelöscht, mit allen Zügen und Notizen. Das kann nicht rückgängig gemacht werden."
       }
     },
     "events": {

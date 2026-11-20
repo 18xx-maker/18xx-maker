@@ -869,6 +869,19 @@
       "banner": {
         "offline": "Reconnecting...",
         "locked": "This game is locked. You can look at it, but not change it."
+      },
+      "owner": {
+        "menu": "Owner menu",
+        "copy": "Copy invite link",
+        "newInvite": "New invite link",
+        "lock": "Lock game",
+        "unlock": "Unlock game",
+        "archive": "Archive game",
+        "delete": "Delete game",
+        "cancel": "Cancel",
+        "link": "Invite link",
+        "failed": "The play server refused this.",
+        "deleteBody": "This deletes the game for everyone, with its moves and notes. This cannot be undone."
       }
     },
     "events": {
