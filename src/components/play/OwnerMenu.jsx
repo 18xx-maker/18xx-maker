@@ -128,6 +128,7 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
           <Button
             variant="outline"
             size="sm"
+            className="h-10 w-10 md:h-8 md:w-auto"
             aria-label={t("play.board.owner.menu")}
           >
             <Settings aria-hidden="true" />

@@ -57,13 +57,13 @@ const MoveError = ({ play }) => {
     <div
       data-testid="play-error"
       role="alert"
-      className="flex items-center gap-3 rounded-md border border-destructive px-3 py-2 text-sm text-destructive"
+      className="flex items-center gap-3 rounded-md border border-destructive px-3 py-2 text-sm text-destructive dark:border-red-400 dark:text-red-400"
     >
       <p>{t("play.board.moveError.message", { message: play.error })}</p>
       <Button
         variant="ghost"
         size="icon"
-        className="ml-auto h-7 w-7"
+        className="ml-auto size-10 shrink-0 md:size-8"
         aria-label={t("play.board.moveError.dismiss")}
         onClick={() => play.dismissError?.()}
       >
@@ -136,6 +136,7 @@ const Board = ({ play, owner }) => {
           <Button
             variant="outline"
             size="sm"
+            className="h-10 md:h-8"
             disabled={!canUndo}
             onClick={() => play.undo()}
           >
@@ -151,7 +152,7 @@ const Board = ({ play, owner }) => {
         {/* The map stays mounted under the market, keeping its view */}
         <div
           className={cn(
-            "min-h-64 flex-1 overflow-hidden rounded-md border",
+            "min-h-64 flex-1 overflow-hidden rounded-md border bg-white text-black",
             tab === "market" && "hidden",
           )}
         >
@@ -166,7 +167,7 @@ const Board = ({ play, owner }) => {
           />
         </div>
         {tab === "market" && (
-          <div className="min-h-64 flex-1 overflow-hidden rounded-md border">
+          <div className="min-h-64 flex-1 overflow-hidden rounded-md border bg-white text-black">
             <PlayMarket
               game={game}
               config={config}
@@ -180,7 +181,7 @@ const Board = ({ play, owner }) => {
           <div
             role="tablist"
             aria-label={t("play.board.panel")}
-            className="flex flex-wrap gap-1"
+            className="flex shrink-0 gap-1 overflow-x-auto"
           >
             {TABS.map((name) => (
               <Button
@@ -191,6 +192,7 @@ const Board = ({ play, owner }) => {
                 aria-controls="play-tab-panel"
                 variant={tab === name ? "secondary" : "ghost"}
                 size="sm"
+                className="h-10 shrink-0 md:h-9"
                 onClick={() => setTab(name)}
               >
                 {t(`play.board.tabs.${name}`)}
