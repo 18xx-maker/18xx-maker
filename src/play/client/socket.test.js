@@ -368,6 +368,41 @@ describe("play websocket session", () => {
     });
   });
 
+  it("clears a rejected move's error when a later move of ours lands", () => {
+    const { join, session, sock, last } = setup({ userId: "u1" });
+    join();
+    session.send({ type: "undo", target: 5 });
+    session.send(note("y"));
+    sock().receive({ t: "error", code: "invalid", message: "bad undo" });
+    // someone else's move keeps it
+    sock().receive({ t: "event", event: ev(1, "other") });
+    expect(last().error).toBe("bad undo");
+    sock().receive({ t: "rebase", currentSeq: 1 });
+    join({ t: "events", events: [] }, 1);
+    sock().receive({ t: "event", event: ev(2, "y", "u1") });
+    expect(last()).toMatchObject({ error: null, pending: 0 });
+  });
+
+  it("clears a server error on the next accepted move", () => {
+    const { join, session, sock, last } = setup();
+    join();
+    session.send(note("x"));
+    sock().receive({ t: "error", code: "server_error" });
+    expect(last().error).toBe("server_error");
+    session.send(note("y"));
+    sock().receive({ t: "event", event: ev(1, "y", "u2") });
+    expect(last().error).toBeNull();
+  });
+
+  it("clears the error when it is dismissed", () => {
+    const { join, session, sock, last } = setup();
+    join();
+    session.send(note("x"));
+    sock().receive({ t: "error", code: "invalid", message: "bad" });
+    session.clearError();
+    expect(last()).toMatchObject({ status: "online", error: null });
+  });
+
   it("reconnects with backoff 1s, 2s, 4s ... capped at 15s", () => {
     const { sock, last, pendingTimers, runTimers } = setup();
     const delays = [];

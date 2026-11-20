@@ -870,6 +870,10 @@
         "offline": "Reconnecting...",
         "locked": "This game is locked. You can look at it, but not change it."
       },
+      "moveError": {
+        "message": "The server refused a move: {{message}}",
+        "dismiss": "Dismiss"
+      },
       "owner": {
         "menu": "Owner menu",
         "copy": "Copy invite link",
