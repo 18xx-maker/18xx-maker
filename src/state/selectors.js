@@ -23,6 +23,12 @@ export const selectLanguage = (state) => {
   return typeof language === "string" && language ? language : undefined;
 };
 
+// The url of the play server, empty when none is set
+export const selectPlayServer = (state) => {
+  const url = state.settings?.playServer;
+  return typeof url === "string" ? url : "";
+};
+
 // Off unless the setting is exactly true (the app shows exports in the folder)
 export const selectOpenExportFolder = (state) =>
   state.settings?.openExportFolder === true;

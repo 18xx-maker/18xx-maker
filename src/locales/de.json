@@ -742,6 +742,10 @@
       "emacs": "Emacs",
       "vim": "Vim",
       "description": "Die Tasten des JSON-Editors. Emacs und Vim werden geladen, wenn du sie wählst. Formatieren, Übernehmen, Probleme und Suche haben in jedem Modus eigene Tasten."
+    },
+    "playServer": {
+      "title": "Spielserver",
+      "description": "Die Adresse des Servers für das Online-Spiel, zum Beispiel https://play.example.com. Lass das Feld leer, um das Online-Spiel auszuschalten."
     }
   },
   "app": {

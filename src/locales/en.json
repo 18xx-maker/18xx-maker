@@ -742,6 +742,10 @@
       "emacs": "Emacs",
       "vim": "Vim",
       "description": "The keys of the JSON editor. Emacs and Vim load when you choose them. Format, apply, problems and search have their own keys in each mode."
+    },
+    "playServer": {
+      "title": "Play server",
+      "description": "The address of the server for online play, for example https://play.example.com. Leave it empty to turn online play off."
     }
   },
   "app": {

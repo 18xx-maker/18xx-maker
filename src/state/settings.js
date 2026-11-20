@@ -5,6 +5,7 @@ export const SET_SETTINGS = "SET_SETTINGS";
 export const SET_SIDEBAR_OPEN = "SET_SIDEBAR_OPEN";
 export const SET_LANGUAGE = "SET_LANGUAGE";
 export const SET_OPEN_EXPORT_FOLDER = "SET_OPEN_EXPORT_FOLDER";
+export const SET_PLAY_SERVER = "SET_PLAY_SERVER";
 export const SET_EDITOR_KEYS = "SET_EDITOR_KEYS";
 
 export const createSetSettings = (settings) => ({
@@ -25,6 +26,11 @@ export const createSetLanguage = (language) => ({
 export const createSetOpenExportFolder = (open) => ({
   type: SET_OPEN_EXPORT_FOLDER,
   open,
+});
+
+export const createSetPlayServer = (url) => ({
+  type: SET_PLAY_SERVER,
+  url,
 });
 
 export const createSetEditorKeys = (keys) => ({
@@ -58,6 +64,17 @@ export const settingsReducer = (state = {}, action) => {
       return action.keys === "vim" || action.keys === "emacs"
         ? { ...state, editorKeys: action.keys }
         : dissoc("editorKeys", state);
+    case SET_PLAY_SERVER: {
+      // Unset is the default, so only an http(s) url is stored, without
+      // trailing slashes. Anything else that is not empty is ignored.
+      if (action.url === "" || action.url == null) {
+        return dissoc("playServer", state);
+      }
+      const url = typeof action.url === "string" ? action.url.trim() : "";
+      return /^https?:\/\/./i.test(url)
+        ? { ...state, playServer: url.replace(/\/+$/, "") }
+        : state;
+    }
     default:
       return state;
   }
