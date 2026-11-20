@@ -1,9 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useContext, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 import { mergeDeepRight } from "ramda";
 
+import GameContext from "@/context/GameContext";
 import { useGame, useValidation } from "@/hooks";
 import { useLocation } from "@/router";
 import { createAlert, createResetConfig, createSetConfig } from "@/state";
@@ -35,17 +36,25 @@ export const useConfig = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const game = useGame();
+  const override = useContext(GameContext);
   const location = useLocation();
   const { validateConfigSchema, checkConfigSchema } = useValidation();
 
   const storedConfig = useSelector((state) => state.config);
   const {
-    config,
+    config: resolved,
     searchConfig,
     gameConfig,
     gameConfigIgnored,
     userLayerConfig,
   } = useSelector((state) => selectConfig(state, location.search, game));
+
+  // A context config (the play game) is laid over the resolved one
+  const config = useMemo(
+    () =>
+      override?.config ? mergeDeepRight(resolved, override.config) : resolved,
+    [resolved, override],
+  );
 
   const setConfig = useCallback(
     async (config) => {
