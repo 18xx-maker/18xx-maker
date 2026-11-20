@@ -10,7 +10,6 @@ import HistoryPanel from "@/components/play/HistoryPanel";
 import NotesPanel from "@/components/play/NotesPanel";
 import PlayMap, { sameToken } from "@/components/play/PlayMap";
 import PlayMarket, { MarketPanel } from "@/components/play/PlayMarket";
-import { BackLink } from "@/components/play/PlayNotice";
 import Presence from "@/components/play/Presence";
 import TilePanel from "@/components/play/TilePanel";
 import TokenPanel from "@/components/play/TokenPanel";
@@ -26,34 +25,23 @@ const TABS = ["tiles", "tokens", "market", "trays", "notes", "history"];
 const STATUSES = ["connecting", "online", "offline"];
 
 // What the connection or the game says about itself, apart from the badge
+// (a game that failed to load never gets here, PlayGamePage shows that)
 const Banner = ({ play }) => {
   const { t } = useTranslation();
-  let text = null;
-  let alert = false;
-  let back = false;
-  if (play.status === "denied") {
-    text = t("play.board.banner.denied");
-    alert = back = true;
-  } else if (play.status === "error") {
-    text = play.error
-      ? t("play.board.banner.error", { message: play.error })
-      : t("play.board.banner.errorNoMessage");
-    alert = back = true;
-  } else if (play.locked) {
-    text = t("play.board.banner.locked");
-  } else if (play.status === "offline") {
-    text = t("play.board.banner.offline");
-  }
+  const text = play.locked
+    ? t("play.board.banner.locked")
+    : play.status === "offline"
+      ? t("play.board.banner.offline")
+      : null;
   if (!text) return null;
 
   return (
     <div
       data-testid="play-banner"
-      role={alert ? "alert" : "status"}
+      role="status"
       className="flex flex-wrap items-center gap-3 rounded-md border bg-muted px-3 py-2 text-sm"
     >
       <p>{text}</p>
-      {back && <BackLink />}
     </div>
   );
 };
@@ -62,7 +50,8 @@ const Board = ({ play }) => {
   const { t } = useTranslation();
   const { config } = useConfig();
   const { game, state, locked, send } = play;
-  const canUndo = !locked && undoTarget(play.log || []) !== null;
+  const target = useMemo(() => undoTarget(play.log || []), [play.log]);
+  const canUndo = !locked && target !== null;
   const [tab, setTab] = useState("tiles");
   const [tile, setTile] = useState(null);
   const [rotation, setRotation] = useState(0);

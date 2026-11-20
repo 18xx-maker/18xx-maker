@@ -811,7 +811,6 @@
         "offline": "Offline, verbinde neu...",
         "locked": "Nur lesen"
       },
-      "presence": "Gerade da: {{names}}",
       "offMap": "Nicht auf dieser Karte: {{hexes}}",
       "tabs": {
         "tiles": "Plättchen",
@@ -870,10 +869,7 @@
       },
       "banner": {
         "offline": "Verbindung wird wiederhergestellt...",
-        "denied": "Du bist nicht in diesem Spiel.",
-        "locked": "Dieses Spiel ist gesperrt. Du kannst es ansehen, aber nicht ändern.",
-        "error": "Etwas ist schiefgelaufen: {{message}}",
-        "errorNoMessage": "Etwas ist schiefgelaufen."
+        "locked": "Dieses Spiel ist gesperrt. Du kannst es ansehen, aber nicht ändern."
       }
     },
     "events": {

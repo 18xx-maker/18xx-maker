@@ -811,7 +811,6 @@
         "offline": "离线,正在重新连接...",
         "locked": "只读"
       },
-      "presence": "当前在场:{{names}}",
       "offMap": "不在此地图上:{{hexes}}",
       "tabs": {
         "tiles": "地块",
@@ -870,10 +869,7 @@
       },
       "banner": {
         "offline": "正在重新连接...",
-        "denied": "你不在这局游戏中。",
-        "locked": "这局游戏已锁定。你可以查看,但不能修改。",
-        "error": "出错了:{{message}}",
-        "errorNoMessage": "出错了。"
+        "locked": "这局游戏已锁定。你可以查看,但不能修改。"
       }
     },
     "events": {
