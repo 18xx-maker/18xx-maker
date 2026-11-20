@@ -185,6 +185,54 @@ describe("login", () => {
   });
 });
 
+describe("every sign in link stores its nonce", () => {
+  const clickSignIn = async (url, routes) => {
+    fakeServer(routes);
+    const { user } = renderApp(url, { settings });
+    const link = await screen.findByRole("link", {
+      name: "Sign in with Discord",
+    });
+    link.addEventListener("click", (e) => e.preventDefault());
+    await user.click(link);
+    const nonce = new URL(link.href).searchParams.get("nonce");
+    expect(nonce).toMatch(/^[A-Za-z0-9_-]{16,64}$/);
+    expect(window.sessionStorage.getItem("play-login-nonce")).toBe(nonce);
+  };
+
+  it.for([
+    ["the list page", "/play", {}],
+    ["the game page without a token", "/play/g1", {}],
+    [
+      "the join page",
+      "/play/join/abc",
+      { "GET /invites/abc": [200, { gameId: "g3", title: "Spring Game" }] },
+    ],
+    [
+      "the game page when the token is denied",
+      "/play/g1",
+      {
+        "GET /me": [200, me],
+        "GET /games/g1": [401, { error: "Unauthorized" }],
+      },
+    ],
+  ])("on %s", async ([, url, routes]) => {
+    if (routes["GET /me"]) setToken(BASE, "tok");
+    await clickSignIn(url, routes);
+    expect(window.sessionStorage.getItem("play-login-nonce")).toBeTruthy();
+  });
+});
+
+describe("a fragment that is not a login return", () => {
+  it.for(["#error", "#token", "#other=x"])("leaves %s alone", async (hash) => {
+    fakeServer({});
+    const { router } = renderApp(`/play${hash}`, { settings });
+    await screen.findByRole("link", { name: "Sign in with Discord" });
+    expect(router.state.location.hash).toBe(hash);
+    expect(screen.queryByTestId("alert")).not.toBeInTheDocument();
+    expect(getToken(BASE)).toBeNull();
+  });
+});
+
 describe("game list", () => {
   it("links each game to its page", async () => {
     signedIn({
