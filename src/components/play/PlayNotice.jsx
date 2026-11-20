@@ -16,7 +16,15 @@ export const BackLink = () => {
 // What a play page shows instead of its content: no server, the desktop app,
 // signed out, still loading or a server that does not answer. children go
 // before the sign in link.
-const PlayNotice = ({ status, signInUrl, error, retry, back, children }) => {
+const PlayNotice = ({
+  status,
+  signInUrl,
+  signIn,
+  error,
+  retry,
+  back,
+  children,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -35,7 +43,9 @@ const PlayNotice = ({ status, signInUrl, error, retry, back, children }) => {
         <>
           <p>{t("play.signInPrompt")}</p>
           <Button asChild>
-            <a href={signInUrl}>{t("play.signIn")}</a>
+            <a href={signInUrl} onClick={signIn}>
+              {t("play.signIn")}
+            </a>
           </Button>
         </>
       )}

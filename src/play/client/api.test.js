@@ -25,8 +25,8 @@ const setup = (response = respond(200, {}), options = {}) => {
 describe("play rest client", () => {
   it("builds the login url and normalizes the base url", () => {
     const { api } = setup(undefined, { baseUrl: "https://s.test/" });
-    expect(api.loginUrl("https://s/play")).toBe(
-      "https://s.test/auth/discord/login?return=https%3A%2F%2Fs%2Fplay",
+    expect(api.loginUrl("https://s/play", "nonce-1234567890ab")).toBe(
+      "https://s.test/auth/discord/login?return=https%3A%2F%2Fs%2Fplay&nonce=nonce-1234567890ab",
     );
     expect(api.assetUrl("g1", "a b.png")).toBe(
       "https://s.test/games/g1/assets/a%20b.png",

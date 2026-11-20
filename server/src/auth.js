@@ -26,14 +26,18 @@ const allowedReturn = (value, config) => {
   }
 };
 
-const makeState = (ret, secret) => {
+// The browser's own random value of a login: the return fragment is accepted
+// only by the browser that made it
+const NONCE = /^[A-Za-z0-9_-]{16,64}$/;
+
+const makeState = (ret, nonce, secret) => {
   const payload = Buffer.from(
-    JSON.stringify({ return: ret, exp: Date.now() + STATE_TTL_MS }),
+    JSON.stringify({ return: ret, nonce, exp: Date.now() + STATE_TTL_MS }),
   ).toString("base64url");
   return `${payload}.${sign(payload, secret)}`;
 };
 
-// Returns the return URL string, or null when the state is invalid or expired
+// Returns { return, nonce }, or null when the state is invalid or expired
 const readState = (state, secret) => {
   if (typeof state !== "string") return null;
   const [payload, mac, ...rest] = state.split(".");
@@ -48,7 +52,8 @@ const readState = (state, secret) => {
   try {
     const data = JSON.parse(Buffer.from(payload, "base64url").toString());
     if (typeof data.exp !== "number" || data.exp < Date.now()) return null;
-    return typeof data.return === "string" ? data.return : null;
+    if (typeof data.return !== "string" || !NONCE.test(data.nonce)) return null;
+    return { return: data.return, nonce: data.nonce };
   } catch {
     return null;
   }
@@ -100,25 +105,37 @@ export const authRoutes = ({ pool, config, sockets }) => {
   app.get("/auth/discord/login", (c) => {
     const ret = allowedReturn(c.req.query("return"), config);
     if (!ret) return c.json({ error: "Return URL not allowed" }, 400);
+    const nonce = c.req.query("nonce");
+    if (!NONCE.test(nonce)) {
+      return c.json(
+        { error: "nonce must be 16 to 64 base64url characters" },
+        400,
+      );
+    }
 
     const url = new URL(`${discord.authBase}/authorize`);
     url.searchParams.set("client_id", discord.clientId);
     url.searchParams.set("response_type", "code");
     url.searchParams.set("scope", "identify guilds");
     url.searchParams.set("redirect_uri", redirectUri);
-    url.searchParams.set("state", makeState(ret.href, discord.clientSecret));
+    url.searchParams.set(
+      "state",
+      makeState(ret.href, nonce, discord.clientSecret),
+    );
     return c.redirect(url.href, 302);
   });
 
   app.get("/auth/discord/callback", async (c) => {
-    const returned = readState(c.req.query("state"), discord.clientSecret);
+    const state = readState(c.req.query("state"), discord.clientSecret);
     // Re-check the origin: the allow list may have changed since login
-    const ret = returned && allowedReturn(returned, config);
+    const ret = state && allowedReturn(state.return, config);
     if (!ret) return c.json({ error: "Invalid state" }, 400);
+    const { nonce } = state;
     // Discord sends error (access_denied when the user cancels) instead of code
     const denied = c.req.query("error");
     if (denied !== undefined) {
-      ret.hash = `error=${OAUTH_ERROR.test(denied) ? denied : "login_failed"}`;
+      const error = OAUTH_ERROR.test(denied) ? denied : "login_failed";
+      ret.hash = `error=${error}&nonce=${nonce}`;
       return c.redirect(ret.href, 302);
     }
     const code = c.req.query("code");
@@ -175,7 +192,7 @@ export const authRoutes = ({ pool, config, sockets }) => {
       [sha256(sessionToken), rows[0].id, config.limits.sessionTtlDays],
     );
 
-    ret.hash = `token=${sessionToken}`;
+    ret.hash = `token=${sessionToken}&nonce=${nonce}`;
     return c.redirect(ret.href, 302);
   });
 

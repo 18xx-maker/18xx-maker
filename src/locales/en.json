@@ -757,6 +757,8 @@
     "electron": "Online play is available on the website.",
     "signInPrompt": "Sign in to play online.",
     "signIn": "Sign in with Discord",
+    "signInFailed": "Sign in did not complete, try again",
+    "signInCancelled": "Discord sign in was cancelled",
     "signOut": "Sign out",
     "signedInAs": "Signed in as {{name}}",
     "loading": "Loading...",
