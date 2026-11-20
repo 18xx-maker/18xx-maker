@@ -66,9 +66,11 @@ describe.skipIf(!hasDb)("play client against the real server", () => {
   // The redirect flow from the client's login url: the (fake) Discord sends
   // the browser to the callback, which sends it back with #token=
   const login = async (code) => {
-    const start = await fetch(createApi({ baseUrl: base }).loginUrl(ORIGIN), {
-      redirect: "manual",
-    });
+    const nonce = "n".repeat(22);
+    const start = await fetch(
+      createApi({ baseUrl: base }).loginUrl(ORIGIN, nonce),
+      { redirect: "manual" },
+    );
     expect(start.status).toBe(302);
     const authorize = new URL(start.headers.get("location"));
     const callback = new URL(authorize.searchParams.get("redirect_uri"));
@@ -79,7 +81,9 @@ describe.skipIf(!hasDb)("play client against the real server", () => {
     });
     const location = new URL(done.headers.get("location"));
     expect(location.origin).toBe(ORIGIN);
-    return /^#token=(.+)$/.exec(location.hash)[1];
+    const fragment = new URLSearchParams(location.hash.slice(1));
+    expect(fragment.get("nonce")).toBe(nonce);
+    return fragment.get("token");
   };
 
   const open = (token, gameId, userId) => {

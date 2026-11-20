@@ -756,6 +756,8 @@
     "electron": "Das Online-Spiel gibt es auf der Website.",
     "signInPrompt": "Melde dich an, um online zu spielen.",
     "signIn": "Mit Discord anmelden",
+    "signInFailed": "Die Anmeldung wurde nicht abgeschlossen, versuche es erneut",
+    "signInCancelled": "Die Discord-Anmeldung wurde abgebrochen",
     "signOut": "Abmelden",
     "signedInAs": "Angemeldet als {{name}}",
     "loading": "Lädt ...",

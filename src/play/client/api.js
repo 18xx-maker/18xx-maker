@@ -55,8 +55,8 @@ export const createApi = ({ baseUrl, token, fetch = globalThis.fetch }) => {
   };
 
   return {
-    loginUrl: (returnUrl) =>
-      `${base}/auth/discord/login?return=${enc(returnUrl)}`,
+    loginUrl: (returnUrl, nonce) =>
+      `${base}/auth/discord/login?return=${enc(returnUrl)}&nonce=${enc(nonce)}`,
     me: () => request("GET", "/me"),
     logout: () => request("POST", "/auth/logout"),
     listGames: () => request("GET", "/games"),

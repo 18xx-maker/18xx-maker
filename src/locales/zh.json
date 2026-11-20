@@ -756,6 +756,8 @@
     "electron": "在线游戏仅在网站上提供。",
     "signInPrompt": "登录后即可在线游戏。",
     "signIn": "使用 Discord 登录",
+    "signInFailed": "登录未完成，请重试",
+    "signInCancelled": "Discord 登录已取消",
     "signOut": "退出登录",
     "signedInAs": "已登录为 {{name}}",
     "loading": "加载中...",

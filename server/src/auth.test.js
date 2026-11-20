@@ -8,6 +8,7 @@ import { createApp } from "./app.js";
 import { loadConfig } from "./config.js";
 
 const RETURN = "http://app.test/play";
+const NONCE = "abcdefghijklmnop_-0123";
 
 describe.skipIf(!hasDb)("discord auth", () => {
   let db, discord, app, config;
@@ -53,9 +54,9 @@ describe.skipIf(!hasDb)("discord auth", () => {
     await db.close();
   });
 
-  const login = async (ret = RETURN) => {
+  const login = async (ret = RETURN, nonce = NONCE) => {
     const res = await app.request(
-      `/auth/discord/login?return=${encodeURIComponent(ret)}`,
+      `/auth/discord/login?return=${encodeURIComponent(ret)}&nonce=${nonce}`,
     );
     return res;
   };
@@ -72,10 +73,9 @@ describe.skipIf(!hasDb)("discord auth", () => {
     );
   };
 
-  const tokenOf = (res) =>
-    new URLSearchParams(new URL(res.headers.get("location")).hash.slice(1)).get(
-      "token",
-    );
+  const fragmentOf = (res) =>
+    new URLSearchParams(new URL(res.headers.get("location")).hash.slice(1));
+  const tokenOf = (res) => fragmentOf(res).get("token");
 
   it("login redirects to Discord with the state and scopes", async () => {
     const res = await login();
@@ -95,6 +95,54 @@ describe.skipIf(!hasDb)("discord auth", () => {
     expect((await login("http://evil.test/x")).status).toBe(400);
     expect((await login("not a url")).status).toBe(400);
     expect((await app.request("/auth/discord/login")).status).toBe(400);
+  });
+
+  it("login needs a valid nonce", async () => {
+    const path = `/auth/discord/login?return=${encodeURIComponent(RETURN)}`;
+    expect((await app.request(path)).status).toBe(400);
+    for (const nonce of [
+      "short",
+      "x".repeat(65),
+      "has space 12345678",
+      "a".repeat(15) + "!",
+    ]) {
+      const res = await app.request(
+        `${path}&nonce=${encodeURIComponent(nonce)}`,
+      );
+      expect(res.status).toBe(400);
+      expect((await res.json()).error).toMatch(/nonce/);
+    }
+    expect((await login(RETURN, "a".repeat(16))).status).toBe(302);
+    expect((await login(RETURN, "a".repeat(64))).status).toBe(302);
+  });
+
+  it("callback returns the nonce of the login with the token", async () => {
+    const res = await signIn("in");
+    expect(fragmentOf(res).get("nonce")).toBe(NONCE);
+    expect(fragmentOf(res).get("token")).toBeTruthy();
+  });
+
+  it("callback refuses a state with a swapped or missing nonce", async () => {
+    const good = await stateOf();
+    const [payload, mac] = good.split(".");
+    const data = JSON.parse(Buffer.from(payload, "base64url").toString());
+    const swapped = Buffer.from(
+      JSON.stringify({ ...data, nonce: "z".repeat(22) }),
+    ).toString("base64url");
+    const rest = { return: data.return, exp: data.exp };
+    const missing = Buffer.from(JSON.stringify(rest)).toString("base64url");
+    const signed = (p) =>
+      `${p}.${createHmac("sha256", "secret").update(p).digest("base64url")}`;
+    for (const state of [
+      `${swapped}.${mac}`,
+      `${missing}.${mac}`,
+      signed(missing),
+    ]) {
+      const res = await app.request(
+        `/auth/discord/callback?code=in&state=${encodeURIComponent(state)}`,
+      );
+      expect(res.status).toBe(400);
+    }
   });
 
   it("callback creates a user and a session and redirects with the token", async () => {
@@ -141,12 +189,16 @@ describe.skipIf(!hasDb)("discord auth", () => {
       createHmac("sha256", key).update(p).digest("base64url");
 
     const expiredPayload = Buffer.from(
-      JSON.stringify({ return: RETURN, exp: Date.now() - 1000 }),
+      JSON.stringify({ return: RETURN, nonce: NONCE, exp: Date.now() - 1000 }),
     ).toString("base64url");
     const expired = `${expiredPayload}.${sign(expiredPayload, "secret")}`;
 
     const evilPayload = Buffer.from(
-      JSON.stringify({ return: "http://evil.test/", exp: Date.now() + 60000 }),
+      JSON.stringify({
+        return: "http://evil.test/",
+        nonce: NONCE,
+        exp: Date.now() + 60000,
+      }),
     ).toString("base64url");
     const evil = `${evilPayload}.${sign(evilPayload, "secret")}`;
 
@@ -260,7 +312,7 @@ describe.skipIf(!hasDb)("discord auth", () => {
     const state = new URL(
       (
         await short.request(
-          `/auth/discord/login?return=${encodeURIComponent(RETURN)}`,
+          `/auth/discord/login?return=${encodeURIComponent(RETURN)}&nonce=${NONCE}`,
         )
       ).headers.get("location"),
     ).searchParams.get("state");
@@ -322,7 +374,7 @@ describe.skipIf(!hasDb)("discord auth", () => {
     expect(res.status).toBe(302);
     const location = new URL(res.headers.get("location"));
     expect(location.origin + location.pathname).toBe(RETURN);
-    expect(location.hash).toBe("#error=access_denied");
+    expect(location.hash).toBe(`#error=access_denied&nonce=${NONCE}`);
     const after = (await db.pool.query("select count(*)::int n from sessions"))
       .rows[0].n;
     expect(after).toBe(before);
@@ -332,7 +384,7 @@ describe.skipIf(!hasDb)("discord auth", () => {
       `/auth/discord/callback?error=${encodeURIComponent("<b>x</b>")}&state=${encodeURIComponent(await stateOf())}`,
     );
     expect(new URL(odd.headers.get("location")).hash).toBe(
-      "#error=login_failed",
+      `#error=login_failed&nonce=${NONCE}`,
     );
   });
 
