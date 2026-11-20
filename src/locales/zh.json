@@ -902,7 +902,6 @@
         "webhookTitle": "Discord 通知",
         "webhookBody": "在此游戏中有人行动时,向 Discord 频道发送消息。每次行动发送一行合并的消息,包含行动者和变化内容,绝不包含笔记的文字。",
         "webhookLabel": "Webhook 网址",
-        "webhookPlaceholder": "粘贴 Discord Webhook 网址。它保存在服务器上,之后不会再显示。",
         "webhookHint": "请使用类似 https://discord.com/api/webhooks/123456/token 的网址。",
         "webhookOn": "通知已开启",
         "webhookSave": "保存",
