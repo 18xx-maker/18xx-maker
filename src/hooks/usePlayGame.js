@@ -31,6 +31,9 @@ export const usePlayGame = (
   const [snapshot, setSnapshot] = useState(EMPTY);
   const [epoch, setEpoch] = useState(0);
   const [assets, setAssets] = useState(undefined);
+  // The request the loaded game answers, so a changed game never loads the
+  // images of the one before
+  const [loadedFor, setLoadedFor] = useState(null);
   const session = useRef(null);
   const depsRef = useRef(deps);
   depsRef.current = deps;
@@ -43,8 +46,13 @@ export const usePlayGame = (
     setSnapshot(EMPTY);
 
     const { api = createApi({ baseUrl, token }) } = depsRef.current;
+    const request = JSON.stringify([baseUrl, token, gameId, userId, watch]);
     (watch !== undefined ? api.watchGame(watch) : api.getGame(gameId))
-      .then((game) => live && setLoaded(game))
+      .then((game) => {
+        if (!live) return;
+        setLoadedFor({ request });
+        setLoaded(game);
+      })
       .catch((error) => {
         if (live) setFailed(failure(error));
       });
@@ -60,7 +68,8 @@ export const usePlayGame = (
   const assetKey = Array.isArray(names) ? JSON.stringify(names) : "";
   useEffect(() => {
     setAssets(undefined);
-    if (!assetKey) return;
+    const request = JSON.stringify([baseUrl, token, gameId, userId, watch]);
+    if (!assetKey || loadedFor?.request !== request) return;
     let live = true;
     const list = JSON.parse(assetKey);
     const { api = createApi({ baseUrl, token }) } = depsRef.current;
@@ -68,13 +77,13 @@ export const usePlayGame = (
       watch !== undefined
         ? (name) => api.watchAsset(watch, name)
         : (name) => api.getAsset(gameId, name);
-    loadAssets({ fetchAsset, names: list })
+    loadAssets({ fetchAsset, names: list, isCancelled: () => !live })
       .then((map) => live && setAssets(map))
       .catch(() => {});
     return () => {
       live = false;
     };
-  }, [assetKey, baseUrl, token, gameId, watch]);
+  }, [assetKey, loadedFor, baseUrl, token, gameId, userId, watch]);
 
   // The session follows it. A session that saw the lock stays locked for good,
   // so unlocking (a new epoch) opens a fresh one.
