@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import Icon from "@/components/atoms/Icon";
 import Map from "@/components/map/Map";
 
 import GameContext from "@/context/GameContext";
@@ -58,5 +59,28 @@ describe("GameContext", () => {
     };
     await drawSvg(<Probe />);
     expect(seen).toBe(base);
+  });
+
+  it("draws no custom image of the store's game for the context game", async () => {
+    // The store holds the custom images of the open game (18Test)
+    const assets = {
+      [base.meta.slug]: {
+        icons: {
+          star: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><rect width='10' height='10'/></svg>",
+        },
+        logos: {},
+        trains: {},
+      },
+    };
+    const own = await drawSvg(<Icon type="custom/star" />, { assets });
+    expect(all(own, "rect")).toHaveLength(1);
+
+    const play = await drawSvg(
+      <GameContext.Provider value={{ game: other, config: {} }}>
+        <Icon type="custom/star" />
+      </GameContext.Provider>,
+      { assets },
+    );
+    expect(all(play, "rect")).toHaveLength(0);
   });
 });
