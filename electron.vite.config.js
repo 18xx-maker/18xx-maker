@@ -5,6 +5,8 @@ import react from "@vitejs/plugin-react-swc";
 import { defineConfig, externalizeDepsPlugin } from "electron-vite";
 import { svgPlugin as svg } from "vite-plugin-fast-react-svg";
 
+import { electronCspPlugin } from "./scripts/electronCsp.js";
+
 export default defineConfig({
   main: {
     build: {
@@ -52,7 +54,7 @@ export default defineConfig({
     json: {
       stringify: true,
     },
-    plugins: [react(), svg(), tailwindcss()],
+    plugins: [react(), svg(), tailwindcss(), electronCspPlugin()],
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "src"),
