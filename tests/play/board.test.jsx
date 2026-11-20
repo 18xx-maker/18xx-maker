@@ -1,74 +1,21 @@
 import { fireEvent, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { useMemo, useState } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import PlayBoard from "@/components/play/PlayBoard";
-
-import { games } from "@/data";
 import { setToken } from "@/play/client/tokenStore";
-import { reduce } from "@/play/reduce";
 
 import { renderApp } from "@tests/support/helpers.jsx";
+import {
+  cell,
+  drag,
+  game,
+  mount,
+  option,
+  svgOf,
+  tab,
+  tap,
+} from "@tests/support/playBoard.jsx";
 import { BASE, fakeServer } from "@tests/support/playServer.js";
-import { mountElement, one } from "@tests/support/render.jsx";
-
-const game = games["18Test"];
-
-// A hook stub: the log grows by every sent event, as the server echoes it
-const Board = ({ log: initial = [], locked = false, send, game: g = game }) => {
-  const [log, setLog] = useState(() =>
-    initial.map((event, i) => ({ seq: i + 1, userId: 7, ...event })),
-  );
-  const state = useMemo(() => reduce(log), [log]);
-  const play = {
-    status: locked ? "locked" : "online",
-    game: g,
-    config: {},
-    seats: [{ userId: 7, name: "Ann" }],
-    log,
-    state,
-    presence: [7],
-    me: { userId: 7, name: "Ann" },
-    locked,
-    missing: false,
-    error: null,
-    send: (event) => {
-      send(event);
-      if (!locked)
-        setLog((list) => [...list, { ...event, seq: list.length + 1 }]);
-    },
-    undo: () => {},
-  };
-  return <PlayBoard play={play} />;
-};
-
-const mount = async (props = {}) => {
-  const send = vi.fn();
-  const { root } = await mountElement(<Board send={send} {...props} />);
-  const board = await within(root).findByTestId("play-board");
-  return { send, board, user: userEvent.setup() };
-};
-
-const cell = (board, coord) => one(board, `[data-coord="${coord}"]`);
-const svgOf = (board) => one(board, "svg[data-play-map]");
-
-// A tap of the pan and zoom svg, dx and dy pixels from the middle of el
-const tap = (board, el, dx = 0, dy = 0) => {
-  const rect = el.getBoundingClientRect();
-  const init = {
-    clientX: rect.x + rect.width / 2 + dx,
-    clientY: rect.y + rect.height / 2 + dy,
-    button: 0,
-    buttons: 1,
-    pointerId: 1,
-  };
-  fireEvent.pointerDown(el, init);
-  fireEvent.pointerUp(svgOf(board), { ...init, buttons: 0 });
-};
-
-const tab = (user, name) => user.click(screen.getByRole("tab", { name }));
-const option = (board, attr, id) => one(board, `[data-${attr}-option="${id}"]`);
+import { one } from "@tests/support/render.jsx";
 
 describe("play board", () => {
   it("has a board root and reuses the print map", async () => {
@@ -250,6 +197,63 @@ describe("play board", () => {
     tap(board, one(board, '[data-token="BLRR"]'));
     expect(screen.getByRole("button", { name: "Remove token" })).toBeDisabled();
     expect(send).not.toHaveBeenCalled();
+  });
+});
+
+describe("play board robustness", () => {
+  it("shows a notice for a game without a map, without throwing", async () => {
+    const { board } = await mount({
+      game: { ...game, map: undefined },
+      log: [{ type: "tile.place", hex: "B12", tile: "63", rotation: 0 }],
+    });
+    expect(board).toHaveTextContent("This game has no map.");
+    expect(within(board).getByTestId("play-off-map")).toHaveTextContent("B12");
+    expect(svgOf(board)).toBeInTheDocument();
+  });
+
+  it("lists hexes named like object properties as off the map", async () => {
+    const { board } = await mount({
+      log: [
+        { type: "tile.place", hex: "constructor", tile: "63", rotation: 0 },
+        { type: "token.place", hex: "toString", token: "BLRR", x: 0, y: 0 },
+      ],
+    });
+    const off = within(board).getByTestId("play-off-map");
+    expect(off).toHaveTextContent("constructor");
+    expect(off).toHaveTextContent("toString");
+    expect(one(board, '[data-tile-hex="constructor"]')).toBeNull();
+    expect(one(board, '[data-token-hex="toString"]')).toBeNull();
+  });
+
+  it("pans on a drag and sends nothing", async () => {
+    const { board, send, user } = await mount();
+    await user.click(option(board, "tile", "63"));
+    const before = svgOf(board).getAttribute("viewBox");
+    drag(board, cell(board, "B14"), 40, 20);
+    expect(svgOf(board).getAttribute("viewBox")).not.toBe(before);
+    expect(send).not.toHaveBeenCalled();
+    expect(one(board, "[data-selected]")).toBeNull();
+  });
+
+  it("selects and removes a token after zooming and panning", async () => {
+    const { board, send, user } = await mount({
+      log: [{ type: "token.place", hex: "B12", token: "BLRR", x: 10, y: -5 }],
+    });
+    await tab(user, "Tokens");
+    const before = svgOf(board).getAttribute("viewBox");
+    fireEvent.wheel(svgOf(board), { deltaY: -400 });
+    drag(board, cell(board, "C13"), -30, 15);
+    expect(svgOf(board).getAttribute("viewBox")).not.toBe(before);
+    tap(board, one(board, '[data-token="BLRR"]'));
+    expect(one(board, "[data-selected-token]")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Remove token" }));
+    expect(send).toHaveBeenCalledWith({
+      type: "token.remove",
+      hex: "B12",
+      token: "BLRR",
+      x: 10,
+      y: -5,
+    });
   });
 });
 

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Trash2, TriangleAlert } from "lucide-react";
@@ -9,6 +10,15 @@ import GameMapCompanyToken from "@/components/tokens/GameMapCompanyToken";
 
 import ColorContext from "@/context/ColorContext";
 import { cn } from "@/util/cn";
+
+const CompanyPreviewView = ({ abbrev }) => (
+  <Svg viewBox="-27 -27 54 54" className="size-8! shrink-0" aria-hidden="true">
+    <ColorContext.Provider value="companies">
+      <GameMapCompanyToken abbrev={abbrev} width={25} />
+    </ColorContext.Provider>
+  </Svg>
+);
+const CompanyPreview = memo(CompanyPreviewView);
 
 // How many tokens a company has, 0 when the game does not say
 const total = (company) =>
@@ -88,15 +98,7 @@ const TokenPanel = ({
               chosen === c.abbrev && "border-primary bg-accent",
             )}
           >
-            <Svg
-              viewBox="-27 -27 54 54"
-              className="size-8! shrink-0"
-              aria-hidden="true"
-            >
-              <ColorContext.Provider value="companies">
-                <GameMapCompanyToken abbrev={c.abbrev} width={25} />
-              </ColorContext.Provider>
-            </Svg>
+            <CompanyPreview abbrev={c.abbrev} />
             <span className="flex min-w-0 flex-col">
               <span className="truncate">{c.abbrev}</span>
               <span className="text-xs font-normal text-muted-foreground">
