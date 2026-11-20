@@ -55,6 +55,8 @@ describe("play rest client", () => {
     await api.createGame({ game: { a: 1 }, config: { b: 2 }, seatName: "Me" });
     await api.getGame("g1");
     await api.setStatus("g1", "locked");
+    await api.setWebhook("g1", "https://discord.com/api/webhooks/1/a");
+    await api.setWebhook("g1", null);
     await api.newInvite("g1");
     await api.getInvite("c/1");
     await api.join("c1", { name: "N", color: "#fff" });
@@ -72,6 +74,16 @@ describe("play rest client", () => {
         "PATCH",
         "https://s.test/games/g1",
         JSON.stringify({ status: "locked" }),
+      ],
+      [
+        "PATCH",
+        "https://s.test/games/g1",
+        JSON.stringify({ webhookUrl: "https://discord.com/api/webhooks/1/a" }),
+      ],
+      [
+        "PATCH",
+        "https://s.test/games/g1",
+        JSON.stringify({ webhookUrl: null }),
       ],
       ["POST", "https://s.test/games/g1/invite", undefined],
       ["GET", "https://s.test/invites/c%2F1", undefined],

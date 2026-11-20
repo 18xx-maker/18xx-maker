@@ -65,6 +65,8 @@ export const createApi = ({ baseUrl, token, fetch = globalThis.fetch }) => {
     getGame: (id) => request("GET", `/games/${enc(id)}`),
     setStatus: (id, status) =>
       request("PATCH", `/games/${enc(id)}`, { json: { status } }),
+    setWebhook: (id, url) =>
+      request("PATCH", `/games/${enc(id)}`, { json: { webhookUrl: url } }),
     deleteGame: (id) => request("DELETE", `/games/${enc(id)}`),
     newInvite: (id) => request("POST", `/games/${enc(id)}/invite`),
     getInvite: (code) => request("GET", `/invites/${enc(code)}`),

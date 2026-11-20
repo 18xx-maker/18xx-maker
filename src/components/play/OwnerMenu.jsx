@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 import {
   Archive,
+  Bell,
   Copy,
   Link2,
   Lock,
@@ -29,12 +30,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 
+import WebhookDialog from "@/components/play/WebhookDialog";
+
 import { useNavigate } from "@/router";
 import { createAlert } from "@/state";
 
 // What the owner of an online game can do: hand out the invite link, lock,
 // unlock or archive it, or delete it. `onStatus` follows a status change.
-const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
+const OwnerMenu = ({
+  api,
+  gameId,
+  status,
+  inviteCode,
+  onStatus,
+  webhookSet = false,
+  onWebhook = () => {},
+}) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,6 +53,7 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
   // The link shown for copying by hand: a new invite, or a refused clipboard
   const [shown, setShown] = useState(null);
   const [confirming, setConfirming] = useState(false);
+  const [hooking, setHooking] = useState(false);
   const [busy, setBusy] = useState(false);
   // One request at a time: a repeated click cannot fire an action twice
   const [pending, setPending] = useState(false);
@@ -98,6 +110,32 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
       }
     });
 
+  // Resolves true when the server took the change
+  const saveWebhook = async (url) => {
+    let done = false;
+    await once(async () => {
+      try {
+        const result = await api.setWebhook(gameId, url);
+        onWebhook(result?.webhookSet ?? url !== null);
+        dispatch(
+          createAlert(
+            t(
+              url === null
+                ? "play.board.owner.webhookRemoved"
+                : "play.board.owner.webhookSaved",
+            ),
+            "",
+            "success",
+          ),
+        );
+        done = true;
+      } catch (error) {
+        fail(error);
+      }
+    });
+    return done;
+  };
+
   const remove = async () => {
     setBusy(true);
     try {
@@ -143,6 +181,13 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
             <Link2 aria-hidden="true" />
             {t("play.board.owner.newInvite")}
           </DropdownMenuItem>
+          <DropdownMenuItem
+            disabled={pending}
+            onSelect={() => setHooking(true)}
+          >
+            <Bell aria-hidden="true" />
+            {t("play.board.owner.webhook")}
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           {status === "active" && (
             <DropdownMenuItem
@@ -185,6 +230,13 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <WebhookDialog
+        open={hooking}
+        onOpenChange={setHooking}
+        webhookSet={webhookSet}
+        pending={pending}
+        onSave={saveWebhook}
+      />
       <Dialog open={confirming} onOpenChange={setConfirming}>
         <DialogContent className="max-w-md">
           <DialogTitle>{t("play.board.owner.delete")}</DialogTitle>

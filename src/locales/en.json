@@ -887,6 +887,17 @@
         "delete": "Delete game",
         "cancel": "Cancel",
         "link": "Invite link",
+        "webhook": "Discord notifications",
+        "webhookTitle": "Discord notifications",
+        "webhookBody": "Send a message to a Discord channel when moves are made in this game. It posts one batched line per move, with who moved and what changed, and never the text of notes.",
+        "webhookLabel": "Webhook URL",
+        "webhookPlaceholder": "Paste a Discord webhook URL. It is stored on the server and never shown again.",
+        "webhookHint": "Use a URL like https://discord.com/api/webhooks/123456/token.",
+        "webhookOn": "Notifications are on",
+        "webhookSave": "Save",
+        "webhookRemove": "Remove",
+        "webhookSaved": "Discord notifications are on.",
+        "webhookRemoved": "Discord notifications are off.",
         "failed": "The play server refused this.",
         "deleteBody": "This deletes the game for everyone, with its moves and notes. This cannot be undone."
       }
