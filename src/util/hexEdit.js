@@ -107,6 +107,52 @@ export const validCells = (data) => {
   return cells;
 };
 
+// The corners of a hex of 150 across the flats, as the borders draw them
+export const CORNERS = [
+  [-86.6025, 0],
+  [-43.30125, -75],
+  [43.30125, -75],
+  [86.6025, 0],
+  [43.30125, 75],
+  [-43.30125, 75],
+];
+
+// The points of a hex around its center, turned like the hexes of the map
+export const outline = (data, rotation, { x, y }) => {
+  const cx = data.hexX(x, y);
+  const cy = data.hexY(x, y);
+  const turn = (rotation * Math.PI) / 180;
+  const [cos, sin] = [Math.cos(turn), Math.sin(turn)];
+  return CORNERS.map(([px, py]) => {
+    const rx = px * cos - py * sin;
+    const ry = px * sin + py * cos;
+    return `${(cx + rx * data.scale).toFixed(2)},${(cy + ry * data.scale).toFixed(2)}`;
+  }).join(" ");
+};
+
+// A point of the map in the units of the hex at { x, y } (150 across the
+// flats, 0,0 at its center), rounded to a tenth and kept inside the box of
+// the hex as the orientation turns it
+export const toHexLocal = (data, rotation, { x, y }, point) => {
+  const turn = (rotation * Math.PI) / 180;
+  const [cos, sin] = [Math.cos(turn), Math.sin(turn)];
+  const box = (axis) =>
+    Math.max(
+      ...CORNERS.map(([px, py]) =>
+        Math.abs(axis === "x" ? px * cos - py * sin : px * sin + py * cos),
+      ),
+    );
+  const local = (value, center, axis) => {
+    const limit = Math.round(box(axis) * 10) / 10;
+    const v = Math.round(((value - center) / data.scale) * 10) / 10;
+    return Math.min(limit, Math.max(-limit, v));
+  };
+  return {
+    x: local(point.x, data.hexX(x, y), "x"),
+    y: local(point.y, data.hexY(x, y), "y"),
+  };
+};
+
 // The map of the variation as the game file has it (not resolved)
 export const variationMap = (game, variation = 0) =>
   Array.isArray(game.map) ? game.map[variation] : game.map;

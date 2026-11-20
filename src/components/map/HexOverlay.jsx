@@ -12,35 +12,13 @@ import { createAlert, editGame } from "@/state";
 import {
   isMoveClick,
   moveHex,
+  outline,
   selectedCoords,
   selectionFor,
   validCells,
 } from "@/util/hexEdit";
 
-// The corners of a hex of 150 across the flats, as the borders draw them
-const CORNERS = [
-  [-86.6025, 0],
-  [-43.30125, -75],
-  [43.30125, -75],
-  [86.6025, 0],
-  [43.30125, 75],
-  [-43.30125, 75],
-];
-
 const ACCENT = "#2563eb";
-
-// The points of a hex around its center, turned like the hexes of the map
-const outline = (data, rotation, { x, y }) => {
-  const cx = data.hexX(x, y);
-  const cy = data.hexY(x, y);
-  const turn = (rotation * Math.PI) / 180;
-  const [cos, sin] = [Math.cos(turn), Math.sin(turn)];
-  return CORNERS.map(([px, py]) => {
-    const rx = px * cos - py * sin;
-    const ry = px * sin + py * cos;
-    return `${(cx + rx * data.scale).toFixed(2)},${(cy + ry * data.scale).toFixed(2)}`;
-  }).join(" ");
-};
 
 // The layer of the editable map that picks hexes: a faint outline under the
 // pointer, the group that is selected, and a target on every position of the
