@@ -111,6 +111,27 @@ describe("usePlayGame", () => {
     expect(result.current.locked).toBe(false);
   });
 
+  it("opens a fresh session when the owner unlocks a latched game", async () => {
+    const { deps, session, push } = setup(
+      {},
+      { game: { ...record, ownerId: 7, status: "locked" } },
+    );
+    const { result } = renderHook(() => usePlayGame(options, deps));
+    await waitFor(() => expect(result.current.status).toBe("online"));
+    push({ status: "locked", log: [] });
+    expect(result.current.locked).toBe(true);
+    expect(deps.createSession).toHaveBeenCalledTimes(1);
+    act(() => result.current.setStatus("active"));
+    expect(deps.createSession).toHaveBeenCalledTimes(2);
+    expect(session.close).toHaveBeenCalledTimes(1);
+    expect(result.current.locked).toBe(false);
+    act(() => result.current.send({ type: "note.set", text: "a" }));
+    expect(session.send).toHaveBeenCalledTimes(1);
+    act(() => result.current.setStatus("locked"));
+    act(() => result.current.send({ type: "note.set", text: "b" }));
+    expect(session.send).toHaveBeenCalledTimes(1);
+  });
+
   it.each([
     [401, "denied", false],
     [410, "error", true],

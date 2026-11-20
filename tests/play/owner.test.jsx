@@ -195,6 +195,63 @@ describe("owner controls", () => {
     expect(calls(fetch, "DELETE", "/games/g1")).toHaveLength(1);
   });
 
+  it("offers reopen, not lock or archive, for an archived game", async () => {
+    const { user, fetch } = await open(
+      { "PATCH /games/g1": [200, { id: "g1", status: "active" }] },
+      { status: "archived" },
+    );
+    await openMenu(user);
+    expect(names()).toEqual([
+      "Copy invite link",
+      "New invite link",
+      "Reopen game",
+      "Delete game",
+    ]);
+    await user.click(item("Reopen game"));
+    await waitFor(() =>
+      expect(screen.queryByTestId("play-banner")).not.toBeInTheDocument(),
+    );
+    expect(JSON.parse(calls(fetch, "PATCH", "/games/g1")[0][1].body)).toEqual({
+      status: "active",
+    });
+    await openMenu(user);
+    expect(names()).toContain("Lock game");
+  });
+
+  it("disables the items while a request is in flight", async () => {
+    let release;
+    const gate = new Promise((resolve) => (release = resolve));
+    const { user, fetch } = await open({
+      "PATCH /games/g1": [200, { id: "g1", status: "locked" }],
+    });
+    const respond = fetch.getMockImplementation();
+    fetch.mockImplementation(async (url, init) => {
+      if (init?.method === "PATCH") await gate;
+      return respond(url, init);
+    });
+    await openMenu(user);
+    await user.click(item("Lock game"));
+    await openMenu(user);
+    for (const name of ["Lock game", "Archive game", "New invite link"])
+      expect(item(name)).toHaveAttribute("data-disabled");
+    await user.click(item("Lock game"));
+    release();
+    await screen.findByTestId("play-banner");
+    expect(calls(fetch, "PATCH", "/games/g1")).toHaveLength(1);
+  });
+
+  it("encodes the invite code in the link", async () => {
+    const writeText = vi
+      .spyOn(navigator.clipboard, "writeText")
+      .mockResolvedValue();
+    const { user } = await open({}, { inviteCode: "a b/c" });
+    await openMenu(user);
+    await user.click(item("Copy invite link"));
+    expect(writeText).toHaveBeenCalledWith(
+      `${window.location.origin}/play/join/a%20b%2Fc`,
+    );
+  });
+
   it("alerts a failed call and leaves the menu usable", async () => {
     const { user, fetch, store } = await open({
       "PATCH /games/g1": [500, { error: "boom" }],
