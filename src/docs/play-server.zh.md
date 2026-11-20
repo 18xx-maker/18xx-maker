@@ -7,7 +7,7 @@
 ## 运行要求
 
 - Postgres 17。一个空数据库就够了:服务器在启动时会创建自己的表。
-- Node 24 和 pnpm,或者用 Docker 运行镜像。
+- Node 24 和 pnpm(启动命令见 README 的 [Local development](https://github.com/18xx-maker/18xx-maker/blob/main/server/README.md#local-development) 一节),或者用 Docker 运行镜像。
 - 一个 Discord 应用(见下文)。
 - 服务器的公共 HTTPS 地址,例如 `https://play.example.com`,以便网站能访问它,Discord 也能把玩家送回它。
 
@@ -102,7 +102,7 @@ curl -s localhost:8787/health   # {"ok":true}
 
 ## 备份
 
-备份由主机负责。请备份 Postgres 数据库(游戏、事件、资源、会话);服务器不保存其他任何东西,例如可以定期运行 `pg_dump`。
+服务器运营者负责备份。请备份 Postgres 数据库(游戏、事件、资源、会话),例如定期运行 `pg_dump`;服务器不保存其他任何东西。
 
 ## 升级
 
@@ -128,7 +128,7 @@ curl -s localhost:8787/health   # {"ok":true}
 
 ### websocket 无法连接
 
-如果版图一直停留在"正在连接...",说明服务器前面的代理没有转发 `/ws` 上的 websocket。请为该域名开启 websocket(升级)支持,并通过 `https://` 提供服务器,这样版图会使用 `wss://` 连接。
+如果棋盘加载后立即显示"离线,正在重新连接...",说明 `/ws` 上的 websocket 升级失败:服务器前面的代理没有转发 websocket。(如果代理保持连接却不作应答,棋盘也可能一直停留在"正在连接...")请为该域名开启 websocket(升级)支持,并通过 `https://` 提供服务器,这样棋盘会使用 `wss://` 连接。
 
 ### 创建游戏时出现 422
 

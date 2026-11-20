@@ -964,6 +964,7 @@
     "pager": "Pages",
     "previous": "Previous",
     "next": "Next",
+    "table": "Table",
     "help": {
       "title": "Using 18xx Maker",
       "description": "Getting Started"

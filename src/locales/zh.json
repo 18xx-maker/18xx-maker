@@ -964,6 +964,7 @@
     "pager": "页面",
     "previous": "上一页",
     "next": "下一页",
+    "table": "表格",
     "help": {
       "title": "使用 18xx Maker",
       "description": "快速入门"
