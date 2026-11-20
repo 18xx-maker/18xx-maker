@@ -760,6 +760,7 @@
     "signOut": "Sign out",
     "signedInAs": "Signed in as {{name}}",
     "loading": "Loading...",
+    "retry": "Retry",
     "error": "Could not reach the play server: {{message}}",
     "list": {
       "title": "Your games",
@@ -780,7 +781,8 @@
       "note": "Each image must be at most {{size}} MB.",
       "invalid": "The server rejected the game:",
       "failed": "Could not create the game: {{message}}",
-      "uploadFailed": "Could not upload {{name}}: {{message}}"
+      "uploadFailed": "Could not upload {{name}}: {{message}}",
+      "tooLarge": "Each image must be at most {{size}} MB. These are larger: {{names}}"
     },
     "join": {
       "title": "Join a game",
@@ -796,7 +798,8 @@
       "denied": "Your sign in has expired.",
       "locked": "This game is no longer open, or you are not a player in it.",
       "back": "Back to your games",
-      "open": "Open the game"
+      "open": "Open the game",
+      "missing": "Game not found, or you are not a player in it."
     }
   },
   "app": {

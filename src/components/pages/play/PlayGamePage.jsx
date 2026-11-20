@@ -1,21 +1,10 @@
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@/components/ui/button";
-
-import PlayNotice from "@/components/play/PlayNotice";
+import PlayNotice, { BackLink } from "@/components/play/PlayNotice";
 import useApi from "@/components/play/useApi";
 
 import usePlayGame from "@/hooks/usePlayGame";
-import { Link, useParams } from "@/router";
-
-const Back = () => {
-  const { t } = useTranslation();
-  return (
-    <Button asChild variant="outline">
-      <Link to="/play">{t("play.game.back")}</Link>
-    </Button>
-  );
-};
+import { useParams } from "@/router";
 
 // Only rendered with a server, a token and the signed in user: the hook
 // cannot be called without them
@@ -39,11 +28,13 @@ const PlayGame = ({ id, play }) => {
     return (
       <div className="flex flex-col items-start gap-3" role="alert">
         <p>
-          {game.locked
-            ? t("play.game.locked")
-            : t("play.error", { message: game.error })}
+          {game.missing
+            ? t("play.game.missing")
+            : game.locked
+              ? t("play.game.locked")
+              : t("play.error", { message: game.error })}
         </p>
-        <Back />
+        <BackLink />
       </div>
     );
   }
@@ -61,7 +52,7 @@ const PlayGamePage = () => {
       {play.status === "ready" ? (
         <PlayGame id={id} play={play} />
       ) : (
-        <PlayNotice {...play} />
+        <PlayNotice {...play} back={play.status === "error"} />
       )}
     </div>
   );

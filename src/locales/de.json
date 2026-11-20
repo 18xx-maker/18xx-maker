@@ -760,6 +760,7 @@
     "signOut": "Abmelden",
     "signedInAs": "Angemeldet als {{name}}",
     "loading": "Lädt ...",
+    "retry": "Erneut versuchen",
     "error": "Der Spielserver ist nicht erreichbar: {{message}}",
     "list": {
       "title": "Deine Spiele",
@@ -780,7 +781,8 @@
       "note": "Jedes Bild darf höchstens {{size}} MB groß sein.",
       "invalid": "Der Server hat das Spiel abgelehnt:",
       "failed": "Das Spiel konnte nicht erstellt werden: {{message}}",
-      "uploadFailed": "{{name}} konnte nicht hochgeladen werden: {{message}}"
+      "uploadFailed": "{{name}} konnte nicht hochgeladen werden: {{message}}",
+      "tooLarge": "Jedes Bild darf höchstens {{size}} MB groß sein. Diese sind größer: {{names}}"
     },
     "join": {
       "title": "Einem Spiel beitreten",
@@ -796,7 +798,8 @@
       "denied": "Deine Anmeldung ist abgelaufen.",
       "locked": "Dieses Spiel ist nicht mehr offen, oder du bist kein Mitspieler.",
       "back": "Zurück zu deinen Spielen",
-      "open": "Spiel öffnen"
+      "open": "Spiel öffnen",
+      "missing": "Spiel nicht gefunden, oder du bist kein Mitspieler."
     }
   },
   "app": {

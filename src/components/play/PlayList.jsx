@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Button } from "@/components/ui/button";
+
 import { Link } from "@/router";
 
 // The games the signed in user plays in
@@ -8,6 +10,7 @@ const PlayList = ({ api }) => {
   const { t } = useTranslation();
   const [games, setGames] = useState(null);
   const [error, setError] = useState(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let live = true;
@@ -18,9 +21,28 @@ const PlayList = ({ api }) => {
     return () => {
       live = false;
     };
-  }, [api]);
+  }, [api, attempt]);
 
-  if (error) return <p role="alert">{t("play.error", { message: error })}</p>;
+  if (error) {
+    return (
+      <div className="flex flex-col items-start gap-2">
+        <p role="alert">{t("play.error", { message: error })}</p>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => {
+              setError(null);
+              setAttempt((n) => n + 1);
+            }}
+          >
+            {t("play.retry")}
+          </Button>
+          <Button asChild variant="outline">
+            <Link to="/settings">{t("play.settings")}</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
   if (!games) return <p>{t("play.loading")}</p>;
 
   return (

@@ -16,7 +16,7 @@ const PlayJoinPage = () => {
     <div className="p-4 flex flex-col gap-6" data-testid="play-join">
       <h1 className="text-4xl font-extrabold">{t("play.title")}</h1>
       {blocked ? (
-        <PlayNotice {...play} />
+        <PlayNotice {...play} back />
       ) : (
         <JoinGame code={code} play={play} />
       )}

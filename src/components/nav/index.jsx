@@ -54,7 +54,6 @@ export const mainMenu = [
       {
         icon: Gamepad2,
         label: "nav.play",
-        shortcut: "o",
         to: "/play",
       },
       {

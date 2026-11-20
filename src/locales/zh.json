@@ -760,6 +760,7 @@
     "signOut": "退出登录",
     "signedInAs": "已登录为 {{name}}",
     "loading": "加载中...",
+    "retry": "重试",
     "error": "无法连接游戏服务器：{{message}}",
     "list": {
       "title": "你的游戏",
@@ -780,7 +781,8 @@
       "note": "每张图片最大 {{size}} MB。",
       "invalid": "服务器拒绝了该游戏：",
       "failed": "无法创建游戏：{{message}}",
-      "uploadFailed": "无法上传 {{name}}：{{message}}"
+      "uploadFailed": "无法上传 {{name}}：{{message}}",
+      "tooLarge": "每张图片最大 {{size}} MB。以下图片过大：{{names}}"
     },
     "join": {
       "title": "加入游戏",
@@ -796,7 +798,8 @@
       "denied": "你的登录已过期。",
       "locked": "该游戏已不再开放，或者你不是其中的玩家。",
       "back": "返回你的游戏",
-      "open": "打开游戏"
+      "open": "打开游戏",
+      "missing": "未找到该游戏，或者你不是其中的玩家。"
     }
   },
   "app": {
