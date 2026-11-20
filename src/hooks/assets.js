@@ -6,9 +6,10 @@ import { selectAssets } from "@/state/selectors";
 
 // The custom images of the game on screen (see util/assets): undefined when
 // the game has none. A GameContext game (the play board) is not the game of
-// the store, so it gets none of the store's images.
+// the store, so it gets the context's images (the server's), never the
+// store's.
 export const useAssets = () => {
   const override = useContext(GameContext);
   const assets = useSelector(selectAssets);
-  return override ? undefined : assets;
+  return override ? override.assets : assets;
 };
