@@ -40,6 +40,10 @@ Open **Play** in the sidebar and choose **Sign in with Discord**. Discord asks
 you to allow the play server to see your name and your servers, then sends you
 back to 18xx Maker. Every player needs a Discord account, also to join a game.
 
+Start the sign in with a normal click in the same tab: opening **Sign in with
+Discord** in a new tab or with a middle click ends with "Sign in did not
+complete, try again". When that happens, simply sign in again.
+
 A sign in lasts as long as the server allows (30 days unless the server says
 otherwise). After that the board says that your sign in has expired: sign in
 again. **Sign out** on the Play page ends the sign in on this browser.
