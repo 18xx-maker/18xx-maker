@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+import { createGameBody } from "@/play/client/createGame";
 import { Link, useNavigate } from "@/router";
 import {
   selectAssets,
@@ -69,11 +70,9 @@ const CreateGame = ({ api, user }) => {
     setBusy(true);
     let created;
     try {
-      created = await api.createGame({
-        game,
-        config,
-        seatName: seatName ?? user.name,
-      });
+      created = await api.createGame(
+        createGameBody({ game, config, seatName: seatName ?? user.name }),
+      );
     } catch (error) {
       setProblem({
         errors: error.errors,
