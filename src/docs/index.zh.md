@@ -4,6 +4,8 @@
 
 初次使用?请跟着[第一款游戏教程](/docs/games/first-game)操作,常见问题请参阅[常见问题](/docs/faq)。页面、打印和显示设置见[配置面板](/docs/config),桌面应用和命令行见[桌面应用](/docs/app)与[命令行](/docs/output/cli)。
 
+想在共享的版图上与他人一起玩游戏,请参阅[在线游戏](/docs/play);想架设自己的游戏服务器,请参阅[运行游戏服务器](/docs/play-server)。
+
 > [!TIP]
 > 这些文档介绍的是如何使用 18xx Maker。如果您有兴趣修改代码或在本地运行代码,请参阅代码仓库中的
 > [DEVELOPMENT.md](https://github.com/18xx-maker/18xx-maker/blob/main/DEVELOPMENT.md)。

@@ -989,6 +989,14 @@
       "title": "Translation",
       "description": "Help translate 18xx Maker"
     },
+    "play": {
+      "title": "Online Play",
+      "description": "Play a game with others on a play server"
+    },
+    "playServer": {
+      "title": "Running a Play Server",
+      "description": "Host your own server for online play"
+    },
     "output": {
       "cli": {
         "title": "Command Line",
