@@ -24,7 +24,7 @@ Schritte](https://18xx-maker.com/docs) an, um schnell loszulegen.
 
 ::: siteonly
 
-Um ein Spiel mit Freunden auf einem gemeinsamen Brett zu spielen, siehe
+Um ein Spiel mit Freunden auf einem gemeinsamen Spielbrett zu spielen, siehe
 [Online-Spiel](/docs/play).
 
 :::

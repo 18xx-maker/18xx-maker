@@ -1,10 +1,10 @@
 # Running a Play Server
 
-The play server is what [online play](/docs/play) talks to: it signs players
-in with Discord, keeps the games and their moves, and sends every move to the
-players of a game. This page is for people who want to run their own. If
-someone already gave you a server address, you only need the [online
-play](/docs/play) page.
+The play server is what [online play](/docs/play) talks to: it signs players in
+with Discord, keeps the games and their moves, and sends every move to the
+players of a game. This page is for people who want to run their own. If someone
+already gave you a server address, you only need the [online play](/docs/play)
+page.
 
 The server is a Node app in the `server` folder of the
 [repository](https://github.com/18xx-maker/18xx-maker/tree/main/server) and
@@ -16,21 +16,24 @@ also describes the API and the websocket protocol.
 
 - Postgres 17. An empty database is enough: the server creates its tables when
   it starts.
-- Node 24 with pnpm, or Docker to run the image instead.
+- Node 24 with pnpm (see
+  [local development](https://github.com/18xx-maker/18xx-maker/blob/main/server/README.md#local-development)
+  in the README for the command), or Docker to run the image instead.
 - A Discord application (see below).
-- A public HTTPS address for the server, like `https://play.example.com`, so
-  the website can reach it and Discord can send players back to it.
+- A public HTTPS address for the server, like `https://play.example.com`, so the
+  website can reach it and Discord can send players back to it.
 
 ## Discord application
 
 Players sign in with Discord, so the server needs a Discord application of its
 own:
 
-1. In the [Discord developer portal](https://discord.com/developers/applications)
+1. In the
+   [Discord developer portal](https://discord.com/developers/applications)
    create an application and open **OAuth2**.
 2. Add the redirect URI `${PUBLIC_URL}/auth/discord/callback`, for example
-   `https://play.example.com/auth/discord/callback`. It must match
-   `PUBLIC_URL` exactly.
+   `https://play.example.com/auth/discord/callback`. It must match `PUBLIC_URL`
+   exactly.
 3. Copy the client id and the client secret into `DISCORD_CLIENT_ID` and
    `DISCORD_CLIENT_SECRET`.
 4. The server asks for the scopes `identify guilds`. No bot is needed: the
@@ -39,8 +42,8 @@ own:
 
 ## Configuration
 
-All settings are environment variables. The first four are required, the
-server refuses to start without them.
+All settings are environment variables. The first four are required, the server
+refuses to start without them.
 
 | Variable                 | Default                      | Meaning                                                                                                                      |
 | ------------------------ | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -84,8 +87,8 @@ The image is built from the repository root:
 docker build -f server/Dockerfile -t 18xx-maker-play .
 ```
 
-It listens on port 8787, runs as the non root `node` user and has a health
-check on `/health`.
+It listens on port 8787, runs as the non root `node` user and has a health check
+on `/health`.
 
 ### Docker Compose
 
@@ -110,8 +113,8 @@ For a public server, set `PUBLIC_URL` to its `https://` address and
 2. Create an **Application** from Git (this repository). Build type
    **Dockerfile**, Dockerfile path `server/Dockerfile`, build context the
    repository root (`.`).
-3. In the environment, set `DATABASE_URL` (the internal connection string of
-   the database service), `PUBLIC_URL` (the domain below, with `https://`),
+3. In the environment, set `DATABASE_URL` (the internal connection string of the
+   database service), `PUBLIC_URL` (the domain below, with `https://`),
    `ALLOWED_ORIGINS`, `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` and
    optionally `DISCORD_GUILD_ID`.
 4. Add a domain pointing at the container port `8787`. The websocket (`/ws`)
@@ -121,30 +124,30 @@ For a public server, set `PUBLIC_URL` to its `https://` address and
 ## The website and your server
 
 The website's Content-Security-Policy allows connections to any `https:` and
-`wss:` address, so any play server works from the hosted site without a
-rebuild: players only enter its address in Settings. A server on a plain
-`http://` address is blocked, except on `localhost` and `127.0.0.1` for
-testing on your own computer.
+`wss:` address, so any play server works from the hosted site without a rebuild:
+players only enter its address in Settings. A server on a plain `http://`
+address is blocked, except on `localhost` and `127.0.0.1` for testing on your
+own computer.
 
-The browser also asks the server whether the site may call it (CORS). The
-server answers yes only for the origins in `ALLOWED_ORIGINS`, and only lets a
-login return to those origins.
+The browser also asks the server whether the site may call it (CORS). The server
+answers yes only for the origins in `ALLOWED_ORIGINS`, and only lets a login
+return to those origins.
 
 ## One instance only
 
 Run exactly **one instance**. Rooms, presence and the ordering of broadcasts
-live in the process, so a second replica would miss the broadcasts of the
-first and its players would not see each other's events until they reconnect.
+live in the process, so a second replica would miss the broadcasts of the first
+and its players would not see each other's events until they reconnect.
 
-The container handles `SIGTERM` (and `SIGINT`): it closes the websockets and
-the listener, ends the database pool and exits 0, with a 5 second limit, so
+The container handles `SIGTERM` (and `SIGINT`): it closes the websockets and the
+listener, ends the database pool and exits 0, with a 5 second limit, so
 `docker stop` and redeploys do not wait for a kill.
 
 ## Backups
 
-Backups are the host's job. Back up the Postgres database (games, events,
-assets, sessions); the server keeps nothing else, for example with
-`pg_dump` on a schedule.
+Backups are the job of whoever runs the server. Back up the Postgres database
+(games, events, assets, sessions), for example with `pg_dump` on a schedule; the
+server keeps nothing else.
 
 ## Upgrading
 
@@ -155,13 +158,13 @@ applied once even if two servers start at the same time.
 
 ## Security
 
-- A sign in lasts `SESSION_TTL_DAYS` (30 days by default). An expired session
-  is refused and the player signs in again. Changing the value applies to new
-  sign ins only. Signing out ends the session and closes its websockets.
+- A sign in lasts `SESSION_TTL_DAYS` (30 days by default). An expired session is
+  refused and the player signs in again. Changing the value applies to new sign
+  ins only. Signing out ends the session and closes its websockets.
 - Changing `DISCORD_CLIENT_SECRET` ends sign ins that are in progress (it signs
   the login `state`). Keep it secret like a password.
-- A game's Discord webhook URL is stored on the server only. No endpoint
-  returns it, not even to the owner, and the logs never contain it. Only
+- A game's Discord webhook URL is stored on the server only. No endpoint returns
+  it, not even to the owner, and the logs never contain it. Only
   `https://discord.com/api/webhooks/...` (or `discordapp.com`) URLs are
   accepted.
 - Invite links and spectator links are secrets: anyone who has one can join or
@@ -186,15 +189,16 @@ and restart the server.
 
 ### Websocket does not connect
 
-If the board stays on "Connecting...", the proxy in front of the server does
-not pass websockets on `/ws`. Turn on websocket (upgrade) support for the
-domain, and serve the server on `https://` so the board connects with
-`wss://`.
+If the board shows "Offline, reconnecting..." right after it loads, the
+websocket upgrade on `/ws` fails: the proxy in front of the server does not pass
+websockets. (A proxy that holds the connection open without answering can leave
+it on "Connecting..." instead.) Turn on websocket (upgrade) support for the
+domain, and serve the server on `https://` so the board connects with `wss://`.
 
 ### Creating a game fails with 422
 
 A 422 means the server's check of the game file found errors; the Play page
-lists them. Run `pnpm maker validate my-game.json` (see [JSON
-Schemas](/docs/games/schemas)) and fix them. A 413 means the game file or an
-image is over the server's limits (`MAX_GAME_BYTES`, `MAX_ASSET_BYTES`,
+lists them. Run `pnpm maker validate my-game.json` (see
+[JSON Schemas](/docs/games/schemas)) and fix them. A 413 means the game file or
+an image is over the server's limits (`MAX_GAME_BYTES`, `MAX_ASSET_BYTES`,
 `MAX_ASSETS_PER_GAME`, `MAX_ASSET_TOTAL_BYTES`).
