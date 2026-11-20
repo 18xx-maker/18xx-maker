@@ -86,6 +86,11 @@ The container handles `SIGTERM` (and `SIGINT`): it closes the websockets and
 the listener, ends the database pool and exits 0, with a 5 second limit, so
 `docker stop` and redeploys do not wait for a kill.
 
+The site's Content-Security-Policy (`index.html`) allows `connect-src` to
+`https:`, `wss:` and `localhost`/`127.0.0.1` (http and ws), so any play server
+URL works from the hosted site without a rebuild. `script-src` stays `'self'`.
+A server on a plain `http://` host other than localhost is blocked.
+
 Backups are the host's job. Back up the Postgres database (games, events,
 assets, sessions); the server keeps nothing else.
 
