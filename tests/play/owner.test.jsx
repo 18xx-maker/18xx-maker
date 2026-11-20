@@ -63,6 +63,7 @@ describe("owner controls", () => {
     expect(names()).toEqual([
       "Copy invite link",
       "New invite link",
+      "Spectator link",
       "Discord notifications",
       "Lock game",
       "Archive game",
@@ -205,6 +206,7 @@ describe("owner controls", () => {
     expect(names()).toEqual([
       "Copy invite link",
       "New invite link",
+      "Spectator link",
       "Discord notifications",
       "Reopen game",
       "Delete game",

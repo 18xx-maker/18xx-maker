@@ -32,13 +32,15 @@ const prod = import.meta.env.PROD;
 
 const gamesRE = /^\/games\/([^/]+)(.*)$/;
 
-// An invite code is a secret and a game id is private: neither is sent
+// An invite or watch code is a secret and a game id is private: none is sent
 const joinRE = /^\/play\/join\/[^/]+/;
-const playRE = /^\/play\/(?!join(?:\/|$))[^/]+/;
+const watchRE = /^\/play\/watch\/[^/]+/;
+const playRE = /^\/play\/(?!(?:join|watch)(?:\/|$))[^/]+/;
 
 export const maskGame = (path) => {
   if (typeof path === "string") {
     if (joinRE.test(path)) return path.replace(joinRE, "/play/join/code");
+    if (watchRE.test(path)) return path.replace(watchRE, "/play/watch/code");
     if (playRE.test(path)) return path.replace(playRE, "/play/id");
   }
   const match = gamesRE.exec(path);

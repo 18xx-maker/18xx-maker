@@ -47,6 +47,8 @@ const PlayGame = ({ id, play }) => {
           gameId: id,
           status: game.gameStatus,
           inviteCode: game.inviteCode,
+          watchCode: game.watchCode,
+          onWatch: game.setWatchCode,
           onStatus: game.setStatus,
           webhookSet: game.webhookSet,
           onWebhook: game.setWebhookSet,

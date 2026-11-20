@@ -61,6 +61,7 @@ describe("play without a server", () => {
 
   it.for([
     ["/play/join/abc", "play-join"],
+    ["/play/watch/abc", "play-watch"],
     ["/play/g1", "play-game"],
   ])("%s renders its page with the explanation", async ([url, id]) => {
     renderApp(url);

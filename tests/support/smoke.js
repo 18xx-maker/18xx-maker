@@ -148,6 +148,7 @@ export const routes = [
   ["/settings", "settings"],
   ["/play", "play"],
   ["/play/join/abc", "play-join"],
+  ["/play/watch/abc", "play-watch"],
   ["/play/g1", "play-game"],
 ];
 

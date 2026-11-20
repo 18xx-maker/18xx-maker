@@ -796,6 +796,12 @@
       "notFound": "This invite link is not valid.",
       "failed": "Could not join the game: {{message}}"
     },
+    "watch": {
+      "missing": "Link not found",
+      "stopped": "This spectator link no longer works.",
+      "full": "Too many people are watching this game right now. Try again later.",
+      "back": "Go to online play"
+    },
     "game": {
       "denied": "Your sign in has expired.",
       "locked": "This game is no longer open, or you are not a player in it.",
@@ -871,7 +877,8 @@
       },
       "banner": {
         "offline": "Reconnecting...",
-        "locked": "This game is locked. You can look at it, but not change it."
+        "locked": "This game is locked. You can look at it, but not change it.",
+        "watching": "Watching: you see the moves as the players make them, but cannot change anything."
       },
       "moveError": {
         "message": "The server refused a move: {{message}}",
@@ -881,6 +888,9 @@
         "menu": "Owner menu",
         "copy": "Copy invite link",
         "newInvite": "New invite link",
+        "watch": "Spectator link",
+        "watchNew": "New spectator link",
+        "watchStop": "Stop spectator link",
         "lock": "Lock game",
         "unlock": "Unlock game",
         "archive": "Archive game",
@@ -899,6 +909,7 @@
         "webhookRemove": "Remove",
         "webhookSaved": "Discord notifications are on.",
         "webhookRemoved": "Discord notifications are off.",
+        "watchStopped": "The spectator link is stopped.",
         "failed": "The play server refused this.",
         "deleteBody": "This deletes the game for everyone, with its moves and notes. This cannot be undone."
       }
