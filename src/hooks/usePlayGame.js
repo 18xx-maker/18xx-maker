@@ -105,6 +105,10 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     gameId: loaded?.id ?? gameId,
     gameStatus: loaded?.status ?? null,
     ownerId: loaded?.ownerId ?? null,
+    webhookSet: loaded?.webhookSet ?? false,
+    // The owner set or removed the webhook: follow it without a refetch
+    setWebhookSet: (value) =>
+      setLoaded((game) => game && { ...game, webhookSet: value }),
     inviteCode: loaded?.inviteCode ?? null,
     // The owner changed the status of the game: follow it without a refetch
     setStatus: (value) => {

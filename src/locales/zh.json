@@ -888,6 +888,17 @@
         "delete": "删除游戏",
         "cancel": "取消",
         "link": "邀请链接",
+        "webhook": "Discord 通知",
+        "webhookTitle": "Discord 通知",
+        "webhookBody": "在此游戏中有人行动时,向 Discord 频道发送消息。每次行动发送一行合并的消息,包含行动者和变化内容,绝不包含笔记的文字。",
+        "webhookLabel": "Webhook 网址",
+        "webhookPlaceholder": "粘贴 Discord Webhook 网址。它保存在服务器上,之后不会再显示。",
+        "webhookHint": "请使用类似 https://discord.com/api/webhooks/123456/token 的网址。",
+        "webhookOn": "通知已开启",
+        "webhookSave": "保存",
+        "webhookRemove": "移除",
+        "webhookSaved": "Discord 通知已开启。",
+        "webhookRemoved": "Discord 通知已关闭。",
         "failed": "游戏服务器拒绝了此操作。",
         "deleteBody": "这将为所有人删除该游戏,包括所有操作和笔记。此操作无法撤销。"
       }

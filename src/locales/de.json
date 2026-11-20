@@ -888,6 +888,17 @@
         "delete": "Spiel löschen",
         "cancel": "Abbrechen",
         "link": "Einladungslink",
+        "webhook": "Discord-Benachrichtigungen",
+        "webhookTitle": "Discord-Benachrichtigungen",
+        "webhookBody": "Sende eine Nachricht an einen Discord-Kanal, wenn in diesem Spiel Züge gemacht werden. Es wird eine gebündelte Zeile pro Zug gepostet, mit dem, der gezogen hat, und was sich geändert hat, aber nie der Text von Notizen.",
+        "webhookLabel": "Webhook-URL",
+        "webhookPlaceholder": "Füge eine Discord-Webhook-URL ein. Sie wird auf dem Server gespeichert und nie wieder angezeigt.",
+        "webhookHint": "Nutze eine URL wie https://discord.com/api/webhooks/123456/token.",
+        "webhookOn": "Benachrichtigungen sind an",
+        "webhookSave": "Speichern",
+        "webhookRemove": "Entfernen",
+        "webhookSaved": "Discord-Benachrichtigungen sind an.",
+        "webhookRemoved": "Discord-Benachrichtigungen sind aus.",
         "failed": "Der Spielserver hat das abgelehnt.",
         "deleteBody": "Das Spiel wird für alle gelöscht, mit allen Zügen und Notizen. Das kann nicht rückgängig gemacht werden."
       }

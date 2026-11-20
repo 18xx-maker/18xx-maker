@@ -48,6 +48,8 @@ const PlayGame = ({ id, play }) => {
           status: game.gameStatus,
           inviteCode: game.inviteCode,
           onStatus: game.setStatus,
+          webhookSet: game.webhookSet,
+          onWebhook: game.setWebhookSet,
         }
       : null;
   return <PlayBoard play={game} owner={owner} />;
