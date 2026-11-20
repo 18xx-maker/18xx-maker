@@ -9,7 +9,7 @@ import Movement from "@/components/market/Movement";
 import Par from "@/components/market/Par";
 
 import { multiDefaultTo } from "@/util";
-import { getParData } from "@/util/market";
+import { cellPosition, getParData } from "@/util/market";
 
 // The legend entries in a row, each as wide as its description
 const poolNotes = (legend, left, y) => (
@@ -28,59 +28,36 @@ const poolNotes = (legend, left, y) => (
 
 const Market = ({ data, game, config, title, displayTitle }) => {
   const pass = { game, config, data };
-  const titleY = data.stock.title === false ? 0 : 50;
   const keepBottom = (cell) => (cell && cell.bottom ? cell : null);
   const dropBottom = (cell) => (cell && cell.bottom ? null : cell);
-  const cellGroup = (key, transform, cell) => (
-    <g key={key} transform={transform}>
-      <Cell cell={cell} {...pass} />
-    </g>
-  );
+  const cellGroup = (key, row, col, cell) => {
+    const { x, y } = cellPosition(data, row, col);
+    return (
+      <g key={key} transform={`translate(${x} ${y})`}>
+        <Cell cell={cell} {...pass} />
+      </g>
+    );
+  };
 
   // The cells that sit on the bottom are drawn first, so the others cover them
   let renderLayer;
-  switch (data.type) {
-    case "1D":
-      renderLayer = (name, select) =>
-        addIndex(map)(
-          (cell, i) =>
-            cellGroup(
-              `cell-${name}-${i}`,
-              `translate(${i * data.width} ${titleY})`,
-              cell,
-            ),
-          map(select, data.market || []),
-        );
-      break;
-    case "1Diag":
-      renderLayer = (name, select) =>
-        addIndex(map)(
-          (cell, i) =>
-            cellGroup(
-              `cell-${name}-${i}`,
-              `translate(${i * 0.5 * data.width} ${i % 2 === 0 ? titleY : titleY + data.height})`,
-              cell,
-            ),
-          map(select, data.market || []),
-        );
-      break;
-    default:
-      // 2D
-      renderLayer = (name, select) =>
-        addIndex(chain)(
-          (row, y) =>
-            addIndex(map)(
-              (cell, x) =>
-                cellGroup(
-                  `cell-${name}-${x}-${y}`,
-                  `translate(${x * data.width} ${y * data.height + titleY})`,
-                  cell,
-                ),
-              row,
-            ),
-          map((row) => map(select, row), data.market || []),
-        );
-      break;
+  if (data.type === "1D" || data.type === "1Diag") {
+    renderLayer = (name, select) =>
+      addIndex(map)(
+        (cell, i) => cellGroup(`cell-${name}-${i}`, 0, i, cell),
+        map(select, data.market || []),
+      );
+  } else {
+    // 2D
+    renderLayer = (name, select) =>
+      addIndex(chain)(
+        (row, y) =>
+          addIndex(map)(
+            (cell, x) => cellGroup(`cell-${name}-${x}-${y}`, y, x, cell),
+            row,
+          ),
+        map((row) => map(select, row), data.market || []),
+      );
   }
   const cells = concat(
     renderLayer("bottom", keepBottom),
