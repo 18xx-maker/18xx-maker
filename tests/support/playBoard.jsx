@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { useMemo, useState } from "react";
 import { vi } from "vitest";
 
+import { omit } from "ramda";
+
 import PlayBoard from "@/components/play/PlayBoard";
 
 import { games } from "@/data";
@@ -11,7 +13,8 @@ import { reduce } from "@/play/reduce";
 
 import { mountElement, one } from "@tests/support/render.jsx";
 
-export const game = games["18Test"];
+// A game as the server holds it: the game file, without the app's meta
+export const game = omit(["meta"], games["18Test"]);
 
 // A hook stub: the log grows by every sent event, as the server echoes it
 export const Board = ({

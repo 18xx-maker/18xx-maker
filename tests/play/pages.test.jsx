@@ -1,6 +1,8 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { omit } from "ramda";
+
 import { mainMenu } from "@/components/nav";
 
 import { games } from "@/data";
@@ -159,11 +161,15 @@ describe("create game", () => {
       expect(router.state.location.pathname).toBe("/play/g9"),
     );
     const [, post] = calls(fetch, "POST", "/games")[0];
-    expect(JSON.parse(post.body)).toEqual({
-      game,
+    // The game file without the app's meta: the server's schema refuses it
+    const file = omit(["meta"], game);
+    const body = JSON.parse(post.body);
+    expect(body).toEqual({
+      game: file,
       config: { unit: "mm" },
       seatName: "Bob",
     });
+    expect(body.game).not.toHaveProperty("meta");
     const [, put] = calls(fetch, "PUT", "/games/g9/assets/icons.star")[0];
     expect(put.body).toBeInstanceOf(Blob);
     expect(put.body.type).toBe("image/svg+xml");
