@@ -462,6 +462,25 @@ Notes:
 - The vitest projects only include `src/`, `tests/` and the unit tests of
   `scripts/`, so they never pick up `e2e/`.
 
+### Online play end to end
+
+`e2e/play.spec.js` plays one online game with two signed in players and a
+spectator, each in their own browser context: create, invite, join, a tile
+seen by the other player, undo, lock and unlock, and the spectator link. It
+needs Postgres: with `DATABASE_URL` set, `playwright.config.js` also starts
+`e2e/support/play-server.mjs`, the real play server on port 4319 with a fresh
+schema (dropped on exit) and the fake Discord of `server/test/discord.js`,
+whose consent page has a "Sign in as Alice" and a "Sign in as Bob" link.
+Without `DATABASE_URL` the spec is skipped. CI runs it in the End to End job,
+which has a Postgres service. Locally, with the database of `server/README.md`:
+
+```shell
+docker run -d --name server-db-1 -e POSTGRES_USER=play -e POSTGRES_PASSWORD=play -e POSTGRES_DB=play -p 55432:5432 postgres:17
+pnpm build
+DATABASE_URL=postgres://play:play@localhost:55432/play pnpm test:e2e
+DATABASE_URL=postgres://play:play@localhost:55432/play pnpm test:e2e e2e/play.spec.js
+```
+
 The edit panel (`src/components/editPanel`, toolbar button and `e` key) has a
 tab for each entry of `editSections` in `sections.js` (the current one is
 `?editSection=`, `[` and `]` cycle them). Its forms are generated at runtime
