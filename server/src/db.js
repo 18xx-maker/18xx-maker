@@ -17,6 +17,9 @@ export const createPool = (databaseUrl) => {
   return pool;
 };
 
+// Held for the whole run, so two servers starting at once apply each file once
+const MIGRATE_LOCK = 1808_7001;
+
 export const migrate = async (pool) => {
   const names = (await fs.readdir(MIGRATIONS))
     .filter((f) => f.endsWith(".sql"))
@@ -24,6 +27,12 @@ export const migrate = async (pool) => {
   const applied = [];
 
   const client = await pool.connect();
+  try {
+    await client.query("select pg_advisory_lock($1)", [MIGRATE_LOCK]);
+  } catch (error) {
+    client.release();
+    throw error;
+  }
   try {
     await client.query(
       "create table if not exists schema_migrations (name text primary key)",
@@ -50,7 +59,14 @@ export const migrate = async (pool) => {
       applied.push(name);
     }
   } finally {
-    client.release();
+    // A failed unlock means a broken connection: drop it, the lock goes with it
+    const unlocked = await client
+      .query("select pg_advisory_unlock($1)", [MIGRATE_LOCK])
+      .then(
+        () => true,
+        () => false,
+      );
+    client.release(!unlocked);
   }
   return applied;
 };

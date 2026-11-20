@@ -82,5 +82,24 @@ describe("GameContext", () => {
       { assets },
     );
     expect(all(play, "rect")).toHaveLength(0);
+
+    // The context's own images are drawn instead
+    const serverAssets = {
+      icons: {
+        star: "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'><circle r='5'/></svg>",
+      },
+      logos: {},
+      trains: {},
+    };
+    const served = await drawSvg(
+      <GameContext.Provider
+        value={{ game: other, config: {}, assets: serverAssets }}
+      >
+        <Icon type="custom/star" />
+      </GameContext.Provider>,
+      { assets },
+    );
+    expect(all(served, "rect")).toHaveLength(0);
+    expect(all(served, "svg circle[r='5']")).toHaveLength(1);
   });
 });

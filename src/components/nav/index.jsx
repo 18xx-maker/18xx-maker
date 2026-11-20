@@ -25,6 +25,7 @@ import {
   Palette,
   Scissors,
   ScrollText,
+  Server,
   Settings2,
   Shapes,
   Shield,
@@ -34,6 +35,7 @@ import {
   SwatchBook,
   TrainFront,
   TrainTrack,
+  Users,
 } from "lucide-react";
 
 export const mainMenu = [
@@ -125,6 +127,16 @@ export const mainMenu = [
         icon: Globe,
         label: "docs.translation.title",
         to: "/docs/translation",
+      },
+      {
+        icon: Users,
+        label: "docs.play.title",
+        to: "/docs/play",
+      },
+      {
+        icon: Server,
+        label: "docs.playServer.title",
+        to: "/docs/play-server",
       },
     ],
   },

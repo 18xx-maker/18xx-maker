@@ -756,6 +756,8 @@
     "electron": "Online play is available on the website.",
     "signInPrompt": "Sign in to play online.",
     "signIn": "Sign in with Discord",
+    "signInFailed": "Sign in did not complete, try again",
+    "signInCancelled": "Discord sign in was cancelled",
     "signOut": "Sign out",
     "signedInAs": "Signed in as {{name}}",
     "loading": "Loading...",
@@ -792,6 +794,12 @@
       "closed": "This game is closed.",
       "notFound": "This invite link is not valid.",
       "failed": "Could not join the game: {{message}}"
+    },
+    "watch": {
+      "missing": "Link not found",
+      "stopped": "This spectator link no longer works.",
+      "full": "Too many people are watching this game right now. Try again later.",
+      "back": "Go to online play"
     },
     "game": {
       "denied": "Your sign in has expired.",
@@ -868,7 +876,8 @@
       },
       "banner": {
         "offline": "Reconnecting...",
-        "locked": "This game is locked. You can look at it, but not change it."
+        "locked": "This game is locked. You can look at it, but not change it.",
+        "watching": "Watching: you see the moves as the players make them, but cannot change anything."
       },
       "moveError": {
         "message": "The server refused a move: {{message}}",
@@ -878,6 +887,9 @@
         "menu": "Owner menu",
         "copy": "Copy invite link",
         "newInvite": "New invite link",
+        "watch": "Spectator link",
+        "watchNew": "New spectator link",
+        "watchStop": "Stop spectator link",
         "lock": "Lock game",
         "unlock": "Unlock game",
         "archive": "Archive game",
@@ -885,6 +897,17 @@
         "delete": "Delete game",
         "cancel": "Cancel",
         "link": "Invite link",
+        "webhook": "Discord notifications",
+        "webhookTitle": "Discord notifications",
+        "webhookBody": "Send a message to a Discord channel when moves are made in this game. It posts one batched line per move, with who moved and what changed, and never the text of notes.",
+        "webhookLabel": "Webhook URL",
+        "webhookHint": "Use a URL like https://discord.com/api/webhooks/123456/token.",
+        "webhookOn": "Notifications are on",
+        "webhookSave": "Save",
+        "webhookRemove": "Remove",
+        "webhookSaved": "Discord notifications are on.",
+        "webhookRemoved": "Discord notifications are off.",
+        "watchStopped": "The spectator link is stopped.",
         "failed": "The play server refused this.",
         "deleteBody": "This deletes the game for everyone, with its moves and notes. This cannot be undone."
       }
@@ -940,6 +963,7 @@
     "pager": "Pages",
     "previous": "Previous",
     "next": "Next",
+    "table": "Table",
     "help": {
       "title": "Using 18xx Maker",
       "description": "Getting Started"
@@ -963,6 +987,14 @@
     "translation": {
       "title": "Translation",
       "description": "Help translate 18xx Maker"
+    },
+    "play": {
+      "title": "Online Play",
+      "description": "Play a game with others on a play server"
+    },
+    "playServer": {
+      "title": "Running a Play Server",
+      "description": "Host your own server for online play"
     },
     "output": {
       "cli": {

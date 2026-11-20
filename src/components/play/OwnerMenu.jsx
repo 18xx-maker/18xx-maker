@@ -4,10 +4,14 @@ import { useDispatch } from "react-redux";
 
 import {
   Archive,
+  Bell,
   Copy,
+  Eye,
+  EyeOff,
   Link2,
   Lock,
   LockOpen,
+  RefreshCw,
   RotateCcw,
   Settings,
   Trash2,
@@ -29,19 +33,35 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 
+import WebhookDialog from "@/components/play/WebhookDialog";
+
 import { useNavigate } from "@/router";
 import { createAlert } from "@/state";
 
-// What the owner of an online game can do: hand out the invite link, lock,
-// unlock or archive it, or delete it. `onStatus` follows a status change.
-const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
+// What the owner of an online game can do: hand out the invite link and the
+// spectator link, lock, unlock or archive it, or delete it. `onStatus`
+// follows a status change, `onWatch` a new or stopped spectator link.
+const OwnerMenu = ({
+  api,
+  gameId,
+  status,
+  inviteCode,
+  onStatus,
+  webhookSet = false,
+  onWebhook = () => {},
+  watchCode = null,
+  onWatch = () => {},
+}) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [code, setCode] = useState(inviteCode);
-  // The link shown for copying by hand: a new invite, or a refused clipboard
+  const [watch, setWatch] = useState(watchCode);
+  // The link shown for copying by hand: a new link, or a refused clipboard.
+  // { label, value }, the label says which link it is.
   const [shown, setShown] = useState(null);
   const [confirming, setConfirming] = useState(false);
+  const [hooking, setHooking] = useState(false);
   const [busy, setBusy] = useState(false);
   // One request at a time: a repeated click cannot fire an action twice
   const [pending, setPending] = useState(false);
@@ -61,28 +81,84 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
 
   const link = (value) =>
     `${window.location.origin}/play/join/${encodeURIComponent(value)}`;
+  const watchLink = (value) =>
+    `${window.location.origin}/play/watch/${encodeURIComponent(value)}`;
+  const inviteShown = (value) => ({
+    label: t("play.board.owner.link"),
+    value: link(value),
+  });
+  const watchShown = (value) => ({
+    label: t("play.board.owner.watch"),
+    value: watchLink(value),
+  });
   const fail = (error) =>
     dispatch(
       createAlert(t("play.board.owner.failed"), error?.message, "error"),
     );
 
-  const copy = async (value) => {
+  // Copies the link, or shows it when the clipboard refuses
+  const copyShown = async (value) => {
     try {
-      await navigator.clipboard.writeText(link(value));
+      await navigator.clipboard.writeText(value.value);
       setShown(null);
     } catch {
-      setShown(link(value));
+      setShown(value);
     }
   };
+  const copy = (value) => copyShown(inviteShown(value));
 
   const renew = () =>
     once(async () => {
       try {
         const { inviteCode: next } = await api.newInvite(gameId);
         setCode(next);
-        setShown(link(next));
+        setShown(inviteShown(next));
         await copy(next).catch(() => {});
-        setShown(link(next));
+        setShown(inviteShown(next));
+      } catch (error) {
+        fail(error);
+      }
+    });
+
+  // A new spectator link (the old one stops working), copied and shown
+  const newWatch = async () => {
+    const { watchCode: next } = await api.newWatch(gameId);
+    setWatch(next);
+    onWatch(next);
+    await copyShown(watchShown(next));
+    setShown(watchShown(next));
+  };
+
+  // Copies the spectator link, made first when there is none
+  const copyWatch = () =>
+    once(async () => {
+      try {
+        if (watch) await copyShown(watchShown(watch));
+        else await newWatch();
+      } catch (error) {
+        fail(error);
+      }
+    });
+
+  const renewWatch = () =>
+    once(async () => {
+      try {
+        await newWatch();
+      } catch (error) {
+        fail(error);
+      }
+    });
+
+  const stopWatch = () =>
+    once(async () => {
+      try {
+        await api.deleteWatch(gameId);
+        setWatch(null);
+        onWatch(null);
+        setShown((value) => (value?.value === watchLink(watch) ? null : value));
+        dispatch(
+          createAlert(t("play.board.owner.watchStopped"), "", "success"),
+        );
       } catch (error) {
         fail(error);
       }
@@ -97,6 +173,32 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
         fail(error);
       }
     });
+
+  // Resolves true when the server took the change
+  const saveWebhook = async (url) => {
+    let done = false;
+    await once(async () => {
+      try {
+        const result = await api.setWebhook(gameId, url);
+        onWebhook(result?.webhookSet ?? url !== null);
+        dispatch(
+          createAlert(
+            t(
+              url === null
+                ? "play.board.owner.webhookRemoved"
+                : "play.board.owner.webhookSaved",
+            ),
+            "",
+            "success",
+          ),
+        );
+        done = true;
+      } catch (error) {
+        fail(error);
+      }
+    });
+    return done;
+  };
 
   const remove = async () => {
     setBusy(true);
@@ -117,9 +219,9 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
       {shown && (
         <Input
           readOnly
-          aria-label={t("play.board.owner.link")}
-          value={shown}
-          className="h-8 w-72"
+          aria-label={shown.label}
+          value={shown.value}
+          className="h-10 w-40 sm:w-72 md:h-8"
           onFocus={(event) => event.target.select()}
         />
       )}
@@ -142,6 +244,29 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
           <DropdownMenuItem disabled={pending} onSelect={renew}>
             <Link2 aria-hidden="true" />
             {t("play.board.owner.newInvite")}
+          </DropdownMenuItem>
+          <DropdownMenuItem disabled={pending} onSelect={copyWatch}>
+            <Eye aria-hidden="true" />
+            {t("play.board.owner.watch")}
+          </DropdownMenuItem>
+          {watch && (
+            <>
+              <DropdownMenuItem disabled={pending} onSelect={renewWatch}>
+                <RefreshCw aria-hidden="true" />
+                {t("play.board.owner.watchNew")}
+              </DropdownMenuItem>
+              <DropdownMenuItem disabled={pending} onSelect={stopWatch}>
+                <EyeOff aria-hidden="true" />
+                {t("play.board.owner.watchStop")}
+              </DropdownMenuItem>
+            </>
+          )}
+          <DropdownMenuItem
+            disabled={pending}
+            onSelect={() => setHooking(true)}
+          >
+            <Bell aria-hidden="true" />
+            {t("play.board.owner.webhook")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           {status === "active" && (
@@ -185,6 +310,13 @@ const OwnerMenu = ({ api, gameId, status, inviteCode, onStatus }) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <WebhookDialog
+        open={hooking}
+        onOpenChange={setHooking}
+        webhookSet={webhookSet}
+        pending={pending}
+        onSave={saveWebhook}
+      />
       <Dialog open={confirming} onOpenChange={setConfirming}>
         <DialogContent className="max-w-md">
           <DialogTitle>{t("play.board.owner.delete")}</DialogTitle>

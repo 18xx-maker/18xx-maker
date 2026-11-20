@@ -26,14 +26,18 @@ const allowedReturn = (value, config) => {
   }
 };
 
-const makeState = (ret, secret) => {
+// The browser's own random value of a login: the return fragment is accepted
+// only by the browser that made it
+const NONCE = /^[A-Za-z0-9_-]{16,64}$/;
+
+const makeState = (ret, nonce, secret) => {
   const payload = Buffer.from(
-    JSON.stringify({ return: ret, exp: Date.now() + STATE_TTL_MS }),
+    JSON.stringify({ return: ret, nonce, exp: Date.now() + STATE_TTL_MS }),
   ).toString("base64url");
   return `${payload}.${sign(payload, secret)}`;
 };
 
-// Returns the return URL string, or null when the state is invalid or expired
+// Returns { return, nonce }, or null when the state is invalid or expired
 const readState = (state, secret) => {
   if (typeof state !== "string") return null;
   const [payload, mac, ...rest] = state.split(".");
@@ -48,14 +52,23 @@ const readState = (state, secret) => {
   try {
     const data = JSON.parse(Buffer.from(payload, "base64url").toString());
     if (typeof data.exp !== "number" || data.exp < Date.now()) return null;
-    return typeof data.return === "string" ? data.return : null;
+    if (typeof data.return !== "string" || !NONCE.test(data.nonce)) return null;
+    return { return: data.return, nonce: data.nonce };
   } catch {
     return null;
   }
 };
 
-const discordFetch = async (url, options) => {
-  const res = await fetch(url, options);
+// An OAuth error code from Discord, put in the return fragment; anything that
+// is not a plain code is not reflected
+const OAUTH_ERROR = /^[a-z_]{1,64}$/;
+
+// The timeout covers the response body too
+const discordFetch = async (url, options, timeoutMs) => {
+  const res = await fetch(url, {
+    ...options,
+    signal: AbortSignal.timeout(timeoutMs),
+  });
   if (!res.ok) throw new Error(`Discord responded ${res.status}`);
   return res.json();
 };
@@ -67,7 +80,7 @@ export const requireUser = (pool) => async (c, next) => {
   const { rows } = await pool.query(
     `select u.id, u.name, u.avatar, u.can_create
        from sessions s join users u on u.id = s.user_id
-      where s.token_hash = $1`,
+      where s.token_hash = $1 and s.expires_at > now()`,
     [sha256(match[1])],
   );
   if (!rows.length) return c.json({ error: "Unauthorized" }, 401);
@@ -83,7 +96,8 @@ export const requireUser = (pool) => async (c, next) => {
   return next();
 };
 
-export const authRoutes = ({ pool, config }) => {
+// sockets.closeToken(tokenHash) closes the websockets of a session on logout
+export const authRoutes = ({ pool, config, sockets }) => {
   const app = new Hono();
   const { discord } = config;
   const redirectUri = `${config.publicUrl}/auth/discord/callback`;
@@ -91,26 +105,47 @@ export const authRoutes = ({ pool, config }) => {
   app.get("/auth/discord/login", (c) => {
     const ret = allowedReturn(c.req.query("return"), config);
     if (!ret) return c.json({ error: "Return URL not allowed" }, 400);
+    const nonce = c.req.query("nonce");
+    if (!NONCE.test(nonce)) {
+      return c.json(
+        { error: "nonce must be 16 to 64 base64url characters" },
+        400,
+      );
+    }
 
     const url = new URL(`${discord.authBase}/authorize`);
     url.searchParams.set("client_id", discord.clientId);
     url.searchParams.set("response_type", "code");
     url.searchParams.set("scope", "identify guilds");
     url.searchParams.set("redirect_uri", redirectUri);
-    url.searchParams.set("state", makeState(ret.href, discord.clientSecret));
+    url.searchParams.set(
+      "state",
+      makeState(ret.href, nonce, discord.clientSecret),
+    );
     return c.redirect(url.href, 302);
   });
 
   app.get("/auth/discord/callback", async (c) => {
-    const returned = readState(c.req.query("state"), discord.clientSecret);
+    const state = readState(c.req.query("state"), discord.clientSecret);
     // Re-check the origin: the allow list may have changed since login
-    const ret = returned && allowedReturn(returned, config);
+    const ret = state && allowedReturn(state.return, config);
+    if (!ret) return c.json({ error: "Invalid state" }, 400);
+    const { nonce } = state;
+    // Discord sends error (access_denied when the user cancels) instead of code
+    const denied = c.req.query("error");
+    if (denied !== undefined) {
+      const error = OAUTH_ERROR.test(denied) ? denied : "login_failed";
+      ret.hash = `error=${error}&nonce=${nonce}`;
+      return c.redirect(ret.href, 302);
+    }
     const code = c.req.query("code");
-    if (!ret || !code) return c.json({ error: "Invalid state" }, 400);
+    if (!code) return c.json({ error: "Invalid state" }, 400);
+    const fetchDiscord = (url, options) =>
+      discordFetch(url, options, discord.timeoutMs);
 
     let profile, guilds;
     try {
-      const token = await discordFetch(`${discord.apiBase}/oauth2/token`, {
+      const token = await fetchDiscord(`${discord.apiBase}/oauth2/token`, {
         method: "POST",
         headers: { "content-type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
@@ -122,8 +157,8 @@ export const authRoutes = ({ pool, config }) => {
         }),
       });
       const headers = { authorization: `Bearer ${token.access_token}` };
-      profile = await discordFetch(`${discord.apiBase}/users/@me`, { headers });
-      guilds = await discordFetch(`${discord.apiBase}/users/@me/guilds`, {
+      profile = await fetchDiscord(`${discord.apiBase}/users/@me`, { headers });
+      guilds = await fetchDiscord(`${discord.apiBase}/users/@me/guilds`, {
         headers,
       });
       if (!profile?.id || !Array.isArray(guilds)) throw new Error("bad shape");
@@ -148,11 +183,16 @@ export const authRoutes = ({ pool, config }) => {
 
     const sessionToken = randomBytes(32).toString("base64url");
     await pool.query(
-      "insert into sessions (token_hash, user_id) values ($1, $2)",
-      [sha256(sessionToken), rows[0].id],
+      "delete from sessions where user_id = $1 and expires_at <= now()",
+      [rows[0].id],
+    );
+    await pool.query(
+      `insert into sessions (token_hash, user_id, expires_at)
+       values ($1, $2, now() + make_interval(days => $3))`,
+      [sha256(sessionToken), rows[0].id, config.limits.sessionTtlDays],
     );
 
-    ret.hash = `token=${sessionToken}`;
+    ret.hash = `token=${sessionToken}&nonce=${nonce}`;
     return c.redirect(ret.href, 302);
   });
 
@@ -162,6 +202,7 @@ export const authRoutes = ({ pool, config }) => {
     await pool.query("delete from sessions where token_hash = $1", [
       c.get("tokenHash"),
     ]);
+    sockets?.closeToken(c.get("tokenHash"));
     return c.json({ ok: true });
   });
 

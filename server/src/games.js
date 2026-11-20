@@ -4,12 +4,43 @@ import { Hono } from "hono";
 
 import { validateGameJson } from "../../src/cli/validate.js";
 import { requireUser } from "./auth.js";
+import { isWebhookUrl } from "./webhook.js";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const ASSET_NAME = /^[\w.-]{1,100}$/;
 const STATUSES = ["active", "locked", "archived"];
 
+// Invite and watch codes
 const newInviteCode = () => randomBytes(16).toString("base64url");
+
+// Runs fn(client) in a transaction; fn returns the response, rolled back when
+// it is a refusal (rollback: true) or throws
+const inTransaction = async (pool, fn) => {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const { response, rollback } = await fn(client);
+    await client.query(rollback ? "rollback" : "commit");
+    return response;
+  } catch (err) {
+    await client.query("rollback").catch(() => {});
+    throw err;
+  } finally {
+    client.release();
+  }
+};
+
+// Locks the owner's row so concurrent changes to their game count serialize;
+// resolves to the games of the owner that count against gamesPerUser
+const lockOwnedCount = async (client, userId) => {
+  await client.query("select 1 from users where id = $1 for update", [userId]);
+  const { rows } = await client.query(
+    `select count(*)::int as n from games
+      where owner_id = $1 and status in ('active', 'locked')`,
+    [userId],
+  );
+  return rows[0].n;
+};
 
 // Reads the raw body, giving up (null) as soon as it passes the limit
 const readCapped = async (c, limit) => {
@@ -53,7 +84,34 @@ const seatJson = (row) => ({
   color: row.color,
 });
 
-export const gameRoutes = ({ pool, config }) => {
+// The names of a game's assets, for the board to fetch
+const assetNames = async (pool, gameId) => {
+  const { rows } = await pool.query(
+    "select name from game_assets where game_id = $1 order by name",
+    [gameId],
+  );
+  return rows.map((r) => r.name);
+};
+
+const seatsOf = async (pool, gameId) => {
+  const { rows } = await pool.query(
+    "select user_id, name, color from seats where game_id = $1 order by created_at",
+    [gameId],
+  );
+  return rows.map(seatJson);
+};
+
+// The asset as a download that is never rendered in place
+const assetResponse = (c, row) =>
+  c.body(row.data, 200, {
+    "Content-Type": row.content_type,
+    "X-Content-Type-Options": "nosniff",
+    "Content-Disposition": "attachment",
+  });
+
+// notifier: the webhook notifier (webhook.js), for the test post of a webhook;
+// sockets: the hub's { closeGame, closeWatchers }, absent without a websocket hub
+export const gameRoutes = ({ pool, config, notifier, sockets }) => {
   const app = new Hono();
   const { limits } = config;
   const auth = requireUser(pool);
@@ -117,21 +175,13 @@ export const gameRoutes = ({ pool, config }) => {
         ? seatName.trim().slice(0, 50)
         : user.name;
 
-    const client = await pool.connect();
-    try {
-      await client.query("begin");
+    return inTransaction(pool, async (client) => {
       // Serialise concurrent creates by one user so the cap cannot be raced
-      await client.query("select 1 from users where id = $1 for update", [
-        user.id,
-      ]);
-      const { rows: owned } = await client.query(
-        `select count(*)::int as n from games
-          where owner_id = $1 and status in ('active', 'locked')`,
-        [user.id],
-      );
-      if (owned[0].n >= limits.gamesPerUser) {
-        await client.query("rollback");
-        return c.json({ error: "Too many games" }, 429);
+      if ((await lockOwnedCount(client, user.id)) >= limits.gamesPerUser) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Too many games" }, 429),
+        };
       }
       const { rows } = await client.query(
         `insert into games (title, owner_id, game_json, config_json, invite_code)
@@ -142,14 +192,8 @@ export const gameRoutes = ({ pool, config }) => {
         "insert into seats (game_id, user_id, name) values ($1, $2, $3)",
         [rows[0].id, user.id, name],
       );
-      await client.query("commit");
-      return c.json({ id: rows[0].id, inviteCode }, 201);
-    } catch (err) {
-      await client.query("rollback");
-      throw err;
-    } finally {
-      client.release();
-    }
+      return { response: c.json({ id: rows[0].id, inviteCode }, 201) };
+    });
   });
 
   app.get("/games", auth, async (c) => {
@@ -180,10 +224,6 @@ export const gameRoutes = ({ pool, config }) => {
     const row = await membership(c.req.param("id"), user);
     if (!row) return c.json({ error: "Not found" }, 404);
 
-    const { rows: seats } = await pool.query(
-      "select user_id, name, color from seats where game_id = $1 order by created_at",
-      [row.id],
-    );
     return c.json({
       id: row.id,
       title: row.title,
@@ -191,8 +231,16 @@ export const gameRoutes = ({ pool, config }) => {
       ownerId: row.owner_id,
       game: row.game_json,
       config: row.config_json,
-      seats: seats.map(seatJson),
-      ...(row.owner_id === user.id ? { inviteCode: row.invite_code } : {}),
+      seats: await seatsOf(pool, row.id),
+      assets: await assetNames(pool, row.id),
+      // The webhook URL is a secret: never returned, the owner sees if one is set
+      ...(row.owner_id === user.id
+        ? {
+            inviteCode: row.invite_code,
+            watchCode: row.watch_code,
+            webhookSet: row.webhook_url !== null,
+          }
+        : {}),
     });
   });
 
@@ -202,20 +250,88 @@ export const gameRoutes = ({ pool, config }) => {
 
     const body = await readSmallJson(c);
     if (body === undefined) return c.json({ error: "Body too large" }, 413);
-    if (!STATUSES.includes(body?.status)) {
+    const has = (key) =>
+      body !== null && typeof body === "object" && Object.hasOwn(body, key);
+    const setStatus = has("status");
+    const setWebhook = has("webhookUrl");
+    if ((setStatus || !setWebhook) && !STATUSES.includes(body?.status)) {
       return c.json({ error: "Invalid status" }, 400);
     }
-    await pool.query("update games set status = $2 where id = $1", [
-      row.id,
-      body.status,
-    ]);
-    return c.json({ id: row.id, status: body.status });
+    const webhookUrl = setWebhook ? body.webhookUrl : undefined;
+    if (
+      setWebhook &&
+      webhookUrl !== null &&
+      !isWebhookUrl(webhookUrl, config.discord.webhookOrigin)
+    ) {
+      return c.json({ error: "Invalid webhook URL" }, 400);
+    }
+    // The test post comes first, so a webhook Discord does not know (401/404)
+    // is refused before anything is written
+    const user = c.get("user");
+    if (webhookUrl) {
+      const test = await notifier.connected(row.id, webhookUrl, user.id);
+      if (test === "limited") {
+        return c.json({ error: "Too many requests" }, 429);
+      }
+      if (test === "rejected") {
+        return c.json({ error: "Discord rejected the webhook" }, 400);
+      }
+    }
+    return inTransaction(pool, async (client) => {
+      const count = setStatus ? await lockOwnedCount(client, user.id) : 0;
+      const { rows } = await client.query(
+        "select status from games where id = $1 for update",
+        [row.id],
+      );
+      if (!rows.length) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Not found" }, 404),
+        };
+      }
+      // Bringing an archived game back counts against the cap like a new one
+      if (
+        setStatus &&
+        rows[0].status === "archived" &&
+        body.status !== "archived" &&
+        count >= limits.gamesPerUser
+      ) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Too many games" }, 409),
+        };
+      }
+      const { rows: updated } = await client.query(
+        `update games
+            set status = coalesce($2, status),
+                webhook_url = case when $3 then $4 else webhook_url end
+          where id = $1
+          returning status, webhook_url is not null as webhook_set`,
+        [
+          row.id,
+          setStatus ? body.status : null,
+          setWebhook,
+          webhookUrl ?? null,
+        ],
+      );
+      return {
+        response: c.json({
+          id: row.id,
+          status: updated[0].status,
+          webhookSet: updated[0].webhook_set,
+        }),
+      };
+    });
   });
 
   app.delete("/games/:id", auth, async (c) => {
     const { row, fail } = await ownerOnly(c);
     if (fail) return fail;
     await pool.query("delete from games where id = $1", [row.id]);
+    notifier.forget(row.id);
+    // Its players and spectators are closed; a join still in flight checks
+    // its seat again once it is in the room
+    sockets?.closeGame(row.id);
     return c.body(null, 204);
   });
 
@@ -228,6 +344,78 @@ export const gameRoutes = ({ pool, config }) => {
       inviteCode,
     ]);
     return c.json({ inviteCode });
+  });
+
+  // The spectator link: a new code (the old one stops working) or none. Open
+  // spectator sockets of the game are closed either way; a spectator join
+  // still in flight checks the code again once it is in the room
+  const setWatchCode = async (gameId, watchCode) => {
+    await pool.query("update games set watch_code = $2 where id = $1", [
+      gameId,
+      watchCode,
+    ]);
+    sockets?.closeWatchers(gameId);
+  };
+
+  app.post("/games/:id/watch", auth, async (c) => {
+    const { row, fail } = await ownerOnly(c);
+    if (fail) return fail;
+    const watchCode = newInviteCode();
+    await setWatchCode(row.id, watchCode);
+    return c.json({ watchCode });
+  });
+
+  app.delete("/games/:id/watch", auth, async (c) => {
+    const { row, fail } = await ownerOnly(c);
+    if (fail) return fail;
+    await setWatchCode(row.id, null);
+    return c.body(null, 204);
+  });
+
+  // Public, read-only: the watch code is the only credential
+  const watched = async (code) => {
+    const { rows } = await pool.query(
+      `select id, title, status, game_json, config_json from games
+        where watch_code = $1`,
+      [code],
+    );
+    return rows[0] || null;
+  };
+
+  app.get("/watch/:code", async (c) => {
+    const { rows } = await pool.query(
+      "select id, title from games where watch_code = $1",
+      [c.req.param("code")],
+    );
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+    return c.json({ gameId: rows[0].id, title: rows[0].title });
+  });
+
+  // What a spectator needs to draw the game: no owner, invite or webhook
+  app.get("/watch/:code/game", async (c) => {
+    const row = await watched(c.req.param("code"));
+    if (!row) return c.json({ error: "Not found" }, 404);
+    return c.json({
+      id: row.id,
+      title: row.title,
+      status: row.status,
+      game: row.game_json,
+      config: row.config_json,
+      seats: await seatsOf(pool, row.id),
+      assets: await assetNames(pool, row.id),
+    });
+  });
+
+  app.get("/watch/:code/assets/:name", async (c) => {
+    // One query: an unknown code and an unknown name are the same 404
+    const { rows } = await pool.query(
+      `select a.content_type, a.data from game_assets a
+         join games g on g.id = a.game_id
+        where g.watch_code = $1 and a.name = $2`,
+      [c.req.param("code"), c.req.param("name")],
+    );
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+    return assetResponse(c, rows[0]);
   });
 
   app.get("/invites/:code", async (c) => {
@@ -292,14 +480,46 @@ export const gameRoutes = ({ pool, config }) => {
     if (!data) return c.json({ error: "Asset too large" }, 413);
 
     const type = c.req.header("content-type") || "application/octet-stream";
-    await pool.query(
-      `insert into game_assets (game_id, name, content_type, data)
-       values ($1, $2, $3, $4)
-       on conflict (game_id, name) do update
-         set content_type = excluded.content_type, data = excluded.data`,
-      [row.id, name, type, data],
-    );
-    return c.body(null, 204);
+    return inTransaction(pool, async (client) => {
+      // The game row lock serializes uploads, so the caps cannot be raced
+      const game = await client.query(
+        "select 1 from games where id = $1 for update",
+        [row.id],
+      );
+      if (!game.rows.length) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Not found" }, 404),
+        };
+      }
+      // The asset being replaced does not count
+      const { rows } = await client.query(
+        `select count(*)::int as n,
+                coalesce(sum(octet_length(data)), 0)::float8 as bytes
+           from game_assets where game_id = $1 and name <> $2`,
+        [row.id, name],
+      );
+      if (rows[0].n >= limits.assetsPerGame) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Too many assets" }, 413),
+        };
+      }
+      if (rows[0].bytes + data.length > limits.assetTotalBytes) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Assets too large in total" }, 413),
+        };
+      }
+      await client.query(
+        `insert into game_assets (game_id, name, content_type, data)
+         values ($1, $2, $3, $4)
+         on conflict (game_id, name) do update
+           set content_type = excluded.content_type, data = excluded.data`,
+        [row.id, name, type, data],
+      );
+      return { response: c.body(null, 204) };
+    });
   });
 
   app.get("/games/:id/assets/:name", auth, async (c) => {
@@ -311,12 +531,7 @@ export const gameRoutes = ({ pool, config }) => {
       [row.id, c.req.param("name")],
     );
     if (!rows.length) return c.json({ error: "Not found" }, 404);
-
-    return c.body(rows[0].data, 200, {
-      "Content-Type": rows[0].content_type,
-      "X-Content-Type-Options": "nosniff",
-      "Content-Disposition": "attachment",
-    });
+    return assetResponse(c, rows[0]);
   });
 
   return app;

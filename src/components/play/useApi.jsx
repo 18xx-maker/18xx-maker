@@ -1,9 +1,17 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
 import { createApi } from "@/play/client/api";
+import {
+  clearNonce,
+  newNonce,
+  readNonce,
+  storeNonce,
+} from "@/play/client/loginNonce";
 import { clearToken, getToken, setToken } from "@/play/client/tokenStore";
 import { useLocation, useNavigate } from "@/router";
+import { createAlert } from "@/state/alerts";
 import { selectPlayServer } from "@/state/selectors";
 import capability from "@/util/capability";
 
@@ -11,31 +19,69 @@ import capability from "@/util/capability";
 // the signed in user. status is "electron" or "noServer" (nothing is
 // requested), "signedout", "loading", "error" or "ready".
 //
-// The server sends the login back to <return>#token=<token>: the token is
-// stored for the server url and the fragment is replaced out of the address
-// and the history. It is never logged or sent anywhere else. Without a server
-// or in Electron a #token= fragment is only replaced out, never stored.
+// The server sends the login back to <return>#token=<token>&nonce=<nonce>:
+// the token is stored for the server url only when the nonce is the one this
+// tab made when it began the login (once), and the fragment is replaced out of
+// the address and the history. It is never logged or sent anywhere else.
+// Without a server or in Electron the fragment is only replaced out, never
+// stored. #error=<code>&nonce=<nonce> is a login Discord did not complete.
 export const useApi = () => {
   const server = useSelector(selectPlayServer);
   const { pathname, hash } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [version, setVersion] = useState(0);
   const [session, setSession] = useState(null);
   const [failure, setFailure] = useState(null);
   const [attempt, setAttempt] = useState(0);
 
   const blocked = capability.electron ? "electron" : server ? null : "noServer";
-  const tokenHash = /^#token=/.test(hash);
-  const fragment = (!blocked && /^#token=(.+)$/.exec(hash)?.[1]) || null;
+  const params = new URLSearchParams(hash.slice(1));
+  // A login return is token=<value> or error=<value>; a plain #token or
+  // #error anchor is left alone
+  const hasLogin = Boolean(params.get("token") || params.get("error"));
+  const fragmentToken = params.get("token");
+  const fragmentError = params.get("error");
+  const fragmentNonce = params.get("nonce");
+  // Read once per fragment: a later render must not see a cleared nonce
+  const expected = useMemo(
+    () => (hasLogin && !blocked ? readNonce() : null),
+    [hasLogin, blocked],
+  );
+  const valid = Boolean(expected) && fragmentNonce === expected;
+  const fragment = (valid && fragmentToken) || null;
 
   useEffect(() => {
-    if (!tokenHash) return;
-    if (fragment) {
-      setToken(server, fragment);
-      setVersion((v) => v + 1);
+    if (!hasLogin) return;
+    if (!blocked) {
+      clearNonce();
+      if (fragment) {
+        setToken(server, fragment);
+        setVersion((v) => v + 1);
+      } else {
+        const cancelled = valid && fragmentError === "access_denied";
+        dispatch(
+          createAlert(
+            t("alerts.error"),
+            t(cancelled ? "play.signInCancelled" : "play.signInFailed"),
+            "error",
+          ),
+        );
+      }
     }
     navigate({ hash: "" }, { replace: true });
-  }, [tokenHash, fragment, server, navigate]);
+  }, [
+    hasLogin,
+    blocked,
+    fragment,
+    valid,
+    fragmentError,
+    server,
+    navigate,
+    dispatch,
+    t,
+  ]);
 
   const stored = useMemo(
     () => (blocked ? null : getToken(server)),
@@ -78,13 +124,16 @@ export const useApi = () => {
   const user = session?.token === token ? session.user : null;
   const error = failure?.token === token ? failure.message : null;
 
+  // The nonce of this page's sign in link, kept for the tab when it is used
+  const nonce = useMemo(newNonce, []);
   const signInUrl = api
-    ? api.loginUrl(`${window.location.origin}${pathname}`)
+    ? api.loginUrl(`${window.location.origin}${pathname}`, nonce)
     : null;
-  const signIn = useCallback(
-    () => window.location.assign(signInUrl),
-    [signInUrl],
-  );
+  // The click handler of the link, before the browser goes to Discord
+  const signIn = useCallback(() => storeNonce(nonce), [nonce]);
+  // The sign in link's attributes: the url and the click that stores the
+  // nonce always travel together
+  const signInProps = signInUrl ? { href: signInUrl, onClick: signIn } : null;
 
   const signOut = useCallback(async () => {
     try {
@@ -112,6 +161,7 @@ export const useApi = () => {
     error,
     signInUrl,
     signIn,
+    signInProps,
     signOut,
     retry,
   };

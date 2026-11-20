@@ -22,6 +22,13 @@ Wenn du direkt loslegen möchtest, um ein bestehendes Spiel zu drucken oder ein
 neues zu erstellen, schau dir unsere Seite [Erste
 Schritte](https://18xx-maker.com/docs) an, um schnell loszulegen.
 
+::: siteonly
+
+Um ein Spiel mit Freunden auf einem gemeinsamen Spielbrett zu spielen, siehe
+[Online-Spiel](/docs/play).
+
+:::
+
 ## Discord
 
 Wir haben einen [Discord-Server für 18xx-Maker](https://discord.gg/gcYvAjYYfw).

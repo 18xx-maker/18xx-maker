@@ -20,7 +20,7 @@ const PlayGame = ({ id, play }) => {
 
   if (game.status === "denied") {
     return (
-      <PlayNotice status="signedout" signInUrl={play.signInUrl}>
+      <PlayNotice status="signedout" signInProps={play.signInProps}>
         <p>{t("play.game.denied")}</p>
       </PlayNotice>
     );
@@ -47,7 +47,11 @@ const PlayGame = ({ id, play }) => {
           gameId: id,
           status: game.gameStatus,
           inviteCode: game.inviteCode,
+          watchCode: game.watchCode,
+          onWatch: game.setWatchCode,
           onStatus: game.setStatus,
+          webhookSet: game.webhookSet,
+          onWebhook: game.setWebhookSet,
         }
       : null;
   return <PlayBoard play={game} owner={owner} />;

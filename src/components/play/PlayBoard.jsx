@@ -26,14 +26,18 @@ const TABS = ["tiles", "tokens", "market", "trays", "notes", "history"];
 const STATUSES = ["connecting", "online", "offline"];
 
 // What the connection or the game says about itself, apart from the badge
-// (a game that failed to load never gets here, PlayGamePage shows that)
+// (a game that failed to load never gets here, PlayGamePage shows that). A
+// spectator is always read only: it says watching, or reconnecting.
 const Banner = ({ play }) => {
   const { t } = useTranslation();
-  const text = play.locked
-    ? t("play.board.banner.locked")
-    : play.status === "offline"
-      ? t("play.board.banner.offline")
-      : null;
+  const offline = play.status === "offline";
+  const text = play.spectator
+    ? t(offline ? "play.board.banner.offline" : "play.board.banner.watching")
+    : play.locked
+      ? t("play.board.banner.locked")
+      : offline
+        ? t("play.board.banner.offline")
+        : null;
   if (!text) return null;
 
   return (
@@ -115,11 +119,13 @@ const Board = ({ play, owner }) => {
       sameToken(tk, selected.token),
     );
 
-  const status = locked
-    ? "locked"
-    : STATUSES.includes(play.status)
-      ? play.status
-      : "connecting";
+  // A spectator's badge is the connection: the banner says it is read only
+  const status =
+    locked && !play.spectator
+      ? "locked"
+      : STATUSES.includes(play.status)
+        ? play.status
+        : "connecting";
 
   return (
     <div
@@ -133,16 +139,18 @@ const Board = ({ play, owner }) => {
         </Badge>
         <Presence presence={play.presence} seats={play.seats} />
         <div className="ml-auto flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="h-10 md:h-8"
-            disabled={!canUndo}
-            onClick={() => play.undo()}
-          >
-            <Undo2 aria-hidden="true" />
-            {t("play.board.undo")}
-          </Button>
+          {!play.spectator && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-10 md:h-8"
+              disabled={!canUndo}
+              onClick={() => play.undo()}
+            >
+              <Undo2 aria-hidden="true" />
+              {t("play.board.undo")}
+            </Button>
+          )}
           {owner && <OwnerMenu {...owner} />}
         </div>
       </header>
@@ -262,11 +270,12 @@ const Board = ({ play, owner }) => {
 
 // The board of an online game: the map with the placed tiles and tokens, the
 // tools to place them and who is here. `play` is what usePlayGame gives;
-// `owner` (props of OwnerMenu) is only given to the owner of the game.
+// `owner` (props of OwnerMenu) is only given to the owner of the game, never
+// to a spectator.
 const PlayBoard = ({ play, owner }) => {
   const value = useMemo(
-    () => ({ game: play.game, config: play.config }),
-    [play.game, play.config],
+    () => ({ game: play.game, config: play.config, assets: play.assets }),
+    [play.game, play.config, play.assets],
   );
   return (
     <GameContext.Provider value={value}>

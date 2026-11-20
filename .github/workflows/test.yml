@@ -291,6 +291,21 @@ jobs:
     name: End to End
     runs-on: ubuntu-latest
     needs: pr-body
+    # e2e/play.spec.js runs the play server against it
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: play
+          POSTGRES_PASSWORD: play
+          POSTGRES_DB: play
+        options: >-
+          --health-cmd "pg_isready -U play"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -330,6 +345,8 @@ jobs:
         run: pnpm build
       - name: End to End Tests
         run: pnpm test:e2e
+        env:
+          DATABASE_URL: postgres://play:play@localhost:5432/play
       - name: Upload Report
         uses: actions/upload-artifact@v7
         if: failure()
