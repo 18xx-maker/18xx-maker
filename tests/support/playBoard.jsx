@@ -25,7 +25,10 @@ export const Board = ({
   send,
   game: g = game,
   seats = [{ userId: 7, name: "Ann" }],
+  error: initialError = null,
+  dismissError,
 }) => {
+  const [error, setError] = useState(initialError);
   const [log, setLog] = useState(() =>
     initial.map((event, i) => ({ seq: i + 1, userId: 7, ...event })),
   );
@@ -41,7 +44,11 @@ export const Board = ({
     me: { userId: 7, name: "Ann" },
     locked,
     missing: false,
-    error: null,
+    error,
+    dismissError: () => {
+      dismissError?.();
+      setError(null);
+    },
     send: (event) => {
       send(event);
       if (!locked)

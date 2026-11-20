@@ -120,6 +120,22 @@ describe("play history", () => {
     );
   });
 
+  it("shows a move the server refused until it is dismissed", async () => {
+    const dismissError = vi.fn();
+    const { user } = await mount({ error: "bad undo", dismissError });
+    const alert = screen.getByTestId("play-error");
+    expect(alert).toHaveAttribute("role", "alert");
+    expect(alert).toHaveTextContent("The server refused a move: bad undo");
+    await user.click(within(alert).getByRole("button", { name: "Dismiss" }));
+    expect(dismissError).toHaveBeenCalledTimes(1);
+    expect(screen.queryByTestId("play-error")).not.toBeInTheDocument();
+  });
+
+  it("shows no move error on a locked game", async () => {
+    await mount({ locked: true, error: "locked" });
+    expect(screen.queryByTestId("play-error")).not.toBeInTheDocument();
+  });
+
   it("notes that a locked game is read only", async () => {
     await mount({ locked: true });
     expect(screen.getByTestId("play-banner")).toHaveTextContent(

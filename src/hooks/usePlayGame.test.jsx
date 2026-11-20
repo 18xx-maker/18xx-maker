@@ -21,6 +21,7 @@ const setup = (view = {}, { game = record } = {}) => {
       return vi.fn();
     }),
     send: vi.fn(),
+    clearError: vi.fn(),
     close: vi.fn(),
   };
   const deps = {
@@ -84,6 +85,16 @@ describe("usePlayGame", () => {
     act(() => result.current.send({ type: "note.set", text: "b" }));
     act(() => result.current.undo());
     expect(session.send).not.toHaveBeenCalled();
+  });
+
+  it("gives the error of a rejected move and dismisses it", async () => {
+    const { deps, session, push } = setup();
+    const { result } = renderHook(() => usePlayGame(options, deps));
+    await waitFor(() => expect(result.current.status).toBe("online"));
+    push({ status: "online", log: [], error: "bad undo" });
+    expect(result.current.error).toBe("bad undo");
+    act(() => result.current.dismissError());
+    expect(session.clearError).toHaveBeenCalledTimes(1);
   });
 
   it("closes the session on unmount", async () => {

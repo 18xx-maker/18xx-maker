@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Undo2 } from "lucide-react";
+import { Undo2, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -43,6 +43,32 @@ const Banner = ({ play }) => {
       className="flex flex-wrap items-center gap-3 rounded-md border bg-muted px-3 py-2 text-sm"
     >
       <p>{text}</p>
+    </div>
+  );
+};
+
+// A move the server refused (the session clears it when a later move of ours
+// lands). A locked game says so in the banner instead.
+const MoveError = ({ play }) => {
+  const { t } = useTranslation();
+  if (!play.error || play.locked) return null;
+
+  return (
+    <div
+      data-testid="play-error"
+      role="alert"
+      className="flex items-center gap-3 rounded-md border border-destructive px-3 py-2 text-sm text-destructive"
+    >
+      <p>{t("play.board.moveError.message", { message: play.error })}</p>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="ml-auto h-7 w-7"
+        aria-label={t("play.board.moveError.dismiss")}
+        onClick={() => play.dismissError?.()}
+      >
+        <X aria-hidden="true" />
+      </Button>
     </div>
   );
 };
@@ -120,6 +146,7 @@ const Board = ({ play, owner }) => {
         </div>
       </header>
       <Banner play={play} />
+      <MoveError play={play} />
       <div className="flex min-h-0 flex-1 flex-col gap-2 md:flex-row">
         {/* The map stays mounted under the market, keeping its view */}
         <div

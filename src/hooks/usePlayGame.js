@@ -114,6 +114,8 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     send,
     undo,
     error: failed?.error || snapshot.error || null,
+    // The error of a rejected move was seen
+    dismissError: () => session.current?.clearError(),
   };
 };
 

@@ -871,6 +871,10 @@
         "offline": "正在重新连接...",
         "locked": "这局游戏已锁定。你可以查看,但不能修改。"
       },
+      "moveError": {
+        "message": "服务器拒绝了一步操作:{{message}}",
+        "dismiss": "关闭"
+      },
       "owner": {
         "menu": "所有者菜单",
         "copy": "复制邀请链接",

@@ -81,10 +81,15 @@ export const createSession = ({
   const ours = (event) =>
     userId ? event.userId === userId : same(queue[0], event);
 
-  // queue[0] was accepted when the log holds it at the seq it was sent with
+  // queue[0] was accepted when the log holds it at the seq it was sent with.
+  // A move of ours that lands clears the error of an earlier rejected one.
+  const accepted = () => {
+    queue = queue.slice(1);
+    view = { ...view, error: null };
+  };
   const settle = (seq) => {
     const held = view.log.find((e) => e.seq === seq);
-    if (held && ours(held)) queue = queue.slice(1);
+    if (held && ours(held)) accepted();
   };
 
   const handlers = {
@@ -94,7 +99,7 @@ export const createSession = ({
     event: ({ event }) => {
       const log = merge(view.log, [event]);
       if (sent === event.seq && ours(event)) {
-        queue = queue.slice(1);
+        accepted();
         sent = null;
       }
       update({ log });
@@ -195,6 +200,8 @@ export const createSession = ({
       update({});
       pump();
     },
+    // The error was seen (a dismissed message)
+    clearError: () => update({ error: null }),
     close: () => {
       closed = true;
       for (const id of timers) cancel(id);

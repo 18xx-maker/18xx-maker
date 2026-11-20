@@ -871,6 +871,10 @@
         "offline": "Verbindung wird wiederhergestellt...",
         "locked": "Dieses Spiel ist gesperrt. Du kannst es ansehen, aber nicht ändern."
       },
+      "moveError": {
+        "message": "Der Server hat einen Zug abgelehnt: {{message}}",
+        "dismiss": "Ausblenden"
+      },
       "owner": {
         "menu": "Menü des Besitzers",
         "copy": "Einladungslink kopieren",
