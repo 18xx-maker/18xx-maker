@@ -149,18 +149,22 @@ accepted, anything else is 400 `Invalid webhook URL`. Setting it posts
 "Notifications connected" first: when Discord answers 401 or 404 (the webhook
 does not exist) the PATCH is 400 `Discord rejected the webhook` and nothing is
 written; any other failure of that post is only logged and the webhook is set.
+The test post counts against the game's `WEBHOOK_MAX_PER_MINUTE` like every
+other message: past it the PATCH is 429 `Too many requests`, with no write and
+no call to Discord.
 
 Every accepted event then becomes one English line ("Alice placed tile 7 on
 A1"; a note change is "Alice updated the notes", never its text). The lines of
 a game are posted together every `WEBHOOK_BATCH_MS`, at most
 `WEBHOOK_MAX_PER_MINUTE` messages a minute and 1900 characters a message (the
-rest goes in the next one), with mentions turned off and `@`, `<`, `>` and
-backticks removed from names. A webhook that answers 401 or 404 later is
-cleared, so the notices of that game stop until the owner sets a new one. A
-429 is retried after its `retry-after`; other failures and timeouts
-(`DISCORD_TIMEOUT_MS`) drop that message. The URL is a secret: no endpoint
-returns it and the logs never contain it. Notices still waiting when the
-server stops are dropped.
+rest goes in the next one), with mentions and link previews turned off and
+`@`, `<`, `>` and backticks removed from names. At most 200 lines of a game
+wait; past that they are counted ("(N more moves not shown)"). A webhook that
+answers 401 or 404 later is cleared, so the notices of that game stop until
+the owner sets a new one. A 429 is retried after its `retry-after`. Other
+failures, redirects (never followed) and timeouts (`DISCORD_TIMEOUT_MS`) drop
+that message. The URL is a secret: no endpoint returns it and the logs never
+contain it. Notices still waiting when the server stops are dropped.
 
 ### Websocket
 

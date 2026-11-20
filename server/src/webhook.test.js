@@ -222,6 +222,7 @@ describe("createNotifier", () => {
     expect(posts[0].body).toEqual({
       content: "Alice placed tile 7 on A1\nAlice rotated the tile on A1",
       allowed_mentions: { parse: [] },
+      flags: 4,
     });
     // One read per flush, for the URL and every seat name
     expect(pool.reads).toBe(1);
@@ -389,12 +390,89 @@ describe("createNotifier", () => {
     const { posts, notifier } = setup({
       answer: (n) => new Response(null, { status: n === 1 ? 204 : 404 }),
     });
-    expect(await notifier.connected(GAME, URL_A)).toBe(true);
+    expect(await notifier.connected(GAME, URL_A)).toBe("ok");
     expect(posts[0].body).toEqual({
       content: "Notifications connected",
       allowed_mentions: { parse: [] },
+      flags: 4,
     });
-    expect(await notifier.connected(GAME, URL_A)).toBe(false);
+    expect(await notifier.connected(GAME, URL_A)).toBe("rejected");
+  });
+
+  it("refuses a test post while the minute's window is full, until it slides", async () => {
+    const { clock, posts, notifier } = setup();
+    expect(await notifier.connected(GAME, URL_A)).toBe("ok");
+    await clock.advance(30000);
+    expect(await notifier.connected(GAME, URL_A)).toBe("ok");
+    for (let i = 0; i < 5; i++) {
+      expect(await notifier.connected(GAME, URL_A)).toBe("limited");
+    }
+    expect(posts).toHaveLength(2);
+    // The first post leaves the window a minute after it went out
+    await clock.advance(30000);
+    expect(await notifier.connected(GAME, URL_A)).toBe("ok");
+    expect(await notifier.connected(GAME, URL_A)).toBe("limited");
+    expect(posts).toHaveLength(3);
+  });
+
+  it("test posts and notices share the per-game window", async () => {
+    const { clock, posts, notifier } = setup();
+    notifier.notify(GAME, "one");
+    await clock.advance(1000);
+    expect(await notifier.connected(GAME, URL_A)).toBe("ok");
+    expect(await notifier.connected(GAME, URL_A)).toBe("limited");
+    notifier.notify(GAME, "two");
+    await clock.advance(1000);
+    expect(posts).toHaveLength(2);
+    expect(await notifier.connected("other-game", URL_A)).toBe("ok");
+  });
+
+  it("never follows a redirect: the batch is dropped", async () => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { clock, posts, notifier } = setup({
+      answer: () =>
+        new Response(null, {
+          status: 307,
+          headers: { location: "https://elsewhere.test/hook" },
+        }),
+    });
+    notifier.notify(GAME, "one");
+    await clock.advance(1000);
+    expect(posts).toHaveLength(1);
+    expect(posts[0].init.redirect).toBe("error");
+    await clock.advance(10000);
+    expect(posts).toHaveLength(1);
+    expect(log).toHaveBeenCalledTimes(1);
+  });
+
+  it("keeps at most 200 lines waiting after a 429 puts a batch back", async () => {
+    let answer429;
+    const first = new Promise((resolve) => (answer429 = resolve));
+    const { clock, posts, notifier } = setup({
+      config: configFor({ WEBHOOK_MAX_PER_MINUTE: "10" }),
+      answer: (n) => (n === 1 ? first : new Response(null, { status: 204 })),
+    });
+    const old = Array.from(
+      { length: 200 },
+      (_, i) => `old ${String(i).padStart(3, "0")}`,
+    );
+    for (const line of old) notifier.notify(GAME, line);
+    await clock.advance(1000);
+    expect(posts).toHaveLength(1);
+    // 200 newer lines arrive while the post is waiting on Discord
+    for (let i = 0; i < 200; i++) notifier.notify(GAME, `new ${i}`);
+    answer429(
+      new Response("{}", { status: 429, headers: { "retry-after": "1" } }),
+    );
+    await settle();
+    await clock.advance(1000);
+    expect(posts).toHaveLength(2);
+    expect(posts[1].body.content.split("\n")).toEqual([
+      ...old,
+      "(200 more moves not shown)",
+    ]);
+    await clock.advance(10000);
+    expect(posts).toHaveLength(2);
   });
 
   it("close cancels the timers and ignores later lines", async () => {

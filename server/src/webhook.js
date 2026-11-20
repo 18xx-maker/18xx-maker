@@ -11,6 +11,7 @@ const URL_MAX = 256;
 // Lines a game may have waiting; past this they are counted, not kept
 const PENDING_MAX = 200;
 const MINUTE = 60_000;
+const SUPPRESS_EMBEDS = 4;
 const DEFAULT_ORIGIN = "https://discord.com";
 
 const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -121,7 +122,14 @@ export const createNotifier = ({
       const res = await fetch(url, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ content, allowed_mentions: { parse: [] } }),
+        // No pings, no link previews of player text (flags: SUPPRESS_EMBEDS)
+        body: JSON.stringify({
+          content,
+          allowed_mentions: { parse: [] },
+          flags: SUPPRESS_EMBEDS,
+        }),
+        // A webhook never redirects; a redirect is a failure, not followed
+        redirect: "error",
         signal: AbortSignal.timeout(config.discord.timeoutMs),
       });
       let retryAfter = Number(res.headers.get("retry-after"));
@@ -138,6 +146,21 @@ export const createNotifier = ({
     }
   };
 
+  // Prunes the posts of the last minute; true when another one may go out, so
+  // posts never holds more than perMinute times
+  const mayPost = (state, at) => {
+    state.posts = state.posts.filter((t) => at - t < MINUTE);
+    return state.posts.length < perMinute;
+  };
+
+  // Lines put back in front of newer ones stay within PENDING_MAX; the
+  // newest past it are counted, not kept
+  const requeue = (state, lines) => {
+    const items = [...lines, ...state.items];
+    state.dropped += Math.max(0, items.length - PENDING_MAX);
+    state.items = items.slice(0, PENDING_MAX);
+  };
+
   const arm = (gameId, state, ms) => {
     if (closed || state.timer || state.busy) return;
     state.timer = schedule(() => {
@@ -151,8 +174,7 @@ export const createNotifier = ({
     let delay = batchMs;
     try {
       const start = now();
-      state.posts = state.posts.filter((t) => start - t < MINUTE);
-      if (state.posts.length >= perMinute) {
+      if (!mayPost(state, start)) {
         // Over the limit: the lines wait and merge into the next post
         delay = Math.max(1, state.posts[0] + MINUTE - start);
         return;
@@ -172,12 +194,14 @@ export const createNotifier = ({
       const url = rows[0]?.webhook_url;
       if (!url || closed) return;
       const names = new Map(rows.map((r) => [r.user_id, r.name]));
-      const lines = taken.map((item) =>
+      const described = taken.map((item) =>
         typeof item === "string"
           ? item
           : describeEvent(item, names.get(item.userId)),
       );
-      if (dropped) lines.push(`(${dropped} more moves not shown)`);
+      const lines = dropped
+        ? [...described, `(${dropped} more moves not shown)`]
+        : described;
       const { content, rest } = pack(lines);
 
       state.posts.push(now());
@@ -191,14 +215,15 @@ export const createNotifier = ({
         return;
       }
       if (result.status === 429) {
-        state.items = [...lines, ...state.items];
+        state.dropped += dropped;
+        requeue(state, described);
         delay = Math.min(result.retryAfter ?? batchMs, MINUTE);
         return;
       }
       if (result.error || result.status < 200 || result.status >= 300) {
         log(gameId, result.error ?? result.status);
       }
-      state.items = [...rest, ...state.items];
+      requeue(state, rest);
     } catch (err) {
       log(gameId, reasonOf(err));
     } finally {
@@ -223,16 +248,21 @@ export const createNotifier = ({
         log(gameId, reasonOf(err));
       }
     },
-    // Posts "Notifications connected" to a new webhook now; false when Discord
-    // says it does not exist (401/404), true otherwise (a failure is logged)
+    // Posts "Notifications connected" to a new webhook now. It counts against
+    // the game's WEBHOOK_MAX_PER_MINUTE like any post. Resolves to "limited"
+    // (the window is full: nothing sent), "rejected" (Discord answered 401 or
+    // 404) or "ok" (sent, or failed otherwise and logged)
     connected: async (gameId, url) => {
-      stateOf(gameId).posts.push(now());
+      const state = stateOf(gameId);
+      const at = now();
+      if (!mayPost(state, at)) return "limited";
+      state.posts.push(at);
       const result = await post(url, "Notifications connected");
-      if (result.status === 401 || result.status === 404) return false;
+      if (result.status === 401 || result.status === 404) return "rejected";
       if (result.error || result.status < 200 || result.status >= 300) {
         log(gameId, result.error ?? result.status);
       }
-      return true;
+      return "ok";
     },
     close: () => {
       closed = true;

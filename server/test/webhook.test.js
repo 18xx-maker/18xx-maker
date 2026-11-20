@@ -121,7 +121,11 @@ describe.skipIf(!hasDb)("discord webhook notices", () => {
       body: { id, status: "active", webhookSet: true },
     });
     expect(postsTo("first-hook").map((p) => p.body)).toEqual([
-      { content: "Notifications connected", allowed_mentions: { parse: [] } },
+      {
+        content: "Notifications connected",
+        allowed_mentions: { parse: [] },
+        flags: 4,
+      },
     ]);
 
     const owner = await api(alice, "GET", `/games/${id}`);
@@ -148,6 +152,7 @@ describe.skipIf(!hasDb)("discord webhook notices", () => {
     expect(postsTo("first-hook")[1].body).toEqual({
       content: "Alice placed tile 7 on A1\nBob updated the notes",
       allowed_mentions: { parse: [] },
+      flags: 4,
     });
     await sleep(BATCH_MS * 2);
     expect(postsTo("first-hook")).toHaveLength(2);
@@ -262,6 +267,52 @@ describe.skipIf(!hasDb)("discord webhook notices", () => {
       for (const call of log.mock.calls) {
         expect(call.join(" ")).not.toContain("broken-hook");
       }
+    } finally {
+      log.mockRestore();
+    }
+  });
+
+  it("rate limits the test posts of PATCH: 429 and no Discord call past the limit", async () => {
+    const id = await makeGame([alice, bob]);
+    discord.setWebhook("spam-hook", { status: 404 });
+    const url = hookUrl("spam-hook");
+    for (let i = 0; i < 10; i++) {
+      expect((await setHook(alice, id, url)).status).toBe(400);
+    }
+    for (let i = 0; i < 3; i++) {
+      expect(await setHook(alice, id, url)).toEqual({
+        status: 429,
+        body: { error: "Too many requests" },
+      });
+    }
+    expect(postsTo("spam-hook")).toHaveLength(10);
+    // A good webhook on the same game waits too, nothing is written
+    const good = await setHook(alice, id, hookUrl("after-spam"));
+    expect(good.status).toBe(429);
+    expect(postsTo("after-spam")).toHaveLength(0);
+    expect((await api(alice, "GET", `/games/${id}`)).body.webhookSet).toBe(
+      false,
+    );
+  });
+
+  it("does not follow a redirect from the webhook", async () => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      const id = await makeGame([alice, bob]);
+      discord.setWebhook("moved-hook", {
+        status: 307,
+        headers: { location: hookUrl("redirect-target") },
+      });
+      const set = await setHook(alice, id, hookUrl("moved-hook"));
+      expect(set.status).toBe(200);
+      const a = await join(alice, id);
+      await place(a, 1);
+      await a.next("event");
+      await vi.waitFor(() => expect(postsTo("moved-hook")).toHaveLength(2), {
+        timeout: 3000,
+      });
+      await sleep(BATCH_MS);
+      expect(postsTo("redirect-target")).toHaveLength(0);
     } finally {
       log.mockRestore();
     }
