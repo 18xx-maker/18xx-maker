@@ -12,6 +12,9 @@ const { makeTestDb } = await import("../../server/test/db.js");
 const { startFakeDiscord } = await import("../../server/test/discord.js");
 
 const PORT = 4319;
+// Loopback only, by address: "localhost" may resolve to ::1 or 127.0.0.1
+const HOST = "127.0.0.1";
+const ORIGIN = `http://${HOST}:${PORT}`;
 const GUILD = "guild-e2e";
 
 const db = await makeTestDb();
@@ -24,7 +27,7 @@ const discord = await startFakeDiscord({
 const config = loadConfig({
   DATABASE_URL: process.env.DATABASE_URL,
   PORT: String(PORT),
-  PUBLIC_URL: `http://localhost:${PORT}`,
+  PUBLIC_URL: ORIGIN,
   ALLOWED_ORIGINS: "http://localhost:4318",
   DISCORD_CLIENT_ID: "e2e",
   DISCORD_CLIENT_SECRET: "e2e-secret",
@@ -33,8 +36,8 @@ const config = loadConfig({
   DISCORD_AUTH_BASE: discord.url,
 });
 const server = createServer({ pool: db.pool, config });
-await new Promise((resolve) => server.listen(PORT, resolve));
-console.log(`play server ready on http://localhost:${PORT}`);
+await new Promise((resolve) => server.listen(PORT, HOST, resolve));
+console.log(`play server ready on ${ORIGIN}`);
 
 let stopping = false;
 const stop = async () => {

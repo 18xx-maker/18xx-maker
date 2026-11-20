@@ -36,7 +36,7 @@ export default defineConfig({
       ? [
           {
             command: "node e2e/support/play-server.mjs",
-            url: "http://localhost:4319/health",
+            url: "http://127.0.0.1:4319/health",
             reuseExistingServer: !process.env.CI,
             timeout: 30_000,
             // SIGTERM lets it drop its schema
