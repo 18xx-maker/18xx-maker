@@ -5,6 +5,10 @@ seats, an append-only event log per game, and a websocket that pushes events to
 the players of a game. It is a Node (Hono + `ws`) app that stores everything in
 Postgres. It runs migrations on start, so an empty database is enough.
 
+The self-hosting guide for people running their own server is the
+[Running a Play Server](../src/docs/play-server.en.md) docs page (on the site
+at `/docs/play-server`).
+
 ## Configuration
 
 All settings are environment variables. The first four are required, the

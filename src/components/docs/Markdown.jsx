@@ -185,7 +185,13 @@ const components = {
   ul: md("ul", "my-6 ml-6 list-disc [&>li]:mt-2"),
   a: LocalLink,
   img: DocImage,
-  table: md("table", "w-full"),
+  // A wide table (long code in a cell) scrolls instead of running under the
+  // table of contents
+  table: (props) => (
+    <div className="w-full overflow-x-auto">
+      <table {...clean(props)} className={clsx(props.className, "w-full")} />
+    </div>
+  ),
   tr: md("tr", "m-0 border-t p-0 even:bg-muted"),
   th: md(
     "th",

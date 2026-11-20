@@ -988,6 +988,14 @@
       "title": "翻译",
       "description": "帮助翻译 18xx Maker"
     },
+    "play": {
+      "title": "在线游戏",
+      "description": "在游戏服务器上与他人一起玩游戏"
+    },
+    "playServer": {
+      "title": "运行游戏服务器",
+      "description": "为在线游戏架设自己的服务器"
+    },
     "output": {
       "cli": {
         "title": "命令行",

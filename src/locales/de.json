@@ -988,6 +988,14 @@
       "title": "Übersetzung",
       "description": "Hilf mit, 18xx Maker zu übersetzen"
     },
+    "play": {
+      "title": "Online-Spiel",
+      "description": "Ein Spiel mit anderen auf einem Spielserver spielen"
+    },
+    "playServer": {
+      "title": "Einen Spielserver betreiben",
+      "description": "Einen eigenen Server für das Online-Spiel betreiben"
+    },
     "output": {
       "cli": {
         "title": "Kommandozeile",

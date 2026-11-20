@@ -18,8 +18,22 @@ describe("docs previous and next", () => {
     );
   });
 
+  it("puts the online play pages at the end of the first group", async () => {
+    renderApp("/docs/play");
+    const nav = await pager();
+
+    expect(within(nav).getByRole("link", { name: /Previous/ })).toHaveAttribute(
+      "href",
+      "/docs/translation",
+    );
+    expect(within(nav).getByRole("link", { name: /Next/ })).toHaveAttribute(
+      "href",
+      "/docs/play-server",
+    );
+  });
+
   it("crosses from one group to the next", async () => {
-    renderApp("/docs/translation");
+    renderApp("/docs/play-server");
     const nav = await pager();
 
     expect(within(nav).getByRole("link", { name: /Next/ })).toHaveAttribute(
