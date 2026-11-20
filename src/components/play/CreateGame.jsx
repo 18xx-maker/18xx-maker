@@ -44,8 +44,29 @@ const CreateGame = ({ api, user }) => {
 
   const submit = async (event) => {
     event.preventDefault();
-    setBusy(true);
     setProblem(null);
+
+    // Every image is checked before the game exists: a game created and then
+    // refused its images would be left behind
+    const files = Object.entries(assets || {}).flatMap(([kind, images]) =>
+      Object.entries(images).map(([name, value]) => ({
+        name,
+        kind,
+        blob: toBlob(value),
+      })),
+    );
+    const large = files.filter(({ blob }) => blob.size > ASSET_MB * 1048576);
+    if (large.length) {
+      setProblem({
+        message: t("play.create.tooLarge", {
+          size: ASSET_MB,
+          names: large.map(({ kind, name }) => `${kind}/${name}`).join(", "),
+        }),
+      });
+      return;
+    }
+
+    setBusy(true);
     let created;
     try {
       created = await api.createGame({
@@ -62,21 +83,19 @@ const CreateGame = ({ api, user }) => {
       return;
     }
 
-    for (const [kind, images] of Object.entries(assets || {})) {
-      for (const [name, value] of Object.entries(images)) {
-        try {
-          await api.putAsset(created.id, `${kind}.${name}`, toBlob(value));
-        } catch (error) {
-          setProblem({
-            id: created.id,
-            message: t("play.create.uploadFailed", {
-              name: `${kind}/${name}`,
-              message: messageOf(error),
-            }),
-          });
-          setBusy(false);
-          return;
-        }
+    for (const { kind, name, blob } of files) {
+      try {
+        await api.putAsset(created.id, `${kind}.${name}`, blob);
+      } catch (error) {
+        setProblem({
+          id: created.id,
+          message: t("play.create.uploadFailed", {
+            name: `${kind}/${name}`,
+            message: messageOf(error),
+          }),
+        });
+        setBusy(false);
+        return;
       }
     }
     navigate(`/play/${encodeURIComponent(created.id)}`);

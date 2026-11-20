@@ -21,6 +21,7 @@ export const useApi = () => {
   const [version, setVersion] = useState(0);
   const [session, setSession] = useState(null);
   const [failure, setFailure] = useState(null);
+  const [attempt, setAttempt] = useState(0);
 
   const blocked = capability.electron ? "electron" : server ? null : "noServer";
   const fragment = (!blocked && /^#token=(.+)$/.exec(hash)?.[1]) || null;
@@ -63,7 +64,12 @@ export const useApi = () => {
     return () => {
       live = false;
     };
-  }, [api, token, server]);
+  }, [api, token, server, attempt]);
+
+  const retry = useCallback(() => {
+    setFailure(null);
+    setAttempt((n) => n + 1);
+  }, []);
 
   const user = session?.token === token ? session.user : null;
   const error = failure?.token === token ? failure.message : null;
@@ -103,6 +109,7 @@ export const useApi = () => {
     signInUrl,
     signIn,
     signOut,
+    retry,
   };
 };
 

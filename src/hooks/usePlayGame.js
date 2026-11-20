@@ -13,6 +13,7 @@ const failure = (error) => ({
   status: error?.status === 401 ? "denied" : "error",
   error: error?.message || "error",
   locked: error?.status === 403 || error?.status === 410,
+  missing: error?.status === 404,
 });
 
 // One online game: loads it once over REST and follows its event log over the
@@ -100,6 +101,7 @@ export const usePlayGame = ({ baseUrl, token, gameId, userId }, deps = {}) => {
     presence: snapshot.presence,
     me,
     locked,
+    missing: failed?.missing ?? false,
     send,
     undo,
     error: failed?.error || snapshot.error || null,

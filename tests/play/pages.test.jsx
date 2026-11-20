@@ -1,6 +1,8 @@
 import { screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { mainMenu } from "@/components/nav";
+
 import { games } from "@/data";
 import { createApi } from "@/play/client/api";
 import { getToken, setToken } from "@/play/client/tokenStore";
@@ -307,5 +309,107 @@ describe("game page", () => {
     expect(
       screen.getByRole("link", { name: "Back to your games" }),
     ).toHaveAttribute("href", "/play");
+  });
+});
+
+describe("sidebar", () => {
+  it("has a Play entry without a keyboard shortcut", () => {
+    const play = mainMenu
+      .flatMap((group) => group.items)
+      .find((item) => item.to === "/play");
+    expect(play.label).toBe("nav.play");
+    expect(play.shortcut).toBeUndefined();
+  });
+});
+
+describe("images over the server limit", () => {
+  it("refuses before creating the game and names them", async () => {
+    const fetch = signedIn({ "POST /games": [201, { id: "g9" }] });
+    const big = `<svg xmlns='http://www.w3.org/2000/svg'>${"a".repeat(1024 * 1024 + 1)}</svg>`;
+    const { user } = renderApp("/play", {
+      settings,
+      game,
+      assets: {
+        [slug]: { icons: { big, ok: "<svg/>" }, logos: {}, trains: {} },
+      },
+    });
+    await user.click(
+      await screen.findByRole("button", { name: "Create game" }),
+    );
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent("icons/big");
+    expect(alert).not.toHaveTextContent("icons/ok");
+    expect(calls(fetch, "POST", "/games")).toHaveLength(0);
+  });
+});
+
+describe("server unreachable", () => {
+  const down = () => {
+    let up = false;
+    const fetch = vi.fn(async (url) => {
+      if (!up) throw new Error("down");
+      const path = String(url).replace(BASE, "");
+      const body = path === "/me" ? me : [];
+      return new Response(JSON.stringify(body), { status: 200 });
+    });
+    vi.stubGlobal("fetch", fetch);
+    return { fetch, recover: () => (up = true) };
+  };
+
+  it("retries the sign in check on the list page", async () => {
+    setToken(BASE, "tok");
+    const { fetch, recover } = down();
+    const { user } = renderApp("/play", { settings });
+    await screen.findByRole("alert");
+    expect(screen.getByRole("link", { name: "Settings" })).toHaveAttribute(
+      "href",
+      "/settings",
+    );
+    const before = fetch.mock.calls.length;
+    recover();
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(await screen.findByText("No games yet.")).toBeInTheDocument();
+    expect(fetch.mock.calls.length).toBeGreaterThan(before);
+  });
+
+  it("retries the game list", async () => {
+    setToken(BASE, "tok");
+    let listUp = false;
+    fakeServer({});
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url) => {
+        const path = String(url).replace(BASE, "");
+        if (path === "/me") return new Response(JSON.stringify(me));
+        if (!listUp) throw new Error("down");
+        return new Response("[]");
+      }),
+    );
+    const { user } = renderApp("/play", { settings });
+    await screen.findByRole("alert");
+    listUp = true;
+    await user.click(screen.getByRole("button", { name: "Retry" }));
+    expect(await screen.findByText("No games yet.")).toBeInTheDocument();
+  });
+
+  it("has a way back on the game and join pages", async () => {
+    setToken(BASE, "tok");
+    down();
+    renderApp("/play/g1", { settings });
+    expect(
+      await screen.findByRole("link", { name: "Back to your games" }),
+    ).toHaveAttribute("href", "/play");
+  });
+});
+
+describe("game that is not there", () => {
+  it("says so with a way back", async () => {
+    signedIn({ "GET /games/g1": [404, { error: "Not found" }] });
+    renderApp("/play/g1", { settings });
+    expect(await screen.findByText(/Game not found/)).toBeInTheDocument();
+    expect(screen.queryByText(/Could not reach/)).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Back to your games" }),
+    ).toBeVisible();
   });
 });

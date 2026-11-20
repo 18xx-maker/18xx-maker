@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import PlayNotice from "@/components/play/PlayNotice";
+import PlayNotice, { BackLink } from "@/components/play/PlayNotice";
 
 import { useNavigate } from "@/router";
 
@@ -58,7 +58,7 @@ const JoinGame = ({ code, play }) => {
   };
 
   if (status === "loading" || status === "error") {
-    return <PlayNotice {...play} />;
+    return <PlayNotice {...play} back />;
   }
 
   return (
@@ -69,6 +69,7 @@ const JoinGame = ({ code, play }) => {
       <h2 className="text-2xl font-bold">{t("play.join.title")}</h2>
       {invite && <p className="text-lg">{invite.title}</p>}
       {problem && <p role="alert">{problem}</p>}
+      {problem && <BackLink />}
       {invite && status === "signedout" && (
         <PlayNotice status="signedout" signInUrl={signInUrl} />
       )}
