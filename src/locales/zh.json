@@ -818,7 +818,8 @@
         "tokens": "标记",
         "market": "市场",
         "trays": "托盘",
-        "notes": "笔记"
+        "notes": "笔记",
+        "history": "历史"
       },
       "tiles": {
         "hint": "选择一个地块,然后点击一个六边格放置它。点击六边格可选中它。",
@@ -859,7 +860,42 @@
         "label": "笔记",
         "hint": "游戏中的所有人都能看到这些笔记。离开输入框时保存。",
         "tooLong": "笔记最多 {{max}} 个字符，当前有 {{length}} 个。"
+      },
+      "undo": "撤销",
+      "history": {
+        "label": "操作",
+        "empty": "还没有操作。",
+        "unknownUser": "某位玩家",
+        "bank": "银行"
+      },
+      "banner": {
+        "offline": "正在重新连接...",
+        "denied": "你不在这局游戏中。",
+        "locked": "这局游戏已锁定。你可以查看,但不能修改。",
+        "error": "出错了:{{message}}",
+        "errorNoMessage": "出错了。"
       }
+    },
+    "events": {
+      "tile": {
+        "place": "{{user}}把 {{tile}} 放到了 {{hex}}",
+        "rotate": "{{user}}旋转了 {{hex}} 上的板块",
+        "remove": "{{user}}移除了 {{hex}} 上的板块"
+      },
+      "token": {
+        "place": "{{user}}把 {{token}} 放到了 {{hex}}",
+        "remove": "{{user}}从 {{hex}} 移除了 {{token}}"
+      },
+      "market": {
+        "move": "{{user}}把 {{marker}} 移到了第 {{row}} 行第 {{col}} 列"
+      },
+      "tray": {
+        "move": "{{user}}把 {{item}} 从 {{from}} 移到了 {{to}}"
+      },
+      "note": {
+        "set": "{{user}}修改了笔记"
+      },
+      "undo": "{{user}}撤销了{{owner}}的操作"
     }
   },
   "app": {

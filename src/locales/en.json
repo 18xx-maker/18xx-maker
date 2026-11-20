@@ -818,7 +818,8 @@
         "tokens": "Tokens",
         "market": "Market",
         "trays": "Trays",
-        "notes": "Notes"
+        "notes": "Notes",
+        "history": "History"
       },
       "tiles": {
         "hint": "Choose a tile, then click a hex to place it. Click a hex to select it.",
@@ -859,7 +860,42 @@
         "label": "Notes",
         "hint": "Everyone in the game sees these notes. They are saved when you leave the field.",
         "tooLong": "Notes can have at most {{max}} characters, these have {{length}}."
+      },
+      "undo": "Undo",
+      "history": {
+        "label": "Moves",
+        "empty": "No moves yet.",
+        "unknownUser": "a player",
+        "bank": "the bank"
+      },
+      "banner": {
+        "offline": "Reconnecting...",
+        "denied": "You are not in this game.",
+        "locked": "This game is locked. You can look at it, but not change it.",
+        "error": "Something went wrong: {{message}}",
+        "errorNoMessage": "Something went wrong."
       }
+    },
+    "events": {
+      "tile": {
+        "place": "{{user}} placed {{tile}} on {{hex}}",
+        "rotate": "{{user}} rotated the tile on {{hex}}",
+        "remove": "{{user}} removed the tile on {{hex}}"
+      },
+      "token": {
+        "place": "{{user}} placed {{token}} on {{hex}}",
+        "remove": "{{user}} removed {{token}} from {{hex}}"
+      },
+      "market": {
+        "move": "{{user}} moved {{marker}} to row {{row}}, column {{col}}"
+      },
+      "tray": {
+        "move": "{{user}} moved {{item}} from {{from}} to {{to}}"
+      },
+      "note": {
+        "set": "{{user}} changed the notes"
+      },
+      "undo": "{{user}} undid {{owner}}'s move"
     }
   },
   "app": {

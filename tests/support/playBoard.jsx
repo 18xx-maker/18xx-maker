@@ -6,6 +6,7 @@ import { vi } from "vitest";
 import PlayBoard from "@/components/play/PlayBoard";
 
 import { games } from "@/data";
+import { undoTarget } from "@/play/history";
 import { reduce } from "@/play/reduce";
 
 import { mountElement, one } from "@tests/support/render.jsx";
@@ -16,6 +17,8 @@ export const game = games["18Test"];
 export const Board = ({
   log: initial = [],
   locked = false,
+  status,
+  presence = [7],
   send,
   game: g = game,
   seats = [{ userId: 7, name: "Ann" }],
@@ -25,13 +28,13 @@ export const Board = ({
   );
   const state = useMemo(() => reduce(log), [log]);
   const play = {
-    status: locked ? "locked" : "online",
+    status: status || (locked ? "locked" : "online"),
     game: g,
     config: {},
     seats,
     log,
     state,
-    presence: [7],
+    presence,
     me: { userId: 7, name: "Ann" },
     locked,
     missing: false,
@@ -41,7 +44,11 @@ export const Board = ({
       if (!locked)
         setLog((list) => [...list, { ...event, seq: list.length + 1 }]);
     },
-    undo: () => {},
+    undo: () => {
+      const target = undoTarget(log);
+      if (locked || target === null) return;
+      play.send({ type: "undo", target });
+    },
   };
   return <PlayBoard play={play} />;
 };
