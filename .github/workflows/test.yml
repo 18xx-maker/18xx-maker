@@ -40,6 +40,15 @@ jobs:
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: node scripts/check-pr-body.mjs
+  server-image:
+    name: Server image
+    needs: pr-body
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Build
+        run: docker build -f server/Dockerfile .
   lint:
     name: Lint
     needs: pr-body
@@ -100,6 +109,20 @@ jobs:
       fail-fast: false
       matrix:
         shard: [1, 2, 3]
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: play
+          POSTGRES_PASSWORD: play
+          POSTGRES_DB: play
+        options: >-
+          --health-cmd "pg_isready -U play"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -140,6 +163,7 @@ jobs:
         run: pnpm exec vitest run --shard=${{ matrix.shard }}/3 --reporter=default --reporter=blob
         env:
           VITEST_SHARD: 1
+          DATABASE_URL: postgres://play:play@localhost:5432/play
       - name: Upload Blob Report
         uses: actions/upload-artifact@v7
         with:
@@ -243,7 +267,7 @@ jobs:
         run: pnpm exec vitest run --project unit --coverage.enabled=false
       - name: Test
         if: github.event_name != 'pull_request'
-        run: pnpm exec vitest run --shard=${{ matrix.shard }}/2 --coverage.enabled=false
+        run: pnpm exec vitest run --project unit --project component --shard=${{ matrix.shard }}/2 --coverage.enabled=false
   mac:
     name: Mac
     needs: desktop-shards

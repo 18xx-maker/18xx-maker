@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: play
+      POSTGRES_PASSWORD: play
+      POSTGRES_DB: play
+    ports:
+      - "55432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U play -d play"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  play:
+    restart: unless-stopped
+    build:
+      context: ..
+      dockerfile: server/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://play:play@db:5432/play
+      PUBLIC_URL: ${PUBLIC_URL:?set PUBLIC_URL}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID:?set DISCORD_CLIENT_ID}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET:?set DISCORD_CLIENT_SECRET}
+      DISCORD_GUILD_ID: ${DISCORD_GUILD_ID:-}
+    ports:
+      - "8787:8787"

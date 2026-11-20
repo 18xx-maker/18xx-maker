@@ -1,0 +1,18 @@
+{
+  "name": "18xx-maker-play-server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.9",
+    "chalk": "^6.0.1",
+    "hono": "^4.13.19",
+    "json-schema-library": "11.6.2",
+    "pg": "^8.23.1",
+    "ramda": "^0.32.0",
+    "sirv": "^3.0.2",
+    "ws": "^8.23.0"
+  }
+}
