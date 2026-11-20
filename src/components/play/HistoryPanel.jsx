@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { describeEvent } from "@/play/history";
@@ -7,15 +8,24 @@ import { cn } from "@/util/cn";
 // The log, newest first. A move cancelled by an undo is struck through.
 const HistoryPanel = ({ log = [], seats = [] }) => {
   const { t } = useTranslation();
-  const live = new Set(effectiveEvents(log).map((e) => e.seq));
-  const bySeq = new Map(log.map((e) => [e.seq, e]));
+  const { live, bySeq, events } = useMemo(
+    () => ({
+      live: new Set(effectiveEvents(log).map((e) => e.seq)),
+      bySeq: new Map(log.map((e) => [e.seq, e])),
+      events: [...log].sort((a, b) => b.seq - a.seq),
+    }),
+    [log],
+  );
   const name = (userId) => {
     const seat = seats.find((s) => s.userId === userId);
     return seat?.name || (userId === undefined ? "" : String(userId));
   };
-  // A tray is the bank or a seat
-  const place = (id) => (id === "bank" ? t("play.board.history.bank") : id);
-  const events = [...log].sort((a, b) => b.seq - a.seq);
+  // A tray is the bank or a seat (by user id); an unknown one shows its id
+  const place = (id) => {
+    if (id === "bank") return t("play.board.history.bank");
+    const seat = seats.find((s) => String(s.userId) === id);
+    return seat?.name || id;
+  };
 
   if (!events.length) {
     return (
@@ -32,6 +42,9 @@ const HistoryPanel = ({ log = [], seats = [] }) => {
     >
       {events.map((event) => {
         const { key, params } = describeEvent(event, { seats });
+        if (event.userId === undefined) {
+          params.user = t("play.board.history.unknownUser");
+        }
         if (event.type === "undo") {
           const target = bySeq.get(event.target);
           params.owner =

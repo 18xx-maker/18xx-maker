@@ -810,7 +810,6 @@
         "offline": "Offline, reconnecting...",
         "locked": "Read only"
       },
-      "presence": "Here now: {{names}}",
       "offMap": "Not on this map: {{hexes}}",
       "tabs": {
         "tiles": "Tiles",
@@ -869,10 +868,7 @@
       },
       "banner": {
         "offline": "Reconnecting...",
-        "denied": "You are not in this game.",
-        "locked": "This game is locked. You can look at it, but not change it.",
-        "error": "Something went wrong: {{message}}",
-        "errorNoMessage": "Something went wrong."
+        "locked": "This game is locked. You can look at it, but not change it."
       }
     },
     "events": {

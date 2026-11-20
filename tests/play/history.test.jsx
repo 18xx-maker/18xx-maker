@@ -1,7 +1,11 @@
 import { screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { setToken } from "@/play/client/tokenStore";
+
+import { renderApp } from "@tests/support/helpers.jsx";
 import { mount, tab } from "@tests/support/playBoard.jsx";
+import { BASE, fakeServer } from "@tests/support/playServer.js";
 import { one } from "@tests/support/render.jsx";
 
 const place = (hex, tile = "63") => ({
@@ -116,16 +120,6 @@ describe("play history", () => {
     );
   });
 
-  it("explains a game that is not yours and links to the list", async () => {
-    await mount({ status: "denied" });
-    expect(screen.getByRole("alert")).toHaveTextContent(
-      "You are not in this game",
-    );
-    expect(
-      screen.getByRole("link", { name: "Back to your games" }),
-    ).toHaveAttribute("href", "/play");
-  });
-
   it("notes that a locked game is read only", async () => {
     await mount({ locked: true });
     expect(screen.getByTestId("play-banner")).toHaveTextContent(
@@ -133,12 +127,71 @@ describe("play history", () => {
     );
   });
 
-  it("shows the error with a way out", async () => {
-    await mount({ status: "error" });
-    expect(screen.getByRole("alert")).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: "Back to your games" }),
-    ).toBeInTheDocument();
+  it("names trays by seat, the bank translated and unknown ids as they are", async () => {
+    const { user } = await mount({
+      log: [
+        { type: "tray.move", item: "63", from: "7", to: "8" },
+        { type: "tray.move", item: "63", from: "bank", to: "7" },
+        { type: "tray.move", item: "63", from: "8", to: "bank" },
+        { type: "tray.move", item: "63", from: "99", to: "8" },
+      ],
+      seats: [
+        { userId: 7, name: "Ann" },
+        { userId: 8, name: "Bob" },
+      ],
+    });
+    await tab(user, "History");
+    const texts = screen
+      .getAllByTestId("play-history-event")
+      .map((li) => li.textContent);
+    expect(texts).toEqual([
+      "Ann moved 63 from 99 to Bob",
+      "Ann moved 63 from Bob to the bank",
+      "Ann moved 63 from the bank to Ann",
+      "Ann moved 63 from Ann to Bob",
+    ]);
+  });
+
+  it("words an event with no user as a player", async () => {
+    const { user } = await mount({
+      log: [{ ...place("B12", "5"), userId: undefined }],
+    });
+    await tab(user, "History");
+    expect(screen.getByTestId("play-history-event")).toHaveTextContent(
+      "a player placed 5 on B12",
+    );
+  });
+
+  describe("the game page gates", () => {
+    beforeEach(() => window.localStorage.clear());
+    afterEach(() => vi.unstubAllGlobals());
+
+    const open = async (status) => {
+      setToken(BASE, "tok");
+      fakeServer({
+        "GET /me": [200, { id: 7, name: "Ann", canCreate: true }],
+        "GET /games/g1": [status, { error: "nope" }],
+      });
+      renderApp("/play/g1", { settings: { playServer: BASE } });
+    };
+
+    it("offers the sign in when the token is denied", async () => {
+      await open(401);
+      expect(
+        await screen.findByText("Your sign in has expired."),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("link", { name: "Sign in with Discord" }),
+      ).toBeInTheDocument();
+    });
+
+    it("shows the error with a link back to the list", async () => {
+      await open(500);
+      expect(await screen.findByRole("alert")).toHaveTextContent("nope");
+      expect(
+        screen.getByRole("link", { name: "Back to your games" }),
+      ).toHaveAttribute("href", "/play");
+    });
   });
 
   it("has no keyboard shortcut for undo", async () => {
