@@ -817,7 +817,8 @@
         "tokens": "Token",
         "market": "Markt",
         "trays": "Ablagen",
-        "notes": "Notizen"
+        "notes": "Notizen",
+        "history": "Verlauf"
       },
       "tiles": {
         "hint": "Wähle ein Plättchen und klicke dann auf ein Kartenfeld, um es zu legen. Klicke auf ein Kartenfeld, um es auszuwählen.",
@@ -858,7 +859,42 @@
         "label": "Notizen",
         "hint": "Alle im Spiel sehen diese Notizen. Sie werden gespeichert, wenn du das Feld verlässt.",
         "tooLong": "Notizen können höchstens {{max}} Zeichen haben, diese haben {{length}}."
+      },
+      "undo": "Rückgängig",
+      "history": {
+        "label": "Züge",
+        "empty": "Noch keine Züge.",
+        "unknownUser": "ein Spieler",
+        "bank": "die Bank"
+      },
+      "banner": {
+        "offline": "Verbindung wird wiederhergestellt...",
+        "denied": "Du bist nicht in diesem Spiel.",
+        "locked": "Dieses Spiel ist gesperrt. Du kannst es ansehen, aber nicht ändern.",
+        "error": "Etwas ist schiefgelaufen: {{message}}",
+        "errorNoMessage": "Etwas ist schiefgelaufen."
       }
+    },
+    "events": {
+      "tile": {
+        "place": "{{user}} hat {{tile}} auf {{hex}} gelegt",
+        "rotate": "{{user}} hat das Plättchen auf {{hex}} gedreht",
+        "remove": "{{user}} hat das Plättchen auf {{hex}} entfernt"
+      },
+      "token": {
+        "place": "{{user}} hat {{token}} auf {{hex}} gesetzt",
+        "remove": "{{user}} hat {{token}} von {{hex}} entfernt"
+      },
+      "market": {
+        "move": "{{user}} hat {{marker}} in Zeile {{row}}, Spalte {{col}} gesetzt"
+      },
+      "tray": {
+        "move": "{{user}} hat {{item}} von {{from}} nach {{to}} verschoben"
+      },
+      "note": {
+        "set": "{{user}} hat die Notizen geändert"
+      },
+      "undo": "{{user}} hat den Zug von {{owner}} rückgängig gemacht"
     }
   },
   "app": {

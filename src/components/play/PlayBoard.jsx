@@ -1,12 +1,16 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Undo2 } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
+import HistoryPanel from "@/components/play/HistoryPanel";
 import NotesPanel from "@/components/play/NotesPanel";
 import PlayMap, { sameToken } from "@/components/play/PlayMap";
 import PlayMarket, { MarketPanel } from "@/components/play/PlayMarket";
+import { BackLink } from "@/components/play/PlayNotice";
 import Presence from "@/components/play/Presence";
 import TilePanel from "@/components/play/TilePanel";
 import TokenPanel from "@/components/play/TokenPanel";
@@ -15,16 +19,50 @@ import TrayPanel from "@/components/play/TrayPanel";
 import GameContext from "@/context/GameContext";
 import { MapOrientation } from "@/context/OrientationContext";
 import { useConfig } from "@/hooks";
-import { supply as countSupply } from "@/play/history";
+import { supply as countSupply, undoTarget } from "@/play/history";
 import { cn } from "@/util/cn";
 
-const TABS = ["tiles", "tokens", "market", "trays", "notes"];
+const TABS = ["tiles", "tokens", "market", "trays", "notes", "history"];
 const STATUSES = ["connecting", "online", "offline"];
+
+// What the connection or the game says about itself, apart from the badge
+const Banner = ({ play }) => {
+  const { t } = useTranslation();
+  let text = null;
+  let alert = false;
+  let back = false;
+  if (play.status === "denied") {
+    text = t("play.board.banner.denied");
+    alert = back = true;
+  } else if (play.status === "error") {
+    text = play.error
+      ? t("play.board.banner.error", { message: play.error })
+      : t("play.board.banner.errorNoMessage");
+    alert = back = true;
+  } else if (play.locked) {
+    text = t("play.board.banner.locked");
+  } else if (play.status === "offline") {
+    text = t("play.board.banner.offline");
+  }
+  if (!text) return null;
+
+  return (
+    <div
+      data-testid="play-banner"
+      role={alert ? "alert" : "status"}
+      className="flex flex-wrap items-center gap-3 rounded-md border bg-muted px-3 py-2 text-sm"
+    >
+      <p>{text}</p>
+      {back && <BackLink />}
+    </div>
+  );
+};
 
 const Board = ({ play }) => {
   const { t } = useTranslation();
   const { config } = useConfig();
   const { game, state, locked, send } = play;
+  const canUndo = !locked && undoTarget(play.log || []) !== null;
   const [tab, setTab] = useState("tiles");
   const [tile, setTile] = useState(null);
   const [rotation, setRotation] = useState(0);
@@ -78,7 +116,18 @@ const Board = ({ play }) => {
           {t(`play.board.status.${status}`)}
         </Badge>
         <Presence presence={play.presence} seats={play.seats} />
+        <Button
+          variant="outline"
+          size="sm"
+          className="ml-auto"
+          disabled={!canUndo}
+          onClick={() => play.undo()}
+        >
+          <Undo2 aria-hidden="true" />
+          {t("play.board.undo")}
+        </Button>
       </header>
+      <Banner play={play} />
       <div className="flex min-h-0 flex-1 flex-col gap-2 md:flex-row">
         {/* The map stays mounted under the market, keeping its view */}
         <div
@@ -112,7 +161,7 @@ const Board = ({ play }) => {
           <div
             role="tablist"
             aria-label={t("play.board.panel")}
-            className="flex gap-1"
+            className="flex flex-wrap gap-1"
           >
             {TABS.map((name) => (
               <Button
@@ -179,6 +228,9 @@ const Board = ({ play }) => {
             )}
             {tab === "notes" && (
               <NotesPanel notes={state.notes} locked={locked} send={send} />
+            )}
+            {tab === "history" && (
+              <HistoryPanel log={play.log} seats={play.seats || []} />
             )}
           </div>
         </aside>
