@@ -274,12 +274,14 @@ const PlayMap = ({ game, config, state, selected, onTap }) => {
         )}
       </Svg>
       {!data.map && (
-        <p className="absolute top-2 left-2 text-sm">{t("play.board.noMap")}</p>
+        <p className="absolute top-2 left-2 text-sm text-black">
+          {t("play.board.noMap")}
+        </p>
       )}
       {offMap.length > 0 && (
         <p
           data-testid="play-off-map"
-          className="absolute bottom-2 left-2 rounded-md border bg-background/90 px-2 py-1 text-xs text-destructive"
+          className="absolute bottom-2 left-2 rounded-md border bg-white/90 px-2 py-1 text-xs text-red-700"
         >
           {t("play.board.offMap", { hexes: offMap.join(", ") })}
         </p>

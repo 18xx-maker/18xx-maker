@@ -131,6 +131,25 @@ describe("play history", () => {
     expect(screen.queryByTestId("play-error")).not.toBeInTheDocument();
   });
 
+  it("reads the move error in dark mode and gives it big touch targets", async () => {
+    await mount({ error: "bad undo" });
+    const alert = screen.getByTestId("play-error");
+    expect(alert.className).toMatch(/dark:text-red-400/);
+    expect(
+      within(alert).getByRole("button", { name: "Dismiss" }).className,
+    ).toMatch(/size-10/);
+  });
+
+  it("keeps the tabs in one scrolling row on a paper map", async () => {
+    await mount({});
+    const list = screen.getByRole("tablist");
+    expect(list.className).toMatch(/overflow-x-auto/);
+    expect(list.className).not.toMatch(/flex-wrap/);
+    for (const tabEl of screen.getAllByRole("tab")) {
+      expect(tabEl.className).toMatch(/shrink-0/);
+    }
+  });
+
   it("shows no move error on a locked game", async () => {
     await mount({ locked: true, error: "locked" });
     expect(screen.queryByTestId("play-error")).not.toBeInTheDocument();
