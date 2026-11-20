@@ -36,6 +36,7 @@ describe("loadConfig", () => {
         sessionTtlDays: 30,
         webhookBatchMs: 5000,
         webhookMaxPerMinute: 10,
+        webhookTestPerMinute: 60,
         spectatorsPerGame: 50,
       },
     });
@@ -68,6 +69,7 @@ describe("loadConfig", () => {
       MAX_EVENTS_PER_GAME: "70",
       WEBHOOK_BATCH_MS: "250",
       WEBHOOK_MAX_PER_MINUTE: "3",
+      WEBHOOK_TEST_PER_MINUTE: "7",
       MAX_SPECTATORS: "6",
     });
     expect(config.port).toBe(9000);
@@ -86,6 +88,7 @@ describe("loadConfig", () => {
       sessionTtlDays: 7,
       webhookBatchMs: 250,
       webhookMaxPerMinute: 3,
+      webhookTestPerMinute: 7,
       spectatorsPerGame: 6,
     });
   });
@@ -108,6 +111,7 @@ describe("loadConfig", () => {
     ["MAX_EVENTS_PER_GAME", "0"],
     ["WEBHOOK_BATCH_MS", "0"],
     ["WEBHOOK_MAX_PER_MINUTE", "1.5"],
+    ["WEBHOOK_TEST_PER_MINUTE", "0"],
     ["MAX_SPECTATORS", "0"],
   ])("rejects %s=%s", (name, value) => {
     expect(() => loadConfig({ ...required, [name]: value })).toThrow(

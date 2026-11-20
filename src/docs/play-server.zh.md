@@ -24,32 +24,33 @@
 
 所有设置都是环境变量。前四个是必需的,缺少它们服务器将拒绝启动。
 
-| 变量                     | 默认值                       | 含义                                                                                                  |
-| ------------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`           | 必填                         | Postgres 连接字符串,例如 `postgres://play:play@db:5432/play`。                                        |
-| `PUBLIC_URL`             | 必填                         | 此服务器的公共 URL,末尾不带斜杠。用于 Discord 重定向 URI。                                            |
-| `DISCORD_CLIENT_ID`      | 必填                         | Discord 应用的客户端 ID。                                                                             |
-| `DISCORD_CLIENT_SECRET`  | 必填                         | Discord 应用的客户端密钥。它还用于签名登录的 `state`,因此更改它会中断正在进行的登录。                 |
-| `PORT`                   | `8787`                       | 服务器监听的端口。                                                                                    |
-| `ALLOWED_ORIGINS`        | 空                           | 以逗号分隔的 18xx Maker 网站来源,这些来源可以调用 API(CORS),也可以作为登录的 `return` URL。           |
-| `DISCORD_GUILD_ID`       | 空                           | 设置后,只有该 Discord 服务器的成员可以创建游戏。任何拥有邀请链接的人仍然可以加入。留空:任何人。       |
-| `DISCORD_API_BASE`       | `https://discord.com/api`    | Discord API 基础地址,仅在测试中更改。                                                                 |
-| `DISCORD_AUTH_BASE`      | `https://discord.com/oauth2` | Discord 授权基础地址,仅在测试中更改。                                                                 |
-| `DISCORD_TIMEOUT_MS`     | `10000`                      | 登录时每个 Discord 请求(包括响应正文)允许的时间。超时的登录会以 502 失败。                            |
-| `DISCORD_WEBHOOK_ORIGIN` | `https://discord.com`        | 游戏的 Webhook 网址必须以此来源开头(`<origin>/api/webhooks/<id>/<token>`),仅在测试中更改。            |
-| `SESSION_TTL_DAYS`       | `30`                         | 登录保持有效的天数。过期的会话在 API 上得到 401,在 websocket 上得到 `bad_token`。                     |
-| `MAX_GAME_BYTES`         | `2097152` (2 MiB)            | 创建游戏时接受的最大游戏文件。                                                                        |
-| `MAX_ASSET_BYTES`        | `1048576` (1 MiB)            | 游戏上传的单个资源(图片或字体)的最大大小。                                                            |
-| `MAX_ASSETS_PER_GAME`    | `50`                         | 一局游戏可以拥有的资源数量。替换同名资源不会重复计数。                                                |
-| `MAX_ASSET_TOTAL_BYTES`  | `8388608` (8 MiB)            | 一局游戏所有资源的总大小。                                                                            |
-| `MAX_GAMES_PER_USER`     | `50`                         | 用户可以拥有的处于 `active` 或 `locked` 状态的游戏数量(已归档的不计入,直到它们重新变为进行中或锁定)。 |
-| `MAX_EVENTS_PER_SECOND`  | `10`                         | 一个 websocket 每秒可以发送的事件数,超过后会收到 `rate_limited` 错误。                                |
-| `MAX_EVENTS_PER_GAME`    | `200000`                     | 一局游戏可以保存的事件数。之后的事件会得到 `invalid`("game is full")。                                |
-| `SNAPSHOT_EVERY`         | `100`                        | 保存快照的事件间隔。落后超过此值五倍的客户端会在 `snapshot` 帧中收到完整记录。                        |
-| `JOIN_TIMEOUT_MS`        | `10000`                      | 新 websocket 发送 `join` 帧的时限,超时后连接会被关闭(4001)。                                          |
-| `WEBHOOK_BATCH_MS`       | `5000`                       | 游戏的操作通知在作为一条消息发送到其 Discord Webhook 之前收集的时间。                                 |
-| `WEBHOOK_MAX_PER_MINUTE` | `10`                         | 每局游戏每分钟的 Webhook 消息数。超出的通知会等待,并随下一条消息一起发送。                            |
-| `MAX_SPECTATORS`         | `50`                         | 一局游戏同时允许的观战 websocket 数量。下一个会收到 `too_many_spectators` 并以 4003 关闭。            |
+| 变量                      | 默认值                       | 含义                                                                                                         |
+| ------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `DATABASE_URL`            | 必填                         | Postgres 连接字符串,例如 `postgres://play:play@db:5432/play`。                                               |
+| `PUBLIC_URL`              | 必填                         | 此服务器的公共 URL,末尾不带斜杠。用于 Discord 重定向 URI。                                                   |
+| `DISCORD_CLIENT_ID`       | 必填                         | Discord 应用的客户端 ID。                                                                                    |
+| `DISCORD_CLIENT_SECRET`   | 必填                         | Discord 应用的客户端密钥。它还用于签名登录的 `state`,因此更改它会中断正在进行的登录。                        |
+| `PORT`                    | `8787`                       | 服务器监听的端口。                                                                                           |
+| `ALLOWED_ORIGINS`         | 空                           | 以逗号分隔的 18xx Maker 网站来源,这些来源可以调用 API(CORS),也可以作为登录的 `return` URL。                  |
+| `DISCORD_GUILD_ID`        | 空                           | 设置后,只有该 Discord 服务器的成员可以创建游戏。任何拥有邀请链接的人仍然可以加入。留空:任何人。              |
+| `DISCORD_API_BASE`        | `https://discord.com/api`    | Discord API 基础地址,仅在测试中更改。                                                                        |
+| `DISCORD_AUTH_BASE`       | `https://discord.com/oauth2` | Discord 授权基础地址,仅在测试中更改。                                                                        |
+| `DISCORD_TIMEOUT_MS`      | `10000`                      | 登录时每个 Discord 请求(包括响应正文)允许的时间。超时的登录会以 502 失败。                                   |
+| `DISCORD_WEBHOOK_ORIGIN`  | `https://discord.com`        | 游戏的 Webhook 网址必须以此来源开头(`<origin>/api/webhooks/<id>/<token>`),仅在测试中更改。                   |
+| `SESSION_TTL_DAYS`        | `30`                         | 登录保持有效的天数。过期的会话在 API 上得到 401,在 websocket 上得到 `bad_token`。                            |
+| `MAX_GAME_BYTES`          | `2097152` (2 MiB)            | 创建游戏时接受的最大游戏文件。                                                                               |
+| `MAX_ASSET_BYTES`         | `1048576` (1 MiB)            | 游戏上传的单个资源(图片或字体)的最大大小。                                                                   |
+| `MAX_ASSETS_PER_GAME`     | `50`                         | 一局游戏可以拥有的资源数量。替换同名资源不会重复计数。                                                       |
+| `MAX_ASSET_TOTAL_BYTES`   | `8388608` (8 MiB)            | 一局游戏所有资源的总大小。                                                                                   |
+| `MAX_GAMES_PER_USER`      | `50`                         | 用户可以拥有的处于 `active` 或 `locked` 状态的游戏数量(已归档的不计入,直到它们重新变为进行中或锁定)。        |
+| `MAX_EVENTS_PER_SECOND`   | `10`                         | 一个 websocket 每秒可以发送的事件数,超过后会收到 `rate_limited` 错误。                                       |
+| `MAX_EVENTS_PER_GAME`     | `200000`                     | 一局游戏可以保存的事件数。之后的事件会得到 `invalid`("game is full")。                                       |
+| `SNAPSHOT_EVERY`          | `100`                        | 保存快照的事件间隔。落后超过此值五倍的客户端会在 `snapshot` 帧中收到完整记录。                               |
+| `JOIN_TIMEOUT_MS`         | `10000`                      | 新 websocket 发送 `join` 帧的时限,超时后连接会被关闭(4001)。                                                 |
+| `WEBHOOK_BATCH_MS`        | `5000`                       | 游戏的操作通知在作为一条消息发送到其 Discord Webhook 之前收集的时间。                                        |
+| `WEBHOOK_MAX_PER_MINUTE`  | `10`                         | 每局游戏每分钟的 Webhook 消息数。超出的通知会等待,并随下一条消息一起发送。                                   |
+| `WEBHOOK_TEST_PER_MINUTE` | `60`                         | 整个服务器每分钟的测试消息(“Notifications connected”)数。超出后设置 Webhook 会得到 429 `Too many requests`。 |
+| `MAX_SPECTATORS`          | `50`                         | 一局游戏同时允许的观战 websocket 数量。下一个会收到 `too_many_spectators` 并以 4003 关闭。                   |
 
 数值型变量必须是正整数,否则服务器会拒绝启动并指出该变量。未设置或为空时使用默认值。
 

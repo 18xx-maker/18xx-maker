@@ -1,6 +1,9 @@
 // Move notices of a game, posted to the Discord webhook its owner set. Lines
 // are collected per game and posted once per WEBHOOK_BATCH_MS, at most
-// WEBHOOK_MAX_PER_MINUTE times a minute. Nothing here may delay, fail or
+// WEBHOOK_MAX_PER_MINUTE times a minute. The test post of a new webhook is
+// also limited per owner (WEBHOOK_MAX_PER_MINUTE across all their games) and
+// for the whole server (WEBHOOK_TEST_PER_MINUTE), so making, patching and
+// deleting games cannot flood Discord with posts to bad webhooks. Nothing here may delay, fail or
 // reorder a game event: notify only queues, and every failure is logged
 // (never with the URL, which is a secret) and swallowed.
 
@@ -95,10 +98,18 @@ export const createNotifier = ({
   cancel = clearTimeout,
   now = Date.now,
 }) => {
-  const { webhookBatchMs: batchMs, webhookMaxPerMinute: perMinute } =
-    config.limits;
+  const {
+    webhookBatchMs: batchMs,
+    webhookMaxPerMinute: perMinute,
+    webhookTestPerMinute: testPerMinute,
+  } = config.limits;
   // gameId -> { items, dropped, timer, busy, posts: start times of the last minute }
   const games = new Map();
+  // userId -> times of the test posts of the last minute; only owners with a
+  // post in the last minute are kept, so never more than testPerMinute
+  const owners = new Map();
+  // Times of every test post of the last minute
+  let tests = [];
   let closed = false;
 
   const log = (gameId, reason) =>
@@ -153,6 +164,26 @@ export const createNotifier = ({
     return state.posts.length < perMinute;
   };
 
+  // The owners' windows of the last minute, the expired ones dropped
+  const pruneOwners = (at) => {
+    for (const [userId, times] of owners) {
+      const live = times.filter((t) => at - t < MINUTE);
+      if (live.length) owners.set(userId, live);
+      else owners.delete(userId);
+    }
+    tests = tests.filter((t) => at - t < MINUTE);
+  };
+
+  // A game with nothing waiting and no post in the last minute is dropped
+  // (its window is empty, so nothing is lost); its next line starts anew
+  const dropIfIdle = (gameId, state, at) => {
+    if (state.items.length || state.dropped || state.timer || state.busy)
+      return;
+    state.posts = state.posts.filter((t) => at - t < MINUTE);
+    if (state.posts.length) return;
+    if (games.get(gameId) === state) games.delete(gameId);
+  };
+
   // Lines put back in front of newer ones stay within PENDING_MAX; the
   // newest past it are counted, not kept
   const requeue = (state, lines) => {
@@ -162,7 +193,7 @@ export const createNotifier = ({
   };
 
   const arm = (gameId, state, ms) => {
-    if (closed || state.timer || state.busy) return;
+    if (closed || state.forgotten || state.timer || state.busy) return;
     state.timer = schedule(() => {
       state.timer = null;
       flush(gameId, state);
@@ -172,6 +203,7 @@ export const createNotifier = ({
   const flush = async (gameId, state) => {
     state.busy = true;
     let delay = batchMs;
+    let gone = false;
     try {
       const start = now();
       if (!mayPost(state, start)) {
@@ -192,7 +224,11 @@ export const createNotifier = ({
         [gameId],
       );
       const url = rows[0]?.webhook_url;
-      if (!url || closed) return;
+      if (!url || closed) {
+        // No webhook (cleared or the game deleted): the lines are dropped
+        gone = true;
+        return;
+      }
       const names = new Map(rows.map((r) => [r.user_id, r.name]));
       const described = taken.map((item) =>
         typeof item === "string"
@@ -228,7 +264,13 @@ export const createNotifier = ({
       log(gameId, reasonOf(err));
     } finally {
       state.busy = false;
-      if (state.items.length || state.dropped) arm(gameId, state, delay);
+      if (gone) {
+        state.items = [];
+        state.dropped = 0;
+        dropIfIdle(gameId, state, now());
+      } else if (state.items.length || state.dropped) {
+        arm(gameId, state, delay);
+      }
     }
   };
 
@@ -248,15 +290,23 @@ export const createNotifier = ({
         log(gameId, reasonOf(err));
       }
     },
-    // Posts "Notifications connected" to a new webhook now. It counts against
-    // the game's WEBHOOK_MAX_PER_MINUTE like any post. Resolves to "limited"
-    // (the window is full: nothing sent), "rejected" (Discord answered 401 or
-    // 404) or "ok" (sent, or failed otherwise and logged)
-    connected: async (gameId, url) => {
-      const state = stateOf(gameId);
+    // Posts "Notifications connected" to a new webhook of userId's game now.
+    // It counts against the game's WEBHOOK_MAX_PER_MINUTE like any post, the
+    // owner's own WEBHOOK_MAX_PER_MINUTE over all their games and the server's
+    // WEBHOOK_TEST_PER_MINUTE. Resolves to "limited" (a window is full: nothing
+    // sent), "rejected" (Discord answered 401 or 404) or "ok" (sent, or failed
+    // otherwise and logged)
+    connected: async (gameId, url, userId) => {
       const at = now();
+      pruneOwners(at);
+      const mine = owners.get(userId) ?? [];
+      if (mine.length >= perMinute || tests.length >= testPerMinute)
+        return "limited";
+      const state = stateOf(gameId);
       if (!mayPost(state, at)) return "limited";
       state.posts.push(at);
+      owners.set(userId, [...mine, at]);
+      tests.push(at);
       const result = await post(url, "Notifications connected");
       if (result.status === 401 || result.status === 404) return "rejected";
       if (result.error || result.status < 200 || result.status >= 300) {
@@ -264,6 +314,17 @@ export const createNotifier = ({
       }
       return "ok";
     },
+    // Drops the game's state and waiting lines (the game was deleted)
+    forget: (gameId) => {
+      const state = games.get(gameId);
+      if (!state) return;
+      if (state.timer) cancel(state.timer);
+      state.timer = null;
+      state.forgotten = true;
+      games.delete(gameId);
+    },
+    // How many games and owners are tracked
+    sizes: () => ({ games: games.size, users: owners.size }),
     close: () => {
       closed = true;
       for (const state of games.values()) {

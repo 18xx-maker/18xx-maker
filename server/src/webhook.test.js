@@ -427,6 +427,100 @@ describe("createNotifier", () => {
     expect(await notifier.connected("other-game", URL_A)).toBe("ok");
   });
 
+  it("limits test posts per owner across games, until the window slides", async () => {
+    const { clock, posts, notifier } = setup();
+    expect(await notifier.connected("g1", URL_A, "owner")).toBe("ok");
+    expect(await notifier.connected("g2", URL_A, "owner")).toBe("ok");
+    // A fresh game of the same owner (deleted and made again) waits too
+    expect(await notifier.connected("g3", URL_A, "owner")).toBe("limited");
+    expect(await notifier.connected("g3", URL_A, "other")).toBe("ok");
+    expect(posts).toHaveLength(3);
+    await clock.advance(60000);
+    expect(await notifier.connected("g3", URL_A, "owner")).toBe("ok");
+  });
+
+  it("limits test posts of the whole server to WEBHOOK_TEST_PER_MINUTE", async () => {
+    const { clock, posts, notifier } = setup({
+      config: configFor({ WEBHOOK_TEST_PER_MINUTE: "3" }),
+    });
+    for (let i = 0; i < 3; i++) {
+      expect(await notifier.connected(`g${i}`, URL_A, `u${i}`)).toBe("ok");
+    }
+    expect(await notifier.connected("g9", URL_A, "u9")).toBe("limited");
+    expect(posts).toHaveLength(3);
+    // A refused post takes nothing from the owner's own window
+    await clock.advance(60000);
+    expect(await notifier.connected("g9", URL_A, "u9")).toBe("ok");
+    expect(await notifier.connected("g8", URL_A, "u9")).toBe("ok");
+  });
+
+  it("tracks only the owners of the last minute", async () => {
+    const { clock, notifier } = setup({
+      config: configFor({ WEBHOOK_TEST_PER_MINUTE: "5" }),
+    });
+    for (let i = 0; i < 50; i++) {
+      await notifier.connected(`g${i}`, URL_A, `u${i}`);
+      expect(notifier.sizes().users).toBeLessThanOrEqual(5);
+      await clock.advance(20000);
+    }
+    await clock.advance(60000);
+    await notifier.connected("last", URL_A, "last");
+    expect(notifier.sizes().users).toBe(1);
+  });
+
+  it("forget drops a game's state and its waiting lines", async () => {
+    const { clock, posts, notifier } = setup();
+    notifier.notify(GAME, move());
+    expect(notifier.sizes().games).toBe(1);
+    notifier.forget(GAME);
+    expect(notifier.sizes().games).toBe(0);
+    expect(clock.timers).toHaveLength(0);
+    await clock.advance(5000);
+    expect(posts).toHaveLength(0);
+  });
+
+  it("forget during a flush leaves nothing behind", async () => {
+    let answer;
+    const held = new Promise((resolve) => (answer = resolve));
+    const { clock, posts, notifier } = setup({ answer: () => held });
+    notifier.notify(GAME, "one");
+    await clock.advance(1000);
+    expect(posts).toHaveLength(1);
+    notifier.notify(GAME, "two");
+    notifier.forget(GAME);
+    answer(new Response(null, { status: 204 }));
+    await settle();
+    expect(notifier.sizes().games).toBe(0);
+    expect(clock.timers).toHaveLength(0);
+  });
+
+  it("drops the state of a game whose webhook is gone once it is idle", async () => {
+    const pool = fakePool({ url: null });
+    const { clock, notifier } = setup({ pool });
+    for (let i = 0; i < 20; i++) notifier.notify(`game-${i}`, move());
+    expect(notifier.sizes().games).toBe(20);
+    await clock.advance(1000);
+    expect(notifier.sizes().games).toBe(0);
+    expect(clock.timers).toHaveLength(0);
+  });
+
+  it("keeps a cleared game's window until its last post is a minute old", async () => {
+    const pool = fakePool();
+    const { clock, posts, notifier } = setup({ pool });
+    notifier.notify(GAME, "one");
+    await clock.advance(1000);
+    expect(posts).toHaveLength(1);
+    pool.url = null;
+    notifier.notify(GAME, "two");
+    await clock.advance(1000);
+    expect(notifier.sizes().games).toBe(1);
+    await clock.advance(60000);
+    notifier.notify(GAME, "three");
+    await clock.advance(1000);
+    expect(notifier.sizes().games).toBe(0);
+    expect(posts).toHaveLength(1);
+  });
+
   it("never follows a redirect: the batch is dropped", async () => {
     const log = vi.spyOn(console, "error").mockImplementation(() => {});
     const { clock, posts, notifier } = setup({

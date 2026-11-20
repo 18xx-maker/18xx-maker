@@ -273,26 +273,49 @@ describe.skipIf(!hasDb)("discord webhook notices", () => {
   });
 
   it("rate limits the test posts of PATCH: 429 and no Discord call past the limit", async () => {
-    const id = await makeGame([alice, bob]);
+    // A fresh owner: the tests above used up part of Alice's own window
+    const dave = await makeUser("Dave");
+    const id = await makeGame([dave, bob]);
     discord.setWebhook("spam-hook", { status: 404 });
     const url = hookUrl("spam-hook");
     for (let i = 0; i < 10; i++) {
-      expect((await setHook(alice, id, url)).status).toBe(400);
+      expect((await setHook(dave, id, url)).status).toBe(400);
     }
     for (let i = 0; i < 3; i++) {
-      expect(await setHook(alice, id, url)).toEqual({
+      expect(await setHook(dave, id, url)).toEqual({
         status: 429,
         body: { error: "Too many requests" },
       });
     }
     expect(postsTo("spam-hook")).toHaveLength(10);
     // A good webhook on the same game waits too, nothing is written
-    const good = await setHook(alice, id, hookUrl("after-spam"));
+    const good = await setHook(dave, id, hookUrl("after-spam"));
     expect(good.status).toBe(429);
     expect(postsTo("after-spam")).toHaveLength(0);
-    expect((await api(alice, "GET", `/games/${id}`)).body.webhookSet).toBe(
+    expect((await api(dave, "GET", `/games/${id}`)).body.webhookSet).toBe(
       false,
     );
+  });
+
+  it("limits test posts per owner: new games do not reset the window", async () => {
+    const carol = await makeUser("Carol");
+    discord.setWebhook("cycle-hook", { status: 404 });
+    const url = hookUrl("cycle-hook");
+    const statuses = [];
+    // Each game gets a few PATCHes, then is deleted and made again
+    for (let round = 0; round < 6; round++) {
+      const id = await makeGame([carol]);
+      for (let i = 0; i < 3; i++) {
+        statuses.push((await setHook(carol, id, url)).status);
+      }
+      expect((await api(carol, "DELETE", `/games/${id}`)).status).toBe(204);
+    }
+    expect(statuses.filter((s) => s === 400)).toHaveLength(10);
+    expect(statuses.slice(10).every((s) => s === 429)).toBe(true);
+    expect(postsTo("cycle-hook")).toHaveLength(10);
+    // Another owner is not held up by Carol's window
+    const id = await makeGame([bob]);
+    expect((await setHook(bob, id, hookUrl("bob-own-hook"))).status).toBe(200);
   });
 
   it("does not follow a redirect from the webhook", async () => {

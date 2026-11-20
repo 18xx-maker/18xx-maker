@@ -267,8 +267,9 @@ export const gameRoutes = ({ pool, config, notifier, sockets }) => {
     }
     // The test post comes first, so a webhook Discord does not know (401/404)
     // is refused before anything is written
+    const user = c.get("user");
     if (webhookUrl) {
-      const test = await notifier.connected(row.id, webhookUrl);
+      const test = await notifier.connected(row.id, webhookUrl, user.id);
       if (test === "limited") {
         return c.json({ error: "Too many requests" }, 429);
       }
@@ -276,7 +277,6 @@ export const gameRoutes = ({ pool, config, notifier, sockets }) => {
         return c.json({ error: "Discord rejected the webhook" }, 400);
       }
     }
-    const user = c.get("user");
     return inTransaction(pool, async (client) => {
       const count = setStatus ? await lockOwnedCount(client, user.id) : 0;
       const { rows } = await client.query(
@@ -328,6 +328,7 @@ export const gameRoutes = ({ pool, config, notifier, sockets }) => {
     const { row, fail } = await ownerOnly(c);
     if (fail) return fail;
     await pool.query("delete from games where id = $1", [row.id]);
+    notifier.forget(row.id);
     return c.body(null, 204);
   });
 
