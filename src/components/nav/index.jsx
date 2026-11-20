@@ -9,6 +9,7 @@ import {
   FilePlus,
   FileStack,
   FolderOpen,
+  Gamepad2,
   Globe,
   HandCoins,
   Hexagon,
@@ -49,6 +50,12 @@ export const mainMenu = [
         label: "nav.load",
         shortcut: "l",
         to: "/games",
+      },
+      {
+        icon: Gamepad2,
+        label: "nav.play",
+        shortcut: "o",
+        to: "/play",
       },
       {
         icon: TrainTrack,
