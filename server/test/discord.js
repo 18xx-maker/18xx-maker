@@ -2,7 +2,8 @@ import { createServer } from "node:http";
 
 // A fake Discord API. users: [{ code, id, username, avatar, guilds: [id],
 // failGuilds?, hang? }]. The access token for a code is `at-<code>`. A user
-// with hang gets no answer to the token request, ever.
+// with hang gets no answer to the token request, ever. GET .../authorize is a
+// page with a "Sign in as <username>" link per user (for a browser).
 // Webhooks: POST /api/webhooks/:id/:token is recorded in `posts` and answered
 // 204, or as setWebhook(token, { status, delayMs, headers }) says.
 export const startFakeDiscord = async ({ users = [] } = {}) => {
@@ -40,6 +41,29 @@ export const startFakeDiscord = async ({ users = [] } = {}) => {
           res.end(status === 204 ? undefined : "{}");
         }, delayMs);
       });
+      return;
+    }
+
+    // The consent page, for a real browser: a link per user back to the
+    // redirect_uri with that user's code and the state
+    if (req.method === "GET" && pathname.endsWith("/authorize")) {
+      const params = new URL(req.url, "http://localhost").searchParams;
+      let back;
+      try {
+        back = new URL(params.get("redirect_uri"));
+      } catch {
+        return json(res, 400, { error: "invalid_request" });
+      }
+      const links = users.map((u) => {
+        back.searchParams.set("code", u.code);
+        back.searchParams.set("state", params.get("state") ?? "");
+        const href = back.href.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+        return `<li><a href="${href}">Sign in as ${u.username}</a></li>`;
+      });
+      res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
+      res.end(
+        `<!doctype html><title>Fake Discord</title><ul>${links.join("")}</ul>`,
+      );
       return;
     }
 
