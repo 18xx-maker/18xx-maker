@@ -10,6 +10,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const ASSET_NAME = /^[\w.-]{1,100}$/;
 const STATUSES = ["active", "locked", "archived"];
 
+// Invite and watch codes
 const newInviteCode = () => randomBytes(16).toString("base64url");
 
 // Runs fn(client) in a transaction; fn returns the response, rolled back when
@@ -83,8 +84,34 @@ const seatJson = (row) => ({
   color: row.color,
 });
 
-// notifier: the webhook notifier (webhook.js), for the test post of a webhook
-export const gameRoutes = ({ pool, config, notifier }) => {
+// The names of a game's assets, for the board to fetch
+const assetNames = async (pool, gameId) => {
+  const { rows } = await pool.query(
+    "select name from game_assets where game_id = $1 order by name",
+    [gameId],
+  );
+  return rows.map((r) => r.name);
+};
+
+const seatsOf = async (pool, gameId) => {
+  const { rows } = await pool.query(
+    "select user_id, name, color from seats where game_id = $1 order by created_at",
+    [gameId],
+  );
+  return rows.map(seatJson);
+};
+
+// The asset as a download that is never rendered in place
+const assetResponse = (c, row) =>
+  c.body(row.data, 200, {
+    "Content-Type": row.content_type,
+    "X-Content-Type-Options": "nosniff",
+    "Content-Disposition": "attachment",
+  });
+
+// notifier: the webhook notifier (webhook.js), for the test post of a webhook;
+// sockets: the hub's { closeWatchers }, absent without a websocket hub
+export const gameRoutes = ({ pool, config, notifier, sockets }) => {
   const app = new Hono();
   const { limits } = config;
   const auth = requireUser(pool);
@@ -197,10 +224,6 @@ export const gameRoutes = ({ pool, config, notifier }) => {
     const row = await membership(c.req.param("id"), user);
     if (!row) return c.json({ error: "Not found" }, 404);
 
-    const { rows: seats } = await pool.query(
-      "select user_id, name, color from seats where game_id = $1 order by created_at",
-      [row.id],
-    );
     return c.json({
       id: row.id,
       title: row.title,
@@ -208,10 +231,15 @@ export const gameRoutes = ({ pool, config, notifier }) => {
       ownerId: row.owner_id,
       game: row.game_json,
       config: row.config_json,
-      seats: seats.map(seatJson),
+      seats: await seatsOf(pool, row.id),
+      assets: await assetNames(pool, row.id),
       // The webhook URL is a secret: never returned, the owner sees if one is set
       ...(row.owner_id === user.id
-        ? { inviteCode: row.invite_code, webhookSet: row.webhook_url !== null }
+        ? {
+            inviteCode: row.invite_code,
+            watchCode: row.watch_code,
+            webhookSet: row.webhook_url !== null,
+          }
         : {}),
     });
   });
@@ -312,6 +340,78 @@ export const gameRoutes = ({ pool, config, notifier }) => {
       inviteCode,
     ]);
     return c.json({ inviteCode });
+  });
+
+  // The spectator link: a new code (the old one stops working) or none. Open
+  // spectator sockets of the game are closed either way; a spectator join
+  // still in flight checks the code again once it is in the room
+  const setWatchCode = async (gameId, watchCode) => {
+    await pool.query("update games set watch_code = $2 where id = $1", [
+      gameId,
+      watchCode,
+    ]);
+    sockets?.closeWatchers(gameId);
+  };
+
+  app.post("/games/:id/watch", auth, async (c) => {
+    const { row, fail } = await ownerOnly(c);
+    if (fail) return fail;
+    const watchCode = newInviteCode();
+    await setWatchCode(row.id, watchCode);
+    return c.json({ watchCode });
+  });
+
+  app.delete("/games/:id/watch", auth, async (c) => {
+    const { row, fail } = await ownerOnly(c);
+    if (fail) return fail;
+    await setWatchCode(row.id, null);
+    return c.body(null, 204);
+  });
+
+  // Public, read-only: the watch code is the only credential
+  const watched = async (code) => {
+    const { rows } = await pool.query(
+      `select id, title, status, game_json, config_json from games
+        where watch_code = $1`,
+      [code],
+    );
+    return rows[0] || null;
+  };
+
+  app.get("/watch/:code", async (c) => {
+    const { rows } = await pool.query(
+      "select id, title from games where watch_code = $1",
+      [c.req.param("code")],
+    );
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+    return c.json({ gameId: rows[0].id, title: rows[0].title });
+  });
+
+  // What a spectator needs to draw the game: no owner, invite or webhook
+  app.get("/watch/:code/game", async (c) => {
+    const row = await watched(c.req.param("code"));
+    if (!row) return c.json({ error: "Not found" }, 404);
+    return c.json({
+      id: row.id,
+      title: row.title,
+      status: row.status,
+      game: row.game_json,
+      config: row.config_json,
+      seats: await seatsOf(pool, row.id),
+      assets: await assetNames(pool, row.id),
+    });
+  });
+
+  app.get("/watch/:code/assets/:name", async (c) => {
+    // One query: an unknown code and an unknown name are the same 404
+    const { rows } = await pool.query(
+      `select a.content_type, a.data from game_assets a
+         join games g on g.id = a.game_id
+        where g.watch_code = $1 and a.name = $2`,
+      [c.req.param("code"), c.req.param("name")],
+    );
+    if (!rows.length) return c.json({ error: "Not found" }, 404);
+    return assetResponse(c, rows[0]);
   });
 
   app.get("/invites/:code", async (c) => {
@@ -427,12 +527,7 @@ export const gameRoutes = ({ pool, config, notifier }) => {
       [row.id, c.req.param("name")],
     );
     if (!rows.length) return c.json({ error: "Not found" }, 404);
-
-    return c.body(rows[0].data, 200, {
-      "Content-Type": rows[0].content_type,
-      "X-Content-Type-Options": "nosniff",
-      "Content-Disposition": "attachment",
-    });
+    return assetResponse(c, rows[0]);
   });
 
   return app;

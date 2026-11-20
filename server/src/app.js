@@ -7,7 +7,7 @@ import { gameRoutes } from "./games.js";
 import { attachHub } from "./hub.js";
 import { createNotifier } from "./webhook.js";
 
-// sockets: the hub's { closeToken, closeGame }, absent without a websocket hub
+// sockets: the hub's { closeToken, closeGame, closeWatchers }, absent without a websocket hub
 export const createApp = ({
   pool,
   config,
@@ -28,7 +28,7 @@ export const createApp = ({
 
   app.get("/health", (c) => c.json({ ok: true }));
   app.route("/", authRoutes({ pool, config, sockets }));
-  app.route("/", gameRoutes({ pool, config, notifier }));
+  app.route("/", gameRoutes({ pool, config, notifier, sockets }));
 
   return app;
 };
@@ -42,6 +42,7 @@ export const createServer = ({ pool, config }) => {
   const sockets = {
     closeToken: (tokenHash) => hub.closeToken(tokenHash),
     closeGame: (gameId) => hub.closeGame(gameId),
+    closeWatchers: (gameId) => hub.closeWatchers(gameId),
   };
   const notifier = createNotifier({ pool, config });
   const server = createAdaptorServer({
