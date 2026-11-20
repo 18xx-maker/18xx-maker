@@ -745,7 +745,7 @@
     },
     "playServer": {
       "title": "游戏服务器",
-      "description": "在线游戏服务器的地址,例如 https://play.example.com。留空则关闭在线游戏。"
+      "description": "在线游戏服务器的地址，例如 https://play.example.com。留空则关闭在线游戏。"
     }
   },
   "app": {
