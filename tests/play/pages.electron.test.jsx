@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { renderApp } from "@tests/support/helpers.jsx";
@@ -31,7 +31,10 @@ vi.mock("@/util/capability", async (importOriginal) => ({
   default: { ...(await importOriginal()).default, electron: true },
 }));
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => {
+  vi.unstubAllGlobals();
+  window.localStorage.clear();
+});
 
 describe("play in the desktop app", () => {
   it.for(["/play", "/play/join/abc", "/play/g1"])(
@@ -49,4 +52,16 @@ describe("play in the desktop app", () => {
       expect(fetch).not.toHaveBeenCalled();
     },
   );
+
+  it("strips a token fragment without storing it", async () => {
+    const fetch = fakeServer({});
+    const { router } = renderApp("/play#token=abc", {
+      settings: { playServer: BASE },
+    });
+    await screen.findByText(/available on the website/);
+    await waitFor(() => expect(router.state.location.hash).toBe(""));
+    expect(router.state.historyAction).toBe("REPLACE");
+    expect(window.localStorage.getItem("play-tokens")).toBeNull();
+    expect(fetch).not.toHaveBeenCalled();
+  });
 });

@@ -40,6 +40,16 @@ describe("play without a server", () => {
     expect(fetch).not.toHaveBeenCalled();
   });
 
+  it("strips a token fragment without storing it", async () => {
+    const fetch = fakeServer({});
+    const { router } = renderApp("/play#token=abc");
+    await screen.findByTestId("play");
+    await waitFor(() => expect(router.state.location.hash).toBe(""));
+    expect(router.state.historyAction).toBe("REPLACE");
+    expect(window.localStorage.getItem("play-tokens")).toBeNull();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
   it.for([
     ["/play/join/abc", "play-join"],
     ["/play/g1", "play-game"],

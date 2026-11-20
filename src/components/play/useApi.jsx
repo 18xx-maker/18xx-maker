@@ -13,7 +13,8 @@ import capability from "@/util/capability";
 //
 // The server sends the login back to <return>#token=<token>: the token is
 // stored for the server url and the fragment is replaced out of the address
-// and the history. It is never logged or sent anywhere else.
+// and the history. It is never logged or sent anywhere else. Without a server
+// or in Electron a #token= fragment is only replaced out, never stored.
 export const useApi = () => {
   const server = useSelector(selectPlayServer);
   const { pathname, hash } = useLocation();
@@ -24,14 +25,17 @@ export const useApi = () => {
   const [attempt, setAttempt] = useState(0);
 
   const blocked = capability.electron ? "electron" : server ? null : "noServer";
+  const tokenHash = /^#token=/.test(hash);
   const fragment = (!blocked && /^#token=(.+)$/.exec(hash)?.[1]) || null;
 
   useEffect(() => {
-    if (!fragment) return;
-    setToken(server, fragment);
-    setVersion((v) => v + 1);
+    if (!tokenHash) return;
+    if (fragment) {
+      setToken(server, fragment);
+      setVersion((v) => v + 1);
+    }
     navigate({ hash: "" }, { replace: true });
-  }, [fragment, server, navigate]);
+  }, [tokenHash, fragment, server, navigate]);
 
   const stored = useMemo(
     () => (blocked ? null : getToken(server)),
