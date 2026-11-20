@@ -31,6 +31,7 @@ describe.skipIf(!hasDb)("discord auth", () => {
           guilds: ["g"],
           failGuilds: true,
         },
+        { code: "hang", id: "4", username: "Dee", guilds: ["g"], hang: true },
       ],
     });
     config = loadConfig({
@@ -42,6 +43,7 @@ describe.skipIf(!hasDb)("discord auth", () => {
       DISCORD_API_BASE: discord.url,
       DISCORD_AUTH_BASE: `${discord.url}/oauth2`,
       ALLOWED_ORIGINS: "http://app.test",
+      DISCORD_TIMEOUT_MS: "200",
     });
     app = createApp({ pool: db.pool, config });
   });
@@ -225,6 +227,125 @@ describe.skipIf(!hasDb)("discord auth", () => {
       (await app.request("/auth/logout", { method: "POST", headers })).status,
     ).toBe(200);
     expect((await app.request("/me", { headers })).status).toBe(401);
+  });
+
+  const userIdOf = async (token) =>
+    (
+      await (
+        await app.request("/me", {
+          headers: { authorization: `Bearer ${token}` },
+        })
+      ).json()
+    ).id;
+
+  const expire = (token) =>
+    db.pool.query(
+      "update sessions set expires_at = now() - interval '1 second' where token_hash = $1",
+      [createHash("sha256").update(token).digest("hex")],
+    );
+
+  it("a session gets an expiry of SESSION_TTL_DAYS from login", async () => {
+    const token = tokenOf(await signIn("in"));
+    const { rows } = await db.pool.query(
+      `select extract(epoch from expires_at - created_at)::int as secs
+         from sessions where token_hash = $1`,
+      [createHash("sha256").update(token).digest("hex")],
+    );
+    expect(rows[0].secs).toBe(30 * 24 * 3600);
+
+    const short = createApp({
+      pool: db.pool,
+      config: { ...config, limits: { ...config.limits, sessionTtlDays: 2 } },
+    });
+    const state = new URL(
+      (
+        await short.request(
+          `/auth/discord/login?return=${encodeURIComponent(RETURN)}`,
+        )
+      ).headers.get("location"),
+    ).searchParams.get("state");
+    const res = await short.request(
+      `/auth/discord/callback?code=in&state=${encodeURIComponent(state)}`,
+    );
+    const { rows: two } = await db.pool.query(
+      `select extract(epoch from expires_at - created_at)::int as secs
+         from sessions where token_hash = $1`,
+      [createHash("sha256").update(tokenOf(res)).digest("hex")],
+    );
+    expect(two[0].secs).toBe(2 * 24 * 3600);
+  });
+
+  it("an expired session is refused with 401", async () => {
+    const token = tokenOf(await signIn("in"));
+    const headers = { authorization: `Bearer ${token}` };
+    expect((await app.request("/me", { headers })).status).toBe(200);
+    await expire(token);
+    expect((await app.request("/me", { headers })).status).toBe(401);
+  });
+
+  it("a login deletes the user's expired sessions and keeps the live ones", async () => {
+    const old = tokenOf(await signIn("in"));
+    const live = tokenOf(await signIn("in"));
+    const userId = await userIdOf(live);
+    await expire(old);
+    await signIn("in");
+    const hashes = (
+      await db.pool.query(
+        "select token_hash from sessions where user_id = $1",
+        [userId],
+      )
+    ).rows.map((r) => r.token_hash);
+    const hash = (t) => createHash("sha256").update(t).digest("hex");
+    expect(hashes).not.toContain(hash(old));
+    expect(hashes).toContain(hash(live));
+  });
+
+  it("a Discord that never answers fails the callback with 502 within DISCORD_TIMEOUT_MS", async () => {
+    const started = Date.now();
+    const res = await signIn("hang");
+    expect(res.status).toBe(502);
+    expect(await res.json()).toEqual({ error: "Discord login failed" });
+    expect(Date.now() - started).toBeLessThan(2000);
+    const { rows } = await db.pool.query(
+      "select 1 from users where discord_id = '4'",
+    );
+    expect(rows).toHaveLength(0);
+  }, 5000);
+
+  it("a denied consent redirects back with the error in the fragment", async () => {
+    const before = (await db.pool.query("select count(*)::int n from sessions"))
+      .rows[0].n;
+    const state = await stateOf();
+    const res = await app.request(
+      `/auth/discord/callback?error=access_denied&error_description=The+user+denied&state=${encodeURIComponent(state)}`,
+    );
+    expect(res.status).toBe(302);
+    const location = new URL(res.headers.get("location"));
+    expect(location.origin + location.pathname).toBe(RETURN);
+    expect(location.hash).toBe("#error=access_denied");
+    const after = (await db.pool.query("select count(*)::int n from sessions"))
+      .rows[0].n;
+    expect(after).toBe(before);
+
+    // An error value that is not a plain code is not reflected
+    const odd = await app.request(
+      `/auth/discord/callback?error=${encodeURIComponent("<b>x</b>")}&state=${encodeURIComponent(await stateOf())}`,
+    );
+    expect(new URL(odd.headers.get("location")).hash).toBe(
+      "#error=login_failed",
+    );
+  });
+
+  it("an error with an invalid state is still 400", async () => {
+    for (const state of ["garbage", ""]) {
+      const res = await app.request(
+        `/auth/discord/callback?error=access_denied&state=${state}`,
+      );
+      expect(res.status).toBe(400);
+    }
+    expect(
+      (await app.request("/auth/discord/callback?error=access_denied")).status,
+    ).toBe(400);
   });
 
   it("the session table stores a hash, never the token", async () => {

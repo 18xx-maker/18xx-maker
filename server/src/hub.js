@@ -18,7 +18,9 @@ import { appendEvent, eventsSince, lastSeq } from "./events.js";
 //   { t: "rebase", currentSeq }             to the sender of a stale seq
 //   { t: "presence", users }                on every join and leave
 //   { t: "error", code, message? }
-// Only seat holders may join; others get not_member and close 4003.
+// Only seat holders may join; others get not_member and close 4003. A socket
+// whose session ends (logout, expiry) gets bad_token and close 4003, one of a
+// game that is closed gets not_member and 4003; frames after that are ignored.
 
 // Frames are small JSON messages; ws closes the socket (1009) above this
 export const MAX_FRAME_BYTES = 256 * 1024;
@@ -81,6 +83,13 @@ export const attachHub = (server, { pool, config }) => {
     } else broadcast(room, { t: "presence", users: presence(room) });
   };
 
+  // Ends a socket for good: no frame of it is handled after this
+  const revoke = (ws, code) => {
+    error(ws, code);
+    leave(ws);
+    ws.close(JOIN_FAILED, code);
+  };
+
   const join = async (ws, state, msg) => {
     const { token, gameId, lastSeq: since } = msg;
     if (
@@ -92,10 +101,12 @@ export const attachHub = (server, { pool, config }) => {
       return error(ws, "invalid", "join needs token, gameId and lastSeq");
     if (state.joining) return error(ws, "invalid", "already joined");
     state.joining = true;
+    // Set before the lookup, so a logout during the join closes this socket
+    state.tokenHash = sha256(token);
 
     const user = await pool.query(
-      "select user_id from sessions where token_hash = $1",
-      [sha256(token)],
+      "select user_id from sessions where token_hash = $1 and expires_at > now()",
+      [state.tokenHash],
     );
     if (!user.rows.length) {
       error(ws, "bad_token");
@@ -171,11 +182,19 @@ export const attachHub = (server, { pool, config }) => {
       return error(ws, "rate_limited");
     if (!isSeq(msg.seq, 1)) return error(ws, "invalid", "seq out of range");
 
+    const session = await pool.query(
+      "select 1 from sessions where token_hash = $1 and expires_at > now()",
+      [state.tokenHash],
+    );
+    if (state.closed) return;
+    if (!session.rows.length) return revoke(ws, "bad_token");
+
     const { seq, event: body } = msg;
     const { gameId, userId } = state;
     const room = rooms.get(gameId);
     room.pending++;
     const run = room.queue.then(async () => {
+      if (state.closed) return;
       const result = await appendEvent(pool, config, {
         gameId,
         userId,
@@ -208,6 +227,7 @@ export const attachHub = (server, { pool, config }) => {
 
   wss.on("connection", (ws) => {
     const state = {
+      tokenHash: null,
       userId: null,
       gameId: null,
       joining: false,
@@ -223,6 +243,7 @@ export const attachHub = (server, { pool, config }) => {
     states.set(ws, state);
 
     ws.on("message", (data, isBinary) => {
+      if (state.closed) return;
       const msg = parse(data, isBinary);
       const handler = msg && Object.hasOwn(handlers, msg.t) && handlers[msg.t];
       if (!handler) return error(ws, "invalid", "unknown frame");
@@ -257,6 +278,19 @@ export const attachHub = (server, { pool, config }) => {
     close: () => {
       for (const ws of wss.clients) ws.terminate();
       wss.close();
+    },
+    // The sockets that joined (or are joining) with this session
+    closeToken: (tokenHash) => {
+      for (const ws of wss.clients) {
+        const state = states.get(ws);
+        if (state && !state.closed && state.tokenHash === tokenHash)
+          revoke(ws, "bad_token");
+      }
+    },
+    // Every socket in the room of this game
+    closeGame: (gameId) => {
+      const room = rooms.get(gameId);
+      for (const ws of room ? [...room.sockets] : []) revoke(ws, "not_member");
     },
   };
 };

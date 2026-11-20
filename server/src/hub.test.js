@@ -1,7 +1,16 @@
 import { createHash, randomBytes } from "node:crypto";
+import { createServer as createHttpServer } from "node:http";
 import net from "node:net";
 
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
 
 import { initialState, reduce } from "../../src/play/reduce.js";
 import { connect } from "../test/client.js";
@@ -9,6 +18,7 @@ import { hasDb, makeTestDb } from "../test/db.js";
 import { createServer } from "./app.js";
 import { loadConfig } from "./config.js";
 import { appendEvent, eventsSince } from "./events.js";
+import { attachHub } from "./hub.js";
 
 const note = (text) => ({ type: "note.set", text });
 
@@ -33,6 +43,7 @@ describe.skipIf(!hasDb)("hub", () => {
     const clients = [];
     const entry = {
       url,
+      http: `http://127.0.0.1:${server.address().port}`,
       client: () => {
         const c = connect(url);
         clients.push(c);
@@ -83,18 +94,37 @@ describe.skipIf(!hasDb)("hub", () => {
   };
   const isLastSeq = (sql) => sql.includes("max(seq)");
 
-  const makeUser = async (name) => {
+  const hashOf = (token) => createHash("sha256").update(token).digest("hex");
+
+  // A second session (token) of the same user
+  const newSession = async (user) => {
     const token = randomBytes(16).toString("hex");
+    await db.pool.query(
+      "insert into sessions (token_hash, user_id) values ($1, $2)",
+      [hashOf(token), user.id],
+    );
+    return { id: user.id, token };
+  };
+
+  const makeUser = async (name) => {
     const { rows } = await db.pool.query(
       "insert into users (discord_id, name) values ($1, $2) returning id",
       [randomBytes(8).toString("hex"), name],
     );
-    await db.pool.query(
-      "insert into sessions (token_hash, user_id) values ($1, $2)",
-      [createHash("sha256").update(token).digest("hex"), rows[0].id],
-    );
-    return { id: rows[0].id, token };
+    return newSession({ id: rows[0].id });
   };
+
+  const expire = (user) =>
+    db.pool.query(
+      "update sessions set expires_at = now() - interval '1 second' where token_hash = $1",
+      [hashOf(user.token)],
+    );
+
+  const logout = (s, user) =>
+    fetch(`${s.http}/auth/logout`, {
+      method: "POST",
+      headers: { authorization: `Bearer ${user.token}` },
+    });
 
   const makeGame = async (players, status = "active") => {
     const { rows } = await db.pool.query(
@@ -152,6 +182,173 @@ describe.skipIf(!hasDb)("hub", () => {
     await c.send({ t: "join", token: "nope", gameId: g, lastSeq: 0 });
     expect(await c.next("error")).toMatchObject({ code: "bad_token" });
     expect((await c.closed).code).toBe(4003);
+  });
+
+  it("join with an expired session returns bad_token and closes 4003", async () => {
+    const s = await start();
+    const dee = await makeUser("Dee");
+    const g = await makeGame([dee]);
+    await expire(dee);
+    const c = s.client();
+    await c.send({ t: "join", token: dee.token, gameId: g, lastSeq: 0 });
+    expect(await c.next("error")).toMatchObject({ code: "bad_token" });
+    expect((await c.closed).code).toBe(4003);
+    expect(c.pending().filter((m) => m.t === "joined")).toEqual([]);
+  });
+
+  it("logout closes the sockets of that token with 4003 and keeps other sessions open", async () => {
+    const s = await start();
+    const eve = await makeUser("Eve");
+    const eve2 = await newSession(eve);
+    const g = await makeGame([eve, bob]);
+    const [a1, a2, other, b] = [s.client(), s.client(), s.client(), s.client()];
+    await join(a1, eve, g);
+    await join(a2, eve, g);
+    await join(other, eve2, g);
+    await join(b, bob, g);
+
+    const res = await logout(s, eve);
+    expect(res.status).toBe(200);
+    // A frame sent right after the logout is ignored, never stored
+    await a1.send({ t: "event", seq: 1, event: note("late") });
+    for (const c of [a1, a2]) {
+      expect(await c.next("error")).toMatchObject({ code: "bad_token" });
+      expect((await c.closed).code).toBe(4003);
+    }
+
+    await other.send({ t: "event", seq: 1, event: note("still here") });
+    expect((await other.next("event")).event).toMatchObject({
+      seq: 1,
+      text: "still here",
+    });
+    expect((await b.next("event")).event.seq).toBe(1);
+    expect((await eventsSince(db.pool, g, 0)).map((e) => e.text)).toEqual([
+      "still here",
+    ]);
+  });
+
+  it("a socket whose session expired mid-connection is closed on its next event", async () => {
+    const s = await start();
+    const fay = await makeUser("Fay");
+    const g = await makeGame([fay]);
+    const c = s.client();
+    await join(c, fay, g);
+    await expire(fay);
+    await c.send({ t: "event", seq: 1, event: note("x") });
+    expect(await c.next("error")).toMatchObject({ code: "bad_token" });
+    expect((await c.closed).code).toBe(4003);
+    expect(await eventsSince(db.pool, g, 0)).toEqual([]);
+  });
+
+  it("the append past MAX_EVENTS_PER_GAME is invalid and writes nothing", async () => {
+    const s = await start({ MAX_EVENTS_PER_GAME: "2" });
+    const g = await makeGame([ann]);
+    await seed(g, ann, 2);
+    const c = s.client();
+    await join(c, ann, g, 2);
+    await c.send({ t: "event", seq: 3, event: note("x") });
+    expect(await c.next("error")).toEqual({
+      t: "error",
+      code: "invalid",
+      message: "game is full",
+    });
+    expect(await eventsSince(db.pool, g, 0)).toHaveLength(2);
+  });
+
+  // The hub alone on a plain http server, to call closeGame on it
+  const startHub = async (pool = db.pool) => {
+    const server = createHttpServer();
+    const hub = attachHub(server, { pool, config: configFor() });
+    await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+    const url = `ws://127.0.0.1:${server.address().port}/ws`;
+    const clients = [];
+    running.push({
+      stop: async () => {
+        await Promise.all(clients.map((c) => c.close()));
+        hub.close();
+        await new Promise((resolve) => server.close(resolve));
+      },
+    });
+    return {
+      hub,
+      client: () => {
+        const c = connect(url);
+        clients.push(c);
+        return c;
+      },
+    };
+  };
+
+  const isSessionCheck = (sql) => sql.startsWith("select 1 from sessions");
+
+  it("closeGame closes every socket of that game with 4003 and no other", async () => {
+    const { hub, client } = await startHub();
+    const g = await makeGame([ann, bob]);
+    const h = await makeGame([ann]);
+    const [a, b, other] = [client(), client(), client()];
+    await join(a, ann, g);
+    await join(b, bob, g);
+    await join(other, ann, h);
+    const log = vi.spyOn(console, "error");
+    try {
+      hub.closeGame(g);
+      // A frame that crosses the close is ignored, not handled
+      await a.send({ t: "event", seq: 1, event: note("late") });
+      for (const c of [a, b]) {
+        expect(await c.next("error")).toMatchObject({ code: "not_member" });
+        expect((await c.closed).code).toBe(4003);
+      }
+      await other.send({ t: "event", seq: 1, event: note("x") });
+      expect((await other.next("event")).event.seq).toBe(1);
+      expect(await eventsSince(db.pool, g, 0)).toEqual([]);
+      expect(log).not.toHaveBeenCalled();
+    } finally {
+      log.mockRestore();
+    }
+  });
+
+  it("an event whose session check is in flight when the game closes is dropped", async () => {
+    const pool = gatedPool();
+    const { hub, client } = await startHub(pool);
+    const g = await makeGame([ann]);
+    const a = client();
+    await join(a, ann, g);
+    const held = pool.hold("query", isSessionCheck);
+    await a.send({ t: "event", seq: 1, event: note("racing") });
+    const release = await held;
+    const log = vi.spyOn(console, "error");
+    try {
+      hub.closeGame(g);
+      release();
+      expect((await a.closed).code).toBe(4003);
+      // Let the released handler finish before looking
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      expect(await eventsSince(db.pool, g, 0)).toEqual([]);
+      expect(log).not.toHaveBeenCalled();
+    } finally {
+      log.mockRestore();
+    }
+  });
+
+  it("an event queued behind an append when the game closes is not stored", async () => {
+    const pool = gatedPool();
+    const { hub, client } = await startHub(pool);
+    const g = await makeGame([ann, bob]);
+    const a = client();
+    const b = client();
+    await join(a, ann, g);
+    await join(b, bob, g);
+    const held = pool.hold("connect");
+    await a.send({ t: "event", seq: 1, event: note("in flight") });
+    const release = await held;
+    await a.send({ t: "event", seq: 2, event: note("queued") });
+    // Time for seq 2 to pass its session check and wait on the queue
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    hub.closeGame(g);
+    release();
+    expect((await a.closed).code).toBe(4003);
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    expect((await eventsSince(db.pool, g, 0)).map((e) => e.seq)).toEqual([1]);
   });
 
   it("join returns joined and the full history for lastSeq 0", async () => {

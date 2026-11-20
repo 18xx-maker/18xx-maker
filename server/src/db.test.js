@@ -1,3 +1,5 @@
+import fs from "node:fs/promises";
+
 import { describe, expect, it, vi } from "vitest";
 
 import { hasDb, makeTestDb } from "../test/db.js";
@@ -32,6 +34,36 @@ describe.skipIf(!hasDb)("migrate", () => {
 
   it("is idempotent (second call returns [])", async () => {
     expect(await migrate(db.pool)).toEqual([]);
+  });
+
+  it("adds expires_at to sessions", async () => {
+    const { rows } = await db.pool.query(
+      `select is_nullable from information_schema.columns
+        where table_schema = $1 and table_name = 'sessions'
+          and column_name = 'expires_at'`,
+      [db.schema],
+    );
+    expect(rows).toEqual([{ is_nullable: "NO" }]);
+  });
+});
+
+describe.skipIf(!hasDb)("concurrent migrate", () => {
+  let db;
+  beforeEach(async () => {
+    db = await makeTestDb({ migrate: false });
+  });
+  afterEach(() => db.close());
+
+  it("applies each file once when two run against one database", async () => {
+    const files = (await fs.readdir(new URL("../migrations", import.meta.url)))
+      .filter((f) => f.endsWith(".sql"))
+      .sort();
+    const results = await Promise.all([migrate(db.pool), migrate(db.pool)]);
+    expect(results.flat().sort()).toEqual(files);
+    const { rows } = await db.pool.query(
+      "select name from schema_migrations order by name",
+    );
+    expect(rows.map((r) => r.name)).toEqual(files);
   });
 });
 

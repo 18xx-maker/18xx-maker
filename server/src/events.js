@@ -64,6 +64,8 @@ export const appendEvent = async (
     const current = await lastSeq(client, gameId);
     if (seq !== current + 1)
       return await fail({ reason: "conflict", currentSeq: current });
+    if (current >= config.limits.eventsPerGame)
+      return await fail({ reason: "invalid", message: "game is full" });
     if (
       event.type === "undo" &&
       !(event.target < seq && event.target <= current)

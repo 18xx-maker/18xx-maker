@@ -11,6 +11,35 @@ const STATUSES = ["active", "locked", "archived"];
 
 const newInviteCode = () => randomBytes(16).toString("base64url");
 
+// Runs fn(client) in a transaction; fn returns the response, rolled back when
+// it is a refusal (rollback: true) or throws
+const inTransaction = async (pool, fn) => {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    const { response, rollback } = await fn(client);
+    await client.query(rollback ? "rollback" : "commit");
+    return response;
+  } catch (err) {
+    await client.query("rollback").catch(() => {});
+    throw err;
+  } finally {
+    client.release();
+  }
+};
+
+// Locks the owner's row so concurrent changes to their game count serialize;
+// resolves to the games of the owner that count against gamesPerUser
+const lockOwnedCount = async (client, userId) => {
+  await client.query("select 1 from users where id = $1 for update", [userId]);
+  const { rows } = await client.query(
+    `select count(*)::int as n from games
+      where owner_id = $1 and status in ('active', 'locked')`,
+    [userId],
+  );
+  return rows[0].n;
+};
+
 // Reads the raw body, giving up (null) as soon as it passes the limit
 const readCapped = async (c, limit) => {
   const declared = Number(c.req.header("content-length"));
@@ -117,21 +146,13 @@ export const gameRoutes = ({ pool, config }) => {
         ? seatName.trim().slice(0, 50)
         : user.name;
 
-    const client = await pool.connect();
-    try {
-      await client.query("begin");
+    return inTransaction(pool, async (client) => {
       // Serialise concurrent creates by one user so the cap cannot be raced
-      await client.query("select 1 from users where id = $1 for update", [
-        user.id,
-      ]);
-      const { rows: owned } = await client.query(
-        `select count(*)::int as n from games
-          where owner_id = $1 and status in ('active', 'locked')`,
-        [user.id],
-      );
-      if (owned[0].n >= limits.gamesPerUser) {
-        await client.query("rollback");
-        return c.json({ error: "Too many games" }, 429);
+      if ((await lockOwnedCount(client, user.id)) >= limits.gamesPerUser) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Too many games" }, 429),
+        };
       }
       const { rows } = await client.query(
         `insert into games (title, owner_id, game_json, config_json, invite_code)
@@ -142,14 +163,8 @@ export const gameRoutes = ({ pool, config }) => {
         "insert into seats (game_id, user_id, name) values ($1, $2, $3)",
         [rows[0].id, user.id, name],
       );
-      await client.query("commit");
-      return c.json({ id: rows[0].id, inviteCode }, 201);
-    } catch (err) {
-      await client.query("rollback");
-      throw err;
-    } finally {
-      client.release();
-    }
+      return { response: c.json({ id: rows[0].id, inviteCode }, 201) };
+    });
   });
 
   app.get("/games", auth, async (c) => {
@@ -205,11 +220,36 @@ export const gameRoutes = ({ pool, config }) => {
     if (!STATUSES.includes(body?.status)) {
       return c.json({ error: "Invalid status" }, 400);
     }
-    await pool.query("update games set status = $2 where id = $1", [
-      row.id,
-      body.status,
-    ]);
-    return c.json({ id: row.id, status: body.status });
+    const user = c.get("user");
+    return inTransaction(pool, async (client) => {
+      const count = await lockOwnedCount(client, user.id);
+      const { rows } = await client.query(
+        "select status from games where id = $1 for update",
+        [row.id],
+      );
+      if (!rows.length) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Not found" }, 404),
+        };
+      }
+      // Bringing an archived game back counts against the cap like a new one
+      if (
+        rows[0].status === "archived" &&
+        body.status !== "archived" &&
+        count >= limits.gamesPerUser
+      ) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Too many games" }, 409),
+        };
+      }
+      await client.query("update games set status = $2 where id = $1", [
+        row.id,
+        body.status,
+      ]);
+      return { response: c.json({ id: row.id, status: body.status }) };
+    });
   });
 
   app.delete("/games/:id", auth, async (c) => {
@@ -292,14 +332,46 @@ export const gameRoutes = ({ pool, config }) => {
     if (!data) return c.json({ error: "Asset too large" }, 413);
 
     const type = c.req.header("content-type") || "application/octet-stream";
-    await pool.query(
-      `insert into game_assets (game_id, name, content_type, data)
-       values ($1, $2, $3, $4)
-       on conflict (game_id, name) do update
-         set content_type = excluded.content_type, data = excluded.data`,
-      [row.id, name, type, data],
-    );
-    return c.body(null, 204);
+    return inTransaction(pool, async (client) => {
+      // The game row lock serializes uploads, so the caps cannot be raced
+      const game = await client.query(
+        "select 1 from games where id = $1 for update",
+        [row.id],
+      );
+      if (!game.rows.length) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Not found" }, 404),
+        };
+      }
+      // The asset being replaced does not count
+      const { rows } = await client.query(
+        `select count(*)::int as n,
+                coalesce(sum(octet_length(data)), 0)::float8 as bytes
+           from game_assets where game_id = $1 and name <> $2`,
+        [row.id, name],
+      );
+      if (rows[0].n >= limits.assetsPerGame) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Too many assets" }, 413),
+        };
+      }
+      if (rows[0].bytes + data.length > limits.assetTotalBytes) {
+        return {
+          rollback: true,
+          response: c.json({ error: "Assets too large in total" }, 413),
+        };
+      }
+      await client.query(
+        `insert into game_assets (game_id, name, content_type, data)
+         values ($1, $2, $3, $4)
+         on conflict (game_id, name) do update
+           set content_type = excluded.content_type, data = excluded.data`,
+        [row.id, name, type, data],
+      );
+      return { response: c.body(null, 204) };
+    });
   });
 
   app.get("/games/:id/assets/:name", auth, async (c) => {
