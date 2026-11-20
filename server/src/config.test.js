@@ -21,6 +21,7 @@ describe("loadConfig", () => {
         apiBase: "https://discord.com/api",
         authBase: "https://discord.com/oauth2",
         timeoutMs: 10000,
+        webhookOrigin: "https://discord.com",
       },
       limits: {
         gameBytes: 2097152,
@@ -33,6 +34,8 @@ describe("loadConfig", () => {
         snapshotEvery: 100,
         joinTimeoutMs: 10000,
         sessionTtlDays: 30,
+        webhookBatchMs: 5000,
+        webhookMaxPerMinute: 10,
       },
     });
   });
@@ -62,6 +65,8 @@ describe("loadConfig", () => {
       MAX_ASSETS_PER_GAME: "8",
       MAX_ASSET_TOTAL_BYTES: "90",
       MAX_EVENTS_PER_GAME: "70",
+      WEBHOOK_BATCH_MS: "250",
+      WEBHOOK_MAX_PER_MINUTE: "3",
     });
     expect(config.port).toBe(9000);
     expect(config.allowedOrigins).toEqual(["https://a.com", "https://b.com"]);
@@ -77,6 +82,8 @@ describe("loadConfig", () => {
       snapshotEvery: 5,
       joinTimeoutMs: 50,
       sessionTtlDays: 7,
+      webhookBatchMs: 250,
+      webhookMaxPerMinute: 3,
     });
   });
 
@@ -96,10 +103,31 @@ describe("loadConfig", () => {
     ["MAX_ASSETS_PER_GAME", "2.5"],
     ["MAX_ASSET_TOTAL_BYTES", "lots"],
     ["MAX_EVENTS_PER_GAME", "0"],
+    ["WEBHOOK_BATCH_MS", "0"],
+    ["WEBHOOK_MAX_PER_MINUTE", "1.5"],
   ])("rejects %s=%s", (name, value) => {
     expect(() => loadConfig({ ...required, [name]: value })).toThrow(
       new RegExp(`${name} must be a positive integer`),
     );
+  });
+
+  it("takes DISCORD_WEBHOOK_ORIGIN as an origin", () => {
+    expect(
+      loadConfig({ ...required, DISCORD_WEBHOOK_ORIGIN: "http://127.0.0.1:9/" })
+        .discord.webhookOrigin,
+    ).toBe("http://127.0.0.1:9");
+  });
+
+  it.each([
+    "discord.com",
+    "ftp://discord.com",
+    "https://discord.com/api",
+    "https://discord.com/?x=1",
+    "https://user:pw@discord.com",
+  ])("rejects DISCORD_WEBHOOK_ORIGIN=%s", (value) => {
+    expect(() =>
+      loadConfig({ ...required, DISCORD_WEBHOOK_ORIGIN: value }),
+    ).toThrow(/DISCORD_WEBHOOK_ORIGIN must be an http\(s\) URL origin/);
   });
 
   it("treats an empty numeric variable as unset", () => {

@@ -41,7 +41,8 @@ const parse = (data, isBinary) => {
   }
 };
 
-export const attachHub = (server, { pool, config }) => {
+// notifier: the webhook notifier (webhook.js), told of every accepted event
+export const attachHub = (server, { pool, config, notifier }) => {
   const { limits } = config;
   const wss = new WebSocketServer({
     noServer: true,
@@ -204,10 +205,14 @@ export const attachHub = (server, { pool, config }) => {
       if (result.ok) {
         const payload = { ...body };
         delete payload.type;
-        broadcast(room, {
-          t: "event",
-          event: { seq, userId, type: body.type, ...payload },
-        });
+        const accepted = { seq, userId, type: body.type, ...payload };
+        broadcast(room, { t: "event", event: accepted });
+        // Fire and forget: a notice never delays or fails the event
+        try {
+          notifier?.notify(gameId, accepted);
+        } catch (err) {
+          console.error("hub: notify failed", err?.name);
+        }
       } else if (result.reason === "conflict") {
         send(ws, { t: "rebase", currentSeq: result.currentSeq });
       } else {
