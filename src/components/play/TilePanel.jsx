@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { RotateCcw, RotateCw, Trash2, TriangleAlert } from "lucide-react";
@@ -9,13 +10,14 @@ import Svg from "@/components/svg/Svg";
 
 import { cn } from "@/util/cn";
 
-const Preview = ({ id, game, rotation = 0, className }) => (
+const PreviewView = ({ id, game, rotation = 0, className }) => (
   <Svg viewBox="-90 -90 180 180" className={className} aria-hidden="true">
     <g transform={`rotate(${60 * rotation})`}>
       <Tile id={id} gameTiles={game.tiles} border />
     </g>
   </Svg>
 );
+const Preview = memo(PreviewView);
 
 const NoneLeft = () => {
   const { t } = useTranslation();

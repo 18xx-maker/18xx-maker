@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { memo, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import Tile from "@/components/Tile";
@@ -29,9 +29,10 @@ export const sameToken = (a, b) =>
 export const knownCompany = (game, abbrev) =>
   (game.companies || []).some((company) => company.abbrev === abbrev);
 
-// The hexes of the map by coordinate, with the outline that picks them
+// The hexes of the map by coordinate, with the outline that picks them. No
+// prototype: a hex id of an event ("constructor") is never found on it.
 const mapCells = (data, rotation) => {
-  const cells = {};
+  const cells = Object.create(null);
   for (const group of data.hexes || []) {
     for (const coords of group.hexes || []) {
       const [x, y] = toCoords(coords);
@@ -101,6 +102,66 @@ const PlacedToken = ({ game, hex, index, token, width, selected }) => (
   </g>
 );
 
+const BaseMap = memo(Map);
+
+const at = (data, { x, y }) =>
+  `translate(${data.hexX(x, y)} ${data.hexY(x, y)}) scale(${data.scale})`;
+
+const TileLayerView = ({ game, tiles, cells, data, rotation }) =>
+  Object.entries(tiles).map(
+    ([hex, placed]) =>
+      cells[hex] && (
+        <g
+          key={hex}
+          data-tile-hex={hex}
+          data-tile={placed.tile}
+          transform={`${at(data, cells[hex])} rotate(${60 * placed.rotation})`}
+        >
+          {knownTile(game, placed.tile) ? (
+            <Tile id={placed.tile} gameTiles={game.tiles} border />
+          ) : (
+            <TilePlaceholder id={placed.tile} rotation={rotation} />
+          )}
+        </g>
+      ),
+  );
+const TileLayer = memo(TileLayerView);
+
+const TargetLayerView = ({ cells }) =>
+  Object.values(cells).map((cell) => (
+    <polygon
+      key={cell.coord}
+      data-coord={cell.coord}
+      points={cell.points}
+      fill="transparent"
+      style={{ cursor: "pointer" }}
+    />
+  ));
+const TargetLayer = memo(TargetLayerView);
+
+const TokenLayerView = ({ game, tokens, cells, data, width, selected }) =>
+  Object.entries(tokens).map(
+    ([hex, list]) =>
+      cells[hex] && (
+        <g key={hex} transform={at(data, cells[hex])}>
+          {list.map((token, i) => (
+            <PlacedToken
+              key={`${token.token}-${token.x}-${token.y}-${i}`}
+              game={game}
+              hex={hex}
+              index={i}
+              token={token}
+              width={width}
+              selected={
+                selected?.hex === hex && sameToken(selected.token, token)
+              }
+            />
+          ))}
+        </g>
+      ),
+  );
+const TokenLayer = memo(TokenLayerView);
+
 // The board map: the print map of the game with the placed tiles and tokens
 // over it and a target on every hex. Pan with a drag, zoom with the wheel or
 // a pinch, "v" fits it again. A tap calls onTap with { hex, x, y } (the point
@@ -161,16 +222,14 @@ const PlayMap = ({ game, config, state, selected, onTap }) => {
     },
   });
 
-  if (!data.map) return <p>{t("play.board.noMap")}</p>;
-
-  const at = ({ x, y }) =>
-    `translate(${data.hexX(x, y)} ${data.hexY(x, y)}) scale(${data.scale})`;
   const offMap = [
     ...Object.keys(state.tiles),
     ...Object.keys(state.tokens).filter((hex) => state.tokens[hex].length),
   ].filter((hex, i, list) => !cells[hex] && list.indexOf(hex) === i);
   const picked = selected && cells[selected.hex];
 
+  // Only the view box changes while panning and zooming: the layers are
+  // memoized on what they draw
   return (
     <div className="relative h-full w-full">
       <Svg
@@ -181,66 +240,43 @@ const PlayMap = ({ game, config, state, selected, onTap }) => {
         className="h-full w-full touch-none select-none"
         viewBox={`${box.x} ${box.y} ${box.width} ${box.height}`}
       >
-        <Map name="play" game={game} config={config} variation={0} />
-        {Object.entries(state.tiles).map(
-          ([hex, placed]) =>
-            cells[hex] && (
-              <g
-                key={hex}
-                data-tile-hex={hex}
-                data-tile={placed.tile}
-                transform={`${at(cells[hex])} rotate(${60 * placed.rotation})`}
-              >
-                {knownTile(game, placed.tile) ? (
-                  <Tile id={placed.tile} gameTiles={game.tiles} border />
-                ) : (
-                  <TilePlaceholder id={placed.tile} rotation={rotation} />
-                )}
-              </g>
-            ),
-        )}
-        {Object.values(cells).map((cell) => (
-          <polygon
-            key={cell.coord}
-            data-coord={cell.coord}
-            points={cell.points}
-            fill="transparent"
-            style={{ cursor: "pointer" }}
-          />
-        ))}
-        {picked && (
-          <polygon
-            data-selected={picked.coord}
-            points={picked.points}
-            fill={ACCENT}
-            fillOpacity={0.12}
-            stroke={ACCENT}
-            strokeWidth={4 * data.scale}
-            strokeLinejoin="round"
-            pointerEvents="none"
-          />
-        )}
-        {Object.entries(state.tokens).map(
-          ([hex, list]) =>
-            cells[hex] && (
-              <g key={hex} transform={at(cells[hex])}>
-                {list.map((token, i) => (
-                  <PlacedToken
-                    key={`${token.token}-${token.x}-${token.y}-${i}`}
-                    game={game}
-                    hex={hex}
-                    index={i}
-                    token={token}
-                    width={width}
-                    selected={
-                      selected?.hex === hex && sameToken(selected.token, token)
-                    }
-                  />
-                ))}
-              </g>
-            ),
+        {data.map && (
+          <>
+            <BaseMap name="play" game={game} config={config} variation={0} />
+            <TileLayer
+              game={game}
+              tiles={state.tiles}
+              cells={cells}
+              data={data}
+              rotation={rotation}
+            />
+            <TargetLayer cells={cells} />
+            {picked && (
+              <polygon
+                data-selected={picked.coord}
+                points={picked.points}
+                fill={ACCENT}
+                fillOpacity={0.12}
+                stroke={ACCENT}
+                strokeWidth={4 * data.scale}
+                strokeLinejoin="round"
+                pointerEvents="none"
+              />
+            )}
+            <TokenLayer
+              game={game}
+              tokens={state.tokens}
+              cells={cells}
+              data={data}
+              width={width}
+              selected={selected?.token ? selected : null}
+            />
+          </>
         )}
       </Svg>
+      {!data.map && (
+        <p className="absolute top-2 left-2 text-sm">{t("play.board.noMap")}</p>
+      )}
       {offMap.length > 0 && (
         <p
           data-testid="play-off-map"
