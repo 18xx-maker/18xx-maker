@@ -239,8 +239,14 @@ export const gameRoutes = ({ pool, config, notifier }) => {
     }
     // The test post comes first, so a webhook Discord does not know (401/404)
     // is refused before anything is written
-    if (webhookUrl && !(await notifier.connected(row.id, webhookUrl))) {
-      return c.json({ error: "Discord rejected the webhook" }, 400);
+    if (webhookUrl) {
+      const test = await notifier.connected(row.id, webhookUrl);
+      if (test === "limited") {
+        return c.json({ error: "Too many requests" }, 429);
+      }
+      if (test === "rejected") {
+        return c.json({ error: "Discord rejected the webhook" }, 400);
+      }
     }
     const user = c.get("user");
     return inTransaction(pool, async (client) => {
