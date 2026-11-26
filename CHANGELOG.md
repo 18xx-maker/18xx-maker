@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0-beta.143](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.142...v1.0.0-beta.143) (2026-11-26)
+
+
+### :tada: Features
+
+* **ui:** add paper size preset buttons to the layout config ([#1111](https://github.com/18xx-maker/18xx-maker/issues/1111)) ([7940c9c](https://github.com/18xx-maker/18xx-maker/commit/7940c9cf228cef29da0f0ead42efa2455f6e2e2c))
+
+
+### :bug: Bug Fixes
+
+* **ui:** accept fractional paper sizes in the config schema ([#1109](https://github.com/18xx-maker/18xx-maker/issues/1109)) ([a624082](https://github.com/18xx-maker/18xx-maker/commit/a6240826d6a15c3cb0e1871f3d8b234f200cf09b))
+
 ## [1.0.0-beta.142](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.141...v1.0.0-beta.142) (2026-11-19)
 
 
