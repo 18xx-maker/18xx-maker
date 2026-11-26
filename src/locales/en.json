@@ -1197,7 +1197,7 @@
     },
     "layout": {
       "title": "Layout",
-      "paperSize": "For reference US Letter size would be 8.5in by 11in. A4 is 210mm by 297mm.",
+      "paperSizes": "Paper size presets",
       "margin": {
         "label": "Margin Size",
         "description": "How much of a margin exists around the printed item."
