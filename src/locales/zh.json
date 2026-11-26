@@ -1197,7 +1197,7 @@
     },
     "layout": {
       "title": "布局",
-      "paperSize": "仅供参考:美国 Letter 尺寸为 8.5 英寸 × 11 英寸。A4 为 210 毫米 × 297 毫米。",
+      "paperSizes": "纸张尺寸预设",
       "margin": {
         "label": "边距大小",
         "description": "打印内容四周留出的边距大小。"

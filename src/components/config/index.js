@@ -111,7 +111,7 @@ export const sections = [
         description: false,
       },
       {
-        note: "paperSize",
+        paperSizes: true,
       },
       {
         name: "printScale",

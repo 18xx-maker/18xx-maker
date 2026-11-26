@@ -1197,7 +1197,7 @@
     },
     "layout": {
       "title": "Layout",
-      "paperSize": "Zur Orientierung: US Letter misst 8,5 × 11 Zoll. A4 misst 210 × 297 mm.",
+      "paperSizes": "Papierformat-Vorlagen",
       "margin": {
         "label": "Randgröße",
         "description": "Wie groß der Rand um das gedruckte Element ist."

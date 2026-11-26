@@ -206,6 +206,35 @@ describe("config drawer", () => {
     expect(store.getState().errors).toEqual({});
   });
 
+  it("sets the paper width and height from a paper size button", async () => {
+    const { user, store } = renderApp(
+      "/games/18Test/map?config=true&section=layout",
+    );
+    await screen.findByRole("button", { name: "Close Config" });
+
+    await user.click(screen.getByRole("button", { name: "A4" }));
+    await waitFor(() =>
+      expect(store.getState().config.paper.width).toBeCloseTo(826.77, 2),
+    );
+    expect(store.getState().config.paper.height).toBeCloseTo(1169.29, 2);
+    expect(screen.getByRole("button", { name: "A4" })).toHaveClass(
+      "bg-primary",
+    );
+    expect(screen.getByRole("textbox", { name: "Paper Width" })).toHaveValue(
+      "8.2677165354",
+    );
+
+    await user.click(screen.getByRole("button", { name: "Legal" }));
+    await waitFor(() =>
+      expect(screen.getByRole("textbox", { name: "Paper Height" })).toHaveValue(
+        "14",
+      ),
+    );
+    expect(screen.getByRole("textbox", { name: "Paper Width" })).toHaveValue(
+      "8.5",
+    );
+  });
+
   it("sets and clears the size of a type of card", async () => {
     const { user, store } = renderApp(
       "/games/18Test/cards?config=true&section=cards",

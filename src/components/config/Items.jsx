@@ -5,6 +5,7 @@ import { addIndex, chain } from "ramda";
 
 import FontRoleInput from "@/components/config/FontRoleInput";
 import Input from "@/components/config/Input";
+import PaperSizes from "@/components/config/PaperSizes";
 import PinConfig from "@/components/config/PinConfig";
 import ThemePreview from "@/components/config/ThemePreview";
 
@@ -29,6 +30,15 @@ const Items = ({ section, items }) => {
 
     if (item.pins) {
       return [<PinConfig key={`${section}.pins`} prefix={section} />];
+    }
+
+    if (item.paperSizes) {
+      return [
+        <PaperSizes
+          key={`${section}.paperSizes`}
+          label={t(`config.${section}.paperSizes`)}
+        />,
+      ];
     }
 
     if (item.fontRole) {
