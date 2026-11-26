@@ -774,6 +774,33 @@ describe("validate", () => {
     });
   });
 
+  describe("the paper of a config", () => {
+    const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
+
+    // A4 in mm is not a whole number of the config's 1/100 inch units
+    it("accepts a paper size that is not a whole number", () => {
+      const paper = {
+        width: 826.77165354,
+        height: 1169.291338578,
+        margins: 25,
+      };
+      const file = writeTmp(
+        "config.json",
+        JSON.stringify({ ...defaults, paper }),
+      );
+      expect(run(file).code).toBe(0);
+    });
+
+    it("rejects a paper size below 1", () => {
+      const paper = { ...defaults.paper, height: 0.5 };
+      const file = writeTmp(
+        "config.json",
+        JSON.stringify({ ...defaults, paper }),
+      );
+      expect(run(file).code).toBe(1);
+    });
+  });
+
   describe("the duplex of a config", () => {
     const defaults = JSON.parse(fs.readFileSync(src("defaults.json"), "utf8"));
     const withDuplex = (duplex) =>

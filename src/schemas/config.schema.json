@@ -117,7 +117,7 @@
       "additionalProperties": false
     },
     "dimension": {
-      "type": "integer",
+      "type": "number",
       "minimum": 1
     },
     "dimensions": {
