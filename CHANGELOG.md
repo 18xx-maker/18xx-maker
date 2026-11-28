@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.145](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.144...v1.0.0-beta.145) (2026-11-28)
+
+
+### :tada: Features
+
+* **export:** export svg images from the web version ([#1114](https://github.com/18xx-maker/18xx-maker/issues/1114)) ([aa81146](https://github.com/18xx-maker/18xx-maker/commit/aa811464683d94e8a2223b3631fffdd223fa0971))
+
 ## [1.0.0-beta.144](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.143...v1.0.0-beta.144) (2026-11-28)
 
 
