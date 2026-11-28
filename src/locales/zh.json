@@ -722,10 +722,11 @@
     "progressTitle": "正在导出游戏",
     "progress": "{{done}}/{{total}} - {{name}}",
     "doneTitle": "游戏已导出",
-    "done": "已导出 {{count}} 个文件",
+    "done_one": "已导出 {{count}} 个文件",
+    "done_other": "已导出 {{count}} 个文件",
     "cancelledTitle": "导出已取消",
     "cancelled": "已导出 {{done}}/{{total}} 个文件",
-    "someFailed": "{{total}} 个文件中有 {{failed}} 个失败，{{path}}：{{message}}"
+    "someFailed": "{{total}} 个文件中有 {{failed}} 个失败, {{path}}: {{message}}"
   },
   "settings": {
     "title": "设置",

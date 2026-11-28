@@ -11,7 +11,10 @@ import { titleToFilename } from "@/util";
 // has no devtools protocol.
 
 // The adapter of an iframe: only the print media emulation of a svg capture
-// exists, and it needs nothing because the svg is read from the page itself
+// exists, and it needs nothing because the svg is read from the page itself.
+// The iframe can not emulate print media, so its svg is serialized in screen
+// media: this relies on no @media print rule reaching svg content (the
+// `export › web › svg` e2e compares it with the cli's).
 export const frameSend = async (method) => {
   if (method !== "Emulation.setEmulatedMedia") {
     throw new Error(`Unsupported on the web: ${method}`);
@@ -22,7 +25,7 @@ export const frameSend = async (method) => {
 // expressions of a svg capture (src/export/page.js and svg.js) are not
 // evaluated: they are answered by the page in the iframe, the render state from
 // its body and the svg by its own serializeSvg (one of the parent would read
-// the parent's document). Every other expression is refused.
+// the parent's document, the iframe sets it, see util/frameCapture). Every other expression is refused.
 const SERIALIZE = `(${serializeSvg.toString()})(`;
 
 export const frameEvaluate = async (win, expression) => {
@@ -38,14 +41,6 @@ export const frameEvaluate = async (win, expression) => {
     return win.__EXPORT_SVG__(...args);
   }
   throw new Error(`Unsupported on the web: ${expression.slice(0, 40)}`);
-};
-
-// Called by the app at start: a page in render mode in the iframe of a web
-// export gives the parent its serializeSvg (see frameEvaluate)
-export const exposeFrameCapture = () => {
-  if (window.frameElement?.__RENDER_INPUT__) {
-    window.__EXPORT_SVG__ = serializeSvg;
-  }
 };
 
 // A capture slot (see createPool) of a hidden iframe showing a document in

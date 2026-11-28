@@ -338,6 +338,70 @@ describe("export on the web", () => {
     await waitFor(() => expect(web.saveFile).toHaveBeenCalledTimes(1));
   });
 
+  it("the options panel shows and cancels an export started from the menu", async () => {
+    let signal;
+    web.exportSvgs.mockImplementation(
+      (request, options) =>
+        new Promise((resolve) => {
+          signal = options.signal;
+          signal.addEventListener("abort", () =>
+            resolve({
+              done: 0,
+              total: 3,
+              failed: [],
+              cancelled: true,
+              file: null,
+            }),
+          );
+        }),
+    );
+    const { user, store } = await openMenu();
+    await exportFromMenu(user);
+    await waitFor(() => expect(web.exportSvgs).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument(),
+    );
+
+    await user.click(screen.getByRole("button", { name: "Export" }));
+    await user.click(
+      await screen.findByRole("menuitem", { name: "Export options" }),
+    );
+    const panel = await screen.findByRole("dialog", { name: "Export 18Test" });
+    expect(
+      within(panel).getByRole("button", { name: "Exporting" }),
+    ).toBeDisabled();
+    await user.click(
+      within(panel).getByRole("button", { name: "Cancel export" }),
+    );
+
+    expect(signal.aborted).toBe(true);
+    await waitFor(() =>
+      expect(selectLatestAlert(store.getState())).toMatchObject({
+        title: "Export cancelled",
+      }),
+    );
+    expect(web.exportSvgs).toHaveBeenCalledTimes(1);
+  });
+
+  it("says one file for an export of one file", async () => {
+    web.exportSvgs.mockResolvedValue({
+      done: 1,
+      total: 1,
+      failed: [],
+      cancelled: false,
+      file,
+    });
+    const { user, store } = await openMenu();
+    await exportFromMenu(user);
+
+    await waitFor(() =>
+      expect(selectLatestAlert(store.getState())).toMatchObject({
+        title: "Game exported",
+        message: "Exported 1 file",
+      }),
+    );
+  });
+
   it("alerts the first failed file and still downloads the others", async () => {
     web.exportSvgs.mockResolvedValue({
       done: 2,
@@ -382,9 +446,12 @@ describe("export on the web", () => {
   });
 
   it("shows the progress of the export", async () => {
+    let finish;
     web.exportSvgs.mockImplementation((request, { onProgress }) => {
       onProgress({ type: "doc", done: 1, total: 3, name: "svg/a.svg" });
-      return new Promise(() => {});
+      return new Promise((resolve) => {
+        finish = resolve;
+      });
     });
     const { user, store } = await openMenu();
     await exportFromMenu(user);
@@ -394,6 +461,9 @@ describe("export on the web", () => {
       title: "Exporting game",
       progress: 33,
     });
+    // The export is one for the page, it must not outlive the test
+    finish({ done: 3, total: 3, failed: [], cancelled: false, file });
+    await waitFor(() => expect(web.saveFile).toHaveBeenCalled());
   });
 
   it("x opens the menu on the web", async () => {

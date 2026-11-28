@@ -6,7 +6,7 @@ import { Router } from "@/router";
 import AppRoutes from "@/routes";
 import { store } from "@/state";
 import capability from "@/util/capability";
-import { exposeFrameCapture } from "@/util/webExport";
+import { exposeFrameCapture } from "@/util/frameCapture";
 
 import "@/locales/i18n";
 import "@/styles/index.css";

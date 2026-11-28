@@ -11,7 +11,7 @@ click on the export button:
 > the app or the [command line](#command-line). In a browser, the print button
 > opens your browser's print menu.
 
-![Toolbar of a game page in a web browser with the print button circled](/images/print-button-light.png "In a web browser the same spot shows the print button.")
+![Toolbar of a game page in a web browser with the print button circled](/images/print-button-light.png "The print button in a web browser opens the browser's print menu.")
 
 This will expose a menu with export options: export the full game as PDF
 documents, as PNG images, as SVG images or as a Board18 box. Exporting this way

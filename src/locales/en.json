@@ -722,7 +722,8 @@
     "progressTitle": "Exporting game",
     "progress": "{{done}}/{{total}} - {{name}}",
     "doneTitle": "Game exported",
-    "done": "Exported {{count}} files",
+    "done_one": "Exported {{count}} file",
+    "done_other": "Exported {{count}} files",
     "cancelledTitle": "Export cancelled",
     "cancelled": "Exported {{done}} of {{total}} files",
     "someFailed": "{{failed}} of {{total}} files failed, {{path}}: {{message}}"

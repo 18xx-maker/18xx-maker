@@ -1,12 +1,25 @@
-import { useRef, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import { createAlert, createProgressAlert } from "@/state";
-import { exportSvgs, saveFile } from "@/util/webExport";
 
 // As the progress of src/export/service.js
 const percent = (done, total) => Math.floor((done / total) * 100);
+
+// One export at a time for the whole page: the menu (ExportHost) and the
+// options (ExportOptions) share the export that runs and its cancel
+let controller = null;
+const listeners = new Set();
+const subscribe = (listener) => {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+};
+const isRunning = () => controller !== null;
+const setController = (next) => {
+  controller = next;
+  listeners.forEach((listener) => listener());
+};
 
 // The export of the web version: the svgs of a request (the output of
 // planExport) are captured in the page, the progress and the result are
@@ -14,20 +27,19 @@ const percent = (done, total) => Math.floor((done / total) * 100);
 const useWebExport = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const controller = useRef(null);
-  const [running, setRunning] = useState(false);
+  const running = useSyncExternalStore(subscribe, isRunning);
 
   const alert = (title, message, type) =>
     dispatch(createAlert(title, message, type));
 
   const run = async (request) => {
-    // One export at a time
-    if (controller.current) return;
+    if (controller) return;
 
     const abort = new AbortController();
-    controller.current = abort;
-    setRunning(true);
+    setController(abort);
     try {
+      // Loaded when used, it is not needed by the page itself
+      const { exportSvgs, saveFile } = await import("@/util/webExport");
       const result = await exportSvgs(request, {
         signal: abort.signal,
         onProgress: ({ type, done, total, name }) => {
@@ -76,12 +88,11 @@ const useWebExport = () => {
     } catch (error) {
       alert(t("export.failed"), error.message, "error");
     } finally {
-      controller.current = null;
-      setRunning(false);
+      setController(null);
     }
   };
 
-  const cancel = () => controller.current?.abort();
+  const cancel = () => controller?.abort();
 
   return { run, cancel, running };
 };

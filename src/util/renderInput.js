@@ -19,9 +19,13 @@ let decided = false;
 export const getRenderInput = () => {
   if (!decided) {
     decided = true;
+    // The input of the frame element is an object of the parent window: it is
+    // cloned so its arrays are this window's Array (R.is(Array) is false for
+    // the parent's)
+    const frame = window.frameElement?.__RENDER_INPUT__;
     const given =
       window.__RENDER_INPUT__ ||
-      window.frameElement?.__RENDER_INPUT__ ||
+      (frame && structuredClone(frame)) ||
       (window.api || {}).renderInput;
     if (given) {
       const id = given.id ?? given.game.meta?.id;

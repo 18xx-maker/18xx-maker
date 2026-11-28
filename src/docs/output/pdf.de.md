@@ -14,7 +14,7 @@ dann auf den Export-Button klicken:
 > [Kommandozeile](#kommandozeile). Der Drucken-Button öffnet im Browser das
 > Druckmenü deines Browsers.
 
-![Werkzeugleiste einer Spielseite in einem Webbrowser mit eingekreistem Druck-Button](/images/print-button-light.png "In einem Webbrowser zeigt dieselbe Stelle den Druck-Button.")
+![Werkzeugleiste einer Spielseite in einem Webbrowser mit eingekreistem Druck-Button](/images/print-button-light.png "Der Druck-Button in einem Webbrowser öffnet das Druckmenü des Browsers.")
 
 Dadurch öffnet sich ein Menü mit Exportoptionen: das ganze Spiel als
 PDF-Dokumente, als PNG-Bilder, als SVG-Bilder oder als Board18-Box exportieren. Ein Export auf
