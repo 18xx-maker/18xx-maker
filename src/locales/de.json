@@ -682,6 +682,7 @@
     "options": "Exportoptionen",
     "optionsTitle": "{{title}} exportieren",
     "optionsDescription": "Wähle die Dateien aus, die exportiert werden sollen. Die Optionen starten mit den Exporteinstellungen der Spieldatei, und „Zurücksetzen“ stellt sie wieder her. Board18-Boxen verwenden immer einen Pixel pro Einheit.",
+    "optionsDescriptionWeb": "Wähle die Dateien aus, die exportiert werden sollen. Die Optionen starten mit den Exporteinstellungen der Spieldatei, und „Zurücksetzen“ stellt sie wieder her. Die Webversion exportiert nur SVG-Bilder.",
     "formats": "Formate",
     "format": {
       "pdf": "PDF-Dokumente",
@@ -718,7 +719,15 @@
     "running": "Exportiere",
     "cancel": "Export abbrechen",
     "failed": "Export fehlgeschlagen",
-    "label": "Exportieren"
+    "label": "Exportieren",
+    "progressTitle": "Spiel wird exportiert",
+    "progress": "{{done}}/{{total}} - {{name}}",
+    "doneTitle": "Spiel exportiert",
+    "done_one": "{{count}} Datei exportiert",
+    "done_other": "{{count}} Dateien exportiert",
+    "cancelledTitle": "Export abgebrochen",
+    "cancelled": "{{done}} von {{total}} Dateien exportiert",
+    "someFailed": "{{failed}} von {{total}} Dateien fehlgeschlagen, {{path}}: {{message}}"
   },
   "settings": {
     "title": "Einstellungen",
@@ -1956,7 +1965,7 @@
     "key": "Taste",
     "use": "Verwendung",
     "notes": "Hinweise",
-    "exportMenu": "Bei geöffnetem Exportmenü: p exportiert PDFs, n exportiert PNGs, s exportiert SVGs, b exportiert eine Board18-Datei und o öffnet die Exportoptionen.",
+    "exportMenu": "Bei geöffnetem Exportmenü: s exportiert SVGs und o öffnet die Exportoptionen. In der App exportiert p PDFs, n PNGs und b eine Board18-Datei.",
     "keys": {
       "escape": {
         "use": "Zurück: schließt zuerst das Bearbeitungs- oder Konfigurationspanel, verlässt dann die Bearbeitungsseite und wechselt zur Spielseite, dann zur Startseite",
@@ -2055,7 +2064,7 @@
       },
       "export": {
         "use": "Das Exportmenü öffnen",
-        "notes": "Nur in der App. Öffnet auf jeder Seite das Menü des geladenen Spiels."
+        "notes": "Öffnet auf jeder Seite das Menü des geladenen Spiels. Die Webversion exportiert nur SVG-Bilder."
       },
       "app": {
         "use": "Zur Seite „App-Informationen“ wechseln",

@@ -47,6 +47,11 @@ gemeinsamen keine eigenen Optionen.
 Die Optionen dazu, wo und wie der Befehl läuft, gehören nicht zum Spiel:
 `--out`, `--jobs`, `--all`, `--config` und `--debug` gibt es nur als Flags.
 
+In einem Webbrowser kann nur das Format `svg` exportiert werden: Das Exportmenü
+und das Panel _Exportoptionen_ bieten SVG-Bilder an, mit `docs`, `layouts` und
+`variation`. PDF, PNG und Board18 brauchen die App oder `maker export`; die
+`formats` der Spieldatei werden im Browser dann nicht verwendet.
+
 ## Welcher Wert gewinnt
 
 Für jede Option, vom niedrigsten zum höchsten:

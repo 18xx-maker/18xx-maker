@@ -4,6 +4,10 @@ import { docPath } from "./names.js";
 // A document that takes longer than this to capture fails, in milliseconds
 export const TIMEOUT = 120_000;
 
+// The expression that reads the render state of the page (see renderState)
+export const RENDER_STATE =
+  "document.body && document.body.dataset.renderState";
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Waits until the page in render mode says what it is: "ready", or "empty" when
@@ -11,9 +15,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // is true.
 const renderState = async (slot, stopped, pollMs) => {
   while (!stopped()) {
-    const state = await slot.evaluate(
-      "document.body && document.body.dataset.renderState",
-    );
+    const state = await slot.evaluate(RENDER_STATE);
     if (state) return state;
     await sleep(pollMs);
   }

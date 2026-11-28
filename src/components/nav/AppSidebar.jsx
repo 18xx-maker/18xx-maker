@@ -34,7 +34,6 @@ import {
   selectGameForSlug,
   selectGameHistory,
 } from "@/state/selectors";
-import capability from "@/util/capability";
 import { firstSection } from "@/util/gameNav";
 import version from "@/util/version";
 
@@ -75,7 +74,7 @@ const AppSidebar = (props) => {
               label={t("nav.edit")}
               shortcut="e"
             />,
-            capability.electron && resolved && <ExportItem key="game-export" />,
+            resolved && <ExportItem key="game-export" />,
             resolved && <DownloadItem key="game-download" game={resolved} />,
             saveAs.available && (
               <SaveAsItem key="game-save-as" onClick={saveAs.start} />

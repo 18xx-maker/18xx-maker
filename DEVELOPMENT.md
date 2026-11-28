@@ -648,6 +648,15 @@ and PDFs must have the same page count and page sizes (and the same pages as
 images when `pdftoppm` is installed). Run it on Linux, where fonts and the
 Chromium build make pixels comparable.
 
+The web version exports svg only, in the page: `exportSvgs` in
+`src/util/webExport.js` renders each document of the plan in a hidden same-origin
+iframe in render mode (`render:<id>` input, so nothing is written to localStorage
+or the recents), and the iframe exposes its svg serializer to the parent because
+the CSP blocks eval. One file downloads as its own name, several as one zip
+(`fflate`) of `svg/<file>.svg`, driven by `useWebExport`
+(`src/components/export/useWebExport.js`). The files are the ones the CLI writes
+(`e2e/export.spec.js` compares them); PDF, PNG and Board18 stay in the app and the CLI.
+
 ### Export tests on every OS
 
 Plan: the eight real export paths, {CLI, app} x {pdf, png, svg, b18}, run with no

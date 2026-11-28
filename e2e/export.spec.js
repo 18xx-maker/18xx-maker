@@ -4,7 +4,9 @@ import os from "node:os";
 import path from "node:path";
 
 import { _electron as electron, expect, test } from "@playwright/test";
+import { unzipSync } from "fflate";
 
+import { startServer } from "../src/cli/util.js";
 import { readPng } from "../src/export/png.js";
 import {
   OPAQUE,
@@ -326,3 +328,81 @@ for (const format of ["pdf", "png", "svg", "b18"]) {
     check[format](format === "b18" ? game : path.join(game, format), "app");
   });
 }
+
+// The web version exports the svgs in hidden iframes of the page: the files
+// are the CLI's, byte for byte, in the light and the dark theme, and the
+// export leaves the storage of the page as it was
+test("export › web › svg", async ({ browser }) => {
+  const result = spawnSync(
+    process.execPath,
+    [bin, "export", "18Test", "--format", "svg", "--jobs", "2", "--out", out],
+    { cwd: out, encoding: "utf-8" },
+  );
+  expect(result.status, result.stderr).toBe(0);
+  const dir = path.join(out, "18Test", "svg");
+  const cli = Object.fromEntries(
+    fs
+      .readdirSync(dir)
+      .map((name) => [`svg/${name}`, fs.readFileSync(path.join(dir, name))]),
+  );
+
+  const server = startServer(0, path.join(root, "dist/site"));
+  await new Promise((resolve) => server.once("listening", resolve));
+  const context = await browser.newContext({ acceptDownloads: true });
+  try {
+    const page = await context.newPage();
+    const site = `http://127.0.0.1:${server.address().port}`;
+    const storage = () =>
+      page.evaluate(() => JSON.stringify({ ...window.localStorage }));
+
+    const exportWeb = async () => {
+      await page.goto(`${site}/games/18Test/map`);
+      await expect(page.getByTestId("game-18Test-map")).toBeVisible();
+      const before = await storage();
+      await page.getByRole("button", { name: "Export" }).click();
+      const downloaded = page.waitForEvent("download", { timeout: 150_000 });
+      await page
+        .getByRole("menuitem", { name: "Export game as svg images" })
+        .click();
+      const download = await downloaded;
+      expect(download.suggestedFilename()).toBe("18test.zip");
+      const files = unzipSync(fs.readFileSync(await download.path()));
+
+      expect(await storage()).toBe(before);
+      expect(await page.locator("iframe").count()).toBe(0);
+      return files;
+    };
+
+    const light = await exportWeb();
+    expect(Object.keys(light).sort()).toEqual(Object.keys(cli).sort());
+    for (const [name, bytes] of Object.entries(cli)) {
+      expect(Buffer.from(light[name]).equals(bytes), name).toBe(true);
+    }
+    // A custom image of the game (its bundled assets) is drawn in the file
+    expect(
+      Buffer.from(light[`svg/${expected.svg.custom.file}`]).toString("utf-8"),
+    ).toContain(expected.svg.custom.path);
+
+    // The iframes read the theme of the app from the shared storage, it does
+    // not reach the files
+    await page.evaluate(() =>
+      window.localStorage.setItem(
+        "settings",
+        JSON.stringify({ theme: "dark" }),
+      ),
+    );
+    const dark = await exportWeb();
+    expect(
+      await page.evaluate(() => document.documentElement.className),
+    ).toMatch(/dark/);
+    expect(Object.keys(dark).sort()).toEqual(Object.keys(light).sort());
+    for (const [name, bytes] of Object.entries(light)) {
+      expect(Buffer.from(dark[name]).equals(Buffer.from(bytes)), name).toBe(
+        true,
+      );
+    }
+  } finally {
+    await context.close();
+    server.close();
+  }
+});

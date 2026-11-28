@@ -45,6 +45,11 @@ and svg files have no options of their own besides the shared ones.
 The options that are about where and how the command runs are not part of the
 game: `--out`, `--jobs`, `--all`, `--config` and `--debug` are flags only.
 
+In a web browser only the `svg` format can be exported: the export menu and the
+_Export options_ panel offer SVG images, with `docs`, `layouts` and `variation`.
+PDF, PNG and Board18 need the app or `maker export`, and the `formats` of the
+game file are then not used by the browser.
+
 ## Which value wins
 
 For every option, from the lowest to the highest:
