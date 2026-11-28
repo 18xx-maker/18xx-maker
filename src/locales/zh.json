@@ -682,6 +682,7 @@
     "options": "导出选项",
     "optionsTitle": "导出 {{title}}",
     "optionsDescription": "选择要导出的文件。这些选项默认取自游戏文件中的导出设置,点击“重置”可恢复。Board18 游戏盒始终每个单位使用一个像素。",
+    "optionsDescriptionWeb": "选择要导出的文件。这些选项默认取自游戏文件中的导出设置,点击“重置”可恢复。网页版只导出 SVG 图片。",
     "formats": "格式",
     "format": {
       "pdf": "PDF 文档",
@@ -718,7 +719,15 @@
     "running": "正在导出",
     "cancel": "取消导出",
     "failed": "导出失败",
-    "label": "导出"
+    "label": "导出",
+    "progressTitle": "正在导出游戏",
+    "progress": "{{done}}/{{total}} - {{name}}",
+    "doneTitle": "游戏已导出",
+    "done_one": "已导出 {{count}} 个文件",
+    "done_other": "已导出 {{count}} 个文件",
+    "cancelledTitle": "导出已取消",
+    "cancelled": "已导出 {{done}}/{{total}} 个文件",
+    "someFailed": "{{total}} 个文件中有 {{failed}} 个失败, {{path}}: {{message}}"
   },
   "settings": {
     "title": "设置",
@@ -1924,7 +1933,7 @@
     "key": "按键",
     "use": "用途",
     "notes": "备注",
-    "exportMenu": "打开导出菜单后:p 导出 PDF,n 导出 PNG,s 导出 SVG,b 导出 Board18 文件,o 打开导出选项。",
+    "exportMenu": "打开导出菜单后:s 导出 SVG,o 打开导出选项。在应用中,p 导出 PDF,n 导出 PNG,b 导出 Board18 文件。",
     "keys": {
       "escape": {
         "use": "返回:先关闭编辑面板或配置面板,再从编辑页面返回游戏页面,最后回到首页",
@@ -2023,7 +2032,7 @@
       },
       "export": {
         "use": "打开导出菜单",
-        "notes": "仅限应用。在任何页面都会打开已加载游戏的菜单。"
+        "notes": "在任何页面都会打开已加载游戏的菜单。网页版只导出 SVG 图片。"
       },
       "app": {
         "use": "前往应用信息页面",

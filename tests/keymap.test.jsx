@@ -85,11 +85,11 @@ describe("one keymap", () => {
     expect(router.state.location.pathname).toBe("/games/18Test/map");
   });
 
-  it("the export menu is not opened by x outside of the app", async () => {
+  it("the export menu is opened by x on the web", async () => {
     const { user, store } = renderApp("/games/18Test/map");
     await screen.findByTestId("game-18Test-map");
 
     await user.keyboard("x");
-    expect(store.getState().ui.exportMenuOpen).toBe(false);
+    expect(store.getState().ui.exportMenuOpen).toBe(true);
   });
 });

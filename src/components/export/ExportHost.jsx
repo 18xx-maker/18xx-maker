@@ -14,6 +14,7 @@ import {
 
 import KeyLabel from "@/components/KeyLabel";
 import ExportOptions from "@/components/export/ExportOptions";
+import useWebExport from "@/components/export/useWebExport";
 
 import { useConfig, useLoadedGame } from "@/hooks";
 import { useLocation } from "@/router";
@@ -88,8 +89,10 @@ const ExportHost = () => {
   const setOptions = (open) => dispatch(createSetExportSheetOpen(open));
   const [print] = useBooleanParam("print");
   const [anchor, setAnchor] = useState(corner);
+  const web = useWebExport();
+  const electron = capability.electron;
 
-  const hidden = !capability.electron || print || !game;
+  const hidden = print || !game;
 
   // The flags do not outlive the game they were opened for
   useEffect(
@@ -108,11 +111,14 @@ const ExportHost = () => {
     return null;
   }
 
-  // The result, and progress, come as alerts from the main process
+  // The result, and progress, come as alerts from the main process, or from
+  // the export of the page on the web (svg only)
   const exportFiles = (request) =>
-    window.api.export({ ...request, reveal }).catch((error) => {
-      dispatch(createAlert(t("export.failed"), error.message, "error"));
-    });
+    electron
+      ? window.api.export({ ...request, reveal }).catch((error) => {
+          dispatch(createAlert(t("export.failed"), error.message, "error"));
+        })
+      : web.run(request);
 
   const handleAll = (format) => {
     trackEvent("exportGame", location, { media: format });
@@ -123,13 +129,15 @@ const ExportHost = () => {
   const handleMenuKeyDown = (event) => {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
 
-    const actions = {
-      p: () => handleAll("pdf"),
-      n: () => handleAll("png"),
-      s: () => handleAll("svg"),
-      b: () => handleAll("b18"),
-      o: () => setOptions(true),
-    };
+    const actions = electron
+      ? {
+          p: () => handleAll("pdf"),
+          n: () => handleAll("png"),
+          s: () => handleAll("svg"),
+          b: () => handleAll("b18"),
+          o: () => setOptions(true),
+        }
+      : { s: () => handleAll("svg"), o: () => setOptions(true) };
     const action = actions[event.key];
 
     if (action) {
@@ -164,30 +172,36 @@ const ExportHost = () => {
           // The menu has no trigger of its own to give the focus back to
           onCloseAutoFocus={(event) => event.preventDefault()}
         >
-          <DropdownMenuItem onSelect={() => handleAll("pdf")}>
-            <FileText />
-            <span>
-              <KeyLabel text={t("export.allPdf")} shortcut="p" word="pdf" />
-            </span>
-          </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => handleAll("png")}>
-            <FileImage />
-            <span>
-              <KeyLabel text={t("export.allPng")} shortcut="n" word="png" />
-            </span>
-          </DropdownMenuItem>
+          {electron && (
+            <>
+              <DropdownMenuItem onSelect={() => handleAll("pdf")}>
+                <FileText />
+                <span>
+                  <KeyLabel text={t("export.allPdf")} shortcut="p" word="pdf" />
+                </span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => handleAll("png")}>
+                <FileImage />
+                <span>
+                  <KeyLabel text={t("export.allPng")} shortcut="n" word="png" />
+                </span>
+              </DropdownMenuItem>
+            </>
+          )}
           <DropdownMenuItem onSelect={() => handleAll("svg")}>
             <Shapes />
             <span>
               <KeyLabel text={t("export.allSvg")} shortcut="s" word="svg" />
             </span>
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => handleAll("b18")}>
-            <Box />
-            <span>
-              <KeyLabel text={t("export.b18")} shortcut="b" word="Board18" />
-            </span>
-          </DropdownMenuItem>
+          {electron && (
+            <DropdownMenuItem onSelect={() => handleAll("b18")}>
+              <Box />
+              <span>
+                <KeyLabel text={t("export.b18")} shortcut="b" word="Board18" />
+              </span>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => setOptions(true)}>
             <Settings2 />
