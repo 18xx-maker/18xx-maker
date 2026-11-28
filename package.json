@@ -203,6 +203,7 @@
     "chokidar": "^5.0.0",
     "diff": "^9.0.0",
     "electron-updater": "^6.8.9",
+    "fflate": "^0.8.3",
     "ramda": "^0.32.0",
     "wouter": "^3.13.0"
   },
