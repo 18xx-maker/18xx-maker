@@ -1,6 +1,7 @@
-import { createPageCapture } from "@/export/page.js";
+import { RENDER_STATE, createPageCapture } from "@/export/page.js";
 import { createPool } from "@/export/pool.js";
 import { runExport } from "@/export/run.js";
+import { serializeSvg } from "@/export/svg.js";
 import { zipFiles } from "@/export/zipFiles.js";
 import { titleToFilename } from "@/util";
 
@@ -14,6 +15,36 @@ import { titleToFilename } from "@/util";
 export const frameSend = async (method) => {
   if (method !== "Emulation.setEmulatedMedia") {
     throw new Error(`Unsupported on the web: ${method}`);
+  }
+};
+
+// The page has a Content Security Policy without 'unsafe-eval', so the
+// expressions of a svg capture (src/export/page.js and svg.js) are not
+// evaluated: they are answered by the page in the iframe, the render state from
+// its body and the svg by its own serializeSvg (one of the parent would read
+// the parent's document). Every other expression is refused.
+const SERIALIZE = `(${serializeSvg.toString()})(`;
+
+export const frameEvaluate = async (win, expression) => {
+  if (expression === RENDER_STATE) {
+    return win.document.body && win.document.body.dataset.renderState;
+  }
+  if (expression.startsWith(SERIALIZE) && expression.endsWith(")")) {
+    // The arguments are JSON (see svgExpression)
+    const args = JSON.parse(`[${expression.slice(SERIALIZE.length, -1)}]`);
+    if (typeof win.__EXPORT_SVG__ !== "function") {
+      throw new Error("The export page did not load the capture");
+    }
+    return win.__EXPORT_SVG__(...args);
+  }
+  throw new Error(`Unsupported on the web: ${expression.slice(0, 40)}`);
+};
+
+// Called by the app at start: a page in render mode in the iframe of a web
+// export gives the parent its serializeSvg (see frameEvaluate)
+export const exposeFrameCapture = () => {
+  if (window.frameElement?.__RENDER_INPUT__) {
+    window.__EXPORT_SVG__ = serializeSvg;
   }
 };
 
@@ -39,7 +70,7 @@ export const frameSlot = async (input) => {
         );
         iframe.src = path;
       }),
-    evaluate: async (expression) => iframe.contentWindow.eval(expression),
+    evaluate: (expression) => frameEvaluate(iframe.contentWindow, expression),
     send: frameSend,
     close: async () => iframe.remove(),
   };

@@ -1,7 +1,9 @@
 import { unzipSync } from "fflate";
 import { describe, expect, it, vi } from "vitest";
 
-import { exportSvgs, frameSend } from "./webExport.js";
+import { RENDER_STATE } from "../export/page.js";
+import { FONT_ALIASES, svgExpression } from "../export/svg.js";
+import { exportSvgs, frameEvaluate, frameSend } from "./webExport.js";
 
 const SVG = '<svg xmlns="http://www.w3.org/2000/svg"></svg>';
 
@@ -132,6 +134,40 @@ describe("frameSend", () => {
     ).resolves.toBeUndefined();
     await expect(frameSend("Page.captureScreenshot", {})).rejects.toThrow(
       "Unsupported on the web: Page.captureScreenshot",
+    );
+  });
+});
+
+// The page has a Content Security Policy without 'unsafe-eval': the
+// expressions of the capture are answered by functions of the iframe
+describe("frameEvaluate", () => {
+  const frame = (state) => ({
+    document: { body: { dataset: { renderState: state } } },
+    __EXPORT_SVG__: vi.fn(() => ({ text: SVG })),
+  });
+
+  it("answers the render state of the page", async () => {
+    expect(await frameEvaluate(frame("ready"), RENDER_STATE)).toBe("ready");
+    expect(await frameEvaluate({ document: {} }, RENDER_STATE)).toBeUndefined();
+  });
+
+  it("serializes the svg with the function of the iframe", async () => {
+    const win = frame("ready");
+    expect(await frameEvaluate(win, svgExpression('#a "b")'))).toEqual({
+      text: SVG,
+    });
+    expect(win.__EXPORT_SVG__).toHaveBeenCalledWith('#a "b")', FONT_ALIASES);
+  });
+
+  it("fails when the iframe has no capture", async () => {
+    await expect(
+      frameEvaluate({ document: {} }, svgExpression("#a")),
+    ).rejects.toThrow("The export page did not load the capture");
+  });
+
+  it("evaluates nothing else", async () => {
+    await expect(frameEvaluate(frame("ready"), "alert(1)")).rejects.toThrow(
+      "Unsupported on the web",
     );
   });
 });
