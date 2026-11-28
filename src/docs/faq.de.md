@@ -29,7 +29,9 @@ Datei gültig sein und trotzdem nicht richtig aussehen. Siehe
 In der App nutzt du die Export-Schaltfläche oben links auf einer Spielseite oder
 den Eintrag Exportieren in der Seitenleiste (oder die Taste `x`) auf jeder Seite:
 PDF, PNG, SVG oder Board18 für das ganze Spiel, oder _Exportoptionen_ zur Auswahl. Auf
-der Website öffnet die Schaltfläche den Druckdialog deines Browsers. Siehe
+der Website bietet die Export-Schaltfläche nur SVG-Bilder an (ein Download oder
+eine ZIP-Datei mit mehreren Dateien), und die Drucken-Schaltfläche daneben öffnet
+den Druckdialog deines Browsers. Siehe
 [PDF-Ausgabe](/docs/output/pdf), [PNG-Ausgabe](/docs/output/png),
 [SVG-Ausgabe](/docs/output/svg) (um Karte, Plättchen oder Token in Inkscape oder
 Illustrator zu bearbeiten) und [Board18-Ausgabe](/docs/output/b18). Auch die Kommandozeile kann mit

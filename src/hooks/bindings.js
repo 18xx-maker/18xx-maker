@@ -353,13 +353,7 @@ export const useBindings = () => {
           break;
         case "x":
           // The menu is ExportHost's, for the loaded game on every page
-          if (
-            capability.electron &&
-            !getRenderInput() &&
-            !print &&
-            game &&
-            !exportSheetOpen
-          ) {
+          if (!getRenderInput() && !print && game && !exportSheetOpen) {
             dispatch(createSetExportMenuOpen(true));
           }
           break;

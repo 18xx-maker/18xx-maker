@@ -242,7 +242,8 @@ const Toolbar = () => {
         </SelectContent>
       </Select>
       <Separator orientation="vertical" />
-      {capability.electron ? <ExportButton /> : <PrintButton />}
+      <ExportButton />
+      {!capability.electron && <PrintButton />}
       {item.section === "map" && is(Array, game.map) && (
         <Select
           value={`${variation}`}
