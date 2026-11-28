@@ -395,6 +395,15 @@ shown while files are dragged over the window.
 Tests: `tests/chrome/drop-images.test.jsx` (component project) and
 `src/util/dropImages.test.jsx` (component); the web case in `e2e/drop-images.spec.js`.
 
+### Online play client
+
+The website talks to a play server (`server/`) whose url is the optional
+`settings.playServer` string (Settings page, `selectPlayServer`; empty means
+online play is off). The reducer stores only an http(s) url without trailing
+slashes. Sign-in tokens are not in Redux: `src/play/client/tokenStore.js` keeps
+`{ [serverUrl]: token }` in `localStorage` under `play-tokens`, behind
+try/catch, so a blocked storage reads as signed out.
+
 ## End To End Tests
 
 `e2e/*.spec.js` are [Playwright](https://playwright.dev) specs that drive the

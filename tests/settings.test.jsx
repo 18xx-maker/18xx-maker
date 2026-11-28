@@ -156,3 +156,17 @@ describe("editor keys setting", () => {
     ).toHaveTextContent("Emacs");
   });
 });
+
+describe("play server setting", () => {
+  it("saves the url on change and clearing it removes it", async () => {
+    const { user, store } = renderApp("/settings", { settings: {} });
+    const input = await screen.findByRole("textbox", { name: "Play server" });
+    expect(input).toHaveValue("");
+
+    await user.type(input, "https://x.test/");
+    expect(store.getState().settings.playServer).toBe("https://x.test");
+
+    await user.clear(input);
+    expect(store.getState().settings).toEqual({});
+  });
+});

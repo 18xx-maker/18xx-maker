@@ -26,6 +26,7 @@ export const mountElement = async (
     search = "",
     path = "/games/*",
     url = "/games/test",
+    assets,
   } = {},
 ) => {
   const store = configureStore({
@@ -35,7 +36,12 @@ export const mountElement = async (
         immutableCheck: false,
         serializableCheck: false,
       }),
-    preloadedState: { ...initialState, config, game },
+    preloadedState: {
+      ...initialState,
+      config,
+      game,
+      ...(assets && { assets }),
+    },
   });
   const router = createMemoryRouter([`${url}${search}`]);
   const result = render(

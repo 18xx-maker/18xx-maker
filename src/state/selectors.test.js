@@ -7,6 +7,7 @@ import {
   selectGameState,
   selectLanguage,
   selectOpenExportFolder,
+  selectPlayServer,
   selectSidebarOpen,
   selectStoredConfig,
   selectTheme,
@@ -214,5 +215,16 @@ describe("settings selectors", () => {
     expect(selectTheme(state)).toBe("dark");
     expect(selectSidebarOpen(state)).toBe(false);
     expect(selectLanguage(state)).toBe("de");
+  });
+});
+
+describe("play server selector", () => {
+  it("is empty unless a url string is stored (old settings load unchanged)", () => {
+    expect(selectPlayServer({})).toBe("");
+    expect(selectPlayServer({ settings: { theme: "dark" } })).toBe("");
+    expect(selectPlayServer({ settings: { playServer: 1 } })).toBe("");
+    expect(
+      selectPlayServer({ settings: { playServer: "https://x.test" } }),
+    ).toBe("https://x.test");
   });
 });

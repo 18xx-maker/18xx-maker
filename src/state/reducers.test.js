@@ -18,6 +18,7 @@ import {
   SET_LOADING_GAME,
   SET_OPEN_EXPORT_FOLDER,
   SET_PANEL_STATE,
+  SET_PLAY_SERVER,
   SET_SETTINGS,
   SET_SIDEBAR_OPEN,
   SET_SUMMARIES,
@@ -42,6 +43,7 @@ import {
   createSetLoadingGame,
   createSetOpenExportFolder,
   createSetPanelState,
+  createSetPlayServer,
   createSetSettings,
   createSetSidebarOpen,
   createSetSummaries,
@@ -510,6 +512,33 @@ describe("settingsReducer", () => {
       expect(settingsReducer(state, createSetOpenExportFolder(open))).toEqual({
         theme: "dark",
       });
+    }
+  });
+
+  it("stores the play server without trailing slashes, only for http(s)", () => {
+    const set = createSetPlayServer("https://x.test/");
+    expect(set).toEqual({ type: SET_PLAY_SERVER, url: "https://x.test/" });
+    const state = settingsReducer(frozen({ theme: "dark" }), set);
+    expect(state).toEqual({ theme: "dark", playServer: "https://x.test" });
+    expect(
+      settingsReducer(state, createSetPlayServer(" http://localhost:8080// ")),
+    ).toEqual({ theme: "dark", playServer: "http://localhost:8080" });
+
+    // Unset removes the key, anything that is not http(s) is ignored
+    expect(settingsReducer(state, createSetPlayServer(""))).toEqual({
+      theme: "dark",
+    });
+    expect(settingsReducer(state, createSetPlayServer(undefined))).toEqual({
+      theme: "dark",
+    });
+    for (const url of [
+      "ftp://x.test",
+      "https://",
+      "x.test",
+      "javascript:alert(1)",
+      1,
+    ]) {
+      expect(settingsReducer(state, createSetPlayServer(url))).toBe(state);
     }
   });
 

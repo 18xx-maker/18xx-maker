@@ -26,6 +26,19 @@ describe("analytics", () => {
     });
   });
 
+  describe("play paths", () => {
+    it("masks the invite code and the game id", () => {
+      expect(analytics.maskGame("/play")).toEqual("/play");
+      expect(analytics.maskGame("/play/join/s3cr3t")).toEqual(
+        "/play/join/code",
+      );
+      expect(analytics.maskGame("/play/abc-123")).toEqual("/play/id");
+      expect(
+        analytics.normalizePath({ pathname: "/play/join/s3cr3t/", search: "" }),
+      ).toEqual("/play/join/code");
+    });
+  });
+
   describe("normalizePath", () => {
     it("should remove the / off of the end of paths", () => {
       expect(analytics.normalizePath({ pathname: "/", search: "" })).toEqual(

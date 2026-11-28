@@ -1,11 +1,13 @@
 import games from "@/data/games";
 import defaults from "@/defaults.json";
 import {
+  cellPosition,
   getMarketData,
   getMaxLength,
   getMovementData,
   getParData,
   getRevenueData,
+  marketCells,
 } from "@/util/market";
 
 const config = defaults;
@@ -303,5 +305,55 @@ describe("getParData", () => {
     }
     expect(getParData({}, config).totalHeight).toBe(50);
     expect(getParData({ title: false }, config).totalHeight).toBe(0);
+  });
+});
+
+describe("cellPosition", () => {
+  it("should place 2D cells by row and column under the title", () => {
+    const data = getMarketData(games["18Test"].stock, config);
+    expect(cellPosition(data, 0, 0)).toEqual({ x: 0, y: 50 });
+    expect(cellPosition(data, 1, 2)).toEqual({ x: 140, y: 135 });
+  });
+
+  it("should place 1D cells in one row", () => {
+    const data = getMarketData({ type: "1D", market: [1, 2, 3, 4] }, config);
+    expect(cellPosition(data, 0, 3)).toEqual({ x: 210, y: 50 });
+  });
+
+  it("should zigzag 1Diag cells by half a cell", () => {
+    const stock = { type: "1Diag", title: false, market: [1, 2, 3, 4] };
+    const data = getMarketData(stock, config);
+    expect(cellPosition(data, 0, 2)).toEqual({ x: 70, y: 0 });
+    expect(cellPosition(data, 0, 3)).toEqual({ x: 105, y: 170 });
+  });
+});
+
+describe("marketCells", () => {
+  it("should list the cells that exist with their size", () => {
+    const stock = {
+      type: "2D",
+      market: [
+        [1, { value: 2, width: 2 }],
+        [null, "x"],
+      ],
+    };
+    const data = getMarketData(stock, config);
+    expect(marketCells(data)).toEqual([
+      { row: 0, col: 0, x: 0, y: 50, width: 70, height: 85 },
+      { row: 0, col: 1, x: 70, y: 50, width: 140, height: 85 },
+      { row: 1, col: 1, x: 70, y: 135, width: 70, height: 85 },
+    ]);
+  });
+
+  it("should give 1D and 1Diag cells row 0", () => {
+    const data = getMarketData({ type: "1D", market: [1, 2] }, config);
+    expect(marketCells(data).map(({ row, col }) => [row, col])).toEqual([
+      [0, 0],
+      [0, 1],
+    ]);
+  });
+
+  it("should list nothing without a market", () => {
+    expect(marketCells(getMarketData({ type: "2D" }, config))).toEqual([]);
   });
 });

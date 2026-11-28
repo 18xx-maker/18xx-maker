@@ -164,6 +164,20 @@ describe("loading persisted state", () => {
     });
   });
 
+  it("reads settings stored before playServer existed as unset", async () => {
+    window.localStorage.setItem("settings", JSON.stringify({ theme: "dark" }));
+    const { store } = await importStore();
+    const { selectPlayServer } = await import("@/state/selectors");
+    const { createSetPlayServer } = await import("@/state/settings");
+
+    expect(selectPlayServer(store.getState())).toBe("");
+    store.dispatch(createSetPlayServer("https://x.test/"));
+    expect(JSON.parse(window.localStorage.getItem("settings"))).toEqual({
+      theme: "dark",
+      playServer: "https://x.test",
+    });
+  });
+
   it("ignores keys that are not persisted", async () => {
     window.localStorage.setItem(
       "alert",

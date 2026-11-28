@@ -87,7 +87,10 @@ function applyEvent(state, e) {
   }
 }
 
-export function reduce(events, state = initialState()) {
+// The valid events (sorted by seq) that are still in effect: an undo cancels
+// its target, walking newest to oldest so a cancelled undo cancels nothing.
+// An effective undo is included; it has no effect on state itself.
+export function effectiveEvents(events) {
   const valid = events
     .filter((e) => {
       if (typeof e !== "object" || e === null || !Number.isInteger(e.seq))
@@ -105,9 +108,13 @@ export function reduce(events, state = initialState()) {
     if (e.type !== "undo" || cancelled.has(e.seq)) continue;
     if (e.target < e.seq && seqs.has(e.target)) cancelled.add(e.target);
   }
+  return valid.filter((e) => !cancelled.has(e.seq));
+}
+
+export function reduce(events, state = initialState()) {
   let next = state;
-  for (const e of valid) {
-    if (e.type === "undo" || cancelled.has(e.seq)) continue;
+  for (const e of effectiveEvents(events)) {
+    if (e.type === "undo") continue;
     next = applyEvent(next, e);
   }
   return next;
