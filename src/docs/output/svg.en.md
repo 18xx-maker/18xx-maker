@@ -11,9 +11,10 @@ click on the export button:
 ![Toolbar of a game page with the export button circled](/images/export-button-light.png "The export button in the app's toolbar.")
 
 > [!NOTE]
-> If you are using 18xx Maker in a web browser please note that this button
-> doesn't exist and instead shows a print icon. It only opens your browser's
-> print menu.
+> In a web browser the toolbar also has an export button, next to the print
+> button, and it exports SVG images only (see [In a web
+> browser](#in-a-web-browser)). PDF, PNG and Board18 exports need the app or the
+> [command line](#command-line).
 
 Choose _Export game as svg images_ (press `s` with the menu open) or tick _SVG
 images_ in the _Export options_ panel. Exporting this way _will_ respect any
@@ -27,6 +28,16 @@ exporting_ setting is on.
 The pages that are not one drawing have no SVG: the cards and charters (they are
 text and boxes made with HTML), the background page, the tile manifest and the
 sheets. Export those as [PDF](/docs/output/pdf) or [PNG](/docs/output/png).
+
+## In a web browser
+
+In a web browser the export button, the _Export_ entry of the sidebar and the `x`
+key open a menu with _Export game as svg images_ (`s`) and _Export options_
+(`o`), where you choose the pages, the layouts and the map variation. There is
+no folder to pick: one file is downloaded as `<name>.svg`, and several files are
+downloaded as one `.zip` named after the game, with the files in its `svg`
+folder. The files are the same ones the app and the command line write. PDF, PNG
+and Board18 are not offered, use the app or the command line for those.
 
 ## What is in the file
 

@@ -35,6 +35,8 @@
 
 与命令在哪里、如何运行有关的选项不属于游戏:`--out`、`--jobs`、`--all`、`--config` 和 `--debug` 只是命令行标志。
 
+在网页浏览器中只能导出 `svg` 格式:导出菜单和“导出选项”面板提供 SVG 图片,以及 `docs`、`layouts` 和 `variation`。PDF、PNG 和 Board18 需要使用应用或 `maker export`,此时浏览器不会使用游戏文件中的 `formats`。
+
 ## 哪个值优先
 
 对于每个选项,优先级从低到高依次为:

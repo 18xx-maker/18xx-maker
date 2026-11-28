@@ -184,7 +184,13 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
           <SheetTitle>
             {t("export.optionsTitle", { title: game.info.title })}
           </SheetTitle>
-          <SheetDescription>{t("export.optionsDescription")}</SheetDescription>
+          <SheetDescription>
+            {t(
+              capability.electron
+                ? "export.optionsDescription"
+                : "export.optionsDescriptionWeb",
+            )}
+          </SheetDescription>
         </SheetHeader>
 
         <div className="flex flex-col gap-6 py-4">

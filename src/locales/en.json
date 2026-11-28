@@ -681,6 +681,7 @@
     "options": "Export options",
     "optionsTitle": "Export {{title}}",
     "optionsDescription": "Choose the files to export. The options start as the exports of the game file, and Reset brings them back. Board18 boxes are always at one pixel for each unit.",
+    "optionsDescriptionWeb": "Choose the files to export. The options start as the exports of the game file, and Reset brings them back. The web version exports SVG images only.",
     "formats": "Formats",
     "format": {
       "pdf": "PDF documents",
@@ -1764,7 +1765,7 @@
     "key": "Key",
     "use": "Use",
     "notes": "Notes",
-    "exportMenu": "With the export menu open: p exports PDFs, n exports PNGs, s exports SVGs, b exports a Board18 file and o opens the export options.",
+    "exportMenu": "With the export menu open: s exports SVGs and o opens the export options. In the app p exports PDFs, n exports PNGs and b exports a Board18 file.",
     "keys": {
       "escape": {
         "use": "Go back: close the edit or config panel, then leave the edit page for the game page, then go home",
@@ -1863,7 +1864,7 @@
       },
       "export": {
         "use": "Open the export menu",
-        "notes": "App only. Opens the menu of the loaded game on any page."
+        "notes": "Opens the menu of the loaded game on any page. The web version exports SVG images only."
       },
       "app": {
         "use": "Navigate to the App Info page",

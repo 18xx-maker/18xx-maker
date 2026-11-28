@@ -6,9 +6,11 @@ dann auf den Export-Button klicken:
 ![Werkzeugleiste einer Spielseite mit eingekreistem Export-Button](/images/export-button-light.png "Der Export-Button in der Werkzeugleiste der App.")
 
 > [!NOTE]
-> Wenn du 18xx Maker in einem Webbrowser verwendest, beachte bitte, dass es
-> diesen Button dort nicht gibt und stattdessen ein Drucker-Symbol erscheint. Er
-> öffnet nur das Druckmenü deines Browsers.
+> In einem Webbrowser hat die Werkzeugleiste neben dem Drucken-Button einen
+> Export-Button, der nur SVG-Bilder exportiert (siehe
+> [SVG-Ausgabe](/docs/output/svg)). PNG braucht die App oder die
+> [Kommandozeile](#kommandozeile). Der Drucken-Button öffnet im Browser das
+> Druckmenü deines Browsers.
 
 ![Werkzeugleiste einer Spielseite in einem Webbrowser mit eingekreistem Druck-Button](/images/print-button-light.png "In einem Webbrowser zeigt dieselbe Stelle den Druck-Button.")
 

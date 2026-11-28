@@ -6,9 +6,10 @@ click on the export button:
 ![Toolbar of a game page with the export button circled](/images/export-button-light.png "The export button in the app's toolbar.")
 
 > [!NOTE]
-> If you are using 18xx Maker in a web browser please note that this button
-> doesn't exist and instead shows a print icon. It only opens your browser's
-> print menu.
+> In a web browser the toolbar has an export button next to the print button,
+> but it exports SVG images only (see [SVG Output](/docs/output/svg)). PNG needs
+> the app or the [command line](#command-line). In a browser, the print button
+> opens your browser's print menu.
 
 ![Toolbar of a game page in a web browser with the print button circled](/images/print-button-light.png "In a web browser the same spot shows the print button.")
 

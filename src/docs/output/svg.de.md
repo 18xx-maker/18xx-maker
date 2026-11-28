@@ -11,9 +11,10 @@ dann auf den Export-Button klicken:
 ![Werkzeugleiste einer Spielseite mit eingekreistem Export-Button](/images/export-button-light.png "Der Export-Button in der Werkzeugleiste der App.")
 
 > [!NOTE]
-> Wenn du 18xx Maker in einem Webbrowser verwendest, beachte bitte, dass es
-> diesen Button dort nicht gibt und stattdessen ein Drucker-Symbol erscheint. Er
-> öffnet nur das Druckmenü deines Browsers.
+> In einem Webbrowser hat die Werkzeugleiste neben dem Drucken-Button ebenfalls
+> einen Export-Button, der nur SVG-Bilder exportiert (siehe [In einem
+> Webbrowser](#in-einem-webbrowser)). Exporte als PDF, PNG und Board18 brauchen
+> die App oder die [Kommandozeile](#kommandozeile).
 
 Wähle _Spiel als SVG-Bilder exportieren_ (drücke `s` bei geöffnetem Menü) oder
 hake _SVG-Bilder_ im Panel _Exportoptionen_ an. Ein Export auf diesem Weg
@@ -29,6 +30,17 @@ Seiten, die keine einzelne Zeichnung sind, haben kein SVG: die Karten und
 Gesellschaftskarten (sie bestehen aus Text und Kästen in HTML), die
 Hintergrundseite, die Plättchenübersicht und die Bögen. Exportiere sie als
 [PDF](/docs/output/pdf) oder [PNG](/docs/output/png).
+
+## In einem Webbrowser
+
+In einem Webbrowser öffnen der Export-Button, der Eintrag _Exportieren_ der
+Seitenleiste und die Taste `x` ein Menü mit _Spiel als SVG-Bilder exportieren_
+(`s`) und _Exportoptionen_ (`o`), wo du die Seiten, die Layouts und die
+Kartenvariante auswählst. Einen Ordner musst du nicht wählen: Eine einzelne Datei
+wird als `<Name>.svg` heruntergeladen, mehrere Dateien als eine `.zip`-Datei mit
+dem Namen des Spiels, deren Dateien im Ordner `svg` liegen. Es sind dieselben
+Dateien, die die App und die Kommandozeile schreiben. PDF, PNG und Board18 werden
+nicht angeboten, nutze dafür die App oder die Kommandozeile.
 
 ## Was in der Datei steht
 
