@@ -2,8 +2,8 @@ import { expect, test } from "@playwright/test";
 
 import { pages } from "./export-files.js";
 
-// The web build shows a print button (the electron app shows the export
-// button instead) that calls window.print()
+// The web build shows a print button next to the export button (the electron
+// app shows only the export button) that calls window.print()
 test("the print button calls window.print on a game page", async ({ page }) => {
   await page.addInitScript(() => {
     window.__printCalls = 0;
@@ -14,7 +14,7 @@ test("the print button calls window.print on a game page", async ({ page }) => {
 
   await page.goto("/games/18Test/map");
   await expect(page.getByTestId("game-18Test-map")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Export" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Export" })).toHaveCount(1);
 
   await page.getByRole("button", { name: "print" }).click();
   await expect.poll(() => page.evaluate(() => window.__printCalls)).toBe(1);

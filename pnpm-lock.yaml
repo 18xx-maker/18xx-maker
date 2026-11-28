@@ -50,6 +50,9 @@ importers:
       electron-updater:
         specifier: ^6.8.9
         version: 6.8.9
+      fflate:
+        specifier: ^0.8.3
+        version: 0.8.3
       ramda:
         specifier: ^0.32.0
         version: 0.32.0
@@ -314,13 +317,13 @@ importers:
     dependencies:
       '@hono/node-server':
         specifier: ^2.1.9
-        version: 2.1.9(hono@4.13.19)
+        version: 2.1.11(hono@4.13.23)
       chalk:
         specifier: ^6.0.1
         version: 6.0.1
       hono:
         specifier: ^4.13.19
-        version: 4.13.19
+        version: 4.13.23
       json-schema-library:
         specifier: 11.6.2
         version: 11.6.2
@@ -988,8 +991,8 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@hono/node-server@2.1.9':
-    resolution: {integrity: sha512-Sk4NQd3GFY0WZWCzndwFMPwJhtD0y9qjsQ+pjID0/03nK9pxyBCUoUHCho8QYBLBVhi0ssL8UkNPHqbgSOFPIQ==}
+  '@hono/node-server@2.1.11':
+    resolution: {integrity: sha512-KzKz9vl4vvr1vgLHamj+g5uonbrj5NwAdO3yzOS6cd2HjALVeOgTgeZOyAzNxejbkfOOPIcvuf/Tg8l1pEFLog==}
     engines: {node: '>=20'}
     peerDependencies:
       hono: ^4 || ^5.0.0-0
@@ -3701,8 +3704,8 @@ packages:
   hermes-parser@0.25.1:
     resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
 
-  hono@4.13.19:
-    resolution: {integrity: sha512-KmXvQAXwcAHV+muzbIwoJ23niEB5nMoDVr9WcRkU8mvjUECm/1+7v4Jgp7P7a+H6MLFrh+vXrGonGrGS+RQfkA==}
+  hono@4.13.23:
+    resolution: {integrity: sha512-OS90dj7dcsftEEWCOef8jRbnHE5lbrOq0hNRqjSyPsOnaGZvvfof1KS05hQNb4kUOCfDq1mG3PmHoX37DMnHQg==}
     engines: {node: '>=16.9.0'}
 
   hookified@1.15.1:
@@ -6480,9 +6483,9 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@hono/node-server@2.1.9(hono@4.13.19)':
+  '@hono/node-server@2.1.11(hono@4.13.23)':
     dependencies:
-      hono: 4.13.19
+      hono: 4.13.23
 
   '@humanfs/core@0.19.2':
     dependencies:
@@ -9349,7 +9352,7 @@ snapshots:
     dependencies:
       hermes-estree: 0.25.1
 
-  hono@4.13.19: {}
+  hono@4.13.23: {}
 
   hookified@1.15.1: {}
 
