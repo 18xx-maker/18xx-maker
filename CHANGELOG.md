@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.144](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.143...v1.0.0-beta.144) (2026-11-28)
+
+
+### :tada: Features
+
+* **electron:** build the linux appimage for x64 as well as arm64 ([#1112](https://github.com/18xx-maker/18xx-maker/issues/1112)) ([d25315c](https://github.com/18xx-maker/18xx-maker/commit/d25315c090b40091d7db7a5b69fe50a611ae0d89))
+
 ## [1.0.0-beta.143](https://github.com/18xx-maker/18xx-maker/compare/v1.0.0-beta.142...v1.0.0-beta.143) (2026-11-26)
 
 
