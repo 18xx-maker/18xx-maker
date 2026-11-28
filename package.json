@@ -183,7 +183,15 @@
       "icon": "electron/assets/18xx-maker.ico"
     },
     "linux": {
-      "target": "AppImage",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
       "icon": "electron/assets/18xx-maker.png",
       "executableName": "18xx-maker"
     }
