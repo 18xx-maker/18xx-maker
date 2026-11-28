@@ -21,9 +21,10 @@ export const createApi = ({ baseUrl, token, fetch = globalThis.fetch }) => {
   const base = baseUrl.replace(/\/+$/, "");
   const enc = encodeURIComponent;
 
-  const send = async (method, path, { json, body, type } = {}) => {
+  // anonymous: a public route (a spectator link), never sent the token
+  const send = async (method, path, { json, body, type, anonymous } = {}) => {
     const headers = { Accept: "application/json" };
-    if (token) headers.Authorization = `Bearer ${token}`;
+    if (token && !anonymous) headers.Authorization = `Bearer ${token}`;
     if (json !== undefined) {
       headers["Content-Type"] = "application/json";
       body = JSON.stringify(json);
@@ -55,8 +56,8 @@ export const createApi = ({ baseUrl, token, fetch = globalThis.fetch }) => {
   };
 
   return {
-    loginUrl: (returnUrl) =>
-      `${base}/auth/discord/login?return=${enc(returnUrl)}`,
+    loginUrl: (returnUrl, nonce) =>
+      `${base}/auth/discord/login?return=${enc(returnUrl)}&nonce=${enc(nonce)}`,
     me: () => request("GET", "/me"),
     logout: () => request("POST", "/auth/logout"),
     listGames: () => request("GET", "/games"),
@@ -65,6 +66,8 @@ export const createApi = ({ baseUrl, token, fetch = globalThis.fetch }) => {
     getGame: (id) => request("GET", `/games/${enc(id)}`),
     setStatus: (id, status) =>
       request("PATCH", `/games/${enc(id)}`, { json: { status } }),
+    setWebhook: (id, url) =>
+      request("PATCH", `/games/${enc(id)}`, { json: { webhookUrl: url } }),
     deleteGame: (id) => request("DELETE", `/games/${enc(id)}`),
     newInvite: (id) => request("POST", `/games/${enc(id)}/invite`),
     getInvite: (code) => request("GET", `/invites/${enc(code)}`),
@@ -78,5 +81,17 @@ export const createApi = ({ baseUrl, token, fetch = globalThis.fetch }) => {
     getAsset: async (id, name) =>
       (await send("GET", `/games/${enc(id)}/assets/${enc(name)}`)).blob(),
     assetUrl: (id, name) => `${base}/games/${enc(id)}/assets/${enc(name)}`,
+    newWatch: (id) => request("POST", `/games/${enc(id)}/watch`),
+    deleteWatch: (id) => request("DELETE", `/games/${enc(id)}/watch`),
+    watchInfo: (code) =>
+      request("GET", `/watch/${enc(code)}`, { anonymous: true }),
+    watchGame: (code) =>
+      request("GET", `/watch/${enc(code)}/game`, { anonymous: true }),
+    watchAsset: async (code, name) =>
+      (
+        await send("GET", `/watch/${enc(code)}/assets/${enc(name)}`, {
+          anonymous: true,
+        })
+      ).blob(),
   };
 };

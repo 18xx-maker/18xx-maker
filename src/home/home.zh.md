@@ -13,6 +13,12 @@
 
 如果您想直接开始打印现有游戏或创建新游戏,请查看我们的[快速入门](https://18xx-maker.com/docs)页面,尽快上手。
 
+::: siteonly
+
+想在共享的棋盘上与朋友一起玩游戏,请参阅[在线游戏](/docs/play)。
+
+:::
+
 ## Discord
 
 我们有一个 [18xx-Maker 的 Discord 服务器](https://discord.gg/gcYvAjYYfw)。开发讨论和技术支持请使用它!

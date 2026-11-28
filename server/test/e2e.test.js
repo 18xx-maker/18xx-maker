@@ -33,8 +33,9 @@ describe.skipIf(!hasDb)("two player end to end", () => {
 
   // The real redirect flow: login, the (fake) Discord authorize step, callback
   const login = async (code) => {
+    const nonce = `n${code}`.padEnd(22, "x");
     const start = await fetch(
-      `${base}/auth/discord/login?return=${encodeURIComponent(ORIGIN)}`,
+      `${base}/auth/discord/login?return=${encodeURIComponent(ORIGIN)}&nonce=${nonce}`,
       { redirect: "manual" },
     );
     expect(start.status).toBe(302);
@@ -52,7 +53,9 @@ describe.skipIf(!hasDb)("two player end to end", () => {
     expect(done.status).toBe(302);
     const location = new URL(done.headers.get("location"));
     expect(location.origin).toBe(ORIGIN);
-    const token = new URLSearchParams(location.hash.slice(1)).get("token");
+    const fragment = new URLSearchParams(location.hash.slice(1));
+    expect(fragment.get("nonce")).toBe(nonce);
+    const token = fragment.get("token");
     expect(token).toBeTruthy();
     return token;
   };

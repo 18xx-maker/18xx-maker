@@ -766,6 +766,8 @@
     "electron": "在线游戏仅在网站上提供。",
     "signInPrompt": "登录后即可在线游戏。",
     "signIn": "使用 Discord 登录",
+    "signInFailed": "登录未完成，请重试",
+    "signInCancelled": "Discord 登录已取消",
     "signOut": "退出登录",
     "signedInAs": "已登录为 {{name}}",
     "loading": "加载中...",
@@ -802,6 +804,12 @@
       "closed": "该游戏已关闭。",
       "notFound": "此邀请链接无效。",
       "failed": "无法加入游戏：{{message}}"
+    },
+    "watch": {
+      "missing": "未找到链接",
+      "stopped": "此观战链接已失效。",
+      "full": "当前观战人数过多，请稍后再试。",
+      "back": "前往在线游戏"
     },
     "game": {
       "denied": "你的登录已过期。",
@@ -878,7 +886,8 @@
       },
       "banner": {
         "offline": "正在重新连接...",
-        "locked": "这局游戏已锁定。你可以查看,但不能修改。"
+        "locked": "这局游戏已锁定。你可以查看,但不能修改。",
+        "watching": "观战中：你可以看到玩家的每一步操作，但不能做任何更改。"
       },
       "moveError": {
         "message": "服务器拒绝了一步操作:{{message}}",
@@ -888,6 +897,9 @@
         "menu": "所有者菜单",
         "copy": "复制邀请链接",
         "newInvite": "新的邀请链接",
+        "watch": "观战链接",
+        "watchNew": "新的观战链接",
+        "watchStop": "停用观战链接",
         "lock": "锁定游戏",
         "unlock": "解锁游戏",
         "archive": "归档游戏",
@@ -895,6 +907,17 @@
         "delete": "删除游戏",
         "cancel": "取消",
         "link": "邀请链接",
+        "webhook": "Discord 通知",
+        "webhookTitle": "Discord 通知",
+        "webhookBody": "在此游戏中有人行动时,向 Discord 频道发送消息。每次行动发送一行合并的消息,包含行动者和变化内容,绝不包含笔记的文字。",
+        "webhookLabel": "Webhook 网址",
+        "webhookHint": "请使用类似 https://discord.com/api/webhooks/123456/token 的网址。",
+        "webhookOn": "通知已开启",
+        "webhookSave": "保存",
+        "webhookRemove": "移除",
+        "webhookSaved": "Discord 通知已开启。",
+        "webhookRemoved": "Discord 通知已关闭。",
+        "watchStopped": "观战链接已停用。",
         "failed": "游戏服务器拒绝了此操作。",
         "deleteBody": "这将为所有人删除该游戏,包括所有操作和笔记。此操作无法撤销。"
       }
@@ -950,6 +973,7 @@
     "pager": "页面",
     "previous": "上一页",
     "next": "下一页",
+    "table": "表格",
     "help": {
       "title": "使用 18xx Maker",
       "description": "快速入门"
@@ -973,6 +997,14 @@
     "translation": {
       "title": "翻译",
       "description": "帮助翻译 18xx Maker"
+    },
+    "play": {
+      "title": "在线游戏",
+      "description": "在游戏服务器上与他人一起玩游戏"
+    },
+    "playServer": {
+      "title": "运行游戏服务器",
+      "description": "为在线游戏架设自己的服务器"
     },
     "output": {
       "cli": {

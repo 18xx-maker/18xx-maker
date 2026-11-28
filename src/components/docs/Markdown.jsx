@@ -106,6 +106,23 @@ const Paragraph = ({ node, ...props }) => {
   });
 };
 
+// A wide table (long code in a cell) scrolls instead of running under the
+// table of contents. The scrolling box is a labelled region that takes focus,
+// so it can be scrolled with the keyboard.
+const DocTable = (props) => {
+  const { t } = useTranslation();
+  return (
+    <div
+      role="region"
+      aria-label={t("docs.table")}
+      tabIndex={0}
+      className="w-full overflow-x-auto"
+    >
+      <table {...clean(props)} className={clsx(props.className, "w-full")} />
+    </div>
+  );
+};
+
 const LocalLink = (props) => {
   const pass = {
     ...clean(props),
@@ -185,7 +202,7 @@ const components = {
   ul: md("ul", "my-6 ml-6 list-disc [&>li]:mt-2"),
   a: LocalLink,
   img: DocImage,
-  table: md("table", "w-full"),
+  table: DocTable,
   tr: md("tr", "m-0 border-t p-0 even:bg-muted"),
   th: md(
     "th",

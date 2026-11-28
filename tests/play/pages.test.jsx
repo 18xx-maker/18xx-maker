@@ -7,17 +7,26 @@ import { mainMenu } from "@/components/nav";
 
 import { games } from "@/data";
 import { createApi } from "@/play/client/api";
+import { readNonce, storeNonce } from "@/play/client/loginNonce";
 import { getToken, setToken } from "@/play/client/tokenStore";
 
 import { renderApp } from "@tests/support/helpers.jsx";
 import { BASE, calls, fakeServer } from "@tests/support/playServer.js";
+
+const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 const settings = { playServer: BASE };
 const me = { id: 7, name: "Ann", avatar: null, canCreate: true };
 const game = games["18Test"];
 const slug = game.meta.slug;
 
-beforeEach(() => window.localStorage.clear());
+beforeEach(() => {
+  window.localStorage.clear();
+  window.sessionStorage.clear();
+  // The in-memory copy of a nonce must not leak between tests
+  storeNonce("reset");
+  window.sessionStorage.clear();
+});
 afterEach(() => vi.unstubAllGlobals());
 
 const signedIn = (extra = {}) => {
@@ -52,6 +61,7 @@ describe("play without a server", () => {
 
   it.for([
     ["/play/join/abc", "play-join"],
+    ["/play/watch/abc", "play-watch"],
     ["/play/g1", "play-game"],
   ])("%s renders its page with the explanation", async ([url, id]) => {
     renderApp(url);
@@ -66,12 +76,88 @@ describe("login", () => {
       "GET /me": [200, me],
       "GET /games": [200, []],
     });
-    const { router } = renderApp("/play#token=abc", { settings });
+    storeNonce("nonce-1234567890ab");
+    const { router } = renderApp("/play#token=abc&nonce=nonce-1234567890ab", {
+      settings,
+    });
     await screen.findByText("No games yet.");
     expect(getToken(BASE)).toBe("abc");
+    expect(readNonce()).toBeNull();
     expect(router.state.location.hash).toBe("");
     expect(router.state.historyAction).toBe("REPLACE");
     expect(fetch.mock.calls[0][1].headers.Authorization).toBe("Bearer abc");
+  });
+
+  it.for([
+    ["a different nonce", "#token=abc&nonce=other-1234567890ab"],
+    ["no nonce", "#token=abc"],
+  ])("refuses a login with %s", async ([, hash]) => {
+    storeNonce("nonce-1234567890ab");
+    const fetch = fakeServer({});
+    const { router } = renderApp(`/play${hash}`, { settings });
+    expect(await screen.findByTestId("alert")).toHaveTextContent(
+      "Sign in did not complete, try again",
+    );
+    await waitFor(() => expect(router.state.location.hash).toBe(""));
+    expect(router.state.historyAction).toBe("REPLACE");
+    expect(getToken(BASE)).toBeNull();
+    expect(readNonce()).toBeNull();
+    expect(calls(fetch, "GET", "/me")).toHaveLength(0);
+  });
+
+  it("refuses a login that this tab did not begin", async () => {
+    fakeServer({});
+    renderApp("/play#token=abc&nonce=nonce-1234567890ab", { settings });
+    expect(await screen.findByTestId("alert")).toHaveTextContent(
+      "Sign in did not complete, try again",
+    );
+    expect(getToken(BASE)).toBeNull();
+  });
+
+  it("says when Discord sign in was cancelled", async () => {
+    storeNonce("nonce-1234567890ab");
+    fakeServer({});
+    const { router } = renderApp(
+      "/play#error=access_denied&nonce=nonce-1234567890ab",
+      { settings },
+    );
+    expect(await screen.findByTestId("alert")).toHaveTextContent(
+      "Discord sign in was cancelled",
+    );
+    await waitFor(() => expect(router.state.location.hash).toBe(""));
+    expect(getToken(BASE)).toBeNull();
+  });
+
+  it("does not trust a cancelled message with the wrong nonce", async () => {
+    storeNonce("nonce-1234567890ab");
+    fakeServer({});
+    renderApp("/play#error=access_denied&nonce=other-1234567890ab", {
+      settings,
+    });
+    expect(await screen.findByTestId("alert")).toHaveTextContent(
+      "Sign in did not complete, try again",
+    );
+  });
+
+  it("the sign in link keeps its nonce for the return, even without sessionStorage", async () => {
+    fakeServer({});
+    const { user } = renderApp("/play", { settings });
+    const link = await screen.findByRole("link", {
+      name: "Sign in with Discord",
+    });
+    const nonce = new URL(link.href).searchParams.get("nonce");
+    expect(nonce).toMatch(/^[A-Za-z0-9_-]{16,64}$/);
+    vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+      throw new Error("blocked");
+    });
+    vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+      throw new Error("blocked");
+    });
+    link.addEventListener("click", (e) => e.preventDefault());
+    await user.click(link);
+    vi.restoreAllMocks();
+    expect(window.sessionStorage.getItem("play-login-nonce")).toBeNull();
+    expect(readNonce()).toBe(nonce);
   });
 
   it("clears a rejected token and offers the Discord sign in", async () => {
@@ -83,7 +169,11 @@ describe("login", () => {
     });
     expect(link).toHaveAttribute(
       "href",
-      createApi({ baseUrl: BASE }).loginUrl(`${window.location.origin}/play`),
+      expect.stringMatching(
+        new RegExp(
+          `^${escapeRegExp(createApi({ baseUrl: BASE }).loginUrl(`${window.location.origin}/play`, ""))}[A-Za-z0-9_-]{16,64}$`,
+        ),
+      ),
     );
     expect(getToken(BASE)).toBeNull();
   });
@@ -93,6 +183,54 @@ describe("login", () => {
     renderApp("/play", { settings });
     await screen.findByRole("link", { name: "Sign in with Discord" });
     expect(calls(fetch, "GET", "/me")).toHaveLength(0);
+  });
+});
+
+describe("every sign in link stores its nonce", () => {
+  const clickSignIn = async (url, routes) => {
+    fakeServer(routes);
+    const { user } = renderApp(url, { settings });
+    const link = await screen.findByRole("link", {
+      name: "Sign in with Discord",
+    });
+    link.addEventListener("click", (e) => e.preventDefault());
+    await user.click(link);
+    const nonce = new URL(link.href).searchParams.get("nonce");
+    expect(nonce).toMatch(/^[A-Za-z0-9_-]{16,64}$/);
+    expect(window.sessionStorage.getItem("play-login-nonce")).toBe(nonce);
+  };
+
+  it.for([
+    ["the list page", "/play", {}],
+    ["the game page without a token", "/play/g1", {}],
+    [
+      "the join page",
+      "/play/join/abc",
+      { "GET /invites/abc": [200, { gameId: "g3", title: "Spring Game" }] },
+    ],
+    [
+      "the game page when the token is denied",
+      "/play/g1",
+      {
+        "GET /me": [200, me],
+        "GET /games/g1": [401, { error: "Unauthorized" }],
+      },
+    ],
+  ])("on %s", async ([, url, routes]) => {
+    if (routes["GET /me"]) setToken(BASE, "tok");
+    await clickSignIn(url, routes);
+    expect(window.sessionStorage.getItem("play-login-nonce")).toBeTruthy();
+  });
+});
+
+describe("a fragment that is not a login return", () => {
+  it.for(["#error", "#token", "#other=x"])("leaves %s alone", async (hash) => {
+    fakeServer({});
+    const { router } = renderApp(`/play${hash}`, { settings });
+    await screen.findByRole("link", { name: "Sign in with Discord" });
+    expect(router.state.location.hash).toBe(hash);
+    expect(screen.queryByTestId("alert")).not.toBeInTheDocument();
+    expect(getToken(BASE)).toBeNull();
   });
 });
 
@@ -255,8 +393,10 @@ describe("join", () => {
     });
     expect(link).toHaveAttribute(
       "href",
-      createApi({ baseUrl: BASE }).loginUrl(
-        `${window.location.origin}/play/join/abc`,
+      expect.stringMatching(
+        new RegExp(
+          `^${escapeRegExp(createApi({ baseUrl: BASE }).loginUrl(`${window.location.origin}/play/join/abc`, ""))}[A-Za-z0-9_-]{16,64}$`,
+        ),
       ),
     );
     expect(screen.getByText("Spring Game")).toBeInTheDocument();

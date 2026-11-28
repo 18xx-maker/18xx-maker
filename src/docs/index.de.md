@@ -11,6 +11,10 @@ und Anzeigeeinstellungen findest du im [Konfigurationsfenster](/docs/config),
 zur Desktop-App und zur Kommandozeile siehe [App](/docs/app) und
 [Kommandozeile](/docs/output/cli).
 
+Um ein Spiel mit anderen auf einem gemeinsamen Spielbrett zu spielen, siehe
+[Online-Spiel](/docs/play); um einen eigenen Spielserver zu betreiben, siehe
+[Einen Spielserver betreiben](/docs/play-server).
+
 > [!TIP]
 > Diese Dokumentation erklärt, wie du 18xx Maker verwendest. Wenn du am Code
 > mitarbeiten oder ihn lokal ausführen möchtest, findest du alles in

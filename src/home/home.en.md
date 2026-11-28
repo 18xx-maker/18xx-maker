@@ -21,6 +21,12 @@ If you want to jump right in to printing an existing game or creating a new one,
 check out our [Getting Started](https://18xx-maker.com/docs) page to get up and
 running fast.
 
+::: siteonly
+
+To play a game with friends on a shared board, see [online play](/docs/play).
+
+:::
+
 ## Discord
 
 We have a [discord for 18xx-Maker](https://discord.gg/gcYvAjYYfw). Please use it

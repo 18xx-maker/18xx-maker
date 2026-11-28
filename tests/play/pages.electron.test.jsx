@@ -37,7 +37,7 @@ afterEach(() => {
 });
 
 describe("play in the desktop app", () => {
-  it.for(["/play", "/play/join/abc", "/play/g1"])(
+  it.for(["/play", "/play/join/abc", "/play/watch/abc", "/play/g1"])(
     "%s shows the website notice and makes no request",
     async (url) => {
       window.localStorage.setItem(

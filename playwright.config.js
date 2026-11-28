@@ -24,10 +24,25 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
-  webServer: {
-    command: `pnpm exec vite preview --port ${PORT} --strictPort --no-open`,
-    url: `http://localhost:${PORT}`,
-    reuseExistingServer: !process.env.CI,
-    timeout: 30_000,
-  },
+  webServer: [
+    {
+      command: `pnpm exec vite preview --port ${PORT} --strictPort --no-open`,
+      url: `http://localhost:${PORT}`,
+      reuseExistingServer: !process.env.CI,
+      timeout: 30_000,
+    },
+    // The play server of e2e/play.spec.js, which is skipped without a database
+    ...(process.env.DATABASE_URL
+      ? [
+          {
+            command: "node e2e/support/play-server.mjs",
+            url: "http://127.0.0.1:4319/health",
+            reuseExistingServer: !process.env.CI,
+            timeout: 30_000,
+            // SIGTERM lets it drop its schema
+            gracefulShutdown: { signal: "SIGTERM", timeout: 5_000 },
+          },
+        ]
+      : []),
+  ],
 });

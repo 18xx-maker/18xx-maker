@@ -14,7 +14,7 @@ import { useNavigate } from "@/router";
 const JoinGame = ({ code, play }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { api, status, user, signInUrl } = play;
+  const { api, status, user, signInProps } = play;
   const [invite, setInvite] = useState(null);
   const [problem, setProblem] = useState(null);
   const [name, setName] = useState(null);
@@ -71,7 +71,7 @@ const JoinGame = ({ code, play }) => {
       {problem && <p role="alert">{problem}</p>}
       {problem && <BackLink />}
       {invite && status === "signedout" && (
-        <PlayNotice status="signedout" signInUrl={signInUrl} />
+        <PlayNotice status="signedout" signInProps={signInProps} />
       )}
       {invite && status === "ready" && (
         <>

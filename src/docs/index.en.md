@@ -11,6 +11,9 @@ display settings read the [config panel](/docs/config), and for the desktop app
 and the command line see the [app](/docs/app) and [command line](/docs/output/cli)
 docs.
 
+To play a game with others on a shared board, see [online play](/docs/play);
+to host your own play server, see [running a play server](/docs/play-server).
+
 > [!TIP]
 > These docs are about using 18xx Maker. If you are interested in hacking on the
 > code or running the code locally please refer to

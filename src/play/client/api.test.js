@@ -25,8 +25,8 @@ const setup = (response = respond(200, {}), options = {}) => {
 describe("play rest client", () => {
   it("builds the login url and normalizes the base url", () => {
     const { api } = setup(undefined, { baseUrl: "https://s.test/" });
-    expect(api.loginUrl("https://s/play")).toBe(
-      "https://s.test/auth/discord/login?return=https%3A%2F%2Fs%2Fplay",
+    expect(api.loginUrl("https://s/play", "nonce-1234567890ab")).toBe(
+      "https://s.test/auth/discord/login?return=https%3A%2F%2Fs%2Fplay&nonce=nonce-1234567890ab",
     );
     expect(api.assetUrl("g1", "a b.png")).toBe(
       "https://s.test/games/g1/assets/a%20b.png",
@@ -55,6 +55,8 @@ describe("play rest client", () => {
     await api.createGame({ game: { a: 1 }, config: { b: 2 }, seatName: "Me" });
     await api.getGame("g1");
     await api.setStatus("g1", "locked");
+    await api.setWebhook("g1", "https://discord.com/api/webhooks/1/a");
+    await api.setWebhook("g1", null);
     await api.newInvite("g1");
     await api.getInvite("c/1");
     await api.join("c1", { name: "N", color: "#fff" });
@@ -72,6 +74,16 @@ describe("play rest client", () => {
         "PATCH",
         "https://s.test/games/g1",
         JSON.stringify({ status: "locked" }),
+      ],
+      [
+        "PATCH",
+        "https://s.test/games/g1",
+        JSON.stringify({ webhookUrl: "https://discord.com/api/webhooks/1/a" }),
+      ],
+      [
+        "PATCH",
+        "https://s.test/games/g1",
+        JSON.stringify({ webhookUrl: null }),
       ],
       ["POST", "https://s.test/games/g1/invite", undefined],
       ["GET", "https://s.test/invites/c%2F1", undefined],
@@ -139,6 +151,40 @@ describe("play rest client", () => {
       status: 500,
     });
     await expect(r.api.me()).rejects.toMatchObject({ status: 500 });
+  });
+
+  it("creates, rotates and stops the spectator link with the token", async () => {
+    const { api, calls } = setup(respond(200, { watchCode: "w1" }));
+    expect(await api.newWatch("g/1")).toEqual({ watchCode: "w1" });
+    await api.deleteWatch("g1");
+    expect(calls.map((c) => [c.init.method, c.url])).toEqual([
+      ["POST", "https://s.test/games/g%2F1/watch"],
+      ["DELETE", "https://s.test/games/g1/watch"],
+    ]);
+    expect(calls[0].init.headers.Authorization).toBe("Bearer tok");
+  });
+
+  it("watches a game with no Authorization, even with a token", async () => {
+    const { api, calls } = setup(respond(200, { gameId: "g1", title: "T" }));
+    expect(await api.watchInfo("w/1")).toEqual({ gameId: "g1", title: "T" });
+    await api.watchGame("w1");
+    const blob = await api.watchAsset("w1", "a b.png");
+    expect(blob).toBeInstanceOf(Blob);
+    expect(calls.map((c) => [c.init.method, c.url])).toEqual([
+      ["GET", "https://s.test/watch/w%2F1"],
+      ["GET", "https://s.test/watch/w1/game"],
+      ["GET", "https://s.test/watch/w1/assets/a%20b.png"],
+    ]);
+    for (const call of calls)
+      expect(call.init.headers.Authorization).toBeUndefined();
+  });
+
+  it("maps an unknown watch code to a 404 ApiError", async () => {
+    const { api } = setup(respond(404, { error: "Not found" }));
+    await expect(api.watchGame("nope")).rejects.toMatchObject({
+      status: 404,
+      message: "Not found",
+    });
   });
 
   it("maps a network failure to status 0", async () => {

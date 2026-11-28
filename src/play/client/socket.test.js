@@ -519,4 +519,73 @@ describe("play websocket session", () => {
     sock().drop();
     expect(seen).toEqual(["connecting"]);
   });
+
+  describe("as a spectator", () => {
+    const watch = () =>
+      setup({ token: undefined, gameId: undefined, watch: "w1" });
+
+    it("joins with the watch code and no token or game id", () => {
+      const { sock } = watch();
+      sock().open();
+      expect(sock().sent).toEqual([{ t: "join", watch: "w1", lastSeq: 0 }]);
+    });
+
+    it("follows the events and marks itself a spectator", () => {
+      const { sock, last } = watch();
+      sock().open();
+      sock().receive({
+        t: "joined",
+        seq: 1,
+        seats: [],
+        presence: ["u1"],
+        spectator: true,
+      });
+      sock().receive({ t: "events", events: [ev(1, "a")] });
+      sock().receive({ t: "event", event: ev(2, "b") });
+      expect(last()).toMatchObject({ status: "online", spectator: true });
+      expect(last().log.map((e) => e.seq)).toEqual([1, 2]);
+    });
+
+    it("never sends an event: send throws", () => {
+      const { join, session, sock } = watch();
+      join();
+      expect(() => session.send(note("x"))).toThrow(/spectator/);
+      expect(sock().events()).toEqual([]);
+    });
+
+    it("reconnects with the watch code and the held seq", () => {
+      const { join, sock, sockets, runTimers } = watch();
+      join({ t: "events", events: [ev(1, "a")] }, 1);
+      sock().drop();
+      runTimers();
+      expect(sockets).toHaveLength(2);
+      sock().open();
+      expect(sock().sent).toEqual([{ t: "join", watch: "w1", lastSeq: 1 }]);
+    });
+
+    it("is denied without reconnecting when the link is stopped", () => {
+      const { join, sock, sockets, last, pendingTimers } = watch();
+      join();
+      sock().receive({ t: "error", code: "not_member" });
+      sock().drop(4003);
+      expect(last()).toMatchObject({ status: "denied", error: "not_member" });
+      expect(pendingTimers()).toEqual([]);
+      expect(sockets).toHaveLength(1);
+    });
+
+    it("keeps the code of too many spectators", () => {
+      const { sock, last } = watch();
+      sock().open();
+      sock().receive({
+        t: "error",
+        code: "too_many_spectators",
+        message: "too many spectators",
+      });
+      sock().drop(4003);
+      expect(last()).toMatchObject({
+        status: "denied",
+        error: "too_many_spectators",
+      });
+    });
+  });
 });
