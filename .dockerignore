@@ -5,3 +5,15 @@ electron
 node_modules
 out
 render
+.git
+.claude
+.superpowers
+playwright-report
+test-results
+shots
+browsers
+.vitest
+junit.xml
+*.log
+.env*
+src/config.json

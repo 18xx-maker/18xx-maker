@@ -117,6 +117,14 @@ export default defineConfig({
           setupFiles: ["tests/support/setup.js"],
         },
       },
+      {
+        test: {
+          ...testShared,
+          environment: "node",
+          include: ["server/**/*.test.js"],
+          name: "server",
+        },
+      },
     ],
     reporters: process.env.CI ? ["junit", "default"] : "default",
     // `--shard` splits the files by their time in tests/timings.json

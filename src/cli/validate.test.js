@@ -7,7 +7,7 @@ import { compileSchema, draft07 } from "json-schema-library";
 
 import { omit } from "ramda";
 
-import validate from "#cli/validate";
+import validate, { validateGameJson } from "#cli/validate";
 
 import {
   bothGame,
@@ -1567,5 +1567,20 @@ describe("the localized schemas", () => {
   ])("validates a game with the schema of %s", (_, folder) => {
     expect(check(folder, game)).toEqual([]);
     expect(check(folder, bad)).not.toEqual([]);
+  });
+});
+
+describe("validateGameJson", () => {
+  const game = () =>
+    JSON.parse(fs.readFileSync(src("data/games/18Test.json"), "utf8"));
+
+  it("validateGameJson accepts the 18Test game", () => {
+    expect(validateGameJson(game()).valid).toBe(true);
+  });
+
+  it("validateGameJson rejects a game with an unknown top level field", () => {
+    const result = validateGameJson({ ...game(), bogusField: true });
+    expect(result.valid).toBe(false);
+    expect(result.validationErrors.length).toBeGreaterThan(0);
   });
 });
