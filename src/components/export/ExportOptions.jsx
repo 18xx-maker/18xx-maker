@@ -23,13 +23,18 @@ import {
 } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
 
+import useWebExport from "@/components/export/useWebExport";
+
 import { MAX_DPI } from "@/export/capture.js";
 import { BACKGROUNDS, MAX_CARD_BLEED } from "@/export/options.js";
 import { createAlert } from "@/state";
 import { selectAssets, selectOpenExportFolder } from "@/state/selectors";
+import capability from "@/util/capability";
 import { exportDefaults, exportPages, planExport } from "@/util/exportPlan";
 
-const FORMATS = ["pdf", "png", "svg", "b18"];
+// The web version exports svg images only, in the page
+const formatsOf = () =>
+  capability.electron ? ["pdf", "png", "svg", "b18"] : ["svg"];
 
 const Field = ({ id, label, description, error, children }) => (
   <div className="flex flex-col gap-1">
@@ -56,7 +61,8 @@ const toggle = (list, item, on) =>
 
 // The options of an export of the game, and the export: the files are planned
 // here (only while the panel is open) and exported by the main process (window.api.export), which answers
-// when it is over. layers is { defaultConfig, userConfig, storedConfig }.
+// when it is over, or on the web by the page (useWebExport). layers is
+// { defaultConfig, userConfig, storedConfig }.
 const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -65,7 +71,10 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const pages = exportPages(game, layers);
 
   // The options start as the game's `exports` and the defaults say
-  const [initial] = useState(() => exportDefaults(game, layers));
+  const [initial] = useState(() => {
+    const defaults = exportDefaults(game, layers);
+    return capability.electron ? defaults : { ...defaults, formats: ["svg"] };
+  });
   const [formats, setFormats] = useState(initial.formats);
   const [docs, setDocs] = useState(initial.docs);
   const [layoutsAll, setLayoutsAll] = useState(initial.layouts === "all");
@@ -78,7 +87,9 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   const [version, setVersion] = useState(initial.b18.version);
   const [author, setAuthor] = useState(initial.b18.author);
   const [out, setOut] = useState();
-  const [running, setRunning] = useState(false);
+  const [appRunning, setRunning] = useState(false);
+  const web = useWebExport();
+  const running = appRunning || web.running;
 
   const variations = Array.isArray(game.map) && game.map.length > 1;
 
@@ -138,6 +149,12 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
   };
 
   const run = async () => {
+    if (!capability.electron) {
+      const result = await web.run(planExport(game, layers, options(), assets));
+      if (result) onOpenChange(false);
+      return;
+    }
+
     setRunning(true);
     try {
       const result = await window.api.export({
@@ -173,7 +190,7 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
         <div className="flex flex-col gap-6 py-4">
           <fieldset className="flex flex-col gap-2">
             <legend className="font-medium mb-2">{t("export.formats")}</legend>
-            {FORMATS.map((format) => (
+            {formatsOf().map((format) => (
               <div key={format} className="flex items-center gap-2">
                 <Checkbox
                   id={`export-format-${format}`}
@@ -254,84 +271,89 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
             </Field>
           )}
 
-          <Field
-            id="export-dpi"
-            label={t("export.dpi")}
-            description={t("export.dpiDescription", { max: MAX_DPI })}
-            error={dpiError && t("export.dpiError", { max: MAX_DPI })}
-          >
-            <Input
-              id="export-dpi"
-              type="number"
-              inputMode="numeric"
-              min={1}
-              max={MAX_DPI}
-              value={dpi}
-              disabled={running || !formats.includes("png")}
-              aria-invalid={dpiError}
-              aria-describedby={
-                dpiError
-                  ? "export-dpi-description export-dpi-error"
-                  : "export-dpi-description"
-              }
-              onChange={(event) => setDpi(event.target.value)}
-            />
-          </Field>
-
-          <Field
-            id="export-card-bleed"
-            label={t("export.cardBleed")}
-            description={t("export.cardBleedDescription", {
-              max: MAX_CARD_BLEED,
-            })}
-            error={
-              bleedError && t("export.cardBleedError", { max: MAX_CARD_BLEED })
-            }
-          >
-            <Input
-              id="export-card-bleed"
-              type="number"
-              inputMode="decimal"
-              min={0}
-              max={MAX_CARD_BLEED}
-              step="any"
-              value={cardBleed}
-              disabled={running || !formats.includes("png")}
-              aria-invalid={bleedError}
-              aria-describedby={
-                bleedError
-                  ? "export-card-bleed-description export-card-bleed-error"
-                  : "export-card-bleed-description"
-              }
-              onChange={(event) => setCardBleed(event.target.value)}
-            />
-          </Field>
-
-          <Field
-            id="export-background"
-            label={t("export.background")}
-            description={t("export.backgroundDescription")}
-          >
-            <Select
-              value={background}
-              disabled={running || !formats.includes("png")}
-              onValueChange={setBackground}
-            >
-              <SelectTrigger
-                id="export-background"
-                aria-describedby="export-background-description"
+          {capability.electron && (
+            <>
+              <Field
+                id="export-dpi"
+                label={t("export.dpi")}
+                description={t("export.dpiDescription", { max: MAX_DPI })}
+                error={dpiError && t("export.dpiError", { max: MAX_DPI })}
               >
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {BACKGROUNDS.map((value) => (
-                  <SelectItem key={value} value={value}>
-                    {t(`export.${value}`)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </Field>
+                <Input
+                  id="export-dpi"
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  max={MAX_DPI}
+                  value={dpi}
+                  disabled={running || !formats.includes("png")}
+                  aria-invalid={dpiError}
+                  aria-describedby={
+                    dpiError
+                      ? "export-dpi-description export-dpi-error"
+                      : "export-dpi-description"
+                  }
+                  onChange={(event) => setDpi(event.target.value)}
+                />
+              </Field>
+
+              <Field
+                id="export-card-bleed"
+                label={t("export.cardBleed")}
+                description={t("export.cardBleedDescription", {
+                  max: MAX_CARD_BLEED,
+                })}
+                error={
+                  bleedError &&
+                  t("export.cardBleedError", { max: MAX_CARD_BLEED })
+                }
+              >
+                <Input
+                  id="export-card-bleed"
+                  type="number"
+                  inputMode="decimal"
+                  min={0}
+                  max={MAX_CARD_BLEED}
+                  step="any"
+                  value={cardBleed}
+                  disabled={running || !formats.includes("png")}
+                  aria-invalid={bleedError}
+                  aria-describedby={
+                    bleedError
+                      ? "export-card-bleed-description export-card-bleed-error"
+                      : "export-card-bleed-description"
+                  }
+                  onChange={(event) => setCardBleed(event.target.value)}
+                />
+              </Field>
+
+              <Field
+                id="export-background"
+                label={t("export.background")}
+                description={t("export.backgroundDescription")}
+              >
+                <Select
+                  value={background}
+                  disabled={running || !formats.includes("png")}
+                  onValueChange={setBackground}
+                >
+                  <SelectTrigger
+                    id="export-background"
+                    aria-describedby="export-background-description"
+                  >
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {BACKGROUNDS.map((value) => (
+                      <SelectItem key={value} value={value}>
+                        {t(`export.${value}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Field>
+            </>
+          )}
 
           {formats.includes("b18") && (
             <>
@@ -354,22 +376,24 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
             </>
           )}
 
-          <div className="flex flex-col gap-2">
-            <span className="font-medium" id="export-destination">
-              {t("export.destination")}
-            </span>
-            <p className="text-sm break-all" aria-live="polite">
-              {out || t("export.destinationAsk")}
-            </p>
-            <Button
-              variant="outline"
-              aria-describedby="export-destination"
-              disabled={running}
-              onClick={chooseFolder}
-            >
-              {t("export.chooseFolder")}
-            </Button>
-          </div>
+          {capability.electron && (
+            <div className="flex flex-col gap-2">
+              <span className="font-medium" id="export-destination">
+                {t("export.destination")}
+              </span>
+              <p className="text-sm break-all" aria-live="polite">
+                {out || t("export.destinationAsk")}
+              </p>
+              <Button
+                variant="outline"
+                aria-describedby="export-destination"
+                disabled={running}
+                onClick={chooseFolder}
+              >
+                {t("export.chooseFolder")}
+              </Button>
+            </div>
+          )}
 
           {problem && (
             <p role="alert" className="text-sm text-error">
@@ -380,7 +404,12 @@ const ExportOptions = ({ game, layers, open, onOpenChange }) => {
 
         <SheetFooter className="gap-2">
           {running && (
-            <Button variant="outline" onClick={() => window.api.cancelExport()}>
+            <Button
+              variant="outline"
+              onClick={() =>
+                capability.electron ? window.api.cancelExport() : web.cancel()
+              }
+            >
               {t("export.cancel")}
             </Button>
           )}

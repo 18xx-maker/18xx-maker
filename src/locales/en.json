@@ -717,7 +717,14 @@
     "running": "Exporting",
     "cancel": "Cancel export",
     "failed": "Export failed",
-    "label": "Export"
+    "label": "Export",
+    "progressTitle": "Exporting game",
+    "progress": "{{done}}/{{total}} - {{name}}",
+    "doneTitle": "Game exported",
+    "done": "Exported {{count}} files",
+    "cancelledTitle": "Export cancelled",
+    "cancelled": "Exported {{done}} of {{total}} files",
+    "someFailed": "{{failed}} of {{total}} files failed, {{path}}: {{message}}"
   },
   "settings": {
     "title": "Settings",
